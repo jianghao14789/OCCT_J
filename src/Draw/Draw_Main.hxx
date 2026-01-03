@@ -1,4 +1,4 @@
-// Created on: 1999-12-30
+﻿// Created on: 1999-12-30
 // Created by: data exchange team
 // Copyright (c) 1999-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -30,18 +30,18 @@
 
 typedef void (*FDraw_InitAppli)(Draw_Interpretor&);
 
-Standard_EXPORT Standard_Integer Draw_Main (Standard_Integer argc, Standard_PCharacter argv[], const FDraw_InitAppli Draw_InitAppli);
+Standard_EXPORT Standard_Integer Draw_Main(Standard_Integer argc, Standard_PCharacter argv[], const FDraw_InitAppli Draw_InitAppli);
 
 // Declarations of macros DRAW_MAIN to be used in executables instead of explicit main/WinMain
 #ifdef _WIN32
 
 #include <windows.h>
 
-Standard_EXPORT Standard_Integer Draw_WinMain (HINSTANCE hInstance,
-                                               HINSTANCE hPrevinstance, 
-                                               LPSTR lpCmdLine,
-                                               Standard_Integer nCmdShow,
-					       const FDraw_InitAppli Draw_InitAppli);
+Standard_EXPORT Standard_Integer Draw_WinMain(HINSTANCE hInstance,
+    HINSTANCE hPrevinstance,
+    LPSTR lpCmdLine,
+    Standard_Integer nCmdShow,
+    const FDraw_InitAppli Draw_InitAppli);
 
 // WinMain() and main()
 #define DRAW_MAIN Standard_Integer PASCAL WinMain (HINSTANCE hInstance, HINSTANCE hPrevinstance, LPSTR lpCmdLine, Standard_Integer nCmdShow) \
