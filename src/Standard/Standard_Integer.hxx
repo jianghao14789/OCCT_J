@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2013 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -26,72 +26,86 @@
 // ------------------------------------------------------------------
 // Abs : Returns the absolute value of an Integer
 // ------------------------------------------------------------------
-inline  Standard_Integer Abs (const Standard_Integer Value)
+inline  Standard_Integer Abs(const Standard_Integer Value)
 {
-  return Value >= 0 ? Value : -Value;
+    return Value >= 0 ? Value : -Value;
 }
 
 // ------------------------------------------------------------------
 // IsEven : Returns Standard_True if an integer is even
 // ------------------------------------------------------------------
-inline Standard_Boolean IsEven (const Standard_Integer Value)
-{ return Value % 2 == 0; }
+inline Standard_Boolean IsEven(const Standard_Integer Value)
+{
+    return Value % 2 == 0;
+}
 
 
 // ------------------------------------------------------------------
 // IsOdd : Returns Standard_True if an integer is odd
 // ------------------------------------------------------------------
-inline Standard_Boolean IsOdd (const Standard_Integer Value)
-{ return Value % 2 == 1; }
+inline Standard_Boolean IsOdd(const Standard_Integer Value)
+{
+    return Value % 2 == 1;
+}
 
 // ------------------------------------------------------------------
 // Max : Returns the maximum integer between two integers
 // ------------------------------------------------------------------
-inline Standard_Integer  Max (const Standard_Integer Val1,
-			      const Standard_Integer Val2)
+inline Standard_Integer  Max(const Standard_Integer Val1,
+    const Standard_Integer Val2)
 {
-  return Val1 >= Val2 ? Val1 : Val2;
+    return Val1 >= Val2 ? Val1 : Val2;
 }
 
 // ------------------------------------------------------------------
 // Min : Returns the minimum integer between two integers
 // ------------------------------------------------------------------
-inline Standard_Integer  Min (const Standard_Integer Val1,
-			      const Standard_Integer Val2)
+inline Standard_Integer  Min(const Standard_Integer Val1,
+    const Standard_Integer Val2)
 {
-  return Val1 <= Val2 ? Val1 : Val2;
+    return Val1 <= Val2 ? Val1 : Val2;
 }
 
 // ------------------------------------------------------------------
 // Modulus : Returns the remainder of division between two integers
 // ------------------------------------------------------------------
-inline Standard_Integer  Modulus (const Standard_Integer Value,
-				  const Standard_Integer Divisor)
-{ return Value % Divisor; }
+inline Standard_Integer  Modulus(const Standard_Integer Value,
+    const Standard_Integer Divisor)
+{
+    return Value % Divisor;
+}
 
 // ------------------------------------------------------------------
 // Square : Returns the square of an integer
 // ------------------------------------------------------------------
 inline Standard_Integer Square(const Standard_Integer Value)
-{ return Value * Value; }
+{
+    return Value * Value;
+}
 
 // ------------------------------------------------------------------
 // IntegerFirst : Returns the minimum value of an integer
 // ------------------------------------------------------------------
 inline Standard_Integer  IntegerFirst()
-{ return INT_MIN; }
+{
+    return INT_MIN;
+}
 
 // ------------------------------------------------------------------
 // IntegerLast : Returns the maximum value of an integer
 // ------------------------------------------------------------------
 inline Standard_Integer  IntegerLast()
-{ return INT_MAX; }
+{
+    return INT_MAX;
+}
 
 // ------------------------------------------------------------------
 // IntegerSize : Returns the size in digits of an integer
 // ------------------------------------------------------------------
 inline Standard_Integer  IntegerSize()
-{ return BITS(Standard_Integer); }
+{
+    return BITS(Standard_Integer);
+}
 
 
 //! Computes a hash code for the given value of some integer type, in range [1, theUpperBound]
@@ -102,49 +116,49 @@ inline Standard_Integer  IntegerSize()
 //! @return a computed hash code, in range [1, theUpperBound]
 template <typename TheInteger>
 typename opencascade::std::enable_if<opencascade::is_integer<TheInteger>::value, Standard_Integer>::type
-IntegerHashCode (const TheInteger                                                theValue,
-                 const typename opencascade::disable_deduction<TheInteger>::type theMask,
-                 const Standard_Integer                                          theUpperBound)
+IntegerHashCode(const TheInteger                                                theValue,
+    const typename opencascade::disable_deduction<TheInteger>::type theMask,
+    const Standard_Integer                                          theUpperBound)
 {
-  return static_cast<Standard_Integer> ((theValue & theMask) % theUpperBound + 1);
+    return static_cast<Standard_Integer> ((theValue & theMask) % theUpperBound + 1);
 }
 
 //! Computes a hash code for the given value of the Standard_Integer type, in range [1, theUpperBound]
 //! @param theValue the value of the Standard_Integer type which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in range [1, theUpperBound]
-inline Standard_Integer HashCode (const Standard_Integer theValue,
-                                  const Standard_Integer theUpperBound)
+inline Standard_Integer HashCode(const Standard_Integer theValue,
+    const Standard_Integer theUpperBound)
 {
-  // return (Abs (theMe) % theUpper) + 1;
-  return IntegerHashCode(theValue, IntegerLast(), theUpperBound);
+    // return (Abs (theMe) % theUpper) + 1;
+    return IntegerHashCode(theValue, IntegerLast(), theUpperBound);
 }
 
 // ------------------------------------------------------------------
 // IsEqual : Returns Standard_True if two integers are equal
 // ------------------------------------------------------------------
-inline Standard_Boolean IsEqual (const Standard_Integer theOne,
-                                 const Standard_Integer theTwo)
+inline Standard_Boolean IsEqual(const Standard_Integer theOne,
+    const Standard_Integer theTwo)
 {
-  return theOne == theTwo;
+    return theOne == theTwo;
 }
 
 //! Computes a hash value for the given unsigned integer, in range [1, theUpperBound]
 //! @param theValue the unsigned integer which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a hash value computed for the given unsigned integer, in range [1, theUpperBound]
-inline Standard_Integer HashCode (const unsigned int theValue, const Standard_Integer theUpperBound)
+inline Standard_Integer HashCode(const unsigned int theValue, const Standard_Integer theUpperBound)
 {
-  return ::HashCode (static_cast<Standard_Integer> (theValue), theUpperBound);
+    return ::HashCode(static_cast<Standard_Integer> (theValue), theUpperBound);
 }
 
 //! Computes a hash code for the given value of the "long long int" type, in range [1, theUpperBound]
 //! @param theValue the value of the "long long int" type which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in range [1, theUpperBound]
-inline Standard_Integer HashCode (const long long int theValue, const Standard_Integer theUpperBound)
+inline Standard_Integer HashCode(const long long int theValue, const Standard_Integer theUpperBound)
 {
-  return IntegerHashCode(theValue, 0x7fffffffffffffff, theUpperBound);
+    return IntegerHashCode(theValue, 0x7fffffffffffffff, theUpperBound);
 }
 
 #if (defined(_LP64) || defined(__LP64__) || defined(_WIN64)) || defined(__APPLE__)
@@ -158,20 +172,20 @@ inline Standard_Integer HashCode (const long long int theValue, const Standard_I
 //! @return a computed hash code, in the range [1, theUpperBound]
 template <typename TheUtf32Char>
 typename opencascade::std::enable_if<!opencascade::std::is_same<Standard_Utf32Char, unsigned int>::value
-                                       && opencascade::std::is_same<TheUtf32Char, Standard_Utf32Char>::value,
-                                     Standard_Integer>::type
-HashCode (const TheUtf32Char theValue, const Standard_Integer theUpperBound)
+    && opencascade::std::is_same<TheUtf32Char, Standard_Utf32Char>::value,
+    Standard_Integer>::type
+    HashCode(const TheUtf32Char theValue, const Standard_Integer theUpperBound)
 {
-  return IntegerHashCode (theValue, IntegerLast(), theUpperBound);
+    return IntegerHashCode(theValue, IntegerLast(), theUpperBound);
 }
 
 // ------------------------------------------------------------------
 // IsEqual : Returns Standard_True if two integers are equal
 // ------------------------------------------------------------------
-inline Standard_Boolean IsEqual (const Standard_Utf32Char theOne,
-                                 const Standard_Utf32Char theTwo)
+inline Standard_Boolean IsEqual(const Standard_Utf32Char theOne,
+    const Standard_Utf32Char theTwo)
 {
-  return theOne == theTwo;
+    return theOne == theTwo;
 }
 
 #endif

@@ -40,8 +40,7 @@ inline Standard_Integer HashCode(const void* const thePointer, const Standard_In
 // IsEqual : Returns Standard_True if two CString have the same value
 //============================================================================
 
-inline Standard_Boolean IsEqual(const Standard_Address One
-    , const Standard_Address Two)
+inline Standard_Boolean IsEqual(const Standard_Address One, const Standard_Address Two)
 {
     return One == Two;
 }

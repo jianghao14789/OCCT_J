@@ -16,6 +16,7 @@
 #ifndef _Standard_DefineAlloc_HeaderFile
 #define _Standard_DefineAlloc_HeaderFile
 
+// [STUDY] 数组内存分配
 // Macro to override new and delete operators for arrays.
 // Defined to empty for old SUN compiler
 # if defined(__SUNPRO_CC) && (__SUNPRO_CC <= 0x530)
@@ -32,6 +33,7 @@
    }
 # endif
 
+// [STUDY] 定位内存分配
 // Macro to override placement new and placement delete operators. 
 // For Borland C and old SUN compilers do not define placement delete
 // as it is not supported.

@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -22,7 +22,7 @@
 class Standard_Type;
 
 namespace opencascade {
-  template <class T> class handle;
+    template <class T> class handle;
 }
 
 //! Abstract class which forms the root of the entire 
@@ -31,80 +31,80 @@ namespace opencascade {
 class Standard_Transient
 {
 public:
-  // Standard OCCT memory allocation stuff
-  DEFINE_STANDARD_ALLOC;
+    // Standard OCCT memory allocation stuff
+    DEFINE_STANDARD_ALLOC;
 
 public:
 
-  //! Empty constructor
-  Standard_Transient() : myRefCount_(0) {}
+    //! Empty constructor
+    Standard_Transient() : myRefCount_(0) {}
 
-  //! Copy constructor -- does nothing
-  Standard_Transient (const Standard_Transient&) : myRefCount_(0) {}
+    //! Copy constructor -- does nothing
+    Standard_Transient(const Standard_Transient&) : myRefCount_(0) {}
 
-  //! Assignment operator, needed to avoid copying reference counter
-  Standard_Transient& operator= (const Standard_Transient&) { return *this; }
+    //! Assignment operator, needed to avoid copying reference counter
+    Standard_Transient& operator= (const Standard_Transient&) { return *this; }
 
-  //! Destructor must be virtual
-  virtual ~Standard_Transient() {}
+    //! Destructor must be virtual
+    virtual ~Standard_Transient() {}
 
-  //! Memory deallocator for transient classes
-  Standard_EXPORT virtual void Delete() const;
-
-public: 
-  //!@name Support of run-time type information (RTTI)
-
-  typedef void base_type;
-
-  static const char* get_type_name () { return "Standard_Transient"; }
-
-  //! Returns type descriptor of Standard_Transient class
-  Standard_EXPORT static const opencascade::handle<Standard_Type>& get_type_descriptor ();
-
-  //! Returns a type descriptor about this object.
-  Standard_EXPORT virtual const opencascade::handle<Standard_Type>& DynamicType() const;
-
-  //! Returns a true value if this is an instance of Type.
-  Standard_EXPORT Standard_Boolean IsInstance(const opencascade::handle<Standard_Type>& theType) const;  
-
-  //! Returns a true value if this is an instance of TypeName.
-  Standard_EXPORT Standard_Boolean IsInstance(const Standard_CString theTypeName) const;  
-
-  //! Returns true if this is an instance of Type or an
-  //! instance of any class that inherits from Type.
-  //! Note that multiple inheritance is not supported by OCCT RTTI mechanism.
-  Standard_EXPORT Standard_Boolean IsKind(const opencascade::handle<Standard_Type>& theType) const;
-
-  //! Returns true if this is an instance of TypeName or an
-  //! instance of any class that inherits from TypeName.
-  //! Note that multiple inheritance is not supported by OCCT RTTI mechanism.
-  Standard_EXPORT Standard_Boolean IsKind(const Standard_CString theTypeName) const;
-
-  //! Returns non-const pointer to this object (like const_cast).
-  //! For protection against creating handle to objects allocated in stack
-  //! or call from constructor, it will raise exception Standard_ProgramError
-  //! if reference counter is zero.
-  Standard_EXPORT Standard_Transient* This() const;
+    //! Memory deallocator for transient classes
+    Standard_EXPORT virtual void Delete() const;
 
 public:
-  //!@name Reference counting, for use by handle<>
+    //!@name Support of run-time type information (RTTI)
 
-  //! Get the reference counter of this object
-  Standard_Integer GetRefCount() const { return myRefCount_; }
+    typedef void base_type;
 
-  //! Increments the reference counter of this object
-  Standard_EXPORT void IncrementRefCounter() const;
+    static const char* get_type_name() { return "Standard_Transient"; }
 
-  //! Decrements the reference counter of this object;
-  //! returns the decremented value
-  Standard_EXPORT Standard_Integer DecrementRefCounter() const;
+    //! Returns type descriptor of Standard_Transient class
+    Standard_EXPORT static const opencascade::handle<Standard_Type>& get_type_descriptor();
+
+    //! Returns a type descriptor about this object.
+    Standard_EXPORT virtual const opencascade::handle<Standard_Type>& DynamicType() const;
+
+    //! Returns a true value if this is an instance of Type.
+    Standard_EXPORT Standard_Boolean IsInstance(const opencascade::handle<Standard_Type>& theType) const;
+
+    //! Returns a true value if this is an instance of TypeName.
+    Standard_EXPORT Standard_Boolean IsInstance(const Standard_CString theTypeName) const;
+
+    //! Returns true if this is an instance of Type or an
+    //! instance of any class that inherits from Type.
+    //! Note that multiple inheritance is not supported by OCCT RTTI mechanism.
+    Standard_EXPORT Standard_Boolean IsKind(const opencascade::handle<Standard_Type>& theType) const;
+
+    //! Returns true if this is an instance of TypeName or an
+    //! instance of any class that inherits from TypeName.
+    //! Note that multiple inheritance is not supported by OCCT RTTI mechanism.
+    Standard_EXPORT Standard_Boolean IsKind(const Standard_CString theTypeName) const;
+
+    //! Returns non-const pointer to this object (like const_cast).
+    //! For protection against creating handle to objects allocated in stack
+    //! or call from constructor, it will raise exception Standard_ProgramError
+    //! if reference counter is zero.
+    Standard_EXPORT Standard_Transient* This() const;
+
+public:
+    //!@name Reference counting, for use by handle<>
+
+    //! Get the reference counter of this object
+    Standard_Integer GetRefCount() const { return myRefCount_; }
+
+    //! Increments the reference counter of this object
+    Standard_EXPORT void IncrementRefCounter() const;
+
+    //! Decrements the reference counter of this object;
+    //! returns the decremented value
+    Standard_EXPORT Standard_Integer DecrementRefCounter() const;
 
 private:
 
-  //! Reference counter.
-  //! Note use of underscore, aimed to reduce probability 
-  //! of conflict with names of members of derived classes.
-  mutable volatile Standard_Integer myRefCount_;
+    //! Reference counter.
+    //! Note use of underscore, aimed to reduce probability 
+    //! of conflict with names of members of derived classes.
+    mutable volatile Standard_Integer myRefCount_;
 };
 
 
@@ -112,10 +112,10 @@ private:
 //! @param theTransientObject the transient object which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-inline Standard_Integer HashCode (const Standard_Transient* const theTransientObject,
-                                  const Standard_Integer          theUpperBound)
+inline Standard_Integer HashCode(const Standard_Transient* const theTransientObject,
+    const Standard_Integer          theUpperBound)
 {
-  return ::HashCode (static_cast<const void*> (theTransientObject), theUpperBound);
+    return ::HashCode(static_cast<const void*> (theTransientObject), theUpperBound);
 }
 
 //! Definition of Handle_Standard_Transient as typedef for compatibility

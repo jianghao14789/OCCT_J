@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of the examples of the Open CASCADE Technology software library.
 //
@@ -53,129 +53,129 @@
 
 enum StdActions
 {
-  StdActions_FileQuit, 
-  StdActions_HelpAbout
+    StdActions_FileQuit,
+    StdActions_HelpAbout
 };
 
 enum ApplicationType
 {
-  AppType_Geometry,
-  AppType_Topology,
-  AppType_Triangulation,
-  AppType_DataExchange,
-  AppType_Ocaf,
-  AppType_Viewer2d,
-  AppType_Viewer3d,
-  AppType_Unknown
+    AppType_Geometry,
+    AppType_Topology,
+    AppType_Triangulation,
+    AppType_DataExchange,
+    AppType_Ocaf,
+    AppType_Viewer2d,
+    AppType_Viewer3d,
+    AppType_Unknown
 };
 
 
 //! Main application window
-class ApplicationCommonWindow: public QMainWindow
+class ApplicationCommonWindow : public QMainWindow
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  ApplicationCommonWindow(ApplicationType theCategory);
+    ApplicationCommonWindow(ApplicationType theCategory);
 
-  ApplicationType GetApplicationType() const { return myAppType; }
-  void SetApplicationType(ApplicationType theApplicationType) { myAppType = theApplicationType; }
+    ApplicationType GetApplicationType() const { return myAppType; }
+    void SetApplicationType(ApplicationType theApplicationType) { myAppType = theApplicationType; }
 
-  static TCollection_AsciiString getSampleSourceDir();
+    static TCollection_AsciiString getSampleSourceDir();
 
 protected:
-  virtual DocumentCommon* createNewDocument();
+    virtual DocumentCommon* createNewDocument();
 
 public slots:
-  virtual void onAbout();
-  virtual void onChangeCategory(const QString& theCategory);
+    virtual void onAbout();
+    virtual void onChangeCategory(const QString& theCategory);
 
 protected:
-  QAction* CreateAction(const QString& theActionName,
-                        const QString& theShortcut = "",
-                        const QString& theIconName = "");
+    QAction* CreateAction(const QString& theActionName,
+        const QString& theShortcut = "",
+        const QString& theIconName = "");
 
-  template <typename PointerToMemberFunction>
-  QAction* CreateSample(PointerToMemberFunction theHandlerMethod,
-                        const char* theActionName);
+    template <typename PointerToMemberFunction>
+    QAction* CreateSample(PointerToMemberFunction theHandlerMethod,
+        const char* theActionName);
 
-  virtual void  resizeEvent( QResizeEvent* );
-  QMenu*        getFilePopup()  { return myFilePopup; }
-  QToolBar*     getCasCadeBar() { return myCasCadeBar; }
+    virtual void  resizeEvent(QResizeEvent*);
+    QMenu* getFilePopup() { return myFilePopup; }
+    QToolBar* getCasCadeBar() { return myCasCadeBar; }
 
-  void MenuFormXml (const QString& thePath,
-                     QSignalMapper* theMapper,
-                     QList<QMenu*>& theMunusList);
-  QMenu* MenuFromDomNode(QDomElement& theItemElement,
-                         QWidget* theParent,
-                         QSignalMapper* theMapper);
+    void MenuFormXml(const QString& thePath,
+        QSignalMapper* theMapper,
+        QList<QMenu*>& theMunusList);
+    QMenu* MenuFromDomNode(QDomElement& theItemElement,
+        QWidget* theParent,
+        QSignalMapper* theMapper);
 
 
 private slots:
-  void onCloseAllWindows() { qApp->closeAllWindows(); }
+    void onCloseAllWindows() { qApp->closeAllWindows(); }
 
-  void onProcessSample(const QString& theSampleName);
-  void onProcessExchange(const QString& theSampleName);
-  void onProcessOcaf(const QString& theSampleName);
-  void onProcessViewer3d(const QString& theSampleName);
-  void onProcessViewer2d(const QString& theSampleName);
-
-private:
-
-  void RebuildMenu();
-  Handle(BaseSample)   GetCurrentSamples();
-  const QList<QMenu*>& GetCurrentMenus();
-
-  QString selectFileName(const QString& theSampleName, TranslateDialog* theDialog, int& theMode);
-  TranslateDialog* getDataExchangeDialog(const QString& theSampleName);
-  TranslateDialog* getOcafDialog(const QString& theSampleName);
+    void onProcessSample(const QString& theSampleName);
+    void onProcessExchange(const QString& theSampleName);
+    void onProcessOcaf(const QString& theSampleName);
+    void onProcessViewer3d(const QString& theSampleName);
+    void onProcessViewer2d(const QString& theSampleName);
 
 private:
-  ApplicationType myAppType;
-  QMap<ApplicationType, QString> ALL_CATEGORIES;
 
-  Handle(GeometrySamples)      myGeometrySamples;
-  Handle(TopologySamples)      myTopologySamples;
-  Handle(TriangulationSamples) myTriangulationSamples;
-  Handle(DataExchangeSamples)  myDataExchangeSamples;
-  Handle(OcafSamples)          myOcafSamples;
-  Handle(Viewer3dSamples)      myViewer3dSamples;
-  Handle(Viewer2dSamples)      myViewer2dSamples;
+    void RebuildMenu();
+    Handle(BaseSample)   GetCurrentSamples();
+    const QList<QMenu*>& GetCurrentMenus();
 
-  QMap<StdActions,               QAction*>  myStdActions;
-  QMap<ApplicationType,          QAction*>  myCategoryActions;
-  QMap<Graphic3d_NameOfMaterial, QAction*>  myMaterialActions;
+    QString selectFileName(const QString& theSampleName, TranslateDialog* theDialog, int& theMode);
+    TranslateDialog* getDataExchangeDialog(const QString& theSampleName);
+    TranslateDialog* getOcafDialog(const QString& theSampleName);
 
-  QToolBar*        myStdToolBar;
-  QToolBar*        myViewBar;
-  QToolBar*        myCasCadeBar;
-  QMenu*           myFilePopup;
-  QMenu*           myCategoryPopup;
+private:
+    ApplicationType myAppType;
+    QMap<ApplicationType, QString> ALL_CATEGORIES;
 
-  QList<QMenu*>    myGeometryMenus;
-  QList<QMenu*>    myTopologyMenus;
-  QList<QMenu*>    myTriangulationMenus;
-  QList<QMenu*>    myDataExchangeMenus;
-  QList<QMenu*>    myOcafMenus;
-  QList<QMenu*>    myViewer3dMenus;
-  QList<QMenu*>    myViewer2dMenus;
+    Handle(GeometrySamples)      myGeometrySamples;
+    Handle(TopologySamples)      myTopologySamples;
+    Handle(TriangulationSamples) myTriangulationSamples;
+    Handle(DataExchangeSamples)  myDataExchangeSamples;
+    Handle(OcafSamples)          myOcafSamples;
+    Handle(Viewer3dSamples)      myViewer3dSamples;
+    Handle(Viewer2dSamples)      myViewer2dSamples;
 
-  QSignalMapper*   mySampleMapper;
-  QSignalMapper*   myExchangeMapper;
-  QSignalMapper*   myOcafMapper;
-  QSignalMapper*   myViewer3dMapper;
-  QSignalMapper*   myViewer2dMapper;
+    QMap<StdActions, QAction*>  myStdActions;
+    QMap<ApplicationType, QAction*>  myCategoryActions;
+    QMap<Graphic3d_NameOfMaterial, QAction*>  myMaterialActions;
 
-  QSignalMapper*   myCategoryMapper;
+    QToolBar* myStdToolBar;
+    QToolBar* myViewBar;
+    QToolBar* myCasCadeBar;
+    QMenu* myFilePopup;
+    QMenu* myCategoryPopup;
 
-  QTextEdit*       myCodeView;
-  QTextEdit*       myResultView;
-  OcctHighlighter* myCodeViewHighlighter;
+    QList<QMenu*>    myGeometryMenus;
+    QList<QMenu*>    myTopologyMenus;
+    QList<QMenu*>    myTriangulationMenus;
+    QList<QMenu*>    myDataExchangeMenus;
+    QList<QMenu*>    myOcafMenus;
+    QList<QMenu*>    myViewer3dMenus;
+    QList<QMenu*>    myViewer2dMenus;
 
-  GeomWidget*  myGeomWidget;
+    QSignalMapper* mySampleMapper;
+    QSignalMapper* myExchangeMapper;
+    QSignalMapper* myOcafMapper;
+    QSignalMapper* myViewer3dMapper;
+    QSignalMapper* myViewer2dMapper;
 
-  DocumentCommon*  myDocument3d;
-  DocumentCommon*  myDocument2d;
+    QSignalMapper* myCategoryMapper;
+
+    QTextEdit* myCodeView;
+    QTextEdit* myResultView;
+    OcctHighlighter* myCodeViewHighlighter;
+
+    GeomWidget* myGeomWidget;
+
+    DocumentCommon* myDocument3d;
+    DocumentCommon* myDocument2d;
 };
 
 #endif
