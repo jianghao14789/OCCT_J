@@ -40,7 +40,7 @@ class IGESDimen_ToolSection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSection, ready to work

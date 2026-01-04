@@ -51,7 +51,7 @@ class GProp_PrincipalProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates an undefined PrincipalProps.

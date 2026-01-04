@@ -53,7 +53,7 @@ class GccAna_Lin2d2Tan
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This methods implements the algorithms used to

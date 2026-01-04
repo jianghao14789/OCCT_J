@@ -35,7 +35,7 @@ class TopoDSToStep_MakeGeometricCurveSet  : public TopoDSToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopoDSToStep_MakeGeometricCurveSet(const TopoDS_Shape& SH, const Handle(Transfer_FinderProcess)& FP);

@@ -38,7 +38,7 @@ class BRepFill_TrimSurfaceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepFill_TrimSurfaceTool(const Handle(Geom2d_Curve)& Bis, const TopoDS_Face& Face1, const TopoDS_Face& Face2, const TopoDS_Edge& Edge1, const TopoDS_Edge& Edge2, const Standard_Boolean Inv1, const Standard_Boolean Inv2);

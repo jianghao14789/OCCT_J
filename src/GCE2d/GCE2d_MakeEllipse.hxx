@@ -45,7 +45,7 @@ class GCE2d_MakeEllipse  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

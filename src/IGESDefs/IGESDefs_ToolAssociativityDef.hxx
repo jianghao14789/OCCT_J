@@ -39,7 +39,7 @@ class IGESDefs_ToolAssociativityDef
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolAssociativityDef, ready to work

@@ -48,7 +48,7 @@ class Interface_EntityList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a List as being empty

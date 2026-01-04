@@ -35,7 +35,7 @@ class HLRBRep_EdgeBuilder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates  an   EdgeBuilder    algorithm.    <VList>

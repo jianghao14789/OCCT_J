@@ -39,7 +39,7 @@ class APIHeaderSection_MakeHeader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares a new MakeHeader from scratch

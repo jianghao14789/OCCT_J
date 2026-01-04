@@ -39,7 +39,7 @@ class IGESGeom_ToolCircularArc
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolCircularArc, ready to work

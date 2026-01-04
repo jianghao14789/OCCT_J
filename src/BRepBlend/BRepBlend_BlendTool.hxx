@@ -27,7 +27,7 @@ class BRepBlend_BlendTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Projects the point P on the arc C.

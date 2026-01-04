@@ -1,4 +1,4 @@
-// Copyright (c) 2021 OPEN CASCADE SAS
+﻿// Copyright (c) 2021 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -29,31 +29,31 @@ class BRepTools_PurgeLocations
 {
 
 public:
-  
-  Standard_EXPORT BRepTools_PurgeLocations();
-   
-  //! Removes all locations correspodingly to criterium from theShape.
-  Standard_EXPORT Standard_Boolean Perform(const TopoDS_Shape& theShape);
 
-  //! Returns shape with removed locations.
-  Standard_EXPORT const TopoDS_Shape& GetResult() const;
+    Standard_EXPORT BRepTools_PurgeLocations();
 
-  Standard_EXPORT Standard_Boolean  IsDone() const;
+    //! Removes all locations correspodingly to criterium from theShape.
+    Standard_EXPORT Standard_Boolean Perform(const TopoDS_Shape& theShape);
 
-  //! Returns modified shape obtained from initial shape.
-  TopoDS_Shape ModifiedShape(const TopoDS_Shape& theInitShape) const;
+    //! Returns shape with removed locations.
+    Standard_EXPORT const TopoDS_Shape& GetResult() const;
+
+    Standard_EXPORT Standard_Boolean  IsDone() const;
+
+    //! Returns modified shape obtained from initial shape.
+    TopoDS_Shape ModifiedShape(const TopoDS_Shape& theInitShape) const;
 
 private:
 
-  void AddShape(const TopoDS_Shape& theS);
-  Standard_Boolean PurgeLocation(const TopoDS_Shape& theS, TopoDS_Shape& theRes);
+    void AddShape(const TopoDS_Shape& theS);
+    Standard_Boolean PurgeLocation(const TopoDS_Shape& theS, TopoDS_Shape& theRes);
 
-  Standard_Boolean myDone;
-  TopoDS_Shape myShape;
-  TopTools_IndexedMapOfShape myMapShapes;
-  TopTools_LocationSet myLocations;
-  TopTools_DataMapOfShapeShape myMapNewShapes;
-  Handle(BRepTools_ReShape) myReShape;
+    Standard_Boolean myDone;
+    TopoDS_Shape myShape;
+    TopTools_IndexedMapOfShape myMapShapes;
+    TopTools_LocationSet myLocations;
+    TopTools_DataMapOfShapeShape myMapNewShapes;
+    Handle(BRepTools_ReShape) myReShape;
 
 };
 

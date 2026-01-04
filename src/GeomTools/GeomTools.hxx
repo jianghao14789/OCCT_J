@@ -40,7 +40,7 @@ class GeomTools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! A set of Curves from Geom2d.

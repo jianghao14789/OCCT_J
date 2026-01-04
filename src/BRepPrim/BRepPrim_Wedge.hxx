@@ -31,7 +31,7 @@ class BRepPrim_Wedge  : public BRepPrim_GWedge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Default constructor
   BRepPrim_Wedge() {}

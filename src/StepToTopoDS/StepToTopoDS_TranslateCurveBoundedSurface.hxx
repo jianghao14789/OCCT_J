@@ -34,7 +34,7 @@ class StepToTopoDS_TranslateCurveBoundedSurface  : public StepToTopoDS_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create empty tool

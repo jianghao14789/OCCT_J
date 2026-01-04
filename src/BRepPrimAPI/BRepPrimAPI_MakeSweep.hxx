@@ -45,7 +45,7 @@ class BRepPrimAPI_MakeSweep  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the  TopoDS  Shape of the bottom of the sweep.

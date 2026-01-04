@@ -40,7 +40,7 @@ class LocOpe_LinearForm
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     LocOpe_LinearForm();

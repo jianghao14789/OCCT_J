@@ -43,7 +43,7 @@ class BRepGProp_Face
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor. Initializes the object with a flag IsUseSpan

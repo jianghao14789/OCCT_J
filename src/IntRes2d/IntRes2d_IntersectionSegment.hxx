@@ -31,7 +31,7 @@ class IntRes2d_IntersectionSegment
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

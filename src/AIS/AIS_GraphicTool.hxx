@@ -35,7 +35,7 @@ class AIS_GraphicTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Quantity_NameOfColor GetLineColor (const Handle(Prs3d_Drawer)& aDrawer, const AIS_TypeOfAttribute TheTypeOfAttributes);

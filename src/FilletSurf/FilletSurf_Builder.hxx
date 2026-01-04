@@ -48,7 +48,7 @@ class FilletSurf_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initialize  of the information  necessary for  the

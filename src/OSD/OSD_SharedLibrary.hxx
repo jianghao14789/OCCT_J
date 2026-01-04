@@ -36,7 +36,7 @@ class OSD_SharedLibrary
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a SharedLibrary object with name NULL.

@@ -45,7 +45,7 @@ class ApproxInt_SvSurfaces
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns True if Tg,Tguv1 Tguv2 can be computed.

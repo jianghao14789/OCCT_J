@@ -30,7 +30,7 @@ class DsgPrs_ParalPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines the display of elements showing relations of

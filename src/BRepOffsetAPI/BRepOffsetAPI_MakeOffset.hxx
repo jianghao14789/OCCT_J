@@ -42,7 +42,7 @@ class BRepOffsetAPI_MakeOffset  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an algorithm for creating an empty offset

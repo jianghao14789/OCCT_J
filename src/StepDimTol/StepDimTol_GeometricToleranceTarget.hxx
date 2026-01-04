@@ -33,7 +33,7 @@ class StepDimTol_GeometricToleranceTarget  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a GeometricToleranceTarget select type
   Standard_EXPORT StepDimTol_GeometricToleranceTarget();

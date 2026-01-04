@@ -42,7 +42,7 @@ class BRepOffsetAPI_MakeOffsetShape  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor does nothing.
   Standard_EXPORT BRepOffsetAPI_MakeOffsetShape();

@@ -44,7 +44,7 @@ class IntPolyh_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public: //! @name Constructors
 

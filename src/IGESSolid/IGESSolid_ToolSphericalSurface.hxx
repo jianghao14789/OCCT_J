@@ -39,7 +39,7 @@ class IGESSolid_ToolSphericalSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSphericalSurface, ready to work

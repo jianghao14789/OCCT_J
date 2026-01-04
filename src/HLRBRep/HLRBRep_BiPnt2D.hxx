@@ -31,7 +31,7 @@ class HLRBRep_BiPnt2D
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   HLRBRep_BiPnt2D()
   : myRg1Line (false),

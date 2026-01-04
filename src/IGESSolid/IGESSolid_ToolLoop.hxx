@@ -39,7 +39,7 @@ class IGESSolid_ToolLoop
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolLoop, ready to work

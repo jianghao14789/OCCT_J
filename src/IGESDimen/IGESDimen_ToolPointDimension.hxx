@@ -39,7 +39,7 @@ class IGESDimen_ToolPointDimension
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPointDimension, ready to work

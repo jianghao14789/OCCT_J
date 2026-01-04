@@ -35,7 +35,7 @@ class Draft_VertexInfo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Draft_VertexInfo();

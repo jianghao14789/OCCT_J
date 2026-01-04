@@ -1,4 +1,4 @@
-// Created on: 2008-06-20
+﻿// Created on: 2008-06-20
 // Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
@@ -19,19 +19,19 @@
 #include <Standard_PrimitiveTypes.hxx>
 
 struct FSD_FileHeader {
-  Standard_Integer testindian;
-  Standard_Integer binfo;
-  Standard_Integer einfo;
-  Standard_Integer bcomment;
-  Standard_Integer ecomment;
-  Standard_Integer btype;
-  Standard_Integer etype;
-  Standard_Integer broot;
-  Standard_Integer eroot;
-  Standard_Integer bref;
-  Standard_Integer eref;
-  Standard_Integer bdata;
-  Standard_Integer edata;  
+    Standard_Integer testindian;
+    Standard_Integer binfo;
+    Standard_Integer einfo;
+    Standard_Integer bcomment;
+    Standard_Integer ecomment;
+    Standard_Integer btype;
+    Standard_Integer etype;
+    Standard_Integer broot;
+    Standard_Integer eroot;
+    Standard_Integer bref;
+    Standard_Integer eref;
+    Standard_Integer bdata;
+    Standard_Integer edata;
 };
 
 #endif

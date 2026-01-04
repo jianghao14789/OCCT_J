@@ -1,4 +1,4 @@
-// Created on: 1995-03-15
+﻿// Created on: 1995-03-15
 // Created by: Laurent PAINNOT
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -38,26 +38,26 @@ class BRep_PolygonOnClosedSurface : public BRep_PolygonOnSurface
 
 public:
 
-  
-  Standard_EXPORT BRep_PolygonOnClosedSurface(const Handle(Poly_Polygon2D)& P1, const Handle(Poly_Polygon2D)& P2, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
-  
-  //! returns True.
-  Standard_EXPORT virtual Standard_Boolean IsPolygonOnClosedSurface() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual const Handle(Poly_Polygon2D)& Polygon2() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Polygon2 (const Handle(Poly_Polygon2D)& P) Standard_OVERRIDE;
-  
-  //! Return a copy of this representation.
-  Standard_EXPORT virtual Handle(BRep_CurveRepresentation) Copy() const Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT BRep_PolygonOnClosedSurface(const Handle(Poly_Polygon2D)& P1, const Handle(Poly_Polygon2D)& P2, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
 
+    //! returns True.
+    Standard_EXPORT virtual Standard_Boolean IsPolygonOnClosedSurface() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual const Handle(Poly_Polygon2D)& Polygon2() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void Polygon2(const Handle(Poly_Polygon2D)& P) Standard_OVERRIDE;
+
+    //! Return a copy of this representation.
+    Standard_EXPORT virtual Handle(BRep_CurveRepresentation) Copy() const Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 
-  DEFINE_STANDARD_RTTIEXT(BRep_PolygonOnClosedSurface,BRep_PolygonOnSurface)
+
+
+    DEFINE_STANDARD_RTTIEXT(BRep_PolygonOnClosedSurface, BRep_PolygonOnSurface)
 
 protected:
 
@@ -67,7 +67,7 @@ protected:
 private:
 
 
-  Handle(Poly_Polygon2D) myPolygon2;
+    Handle(Poly_Polygon2D) myPolygon2;
 
 
 };

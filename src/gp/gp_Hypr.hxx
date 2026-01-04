@@ -72,7 +72,7 @@ class gp_Hypr
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates of an indefinite hyperbola.
   gp_Hypr()

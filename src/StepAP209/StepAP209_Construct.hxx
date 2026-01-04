@@ -45,7 +45,7 @@ class StepAP209_Construct  : public STEPConstruct_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty tool

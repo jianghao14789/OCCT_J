@@ -46,7 +46,7 @@ class GProp
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! methods of package

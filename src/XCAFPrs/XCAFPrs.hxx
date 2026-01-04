@@ -34,7 +34,7 @@ class XCAFPrs
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Collect styles defined for shape on label L

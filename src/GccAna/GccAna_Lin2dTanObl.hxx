@@ -46,7 +46,7 @@ class GccAna_Lin2dTanObl
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This class implements the algorithms used to

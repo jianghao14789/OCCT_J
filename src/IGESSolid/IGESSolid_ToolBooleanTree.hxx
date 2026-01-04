@@ -39,7 +39,7 @@ class IGESSolid_ToolBooleanTree
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolBooleanTree, ready to work

@@ -29,7 +29,7 @@ class IGESGeom
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares dymanic data (Protocol, Modules) for this package

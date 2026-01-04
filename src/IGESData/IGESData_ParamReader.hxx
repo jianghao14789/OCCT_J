@@ -59,7 +59,7 @@ class IGESData_ParamReader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares a ParamReader, stage "Own", current param = 1

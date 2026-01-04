@@ -1,4 +1,4 @@
-// Created on: 2002-04-18
+﻿// Created on: 2002-04-18
 // Created by: Alexander KARTOMIN (akm)
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -24,32 +24,32 @@
 //=======================================================================
 
 Standard_Boolean  NCollection_BaseMap::BeginResize
-  (const Standard_Integer  NbBuckets,
-   Standard_Integer&       N,
-   NCollection_ListNode**& data1,
-   NCollection_ListNode**& data2) const 
+(const Standard_Integer  NbBuckets,
+    Standard_Integer& N,
+    NCollection_ListNode**& data1,
+    NCollection_ListNode**& data2) const
 {
-  // get next size for the buckets array
-  N = NextPrimeForMap(NbBuckets);
-  if (N <= myNbBuckets)
-  {
-    if (!myData1)
-      N = myNbBuckets;
+    // get next size for the buckets array
+    N = NextPrimeForMap(NbBuckets);
+    if (N <= myNbBuckets)
+    {
+        if (!myData1)
+            N = myNbBuckets;
+        else
+            return Standard_False;
+    }
+    data1 = (NCollection_ListNode**)
+        myAllocator->Allocate((N + 1) * sizeof(NCollection_ListNode*));
+    memset(data1, 0, (N + 1) * sizeof(NCollection_ListNode*));
+    if (isDouble)
+    {
+        data2 = (NCollection_ListNode**)
+            myAllocator->Allocate((N + 1) * sizeof(NCollection_ListNode*));
+        memset(data2, 0, (N + 1) * sizeof(NCollection_ListNode*));
+    }
     else
-      return Standard_False;
-  }
-  data1 = (NCollection_ListNode **)
-    myAllocator->Allocate((N+1)*sizeof(NCollection_ListNode *));
-  memset(data1, 0, (N+1)*sizeof(NCollection_ListNode *));
-  if (isDouble) 
-  {
-    data2 = (NCollection_ListNode **)
-      myAllocator->Allocate((N+1)*sizeof(NCollection_ListNode *));
-    memset(data2, 0, (N+1)*sizeof(NCollection_ListNode *));
-  }
-  else
-    data2 = NULL;
-  return Standard_True;
+        data2 = NULL;
+    return Standard_True;
 }
 
 //=======================================================================
@@ -58,19 +58,19 @@ Standard_Boolean  NCollection_BaseMap::BeginResize
 //=======================================================================
 
 void  NCollection_BaseMap::EndResize
-  (const Standard_Integer theNbBuckets,
-   const Standard_Integer N,
-   NCollection_ListNode** data1,
-   NCollection_ListNode** data2)
+(const Standard_Integer theNbBuckets,
+    const Standard_Integer N,
+    NCollection_ListNode** data1,
+    NCollection_ListNode** data2)
 {
-  (void )theNbBuckets; // obsolete parameter
-  if (myData1) 
-    myAllocator->Free(myData1);
-  if (myData2) 
-    myAllocator->Free(myData2);
-  myNbBuckets = N;
-  myData1 = data1;
-  myData2 = data2;
+    (void)theNbBuckets; // obsolete parameter
+    if (myData1)
+        myAllocator->Free(myData1);
+    if (myData2)
+        myAllocator->Free(myData2);
+    myNbBuckets = N;
+    myData1 = data1;
+    myData2 = data2;
 }
 
 
@@ -79,39 +79,39 @@ void  NCollection_BaseMap::EndResize
 //purpose  : 
 //=======================================================================
 
-void  NCollection_BaseMap::Destroy (NCollection_DelMapNode fDel,
-                                    Standard_Boolean doReleaseMemory)
+void  NCollection_BaseMap::Destroy(NCollection_DelMapNode fDel,
+    Standard_Boolean doReleaseMemory)
 {
-  if (!IsEmpty()) 
-  {
-    Standard_Integer i;
-    NCollection_ListNode** data = (NCollection_ListNode**) myData1;
-    NCollection_ListNode *p,*q;
-    for (i = 0; i <= NbBuckets(); i++) 
+    if (!IsEmpty())
     {
-      if (data[i]) 
-      {
-        p = data[i];
-        while (p) 
+        Standard_Integer i;
+        NCollection_ListNode** data = (NCollection_ListNode**)myData1;
+        NCollection_ListNode* p, * q;
+        for (i = 0; i <= NbBuckets(); i++)
         {
-          q = (NCollection_ListNode*)p->Next();
-          fDel (p, myAllocator);
-          p = q;
+            if (data[i])
+            {
+                p = data[i];
+                while (p)
+                {
+                    q = (NCollection_ListNode*)p->Next();
+                    fDel(p, myAllocator);
+                    p = q;
+                }
+                data[i] = NULL;
+            }
         }
-        data[i] = NULL;
-      }
     }
-  }
 
-  mySize = 0;
-  if (doReleaseMemory)
-  {
-    if (myData1) 
-      myAllocator->Free(myData1);
-    if (isDouble && myData2) 
-      myAllocator->Free(myData2);
-    myData1 = myData2 = NULL;
-  }
+    mySize = 0;
+    if (doReleaseMemory)
+    {
+        if (myData1)
+            myAllocator->Free(myData1);
+        if (isDouble && myData2)
+            myAllocator->Free(myData2);
+        myData1 = myData2 = NULL;
+    }
 }
 
 
@@ -122,49 +122,49 @@ void  NCollection_BaseMap::Destroy (NCollection_DelMapNode fDel,
 
 void NCollection_BaseMap::Statistics(Standard_OStream& S) const
 {
-  S <<"\nMap Statistics\n---------------\n\n";
-  S <<"This Map has "<<myNbBuckets<<" Buckets and "<<mySize<<" Keys\n\n";
-  
-  if (mySize == 0) return;
+    S << "\nMap Statistics\n---------------\n\n";
+    S << "This Map has " << myNbBuckets << " Buckets and " << mySize << " Keys\n\n";
 
-  // compute statistics on 1
-  Standard_Integer * sizes = new Standard_Integer [mySize+1];
-  Standard_Integer i,l,nb;
-  NCollection_ListNode* p;
-  NCollection_ListNode** data;
-  
-  S << "\nStatistics for the first Key\n";
-  for (i = 0; i <= mySize; i++) sizes[i] = 0;
-  data = (NCollection_ListNode **) myData1;
-  nb = 0;
-  for (i = 0; i <= myNbBuckets; i++) 
-  {
+    if (mySize == 0) return;
+
+    // compute statistics on 1
+    Standard_Integer* sizes = new Standard_Integer[mySize + 1];
+    Standard_Integer i, l, nb;
+    NCollection_ListNode* p;
+    NCollection_ListNode** data;
+
+    S << "\nStatistics for the first Key\n";
+    for (i = 0; i <= mySize; i++) sizes[i] = 0;
+    data = (NCollection_ListNode**)myData1;
+    nb = 0;
+    for (i = 0; i <= myNbBuckets; i++)
+    {
+        l = 0;
+        p = data[i];
+        if (p) nb++;
+        while (p)
+        {
+            l++;
+            p = p->Next();
+        }
+        sizes[l]++;
+    }
+
+    // display results
     l = 0;
-    p = data[i];
-    if (p) nb++;
-    while (p) 
+    for (i = 0; i <= mySize; i++)
     {
-      l++;
-      p = p->Next();
+        if (sizes[i] > 0)
+        {
+            l += sizes[i] * i;
+            S << std::setw(5) << sizes[i] << " buckets of size " << i << "\n";
+        }
     }
-    sizes[l]++;
-  }
 
-  // display results
-  l = 0;
-  for (i = 0; i<= mySize; i++) 
-  {
-    if (sizes[i] > 0) 
-    {
-      l += sizes[i] * i;
-      S << std::setw(5) << sizes[i] <<" buckets of size "<<i<<"\n";
-    }
-  }
+    Standard_Real mean = ((Standard_Real)l) / ((Standard_Real)nb);
+    S << "\n\nMean of length : " << mean << "\n";
 
-  Standard_Real mean = ((Standard_Real) l) / ((Standard_Real) nb);
-  S<<"\n\nMean of length : "<<mean<<"\n";
-
-  delete [] sizes;
+    delete[] sizes;
 }
 
 //=======================================================================
@@ -173,8 +173,8 @@ void NCollection_BaseMap::Statistics(Standard_OStream& S) const
 //=======================================================================
 
 Standard_Integer NCollection_BaseMap::NextPrimeForMap
-  (const Standard_Integer N) const
+(const Standard_Integer N) const
 {
-  return TCollection::NextPrimeForMap ( N );
+    return TCollection::NextPrimeForMap(N);
 }
 

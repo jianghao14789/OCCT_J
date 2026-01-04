@@ -26,7 +26,7 @@ class OSD_Disk
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a disk object.
   //! This is used only when a class contains a Disk field.

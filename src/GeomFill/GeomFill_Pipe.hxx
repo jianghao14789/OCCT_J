@@ -86,7 +86,7 @@ class GeomFill_Pipe
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

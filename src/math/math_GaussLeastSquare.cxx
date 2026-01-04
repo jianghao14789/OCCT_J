@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -25,43 +25,43 @@
 #include <Standard_DimensionError.hxx>
 #include <StdFail_NotDone.hxx>
 
-math_GaussLeastSquare::math_GaussLeastSquare (const math_Matrix& A,
-		       		      const Standard_Real MinPivot) :
-                                      LU(1, A.ColNumber(),
-					 1, A.ColNumber()),
-                                      A2(1, A.ColNumber(),
-					 1, A.RowNumber()),
-                                      Index(1, A.ColNumber()) {
-  A2 = A.Transposed();					
-  LU.Multiply(A2, A);
+math_GaussLeastSquare::math_GaussLeastSquare(const math_Matrix& A,
+    const Standard_Real MinPivot) :
+    LU(1, A.ColNumber(),
+        1, A.ColNumber()),
+    A2(1, A.ColNumber(),
+        1, A.RowNumber()),
+    Index(1, A.ColNumber()) {
+    A2 = A.Transposed();
+    LU.Multiply(A2, A);
 
-  Standard_Integer Error = LU_Decompose(LU, Index, D, MinPivot);
-  Done = (!Error) ? Standard_True : Standard_False;
+    Standard_Integer Error = LU_Decompose(LU, Index, D, MinPivot);
+    Done = (!Error) ? Standard_True : Standard_False;
 
 }
 
-void math_GaussLeastSquare::Solve(const math_Vector& B, math_Vector& X) const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  Standard_DimensionError_Raise_if((B.Length() != A2.ColNumber()) ||
-				   (X.Length() != A2.RowNumber()), " ");
+void math_GaussLeastSquare::Solve(const math_Vector& B, math_Vector& X) const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    Standard_DimensionError_Raise_if((B.Length() != A2.ColNumber()) ||
+        (X.Length() != A2.RowNumber()), " ");
 
-  X.Multiply(A2, B);
+    X.Multiply(A2, B);
 
-  LU_Solve(LU, Index, X);
+    LU_Solve(LU, Index, X);
 
-  return;
+    return;
 }
 
 
 void math_GaussLeastSquare::Dump(Standard_OStream& o) const {
 
-  o <<"math_GaussLeastSquare ";
-   if (Done) {
-     o << " Status = Done \n";
-   }
-   else {
-     o << "Status = not Done \n";
-   }
+    o << "math_GaussLeastSquare ";
+    if (Done) {
+        o << " Status = Done \n";
+    }
+    else {
+        o << "Status = not Done \n";
+    }
 }
 
 

@@ -39,7 +39,7 @@ class BRepFill
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes a ruled surface between two edges.

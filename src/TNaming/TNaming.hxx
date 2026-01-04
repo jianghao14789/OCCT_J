@@ -123,7 +123,7 @@ class TNaming
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Subtituter les  shapes  sur les structures de   source

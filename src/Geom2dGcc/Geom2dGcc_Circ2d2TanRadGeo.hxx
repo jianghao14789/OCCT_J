@@ -62,7 +62,7 @@ class Geom2dGcc_Circ2d2TanRadGeo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This method implements the algorithms used to

@@ -51,7 +51,7 @@ class GeomInt_TheComputeLineBezierOfWLApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The MultiLine <Line> will be approximated until tolerances

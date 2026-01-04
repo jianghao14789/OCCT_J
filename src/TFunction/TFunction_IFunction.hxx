@@ -38,7 +38,7 @@ class TFunction_IFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Sets a new function attached to a label <L> with <ID>.

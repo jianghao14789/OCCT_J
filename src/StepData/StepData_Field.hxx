@@ -45,7 +45,7 @@ class StepData_Field
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 
   //! Creates a Field, empty ("no value defined")

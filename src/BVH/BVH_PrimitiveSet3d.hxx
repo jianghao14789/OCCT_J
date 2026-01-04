@@ -1,4 +1,4 @@
-// Copyright (c) 2017 OPEN CASCADE SAS
+﻿// Copyright (c) 2017 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //

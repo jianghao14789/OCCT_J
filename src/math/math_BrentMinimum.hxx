@@ -37,7 +37,7 @@ class math_BrentMinimum
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

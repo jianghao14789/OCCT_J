@@ -1,4 +1,4 @@
-// Created on: 1994-05-09
+﻿// Created on: 1994-05-09
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -34,80 +34,80 @@ class TCollection_AsciiString;
 
 //! This class provides all the services to explore
 //! UnitsSystem or UnitsDictionary.
-class Units_Explorer 
+class Units_Explorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Empty constructor of the class.
-  Standard_EXPORT Units_Explorer();
-  
-  //! Creates a new instance of the class, initialized with
-  //! the UnitsSystem <aunitssystem>.
-  Standard_EXPORT Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem);
-  
-  //! Creates a new instance of the class, initialized with
-  //! the UnitsDictionary <aunitsdictionary>.
-  Standard_EXPORT Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictionary);
-  
-  //! Creates a new instance of the class, initialized with
-  //! the UnitsSystem <aunitssystem> and positioned at the
-  //! quantity <aquantity>.
-  Standard_EXPORT Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem, const Standard_CString aquantity);
-  
-  //! Creates a  new instance of the class,  initialized with
-  //! the  UnitsDictionary <aunitsdictionary> and positioned
-  //! at the quantity <aquantity>.
-  Standard_EXPORT Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictionary, const Standard_CString aquantity);
-  
-  //! Initializes  the  instance  of  the  class  with  the
-  //! UnitsSystem <aunitssystem>.
-  Standard_EXPORT void Init (const Handle(Units_UnitsSystem)& aunitssystem);
-  
-  //! Initializes  the  instance  of  the  class  with  the
-  //! UnitsDictionary <aunitsdictionary>.
-  Standard_EXPORT void Init (const Handle(Units_UnitsDictionary)& aunitsdictionary);
-  
-  //! Initializes  the  instance  of  the   class  with  the
-  //! UnitsSystem  <aunitssystem>  and   positioned  at  the
-  //! quantity <aquantity>.
-  Standard_EXPORT void Init (const Handle(Units_UnitsSystem)& aunitssystem, const Standard_CString aquantity);
-  
-  //! Initializes  the  instance   of  the  class  with  the
-  //! UnitsDictionary  <aunitsdictionary> and positioned  at
-  //! the quantity <aquantity>.
-  Standard_EXPORT void Init (const Handle(Units_UnitsDictionary)& aunitsdictionary, const Standard_CString aquantity);
-  
-  //! Returns True if there is another Quantity to explore,
-  //! False otherwise.
-  Standard_EXPORT Standard_Boolean MoreQuantity() const;
-  
-  //! Sets the next Quantity current.
-  Standard_EXPORT void NextQuantity();
-  
-  //! Returns the name of the current Quantity.
-  Standard_EXPORT TCollection_AsciiString Quantity() const;
-  
-  //! Returns True if there is another Unit to explore,
-  //! False otherwise.
-  Standard_EXPORT Standard_Boolean MoreUnit() const;
-  
-  //! Sets the next Unit current.
-  Standard_EXPORT void NextUnit();
-  
-  //! Returns the name of the current unit.
-  Standard_EXPORT TCollection_AsciiString Unit() const;
-  
-  //! If the  units system  to  explore  is  a user  system,
-  //! returns True  if  the  current unit  is  active, False
-  //! otherwise.
-  //!
-  //! If   the   units  system  to  explore  is   the  units
-  //! dictionary,  returns True if the  current unit is  the
-  //! S.I. unit.
-  Standard_EXPORT Standard_Boolean IsActive() const;
+
+    //! Empty constructor of the class.
+    Standard_EXPORT Units_Explorer();
+
+    //! Creates a new instance of the class, initialized with
+    //! the UnitsSystem <aunitssystem>.
+    Standard_EXPORT Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem);
+
+    //! Creates a new instance of the class, initialized with
+    //! the UnitsDictionary <aunitsdictionary>.
+    Standard_EXPORT Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictionary);
+
+    //! Creates a new instance of the class, initialized with
+    //! the UnitsSystem <aunitssystem> and positioned at the
+    //! quantity <aquantity>.
+    Standard_EXPORT Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem, const Standard_CString aquantity);
+
+    //! Creates a  new instance of the class,  initialized with
+    //! the  UnitsDictionary <aunitsdictionary> and positioned
+    //! at the quantity <aquantity>.
+    Standard_EXPORT Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictionary, const Standard_CString aquantity);
+
+    //! Initializes  the  instance  of  the  class  with  the
+    //! UnitsSystem <aunitssystem>.
+    Standard_EXPORT void Init(const Handle(Units_UnitsSystem)& aunitssystem);
+
+    //! Initializes  the  instance  of  the  class  with  the
+    //! UnitsDictionary <aunitsdictionary>.
+    Standard_EXPORT void Init(const Handle(Units_UnitsDictionary)& aunitsdictionary);
+
+    //! Initializes  the  instance  of  the   class  with  the
+    //! UnitsSystem  <aunitssystem>  and   positioned  at  the
+    //! quantity <aquantity>.
+    Standard_EXPORT void Init(const Handle(Units_UnitsSystem)& aunitssystem, const Standard_CString aquantity);
+
+    //! Initializes  the  instance   of  the  class  with  the
+    //! UnitsDictionary  <aunitsdictionary> and positioned  at
+    //! the quantity <aquantity>.
+    Standard_EXPORT void Init(const Handle(Units_UnitsDictionary)& aunitsdictionary, const Standard_CString aquantity);
+
+    //! Returns True if there is another Quantity to explore,
+    //! False otherwise.
+    Standard_EXPORT Standard_Boolean MoreQuantity() const;
+
+    //! Sets the next Quantity current.
+    Standard_EXPORT void NextQuantity();
+
+    //! Returns the name of the current Quantity.
+    Standard_EXPORT TCollection_AsciiString Quantity() const;
+
+    //! Returns True if there is another Unit to explore,
+    //! False otherwise.
+    Standard_EXPORT Standard_Boolean MoreUnit() const;
+
+    //! Sets the next Unit current.
+    Standard_EXPORT void NextUnit();
+
+    //! Returns the name of the current unit.
+    Standard_EXPORT TCollection_AsciiString Unit() const;
+
+    //! If the  units system  to  explore  is  a user  system,
+    //! returns True  if  the  current unit  is  active, False
+    //! otherwise.
+    //!
+    //! If   the   units  system  to  explore  is   the  units
+    //! dictionary,  returns True if the  current unit is  the
+    //! S.I. unit.
+    Standard_EXPORT Standard_Boolean IsActive() const;
 
 
 
@@ -122,11 +122,11 @@ private:
 
 
 
-  Standard_Integer thecurrentquantity;
-  Handle(Units_QuantitiesSequence) thequantitiessequence;
-  Standard_Integer thecurrentunit;
-  Handle(Units_UnitsSequence) theunitssequence;
-  Handle(TColStd_HSequenceOfInteger) theactiveunitssequence;
+    Standard_Integer thecurrentquantity;
+    Handle(Units_QuantitiesSequence) thequantitiessequence;
+    Standard_Integer thecurrentunit;
+    Handle(Units_UnitsSequence) theunitssequence;
+    Handle(TColStd_HSequenceOfInteger) theactiveunitssequence;
 
 
 };

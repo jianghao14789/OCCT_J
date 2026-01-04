@@ -33,7 +33,7 @@ class FairCurve_Newton  : public math_NewtonMinimum
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

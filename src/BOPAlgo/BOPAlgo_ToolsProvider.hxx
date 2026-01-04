@@ -1,4 +1,4 @@
-// Created by: Oleg AGASHIN
+﻿// Created by: Oleg AGASHIN
 // Copyright (c) 2017 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -26,32 +26,32 @@ class BOPAlgo_ToolsProvider : public BOPAlgo_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  //! Empty constructor
-  Standard_EXPORT BOPAlgo_ToolsProvider();
+    //! Empty constructor
+    Standard_EXPORT BOPAlgo_ToolsProvider();
 
-  Standard_EXPORT BOPAlgo_ToolsProvider(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_ToolsProvider(const Handle(NCollection_BaseAllocator)& theAllocator);
 
-  //! Clears internal fields and arguments
-  Standard_EXPORT virtual void Clear() Standard_OVERRIDE;
+    //! Clears internal fields and arguments
+    Standard_EXPORT virtual void Clear() Standard_OVERRIDE;
 
-  //! Adds Tool argument of the operation
-  Standard_EXPORT virtual void AddTool(const TopoDS_Shape& theShape);
+    //! Adds Tool argument of the operation
+    Standard_EXPORT virtual void AddTool(const TopoDS_Shape& theShape);
 
-  //! Adds the Tool arguments of the operation
-  Standard_EXPORT virtual void SetTools(const TopTools_ListOfShape& theShapes);
+    //! Adds the Tool arguments of the operation
+    Standard_EXPORT virtual void SetTools(const TopTools_ListOfShape& theShapes);
 
-  //! Returns the Tool arguments of the operation
-  const TopTools_ListOfShape& Tools() const
-  {
-    return myTools;
-  }
+    //! Returns the Tool arguments of the operation
+    const TopTools_ListOfShape& Tools() const
+    {
+        return myTools;
+    }
 
 protected:
 
-  TopTools_ListOfShape myTools;
-  TopTools_MapOfShape  myMapTools;
+    TopTools_ListOfShape myTools;
+    TopTools_MapOfShape  myMapTools;
 };
 
 #endif // _BOPAlgo_ToolsProvider_HeaderFile

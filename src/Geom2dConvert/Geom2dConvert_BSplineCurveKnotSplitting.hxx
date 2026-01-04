@@ -49,7 +49,7 @@ class Geom2dConvert_BSplineCurveKnotSplitting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Determines points at which the BSpline curve

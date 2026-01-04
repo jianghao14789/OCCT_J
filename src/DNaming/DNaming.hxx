@@ -49,7 +49,7 @@ class DNaming
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Handle(TDataStd_Real) GetReal (const Handle(TFunction_Function)& theFunction, const Standard_Integer thePosition);

@@ -33,7 +33,7 @@ class StepBasic_Unit  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates empty object

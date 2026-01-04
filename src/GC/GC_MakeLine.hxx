@@ -44,7 +44,7 @@ class GC_MakeLine  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

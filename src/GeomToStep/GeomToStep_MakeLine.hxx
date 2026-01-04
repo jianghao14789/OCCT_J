@@ -37,7 +37,7 @@ class GeomToStep_MakeLine  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeLine(const gp_Lin& L);

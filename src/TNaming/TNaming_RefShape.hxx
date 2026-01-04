@@ -33,7 +33,7 @@ class TNaming_RefShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     TNaming_RefShape();

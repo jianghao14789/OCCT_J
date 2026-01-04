@@ -27,7 +27,7 @@ class StlAPI_Writer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a writer object with default parameters: ASCIIMode.
   Standard_EXPORT StlAPI_Writer();

@@ -33,7 +33,7 @@ class RWStepElement_RWCurveElementEndReleasePacket
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

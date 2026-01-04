@@ -37,7 +37,7 @@ class XmlObjMgt_Array1
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an array of lower bound <Low> and

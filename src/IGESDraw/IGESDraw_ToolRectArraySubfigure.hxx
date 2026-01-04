@@ -39,7 +39,7 @@ class IGESDraw_ToolRectArraySubfigure
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolRectArraySubfigure, ready to work

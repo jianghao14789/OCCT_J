@@ -45,7 +45,7 @@ class Vrml_WWWInline
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_WWWInline();

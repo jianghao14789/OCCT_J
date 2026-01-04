@@ -95,7 +95,7 @@ protected:
 public:
 
   DEFINE_STANDARD_RTTIEXT(OpenGl_Window,Standard_Transient) // Type definition
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 };
 

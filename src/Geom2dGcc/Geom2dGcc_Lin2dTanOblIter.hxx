@@ -37,7 +37,7 @@ class Geom2dGcc_Lin2dTanOblIter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This class implements the algorithm used to

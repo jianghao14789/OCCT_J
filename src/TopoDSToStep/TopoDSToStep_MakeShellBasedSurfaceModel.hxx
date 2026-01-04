@@ -40,7 +40,7 @@ class TopoDSToStep_MakeShellBasedSurfaceModel  : public TopoDSToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopoDSToStep_MakeShellBasedSurfaceModel(const TopoDS_Face& F,

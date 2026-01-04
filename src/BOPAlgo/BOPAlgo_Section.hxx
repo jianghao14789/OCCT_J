@@ -1,4 +1,4 @@
-// Created by: Peter KURNEV
+﻿// Created by: Peter KURNEV
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -33,50 +33,50 @@ class BOPAlgo_PaveFiller;
 //! 2. vertices that are subjects of V/E, V/F interferences
 //! 3. new edges that are subjects of F/F interferences
 //! 4. edges that are Common Blocks
-class BOPAlgo_Section  : public BOPAlgo_Builder
+class BOPAlgo_Section : public BOPAlgo_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  //! Empty constructor
-  Standard_EXPORT BOPAlgo_Section();
-  Standard_EXPORT virtual ~BOPAlgo_Section();
+    //! Empty constructor
+    Standard_EXPORT BOPAlgo_Section();
+    Standard_EXPORT virtual ~BOPAlgo_Section();
 
-  //! Constructor with allocator
-  Standard_EXPORT BOPAlgo_Section(const Handle(NCollection_BaseAllocator)& theAllocator);
-
-protected:
-
-  //! Checks the data before performing the operation
-  Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
-
-  //! Combine the result of section operation
-  Standard_EXPORT virtual void BuildSection(const Message_ProgressRange& theRange);
-
-  //! Performs calculations using prepared Filler object <thePF>
-  Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange) Standard_OVERRIDE;
+    //! Constructor with allocator
+    Standard_EXPORT BOPAlgo_Section(const Handle(NCollection_BaseAllocator)& theAllocator);
 
 protected:
 
-  //! List of operations to be supported by the Progress Indicator.
-  //! Override the whole enumeration here since the constant operations are also
-  //! going to be overridden.
-  enum BOPAlgo_PIOperation
-  {
-    PIOperation_TreatVertices = 0,
-    PIOperation_TreatEdges,
-    PIOperation_BuildSection,
-    PIOperation_FillHistory,
-    PIOperation_PostTreat,
-    PIOperation_Last
-  };
+    //! Checks the data before performing the operation
+    Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
 
-  //! Filling steps for constant operations
-  Standard_EXPORT void fillPIConstants(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+    //! Combine the result of section operation
+    Standard_EXPORT virtual void BuildSection(const Message_ProgressRange& theRange);
 
-  //! Filling steps for all other operations
-  Standard_EXPORT void fillPISteps(BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+    //! Performs calculations using prepared Filler object <thePF>
+    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange) Standard_OVERRIDE;
+
+protected:
+
+    //! List of operations to be supported by the Progress Indicator.
+    //! Override the whole enumeration here since the constant operations are also
+    //! going to be overridden.
+    enum BOPAlgo_PIOperation
+    {
+        PIOperation_TreatVertices = 0,
+        PIOperation_TreatEdges,
+        PIOperation_BuildSection,
+        PIOperation_FillHistory,
+        PIOperation_PostTreat,
+        PIOperation_Last
+    };
+
+    //! Filling steps for constant operations
+    Standard_EXPORT void fillPIConstants(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+
+    //! Filling steps for all other operations
+    Standard_EXPORT void fillPISteps(BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
 
 };
 

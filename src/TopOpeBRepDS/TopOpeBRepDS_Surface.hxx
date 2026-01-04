@@ -30,7 +30,7 @@ class TopOpeBRepDS_Surface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT TopOpeBRepDS_Surface();
   

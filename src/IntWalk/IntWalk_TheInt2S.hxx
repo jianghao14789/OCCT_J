@@ -33,7 +33,7 @@ class IntWalk_TheInt2S
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! compute the solution point with the close point
   Standard_EXPORT IntWalk_TheInt2S(const TColStd_Array1OfReal& Param, const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Standard_Real TolTangency);

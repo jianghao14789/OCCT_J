@@ -32,7 +32,7 @@ class DsgPrs_EqualRadiusPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the points FirstCenter, SecondCenter,

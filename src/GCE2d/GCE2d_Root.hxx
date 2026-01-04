@@ -35,7 +35,7 @@ class GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns true if the construction is successful.

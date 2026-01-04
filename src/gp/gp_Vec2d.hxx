@@ -30,7 +30,7 @@ class gp_Vec2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a zero vector.
   gp_Vec2d() {}

@@ -27,7 +27,7 @@
 #define DEFINE_HARRAY2(HClassName, _Array2Type_)                               \
 class HClassName : public _Array2Type_, public Standard_Transient {                  \
  public:                                                                       \
-   DEFINE_STANDARD_ALLOC                                                       \
+   DEFINE_STANDARD_ALLOC;                                                       \
    DEFINE_NCOLLECTION_ALLOC                                                    \
    HClassName  (const Standard_Integer theRowLow,                              \
                 const Standard_Integer theRowUpp,                              \

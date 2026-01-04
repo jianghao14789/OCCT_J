@@ -109,7 +109,7 @@ class StepFile_ReadData
 {
 public:
   // Standard OCCT memory allocation stuff
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 private:
 

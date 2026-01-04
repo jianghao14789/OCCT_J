@@ -36,7 +36,7 @@ class OSD_FileNode
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Gets file name and path.

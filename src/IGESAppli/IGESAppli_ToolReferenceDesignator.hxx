@@ -40,7 +40,7 @@ class IGESAppli_ToolReferenceDesignator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolReferenceDesignator, ready to work

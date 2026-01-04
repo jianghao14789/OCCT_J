@@ -39,7 +39,7 @@ class IGESSolid_ToolSolidInstance
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSolidInstance, ready to work

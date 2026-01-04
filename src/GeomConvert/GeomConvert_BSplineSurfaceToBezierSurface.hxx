@@ -43,7 +43,7 @@ class GeomConvert_BSplineSurfaceToBezierSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes all the data needed to convert

@@ -38,7 +38,7 @@ class ChFiKPart_ComputeData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes a simple fillet in several particular

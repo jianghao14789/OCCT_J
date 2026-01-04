@@ -30,7 +30,7 @@ class Geom2dHatch_Element
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dHatch_Element();

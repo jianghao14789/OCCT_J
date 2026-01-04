@@ -49,7 +49,7 @@ class IFSelect_ContextWrite
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares a ContextWrite with these information :

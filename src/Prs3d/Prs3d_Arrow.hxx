@@ -29,7 +29,7 @@ class gp_Dir;
 class Prs3d_Arrow
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Defines the representation of the arrow as shaded triangulation.
   //! @param theAxis       axis definition (arrow origin and direction)

@@ -32,7 +32,7 @@ class ShapeAnalysis_ShapeContents
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initialize fields and call ClearFlags()

@@ -32,7 +32,7 @@ class RWStepRepr_RWReprItemAndPlaneAngleMeasureWithUnit
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepRepr_RWReprItemAndPlaneAngleMeasureWithUnit();

@@ -38,7 +38,7 @@ class IntPatch_Point
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

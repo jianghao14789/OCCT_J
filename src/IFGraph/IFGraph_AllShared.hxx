@@ -34,7 +34,7 @@ class IFGraph_AllShared  : public Interface_GraphContent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates an AllShared from a graph, empty ready to be filled

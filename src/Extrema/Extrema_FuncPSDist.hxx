@@ -48,7 +48,7 @@ class Extrema_FuncPSDist  : public math_MultipleVarFunctionWithGradient
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor.
   Standard_EXPORT Extrema_FuncPSDist(const Adaptor3d_Surface& theS,

@@ -39,7 +39,7 @@ class DsgPrs_AnglePresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draws the presenation of the full angle of a cone.

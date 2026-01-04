@@ -45,7 +45,7 @@ private:
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 };
 
 #endif //OpenGl_StencilOptions_Header

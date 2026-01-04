@@ -32,7 +32,7 @@ class DsgPrs_MidPointPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! draws the representation of a MidPoint between

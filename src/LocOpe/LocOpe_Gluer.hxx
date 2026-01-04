@@ -42,7 +42,7 @@ class LocOpe_Gluer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     LocOpe_Gluer();

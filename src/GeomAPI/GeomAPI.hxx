@@ -65,7 +65,7 @@ class GeomAPI
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This function builds (in the

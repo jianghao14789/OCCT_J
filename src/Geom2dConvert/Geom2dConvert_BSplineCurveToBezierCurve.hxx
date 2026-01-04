@@ -42,7 +42,7 @@ class Geom2dConvert_BSplineCurveToBezierCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes all the data needed to convert

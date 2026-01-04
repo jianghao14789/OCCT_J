@@ -32,7 +32,7 @@ class RWStepKinematics_RWSlidingSurfacePair
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT RWStepKinematics_RWSlidingSurfacePair();
 

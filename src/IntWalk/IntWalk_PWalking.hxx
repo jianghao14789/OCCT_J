@@ -36,7 +36,7 @@ class IntWalk_PWalking
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor used to set the data to compute intersection

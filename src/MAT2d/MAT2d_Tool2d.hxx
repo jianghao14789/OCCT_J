@@ -44,7 +44,7 @@ class MAT2d_Tool2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty Constructor.

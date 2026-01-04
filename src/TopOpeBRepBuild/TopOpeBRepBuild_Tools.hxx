@@ -46,7 +46,7 @@ class TopOpeBRepBuild_Tools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void FindState (const TopoDS_Shape& aVertex, const TopAbs_State aState, const TopAbs_ShapeEnum aShapeEnum, const TopTools_IndexedDataMapOfShapeListOfShape& aMapVertexEdges, TopTools_MapOfShape& aMapProcessedVertices, TopOpeBRepDS_DataMapOfShapeState& aMapVs);

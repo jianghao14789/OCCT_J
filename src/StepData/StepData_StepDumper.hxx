@@ -43,7 +43,7 @@ class StepData_StepDumper
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a StepDumper, able to work on a given StepModel

@@ -41,7 +41,7 @@ class ShapeAnalysis_Curve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Projects a Point on a Curve.

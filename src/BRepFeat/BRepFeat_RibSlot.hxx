@@ -58,7 +58,7 @@ class BRepFeat_RibSlot  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns true if F a TopoDS_Shape of type edge or face has been deleted.

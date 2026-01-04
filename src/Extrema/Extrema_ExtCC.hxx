@@ -41,7 +41,7 @@ class Extrema_ExtCC
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_ExtCC(const Standard_Real TolC1 = 1.0e-10,

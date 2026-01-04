@@ -38,7 +38,7 @@ class Geom2dLProp_CurAndInf2d  : public LProp_CurAndInf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes the framework.

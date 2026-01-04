@@ -30,7 +30,7 @@ class BOPDS_IndexRange
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

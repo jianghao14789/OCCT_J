@@ -29,7 +29,7 @@ class IntPatch_LineConstructor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntPatch_LineConstructor(const Standard_Integer mode);

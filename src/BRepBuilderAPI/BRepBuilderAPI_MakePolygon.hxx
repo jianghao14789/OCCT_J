@@ -51,7 +51,7 @@ class BRepBuilderAPI_MakePolygon  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an empty polygonal wire, to which points or

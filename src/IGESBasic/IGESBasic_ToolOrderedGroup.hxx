@@ -40,7 +40,7 @@ class IGESBasic_ToolOrderedGroup
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolOrderedGroup, ready to work

@@ -111,7 +111,7 @@ public:
   Standard_EXPORT Standard_Size EstimatedDataSize() const;
 
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   DEFINE_NCOLLECTION_ALLOC
 
 };

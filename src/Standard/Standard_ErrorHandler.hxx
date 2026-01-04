@@ -81,7 +81,7 @@ class Standard_ErrorHandler
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create a ErrorHandler (to be used with try{}catch(){}).
@@ -152,7 +152,7 @@ public:
   class Callback
   {
   public:
-    DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
     //! Registers this callback object in the current error handler (if found).
     #if defined(OCC_CONVERT_SIGNALS)

@@ -37,7 +37,7 @@ class IntSurf_PathPointTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the 3d coordinates of the starting point.

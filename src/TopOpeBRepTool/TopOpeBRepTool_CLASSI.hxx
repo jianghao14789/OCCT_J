@@ -40,7 +40,7 @@ class TopOpeBRepTool_CLASSI
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepTool_CLASSI();

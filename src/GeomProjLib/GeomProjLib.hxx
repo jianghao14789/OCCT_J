@@ -35,7 +35,7 @@ class GeomProjLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! gives  the 2d-curve   of  a 3d-curve  lying on   a

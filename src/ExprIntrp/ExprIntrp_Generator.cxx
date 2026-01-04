@@ -1,4 +1,4 @@
-// Created on: 1992-07-20
+﻿// Created on: 1992-07-20
 // Created by: Arnaud BOUZY
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,7 +22,7 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_Generator,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_Generator, Standard_Transient)
 
 #include <ExprIntrp_yaccanal.hxx>
 ExprIntrp_Analysis ExprIntrp_Recept;
@@ -33,43 +33,43 @@ ExprIntrp_Generator::ExprIntrp_Generator()
 
 void ExprIntrp_Generator::Use(const Handle(Expr_NamedFunction)& func)
 {
-  myFunctions.Append(func);
+    myFunctions.Append(func);
 }
 
 void ExprIntrp_Generator::Use(const Handle(Expr_NamedExpression)& named)
 {
-  myNamed.Append(named);
+    myNamed.Append(named);
 }
 
 const ExprIntrp_SequenceOfNamedFunction& ExprIntrp_Generator::GetFunctions() const
 {
-  return myFunctions;
+    return myFunctions;
 }
 
-const ExprIntrp_SequenceOfNamedExpression & ExprIntrp_Generator::GetNamed() const
+const ExprIntrp_SequenceOfNamedExpression& ExprIntrp_Generator::GetNamed() const
 {
-  return myNamed;
+    return myNamed;
 }
 
-Handle(Expr_NamedFunction) ExprIntrp_Generator::GetFunction (const TCollection_AsciiString& name) const
+Handle(Expr_NamedFunction) ExprIntrp_Generator::GetFunction(const TCollection_AsciiString& name) const
 {
-  for (Standard_Integer i=1; i<= myFunctions.Length(); i++) {
-    if (name == myFunctions(i)->GetName()) {
-      return myFunctions(i);
+    for (Standard_Integer i = 1; i <= myFunctions.Length(); i++) {
+        if (name == myFunctions(i)->GetName()) {
+            return myFunctions(i);
+        }
     }
-  }
-  Handle(Expr_NamedFunction) curfunc;
-  return curfunc;
+    Handle(Expr_NamedFunction) curfunc;
+    return curfunc;
 }
 
-Handle(Expr_NamedExpression) ExprIntrp_Generator::GetNamed (const TCollection_AsciiString& name) const
+Handle(Expr_NamedExpression) ExprIntrp_Generator::GetNamed(const TCollection_AsciiString& name) const
 {
-  for (Standard_Integer i=1;i<=myNamed.Length();i++){
-    if (name == myNamed(i)->GetName()) {
-      return myNamed(i);
+    for (Standard_Integer i = 1; i <= myNamed.Length(); i++) {
+        if (name == myNamed(i)->GetName()) {
+            return myNamed(i);
+        }
     }
-  }
-  Handle(Expr_NamedExpression) curexp;
-  return curexp;
+    Handle(Expr_NamedExpression) curexp;
+    return curexp;
 }
 

@@ -29,7 +29,7 @@ class MeshTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines meshing commands

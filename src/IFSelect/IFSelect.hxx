@@ -41,7 +41,7 @@ class IFSelect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Saves the state of a WorkSession from IFSelect, by using a

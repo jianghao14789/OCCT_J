@@ -39,7 +39,7 @@ class IGESGeom_ToolBSplineSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolBSplineSurface, ready to work

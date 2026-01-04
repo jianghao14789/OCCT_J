@@ -33,7 +33,7 @@ class Plate_D1
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_D1(const gp_XYZ& du, const gp_XYZ& dv);

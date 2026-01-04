@@ -39,7 +39,7 @@ class IGESGraph_ToolTextDisplayTemplate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolTextDisplayTemplate, ready to work

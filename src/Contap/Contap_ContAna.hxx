@@ -40,7 +40,7 @@ class Contap_ContAna
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Contap_ContAna();

@@ -33,7 +33,7 @@ class StepVisual_StyledItemTarget  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a StyledItemTarget select type
   Standard_EXPORT StepVisual_StyledItemTarget();

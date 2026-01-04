@@ -34,7 +34,7 @@ class BRepBndLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the shape S to the bounding box B.

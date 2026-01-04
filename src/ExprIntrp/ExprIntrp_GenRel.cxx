@@ -1,4 +1,4 @@
-// Created on: 1992-08-18
+﻿// Created on: 1992-08-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,46 +23,46 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenRel,ExprIntrp_Generator)
+IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenRel, ExprIntrp_Generator)
 
-ExprIntrp_GenRel::ExprIntrp_GenRel ()
+ExprIntrp_GenRel::ExprIntrp_GenRel()
 {
-  done = Standard_False;
+    done = Standard_False;
 }
 
-Handle( ExprIntrp_GenRel ) ExprIntrp_GenRel::Create()
+Handle(ExprIntrp_GenRel) ExprIntrp_GenRel::Create()
 {
-  return new ExprIntrp_GenRel();
+    return new ExprIntrp_GenRel();
 }
 
-void ExprIntrp_GenRel::Process (const TCollection_AsciiString& str)
+void ExprIntrp_GenRel::Process(const TCollection_AsciiString& str)
 {
-  Handle(ExprIntrp_GenRel) me = this;
-  done = Standard_False;
-  if (ExprIntrp::Parse(me,str)) {
-    if (!ExprIntrp_Recept.IsRelStackEmpty()) {
-      myRelation = ExprIntrp_Recept.PopRelation();
-      done = Standard_True;
+    Handle(ExprIntrp_GenRel) me = this;
+    done = Standard_False;
+    if (ExprIntrp::Parse(me, str)) {
+        if (!ExprIntrp_Recept.IsRelStackEmpty()) {
+            myRelation = ExprIntrp_Recept.PopRelation();
+            done = Standard_True;
+        }
+        else {
+            myRelation.Nullify();
+        }
     }
     else {
-      myRelation.Nullify();
+        myRelation.Nullify();
     }
-  }
-  else {
-    myRelation.Nullify();
-  }
-}
- 
-Standard_Boolean ExprIntrp_GenRel::IsDone() const
-{
-  return done;
 }
 
-Handle(Expr_GeneralRelation) ExprIntrp_GenRel::Relation () const
+Standard_Boolean ExprIntrp_GenRel::IsDone() const
 {
-  if (!done) {
-    throw Standard_NoSuchObject();
-  }
-  return myRelation;
+    return done;
+}
+
+Handle(Expr_GeneralRelation) ExprIntrp_GenRel::Relation() const
+{
+    if (!done) {
+        throw Standard_NoSuchObject();
+    }
+    return myRelation;
 }
 

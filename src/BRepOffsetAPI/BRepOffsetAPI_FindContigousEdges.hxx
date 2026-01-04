@@ -46,7 +46,7 @@ class BRepOffsetAPI_FindContigousEdges
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an algorithm for identifying contiguous edges

@@ -33,7 +33,7 @@ class RWStepShape_RWFaceBasedSurfaceModel
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

@@ -1,4 +1,4 @@
-// Created on: 1991-10-10
+﻿// Created on: 1991-10-10
 // Created by: Jean Claude VAUTHIER
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,18 +36,18 @@ class gp_Parab2d;
 //! the directrix and F is the focal length.
 //! KeyWords :
 //! Convert, Parabola, BSplineCurve, 2D .
-class Convert_ParabolaToBSplineCurve  : public Convert_ConicToBSplineCurve
+class Convert_ParabolaToBSplineCurve : public Convert_ConicToBSplineCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! The parabola Prb is limited between the parametric values U1, U2
-  //! and the equivalent B-spline curve as the same orientation as the
-  //! parabola Prb.
-  Standard_EXPORT Convert_ParabolaToBSplineCurve(const gp_Parab2d& Prb, const Standard_Real U1, const Standard_Real U2);
+
+        //! The parabola Prb is limited between the parametric values U1, U2
+        //! and the equivalent B-spline curve as the same orientation as the
+        //! parabola Prb.
+        Standard_EXPORT Convert_ParabolaToBSplineCurve(const gp_Parab2d& Prb, const Standard_Real U1, const Standard_Real U2);
 
 
 

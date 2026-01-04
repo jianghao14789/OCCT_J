@@ -30,7 +30,7 @@ class IntPatch_CSFunction  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! S1 is the surface on which the intersection is searched.

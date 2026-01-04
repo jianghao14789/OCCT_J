@@ -33,7 +33,7 @@ class RWStepAP214_RWAppliedGroupAssignment
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

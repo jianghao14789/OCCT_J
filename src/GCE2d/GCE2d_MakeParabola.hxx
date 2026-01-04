@@ -50,7 +50,7 @@ class GCE2d_MakeParabola  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a parabola from a non persistent one.

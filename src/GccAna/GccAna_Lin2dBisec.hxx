@@ -53,7 +53,7 @@ class GccAna_Lin2dBisec
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs bisecting lines between the two lines Lin1 and Lin2.

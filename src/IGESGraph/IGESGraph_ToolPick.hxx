@@ -40,7 +40,7 @@ class IGESGraph_ToolPick
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPick, ready to work

@@ -1,4 +1,4 @@
-// Created on: 2014-07-18
+﻿// Created on: 2014-07-18
 // Created by: Alexander Malyshev
 // Copyright (c) 2014-2014 OPEN CASCADE SAS
 //
@@ -22,25 +22,25 @@
 //purpose  : Constructor
 //=======================================================================
 math_PSOParticlesPool::math_PSOParticlesPool(const Standard_Integer theParticlesCount,
-                                             const Standard_Integer theDimensionCount)
-: myParticlesPool(1, theParticlesCount),
-  myMemory(0, theParticlesCount * (theDimensionCount  // Position
-                                 + theDimensionCount  // Velocity
-                                 + theDimensionCount) // BestPosition
-                                 - 1) 
+    const Standard_Integer theDimensionCount)
+    : myParticlesPool(1, theParticlesCount),
+    myMemory(0, theParticlesCount* (theDimensionCount  // Position
+        + theDimensionCount  // Velocity
+        + theDimensionCount) // BestPosition
+        - 1)
 {
-  myParticlesCount = theParticlesCount;
-  myDimensionCount = theDimensionCount;
-  myMemory.Init(0.);
-  // Pointers adjusting.
-  Standard_Integer aParIdx, aShiftIdx;
-  for(aParIdx = 1; aParIdx <= myParticlesCount; ++aParIdx)
-  {
-    aShiftIdx = (theDimensionCount * 3) * (aParIdx - 1);
-    myParticlesPool(aParIdx).Position     = &myMemory(aShiftIdx);
-    myParticlesPool(aParIdx).Velocity     = &myMemory(aShiftIdx + theDimensionCount);
-    myParticlesPool(aParIdx).BestPosition = &myMemory(aShiftIdx + 2 * theDimensionCount);
-  }
+    myParticlesCount = theParticlesCount;
+    myDimensionCount = theDimensionCount;
+    myMemory.Init(0.);
+    // Pointers adjusting.
+    Standard_Integer aParIdx, aShiftIdx;
+    for (aParIdx = 1; aParIdx <= myParticlesCount; ++aParIdx)
+    {
+        aShiftIdx = (theDimensionCount * 3) * (aParIdx - 1);
+        myParticlesPool(aParIdx).Position = &myMemory(aShiftIdx);
+        myParticlesPool(aParIdx).Velocity = &myMemory(aShiftIdx + theDimensionCount);
+        myParticlesPool(aParIdx).BestPosition = &myMemory(aShiftIdx + 2 * theDimensionCount);
+    }
 }
 
 //=======================================================================
@@ -57,7 +57,7 @@ math_PSOParticlesPool::~math_PSOParticlesPool()
 //=======================================================================
 PSO_Particle* math_PSOParticlesPool::GetParticle(const Standard_Integer theIdx)
 {
-  return &myParticlesPool(theIdx);
+    return &myParticlesPool(theIdx);
 }
 
 //=======================================================================
@@ -66,7 +66,7 @@ PSO_Particle* math_PSOParticlesPool::GetParticle(const Standard_Integer theIdx)
 //=======================================================================
 PSO_Particle* math_PSOParticlesPool::GetBestParticle()
 {
-  return &*std::min_element(myParticlesPool.begin(), myParticlesPool.end());
+    return &*std::min_element(myParticlesPool.begin(), myParticlesPool.end());
 }
 
 //=======================================================================
@@ -75,5 +75,5 @@ PSO_Particle* math_PSOParticlesPool::GetBestParticle()
 //=======================================================================
 PSO_Particle* math_PSOParticlesPool::GetWorstParticle()
 {
-  return &*std::max_element(myParticlesPool.begin(), myParticlesPool.end());
+    return &*std::max_element(myParticlesPool.begin(), myParticlesPool.end());
 }

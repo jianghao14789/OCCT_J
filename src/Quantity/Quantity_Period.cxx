@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -32,15 +32,15 @@
 // 0 <= mics 
 // -----------------------------------------------------------
 Standard_Boolean Quantity_Period::IsValid(
-                                        const Standard_Integer dd,
-                                        const Standard_Integer hh,
-                                        const Standard_Integer mn,
-                                        const Standard_Integer ss,
-                                        const Standard_Integer mis,
-                                        const Standard_Integer mics){
+    const Standard_Integer dd,
+    const Standard_Integer hh,
+    const Standard_Integer mn,
+    const Standard_Integer ss,
+    const Standard_Integer mis,
+    const Standard_Integer mics) {
 
-return ( (dd < 0 || hh < 0 || mn < 0 || 
-          ss < 0 || mis < 0 || mics < 0 ) ? Standard_False : Standard_True );
+    return ((dd < 0 || hh < 0 || mn < 0 ||
+        ss < 0 || mis < 0 || mics < 0) ? Standard_False : Standard_True);
 }
 // -------------------------------------------------------------
 // IsValid : Checks the validity of a date
@@ -49,10 +49,10 @@ return ( (dd < 0 || hh < 0 || mn < 0 ||
 // 0 <= mics 
 // -------------------------------------------------------------
 Standard_Boolean Quantity_Period::IsValid(
-                                        const Standard_Integer ss,
-                                        const Standard_Integer mics){
+    const Standard_Integer ss,
+    const Standard_Integer mics) {
 
-return ( (ss < 0 || mics < 0 ) ? Standard_False : Standard_True );
+    return ((ss < 0 || mics < 0) ? Standard_False : Standard_True);
 }
 
 // -------------------------------------------------------------
@@ -61,13 +61,13 @@ return ( (ss < 0 || mics < 0 ) ? Standard_False : Standard_True );
 //  
 // -------------------------------------------------------------
 Quantity_Period::Quantity_Period(const Standard_Integer dd,
-                                 const Standard_Integer hh,
-                                 const Standard_Integer mn,
-                                 const Standard_Integer ss,
-                                 const Standard_Integer mils,
-                                 const Standard_Integer mics){
+    const Standard_Integer hh,
+    const Standard_Integer mn,
+    const Standard_Integer ss,
+    const Standard_Integer mils,
+    const Standard_Integer mics) {
 
-SetValues (dd,hh,mn,ss,mils,mics);
+    SetValues(dd, hh, mn, ss, mils, mics);
 }
 
 // -------------------------------------------------------------
@@ -76,9 +76,9 @@ SetValues (dd,hh,mn,ss,mils,mics);
 //  
 // -------------------------------------------------------------
 Quantity_Period::Quantity_Period(const Standard_Integer ss,
-                                 const Standard_Integer mics){
-                          
-  SetValues(ss,mics);
+    const Standard_Integer mics) {
+
+    SetValues(ss, mics);
 }
 
 
@@ -87,23 +87,23 @@ Quantity_Period::Quantity_Period(const Standard_Integer ss,
 // ~~~~~~   minutes,seconds,milliseconds and microseconds.
 // -------------------------------------------------------------
 void Quantity_Period::Values(
-                         Standard_Integer& dd,
-                         Standard_Integer& hh,
-                         Standard_Integer& mn,
-                         Standard_Integer& ss,
-                         Standard_Integer& mis, 
-                         Standard_Integer& mics
-                                     )const{
-Standard_Integer carry = mySec;
-dd    = carry / ( 24 * 3600 );
-carry -= dd * 24 * 3600 ;
-hh    = carry / 3600;
-carry -= 3600 * hh;
-mn    = carry / 60;
-carry -= mn * 60;
-ss    = carry;
-mis   = myUSec / 1000;
-mics  = myUSec - ( mis * 1000);
+    Standard_Integer& dd,
+    Standard_Integer& hh,
+    Standard_Integer& mn,
+    Standard_Integer& ss,
+    Standard_Integer& mis,
+    Standard_Integer& mics
+)const {
+    Standard_Integer carry = mySec;
+    dd = carry / (24 * 3600);
+    carry -= dd * 24 * 3600;
+    hh = carry / 3600;
+    carry -= 3600 * hh;
+    mn = carry / 60;
+    carry -= mn * 60;
+    ss = carry;
+    mis = myUSec / 1000;
+    mics = myUSec - (mis * 1000);
 }
 
 // -------------------------------------------------------------
@@ -111,26 +111,26 @@ mics  = myUSec - ( mis * 1000);
 // ~~~~~~   microseconds.
 // -------------------------------------------------------------
 void Quantity_Period::Values(
-                         Standard_Integer& ss,
-                         Standard_Integer& mics
-                                     )const{
+    Standard_Integer& ss,
+    Standard_Integer& mics
+)const {
 
-ss   = mySec;
-mics = myUSec;
+    ss = mySec;
+    mics = myUSec;
 }
 
 // -------------------------------------------------------------
 // SetValues : Sets a period with a number of days,hours,minutes,
 // ~~~~~~~~~   seconds and microseconds.
 // -------------------------------------------------------------
-void Quantity_Period::SetValues( const Standard_Integer dd,
-                                 const Standard_Integer hh,
-                                 const Standard_Integer mn,
-                                 const Standard_Integer ss,
-                                 const Standard_Integer mils,
-                                 const Standard_Integer mics){
-SetValues( ( dd * 24 * 3600 ) + ( hh * 3600 ) + ( 60 * mn ) + ss , 
-           mils * 1000 + mics );
+void Quantity_Period::SetValues(const Standard_Integer dd,
+    const Standard_Integer hh,
+    const Standard_Integer mn,
+    const Standard_Integer ss,
+    const Standard_Integer mils,
+    const Standard_Integer mics) {
+    SetValues((dd * 24 * 3600) + (hh * 3600) + (60 * mn) + ss,
+        mils * 1000 + mics);
 }
 
 // -------------------------------------------------------------
@@ -138,48 +138,48 @@ SetValues( ( dd * 24 * 3600 ) + ( hh * 3600 ) + ( 60 * mn ) + ss ,
 // ~~~~~~~~~   microseconds.
 // -------------------------------------------------------------
 void Quantity_Period::SetValues(
-                         const Standard_Integer ss,
-                         const Standard_Integer mics) {
+    const Standard_Integer ss,
+    const Standard_Integer mics) {
 
-if ( ! Quantity_Period::IsValid(ss,mics) )
-   throw Quantity_PeriodDefinitionError("Quantity_Period::SetValues invalid parameters");
+    if (!Quantity_Period::IsValid(ss, mics))
+        throw Quantity_PeriodDefinitionError("Quantity_Period::SetValues invalid parameters");
 
-mySec  = ss;
-myUSec = mics;
-while ( myUSec > 1000000 )
-  {
-  myUSec -= 1000000;
-  mySec++;
-  }
-}                                   
+    mySec = ss;
+    myUSec = mics;
+    while (myUSec > 1000000)
+    {
+        myUSec -= 1000000;
+        mySec++;
+    }
+}
 // -------------------------------------------------------------
 // Subtract : Subtracts a period to another period
 // ~~~~~~~~
 // -------------------------------------------------------------
-Quantity_Period Quantity_Period::Subtract(const Quantity_Period& 
-                                          OtherPeriod)const{
-Quantity_Period result (mySec,myUSec);
+Quantity_Period Quantity_Period::Subtract(const Quantity_Period&
+    OtherPeriod)const {
+    Quantity_Period result(mySec, myUSec);
 
 
-result.mySec  -= OtherPeriod.mySec;
-result.myUSec -= OtherPeriod.myUSec;
+    result.mySec -= OtherPeriod.mySec;
+    result.myUSec -= OtherPeriod.myUSec;
 
-if ( result.mySec >= 0 && result.myUSec < 0 ) { 
-   result.mySec--;
-   result.myUSec = 1000000 + result.myUSec ;
-   }
-else if ( result.mySec <0   && result.myUSec >= 0 ) {
-   result.mySec = Abs(result.mySec);
-   if ( result.myUSec > 0 ){
-      result.mySec--;
-      result.myUSec = 1000000 - result.myUSec ;
+    if (result.mySec >= 0 && result.myUSec < 0) {
+        result.mySec--;
+        result.myUSec = 1000000 + result.myUSec;
     }
-}
-else if ( result.mySec <0   && result.myUSec <  0 ) {
-   result.mySec = Abs(result.mySec);
-   result.myUSec = Abs(result.myUSec);
-}
-return (result);
+    else if (result.mySec < 0 && result.myUSec >= 0) {
+        result.mySec = Abs(result.mySec);
+        if (result.myUSec > 0) {
+            result.mySec--;
+            result.myUSec = 1000000 - result.myUSec;
+        }
+    }
+    else if (result.mySec < 0 && result.myUSec < 0) {
+        result.mySec = Abs(result.mySec);
+        result.myUSec = Abs(result.myUSec);
+    }
+    return (result);
 }
 
 // -------------------------------------------------------------
@@ -187,17 +187,17 @@ return (result);
 // ~~~
 // -------------------------------------------------------------
 Quantity_Period Quantity_Period::Add(const Quantity_Period& OtherPeriod)
-                                 const{
+const {
 
-Quantity_Period result (mySec,myUSec);
-result.mySec  += OtherPeriod.mySec;
-result.myUSec += OtherPeriod.myUSec;
-if (result.myUSec > 1000000)
-  {
-  result.myUSec -= 1000000;
-  result.mySec++;
-  }
-return (result);
+    Quantity_Period result(mySec, myUSec);
+    result.mySec += OtherPeriod.mySec;
+    result.myUSec += OtherPeriod.myUSec;
+    if (result.myUSec > 1000000)
+    {
+        result.myUSec -= 1000000;
+        result.mySec++;
+    }
+    return (result);
 }
 
 
@@ -205,12 +205,12 @@ return (result);
 // IsEqual : returns true if two periods are equal
 // ~~~~~~~
 // -------------------------------------------------------------
-Standard_Boolean Quantity_Period::IsEqual(const Quantity_Period& 
-                                             OtherPeriod)const{
+Standard_Boolean Quantity_Period::IsEqual(const Quantity_Period&
+    OtherPeriod)const {
 
-return 
-( ( mySec  == OtherPeriod.mySec &&
-    myUSec == OtherPeriod.myUSec ) ? Standard_True : Standard_False);
+    return
+        ((mySec == OtherPeriod.mySec &&
+            myUSec == OtherPeriod.myUSec) ? Standard_True : Standard_False);
 }
 
 
@@ -219,12 +219,12 @@ return
 // ~~~~~~~~~   date
 // -------------------------------------------------------------
 Standard_Boolean Quantity_Period::IsShorter(
-               const Quantity_Period& OtherPeriod)const{
+    const Quantity_Period& OtherPeriod)const {
 
-if ( mySec < OtherPeriod.mySec ) return Standard_True;
-else if ( mySec > OtherPeriod.mySec ) return Standard_False;
-else return 
-   ( ( myUSec < OtherPeriod.myUSec ) ? Standard_True : Standard_False);
+    if (mySec < OtherPeriod.mySec) return Standard_True;
+    else if (mySec > OtherPeriod.mySec) return Standard_False;
+    else return
+        ((myUSec < OtherPeriod.myUSec) ? Standard_True : Standard_False);
 }
 
 
@@ -233,12 +233,12 @@ else return
 // ~~~~~~~~   date
 // -------------------------------------------------------------
 Standard_Boolean Quantity_Period::IsLonger(
-                const Quantity_Period& OtherPeriod)const{
+    const Quantity_Period& OtherPeriod)const {
 
-if ( mySec > OtherPeriod.mySec ) return Standard_True;
-else if ( mySec < OtherPeriod.mySec ) return Standard_False;
-else return 
-   ( ( myUSec > OtherPeriod.myUSec ) ? Standard_True : Standard_False);
+    if (mySec > OtherPeriod.mySec) return Standard_True;
+    else if (mySec < OtherPeriod.mySec) return Standard_False;
+    else return
+        ((myUSec > OtherPeriod.myUSec) ? Standard_True : Standard_False);
 }
 
-  
+

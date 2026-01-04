@@ -33,7 +33,7 @@ public:
   Standard_EXPORT static PCDM_TypeOfFileDriver FileDriverType (Standard_IStream& theIStream, 
                                                                Handle(Storage_BaseDriver)& theBaseDriver);
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 };
 
 #endif // _PCDM_HeaderFile

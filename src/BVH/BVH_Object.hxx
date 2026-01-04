@@ -1,4 +1,4 @@
-// Created on: 2013-12-20
+﻿// Created on: 2013-12-20
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -23,30 +23,30 @@
 //! (just to have a named base class).
 class BVH_ObjectTransient : public Standard_Transient
 {
-  DEFINE_STANDARD_RTTIEXT(BVH_ObjectTransient, Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(BVH_ObjectTransient, Standard_Transient)
 public:
 
-  //! Returns properties of the geometric object.
-  virtual const Handle(BVH_Properties)& Properties() const { return myProperties; }
+    //! Returns properties of the geometric object.
+    virtual const Handle(BVH_Properties)& Properties() const { return myProperties; }
 
-  //! Sets properties of the geometric object.
-  virtual void SetProperties (const Handle(BVH_Properties)& theProperties) { myProperties = theProperties; }
+    //! Sets properties of the geometric object.
+    virtual void SetProperties(const Handle(BVH_Properties)& theProperties) { myProperties = theProperties; }
 
-  //! Returns TRUE if object state should be updated.
-  virtual Standard_Boolean IsDirty() const { return myIsDirty; }
+    //! Returns TRUE if object state should be updated.
+    virtual Standard_Boolean IsDirty() const { return myIsDirty; }
 
-  //! Marks object state as outdated (needs BVH rebuilding).
-  virtual void MarkDirty() { myIsDirty = Standard_True; }
-
-protected:
-
-  //! Creates new abstract geometric object.
-  BVH_ObjectTransient() : myIsDirty (Standard_False) {}
+    //! Marks object state as outdated (needs BVH rebuilding).
+    virtual void MarkDirty() { myIsDirty = Standard_True; }
 
 protected:
 
-  Standard_Boolean       myIsDirty;    //!< Marks internal object state as outdated
-  Handle(BVH_Properties) myProperties; //!< Generic properties assigned to the object
+    //! Creates new abstract geometric object.
+    BVH_ObjectTransient() : myIsDirty(Standard_False) {}
+
+protected:
+
+    Standard_Boolean       myIsDirty;    //!< Marks internal object state as outdated
+    Handle(BVH_Properties) myProperties; //!< Generic properties assigned to the object
 
 };
 
@@ -58,16 +58,16 @@ class BVH_Object : public BVH_ObjectTransient
 {
 public:
 
-  //! Creates new abstract geometric object.
-  BVH_Object() {}
+    //! Creates new abstract geometric object.
+    BVH_Object() {}
 
-  //! Releases resources of geometric object.
-  virtual ~BVH_Object() {}
+    //! Releases resources of geometric object.
+    virtual ~BVH_Object() {}
 
 public:
 
-  //! Returns AABB of the geometric object.
-  virtual BVH_Box<T, N> Box() const = 0;
+    //! Returns AABB of the geometric object.
+    virtual BVH_Box<T, N> Box() const = 0;
 
 };
 

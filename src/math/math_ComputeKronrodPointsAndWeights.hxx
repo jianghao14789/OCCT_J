@@ -31,7 +31,7 @@ class math_ComputeKronrodPointsAndWeights
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT math_ComputeKronrodPointsAndWeights(const Standard_Integer Number);

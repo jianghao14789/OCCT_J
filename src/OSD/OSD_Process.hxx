@@ -46,7 +46,7 @@ public:
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Initializes the object and prepare for a possible dump
   Standard_EXPORT OSD_Process();

@@ -34,7 +34,7 @@ class RWStepAP242_RWIdAttribute
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepAP242_RWIdAttribute();

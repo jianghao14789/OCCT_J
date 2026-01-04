@@ -53,7 +53,7 @@ class BRepApprox_TheComputeLineOfApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The MultiLine <Line> will be approximated until tolerances

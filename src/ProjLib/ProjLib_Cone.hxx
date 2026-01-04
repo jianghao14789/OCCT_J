@@ -37,7 +37,7 @@ class ProjLib_Cone  : public ProjLib_Projector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Undefined projection.

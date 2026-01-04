@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -47,73 +47,73 @@
 //function : Convert_CircleToBSplineCurve
 //purpose  : this constructs a periodic circle 
 //=======================================================================
-Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve 
-  (const gp_Circ2d& C, const Convert_ParameterisationType Parameterisation)
-:Convert_ConicToBSplineCurve(0,0,0){
+Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve
+(const gp_Circ2d& C, const Convert_ParameterisationType Parameterisation)
+    :Convert_ConicToBSplineCurve(0, 0, 0) {
 
-  Standard_Integer ii ;
+    Standard_Integer ii;
 
-  Standard_Real R,
-  value ;
-  Handle(TColStd_HArray1OfReal) CosNumeratorPtr,
-  SinNumeratorPtr ;
-
-
-  R = C.Radius() ; 
-  if (Parameterisation != Convert_TgtThetaOver2 &&
-    Parameterisation != Convert_RationalC1) {
-    // In case if BuildCosAndSin does not know how to manage the periodicity
-    // => trim on 0,2*PI
-    isperiodic = Standard_False;
-    Convert_ConicToBSplineCurve::
-      BuildCosAndSin(Parameterisation,
-		     0, 2*M_PI,
-		     CosNumeratorPtr,
-		     SinNumeratorPtr,
-		     weights,
-		     degree,
-		     knots,
-		     mults);
-      }   
-  else { 
-    isperiodic = Standard_True;
-    Convert_ConicToBSplineCurve::
-      BuildCosAndSin(Parameterisation,
-		     CosNumeratorPtr,
-		     SinNumeratorPtr,
-		     weights,
-		     degree,
-		     knots,
-		     mults);
-  }
+    Standard_Real R,
+        value;
+    Handle(TColStd_HArray1OfReal) CosNumeratorPtr,
+        SinNumeratorPtr;
 
 
-  nbPoles = CosNumeratorPtr->Length();
-  nbKnots = knots->Length();
+    R = C.Radius();
+    if (Parameterisation != Convert_TgtThetaOver2 &&
+        Parameterisation != Convert_RationalC1) {
+        // In case if BuildCosAndSin does not know how to manage the periodicity
+        // => trim on 0,2*PI
+        isperiodic = Standard_False;
+        Convert_ConicToBSplineCurve::
+            BuildCosAndSin(Parameterisation,
+                0, 2 * M_PI,
+                CosNumeratorPtr,
+                SinNumeratorPtr,
+                weights,
+                degree,
+                knots,
+                mults);
+    }
+    else {
+        isperiodic = Standard_True;
+        Convert_ConicToBSplineCurve::
+            BuildCosAndSin(Parameterisation,
+                CosNumeratorPtr,
+                SinNumeratorPtr,
+                weights,
+                degree,
+                knots,
+                mults);
+    }
 
-  poles = 
-    new TColgp_HArray1OfPnt2d(1,nbPoles);
+
+    nbPoles = CosNumeratorPtr->Length();
+    nbKnots = knots->Length();
+
+    poles =
+        new TColgp_HArray1OfPnt2d(1, nbPoles);
 
 
-  gp_Dir2d Ox = C.XAxis().Direction();
-  gp_Dir2d Oy = C.YAxis().Direction();
-  gp_Trsf2d Trsf;
-  Trsf.SetTransformation( C.XAxis(), gp::OX2d());
-  if  ( Ox.X() * Oy.Y() - Ox.Y() * Oy.X() > 0.0e0) {
-    value = R ;
-  }
-  else {
-    value = -R ;
-   }
-  
-  // Replace the bspline in the reference of the circle.
-  // and calculate the weight of the bspline.
+    gp_Dir2d Ox = C.XAxis().Direction();
+    gp_Dir2d Oy = C.YAxis().Direction();
+    gp_Trsf2d Trsf;
+    Trsf.SetTransformation(C.XAxis(), gp::OX2d());
+    if (Ox.X() * Oy.Y() - Ox.Y() * Oy.X() > 0.0e0) {
+        value = R;
+    }
+    else {
+        value = -R;
+    }
 
-  for (ii = 1; ii <= nbPoles ; ii++) {
-     poles->ChangeArray1()(ii).SetCoord(1, R * CosNumeratorPtr->Value(ii)) ;
-     poles->ChangeArray1()(ii).SetCoord(2, value * SinNumeratorPtr->Value(ii)) ;
-     poles->ChangeArray1()(ii).Transform( Trsf); 
-   }
+    // Replace the bspline in the reference of the circle.
+    // and calculate the weight of the bspline.
+
+    for (ii = 1; ii <= nbPoles; ii++) {
+        poles->ChangeArray1()(ii).SetCoord(1, R * CosNumeratorPtr->Value(ii));
+        poles->ChangeArray1()(ii).SetCoord(2, value * SinNumeratorPtr->Value(ii));
+        poles->ChangeArray1()(ii).Transform(Trsf);
+    }
 
 }
 //=======================================================================
@@ -121,64 +121,64 @@ Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve
 //purpose  : this constructs a non periodic circle
 //=======================================================================
 
-Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve 
-  (const gp_Circ2d& C, 
-   const Standard_Real  UFirst,
-   const Standard_Real  ULast,
-   const Convert_ParameterisationType Parameterisation)
-:Convert_ConicToBSplineCurve(0,0,0)
+Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve
+(const gp_Circ2d& C,
+    const Standard_Real  UFirst,
+    const Standard_Real  ULast,
+    const Convert_ParameterisationType Parameterisation)
+    :Convert_ConicToBSplineCurve(0, 0, 0)
 {
-  Standard_Real delta = ULast - UFirst ;
-  Standard_Real Eps = Precision::PConfusion();
+    Standard_Real delta = ULast - UFirst;
+    Standard_Real Eps = Precision::PConfusion();
 
-  if ( (delta > (2*M_PI + Eps)) || (delta <= 0.0e0) ) {
-    throw Standard_DomainError( "Convert_CircleToBSplineCurve");
-  }
+    if ((delta > (2 * M_PI + Eps)) || (delta <= 0.0e0)) {
+        throw Standard_DomainError("Convert_CircleToBSplineCurve");
+    }
 
-  Standard_Integer ii;
-  Standard_Real R, value ;
-  Handle(TColStd_HArray1OfReal) CosNumeratorPtr,SinNumeratorPtr ;
-
-
-  R = C.Radius() ;    
-  isperiodic = Standard_False;
-  Convert_ConicToBSplineCurve::BuildCosAndSin(Parameterisation,
-					      UFirst,
-					      ULast,
-					      CosNumeratorPtr,
-					      SinNumeratorPtr,
-					      weights,
-					      degree,
-					      knots,
-					      mults) ;
+    Standard_Integer ii;
+    Standard_Real R, value;
+    Handle(TColStd_HArray1OfReal) CosNumeratorPtr, SinNumeratorPtr;
 
 
+    R = C.Radius();
+    isperiodic = Standard_False;
+    Convert_ConicToBSplineCurve::BuildCosAndSin(Parameterisation,
+        UFirst,
+        ULast,
+        CosNumeratorPtr,
+        SinNumeratorPtr,
+        weights,
+        degree,
+        knots,
+        mults);
 
-  nbPoles = CosNumeratorPtr->Length();
-  nbKnots = knots->Length();
 
-  poles = 
-    new TColgp_HArray1OfPnt2d(1,nbPoles)   ;
 
-  gp_Dir2d Ox = C.XAxis().Direction();
-  gp_Dir2d Oy = C.YAxis().Direction();
-  gp_Trsf2d Trsf;
-  Trsf.SetTransformation( C.XAxis(), gp::OX2d());
-  if  ( Ox.X() * Oy.Y() - Ox.Y() * Oy.X() > 0.0e0) {
-    value = R ;
-  }
-  else {
-    value = -R ;
-   }
-  
-  // Replace the bspline in the reference of the circle.
-  // and calculate the weight of the bspline.
+    nbPoles = CosNumeratorPtr->Length();
+    nbKnots = knots->Length();
 
-  for (ii = 1; ii <= nbPoles ; ii++) {
-     poles->ChangeArray1()(ii).SetCoord(1, R * CosNumeratorPtr->Value(ii)) ;
-     poles->ChangeArray1()(ii).SetCoord(2, value * SinNumeratorPtr->Value(ii)) ;
-     poles->ChangeArray1()(ii).Transform( Trsf); 
-   }
+    poles =
+        new TColgp_HArray1OfPnt2d(1, nbPoles);
+
+    gp_Dir2d Ox = C.XAxis().Direction();
+    gp_Dir2d Oy = C.YAxis().Direction();
+    gp_Trsf2d Trsf;
+    Trsf.SetTransformation(C.XAxis(), gp::OX2d());
+    if (Ox.X() * Oy.Y() - Ox.Y() * Oy.X() > 0.0e0) {
+        value = R;
+    }
+    else {
+        value = -R;
+    }
+
+    // Replace the bspline in the reference of the circle.
+    // and calculate the weight of the bspline.
+
+    for (ii = 1; ii <= nbPoles; ii++) {
+        poles->ChangeArray1()(ii).SetCoord(1, R * CosNumeratorPtr->Value(ii));
+        poles->ChangeArray1()(ii).SetCoord(2, value * SinNumeratorPtr->Value(ii));
+        poles->ChangeArray1()(ii).Transform(Trsf);
+    }
 
 }
 

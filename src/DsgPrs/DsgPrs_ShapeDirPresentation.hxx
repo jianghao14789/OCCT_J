@@ -32,7 +32,7 @@ class DsgPrs_ShapeDirPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the shape shape and the mode mode to the

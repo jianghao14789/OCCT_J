@@ -72,7 +72,7 @@ class XSControl_Reader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Reader from scratch (creates an empty WorkSession)

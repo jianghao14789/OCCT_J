@@ -41,7 +41,7 @@ class GccAna_Circ2dBisec
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs bisecting curves between the two circles Circ1 and Circ2.

@@ -30,7 +30,7 @@ class StepVisual_CameraModelD3MultiClippingInterectionSelect  : public StepData_
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a CameraModelD3MultiClippingInterectionSelect select type
   Standard_EXPORT StepVisual_CameraModelD3MultiClippingInterectionSelect();

@@ -42,7 +42,7 @@ class TopOpeBRepDS_InterferenceIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_InterferenceIterator();

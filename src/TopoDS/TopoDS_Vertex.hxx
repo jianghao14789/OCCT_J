@@ -36,7 +36,7 @@ class TopoDS_Vertex  : public TopoDS_Shape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Undefined Vertex.

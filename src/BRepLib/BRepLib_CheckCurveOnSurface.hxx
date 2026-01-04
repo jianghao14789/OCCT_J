@@ -24,7 +24,7 @@ class BRepLib_CheckCurveOnSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Default constructor
   BRepLib_CheckCurveOnSurface() {}

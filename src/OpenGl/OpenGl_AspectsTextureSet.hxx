@@ -26,7 +26,7 @@ class OpenGl_PointSprite;
 class OpenGl_AspectsTextureSet
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 public:
   //! Empty constructor.
   OpenGl_AspectsTextureSet() : myIsTextureReady (Standard_False) {}

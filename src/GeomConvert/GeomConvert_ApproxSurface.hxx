@@ -31,7 +31,7 @@ class GeomConvert_ApproxSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a surface approximation framework defined by

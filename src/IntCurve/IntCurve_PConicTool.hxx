@@ -34,7 +34,7 @@ class IntCurve_PConicTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Real EpsX (const IntCurve_PConic& C);

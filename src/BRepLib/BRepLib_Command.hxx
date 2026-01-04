@@ -37,7 +37,7 @@ class BRepLib_Command
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT virtual ~BRepLib_Command();
   

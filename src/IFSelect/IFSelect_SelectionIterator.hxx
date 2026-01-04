@@ -32,7 +32,7 @@ class IFSelect_SelectionIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an empty iterator, ready to be filled
   Standard_EXPORT IFSelect_SelectionIterator();

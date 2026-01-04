@@ -66,7 +66,7 @@ class TopoDS_Face;
 class StdSelect_BRepSelectionTool 
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Decomposition of <aShape> into sensitive entities following
   //! a mode of decomposition <aType>. These entities are stored in <aSelection>.

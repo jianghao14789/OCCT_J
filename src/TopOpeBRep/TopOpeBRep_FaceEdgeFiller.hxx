@@ -38,7 +38,7 @@ class TopOpeBRep_FaceEdgeFiller
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRep_FaceEdgeFiller();

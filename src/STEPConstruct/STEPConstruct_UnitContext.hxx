@@ -39,7 +39,7 @@ class STEPConstruct_UnitContext
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates empty tool

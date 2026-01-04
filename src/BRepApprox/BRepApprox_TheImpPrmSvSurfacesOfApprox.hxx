@@ -45,7 +45,7 @@ class BRepApprox_TheImpPrmSvSurfacesOfApprox  : public ApproxInt_SvSurfaces
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepApprox_TheImpPrmSvSurfacesOfApprox(const BRepAdaptor_Surface& Surf1, const IntSurf_Quadric& Surf2);

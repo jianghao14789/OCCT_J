@@ -39,7 +39,7 @@ class IGESBasic_ToolExternalRefFile
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolExternalRefFile, ready to work

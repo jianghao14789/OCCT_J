@@ -40,7 +40,7 @@ class IntImpParGen
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Template class for an implicit  curve.

@@ -38,7 +38,7 @@ class BRepMAT2d_LinkTopoBilo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepMAT2d_LinkTopoBilo();

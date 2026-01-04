@@ -35,7 +35,7 @@ class BlendFunc_Corde
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BlendFunc_Corde(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& CGuide);

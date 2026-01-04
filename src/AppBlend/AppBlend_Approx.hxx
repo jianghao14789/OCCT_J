@@ -36,7 +36,7 @@ class AppBlend_Approx
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT virtual Standard_Boolean IsDone() const = 0;

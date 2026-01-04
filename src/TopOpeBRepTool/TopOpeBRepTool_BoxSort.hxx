@@ -39,7 +39,7 @@ class TopOpeBRepTool_BoxSort
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepTool_BoxSort();

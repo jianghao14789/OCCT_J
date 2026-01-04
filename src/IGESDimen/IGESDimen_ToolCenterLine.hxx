@@ -40,7 +40,7 @@ class IGESDimen_ToolCenterLine
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolCenterLine, ready to work

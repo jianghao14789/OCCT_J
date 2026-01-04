@@ -34,7 +34,7 @@ class DsgPrs_EllipseRadiusPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! draws a  Radius  (Major  or  Minor)

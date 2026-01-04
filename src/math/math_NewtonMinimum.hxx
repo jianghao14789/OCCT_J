@@ -39,7 +39,7 @@ class math_NewtonMinimum
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

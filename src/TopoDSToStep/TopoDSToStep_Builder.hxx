@@ -38,7 +38,7 @@ class TopoDSToStep_Builder  : public TopoDSToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopoDSToStep_Builder();

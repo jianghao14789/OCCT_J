@@ -40,7 +40,7 @@ class IGESGraph_ToolHighLight
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolHighLight, ready to work

@@ -39,7 +39,7 @@ class IntRes2d_Transition
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

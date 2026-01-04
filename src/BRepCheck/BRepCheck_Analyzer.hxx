@@ -38,7 +38,7 @@ class BRepCheck_Analyzer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructs a shape validation object defined by the shape S.
   //! <S> is the  shape  to control.  <GeomControls>  If

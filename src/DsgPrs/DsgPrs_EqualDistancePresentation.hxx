@@ -37,7 +37,7 @@ class DsgPrs_EqualDistancePresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the points Point1, Point2, Point3 Point4, and the

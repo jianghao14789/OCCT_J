@@ -36,7 +36,7 @@ class Geom2dAPI_ProjectPointOnCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty projector algorithm. Use an Init

@@ -40,7 +40,7 @@ class IGESAppli_ToolPinNumber
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPinNumber, ready to work

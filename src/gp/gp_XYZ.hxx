@@ -32,7 +32,7 @@ class gp_XYZ
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an XYZ object with zero coordinates (0,0,0)
   gp_XYZ()

@@ -36,7 +36,7 @@ class BRepSweep_Prism
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds the prism of base S and vector V. If C is true,

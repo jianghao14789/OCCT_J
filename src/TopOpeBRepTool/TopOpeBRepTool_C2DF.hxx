@@ -33,7 +33,7 @@ class TopOpeBRepTool_C2DF
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepTool_C2DF();

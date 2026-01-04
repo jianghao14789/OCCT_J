@@ -31,7 +31,7 @@ class HLRBRep_Hider
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Hider processing  the set  of  Edges and

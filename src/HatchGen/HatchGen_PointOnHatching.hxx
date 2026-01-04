@@ -35,7 +35,7 @@ class HatchGen_PointOnHatching  : public HatchGen_IntersectionPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty point.

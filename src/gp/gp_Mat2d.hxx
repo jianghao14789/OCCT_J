@@ -29,7 +29,7 @@ class gp_Mat2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates  a matrix with null coefficients.
   gp_Mat2d()

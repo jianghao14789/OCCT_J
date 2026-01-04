@@ -33,7 +33,7 @@ class BRepPrim_Cylinder  : public BRepPrim_Revolution
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! the STEP definition

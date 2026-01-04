@@ -36,7 +36,7 @@ class RWStepShape_RWEdgeCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepShape_RWEdgeCurve();

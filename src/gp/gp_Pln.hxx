@@ -48,7 +48,7 @@ class gp_Pln
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a plane coincident with OXY plane of the
   //! reference coordinate system.

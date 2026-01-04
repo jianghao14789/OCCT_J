@@ -35,7 +35,7 @@ class TPrsStd_ConstraintTools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void UpdateOnlyValue (const Handle(TDataXtd_Constraint)& aConst, const Handle(AIS_InteractiveObject)& anAIS);

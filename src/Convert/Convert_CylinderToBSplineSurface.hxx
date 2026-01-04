@@ -1,4 +1,4 @@
-// Created on: 1991-10-10
+﻿// Created on: 1991-10-10
 // Created by: Jean Claude VAUTHIER
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -37,27 +37,27 @@ class gp_Cylinder;
 //! cylinder's axis). The U parametrization range is U [0, 2PI].
 //! KeyWords :
 //! Convert, Cylinder, BSplineSurface.
-class Convert_CylinderToBSplineSurface  : public Convert_ElementarySurfaceToBSplineSurface
+class Convert_CylinderToBSplineSurface : public Convert_ElementarySurfaceToBSplineSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! The equivalent B-splineSurface as the same orientation as the
-  //! cylinder in the U and V parametric directions.
-  //!
-  //! Raised if U1 = U2 or U1 = U2 + 2.0 * Pi
-  //! Raised if V1 = V2.
-  Standard_EXPORT Convert_CylinderToBSplineSurface(const gp_Cylinder& Cyl, const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2);
-  
 
-  //! The equivalent B-splineSurface as the same orientation as the
-  //! cylinder in the U and V parametric directions.
-  //!
-  //! Raised if V1 = V2.
-  Standard_EXPORT Convert_CylinderToBSplineSurface(const gp_Cylinder& Cyl, const Standard_Real V1, const Standard_Real V2);
+        //! The equivalent B-splineSurface as the same orientation as the
+        //! cylinder in the U and V parametric directions.
+        //!
+        //! Raised if U1 = U2 or U1 = U2 + 2.0 * Pi
+        //! Raised if V1 = V2.
+        Standard_EXPORT Convert_CylinderToBSplineSurface(const gp_Cylinder& Cyl, const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2);
+
+
+    //! The equivalent B-splineSurface as the same orientation as the
+    //! cylinder in the U and V parametric directions.
+    //!
+    //! Raised if V1 = V2.
+    Standard_EXPORT Convert_CylinderToBSplineSurface(const gp_Cylinder& Cyl, const Standard_Real V1, const Standard_Real V2);
 
 
 

@@ -40,7 +40,7 @@ class TopoDSToStep_MakeFacetedBrep  : public TopoDSToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopoDSToStep_MakeFacetedBrep(const TopoDS_Shell& S,

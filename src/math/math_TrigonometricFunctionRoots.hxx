@@ -38,7 +38,7 @@ class math_TrigonometricFunctionRoots
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given coefficients a, b, c, d , e, this constructor

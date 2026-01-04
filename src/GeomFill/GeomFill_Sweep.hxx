@@ -39,7 +39,7 @@ class GeomFill_Sweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_Sweep(const Handle(GeomFill_LocationLaw)& Location, const Standard_Boolean WithKpart = Standard_True);

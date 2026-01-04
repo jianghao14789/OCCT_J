@@ -36,7 +36,7 @@ class Bisector_FunctionH  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Bisector_FunctionH(const Handle(Geom2d_Curve)& C2, const gp_Pnt2d& P1, const gp_Vec2d& T1);

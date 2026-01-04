@@ -44,7 +44,7 @@ class IntAna2d_AnaIntersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor. IsDone returns False.

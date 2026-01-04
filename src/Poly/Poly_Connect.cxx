@@ -1,4 +1,4 @@
-// Created on: 1995-03-06
+﻿// Created on: 1995-03-06
 // Created by: Laurent PAINNOT
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,11 +23,11 @@
 // this structure records one of the edges starting from a node
 struct polyedge
 {
-  polyedge* next;         // the next edge in the list
-  Standard_Integer nt[2]; // the two adjacent triangles
-  Standard_Integer nn[2]; // the two adjacent nodes
-  Standard_Integer nd;    // the second node of the edge
-  DEFINE_STANDARD_ALLOC
+    polyedge* next;         // the next edge in the list
+    Standard_Integer nt[2]; // the two adjacent triangles
+    Standard_Integer nn[2]; // the two adjacent nodes
+    Standard_Integer nd;    // the second node of the edge
+    DEFINE_STANDARD_ALLOC;
 };
 
 //=======================================================================
@@ -35,14 +35,14 @@ struct polyedge
 //purpose  :
 //=======================================================================
 Poly_Connect::Poly_Connect()
-: mytr    (0),
-  myfirst (0),
-  mynode  (0),
-  myothernode (0),
-  mysense (false),
-  mymore  (false)
+    : mytr(0),
+    myfirst(0),
+    mynode(0),
+    myothernode(0),
+    mysense(false),
+    mymore(false)
 {
-  //
+    //
 }
 
 //=======================================================================
@@ -50,165 +50,165 @@ Poly_Connect::Poly_Connect()
 //purpose  :
 //=======================================================================
 Poly_Connect::Poly_Connect(const Handle(Poly_Triangulation)& theTriangulation)
-: myTriangulation (theTriangulation),
-  myTriangles (1, theTriangulation->NbNodes()),
-  myAdjacents (1, 6 * theTriangulation->NbTriangles()),
-  mytr    (0),
-  myfirst (0),
-  mynode  (0),
-  myothernode (0),
-  mysense (false),
-  mymore  (false)
+    : myTriangulation(theTriangulation),
+    myTriangles(1, theTriangulation->NbNodes()),
+    myAdjacents(1, 6 * theTriangulation->NbTriangles()),
+    mytr(0),
+    myfirst(0),
+    mynode(0),
+    myothernode(0),
+    mysense(false),
+    mymore(false)
 {
-  Load (theTriangulation);
+    Load(theTriangulation);
 }
 
 //=======================================================================
 //function : Load
 //purpose  :
 //=======================================================================
-void Poly_Connect::Load (const Handle(Poly_Triangulation)& theTriangulation)
+void Poly_Connect::Load(const Handle(Poly_Triangulation)& theTriangulation)
 {
-  myTriangulation = theTriangulation;
-  mytr = 0;
-  myfirst = 0;
-  mynode  = 0;
-  myothernode = 0;
-  mysense = false;
-  mymore  = false;
+    myTriangulation = theTriangulation;
+    mytr = 0;
+    myfirst = 0;
+    mynode = 0;
+    myothernode = 0;
+    mysense = false;
+    mymore = false;
 
-  const Standard_Integer aNbNodes = myTriangulation->NbNodes();
-  const Standard_Integer aNbTris  = myTriangulation->NbTriangles();
-  {
-    const Standard_Integer aNbAdjs = 6 * aNbTris;
-    if (myTriangles.Size() != aNbNodes)
+    const Standard_Integer aNbNodes = myTriangulation->NbNodes();
+    const Standard_Integer aNbTris = myTriangulation->NbTriangles();
     {
-      myTriangles.Resize (1, aNbNodes, Standard_False);
-    }
-    if (myAdjacents.Size() != aNbAdjs)
-    {
-      myAdjacents.Resize (1, aNbAdjs, Standard_False);
-    }
-  }
-
-  myTriangles.Init(0);
-  myAdjacents.Init(0);
-
-  // We first build an array of the list of edges connected to the nodes
-  // create an array to store the edges starting from the vertices
-  NCollection_Array1<polyedge*> anEdges (1, aNbNodes);
-  anEdges.Init (NULL);
-  // use incremental allocator for small allocations
-  Handle(NCollection_IncAllocator) anIncAlloc = new NCollection_IncAllocator();
-
-  // loop on the triangles
-  NCollection_Vec3<Standard_Integer> aTriNodes;
-  NCollection_Vec2<Standard_Integer> anEdgeNodes;
-  for (Standard_Integer aTriIter = 1; aTriIter <= aNbTris; ++aTriIter)
-  {
-    // get the nodes
-    myTriangulation->Triangle (aTriIter).Get (aTriNodes[0], aTriNodes[1], aTriNodes[2]);
-
-    // Update the myTriangles array
-    myTriangles.SetValue (aTriNodes[0], aTriIter);
-    myTriangles.SetValue (aTriNodes[1], aTriIter);
-    myTriangles.SetValue (aTriNodes[2], aTriIter);
-
-    // update the edge lists
-    for (Standard_Integer aNodeInTri = 0; aNodeInTri < 3; ++aNodeInTri)
-    {
-      const Standard_Integer aNodeNext = (aNodeInTri + 1) % 3;  // the following node of the edge
-      if (aTriNodes[aNodeInTri] < aTriNodes[aNodeNext])
-      {
-        anEdgeNodes[0] = aTriNodes[aNodeInTri];
-        anEdgeNodes[1] = aTriNodes[aNodeNext];
-      }
-      else
-      {
-        anEdgeNodes[0] = aTriNodes[aNodeNext];
-        anEdgeNodes[1] = aTriNodes[aNodeInTri];
-      }
-
-      // edge from node 0 to node 1 with node 0 < node 1
-      // insert in the list of node 0
-      polyedge* ced = anEdges[anEdgeNodes[0]];
-      for (; ced != NULL; ced = ced->next)
-      {
-        // the edge already exists
-        if (ced->nd == anEdgeNodes[1])
+        const Standard_Integer aNbAdjs = 6 * aNbTris;
+        if (myTriangles.Size() != aNbNodes)
         {
-          // just mark the adjacency if found
-          ced->nt[1] = aTriIter;
-          ced->nn[1] = aTriNodes[3 - aNodeInTri - aNodeNext];  // the third node
-          break;
+            myTriangles.Resize(1, aNbNodes, Standard_False);
         }
-      }
-
-      if (ced == NULL)
-      {
-        // create the edge if not found
-        ced = (polyedge* )anIncAlloc->Allocate (sizeof(polyedge));
-        ced->next = anEdges[anEdgeNodes[0]];
-        anEdges[anEdgeNodes[0]] = ced;
-        ced->nd = anEdgeNodes[1];
-        ced->nt[0] = aTriIter;
-        ced->nn[0] = aTriNodes[3 - aNodeInTri - aNodeNext];  // the third node
-        ced->nt[1] = 0;
-        ced->nn[1] = 0;
-      }
+        if (myAdjacents.Size() != aNbAdjs)
+        {
+            myAdjacents.Resize(1, aNbAdjs, Standard_False);
+        }
     }
-  }
 
-  // now complete the myAdjacents array
-  Standard_Integer anAdjIndex = 1;
-  for (Standard_Integer aTriIter = 1; aTriIter <= aNbTris; ++aTriIter)
-  {
-    // get the nodes
-    myTriangulation->Triangle (aTriIter).Get (aTriNodes[0], aTriNodes[1], aTriNodes[2]);
+    myTriangles.Init(0);
+    myAdjacents.Init(0);
 
-    // for each edge in triangle
-    for (Standard_Integer aNodeInTri = 0; aNodeInTri < 3; ++aNodeInTri)
+    // We first build an array of the list of edges connected to the nodes
+    // create an array to store the edges starting from the vertices
+    NCollection_Array1<polyedge*> anEdges(1, aNbNodes);
+    anEdges.Init(NULL);
+    // use incremental allocator for small allocations
+    Handle(NCollection_IncAllocator) anIncAlloc = new NCollection_IncAllocator();
+
+    // loop on the triangles
+    NCollection_Vec3<Standard_Integer> aTriNodes;
+    NCollection_Vec2<Standard_Integer> anEdgeNodes;
+    for (Standard_Integer aTriIter = 1; aTriIter <= aNbTris; ++aTriIter)
     {
-      const Standard_Integer aNodeNext = (aNodeInTri + 1) % 3;  // the following node of the edge
-      if (aTriNodes[aNodeInTri] < aTriNodes[aNodeNext])
-      {
-        anEdgeNodes[0] = aTriNodes[aNodeInTri];
-        anEdgeNodes[1] = aTriNodes[aNodeNext];
-      }
-      else
-      {
-        anEdgeNodes[0] = aTriNodes[aNodeNext];
-        anEdgeNodes[1] = aTriNodes[aNodeInTri];
-      }
+        // get the nodes
+        myTriangulation->Triangle(aTriIter).Get(aTriNodes[0], aTriNodes[1], aTriNodes[2]);
 
-      // edge from node 0 to node 1 with node 0 < node 1
-      // find in the list of node 0
-      const polyedge* ced = anEdges[anEdgeNodes[0]];
-      while (ced->nd != anEdgeNodes[1])
-      {
-        ced = ced->next;
-      }
+        // Update the myTriangles array
+        myTriangles.SetValue(aTriNodes[0], aTriIter);
+        myTriangles.SetValue(aTriNodes[1], aTriIter);
+        myTriangles.SetValue(aTriNodes[2], aTriIter);
 
-      // Find the adjacent triangle
-      const Standard_Integer l = ced->nt[0] == aTriIter ? 1 : 0;
+        // update the edge lists
+        for (Standard_Integer aNodeInTri = 0; aNodeInTri < 3; ++aNodeInTri)
+        {
+            const Standard_Integer aNodeNext = (aNodeInTri + 1) % 3;  // the following node of the edge
+            if (aTriNodes[aNodeInTri] < aTriNodes[aNodeNext])
+            {
+                anEdgeNodes[0] = aTriNodes[aNodeInTri];
+                anEdgeNodes[1] = aTriNodes[aNodeNext];
+            }
+            else
+            {
+                anEdgeNodes[0] = aTriNodes[aNodeNext];
+                anEdgeNodes[1] = aTriNodes[aNodeInTri];
+            }
 
-      myAdjacents.SetValue (anAdjIndex,     ced->nt[l]);
-      myAdjacents.SetValue (anAdjIndex + 3, ced->nn[l]);
-      ++anAdjIndex;
+            // edge from node 0 to node 1 with node 0 < node 1
+            // insert in the list of node 0
+            polyedge* ced = anEdges[anEdgeNodes[0]];
+            for (; ced != NULL; ced = ced->next)
+            {
+                // the edge already exists
+                if (ced->nd == anEdgeNodes[1])
+                {
+                    // just mark the adjacency if found
+                    ced->nt[1] = aTriIter;
+                    ced->nn[1] = aTriNodes[3 - aNodeInTri - aNodeNext];  // the third node
+                    break;
+                }
+            }
+
+            if (ced == NULL)
+            {
+                // create the edge if not found
+                ced = (polyedge*)anIncAlloc->Allocate(sizeof(polyedge));
+                ced->next = anEdges[anEdgeNodes[0]];
+                anEdges[anEdgeNodes[0]] = ced;
+                ced->nd = anEdgeNodes[1];
+                ced->nt[0] = aTriIter;
+                ced->nn[0] = aTriNodes[3 - aNodeInTri - aNodeNext];  // the third node
+                ced->nt[1] = 0;
+                ced->nn[1] = 0;
+            }
+        }
     }
-    anAdjIndex += 3;
-  }
 
-  // destroy the edges array - can be skipped when using NCollection_IncAllocator
-  /*for (Standard_Integer aNodeIter = anEdges.Lower(); aNodeIter <= anEdges.Upper(); ++aNodeIter)
-  {
-    for (polyedge* anEdgeIter = anEdges[aNodeIter]; anEdgeIter != NULL;)
+    // now complete the myAdjacents array
+    Standard_Integer anAdjIndex = 1;
+    for (Standard_Integer aTriIter = 1; aTriIter <= aNbTris; ++aTriIter)
     {
-      polyedge* aTmp = anEdgeIter->next;
-      anIncAlloc->Free (anEdgeIter);
-      anEdgeIter = aTmp;
+        // get the nodes
+        myTriangulation->Triangle(aTriIter).Get(aTriNodes[0], aTriNodes[1], aTriNodes[2]);
+
+        // for each edge in triangle
+        for (Standard_Integer aNodeInTri = 0; aNodeInTri < 3; ++aNodeInTri)
+        {
+            const Standard_Integer aNodeNext = (aNodeInTri + 1) % 3;  // the following node of the edge
+            if (aTriNodes[aNodeInTri] < aTriNodes[aNodeNext])
+            {
+                anEdgeNodes[0] = aTriNodes[aNodeInTri];
+                anEdgeNodes[1] = aTriNodes[aNodeNext];
+            }
+            else
+            {
+                anEdgeNodes[0] = aTriNodes[aNodeNext];
+                anEdgeNodes[1] = aTriNodes[aNodeInTri];
+            }
+
+            // edge from node 0 to node 1 with node 0 < node 1
+            // find in the list of node 0
+            const polyedge* ced = anEdges[anEdgeNodes[0]];
+            while (ced->nd != anEdgeNodes[1])
+            {
+                ced = ced->next;
+            }
+
+            // Find the adjacent triangle
+            const Standard_Integer l = ced->nt[0] == aTriIter ? 1 : 0;
+
+            myAdjacents.SetValue(anAdjIndex, ced->nt[l]);
+            myAdjacents.SetValue(anAdjIndex + 3, ced->nn[l]);
+            ++anAdjIndex;
+        }
+        anAdjIndex += 3;
     }
-  }*/
+
+    // destroy the edges array - can be skipped when using NCollection_IncAllocator
+    /*for (Standard_Integer aNodeIter = anEdges.Lower(); aNodeIter <= anEdges.Upper(); ++aNodeIter)
+    {
+      for (polyedge* anEdgeIter = anEdges[aNodeIter]; anEdgeIter != NULL;)
+      {
+        polyedge* aTmp = anEdgeIter->next;
+        anIncAlloc->Free (anEdgeIter);
+        anEdgeIter = aTmp;
+      }
+    }*/
 }
 
 //=======================================================================
@@ -218,21 +218,21 @@ void Poly_Connect::Load (const Handle(Poly_Triangulation)& theTriangulation)
 
 void Poly_Connect::Initialize(const Standard_Integer N)
 {
-  mynode = N;
-  myfirst = Triangle(N);
-  mytr = myfirst;
-  mysense = Standard_True;
-  mymore = (myfirst != 0);
-  myPassedTr.Clear();
-  myPassedTr.Add (mytr);
-  if (mymore)
-  {
-    Standard_Integer i, no[3];
-    myTriangulation->Triangle (myfirst).Get (no[0], no[1], no[2]);
-    for (i = 0; i < 3; i++)
-      if (no[i] == mynode) break;
-    myothernode = no[(i+2)%3];
-  }
+    mynode = N;
+    myfirst = Triangle(N);
+    mytr = myfirst;
+    mysense = Standard_True;
+    mymore = (myfirst != 0);
+    myPassedTr.Clear();
+    myPassedTr.Add(mytr);
+    if (mymore)
+    {
+        Standard_Integer i, no[3];
+        myTriangulation->Triangle(myfirst).Get(no[0], no[1], no[2]);
+        for (i = 0; i < 3; i++)
+            if (no[i] == mynode) break;
+        myothernode = no[(i + 2) % 3];
+    }
 }
 
 //=======================================================================
@@ -242,49 +242,49 @@ void Poly_Connect::Initialize(const Standard_Integer N)
 
 void Poly_Connect::Next()
 {
-  Standard_Integer i, j;
-  Standard_Integer n[3];
-  Standard_Integer t[3];
-  Triangles(mytr, t[0], t[1], t[2]);
-  if (mysense) {
-    for (i = 0; i < 3; i++) {
-      if (t[i] != 0) {
-        myTriangulation->Triangle (t[i]).Get (n[0], n[1], n[2]);
-        for (j = 0; j < 3; j++) {
-          if ((n[j] == mynode) && (n[(j+1)%3] == myothernode)) {
-            mytr = t[i];
-            myothernode = n[(j+2)%3];
-            mymore = !myPassedTr.Contains (mytr);
-            myPassedTr.Add (mytr);
-            return;
-          }
-        }
-      }
-    }
-    // sinon, depart vers la gauche.
-    myTriangulation->Triangle (myfirst).Get (n[0], n[1], n[2]);
-    for (i = 0; i < 3; i++)
-      if (n[i] == mynode) break;
-    myothernode = n[(i+1)%3];
-    mysense = Standard_False;
-    mytr = myfirst;
+    Standard_Integer i, j;
+    Standard_Integer n[3];
+    Standard_Integer t[3];
     Triangles(mytr, t[0], t[1], t[2]);
-  }
-  if (!mysense) {
-    for (i = 0; i < 3; i++) {
-      if (t[i] != 0) {
-        myTriangulation->Triangle (t[i]).Get (n[0], n[1], n[2]);
-        for (j = 0; j < 3; j++) {
-          if ((n[j] == mynode) && (n[(j+2)%3] == myothernode)) {
-            mytr = t[i];
-            myothernode = n[(j+1)%3];
-            mymore = !myPassedTr.Contains (mytr);
-            myPassedTr.Add (mytr);
-            return;
-          }
+    if (mysense) {
+        for (i = 0; i < 3; i++) {
+            if (t[i] != 0) {
+                myTriangulation->Triangle(t[i]).Get(n[0], n[1], n[2]);
+                for (j = 0; j < 3; j++) {
+                    if ((n[j] == mynode) && (n[(j + 1) % 3] == myothernode)) {
+                        mytr = t[i];
+                        myothernode = n[(j + 2) % 3];
+                        mymore = !myPassedTr.Contains(mytr);
+                        myPassedTr.Add(mytr);
+                        return;
+                    }
+                }
+            }
         }
-      }
+        // sinon, depart vers la gauche.
+        myTriangulation->Triangle(myfirst).Get(n[0], n[1], n[2]);
+        for (i = 0; i < 3; i++)
+            if (n[i] == mynode) break;
+        myothernode = n[(i + 1) % 3];
+        mysense = Standard_False;
+        mytr = myfirst;
+        Triangles(mytr, t[0], t[1], t[2]);
     }
-  }
-  mymore = Standard_False;
+    if (!mysense) {
+        for (i = 0; i < 3; i++) {
+            if (t[i] != 0) {
+                myTriangulation->Triangle(t[i]).Get(n[0], n[1], n[2]);
+                for (j = 0; j < 3; j++) {
+                    if ((n[j] == mynode) && (n[(j + 2) % 3] == myothernode)) {
+                        mytr = t[i];
+                        myothernode = n[(j + 1) % 3];
+                        mymore = !myPassedTr.Contains(mytr);
+                        myPassedTr.Add(mytr);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    mymore = Standard_False;
 }

@@ -30,7 +30,7 @@ class Geom2dToIGES_Geom2dEntity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a tool Geom2dEntity

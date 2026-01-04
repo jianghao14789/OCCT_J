@@ -29,7 +29,7 @@ class StdPrs_WFSurface  : public Prs3d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draws a surface by drawing the isoparametric curves with respect to

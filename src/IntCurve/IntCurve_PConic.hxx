@@ -39,7 +39,7 @@ class IntCurve_PConic
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntCurve_PConic(const IntCurve_PConic& PC);

@@ -59,7 +59,7 @@ class GeomConvert_CompBezierSurfacesToBSplineSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes all the data needed to build a "C0"

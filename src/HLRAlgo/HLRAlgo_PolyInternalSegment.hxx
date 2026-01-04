@@ -26,7 +26,7 @@
 //! to Update OutLines.
 struct HLRAlgo_PolyInternalSegment
 {
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_Integer LstSg1, LstSg2, NxtSg1, NxtSg2, Conex1, Conex2;
 };

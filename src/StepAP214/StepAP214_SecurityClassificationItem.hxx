@@ -38,7 +38,7 @@ class StepAP214_SecurityClassificationItem  : public StepAP214_ApprovalItem
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a SecurityClassificationItem SelectType

@@ -35,7 +35,7 @@ class math_MultipleVarFunctionWithGradient  : public math_MultipleVarFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the number of variables of the function.

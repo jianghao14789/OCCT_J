@@ -68,7 +68,7 @@ class BRepFeat_Form  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns the list of generated Faces.

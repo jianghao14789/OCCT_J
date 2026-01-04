@@ -30,7 +30,7 @@ class DPrsStd
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Presentation commands

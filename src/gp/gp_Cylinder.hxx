@@ -42,7 +42,7 @@ class gp_Cylinder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a indefinite cylinder.
   gp_Cylinder() { radius = RealLast(); }

@@ -28,7 +28,7 @@ class QADraw
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Define specicial commands for AIS.

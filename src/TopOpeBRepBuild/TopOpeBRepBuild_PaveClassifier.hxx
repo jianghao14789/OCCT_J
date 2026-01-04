@@ -46,7 +46,7 @@ class TopOpeBRepBuild_PaveClassifier  : public TopOpeBRepBuild_LoopClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create a Pave classifier to compare vertices on edge <E>.

@@ -53,7 +53,7 @@ class gp_GTrsf2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! returns identity transformation.
   gp_GTrsf2d()

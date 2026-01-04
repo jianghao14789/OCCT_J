@@ -40,7 +40,7 @@ class GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given a MultiLine SSP with constraints points, this

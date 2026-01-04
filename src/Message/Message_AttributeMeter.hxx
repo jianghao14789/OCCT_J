@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -28,70 +28,70 @@ class Message_AttributeMeter : public Message_Attribute
 {
 public:
 
-  //! Returns default value of the metric when it is not defined
-  //! @return undefined value
-  static Standard_Real UndefinedMetricValue() { return -1.0; }
+    //! Returns default value of the metric when it is not defined
+    //! @return undefined value
+    static Standard_Real UndefinedMetricValue() { return -1.0; }
 
 public:
 
-  //! Constructor with string argument
-  Standard_EXPORT Message_AttributeMeter (const TCollection_AsciiString& theName = TCollection_AsciiString());
+    //! Constructor with string argument
+    Standard_EXPORT Message_AttributeMeter(const TCollection_AsciiString& theName = TCollection_AsciiString());
 
-  //! Checks whether the attribute has values for the metric
-  //! @param theMetric [in] metric type
-  //! @return true if the metric values exist in the attribute
-  Standard_EXPORT Standard_Boolean HasMetric (const Message_MetricType& theMetric) const;
+    //! Checks whether the attribute has values for the metric
+    //! @param theMetric [in] metric type
+    //! @return true if the metric values exist in the attribute
+    Standard_EXPORT Standard_Boolean HasMetric(const Message_MetricType& theMetric) const;
 
-  //! Returns true when both values of the metric are set.
-  //! @param theMetric [in] metric type
-  //! @return true if metric values are valid
-  Standard_EXPORT Standard_Boolean IsMetricValid (const Message_MetricType& theMetric) const;
+    //! Returns true when both values of the metric are set.
+    //! @param theMetric [in] metric type
+    //! @return true if metric values are valid
+    Standard_EXPORT Standard_Boolean IsMetricValid(const Message_MetricType& theMetric) const;
 
-  //! Returns start value for the metric
-  //! @param theMetric [in] metric type
-  //! @return real value
-  Standard_EXPORT Standard_Real StartValue (const Message_MetricType& theMetric) const;
+    //! Returns start value for the metric
+    //! @param theMetric [in] metric type
+    //! @return real value
+    Standard_EXPORT Standard_Real StartValue(const Message_MetricType& theMetric) const;
 
-  //! Sets start values for the metric
-  //! @param theMetric [in] metric type
-  Standard_EXPORT void SetStartValue (const Message_MetricType& theMetric, const Standard_Real theValue);
+    //! Sets start values for the metric
+    //! @param theMetric [in] metric type
+    Standard_EXPORT void SetStartValue(const Message_MetricType& theMetric, const Standard_Real theValue);
 
-  //! Returns stop value for the metric
-  //! @param theMetric [in] metric type
-  //! @return real value
-  Standard_EXPORT Standard_Real StopValue (const Message_MetricType& theMetric) const;
+    //! Returns stop value for the metric
+    //! @param theMetric [in] metric type
+    //! @return real value
+    Standard_EXPORT Standard_Real StopValue(const Message_MetricType& theMetric) const;
 
-  //! Sets stop values for the metric
-  //! @param theMetric [in] metric type
-  Standard_EXPORT void SetStopValue (const Message_MetricType& theMetric, const Standard_Real theValue);
+    //! Sets stop values for the metric
+    //! @param theMetric [in] metric type
+    Standard_EXPORT void SetStopValue(const Message_MetricType& theMetric, const Standard_Real theValue);
 
 public:
 
-  //! Sets start values of default report metrics into the alert
-  //! @param theAlert an alert  
-  static void StartAlert (const Handle(Message_AlertExtended)& theAlert) { SetAlertMetrics (theAlert, Standard_True); }
+    //! Sets start values of default report metrics into the alert
+    //! @param theAlert an alert  
+    static void StartAlert(const Handle(Message_AlertExtended)& theAlert) { SetAlertMetrics(theAlert, Standard_True); }
 
-  //! Sets stop values of default report metrics into the alert
-  //! @param theAlert an alert  
-  static void StopAlert (const Handle(Message_AlertExtended)& theAlert) { SetAlertMetrics (theAlert, Standard_False); }
+    //! Sets stop values of default report metrics into the alert
+    //! @param theAlert an alert  
+    static void StopAlert(const Handle(Message_AlertExtended)& theAlert) { SetAlertMetrics(theAlert, Standard_False); }
 
-  //! Sets current values of default report metrics into the alert.
-  //! Processed only alert with Message_AttributeMeter attribute
-  //! @param theAlert an alert  
-  //! @param theStartValue flag, if true, the start value is collected otherwise stop
-  static Standard_EXPORT void SetAlertMetrics (const Handle(Message_AlertExtended)& theAlert,
-                                               const Standard_Boolean theStartValue);
+    //! Sets current values of default report metrics into the alert.
+    //! Processed only alert with Message_AttributeMeter attribute
+    //! @param theAlert an alert  
+    //! @param theStartValue flag, if true, the start value is collected otherwise stop
+    static Standard_EXPORT void SetAlertMetrics(const Handle(Message_AlertExtended)& theAlert,
+        const Standard_Boolean theStartValue);
 
-  //! Dumps the content of me into the stream
-  virtual Standard_EXPORT void DumpJson (Standard_OStream& theOStream,
-                                         Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Dumps the content of me into the stream
+    virtual Standard_EXPORT void DumpJson(Standard_OStream& theOStream,
+        Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(Message_AttributeMeter, Message_Attribute)
+    DEFINE_STANDARD_RTTIEXT(Message_AttributeMeter, Message_Attribute)
 
 private:
 
-  typedef std::pair<Standard_Real, Standard_Real> StartToStopValue;
-  NCollection_IndexedDataMap<Message_MetricType, StartToStopValue> myMetrics; //!< computed metrics
+    typedef std::pair<Standard_Real, Standard_Real> StartToStopValue;
+    NCollection_IndexedDataMap<Message_MetricType, StartToStopValue> myMetrics; //!< computed metrics
 };
 
 #endif // _Message_AttributeMeter_HeaderFile

@@ -31,7 +31,7 @@ class DsgPrs_XYZPlanePresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draws each plane of a trihedron displayed in the

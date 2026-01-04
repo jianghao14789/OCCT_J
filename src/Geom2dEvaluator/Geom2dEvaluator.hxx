@@ -33,7 +33,7 @@ class Geom2dEvaluator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Recalculate D1 values of base curve into D0 value of offset curve

@@ -31,7 +31,7 @@ class BOPDS_Pave
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

@@ -45,7 +45,7 @@ class ChFi3d_ChBuilder  : public ChFi3d_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the Builder with the Shape <S> for the

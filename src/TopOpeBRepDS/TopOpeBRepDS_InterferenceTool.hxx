@@ -36,7 +36,7 @@ class TopOpeBRepDS_InterferenceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Handle(TopOpeBRepDS_Interference) MakeEdgeInterference (const TopOpeBRepDS_Transition& T, const TopOpeBRepDS_Kind SK, const Standard_Integer SI, const TopOpeBRepDS_Kind GK, const Standard_Integer GI, const Standard_Real P);

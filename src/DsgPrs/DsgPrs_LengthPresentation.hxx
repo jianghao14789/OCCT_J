@@ -39,7 +39,7 @@ class DsgPrs_LengthPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draws a line segment representing a length in the

@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -47,5 +47,5 @@
         (carr)[1] = (carr2)[1]
 
 #define BSplCLib_DataContainer BSplCLib_DataContainer_2d  
-  
+
 #include <BSplCLib_CurveComputation.gxx>

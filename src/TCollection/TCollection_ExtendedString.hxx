@@ -57,7 +57,7 @@ class TCollection_ExtendedString
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes a ExtendedString to an empty ExtendedString.

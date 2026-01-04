@@ -1,4 +1,4 @@
-// Created on: 2004-06-15
+﻿// Created on: 2004-06-15
 // Created by: Sergey ZARITCHNY <szy@opencascade.com>
 // Copyright (c) 2004-2014 OPEN CASCADE SAS
 //
@@ -35,39 +35,39 @@ Standard_OStream& operator << (Standard_OStream& OS, const gp_Trsf& T);
 //! It can be created from Locations.
 //!
 //! It can create Locations.
-class BinTools_LocationSet 
+class BinTools_LocationSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Returns an empty set of locations.
-  Standard_EXPORT BinTools_LocationSet();
-  
-  //! Clears the content of the set.
-  Standard_EXPORT void Clear();
-  
-  //! Incorporate a new Location in the  set and returns
-  //! its index.
-  Standard_EXPORT Standard_Integer Add (const TopLoc_Location& L);
-  
-  //! Returns the location of index <I>.
-  Standard_EXPORT const TopLoc_Location& Location (const Standard_Integer I) const;
-  
-  //! Returns the index of <L>.
-  Standard_EXPORT Standard_Integer Index (const TopLoc_Location& L) const;
-  
-  //! Returns number of locations.
-  Standard_EXPORT Standard_Integer NbLocations() const;
-  
-  //! Writes the content of  me  on the stream <OS> in a
-  //! format that can be read back by Read.
-  Standard_EXPORT void Write (Standard_OStream& OS) const;
-  
-  //! Reads the content of me from the  stream  <IS>. me
-  //! is first cleared.
-  Standard_EXPORT void Read (Standard_IStream& IS);
+
+    //! Returns an empty set of locations.
+    Standard_EXPORT BinTools_LocationSet();
+
+    //! Clears the content of the set.
+    Standard_EXPORT void Clear();
+
+    //! Incorporate a new Location in the  set and returns
+    //! its index.
+    Standard_EXPORT Standard_Integer Add(const TopLoc_Location& L);
+
+    //! Returns the location of index <I>.
+    Standard_EXPORT const TopLoc_Location& Location(const Standard_Integer I) const;
+
+    //! Returns the index of <L>.
+    Standard_EXPORT Standard_Integer Index(const TopLoc_Location& L) const;
+
+    //! Returns number of locations.
+    Standard_EXPORT Standard_Integer NbLocations() const;
+
+    //! Writes the content of  me  on the stream <OS> in a
+    //! format that can be read back by Read.
+    Standard_EXPORT void Write(Standard_OStream& OS) const;
+
+    //! Reads the content of me from the  stream  <IS>. me
+    //! is first cleared.
+    Standard_EXPORT void Read(Standard_IStream& IS);
 
 protected:
 
@@ -79,7 +79,7 @@ private:
 
 
 
-  TopLoc_IndexedMapOfLocation myMap;
+    TopLoc_IndexedMapOfLocation myMap;
 
 
 };

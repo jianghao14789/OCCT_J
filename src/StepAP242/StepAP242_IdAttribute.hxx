@@ -1,4 +1,4 @@
-// Created on: 2015-07-10
+﻿// Created on: 2015-07-10
 // Created by: Irina KRYLOVA
 // Copyright (c) 2015 OPEN CASCADE SAS
 //
@@ -30,42 +30,42 @@ class StepAP242_IdAttribute : public Standard_Transient
 {
 
 public:
-  
-  //! Returns a IdAttribute
-  Standard_EXPORT StepAP242_IdAttribute();
-  
-  //! Init all field own and inherited
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& theAttributeValue,
-                             const StepAP242_IdAttributeSelect& theIdentifiedItem);
-  
-  // Set field AttributeValue
-  inline void SetAttributeValue(const Handle(TCollection_HAsciiString)& theAttributeValue)
-  {
-    attributeValue = theAttributeValue;
-  }
-  
-  //! Returns field AttributeValue
-  inline Handle(TCollection_HAsciiString) AttributeValue() const
-  {
-    return attributeValue;
-  }
-  
-  //! Set field IdentifiedItem
-  inline void SetIdentifiedItem(const StepAP242_IdAttributeSelect& theIdentifiedItem)
-  {
-    identifiedItem = theIdentifiedItem;
-  }
-  
-  //! Returns IdentifiedItem
-  inline StepAP242_IdAttributeSelect IdentifiedItem() const
-  {
-    return identifiedItem;
-  }
 
-  DEFINE_STANDARD_RTTIEXT(StepAP242_IdAttribute,Standard_Transient)
+    //! Returns a IdAttribute
+    Standard_EXPORT StepAP242_IdAttribute();
 
-private: 
-  Handle(TCollection_HAsciiString) attributeValue;
-  StepAP242_IdAttributeSelect identifiedItem;
+    //! Init all field own and inherited
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString)& theAttributeValue,
+        const StepAP242_IdAttributeSelect& theIdentifiedItem);
+
+    // Set field AttributeValue
+    inline void SetAttributeValue(const Handle(TCollection_HAsciiString)& theAttributeValue)
+    {
+        attributeValue = theAttributeValue;
+    }
+
+    //! Returns field AttributeValue
+    inline Handle(TCollection_HAsciiString) AttributeValue() const
+    {
+        return attributeValue;
+    }
+
+    //! Set field IdentifiedItem
+    inline void SetIdentifiedItem(const StepAP242_IdAttributeSelect& theIdentifiedItem)
+    {
+        identifiedItem = theIdentifiedItem;
+    }
+
+    //! Returns IdentifiedItem
+    inline StepAP242_IdAttributeSelect IdentifiedItem() const
+    {
+        return identifiedItem;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(StepAP242_IdAttribute, Standard_Transient)
+
+private:
+    Handle(TCollection_HAsciiString) attributeValue;
+    StepAP242_IdAttributeSelect identifiedItem;
 };
 #endif // _StepAP242_IdAttribute_HeaderFile

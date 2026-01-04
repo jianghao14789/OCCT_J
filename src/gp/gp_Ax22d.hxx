@@ -43,7 +43,7 @@ class gp_Ax22d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an object representing the reference
   //! coordinate system (OXY).

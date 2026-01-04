@@ -34,7 +34,7 @@ class OSD_Error
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes Error to be without any Error.

@@ -42,7 +42,7 @@ class Adaptor3d_HSurfaceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   static Standard_Real FirstUParameter (const Handle(Adaptor3d_Surface)& theSurf) { return theSurf->FirstUParameter(); }
 

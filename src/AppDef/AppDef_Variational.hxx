@@ -50,7 +50,7 @@ class AppDef_Variational
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor.

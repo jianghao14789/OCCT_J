@@ -36,7 +36,7 @@ class VrmlConverter_WFDeflectionRestrictedFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void Add (Standard_OStream& anOStream, const Handle(BRepAdaptor_Surface)& aFace, const Handle(VrmlConverter_Drawer)& aDrawer);

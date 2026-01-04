@@ -34,7 +34,7 @@ class RWStepVisual_RWCameraModelD2
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepVisual_RWCameraModelD2();

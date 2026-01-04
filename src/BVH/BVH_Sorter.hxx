@@ -1,4 +1,4 @@
-// Created on: 2014-01-10
+﻿// Created on: 2014-01-10
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -24,35 +24,36 @@ class BVH_Sorter
 {
 public:
 
-  //! Performs default initialization.
-  BVH_Sorter()
-  : myIsParallel (Standard_False)
-  { }
+    //! Performs default initialization.
+    BVH_Sorter()
+        : myIsParallel(Standard_False)
+    {
+    }
 
-  //! Releases resources of BVH sorter.
-  virtual ~BVH_Sorter() { }
+    //! Releases resources of BVH sorter.
+    virtual ~BVH_Sorter() {}
 
-  //! Sorts the set.
-  virtual void Perform (BVH_Set<T, N>* theSet) = 0;
+    //! Sorts the set.
+    virtual void Perform(BVH_Set<T, N>* theSet) = 0;
 
-  //! Sorts the given (inclusive) range in the set.
-  virtual void Perform (BVH_Set<T, N>* theSet, const Standard_Integer theStart, const Standard_Integer theFinal) = 0;
+    //! Sorts the given (inclusive) range in the set.
+    virtual void Perform(BVH_Set<T, N>* theSet, const Standard_Integer theStart, const Standard_Integer theFinal) = 0;
 
-  //! Returns parallel flag.
-  inline Standard_Boolean IsParallel() const
-  {
-    return myIsParallel;
-  }
+    //! Returns parallel flag.
+    inline Standard_Boolean IsParallel() const
+    {
+        return myIsParallel;
+    }
 
-  //! Set parallel flag contolling possibility of parallel execution.
-  inline void SetParallel(const Standard_Boolean isParallel)
-  {
-    myIsParallel = isParallel;
-  }
+    //! Set parallel flag contolling possibility of parallel execution.
+    inline void SetParallel(const Standard_Boolean isParallel)
+    {
+        myIsParallel = isParallel;
+    }
 
 private:
 
-  Standard_Boolean myIsParallel;
+    Standard_Boolean myIsParallel;
 };
 
 #endif // _BVH_Sorter_Header

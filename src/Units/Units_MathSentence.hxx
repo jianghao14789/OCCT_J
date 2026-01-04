@@ -1,4 +1,4 @@
-// Created on: 1992-06-22
+﻿// Created on: 1992-06-22
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -27,17 +27,17 @@
 
 //! This class  defines all the methods to  create and
 //! compute an algebraic formula.
-class Units_MathSentence  : public Units_Sentence
+class Units_MathSentence : public Units_Sentence
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Creates and returns a  MathSentence object. The string
-  //! <astring>  describes  an algebraic  formula in natural
-  //! language.
-  Standard_EXPORT Units_MathSentence(const Standard_CString astring);
+
+    //! Creates and returns a  MathSentence object. The string
+    //! <astring>  describes  an algebraic  formula in natural
+    //! language.
+    Standard_EXPORT Units_MathSentence(const Standard_CString astring);
 
 
 

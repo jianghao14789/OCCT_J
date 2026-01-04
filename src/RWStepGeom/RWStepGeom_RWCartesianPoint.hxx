@@ -33,7 +33,7 @@ class RWStepGeom_RWCartesianPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepGeom_RWCartesianPoint();

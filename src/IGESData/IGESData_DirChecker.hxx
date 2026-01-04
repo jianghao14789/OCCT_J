@@ -45,7 +45,7 @@ class IGESData_DirChecker
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a DirChecker, with no criterium at all to be checked

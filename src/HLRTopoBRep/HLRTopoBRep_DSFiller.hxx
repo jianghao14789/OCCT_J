@@ -39,7 +39,7 @@ class HLRTopoBRep_DSFiller
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Stores in <DS> the outlines of  <S> using the current

@@ -49,7 +49,7 @@ class DrawTrSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Sets <G> in the variable <Name>.  Overwrite the
   //! variable if already set.

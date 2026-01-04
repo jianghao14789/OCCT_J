@@ -44,7 +44,7 @@ class TDF_Transaction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty transaction context, unable to be

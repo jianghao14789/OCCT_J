@@ -36,7 +36,7 @@ class StdPrs_WFDeflectionRestrictedFace  : public Prs3d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines a display featuring U and V isoparameters.

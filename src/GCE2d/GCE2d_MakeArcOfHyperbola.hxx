@@ -39,7 +39,7 @@ class GCE2d_MakeArcOfHyperbola  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Makes an arc of Hyperbola (TrimmedCurve from Geom2d) from

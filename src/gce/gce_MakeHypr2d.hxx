@@ -68,7 +68,7 @@ class gce_MakeHypr2d  : public gce_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a hyperbola

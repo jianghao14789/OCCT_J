@@ -57,7 +57,7 @@ class Geom2dGcc_Circ2dTanCen
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs one or more 2D circles tangential to the

@@ -30,7 +30,7 @@ class StepToTopoDS_PointPair
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StepToTopoDS_PointPair(const Handle(StepGeom_CartesianPoint)& P1, const Handle(StepGeom_CartesianPoint)& P2);

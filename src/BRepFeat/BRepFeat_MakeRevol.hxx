@@ -40,7 +40,7 @@ class BRepFeat_MakeRevol  : public BRepFeat_Form
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the revolved shell class.

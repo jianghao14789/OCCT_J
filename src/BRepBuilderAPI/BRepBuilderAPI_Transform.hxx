@@ -44,7 +44,7 @@ class BRepBuilderAPI_Transform  : public BRepBuilderAPI_ModifyShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a framework for applying the geometric

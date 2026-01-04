@@ -1,4 +1,4 @@
-// Created on: 1995-05-30
+﻿// Created on: 1995-05-30
 // Created by: Xavier BENVENISTE
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -54,65 +54,65 @@
 //! myTrueIntervals->Value(n) and myTrueIntervals->Value(n+1)
 //! so that it represent adequatly the function with the
 //! required continuity
-class Convert_CompPolynomialToPoles 
+class Convert_CompPolynomialToPoles
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Warning!
-  //! Continuity can be at MOST the maximum degree of
-  //! the polynomial functions
-  //! TrueIntervals :
-  //! this is the true parameterisation for the composite curve
-  //! that is : the curve has myContinuity if the nth curve
-  //! is parameterized between myTrueIntervals(n) and myTrueIntervals(n+1)
-  //!
-  //! Coefficients have to be the implicit "c form":
-  //! Coefficients[Numcurves][MaxDegree+1][Dimension]
-  //!
-  //! Warning!
-  //! The NumberOfCoefficient of an polynome is his degree + 1
-  //! Example: To convert the linear function f(x) = 2*x + 1 on the
-  //! domaine [2,5] to BSpline with the bound [-1,1]. Arguments are :
-  //! NumCurves  = 1;
-  //! Continuity = 1;
-  //! Dimension  = 1;
-  //! MaxDegree  = 1;
-  //! NumCoeffPerCurve [1] = {2};
-  //! Coefficients[2] = {1, 2};
-  //! PolynomialIntervals[1,2] = {{2,5}}
-  //! TrueIntervals[2] = {-1, 1}
-  Standard_EXPORT Convert_CompPolynomialToPoles(const Standard_Integer NumCurves, const Standard_Integer Continuity, const Standard_Integer Dimension, const Standard_Integer MaxDegree, const Handle(TColStd_HArray1OfInteger)& NumCoeffPerCurve, const Handle(TColStd_HArray1OfReal)& Coefficients, const Handle(TColStd_HArray2OfReal)& PolynomialIntervals, const Handle(TColStd_HArray1OfReal)& TrueIntervals);
-  
-  //! To Convert sevral span with different order of Continuity.
-  //! Warning: The Length of Continuity have to be NumCurves-1
-  Standard_EXPORT Convert_CompPolynomialToPoles(const Standard_Integer NumCurves, const Standard_Integer Dimension, const Standard_Integer MaxDegree, const TColStd_Array1OfInteger& Continuity, const TColStd_Array1OfInteger& NumCoeffPerCurve, const TColStd_Array1OfReal& Coefficients, const TColStd_Array2OfReal& PolynomialIntervals, const TColStd_Array1OfReal& TrueIntervals);
-  
-  //! To Convert only one span.
-  Standard_EXPORT Convert_CompPolynomialToPoles(const Standard_Integer Dimension, const Standard_Integer MaxDegree, const Standard_Integer Degree, const TColStd_Array1OfReal& Coefficients, const TColStd_Array1OfReal& PolynomialIntervals, const TColStd_Array1OfReal& TrueIntervals);
-  
-  //! number of poles of the n-dimensional BSpline
-  Standard_EXPORT Standard_Integer NbPoles() const;
-  
-  //! returns the poles of the n-dimensional BSpline
-  //! in the following format :
-  //! [1..NumPoles][1..Dimension]
-  Standard_EXPORT void Poles (Handle(TColStd_HArray2OfReal)& Poles) const;
-  
-  Standard_EXPORT Standard_Integer Degree() const;
-  
-  //! Degree of the n-dimensional Bspline
-  Standard_EXPORT Standard_Integer NbKnots() const;
-  
-  //! Knots of the n-dimensional Bspline
-  Standard_EXPORT void Knots (Handle(TColStd_HArray1OfReal)& K) const;
-  
-  //! Multiplicities of the knots in the BSpline
-  Standard_EXPORT void Multiplicities (Handle(TColStd_HArray1OfInteger)& M) const;
-  
-  Standard_EXPORT Standard_Boolean IsDone() const;
+
+        //! Warning!
+        //! Continuity can be at MOST the maximum degree of
+        //! the polynomial functions
+        //! TrueIntervals :
+        //! this is the true parameterisation for the composite curve
+        //! that is : the curve has myContinuity if the nth curve
+        //! is parameterized between myTrueIntervals(n) and myTrueIntervals(n+1)
+        //!
+        //! Coefficients have to be the implicit "c form":
+        //! Coefficients[Numcurves][MaxDegree+1][Dimension]
+        //!
+        //! Warning!
+        //! The NumberOfCoefficient of an polynome is his degree + 1
+        //! Example: To convert the linear function f(x) = 2*x + 1 on the
+        //! domaine [2,5] to BSpline with the bound [-1,1]. Arguments are :
+        //! NumCurves  = 1;
+        //! Continuity = 1;
+        //! Dimension  = 1;
+        //! MaxDegree  = 1;
+        //! NumCoeffPerCurve [1] = {2};
+        //! Coefficients[2] = {1, 2};
+        //! PolynomialIntervals[1,2] = {{2,5}}
+        //! TrueIntervals[2] = {-1, 1}
+        Standard_EXPORT Convert_CompPolynomialToPoles(const Standard_Integer NumCurves, const Standard_Integer Continuity, const Standard_Integer Dimension, const Standard_Integer MaxDegree, const Handle(TColStd_HArray1OfInteger)& NumCoeffPerCurve, const Handle(TColStd_HArray1OfReal)& Coefficients, const Handle(TColStd_HArray2OfReal)& PolynomialIntervals, const Handle(TColStd_HArray1OfReal)& TrueIntervals);
+
+    //! To Convert sevral span with different order of Continuity.
+    //! Warning: The Length of Continuity have to be NumCurves-1
+    Standard_EXPORT Convert_CompPolynomialToPoles(const Standard_Integer NumCurves, const Standard_Integer Dimension, const Standard_Integer MaxDegree, const TColStd_Array1OfInteger& Continuity, const TColStd_Array1OfInteger& NumCoeffPerCurve, const TColStd_Array1OfReal& Coefficients, const TColStd_Array2OfReal& PolynomialIntervals, const TColStd_Array1OfReal& TrueIntervals);
+
+    //! To Convert only one span.
+    Standard_EXPORT Convert_CompPolynomialToPoles(const Standard_Integer Dimension, const Standard_Integer MaxDegree, const Standard_Integer Degree, const TColStd_Array1OfReal& Coefficients, const TColStd_Array1OfReal& PolynomialIntervals, const TColStd_Array1OfReal& TrueIntervals);
+
+    //! number of poles of the n-dimensional BSpline
+    Standard_EXPORT Standard_Integer NbPoles() const;
+
+    //! returns the poles of the n-dimensional BSpline
+    //! in the following format :
+    //! [1..NumPoles][1..Dimension]
+    Standard_EXPORT void Poles(Handle(TColStd_HArray2OfReal)& Poles) const;
+
+    Standard_EXPORT Standard_Integer Degree() const;
+
+    //! Degree of the n-dimensional Bspline
+    Standard_EXPORT Standard_Integer NbKnots() const;
+
+    //! Knots of the n-dimensional Bspline
+    Standard_EXPORT void Knots(Handle(TColStd_HArray1OfReal)& K) const;
+
+    //! Multiplicities of the knots in the BSpline
+    Standard_EXPORT void Multiplicities(Handle(TColStd_HArray1OfInteger)& M) const;
+
+    Standard_EXPORT Standard_Boolean IsDone() const;
 
 
 
@@ -125,16 +125,16 @@ protected:
 
 private:
 
-  
-  Standard_EXPORT void Perform (const Standard_Integer NumCurves, const Standard_Integer MaxDegree, const Standard_Integer Dimension, const TColStd_Array1OfInteger& NumCoeffPerCurve, const TColStd_Array1OfReal& Coefficients, const TColStd_Array2OfReal& PolynomialIntervals, const TColStd_Array1OfReal& TrueIntervals);
+
+    Standard_EXPORT void Perform(const Standard_Integer NumCurves, const Standard_Integer MaxDegree, const Standard_Integer Dimension, const TColStd_Array1OfInteger& NumCoeffPerCurve, const TColStd_Array1OfReal& Coefficients, const TColStd_Array2OfReal& PolynomialIntervals, const TColStd_Array1OfReal& TrueIntervals);
 
 
-  Handle(TColStd_HArray1OfReal) myFlatKnots;
-  Handle(TColStd_HArray1OfReal) myKnots;
-  Handle(TColStd_HArray1OfInteger) myMults;
-  Handle(TColStd_HArray2OfReal) myPoles;
-  Standard_Integer myDegree;
-  Standard_Boolean myDone;
+    Handle(TColStd_HArray1OfReal) myFlatKnots;
+    Handle(TColStd_HArray1OfReal) myKnots;
+    Handle(TColStd_HArray1OfInteger) myMults;
+    Handle(TColStd_HArray2OfReal) myPoles;
+    Standard_Integer myDegree;
+    Standard_Boolean myDone;
 
 
 };

@@ -38,7 +38,7 @@ class BOPDS_IteratorSI  : public BOPDS_Iterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

@@ -32,7 +32,7 @@ class Quantity_Period
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a Period
   //! With:      0 <= dd

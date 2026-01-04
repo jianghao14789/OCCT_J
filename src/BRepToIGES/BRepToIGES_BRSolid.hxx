@@ -38,7 +38,7 @@ class BRepToIGES_BRSolid  : public BRepToIGES_BREntity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepToIGES_BRSolid();

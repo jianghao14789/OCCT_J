@@ -33,7 +33,7 @@ class StepRepr_ConfigurationDesignItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

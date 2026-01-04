@@ -1,4 +1,4 @@
-// Created on: 1991-06-13
+﻿// Created on: 1991-06-13
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -24,52 +24,52 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Expr_LessThanOrEqual,Expr_SingleRelation)
+IMPLEMENT_STANDARD_RTTIEXT(Expr_LessThanOrEqual, Expr_SingleRelation)
 
-Expr_LessThanOrEqual::Expr_LessThanOrEqual (const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
+Expr_LessThanOrEqual::Expr_LessThanOrEqual(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
 {
-  SetFirstMember(exp1);
-  SetSecondMember(exp2);
+    SetFirstMember(exp1);
+    SetSecondMember(exp2);
 }
 
-Standard_Boolean Expr_LessThanOrEqual::IsSatisfied () const
+Standard_Boolean Expr_LessThanOrEqual::IsSatisfied() const
 {
-  Handle(Expr_GeneralExpression) fm = FirstMember();
-  Handle(Expr_GeneralExpression) sm = SecondMember();
-  fm = fm->Simplified();
-  sm = sm->Simplified();
-  if (fm->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
-    if (sm->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
-      Handle(Expr_NumericValue) nfm = Handle(Expr_NumericValue)::DownCast(fm);
-      Handle(Expr_NumericValue) nsm = Handle(Expr_NumericValue)::DownCast(sm);
-      return (nfm->GetValue() <= nsm->GetValue());
+    Handle(Expr_GeneralExpression) fm = FirstMember();
+    Handle(Expr_GeneralExpression) sm = SecondMember();
+    fm = fm->Simplified();
+    sm = sm->Simplified();
+    if (fm->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
+        if (sm->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
+            Handle(Expr_NumericValue) nfm = Handle(Expr_NumericValue)::DownCast(fm);
+            Handle(Expr_NumericValue) nsm = Handle(Expr_NumericValue)::DownCast(sm);
+            return (nfm->GetValue() <= nsm->GetValue());
+        }
     }
-  }
-  return Standard_False;
+    return Standard_False;
 }
 
-Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Simplified () const
+Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Simplified() const
 {
-  Handle(Expr_GeneralExpression) fm = FirstMember();
-  Handle(Expr_GeneralExpression) sm = SecondMember();
-  return new Expr_LessThanOrEqual(fm->Simplified(),sm->Simplified());
+    Handle(Expr_GeneralExpression) fm = FirstMember();
+    Handle(Expr_GeneralExpression) sm = SecondMember();
+    return new Expr_LessThanOrEqual(fm->Simplified(), sm->Simplified());
 }
 
-void Expr_LessThanOrEqual::Simplify ()
+void Expr_LessThanOrEqual::Simplify()
 {
-  Handle(Expr_GeneralExpression) fm = FirstMember();
-  Handle(Expr_GeneralExpression) sm = SecondMember();
-  SetFirstMember(fm->Simplified());
-  SetSecondMember(sm->Simplified());
+    Handle(Expr_GeneralExpression) fm = FirstMember();
+    Handle(Expr_GeneralExpression) sm = SecondMember();
+    SetFirstMember(fm->Simplified());
+    SetSecondMember(sm->Simplified());
 }
 
-Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Copy () const
+Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Copy() const
 {
-  return new Expr_LessThanOrEqual(Expr::CopyShare(FirstMember()),
-				  Expr::CopyShare(SecondMember()));
+    return new Expr_LessThanOrEqual(Expr::CopyShare(FirstMember()),
+        Expr::CopyShare(SecondMember()));
 }
 
 TCollection_AsciiString Expr_LessThanOrEqual::String() const
 {
-  return FirstMember()->String() + " <= " + SecondMember()->String();
+    return FirstMember()->String() + " <= " + SecondMember()->String();
 }

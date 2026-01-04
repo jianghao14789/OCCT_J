@@ -64,7 +64,7 @@ class GeomConvert
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Convert a curve from Geom by an approximation method

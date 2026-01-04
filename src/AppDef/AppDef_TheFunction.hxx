@@ -45,7 +45,7 @@ class AppDef_TheFunction  : public math_MultipleVarFunctionWithGradient
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the fields of the function. The approximating

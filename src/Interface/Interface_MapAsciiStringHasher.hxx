@@ -30,7 +30,7 @@ class Interface_MapAsciiStringHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the given ASCII string, in the range [1, theUpperBound]
   //! @param theAsciiString the ASCII string which hash code is to be computed

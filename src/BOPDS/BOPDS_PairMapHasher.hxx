@@ -29,7 +29,7 @@ class BOPDS_PairMapHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the given pair, in the range [1, theUpperBound]
   //! @param thePair the pair which hash code is to be computed

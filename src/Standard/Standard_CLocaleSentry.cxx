@@ -1,4 +1,4 @@
-// Created on: 2013-01-17
+﻿// Created on: 2013-01-17
 // Created by: Kirill GAVRILOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -24,37 +24,38 @@
 namespace
 {
 
-  //! CLocalePtr - static object representing C locale
-  class CLocalePtr
-  {
-  public:
-
-    CLocalePtr()
-    #ifdef OCCT_CLOCALE_POSIX2008
-    : myLocale (newlocale (LC_ALL_MASK, "C", NULL))
-    #elif defined(_MSC_VER)
-    : myLocale (_create_locale (LC_ALL, "C"))
-    #else
-    : myLocale (NULL)
-    #endif
-    {}
-
-    ~CLocalePtr()
+    //! CLocalePtr - static object representing C locale
+    class CLocalePtr
     {
-    #ifdef OCCT_CLOCALE_POSIX2008
-      freelocale (myLocale);
-    #elif defined(_MSC_VER)
-      _free_locale (myLocale);
-    #endif
-    }
+    public:
 
-  public:
+        CLocalePtr()
+#ifdef OCCT_CLOCALE_POSIX2008
+            : myLocale(newlocale(LC_ALL_MASK, "C", NULL))
+#elif defined(_MSC_VER)
+            : myLocale(_create_locale(LC_ALL, "C"))
+#else
+            : myLocale(NULL)
+#endif
+        {
+        }
 
-    Standard_CLocaleSentry::clocale_t myLocale;
+        ~CLocalePtr()
+        {
+#ifdef OCCT_CLOCALE_POSIX2008
+            freelocale(myLocale);
+#elif defined(_MSC_VER)
+            _free_locale(myLocale);
+#endif
+        }
 
-  };
+    public:
 
-  static CLocalePtr theCLocale;
+        Standard_CLocaleSentry::clocale_t myLocale;
+
+    };
+
+    static CLocalePtr theCLocale;
 
 }
 
@@ -64,7 +65,7 @@ namespace
 // =======================================================================
 Standard_CLocaleSentry::clocale_t Standard_CLocaleSentry::GetCLocale()
 {
-  return theCLocale.myLocale;
+    return theCLocale.myLocale;
 }
 
 // =======================================================================
@@ -73,28 +74,28 @@ Standard_CLocaleSentry::clocale_t Standard_CLocaleSentry::GetCLocale()
 // =======================================================================
 Standard_CLocaleSentry::Standard_CLocaleSentry()
 #ifdef OCCT_CLOCALE_POSIX2008
-: myPrevLocale (uselocale (theCLocale.myLocale)) // switch to C locale within this thread only using xlocale API
+    : myPrevLocale(uselocale(theCLocale.myLocale)) // switch to C locale within this thread only using xlocale API
 #else
-: myPrevLocale (setlocale (LC_ALL, 0))
+    : myPrevLocale(setlocale(LC_ALL, 0))
 #if defined(_MSC_VER) && (_MSC_VER > 1400)
-, myPrevTLocaleState (_configthreadlocale (_ENABLE_PER_THREAD_LOCALE))
+    , myPrevTLocaleState(_configthreadlocale(_ENABLE_PER_THREAD_LOCALE))
 #endif
 #endif
 {
 #if !defined(OCCT_CLOCALE_POSIX2008)
-  const char* aPrevLocale = (const char* )myPrevLocale;
-  if (myPrevLocale == NULL
-   || (aPrevLocale[0] == 'C' && aPrevLocale[1] == '\0'))
-  {
-    myPrevLocale = NULL; // already C locale
-    return;
-  }
-  // copy string as following setlocale calls may invalidate returned pointer
-  Standard_Size aLen = std::strlen (aPrevLocale) + 1;
-  myPrevLocale = new char[aLen];
-  memcpy (myPrevLocale, aPrevLocale, aLen);
+    const char* aPrevLocale = (const char*)myPrevLocale;
+    if (myPrevLocale == NULL
+        || (aPrevLocale[0] == 'C' && aPrevLocale[1] == '\0'))
+    {
+        myPrevLocale = NULL; // already C locale
+        return;
+    }
+    // copy string as following setlocale calls may invalidate returned pointer
+    Standard_Size aLen = std::strlen(aPrevLocale) + 1;
+    myPrevLocale = new char[aLen];
+    memcpy(myPrevLocale, aPrevLocale, aLen);
 
-  setlocale (LC_ALL, "C");
+    setlocale(LC_ALL, "C");
 #endif
 }
 
@@ -105,19 +106,19 @@ Standard_CLocaleSentry::Standard_CLocaleSentry()
 Standard_CLocaleSentry::~Standard_CLocaleSentry()
 {
 #if defined(OCCT_CLOCALE_POSIX2008)
-  uselocale ((locale_t )myPrevLocale);
+    uselocale((locale_t)myPrevLocale);
 #else
-  if (myPrevLocale != NULL)
-  {
-    const char* aPrevLocale = (const char* )myPrevLocale;
-    setlocale (LC_ALL, aPrevLocale);
-    delete[] aPrevLocale;
-  }
+    if (myPrevLocale != NULL)
+    {
+        const char* aPrevLocale = (const char*)myPrevLocale;
+        setlocale(LC_ALL, aPrevLocale);
+        delete[] aPrevLocale;
+    }
 #if defined(_MSC_VER) && (_MSC_VER > 1400)
-  if (myPrevTLocaleState != _ENABLE_PER_THREAD_LOCALE)
-  {
-    _configthreadlocale (myPrevTLocaleState);
-  }
+    if (myPrevTLocaleState != _ENABLE_PER_THREAD_LOCALE)
+    {
+        _configthreadlocale(myPrevTLocaleState);
+    }
 #endif
 #endif
 }

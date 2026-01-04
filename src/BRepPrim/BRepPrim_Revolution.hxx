@@ -37,7 +37,7 @@ class BRepPrim_Revolution  : public BRepPrim_OneAxis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create a  revolution body <M>  is the  meridian nd

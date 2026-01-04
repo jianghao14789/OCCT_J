@@ -1,4 +1,4 @@
-// Created on: 2017-06-26
+﻿// Created on: 2017-06-26
 // Created by: Andrey Betenev
 // Copyright (c) 2017 OPEN CASCADE SAS
 //
@@ -58,123 +58,123 @@ class Message_Report : public Standard_Transient
 {
 public:
 
-  //! Empty constructor
-  Standard_EXPORT Message_Report ();
-  
-  //! Add alert with specified gravity.
-  //! This method is thread-safe, i.e. alerts can be added from parallel threads safely.
-  Standard_EXPORT void AddAlert (Message_Gravity theGravity, const Handle(Message_Alert)& theAlert);
+    //! Empty constructor
+    Standard_EXPORT Message_Report();
 
-  //! Returns list of collected alerts with specified gravity
-  Standard_EXPORT const Message_ListOfAlert& GetAlerts (Message_Gravity theGravity) const;
+    //! Add alert with specified gravity.
+    //! This method is thread-safe, i.e. alerts can be added from parallel threads safely.
+    Standard_EXPORT void AddAlert(Message_Gravity theGravity, const Handle(Message_Alert)& theAlert);
 
-  //! Returns true if specific type of alert is recorded
-  Standard_EXPORT Standard_Boolean HasAlert (const Handle(Standard_Type)& theType);
+    //! Returns list of collected alerts with specified gravity
+    Standard_EXPORT const Message_ListOfAlert& GetAlerts(Message_Gravity theGravity) const;
 
-  //! Returns true if specific type of alert is recorded with specified gravity
-  Standard_EXPORT Standard_Boolean HasAlert (const Handle(Standard_Type)& theType, Message_Gravity theGravity);
+    //! Returns true if specific type of alert is recorded
+    Standard_EXPORT Standard_Boolean HasAlert(const Handle(Standard_Type)& theType);
 
-  //! Returns true if a report printer for the current report is registered in the messenger
-  //! @param theMessenger the messenger. If it's NULL, the default messenger is used
-  Standard_EXPORT Standard_Boolean IsActiveInMessenger (const Handle(Message_Messenger)& theMessenger = NULL) const;
+    //! Returns true if specific type of alert is recorded with specified gravity
+    Standard_EXPORT Standard_Boolean HasAlert(const Handle(Standard_Type)& theType, Message_Gravity theGravity);
 
-  //! Creates an instance of Message_PrinterToReport with the current report and register it in messenger
-  //! @param toActivate if true, activated else deactivated
-  //! @param theMessenger the messenger. If it's NULL, the default messenger is used
-  Standard_EXPORT void ActivateInMessenger (const Standard_Boolean toActivate,
-                                            const Handle(Message_Messenger)& theMessenger = NULL);
+    //! Returns true if a report printer for the current report is registered in the messenger
+    //! @param theMessenger the messenger. If it's NULL, the default messenger is used
+    Standard_EXPORT Standard_Boolean IsActiveInMessenger(const Handle(Message_Messenger)& theMessenger = NULL) const;
 
-  //! Updates internal flag IsActiveInMessenger.
-  //! It becomes true if messenger contains at least one instance of Message_PrinterToReport.
-  //! @param theMessenger the messenger. If it's NULL, the default messenger is used
-  Standard_EXPORT void UpdateActiveInMessenger (const Handle(Message_Messenger)& theMessenger = NULL);
-  
-  //! Add new level of alerts
-  //! @param theLevel a level 
-  Standard_EXPORT void AddLevel (Message_Level* theLevel, const TCollection_AsciiString& theName);
+    //! Creates an instance of Message_PrinterToReport with the current report and register it in messenger
+    //! @param toActivate if true, activated else deactivated
+    //! @param theMessenger the messenger. If it's NULL, the default messenger is used
+    Standard_EXPORT void ActivateInMessenger(const Standard_Boolean toActivate,
+        const Handle(Message_Messenger)& theMessenger = NULL);
 
-  //! Remove level of alerts
-  Standard_EXPORT void RemoveLevel (Message_Level* theLevel);
+    //! Updates internal flag IsActiveInMessenger.
+    //! It becomes true if messenger contains at least one instance of Message_PrinterToReport.
+    //! @param theMessenger the messenger. If it's NULL, the default messenger is used
+    Standard_EXPORT void UpdateActiveInMessenger(const Handle(Message_Messenger)& theMessenger = NULL);
 
-  //! Clears all collected alerts
-  Standard_EXPORT void Clear ();
+    //! Add new level of alerts
+    //! @param theLevel a level 
+    Standard_EXPORT void AddLevel(Message_Level* theLevel, const TCollection_AsciiString& theName);
 
-  //! Clears collected alerts with specified gravity
-  Standard_EXPORT void Clear (Message_Gravity theGravity);
+    //! Remove level of alerts
+    Standard_EXPORT void RemoveLevel(Message_Level* theLevel);
 
-  //! Clears collected alerts with specified type
-  Standard_EXPORT void Clear (const Handle(Standard_Type)& theType);
+    //! Clears all collected alerts
+    Standard_EXPORT void Clear();
 
-  //! Returns computed metrics when alerts are performed
-  const NCollection_IndexedMap<Message_MetricType>& ActiveMetrics() const { return myActiveMetrics; }
+    //! Clears collected alerts with specified gravity
+    Standard_EXPORT void Clear(Message_Gravity theGravity);
 
-  //! Sets metrics to compute when alerts are performed
-  //! @param theMetrics container of metrics
-  Standard_EXPORT void SetActiveMetric (const Message_MetricType theMetricType, const Standard_Boolean theActivate);
+    //! Clears collected alerts with specified type
+    Standard_EXPORT void Clear(const Handle(Standard_Type)& theType);
 
-  //! Removes all activated metrics
-  void ClearMetrics() { myActiveMetrics.Clear(); }
+    //! Returns computed metrics when alerts are performed
+    const NCollection_IndexedMap<Message_MetricType>& ActiveMetrics() const { return myActiveMetrics; }
 
-  //! Returns maximum number of collecting alerts. If the limit is achieved,
-  //! first alert is removed, the new alert is added in the container.
-  //! @return the limit value
-  Standard_Integer Limit() const { return myLimit; }
+    //! Sets metrics to compute when alerts are performed
+    //! @param theMetrics container of metrics
+    Standard_EXPORT void SetActiveMetric(const Message_MetricType theMetricType, const Standard_Boolean theActivate);
 
-  //! Sets maximum number of collecting alerts.
-  //! @param theLimit limit value
-  void SetLimit(const Standard_Integer theLimit) { myLimit = theLimit; }
+    //! Removes all activated metrics
+    void ClearMetrics() { myActiveMetrics.Clear(); }
 
-  //! Dumps all collected alerts to stream
-  Standard_EXPORT void Dump (Standard_OStream& theOS);
+    //! Returns maximum number of collecting alerts. If the limit is achieved,
+    //! first alert is removed, the new alert is added in the container.
+    //! @return the limit value
+    Standard_Integer Limit() const { return myLimit; }
 
-  //! Dumps collected alerts with specified gravity to stream
-  Standard_EXPORT void Dump (Standard_OStream& theOS, Message_Gravity theGravity);
+    //! Sets maximum number of collecting alerts.
+    //! @param theLimit limit value
+    void SetLimit(const Standard_Integer theLimit) { myLimit = theLimit; }
 
-  //! Sends all collected alerts to messenger.
-  Standard_EXPORT virtual void SendMessages (const Handle(Message_Messenger)& theMessenger);
+    //! Dumps all collected alerts to stream
+    Standard_EXPORT void Dump(Standard_OStream& theOS);
 
-  //! Dumps collected alerts with specified gravity to messenger.
-  //! Default implementation creates Message_Msg object with a message
-  //! key returned by alert, and sends it in the messenger.
-  Standard_EXPORT virtual void SendMessages (const Handle(Message_Messenger)& theMessenger, 
-                                             Message_Gravity theGravity);
+    //! Dumps collected alerts with specified gravity to stream
+    Standard_EXPORT void Dump(Standard_OStream& theOS, Message_Gravity theGravity);
 
-  //! Merges data from theOther report into this
-  Standard_EXPORT void Merge (const Handle(Message_Report)& theOther);
+    //! Sends all collected alerts to messenger.
+    Standard_EXPORT virtual void SendMessages(const Handle(Message_Messenger)& theMessenger);
 
-  //! Merges alerts with specified gravity from theOther report into this
-  Standard_EXPORT void Merge (const Handle(Message_Report)& theOther, Message_Gravity theGravity);
+    //! Dumps collected alerts with specified gravity to messenger.
+    //! Default implementation creates Message_Msg object with a message
+    //! key returned by alert, and sends it in the messenger.
+    Standard_EXPORT virtual void SendMessages(const Handle(Message_Messenger)& theMessenger,
+        Message_Gravity theGravity);
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
+    //! Merges data from theOther report into this
+    Standard_EXPORT void Merge(const Handle(Message_Report)& theOther);
 
-  // OCCT RTTI
-  DEFINE_STANDARD_RTTIEXT(Message_Report,Standard_Transient)
+    //! Merges alerts with specified gravity from theOther report into this
+    Standard_EXPORT void Merge(const Handle(Message_Report)& theOther, Message_Gravity theGravity);
 
-protected:
-  //! Returns class provided hierarchy of alerts if created or create if the parameter is true
-  //! @param isCreate if composite alert has not been created for this alert, it should be created
-  //! @return instance or NULL
-  Standard_EXPORT const Handle(Message_CompositeAlerts)& compositeAlerts (const Standard_Boolean isCreate = Standard_False);
+    //! Dumps the content of me into the stream
+    Standard_EXPORT void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 
-  //! Sends alerts to messenger
-  Standard_EXPORT void sendMessages (const Handle(Message_Messenger)& theMessenger, Message_Gravity theGravity,
-                                     const Handle(Message_CompositeAlerts)& theCompositeAlert);
-
-  //! Dumps collected alerts with specified gravity to stream
-  Standard_EXPORT void dumpMessages (Standard_OStream& theOS, Message_Gravity theGravity,
-                                     const Handle(Message_CompositeAlerts)& theCompositeAlert);
+    // OCCT RTTI
+    DEFINE_STANDARD_RTTIEXT(Message_Report, Standard_Transient)
 
 protected:
-  Standard_Mutex myMutex;
+    //! Returns class provided hierarchy of alerts if created or create if the parameter is true
+    //! @param isCreate if composite alert has not been created for this alert, it should be created
+    //! @return instance or NULL
+    Standard_EXPORT const Handle(Message_CompositeAlerts)& compositeAlerts(const Standard_Boolean isCreate = Standard_False);
 
-  Handle(Message_CompositeAlerts) myCompositAlerts; //!< container of alerts
+    //! Sends alerts to messenger
+    Standard_EXPORT void sendMessages(const Handle(Message_Messenger)& theMessenger, Message_Gravity theGravity,
+        const Handle(Message_CompositeAlerts)& theCompositeAlert);
 
-  NCollection_Sequence<Message_Level*> myAlertLevels;   //!< container of active levels, new alerts are added below the latest level
-  NCollection_IndexedMap<Message_MetricType>  myActiveMetrics; //!< metrics to compute on alerts
+    //! Dumps collected alerts with specified gravity to stream
+    Standard_EXPORT void dumpMessages(Standard_OStream& theOS, Message_Gravity theGravity,
+        const Handle(Message_CompositeAlerts)& theCompositeAlert);
 
-  Standard_Integer myLimit; //!< Maximum number of collected alerts on the top level
-  Standard_Boolean myIsActiveInMessenger; //! state whether the report is activated in messenger
+protected:
+    Standard_Mutex myMutex;
+
+    Handle(Message_CompositeAlerts) myCompositAlerts; //!< container of alerts
+
+    NCollection_Sequence<Message_Level*> myAlertLevels;   //!< container of active levels, new alerts are added below the latest level
+    NCollection_IndexedMap<Message_MetricType>  myActiveMetrics; //!< metrics to compute on alerts
+
+    Standard_Integer myLimit; //!< Maximum number of collected alerts on the top level
+    Standard_Boolean myIsActiveInMessenger; //! state whether the report is activated in messenger
 };
 
 #endif // _Message_Report_HeaderFile

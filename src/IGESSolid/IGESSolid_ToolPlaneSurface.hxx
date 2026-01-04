@@ -39,7 +39,7 @@ class IGESSolid_ToolPlaneSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPlaneSurface, ready to work

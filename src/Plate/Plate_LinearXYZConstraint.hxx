@@ -40,7 +40,7 @@ class Plate_LinearXYZConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_LinearXYZConstraint();

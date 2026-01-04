@@ -1,4 +1,4 @@
-// Created on: 2005-12-07
+﻿// Created on: 2005-12-07
 // Created by: Sergey KHROMOV
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -19,7 +19,7 @@
 
 Standard_Integer math::KronrodPointsMax()
 {
-  return 123;
+    return 123;
 }
 
 // The array of Kronrod points.
@@ -3940,47 +3940,47 @@ static const Standard_Real Weight[] = {
 //=======================================================================
 
 Standard_Boolean math::KronrodPointsAndWeights(const Standard_Integer  Index,
-					       math_Vector             &Points,
-					       math_Vector             &Weights)
+    math_Vector& Points,
+    math_Vector& Weights)
 {
-  if (Index             < 3   ||   // Index is less then 3
-      Index%2          == 0   ||   // Index is even
-      Points.Length()  != Index || // Inconsistent length of Points
-      Weights.Length() != Index)   // Inconsistent length of Weights
-    return Standard_False;
+    if (Index < 3 ||   // Index is less then 3
+        Index % 2 == 0 ||   // Index is even
+        Points.Length() != Index || // Inconsistent length of Points
+        Weights.Length() != Index)   // Inconsistent length of Weights
+        return Standard_False;
 
-  if (Index <= 123) {
-    // Get points from the array.
-    Standard_Integer i;
-    Standard_Integer aStartInd = 0;
+    if (Index <= 123) {
+        // Get points from the array.
+        Standard_Integer i;
+        Standard_Integer aStartInd = 0;
 
-    // Compute the index of starting point in the array.
-    for (i = 3; i < Index; i += 2)
-      aStartInd += (i + 1)/2;
+        // Compute the index of starting point in the array.
+        for (i = 3; i < Index; i += 2)
+            aStartInd += (i + 1) / 2;
 
-    // Get points from the array.
-    Standard_Integer aNbPts   = i/2;
-    Standard_Integer aLowerI  = Points.Lower();
-    Standard_Integer anUpperI = Points.Upper();
+        // Get points from the array.
+        Standard_Integer aNbPts = i / 2;
+        Standard_Integer aLowerI = Points.Lower();
+        Standard_Integer anUpperI = Points.Upper();
 
-    for (i = 0; i < aNbPts; i++) {
-      Points.Value(aLowerI  + i)  = -Point[aStartInd + i];
-      Points.Value(anUpperI - i)  =  Point[aStartInd + i];
-      Weights.Value(aLowerI  + i) = Weight[aStartInd + i];
-      Weights.Value(anUpperI - i) = Weight[aStartInd + i];
+        for (i = 0; i < aNbPts; i++) {
+            Points.Value(aLowerI + i) = -Point[aStartInd + i];
+            Points.Value(anUpperI - i) = Point[aStartInd + i];
+            Weights.Value(aLowerI + i) = Weight[aStartInd + i];
+            Weights.Value(anUpperI - i) = Weight[aStartInd + i];
+        }
+        Points.Value(aLowerI + aNbPts) = Point[aStartInd + aNbPts];
+        Weights.Value(aLowerI + aNbPts) = Weight[aStartInd + aNbPts];
+
+        return Standard_True;
     }
-    Points.Value(aLowerI + aNbPts)  = Point[aStartInd + aNbPts];
-    Weights.Value(aLowerI + aNbPts) = Weight[aStartInd + aNbPts];
-
-    return Standard_True;
-  }
-  else
+    else
     {
-      math_ComputeKronrodPointsAndWeights PWcomputer((Index-1)/2);
-      if (!PWcomputer.IsDone())
-	return Standard_False;
-      Points  = PWcomputer.Points();
-      Weights = PWcomputer.Weights();
-      return Standard_True;
+        math_ComputeKronrodPointsAndWeights PWcomputer((Index - 1) / 2);
+        if (!PWcomputer.IsDone())
+            return Standard_False;
+        Points = PWcomputer.Points();
+        Weights = PWcomputer.Weights();
+        return Standard_True;
     }
 }

@@ -34,7 +34,7 @@ class RWStepVisual_RWContextDependentInvisibility
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepVisual_RWContextDependentInvisibility();

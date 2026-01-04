@@ -35,7 +35,7 @@ class Intf_SectionPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns the location of the SectionPoint.
   Standard_EXPORT const gp_Pnt& Pnt() const;

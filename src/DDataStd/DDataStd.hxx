@@ -32,7 +32,7 @@ class DDataStd
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Used to browse tree nodes.

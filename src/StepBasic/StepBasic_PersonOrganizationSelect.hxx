@@ -34,7 +34,7 @@ class StepBasic_PersonOrganizationSelect  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a PersonOrganizationSelect SelectType

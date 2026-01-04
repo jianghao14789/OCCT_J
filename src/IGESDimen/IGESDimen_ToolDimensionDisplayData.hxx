@@ -40,7 +40,7 @@ class IGESDimen_ToolDimensionDisplayData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDimensionDisplayData, ready to work

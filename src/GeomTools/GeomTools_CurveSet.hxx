@@ -36,7 +36,7 @@ class GeomTools_CurveSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns an empty set of Curves.

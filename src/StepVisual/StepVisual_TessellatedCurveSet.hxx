@@ -37,7 +37,7 @@ class StepVisual_TessellatedCurveSet  : public StepVisual_TessellatedItem
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a DraughtingCalloutElement select type
   Standard_EXPORT StepVisual_TessellatedCurveSet();

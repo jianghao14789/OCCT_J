@@ -38,7 +38,7 @@ class TopOpeBRepTool_CurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepTool_CurveTool();

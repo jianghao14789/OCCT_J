@@ -40,7 +40,7 @@ class IGESGraph_ToolDrawingUnits
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDrawingUnits, ready to work

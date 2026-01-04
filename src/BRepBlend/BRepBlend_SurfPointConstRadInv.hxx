@@ -37,7 +37,7 @@ class BRepBlend_SurfPointConstRadInv  : public Blend_SurfPointFuncInv
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_SurfPointConstRadInv(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C);

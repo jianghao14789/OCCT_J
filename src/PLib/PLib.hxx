@@ -47,7 +47,7 @@ class PLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Used as argument for a non rational functions

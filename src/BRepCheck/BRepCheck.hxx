@@ -34,7 +34,7 @@ class BRepCheck
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void Add (BRepCheck_ListOfStatus& List, const BRepCheck_Status Stat);

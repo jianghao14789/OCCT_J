@@ -34,7 +34,7 @@ class DsgPrs_SymmetricPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the points OffsetPoint, AttachmentPoint1,

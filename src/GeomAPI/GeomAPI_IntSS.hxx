@@ -41,7 +41,7 @@ class GeomAPI_IntSS
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty object. Use the

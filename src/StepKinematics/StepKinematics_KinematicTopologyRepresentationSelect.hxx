@@ -34,7 +34,7 @@ class StepKinematics_KinematicTopologyRepresentationSelect : public StepData_Sel
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   Standard_EXPORT StepKinematics_KinematicTopologyRepresentationSelect();

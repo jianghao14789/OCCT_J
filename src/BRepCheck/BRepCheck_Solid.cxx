@@ -74,7 +74,7 @@ class BRepCheck_HSC : public Standard_Transient {
 class BRepCheck_ToolSolid  {
 
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BRepCheck_ToolSolid() {
     myIsHole=Standard_False;

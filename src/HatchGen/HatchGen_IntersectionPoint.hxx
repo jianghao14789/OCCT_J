@@ -33,7 +33,7 @@ class HatchGen_IntersectionPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Sets the index of the supporting curve.

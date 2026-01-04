@@ -40,7 +40,7 @@ class BRepFill_TrimEdgeTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepFill_TrimEdgeTool();

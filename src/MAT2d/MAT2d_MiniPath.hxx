@@ -48,7 +48,7 @@ class MAT2d_MiniPath
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT MAT2d_MiniPath();

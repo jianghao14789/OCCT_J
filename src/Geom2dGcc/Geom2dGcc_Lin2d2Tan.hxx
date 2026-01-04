@@ -54,7 +54,7 @@ class Geom2dGcc_Lin2d2Tan
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This class implements the algorithms used to create 2d

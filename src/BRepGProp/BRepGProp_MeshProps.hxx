@@ -29,7 +29,7 @@ class BRepGProp_MeshProps : public GProp_GProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Describes types of geometric objects.
   //! - Vinert is 3D closed region of space delimited with

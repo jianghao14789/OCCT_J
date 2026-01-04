@@ -48,7 +48,7 @@ class GeomLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes     the  curve  3d    from  package  Geom

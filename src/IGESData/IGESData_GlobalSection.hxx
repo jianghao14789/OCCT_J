@@ -41,7 +41,7 @@ class IGESData_GlobalSection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an empty GlobalSection, ready to be filled,
   //! Warning : No default value is provided

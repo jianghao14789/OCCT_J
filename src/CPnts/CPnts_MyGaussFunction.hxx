@@ -33,7 +33,7 @@ class CPnts_MyGaussFunction  : public math_Function
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     CPnts_MyGaussFunction();

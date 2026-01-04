@@ -33,7 +33,7 @@ class GeomLib_DenominatorMultiplier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! if the surface is rational this will define the evaluator

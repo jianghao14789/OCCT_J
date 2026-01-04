@@ -39,7 +39,7 @@ class IGESGeom_ToolDirection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDirection, ready to work

@@ -1,4 +1,4 @@
-// Created on: 2007-05-14
+﻿// Created on: 2007-05-14
 // Created by: data exchange team
 // Copyright (c) 2007-2014 OPEN CASCADE SAS
 //
@@ -20,27 +20,27 @@
 #include <Units_Unit.hxx>
 #include <Units_Quantity.hxx>
 
-Standard_EXPORT Standard_Boolean operator ==(const Handle(Units_Quantity)&,const Standard_CString);
-Standard_EXPORT Standard_Boolean operator ==(const Handle(Units_Token)&,const Standard_CString);
-Standard_EXPORT Standard_Boolean operator ==(const Handle(Units_Unit)&,const Standard_CString);
-     
-Standard_EXPORT Handle(Units_Dimensions) operator *(const Handle(Units_Dimensions)&,const Handle(Units_Dimensions)&);
-Standard_EXPORT Handle(Units_Dimensions) operator /(const Handle(Units_Dimensions)&,const Handle(Units_Dimensions)&);
-     
-Standard_EXPORT Handle(Units_Dimensions) pow(const Handle(Units_Dimensions)&,const Standard_Real);
-Standard_EXPORT Handle(Units_Token) pow(const Handle(Units_Token)&,const Handle(Units_Token)&);
-Standard_EXPORT Handle(Units_Token) pow(const Handle(Units_Token)&,const Standard_Real);
-     
-Standard_EXPORT Handle(Units_Token) operator +(const Handle(Units_Token)&,const Standard_Integer);
-Standard_EXPORT Handle(Units_Token) operator +(const Handle(Units_Token)&,const Handle(Units_Token)&);
-Standard_EXPORT Handle(Units_Token) operator -(const Handle(Units_Token)&,const Handle(Units_Token)&);
-Standard_EXPORT Handle(Units_Token) operator *(const Handle(Units_Token)&,const Handle(Units_Token)&);
-Standard_EXPORT Handle(Units_Token) operator /(const Handle(Units_Token)&,const Handle(Units_Token)&);
+Standard_EXPORT Standard_Boolean operator ==(const Handle(Units_Quantity)&, const Standard_CString);
+Standard_EXPORT Standard_Boolean operator ==(const Handle(Units_Token)&, const Standard_CString);
+Standard_EXPORT Standard_Boolean operator ==(const Handle(Units_Unit)&, const Standard_CString);
 
-Standard_EXPORT Standard_Boolean operator !=(const Handle(Units_Token)&,const Standard_CString);
-Standard_EXPORT Standard_Boolean operator <=(const Handle(Units_Token)&,const Standard_CString);
-Standard_EXPORT Standard_Boolean operator >(const Handle(Units_Token)&,const Standard_CString);
-Standard_EXPORT Standard_Boolean operator >(const Handle(Units_Token)&,const Handle(Units_Token)&);
-Standard_EXPORT Standard_Boolean operator >=(const Handle(Units_Token)&,const Handle(Units_Token)&);
-     
+Standard_EXPORT Handle(Units_Dimensions) operator *(const Handle(Units_Dimensions)&, const Handle(Units_Dimensions)&);
+Standard_EXPORT Handle(Units_Dimensions) operator /(const Handle(Units_Dimensions)&, const Handle(Units_Dimensions)&);
+
+Standard_EXPORT Handle(Units_Dimensions) pow(const Handle(Units_Dimensions)&, const Standard_Real);
+Standard_EXPORT Handle(Units_Token) pow(const Handle(Units_Token)&, const Handle(Units_Token)&);
+Standard_EXPORT Handle(Units_Token) pow(const Handle(Units_Token)&, const Standard_Real);
+
+Standard_EXPORT Handle(Units_Token) operator +(const Handle(Units_Token)&, const Standard_Integer);
+Standard_EXPORT Handle(Units_Token) operator +(const Handle(Units_Token)&, const Handle(Units_Token)&);
+Standard_EXPORT Handle(Units_Token) operator -(const Handle(Units_Token)&, const Handle(Units_Token)&);
+Standard_EXPORT Handle(Units_Token) operator *(const Handle(Units_Token)&, const Handle(Units_Token)&);
+Standard_EXPORT Handle(Units_Token) operator /(const Handle(Units_Token)&, const Handle(Units_Token)&);
+
+Standard_EXPORT Standard_Boolean operator !=(const Handle(Units_Token)&, const Standard_CString);
+Standard_EXPORT Standard_Boolean operator <=(const Handle(Units_Token)&, const Standard_CString);
+Standard_EXPORT Standard_Boolean operator >(const Handle(Units_Token)&, const Standard_CString);
+Standard_EXPORT Standard_Boolean operator >(const Handle(Units_Token)&, const Handle(Units_Token)&);
+Standard_EXPORT Standard_Boolean operator >=(const Handle(Units_Token)&, const Handle(Units_Token)&);
+
 #endif

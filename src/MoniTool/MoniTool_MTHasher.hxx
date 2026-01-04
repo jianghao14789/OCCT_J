@@ -31,7 +31,7 @@ class MoniTool_MTHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns hash code for the given string, in the range [1, theUpperBound]
   //! @param theString the string which hash code is to be computed

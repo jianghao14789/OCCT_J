@@ -34,7 +34,7 @@ class BRepFill_SectionPlacement
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Automatic placement

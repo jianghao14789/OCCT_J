@@ -1,4 +1,4 @@
-// Created on: 1996-02-20
+﻿// Created on: 1996-02-20
 // Created by: Laurent PAINNOT
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -17,21 +17,21 @@
 #include <Poly_PolygonOnTriangulation.hxx>
 #include <Standard_Dump.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Poly_PolygonOnTriangulation,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Poly_PolygonOnTriangulation, Standard_Transient)
 
 //=======================================================================
 //function : Poly_PolygonOnTriangulation
 //purpose  :
 //=======================================================================
-Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation (const Standard_Integer theNbNodes,
-                                                          const Standard_Boolean theHasParams)
-: myDeflection (0.0),
-  myNodes (1, theNbNodes)
+Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation(const Standard_Integer theNbNodes,
+    const Standard_Boolean theHasParams)
+    : myDeflection(0.0),
+    myNodes(1, theNbNodes)
 {
-  if (theHasParams)
-  {
-    myParameters = new TColStd_HArray1OfReal (1, theNbNodes);
-  }
+    if (theHasParams)
+    {
+        myParameters = new TColStd_HArray1OfReal(1, theNbNodes);
+    }
 }
 
 //=======================================================================
@@ -39,11 +39,11 @@ Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation (const Standard_Integer
 //purpose  : 
 //=======================================================================
 Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation
-(const TColStd_Array1OfInteger&    Nodes) :
+(const TColStd_Array1OfInteger& Nodes) :
     myDeflection(0.0),
     myNodes(1, Nodes.Length())
 {
-  myNodes = Nodes;
+    myNodes = Nodes;
 }
 
 //=======================================================================
@@ -52,14 +52,14 @@ Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation
 //=======================================================================
 
 Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation
-   (const TColStd_Array1OfInteger&    Nodes, 
-    const TColStd_Array1OfReal&       Parameters):
+(const TColStd_Array1OfInteger& Nodes,
+    const TColStd_Array1OfReal& Parameters) :
     myDeflection(0.0),
     myNodes(1, Nodes.Length())
 {
-  myNodes = Nodes;
-  myParameters = new TColStd_HArray1OfReal(1, Parameters.Length());
-  myParameters->ChangeArray1() = Parameters;
+    myNodes = Nodes;
+    myParameters = new TColStd_HArray1OfReal(1, Parameters.Length());
+    myParameters->ChangeArray1() = Parameters;
 }
 
 //=======================================================================
@@ -69,40 +69,40 @@ Poly_PolygonOnTriangulation::Poly_PolygonOnTriangulation
 
 Handle(Poly_PolygonOnTriangulation) Poly_PolygonOnTriangulation::Copy() const
 {
-  Handle(Poly_PolygonOnTriangulation) aCopy;
-  if (myParameters.IsNull())
-    aCopy = new Poly_PolygonOnTriangulation(myNodes);
-  else
-    aCopy = new Poly_PolygonOnTriangulation(myNodes, myParameters->Array1());
-  aCopy->Deflection(myDeflection);
-  return aCopy;
+    Handle(Poly_PolygonOnTriangulation) aCopy;
+    if (myParameters.IsNull())
+        aCopy = new Poly_PolygonOnTriangulation(myNodes);
+    else
+        aCopy = new Poly_PolygonOnTriangulation(myNodes, myParameters->Array1());
+    aCopy->Deflection(myDeflection);
+    return aCopy;
 }
 
 //=======================================================================
 //function : SetParameters
 //purpose  :
 //=======================================================================
-void Poly_PolygonOnTriangulation::SetParameters (const Handle(TColStd_HArray1OfReal)& theParameters)
+void Poly_PolygonOnTriangulation::SetParameters(const Handle(TColStd_HArray1OfReal)& theParameters)
 {
-  if (!theParameters.IsNull()
-   && (theParameters->Lower() != myNodes.Lower()
-    || theParameters->Upper() != myNodes.Upper()))
-  {
-    throw Standard_OutOfRange ("Poly_PolygonOnTriangulation::SetParameters() - invalid array size");
-  }
-  myParameters = theParameters;
+    if (!theParameters.IsNull()
+        && (theParameters->Lower() != myNodes.Lower()
+            || theParameters->Upper() != myNodes.Upper()))
+    {
+        throw Standard_OutOfRange("Poly_PolygonOnTriangulation::SetParameters() - invalid array size");
+    }
+    myParameters = theParameters;
 }
 
 //=======================================================================
 //function : DumpJson
 //purpose  : 
 //=======================================================================
-void Poly_PolygonOnTriangulation::DumpJson (Standard_OStream& theOStream, Standard_Integer) const
+void Poly_PolygonOnTriangulation::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
 {
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myDeflection)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myNodes.Size())
-  if (!myParameters.IsNull())
-    OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myParameters->Size())
+        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDeflection)
+        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myNodes.Size())
+        if (!myParameters.IsNull())
+            OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myParameters->Size())
 }

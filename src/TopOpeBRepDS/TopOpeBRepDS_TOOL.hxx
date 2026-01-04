@@ -35,7 +35,7 @@ class TopOpeBRepDS_TOOL
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Integer EShareG (const Handle(TopOpeBRepDS_HDataStructure)& HDS, const TopoDS_Edge& E, TopTools_ListOfShape& lEsd);

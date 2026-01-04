@@ -39,7 +39,7 @@ class IGESDefs_ToolGenericData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolGenericData, ready to work

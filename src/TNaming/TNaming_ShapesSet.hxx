@@ -33,7 +33,7 @@ class TNaming_ShapesSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     TNaming_ShapesSet();

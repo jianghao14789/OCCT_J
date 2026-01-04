@@ -64,7 +64,7 @@ class Poly_Connect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructs an uninitialized algorithm.
   Standard_EXPORT Poly_Connect();

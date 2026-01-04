@@ -34,7 +34,7 @@ class Blend_Point
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Blend_Point();

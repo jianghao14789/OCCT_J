@@ -40,7 +40,7 @@ class BRepClass_FClass2dOfFClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an undefined classifier.

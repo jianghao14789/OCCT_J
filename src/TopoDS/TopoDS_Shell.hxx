@@ -35,7 +35,7 @@ class TopoDS_Shell  : public TopoDS_Shape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an Undefined Shell.

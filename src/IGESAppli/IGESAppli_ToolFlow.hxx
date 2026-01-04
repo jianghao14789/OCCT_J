@@ -40,7 +40,7 @@ class IGESAppli_ToolFlow
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolFlow, ready to work

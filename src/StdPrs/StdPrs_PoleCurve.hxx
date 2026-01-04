@@ -28,7 +28,7 @@ class StdPrs_PoleCurve  : public Prs3d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines display of BSpline and Bezier curves.

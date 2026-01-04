@@ -34,7 +34,7 @@ class BRepAlgoAPI_Algo : public BRepBuilderAPI_MakeShape,
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT virtual const TopoDS_Shape& Shape() Standard_OVERRIDE;
 

@@ -45,7 +45,7 @@ class Transfer_TransferOutput
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a TransferOutput ready to use, with a TransientProcess

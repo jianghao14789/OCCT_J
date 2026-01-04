@@ -1,4 +1,4 @@
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
+﻿// Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -23,7 +23,7 @@ static Standard_Real UnitsMethods_CascadeLengthUnit = 1.;
 //=======================================================================
 Standard_Real UnitsMethods::GetCasCadeLengthUnit(const UnitsMethods_LengthUnit theBaseUnit)
 {
-  return UnitsMethods_CascadeLengthUnit * GetLengthUnitScale(UnitsMethods_LengthUnit_Millimeter, theBaseUnit);
+    return UnitsMethods_CascadeLengthUnit * GetLengthUnitScale(UnitsMethods_LengthUnit_Millimeter, theBaseUnit);
 }
 
 //=======================================================================
@@ -31,9 +31,9 @@ Standard_Real UnitsMethods::GetCasCadeLengthUnit(const UnitsMethods_LengthUnit t
 //purpose  :
 //=======================================================================
 void UnitsMethods::SetCasCadeLengthUnit(const Standard_Real theUnitValue,
-                                        const UnitsMethods_LengthUnit theBaseUnit)
+    const UnitsMethods_LengthUnit theBaseUnit)
 {
-  UnitsMethods_CascadeLengthUnit = theUnitValue * GetLengthUnitScale(theBaseUnit, UnitsMethods_LengthUnit_Millimeter);
+    UnitsMethods_CascadeLengthUnit = theUnitValue * GetLengthUnitScale(theBaseUnit, UnitsMethods_LengthUnit_Millimeter);
 }
 
 //=======================================================================
@@ -42,7 +42,7 @@ void UnitsMethods::SetCasCadeLengthUnit(const Standard_Real theUnitValue,
 //=======================================================================
 void UnitsMethods::SetCasCadeLengthUnit(const Standard_Integer theUnit)
 {
-  UnitsMethods_CascadeLengthUnit = GetLengthFactorValue(theUnit);
+    UnitsMethods_CascadeLengthUnit = GetLengthFactorValue(theUnit);
 }
 
 //=======================================================================
@@ -51,8 +51,8 @@ void UnitsMethods::SetCasCadeLengthUnit(const Standard_Integer theUnit)
 //=======================================================================
 Standard_Real UnitsMethods::GetLengthFactorValue(const Standard_Integer theUnit)
 {
-  switch (theUnit)
-  {
+    switch (theUnit)
+    {
     case  1: return 25.4; // inch
     case  2: return 1.; // millimeter
     case  4: return 304.8; // foot
@@ -64,7 +64,7 @@ Standard_Real UnitsMethods::GetLengthFactorValue(const Standard_Integer theUnit)
     case 10: return 10.; // centimeter
     case 11: return 0.0000254; // microinch
     default: return 1.;
-  }
+    }
 }
 
 //=======================================================================
@@ -72,11 +72,11 @@ Standard_Real UnitsMethods::GetLengthFactorValue(const Standard_Integer theUnit)
 //purpose  :
 //=======================================================================
 Standard_Real UnitsMethods::GetLengthUnitScale(const UnitsMethods_LengthUnit theFromUnit,
-                                               const UnitsMethods_LengthUnit theToUnit)
+    const UnitsMethods_LengthUnit theToUnit)
 {
-  Standard_Real aVal1 = GetLengthFactorValue(theFromUnit);
-  Standard_Real aVal2 = GetLengthFactorValue(theToUnit);
-  return aVal1 / aVal2;
+    Standard_Real aVal1 = GetLengthFactorValue(theFromUnit);
+    Standard_Real aVal2 = GetLengthFactorValue(theToUnit);
+    return aVal1 / aVal2;
 }
 
 //=======================================================================
@@ -84,51 +84,51 @@ Standard_Real UnitsMethods::GetLengthUnitScale(const UnitsMethods_LengthUnit the
 //purpose  :
 //=======================================================================
 UnitsMethods_LengthUnit UnitsMethods::GetLengthUnitByFactorValue(const Standard_Real theFactorValue,
-                                                                 const UnitsMethods_LengthUnit theBaseUnit)
+    const UnitsMethods_LengthUnit theBaseUnit)
 {
-  const Standard_Real aPreci = 1.e-6;
-  const Standard_Real aValue = theFactorValue * GetLengthUnitScale(theBaseUnit, UnitsMethods_LengthUnit_Millimeter);
-  if (Abs(1. - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Millimeter;
-  }
-  else if (Abs(25.4 - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Inch;
-  }
-  else if (Abs(304.8 - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Foot;
-  }
-  else if (Abs(1609344. - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Mile;
-  }
-  else if (Abs(1000. - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Meter;
-  }
-  else if (Abs(1000000. - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Kilometer;
-  }
-  else if (Abs(0.0254 - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Mil;
-  }
-  else if (Abs(0.001 - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Micron;
-  }
-  else if (Abs(10. - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Centimeter;
-  }
-  else if (Abs(0.0000254 - aValue) < aPreci)
-  {
-    return UnitsMethods_LengthUnit_Microinch;
-  }
-  return UnitsMethods_LengthUnit_Undefined;
+    const Standard_Real aPreci = 1.e-6;
+    const Standard_Real aValue = theFactorValue * GetLengthUnitScale(theBaseUnit, UnitsMethods_LengthUnit_Millimeter);
+    if (Abs(1. - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Millimeter;
+    }
+    else if (Abs(25.4 - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Inch;
+    }
+    else if (Abs(304.8 - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Foot;
+    }
+    else if (Abs(1609344. - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Mile;
+    }
+    else if (Abs(1000. - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Meter;
+    }
+    else if (Abs(1000000. - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Kilometer;
+    }
+    else if (Abs(0.0254 - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Mil;
+    }
+    else if (Abs(0.001 - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Micron;
+    }
+    else if (Abs(10. - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Centimeter;
+    }
+    else if (Abs(0.0000254 - aValue) < aPreci)
+    {
+        return UnitsMethods_LengthUnit_Microinch;
+    }
+    return UnitsMethods_LengthUnit_Undefined;
 }
 
 //=======================================================================
@@ -137,8 +137,8 @@ UnitsMethods_LengthUnit UnitsMethods::GetLengthUnitByFactorValue(const Standard_
 //=======================================================================
 Standard_CString UnitsMethods::DumpLengthUnit(const UnitsMethods_LengthUnit theUnit)
 {
-  switch (theUnit)
-  {
+    switch (theUnit)
+    {
     case UnitsMethods_LengthUnit_Millimeter: return "mm";
     case UnitsMethods_LengthUnit_Meter:      return "m";
     case UnitsMethods_LengthUnit_Centimeter: return "cm";
@@ -150,7 +150,7 @@ Standard_CString UnitsMethods::DumpLengthUnit(const UnitsMethods_LengthUnit theU
     case UnitsMethods_LengthUnit_Foot:       return "ft";
     case UnitsMethods_LengthUnit_Mile:       return "stat.mile";
     default: return "UNDEFINED";
-  }
+    }
 }
 
 //=======================================================================
@@ -158,10 +158,10 @@ Standard_CString UnitsMethods::DumpLengthUnit(const UnitsMethods_LengthUnit theU
 //purpose  :
 //=======================================================================
 Standard_CString UnitsMethods::DumpLengthUnit(const Standard_Real theScaleFactor,
-                                              const UnitsMethods_LengthUnit theBaseUnit)
+    const UnitsMethods_LengthUnit theBaseUnit)
 {
-  const UnitsMethods_LengthUnit aUnit = GetLengthUnitByFactorValue(theScaleFactor, theBaseUnit);
-  return DumpLengthUnit(aUnit);
+    const UnitsMethods_LengthUnit aUnit = GetLengthUnitByFactorValue(theScaleFactor, theBaseUnit);
+    return DumpLengthUnit(aUnit);
 }
 
 //=======================================================================
@@ -169,55 +169,55 @@ Standard_CString UnitsMethods::DumpLengthUnit(const Standard_Real theScaleFactor
 //purpose  :
 //=======================================================================
 UnitsMethods_LengthUnit UnitsMethods::LengthUnitFromString(Standard_CString theStr,
-                                                           const Standard_Boolean theCaseSensitive)
+    const Standard_Boolean theCaseSensitive)
 {
-  TCollection_AsciiString aStr(theStr);
-  if (!theCaseSensitive)
-  {
-    aStr.LowerCase();
-  }
-  if (aStr.IsEqual("mm"))
-  {
-    return UnitsMethods_LengthUnit_Millimeter;
-  }
-  else if (aStr.IsEqual("m"))
-  {
-    return UnitsMethods_LengthUnit_Meter;
-  }
-  else if (aStr.IsEqual("cm"))
-  {
-    return UnitsMethods_LengthUnit_Centimeter;
-  }
-  else if (aStr.IsEqual("km"))
-  {
-    return UnitsMethods_LengthUnit_Kilometer;
-  }
-  else if (aStr.IsEqual("micron"))
-  {
-    return UnitsMethods_LengthUnit_Micron;
-  }
-  else if (aStr.IsEqual("in"))
-  {
-    return UnitsMethods_LengthUnit_Inch;
-  }
-  else if (aStr.IsEqual("min"))
-  {
-    return UnitsMethods_LengthUnit_Mil;
-  }
-  else if (aStr.IsEqual("nin"))
-  {
-    return UnitsMethods_LengthUnit_Microinch;
-  }
-  else if (aStr.IsEqual("ft"))
-  {
-    return UnitsMethods_LengthUnit_Foot;
-  }
-  else if (aStr.IsEqual("stat.mile"))
-  {
-    return UnitsMethods_LengthUnit_Mile;
-  }
-  else
-  {
-    return UnitsMethods_LengthUnit_Undefined;
-  }
+    TCollection_AsciiString aStr(theStr);
+    if (!theCaseSensitive)
+    {
+        aStr.LowerCase();
+    }
+    if (aStr.IsEqual("mm"))
+    {
+        return UnitsMethods_LengthUnit_Millimeter;
+    }
+    else if (aStr.IsEqual("m"))
+    {
+        return UnitsMethods_LengthUnit_Meter;
+    }
+    else if (aStr.IsEqual("cm"))
+    {
+        return UnitsMethods_LengthUnit_Centimeter;
+    }
+    else if (aStr.IsEqual("km"))
+    {
+        return UnitsMethods_LengthUnit_Kilometer;
+    }
+    else if (aStr.IsEqual("micron"))
+    {
+        return UnitsMethods_LengthUnit_Micron;
+    }
+    else if (aStr.IsEqual("in"))
+    {
+        return UnitsMethods_LengthUnit_Inch;
+    }
+    else if (aStr.IsEqual("min"))
+    {
+        return UnitsMethods_LengthUnit_Mil;
+    }
+    else if (aStr.IsEqual("nin"))
+    {
+        return UnitsMethods_LengthUnit_Microinch;
+    }
+    else if (aStr.IsEqual("ft"))
+    {
+        return UnitsMethods_LengthUnit_Foot;
+    }
+    else if (aStr.IsEqual("stat.mile"))
+    {
+        return UnitsMethods_LengthUnit_Mile;
+    }
+    else
+    {
+        return UnitsMethods_LengthUnit_Undefined;
+    }
 }

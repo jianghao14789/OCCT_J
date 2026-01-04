@@ -33,7 +33,7 @@ class Bisector_PolyBis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Bisector_PolyBis();

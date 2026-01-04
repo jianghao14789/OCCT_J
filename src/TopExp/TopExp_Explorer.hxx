@@ -1,4 +1,4 @@
-// Created on: 1993-01-14
+﻿// Created on: 1993-01-14
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -78,79 +78,79 @@
 //!
 //! For example searching edges  not in a vertex  does
 //! not make a difference.
-class TopExp_Explorer 
+class TopExp_Explorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Creates an empty explorer, becomes useful after Init.
-  Standard_EXPORT TopExp_Explorer();
-  
-  //! Creates an Explorer on the Shape <S>.
-  //!
-  //! <ToFind> is the type of shapes to search.
-  //! TopAbs_VERTEX, TopAbs_EDGE, ...
-  //!
-  //! <ToAvoid>   is the type   of shape to  skip in the
-  //! exploration.   If   <ToAvoid>  is  equal  or  less
-  //! complex than <ToFind> or if  <ToAVoid> is SHAPE it
-  //! has no effect on the exploration.
-  Standard_EXPORT TopExp_Explorer(const TopoDS_Shape& S, const TopAbs_ShapeEnum ToFind, const TopAbs_ShapeEnum ToAvoid = TopAbs_SHAPE);
-  
-  //! Resets this explorer on the shape S. It is initialized to
-  //! search the shape S, for shapes of type ToFind, that
-  //! are not part of a shape ToAvoid.
-  //! If the shape ToAvoid is equal to TopAbs_SHAPE, or
-  //! if it is the same as, or less complex than, the shape
-  //! ToFind it has no effect on the search.
-  Standard_EXPORT void Init (const TopoDS_Shape& S, const TopAbs_ShapeEnum ToFind, const TopAbs_ShapeEnum ToAvoid = TopAbs_SHAPE);
-  
-  //! Returns True if there are more shapes in the exploration.
-  Standard_Boolean More() const { return hasMore; }
 
-  //! Moves to the next Shape in the exploration.
-  //! Exceptions
-  //! Standard_NoMoreObject if there are no more shapes to explore.
-  Standard_EXPORT void Next();
+    //! Creates an empty explorer, becomes useful after Init.
+    Standard_EXPORT TopExp_Explorer();
 
-  //! Returns the current shape in the exploration.
-  //! Exceptions
-  //! Standard_NoSuchObject if this explorer has no more shapes to explore.
-  const TopoDS_Shape& Value() const { return Current(); }
+    //! Creates an Explorer on the Shape <S>.
+    //!
+    //! <ToFind> is the type of shapes to search.
+    //! TopAbs_VERTEX, TopAbs_EDGE, ...
+    //!
+    //! <ToAvoid>   is the type   of shape to  skip in the
+    //! exploration.   If   <ToAvoid>  is  equal  or  less
+    //! complex than <ToFind> or if  <ToAVoid> is SHAPE it
+    //! has no effect on the exploration.
+    Standard_EXPORT TopExp_Explorer(const TopoDS_Shape& S, const TopAbs_ShapeEnum ToFind, const TopAbs_ShapeEnum ToAvoid = TopAbs_SHAPE);
 
-  //! Returns the current shape in the exploration.
-  //! Exceptions
-  //! Standard_NoSuchObject if this explorer has no more shapes to explore.
-  Standard_EXPORT const TopoDS_Shape& Current() const;
+    //! Resets this explorer on the shape S. It is initialized to
+    //! search the shape S, for shapes of type ToFind, that
+    //! are not part of a shape ToAvoid.
+    //! If the shape ToAvoid is equal to TopAbs_SHAPE, or
+    //! if it is the same as, or less complex than, the shape
+    //! ToFind it has no effect on the search.
+    Standard_EXPORT void Init(const TopoDS_Shape& S, const TopAbs_ShapeEnum ToFind, const TopAbs_ShapeEnum ToAvoid = TopAbs_SHAPE);
 
-  //! Reinitialize the exploration with the original arguments.
-  Standard_EXPORT void ReInit();
+    //! Returns True if there are more shapes in the exploration.
+    Standard_Boolean More() const { return hasMore; }
 
-  //! Return explored shape.
-  const TopoDS_Shape& ExploredShape() const { return myShape; }
+    //! Moves to the next Shape in the exploration.
+    //! Exceptions
+    //! Standard_NoMoreObject if there are no more shapes to explore.
+    Standard_EXPORT void Next();
 
-  //! Returns the current depth of the exploration. 0 is
-  //! the shape to explore itself.
-  Standard_Integer Depth() const { return myTop; }
+    //! Returns the current shape in the exploration.
+    //! Exceptions
+    //! Standard_NoSuchObject if this explorer has no more shapes to explore.
+    const TopoDS_Shape& Value() const { return Current(); }
 
-  //! Clears the content of the explorer. It will return
-  //! False on More().
-  Standard_EXPORT void Clear();
+    //! Returns the current shape in the exploration.
+    //! Exceptions
+    //! Standard_NoSuchObject if this explorer has no more shapes to explore.
+    Standard_EXPORT const TopoDS_Shape& Current() const;
 
-  //! Destructor.
-  Standard_EXPORT ~TopExp_Explorer();
+    //! Reinitialize the exploration with the original arguments.
+    Standard_EXPORT void ReInit();
+
+    //! Return explored shape.
+    const TopoDS_Shape& ExploredShape() const { return myShape; }
+
+    //! Returns the current depth of the exploration. 0 is
+    //! the shape to explore itself.
+    Standard_Integer Depth() const { return myTop; }
+
+    //! Clears the content of the explorer. It will return
+    //! False on More().
+    Standard_EXPORT void Clear();
+
+    //! Destructor.
+    Standard_EXPORT ~TopExp_Explorer();
 
 private:
 
-  TopExp_Stack myStack;
-  TopoDS_Shape myShape;
-  Standard_Integer myTop;
-  Standard_Integer mySizeOfStack;
-  TopAbs_ShapeEnum toFind;
-  TopAbs_ShapeEnum toAvoid;
-  Standard_Boolean hasMore;
+    TopExp_Stack myStack;
+    TopoDS_Shape myShape;
+    Standard_Integer myTop;
+    Standard_Integer mySizeOfStack;
+    TopAbs_ShapeEnum toFind;
+    TopAbs_ShapeEnum toAvoid;
+    Standard_Boolean hasMore;
 
 };
 

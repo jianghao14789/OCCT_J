@@ -1,4 +1,4 @@
-// Created on: 2010-03-15
+﻿// Created on: 2010-03-15
 // Created by: Sergey KUUL
 // Copyright (c) 2010-2014 OPEN CASCADE SAS
 //
@@ -34,7 +34,7 @@ using namespace tbb;
 
 Standard_MMgrTBBalloc::Standard_MMgrTBBalloc(const Standard_Boolean aClear)
 {
-  myClear = aClear;
+    myClear = aClear;
 }
 
 //=======================================================================
@@ -44,15 +44,15 @@ Standard_MMgrTBBalloc::Standard_MMgrTBBalloc(const Standard_Boolean aClear)
 
 Standard_Address Standard_MMgrTBBalloc::Allocate(const Standard_Size aSize)
 {
-  // the size is rounded up to 4 since some OCC classes
-  // (e.g. TCollection_AsciiString) assume memory to be double word-aligned
-  const Standard_Size aRoundSize = (aSize + 3) & ~0x3;
-  // we use ?: operator instead of if() since it is faster :-)
-  Standard_Address aPtr = ( myClear ? scalable_calloc(aRoundSize, sizeof(char)) :
-                                      scalable_malloc(aRoundSize) );
-  if ( ! aPtr )
-    throw Standard_OutOfMemory("Standard_MMgrTBBalloc::Allocate(): malloc failed");
-  return aPtr;
+    // the size is rounded up to 4 since some OCC classes
+    // (e.g. TCollection_AsciiString) assume memory to be double word-aligned
+    const Standard_Size aRoundSize = (aSize + 3) & ~0x3;
+    // we use ?: operator instead of if() since it is faster :-)
+    Standard_Address aPtr = (myClear ? scalable_calloc(aRoundSize, sizeof(char)) :
+        scalable_malloc(aRoundSize));
+    if (!aPtr)
+        throw Standard_OutOfMemory("Standard_MMgrTBBalloc::Allocate(): malloc failed");
+    return aPtr;
 }
 
 //=======================================================================
@@ -60,9 +60,9 @@ Standard_Address Standard_MMgrTBBalloc::Allocate(const Standard_Size aSize)
 //purpose  : 
 //=======================================================================
 
-void Standard_MMgrTBBalloc::Free (Standard_Address theStorage)
+void Standard_MMgrTBBalloc::Free(Standard_Address theStorage)
 {
-  scalable_free (theStorage);
+    scalable_free(theStorage);
 }
 
 //=======================================================================
@@ -70,17 +70,17 @@ void Standard_MMgrTBBalloc::Free (Standard_Address theStorage)
 //purpose  : 
 //=======================================================================
 
-Standard_Address Standard_MMgrTBBalloc::Reallocate (Standard_Address theStorage,
-					            const Standard_Size theSize)
+Standard_Address Standard_MMgrTBBalloc::Reallocate(Standard_Address theStorage,
+    const Standard_Size theSize)
 {
-  // the size is rounded up to 4 since some OCC classes
-  // (e.g. TCollection_AsciiString) assume memory to be double word-aligned
-  const Standard_Size aRoundSize = (theSize + 3) & ~0x3;
-  Standard_Address newStorage = (Standard_Address)scalable_realloc(theStorage, aRoundSize);
-  if ( ! newStorage )
-    throw Standard_OutOfMemory("Standard_MMgrTBBalloc::Reallocate(): realloc failed");
-  // Note that it is not possible to ensure that additional memory
-  // allocated by realloc will be cleared (so as to satisfy myClear mode);
-  // in order to do that we would need using memset...
-  return newStorage;
+    // the size is rounded up to 4 since some OCC classes
+    // (e.g. TCollection_AsciiString) assume memory to be double word-aligned
+    const Standard_Size aRoundSize = (theSize + 3) & ~0x3;
+    Standard_Address newStorage = (Standard_Address)scalable_realloc(theStorage, aRoundSize);
+    if (!newStorage)
+        throw Standard_OutOfMemory("Standard_MMgrTBBalloc::Reallocate(): realloc failed");
+    // Note that it is not possible to ensure that additional memory
+    // allocated by realloc will be cleared (so as to satisfy myClear mode);
+    // in order to do that we would need using memset...
+    return newStorage;
 }

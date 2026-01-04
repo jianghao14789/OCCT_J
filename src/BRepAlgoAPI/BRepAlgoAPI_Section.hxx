@@ -41,7 +41,7 @@ class BRepAlgoAPI_Section  : public BRepAlgoAPI_BooleanOperation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

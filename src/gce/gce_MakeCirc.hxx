@@ -53,7 +53,7 @@ class gce_MakeCirc  : public gce_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

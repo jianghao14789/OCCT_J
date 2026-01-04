@@ -34,7 +34,7 @@ class RWStepBasic_RWContract
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

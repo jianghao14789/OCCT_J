@@ -43,7 +43,7 @@ class BlendFunc_CSCircular  : public Blend_CSFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a function for a circular blending between

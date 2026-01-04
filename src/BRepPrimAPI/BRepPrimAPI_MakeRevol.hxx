@@ -66,7 +66,7 @@ class BRepPrimAPI_MakeRevol  : public BRepPrimAPI_MakeSweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Builds the Revol of base S, axis  A and angle  D. If C
   //! is true, S is copied.

@@ -33,7 +33,7 @@ class HLRAlgo_EdgeIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Iterator  on the  visible or  hidden  parts of  an

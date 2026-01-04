@@ -32,7 +32,7 @@ class StepShape_SurfaceModel  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a SurfaceModel SelectType

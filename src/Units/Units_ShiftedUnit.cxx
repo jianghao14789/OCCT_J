@@ -1,4 +1,4 @@
-// Created on: 1992-11-04
+﻿// Created on: 1992-11-04
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,20 +23,20 @@
 #include <Units_ShiftedUnit.hxx>
 #include <Units_Token.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Units_ShiftedUnit,Units_Unit)
+IMPLEMENT_STANDARD_RTTIEXT(Units_ShiftedUnit, Units_Unit)
 
 //=======================================================================
 //function : Units_ShiftedUnit
 //purpose  : 
 //=======================================================================
 Units_ShiftedUnit::Units_ShiftedUnit(const Standard_CString aname,
-				     const Standard_CString asymbol,
-				     const Standard_Real avalue,
-				     const Standard_Real amove,
-				     const Handle(Units_Quantity)& aquantity)
-     : Units_Unit(aname,asymbol,avalue,aquantity)
+    const Standard_CString asymbol,
+    const Standard_Real avalue,
+    const Standard_Real amove,
+    const Handle(Units_Quantity)& aquantity)
+    : Units_Unit(aname, asymbol, avalue, aquantity)
 {
-  themove = amove;
+    themove = amove;
 }
 
 //=======================================================================
@@ -45,10 +45,11 @@ Units_ShiftedUnit::Units_ShiftedUnit(const Standard_CString aname,
 //=======================================================================
 
 Units_ShiftedUnit::Units_ShiftedUnit(const Standard_CString aname,
-				     const Standard_CString asymbol)
-     : Units_Unit(aname,asymbol),
-       themove(0.0)
-{}
+    const Standard_CString asymbol)
+    : Units_Unit(aname, asymbol),
+    themove(0.0)
+{
+}
 
 //=======================================================================
 //function : Units_ShiftedUnit
@@ -56,9 +57,10 @@ Units_ShiftedUnit::Units_ShiftedUnit(const Standard_CString aname,
 //=======================================================================
 
 Units_ShiftedUnit::Units_ShiftedUnit(const Standard_CString aname)
-     : Units_Unit(aname),
-       themove(0.0)
-{}
+    : Units_Unit(aname),
+    themove(0.0)
+{
+}
 
 //=======================================================================
 //function : Move
@@ -67,7 +69,7 @@ Units_ShiftedUnit::Units_ShiftedUnit(const Standard_CString aname)
 
 void Units_ShiftedUnit::Move(const Standard_Real amove)
 {
-  themove = amove;
+    themove = amove;
 }
 
 //=======================================================================
@@ -77,7 +79,7 @@ void Units_ShiftedUnit::Move(const Standard_Real amove)
 
 Standard_Real Units_ShiftedUnit::Move() const
 {
-  return themove;
+    return themove;
 }
 
 //=======================================================================
@@ -87,8 +89,8 @@ Standard_Real Units_ShiftedUnit::Move() const
 
 Handle(Units_Token) Units_ShiftedUnit::Token() const
 {
-  TCollection_AsciiString string = SymbolsSequence()->Value(1)->String();
-  return new Units_ShiftedToken(string.ToCString()," ",Value(),themove,Quantity()->Dimensions());
+    TCollection_AsciiString string = SymbolsSequence()->Value(1)->String();
+    return new Units_ShiftedToken(string.ToCString(), " ", Value(), themove, Quantity()->Dimensions());
 }
 
 //=======================================================================
@@ -98,20 +100,20 @@ Handle(Units_Token) Units_ShiftedUnit::Token() const
 
 //void Units_ShiftedUnit::Dump(const Standard_Integer ashift,
 //			     const Standard_Integer alevel) const
-void Units_ShiftedUnit::Dump(const Standard_Integer ,
-			     const Standard_Integer ) const
+void Units_ShiftedUnit::Dump(const Standard_Integer,
+    const Standard_Integer) const
 {
-  Standard_Integer index;
-  TCollection_AsciiString string;
+    Standard_Integer index;
+    TCollection_AsciiString string;
 
-//  int i;
-//  for(i=0; i<ashift; i++)std::cout<<"  ";
-  for(index=1;index<=thesymbolssequence->Length();index++)
+    //  int i;
+    //  for(i=0; i<ashift; i++)std::cout<<"  ";
+    for (index = 1; index <= thesymbolssequence->Length(); index++)
     {
-      string = thesymbolssequence->Value(index)->String();
-      if(index != 1) std::cout << " or " ;
-      std::cout<<"\""<<string.ToCString()<<"\"";
+        string = thesymbolssequence->Value(index)->String();
+        if (index != 1) std::cout << " or ";
+        std::cout << "\"" << string.ToCString() << "\"";
     }
-  std::cout<< "		Name:  " <<Name().ToCString()<<"		(= *" << thevalue << " SI + " << themove << ")"<<std::endl;
+    std::cout << "		Name:  " << Name().ToCString() << "		(= *" << thevalue << " SI + " << themove << ")" << std::endl;
 }
 

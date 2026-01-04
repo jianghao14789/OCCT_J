@@ -33,7 +33,7 @@ class Plate_SampledCurveConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_SampledCurveConstraint(const Plate_SequenceOfPinpointConstraint& SOPPC, const Standard_Integer n);

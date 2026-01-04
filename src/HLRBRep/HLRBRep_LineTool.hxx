@@ -53,7 +53,7 @@ class HLRBRep_LineTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstParameter (const gp_Lin& C);

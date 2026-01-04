@@ -1,4 +1,4 @@
-// Created on: 1993-02-26
+﻿// Created on: 1993-02-26
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -25,13 +25,13 @@
 //purpose  : 
 //=======================================================================
 TopLoc_SListOfItemLocation::TopLoc_SListOfItemLocation(const TopLoc_ItemLocation& anItem,
-				     const TopLoc_SListOfItemLocation& aTail) : 
-       myNode(new TopLoc_SListNodeOfItemLocation(anItem,aTail))
+    const TopLoc_SListOfItemLocation& aTail) :
+    myNode(new TopLoc_SListNodeOfItemLocation(anItem, aTail))
 {
-  if (!myNode->Tail().IsEmpty()) {
-    const gp_Trsf& aT = myNode->Tail().Value().myTrsf;
-    myNode->Value().myTrsf.PreMultiply (aT);
-  }
+    if (!myNode->Tail().IsEmpty()) {
+        const gp_Trsf& aT = myNode->Tail().Value().myTrsf;
+        myNode->Value().myTrsf.PreMultiply(aT);
+    }
 }
 
 //=======================================================================
@@ -41,11 +41,11 @@ TopLoc_SListOfItemLocation::TopLoc_SListOfItemLocation(const TopLoc_ItemLocation
 
 TopLoc_SListOfItemLocation& TopLoc_SListOfItemLocation::Assign(const TopLoc_SListOfItemLocation& Other)
 {
-  if (this == &Other) return *this;
-  Clear();
-  myNode = Other.myNode;
+    if (this == &Other) return *this;
+    Clear();
+    myNode = Other.myNode;
 
-  return *this;
+    return *this;
 }
 
 //=======================================================================
@@ -55,8 +55,8 @@ TopLoc_SListOfItemLocation& TopLoc_SListOfItemLocation::Assign(const TopLoc_SLis
 
 const TopLoc_ItemLocation& TopLoc_SListOfItemLocation::Value() const
 {
-  Standard_NoSuchObject_Raise_if(myNode.IsNull(),"TopLoc_SListOfItemLocation::Value");
-  return myNode->Value();
+    Standard_NoSuchObject_Raise_if(myNode.IsNull(), "TopLoc_SListOfItemLocation::Value");
+    return myNode->Value();
 }
 
 //=======================================================================
@@ -66,8 +66,8 @@ const TopLoc_ItemLocation& TopLoc_SListOfItemLocation::Value() const
 
 const TopLoc_SListOfItemLocation& TopLoc_SListOfItemLocation::Tail() const
 {
-  if (!myNode.IsNull()) 
-    return  myNode->Tail();
-  else
-    return *this;
+    if (!myNode.IsNull())
+        return  myNode->Tail();
+    else
+        return *this;
 }

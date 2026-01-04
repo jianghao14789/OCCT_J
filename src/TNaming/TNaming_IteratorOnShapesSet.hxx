@@ -34,7 +34,7 @@ class TNaming_IteratorOnShapesSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     TNaming_IteratorOnShapesSet();

@@ -33,7 +33,7 @@ class Transfer_DataInfo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the Type attached to an object

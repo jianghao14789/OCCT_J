@@ -35,7 +35,7 @@ class BlendFunc
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void GetShape (const BlendFunc_SectionShape SectShape, const Standard_Real MaxAng, Standard_Integer& NbPoles, Standard_Integer& NbKnots, Standard_Integer& Degree, Convert_ParameterisationType& TypeConv);

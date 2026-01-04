@@ -39,7 +39,7 @@ class GC_MakeArcOfParabola  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an arc of Parabola (TrimmedCurve from Geom) from

@@ -31,7 +31,7 @@ class GeomFill_FunctionDraft  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_FunctionDraft(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C);

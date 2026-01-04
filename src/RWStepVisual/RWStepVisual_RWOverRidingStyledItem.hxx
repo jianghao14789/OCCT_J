@@ -34,7 +34,7 @@ class RWStepVisual_RWOverRidingStyledItem
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepVisual_RWOverRidingStyledItem();

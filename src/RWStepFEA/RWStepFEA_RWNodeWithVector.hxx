@@ -33,7 +33,7 @@ class RWStepFEA_RWNodeWithVector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

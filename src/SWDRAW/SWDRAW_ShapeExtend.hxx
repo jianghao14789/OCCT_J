@@ -31,7 +31,7 @@ class SWDRAW_ShapeExtend
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Loads commands defined in ShapeExtend

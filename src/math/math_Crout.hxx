@@ -41,7 +41,7 @@ class math_Crout
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given an input matrix A, this algorithm inverts A by the

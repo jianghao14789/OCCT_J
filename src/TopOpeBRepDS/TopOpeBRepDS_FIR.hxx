@@ -29,7 +29,7 @@ class TopOpeBRepDS_FIR
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_FIR(const Handle(TopOpeBRepDS_HDataStructure)& HDS);

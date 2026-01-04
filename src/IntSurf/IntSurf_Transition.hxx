@@ -33,7 +33,7 @@ class IntSurf_Transition
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor. Creates an UNDECIDED transition.

@@ -30,7 +30,7 @@ class AdvApprox_Cutting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT virtual ~AdvApprox_Cutting();
   

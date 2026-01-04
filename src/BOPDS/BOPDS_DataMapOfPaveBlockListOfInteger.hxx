@@ -1,4 +1,4 @@
-// Created by: Peter KURNEV
+﻿// Created by: Peter KURNEV
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,7 +19,7 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <TColStd_ListOfInteger.hxx>
 
-typedef NCollection_DataMap<Handle(BOPDS_PaveBlock), TColStd_ListOfInteger, TColStd_MapTransientHasher> BOPDS_DataMapOfPaveBlockListOfInteger; 
-typedef BOPDS_DataMapOfPaveBlockListOfInteger::Iterator BOPDS_DataMapIteratorOfDataMapOfPaveBlockListOfInteger; 
+typedef NCollection_DataMap<Handle(BOPDS_PaveBlock), TColStd_ListOfInteger, TColStd_MapTransientHasher> BOPDS_DataMapOfPaveBlockListOfInteger;
+typedef BOPDS_DataMapOfPaveBlockListOfInteger::Iterator BOPDS_DataMapIteratorOfDataMapOfPaveBlockListOfInteger;
 
 #endif

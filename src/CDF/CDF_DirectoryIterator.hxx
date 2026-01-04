@@ -32,7 +32,7 @@ class CDF_DirectoryIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates an Iterator with the directory

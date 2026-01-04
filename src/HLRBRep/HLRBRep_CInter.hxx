@@ -50,7 +50,7 @@ class HLRBRep_CInter  : public IntRes2d_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

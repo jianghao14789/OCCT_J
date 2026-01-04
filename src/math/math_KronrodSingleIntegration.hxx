@@ -34,7 +34,7 @@ class math_KronrodSingleIntegration
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! An empty constructor.

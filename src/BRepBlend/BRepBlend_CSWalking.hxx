@@ -46,7 +46,7 @@ class BRepBlend_CSWalking
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_CSWalking(const Handle(Adaptor3d_Curve)& Curv, const Handle(Adaptor3d_Surface)& Surf, const Handle(Adaptor3d_TopolTool)& Domain);

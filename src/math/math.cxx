@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -24,7 +24,7 @@
 
 Standard_Integer math::GaussPointsMax()
 {
-  return 61;
+    return 61;
 }
 
 static const Standard_Real Point[] = {
@@ -989,7 +989,7 @@ static const Standard_Real Point[] = {
 0.152644240230815300529506761773480e+00,
 0.101984606562274068957208404764366e+00,
 0.510589067079743493668875006189008e-01,
-0.0e+00};
+0.0e+00 };
 
 static const Standard_Real Weight[] = {
 0.0e+00,
@@ -1953,7 +1953,7 @@ static const Standard_Real Weight[] = {
 0.504824703868021063730634389280763e-01,
 0.508147636688145133850277829847859e-01,
 0.510144870386962414093945916878333e-01,
-0.510811194407819869756124378422272e-01};
+0.510811194407819869756124378422272e-01 };
 
 
 
@@ -1963,34 +1963,34 @@ static const Standard_Real Weight[] = {
 
 
 void math::GaussPoints(const Standard_Integer Index, math_Vector& GPoint) {
-  Standard_Integer Som = 0;
-  Standard_Integer i ;
-  for ( i = 1; i < Index; i++) {
-    Som += (i+1) >> 1;
-  }
-  Standard_Integer ind = (Index + 1) >> 1;
+    Standard_Integer Som = 0;
+    Standard_Integer i;
+    for (i = 1; i < Index; i++) {
+        Som += (i + 1) >> 1;
+    }
+    Standard_Integer ind = (Index + 1) >> 1;
 
-  for ( i = 1; i <= ind; i++) {
-    GPoint(i) = Point[Som + i];
-    if ((i + ind) <= Index)
-      GPoint(i + ind) = - GPoint(i);
-  }
+    for (i = 1; i <= ind; i++) {
+        GPoint(i) = Point[Som + i];
+        if ((i + ind) <= Index)
+            GPoint(i + ind) = -GPoint(i);
+    }
 }
 
 void math::GaussWeights(const Standard_Integer Index, math_Vector& GWeight) {
-  Standard_Integer Som = 0;
-  Standard_Integer i ;
+    Standard_Integer Som = 0;
+    Standard_Integer i;
 
-  for ( i = 1; i < Index; i++) {
-    Som += (i+1) >> 1;
-  }
-  Standard_Integer ind = (Index + 1) >> 1;
+    for (i = 1; i < Index; i++) {
+        Som += (i + 1) >> 1;
+    }
+    Standard_Integer ind = (Index + 1) >> 1;
 
-  for ( i = 1; i <= ind; i++) {
-    GWeight(i) = Weight[Som + i];
-    if ((i + ind) <= Index)
-      GWeight(i + ind) = GWeight(i);
-  }
+    for (i = 1; i <= ind; i++) {
+        GWeight(i) = Weight[Som + i];
+        if ((i + ind) <= Index)
+            GWeight(i + ind) = GWeight(i);
+    }
 }
 
 //  Modified by skv - Wed Dec  7 18:44:51 2005 Ordered Gauss Points. Begin
@@ -2001,52 +2001,52 @@ void math::GaussWeights(const Standard_Integer Index, math_Vector& GWeight) {
 //=======================================================================
 
 Standard_Boolean math::OrderedGaussPointsAndWeights(const Standard_Integer Index,
-						    math_Vector            &Points,
-						    math_Vector            &Weights)
+    math_Vector& Points,
+    math_Vector& Weights)
 {
-  if (Index            < 1   ||    // Index is not positive
-      Points.Length()  != Index || // Inconsistent length of Points.
-      Weights.Length() != Index)   // Inconsistent length of Weights.
-    return Standard_False;
+    if (Index < 1 ||    // Index is not positive
+        Points.Length() != Index || // Inconsistent length of Points.
+        Weights.Length() != Index)   // Inconsistent length of Weights.
+        return Standard_False;
 
-  if (Index <= 61) {
-    // Get points from the array.
-    Standard_Integer i;
-    Standard_Integer aStartInd = 1;
+    if (Index <= 61) {
+        // Get points from the array.
+        Standard_Integer i;
+        Standard_Integer aStartInd = 1;
 
-    // Compute the index of starting point in the array.
-    for (i = 1; i < Index; i++)
-      aStartInd += (i + 1)/2;
+        // Compute the index of starting point in the array.
+        for (i = 1; i < Index; i++)
+            aStartInd += (i + 1) / 2;
 
-    // Get points from the array.
-    Standard_Integer aNbPts   = Index/2;
-    Standard_Integer aLowerI  = Points.Lower();
-    Standard_Integer anUpperI = Points.Upper();
+        // Get points from the array.
+        Standard_Integer aNbPts = Index / 2;
+        Standard_Integer aLowerI = Points.Lower();
+        Standard_Integer anUpperI = Points.Upper();
 
-    for (i = 0; i < aNbPts; i++) {
-      Points.Value(aLowerI  + i)  = -Point[aStartInd + i];
-      Points.Value(anUpperI - i)  =  Point[aStartInd + i];
-      Weights.Value(aLowerI  + i) = Weight[aStartInd + i];
-      Weights.Value(anUpperI - i) = Weight[aStartInd + i];
+        for (i = 0; i < aNbPts; i++) {
+            Points.Value(aLowerI + i) = -Point[aStartInd + i];
+            Points.Value(anUpperI - i) = Point[aStartInd + i];
+            Weights.Value(aLowerI + i) = Weight[aStartInd + i];
+            Weights.Value(anUpperI - i) = Weight[aStartInd + i];
+        }
+
+        if (Index % 2 == 1)
+        {
+            // Index is odd.
+            Points.Value(aLowerI + i) = Point[aStartInd + i];
+            Weights.Value(aLowerI + i) = Weight[aStartInd + i];
+        }
+
+        return Standard_True;
     }
-
-    if (Index%2 == 1)
-      {
-	// Index is odd.
-	Points.Value(aLowerI + i)  = Point[aStartInd + i];
-	Weights.Value(aLowerI + i) = Weight[aStartInd + i];
-      }
-
-    return Standard_True;
-  }
-  else
+    else
     {
-      math_ComputeGaussPointsAndWeights PWcomputer(Index);
-      if (!PWcomputer.IsDone())
-	return Standard_False;
-      Points  = PWcomputer.Points();
-      Weights = PWcomputer.Weights();
-      return Standard_True;
+        math_ComputeGaussPointsAndWeights PWcomputer(Index);
+        if (!PWcomputer.IsDone())
+            return Standard_False;
+        Points = PWcomputer.Points();
+        Weights = PWcomputer.Weights();
+        return Standard_True;
     }
 }
 

@@ -56,7 +56,7 @@ class BinObjMgt_Persistent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

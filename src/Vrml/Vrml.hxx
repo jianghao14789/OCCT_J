@@ -77,7 +77,7 @@ class Vrml
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Writes a header in anOStream (VRML file).

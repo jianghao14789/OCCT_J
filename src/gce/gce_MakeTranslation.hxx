@@ -37,7 +37,7 @@ class gce_MakeTranslation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a translation along the vector " Vect"

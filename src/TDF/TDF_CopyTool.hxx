@@ -70,7 +70,7 @@ class TDF_CopyTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Copy   <aSourceDataSet> with using  and  updating

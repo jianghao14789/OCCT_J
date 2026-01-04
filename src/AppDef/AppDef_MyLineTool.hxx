@@ -37,7 +37,7 @@ class AppDef_MyLineTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the first index of multipoints of the MultiLine.

@@ -55,7 +55,7 @@ class GeomAPI_Interpolate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an algorithm for constructing a

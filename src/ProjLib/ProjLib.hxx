@@ -64,7 +64,7 @@ class ProjLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   Standard_EXPORT static gp_Pnt2d Project (const gp_Pln& Pl, const gp_Pnt& P);
 

@@ -27,7 +27,7 @@ class BlendFunc_GenChamfInv  : public Blend_FuncInv
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT BlendFunc_GenChamfInv(const Handle(Adaptor3d_Surface)& S1,
                                         const Handle(Adaptor3d_Surface)& S2,

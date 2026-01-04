@@ -1,4 +1,4 @@
-// Created on: 1991-06-10
+﻿// Created on: 1991-06-10
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,4 +23,4 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Expr_GeneralRelation,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Expr_GeneralRelation, Standard_Transient)

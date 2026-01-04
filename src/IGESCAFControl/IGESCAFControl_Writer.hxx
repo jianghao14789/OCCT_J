@@ -56,7 +56,7 @@ class IGESCAFControl_Writer  : public IGESControl_Writer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a writer with an empty

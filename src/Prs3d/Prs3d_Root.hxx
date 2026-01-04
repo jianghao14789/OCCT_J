@@ -28,7 +28,7 @@ class Prs3d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_DEPRECATED("This method is deprecated - Prs3d_Presentation::CurrentGroup() should be called instead")
   static Handle(Graphic3d_Group) CurrentGroup (const Handle(Prs3d_Presentation)& thePrs3d)

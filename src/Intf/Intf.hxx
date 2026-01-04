@@ -35,7 +35,7 @@ class Intf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes   the  interference between   two polygons in  2d.

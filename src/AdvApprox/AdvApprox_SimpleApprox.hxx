@@ -44,7 +44,7 @@ class AdvApprox_SimpleApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT AdvApprox_SimpleApprox(const Standard_Integer TotalDimension, const Standard_Integer TotalNumSS, const GeomAbs_Shape Continuity, const Standard_Integer WorkDegree, const Standard_Integer NbGaussPoints, const Handle(PLib_JacobiPolynomial)& JacobiBase, const AdvApprox_EvaluatorFunction& Func);

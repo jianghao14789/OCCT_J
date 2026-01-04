@@ -33,7 +33,7 @@ class TDF_IDFilter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an ID/attribute filter based on an ID

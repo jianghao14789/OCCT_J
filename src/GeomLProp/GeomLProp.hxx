@@ -34,7 +34,7 @@ class GeomLProp
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the regularity at the junction between C1 and

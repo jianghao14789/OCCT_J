@@ -40,7 +40,7 @@ class GC_MakeRotation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a rotation through angle Angle about the axis defined by the line Line.

@@ -43,7 +43,7 @@ class FilletSurf_InternalBuilder  : public ChFi3d_FilBuilder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT FilletSurf_InternalBuilder(const TopoDS_Shape& S, const ChFi3d_FilletShape FShape = ChFi3d_Polynomial, const Standard_Real Ta = 1.0e-2, const Standard_Real Tapp3d = 1.0e-4, const Standard_Real Tapp2d = 1.0e-5);

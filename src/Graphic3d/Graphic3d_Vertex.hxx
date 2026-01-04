@@ -28,7 +28,7 @@ class Graphic3d_Vertex
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a point with 0.0, 0.0, 0.0 coordinates.
   Graphic3d_Vertex()

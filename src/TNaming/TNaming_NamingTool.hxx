@@ -32,7 +32,7 @@ class TNaming_NamingTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void CurrentShape (const TDF_LabelMap& Valid, const TDF_LabelMap& Forbiden, const Handle(TNaming_NamedShape)& NS, TopTools_IndexedMapOfShape& MS);

@@ -35,7 +35,7 @@ class BRepBlend_HCurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstParameter (const Handle(Adaptor3d_Curve)& C);

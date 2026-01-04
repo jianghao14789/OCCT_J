@@ -24,7 +24,7 @@ class OpenGl_ShaderProgram;
 class OpenGl_AspectsProgram
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 public:
   //! Empty constructor.
   OpenGl_AspectsProgram() : myIsShaderReady (false) {}

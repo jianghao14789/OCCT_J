@@ -37,7 +37,7 @@ class Sweep_NumShapeTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create a new NumShapeTool with <aShape>.  The Tool

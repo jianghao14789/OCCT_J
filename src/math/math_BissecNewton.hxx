@@ -38,7 +38,7 @@ class math_BissecNewton
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor.

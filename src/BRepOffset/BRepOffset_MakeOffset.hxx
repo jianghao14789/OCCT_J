@@ -48,7 +48,7 @@ class BRepOffset_MakeOffset
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT BRepOffset_MakeOffset();
   

@@ -30,7 +30,7 @@ class Adaptor3d_InterFunc  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! build the function  U(t)=FixVal   if Fix =1 or

@@ -31,7 +31,7 @@ class Plate_GlobalTranslationConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_GlobalTranslationConstraint(const TColgp_SequenceOfXY& SOfXY);

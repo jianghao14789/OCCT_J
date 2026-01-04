@@ -40,7 +40,7 @@ class Transfer_TransferInput
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a TransferInput ready to use

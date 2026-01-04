@@ -40,7 +40,7 @@ class IGESAppli_ToolPWBDrilledHole
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPWBDrilledHole, ready to work

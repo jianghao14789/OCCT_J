@@ -36,7 +36,7 @@ class HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf  : public math_Functio
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create the function.

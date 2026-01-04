@@ -39,7 +39,7 @@ class IGESAppli_ToolElementResults
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolElementResults, ready to work

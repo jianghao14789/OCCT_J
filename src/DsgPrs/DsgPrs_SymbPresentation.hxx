@@ -32,7 +32,7 @@ class DsgPrs_SymbPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the text aText and the point OffsetPoint to the

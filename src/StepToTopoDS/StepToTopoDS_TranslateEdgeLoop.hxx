@@ -40,7 +40,7 @@ class StepToTopoDS_TranslateEdgeLoop  : public StepToTopoDS_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StepToTopoDS_TranslateEdgeLoop();

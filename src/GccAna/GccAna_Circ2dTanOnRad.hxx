@@ -62,7 +62,7 @@ class GccAna_Circ2dTanOnRad
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This methods implements the algorithms used to create

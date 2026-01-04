@@ -54,7 +54,7 @@ class BRepFill_OffsetWire
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepFill_OffsetWire();

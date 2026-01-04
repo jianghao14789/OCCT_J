@@ -41,7 +41,7 @@ class HLRBRep_TheCSFunctionOfInterCSurf  : public math_FunctionSetWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_TheCSFunctionOfInterCSurf(const Standard_Address& S, const gp_Lin& C);

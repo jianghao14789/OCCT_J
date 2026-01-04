@@ -33,7 +33,7 @@ class LocalAnalysis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! This  class  compute s and gives tools to check the local
   //! continuity between two points situated on 2 curves.

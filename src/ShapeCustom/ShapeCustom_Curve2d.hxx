@@ -34,7 +34,7 @@ class ShapeCustom_Curve2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Check if poleses is in the plane with given precision

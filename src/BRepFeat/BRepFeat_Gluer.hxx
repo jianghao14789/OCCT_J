@@ -51,7 +51,7 @@ class BRepFeat_Gluer  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an empty constructor

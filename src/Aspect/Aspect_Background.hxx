@@ -30,7 +30,7 @@ class Aspect_Background
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a window background.

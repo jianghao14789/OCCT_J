@@ -46,7 +46,7 @@ class BRepOffset_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! <V1> is the FirstVertex ,<V2> is the Last Vertex of <Edge>

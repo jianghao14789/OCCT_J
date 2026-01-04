@@ -39,7 +39,7 @@ class BRepToIGES_BRShell  : public BRepToIGES_BREntity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepToIGES_BRShell();

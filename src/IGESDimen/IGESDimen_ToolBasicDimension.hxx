@@ -40,7 +40,7 @@ class IGESDimen_ToolBasicDimension
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolBasicDimension, ready to work

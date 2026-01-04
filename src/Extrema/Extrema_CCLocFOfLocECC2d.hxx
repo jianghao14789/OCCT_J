@@ -45,7 +45,7 @@ class Extrema_CCLocFOfLocECC2d  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_CCLocFOfLocECC2d(const Standard_Real thetol = 1.0e-10);

@@ -36,7 +36,7 @@ class GeomTools_SurfaceSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns an empty set of Surfaces.

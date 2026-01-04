@@ -37,7 +37,7 @@ class gce_MakeScale
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a scaling transformation with

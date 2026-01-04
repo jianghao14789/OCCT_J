@@ -41,7 +41,7 @@ class Geom2dGcc_FunctionTanCuCuOnCu  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dGcc_FunctionTanCuCuOnCu(const Geom2dAdaptor_Curve& C1, const Geom2dAdaptor_Curve& C2, const gp_Circ2d& OnCi, const Standard_Real Rad);

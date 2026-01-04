@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2013 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -30,30 +30,30 @@
 // function : HashCode
 // purpose  :
 //============================================================================
-Standard_Integer HashCode (const Standard_CString theString, const Standard_Integer theUpperBound)
+Standard_Integer HashCode(const Standard_CString theString, const Standard_Integer theUpperBound)
 {
-  const Standard_Integer aLength = static_cast<Standard_Integer> (strlen (theString));
+    const Standard_Integer aLength = static_cast<Standard_Integer> (strlen(theString));
 
-  return HashCode (theString, aLength, theUpperBound);
+    return HashCode(theString, aLength, theUpperBound);
 }
 
 //============================================================================
 // function : HashCodes
 // purpose  :
 //============================================================================
-Standard_Integer HashCodes (const Standard_CString theString, const Standard_Integer theLength)
+Standard_Integer HashCodes(const Standard_CString theString, const Standard_Integer theLength)
 {
-  // compute DJB2 hash of a string
-  unsigned int              hash = 0;
-  const Standard_Character* c    = theString;
+    // compute DJB2 hash of a string
+    unsigned int              hash = 0;
+    const Standard_Character* c = theString;
 
-  for (Standard_Integer i = 0; i < theLength; ++i, ++c)
-  {
-    /* hash = hash * 33 ^ c */
-    hash = ((hash << 5) + hash) ^ (*c);
-  }
+    for (Standard_Integer i = 0; i < theLength; ++i, ++c)
+    {
+        /* hash = hash * 33 ^ c */
+        hash = ((hash << 5) + hash) ^ (*c);
+    }
 
-  return static_cast<Standard_Integer>(hash);
+    return static_cast<Standard_Integer>(hash);
 }
 
 //======================================================================
@@ -63,32 +63,32 @@ Standard_Integer HashCodes (const Standard_CString theString, const Standard_Int
 
 #ifdef __APPLE__
   // There are a lot of *_l functions available on Mac OS X - we use them
-  #define SAVE_TL()
+#define SAVE_TL()
 #elif defined(_MSC_VER)
   // MSVCRT has equivalents with slightly different syntax
-  #define SAVE_TL()
-  #define strtod_l(thePtr, theNextPtr, theLocale)                _strtod_l(thePtr, theNextPtr, theLocale)
-  #define vprintf_l(theLocale, theFormat, theArgPtr)             _vprintf_l(theFormat, theLocale, theArgPtr)
-  #define vsprintf_l(theBuffer, theLocale, theFormat, theArgPtr) _vsprintf_l(theBuffer, theFormat, theLocale, theArgPtr)
-  #define vfprintf_l(theFile,   theLocale, theFormat, theArgPtr) _vfprintf_l(theFile,   theFormat, theLocale, theArgPtr)
+#define SAVE_TL()
+#define strtod_l(thePtr, theNextPtr, theLocale)                _strtod_l(thePtr, theNextPtr, theLocale)
+#define vprintf_l(theLocale, theFormat, theArgPtr)             _vprintf_l(theFormat, theLocale, theArgPtr)
+#define vsprintf_l(theBuffer, theLocale, theFormat, theArgPtr) _vsprintf_l(theBuffer, theFormat, theLocale, theArgPtr)
+#define vfprintf_l(theFile,   theLocale, theFormat, theArgPtr) _vfprintf_l(theFile,   theFormat, theLocale, theArgPtr)
 #else
   // glibc provides only limited xlocale implementation:
   // strtod_l/strtol_l/strtoll_l functions with explicitly specified locale
   // and newlocale/uselocale/freelocale to switch locale within current thread only.
   // So we switch to C locale temporarily
-  #define SAVE_TL() Standard_CLocaleSentry aLocaleSentry;
-  #ifndef OCCT_CLOCALE_POSIX2008
-    // glibc version for android platform use locale-independent implementation of
-    // strtod, strtol, strtoll functions. For other system with locale-depended
-    // implementations problems may appear if "C" locale is not set explicitly.
-    #if !defined(__ANDROID__) && !defined(__QNX__) && !defined(__MINGW32__)
-      #error System does not support xlocale. Import/export could be broken if C locale did not specified by application.
-    #endif
-    #define strtod_l(thePtr, theNextPtr, theLocale)              strtod(thePtr, theNextPtr)
-  #endif
-  #define vprintf_l(theLocale, theFormat, theArgPtr)             vprintf(theFormat, theArgPtr)
-  #define vsprintf_l(theBuffer, theLocale, theFormat, theArgPtr) vsprintf(theBuffer, theFormat, theArgPtr)
-  #define vfprintf_l(theFile,   theLocale, theFormat, theArgPtr) vfprintf(theFile,   theFormat, theArgPtr)
+#define SAVE_TL() Standard_CLocaleSentry aLocaleSentry;
+#ifndef OCCT_CLOCALE_POSIX2008
+  // glibc version for android platform use locale-independent implementation of
+  // strtod, strtol, strtoll functions. For other system with locale-depended
+  // implementations problems may appear if "C" locale is not set explicitly.
+#if !defined(__ANDROID__) && !defined(__QNX__) && !defined(__MINGW32__)
+#error System does not support xlocale. Import/export could be broken if C locale did not specified by application.
+#endif
+#define strtod_l(thePtr, theNextPtr, theLocale)              strtod(thePtr, theNextPtr)
+#endif
+#define vprintf_l(theLocale, theFormat, theArgPtr)             vprintf(theFormat, theArgPtr)
+#define vsprintf_l(theBuffer, theLocale, theFormat, theArgPtr) vsprintf(theBuffer, theFormat, theArgPtr)
+#define vfprintf_l(theFile,   theLocale, theFormat, theArgPtr) vfprintf(theFile,   theFormat, theArgPtr)
 #endif
 
 /*
@@ -98,43 +98,43 @@ double Strtod (const char* theStr, char** theNextPtr)
 }
 */
 
-double Atof (const char* theStr)
+double Atof(const char* theStr)
 {
-  return Strtod (theStr, NULL);
+    return Strtod(theStr, NULL);
 }
 
-int Printf  (const Standard_CString theFormat, ...)
+int Printf(const Standard_CString theFormat, ...)
 {
-  SAVE_TL();
-  va_list argp;
-  va_start(argp, theFormat);
-  int result = vprintf_l (Standard_CLocaleSentry::GetCLocale(), theFormat, argp);
-  va_end(argp);
-  return result;
+    SAVE_TL();
+    va_list argp;
+    va_start(argp, theFormat);
+    int result = vprintf_l(Standard_CLocaleSentry::GetCLocale(), theFormat, argp);
+    va_end(argp);
+    return result;
 }
 
-int Fprintf (FILE* theFile, const char* theFormat, ...)
+int Fprintf(FILE* theFile, const char* theFormat, ...)
 {
-  SAVE_TL();
-  va_list argp;
-  va_start(argp, theFormat);
-  int result = vfprintf_l(theFile, Standard_CLocaleSentry::GetCLocale(), theFormat, argp);
-  va_end(argp);
-  return result;
+    SAVE_TL();
+    va_list argp;
+    va_start(argp, theFormat);
+    int result = vfprintf_l(theFile, Standard_CLocaleSentry::GetCLocale(), theFormat, argp);
+    va_end(argp);
+    return result;
 }
 
-int Sprintf (char* theBuffer, const char* theFormat, ...)
+int Sprintf(char* theBuffer, const char* theFormat, ...)
 {
-  SAVE_TL();
-  va_list argp;
-  va_start(argp, theFormat);
-  int result = vsprintf_l(theBuffer, Standard_CLocaleSentry::GetCLocale(), theFormat, argp);
-  va_end(argp);
-  return result;
+    SAVE_TL();
+    va_list argp;
+    va_start(argp, theFormat);
+    int result = vsprintf_l(theBuffer, Standard_CLocaleSentry::GetCLocale(), theFormat, argp);
+    va_end(argp);
+    return result;
 }
 
-int Vsprintf (char* theBuffer, const char* theFormat, va_list theArgList)
+int Vsprintf(char* theBuffer, const char* theFormat, va_list theArgList)
 {
-  SAVE_TL();
-  return vsprintf_l(theBuffer, Standard_CLocaleSentry::GetCLocale(), theFormat, theArgList);
+    SAVE_TL();
+    return vsprintf_l(theBuffer, Standard_CLocaleSentry::GetCLocale(), theFormat, theArgList);
 }

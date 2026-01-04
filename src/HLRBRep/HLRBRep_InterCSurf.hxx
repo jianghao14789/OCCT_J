@@ -52,7 +52,7 @@ class HLRBRep_InterCSurf  : public IntCurveSurface_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty Constructor

@@ -40,7 +40,7 @@ class StepAP214_AutoDesignDateAndPersonItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a AutoDesignDateAndPersonItem SelectType

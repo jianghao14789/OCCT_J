@@ -42,7 +42,7 @@ class math_GaussLeastSquare
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given an input n X m matrix A with n >= m this constructor

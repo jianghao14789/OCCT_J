@@ -31,7 +31,7 @@ class GeomInt
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adjusts the parameter <thePar> to the range [theParMin,  theParMax]

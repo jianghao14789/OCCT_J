@@ -31,7 +31,7 @@ class BRepSweep_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Builder.

@@ -33,7 +33,7 @@ class TDocStd_XLinkIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns an empty iterator;

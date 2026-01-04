@@ -41,7 +41,7 @@ class math_Powell
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor. Initialize new entity.

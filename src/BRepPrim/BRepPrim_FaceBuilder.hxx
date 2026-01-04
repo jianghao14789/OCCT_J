@@ -39,7 +39,7 @@ class BRepPrim_FaceBuilder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepPrim_FaceBuilder();

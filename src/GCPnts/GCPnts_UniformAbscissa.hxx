@@ -29,7 +29,7 @@ class GCPnts_UniformAbscissa
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! creation of a indefinite UniformAbscissa
   Standard_EXPORT GCPnts_UniformAbscissa();

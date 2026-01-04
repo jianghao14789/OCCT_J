@@ -49,7 +49,7 @@ class Extrema_LocateExtPC2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_LocateExtPC2d();

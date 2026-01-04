@@ -30,7 +30,7 @@ class STEPConstruct_PointHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the point, in the range [1, theUpperBound]
   //! @param thePoint the point which hash code is to be computed

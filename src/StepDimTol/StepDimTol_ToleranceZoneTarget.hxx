@@ -33,7 +33,7 @@ class StepDimTol_ToleranceZoneTarget  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a ToleranceZoneTarget select type
   Standard_EXPORT StepDimTol_ToleranceZoneTarget();

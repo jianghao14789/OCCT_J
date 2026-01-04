@@ -33,7 +33,7 @@ class StepKinematics_RigidPlacement : public StepData_SelectType
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   Standard_EXPORT StepKinematics_RigidPlacement();

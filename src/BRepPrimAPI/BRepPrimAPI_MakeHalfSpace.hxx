@@ -42,7 +42,7 @@ class BRepPrimAPI_MakeHalfSpace  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a HalfSpace defined with a Face and a Point.

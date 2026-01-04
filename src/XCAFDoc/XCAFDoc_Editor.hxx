@@ -31,7 +31,7 @@ class XCAFDoc_Editor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Converts shape (compound/compsolid/shell/wire) to assembly.
   //! @param[in] theDoc input document

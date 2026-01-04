@@ -49,7 +49,7 @@ class IGESToBRep_TopoCurve  : public IGESToBRep_CurveAndSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates  a tool TopoCurve  ready  to  run, with

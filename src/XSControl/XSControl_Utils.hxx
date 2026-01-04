@@ -56,7 +56,7 @@ class XSControl_Utils
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! the only use of this, is to allow a frontal to get one

@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -18,44 +18,44 @@
 #include <Storage_TypedCallBack.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Storage_TypedCallBack,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Storage_TypedCallBack, Standard_Transient)
 
 Storage_TypedCallBack::Storage_TypedCallBack() : myIndex(0)
 {
 }
 
-Storage_TypedCallBack::Storage_TypedCallBack(const TCollection_AsciiString& aTypeName,const Handle(Storage_CallBack)& aCallBack) : myIndex(0)
+Storage_TypedCallBack::Storage_TypedCallBack(const TCollection_AsciiString& aTypeName, const Handle(Storage_CallBack)& aCallBack) : myIndex(0)
 {
-  myType = aTypeName;
-  myCallBack = aCallBack;
+    myType = aTypeName;
+    myCallBack = aCallBack;
 }
 
-void Storage_TypedCallBack::SetType(const TCollection_AsciiString& aType) 
+void Storage_TypedCallBack::SetType(const TCollection_AsciiString& aType)
 {
-  myType = aType;
+    myType = aType;
 }
 
 TCollection_AsciiString Storage_TypedCallBack::Type() const
 {
-  return myType;
+    return myType;
 }
 
-void Storage_TypedCallBack::SetCallBack(const Handle(Storage_CallBack)& aCallBack) 
+void Storage_TypedCallBack::SetCallBack(const Handle(Storage_CallBack)& aCallBack)
 {
-  myCallBack = aCallBack;
+    myCallBack = aCallBack;
 }
 
 Handle(Storage_CallBack) Storage_TypedCallBack::CallBack() const
 {
-  return myCallBack;
+    return myCallBack;
 }
 
 void Storage_TypedCallBack::SetIndex(const Standard_Integer anIndex)
 {
-  myIndex  = anIndex;
+    myIndex = anIndex;
 }
 
 Standard_Integer Storage_TypedCallBack::Index() const
 {
-  return myIndex;
+    return myIndex;
 }

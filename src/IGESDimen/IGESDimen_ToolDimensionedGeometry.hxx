@@ -40,7 +40,7 @@ class IGESDimen_ToolDimensionedGeometry
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDimensionedGeometry, ready to work

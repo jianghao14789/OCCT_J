@@ -25,7 +25,7 @@ class BRepMesh_Circle
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Default constructor.
   BRepMesh_Circle() : myRadius(0.0)

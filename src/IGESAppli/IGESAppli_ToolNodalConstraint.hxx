@@ -39,7 +39,7 @@ class IGESAppli_ToolNodalConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolNodalConstraint, ready to work

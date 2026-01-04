@@ -39,7 +39,7 @@ class IGESSolid_ToolSolidOfLinearExtrusion
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSolidOfLinearExtrusion, ready to work

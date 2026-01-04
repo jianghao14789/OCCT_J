@@ -34,7 +34,7 @@ class GeomFill_LocFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_LocFunction(const Handle(GeomFill_LocationLaw)& Law);

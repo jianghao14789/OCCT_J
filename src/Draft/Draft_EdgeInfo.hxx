@@ -34,7 +34,7 @@ class Draft_EdgeInfo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Draft_EdgeInfo();

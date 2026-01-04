@@ -39,7 +39,7 @@ class IGESGraph_ToolColor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolColor, ready to work

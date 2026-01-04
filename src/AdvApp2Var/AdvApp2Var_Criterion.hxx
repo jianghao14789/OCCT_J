@@ -35,7 +35,7 @@ class AdvApp2Var_Criterion
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT virtual ~AdvApp2Var_Criterion();
   

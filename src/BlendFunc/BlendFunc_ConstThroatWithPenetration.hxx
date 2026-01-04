@@ -39,7 +39,7 @@ class BlendFunc_ConstThroatWithPenetration  : public BlendFunc_ConstThroat
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BlendFunc_ConstThroatWithPenetration(const Handle(Adaptor3d_Surface)& S1,

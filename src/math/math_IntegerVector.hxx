@@ -56,7 +56,7 @@ class math_IntegerVector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! constructs an IntegerVector in the range [Lower..Upper]
   Standard_EXPORT math_IntegerVector(const Standard_Integer theFirst, const Standard_Integer theLast);

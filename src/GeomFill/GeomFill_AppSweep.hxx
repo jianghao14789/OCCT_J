@@ -51,7 +51,7 @@ class GeomFill_AppSweep  : public AppBlend_Approx
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_AppSweep();

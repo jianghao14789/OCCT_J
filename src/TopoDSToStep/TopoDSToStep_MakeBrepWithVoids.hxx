@@ -39,7 +39,7 @@ class TopoDSToStep_MakeBrepWithVoids  : public TopoDSToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopoDSToStep_MakeBrepWithVoids(const TopoDS_Solid& S,

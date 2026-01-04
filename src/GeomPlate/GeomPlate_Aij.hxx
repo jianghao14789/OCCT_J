@@ -30,7 +30,7 @@ class GeomPlate_Aij
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomPlate_Aij();

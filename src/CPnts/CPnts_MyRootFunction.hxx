@@ -37,7 +37,7 @@ class CPnts_MyRootFunction  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     CPnts_MyRootFunction();

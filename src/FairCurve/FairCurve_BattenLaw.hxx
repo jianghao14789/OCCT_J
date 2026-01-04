@@ -31,7 +31,7 @@ class FairCurve_BattenLaw  : public math_Function
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor of linear batten with

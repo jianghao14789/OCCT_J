@@ -47,7 +47,7 @@ class BRepBuilderAPI_ModifyShape  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the list  of shapes modified from the shape

@@ -39,7 +39,7 @@ class IGESConvGeom
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! basic tool to build curves from IGESGeom (arrays of points,

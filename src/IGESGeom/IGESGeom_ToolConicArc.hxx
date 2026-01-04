@@ -40,7 +40,7 @@ class IGESGeom_ToolConicArc
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolConicArc, ready to work

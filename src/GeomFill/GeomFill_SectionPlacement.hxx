@@ -40,7 +40,7 @@ class GeomFill_SectionPlacement
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_SectionPlacement(const Handle(GeomFill_LocationLaw)& L, const Handle(Geom_Geometry)& Section);

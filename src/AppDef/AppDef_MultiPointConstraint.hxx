@@ -48,7 +48,7 @@ class AppDef_MultiPointConstraint  : public AppParCurves_MultiPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates an undefined MultiPointConstraint.

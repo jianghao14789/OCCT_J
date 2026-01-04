@@ -1,4 +1,4 @@
-// Created on: 1999-11-23
+﻿// Created on: 1999-11-23
 // Created by: data exchange team
 // Copyright (c) 1999-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -25,22 +25,22 @@
 
 namespace
 {
-  static Standard_CString Message_Table_PrintMetricTypeEnum[13] =
-  {
-    "NONE", "ThreadCPUUserTime", "ThreadCPUSystemTime", "ProcessCPUUserTime", "ProcessCPUSystemTime",
-    "WallClock", "MemPrivate", "MemVirtual",
-    "MemWorkingSet", "MemWorkingSetPeak", "MemSwapUsage", "MemSwapUsagePeak", "MemHeapUsage"
-  };
+    static Standard_CString Message_Table_PrintMetricTypeEnum[13] =
+    {
+      "NONE", "ThreadCPUUserTime", "ThreadCPUSystemTime", "ProcessCPUUserTime", "ProcessCPUSystemTime",
+      "WallClock", "MemPrivate", "MemVirtual",
+      "MemWorkingSet", "MemWorkingSetPeak", "MemSwapUsage", "MemSwapUsagePeak", "MemHeapUsage"
+    };
 }
 
 //=======================================================================
 //function : DefaultMessenger
 //purpose  : 
 //=======================================================================
-const Handle(Message_Messenger)& Message::DefaultMessenger ()
+const Handle(Message_Messenger)& Message::DefaultMessenger()
 {
-  static Handle(Message_Messenger) aMessenger = new Message_Messenger;
-  return aMessenger;
+    static Handle(Message_Messenger) aMessenger = new Message_Messenger;
+    return aMessenger;
 }
 
 //=======================================================================
@@ -48,18 +48,18 @@ const Handle(Message_Messenger)& Message::DefaultMessenger ()
 //purpose  : 
 //=======================================================================
 
-TCollection_AsciiString Message::FillTime (const Standard_Integer hour,
-					       const Standard_Integer minute,
-					       const Standard_Real second)
+TCollection_AsciiString Message::FillTime(const Standard_Integer hour,
+    const Standard_Integer minute,
+    const Standard_Real second)
 {
-  char t [30];
-  if (hour > 0)
-    Sprintf (t, "%02dh:%02dm:%.2fs", hour, minute, second);
-  else if (minute > 0)
-    Sprintf (t, "%02dm:%.2fs", minute, second);
-  else
-    Sprintf (t, "%.2fs", second);
-  return TCollection_AsciiString (t);
+    char t[30];
+    if (hour > 0)
+        Sprintf(t, "%02dh:%02dm:%.2fs", hour, minute, second);
+    else if (minute > 0)
+        Sprintf(t, "%02dm:%.2fs", minute, second);
+    else
+        Sprintf(t, "%.2fs", second);
+    return TCollection_AsciiString(t);
 }
 
 //=======================================================================
@@ -68,51 +68,51 @@ TCollection_AsciiString Message::FillTime (const Standard_Integer hour,
 //=======================================================================
 const Handle(Message_Report)& Message::DefaultReport(const Standard_Boolean theToCreate)
 {
-  static Handle(Message_Report) MyReport;
-  if (MyReport.IsNull() && theToCreate)
-  {
-    MyReport = new Message_Report();
-  }
-  return MyReport;
+    static Handle(Message_Report) MyReport;
+    if (MyReport.IsNull() && theToCreate)
+    {
+        MyReport = new Message_Report();
+    }
+    return MyReport;
 }
 
 //=======================================================================
 //function : MetricToString
 //purpose  :
 //=======================================================================
-Standard_CString Message::MetricToString (const Message_MetricType theType)
+Standard_CString Message::MetricToString(const Message_MetricType theType)
 {
-  return Message_Table_PrintMetricTypeEnum[theType];
+    return Message_Table_PrintMetricTypeEnum[theType];
 }
 
 //=======================================================================
 //function : MetricFromString
 //purpose  :
 //=======================================================================
-Standard_Boolean Message::MetricFromString (const Standard_CString theString,
-                                            Message_MetricType& theGravity)
+Standard_Boolean Message::MetricFromString(const Standard_CString theString,
+    Message_MetricType& theGravity)
 {
-  TCollection_AsciiString aName (theString);
-  for (Standard_Integer aMetricIter = 0; aMetricIter <= Message_MetricType_MemHeapUsage; ++aMetricIter)
-  {
-    Standard_CString aMetricName = Message_Table_PrintMetricTypeEnum[aMetricIter];
-    if (aName == aMetricName)
+    TCollection_AsciiString aName(theString);
+    for (Standard_Integer aMetricIter = 0; aMetricIter <= Message_MetricType_MemHeapUsage; ++aMetricIter)
     {
-      theGravity = Message_MetricType (aMetricIter);
-      return Standard_True;
+        Standard_CString aMetricName = Message_Table_PrintMetricTypeEnum[aMetricIter];
+        if (aName == aMetricName)
+        {
+            theGravity = Message_MetricType(aMetricIter);
+            return Standard_True;
+        }
     }
-  }
-  return Standard_False;
+    return Standard_False;
 }
 
 // =======================================================================
 // function : ToOSDMetric
 // purpose :
 // =======================================================================
-Standard_Boolean Message::ToOSDMetric (const Message_MetricType theMetric, OSD_MemInfo::Counter& theMemInfo)
+Standard_Boolean Message::ToOSDMetric(const Message_MetricType theMetric, OSD_MemInfo::Counter& theMemInfo)
 {
-  switch (theMetric)
-  {
+    switch (theMetric)
+    {
     case Message_MetricType_MemPrivate:        theMemInfo = OSD_MemInfo::MemPrivate; break;
     case Message_MetricType_MemVirtual:        theMemInfo = OSD_MemInfo::MemVirtual; break;
     case Message_MetricType_MemWorkingSet:     theMemInfo = OSD_MemInfo::MemWorkingSet; break;
@@ -121,18 +121,18 @@ Standard_Boolean Message::ToOSDMetric (const Message_MetricType theMetric, OSD_M
     case Message_MetricType_MemSwapUsagePeak:  theMemInfo = OSD_MemInfo::MemSwapUsagePeak; break;
     case Message_MetricType_MemHeapUsage:      theMemInfo = OSD_MemInfo::MemHeapUsage; break;
     default: return Standard_False;
-  }
-  return Standard_True;
+    }
+    return Standard_True;
 }
 
 // =======================================================================
 // function : ToMessageMetric
 // purpose :
 // =======================================================================
-Standard_Boolean Message::ToMessageMetric (const OSD_MemInfo::Counter theMemInfo, Message_MetricType& theMetric)
+Standard_Boolean Message::ToMessageMetric(const OSD_MemInfo::Counter theMemInfo, Message_MetricType& theMetric)
 {
-  switch (theMemInfo)
-  {
+    switch (theMemInfo)
+    {
     case OSD_MemInfo::MemPrivate:        theMetric = Message_MetricType_MemPrivate;        break;
     case OSD_MemInfo::MemVirtual:        theMetric = Message_MetricType_MemVirtual;        break;
     case OSD_MemInfo::MemWorkingSet:     theMetric = Message_MetricType_MemWorkingSet;     break;
@@ -141,6 +141,6 @@ Standard_Boolean Message::ToMessageMetric (const OSD_MemInfo::Counter theMemInfo
     case OSD_MemInfo::MemSwapUsagePeak:  theMetric = Message_MetricType_MemSwapUsagePeak;  break;
     case OSD_MemInfo::MemHeapUsage:      theMetric = Message_MetricType_MemHeapUsage;      break;
     default: return Standard_False;
-  }
-  return Standard_True;
+    }
+    return Standard_True;
 }

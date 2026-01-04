@@ -33,7 +33,7 @@ class ChFiDS_FaceInterference
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ChFiDS_FaceInterference();

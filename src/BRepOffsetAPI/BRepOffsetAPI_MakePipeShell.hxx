@@ -60,7 +60,7 @@ class BRepOffsetAPI_MakePipeShell  : public BRepPrimAPI_MakeSweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs the shell-generating framework defined by the wire Spine.

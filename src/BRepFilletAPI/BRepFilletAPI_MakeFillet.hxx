@@ -51,7 +51,7 @@ class BRepFilletAPI_MakeFillet  : public BRepFilletAPI_LocalOperation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes   the computation    of   the  fillets.

@@ -1,4 +1,4 @@
-// Created on: 1992-06-24
+﻿// Created on: 1992-06-24
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,7 +23,7 @@
 //purpose  : 
 //=======================================================================
 Units_MathSentence::Units_MathSentence(const Standard_CString astring)
-     : Units_Sentence(Units::LexiconFormula(), astring)
+    : Units_Sentence(Units::LexiconFormula(), astring)
 {
-  SetConstants();
+    SetConstants();
 }

@@ -27,7 +27,7 @@ class WNT_HIDSpaceMouse;
 class Aspect_WindowInputListener
 {
 public:
-  ///DEFINE_STANDARD_ALLOC
+  ///DEFINE_STANDARD_ALLOC;
 public:
 
   //! Destructor.

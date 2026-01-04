@@ -73,7 +73,7 @@ class BRepSweep_NumLinearRegularSweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds the vertex addressed by [aGenV,aDirV], with its

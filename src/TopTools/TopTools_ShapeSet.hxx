@@ -43,7 +43,7 @@ class TopTools_ShapeSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds an empty ShapeSet.

@@ -39,7 +39,7 @@ class IGESAppli_ToolLevelToPWBLayerMap
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolLevelToPWBLayerMap, ready to work

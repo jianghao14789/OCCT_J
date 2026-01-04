@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,67 +19,67 @@
 #include <Standard_ProgramError.hxx>
 
 void Standard_Transient::Delete() const
-{ 
-  delete this;
+{
+    delete this;
 }
 
-const Handle(Standard_Type)& Standard_Transient::get_type_descriptor ()
+const Handle(Standard_Type)& Standard_Transient::get_type_descriptor()
 {
-  return opencascade::type_instance<Standard_Transient>::get();
+    return opencascade::type_instance<Standard_Transient>::get();
 }
 
 //
 //
 const Handle(Standard_Type)& Standard_Transient::DynamicType() const
 {
-  return get_type_descriptor();
+    return get_type_descriptor();
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsInstance(const Handle(Standard_Type) &AType) const
+Standard_Boolean Standard_Transient::IsInstance(const Handle(Standard_Type)& AType) const
 {
-  return (AType == DynamicType());
+    return (AType == DynamicType());
 }
 
 //
 //
 Standard_Boolean Standard_Transient::IsInstance(const Standard_CString theTypeName) const
 {
-  return IsEqual ( DynamicType()->Name(), theTypeName );
+    return IsEqual(DynamicType()->Name(), theTypeName);
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsKind (const Handle(Standard_Type)& aType) const
+Standard_Boolean Standard_Transient::IsKind(const Handle(Standard_Type)& aType) const
 {
-  return DynamicType()->SubType ( aType );
+    return DynamicType()->SubType(aType);
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsKind (const Standard_CString theTypeName) const
+Standard_Boolean Standard_Transient::IsKind(const Standard_CString theTypeName) const
 {
-  return DynamicType()->SubType ( theTypeName );
+    return DynamicType()->SubType(theTypeName);
 }
 
 //
 //
 Standard_Transient* Standard_Transient::This() const
 {
-  if (GetRefCount() == 0)
-    throw Standard_ProgramError("Attempt to create handle to object created in stack, not yet constructed, or destroyed");
-  return const_cast<Standard_Transient*> (this);
+    if (GetRefCount() == 0)
+        throw Standard_ProgramError("Attempt to create handle to object created in stack, not yet constructed, or destroyed");
+    return const_cast<Standard_Transient*> (this);
 }
 
 // Increment reference counter
 void Standard_Transient::IncrementRefCounter() const
 {
-  Standard_Atomic_Increment (&myRefCount_);
+    Standard_Atomic_Increment(&myRefCount_);
 }
 
 // Decrement reference counter
 Standard_Integer Standard_Transient::DecrementRefCounter() const
 {
-  return Standard_Atomic_Decrement(&myRefCount_);
+    return Standard_Atomic_Decrement(&myRefCount_);
 }

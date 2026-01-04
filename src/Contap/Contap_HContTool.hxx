@@ -31,7 +31,7 @@ class Contap_HContTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Integer NbSamplesU (const Handle(Adaptor3d_Surface)& S, const Standard_Real u1, const Standard_Real u2);

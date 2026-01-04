@@ -31,7 +31,7 @@ class TopoDSToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns (modifiable) the tolerance to be used for writing

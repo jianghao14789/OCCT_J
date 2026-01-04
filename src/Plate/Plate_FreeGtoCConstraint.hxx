@@ -40,7 +40,7 @@ class Plate_FreeGtoCConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_FreeGtoCConstraint(const gp_XY& point2d, const Plate_D1& D1S, const Plate_D1& D1T, const Standard_Real IncrementalLoad = 1.0, const Standard_Integer orientation = 0);

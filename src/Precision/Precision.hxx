@@ -99,7 +99,7 @@ class Precision
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns the recommended precision value
   //! when checking the equality of two angles (given in radians).

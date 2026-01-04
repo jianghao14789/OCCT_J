@@ -38,7 +38,7 @@ class LocalAnalysis_SurfaceContinuity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

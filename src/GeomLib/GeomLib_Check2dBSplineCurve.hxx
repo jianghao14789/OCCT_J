@@ -33,7 +33,7 @@ class GeomLib_Check2dBSplineCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomLib_Check2dBSplineCurve(const Handle(Geom2d_BSplineCurve)& Curve,

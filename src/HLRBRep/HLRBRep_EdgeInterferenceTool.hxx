@@ -37,7 +37,7 @@ class HLRBRep_EdgeInterferenceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_EdgeInterferenceTool(const Handle(HLRBRep_Data)& DS);

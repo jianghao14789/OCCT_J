@@ -48,7 +48,7 @@ class IGESCAFControl_Reader  : public IGESControl_Reader
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a reader with an empty
   //! IGES model and sets ColorMode, LayerMode and NameMode to Standard_True.

@@ -30,7 +30,7 @@ class XmlObjMgt_GP
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static XmlObjMgt_DOMString Translate (const gp_Trsf& aTrsf);

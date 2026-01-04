@@ -45,7 +45,7 @@ class GC_MakePlane  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a plane from a non persistent plane from package gp.
   Standard_EXPORT GC_MakePlane(const gp_Pln& Pl);

@@ -36,7 +36,7 @@ template <class T, typename = typename opencascade::std::enable_if<! opencascade
 class NCollection_Shared : public Standard_Transient, public T
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   DEFINE_NCOLLECTION_ALLOC
 
   //! Default constructor

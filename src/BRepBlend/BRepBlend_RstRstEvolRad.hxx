@@ -48,7 +48,7 @@ class BRepBlend_RstRstEvolRad  : public Blend_RstRstFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_RstRstEvolRad(const Handle(Adaptor3d_Surface)& Surf1, const Handle(Adaptor2d_Curve2d)& Rst1, const Handle(Adaptor3d_Surface)& Surf2, const Handle(Adaptor2d_Curve2d)& Rst2, const Handle(Adaptor3d_Curve)& CGuide, const Handle(Law_Function)& Evol);

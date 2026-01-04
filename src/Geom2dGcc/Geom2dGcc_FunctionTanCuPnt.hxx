@@ -35,7 +35,7 @@ class Geom2dGcc_FunctionTanCuPnt  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dGcc_FunctionTanCuPnt(const Geom2dAdaptor_Curve& C, const gp_Pnt2d& Point);

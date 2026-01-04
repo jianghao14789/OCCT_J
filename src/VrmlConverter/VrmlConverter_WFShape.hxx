@@ -39,7 +39,7 @@ class VrmlConverter_WFShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void Add (Standard_OStream& anOStream, const TopoDS_Shape& aShape, const Handle(VrmlConverter_Drawer)& aDrawer);

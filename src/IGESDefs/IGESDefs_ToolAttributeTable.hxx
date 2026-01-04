@@ -39,7 +39,7 @@ class IGESDefs_ToolAttributeTable
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolAttributeTable, ready to work

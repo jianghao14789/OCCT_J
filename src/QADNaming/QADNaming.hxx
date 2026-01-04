@@ -38,7 +38,7 @@ class QADNaming
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static TopoDS_Shape CurrentShape (const Standard_CString ShapeEntry, const Handle(TDF_Data)& Data);

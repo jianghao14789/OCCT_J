@@ -34,7 +34,7 @@ class GeomInt_ThePrmPrmSvSurfacesOfWLApprox  : public ApproxInt_SvSurfaces
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomInt_ThePrmPrmSvSurfacesOfWLApprox(const Handle(Adaptor3d_Surface)& Surf1, const Handle(Adaptor3d_Surface)& Surf2);

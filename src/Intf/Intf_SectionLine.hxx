@@ -33,7 +33,7 @@ class Intf_SectionLine
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns number of points in this SectionLine.

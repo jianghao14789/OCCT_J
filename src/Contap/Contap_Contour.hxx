@@ -32,7 +32,7 @@ class Contap_Contour
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Contap_Contour();

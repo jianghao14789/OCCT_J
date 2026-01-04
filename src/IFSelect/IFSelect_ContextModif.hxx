@@ -54,7 +54,7 @@ class IFSelect_ContextModif
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Prepares a ContextModif with these information :
   //! - the graph established from original model (target passed

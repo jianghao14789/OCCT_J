@@ -44,7 +44,7 @@ class Geom2dAPI_PointsToBSpline
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty approximation algorithm.

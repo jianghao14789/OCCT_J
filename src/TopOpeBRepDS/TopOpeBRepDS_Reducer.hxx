@@ -29,7 +29,7 @@ class TopOpeBRepDS_Reducer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_Reducer(const Handle(TopOpeBRepDS_HDataStructure)& HDS);

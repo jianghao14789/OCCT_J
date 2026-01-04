@@ -40,7 +40,7 @@ class TopOpeBRepBuild_PaveSet  : public TopOpeBRepBuild_LoopSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create a Pave set on edge <E>. It contains <E> vertices.

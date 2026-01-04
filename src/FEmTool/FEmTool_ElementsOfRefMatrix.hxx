@@ -39,7 +39,7 @@ class FEmTool_ElementsOfRefMatrix  : public math_FunctionSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT FEmTool_ElementsOfRefMatrix(const Handle(PLib_Base)& TheBase, const Standard_Integer DerOrder);

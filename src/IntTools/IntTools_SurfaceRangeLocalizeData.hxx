@@ -38,7 +38,7 @@ class IntTools_SurfaceRangeLocalizeData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntTools_SurfaceRangeLocalizeData();

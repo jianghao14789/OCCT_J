@@ -39,7 +39,7 @@ class IGESSolid_ToolShell
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolShell, ready to work

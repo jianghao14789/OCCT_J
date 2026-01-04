@@ -41,7 +41,7 @@ class Interface_CheckTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a CheckTool, by calling the General Service Library

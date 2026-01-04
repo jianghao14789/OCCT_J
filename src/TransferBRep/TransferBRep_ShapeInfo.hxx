@@ -32,7 +32,7 @@ class TransferBRep_ShapeInfo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the Type attached to an object

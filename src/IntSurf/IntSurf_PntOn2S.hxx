@@ -35,7 +35,7 @@ class IntSurf_PntOn2S
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

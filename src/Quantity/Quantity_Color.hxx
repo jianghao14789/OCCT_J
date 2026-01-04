@@ -36,7 +36,7 @@ class Quantity_Color
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates Quantity_NOC_YELLOW color (for historical reasons).
   Quantity_Color() : myRgb (valuesOf (Quantity_NOC_YELLOW, Quantity_TOC_RGB)) {}

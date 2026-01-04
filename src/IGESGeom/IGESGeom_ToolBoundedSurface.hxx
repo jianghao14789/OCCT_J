@@ -39,7 +39,7 @@ class IGESGeom_ToolBoundedSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolBoundedSurface, ready to work

@@ -1,4 +1,4 @@
-// Created on: 1995-10-10
+﻿// Created on: 1995-10-10
 // Created by: Jacques GOUSSARD
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,12 +21,12 @@
 #include <TColStd_HArray1OfInteger.hxx>
 
 void BuildPolynomialCosAndSin
-  (const Standard_Real,
-   const Standard_Real,
-   const Standard_Integer,
-   Handle(TColStd_HArray1OfReal)&,
-   Handle(TColStd_HArray1OfReal)&,
-   Handle(TColStd_HArray1OfReal)&);
+(const Standard_Real,
+    const Standard_Real,
+    const Standard_Integer,
+    Handle(TColStd_HArray1OfReal)&,
+    Handle(TColStd_HArray1OfReal)&,
+    Handle(TColStd_HArray1OfReal)&);
 
 #endif
 

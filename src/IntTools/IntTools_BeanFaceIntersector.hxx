@@ -53,7 +53,7 @@ class IntTools_BeanFaceIntersector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntTools_BeanFaceIntersector();

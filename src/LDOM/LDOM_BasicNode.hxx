@@ -26,7 +26,7 @@ class LDOM_NullPtr;
 class LDOM_BasicNode 
 {
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
  public:
 

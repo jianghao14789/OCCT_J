@@ -47,7 +47,7 @@ class IGESData_IGESReaderTool  : public Interface_FileReaderTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates IGESReaderTool to work with an IGESReaderData and an

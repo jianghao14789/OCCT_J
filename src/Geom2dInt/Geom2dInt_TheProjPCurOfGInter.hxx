@@ -35,7 +35,7 @@ class Geom2dInt_TheProjPCurOfGInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the parameter V of the point on the

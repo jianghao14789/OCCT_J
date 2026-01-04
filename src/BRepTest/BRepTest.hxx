@@ -29,7 +29,7 @@ class BRepTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines all the topology commands.

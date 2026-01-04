@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,7 +19,7 @@
 #include <Storage_DefaultCallBack.hxx>
 #include <Storage_Schema.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Storage_DefaultCallBack,Storage_CallBack)
+IMPLEMENT_STANDARD_RTTIEXT(Storage_DefaultCallBack, Storage_CallBack)
 
 Storage_DefaultCallBack::Storage_DefaultCallBack()
 {
@@ -27,9 +27,9 @@ Storage_DefaultCallBack::Storage_DefaultCallBack()
 
 Handle(Standard_Persistent) Storage_DefaultCallBack::New() const
 {
-  Handle(Standard_Persistent) res = new Standard_Persistent;
+    Handle(Standard_Persistent) res = new Standard_Persistent;
 
-  return res;
+    return res;
 }
 
 void Storage_DefaultCallBack::Add(const Handle(Standard_Persistent)&, const Handle(Storage_Schema)&) const
@@ -37,14 +37,14 @@ void Storage_DefaultCallBack::Add(const Handle(Standard_Persistent)&, const Hand
 }
 
 void Storage_DefaultCallBack::Write(const Handle(Standard_Persistent)&,
-                                    const Handle(Storage_BaseDriver)&,
-                                    const Handle(Storage_Schema)&) const
+    const Handle(Storage_BaseDriver)&,
+    const Handle(Storage_Schema)&) const
 {
 }
 
 void Storage_DefaultCallBack::Read(const Handle(Standard_Persistent)&,
-                                   const Handle(Storage_BaseDriver)& theDriver,
-                                   const Handle(Storage_Schema)&) const
+    const Handle(Storage_BaseDriver)& theDriver,
+    const Handle(Storage_Schema)&) const
 {
-  theDriver->SkipObject();
+    theDriver->SkipObject();
 }

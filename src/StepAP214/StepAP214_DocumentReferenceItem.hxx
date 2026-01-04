@@ -49,7 +49,7 @@ class StepAP214_DocumentReferenceItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a DocumentReferenceItem SelectType

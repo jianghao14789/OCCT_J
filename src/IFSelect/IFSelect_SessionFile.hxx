@@ -67,7 +67,7 @@ class IFSelect_SessionFile
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a SessionFile, ready to read Files in order to load
   //! them into a given WorkSession.

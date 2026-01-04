@@ -66,7 +66,7 @@ class BRepBuilderAPI_MakeWire  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty wire framework, to which edges

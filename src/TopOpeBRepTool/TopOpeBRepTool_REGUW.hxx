@@ -46,7 +46,7 @@ class TopOpeBRepTool_REGUW
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepTool_REGUW(const TopoDS_Face& FRef);

@@ -29,7 +29,7 @@ class XSDRAWIGES
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Inits IGESSelect commands, for DRAW

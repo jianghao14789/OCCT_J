@@ -57,7 +57,7 @@ class BRepBuilderAPI_MakeShell  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty shell framework. The Init

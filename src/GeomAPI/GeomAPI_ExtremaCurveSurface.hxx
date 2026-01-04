@@ -57,7 +57,7 @@ class GeomAPI_ExtremaCurveSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty algorithm for computing

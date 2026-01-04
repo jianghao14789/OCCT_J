@@ -48,7 +48,7 @@ class TopOpeBRepTool_TOOL
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Integer OriinSor (const TopoDS_Shape& sub, const TopoDS_Shape& S, const Standard_Boolean checkclo = Standard_False);

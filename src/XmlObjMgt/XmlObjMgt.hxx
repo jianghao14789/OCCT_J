@@ -40,7 +40,7 @@ class XmlObjMgt
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Define the name of XMLattribute 'ID' (to be used everywhere)

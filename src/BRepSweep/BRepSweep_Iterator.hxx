@@ -35,7 +35,7 @@ class BRepSweep_Iterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepSweep_Iterator();

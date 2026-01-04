@@ -1,4 +1,4 @@
-// Created on: 2013-12-20
+﻿// Created on: 2013-12-20
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -23,5 +23,5 @@ IMPLEMENT_STANDARD_RTTIEXT(BVH_Properties, Standard_Transient)
 // =======================================================================
 BVH_Properties::~BVH_Properties()
 {
-  //
+    //
 }

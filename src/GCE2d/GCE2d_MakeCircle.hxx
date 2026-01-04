@@ -45,7 +45,7 @@ class GCE2d_MakeCircle  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates a circle from a non persistent one.

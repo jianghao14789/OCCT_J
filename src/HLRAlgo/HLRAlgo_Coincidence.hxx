@@ -40,7 +40,7 @@
 class HLRAlgo_Coincidence
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   HLRAlgo_Coincidence() :
     myFE(0),

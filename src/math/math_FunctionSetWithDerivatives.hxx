@@ -34,7 +34,7 @@ class math_FunctionSetWithDerivatives  : public math_FunctionSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the number of variables of the function.

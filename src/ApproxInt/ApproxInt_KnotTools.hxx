@@ -64,7 +64,7 @@ class ApproxInt_KnotTools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Main function to build optimal knot sequence.
   //! At least one set from (thePntsXYZ, thePntsU1V1, thePntsU2V2) should exist.

@@ -40,7 +40,7 @@ class GC_MakeArcOfCircle  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make an arc of circle (TrimmedCurve from Geom) from

@@ -51,7 +51,7 @@ class GccEnt
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 
   //! Prints the name of Position type as a String on the Stream.

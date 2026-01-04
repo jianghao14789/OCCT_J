@@ -1,4 +1,4 @@
-// Created on: 2013-12-20
+﻿// Created on: 2013-12-20
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -25,16 +25,17 @@ class BVH_SpatialMedianBuilder : public BVH_BinnedBuilder<T, N, 2>
 {
 public:
 
-  //! Creates spatial median split builder.
-  BVH_SpatialMedianBuilder (const Standard_Integer theLeafNodeSize = BVH_Constants_LeafNodeSizeDefault,
-                            const Standard_Integer theMaxTreeDepth = BVH_Constants_MaxTreeDepth,
-                            const Standard_Boolean theToUseMainAxis = Standard_False)
-  : BVH_BinnedBuilder<T, N, 2> (theLeafNodeSize,
-                                theMaxTreeDepth,
-                                theToUseMainAxis) {}
+    //! Creates spatial median split builder.
+    BVH_SpatialMedianBuilder(const Standard_Integer theLeafNodeSize = BVH_Constants_LeafNodeSizeDefault,
+        const Standard_Integer theMaxTreeDepth = BVH_Constants_MaxTreeDepth,
+        const Standard_Boolean theToUseMainAxis = Standard_False)
+        : BVH_BinnedBuilder<T, N, 2>(theLeafNodeSize,
+            theMaxTreeDepth,
+            theToUseMainAxis) {
+    }
 
-  //! Releases resources of spatial median split builder.
-  virtual ~BVH_SpatialMedianBuilder() {}
+    //! Releases resources of spatial median split builder.
+    virtual ~BVH_SpatialMedianBuilder() {}
 
 };
 

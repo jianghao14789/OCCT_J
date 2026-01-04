@@ -33,7 +33,7 @@ class StepVisual_LayeredItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a LayeredItem SelectType

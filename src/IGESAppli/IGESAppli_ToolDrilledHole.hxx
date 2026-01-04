@@ -41,7 +41,7 @@ class IGESAppli_ToolDrilledHole
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDrilledHole, ready to work

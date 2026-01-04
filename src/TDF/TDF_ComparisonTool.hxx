@@ -49,7 +49,7 @@ class TDF_ComparisonTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Compares <aSourceDataSet> with <aTargetDataSet>,

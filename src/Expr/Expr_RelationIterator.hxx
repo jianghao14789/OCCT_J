@@ -34,7 +34,7 @@ class Expr_RelationIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Expr_RelationIterator(const Handle(Expr_GeneralRelation)& rel);

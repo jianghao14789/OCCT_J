@@ -39,7 +39,7 @@ class IGESDimen_ToolGeneralNote
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolGeneralNote, ready to work

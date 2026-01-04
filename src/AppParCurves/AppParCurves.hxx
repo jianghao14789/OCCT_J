@@ -36,7 +36,7 @@ class AppParCurves
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void BernsteinMatrix (const Standard_Integer NbPoles, const math_Vector& U, math_Matrix& A);

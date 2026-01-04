@@ -1,4 +1,4 @@
-// Created on: 1995-03-07
+﻿// Created on: 1995-03-07
 // Created by: Laurent PAINNOT
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -16,34 +16,34 @@
 
 #include <Poly_Polygon3D.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Poly_Polygon3D,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Poly_Polygon3D, Standard_Transient)
 
 //=======================================================================
 //function : Poly_Polygon3D
 //purpose  :
 //=======================================================================
-Poly_Polygon3D::Poly_Polygon3D (const Standard_Integer theNbNodes,
-                                const Standard_Boolean theHasParams)
-: myDeflection (0.0),
-  myNodes (1, theNbNodes)
+Poly_Polygon3D::Poly_Polygon3D(const Standard_Integer theNbNodes,
+    const Standard_Boolean theHasParams)
+    : myDeflection(0.0),
+    myNodes(1, theNbNodes)
 {
-  if (theHasParams)
-  {
-    myParameters = new TColStd_HArray1OfReal (1, theNbNodes);
-  }
+    if (theHasParams)
+    {
+        myParameters = new TColStd_HArray1OfReal(1, theNbNodes);
+    }
 }
 
 //=======================================================================
 //function : Poly_Polygon3D
 //purpose  : 
 //=======================================================================
-Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes): 
+Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes) :
     myDeflection(0.),
     myNodes(1, Nodes.Length())
 {
-  Standard_Integer i, j= 1;
-  for (i = Nodes.Lower(); i <= Nodes.Upper(); i++)
-    myNodes(j++) = Nodes(i);
+    Standard_Integer i, j = 1;
+    for (i = Nodes.Lower(); i <= Nodes.Upper(); i++)
+        myNodes(j++) = Nodes(i);
 }
 
 //=======================================================================
@@ -51,19 +51,19 @@ Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes):
 //purpose  : 
 //=======================================================================
 
-Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt&   Nodes,
-			       const TColStd_Array1OfReal& P): 
+Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes,
+    const TColStd_Array1OfReal& P) :
     myDeflection(0.),
     myNodes(1, Nodes.Length())
-    
+
 {
-  myParameters = new TColStd_HArray1OfReal(1, P.Length());
-  Standard_Integer i, j= 1;
-  for (i = Nodes.Lower(); i <= Nodes.Upper(); i++) {
-    myNodes(j) = Nodes(i);
-    myParameters->SetValue(j, P(i));
-    j++;
-  }
+    myParameters = new TColStd_HArray1OfReal(1, P.Length());
+    Standard_Integer i, j = 1;
+    for (i = Nodes.Lower(); i <= Nodes.Upper(); i++) {
+        myNodes(j) = Nodes(i);
+        myParameters->SetValue(j, P(i));
+        j++;
+    }
 }
 
 //=======================================================================
@@ -73,25 +73,25 @@ Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt&   Nodes,
 
 Handle(Poly_Polygon3D) Poly_Polygon3D::Copy() const
 {
-  Handle(Poly_Polygon3D) aCopy;
-  if (myParameters.IsNull())
-    aCopy = new Poly_Polygon3D(myNodes);
-  else
-    aCopy = new Poly_Polygon3D(myNodes, myParameters->Array1());
-  aCopy->Deflection(myDeflection);
-  return aCopy;
+    Handle(Poly_Polygon3D) aCopy;
+    if (myParameters.IsNull())
+        aCopy = new Poly_Polygon3D(myNodes);
+    else
+        aCopy = new Poly_Polygon3D(myNodes, myParameters->Array1());
+    aCopy->Deflection(myDeflection);
+    return aCopy;
 }
 
 //=======================================================================
 //function : DumpJson
 //purpose  : 
 //=======================================================================
-void Poly_Polygon3D::DumpJson (Standard_OStream& theOStream, Standard_Integer) const
+void Poly_Polygon3D::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
 {
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myDeflection)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myNodes.Size())
-  if (!myParameters.IsNull())
-    OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myParameters->Size())
+        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDeflection)
+        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myNodes.Size())
+        if (!myParameters.IsNull())
+            OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myParameters->Size())
 }

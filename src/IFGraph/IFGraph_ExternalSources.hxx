@@ -34,7 +34,7 @@ class IFGraph_ExternalSources  : public Interface_GraphContent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates empty ExternalSources, ready to work

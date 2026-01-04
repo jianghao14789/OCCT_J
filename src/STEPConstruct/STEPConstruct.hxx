@@ -52,7 +52,7 @@ class STEPConstruct
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns STEP entity of the (sub)type of RepresentationItem

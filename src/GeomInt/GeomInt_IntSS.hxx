@@ -39,7 +39,7 @@ class GeomInt_IntSS
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     GeomInt_IntSS();

@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -20,22 +20,22 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeObject, Message_Attribute)
 //function : Constructor
 //purpose  :
 //=======================================================================
-Message_AttributeObject::Message_AttributeObject (const Handle(Standard_Transient)& theObject,
-                                                  const TCollection_AsciiString& theName)
-: Message_Attribute(theName)
+Message_AttributeObject::Message_AttributeObject(const Handle(Standard_Transient)& theObject,
+    const TCollection_AsciiString& theName)
+    : Message_Attribute(theName)
 {
-  myObject = theObject;
+    myObject = theObject;
 }
 
 //=======================================================================
 //function : DumpJson
 //purpose  :
 //=======================================================================
-void Message_AttributeObject::DumpJson (Standard_OStream& theOStream,
-                                        Standard_Integer theDepth) const
+void Message_AttributeObject::DumpJson(Standard_OStream& theOStream,
+    Standard_Integer theDepth) const
 {
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, Message_Attribute)
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
+        OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Message_Attribute)
 
-  OCCT_DUMP_FIELD_VALUE_POINTER (theOStream, myObject.get())
+        OCCT_DUMP_FIELD_VALUE_POINTER(theOStream, myObject.get())
 }

@@ -32,7 +32,7 @@ class IFGraph_AllConnected  : public Interface_GraphContent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates an AllConnected from a graph, empty ready to be filled

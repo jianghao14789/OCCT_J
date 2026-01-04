@@ -39,7 +39,7 @@ class IGESBasic_ToolSingularSubfigure
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSingularSubfigure, ready to work

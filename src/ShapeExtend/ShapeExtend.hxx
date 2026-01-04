@@ -51,7 +51,7 @@ class ShapeExtend
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Inits using of ShapeExtend.

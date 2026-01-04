@@ -63,7 +63,7 @@ class GC_MakeHyperbola  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

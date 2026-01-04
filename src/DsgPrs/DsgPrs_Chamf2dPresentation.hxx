@@ -33,7 +33,7 @@ class DsgPrs_Chamf2dPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines the display of elements showing 2D chamfers on shapes.

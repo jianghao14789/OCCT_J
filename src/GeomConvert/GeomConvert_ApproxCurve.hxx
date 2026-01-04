@@ -30,7 +30,7 @@ class GeomConvert_ApproxCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a curve approximation framework defined by -

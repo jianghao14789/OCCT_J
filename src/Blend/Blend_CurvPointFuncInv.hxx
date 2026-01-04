@@ -43,7 +43,7 @@ class Blend_CurvPointFuncInv  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns 3.

@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -19,37 +19,37 @@
 //! Functionality of this class (Message_ProgressSentry) has been superseded by Message_ProgressScope.
 //! This class is kept just to simplify transition of an old code and will be removed in future.
 class Standard_DEPRECATED("Deprecated class, Message_ProgressScope should be used instead")
-Message_ProgressSentry : public Message_ProgressScope
+    Message_ProgressSentry : public Message_ProgressScope
 {
 public:
-  //! Deprecated constructor, Message_ProgressScope should be created instead.
-  Message_ProgressSentry (const Message_ProgressRange& theRange,
-                          const Standard_CString theName,
-                          const Standard_Real theMin,
-                          const Standard_Real theMax,
-                          const Standard_Real theStep,
-                          const Standard_Boolean theIsInf = Standard_False,
-                          const Standard_Real theNewScopeSpan = 0.0)
-  : Message_ProgressScope (theRange, theName, theMax, theIsInf)
-  {
-    if (theMin != 0.0 || theStep != 1.0 || theNewScopeSpan != 0.0)
+    //! Deprecated constructor, Message_ProgressScope should be created instead.
+    Message_ProgressSentry(const Message_ProgressRange & theRange,
+                            const Standard_CString theName,
+                            const Standard_Real theMin,
+                            const Standard_Real theMax,
+                            const Standard_Real theStep,
+                            const Standard_Boolean theIsInf = Standard_False,
+                            const Standard_Real theNewScopeSpan = 0.0)
+    : Message_ProgressScope(theRange, theName, theMax, theIsInf)
     {
-      throw Standard_ProgramError ("Message_ProgressSentry, invalid parameters");
+      if (theMin != 0.0 || theStep != 1.0 || theNewScopeSpan != 0.0)
+      {
+        throw Standard_ProgramError("Message_ProgressSentry, invalid parameters");
+      }
     }
-  }
 
-  //! Method Relieve() was replaced by Close() in Message_ProgressScope
-  void Relieve () { Close(); }
+    //! Method Relieve() was replaced by Close() in Message_ProgressScope
+    void Relieve() { Close(); }
 
-private:
-  //! Message_ProgressRange should be passed to constructor instead of Message_ProgressIndicator.
-  Message_ProgressSentry (const Handle(Message_ProgressIndicator)& theProgress,
-                          const Standard_CString theName,
-                          const Standard_Real theMin,
-                          const Standard_Real theMax,
-                          const Standard_Real theStep,
-                          const Standard_Boolean theIsInf = Standard_False,
-                          const Standard_Real theNewScopeSpan = 0.0);
+  private:
+      //! Message_ProgressRange should be passed to constructor instead of Message_ProgressIndicator.
+      Message_ProgressSentry(const Handle(Message_ProgressIndicator) & theProgress,
+                              const Standard_CString theName,
+                              const Standard_Real theMin,
+                              const Standard_Real theMax,
+                              const Standard_Real theStep,
+                              const Standard_Boolean theIsInf = Standard_False,
+                              const Standard_Real theNewScopeSpan = 0.0);
 };
 
 #endif // Message_ProgressSentry_HeaderFile

@@ -37,7 +37,7 @@ class Approx_FitAndDivide2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The MultiLine <Line> will be approximated until tolerances

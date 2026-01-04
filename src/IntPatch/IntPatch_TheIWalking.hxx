@@ -48,7 +48,7 @@ class IntPatch_TheIWalking
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Deflection is the maximum deflection admitted between two

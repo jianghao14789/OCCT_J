@@ -35,7 +35,7 @@ class BRepFill_AdvancedEvolved
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+  DEFINE_STANDARD_ALLOC;;
 
   //! Constructor
   Standard_EXPORT BRepFill_AdvancedEvolved() :myErrorStatus(BRepFill_AdvancedEvolved_Empty),

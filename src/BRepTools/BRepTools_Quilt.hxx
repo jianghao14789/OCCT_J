@@ -1,4 +1,4 @@
-// Created on: 1994-12-22
+﻿// Created on: 1994-12-22
 // Created by: Remi LEQUETTE
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -41,54 +41,54 @@ class TopoDS_Shape;
 //! The user can call the Shells methods to compute a compound of shells from the current set of faces.
 //!
 //! If no binding is made this class can be used to make shell from faces already sharing their edges.
-class BRepTools_Quilt 
+class BRepTools_Quilt
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT BRepTools_Quilt();
-  
-  //! Binds <Enew> to   be  the  new edge  instead   of
-  //! <Eold>.
-  //!
-  //! The faces  of  the added  shape containing  <Eold>
-  //! will be copied to substitute <Eold> by <Enew>.
-  //!
-  //! The vertices  of   <Eold> will   be bound to   the
-  //! vertices of <Enew> with the same orientation.
-  //!
-  //! If <Eold>  and <Enew>  have different orientations
-  //! the curves are considered  to be opposite  and the
-  //! pcurves of <Eold>  will be copied  and reversed in
-  //! the new faces.
-  //!
-  //! <Eold> must belong to the next added shape, <Enew> must belong
-  //! to a Shape added before.
-  Standard_EXPORT void Bind (const TopoDS_Edge& Eold, const TopoDS_Edge& Enew);
-  
-  //! Binds <VNew> to be a new vertex instead of <Vold>.
-  //!
-  //! The faces  of  the added  shape containing  <Vold>
-  //! will be copied to substitute <Vold> by <Vnew>.
-  Standard_EXPORT void Bind (const TopoDS_Vertex& Vold, const TopoDS_Vertex& Vnew);
-  
-  //! Add   the faces of  <S>  to  the Quilt,  the faces
-  //! containing bounded edges are copied.
-  Standard_EXPORT void Add (const TopoDS_Shape& S);
-  
-  //! Returns   True if <S> has   been  copied (<S> is a
-  //! vertex, an edge or a face)
-  Standard_EXPORT Standard_Boolean IsCopied (const TopoDS_Shape& S) const;
-  
-  //! Returns the shape substituted to <S> in the Quilt.
-  Standard_EXPORT const TopoDS_Shape& Copy (const TopoDS_Shape& S) const;
-  
-  //! Returns a Compound of shells made from the current
-  //! set of faces. The shells will be flagged as closed
-  //! or not closed.
-  Standard_EXPORT TopoDS_Shape Shells() const;
+
+    Standard_EXPORT BRepTools_Quilt();
+
+    //! Binds <Enew> to   be  the  new edge  instead   of
+    //! <Eold>.
+    //!
+    //! The faces  of  the added  shape containing  <Eold>
+    //! will be copied to substitute <Eold> by <Enew>.
+    //!
+    //! The vertices  of   <Eold> will   be bound to   the
+    //! vertices of <Enew> with the same orientation.
+    //!
+    //! If <Eold>  and <Enew>  have different orientations
+    //! the curves are considered  to be opposite  and the
+    //! pcurves of <Eold>  will be copied  and reversed in
+    //! the new faces.
+    //!
+    //! <Eold> must belong to the next added shape, <Enew> must belong
+    //! to a Shape added before.
+    Standard_EXPORT void Bind(const TopoDS_Edge& Eold, const TopoDS_Edge& Enew);
+
+    //! Binds <VNew> to be a new vertex instead of <Vold>.
+    //!
+    //! The faces  of  the added  shape containing  <Vold>
+    //! will be copied to substitute <Vold> by <Vnew>.
+    Standard_EXPORT void Bind(const TopoDS_Vertex& Vold, const TopoDS_Vertex& Vnew);
+
+    //! Add   the faces of  <S>  to  the Quilt,  the faces
+    //! containing bounded edges are copied.
+    Standard_EXPORT void Add(const TopoDS_Shape& S);
+
+    //! Returns   True if <S> has   been  copied (<S> is a
+    //! vertex, an edge or a face)
+    Standard_EXPORT Standard_Boolean IsCopied(const TopoDS_Shape& S) const;
+
+    //! Returns the shape substituted to <S> in the Quilt.
+    Standard_EXPORT const TopoDS_Shape& Copy(const TopoDS_Shape& S) const;
+
+    //! Returns a Compound of shells made from the current
+    //! set of faces. The shells will be flagged as closed
+    //! or not closed.
+    Standard_EXPORT TopoDS_Shape Shells() const;
 
 
 
@@ -103,8 +103,8 @@ private:
 
 
 
-  TopTools_IndexedDataMapOfShapeShape myBounds;
-  Standard_Boolean hasCopy;
+    TopTools_IndexedDataMapOfShapeShape myBounds;
+    Standard_Boolean hasCopy;
 
 
 };

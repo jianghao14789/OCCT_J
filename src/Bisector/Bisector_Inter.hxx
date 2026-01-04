@@ -36,7 +36,7 @@ class Bisector_Inter  : public IntRes2d_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Bisector_Inter();

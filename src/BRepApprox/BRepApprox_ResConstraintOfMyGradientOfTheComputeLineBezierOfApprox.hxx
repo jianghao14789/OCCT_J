@@ -40,7 +40,7 @@ class BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given a MultiLine SSP with constraints points, this

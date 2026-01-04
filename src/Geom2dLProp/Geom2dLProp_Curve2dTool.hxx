@@ -33,7 +33,7 @@ class Geom2dLProp_Curve2dTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the point <P> of parameter <U> on the curve <C>.

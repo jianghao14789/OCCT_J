@@ -32,7 +32,7 @@ class IntPolyh_Couple
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor
   IntPolyh_Couple() :

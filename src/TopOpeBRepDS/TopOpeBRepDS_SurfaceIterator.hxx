@@ -33,7 +33,7 @@ class TopOpeBRepDS_SurfaceIterator  : public TopOpeBRepDS_InterferenceIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an  iterator on the  Surfaces on solid

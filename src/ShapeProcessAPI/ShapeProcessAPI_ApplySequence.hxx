@@ -36,7 +36,7 @@ class ShapeProcessAPI_ApplySequence
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an object and loads resource file and sequence of

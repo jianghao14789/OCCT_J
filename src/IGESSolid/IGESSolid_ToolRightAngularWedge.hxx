@@ -39,7 +39,7 @@ class IGESSolid_ToolRightAngularWedge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolRightAngularWedge, ready to work

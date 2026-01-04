@@ -33,7 +33,7 @@ class math_FunctionSample
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT math_FunctionSample(const Standard_Real A, const Standard_Real B, const Standard_Integer N);

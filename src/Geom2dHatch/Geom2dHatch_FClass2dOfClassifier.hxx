@@ -40,7 +40,7 @@ class Geom2dHatch_FClass2dOfClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an undefined classifier.

@@ -31,7 +31,7 @@ class TopOpeBRepBuild_FuseFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     TopOpeBRepBuild_FuseFace();

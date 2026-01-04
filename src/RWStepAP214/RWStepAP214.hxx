@@ -56,7 +56,7 @@ class RWStepAP214
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! enforced the initialisation of the  libraries

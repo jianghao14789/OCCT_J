@@ -39,7 +39,7 @@ class IGESDimen_ToolGeneralSymbol
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolGeneralSymbol, ready to work

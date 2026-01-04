@@ -1,4 +1,4 @@
-// Created on: 2013-12-20
+﻿// Created on: 2013-12-20
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -27,63 +27,63 @@ class BVH_ObjectSet : public BVH_Set<T, N>
 {
 public:
 
-  //! Type of array of geometric objects.
-  typedef NCollection_Vector<opencascade::handle<BVH_Object<T, N> > > BVH_ObjectList;
+    //! Type of array of geometric objects.
+    typedef NCollection_Vector<opencascade::handle<BVH_Object<T, N> > > BVH_ObjectList;
 
 public:
 
-  //! Creates new set of geometric objects.
-  BVH_ObjectSet() {}
+    //! Creates new set of geometric objects.
+    BVH_ObjectSet() {}
 
-  //! Releases resources of set of geometric objects.
-  virtual ~BVH_ObjectSet() {}
+    //! Releases resources of set of geometric objects.
+    virtual ~BVH_ObjectSet() {}
 
 public:
 
-  //! Removes all geometric objects.
-  virtual void Clear()
-  {
-    for (typename BVH_ObjectList::Iterator anObjectIter (myObjects); anObjectIter.More(); anObjectIter.Next())
+    //! Removes all geometric objects.
+    virtual void Clear()
     {
-      anObjectIter.ChangeValue().Nullify();
+        for (typename BVH_ObjectList::Iterator anObjectIter(myObjects); anObjectIter.More(); anObjectIter.Next())
+        {
+            anObjectIter.ChangeValue().Nullify();
+        }
+        myObjects.Clear();
     }
-    myObjects.Clear();
-  }
 
-  //! Returns reference to the array of geometric objects.
-  BVH_ObjectList& Objects() { return myObjects; }
+    //! Returns reference to the array of geometric objects.
+    BVH_ObjectList& Objects() { return myObjects; }
 
-  //! Returns reference to the  array of geometric objects.
-  const BVH_ObjectList& Objects() const { return myObjects; }
+    //! Returns reference to the  array of geometric objects.
+    const BVH_ObjectList& Objects() const { return myObjects; }
 
 public:
 
-  //! Return total number of objects.
-  virtual Standard_Integer Size() const Standard_OVERRIDE { return myObjects.Size(); }
+    //! Return total number of objects.
+    virtual Standard_Integer Size() const Standard_OVERRIDE { return myObjects.Size(); }
 
-  //! Returns AABB of entire set of objects.
-  using BVH_Set<T, N>::Box;
+    //! Returns AABB of entire set of objects.
+    using BVH_Set<T, N>::Box;
 
-  //! Returns AABB of the given object.
-  virtual BVH_Box<T, N> Box (const Standard_Integer theIndex) const Standard_OVERRIDE { return myObjects.Value (theIndex)->Box(); }
+    //! Returns AABB of the given object.
+    virtual BVH_Box<T, N> Box(const Standard_Integer theIndex) const Standard_OVERRIDE { return myObjects.Value(theIndex)->Box(); }
 
-  //! Returns centroid position along the given axis.
-  virtual T Center (const Standard_Integer theIndex, const Standard_Integer theAxis) const Standard_OVERRIDE
-  {
-    // Note: general implementation, not optimal
-    return BVH::CenterAxis<T, N>::Center (myObjects.Value (theIndex)->Box(), theAxis);
-  }
+    //! Returns centroid position along the given axis.
+    virtual T Center(const Standard_Integer theIndex, const Standard_Integer theAxis) const Standard_OVERRIDE
+    {
+        // Note: general implementation, not optimal
+        return BVH::CenterAxis<T, N>::Center(myObjects.Value(theIndex)->Box(), theAxis);
+    }
 
-  //! Performs transposing the two given objects in the set.
-  virtual void Swap (const Standard_Integer theIndex1, const Standard_Integer theIndex2) Standard_OVERRIDE
-  {
-    std::swap (myObjects.ChangeValue (theIndex1),
-               myObjects.ChangeValue (theIndex2));
-  }
+    //! Performs transposing the two given objects in the set.
+    virtual void Swap(const Standard_Integer theIndex1, const Standard_Integer theIndex2) Standard_OVERRIDE
+    {
+        std::swap(myObjects.ChangeValue(theIndex1),
+            myObjects.ChangeValue(theIndex2));
+    }
 
 protected:
 
-  BVH_ObjectList myObjects; //!< Array of geometric objects
+    BVH_ObjectList myObjects; //!< Array of geometric objects
 
 };
 

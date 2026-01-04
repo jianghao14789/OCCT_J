@@ -31,7 +31,7 @@ class TopOpeBRepBuild_GTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static TopOpeBRepBuild_GTopo GFusUnsh (const TopAbs_ShapeEnum s1, const TopAbs_ShapeEnum s2);

@@ -62,7 +62,7 @@ class BOPAlgo_EdgeFace :
   public BOPAlgo_ParallelAlgo {
  
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   BOPAlgo_EdgeFace() : 
     IntTools_EdgeFace(), 

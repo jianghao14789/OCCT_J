@@ -45,7 +45,7 @@ class GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox  : public 
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the fields of the function. The approximating

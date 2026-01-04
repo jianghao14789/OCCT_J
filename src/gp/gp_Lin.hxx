@@ -41,7 +41,7 @@ class gp_Lin
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a Line corresponding to Z axis of the
   //! reference coordinate system.

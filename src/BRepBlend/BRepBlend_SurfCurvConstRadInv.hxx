@@ -39,7 +39,7 @@ class BRepBlend_SurfCurvConstRadInv  : public Blend_SurfCurvFuncInv
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_SurfCurvConstRadInv(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C, const Handle(Adaptor3d_Curve)& Cg);

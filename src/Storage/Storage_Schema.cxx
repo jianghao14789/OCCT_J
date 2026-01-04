@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -46,7 +46,7 @@
 
 #include <locale.h>
 #include <stdio.h>
-IMPLEMENT_STANDARD_RTTIEXT(Storage_Schema,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Storage_Schema, Standard_Transient)
 
 #define DATATYPE_MIGRATION
 
@@ -57,8 +57,8 @@ IMPLEMENT_STANDARD_RTTIEXT(Storage_Schema,Standard_Transient)
 #include <OSD_Protection.hxx>
 #include <OSD_Environment.hxx>
 
-typedef NCollection_DataMap <TCollection_AsciiString, 
-  TCollection_AsciiString> DataMapOfAStringAString;
+typedef NCollection_DataMap <TCollection_AsciiString,
+    TCollection_AsciiString> DataMapOfAStringAString;
 
 #endif
 
@@ -66,10 +66,10 @@ typedef NCollection_DataMap <TCollection_AsciiString,
 //
 Storage_Bucket::~Storage_Bucket()
 {
-  Standard::Free (mySpace);
-  mySpace = 0L;
-  mySpaceSize = 0;
-  Clear();
+    Standard::Free(mySpace);
+    mySpace = 0L;
+    mySpaceSize = 0;
+    Clear();
 }
 
 //=======================================================================
@@ -79,7 +79,7 @@ Storage_Bucket::~Storage_Bucket()
 
 void Storage_Bucket::Clear()
 {
-  myCurrentSpace = -1;
+    myCurrentSpace = -1;
 }
 
 //=======================================================================
@@ -87,10 +87,10 @@ void Storage_Bucket::Clear()
 //purpose  : 
 //=======================================================================
 
-void Storage_Bucket::Append(Standard_Persistent *sp)
+void Storage_Bucket::Append(Standard_Persistent* sp)
 {
-  myCurrentSpace++;
-  mySpace[myCurrentSpace] = sp;
+    myCurrentSpace++;
+    mySpace[myCurrentSpace] = sp;
 }
 
 //=======================================================================
@@ -99,9 +99,9 @@ void Storage_Bucket::Append(Standard_Persistent *sp)
 //=======================================================================
 
 Standard_Persistent* Storage_Bucket::Value
-                         (const Standard_Integer theIndex) const
+(const Standard_Integer theIndex) const
 {
-  return mySpace[theIndex];
+    return mySpace[theIndex];
 }
 
 //=======================================================================
@@ -110,17 +110,17 @@ Standard_Persistent* Storage_Bucket::Value
 //=======================================================================
 
 Storage_BucketOfPersistent::Storage_BucketOfPersistent
-                         (const Standard_Integer theBucketSize,
-                          const Standard_Integer theBucketNumber)
-: myNumberOfBucket(1),myNumberOfBucketAllocated(theBucketNumber),myBucketSize
-                         (theBucketSize)
+(const Standard_Integer theBucketSize,
+    const Standard_Integer theBucketNumber)
+    : myNumberOfBucket(1), myNumberOfBucketAllocated(theBucketNumber), myBucketSize
+    (theBucketSize)
 {
-  myBuckets =  (Storage_Bucket**)Standard::Allocate
-                         (sizeof(Storage_Bucket*) * theBucketNumber);
-  myBuckets[0] = new Storage_Bucket(myBucketSize);
-  myCurrentBucket = myBuckets[0];
-  myLength = 0;
-  myCurrentBucketNumber = 0;
+    myBuckets = (Storage_Bucket**)Standard::Allocate
+    (sizeof(Storage_Bucket*) * theBucketNumber);
+    myBuckets[0] = new Storage_Bucket(myBucketSize);
+    myCurrentBucket = myBuckets[0];
+    myLength = 0;
+    myCurrentBucketNumber = 0;
 }
 
 //=======================================================================
@@ -130,24 +130,24 @@ Storage_BucketOfPersistent::Storage_BucketOfPersistent
 
 void Storage_BucketOfPersistent::Clear()
 {
-  if (myBuckets) {
-    Standard_Integer i;
+    if (myBuckets) {
+        Standard_Integer i;
 
-    for (i = 1; i < myNumberOfBucket; i++) delete myBuckets[i];
-    myNumberOfBucket = 1;
-    myCurrentBucket = myBuckets[0];
-    myCurrentBucket->Clear();
-    myCurrentBucketNumber = 0;
-    myLength = 0;
-  }
+        for (i = 1; i < myNumberOfBucket; i++) delete myBuckets[i];
+        myNumberOfBucket = 1;
+        myCurrentBucket = myBuckets[0];
+        myCurrentBucket->Clear();
+        myCurrentBucketNumber = 0;
+        myLength = 0;
+    }
 }
 
 Storage_BucketOfPersistent::~Storage_BucketOfPersistent()
 {
-  Clear();
-  delete myBuckets[0];
-  Standard::Free (myBuckets);
-  myBuckets = 0L;
+    Clear();
+    delete myBuckets[0];
+    Standard::Free(myBuckets);
+    myBuckets = 0L;
 }
 
 //=======================================================================
@@ -156,13 +156,13 @@ Storage_BucketOfPersistent::~Storage_BucketOfPersistent()
 //=======================================================================
 
 Standard_Persistent* Storage_BucketOfPersistent::Value
-                         (const Standard_Integer theIndex)
+(const Standard_Integer theIndex)
 {
-  Standard_Integer theInd,theCurrentBucketNumber,tecurrentind = theIndex - 1;
-  theCurrentBucketNumber = tecurrentind / myBucketSize;
-  theInd = tecurrentind - (myBucketSize * theCurrentBucketNumber);
+    Standard_Integer theInd, theCurrentBucketNumber, tecurrentind = theIndex - 1;
+    theCurrentBucketNumber = tecurrentind / myBucketSize;
+    theInd = tecurrentind - (myBucketSize * theCurrentBucketNumber);
 
-  return myBuckets[theCurrentBucketNumber]->mySpace[theInd];
+    return myBuckets[theCurrentBucketNumber]->mySpace[theInd];
 
 }
 
@@ -173,29 +173,29 @@ Standard_Persistent* Storage_BucketOfPersistent::Value
 
 void Storage_BucketOfPersistent::Append(const Handle(Standard_Persistent)& sp)
 {
-  myCurrentBucket->myCurrentSpace++;
+    myCurrentBucket->myCurrentSpace++;
 
-  if (myCurrentBucket->myCurrentSpace != myBucketSize) {
+    if (myCurrentBucket->myCurrentSpace != myBucketSize) {
+        myLength++;
+        myCurrentBucket->mySpace[myCurrentBucket->myCurrentSpace] = sp.get();
+        return;
+    }
+
+    myCurrentBucket->myCurrentSpace--;
+    myNumberOfBucket++;
+    myCurrentBucketNumber++;
+
+    if (myNumberOfBucket > myNumberOfBucketAllocated) {
+        Standard_Size e = sizeof(Storage_Bucket*) * myNumberOfBucketAllocated;
+        myBuckets = (Storage_Bucket**)Standard::Reallocate(myBuckets, e * 2);
+        myNumberOfBucketAllocated *= 2;
+    }
+
+    myBuckets[myCurrentBucketNumber] = new Storage_Bucket(myBucketSize);
+    myCurrentBucket = myBuckets[myCurrentBucketNumber];
+    myCurrentBucket->myCurrentSpace++;
     myLength++;
     myCurrentBucket->mySpace[myCurrentBucket->myCurrentSpace] = sp.get();
-    return;
-  }
-
-  myCurrentBucket->myCurrentSpace--;
-  myNumberOfBucket++;
-  myCurrentBucketNumber++;
-
-  if (myNumberOfBucket > myNumberOfBucketAllocated) {
-    Standard_Size e = sizeof(Storage_Bucket*) * myNumberOfBucketAllocated;
-    myBuckets =  (Storage_Bucket**)Standard::Reallocate(myBuckets, e * 2);
-    myNumberOfBucketAllocated *= 2;
-  }
-
-  myBuckets[myCurrentBucketNumber] = new Storage_Bucket(myBucketSize);
-  myCurrentBucket = myBuckets[myCurrentBucketNumber];
-  myCurrentBucket->myCurrentSpace++;
-  myLength++;
-  myCurrentBucket->mySpace[myCurrentBucket->myCurrentSpace] = sp.get();
 }
 
 //=======================================================================
@@ -204,19 +204,19 @@ void Storage_BucketOfPersistent::Append(const Handle(Standard_Persistent)& sp)
 //=======================================================================
 
 Storage_BucketIterator::Storage_BucketIterator
-                         (Storage_BucketOfPersistent* aBucketManager)
-: myBucket(0), myCurrentBucket(0),
-  myCurrentBucketIndex(0), myCurrentIndex(0),
-  myBucketNumber(0), myMoreObject(Standard_False)
+(Storage_BucketOfPersistent* aBucketManager)
+    : myBucket(0), myCurrentBucket(0),
+    myCurrentBucketIndex(0), myCurrentIndex(0),
+    myBucketNumber(0), myMoreObject(Standard_False)
 {
-  if (aBucketManager) {
-    myBucket             = aBucketManager;
-    myCurrentBucket      = myBucket->myBuckets[0];
-    myBucketNumber       = aBucketManager->myNumberOfBucket;
-    myCurrentBucketIndex = 0;
-    myCurrentIndex       = 0;
-    myMoreObject         = Standard_True;
-  }
+    if (aBucketManager) {
+        myBucket = aBucketManager;
+        myCurrentBucket = myBucket->myBuckets[0];
+        myBucketNumber = aBucketManager->myNumberOfBucket;
+        myCurrentBucketIndex = 0;
+        myCurrentIndex = 0;
+        myMoreObject = Standard_True;
+    }
 }
 
 //=======================================================================
@@ -226,14 +226,14 @@ Storage_BucketIterator::Storage_BucketIterator
 
 void Storage_BucketIterator::Reset()
 {
-  if (myBucket) {
-    myCurrentBucket = myBucket->myBuckets[0];
-    myBucketNumber  = myBucket->myNumberOfBucket;
-    myCurrentIndex  = 0;
-    myCurrentBucketIndex = 0;
-    myMoreObject = Standard_True;
-  }
-  else myMoreObject         = Standard_False;
+    if (myBucket) {
+        myCurrentBucket = myBucket->myBuckets[0];
+        myBucketNumber = myBucket->myNumberOfBucket;
+        myCurrentIndex = 0;
+        myCurrentBucketIndex = 0;
+        myMoreObject = Standard_True;
+    }
+    else myMoreObject = Standard_False;
 }
 
 //=======================================================================
@@ -243,15 +243,15 @@ void Storage_BucketIterator::Reset()
 
 void Storage_BucketIterator::Init(Storage_BucketOfPersistent* aBucketManager)
 {
-  if (aBucketManager) {
-    myBucket        = aBucketManager;
-    myCurrentBucket = myBucket->myBuckets[0];
-    myBucketNumber  = aBucketManager->myNumberOfBucket;
-    myCurrentIndex  = 0;
-    myCurrentBucketIndex = 0;
-    myMoreObject = Standard_True;
-  }
-  else myMoreObject         = Standard_False;
+    if (aBucketManager) {
+        myBucket = aBucketManager;
+        myCurrentBucket = myBucket->myBuckets[0];
+        myBucketNumber = aBucketManager->myNumberOfBucket;
+        myCurrentIndex = 0;
+        myCurrentBucketIndex = 0;
+        myMoreObject = Standard_True;
+    }
+    else myMoreObject = Standard_False;
 }
 
 //=======================================================================
@@ -261,21 +261,21 @@ void Storage_BucketIterator::Init(Storage_BucketOfPersistent* aBucketManager)
 
 void Storage_BucketIterator::Next()
 {
-  if (!myMoreObject) return;
+    if (!myMoreObject) return;
 
-  if (myCurrentIndex < myCurrentBucket->myCurrentSpace) {
-    myCurrentIndex++;
-  }
-  else {
-    myCurrentIndex = 0;
-    myCurrentBucketIndex++;
-    if (myCurrentBucketIndex < myBucketNumber) {
-      myCurrentBucket = myBucket->myBuckets[myCurrentBucketIndex];
+    if (myCurrentIndex < myCurrentBucket->myCurrentSpace) {
+        myCurrentIndex++;
     }
     else {
-      myMoreObject = Standard_False;
+        myCurrentIndex = 0;
+        myCurrentBucketIndex++;
+        if (myCurrentBucketIndex < myBucketNumber) {
+            myCurrentBucket = myBucket->myBuckets[myCurrentBucketIndex];
+        }
+        else {
+            myMoreObject = Standard_False;
+        }
     }
-  }
 }
 
 //=======================================================================
@@ -286,9 +286,9 @@ void Storage_BucketIterator::Next()
 
 Storage_Schema::Storage_Schema()
 {
-  Clear();
-  ResetDefaultCallBack();
-  myCallBackState = Standard_False;
+    Clear();
+    ResetDefaultCallBack();
+    myCallBackState = Standard_False;
 }
 
 //=======================================================================
@@ -298,7 +298,7 @@ Storage_Schema::Storage_Schema()
 
 void Storage_Schema::SetVersion(const TCollection_AsciiString& aVersion)
 {
-  myVersion = aVersion;
+    myVersion = aVersion;
 }
 
 //=======================================================================
@@ -308,7 +308,7 @@ void Storage_Schema::SetVersion(const TCollection_AsciiString& aVersion)
 
 TCollection_AsciiString Storage_Schema::Version() const
 {
-  return myVersion;
+    return myVersion;
 }
 
 //=======================================================================
@@ -318,7 +318,7 @@ TCollection_AsciiString Storage_Schema::Version() const
 
 void Storage_Schema::SetName(const TCollection_AsciiString& aSchemaName)
 {
-  myName = aSchemaName;
+    myName = aSchemaName;
 }
 
 //=======================================================================
@@ -328,7 +328,7 @@ void Storage_Schema::SetName(const TCollection_AsciiString& aSchemaName)
 
 TCollection_AsciiString Storage_Schema::Name() const
 {
-  return myName;
+    return myName;
 }
 
 //=======================================================================
@@ -340,163 +340,163 @@ TCollection_AsciiString Storage_Schema::Name() const
 //           VSReadWrite
 //=======================================================================
 
-void Storage_Schema::Write (const Handle(Storage_BaseDriver)& theDriver,
-                            const Handle(Storage_Data)& aData) const
+void Storage_Schema::Write(const Handle(Storage_BaseDriver)& theDriver,
+    const Handle(Storage_Data)& aData) const
 {
- if (aData.IsNull()) return;
+    if (aData.IsNull()) return;
 
-  // add all the persistent to write...
-  //
-  Standard_Integer                 posfrom,posto;
-  Handle(Standard_Persistent)      p;
-  Handle(Storage_HSeqOfRoot)       plist;
-  TCollection_AsciiString          errorContext("AddPersistent");
-  Storage_Schema::ISetCurrentData(aData);
+    // add all the persistent to write...
+    //
+    Standard_Integer                 posfrom, posto;
+    Handle(Standard_Persistent)      p;
+    Handle(Storage_HSeqOfRoot)       plist;
+    TCollection_AsciiString          errorContext("AddPersistent");
+    Storage_Schema::ISetCurrentData(aData);
 
-  Handle(Storage_InternalData) iData = aData->InternalData();
+    Handle(Storage_InternalData) iData = aData->InternalData();
 
-  aData->Clear();
-  aData->ClearErrorStatus();
+    aData->Clear();
+    aData->ClearErrorStatus();
 
-  plist = aData->Roots();
+    plist = aData->Roots();
 
-  for (posto = 1; posto <= plist->Length(); posto++) {
-    PersistentToAdd(plist->Value(posto)->Object());
-  }
+    for (posto = 1; posto <= plist->Length(); posto++) {
+        PersistentToAdd(plist->Value(posto)->Object());
+    }
 
-  for (posto = 1; posto <= plist->Length(); posto++) {
-//    AddTypeSelection(plist->Value(posto)->Object());
-  }
+    for (posto = 1; posto <= plist->Length(); posto++) {
+        //    AddTypeSelection(plist->Value(posto)->Object());
+    }
 
-  for (posfrom = plist->Length() + 1; posfrom <= iData->myPtoA.Length(); posfrom++) {
-//    AddTypeSelection(iData->myPtoA.Value(posfrom));
-  }
+    for (posfrom = plist->Length() + 1; posfrom <= iData->myPtoA.Length(); posfrom++) {
+        //    AddTypeSelection(iData->myPtoA.Value(posfrom));
+    }
 
-  // ...and now we write
-  //
-  Standard_Integer            i,
-                              len;
+    // ...and now we write
+    //
+    Standard_Integer            i,
+        len;
 
- aData->HeaderData()->SetCreationDate(ICreationDate());
- aData->HeaderData()->SetStorageVersion(Storage::Version());
- aData->HeaderData()->SetNumberOfObjects(iData->myPtoA.Length());
- aData->HeaderData()->SetSchemaName(myName);
- aData->HeaderData()->SetSchemaVersion(myVersion);
+    aData->HeaderData()->SetCreationDate(ICreationDate());
+    aData->HeaderData()->SetStorageVersion(Storage::Version());
+    aData->HeaderData()->SetNumberOfObjects(iData->myPtoA.Length());
+    aData->HeaderData()->SetSchemaName(myName);
+    aData->HeaderData()->SetSchemaVersion(myVersion);
 
-  if ((theDriver->OpenMode() == Storage_VSWrite) || (theDriver->OpenMode() == Storage_VSReadWrite)) {
-    try {
-      OCC_CATCH_SIGNALS
-      errorContext = "BeginWriteInfoSection";
-      theDriver->BeginWriteInfoSection();
-      errorContext = "WriteInfo";
-      theDriver->WriteInfo(aData->NumberOfObjects(),
-                           aData->StorageVersion(),
-                           aData->CreationDate(),
-                           aData->SchemaName(),
-                           aData->SchemaVersion(),
-                           aData->ApplicationName(),
-                           aData->ApplicationVersion(),
-                           aData->DataType(),
-                           aData->UserInfo());
-      errorContext = "EndWriteInfoSection";
-      theDriver->EndWriteInfoSection();
+    if ((theDriver->OpenMode() == Storage_VSWrite) || (theDriver->OpenMode() == Storage_VSReadWrite)) {
+        try {
+            OCC_CATCH_SIGNALS
+                errorContext = "BeginWriteInfoSection";
+            theDriver->BeginWriteInfoSection();
+            errorContext = "WriteInfo";
+            theDriver->WriteInfo(aData->NumberOfObjects(),
+                aData->StorageVersion(),
+                aData->CreationDate(),
+                aData->SchemaName(),
+                aData->SchemaVersion(),
+                aData->ApplicationName(),
+                aData->ApplicationVersion(),
+                aData->DataType(),
+                aData->UserInfo());
+            errorContext = "EndWriteInfoSection";
+            theDriver->EndWriteInfoSection();
 
-      errorContext = "BeginWriteCommentSection";
-      theDriver->BeginWriteCommentSection();
-      errorContext = "WriteComment";
-      theDriver->WriteComment(aData->Comments());
-      errorContext = "EndWriteCommentSection";
-      theDriver->EndWriteCommentSection();
+            errorContext = "BeginWriteCommentSection";
+            theDriver->BeginWriteCommentSection();
+            errorContext = "WriteComment";
+            theDriver->WriteComment(aData->Comments());
+            errorContext = "EndWriteCommentSection";
+            theDriver->EndWriteCommentSection();
 
-      Handle(TColStd_HSequenceOfAsciiString) tlist;
+            Handle(TColStd_HSequenceOfAsciiString) tlist;
 
-      tlist = aData->Types();
+            tlist = aData->Types();
 
-      errorContext = "BeginWriteTypeSection";
-      theDriver->BeginWriteTypeSection();
-      len = aData->NumberOfTypes();
+            errorContext = "BeginWriteTypeSection";
+            theDriver->BeginWriteTypeSection();
+            len = aData->NumberOfTypes();
 
-      Handle(Storage_HArrayOfCallBack) WFunc = new Storage_HArrayOfCallBack(1,len);
+            Handle(Storage_HArrayOfCallBack) WFunc = new Storage_HArrayOfCallBack(1, len);
 
-      theDriver->SetTypeSectionSize(len);
+            theDriver->SetTypeSectionSize(len);
 
-      Storage_DataMapIteratorOfMapOfCallBack cbit(iData->myTypeBinding);
-      Handle(Storage_TypedCallBack) atcallBack;
+            Storage_DataMapIteratorOfMapOfCallBack cbit(iData->myTypeBinding);
+            Handle(Storage_TypedCallBack) atcallBack;
 
-      for (; cbit.More(); cbit.Next()) {
-        atcallBack = cbit.Value();
-        WFunc->SetValue(atcallBack->Index(),atcallBack->CallBack());
-      }
+            for (; cbit.More(); cbit.Next()) {
+                atcallBack = cbit.Value();
+                WFunc->SetValue(atcallBack->Index(), atcallBack->CallBack());
+            }
 
-      errorContext = "WriteTypeInformations";
-      for (i = 1; i <= len; i++) {
-        theDriver->WriteTypeInformations(i,tlist->Value(i).ToCString());
-      }
+            errorContext = "WriteTypeInformations";
+            for (i = 1; i <= len; i++) {
+                theDriver->WriteTypeInformations(i, tlist->Value(i).ToCString());
+            }
 
-      errorContext = "EndWriteTypeSection";
-      theDriver->EndWriteTypeSection();
+            errorContext = "EndWriteTypeSection";
+            theDriver->EndWriteTypeSection();
 
-      errorContext = "BeginWriteRootSection";
-      theDriver->BeginWriteRootSection();
-      theDriver->SetRootSectionSize(plist->Length());
+            errorContext = "BeginWriteRootSection";
+            theDriver->BeginWriteRootSection();
+            theDriver->SetRootSectionSize(plist->Length());
 
-      errorContext = "WriteRoot";
-      for (i = 1; i <= plist->Length(); i++) {
-        theDriver->WriteRoot(plist->Value(i)->Name(),i,"PDocStd_Document");
-      }
+            errorContext = "WriteRoot";
+            for (i = 1; i <= plist->Length(); i++) {
+                theDriver->WriteRoot(plist->Value(i)->Name(), i, "PDocStd_Document");
+            }
 
-      errorContext = "EndWriteRootSection";
-      theDriver->EndWriteRootSection();
+            errorContext = "EndWriteRootSection";
+            theDriver->EndWriteRootSection();
 
-      errorContext = "BeginWriteRefSection";
-      theDriver->BeginWriteRefSection();
-      theDriver->SetRefSectionSize(iData->myObjId - 1);
-      errorContext = "WriteReferenceType";
+            errorContext = "BeginWriteRefSection";
+            theDriver->BeginWriteRefSection();
+            theDriver->SetRefSectionSize(iData->myObjId - 1);
+            errorContext = "WriteReferenceType";
 
-      Storage_BucketIterator bit(&iData->myPtoA);
+            Storage_BucketIterator bit(&iData->myPtoA);
 
-      while(bit.More()) {
-        p = bit.Value();
-        if (!p.IsNull()) theDriver->WriteReferenceType(p->_refnum,p->_typenum);
-        bit.Next();
-      }
+            while (bit.More()) {
+                p = bit.Value();
+                if (!p.IsNull()) theDriver->WriteReferenceType(p->_refnum, p->_typenum);
+                bit.Next();
+            }
 
-      errorContext = "EndWriteRefSection";
-      theDriver->EndWriteRefSection();
+            errorContext = "EndWriteRefSection";
+            theDriver->EndWriteRefSection();
 
-      errorContext = "BeginWriteDataSection";
-      theDriver->BeginWriteDataSection();
+            errorContext = "BeginWriteDataSection";
+            theDriver->BeginWriteDataSection();
 
-      Handle(Storage_Schema) me = this;
+            Handle(Storage_Schema) me = this;
 
-      errorContext = "Write";
+            errorContext = "Write";
 
-      bit.Reset();
+            bit.Reset();
 
-      while(bit.More()) {
-        p = bit.Value();
-        if (!p.IsNull()) {
-          WFunc->Value(p->_typenum)->Write(p, theDriver, me);
-          p->_typenum = 0;
+            while (bit.More()) {
+                p = bit.Value();
+                if (!p.IsNull()) {
+                    WFunc->Value(p->_typenum)->Write(p, theDriver, me);
+                    p->_typenum = 0;
+                }
+                bit.Next();
+            }
+
+            errorContext = "EndWriteDataSection";
+            theDriver->EndWriteDataSection();
         }
-        bit.Next();
-      }
-
-      errorContext = "EndWriteDataSection";
-      theDriver->EndWriteDataSection();
+        catch (Storage_StreamWriteError const&) {
+            aData->SetErrorStatus(Storage_VSWriteError);
+            aData->SetErrorStatusExtension(errorContext);
+        }
     }
-    catch(Storage_StreamWriteError const&) {
-      aData->SetErrorStatus(Storage_VSWriteError);
-      aData->SetErrorStatusExtension(errorContext);
+    else {
+        aData->SetErrorStatus(Storage_VSModeError);
+        aData->SetErrorStatusExtension("OpenMode");
     }
-  }
-  else {
-    aData->SetErrorStatus(Storage_VSModeError);
-    aData->SetErrorStatusExtension("OpenMode");
-  }
 
-  iData->Clear();
-  Clear();
+    iData->Clear();
+    Clear();
 }
 
 //=======================================================================
@@ -505,14 +505,14 @@ void Storage_Schema::Write (const Handle(Storage_BaseDriver)& theDriver,
 //=======================================================================
 
 void Storage_Schema::AddReadUnknownTypeCallBack
-                         (const TCollection_AsciiString& aTypeName,
-                          const Handle(Storage_CallBack)& aCallBack)
+(const TCollection_AsciiString& aTypeName,
+    const Handle(Storage_CallBack)& aCallBack)
 {
-  if (!aCallBack.IsNull()) {
-     Handle(Storage_TypedCallBack) aTCallBack = new Storage_TypedCallBack(aTypeName,aCallBack);
+    if (!aCallBack.IsNull()) {
+        Handle(Storage_TypedCallBack) aTCallBack = new Storage_TypedCallBack(aTypeName, aCallBack);
 
-     myCallBack.Bind(aTypeName,aTCallBack);
-  }
+        myCallBack.Bind(aTypeName, aTCallBack);
+    }
 }
 
 //=======================================================================
@@ -521,11 +521,11 @@ void Storage_Schema::AddReadUnknownTypeCallBack
 //=======================================================================
 
 void Storage_Schema::RemoveReadUnknownTypeCallBack
-                         (const TCollection_AsciiString& aTypeName)
+(const TCollection_AsciiString& aTypeName)
 {
-  if (myCallBack.IsBound(aTypeName)) {
-    myCallBack.UnBind(aTypeName);
-  }
+    if (myCallBack.IsBound(aTypeName)) {
+        myCallBack.UnBind(aTypeName);
+    }
 }
 
 //=======================================================================
@@ -535,16 +535,16 @@ void Storage_Schema::RemoveReadUnknownTypeCallBack
 //=======================================================================
 
 Handle(TColStd_HSequenceOfAsciiString) Storage_Schema::
-                          InstalledCallBackList() const
+InstalledCallBackList() const
 {
-  Storage_DataMapIteratorOfMapOfCallBack it(myCallBack);
-  Handle(TColStd_HSequenceOfAsciiString) result = new TColStd_HSequenceOfAsciiString;
+    Storage_DataMapIteratorOfMapOfCallBack it(myCallBack);
+    Handle(TColStd_HSequenceOfAsciiString) result = new TColStd_HSequenceOfAsciiString;
 
-  for (; it.More(); it.Next()) {
-    result->Append(it.Key());
-  }
+    for (; it.More(); it.Next()) {
+        result->Append(it.Key());
+    }
 
-  return result;
+    return result;
 }
 
 //=======================================================================
@@ -554,7 +554,7 @@ Handle(TColStd_HSequenceOfAsciiString) Storage_Schema::
 
 void Storage_Schema::ClearCallBackList()
 {
-  myCallBack.Clear();
+    myCallBack.Clear();
 }
 
 //=======================================================================
@@ -566,7 +566,7 @@ void Storage_Schema::ClearCallBackList()
 
 void Storage_Schema::UseDefaultCallBack()
 {
-  myCallBackState = Standard_True;
+    myCallBackState = Standard_True;
 }
 
 //=======================================================================
@@ -576,7 +576,7 @@ void Storage_Schema::UseDefaultCallBack()
 
 void Storage_Schema::DontUseDefaultCallBack()
 {
-  myCallBackState = Standard_False;
+    myCallBackState = Standard_False;
 }
 
 //=======================================================================
@@ -586,7 +586,7 @@ void Storage_Schema::DontUseDefaultCallBack()
 
 Standard_Boolean Storage_Schema::IsUsingDefaultCallBack() const
 {
-  return myCallBackState;
+    return myCallBackState;
 }
 
 //=======================================================================
@@ -598,7 +598,7 @@ Standard_Boolean Storage_Schema::IsUsingDefaultCallBack() const
 
 void Storage_Schema::SetDefaultCallBack(const Handle(Storage_CallBack)& f)
 {
-  myDefaultCallBack = f;
+    myDefaultCallBack = f;
 }
 
 //=======================================================================
@@ -609,7 +609,7 @@ void Storage_Schema::SetDefaultCallBack(const Handle(Storage_CallBack)& f)
 
 void Storage_Schema::ResetDefaultCallBack()
 {
-  myDefaultCallBack = new Storage_DefaultCallBack;
+    myDefaultCallBack = new Storage_DefaultCallBack;
 }
 
 //=======================================================================
@@ -620,7 +620,7 @@ void Storage_Schema::ResetDefaultCallBack()
 
 Handle(Storage_CallBack) Storage_Schema::DefaultCallBack() const
 {
-  return myDefaultCallBack;
+    return myDefaultCallBack;
 }
 
 //=======================================================================
@@ -629,18 +629,18 @@ Handle(Storage_CallBack) Storage_Schema::DefaultCallBack() const
 //=======================================================================
 
 void Storage_Schema::BindType
-                         (const TCollection_AsciiString& aTypeName,
-                          const Handle(Storage_CallBack)& aCallBack) const
+(const TCollection_AsciiString& aTypeName,
+    const Handle(Storage_CallBack)& aCallBack) const
 {
-  if (!HasTypeBinding(aTypeName)) {
-      Handle(Storage_InternalData) iData = Storage_Schema::ICurrentData()->InternalData();
-      Handle(Storage_TypeData) tData = Storage_Schema::ICurrentData()->TypeData();
-      Handle(Storage_TypedCallBack) c = new Storage_TypedCallBack(aTypeName,aCallBack);
+    if (!HasTypeBinding(aTypeName)) {
+        Handle(Storage_InternalData) iData = Storage_Schema::ICurrentData()->InternalData();
+        Handle(Storage_TypeData) tData = Storage_Schema::ICurrentData()->TypeData();
+        Handle(Storage_TypedCallBack) c = new Storage_TypedCallBack(aTypeName, aCallBack);
 
-      tData->AddType(aTypeName,iData->myTypeId);
-      c->SetIndex(iData->myTypeId++);
-      iData->myTypeBinding.Bind(aTypeName,c);
-  }
+        tData->AddType(aTypeName, iData->myTypeId);
+        c->SetIndex(iData->myTypeId++);
+        iData->myTypeBinding.Bind(aTypeName, c);
+    }
 }
 
 //=======================================================================
@@ -649,17 +649,17 @@ void Storage_Schema::BindType
 //=======================================================================
 
 Handle(Storage_CallBack) Storage_Schema::TypeBinding
-                         (const TCollection_AsciiString& aTypeName) const
+(const TCollection_AsciiString& aTypeName) const
 {
-  Handle(Storage_CallBack) result;
+    Handle(Storage_CallBack) result;
 
-  if (HasTypeBinding(aTypeName)) {
-    Handle(Storage_InternalData) iData = Storage_Schema::ICurrentData()->InternalData();
+    if (HasTypeBinding(aTypeName)) {
+        Handle(Storage_InternalData) iData = Storage_Schema::ICurrentData()->InternalData();
 
-    result =  iData->myTypeBinding.Find(aTypeName)->CallBack();
-  }
+        result = iData->myTypeBinding.Find(aTypeName)->CallBack();
+    }
 
-  return result;
+    return result;
 }
 
 //=======================================================================
@@ -668,30 +668,30 @@ Handle(Storage_CallBack) Storage_Schema::TypeBinding
 //=======================================================================
 
 Standard_Boolean Storage_Schema::AddPersistent
-                         (const Handle(Standard_Persistent)& sp,
-                          const Standard_CString tName) const
+(const Handle(Standard_Persistent)& sp,
+    const Standard_CString tName) const
 {
-  Standard_Boolean result = Standard_False;
+    Standard_Boolean result = Standard_False;
 
-  if (!sp.IsNull()) {
-    Handle(Storage_InternalData)     iData = Storage_Schema::ICurrentData()->InternalData();
+    if (!sp.IsNull()) {
+        Handle(Storage_InternalData)     iData = Storage_Schema::ICurrentData()->InternalData();
 
-    if (sp->_typenum == 0) {
-      Standard_Integer         aTypenum;
-      static TCollection_AsciiString  aTypeName;
-      aTypeName = tName;
-      Handle(Storage_TypeData) tData = Storage_Schema::ICurrentData()->TypeData();
+        if (sp->_typenum == 0) {
+            Standard_Integer         aTypenum;
+            static TCollection_AsciiString  aTypeName;
+            aTypeName = tName;
+            Handle(Storage_TypeData) tData = Storage_Schema::ICurrentData()->TypeData();
 
-      aTypenum = iData->myTypeBinding.Find(aTypeName)->Index();
+            aTypenum = iData->myTypeBinding.Find(aTypeName)->Index();
 
-      sp->_typenum = aTypenum;
-      sp->_refnum = iData->myObjId++;
+            sp->_typenum = aTypenum;
+            sp->_refnum = iData->myObjId++;
 
-      result = Standard_True;
+            result = Standard_True;
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 //=======================================================================
@@ -700,21 +700,21 @@ Standard_Boolean Storage_Schema::AddPersistent
 //=======================================================================
 
 Standard_Boolean Storage_Schema::PersistentToAdd
-                         (const Handle(Standard_Persistent)& sp) const
+(const Handle(Standard_Persistent)& sp) const
 {
- Standard_Boolean result = Standard_False;
+    Standard_Boolean result = Standard_False;
 
-  if (!sp.IsNull()) {
-    Handle(Storage_InternalData) di = Storage_Schema::ICurrentData()->InternalData();
+    if (!sp.IsNull()) {
+        Handle(Storage_InternalData) di = Storage_Schema::ICurrentData()->InternalData();
 
-    if (sp->_typenum == 0 && sp->_refnum != -1) {
-      result = Standard_True;
-      sp->_refnum = -1;
-      di->myPtoA.Append(sp);
+        if (sp->_typenum == 0 && sp->_refnum != -1) {
+            result = Standard_True;
+            sp->_refnum = -1;
+            di->myPtoA.Append(sp);
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 //=======================================================================
@@ -724,7 +724,7 @@ Standard_Boolean Storage_Schema::PersistentToAdd
 
 void Storage_Schema::Clear() const
 {
-  Storage_Schema::ICurrentData().Nullify();
+    Storage_Schema::ICurrentData().Nullify();
 }
 
 #ifdef DATATYPE_MIGRATION
@@ -733,84 +733,84 @@ void Storage_Schema::Clear() const
 // containing migration types table: oldtype - newtype
 //=======================================================================
 Standard_Boolean Storage_Schema::CheckTypeMigration(
-                                  const TCollection_AsciiString&  oldName,
-				  TCollection_AsciiString&  newName)
+    const TCollection_AsciiString& oldName,
+    TCollection_AsciiString& newName)
 {
-  static Standard_Boolean isChecked(Standard_False);
-  static DataMapOfAStringAString aDMap;
-  Standard_Boolean aMigration(Standard_False);
-  
-  if(!isChecked) {
-    isChecked = Standard_True;
-//    TCollection_AsciiString aFileName = getenv("CSF_MIGRATION_TYPES");
-    OSD_Environment csf(TCollection_AsciiString("CSF_MIGRATION_TYPES"));
-    TCollection_AsciiString aFileName = csf.Value();
-    if(aFileName.Length() > 0) {
-      OSD_Path aPath(aFileName,OSD_Default);
-      OSD_File aFile;
-      aFile.SetPath(aPath);
-      if(aFile.Exists()) {
-	OSD_Protection aProt(OSD_R,OSD_R,OSD_R,OSD_R);
-	aFile.Open(OSD_ReadOnly, aProt);
-	if(aFile.IsOpen() && aFile.IsReadable()) {
-	  TCollection_AsciiString aLine;
-	  Standard_Integer aNbReaded(0);
-	  for (;;) {
-	    aFile.ReadLine(aLine, 80, aNbReaded);
-	    if(aFile.IsAtEnd() || !aNbReaded) {
-	      aFile.Close();
-	      break;
-	    }
-#ifdef OCCT_DEBUG
-	    std::cout << "Storage_Sheme:: Line: = " << aLine <<std::endl;
-#endif
-	    TCollection_AsciiString aKey, aValue;
-	    aKey = aLine.Token();
-	    aValue = aLine.Token(" \t\n\r", 2);
-	    aDMap.Bind(aKey, aValue);
-	  }
-        }
-      }
-      else
-      {
-        // hard-code migration table for known types	
-	aDMap.Bind("TDataStd_Shape",          "TDataXtd_Shape");
-	aDMap.Bind("TDataStd_Constraint",     "TDataXtd_Constraint");
-        aDMap.Bind("TDataStd_Geometry",       "TDataXtd_Geometry");
-	aDMap.Bind("TDataStd_Axis",           "TDataXtd_Axis");
-	aDMap.Bind("TDataStd_Point",          "TDataXtd_Point");
-	aDMap.Bind("TDataStd_Plane",          "TDataXtd_Plane");
-	aDMap.Bind("TDataStd_Position",       "TDataXtd_Position");
-	aDMap.Bind("TDataStd_Placement",      "TDataXtd_Placement");
-	aDMap.Bind("TDataStd_PatternStd",     "TDataXtd_PatternStd");
-	aDMap.Bind("TPrsStd_AISPresentation", "TDataXtd_Presentation");
-        aDMap.Bind("PDataStd_Shape",          "PDataXtd_Shape");
-        aDMap.Bind("PDataStd_Constraint",     "PDataXtd_Constraint");
-        aDMap.Bind("PDataStd_Geometry",       "PDataXtd_Geometry");
-        aDMap.Bind("PDataStd_Axis",           "PDataXtd_Axis");
-        aDMap.Bind("PDataStd_Point",          "PDataXtd_Point");
-        aDMap.Bind("PDataStd_Plane",          "PDataXtd_Plane");
-        aDMap.Bind("PDataStd_Position",       "PDataXtd_Position");
-        aDMap.Bind("PDataStd_Placement",      "PDataXtd_Placement");
-        aDMap.Bind("PDataStd_PatternStd",     "PDataXtd_PatternStd");
-      }
-#ifdef OCCT_DEBUG
-      std::cout << "Storage_Sheme:: aDataMap.Size = " << aDMap.Extent() << std::endl;
-#endif
-    }
-  }
+    static Standard_Boolean isChecked(Standard_False);
+    static DataMapOfAStringAString aDMap;
+    Standard_Boolean aMigration(Standard_False);
 
-  if(aDMap.Extent()) {
-    if(aDMap.IsBound(oldName)) {
-      newName.Clear();
-      newName = aDMap.Find(oldName);
-      aMigration = Standard_True;
+    if (!isChecked) {
+        isChecked = Standard_True;
+        //    TCollection_AsciiString aFileName = getenv("CSF_MIGRATION_TYPES");
+        OSD_Environment csf(TCollection_AsciiString("CSF_MIGRATION_TYPES"));
+        TCollection_AsciiString aFileName = csf.Value();
+        if (aFileName.Length() > 0) {
+            OSD_Path aPath(aFileName, OSD_Default);
+            OSD_File aFile;
+            aFile.SetPath(aPath);
+            if (aFile.Exists()) {
+                OSD_Protection aProt(OSD_R, OSD_R, OSD_R, OSD_R);
+                aFile.Open(OSD_ReadOnly, aProt);
+                if (aFile.IsOpen() && aFile.IsReadable()) {
+                    TCollection_AsciiString aLine;
+                    Standard_Integer aNbReaded(0);
+                    for (;;) {
+                        aFile.ReadLine(aLine, 80, aNbReaded);
+                        if (aFile.IsAtEnd() || !aNbReaded) {
+                            aFile.Close();
+                            break;
+                        }
 #ifdef OCCT_DEBUG
-      std::cout << " newName = " << newName << std::endl;
+                        std::cout << "Storage_Sheme:: Line: = " << aLine << std::endl;
 #endif
+                        TCollection_AsciiString aKey, aValue;
+                        aKey = aLine.Token();
+                        aValue = aLine.Token(" \t\n\r", 2);
+                        aDMap.Bind(aKey, aValue);
+                    }
+                }
+            }
+            else
+            {
+                // hard-code migration table for known types	
+                aDMap.Bind("TDataStd_Shape", "TDataXtd_Shape");
+                aDMap.Bind("TDataStd_Constraint", "TDataXtd_Constraint");
+                aDMap.Bind("TDataStd_Geometry", "TDataXtd_Geometry");
+                aDMap.Bind("TDataStd_Axis", "TDataXtd_Axis");
+                aDMap.Bind("TDataStd_Point", "TDataXtd_Point");
+                aDMap.Bind("TDataStd_Plane", "TDataXtd_Plane");
+                aDMap.Bind("TDataStd_Position", "TDataXtd_Position");
+                aDMap.Bind("TDataStd_Placement", "TDataXtd_Placement");
+                aDMap.Bind("TDataStd_PatternStd", "TDataXtd_PatternStd");
+                aDMap.Bind("TPrsStd_AISPresentation", "TDataXtd_Presentation");
+                aDMap.Bind("PDataStd_Shape", "PDataXtd_Shape");
+                aDMap.Bind("PDataStd_Constraint", "PDataXtd_Constraint");
+                aDMap.Bind("PDataStd_Geometry", "PDataXtd_Geometry");
+                aDMap.Bind("PDataStd_Axis", "PDataXtd_Axis");
+                aDMap.Bind("PDataStd_Point", "PDataXtd_Point");
+                aDMap.Bind("PDataStd_Plane", "PDataXtd_Plane");
+                aDMap.Bind("PDataStd_Position", "PDataXtd_Position");
+                aDMap.Bind("PDataStd_Placement", "PDataXtd_Placement");
+                aDMap.Bind("PDataStd_PatternStd", "PDataXtd_PatternStd");
+            }
+#ifdef OCCT_DEBUG
+            std::cout << "Storage_Sheme:: aDataMap.Size = " << aDMap.Extent() << std::endl;
+#endif
+        }
     }
-  } 
-  return aMigration;
+
+    if (aDMap.Extent()) {
+        if (aDMap.IsBound(oldName)) {
+            newName.Clear();
+            newName = aDMap.Find(oldName);
+            aMigration = Standard_True;
+#ifdef OCCT_DEBUG
+            std::cout << " newName = " << newName << std::endl;
+#endif
+        }
+    }
+    return aMigration;
 }
 #endif
 
@@ -821,7 +821,7 @@ Standard_Boolean Storage_Schema::CheckTypeMigration(
 
 void Storage_Schema::ISetCurrentData(const Handle(Storage_Data)& dData)
 {
-  Storage_Schema::ICurrentData() = dData;
+    Storage_Schema::ICurrentData() = dData;
 }
 
 //=======================================================================
@@ -831,8 +831,8 @@ void Storage_Schema::ISetCurrentData(const Handle(Storage_Data)& dData)
 
 Handle(Storage_Data)& Storage_Schema::ICurrentData()
 {
-  static Handle(Storage_Data) _Storage_CData;
-  return _Storage_CData;
+    static Handle(Storage_Data) _Storage_CData;
+    return _Storage_CData;
 }
 
 #define SLENGTH 80
@@ -844,25 +844,25 @@ Handle(Storage_Data)& Storage_Schema::ICurrentData()
 
 TCollection_AsciiString Storage_Schema::ICreationDate()
 {
-  char nowstr[SLENGTH];
-  time_t nowbin;
-  struct tm *nowstruct;
-  if (time(&nowbin) == (time_t)-1)
-  {
+    char nowstr[SLENGTH];
+    time_t nowbin;
+    struct tm* nowstruct;
+    if (time(&nowbin) == (time_t)-1)
+    {
 #ifdef OCCT_DEBUG
-    std::cerr << "Storage ERROR : Could not get time of day from time()" << std::endl;
+        std::cerr << "Storage ERROR : Could not get time of day from time()" << std::endl;
 #endif
-  }
+    }
 
-  nowstruct = localtime(&nowbin);
+    nowstruct = localtime(&nowbin);
 
-  if (strftime(nowstr, SLENGTH, "%m/%d/%Y", nowstruct) == (size_t) 0)
-  {
+    if (strftime(nowstr, SLENGTH, "%m/%d/%Y", nowstruct) == (size_t)0)
+    {
 #ifdef OCCT_DEBUG
-    std::cerr << "Storage ERROR : Could not get string from strftime()" << std::endl;
+        std::cerr << "Storage ERROR : Could not get string from strftime()" << std::endl;
 #endif
-  }
+    }
 
-  TCollection_AsciiString t(nowstr);
-  return t;
+    TCollection_AsciiString t(nowstr);
+    return t;
 }

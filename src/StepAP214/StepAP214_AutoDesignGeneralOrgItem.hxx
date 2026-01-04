@@ -39,7 +39,7 @@ class StepAP214_AutoDesignGeneralOrgItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a AutoDesignGeneralOrgItem SelectType

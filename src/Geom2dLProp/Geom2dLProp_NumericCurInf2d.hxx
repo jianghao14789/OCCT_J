@@ -33,7 +33,7 @@ class Geom2dLProp_NumericCurInf2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dLProp_NumericCurInf2d();

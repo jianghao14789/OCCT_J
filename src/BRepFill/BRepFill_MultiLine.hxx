@@ -49,7 +49,7 @@ class gp_Pnt2d;
 class BRepFill_MultiLine : public AppCont_Function
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT BRepFill_MultiLine();
 

@@ -34,7 +34,7 @@ class RWStepVisual_RWMechanicalDesignGeometricPresentationRepresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepVisual_RWMechanicalDesignGeometricPresentationRepresentation();

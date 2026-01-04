@@ -29,7 +29,7 @@ class Interface_LineBuffer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a LineBuffer with an absolute maximum size

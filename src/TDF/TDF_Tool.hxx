@@ -39,7 +39,7 @@ class TDF_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the number of labels of the tree,

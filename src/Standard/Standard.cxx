@@ -1,4 +1,4 @@
-// Created on: 2005-03-15
+﻿// Created on: 2005-03-15
 // Created by: Peter KURNEV
 // Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,17 +23,17 @@
 
 #include <stdlib.h>
 #if(defined(_WIN32) || defined(__WIN32__))
-  #include <windows.h>
-  #include <malloc.h>
-  #include <locale.h>
+#include <windows.h>
+#include <malloc.h>
+#include <locale.h>
 #endif
 
 #if defined(_MSC_VER) || defined(__ANDROID__) || defined(__QNX__)
-  #include <malloc.h>
+#include <malloc.h>
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1)) && (defined(__i386) || defined(__x86_64)))
-  #include <mm_malloc.h>
+#include <mm_malloc.h>
 #else
-  extern "C" int posix_memalign (void** thePtr, size_t theAlign, size_t theSize);
+extern "C" int posix_memalign(void** thePtr, size_t theAlign, size_t theSize);
 #endif
 
 // There is no support for environment variables in UWP
@@ -55,16 +55,16 @@
 class Standard_MMgrFactory
 {
 public:
-  static Standard_MMgrRoot* GetMMgr();
-  ~Standard_MMgrFactory();
+    static Standard_MMgrRoot* GetMMgr();
+    ~Standard_MMgrFactory();
 
 private:
-  Standard_MMgrFactory();
-  Standard_MMgrFactory (const Standard_MMgrFactory&);
-  Standard_MMgrFactory& operator= (const Standard_MMgrFactory&);
+    Standard_MMgrFactory();
+    Standard_MMgrFactory(const Standard_MMgrFactory&);
+    Standard_MMgrFactory& operator= (const Standard_MMgrFactory&);
 
 private:
-  Standard_MMgrRoot* myFMMgr;
+    Standard_MMgrRoot* myFMMgr;
 };
 
 //=======================================================================
@@ -73,103 +73,103 @@ private:
 //=======================================================================
 
 Standard_MMgrFactory::Standard_MMgrFactory()
-: myFMMgr (NULL)
+    : myFMMgr(NULL)
 {
-/*#if defined(_MSC_VER) && (_MSC_VER > 1400)
-  // Turn ON thread-safe C locale globally to avoid side effects by setlocale() calls between threads.
-  // After this call all following _configthreadlocale() will be ignored assuming
-  // Notice that this is MSVCRT feature - on POSIX systems xlocale API (uselocale instead of setlocale)
-  // should be used explicitly to ensure thread-safety!
+    /*#if defined(_MSC_VER) && (_MSC_VER > 1400)
+      // Turn ON thread-safe C locale globally to avoid side effects by setlocale() calls between threads.
+      // After this call all following _configthreadlocale() will be ignored assuming
+      // Notice that this is MSVCRT feature - on POSIX systems xlocale API (uselocale instead of setlocale)
+      // should be used explicitly to ensure thread-safety!
 
-  // This is not well documented call because _ENABLE_PER_THREAD_LOCALE_GLOBAL flag is defined but not implemented for some reason.
-  // -1 will set global locale flag to force _ENABLE_PER_THREAD_LOCALE_GLOBAL + _ENABLE_PER_THREAD_LOCALE_NEW behaviour
-  // although there NO way to turn it off again and following calls will have no effect (locale will be changed only for current thread).
-  _configthreadlocale (-1);
-#endif*/
+      // This is not well documented call because _ENABLE_PER_THREAD_LOCALE_GLOBAL flag is defined but not implemented for some reason.
+      // -1 will set global locale flag to force _ENABLE_PER_THREAD_LOCALE_GLOBAL + _ENABLE_PER_THREAD_LOCALE_NEW behaviour
+      // although there NO way to turn it off again and following calls will have no effect (locale will be changed only for current thread).
+      _configthreadlocale (-1);
+    #endif*/
 
-  // Check basic assumption.
-  // If assertion happens, then OCCT should be corrected for compatibility with such CPU architecture.
-  Standard_STATIC_ASSERT(sizeof(Standard_Utf8Char)  == 1);
-  Standard_STATIC_ASSERT(sizeof(short) == 2);
-  Standard_STATIC_ASSERT(sizeof(Standard_Utf16Char) == 2);
-  Standard_STATIC_ASSERT(sizeof(Standard_Utf32Char) == 4);
+    // Check basic assumption.
+    // If assertion happens, then OCCT should be corrected for compatibility with such CPU architecture.
+    Standard_STATIC_ASSERT(sizeof(Standard_Utf8Char) == 1);
+    Standard_STATIC_ASSERT(sizeof(short) == 2);
+    Standard_STATIC_ASSERT(sizeof(Standard_Utf16Char) == 2);
+    Standard_STATIC_ASSERT(sizeof(Standard_Utf32Char) == 4);
 #ifdef _WIN32
-  Standard_STATIC_ASSERT(sizeof(Standard_WideChar) == sizeof(Standard_Utf16Char));
+    Standard_STATIC_ASSERT(sizeof(Standard_WideChar) == sizeof(Standard_Utf16Char));
 #endif
 
-  char* aVar;
-  aVar = getenv ("MMGT_OPT");
-  Standard_Integer anAllocId   = (aVar ?  atoi (aVar): OCCT_MMGT_OPT_DEFAULT);
+    char* aVar;
+    aVar = getenv("MMGT_OPT");
+    Standard_Integer anAllocId = (aVar ? atoi(aVar) : OCCT_MMGT_OPT_DEFAULT);
 
 #if defined(HAVE_TBB) && defined(_M_IX86)
-  if (anAllocId == 2)
-  {
-    // CR25396: Check if SSE2 instructions are supported on 32-bit x86 processor on Windows platform,
-    // if not then use MMgrRaw instead of MMgrTBBalloc.
-    // It is to avoid runtime crash when running on a CPU
-    // that supports SSE but does not support SSE2 (some modifications of AMD Sempron).
-    static const DWORD _SSE2_FEATURE_BIT(0x04000000);
-    DWORD volatile dwFeature;
-    _asm
+    if (anAllocId == 2)
     {
-      push eax
-      push ebx
-      push ecx
-      push edx
+        // CR25396: Check if SSE2 instructions are supported on 32-bit x86 processor on Windows platform,
+        // if not then use MMgrRaw instead of MMgrTBBalloc.
+        // It is to avoid runtime crash when running on a CPU
+        // that supports SSE but does not support SSE2 (some modifications of AMD Sempron).
+        static const DWORD _SSE2_FEATURE_BIT(0x04000000);
+        DWORD volatile dwFeature;
+        _asm
+        {
+            push eax
+            push ebx
+            push ecx
+            push edx
 
-      // get the CPU feature bits
-      mov eax, 1
-      cpuid
-      mov dwFeature, edx
+            // get the CPU feature bits
+            mov eax, 1
+            cpuid
+            mov dwFeature, edx
 
-      pop edx
-      pop ecx
-      pop ebx
-      pop eax
+            pop edx
+            pop ecx
+            pop ebx
+            pop eax
+        }
+        if ((dwFeature & _SSE2_FEATURE_BIT) == 0)
+            anAllocId = 0;
     }
-    if ((dwFeature & _SSE2_FEATURE_BIT) == 0)
-      anAllocId = 0;
-  }
 #endif
 
-  aVar = getenv ("MMGT_CLEAR");
-  Standard_Boolean toClear     = (aVar ? (atoi (aVar) != 0) : Standard_True);
+    aVar = getenv("MMGT_CLEAR");
+    Standard_Boolean toClear = (aVar ? (atoi(aVar) != 0) : Standard_True);
 
-  // on Windows (actual for XP and 2000) activate low fragmentation heap
-  // for CRT heap in order to get best performance.
-  // Environment variable MMGT_LFH can be used to switch off this action (if set to 0)
+    // on Windows (actual for XP and 2000) activate low fragmentation heap
+    // for CRT heap in order to get best performance.
+    // Environment variable MMGT_LFH can be used to switch off this action (if set to 0)
 #if defined(_MSC_VER)
-  aVar = getenv ("MMGT_LFH");
-  if ( aVar == NULL || atoi (aVar) != 0 )
-  {
-    ULONG aHeapInfo = 2;
-    HANDLE aCRTHeap = (HANDLE)_get_heap_handle();
-    HeapSetInformation (aCRTHeap, HeapCompatibilityInformation, &aHeapInfo, sizeof(aHeapInfo));
-  }
+    aVar = getenv("MMGT_LFH");
+    if (aVar == NULL || atoi(aVar) != 0)
+    {
+        ULONG aHeapInfo = 2;
+        HANDLE aCRTHeap = (HANDLE)_get_heap_handle();
+        HeapSetInformation(aCRTHeap, HeapCompatibilityInformation, &aHeapInfo, sizeof(aHeapInfo));
+    }
 #endif
 
-  switch (anAllocId)
-  {
+    switch (anAllocId)
+    {
     case 1:  // OCCT optimized memory allocator
     {
-      aVar = getenv ("MMGT_MMAP");
-      Standard_Boolean bMMap       = (aVar ? (atoi (aVar) != 0) : Standard_True);
-      aVar = getenv ("MMGT_CELLSIZE");
-      Standard_Integer aCellSize   = (aVar ?  atoi (aVar) : 200);
-      aVar = getenv ("MMGT_NBPAGES");
-      Standard_Integer aNbPages    = (aVar ?  atoi (aVar) : 1000);
-      aVar = getenv ("MMGT_THRESHOLD");
-      Standard_Integer aThreshold  = (aVar ?  atoi (aVar) : 40000);
-      myFMMgr = new Standard_MMgrOpt (toClear, bMMap, aCellSize, aNbPages, aThreshold);
-      break;
+        aVar = getenv("MMGT_MMAP");
+        Standard_Boolean bMMap = (aVar ? (atoi(aVar) != 0) : Standard_True);
+        aVar = getenv("MMGT_CELLSIZE");
+        Standard_Integer aCellSize = (aVar ? atoi(aVar) : 200);
+        aVar = getenv("MMGT_NBPAGES");
+        Standard_Integer aNbPages = (aVar ? atoi(aVar) : 1000);
+        aVar = getenv("MMGT_THRESHOLD");
+        Standard_Integer aThreshold = (aVar ? atoi(aVar) : 40000);
+        myFMMgr = new Standard_MMgrOpt(toClear, bMMap, aCellSize, aNbPages, aThreshold);
+        break;
     }
     case 2:  // TBB memory allocator
-      myFMMgr = new Standard_MMgrTBBalloc (toClear);
-      break;
+        myFMMgr = new Standard_MMgrTBBalloc(toClear);
+        break;
     case 0:
     default: // system default memory allocator
-      myFMMgr = new Standard_MMgrRaw (toClear);
-  }
+        myFMMgr = new Standard_MMgrRaw(toClear);
+    }
 }
 
 //=======================================================================
@@ -179,8 +179,8 @@ Standard_MMgrFactory::Standard_MMgrFactory()
 
 Standard_MMgrFactory::~Standard_MMgrFactory()
 {
-  if (  myFMMgr )
-    myFMMgr->Purge(Standard_True);
+    if (myFMMgr)
+        myFMMgr->Purge(Standard_True);
 }
 
 //=======================================================================
@@ -226,8 +226,8 @@ Standard_MMgrFactory::~Standard_MMgrFactory()
 //=======================================================================
 Standard_MMgrRoot* Standard_MMgrFactory::GetMMgr()
 {
-  static Standard_MMgrFactory aFactory;
-  return aFactory.myFMMgr;
+    static Standard_MMgrFactory aFactory;
+    return aFactory.myFMMgr;
 }
 
 //=======================================================================
@@ -237,7 +237,7 @@ Standard_MMgrRoot* Standard_MMgrFactory::GetMMgr()
 
 Standard_Address Standard::Allocate(const Standard_Size size)
 {
-  return Standard_MMgrFactory::GetMMgr()->Allocate(size);
+    return Standard_MMgrFactory::GetMMgr()->Allocate(size);
 }
 
 //=======================================================================
@@ -245,9 +245,9 @@ Standard_Address Standard::Allocate(const Standard_Size size)
 //purpose  : 
 //=======================================================================
 
-void Standard::Free (Standard_Address theStorage)
+void Standard::Free(Standard_Address theStorage)
 {
-  Standard_MMgrFactory::GetMMgr()->Free(theStorage);
+    Standard_MMgrFactory::GetMMgr()->Free(theStorage);
 }
 
 //=======================================================================
@@ -255,10 +255,10 @@ void Standard::Free (Standard_Address theStorage)
 //purpose  : 
 //=======================================================================
 
-Standard_Address Standard::Reallocate (Standard_Address theStorage,
-				       const Standard_Size theSize)
+Standard_Address Standard::Reallocate(Standard_Address theStorage,
+    const Standard_Size theSize)
 {
-  return Standard_MMgrFactory::GetMMgr()->Reallocate (theStorage, theSize);
+    return Standard_MMgrFactory::GetMMgr()->Reallocate(theStorage, theSize);
 }
 
 //=======================================================================
@@ -268,7 +268,7 @@ Standard_Address Standard::Reallocate (Standard_Address theStorage,
 
 Standard_Integer Standard::Purge()
 {
-  return Standard_MMgrFactory::GetMMgr()->Purge();
+    return Standard_MMgrFactory::GetMMgr()->Purge();
 }
 
 //=======================================================================
@@ -276,22 +276,22 @@ Standard_Integer Standard::Purge()
 //purpose  :
 //=======================================================================
 
-Standard_Address Standard::AllocateAligned (const Standard_Size theSize,
-                                            const Standard_Size theAlign)
+Standard_Address Standard::AllocateAligned(const Standard_Size theSize,
+    const Standard_Size theAlign)
 {
 #if defined(_MSC_VER)
-  return _aligned_malloc (theSize, theAlign);
+    return _aligned_malloc(theSize, theAlign);
 #elif defined(__ANDROID__) || defined(__QNX__)
-  return memalign (theAlign, theSize);
+    return memalign(theAlign, theSize);
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1)) && (defined(__i386) || defined(__x86_64)))
-  return _mm_malloc (theSize, theAlign);
+    return _mm_malloc(theSize, theAlign);
 #else
-  void* aPtr;
-  if (posix_memalign (&aPtr, theAlign, theSize))
-  {
-    return NULL;
-  }
-  return aPtr;
+    void* aPtr;
+    if (posix_memalign(&aPtr, theAlign, theSize))
+    {
+        return NULL;
+    }
+    return aPtr;
 #endif
 }
 
@@ -300,15 +300,15 @@ Standard_Address Standard::AllocateAligned (const Standard_Size theSize,
 //purpose  :
 //=======================================================================
 
-void Standard::FreeAligned (Standard_Address thePtrAligned)
+void Standard::FreeAligned(Standard_Address thePtrAligned)
 {
 #if defined(_MSC_VER)
-  _aligned_free (thePtrAligned);
+    _aligned_free(thePtrAligned);
 #elif defined(__ANDROID__) || defined(__QNX__)
-  free (thePtrAligned);
+    free(thePtrAligned);
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 1)) && (defined(__i386) || defined(__x86_64)))
-  _mm_free (thePtrAligned);
+    _mm_free(thePtrAligned);
 #else
-  free (thePtrAligned);
+    free(thePtrAligned);
 #endif
 }

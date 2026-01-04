@@ -44,7 +44,7 @@
 class BOPAlgo_VertexEdge : public BOPAlgo_ParallelAlgo {
 
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_VertexEdge() : 
     BOPAlgo_ParallelAlgo(),

@@ -35,7 +35,7 @@ class DsgPrs_RadiusPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the point AttachmentPoint, the circle aCircle,

@@ -59,7 +59,7 @@ public:
     Draw_Interpretor* myDI; //!< pointer to Draw Interpretor
 
     // make sure allocation and de-allocation is done by the same memory allocator
-    DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
   };
 
@@ -276,7 +276,7 @@ private:
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 };
 

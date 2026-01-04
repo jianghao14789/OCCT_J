@@ -39,7 +39,7 @@ class IGESDimen_ToolAngularDimension
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolAngularDimension, ready to work

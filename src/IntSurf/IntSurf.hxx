@@ -30,7 +30,7 @@ class IntSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the transition of the intersection point

@@ -41,7 +41,7 @@ class GeomPlate_BuildAveragePlane
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Tol is a  Tolerance to make the difference between

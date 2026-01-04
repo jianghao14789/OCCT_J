@@ -31,7 +31,7 @@ class gp_Quaternion
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an identity quaternion
   gp_Quaternion()

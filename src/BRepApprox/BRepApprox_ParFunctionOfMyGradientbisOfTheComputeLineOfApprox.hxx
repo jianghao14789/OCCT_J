@@ -45,7 +45,7 @@ class BRepApprox_ParFunctionOfMyGradientbisOfTheComputeLineOfApprox  : public ma
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the fields of the function. The approximating

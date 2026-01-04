@@ -33,7 +33,7 @@ class BRepExtrema_DistanceSS
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! computes the distance between two Shapes ( face edge vertex). <br>
   BRepExtrema_DistanceSS(const TopoDS_Shape& S1, const TopoDS_Shape& S2,

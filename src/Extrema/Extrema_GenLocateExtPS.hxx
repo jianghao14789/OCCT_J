@@ -34,7 +34,7 @@ class Extrema_GenLocateExtPS
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor.
   Standard_EXPORT Extrema_GenLocateExtPS(const Adaptor3d_Surface& theS,

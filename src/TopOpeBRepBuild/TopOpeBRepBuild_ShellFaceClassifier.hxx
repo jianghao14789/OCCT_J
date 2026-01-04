@@ -41,7 +41,7 @@ class TopOpeBRepBuild_ShellFaceClassifier  : public TopOpeBRepBuild_CompositeCla
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a classifier in 3D space, to compare :

@@ -41,7 +41,7 @@ class UTL
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static TCollection_ExtendedString xgetenv (const Standard_CString aCString);

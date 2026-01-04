@@ -42,7 +42,7 @@ class GeomFill_BSplineCurves
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a default BSpline surface framework.

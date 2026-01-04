@@ -31,7 +31,7 @@ class Aspect_GenId
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an available set of identifiers with the lower bound 0 and the upper bound INT_MAX / 2.

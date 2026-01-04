@@ -39,7 +39,7 @@ class ShapeExtend_Explorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an object Explorer

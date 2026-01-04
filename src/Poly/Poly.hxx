@@ -53,7 +53,7 @@ class Poly
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes and  stores  the    link from   nodes  to

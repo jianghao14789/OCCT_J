@@ -34,7 +34,7 @@ class BRepExtrema_DistShapeShape
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! create empty tool
   Standard_EXPORT BRepExtrema_DistShapeShape();

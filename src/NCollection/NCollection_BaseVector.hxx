@@ -35,7 +35,7 @@ class NCollection_BaseVector
 {
 public:
   //! Memory allocation
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   DEFINE_NCOLLECTION_ALLOC
 
 protected:

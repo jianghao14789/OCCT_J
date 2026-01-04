@@ -40,7 +40,7 @@ class Vrml_DirectionalLight
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_DirectionalLight();

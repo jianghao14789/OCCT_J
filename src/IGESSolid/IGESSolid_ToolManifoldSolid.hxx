@@ -39,7 +39,7 @@ class IGESSolid_ToolManifoldSolid
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolManifoldSolid, ready to work

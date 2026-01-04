@@ -36,7 +36,7 @@ class BRepOffset_Inter2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the intersections between the edges stored

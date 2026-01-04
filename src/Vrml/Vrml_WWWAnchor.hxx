@@ -39,7 +39,7 @@ class Vrml_WWWAnchor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_WWWAnchor(const TCollection_AsciiString& aName = "", const TCollection_AsciiString& aDescription = "", const Vrml_WWWAnchorMap aMap = Vrml_MAP_NONE);

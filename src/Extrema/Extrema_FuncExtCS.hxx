@@ -43,7 +43,7 @@ class Extrema_FuncExtCS  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_FuncExtCS();

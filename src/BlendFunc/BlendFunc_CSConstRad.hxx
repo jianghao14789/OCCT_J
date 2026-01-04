@@ -42,7 +42,7 @@ class BlendFunc_CSConstRad  : public Blend_CSFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BlendFunc_CSConstRad(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C, const Handle(Adaptor3d_Curve)& CGuide);

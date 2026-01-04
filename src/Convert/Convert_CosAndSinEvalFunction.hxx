@@ -1,4 +1,4 @@
-// Created on: 1995-08-23
+﻿// Created on: 1995-08-23
 // Created by: Xavier BENVENISTE
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,10 +22,10 @@
 #include <TColStd_Array1OfInteger.hxx>
 
 typedef void   Convert_CosAndSinEvalFunction(Standard_Real,
-					     const Standard_Integer,
-					     const TColgp_Array1OfPnt2d&,
-					     const TColStd_Array1OfReal&, 
-					     const TColStd_Array1OfInteger*,
-					     Standard_Real Result[2]) ; 
+    const Standard_Integer,
+    const TColgp_Array1OfPnt2d&,
+    const TColStd_Array1OfReal&,
+    const TColStd_Array1OfInteger*,
+    Standard_Real Result[2]);
 
 #endif

@@ -37,7 +37,7 @@ class TopOpeBRepBuild_CompositeClassifier  : public TopOpeBRepBuild_LoopClassifi
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT virtual TopAbs_State Compare (const Handle(TopOpeBRepBuild_Loop)& L1, const Handle(TopOpeBRepBuild_Loop)& L2) Standard_OVERRIDE;

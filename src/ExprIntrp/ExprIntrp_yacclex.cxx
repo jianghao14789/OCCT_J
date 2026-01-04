@@ -1,4 +1,4 @@
-// Created on: 1993-12-14
+﻿// Created on: 1993-12-14
 // Created by: Arnaud BOUZY
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,20 +29,20 @@ extern "C" char* ExprIntrptext;
 
 extern "C" void ExprIntrp_SetResult()
 {
-  ExprIntrp_curres = ExprIntrptext;
+    ExprIntrp_curres = ExprIntrptext;
 }
 
 extern "C" void ExprIntrp_SetDegree()
 {
-  ExprIntrp_degree = (int)strlen(ExprIntrptext);
+    ExprIntrp_degree = (int)strlen(ExprIntrptext);
 }
 
 int ExprIntrp_GetDegree()
 {
-  return ExprIntrp_degree;
+    return ExprIntrp_degree;
 }
 
-const TCollection_AsciiString& ExprIntrp_GetResult ()
+const TCollection_AsciiString& ExprIntrp_GetResult()
 {
-  return ExprIntrp_curres;
+    return ExprIntrp_curres;
 }

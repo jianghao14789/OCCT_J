@@ -39,7 +39,7 @@ class Plate_LinearScalarConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_LinearScalarConstraint();

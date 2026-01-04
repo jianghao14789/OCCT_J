@@ -33,7 +33,7 @@ class math_MultipleVarFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

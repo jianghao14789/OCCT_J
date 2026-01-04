@@ -1,4 +1,4 @@
-// Created on: 1991-08-08
+﻿// Created on: 1991-08-08
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,47 +23,47 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenExp,ExprIntrp_Generator)
+IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenExp, ExprIntrp_Generator)
 
-ExprIntrp_GenExp::ExprIntrp_GenExp ()
+ExprIntrp_GenExp::ExprIntrp_GenExp()
 {
-  done = Standard_False;
+    done = Standard_False;
 }
 
-Handle( ExprIntrp_GenExp ) ExprIntrp_GenExp::Create()
+Handle(ExprIntrp_GenExp) ExprIntrp_GenExp::Create()
 {
-  return new ExprIntrp_GenExp();
+    return new ExprIntrp_GenExp();
 }
 
-void ExprIntrp_GenExp::Process (const TCollection_AsciiString& str)
+void ExprIntrp_GenExp::Process(const TCollection_AsciiString& str)
 {
-  Handle(ExprIntrp_GenExp) me = this;
-  done = Standard_False;
-  if (ExprIntrp::Parse(me,str)) {
-    if (!ExprIntrp_Recept.IsExpStackEmpty()) {
-      myExpression = ExprIntrp_Recept.Pop();
-      done = Standard_True;
+    Handle(ExprIntrp_GenExp) me = this;
+    done = Standard_False;
+    if (ExprIntrp::Parse(me, str)) {
+        if (!ExprIntrp_Recept.IsExpStackEmpty()) {
+            myExpression = ExprIntrp_Recept.Pop();
+            done = Standard_True;
+        }
+        else {
+            myExpression.Nullify();
+            done = Standard_True;
+        }
     }
     else {
-      myExpression.Nullify();
-      done = Standard_True;
+        myExpression.Nullify();
     }
-  }
-  else {
-    myExpression.Nullify();
-  }
-}
- 
-Standard_Boolean ExprIntrp_GenExp::IsDone() const
-{
-  return done;
 }
 
-Handle(Expr_GeneralExpression) ExprIntrp_GenExp::Expression () const
+Standard_Boolean ExprIntrp_GenExp::IsDone() const
 {
-  if (!done) {
-    throw Standard_NoSuchObject();
-  }
-  return myExpression;
+    return done;
+}
+
+Handle(Expr_GeneralExpression) ExprIntrp_GenExp::Expression() const
+{
+    if (!done) {
+        throw Standard_NoSuchObject();
+    }
+    return myExpression;
 }
 

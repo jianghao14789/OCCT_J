@@ -74,7 +74,7 @@ class TopTools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! A set of Shapes. Can be dump, wrote or read.

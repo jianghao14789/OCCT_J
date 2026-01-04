@@ -1,4 +1,4 @@
-// Copyright (c) 2016 OPEN CASCADE SAS
+﻿// Copyright (c) 2016 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -17,13 +17,13 @@
 // function : Standard_ArrayStreamBuffer
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer (const char*  theBegin,
-                                                        const size_t theSize)
-: myBegin  (theBegin),
-  myEnd    (theBegin + theSize),
-  myCurrent(theBegin)
+Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer(const char* theBegin,
+    const size_t theSize)
+    : myBegin(theBegin),
+    myEnd(theBegin + theSize),
+    myCurrent(theBegin)
 {
-  //
+    //
 }
 
 // =======================================================================
@@ -32,19 +32,19 @@ Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer (const char*  theBegin,
 // =======================================================================
 Standard_ArrayStreamBuffer::~Standard_ArrayStreamBuffer()
 {
-  //
+    //
 }
 
 // =======================================================================
 // function : Init
 // purpose  :
 // =======================================================================
-void Standard_ArrayStreamBuffer::Init (const char*  theBegin,
-                                       const size_t theSize)
+void Standard_ArrayStreamBuffer::Init(const char* theBegin,
+    const size_t theSize)
 {
-  myBegin   = theBegin;
-  myEnd     = theBegin + theSize;
-  myCurrent = theBegin;
+    myBegin = theBegin;
+    myEnd = theBegin + theSize;
+    myCurrent = theBegin;
 }
 
 // =======================================================================
@@ -53,12 +53,12 @@ void Standard_ArrayStreamBuffer::Init (const char*  theBegin,
 // =======================================================================
 Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::underflow()
 {
-  if (myCurrent == myEnd)
-  {
-    return traits_type::eof();
-  }
+    if (myCurrent == myEnd)
+    {
+        return traits_type::eof();
+    }
 
-  return traits_type::to_int_type(*myCurrent);
+    return traits_type::to_int_type(*myCurrent);
 }
 
 // =======================================================================
@@ -67,28 +67,28 @@ Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::underflow()
 // =======================================================================
 Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::uflow()
 {
-  if (myCurrent == myEnd)
-  {
-    return traits_type::eof();
-  }
+    if (myCurrent == myEnd)
+    {
+        return traits_type::eof();
+    }
 
-  return traits_type::to_int_type(*myCurrent++);
+    return traits_type::to_int_type(*myCurrent++);
 }
 
 // =======================================================================
 // function : pbackfail
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::pbackfail (int_type ch)
+Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::pbackfail(int_type ch)
 {
-  if (myCurrent == myBegin
-    || (ch != traits_type::eof()
-    && ch != myCurrent[-1]))
-  {
-    return traits_type::eof();
-  }
+    if (myCurrent == myBegin
+        || (ch != traits_type::eof()
+            && ch != myCurrent[-1]))
+    {
+        return traits_type::eof();
+    }
 
-  return traits_type::to_int_type(*--myCurrent);
+    return traits_type::to_int_type(*--myCurrent);
 }
 
 // =======================================================================
@@ -97,87 +97,87 @@ Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::pbackfail (int_
 // =======================================================================
 std::streamsize Standard_ArrayStreamBuffer::showmanyc()
 {
-  if (myCurrent > myEnd)
-  {
-    // assert
-  }
-  return myEnd - myCurrent;
+    if (myCurrent > myEnd)
+    {
+        // assert
+    }
+    return myEnd - myCurrent;
 }
 
 // =======================================================================
 // function : seekoff
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekoff (off_type theOff,
-                                                                          std::ios_base::seekdir theWay,
-                                                                          std::ios_base::openmode theWhich)
+Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekoff(off_type theOff,
+    std::ios_base::seekdir theWay,
+    std::ios_base::openmode theWhich)
 {
-  switch (theWay)
-  {
+    switch (theWay)
+    {
     case std::ios_base::beg:
     {
-      myCurrent = myBegin + theOff;
-      if (myCurrent >= myEnd)
-      {
-        myCurrent = myEnd;
-      }
-      break;
+        myCurrent = myBegin + theOff;
+        if (myCurrent >= myEnd)
+        {
+            myCurrent = myEnd;
+        }
+        break;
     }
     case std::ios_base::cur:
     {
-      myCurrent += theOff;
-      if (myCurrent >= myEnd)
-      {
-        myCurrent = myEnd;
-      }
-      break;
+        myCurrent += theOff;
+        if (myCurrent >= myEnd)
+        {
+            myCurrent = myEnd;
+        }
+        break;
     }
     case std::ios_base::end:
     {
-      myCurrent = myEnd - theOff;
-      if (myCurrent < myBegin)
-      {
-        myCurrent = myBegin;
-      }
-      break;
+        myCurrent = myEnd - theOff;
+        if (myCurrent < myBegin)
+        {
+            myCurrent = myBegin;
+        }
+        break;
     }
     default:
     {
-      break;
+        break;
     }
-  }
-  (void )theWhich;
-  return myCurrent - myBegin;
+    }
+    (void)theWhich;
+    return myCurrent - myBegin;
 }
 
 // =======================================================================
 // function : seekpos
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekpos (pos_type thePosition,
-                                                                          std::ios_base::openmode theWhich)
+Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekpos(pos_type thePosition,
+    std::ios_base::openmode theWhich)
 {
-  return seekoff (off_type(thePosition), std::ios_base::beg, theWhich);
+    return seekoff(off_type(thePosition), std::ios_base::beg, theWhich);
 }
 
 // =======================================================================
 // function : xsgetn
 // purpose  :
 // =======================================================================
-std::streamsize Standard_ArrayStreamBuffer::xsgetn (char* thePtr,
-                                                    std::streamsize theCount)
+std::streamsize Standard_ArrayStreamBuffer::xsgetn(char* thePtr,
+    std::streamsize theCount)
 {
-  const char* aCurrent = myCurrent + theCount;
-  if (aCurrent >= myEnd)
-  {
-    aCurrent = myEnd;
-  }
-  size_t aCopied = aCurrent - myCurrent;
-  if (aCopied == 0)
-  {
-    return 0;
-  }
-  memcpy (thePtr, myCurrent, aCopied);
-  myCurrent = aCurrent;
-  return aCopied;
+    const char* aCurrent = myCurrent + theCount;
+    if (aCurrent >= myEnd)
+    {
+        aCurrent = myEnd;
+    }
+    size_t aCopied = aCurrent - myCurrent;
+    if (aCopied == 0)
+    {
+        return 0;
+    }
+    memcpy(thePtr, myCurrent, aCopied);
+    myCurrent = aCurrent;
+    return aCopied;
 }

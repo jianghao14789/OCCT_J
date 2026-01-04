@@ -34,7 +34,7 @@ class BRepPrimAPI_MakeOneAxis  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The inherited commands should provide the algorithm.

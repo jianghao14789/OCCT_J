@@ -43,7 +43,7 @@ class TopoDS_Shape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a NULL Shape referring to nothing.
   TopoDS_Shape() : myOrient (TopAbs_EXTERNAL) {}

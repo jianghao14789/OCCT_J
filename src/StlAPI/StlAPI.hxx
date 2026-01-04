@@ -32,7 +32,7 @@ class StlAPI
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Convert and write shape to STL format.
   //! File is written in binary if aAsciiMode is False otherwise it is written in Ascii (by default).

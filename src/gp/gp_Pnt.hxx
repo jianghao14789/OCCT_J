@@ -35,7 +35,7 @@ class gp_Pnt
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a point with zero coordinates.
   gp_Pnt() {}

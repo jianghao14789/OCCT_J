@@ -43,7 +43,7 @@ class gp_Sphere
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an indefinite sphere.
   gp_Sphere()

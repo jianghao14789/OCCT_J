@@ -33,7 +33,7 @@ class DsgPrs_IdenticPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! draws a line between <aPntAttach> and

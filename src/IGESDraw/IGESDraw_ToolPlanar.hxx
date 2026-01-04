@@ -40,7 +40,7 @@ class IGESDraw_ToolPlanar
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPlanar, ready to work

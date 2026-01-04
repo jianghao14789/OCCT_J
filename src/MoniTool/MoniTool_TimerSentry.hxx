@@ -34,7 +34,7 @@ class MoniTool_TimerSentry
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor creates an instance and runs the corresponding timer

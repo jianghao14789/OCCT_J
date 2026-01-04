@@ -1,4 +1,4 @@
-// Created on: 2015-05-28
+﻿// Created on: 2015-05-28
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2015 OPEN CASCADE SAS
 //
@@ -24,52 +24,52 @@
 //! Command-queue for parallel building of BVH nodes.
 class BVH_BuildQueue
 {
-  template <class T, int N> friend class BVH_QueueBuilder;
+    template <class T, int N> friend class BVH_QueueBuilder;
 
 public:
 
-  //! Creates new BVH build queue.
-  BVH_BuildQueue()
-  : myNbThreads (0)
-  {
-    //
-  }
+    //! Creates new BVH build queue.
+    BVH_BuildQueue()
+        : myNbThreads(0)
+    {
+        //
+    }
 
-  //! Releases resources of BVH build queue.
-  ~BVH_BuildQueue()
-  {
-    //
-  }
+    //! Releases resources of BVH build queue.
+    ~BVH_BuildQueue()
+    {
+        //
+    }
 
 public:
 
-  //! Returns current size of BVH build queue.
-  Standard_EXPORT Standard_Integer Size();
+    //! Returns current size of BVH build queue.
+    Standard_EXPORT Standard_Integer Size();
 
-  //! Enqueues new work-item onto BVH build queue.
-  Standard_EXPORT void Enqueue (const Standard_Integer& theNode);
+    //! Enqueues new work-item onto BVH build queue.
+    Standard_EXPORT void Enqueue(const Standard_Integer& theNode);
 
-  //! Fetches first work-item from BVH build queue.
-  Standard_EXPORT Standard_Integer Fetch (Standard_Boolean& wasBusy);
+    //! Fetches first work-item from BVH build queue.
+    Standard_EXPORT Standard_Integer Fetch(Standard_Boolean& wasBusy);
 
-  //! Checks if there are active build threads.
-  Standard_Boolean HasBusyThreads()
-  {
-    return myNbThreads != 0;
-  }
-
-protected:
-
-  //! Queue of BVH nodes to build.
-  NCollection_Sequence<Standard_Integer> myQueue;
+    //! Checks if there are active build threads.
+    Standard_Boolean HasBusyThreads()
+    {
+        return myNbThreads != 0;
+    }
 
 protected:
 
-  //! Manages access serialization of working threads.
-  Standard_Mutex myMutex;
+    //! Queue of BVH nodes to build.
+    NCollection_Sequence<Standard_Integer> myQueue;
 
-  //! Number of active build threads.
-  Standard_Integer myNbThreads;
+protected:
+
+    //! Manages access serialization of working threads.
+    Standard_Mutex myMutex;
+
+    //! Number of active build threads.
+    Standard_Integer myNbThreads;
 };
 
 #endif // _BVH_BuildQueue_Header

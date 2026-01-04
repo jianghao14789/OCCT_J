@@ -36,7 +36,7 @@ class Expr
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Handle(Expr_GeneralExpression) CopyShare (const Handle(Expr_GeneralExpression)& exp);

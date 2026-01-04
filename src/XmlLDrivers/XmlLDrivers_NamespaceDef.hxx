@@ -29,7 +29,7 @@ class XmlLDrivers_NamespaceDef
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT XmlLDrivers_NamespaceDef();

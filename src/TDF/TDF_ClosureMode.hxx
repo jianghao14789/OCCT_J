@@ -29,7 +29,7 @@ class TDF_ClosureMode
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an object with all modes set to <aMode>.

@@ -34,7 +34,7 @@ class RWStepAP214_RWAppliedPersonAndOrganizationAssignment
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepAP214_RWAppliedPersonAndOrganizationAssignment();

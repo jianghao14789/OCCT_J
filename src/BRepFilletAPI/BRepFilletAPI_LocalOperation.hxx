@@ -35,7 +35,7 @@ class BRepFilletAPI_LocalOperation  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds a  contour in  the  builder  (builds a

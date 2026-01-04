@@ -53,7 +53,7 @@ class Law_BSplineKnotSplitting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

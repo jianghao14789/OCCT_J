@@ -1,4 +1,4 @@
-// Created on: 1992-08-18
+﻿// Created on: 1992-08-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,26 +22,26 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenFct,ExprIntrp_Generator)
+IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenFct, ExprIntrp_Generator)
 
-ExprIntrp_GenFct::ExprIntrp_GenFct ()
+ExprIntrp_GenFct::ExprIntrp_GenFct()
 {
-  done = Standard_False;
+    done = Standard_False;
 }
 
-Handle( ExprIntrp_GenFct ) ExprIntrp_GenFct::Create()
+Handle(ExprIntrp_GenFct) ExprIntrp_GenFct::Create()
 {
-  return new ExprIntrp_GenFct();
+    return new ExprIntrp_GenFct();
 }
 
-void ExprIntrp_GenFct::Process (const TCollection_AsciiString& str)
+void ExprIntrp_GenFct::Process(const TCollection_AsciiString& str)
 {
-  Handle(ExprIntrp_GenFct) me = this;
-  done = ExprIntrp::Parse(me,str);
+    Handle(ExprIntrp_GenFct) me = this;
+    done = ExprIntrp::Parse(me, str);
 }
- 
+
 Standard_Boolean ExprIntrp_GenFct::IsDone() const
 {
-  return done;
+    return done;
 }
 

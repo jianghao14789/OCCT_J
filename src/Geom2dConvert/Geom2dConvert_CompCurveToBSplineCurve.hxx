@@ -33,7 +33,7 @@ class Geom2dConvert_CompCurveToBSplineCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initialize the algorithme

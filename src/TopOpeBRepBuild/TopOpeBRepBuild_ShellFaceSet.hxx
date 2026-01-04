@@ -40,7 +40,7 @@ class TopOpeBRepBuild_ShellFaceSet  : public TopOpeBRepBuild_ShapeSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a ShellFaceSet to build blocks of faces

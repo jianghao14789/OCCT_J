@@ -39,7 +39,7 @@ class IGESAppli_ToolNode
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolNode, ready to work

@@ -37,7 +37,7 @@ class BRepBuilderAPI_MakeShape  : public BRepBuilderAPI_Command
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! This is  called by  Shape().  It does  nothing but
   //! may be redefined.

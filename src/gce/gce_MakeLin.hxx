@@ -41,7 +41,7 @@ class gce_MakeLin  : public gce_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a line located along the axis A1.

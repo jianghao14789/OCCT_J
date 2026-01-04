@@ -32,7 +32,7 @@ class RWStepKinematics_RWKinematicJoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT RWStepKinematics_RWKinematicJoint();
 

@@ -29,7 +29,7 @@ class IntTools_PntOn2Faces
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

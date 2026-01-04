@@ -33,7 +33,7 @@ class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod();

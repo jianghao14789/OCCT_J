@@ -1,4 +1,4 @@
-// Created by: Eugeny MALTCHIKOV
+﻿// Created by: Eugeny MALTCHIKOV
 // Copyright (c) 2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -106,102 +106,102 @@ class BOPAlgo_PaveFiller;
 //! }
 //! //
 //! const TopoDS_Shape& aResult = aMV.Shape();  //result of the operation
-class BOPAlgo_MakerVolume  : public BOPAlgo_Builder
+class BOPAlgo_MakerVolume : public BOPAlgo_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  //! Empty constructor.
-  BOPAlgo_MakerVolume();
-  virtual ~BOPAlgo_MakerVolume();
+    //! Empty constructor.
+    BOPAlgo_MakerVolume();
+    virtual ~BOPAlgo_MakerVolume();
 
-  //! Empty constructor.
-  BOPAlgo_MakerVolume(const Handle(NCollection_BaseAllocator)& theAllocator);
+    //! Empty constructor.
+    BOPAlgo_MakerVolume(const Handle(NCollection_BaseAllocator)& theAllocator);
 
-  //! Clears the data.
-  virtual void Clear() Standard_OVERRIDE;
+    //! Clears the data.
+    virtual void Clear() Standard_OVERRIDE;
 
-  //! Sets the flag myIntersect:
-  //! if <bIntersect> is TRUE the shapes from <myArguments> will be intersected.
-  //! if <bIntersect> is FALSE no intersection will be done.
-  void SetIntersect(const Standard_Boolean bIntersect);
+    //! Sets the flag myIntersect:
+    //! if <bIntersect> is TRUE the shapes from <myArguments> will be intersected.
+    //! if <bIntersect> is FALSE no intersection will be done.
+    void SetIntersect(const Standard_Boolean bIntersect);
 
-  //! Returns the flag <myIntersect>.
-  Standard_Boolean IsIntersect() const;
+    //! Returns the flag <myIntersect>.
+    Standard_Boolean IsIntersect() const;
 
-  //! Returns the solid box <mySBox>.
-  const TopoDS_Solid& Box() const;
+    //! Returns the solid box <mySBox>.
+    const TopoDS_Solid& Box() const;
 
-  //! Returns the processed faces <myFaces>.
-  const TopTools_ListOfShape& Faces() const;
+    //! Returns the processed faces <myFaces>.
+    const TopTools_ListOfShape& Faces() const;
 
-  //! Defines the preventing of addition of internal for solid parts into the result.
-  //! By default the internal parts are added into result.
-  void SetAvoidInternalShapes(const Standard_Boolean theAvoidInternal) {
-    myAvoidInternalShapes = theAvoidInternal;
-  }
+    //! Defines the preventing of addition of internal for solid parts into the result.
+    //! By default the internal parts are added into result.
+    void SetAvoidInternalShapes(const Standard_Boolean theAvoidInternal) {
+        myAvoidInternalShapes = theAvoidInternal;
+    }
 
-  //! Returns the AvoidInternalShapes flag
-  Standard_Boolean IsAvoidInternalShapes() const {
-    return myAvoidInternalShapes;
-  }
+    //! Returns the AvoidInternalShapes flag
+    Standard_Boolean IsAvoidInternalShapes() const {
+        return myAvoidInternalShapes;
+    }
 
-  //! Performs the operation.
-  Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
-
-protected:
-
-  //! Checks the data.
-  Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
-
-  //! Performs the operation.
-  Standard_EXPORT virtual void PerformInternal1 (const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
-
-  //! Collects all faces.
-  Standard_EXPORT void CollectFaces();
-
-  //! Makes solid box.
-  Standard_EXPORT void MakeBox (TopTools_MapOfShape& theBoxFaces);
-
-  //! Builds solids.
-  Standard_EXPORT void BuildSolids (TopTools_ListOfShape& theLSR,
-                                    const Message_ProgressRange& theRange);
-
-  //! Removes the covering box.
-  Standard_EXPORT void RemoveBox (TopTools_ListOfShape& theLSR, const TopTools_MapOfShape& theBoxFaces);
-
-  //! Fills the solids with internal shapes.
-  Standard_EXPORT void FillInternalShapes (const TopTools_ListOfShape& theLSR);
-
-  //! Builds the result.
-  Standard_EXPORT void BuildShape (const TopTools_ListOfShape& theLSR);
-
-protected:
-  //! List of operations to be supported by the Progress Indicator.
-  //! Enumeration is going to contain some extra operations from base class,
-  //! which are not going to be used here. So, the array of steps will also
-  //! contain some extra zero values. This is the only extra resource that is
-  //! going to be used, but it allows us not to override the methods that use
-  //! the values of the enumeration of base class.
-  //! Starting the enumeration from the middle of enumeration of base class is
-  //! not a good idea as the values in enumeration may be swapped.
-  enum BOPAlgo_PIOperation
-  {
-    PIOperation_BuildSolids = BOPAlgo_Builder::PIOperation_Last,
-    PIOperation_Last
-  };
-
-  //! Analyze progress steps
-  Standard_EXPORT void fillPISteps(BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+    //! Performs the operation.
+    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
 protected:
 
-  Standard_Boolean myIntersect;
-  Bnd_Box myBBox;
-  TopoDS_Solid mySBox;
-  TopTools_ListOfShape myFaces;
-  Standard_Boolean myAvoidInternalShapes;
+    //! Checks the data.
+    Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
+
+    //! Performs the operation.
+    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+
+    //! Collects all faces.
+    Standard_EXPORT void CollectFaces();
+
+    //! Makes solid box.
+    Standard_EXPORT void MakeBox(TopTools_MapOfShape& theBoxFaces);
+
+    //! Builds solids.
+    Standard_EXPORT void BuildSolids(TopTools_ListOfShape& theLSR,
+        const Message_ProgressRange& theRange);
+
+    //! Removes the covering box.
+    Standard_EXPORT void RemoveBox(TopTools_ListOfShape& theLSR, const TopTools_MapOfShape& theBoxFaces);
+
+    //! Fills the solids with internal shapes.
+    Standard_EXPORT void FillInternalShapes(const TopTools_ListOfShape& theLSR);
+
+    //! Builds the result.
+    Standard_EXPORT void BuildShape(const TopTools_ListOfShape& theLSR);
+
+protected:
+    //! List of operations to be supported by the Progress Indicator.
+    //! Enumeration is going to contain some extra operations from base class,
+    //! which are not going to be used here. So, the array of steps will also
+    //! contain some extra zero values. This is the only extra resource that is
+    //! going to be used, but it allows us not to override the methods that use
+    //! the values of the enumeration of base class.
+    //! Starting the enumeration from the middle of enumeration of base class is
+    //! not a good idea as the values in enumeration may be swapped.
+    enum BOPAlgo_PIOperation
+    {
+        PIOperation_BuildSolids = BOPAlgo_Builder::PIOperation_Last,
+        PIOperation_Last
+    };
+
+    //! Analyze progress steps
+    Standard_EXPORT void fillPISteps(BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+
+protected:
+
+    Standard_Boolean myIntersect;
+    Bnd_Box myBBox;
+    TopoDS_Solid mySBox;
+    TopTools_ListOfShape myFaces;
+    Standard_Boolean myAvoidInternalShapes;
 
 private:
 

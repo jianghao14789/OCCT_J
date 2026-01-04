@@ -39,7 +39,7 @@ class IGESSolid_ToolVertexList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolVertexList, ready to work

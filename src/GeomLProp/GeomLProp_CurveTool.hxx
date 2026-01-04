@@ -33,7 +33,7 @@ class GeomLProp_CurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the point <P> of parameter <U> on the curve <C>.

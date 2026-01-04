@@ -34,7 +34,7 @@ public:
       ::Bind (theTypeName, Persistent::template Instantiate<Persistent>);
   }
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 };
 
 #endif // _StdObjMgt_MapOfInstantiators_HeaderFile

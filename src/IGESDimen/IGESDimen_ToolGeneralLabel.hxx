@@ -39,7 +39,7 @@ class IGESDimen_ToolGeneralLabel
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolGeneralLabel, ready to work

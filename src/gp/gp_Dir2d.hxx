@@ -37,7 +37,7 @@ class gp_Dir2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a direction corresponding to X axis.
   gp_Dir2d()

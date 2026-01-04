@@ -42,7 +42,7 @@ class Geom2dGcc
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs such a qualified curve that the relative

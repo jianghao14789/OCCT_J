@@ -32,7 +32,7 @@ class TNaming_Translator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TNaming_Translator();

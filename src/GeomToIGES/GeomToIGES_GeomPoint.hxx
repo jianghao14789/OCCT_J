@@ -35,7 +35,7 @@ class GeomToIGES_GeomPoint  : public GeomToIGES_GeomEntity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToIGES_GeomPoint();

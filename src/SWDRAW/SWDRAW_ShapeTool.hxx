@@ -33,7 +33,7 @@ class SWDRAW_ShapeTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines and loads all basic functions for SWDRAW on Shapes

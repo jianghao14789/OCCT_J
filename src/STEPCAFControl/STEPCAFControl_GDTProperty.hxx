@@ -51,7 +51,7 @@ class STEPCAFControl_GDTProperty
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT STEPCAFControl_GDTProperty();
   Standard_EXPORT static void GetDimModifiers(const Handle(StepRepr_CompoundRepresentationItem)& theCRI,

@@ -31,7 +31,7 @@ class IGESGraph
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares dynamic data (Protocol, Modules) for this package

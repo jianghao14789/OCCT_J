@@ -39,7 +39,7 @@ class IGESAppli_ToolFiniteElement
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolFiniteElement, ready to work

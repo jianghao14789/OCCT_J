@@ -37,7 +37,7 @@ class GeomToStep_MakeDirection  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeDirection(const gp_Dir& D);

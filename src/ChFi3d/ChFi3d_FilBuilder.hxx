@@ -46,7 +46,7 @@ class ChFi3d_FilBuilder  : public ChFi3d_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ChFi3d_FilBuilder(const TopoDS_Shape& S, const ChFi3d_FilletShape FShape = ChFi3d_Rational, const Standard_Real Ta = 1.0e-2);

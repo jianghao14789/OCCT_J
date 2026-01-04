@@ -36,7 +36,7 @@ class IntCurve_MyImpParToolOfIntImpConicParConic  : public math_FunctionWithDeri
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor of the class.

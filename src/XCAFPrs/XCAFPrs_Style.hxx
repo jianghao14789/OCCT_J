@@ -27,7 +27,7 @@ class XCAFPrs_Style
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor - colors are unset, visibility is TRUE.
   Standard_EXPORT XCAFPrs_Style();

@@ -37,7 +37,7 @@ class HLRBRep_TheQuadCurvExactInterCSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Provides the signed distance function : Q(w)

@@ -49,7 +49,7 @@ class IGESData_ParamCursor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Cursor to read a precise parameter of ParamReader,

@@ -1,4 +1,4 @@
-// Created on: 1991-09-18
+﻿// Created on: 1991-09-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,41 +22,41 @@
 #include <Standard_NoMoreObject.hxx>
 #include <Standard_NoSuchObject.hxx>
 
-Expr_UnknownIterator::Expr_UnknownIterator (const Handle(Expr_GeneralExpression)& exp)
+Expr_UnknownIterator::Expr_UnknownIterator(const Handle(Expr_GeneralExpression)& exp)
 {
-  Perform(exp);
-  myCurrent = 1;
+    Perform(exp);
+    myCurrent = 1;
 }
 
 void Expr_UnknownIterator::Perform(const Handle(Expr_GeneralExpression)& exp)
 {
-  if (exp->IsKind(STANDARD_TYPE(Expr_NamedUnknown))) {
-    Handle(Expr_NamedUnknown) varexp = Handle(Expr_NamedUnknown)::DownCast(exp);
-    if (!myMap.Contains(varexp)) {
-      myMap.Add(varexp);
+    if (exp->IsKind(STANDARD_TYPE(Expr_NamedUnknown))) {
+        Handle(Expr_NamedUnknown) varexp = Handle(Expr_NamedUnknown)::DownCast(exp);
+        if (!myMap.Contains(varexp)) {
+            myMap.Add(varexp);
+        }
     }
-  }
-  Standard_Integer nbsub = exp->NbSubExpressions();
-  for (Standard_Integer i = 1; i <= nbsub ; i++) {
-    Perform(exp->SubExpression(i));
-  }
+    Standard_Integer nbsub = exp->NbSubExpressions();
+    for (Standard_Integer i = 1; i <= nbsub; i++) {
+        Perform(exp->SubExpression(i));
+    }
 }
 
 Standard_Boolean Expr_UnknownIterator::More() const
 {
-  return (myCurrent <= myMap.Extent());
+    return (myCurrent <= myMap.Extent());
 }
 
-void Expr_UnknownIterator::Next ()
+void Expr_UnknownIterator::Next()
 {
-  if (!More()) {
-    throw Standard_NoMoreObject();
-  }
-  myCurrent++;
+    if (!More()) {
+        throw Standard_NoMoreObject();
+    }
+    myCurrent++;
 }
 
-Handle(Expr_NamedUnknown) Expr_UnknownIterator::Value () const
+Handle(Expr_NamedUnknown) Expr_UnknownIterator::Value() const
 {
-  return myMap(myCurrent);
+    return myMap(myCurrent);
 }
 

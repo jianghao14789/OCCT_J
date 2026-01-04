@@ -1,4 +1,4 @@
-// Created on: 1991-09-20
+﻿// Created on: 1991-09-20
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,39 +23,39 @@
 
 Handle(Expr_GeneralExpression) Expr::CopyShare(const Handle(Expr_GeneralExpression)& exp)
 {
-  if (exp->IsShareable()) {
-    return exp;
-  }
-  return exp->Copy();
+    if (exp->IsShareable()) {
+        return exp;
+    }
+    return exp->Copy();
 }
 
 Standard_Integer Expr::NbOfFreeVariables(const Handle(Expr_GeneralRelation)& rel)
 {
-  Standard_Integer nbvar = 0;
-  Expr_RUIterator rit(rel);
-  while (rit.More()) {
-    if (!rit.Value()->IsAssigned()) {
-      nbvar++;
+    Standard_Integer nbvar = 0;
+    Expr_RUIterator rit(rel);
+    while (rit.More()) {
+        if (!rit.Value()->IsAssigned()) {
+            nbvar++;
+        }
+        rit.Next();
     }
-    rit.Next();
-  }
-  return nbvar;
+    return nbvar;
 }
 
 Standard_Integer Expr::NbOfFreeVariables(const Handle(Expr_GeneralExpression)& exp)
 {
-  Standard_Integer nbvar = 0;
-  Expr_UnknownIterator uit(exp);
-  while (uit.More()) {
-    if (!uit.Value()->IsAssigned()) {
-      nbvar++;
+    Standard_Integer nbvar = 0;
+    Expr_UnknownIterator uit(exp);
+    while (uit.More()) {
+        if (!uit.Value()->IsAssigned()) {
+            nbvar++;
+        }
+        uit.Next();
     }
-    uit.Next();
-  }
-  return nbvar;
+    return nbvar;
 }
 
 Standard_Real Expr::Sign(const Standard_Real val)
 {
-  return ::Sign(1.0,val);
+    return ::Sign(1.0, val);
 }

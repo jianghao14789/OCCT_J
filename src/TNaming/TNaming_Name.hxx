@@ -41,7 +41,7 @@ class TNaming_Name
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TNaming_Name();

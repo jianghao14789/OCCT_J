@@ -41,7 +41,7 @@ class CDF_Store
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates a store list  from the document of the current selection.

@@ -1,4 +1,4 @@
-// Created on: 1999-07-29
+﻿// Created on: 1999-07-29
 // Created by: Roman LYGIN
 // Copyright (c) 1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -25,11 +25,11 @@
 //! - Fail: fatal error
 enum Message_Gravity
 {
-Message_Trace,
-Message_Info,
-Message_Warning,
-Message_Alarm,
-Message_Fail
+    Message_Trace,
+    Message_Info,
+    Message_Warning,
+    Message_Alarm,
+    Message_Fail
 };
 
 #endif // _Message_Gravity_HeaderFile

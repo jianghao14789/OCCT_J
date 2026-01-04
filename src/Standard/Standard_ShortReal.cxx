@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -21,18 +21,18 @@
 // function : HashCode
 // purpose  :
 //============================================================================
-Standard_Integer HashCode (const Standard_ShortReal theShortReal, const Standard_Integer theUpperBound)
+Standard_Integer HashCode(const Standard_ShortReal theShortReal, const Standard_Integer theUpperBound)
 {
-  if (theUpperBound < 1)
-  {
-    throw Standard_RangeError ("Try to apply HashCode method with negative or null argument.");
-  }
-  union
-  {
-    Standard_ShortReal R;
-    Standard_Integer   I;
-  } U;
-  U.R = theShortReal;
+    if (theUpperBound < 1)
+    {
+        throw Standard_RangeError("Try to apply HashCode method with negative or null argument.");
+    }
+    union
+    {
+        Standard_ShortReal R;
+        Standard_Integer   I;
+    } U;
+    U.R = theShortReal;
 
-  return HashCode (U.I, theUpperBound);
+    return HashCode(U.I, theUpperBound);
 }

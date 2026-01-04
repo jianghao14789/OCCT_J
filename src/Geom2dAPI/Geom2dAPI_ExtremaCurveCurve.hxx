@@ -56,7 +56,7 @@ class Geom2dAPI_ExtremaCurveCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the extrema between

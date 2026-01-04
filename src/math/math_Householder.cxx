@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -38,136 +38,136 @@
 // specialement pour celle-ci etait plus long qu'une simple recopie. C'est
 // donc cette solution de recopie initiale qui a ete retenue.
 math_Householder::math_Householder(const math_Matrix& A, const math_Vector& B,
-                                   const Standard_Real EPS):
-                                   Sol(1, A.ColNumber(), 1, 1),
-                                   Q(1, A.RowNumber(), 
-                                     1, A.ColNumber()) {
+    const Standard_Real EPS) :
+    Sol(1, A.ColNumber(), 1, 1),
+    Q(1, A.RowNumber(),
+        1, A.ColNumber()) {
 
-  mylowerArow = A.LowerRow();
-  mylowerAcol = A.LowerCol();
-  myupperArow = A.UpperRow();
-  myupperAcol = A.UpperCol();
-  math_Matrix B1(1, B.Length(), 1, 1);
-  B1.SetCol(1, B);
-  Perform(A, B1, EPS);
+    mylowerArow = A.LowerRow();
+    mylowerAcol = A.LowerCol();
+    myupperArow = A.UpperRow();
+    myupperAcol = A.UpperCol();
+    math_Matrix B1(1, B.Length(), 1, 1);
+    B1.SetCol(1, B);
+    Perform(A, B1, EPS);
 }
 
 
 
 math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B,
-				   const Standard_Real EPS):
-                                   Sol(1, A.ColNumber(), 
-                                       1, B.ColNumber()),
-                                   Q(1, A.RowNumber(), 
-                                     A.LowerCol(), A.UpperCol()) {
+    const Standard_Real EPS) :
+    Sol(1, A.ColNumber(),
+        1, B.ColNumber()),
+    Q(1, A.RowNumber(),
+        A.LowerCol(), A.UpperCol()) {
 
-  mylowerArow = A.LowerRow();
-  mylowerAcol = A.LowerCol();
-  myupperArow = A.UpperRow();
-  myupperAcol = A.UpperCol();
-  Perform(A, B, EPS);
+    mylowerArow = A.LowerRow();
+    mylowerAcol = A.LowerCol();
+    myupperArow = A.UpperRow();
+    myupperAcol = A.UpperCol();
+    Perform(A, B, EPS);
 }
 
 
 math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B,
-                                   const Standard_Integer lowerArow,
-                                   const Standard_Integer upperArow,
-                                   const Standard_Integer lowerAcol,
-                                   const Standard_Integer upperAcol,
-				   const Standard_Real EPS):
-                                   Sol(1, upperAcol-lowerAcol+1, 
-                                       1, B.ColNumber()),
-                                   Q(1, upperArow-lowerArow+1, 
-                                     1, upperAcol-lowerAcol+1) {
-  mylowerArow = lowerArow;
-  myupperArow = upperArow;
-  mylowerAcol = lowerAcol;
-  myupperAcol = upperAcol;
+    const Standard_Integer lowerArow,
+    const Standard_Integer upperArow,
+    const Standard_Integer lowerAcol,
+    const Standard_Integer upperAcol,
+    const Standard_Real EPS) :
+    Sol(1, upperAcol - lowerAcol + 1,
+        1, B.ColNumber()),
+    Q(1, upperArow - lowerArow + 1,
+        1, upperAcol - lowerAcol + 1) {
+    mylowerArow = lowerArow;
+    myupperArow = upperArow;
+    mylowerAcol = lowerAcol;
+    myupperAcol = upperAcol;
 
-  Perform(A, B, EPS);
+    Perform(A, B, EPS);
 }
 
 
-void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B, 
-                               const Standard_Real EPS) {
+void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B,
+    const Standard_Real EPS) {
 
-  Standard_Integer i, j, k, n, l, m;
-  Standard_Real scale, f, g, h = 0., alfaii;
-  Standard_Real qki;
-  Standard_Real cj;
-  n = Q.ColNumber();
-  l = Q.RowNumber();
-  m = B.ColNumber();
-  math_Matrix B2(1, l, 1, m);
+    Standard_Integer i, j, k, n, l, m;
+    Standard_Real scale, f, g, h = 0., alfaii;
+    Standard_Real qki;
+    Standard_Real cj;
+    n = Q.ColNumber();
+    l = Q.RowNumber();
+    m = B.ColNumber();
+    math_Matrix B2(1, l, 1, m);
 
-  Standard_Integer lbrow = B.LowerRow();
-  for (i = 1; i <= l; i++) {
-    for (j = 1; j <= n; j++) {
-      Q(i, j) = A(i+mylowerArow-1, j+mylowerAcol-1);
+    Standard_Integer lbrow = B.LowerRow();
+    for (i = 1; i <= l; i++) {
+        for (j = 1; j <= n; j++) {
+            Q(i, j) = A(i + mylowerArow - 1, j + mylowerAcol - 1);
+        }
+        for (j = 1; j <= m; j++) {
+            B2(i, j) = B(i + lbrow - 1, j);
+        }
     }
-    for (j=1; j <= m; j++) {
-      B2(i, j) = B(i+lbrow-1, j);
-    }
-  }
 
-  Standard_DimensionError_Raise_if(l != B.RowNumber() || n > l, " ");
+    Standard_DimensionError_Raise_if(l != B.RowNumber() || n > l, " ");
 
-// Traitement de chaque colonne de A:
+    // Traitement de chaque colonne de A:
     for (i = 1; i <= n; i++) {
-      h = scale = 0.0;
+        h = scale = 0.0;
         for (k = i; k <= l; k++) {
-          qki = Q(k, i);
-	  h += qki*qki;                           // = ||a||*||a||     = EUAI
+            qki = Q(k, i);
+            h += qki * qki;                           // = ||a||*||a||     = EUAI
         }
-        f = Q(i,i);                               // = a1              = AII
-        g = f<1.e-15 ? Sqrt(h) : -Sqrt(h);
-	if (fabs(g) <= EPS) {
-	  Done = Standard_False;
-	  return;
-	}
-        h -= f*g;                                 // = (v*v)/2         = C1
-        alfaii = g-f;                             // = v               = ALFAII
-        for (j =i+1; j <= n; j++) {
-     	  scale = 0.0;
-	  for (k = i; k <= l; k++) {
-	   scale += Q(k,i)* Q(k,j);                //                   = SCAL
-	  }
-	  cj = (g*Q(i,j) - scale)/h;
-	  Q(i,j) = Q(i,j) - alfaii*cj;
-	  for(k= i+1; k <= l; k++) {
-	    Q(k,j) = Q(k, j) + cj * Q(k,i);
-	  }
+        f = Q(i, i);                               // = a1              = AII
+        g = f < 1.e-15 ? Sqrt(h) : -Sqrt(h);
+        if (fabs(g) <= EPS) {
+            Done = Standard_False;
+            return;
+        }
+        h -= f * g;                                 // = (v*v)/2         = C1
+        alfaii = g - f;                             // = v               = ALFAII
+        for (j = i + 1; j <= n; j++) {
+            scale = 0.0;
+            for (k = i; k <= l; k++) {
+                scale += Q(k, i) * Q(k, j);                //                   = SCAL
+            }
+            cj = (g * Q(i, j) - scale) / h;
+            Q(i, j) = Q(i, j) - alfaii * cj;
+            for (k = i + 1; k <= l; k++) {
+                Q(k, j) = Q(k, j) + cj * Q(k, i);
+            }
         }
 
-// Modification de B:
+        // Modification de B:
 
         for (j = 1; j <= m; j++) {
-          scale= Q(i,i)*B2(i,j);
-          for (k = i+1; k <= l; k++) {
-	    scale += Q(k,i)*B2(k,j);
-	  }
-	  cj = (g*B2(i,j) - scale)/h;
-	  B2(i,j) = B2(i,j) - cj*alfaii;
-	  for (k = i+1; k <= l; k++) {
-	    B2(k,j) = B2(k,j) + cj*Q(k,i);
-	  }
+            scale = Q(i, i) * B2(i, j);
+            for (k = i + 1; k <= l; k++) {
+                scale += Q(k, i) * B2(k, j);
+            }
+            cj = (g * B2(i, j) - scale) / h;
+            B2(i, j) = B2(i, j) - cj * alfaii;
+            for (k = i + 1; k <= l; k++) {
+                B2(k, j) = B2(k, j) + cj * Q(k, i);
+            }
         }
-        Q(i,i) = g;
-      }
-
-
-  // Remontee:
-  for (j = 1; j <= m; j++) {
-    Sol(n,j) = B2(n,j)/Q(n,n);
-    for (i = n -1; i >=1; i--) {
-      scale= 0.0;
-      for(k = i+1; k <= n; k++) {
-	scale += Q(i,k) * Sol(k,j);
-      }
-      Sol(i,j) = (B2(i,j) - scale)/Q(i,i);
+        Q(i, i) = g;
     }
-  }
-  Done = Standard_True;
+
+
+    // Remontee:
+    for (j = 1; j <= m; j++) {
+        Sol(n, j) = B2(n, j) / Q(n, n);
+        for (i = n - 1; i >= 1; i--) {
+            scale = 0.0;
+            for (k = i + 1; k <= n; k++) {
+                scale += Q(i, k) * Sol(k, j);
+            }
+            Sol(i, j) = (B2(i, j) - scale) / Q(i, i);
+        }
+    }
+    Done = Standard_True;
 }
 
 
@@ -175,12 +175,12 @@ void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B,
 
 void math_Householder::Dump(Standard_OStream& o) const {
 
-  o <<"math_Householder ";
-   if (Done) {
-     o << " Status = Done \n";
-   }
-   else {
-     o << "Status = not Done \n";
-   }
+    o << "math_Householder ";
+    if (Done) {
+        o << " Status = Done \n";
+    }
+    else {
+        o << "Status = not Done \n";
+    }
 }
 

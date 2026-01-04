@@ -38,7 +38,7 @@ class GeomFill_SnglrFunc  : public Adaptor3d_Curve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_SnglrFunc(const Handle(Adaptor3d_Curve)& HC);

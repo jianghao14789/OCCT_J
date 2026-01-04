@@ -58,7 +58,7 @@ class Geom2dGcc_Circ2d3Tan
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs one or more 2D circles

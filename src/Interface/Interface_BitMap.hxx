@@ -44,7 +44,7 @@ class Interface_BitMap
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a empty BitMap

@@ -32,7 +32,7 @@ class IntPatch_Polygo  : public Intf_Polygon2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     Standard_Real Error() const;

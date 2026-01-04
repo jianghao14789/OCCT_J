@@ -44,7 +44,7 @@ class Vrml_Texture2
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_Texture2();

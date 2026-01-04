@@ -39,7 +39,7 @@ class BRepMAT2d_Explorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepMAT2d_Explorer();

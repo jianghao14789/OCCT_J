@@ -33,7 +33,7 @@ class RWStepBasic_RWDocumentFile
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

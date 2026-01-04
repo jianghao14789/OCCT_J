@@ -34,7 +34,7 @@ class RWStepAP203_RWChange
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

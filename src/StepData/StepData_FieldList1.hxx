@@ -33,7 +33,7 @@ class StepData_FieldList1  : public StepData_FieldList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a FieldList of 1 Field

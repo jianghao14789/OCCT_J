@@ -28,7 +28,7 @@ class GeomInt_LineTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Integer NbVertex (const Handle(IntPatch_Line)& L);

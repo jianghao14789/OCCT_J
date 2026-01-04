@@ -25,7 +25,7 @@
 class Graphic3d_FrameStatsData
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns FPS (frames per seconds, elapsed time).
   //! This number indicates an actual frame rate averaged for several frames within UpdateInterval() duration,

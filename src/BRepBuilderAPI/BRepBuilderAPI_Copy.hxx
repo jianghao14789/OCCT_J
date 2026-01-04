@@ -34,7 +34,7 @@ class BRepBuilderAPI_Copy  : public BRepBuilderAPI_ModifyShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Constructs an empty copy framework. Use the function
   //! Perform to copy shapes.

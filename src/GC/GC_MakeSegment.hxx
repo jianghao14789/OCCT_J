@@ -41,7 +41,7 @@ class GC_MakeSegment  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a segment of Line from the 2 points <P1> and <P2>.

@@ -41,7 +41,7 @@ class GC_MakeMirror
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GC_MakeMirror(const gp_Pnt& Point);

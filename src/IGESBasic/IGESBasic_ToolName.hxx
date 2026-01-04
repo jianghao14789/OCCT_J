@@ -40,7 +40,7 @@ class IGESBasic_ToolName
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolName, ready to work

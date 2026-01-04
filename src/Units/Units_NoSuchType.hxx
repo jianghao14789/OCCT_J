@@ -1,4 +1,4 @@
-// Created on: 1992-06-22
+﻿// Created on: 1992-06-22
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Units_NoSuchType;
 DEFINE_STANDARD_HANDLE(Units_NoSuchType, Standard_NoSuchObject)
 
 #if !defined No_Exception && !defined No_Units_NoSuchType
-  #define Units_NoSuchType_Raise_if(CONDITION, MESSAGE) \
+#define Units_NoSuchType_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Units_NoSuchType(MESSAGE);
 #else
-  #define Units_NoSuchType_Raise_if(CONDITION, MESSAGE)
+#define Units_NoSuchType_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Units_NoSuchType, Standard_NoSuchObject)

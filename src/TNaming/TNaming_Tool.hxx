@@ -44,7 +44,7 @@ class TNaming_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the last Modification of <NS>.

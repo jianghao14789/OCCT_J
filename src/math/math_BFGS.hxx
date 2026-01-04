@@ -45,7 +45,7 @@ class math_BFGS
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes the computation of the minimum of a function with

@@ -41,7 +41,7 @@ class math_BracketMinimum
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor preparing A and B parameters only. It does not perform the job.
   math_BracketMinimum(const Standard_Real A, const Standard_Real B);

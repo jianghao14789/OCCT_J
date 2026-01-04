@@ -34,7 +34,7 @@ class Geom2dInt_TheCurveLocatorOfTheProjPCurOfGInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Among a set of points {C(ui),i=1,NbU}, locate the point

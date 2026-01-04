@@ -41,7 +41,7 @@ class GC_MakeTrimmedCylinder  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a cylindricalSurface <Cyl> from Geom

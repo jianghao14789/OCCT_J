@@ -33,7 +33,7 @@ class StepVisual_PresentationRepresentationSelect  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a PresentationRepresentationSelect SelectType

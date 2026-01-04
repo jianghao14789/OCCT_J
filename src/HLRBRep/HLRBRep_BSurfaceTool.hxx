@@ -42,7 +42,7 @@ class HLRBRep_BSurfaceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstUParameter (const BRepAdaptor_Surface& S);

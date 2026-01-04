@@ -34,7 +34,7 @@ class GeomToStep_MakeHyperbola  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeHyperbola(const Handle(Geom2d_Hyperbola)& C);

@@ -28,7 +28,7 @@ class IntPatch_RstInt
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void PutVertexOnLine (const Handle(IntPatch_Line)& L,

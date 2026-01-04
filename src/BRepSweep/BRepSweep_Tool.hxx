@@ -34,7 +34,7 @@ class BRepSweep_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initialize the tool  with <aShape>.  The IndexTool

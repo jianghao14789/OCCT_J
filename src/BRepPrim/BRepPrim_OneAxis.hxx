@@ -68,7 +68,7 @@ class BRepPrim_OneAxis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The MeridianOffset is added  to the  parameters on

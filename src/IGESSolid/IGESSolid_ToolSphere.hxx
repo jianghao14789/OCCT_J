@@ -39,7 +39,7 @@ class IGESSolid_ToolSphere
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSphere, ready to work

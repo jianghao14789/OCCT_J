@@ -40,7 +40,7 @@ class IGESGraph_ToolIntercharacterSpacing
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolIntercharacterSpacing, ready to work

@@ -32,7 +32,7 @@ class CDM_ReferenceIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT CDM_ReferenceIterator(const Handle(CDM_Document)& aDocument);

@@ -33,7 +33,7 @@ class RWStepDimTol_RWStraightnessTolerance
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

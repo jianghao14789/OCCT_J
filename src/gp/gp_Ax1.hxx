@@ -38,7 +38,7 @@ class gp_Ax1
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an axis object representing Z axis of
   //! the reference coordinate system.

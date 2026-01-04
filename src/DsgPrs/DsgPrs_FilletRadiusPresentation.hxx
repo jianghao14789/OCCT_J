@@ -35,7 +35,7 @@ class DsgPrs_FilletRadiusPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds a display of the radius of a fillet to the

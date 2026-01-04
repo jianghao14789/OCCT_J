@@ -33,7 +33,7 @@ class RWStepGeom_RWPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepGeom_RWPoint();

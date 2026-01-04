@@ -29,7 +29,7 @@
 class StdPrs_WFRestrictedFace : public Prs3d_Root
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT static void Add
                 (const Handle (Prs3d_Presentation)&  thePresentation,

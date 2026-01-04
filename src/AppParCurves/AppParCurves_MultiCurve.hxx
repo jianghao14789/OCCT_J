@@ -60,7 +60,7 @@ class AppParCurves_MultiCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns an indefinite MultiCurve.

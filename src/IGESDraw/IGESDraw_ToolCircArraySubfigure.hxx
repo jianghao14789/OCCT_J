@@ -39,7 +39,7 @@ class IGESDraw_ToolCircArraySubfigure
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolCircArraySubfigure, ready to work

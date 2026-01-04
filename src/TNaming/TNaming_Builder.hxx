@@ -39,7 +39,7 @@ class TNaming_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an   Builder.

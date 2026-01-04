@@ -76,7 +76,7 @@ class math_Matrix
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 
   //! Constructs a non-initialized  matrix of range [LowerRow..UpperRow,

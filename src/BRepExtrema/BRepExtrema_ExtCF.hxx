@@ -30,7 +30,7 @@ class BRepExtrema_ExtCF
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BRepExtrema_ExtCF()
   {

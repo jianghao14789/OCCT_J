@@ -52,7 +52,7 @@ class TopOpeBRepTool_FuseEdges
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initialise members  and build  construction of map

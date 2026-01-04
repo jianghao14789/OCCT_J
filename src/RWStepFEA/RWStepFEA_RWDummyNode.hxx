@@ -33,7 +33,7 @@ class RWStepFEA_RWDummyNode
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

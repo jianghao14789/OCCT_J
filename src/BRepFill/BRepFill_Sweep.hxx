@@ -46,7 +46,7 @@ class BRepFill_Sweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepFill_Sweep(const Handle(BRepFill_SectionLaw)& Section, const Handle(BRepFill_LocationLaw)& Location, const Standard_Boolean WithKPart);

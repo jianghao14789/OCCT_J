@@ -31,7 +31,7 @@ class VrmlAPI
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! With help of this class user can change parameters of writing.

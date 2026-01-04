@@ -1,4 +1,4 @@
-// Created on: 1991-03-06
+﻿// Created on: 1991-03-06
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -24,32 +24,32 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Expr_GeneralExpression,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Expr_GeneralExpression, Standard_Transient)
 
 Standard_Boolean Expr_GeneralExpression::IsShareable() const
- {
-   return Standard_False;
- }
+{
+    return Standard_False;
+}
 
- Handle(Expr_GeneralExpression) Expr_GeneralExpression::NDerivative (const Handle(Expr_NamedUnknown)& X, const Standard_Integer N) const
- {
-   if (N <= 0) {
-     throw Standard_OutOfRange();
-   }
-   Handle(Expr_GeneralExpression) first = Derivative(X);
-   if (N > 1) {
-     return first->NDerivative(X,N-1);
-   }
-   return first;
- }
+Handle(Expr_GeneralExpression) Expr_GeneralExpression::NDerivative(const Handle(Expr_NamedUnknown)& X, const Standard_Integer N) const
+{
+    if (N <= 0) {
+        throw Standard_OutOfRange();
+    }
+    Handle(Expr_GeneralExpression) first = Derivative(X);
+    if (N > 1) {
+        return first->NDerivative(X, N - 1);
+    }
+    return first;
+}
 
 
- Standard_Real Expr_GeneralExpression::EvaluateNumeric() const
- {
-   if (ContainsUnknowns()) {
-     throw Expr_NotEvaluable();
-   }
-   Expr_Array1OfNamedUnknown tabvr(1,1);
-   TColStd_Array1OfReal tabvl(1,1);
-   return Evaluate(tabvr,tabvl);
- }
+Standard_Real Expr_GeneralExpression::EvaluateNumeric() const
+{
+    if (ContainsUnknowns()) {
+        throw Expr_NotEvaluable();
+    }
+    Expr_Array1OfNamedUnknown tabvr(1, 1);
+    TColStd_Array1OfReal tabvl(1, 1);
+    return Evaluate(tabvr, tabvl);
+}

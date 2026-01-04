@@ -41,7 +41,7 @@ class Interface_FileParameter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Interface_FileParameter();

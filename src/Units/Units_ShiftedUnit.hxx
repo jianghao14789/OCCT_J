@@ -1,4 +1,4 @@
-// Created on: 1992-11-04
+﻿// Created on: 1992-11-04
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -41,42 +41,42 @@ class Units_ShiftedUnit : public Units_Unit
 
 public:
 
-  
-  //! Creates  and  returns a  shifted unit.   <aname> is the
-  //! name of the unit,  <asymbol> is the usual abbreviation
-  //! of the unit, <avalue> is the  value in relation to the
-  //! International System of Units, and <amove>  is the gap
-  //! in relation to another unit.
-  //!
-  //! For  example Celsius   degree   of temperature  is  an
-  //! instance of ShiftedUnit  with <avalue> equal to 1. and
-  //! <amove> equal to 273.15.
-  Standard_EXPORT Units_ShiftedUnit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue, const Standard_Real amove, const Handle(Units_Quantity)& aquantity);
-  
-  //! Creates  and returns a  unit.  <aname> is  the name of
-  //! the  unit, <asymbol> is the  usual abbreviation of the
-  //! unit.
-  Standard_EXPORT Units_ShiftedUnit(const Standard_CString aname, const Standard_CString asymbol);
-  
-  //! Creates  and returns a  unit.  <aname> is  the name of
-  //! the  unit.
-  Standard_EXPORT Units_ShiftedUnit(const Standard_CString aname);
-  
-  //! Sets the field <themove> to <amove>
-  Standard_EXPORT void Move (const Standard_Real amove);
-  
-  //! Returns the shifted value <themove>.
-  Standard_EXPORT Standard_Real Move() const;
-  
-  //! This redefined method returns a ShiftedToken object.
-  Standard_EXPORT virtual Handle(Units_Token) Token() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Dump (const Standard_Integer ashift, const Standard_Integer alevel) const Standard_OVERRIDE;
+
+    //! Creates  and  returns a  shifted unit.   <aname> is the
+    //! name of the unit,  <asymbol> is the usual abbreviation
+    //! of the unit, <avalue> is the  value in relation to the
+    //! International System of Units, and <amove>  is the gap
+    //! in relation to another unit.
+    //!
+    //! For  example Celsius   degree   of temperature  is  an
+    //! instance of ShiftedUnit  with <avalue> equal to 1. and
+    //! <amove> equal to 273.15.
+    Standard_EXPORT Units_ShiftedUnit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue, const Standard_Real amove, const Handle(Units_Quantity)& aquantity);
+
+    //! Creates  and returns a  unit.  <aname> is  the name of
+    //! the  unit, <asymbol> is the  usual abbreviation of the
+    //! unit.
+    Standard_EXPORT Units_ShiftedUnit(const Standard_CString aname, const Standard_CString asymbol);
+
+    //! Creates  and returns a  unit.  <aname> is  the name of
+    //! the  unit.
+    Standard_EXPORT Units_ShiftedUnit(const Standard_CString aname);
+
+    //! Sets the field <themove> to <amove>
+    Standard_EXPORT void Move(const Standard_Real amove);
+
+    //! Returns the shifted value <themove>.
+    Standard_EXPORT Standard_Real Move() const;
+
+    //! This redefined method returns a ShiftedToken object.
+    Standard_EXPORT virtual Handle(Units_Token) Token() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void Dump(const Standard_Integer ashift, const Standard_Integer alevel) const Standard_OVERRIDE;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Units_ShiftedUnit,Units_Unit)
+    DEFINE_STANDARD_RTTIEXT(Units_ShiftedUnit, Units_Unit)
 
 protected:
 
@@ -86,7 +86,7 @@ protected:
 private:
 
 
-  Standard_Real themove;
+    Standard_Real themove;
 
 
 };

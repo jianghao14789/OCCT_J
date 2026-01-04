@@ -56,7 +56,7 @@ class Interface_Category
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a Category, with no protocol yet
   Interface_Category()

@@ -1,4 +1,4 @@
-// Created on: 1991-06-10
+﻿// Created on: 1991-06-10
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,45 +23,45 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Expr_Equal,Expr_SingleRelation)
+IMPLEMENT_STANDARD_RTTIEXT(Expr_Equal, Expr_SingleRelation)
 
-Expr_Equal::Expr_Equal (const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
+Expr_Equal::Expr_Equal(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
 {
-  SetFirstMember(exp1);
-  SetSecondMember(exp2);
+    SetFirstMember(exp1);
+    SetSecondMember(exp2);
 }
 
-Standard_Boolean Expr_Equal::IsSatisfied () const
+Standard_Boolean Expr_Equal::IsSatisfied() const
 {
-  Handle(Expr_GeneralExpression) fm = FirstMember();
-  Handle(Expr_GeneralExpression) sm = SecondMember();
-  fm = fm->Simplified();
-  sm = sm->Simplified();
-  return (fm->IsIdentical(sm));
+    Handle(Expr_GeneralExpression) fm = FirstMember();
+    Handle(Expr_GeneralExpression) sm = SecondMember();
+    fm = fm->Simplified();
+    sm = sm->Simplified();
+    return (fm->IsIdentical(sm));
 }
 
-Handle(Expr_GeneralRelation) Expr_Equal::Simplified () const
+Handle(Expr_GeneralRelation) Expr_Equal::Simplified() const
 {
-  Handle(Expr_GeneralExpression) fm = FirstMember();
-  Handle(Expr_GeneralExpression) sm = SecondMember();
-  return new Expr_Equal(fm->Simplified(),sm->Simplified());
+    Handle(Expr_GeneralExpression) fm = FirstMember();
+    Handle(Expr_GeneralExpression) sm = SecondMember();
+    return new Expr_Equal(fm->Simplified(), sm->Simplified());
 }
 
-void Expr_Equal::Simplify ()
+void Expr_Equal::Simplify()
 {
-  Handle(Expr_GeneralExpression) fm = FirstMember();
-  Handle(Expr_GeneralExpression) sm = SecondMember();
-  SetFirstMember(fm->Simplified());
-  SetSecondMember(sm->Simplified());
+    Handle(Expr_GeneralExpression) fm = FirstMember();
+    Handle(Expr_GeneralExpression) sm = SecondMember();
+    SetFirstMember(fm->Simplified());
+    SetSecondMember(sm->Simplified());
 }
 
-Handle(Expr_GeneralRelation) Expr_Equal::Copy () const
+Handle(Expr_GeneralRelation) Expr_Equal::Copy() const
 {
-  return new Expr_Equal(Expr::CopyShare(FirstMember()),
-			Expr::CopyShare(SecondMember()));
+    return new Expr_Equal(Expr::CopyShare(FirstMember()),
+        Expr::CopyShare(SecondMember()));
 }
 
 TCollection_AsciiString Expr_Equal::String() const
 {
-  return FirstMember()->String() + " = " + SecondMember()->String(); 
+    return FirstMember()->String() + " = " + SecondMember()->String();
 }

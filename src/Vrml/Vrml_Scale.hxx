@@ -35,7 +35,7 @@ class Vrml_Scale
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_Scale();

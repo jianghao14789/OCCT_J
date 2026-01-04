@@ -35,7 +35,7 @@ class AdvApprox_PrefAndRec  : public AdvApprox_Cutting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT AdvApprox_PrefAndRec(const TColStd_Array1OfReal& RecomendedCut, const TColStd_Array1OfReal& PrefferedCut, const Standard_Real Weight = 5);

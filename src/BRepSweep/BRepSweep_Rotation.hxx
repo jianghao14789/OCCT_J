@@ -37,7 +37,7 @@ class BRepSweep_Rotation  : public BRepSweep_Trsf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a topology  by rotating <S>  around A with the

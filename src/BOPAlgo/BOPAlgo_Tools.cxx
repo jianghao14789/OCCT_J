@@ -1146,7 +1146,7 @@ typedef NCollection_Vector<BOPAlgo_ShapeBox> BOPAlgo_VectorOfShapeBox;
 class BOPAlgo_FillIn3DParts : public BOPAlgo_ParallelAlgo
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor
   BOPAlgo_FillIn3DParts()

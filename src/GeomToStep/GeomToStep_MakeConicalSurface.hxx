@@ -34,7 +34,7 @@ class GeomToStep_MakeConicalSurface  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeConicalSurface(const Handle(Geom_ConicalSurface)& CSurf);

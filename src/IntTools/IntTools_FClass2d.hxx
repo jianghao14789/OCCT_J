@@ -38,7 +38,7 @@ class IntTools_FClass2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

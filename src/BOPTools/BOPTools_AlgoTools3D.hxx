@@ -41,7 +41,7 @@ class BOPTools_AlgoTools3D
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Makes the edge <theESplit> seam edge for the face <theFace> basing on the surface properties (U and V periods)
   Standard_EXPORT static Standard_Boolean DoSplitSEAMOnFace (const TopoDS_Edge& theESplit,

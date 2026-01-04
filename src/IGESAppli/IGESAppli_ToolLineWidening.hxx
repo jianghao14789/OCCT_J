@@ -40,7 +40,7 @@ class IGESAppli_ToolLineWidening
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolLineWidening, ready to work

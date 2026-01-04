@@ -33,7 +33,7 @@ class StepShape_ValueQualifier  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StepShape_ValueQualifier();

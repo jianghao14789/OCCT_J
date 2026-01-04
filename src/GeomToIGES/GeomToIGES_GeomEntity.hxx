@@ -30,7 +30,7 @@ class GeomToIGES_GeomEntity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a tool GeomEntity

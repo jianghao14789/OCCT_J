@@ -34,7 +34,7 @@ class OSD_Thread
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   Standard_EXPORT OSD_Thread();

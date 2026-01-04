@@ -30,7 +30,7 @@ class StepVisual_AnnotationPlaneElement  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a AnnotationPlaneElement select type
   Standard_EXPORT StepVisual_AnnotationPlaneElement();

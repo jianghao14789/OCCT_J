@@ -53,7 +53,7 @@ class TCollection_AsciiString
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes a AsciiString to an empty AsciiString.

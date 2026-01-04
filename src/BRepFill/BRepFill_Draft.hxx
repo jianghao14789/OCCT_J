@@ -39,7 +39,7 @@ class BRepFill_Draft
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepFill_Draft(const TopoDS_Shape& Shape, const gp_Dir& Dir, const Standard_Real Angle);

@@ -44,7 +44,7 @@ class TopOpeBRep_Point2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRep_Point2d();

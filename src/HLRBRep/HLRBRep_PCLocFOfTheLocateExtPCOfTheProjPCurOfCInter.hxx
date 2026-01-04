@@ -41,7 +41,7 @@ class HLRBRep_PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter  : public math_Functio
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter();

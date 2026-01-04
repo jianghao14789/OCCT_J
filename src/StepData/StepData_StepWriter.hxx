@@ -59,7 +59,7 @@ class StepData_StepWriter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty StepWriter from a StepModel. The StepModel

@@ -42,7 +42,7 @@ class Vrml_MatrixTransform
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_MatrixTransform();

@@ -59,7 +59,7 @@ class XmlMDF
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Translates a transient <aSource> into a persistent
   //! <aTarget>.

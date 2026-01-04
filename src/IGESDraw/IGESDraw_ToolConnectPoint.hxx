@@ -39,7 +39,7 @@ class IGESDraw_ToolConnectPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolConnectPoint, ready to work

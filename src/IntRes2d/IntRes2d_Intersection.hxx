@@ -37,7 +37,7 @@ class IntRes2d_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns TRUE when the computation was successful.

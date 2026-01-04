@@ -31,7 +31,7 @@ class Geom2dGcc_QCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dGcc_QCurve(const Geom2dAdaptor_Curve& Curve, const GccEnt_Position Qualifier);

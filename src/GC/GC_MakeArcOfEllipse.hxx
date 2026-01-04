@@ -39,7 +39,7 @@ class GC_MakeArcOfEllipse  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an arc of Ellipse (TrimmedCurve from Geom) from

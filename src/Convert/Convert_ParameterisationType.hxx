@@ -1,4 +1,4 @@
-// Created on: 1991-10-10
+﻿// Created on: 1991-10-10
 // Created by: Jean Claude VAUTHIER
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -83,14 +83,14 @@
 //! parameter t on the BSpline curve does not give an exact point on the circle or the ellipse).
 enum Convert_ParameterisationType
 {
-Convert_TgtThetaOver2,
-Convert_TgtThetaOver2_1,
-Convert_TgtThetaOver2_2,
-Convert_TgtThetaOver2_3,
-Convert_TgtThetaOver2_4,
-Convert_QuasiAngular,
-Convert_RationalC1,
-Convert_Polynomial
+    Convert_TgtThetaOver2,
+    Convert_TgtThetaOver2_1,
+    Convert_TgtThetaOver2_2,
+    Convert_TgtThetaOver2_3,
+    Convert_TgtThetaOver2_4,
+    Convert_QuasiAngular,
+    Convert_RationalC1,
+    Convert_Polynomial
 };
 
 #endif // _Convert_ParameterisationType_HeaderFile

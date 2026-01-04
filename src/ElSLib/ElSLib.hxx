@@ -59,7 +59,7 @@ class ElSLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! For elementary surfaces from the gp package (planes,

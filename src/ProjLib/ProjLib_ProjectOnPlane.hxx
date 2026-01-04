@@ -55,7 +55,7 @@ class ProjLib_ProjectOnPlane  : public Adaptor3d_Curve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

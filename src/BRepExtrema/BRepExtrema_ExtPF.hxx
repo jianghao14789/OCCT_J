@@ -31,7 +31,7 @@ class BRepExtrema_ExtPF
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BRepExtrema_ExtPF()
   {}

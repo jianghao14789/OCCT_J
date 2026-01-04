@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -21,19 +21,19 @@
 //! @param thePointer the memory pointer which hash code it to be computed
 //! @param theUpperBound the upper bound of the range a resulting hash code must be within
 //! @return a value of a computed hash code, in range [1, UpperBound]
-inline Standard_Integer HashCode (const void* const thePointer, const Standard_Integer theUpperBound)
+inline Standard_Integer HashCode(const void* const thePointer, const Standard_Integer theUpperBound)
 {
-  union
-  {
-    const void*      L;
-    Standard_Integer I[2];
-  } U;
+    union
+    {
+        const void* L;
+        Standard_Integer I[2];
+    } U;
 
-  U.I[0] = 0;
-  U.I[1] = 0;
-  U.L    = thePointer;
+    U.I[0] = 0;
+    U.I[1] = 0;
+    U.L = thePointer;
 
-  return HashCode (U.I[0] ^ U.I[1], theUpperBound);
+    return HashCode(U.I[0] ^ U.I[1], theUpperBound);
 }
 
 //============================================================================
@@ -41,7 +41,9 @@ inline Standard_Integer HashCode (const void* const thePointer, const Standard_I
 //============================================================================
 
 inline Standard_Boolean IsEqual(const Standard_Address One
-			       ,const Standard_Address Two)
-{ return One == Two; }
+    , const Standard_Address Two)
+{
+    return One == Two;
+}
 
 #endif

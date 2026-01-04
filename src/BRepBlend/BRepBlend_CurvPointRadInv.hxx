@@ -45,7 +45,7 @@ class BRepBlend_CurvPointRadInv  : public Blend_CurvPointFuncInv
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_CurvPointRadInv(const Handle(Adaptor3d_Curve)& C1, const Handle(Adaptor3d_Curve)& C2);

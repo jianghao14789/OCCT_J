@@ -42,7 +42,7 @@ class ShapeUpgrade_ShapeDivide
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ShapeUpgrade_ShapeDivide();

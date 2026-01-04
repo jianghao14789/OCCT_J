@@ -34,7 +34,7 @@ class IntSurf_QuadricTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the value of the function.

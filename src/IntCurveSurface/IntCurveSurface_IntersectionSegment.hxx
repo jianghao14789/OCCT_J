@@ -31,7 +31,7 @@ class IntCurveSurface_IntersectionSegment
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntCurveSurface_IntersectionSegment();

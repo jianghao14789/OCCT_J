@@ -62,7 +62,7 @@ class BndLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Bounding box for a surface trimmed or not

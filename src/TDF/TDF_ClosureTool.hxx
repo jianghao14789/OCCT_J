@@ -41,7 +41,7 @@ class TDF_ClosureTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds the transitive closure of label and

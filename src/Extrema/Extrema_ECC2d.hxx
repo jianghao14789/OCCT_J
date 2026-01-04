@@ -40,7 +40,7 @@ class Extrema_ECC2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Calculates all the distances as above

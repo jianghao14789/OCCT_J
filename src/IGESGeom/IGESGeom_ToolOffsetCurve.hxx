@@ -40,7 +40,7 @@ class IGESGeom_ToolOffsetCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolOffsetCurve, ready to work

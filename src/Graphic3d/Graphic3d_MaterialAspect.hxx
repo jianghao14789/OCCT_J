@@ -32,7 +32,7 @@
 class Graphic3d_MaterialAspect 
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns the number of predefined textures.
   static Standard_Integer NumberOfMaterials() { return Graphic3d_NameOfMaterial_DEFAULT; }

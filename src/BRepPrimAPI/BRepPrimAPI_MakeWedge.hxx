@@ -38,7 +38,7 @@ class BRepPrimAPI_MakeWedge  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a STEP right angular wedge. (ltx >= 0)

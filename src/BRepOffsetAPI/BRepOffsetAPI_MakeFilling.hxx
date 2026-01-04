@@ -68,7 +68,7 @@ class BRepOffsetAPI_MakeFilling  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a wire filling object defined by

@@ -40,7 +40,7 @@ class Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter  : public IntRes2d_Inte
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

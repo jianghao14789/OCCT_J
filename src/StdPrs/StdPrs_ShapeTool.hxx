@@ -37,7 +37,7 @@ class Poly_Polygon3D;
 class StdPrs_ShapeTool
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructs the tool and initializes it using theShape and theAllVertices
   //! (optional) arguments. By default, only isolated and internal vertices are considered,

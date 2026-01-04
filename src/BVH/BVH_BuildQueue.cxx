@@ -1,4 +1,4 @@
-// Created on: 2015-05-27
+﻿// Created on: 2015-05-27
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2015 OPEN CASCADE SAS
 //
@@ -21,61 +21,61 @@
 // =======================================================================
 Standard_Integer BVH_BuildQueue::Size()
 {
-  Standard_Integer aSize;
+    Standard_Integer aSize;
 
-  myMutex.Lock();
-  {
-    aSize = myQueue.Size();
-  }
-  myMutex.Unlock();
+    myMutex.Lock();
+    {
+        aSize = myQueue.Size();
+    }
+    myMutex.Unlock();
 
-  return aSize;
+    return aSize;
 }
 
 // =======================================================================
 // function : Enqueue
 // purpose  : Enqueues new work-item onto BVH build queue
 // =======================================================================
-void BVH_BuildQueue::Enqueue (const Standard_Integer& theWorkItem)
+void BVH_BuildQueue::Enqueue(const Standard_Integer& theWorkItem)
 {
-  myMutex.Lock();
-  {
-    myQueue.Append (theWorkItem);
-  }
-  myMutex.Unlock();
+    myMutex.Lock();
+    {
+        myQueue.Append(theWorkItem);
+    }
+    myMutex.Unlock();
 }
 
 // =======================================================================
 // function : Fetch
 // purpose  : Fetches first work-item from BVH build queue
 // =======================================================================
-Standard_Integer BVH_BuildQueue::Fetch (Standard_Boolean& wasBusy)
+Standard_Integer BVH_BuildQueue::Fetch(Standard_Boolean& wasBusy)
 {
-  Standard_Integer aQuery = -1;
-  {
-    Standard_Mutex::Sentry aSentry (myMutex);
-
-    if (!myQueue.IsEmpty())
+    Standard_Integer aQuery = -1;
     {
-      aQuery = myQueue.First();
+        Standard_Mutex::Sentry aSentry(myMutex);
 
-      myQueue.Remove (1); // remove item from queue
+        if (!myQueue.IsEmpty())
+        {
+            aQuery = myQueue.First();
+
+            myQueue.Remove(1); // remove item from queue
+        }
+
+        if (aQuery != -1)
+        {
+            if (!wasBusy)
+            {
+                ++myNbThreads;
+            }
+        }
+        else if (wasBusy)
+        {
+            --myNbThreads;
+        }
+
+        wasBusy = aQuery != -1;
     }
 
-    if (aQuery != -1)
-    {
-      if (!wasBusy)
-      {
-        ++myNbThreads;
-      }
-    }
-    else if (wasBusy)
-    {
-      --myNbThreads;
-    }
-
-    wasBusy = aQuery != -1;
-  }
-
-  return aQuery;
+    return aQuery;
 }

@@ -27,7 +27,7 @@ class IntPatch_Polyhedron
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! MaTriangle constructor with an double array of pnt for the

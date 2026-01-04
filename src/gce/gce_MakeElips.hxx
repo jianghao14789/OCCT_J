@@ -40,7 +40,7 @@ class gce_MakeElips  : public gce_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The major radius of the ellipse is on the "XAxis" and the

@@ -40,7 +40,7 @@ class IGESAppli_ToolPartNumber
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPartNumber, ready to work

@@ -33,7 +33,7 @@ class IGESSelect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Simply gives a prompt for a conversational action on standard

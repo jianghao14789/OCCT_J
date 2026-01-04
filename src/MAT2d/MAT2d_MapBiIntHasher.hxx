@@ -31,7 +31,7 @@ class MAT2d_MapBiIntHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
     
   //! Computes a hash code for the given key, in the range [1, theUpperBound]
   //! @param theKey the key which hash code is to be computed

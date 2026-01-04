@@ -40,7 +40,7 @@ class Quantity_Date
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructs a default date
   //! (00:00 GMT, January 1, 1979 (zero hour)); use the function

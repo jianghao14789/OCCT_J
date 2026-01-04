@@ -37,7 +37,7 @@ class Vrml_OrthographicCamera
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_OrthographicCamera();

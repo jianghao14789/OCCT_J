@@ -39,7 +39,7 @@ class BRepOffsetAPI_NormalProjection  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty framework to define projection on

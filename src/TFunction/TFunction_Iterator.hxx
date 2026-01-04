@@ -35,7 +35,7 @@ class TFunction_Iterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! An empty constructor.

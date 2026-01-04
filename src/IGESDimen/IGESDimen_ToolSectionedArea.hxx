@@ -39,7 +39,7 @@ class IGESDimen_ToolSectionedArea
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSectionedArea, ready to work

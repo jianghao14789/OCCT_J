@@ -42,7 +42,7 @@ class TDataXtd
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Appends to <anIDList> the list of the attributes

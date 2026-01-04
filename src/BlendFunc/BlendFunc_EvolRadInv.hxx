@@ -28,7 +28,7 @@ class BlendFunc_EvolRadInv  : public Blend_FuncInv
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BlendFunc_EvolRadInv(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Handle(Adaptor3d_Curve)& C, const Handle(Law_Function)& Law);

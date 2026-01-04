@@ -48,7 +48,7 @@ class TopAbs
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Compose  the Orientation    <Or1>  and  <Or2>.    This

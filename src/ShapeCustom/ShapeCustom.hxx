@@ -63,7 +63,7 @@ class ShapeCustom
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Applies modifier to shape and checks sharing in the case assemblies.

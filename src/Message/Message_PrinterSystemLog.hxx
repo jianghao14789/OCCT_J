@@ -1,4 +1,4 @@
-// Copyright (c) 2019 OPEN CASCADE SAS
+﻿// Copyright (c) 2019 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -26,27 +26,27 @@ DEFINE_STANDARD_HANDLE(Message_PrinterSystemLog, Message_Printer)
 //! - UNIX/Linux, through syslog().
 class Message_PrinterSystemLog : public Message_Printer
 {
-  DEFINE_STANDARD_RTTIEXT(Message_PrinterSystemLog, Message_Printer)
+    DEFINE_STANDARD_RTTIEXT(Message_PrinterSystemLog, Message_Printer)
 public:
-  
-  //! Main constructor.
-  Standard_EXPORT Message_PrinterSystemLog (const TCollection_AsciiString& theEventSourceName,
-                                            const Message_Gravity theTraceLevel = Message_Info);
 
-  //! Destructor.
-  Standard_EXPORT virtual ~Message_PrinterSystemLog();
+    //! Main constructor.
+    Standard_EXPORT Message_PrinterSystemLog(const TCollection_AsciiString& theEventSourceName,
+        const Message_Gravity theTraceLevel = Message_Info);
+
+    //! Destructor.
+    Standard_EXPORT virtual ~Message_PrinterSystemLog();
 
 protected:
 
-  //! Puts a message to the system log.
-  Standard_EXPORT virtual void send (const TCollection_AsciiString& theString,
-                                     const Message_Gravity theGravity) const Standard_OVERRIDE;
+    //! Puts a message to the system log.
+    Standard_EXPORT virtual void send(const TCollection_AsciiString& theString,
+        const Message_Gravity theGravity) const Standard_OVERRIDE;
 
 private:
 
-  TCollection_AsciiString myEventSourceName;
+    TCollection_AsciiString myEventSourceName;
 #ifdef _WIN32
-  Standard_Address myEventSource;
+    Standard_Address myEventSource;
 #endif
 
 };

@@ -24,7 +24,7 @@ class Aspect_GradientBackground  : public Aspect_Background
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a window gradient background.
   //! Default color is Quantity_NOC_BLACK.

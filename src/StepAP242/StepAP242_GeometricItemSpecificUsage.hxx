@@ -1,4 +1,4 @@
-// Created on: 2015-07-10
+﻿// Created on: 2015-07-10
 // Created by: Irina KRYLOVA
 // Copyright (c) 2015 OPEN CASCADE SAS
 //
@@ -28,11 +28,11 @@ class StepAP242_GeometricItemSpecificUsage : public StepAP242_ItemIdentifiedRepr
 {
 
 public:
-  
-  Standard_EXPORT StepAP242_GeometricItemSpecificUsage();
 
-  DEFINE_STANDARD_RTTIEXT(StepAP242_GeometricItemSpecificUsage,StepAP242_ItemIdentifiedRepresentationUsage)
+    Standard_EXPORT StepAP242_GeometricItemSpecificUsage();
 
-private: 
+    DEFINE_STANDARD_RTTIEXT(StepAP242_GeometricItemSpecificUsage, StepAP242_ItemIdentifiedRepresentationUsage)
+
+private:
 };
 #endif // _StepAP242_GeometricItemSpecificUsage_HeaderFile

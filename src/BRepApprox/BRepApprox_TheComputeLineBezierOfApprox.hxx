@@ -51,7 +51,7 @@ class BRepApprox_TheComputeLineBezierOfApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! The MultiLine <Line> will be approximated until tolerances

@@ -51,7 +51,7 @@ class Interface_FileReaderTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Sets Data to a FileReaderData. Works with a Protocol

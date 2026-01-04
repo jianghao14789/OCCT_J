@@ -1,4 +1,4 @@
-// Created on: 2005-03-23
+﻿// Created on: 2005-03-23
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -31,5 +31,5 @@ Standard_MMgrRoot::~Standard_MMgrRoot()
 
 Standard_Integer Standard_MMgrRoot::Purge(Standard_Boolean)
 {
-  return 0;
+    return 0;
 }

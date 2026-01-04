@@ -40,7 +40,7 @@ class CPnts_AbscissaPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the length of the Curve <C>.

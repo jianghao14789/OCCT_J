@@ -36,7 +36,7 @@ class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve  : public Geom
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve(const Handle(Geom_BSplineCurve)& Bsplin);

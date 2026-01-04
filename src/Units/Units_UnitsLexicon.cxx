@@ -1,4 +1,4 @@
-// Created on: 1993-10-08
+﻿// Created on: 1993-10-08
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -24,14 +24,15 @@
 #include <Units_Token.hxx>
 #include <Units_UnitsDictionary.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Units_UnitsLexicon,Units_Lexicon)
+IMPLEMENT_STANDARD_RTTIEXT(Units_UnitsLexicon, Units_Lexicon)
 
 //=======================================================================
 //function : Units_UnitsLexicon
 //purpose  : 
 //=======================================================================
 Units_UnitsLexicon::Units_UnitsLexicon() : Units_Lexicon()
-{}
+{
+}
 
 //=======================================================================
 //function : Creates
@@ -40,10 +41,10 @@ Units_UnitsLexicon::Units_UnitsLexicon() : Units_Lexicon()
 
 void Units_UnitsLexicon::Creates(const Standard_Boolean amode)
 {
-  Handle(Units_UnitsDictionary) unitsdictionary;
+    Handle(Units_UnitsDictionary) unitsdictionary;
 
-  Units_Lexicon::Creates();
+    Units_Lexicon::Creates();
 
-  if(amode)unitsdictionary = Units::DictionaryOfUnits(amode);
+    if (amode)unitsdictionary = Units::DictionaryOfUnits(amode);
 
 }

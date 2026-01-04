@@ -29,7 +29,7 @@ class IntPatch_ALineToWLine
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor
   Standard_EXPORT IntPatch_ALineToWLine(const Handle(Adaptor3d_Surface)& theS1,

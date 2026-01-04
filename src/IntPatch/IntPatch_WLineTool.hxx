@@ -27,7 +27,7 @@ class IntPatch_WLineTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! I
   //! Removes equal points (leave one of equal points) from theWLine

@@ -31,7 +31,7 @@ class IGESData_IGESType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IGESData_IGESType();

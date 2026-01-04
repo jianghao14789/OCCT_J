@@ -32,7 +32,7 @@ class GeomLib_IsPlanarSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomLib_IsPlanarSurface(const Handle(Geom_Surface)& S, const Standard_Real Tol = 1.0e-7);

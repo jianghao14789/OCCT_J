@@ -33,7 +33,7 @@ class StepShape_ShapeDimensionRepresentationItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a ShapeDimensionRepresentationItem select type
   Standard_EXPORT StepShape_ShapeDimensionRepresentationItem();

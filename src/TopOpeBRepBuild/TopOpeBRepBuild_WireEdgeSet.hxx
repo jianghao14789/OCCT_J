@@ -46,7 +46,7 @@ class TopOpeBRepBuild_WireEdgeSet  : public TopOpeBRepBuild_ShapeSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a WireEdgeSet to build edges connected by vertices

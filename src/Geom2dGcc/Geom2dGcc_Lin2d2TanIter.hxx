@@ -43,7 +43,7 @@ class Geom2dGcc_Lin2d2TanIter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This class implements the algorithms used to create 2d

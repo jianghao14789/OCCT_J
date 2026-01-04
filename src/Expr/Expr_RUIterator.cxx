@@ -1,4 +1,4 @@
-// Created on: 1991-06-13
+﻿// Created on: 1991-06-13
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -25,49 +25,49 @@
 #include <Standard_NoMoreObject.hxx>
 #include <Standard_NoSuchObject.hxx>
 
-Expr_RUIterator::Expr_RUIterator (const Handle(Expr_GeneralRelation)& rel)
+Expr_RUIterator::Expr_RUIterator(const Handle(Expr_GeneralRelation)& rel)
 {
-  Expr_RelationIterator ri(rel);
-  Handle(Expr_SingleRelation) srel;
-  Handle(Expr_NamedUnknown) var;
-  myCurrent =1;
-  while (ri.More()) {
-    srel = ri.Value();
-    ri.Next();
-    Expr_UnknownIterator ui1(srel->FirstMember());
-    while (ui1.More()) {
-      var = ui1.Value();
-      ui1.Next();
-      if (!myMap.Contains(var)) {
-	myMap.Add(var);
-      }
+    Expr_RelationIterator ri(rel);
+    Handle(Expr_SingleRelation) srel;
+    Handle(Expr_NamedUnknown) var;
+    myCurrent = 1;
+    while (ri.More()) {
+        srel = ri.Value();
+        ri.Next();
+        Expr_UnknownIterator ui1(srel->FirstMember());
+        while (ui1.More()) {
+            var = ui1.Value();
+            ui1.Next();
+            if (!myMap.Contains(var)) {
+                myMap.Add(var);
+            }
+        }
+        Expr_UnknownIterator ui2(srel->SecondMember());
+        while (ui2.More()) {
+            var = ui2.Value();
+            ui2.Next();
+            if (!myMap.Contains(var)) {
+                myMap.Add(var);
+            }
+        }
     }
-    Expr_UnknownIterator ui2(srel->SecondMember());
-    while (ui2.More()) {
-      var = ui2.Value();
-      ui2.Next();
-      if (!myMap.Contains(var)) {
-	myMap.Add(var);
-      }
+}
+
+Standard_Boolean Expr_RUIterator::More() const
+{
+    return (myCurrent <= myMap.Extent());
+}
+
+void Expr_RUIterator::Next()
+{
+    if (!More()) {
+        throw Standard_NoMoreObject();
     }
-  }
+    myCurrent++;
 }
 
-Standard_Boolean Expr_RUIterator::More () const
+Handle(Expr_NamedUnknown) Expr_RUIterator::Value() const
 {
-  return (myCurrent <= myMap.Extent());
-}
-
-void Expr_RUIterator::Next ()
-{
-  if (!More()) {
-    throw Standard_NoMoreObject();
-  }
-  myCurrent++;
-}
-
-Handle(Expr_NamedUnknown) Expr_RUIterator::Value () const
-{
-  return myMap(myCurrent);
+    return myMap(myCurrent);
 }
 

@@ -34,7 +34,7 @@ class RWStepAP203_RWStartWork
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

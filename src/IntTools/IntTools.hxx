@@ -29,7 +29,7 @@ class IntTools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! returns the length of the edge;
   Standard_EXPORT static Standard_Real Length (const TopoDS_Edge& E);

@@ -44,7 +44,7 @@ class math_FunctionSetRoot
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! is used in a sub-class to initialize correctly all the fields

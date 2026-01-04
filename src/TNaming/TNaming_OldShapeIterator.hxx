@@ -41,7 +41,7 @@ class TNaming_OldShapeIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TNaming_OldShapeIterator(const TopoDS_Shape& aShape, const Standard_Integer Transaction, const TDF_Label& access);

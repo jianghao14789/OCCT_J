@@ -29,7 +29,7 @@ class StepVisual_DirectionCountSelect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StepVisual_DirectionCountSelect();

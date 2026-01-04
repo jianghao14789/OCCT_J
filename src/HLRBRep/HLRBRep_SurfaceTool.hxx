@@ -41,7 +41,7 @@ class HLRBRep_SurfaceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstUParameter (const Standard_Address S);

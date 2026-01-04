@@ -35,7 +35,7 @@ class HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter  : public math_F
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter(const Standard_Address& curve1, const Standard_Address& curve2);

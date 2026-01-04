@@ -41,7 +41,7 @@ class IGESData_IGESDumper
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns an IGESDumper ready to work.

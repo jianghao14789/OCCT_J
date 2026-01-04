@@ -34,7 +34,7 @@ class RWStepGeom_RWAxis2Placement2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepGeom_RWAxis2Placement2d();

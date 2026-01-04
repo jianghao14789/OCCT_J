@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -30,5 +30,5 @@ math_MultipleVarFunction::~math_MultipleVarFunction()
 //=======================================================================
 Standard_Integer math_MultipleVarFunction::GetStateNumber()
 {
-  return 0;
+    return 0;
 }

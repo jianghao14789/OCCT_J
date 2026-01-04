@@ -36,7 +36,7 @@ class BRepMesh_Triangulator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Performs conversion of the given list of triangles to Poly_Triangulation.
   Standard_EXPORT static Handle(Poly_Triangulation) ToPolyTriangulation(

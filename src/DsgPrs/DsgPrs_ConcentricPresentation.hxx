@@ -32,7 +32,7 @@ class DsgPrs_ConcentricPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines the display of elements showing relations of

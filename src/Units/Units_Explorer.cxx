@@ -1,4 +1,4 @@
-// Created on: 1994-05-09
+﻿// Created on: 1994-05-09
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -28,8 +28,8 @@
 //=======================================================================
 Units_Explorer::Units_Explorer()
 {
-  thecurrentquantity = 1;
-  thecurrentunit = 1;
+    thecurrentquantity = 1;
+    thecurrentunit = 1;
 }
 
 //=======================================================================
@@ -39,7 +39,7 @@ Units_Explorer::Units_Explorer()
 
 Units_Explorer::Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem)
 {
-  Init(aunitssystem);
+    Init(aunitssystem);
 }
 
 //=======================================================================
@@ -49,7 +49,7 @@ Units_Explorer::Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem)
 
 Units_Explorer::Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictionary)
 {
-  Init(aunitsdictionary);
+    Init(aunitsdictionary);
 }
 
 //=======================================================================
@@ -58,9 +58,9 @@ Units_Explorer::Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictio
 //=======================================================================
 
 Units_Explorer::Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem,
-			       const Standard_CString aquantity)
+    const Standard_CString aquantity)
 {
-  Init(aunitssystem,aquantity);
+    Init(aunitssystem, aquantity);
 }
 
 //=======================================================================
@@ -69,9 +69,9 @@ Units_Explorer::Units_Explorer(const Handle(Units_UnitsSystem)& aunitssystem,
 //=======================================================================
 
 Units_Explorer::Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictionary,
-			       const Standard_CString aquantity)
+    const Standard_CString aquantity)
 {
-  Init(aunitsdictionary,aquantity);
+    Init(aunitsdictionary, aquantity);
 }
 
 //=======================================================================
@@ -81,11 +81,11 @@ Units_Explorer::Units_Explorer(const Handle(Units_UnitsDictionary)& aunitsdictio
 
 void Units_Explorer::Init(const Handle(Units_UnitsSystem)& aunitssystem)
 {
-  thecurrentquantity = 1;
-  thequantitiessequence = aunitssystem->QuantitiesSequence();
-  theactiveunitssequence = aunitssystem->ActiveUnitsSequence();
-  if(MoreQuantity())theunitssequence = thequantitiessequence->Value(thecurrentquantity)->Sequence();
-  thecurrentunit = 1;
+    thecurrentquantity = 1;
+    thequantitiessequence = aunitssystem->QuantitiesSequence();
+    theactiveunitssequence = aunitssystem->ActiveUnitsSequence();
+    if (MoreQuantity())theunitssequence = thequantitiessequence->Value(thecurrentquantity)->Sequence();
+    thecurrentunit = 1;
 }
 
 //=======================================================================
@@ -95,17 +95,17 @@ void Units_Explorer::Init(const Handle(Units_UnitsSystem)& aunitssystem)
 
 void Units_Explorer::Init(const Handle(Units_UnitsDictionary)& aunitsdictionary)
 {
-  Standard_Integer index;
-  thecurrentquantity = 1;
-  thequantitiessequence = aunitsdictionary->Sequence();
-  theactiveunitssequence = new TColStd_HSequenceOfInteger();
-  for(index=1; index<=thequantitiessequence->Length(); index++)
+    Standard_Integer index;
+    thecurrentquantity = 1;
+    thequantitiessequence = aunitsdictionary->Sequence();
+    theactiveunitssequence = new TColStd_HSequenceOfInteger();
+    for (index = 1; index <= thequantitiessequence->Length(); index++)
     {
-      theactiveunitssequence->Append(1);
+        theactiveunitssequence->Append(1);
     }
 
-  if(MoreQuantity())theunitssequence = thequantitiessequence->Value(thecurrentquantity)->Sequence();
-  thecurrentunit = 1;
+    if (MoreQuantity())theunitssequence = thequantitiessequence->Value(thecurrentquantity)->Sequence();
+    thecurrentunit = 1;
 }
 
 //=======================================================================
@@ -114,25 +114,25 @@ void Units_Explorer::Init(const Handle(Units_UnitsDictionary)& aunitsdictionary)
 //=======================================================================
 
 void Units_Explorer::Init(const Handle(Units_UnitsSystem)& aunitssystem,
-			  const Standard_CString aquantity)
+    const Standard_CString aquantity)
 {
-  Standard_Integer index;
-  thecurrentquantity = 0;
-  thequantitiessequence = aunitssystem->QuantitiesSequence();
-  theactiveunitssequence = aunitssystem->ActiveUnitsSequence();
-  for(index=1; index<=thequantitiessequence->Length(); index++)
+    Standard_Integer index;
+    thecurrentquantity = 0;
+    thequantitiessequence = aunitssystem->QuantitiesSequence();
+    theactiveunitssequence = aunitssystem->ActiveUnitsSequence();
+    for (index = 1; index <= thequantitiessequence->Length(); index++)
     {
-      if(thequantitiessequence->Value(index)->Name() == aquantity)
-	{
-	  thecurrentquantity = index;
-	  thecurrentunit = 1;
-	  theunitssequence = thequantitiessequence->Value(index)->Sequence();
-	  return;
-	}
+        if (thequantitiessequence->Value(index)->Name() == aquantity)
+        {
+            thecurrentquantity = index;
+            thecurrentunit = 1;
+            theunitssequence = thequantitiessequence->Value(index)->Sequence();
+            return;
+        }
     }
 
 #ifdef OCCT_DEBUG
-  std::cout<<" La grandeur physique "<<aquantity<<" n'existe pas."<<std::endl;
+    std::cout << " La grandeur physique " << aquantity << " n'existe pas." << std::endl;
 #endif
 }
 
@@ -142,32 +142,32 @@ void Units_Explorer::Init(const Handle(Units_UnitsSystem)& aunitssystem,
 //=======================================================================
 
 void Units_Explorer::Init(const Handle(Units_UnitsDictionary)& aunitsdictionary,
-			  const Standard_CString aquantity)
+    const Standard_CString aquantity)
 {
-  Handle(Units_Quantity) quantity;
-  Standard_Integer index;
-  thecurrentquantity = 0;
-  thequantitiessequence = aunitsdictionary->Sequence();
-  theactiveunitssequence = new TColStd_HSequenceOfInteger();
-  for(index=1; index<=thequantitiessequence->Length(); index++)
+    Handle(Units_Quantity) quantity;
+    Standard_Integer index;
+    thecurrentquantity = 0;
+    thequantitiessequence = aunitsdictionary->Sequence();
+    theactiveunitssequence = new TColStd_HSequenceOfInteger();
+    for (index = 1; index <= thequantitiessequence->Length(); index++)
     {
-      theactiveunitssequence->Append(1);
+        theactiveunitssequence->Append(1);
     }
 
-  for(index=1; index<=thequantitiessequence->Length(); index++)
+    for (index = 1; index <= thequantitiessequence->Length(); index++)
     {
-      quantity = thequantitiessequence->Value(index);
-      if(quantity->Name() == aquantity)
-	{
-	  thecurrentquantity = index;
-	  thecurrentunit = 1;
-	  theunitssequence = thequantitiessequence->Value(index)->Sequence();
-	  return;
-	}
+        quantity = thequantitiessequence->Value(index);
+        if (quantity->Name() == aquantity)
+        {
+            thecurrentquantity = index;
+            thecurrentunit = 1;
+            theunitssequence = thequantitiessequence->Value(index)->Sequence();
+            return;
+        }
     }
 
 #ifdef OCCT_DEBUG
-  std::cout<<" La grandeur physique "<<aquantity<<" n'existe pas."<<std::endl;
+    std::cout << " La grandeur physique " << aquantity << " n'existe pas." << std::endl;
 #endif
 }
 
@@ -178,7 +178,7 @@ void Units_Explorer::Init(const Handle(Units_UnitsDictionary)& aunitsdictionary,
 
 Standard_Boolean Units_Explorer::MoreQuantity() const
 {
-  return thecurrentquantity <= thequantitiessequence->Length() ? Standard_True : Standard_False;
+    return thecurrentquantity <= thequantitiessequence->Length() ? Standard_True : Standard_False;
 }
 
 //=======================================================================
@@ -188,9 +188,9 @@ Standard_Boolean Units_Explorer::MoreQuantity() const
 
 void Units_Explorer::NextQuantity()
 {
-  thecurrentquantity++;
-  thecurrentunit = 1;
-  if(MoreQuantity())theunitssequence = thequantitiessequence->Value(thecurrentquantity)->Sequence();
+    thecurrentquantity++;
+    thecurrentunit = 1;
+    if (MoreQuantity())theunitssequence = thequantitiessequence->Value(thecurrentquantity)->Sequence();
 }
 
 //=======================================================================
@@ -200,7 +200,7 @@ void Units_Explorer::NextQuantity()
 
 TCollection_AsciiString Units_Explorer::Quantity() const
 {
-  return thequantitiessequence->Value(thecurrentquantity)->Name();
+    return thequantitiessequence->Value(thecurrentquantity)->Name();
 }
 
 //=======================================================================
@@ -210,7 +210,7 @@ TCollection_AsciiString Units_Explorer::Quantity() const
 
 Standard_Boolean Units_Explorer::MoreUnit() const
 {
-  return thecurrentunit <= theunitssequence->Length() ? Standard_True : Standard_False;
+    return thecurrentunit <= theunitssequence->Length() ? Standard_True : Standard_False;
 }
 
 //=======================================================================
@@ -220,7 +220,7 @@ Standard_Boolean Units_Explorer::MoreUnit() const
 
 void Units_Explorer::NextUnit()
 {
-  thecurrentunit++;
+    thecurrentunit++;
 }
 
 //=======================================================================
@@ -230,7 +230,7 @@ void Units_Explorer::NextUnit()
 
 TCollection_AsciiString Units_Explorer::Unit() const
 {
-  return theunitssequence->Value(thecurrentunit)->SymbolsSequence()->Value(1)->String();
+    return theunitssequence->Value(thecurrentunit)->SymbolsSequence()->Value(1)->String();
 }
 
 //=======================================================================
@@ -240,6 +240,6 @@ TCollection_AsciiString Units_Explorer::Unit() const
 
 Standard_Boolean Units_Explorer::IsActive() const
 {
-  return theactiveunitssequence->Value(thecurrentquantity) == thecurrentunit ?
-    Standard_True : Standard_False;
+    return theactiveunitssequence->Value(thecurrentquantity) == thecurrentunit ?
+        Standard_True : Standard_False;
 }

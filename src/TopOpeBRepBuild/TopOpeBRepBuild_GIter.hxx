@@ -34,7 +34,7 @@ class TopOpeBRepBuild_GIter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepBuild_GIter();

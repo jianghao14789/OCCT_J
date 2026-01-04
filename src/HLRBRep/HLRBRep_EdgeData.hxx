@@ -40,7 +40,7 @@ class HLRBRep_EdgeData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   HLRBRep_EdgeData() :
     myFlags(0),

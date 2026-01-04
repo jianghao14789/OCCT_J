@@ -39,7 +39,7 @@ class BRepClass3d_SolidPassiveClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an undefined classifier.

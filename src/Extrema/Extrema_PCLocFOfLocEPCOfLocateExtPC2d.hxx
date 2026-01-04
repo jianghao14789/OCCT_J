@@ -42,7 +42,7 @@ class Extrema_PCLocFOfLocEPCOfLocateExtPC2d  : public math_FunctionWithDerivativ
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_PCLocFOfLocEPCOfLocateExtPC2d();

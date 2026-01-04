@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -21,33 +21,39 @@
 #include <gp_Vec.hxx>
 #include <Standard_ConstructionError.hxx>
 
-void gp_Circ::Mirror (const gp_Pnt& P)
-{ pos.Mirror(P); }
-
-gp_Circ gp_Circ::Mirrored (const gp_Pnt& P) const
+void gp_Circ::Mirror(const gp_Pnt& P)
 {
-  gp_Circ C = *this;
-  C.pos.Mirror (P);
-  return C; 
+    pos.Mirror(P);
 }
 
-void gp_Circ::Mirror (const gp_Ax1& A1)
-{ pos.Mirror(A1); }
-
-gp_Circ gp_Circ::Mirrored (const gp_Ax1& A1) const
+gp_Circ gp_Circ::Mirrored(const gp_Pnt& P) const
 {
-  gp_Circ C = *this;
-  C.pos.Mirror (A1);
-  return C; 
+    gp_Circ C = *this;
+    C.pos.Mirror(P);
+    return C;
 }
 
-void gp_Circ::Mirror (const gp_Ax2& A2)
-{ pos.Mirror(A2); }
-
-gp_Circ gp_Circ::Mirrored (const gp_Ax2& A2) const
+void gp_Circ::Mirror(const gp_Ax1& A1)
 {
-  gp_Circ C = *this;
-  C.pos.Mirror (A2);
-  return C; 
+    pos.Mirror(A1);
+}
+
+gp_Circ gp_Circ::Mirrored(const gp_Ax1& A1) const
+{
+    gp_Circ C = *this;
+    C.pos.Mirror(A1);
+    return C;
+}
+
+void gp_Circ::Mirror(const gp_Ax2& A2)
+{
+    pos.Mirror(A2);
+}
+
+gp_Circ gp_Circ::Mirrored(const gp_Ax2& A2) const
+{
+    gp_Circ C = *this;
+    C.pos.Mirror(A2);
+    return C;
 }
 

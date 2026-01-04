@@ -28,7 +28,7 @@ class BOPTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void AllCommands (Draw_Interpretor& aDI);

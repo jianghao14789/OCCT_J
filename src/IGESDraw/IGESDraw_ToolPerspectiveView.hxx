@@ -39,7 +39,7 @@ class IGESDraw_ToolPerspectiveView
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPerspectiveView, ready to work

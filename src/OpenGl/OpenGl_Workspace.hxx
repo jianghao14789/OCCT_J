@@ -229,7 +229,7 @@ protected: //! @name fields related to status
 public: //! @name type definition
 
   DEFINE_STANDARD_RTTIEXT(OpenGl_Workspace,Standard_Transient)
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 };
 

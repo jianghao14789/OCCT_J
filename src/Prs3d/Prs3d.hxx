@@ -43,7 +43,7 @@ class Prs3d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! draws an arrow at a given location, with respect
   //! to a given direction.

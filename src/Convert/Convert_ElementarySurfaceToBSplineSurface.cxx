@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -23,31 +23,32 @@
 //purpose  : 
 //=======================================================================
 Convert_ElementarySurfaceToBSplineSurface::
-Convert_ElementarySurfaceToBSplineSurface 
-  (const Standard_Integer NbUPoles,
-   const Standard_Integer NbVPoles,
-   const Standard_Integer NbUKnots,
-   const Standard_Integer NbVKnots,
-   const Standard_Integer UDegree,
-   const Standard_Integer VDegree) : 
-  poles  (1, NbUPoles, 1, NbVPoles), weights (1, NbUPoles, 1, NbVPoles),
-  uknots (1, NbUKnots), umults (1, NbUKnots),
-  vknots (1, NbVKnots), vmults (1, NbVKnots), 
-  udegree  (UDegree),  vdegree  (VDegree),
-  nbUPoles (NbUPoles), nbVPoles (NbVPoles),
-  nbUKnots (NbUKnots), nbVKnots (NbVKnots)
+Convert_ElementarySurfaceToBSplineSurface
+(const Standard_Integer NbUPoles,
+    const Standard_Integer NbVPoles,
+    const Standard_Integer NbUKnots,
+    const Standard_Integer NbVKnots,
+    const Standard_Integer UDegree,
+    const Standard_Integer VDegree) :
+    poles(1, NbUPoles, 1, NbVPoles), weights(1, NbUPoles, 1, NbVPoles),
+    uknots(1, NbUKnots), umults(1, NbUKnots),
+    vknots(1, NbVKnots), vmults(1, NbVKnots),
+    udegree(UDegree), vdegree(VDegree),
+    nbUPoles(NbUPoles), nbVPoles(NbVPoles),
+    nbUKnots(NbUKnots), nbVKnots(NbVKnots)
 
-{ }
-   
+{
+}
+
 
 //=======================================================================
 //function : UDegree
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::UDegree () const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::UDegree() const
 {
-  return udegree;
+    return udegree;
 }
 
 
@@ -56,9 +57,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::UDegree () const
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::VDegree () const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::VDegree() const
 {
-  return vdegree;
+    return vdegree;
 }
 
 
@@ -67,9 +68,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::VDegree () const
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbUPoles () const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbUPoles() const
 {
-  return nbUPoles;
+    return nbUPoles;
 }
 
 
@@ -78,9 +79,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbUPoles () const
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbVPoles () const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbVPoles() const
 {
-  return nbVPoles;
+    return nbVPoles;
 }
 
 
@@ -89,9 +90,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbVPoles () const
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbUKnots () const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbUKnots() const
 {
-  return nbUKnots;
+    return nbUKnots;
 }
 
 
@@ -100,9 +101,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbUKnots () const
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbVKnots () const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbVKnots() const
 {
-  return nbVKnots;
+    return nbVKnots;
 }
 
 
@@ -112,9 +113,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::NbVKnots () const
 //=======================================================================
 
 Standard_Boolean Convert_ElementarySurfaceToBSplineSurface::IsUPeriodic()
-const 
+const
 {
-  return isuperiodic;
+    return isuperiodic;
 }
 
 //=======================================================================
@@ -123,9 +124,9 @@ const
 //=======================================================================
 
 Standard_Boolean Convert_ElementarySurfaceToBSplineSurface::IsVPeriodic()
-const 
+const
 {
-  return isvperiodic;
+    return isvperiodic;
 }
 
 
@@ -134,14 +135,14 @@ const
 //purpose  : 
 //=======================================================================
 
-gp_Pnt Convert_ElementarySurfaceToBSplineSurface::Pole 
-  (const Standard_Integer UIndex, 
-   const Standard_Integer VIndex ) const 
+gp_Pnt Convert_ElementarySurfaceToBSplineSurface::Pole
+(const Standard_Integer UIndex,
+    const Standard_Integer VIndex) const
 {
-   Standard_OutOfRange_Raise_if (
-                       UIndex < 1 || UIndex > nbUPoles ||
-                       VIndex < 1 || VIndex > nbVPoles, " ");
-   return poles (UIndex, VIndex);
+    Standard_OutOfRange_Raise_if(
+        UIndex < 1 || UIndex > nbUPoles ||
+        VIndex < 1 || VIndex > nbVPoles, " ");
+    return poles(UIndex, VIndex);
 }
 
 
@@ -150,14 +151,14 @@ gp_Pnt Convert_ElementarySurfaceToBSplineSurface::Pole
 //purpose  : 
 //=======================================================================
 
-Standard_Real Convert_ElementarySurfaceToBSplineSurface::Weight 
-  (const Standard_Integer UIndex,
-   const Standard_Integer VIndex ) const 
+Standard_Real Convert_ElementarySurfaceToBSplineSurface::Weight
+(const Standard_Integer UIndex,
+    const Standard_Integer VIndex) const
 {
-   Standard_OutOfRange_Raise_if (
-                       UIndex < 1 || UIndex > nbUPoles ||
-                       VIndex < 1 || VIndex > nbVPoles," ");
-   return weights (UIndex, VIndex);
+    Standard_OutOfRange_Raise_if(
+        UIndex < 1 || UIndex > nbUPoles ||
+        VIndex < 1 || VIndex > nbVPoles, " ");
+    return weights(UIndex, VIndex);
 }
 
 
@@ -167,11 +168,11 @@ Standard_Real Convert_ElementarySurfaceToBSplineSurface::Weight
 //purpose  : 
 //=======================================================================
 
-Standard_Real Convert_ElementarySurfaceToBSplineSurface::UKnot 
-  (const Standard_Integer UIndex) const 
+Standard_Real Convert_ElementarySurfaceToBSplineSurface::UKnot
+(const Standard_Integer UIndex) const
 {
-  Standard_OutOfRange_Raise_if (UIndex < 1 || UIndex > nbUKnots, " ");
-  return uknots (UIndex);
+    Standard_OutOfRange_Raise_if(UIndex < 1 || UIndex > nbUKnots, " ");
+    return uknots(UIndex);
 }
 
 
@@ -180,11 +181,11 @@ Standard_Real Convert_ElementarySurfaceToBSplineSurface::UKnot
 //purpose  : 
 //=======================================================================
 
-Standard_Real Convert_ElementarySurfaceToBSplineSurface::VKnot 
-  (const Standard_Integer VIndex) const 
+Standard_Real Convert_ElementarySurfaceToBSplineSurface::VKnot
+(const Standard_Integer VIndex) const
 {
-  Standard_OutOfRange_Raise_if (VIndex < 1 || VIndex > nbVKnots, " ");
-  return vknots (VIndex);
+    Standard_OutOfRange_Raise_if(VIndex < 1 || VIndex > nbVKnots, " ");
+    return vknots(VIndex);
 }
 
 
@@ -193,11 +194,11 @@ Standard_Real Convert_ElementarySurfaceToBSplineSurface::VKnot
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::UMultiplicity 
-  (const Standard_Integer UIndex) const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::UMultiplicity
+(const Standard_Integer UIndex) const
 {
-  Standard_OutOfRange_Raise_if (UIndex < 1 || UIndex > nbUKnots, " ");
-  return umults (UIndex);
+    Standard_OutOfRange_Raise_if(UIndex < 1 || UIndex > nbUKnots, " ");
+    return umults(UIndex);
 }
 
 
@@ -206,9 +207,9 @@ Standard_Integer Convert_ElementarySurfaceToBSplineSurface::UMultiplicity
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Convert_ElementarySurfaceToBSplineSurface::VMultiplicity 
-  (const Standard_Integer VIndex) const 
+Standard_Integer Convert_ElementarySurfaceToBSplineSurface::VMultiplicity
+(const Standard_Integer VIndex) const
 {
-  Standard_OutOfRange_Raise_if (VIndex < 1 || VIndex > nbVKnots, " ");
-  return vmults (VIndex);
+    Standard_OutOfRange_Raise_if(VIndex < 1 || VIndex > nbVKnots, " ");
+    return vmults(VIndex);
 }

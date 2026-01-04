@@ -37,7 +37,7 @@ class NLPlate_NLPlate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT NLPlate_NLPlate(const Handle(Geom_Surface)& InitialSurface);

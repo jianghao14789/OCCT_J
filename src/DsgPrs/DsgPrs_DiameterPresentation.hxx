@@ -35,7 +35,7 @@ class DsgPrs_DiameterPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draws the diameter of the circle aCircle displayed in

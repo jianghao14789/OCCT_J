@@ -30,7 +30,7 @@ class IntPatch_PrmPrmIntersection_T3Bits
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntPatch_PrmPrmIntersection_T3Bits(const Standard_Integer size);

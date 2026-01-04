@@ -38,7 +38,7 @@ class TNaming_Identifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TNaming_Identifier(const TDF_Label& Lab, const TopoDS_Shape& S, const TopoDS_Shape& Context, const Standard_Boolean Geom);

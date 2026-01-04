@@ -39,7 +39,7 @@ class IGESAppli_ToolNodalResults
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolNodalResults, ready to work

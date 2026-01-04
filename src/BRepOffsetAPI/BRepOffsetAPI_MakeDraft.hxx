@@ -38,7 +38,7 @@ class BRepOffsetAPI_MakeDraft  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs the draft surface object defined by the shape

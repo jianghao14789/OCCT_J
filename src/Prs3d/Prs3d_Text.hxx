@@ -30,7 +30,7 @@ class Prs3d_Text
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Defines the display of the text.
   //! @param theGroup  group to add primitives

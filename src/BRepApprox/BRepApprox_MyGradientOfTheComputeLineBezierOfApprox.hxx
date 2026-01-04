@@ -43,7 +43,7 @@ class BRepApprox_MyGradientOfTheComputeLineBezierOfApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Tries to minimize the sum (square(||Qui - Bi*Pi||))

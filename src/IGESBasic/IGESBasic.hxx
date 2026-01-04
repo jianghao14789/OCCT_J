@@ -29,7 +29,7 @@ class IGESBasic
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares dynqmic data (Protocol, Modules) for this package

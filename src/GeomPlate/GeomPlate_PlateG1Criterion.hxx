@@ -38,7 +38,7 @@ class GeomPlate_PlateG1Criterion  : public AdvApp2Var_Criterion
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomPlate_PlateG1Criterion(const TColgp_SequenceOfXY& Data, const TColgp_SequenceOfXYZ& G1Data, const Standard_Real Maximum, const AdvApp2Var_CriterionType Type = AdvApp2Var_Absolute, const AdvApp2Var_CriterionRepartition Repart = AdvApp2Var_Regular);

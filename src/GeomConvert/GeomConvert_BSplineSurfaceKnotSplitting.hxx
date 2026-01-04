@@ -52,7 +52,7 @@ class GeomConvert_BSplineSurfaceKnotSplitting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Determines the u- and v-isoparametric curves

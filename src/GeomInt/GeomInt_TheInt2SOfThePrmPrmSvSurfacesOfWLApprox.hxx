@@ -34,7 +34,7 @@ class GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! compute the solution point with the close point
   Standard_EXPORT GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox(const TColStd_Array1OfReal& Param, const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Standard_Real TolTangency);

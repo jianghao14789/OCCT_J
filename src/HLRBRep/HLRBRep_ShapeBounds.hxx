@@ -33,7 +33,7 @@ class HLRBRep_ShapeBounds
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     HLRBRep_ShapeBounds();

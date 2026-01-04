@@ -57,7 +57,7 @@ class BRepFeat_MakePrism  : public BRepFeat_Form
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds a prism by projecting a

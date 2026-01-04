@@ -42,7 +42,7 @@ class StepData_StepReaderTool  : public Interface_FileReaderTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates StepReaderTool to work with a StepReaderData according

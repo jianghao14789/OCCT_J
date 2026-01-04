@@ -34,7 +34,7 @@ class RWStepVisual_RWBackgroundColour
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepVisual_RWBackgroundColour();

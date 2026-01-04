@@ -70,7 +70,7 @@ class IGESControl_Reader  : public XSControl_Reader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Reader from scratch

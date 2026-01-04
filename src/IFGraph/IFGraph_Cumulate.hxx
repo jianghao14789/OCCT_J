@@ -36,7 +36,7 @@ class IFGraph_Cumulate  : public Interface_GraphContent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates empty Cumulate, ready to work

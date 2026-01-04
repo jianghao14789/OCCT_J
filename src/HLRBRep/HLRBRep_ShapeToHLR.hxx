@@ -38,7 +38,7 @@ class HLRBRep_ShapeToHLR
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates  a DataStructure   containing the OutLiner

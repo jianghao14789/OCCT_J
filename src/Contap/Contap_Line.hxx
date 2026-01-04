@@ -42,7 +42,7 @@ class Contap_Line
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Contap_Line();

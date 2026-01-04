@@ -1,4 +1,4 @@
-// Created on: 2016-04-13
+﻿// Created on: 2016-04-13
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2016 OPEN CASCADE SAS
 //
@@ -25,60 +25,60 @@ class BVH_QuickSorter : public BVH_Sorter<T, N>
 {
 public:
 
-  //! Creates new BVH quick sorter for the given axis.
-  BVH_QuickSorter (const Standard_Integer theAxis = 0) : myAxis (theAxis) { }
+    //! Creates new BVH quick sorter for the given axis.
+    BVH_QuickSorter(const Standard_Integer theAxis = 0) : myAxis(theAxis) {}
 
-  //! Sorts the set.
-  virtual void Perform (BVH_Set<T, N>* theSet) Standard_OVERRIDE
-  {
-    Perform (theSet, 0, theSet->Size() - 1);
-  }
-
-  //! Sorts the given (inclusive) range in the set.
-  virtual void Perform (BVH_Set<T, N>* theSet, const Standard_Integer theStart, const Standard_Integer theFinal) Standard_OVERRIDE
-  {
-    Standard_Integer aLft = theStart;
-    Standard_Integer aRgh = theFinal;
-
-    T aPivot = theSet->Center ((aRgh + aLft) / 2, myAxis);
-    while (aLft < aRgh)
+    //! Sorts the set.
+    virtual void Perform(BVH_Set<T, N>* theSet) Standard_OVERRIDE
     {
-      while (theSet->Center (aLft, myAxis) < aPivot && aLft < theFinal)
-      {
-        ++aLft;
-      }
+        Perform(theSet, 0, theSet->Size() - 1);
+    }
 
-      while (theSet->Center (aRgh, myAxis) > aPivot && aRgh > theStart)
-      {
-        --aRgh;
-      }
+    //! Sorts the given (inclusive) range in the set.
+    virtual void Perform(BVH_Set<T, N>* theSet, const Standard_Integer theStart, const Standard_Integer theFinal) Standard_OVERRIDE
+    {
+        Standard_Integer aLft = theStart;
+        Standard_Integer aRgh = theFinal;
 
-      if (aLft <= aRgh)
-      {
-        if (aLft != aRgh)
+        T aPivot = theSet->Center((aRgh + aLft) / 2, myAxis);
+        while (aLft < aRgh)
         {
-          theSet->Swap (aLft, aRgh);
+            while (theSet->Center(aLft, myAxis) < aPivot && aLft < theFinal)
+            {
+                ++aLft;
+            }
+
+            while (theSet->Center(aRgh, myAxis) > aPivot && aRgh > theStart)
+            {
+                --aRgh;
+            }
+
+            if (aLft <= aRgh)
+            {
+                if (aLft != aRgh)
+                {
+                    theSet->Swap(aLft, aRgh);
+                }
+                ++aLft;
+                --aRgh;
+            }
         }
-        ++aLft;
-        --aRgh;
-      }
-    }
 
-    if (aRgh > theStart)
-    {
-      Perform (theSet, theStart, aRgh);
-    }
+        if (aRgh > theStart)
+        {
+            Perform(theSet, theStart, aRgh);
+        }
 
-    if (aLft < theFinal)
-    {
-      Perform (theSet, aLft, theFinal);
+        if (aLft < theFinal)
+        {
+            Perform(theSet, aLft, theFinal);
+        }
     }
-  }
 
 protected:
 
-  //! Axis used to arrange the primitives (X - 0, Y - 1, Z - 2).
-  Standard_Integer myAxis;
+    //! Axis used to arrange the primitives (X - 0, Y - 1, Z - 2).
+    Standard_Integer myAxis;
 
 };
 

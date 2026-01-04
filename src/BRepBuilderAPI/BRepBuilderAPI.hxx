@@ -87,7 +87,7 @@ class BRepBuilderAPI
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Sets    the current plane.

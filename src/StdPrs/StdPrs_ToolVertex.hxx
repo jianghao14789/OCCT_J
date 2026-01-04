@@ -27,7 +27,7 @@ class StdPrs_ToolVertex
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT static void Coord (const TopoDS_Vertex& aPoint, Standard_Real& X, Standard_Real& Y, Standard_Real& Z);
 

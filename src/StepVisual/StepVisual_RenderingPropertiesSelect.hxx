@@ -33,7 +33,7 @@ class StepVisual_RenderingPropertiesSelect : public StepData_SelectType
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   Standard_EXPORT StepVisual_RenderingPropertiesSelect();

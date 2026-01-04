@@ -34,7 +34,7 @@ class RWStepShape_RWRightCircularCylinder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepShape_RWRightCircularCylinder();

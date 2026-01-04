@@ -34,7 +34,7 @@ class STEPSelections_Counter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT STEPSelections_Counter();

@@ -49,7 +49,7 @@ class ShapeProcess_OperLibrary
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Registers all the operators

@@ -47,7 +47,7 @@ class Hermit
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! returns the correct spline a(u) which will
   //! be multiplicated with BS later.

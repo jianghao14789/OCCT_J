@@ -51,7 +51,7 @@ class Interface_MSG
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! A MSG is created to write a "functional code" in conjunction

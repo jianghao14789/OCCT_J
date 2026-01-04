@@ -36,7 +36,7 @@ class OpenGl_GraduatedTrihedron : public OpenGl_Element
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public:
 

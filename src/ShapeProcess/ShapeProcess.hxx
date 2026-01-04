@@ -42,7 +42,7 @@ class ShapeProcess
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Registers operator to make it visible for Performer

@@ -35,7 +35,7 @@ class DsgPrs_XYZAxisPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draws each axis of a trihedron displayed in the

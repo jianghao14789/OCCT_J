@@ -29,7 +29,7 @@ class BRepMesh_Vertex
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Default constructor
   BRepMesh_Vertex()

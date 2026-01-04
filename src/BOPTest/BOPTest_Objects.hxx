@@ -38,7 +38,7 @@ class BOPTest_Objects
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static BOPAlgo_PaveFiller& PaveFiller();

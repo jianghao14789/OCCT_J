@@ -37,7 +37,7 @@ class BRepPrimAPI_MakeTorus  : public BRepPrimAPI_MakeOneAxis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 
   //! Make a torus.

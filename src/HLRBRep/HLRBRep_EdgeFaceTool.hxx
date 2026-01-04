@@ -35,7 +35,7 @@ class HLRBRep_EdgeFaceTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Real CurvatureValue (const Standard_Address F, const Standard_Real U, const Standard_Real V, const gp_Dir& Tg);

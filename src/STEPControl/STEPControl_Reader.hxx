@@ -71,7 +71,7 @@ class STEPControl_Reader  : public XSControl_Reader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a reader object with an empty STEP model.

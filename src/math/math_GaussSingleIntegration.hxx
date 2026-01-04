@@ -37,7 +37,7 @@ class math_GaussSingleIntegration
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT math_GaussSingleIntegration();

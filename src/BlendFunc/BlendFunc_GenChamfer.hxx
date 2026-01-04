@@ -36,7 +36,7 @@ class BlendFunc_GenChamfer  : public Blend_Function
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT BlendFunc_GenChamfer(const Handle(Adaptor3d_Surface)& S1,
                                        const Handle(Adaptor3d_Surface)& S2,

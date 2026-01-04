@@ -48,7 +48,7 @@ class Transfer_TransferDispatch  : public Interface_CopyTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a TransferDispatch from a Model. Works with a General

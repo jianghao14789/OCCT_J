@@ -31,7 +31,7 @@ class Approx_SameParameter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Warning: the C3D and C2D must have the same parametric domain.
   Standard_EXPORT Approx_SameParameter(const Handle(Geom_Curve)& C3D,

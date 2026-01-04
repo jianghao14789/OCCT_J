@@ -54,7 +54,7 @@ class IGESToBRep_BasicCurve  : public IGESToBRep_CurveAndSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates  a tool BasicCurve  ready  to  run, with

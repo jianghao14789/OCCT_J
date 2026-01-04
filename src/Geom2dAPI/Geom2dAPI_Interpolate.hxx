@@ -47,7 +47,7 @@ class Geom2dAPI_Interpolate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Tolerance is to check if the points are not too close to one an other

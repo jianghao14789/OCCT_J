@@ -26,7 +26,7 @@ class IntAna_Quadric
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty Constructor

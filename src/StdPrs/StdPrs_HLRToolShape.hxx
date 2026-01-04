@@ -36,7 +36,7 @@ class StdPrs_HLRToolShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StdPrs_HLRToolShape(const TopoDS_Shape& TheShape, const HLRAlgo_Projector& TheProjector);

@@ -48,7 +48,7 @@ class gp_Parab2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an indefinite parabola.
   gp_Parab2d()

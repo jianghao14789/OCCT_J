@@ -37,7 +37,7 @@ class IntCurvesFace_Intersector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Load a Face.

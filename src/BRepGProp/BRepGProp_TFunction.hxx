@@ -39,7 +39,7 @@ class BRepGProp_TFunction  : public math_Function
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor. Initializes the function with the face, the

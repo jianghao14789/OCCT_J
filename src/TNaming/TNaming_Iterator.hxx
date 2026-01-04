@@ -47,7 +47,7 @@ class TNaming_Iterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Iterates on all  the history records in

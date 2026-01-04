@@ -44,7 +44,7 @@ class IntRes2d_Domain
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an infinite Domain (HasFirstPoint = False

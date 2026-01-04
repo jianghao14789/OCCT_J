@@ -34,7 +34,7 @@ class BndLib_Add3dCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds to the bounding box B the curve C

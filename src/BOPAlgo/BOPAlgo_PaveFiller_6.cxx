@@ -95,7 +95,7 @@ class BOPAlgo_FaceFace :
   public BOPAlgo_ParallelAlgo {
 
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_FaceFace() : 
     IntTools_FaceFace(),  

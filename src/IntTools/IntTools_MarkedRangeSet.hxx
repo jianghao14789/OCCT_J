@@ -27,7 +27,7 @@ class IntTools_MarkedRangeSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   Standard_EXPORT IntTools_MarkedRangeSet();

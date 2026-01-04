@@ -23,7 +23,7 @@ class LProp3d_SLProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes the local properties of the surface <S>

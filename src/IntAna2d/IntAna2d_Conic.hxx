@@ -37,7 +37,7 @@ class IntAna2d_Conic
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntAna2d_Conic(const gp_Circ2d& C);

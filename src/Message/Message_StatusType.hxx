@@ -1,4 +1,4 @@
-// Created on: 2007-07-06
+﻿// Created on: 2007-07-06
 // Created by: Pavel TELKOV
 // Copyright (c) 2007-2014 OPEN CASCADE SAS
 //
@@ -21,12 +21,12 @@
 //! Definition of types of execution status supported by
 //! the class Message_ExecStatus
 
-enum Message_StatusType 
+enum Message_StatusType
 {
-  Message_DONE         = 0x00000100,
-  Message_WARN         = 0x00000200,
-  Message_ALARM        = 0x00000400,
-  Message_FAIL         = 0x00000800
+    Message_DONE = 0x00000100,
+    Message_WARN = 0x00000200,
+    Message_ALARM = 0x00000400,
+    Message_FAIL = 0x00000800
 };
 
 #endif

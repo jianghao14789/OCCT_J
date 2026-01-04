@@ -24,7 +24,7 @@ class BinObjMgt_Position : public Standard_Transient
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates position using the current stream position.
   Standard_EXPORT BinObjMgt_Position (Standard_OStream& theStream);

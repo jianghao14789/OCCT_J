@@ -39,7 +39,7 @@ class GCE2d_MakeArcOfEllipse  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make an arc of Ellipse (TrimmedCurve from Geom2d) from

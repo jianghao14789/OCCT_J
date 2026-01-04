@@ -34,7 +34,7 @@ class ChFiDS_Map
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an empty Map

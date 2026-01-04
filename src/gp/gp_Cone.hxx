@@ -52,7 +52,7 @@ class gp_Cone
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an indefinite Cone.
   gp_Cone()

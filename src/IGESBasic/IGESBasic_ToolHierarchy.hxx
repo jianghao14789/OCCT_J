@@ -40,7 +40,7 @@ class IGESBasic_ToolHierarchy
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolHierarchy, ready to work

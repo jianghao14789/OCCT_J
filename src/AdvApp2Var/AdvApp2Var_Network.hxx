@@ -34,7 +34,7 @@ class AdvApp2Var_Network
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT AdvApp2Var_Network();

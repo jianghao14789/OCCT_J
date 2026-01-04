@@ -31,7 +31,7 @@ private:
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
  
   //! Returns a global static object
   Standard_EXPORT static StepData_GlobalFactors& Intance();

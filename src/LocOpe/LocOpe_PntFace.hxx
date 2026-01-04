@@ -34,7 +34,7 @@ class LocOpe_PntFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor. Useful only for the list.

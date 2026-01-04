@@ -27,7 +27,7 @@
 #define DEFINE_HSEQUENCE(HClassName, _SequenceType_)                           \
 class HClassName : public _SequenceType_, public Standard_Transient {                \
  public:                                                                       \
-   DEFINE_STANDARD_ALLOC                                                       \
+   DEFINE_STANDARD_ALLOC;                                                       \
    DEFINE_NCOLLECTION_ALLOC                                                    \
    HClassName () {}                                                            \
    HClassName (const _SequenceType_& theOther) : _SequenceType_(theOther) {}   \

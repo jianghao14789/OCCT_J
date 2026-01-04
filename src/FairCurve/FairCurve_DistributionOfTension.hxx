@@ -36,7 +36,7 @@ class FairCurve_DistributionOfTension  : public FairCurve_DistributionOfEnergy
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT FairCurve_DistributionOfTension(const Standard_Integer BSplOrder, const Handle(TColStd_HArray1OfReal)& FlatKnots, const Handle(TColgp_HArray1OfPnt2d)& Poles, const Standard_Integer DerivativeOrder, const Standard_Real LengthSliding, const FairCurve_BattenLaw& Law, const Standard_Integer NbValAux = 0, const Standard_Boolean Uniform = Standard_False);

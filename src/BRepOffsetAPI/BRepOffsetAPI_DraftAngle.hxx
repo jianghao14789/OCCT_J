@@ -66,7 +66,7 @@ class BRepOffsetAPI_DraftAngle  : public BRepBuilderAPI_ModifyShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty algorithm to perform

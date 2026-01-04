@@ -60,7 +60,7 @@ class Approx_SweepApproximation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Approx_SweepApproximation(const Handle(Approx_SweepFunction)& Func);

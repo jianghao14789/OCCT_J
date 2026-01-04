@@ -40,7 +40,7 @@ class Geom_OsculatingSurface : public Standard_Transient
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom_OsculatingSurface();

@@ -30,7 +30,7 @@ class IntPatch_ImpImpIntersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   enum IntStatus
   {

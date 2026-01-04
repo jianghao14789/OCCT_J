@@ -34,7 +34,7 @@ class AdvApprox_PrefCutting  : public AdvApprox_Cutting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT AdvApprox_PrefCutting(const TColStd_Array1OfReal& CutPnts);

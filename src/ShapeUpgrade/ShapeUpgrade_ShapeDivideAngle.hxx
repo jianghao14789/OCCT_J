@@ -34,7 +34,7 @@ class ShapeUpgrade_ShapeDivideAngle  : public ShapeUpgrade_ShapeDivide
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

@@ -33,7 +33,7 @@ class IGESData_DefSwitch
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! creates a DefSwitch as Void
   Standard_EXPORT IGESData_DefSwitch();

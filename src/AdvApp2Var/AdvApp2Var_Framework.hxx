@@ -37,7 +37,7 @@ class AdvApp2Var_Framework
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT AdvApp2Var_Framework();

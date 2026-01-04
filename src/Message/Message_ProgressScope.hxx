@@ -1,4 +1,4 @@
-// Created on: 2002-02-22
+﻿// Created on: 2002-02-22
 // Created by: Andrey BETENEV
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -192,234 +192,235 @@ class Message_ProgressIndicator;
 class Message_ProgressScope
 {
 public:
-  class NullString; //!< auxiliary type for passing NULL name to Message_ProgressScope constructor
+    class NullString; //!< auxiliary type for passing NULL name to Message_ProgressScope constructor
 public: //! @name Preparation methods
 
-  //! Creates dummy scope.
-  //! It can be safely passed to algorithms; no progress indication will be done.
-  Message_ProgressScope()
-  : myProgress (0),
-    myParent (0),
-    myName (0),
-    myStart (0.),
-    myPortion (1.),
-    myMax (1.),
-    myValue (0.),
-    myIsActive (false),
-    myIsOwnName (false),
-    myIsInfinite (false)
-  {}
-
-  //! Creates a new scope taking responsibility of the part of the progress 
-  //! scale described by theRange. The new scope has own range from 0 to 
-  //! theMax, which is mapped to the given range.
-  //!
-  //! The topmost scope is created and owned by Message_ProgressIndicator
-  //! and its pointer is contained in the Message_ProgressRange returned by the Start() method of progress indicator.
-  //!
-  //! @param theRange [in][out] range to fill (will be disarmed)
-  //! @param theName  [in]      new scope name
-  //! @param theMax   [in]      number of steps in scope
-  //! @param isInfinite [in]    infinite flag
-  Message_ProgressScope (const Message_ProgressRange& theRange,
-                         const TCollection_AsciiString& theName,
-                         Standard_Real theMax,
-                         Standard_Boolean isInfinite = false);
-
-  //! Creates a new scope taking responsibility of the part of the progress 
-  //! scale described by theRange. The new scope has own range from 0 to 
-  //! theMax, which is mapped to the given range.
-  //!
-  //! The topmost scope is created and owned by Message_ProgressIndicator
-  //! and its pointer is contained in the Message_ProgressRange returned by the Start() method of progress indicator.
-  //!
-  //! @param theRange [in][out] range to fill (will be disarmed)
-  //! @param theName  [in]      new scope name constant (will be stored by pointer with no deep copy)
-  //! @param theMax   [in]      number of steps in scope
-  //! @param isInfinite [in]    infinite flag
-  template<size_t N>
-  Message_ProgressScope (const Message_ProgressRange& theRange,
-                         const char (&theName)[N],
-                         Standard_Real theMax,
-                         Standard_Boolean isInfinite = false);
-
-  //! Creates a new scope taking responsibility of the part of the progress 
-  //! scale described by theRange. The new scope has own range from 0 to 
-  //! theMax, which is mapped to the given range.
-  //!
-  //! The topmost scope is created and owned by Message_ProgressIndicator
-  //! and its pointer is contained in the Message_ProgressRange returned by the Start() method of progress indicator.
-  //!
-  //! @param theRange [in][out] range to fill (will be disarmed)
-  //! @param theName  [in]      empty scope name (only NULL is accepted as argument)
-  //! @param theMax   [in]      number of steps in scope
-  //! @param isInfinite [in]    infinite flag
-  Message_ProgressScope (const Message_ProgressRange& theRange,
-                         const NullString* theName,
-                         Standard_Real theMax,
-                         Standard_Boolean isInfinite = false);
-
-  //! Sets the name of the scope.
-  void SetName (const TCollection_AsciiString& theName)
-  {
-    if (myIsOwnName)
+    //! Creates dummy scope.
+    //! It can be safely passed to algorithms; no progress indication will be done.
+    Message_ProgressScope()
+        : myProgress(0),
+        myParent(0),
+        myName(0),
+        myStart(0.),
+        myPortion(1.),
+        myMax(1.),
+        myValue(0.),
+        myIsActive(false),
+        myIsOwnName(false),
+        myIsInfinite(false)
     {
-      Standard::Free (myName);
-      myIsOwnName = false;
     }
-    myName = NULL;
-    if (!theName.IsEmpty())
-    {
-      myIsOwnName = true;
-      myName = (char* )Standard::Allocate (theName.Length() + 1);
-      char* aName = (char* )myName;
-      memcpy (aName, theName.ToCString(), theName.Length());
-      aName[theName.Length()] = '\0';
-    }
-  }
 
-  //! Sets the name of the scope; can be null.
-  //! Note! Just pointer to the given string is copied,
-  //! so do not pass string from a temporary variable whose
-  //! lifetime is less than that of this object.
-  template<size_t N>
-  void SetName (const char (&theName)[N])
-  {
-    if (myIsOwnName)
+    //! Creates a new scope taking responsibility of the part of the progress 
+    //! scale described by theRange. The new scope has own range from 0 to 
+    //! theMax, which is mapped to the given range.
+    //!
+    //! The topmost scope is created and owned by Message_ProgressIndicator
+    //! and its pointer is contained in the Message_ProgressRange returned by the Start() method of progress indicator.
+    //!
+    //! @param theRange [in][out] range to fill (will be disarmed)
+    //! @param theName  [in]      new scope name
+    //! @param theMax   [in]      number of steps in scope
+    //! @param isInfinite [in]    infinite flag
+    Message_ProgressScope(const Message_ProgressRange& theRange,
+        const TCollection_AsciiString& theName,
+        Standard_Real theMax,
+        Standard_Boolean isInfinite = false);
+
+    //! Creates a new scope taking responsibility of the part of the progress 
+    //! scale described by theRange. The new scope has own range from 0 to 
+    //! theMax, which is mapped to the given range.
+    //!
+    //! The topmost scope is created and owned by Message_ProgressIndicator
+    //! and its pointer is contained in the Message_ProgressRange returned by the Start() method of progress indicator.
+    //!
+    //! @param theRange [in][out] range to fill (will be disarmed)
+    //! @param theName  [in]      new scope name constant (will be stored by pointer with no deep copy)
+    //! @param theMax   [in]      number of steps in scope
+    //! @param isInfinite [in]    infinite flag
+    template<size_t N>
+    Message_ProgressScope(const Message_ProgressRange& theRange,
+        const char(&theName)[N],
+        Standard_Real theMax,
+        Standard_Boolean isInfinite = false);
+
+    //! Creates a new scope taking responsibility of the part of the progress 
+    //! scale described by theRange. The new scope has own range from 0 to 
+    //! theMax, which is mapped to the given range.
+    //!
+    //! The topmost scope is created and owned by Message_ProgressIndicator
+    //! and its pointer is contained in the Message_ProgressRange returned by the Start() method of progress indicator.
+    //!
+    //! @param theRange [in][out] range to fill (will be disarmed)
+    //! @param theName  [in]      empty scope name (only NULL is accepted as argument)
+    //! @param theMax   [in]      number of steps in scope
+    //! @param isInfinite [in]    infinite flag
+    Message_ProgressScope(const Message_ProgressRange& theRange,
+        const NullString* theName,
+        Standard_Real theMax,
+        Standard_Boolean isInfinite = false);
+
+    //! Sets the name of the scope.
+    void SetName(const TCollection_AsciiString& theName)
     {
-      Standard::Free (myName);
-      myIsOwnName = false;
+        if (myIsOwnName)
+        {
+            Standard::Free(myName);
+            myIsOwnName = false;
+        }
+        myName = NULL;
+        if (!theName.IsEmpty())
+        {
+            myIsOwnName = true;
+            myName = (char*)Standard::Allocate(theName.Length() + 1);
+            char* aName = (char*)myName;
+            memcpy(aName, theName.ToCString(), theName.Length());
+            aName[theName.Length()] = '\0';
+        }
     }
-    myName = theName;
-  }
+
+    //! Sets the name of the scope; can be null.
+    //! Note! Just pointer to the given string is copied,
+    //! so do not pass string from a temporary variable whose
+    //! lifetime is less than that of this object.
+    template<size_t N>
+    void SetName(const char(&theName)[N])
+    {
+        if (myIsOwnName)
+        {
+            Standard::Free(myName);
+            myIsOwnName = false;
+        }
+        myName = theName;
+    }
 
 public: //! @name Advance by iterations
 
-  //! Returns true if ProgressIndicator signals UserBreak
-  Standard_Boolean UserBreak() const;
+    //! Returns true if ProgressIndicator signals UserBreak
+    Standard_Boolean UserBreak() const;
 
-  //! Returns false if ProgressIndicator signals UserBreak
-  Standard_Boolean More() const
-  {
-    return !UserBreak();
-  }
+    //! Returns false if ProgressIndicator signals UserBreak
+    Standard_Boolean More() const
+    {
+        return !UserBreak();
+    }
 
-  //! Advances position by specified step and returns the range
-  //! covering this step
-  Message_ProgressRange Next (Standard_Real theStep = 1.);
+    //! Advances position by specified step and returns the range
+    //! covering this step
+    Message_ProgressRange Next(Standard_Real theStep = 1.);
 
 public: //! @name Auxiliary methods to use in ProgressIndicator
 
-  //! Force update of presentation of the progress indicator.
-  //! Should not be called concurrently.
-  void Show();
+    //! Force update of presentation of the progress indicator.
+    //! Should not be called concurrently.
+    void Show();
 
-  //! Returns true if this progress scope is attached to some indicator.
-  Standard_Boolean IsActive() const
-  {
-    return myIsActive;
-  }
+    //! Returns true if this progress scope is attached to some indicator.
+    Standard_Boolean IsActive() const
+    {
+        return myIsActive;
+    }
 
-  //! Returns the name of the scope (may be null).
-  //! Scopes with null name (e.g. root scope) should
-  //! be bypassed when reporting progress to the user.
-  Standard_CString Name() const
-  {
-    return myName;
-  }
+    //! Returns the name of the scope (may be null).
+    //! Scopes with null name (e.g. root scope) should
+    //! be bypassed when reporting progress to the user.
+    Standard_CString Name() const
+    {
+        return myName;
+    }
 
-  //! Returns parent scope (null for top-level scope)
-  const Message_ProgressScope* Parent() const
-  {
-    return myParent;
-  }
+    //! Returns parent scope (null for top-level scope)
+    const Message_ProgressScope* Parent() const
+    {
+        return myParent;
+    }
 
-  //! Returns the maximal value of progress in this scope
-  Standard_Real MaxValue() const
-  {
-    return myMax;
-  }
+    //! Returns the maximal value of progress in this scope
+    Standard_Real MaxValue() const
+    {
+        return myMax;
+    }
 
-  //! Returns the current value of progress in this scope.
-  //!
-  //! The value is computed by mapping current global progress into 
-  //! this scope range; the result is rounded up to integer.
-  //! Note that if MaxValue() is not an integer, Value() can be 
-  //! greater than MaxValue() due to that rounding.
-  //!
-  //! This method should not be called concurrently while the progress
-  //! is advancing, except from implementation of method Show() in
-  //! descendant of Message_ProgressIndicator.
-  Standard_Real Value() const;
+    //! Returns the current value of progress in this scope.
+    //!
+    //! The value is computed by mapping current global progress into 
+    //! this scope range; the result is rounded up to integer.
+    //! Note that if MaxValue() is not an integer, Value() can be 
+    //! greater than MaxValue() due to that rounding.
+    //!
+    //! This method should not be called concurrently while the progress
+    //! is advancing, except from implementation of method Show() in
+    //! descendant of Message_ProgressIndicator.
+    Standard_Real Value() const;
 
-  //! Returns the infinite flag
-  Standard_Boolean IsInfinite() const
-  {
-    return myIsInfinite;
-  }
+    //! Returns the infinite flag
+    Standard_Boolean IsInfinite() const
+    {
+        return myIsInfinite;
+    }
 
-  //! Get the portion of the indicator covered by this scope (from 0 to 1)
-  Standard_Real GetPortion() const
-  {
-    return myPortion;
-  }
+    //! Get the portion of the indicator covered by this scope (from 0 to 1)
+    Standard_Real GetPortion() const
+    {
+        return myPortion;
+    }
 
 public: //! @name Destruction, allocation
 
-  //! Destructor - closes the scope and adds its scale to the total progress
-  ~Message_ProgressScope()
-  {
-    Close();
-    if (myIsOwnName)
+    //! Destructor - closes the scope and adds its scale to the total progress
+    ~Message_ProgressScope()
     {
-      Standard::Free (myName);
-      myIsOwnName = false;
-      myName = NULL;
+        Close();
+        if (myIsOwnName)
+        {
+            Standard::Free(myName);
+            myIsOwnName = false;
+            myName = NULL;
+        }
     }
-  }
 
-  //! Closes the scope and advances the progress to its end.
-  //! Closed scope should not be used.
-  void Close();
+    //! Closes the scope and advances the progress to its end.
+    //! Closed scope should not be used.
+    void Close();
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
 private: //! @name Internal methods
-  
-  //! Creates a top-level scope with default range [0,1] and step 1.
-  //! Called only by Message_ProgressIndicator constructor.
-  Message_ProgressScope (Message_ProgressIndicator* theProgress);
 
-  //! Convert value from this scope to global scale, but disregarding
-  //! start position of the scope, in the range [0, myPortion]
-  Standard_Real localToGlobal(const Standard_Real theVal) const;
+    //! Creates a top-level scope with default range [0,1] and step 1.
+    //! Called only by Message_ProgressIndicator constructor.
+    Message_ProgressScope(Message_ProgressIndicator* theProgress);
 
-private:
-  //! Copy constructor is prohibited
-  Message_ProgressScope (const Message_ProgressScope& theOther);
-
-  //! Copy assignment is prohibited
-  Message_ProgressScope& operator= (const Message_ProgressScope& theOther);
+    //! Convert value from this scope to global scale, but disregarding
+    //! start position of the scope, in the range [0, myPortion]
+    Standard_Real localToGlobal(const Standard_Real theVal) const;
 
 private:
+    //! Copy constructor is prohibited
+    Message_ProgressScope(const Message_ProgressScope& theOther);
 
-  Message_ProgressIndicator* myProgress; //!< Pointer to progress indicator instance
-  const Message_ProgressScope* myParent; //!< Pointer to parent scope
-  Standard_CString   myName;        //!< Name of the operation being done in this scope, or null
-
-  Standard_Real      myStart;       //!< Start position on the global scale [0, 1]
-  Standard_Real      myPortion;     //!< The portion of the global scale covered by this scope [0, 1]
-
-  Standard_Real      myMax;         //!< Maximal value of progress in this scope
-  Standard_Real      myValue;       //!< Current position advanced within this scope [0, Max]
-
-  Standard_Boolean   myIsActive;    //!< flag indicating armed/disarmed state
-  Standard_Boolean   myIsOwnName;   //!< flag indicating if name was allocated or not
-  Standard_Boolean   myIsInfinite;  //!< Option to advance by hyperbolic law
+    //! Copy assignment is prohibited
+    Message_ProgressScope& operator= (const Message_ProgressScope& theOther);
 
 private:
-  friend class Message_ProgressIndicator;
-  friend class Message_ProgressRange;
+
+    Message_ProgressIndicator* myProgress; //!< Pointer to progress indicator instance
+    const Message_ProgressScope* myParent; //!< Pointer to parent scope
+    Standard_CString   myName;        //!< Name of the operation being done in this scope, or null
+
+    Standard_Real      myStart;       //!< Start position on the global scale [0, 1]
+    Standard_Real      myPortion;     //!< The portion of the global scale covered by this scope [0, 1]
+
+    Standard_Real      myMax;         //!< Maximal value of progress in this scope
+    Standard_Real      myValue;       //!< Current position advanced within this scope [0, Max]
+
+    Standard_Boolean   myIsActive;    //!< flag indicating armed/disarmed state
+    Standard_Boolean   myIsOwnName;   //!< flag indicating if name was allocated or not
+    Standard_Boolean   myIsInfinite;  //!< Option to advance by hyperbolic law
+
+private:
+    friend class Message_ProgressIndicator;
+    friend class Message_ProgressRange;
 };
 
 #include <Message_ProgressRange.hxx>
@@ -428,17 +429,17 @@ private:
 //function : Message_ProgressScope
 //purpose  :
 //=======================================================================
-inline Message_ProgressScope::Message_ProgressScope (Message_ProgressIndicator* theProgress)
-: myProgress(theProgress),
-  myParent(0),
-  myName(0),
-  myStart(0.),
-  myPortion(1.),
-  myMax(1.),
-  myValue(0.),
-  myIsActive(theProgress != NULL),
-  myIsOwnName(false),
-  myIsInfinite(false)
+inline Message_ProgressScope::Message_ProgressScope(Message_ProgressIndicator* theProgress)
+    : myProgress(theProgress),
+    myParent(0),
+    myName(0),
+    myStart(0.),
+    myPortion(1.),
+    myMax(1.),
+    myValue(0.),
+    myIsActive(theProgress != NULL),
+    myIsOwnName(false),
+    myIsInfinite(false)
 {
 }
 
@@ -446,24 +447,24 @@ inline Message_ProgressScope::Message_ProgressScope (Message_ProgressIndicator* 
 //function : Message_ProgressScope
 //purpose  :
 //=======================================================================
-inline Message_ProgressScope::Message_ProgressScope (const Message_ProgressRange& theRange,
-                                                     const TCollection_AsciiString& theName,
-                                                     Standard_Real theMax,
-                                                     Standard_Boolean isInfinite)
-: myProgress (theRange.myParentScope != NULL ? theRange.myParentScope->myProgress : NULL),
-  myParent (theRange.myParentScope),
-  myName (NULL),
-  myStart (theRange.myStart),
-  myPortion (theRange.myDelta),
-  myMax (Max (1.e-6, theMax)), // protection against zero range
-  myValue (0.),
-  myIsActive (myProgress != NULL && !theRange.myWasUsed),
-  myIsOwnName (false),
-  myIsInfinite (isInfinite)
+inline Message_ProgressScope::Message_ProgressScope(const Message_ProgressRange& theRange,
+    const TCollection_AsciiString& theName,
+    Standard_Real theMax,
+    Standard_Boolean isInfinite)
+    : myProgress(theRange.myParentScope != NULL ? theRange.myParentScope->myProgress : NULL),
+    myParent(theRange.myParentScope),
+    myName(NULL),
+    myStart(theRange.myStart),
+    myPortion(theRange.myDelta),
+    myMax(Max(1.e-6, theMax)), // protection against zero range
+    myValue(0.),
+    myIsActive(myProgress != NULL && !theRange.myWasUsed),
+    myIsOwnName(false),
+    myIsInfinite(isInfinite)
 {
-  SetName (theName);
-  Standard_ASSERT_VOID (! theRange.myWasUsed, "Message_ProgressRange is used to initialize more than one scope");
-  theRange.myWasUsed = true; // Disarm the range
+    SetName(theName);
+    Standard_ASSERT_VOID(!theRange.myWasUsed, "Message_ProgressRange is used to initialize more than one scope");
+    theRange.myWasUsed = true; // Disarm the range
 }
 
 //=======================================================================
@@ -471,46 +472,46 @@ inline Message_ProgressScope::Message_ProgressScope (const Message_ProgressRange
 //purpose  :
 //=======================================================================
 template<size_t N>
-Message_ProgressScope::Message_ProgressScope (const Message_ProgressRange& theRange,
-                                              const char (&theName)[N],
-                                              Standard_Real theMax,
-                                              Standard_Boolean isInfinite)
-: myProgress (theRange.myParentScope != NULL ? theRange.myParentScope->myProgress : NULL),
-  myParent (theRange.myParentScope),
-  myName (theName),
-  myStart (theRange.myStart),
-  myPortion (theRange.myDelta),
-  myMax (Max (1.e-6, theMax)), // protection against zero range
-  myValue (0.),
-  myIsActive (myProgress != NULL && !theRange.myWasUsed),
-  myIsOwnName (false),
-  myIsInfinite (isInfinite)
+Message_ProgressScope::Message_ProgressScope(const Message_ProgressRange& theRange,
+    const char(&theName)[N],
+    Standard_Real theMax,
+    Standard_Boolean isInfinite)
+    : myProgress(theRange.myParentScope != NULL ? theRange.myParentScope->myProgress : NULL),
+    myParent(theRange.myParentScope),
+    myName(theName),
+    myStart(theRange.myStart),
+    myPortion(theRange.myDelta),
+    myMax(Max(1.e-6, theMax)), // protection against zero range
+    myValue(0.),
+    myIsActive(myProgress != NULL && !theRange.myWasUsed),
+    myIsOwnName(false),
+    myIsInfinite(isInfinite)
 {
-  Standard_ASSERT_VOID (! theRange.myWasUsed, "Message_ProgressRange is used to initialize more than one scope");
-  theRange.myWasUsed = true; // Disarm the range
+    Standard_ASSERT_VOID(!theRange.myWasUsed, "Message_ProgressRange is used to initialize more than one scope");
+    theRange.myWasUsed = true; // Disarm the range
 }
 
 //=======================================================================
 //function : Message_ProgressScope
 //purpose  :
 //=======================================================================
-inline Message_ProgressScope::Message_ProgressScope (const Message_ProgressRange& theRange,
-                                                     const NullString* ,
-                                                     Standard_Real theMax,
-                                                     Standard_Boolean isInfinite)
-: myProgress (theRange.myParentScope != NULL ? theRange.myParentScope->myProgress : NULL),
-  myParent (theRange.myParentScope),
-  myName (NULL),
-  myStart (theRange.myStart),
-  myPortion (theRange.myDelta),
-  myMax (Max (1.e-6, theMax)), // protection against zero range
-  myValue (0.),
-  myIsActive (myProgress != NULL && !theRange.myWasUsed),
-  myIsOwnName (false),
-  myIsInfinite (isInfinite)
+inline Message_ProgressScope::Message_ProgressScope(const Message_ProgressRange& theRange,
+    const NullString*,
+    Standard_Real theMax,
+    Standard_Boolean isInfinite)
+    : myProgress(theRange.myParentScope != NULL ? theRange.myParentScope->myProgress : NULL),
+    myParent(theRange.myParentScope),
+    myName(NULL),
+    myStart(theRange.myStart),
+    myPortion(theRange.myDelta),
+    myMax(Max(1.e-6, theMax)), // protection against zero range
+    myValue(0.),
+    myIsActive(myProgress != NULL && !theRange.myWasUsed),
+    myIsOwnName(false),
+    myIsInfinite(isInfinite)
 {
-  Standard_ASSERT_VOID (! theRange.myWasUsed, "Message_ProgressRange is used to initialize more than one scope");
-  theRange.myWasUsed = true; // Disarm the range
+    Standard_ASSERT_VOID(!theRange.myWasUsed, "Message_ProgressRange is used to initialize more than one scope");
+    theRange.myWasUsed = true; // Disarm the range
 }
 
 //=======================================================================
@@ -519,23 +520,23 @@ inline Message_ProgressScope::Message_ProgressScope (const Message_ProgressRange
 //=======================================================================
 inline void Message_ProgressScope::Close()
 {
-  if (!myIsActive)
-  {
-    return;
-  }
+    if (!myIsActive)
+    {
+        return;
+    }
 
-  // Advance indicator to the end of the scope
-  Standard_Real aCurr = localToGlobal (myValue);
-  myValue = (myIsInfinite ? Precision::Infinite() : myMax);
-  Standard_Real aDelta = myPortion - aCurr;
-  if (aDelta > 0.)
-  {
-    myProgress->Increment (aDelta, *this);
-  }
-  Standard_ASSERT_VOID (myParent == 0 || myParent->myIsActive,
-    "Parent progress scope has been closed before child");
+    // Advance indicator to the end of the scope
+    Standard_Real aCurr = localToGlobal(myValue);
+    myValue = (myIsInfinite ? Precision::Infinite() : myMax);
+    Standard_Real aDelta = myPortion - aCurr;
+    if (aDelta > 0.)
+    {
+        myProgress->Increment(aDelta, *this);
+    }
+    Standard_ASSERT_VOID(myParent == 0 || myParent->myIsActive,
+        "Parent progress scope has been closed before child");
 
-  myIsActive = false;
+    myIsActive = false;
 }
 
 //=======================================================================
@@ -544,26 +545,26 @@ inline void Message_ProgressScope::Close()
 //=======================================================================
 inline Standard_Boolean Message_ProgressScope::UserBreak() const
 {
-  return myProgress && myProgress->UserBreak();
+    return myProgress && myProgress->UserBreak();
 }
 
 //=======================================================================
 //function : Next
 //purpose  :
 //=======================================================================
-inline Message_ProgressRange Message_ProgressScope::Next (Standard_Real theStep)
+inline Message_ProgressRange Message_ProgressScope::Next(Standard_Real theStep)
 {
-  if (myIsActive && theStep > 0.)
-  {
-    Standard_Real aCurr = localToGlobal(myValue);
-    Standard_Real aNext = localToGlobal(myValue += theStep);
-    Standard_Real aDelta = aNext - aCurr;
-    if (aDelta > 0.)
+    if (myIsActive && theStep > 0.)
     {
-      return Message_ProgressRange(*this, myStart + aCurr, aDelta);
+        Standard_Real aCurr = localToGlobal(myValue);
+        Standard_Real aNext = localToGlobal(myValue += theStep);
+        Standard_Real aDelta = aNext - aCurr;
+        if (aDelta > 0.)
+        {
+            return Message_ProgressRange(*this, myStart + aCurr, aDelta);
+        }
     }
-  }
-  return Message_ProgressRange();
+    return Message_ProgressRange();
 }
 
 //=======================================================================
@@ -571,33 +572,33 @@ inline Message_ProgressRange Message_ProgressScope::Next (Standard_Real theStep)
 //purpose  :
 //=======================================================================
 
-inline void Message_ProgressScope::Show ()
+inline void Message_ProgressScope::Show()
 {
-  if (myIsActive)
-  {
-    myProgress->Show (*this, Standard_True);
-  }
+    if (myIsActive)
+    {
+        myProgress->Show(*this, Standard_True);
+    }
 }
 
 //=======================================================================
 //function : localToGlobal
 //purpose  :
 //=======================================================================
-inline Standard_Real Message_ProgressScope::localToGlobal (const Standard_Real theVal) const
+inline Standard_Real Message_ProgressScope::localToGlobal(const Standard_Real theVal) const
 {
-  if (theVal <= 0.)
-    return 0.;
+    if (theVal <= 0.)
+        return 0.;
 
-  if (!myIsInfinite)
-  {
-    if (myMax - theVal < RealSmall())
-      return myPortion;
-    return myPortion * theVal / myMax;
-  }
+    if (!myIsInfinite)
+    {
+        if (myMax - theVal < RealSmall())
+            return myPortion;
+        return myPortion * theVal / myMax;
+    }
 
-  double x = theVal / myMax;
-  // return myPortion * ( 1. - std::exp ( -x ) ); // exponent
-  return myPortion * x / (1. + x);  // hyperbola
+    double x = theVal / myMax;
+    // return myPortion * ( 1. - std::exp ( -x ) ); // exponent
+    return myPortion * x / (1. + x);  // hyperbola
 }
 
 //=======================================================================
@@ -605,30 +606,30 @@ inline Standard_Real Message_ProgressScope::localToGlobal (const Standard_Real t
 //purpose  :
 //=======================================================================
 
-inline Standard_Real Message_ProgressScope::Value () const
+inline Standard_Real Message_ProgressScope::Value() const
 {
-  if (!myIsActive)
-  {
-    return myIsInfinite ? Precision::Infinite() : myMax;
-  }
+    if (!myIsActive)
+    {
+        return myIsInfinite ? Precision::Infinite() : myMax;
+    }
 
-  // get current progress on the global scale counted 
-  // from the start of this scope
-  Standard_Real aVal = myProgress->GetPosition() - myStart;
+    // get current progress on the global scale counted 
+    // from the start of this scope
+    Standard_Real aVal = myProgress->GetPosition() - myStart;
 
-  // if progress has not reached yet the start of this scope, return 0
-  if (aVal <= 0.)
-    return 0.;
+    // if progress has not reached yet the start of this scope, return 0
+    if (aVal <= 0.)
+        return 0.;
 
-  // if at end of the scope (or behind), report the maximum
-  Standard_Real aDist = myPortion - aVal;
-  if (aDist <= Precision::Confusion())
-    return myIsInfinite ? Precision::Infinite() : myMax;
+    // if at end of the scope (or behind), report the maximum
+    Standard_Real aDist = myPortion - aVal;
+    if (aDist <= Precision::Confusion())
+        return myIsInfinite ? Precision::Infinite() : myMax;
 
-  // map the value to the range of this scope [0, Max],
-  // rounding up to integer, with small correction applied
-  // to avoid rounding errors
-  return std::ceil (myMax * aVal / (myIsInfinite ? aDist : myPortion) - Precision::Confusion());
+    // map the value to the range of this scope [0, Max],
+    // rounding up to integer, with small correction applied
+    // to avoid rounding errors
+    return std::ceil(myMax * aVal / (myIsInfinite ? aDist : myPortion) - Precision::Confusion());
 }
 
 #endif // _Message_ProgressScope_HeaderFile

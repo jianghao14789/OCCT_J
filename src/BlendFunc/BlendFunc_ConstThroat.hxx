@@ -34,7 +34,7 @@ class BlendFunc_ConstThroat  : public BlendFunc_GenChamfer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BlendFunc_ConstThroat(const Handle(Adaptor3d_Surface)& S1,

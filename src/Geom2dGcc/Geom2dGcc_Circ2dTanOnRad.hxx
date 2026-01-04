@@ -65,7 +65,7 @@ class Geom2dGcc_Circ2dTanOnRad
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs one or more 2D circles of radius Radius,

@@ -47,7 +47,7 @@ class BRepOffsetAPI_ThruSections  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an algorithm for building a shell or a solid

@@ -38,7 +38,7 @@ class TopOpeBRepBuild_Area1dBuilder  : public TopOpeBRepBuild_AreaBuilder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepBuild_Area1dBuilder();

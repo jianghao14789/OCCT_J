@@ -38,7 +38,7 @@ class math_GaussSetIntegration
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

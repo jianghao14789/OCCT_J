@@ -44,7 +44,7 @@ class TopOpeBRepTool_ShapeClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepTool_ShapeClassifier();

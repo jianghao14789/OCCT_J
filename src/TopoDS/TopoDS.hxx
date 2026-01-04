@@ -1,4 +1,4 @@
-// Created on: 1990-12-11
+﻿// Created on: 1990-12-11
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -58,61 +58,61 @@ class TopoDS_Iterator;
 //! sub-classes. Types are verified, thus in the example
 //! below, the first two blocks are correct but the third is
 //! rejected by the compiler.
-class TopoDS 
+class TopoDS
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Basic tool to access the data structure.
-  //! Casts shape S to the more specialized return type, Vertex.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Vertex& Vertex (const TopoDS_Shape& S);
-inline static TopoDS_Vertex& Vertex(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, Edge
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Edge& Edge (const TopoDS_Shape& S);
-inline static TopoDS_Edge& Edge(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, Wire.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Wire& Wire (const TopoDS_Shape& S);
-inline static TopoDS_Wire& Wire(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, Face.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Face& Face (const TopoDS_Shape& S);
-inline static TopoDS_Face& Face(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, Shell.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Shell& Shell (const TopoDS_Shape& S);
-inline static TopoDS_Shell& Shell(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, Solid.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Solid& Solid (const TopoDS_Shape& S);
-inline static TopoDS_Solid& Solid(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, CompSolid.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_CompSolid& CompSolid (const TopoDS_Shape& S);
-inline static TopoDS_CompSolid& CompSolid(TopoDS_Shape&);
-  
-  //! Casts shape S to the more specialized return type, Compound.
-  //! Exceptions
-  //! Standard_TypeMismatch if S cannot be cast to this return type.
-    static const TopoDS_Compound& Compound (const TopoDS_Shape& S);
-inline static TopoDS_Compound& Compound(TopoDS_Shape&);
+
+    //! Basic tool to access the data structure.
+    //! Casts shape S to the more specialized return type, Vertex.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Vertex& Vertex(const TopoDS_Shape& S);
+    inline static TopoDS_Vertex& Vertex(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, Edge
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Edge& Edge(const TopoDS_Shape& S);
+    inline static TopoDS_Edge& Edge(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, Wire.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Wire& Wire(const TopoDS_Shape& S);
+    inline static TopoDS_Wire& Wire(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, Face.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Face& Face(const TopoDS_Shape& S);
+    inline static TopoDS_Face& Face(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, Shell.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Shell& Shell(const TopoDS_Shape& S);
+    inline static TopoDS_Shell& Shell(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, Solid.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Solid& Solid(const TopoDS_Shape& S);
+    inline static TopoDS_Solid& Solid(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, CompSolid.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_CompSolid& CompSolid(const TopoDS_Shape& S);
+    inline static TopoDS_CompSolid& CompSolid(TopoDS_Shape&);
+
+    //! Casts shape S to the more specialized return type, Compound.
+    //! Exceptions
+    //! Standard_TypeMismatch if S cannot be cast to this return type.
+    static const TopoDS_Compound& Compound(const TopoDS_Shape& S);
+    inline static TopoDS_Compound& Compound(TopoDS_Shape&);
 
 
 
@@ -128,27 +128,27 @@ private:
 
 
 
-friend class TopoDS_Shape;
-friend class TopoDS_HShape;
-friend class TopoDS_TShape;
-friend class TopoDS_TVertex;
-friend class TopoDS_Vertex;
-friend class TopoDS_TEdge;
-friend class TopoDS_Edge;
-friend class TopoDS_TWire;
-friend class TopoDS_Wire;
-friend class TopoDS_TFace;
-friend class TopoDS_Face;
-friend class TopoDS_TShell;
-friend class TopoDS_Shell;
-friend class TopoDS_TSolid;
-friend class TopoDS_Solid;
-friend class TopoDS_TCompSolid;
-friend class TopoDS_CompSolid;
-friend class TopoDS_TCompound;
-friend class TopoDS_Compound;
-friend class TopoDS_Builder;
-friend class TopoDS_Iterator;
+    friend class TopoDS_Shape;
+    friend class TopoDS_HShape;
+    friend class TopoDS_TShape;
+    friend class TopoDS_TVertex;
+    friend class TopoDS_Vertex;
+    friend class TopoDS_TEdge;
+    friend class TopoDS_Edge;
+    friend class TopoDS_TWire;
+    friend class TopoDS_Wire;
+    friend class TopoDS_TFace;
+    friend class TopoDS_Face;
+    friend class TopoDS_TShell;
+    friend class TopoDS_Shell;
+    friend class TopoDS_TSolid;
+    friend class TopoDS_Solid;
+    friend class TopoDS_TCompSolid;
+    friend class TopoDS_CompSolid;
+    friend class TopoDS_TCompound;
+    friend class TopoDS_Compound;
+    friend class TopoDS_Builder;
+    friend class TopoDS_Iterator;
 
 };
 

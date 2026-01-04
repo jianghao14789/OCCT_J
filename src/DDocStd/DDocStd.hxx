@@ -46,7 +46,7 @@ class DDocStd
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the global instance of application.

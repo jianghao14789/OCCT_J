@@ -34,7 +34,7 @@ class Extrema_LocateExtCC
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Calculates the distance with a close point. The

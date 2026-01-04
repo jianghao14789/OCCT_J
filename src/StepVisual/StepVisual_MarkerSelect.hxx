@@ -33,7 +33,7 @@ class StepVisual_MarkerSelect  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a MarkerSelect SelectType

@@ -44,7 +44,7 @@ class BRepOffset_Analyse;
 class BRepOffset_Inter3d
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public:
 

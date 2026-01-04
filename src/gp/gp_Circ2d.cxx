@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -23,23 +23,27 @@
 #include <gp_Vec2d.hxx>
 #include <Standard_ConstructionError.hxx>
 
-void gp_Circ2d::Mirror (const gp_Pnt2d& P)
-{ pos.Mirror(P); }
-
-gp_Circ2d gp_Circ2d::Mirrored (const gp_Pnt2d& P) const
+void gp_Circ2d::Mirror(const gp_Pnt2d& P)
 {
-  gp_Circ2d C = *this;
-  C.pos.Mirror (P);
-  return C; 
+    pos.Mirror(P);
 }
 
-void gp_Circ2d::Mirror (const gp_Ax2d& A)
-{ pos.Mirror (A); }
-
-gp_Circ2d gp_Circ2d::Mirrored (const gp_Ax2d& A) const
+gp_Circ2d gp_Circ2d::Mirrored(const gp_Pnt2d& P) const
 {
-  gp_Circ2d C = *this;
-  C.pos.Mirror (A);
-  return C; 
+    gp_Circ2d C = *this;
+    C.pos.Mirror(P);
+    return C;
+}
+
+void gp_Circ2d::Mirror(const gp_Ax2d& A)
+{
+    pos.Mirror(A);
+}
+
+gp_Circ2d gp_Circ2d::Mirrored(const gp_Ax2d& A) const
+{
+    gp_Circ2d C = *this;
+    C.pos.Mirror(A);
+    return C;
 }
 

@@ -39,7 +39,7 @@ class IGESGeom_ToolRuledSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolRuledSurface, ready to work

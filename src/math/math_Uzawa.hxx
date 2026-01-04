@@ -46,7 +46,7 @@ class math_Uzawa
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given an input matrix Cont, two input vectors Secont

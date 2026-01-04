@@ -39,7 +39,7 @@ class GC_MakeArcOfHyperbola  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an arc of Hyperbola (TrimmedCurve from Geom) from

@@ -35,7 +35,7 @@ class ShapeUpgrade_ShellSewing
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a ShellSewing, empty

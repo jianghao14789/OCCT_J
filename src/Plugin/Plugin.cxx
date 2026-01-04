@@ -1,4 +1,4 @@
-// Created on: 1997-03-06
+﻿// Created on: 1997-03-06
 // Created by: Mister rmi
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -34,70 +34,70 @@ static Standard_PCharacter thePluginId = tc;
 //function : Load
 //purpose  : 
 //=======================================================================
-Handle(Standard_Transient) Plugin::Load (const Standard_GUID& aGUID,
-                                         const Standard_Boolean theVerbose)
+Handle(Standard_Transient) Plugin::Load(const Standard_GUID& aGUID,
+    const Standard_Boolean theVerbose)
 {
-  
-  aGUID.ToCString(thePluginId);
-  TCollection_AsciiString pid(thePluginId);
-  static Plugin_MapOfFunctions theMapOfFunctions;
-  OSD_Function f;
 
-  if(!theMapOfFunctions.IsBound(pid)) {
-   
-    Handle(Resource_Manager) PluginResource = new Resource_Manager("Plugin");
-    TCollection_AsciiString theResource(thePluginId);
-    theResource += ".Location";
+    aGUID.ToCString(thePluginId);
+    TCollection_AsciiString pid(thePluginId);
+    static Plugin_MapOfFunctions theMapOfFunctions;
+    OSD_Function f;
 
-    if(!PluginResource->Find(theResource.ToCString())) {
-      Standard_SStream aMsg; aMsg << "could not find the resource:";
-      aMsg << theResource.ToCString() << std::endl;
-      if (theVerbose)
-        std::cout << "could not find the resource:" << theResource.ToCString() << std::endl;
-      throw Plugin_Failure(aMsg.str().c_str());
-    }
-    
-    TCollection_AsciiString thePluginLibrary("");
+    if (!theMapOfFunctions.IsBound(pid)) {
+
+        Handle(Resource_Manager) PluginResource = new Resource_Manager("Plugin");
+        TCollection_AsciiString theResource(thePluginId);
+        theResource += ".Location";
+
+        if (!PluginResource->Find(theResource.ToCString())) {
+            Standard_SStream aMsg; aMsg << "could not find the resource:";
+            aMsg << theResource.ToCString() << std::endl;
+            if (theVerbose)
+                std::cout << "could not find the resource:" << theResource.ToCString() << std::endl;
+            throw Plugin_Failure(aMsg.str().c_str());
+        }
+
+        TCollection_AsciiString thePluginLibrary("");
 #ifndef _WIN32
-    thePluginLibrary += "lib";
+        thePluginLibrary += "lib";
 #endif
-    thePluginLibrary +=  PluginResource->Value(theResource.ToCString());
+        thePluginLibrary += PluginResource->Value(theResource.ToCString());
 #ifdef _WIN32
-    thePluginLibrary += ".dll";
+        thePluginLibrary += ".dll";
 #elif defined(__APPLE__)
-    thePluginLibrary += ".dylib";
+        thePluginLibrary += ".dylib";
 #elif defined (HPUX) || defined(_hpux)
-    thePluginLibrary += ".sl";
+        thePluginLibrary += ".sl";
 #else
-    thePluginLibrary += ".so";
+        thePluginLibrary += ".so";
 #endif  
-    OSD_SharedLibrary theSharedLibrary(thePluginLibrary.ToCString());
-    if(!theSharedLibrary.DlOpen(OSD_RTLD_LAZY)) {
-      TCollection_AsciiString error(theSharedLibrary.DlError());
-      Standard_SStream aMsg; aMsg << "could not open:";
-      aMsg << PluginResource->Value(theResource.ToCString());
-      aMsg << "; reason:";
-      aMsg << error.ToCString();
-      if (theVerbose)
-        std::cout << "could not open: "  << PluginResource->Value(theResource.ToCString())<< " ; reason: "<< error.ToCString() << std::endl;
-      throw Plugin_Failure(aMsg.str().c_str());
+        OSD_SharedLibrary theSharedLibrary(thePluginLibrary.ToCString());
+        if (!theSharedLibrary.DlOpen(OSD_RTLD_LAZY)) {
+            TCollection_AsciiString error(theSharedLibrary.DlError());
+            Standard_SStream aMsg; aMsg << "could not open:";
+            aMsg << PluginResource->Value(theResource.ToCString());
+            aMsg << "; reason:";
+            aMsg << error.ToCString();
+            if (theVerbose)
+                std::cout << "could not open: " << PluginResource->Value(theResource.ToCString()) << " ; reason: " << error.ToCString() << std::endl;
+            throw Plugin_Failure(aMsg.str().c_str());
+        }
+        f = theSharedLibrary.DlSymb("PLUGINFACTORY");
+        if (f == NULL) {
+            TCollection_AsciiString error(theSharedLibrary.DlError());
+            Standard_SStream aMsg; aMsg << "could not find the factory in:";
+            aMsg << PluginResource->Value(theResource.ToCString());
+            aMsg << error.ToCString();
+            throw Plugin_Failure(aMsg.str().c_str());
+        }
+        theMapOfFunctions.Bind(pid, f);
     }
-    f = theSharedLibrary.DlSymb("PLUGINFACTORY");
-    if( f == NULL ) {
-      TCollection_AsciiString error(theSharedLibrary.DlError());
-      Standard_SStream aMsg; aMsg << "could not find the factory in:";
-      aMsg << PluginResource->Value(theResource.ToCString());
-      aMsg << error.ToCString();
-      throw Plugin_Failure(aMsg.str().c_str());
-    }
-    theMapOfFunctions.Bind(pid,f);
-  }
-  else
-    f = theMapOfFunctions(pid);
-  
-  Standard_Transient* (*fp) (const Standard_GUID&) = NULL;
-  fp = (Standard_Transient* (*)(const Standard_GUID&)) f;
-  Handle(Standard_Transient) theServiceFactory = (*fp) (aGUID);
-  return theServiceFactory;
-  
+    else
+        f = theMapOfFunctions(pid);
+
+    Standard_Transient* (*fp) (const Standard_GUID&) = NULL;
+    fp = (Standard_Transient * (*)(const Standard_GUID&)) f;
+    Handle(Standard_Transient) theServiceFactory = (*fp) (aGUID);
+    return theServiceFactory;
+
 }

@@ -54,7 +54,7 @@ class BRepFeat_MakeRevolutionForm  : public BRepFeat_RibSlot
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the linear form class.

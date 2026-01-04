@@ -39,7 +39,7 @@ class BRepClass3d_SolidExplorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepClass3d_SolidExplorer();

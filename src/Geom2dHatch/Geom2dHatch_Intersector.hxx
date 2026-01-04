@@ -33,7 +33,7 @@ class Geom2dHatch_Intersector  : public Geom2dInt_GInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an intersector.

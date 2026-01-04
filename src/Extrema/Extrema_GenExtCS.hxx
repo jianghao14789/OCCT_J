@@ -33,7 +33,7 @@ class Extrema_GenExtCS
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_GenExtCS();

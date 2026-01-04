@@ -45,7 +45,7 @@ class BRepOffsetAPI_MakePipe  : public BRepPrimAPI_MakeSweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a pipe by sweeping the shape Profile along

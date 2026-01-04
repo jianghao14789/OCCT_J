@@ -40,7 +40,7 @@ class IGESDimen_ToolWitnessLine
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolWitnessLine, ready to work

@@ -72,7 +72,7 @@ class BRepLib_MakeEdge  : public BRepLib_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepLib_MakeEdge();

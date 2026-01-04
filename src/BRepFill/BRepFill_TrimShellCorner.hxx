@@ -38,7 +38,7 @@ class BRepFill_TrimShellCorner
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor: takes faces to intersect,

@@ -38,7 +38,7 @@ class HLRBRep_ThePolyhedronOfInterCSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT HLRBRep_ThePolyhedronOfInterCSurf(const Standard_Address& Surface, const Standard_Integer nbdU, const Standard_Integer nbdV, const Standard_Real U1, const Standard_Real V1, const Standard_Real U2, const Standard_Real V2);
   

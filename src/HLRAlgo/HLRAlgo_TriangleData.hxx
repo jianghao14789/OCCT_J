@@ -26,7 +26,7 @@
 //! Data structure of a triangle.
 struct HLRAlgo_TriangleData
 {
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_Integer Node1, Node2, Node3, Flags;
 };

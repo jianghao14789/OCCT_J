@@ -52,7 +52,7 @@ class TopTrans_CurveTransition
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an empty  Curve Transition.

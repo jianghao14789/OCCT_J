@@ -37,7 +37,7 @@ class BRepBuilderAPI_FindPlane
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an empty algorithm. The function Init is then used to define the shape.

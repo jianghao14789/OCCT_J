@@ -29,7 +29,7 @@ class BOPDS_PaveMapHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the given pave, in the range [1, theUpperBound]
   //! @param thePave the pave which hash code is to be computed

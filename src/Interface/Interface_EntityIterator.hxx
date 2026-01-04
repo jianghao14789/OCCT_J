@@ -35,7 +35,7 @@ class Interface_EntityIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines an empty iterator (see AddList & AddItem)

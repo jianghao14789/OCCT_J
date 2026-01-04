@@ -35,7 +35,7 @@ class BRepAlgo_Loop
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepAlgo_Loop();

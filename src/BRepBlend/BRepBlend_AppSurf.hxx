@@ -49,7 +49,7 @@ class BRepBlend_AppSurf  : public AppBlend_Approx
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_AppSurf();

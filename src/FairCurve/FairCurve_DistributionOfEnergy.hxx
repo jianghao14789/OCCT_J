@@ -32,7 +32,7 @@ class FairCurve_DistributionOfEnergy  : public math_FunctionSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns the number of variables of the function.

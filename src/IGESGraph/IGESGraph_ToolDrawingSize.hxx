@@ -40,7 +40,7 @@ class IGESGraph_ToolDrawingSize
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDrawingSize, ready to work

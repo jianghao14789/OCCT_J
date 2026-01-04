@@ -26,7 +26,7 @@ class IntPatch_ArcFunction  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntPatch_ArcFunction();

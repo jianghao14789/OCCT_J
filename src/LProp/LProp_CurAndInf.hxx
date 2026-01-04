@@ -36,7 +36,7 @@ class LProp_CurAndInf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT LProp_CurAndInf();

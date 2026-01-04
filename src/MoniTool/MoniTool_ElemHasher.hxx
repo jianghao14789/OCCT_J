@@ -36,7 +36,7 @@ class MoniTool_ElemHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns hash code for the given element, in the range [1, theUpperBound].
   //! Asks theElement its HashCode, then transforms it to be in the required range.

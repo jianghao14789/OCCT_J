@@ -49,7 +49,7 @@ class gp_Trsf2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns identity transformation.
   gp_Trsf2d();

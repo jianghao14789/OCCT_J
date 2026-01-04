@@ -30,7 +30,7 @@ struct OpenGl_ElementNode
 {
   OpenGl_Element*     elem;
   OpenGl_ElementNode* next;
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 };
 
 //! Implementation of low-level graphic group.

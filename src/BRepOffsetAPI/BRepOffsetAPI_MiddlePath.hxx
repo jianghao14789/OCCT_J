@@ -34,7 +34,7 @@ class BRepOffsetAPI_MiddlePath  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! General constructor.

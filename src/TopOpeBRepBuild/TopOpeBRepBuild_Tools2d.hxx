@@ -31,7 +31,7 @@ class TopOpeBRepBuild_Tools2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void MakeMapOfShapeVertexInfo (const TopoDS_Wire& aWire, TopOpeBRepBuild_IndexedDataMapOfShapeVertexInfo& aMap);

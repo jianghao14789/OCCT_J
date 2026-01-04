@@ -39,7 +39,7 @@ class BRepProj_Projection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Makes a Cylindrical projection of Wire om Shape

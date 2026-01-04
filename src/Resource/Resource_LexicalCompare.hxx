@@ -30,7 +30,7 @@ class Resource_LexicalCompare
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Resource_LexicalCompare();

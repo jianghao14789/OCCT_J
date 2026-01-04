@@ -24,7 +24,7 @@
 class BOPDS_Pair {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPDS_Pair() : myIndex1(-1), myIndex2(-1) {}
   //

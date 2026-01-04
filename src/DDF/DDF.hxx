@@ -35,7 +35,7 @@ class DDF
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Search in draw  directory the framewok  identified

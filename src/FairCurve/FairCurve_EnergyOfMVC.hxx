@@ -44,7 +44,7 @@ class FairCurve_EnergyOfMVC  : public FairCurve_Energy
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Angles corresspond to the Ox axis

@@ -41,7 +41,7 @@ class IntCurvesFace_ShapeIntersector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntCurvesFace_ShapeIntersector();

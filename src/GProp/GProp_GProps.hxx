@@ -102,7 +102,7 @@ class GProp_GProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

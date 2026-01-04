@@ -33,7 +33,7 @@ class SWDRAW_ShapeAnalysis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Loads commands defined in ShapeAnalysis

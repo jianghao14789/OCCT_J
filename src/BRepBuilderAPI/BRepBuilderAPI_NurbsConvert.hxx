@@ -39,7 +39,7 @@ class BRepBuilderAPI_NurbsConvert  : public BRepBuilderAPI_ModifyShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a framework for converting the geometry of a

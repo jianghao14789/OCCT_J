@@ -37,7 +37,7 @@ class GProp_CelGProps  : public GProp_GProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GProp_CelGProps();

@@ -46,7 +46,7 @@ class AdvApprox_ApproxAFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs approximator tool.

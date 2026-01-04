@@ -31,7 +31,7 @@ class ShapeUpgrade_ShapeDivideArea  : public ShapeUpgrade_ShapeDivide
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ShapeUpgrade_ShapeDivideArea();

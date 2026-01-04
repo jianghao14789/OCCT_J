@@ -41,7 +41,7 @@ class ProjLib_ComputeApproxOnPolarSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor, it only sets some initial values for class fields.
   Standard_EXPORT ProjLib_ComputeApproxOnPolarSurface();

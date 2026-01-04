@@ -36,7 +36,7 @@ class IntPatch_PolyArc  : public IntPatch_Polygo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates the polygon of the arc A on the surface S.

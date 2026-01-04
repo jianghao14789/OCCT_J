@@ -40,7 +40,7 @@ class IGESAppli_ToolRegionRestriction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolRegionRestriction, ready to work

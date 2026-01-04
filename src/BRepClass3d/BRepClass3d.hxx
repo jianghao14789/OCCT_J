@@ -30,7 +30,7 @@ class BRepClass3d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the outer most shell of <S>. Returns a Null

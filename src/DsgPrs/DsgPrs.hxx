@@ -33,7 +33,7 @@ class DsgPrs
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! draws symbols ((one or two) arrows,(one or two)points
   //! at thebeginning and at the end of the dimension

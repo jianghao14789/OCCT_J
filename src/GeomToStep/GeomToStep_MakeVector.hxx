@@ -37,7 +37,7 @@ class GeomToStep_MakeVector  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeVector(const gp_Vec& V);

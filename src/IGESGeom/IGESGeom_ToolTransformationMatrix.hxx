@@ -40,7 +40,7 @@ class IGESGeom_ToolTransformationMatrix
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolTransformationMatrix, ready to work

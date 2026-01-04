@@ -29,7 +29,7 @@ class IGESData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prepares General dynamic data used for IGESData specifically :

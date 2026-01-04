@@ -39,7 +39,7 @@ class IGESBasic_ToolExternalRefFileIndex
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolExternalRefFileIndex, ready to work

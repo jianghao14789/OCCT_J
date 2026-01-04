@@ -55,7 +55,7 @@ class BRepFilletAPI_MakeFillet2d  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an empty algorithm for computing fillets and

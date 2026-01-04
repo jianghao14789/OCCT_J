@@ -35,7 +35,7 @@ class Vrml_Info
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Vrml_Info(const TCollection_AsciiString& aString = "<Undefined info>");

@@ -39,7 +39,7 @@ class ShapeBuild_Edge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Copy edge and replace one or both its vertices to a given

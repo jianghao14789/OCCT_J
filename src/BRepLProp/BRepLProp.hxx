@@ -1,4 +1,4 @@
-// Created on: 1994-02-24
+﻿// Created on: 1994-02-24
 // Created by: Laurent BOURESCHE
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,21 +29,21 @@ class BRepAdaptor_Curve;
 //! These global functions compute the degree of
 //! continuity of a curve built by concatenation of two
 //! edges at their junction point.
-class BRepLProp 
+class BRepLProp
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Computes the regularity at the junction between C1 and
-  //! C2. The point u1 on C1 and the point u2 on  C2 must be
-  //! confused.   tl  and ta  are  the  linear  and  angular
-  //! tolerance used two compare the derivative.
-  Standard_EXPORT static GeomAbs_Shape Continuity (const BRepAdaptor_Curve& C1, const BRepAdaptor_Curve& C2, const Standard_Real u1, const Standard_Real u2, const Standard_Real tl, const Standard_Real ta);
-  
-  //! The same as preceding but using the standard tolerances from package Precision.
-  Standard_EXPORT static GeomAbs_Shape Continuity (const BRepAdaptor_Curve& C1, const BRepAdaptor_Curve& C2, const Standard_Real u1, const Standard_Real u2);
+
+    //! Computes the regularity at the junction between C1 and
+    //! C2. The point u1 on C1 and the point u2 on  C2 must be
+    //! confused.   tl  and ta  are  the  linear  and  angular
+    //! tolerance used two compare the derivative.
+    Standard_EXPORT static GeomAbs_Shape Continuity(const BRepAdaptor_Curve& C1, const BRepAdaptor_Curve& C2, const Standard_Real u1, const Standard_Real u2, const Standard_Real tl, const Standard_Real ta);
+
+    //! The same as preceding but using the standard tolerances from package Precision.
+    Standard_EXPORT static GeomAbs_Shape Continuity(const BRepAdaptor_Curve& C1, const BRepAdaptor_Curve& C2, const Standard_Real u1, const Standard_Real u2);
 
 
 
@@ -59,10 +59,10 @@ private:
 
 
 
-friend class BRepLProp_CurveTool;
-friend class BRepLProp_SurfaceTool;
-friend class BRepLProp_CLProps;
-friend class BRepLProp_SLProps;
+    friend class BRepLProp_CurveTool;
+    friend class BRepLProp_SurfaceTool;
+    friend class BRepLProp_CLProps;
+    friend class BRepLProp_SLProps;
 
 };
 

@@ -76,7 +76,7 @@ class StepAP214
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates a Protocol

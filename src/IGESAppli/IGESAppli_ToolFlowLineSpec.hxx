@@ -39,7 +39,7 @@ class IGESAppli_ToolFlowLineSpec
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolFlowLineSpec, ready to work

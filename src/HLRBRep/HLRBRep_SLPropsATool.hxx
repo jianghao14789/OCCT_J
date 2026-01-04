@@ -33,7 +33,7 @@ class HLRBRep_SLPropsATool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the point  <P> of 	parameter <U> and <V>

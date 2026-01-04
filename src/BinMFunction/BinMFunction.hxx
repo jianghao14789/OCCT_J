@@ -29,7 +29,7 @@ class BinMFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the attribute drivers to <theDriverTable>.

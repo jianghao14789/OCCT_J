@@ -34,7 +34,7 @@ class RWStepDimTol_RWDatumReferenceElement
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

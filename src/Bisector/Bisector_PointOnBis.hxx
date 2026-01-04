@@ -31,7 +31,7 @@ class Bisector_PointOnBis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Bisector_PointOnBis();

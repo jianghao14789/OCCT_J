@@ -32,7 +32,7 @@ class DBRep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creation of isoparametric curves.

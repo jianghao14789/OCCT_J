@@ -29,7 +29,7 @@ class StdPrs_WFDeflectionSurface  : public Prs3d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the surface aSurface to the presentation object

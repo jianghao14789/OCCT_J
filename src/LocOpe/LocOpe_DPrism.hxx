@@ -45,7 +45,7 @@ class LocOpe_DPrism
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT LocOpe_DPrism(const TopoDS_Face& Spine, const Standard_Real Height1, const Standard_Real Height2, const Standard_Real Angle);

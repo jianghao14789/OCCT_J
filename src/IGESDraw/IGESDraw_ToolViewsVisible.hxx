@@ -40,7 +40,7 @@ class IGESDraw_ToolViewsVisible
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolViewsVisible, ready to work

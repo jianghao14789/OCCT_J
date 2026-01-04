@@ -39,7 +39,7 @@ class IGESSolid_ToolSolidAssembly
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSolidAssembly, ready to work

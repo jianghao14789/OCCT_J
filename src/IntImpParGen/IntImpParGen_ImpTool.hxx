@@ -31,7 +31,7 @@ class IntImpParGen_ImpTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT gp_Pnt2d Value (const Standard_Real U) const;

@@ -44,7 +44,7 @@ class PrsDim
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns the nearest point in a shape. This is used by
   //! several classes in calculation of dimensions.

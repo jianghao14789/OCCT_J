@@ -29,7 +29,7 @@ class IntSurf_Couple
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     IntSurf_Couple();

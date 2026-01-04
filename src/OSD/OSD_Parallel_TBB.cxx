@@ -1,4 +1,4 @@
-// Created on: 2014-08-19
+﻿// Created on: 2014-08-19
 // Created by: Alexander Zaikin
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
@@ -33,24 +33,24 @@ Standard_ENABLE_DEPRECATION_WARNINGS
 //purpose  : 
 //=======================================================================
 
-void OSD_Parallel::forEachExternal (UniversalIterator& theBegin,
-                                    UniversalIterator& theEnd,
-                                    const FunctorInterface& theFunctor,
-                                    Standard_Integer theNbItems)
+void OSD_Parallel::forEachExternal(UniversalIterator& theBegin,
+    UniversalIterator& theEnd,
+    const FunctorInterface& theFunctor,
+    Standard_Integer theNbItems)
 {
-  try
-  {
-    const Handle(OSD_ThreadPool)& aThreadPool = OSD_ThreadPool::DefaultPool();
-    const Standard_Integer aNbThreads = theNbItems > 0 ?
-      aThreadPool->NbDefaultThreadsToLaunch() : -1;
+    try
+    {
+        const Handle(OSD_ThreadPool)& aThreadPool = OSD_ThreadPool::DefaultPool();
+        const Standard_Integer aNbThreads = theNbItems > 0 ?
+            aThreadPool->NbDefaultThreadsToLaunch() : -1;
 
-    tbb::task_scheduler_init aScheduler (aNbThreads);
-    tbb::parallel_for_each (theBegin, theEnd, theFunctor);
-  }
-  catch (tbb::captured_exception& anException)
-  {
-    throw Standard_ProgramError (anException.what());
-  }
+        tbb::task_scheduler_init aScheduler(aNbThreads);
+        tbb::parallel_for_each(theBegin, theEnd, theFunctor);
+    }
+    catch (tbb::captured_exception& anException)
+    {
+        throw Standard_ProgramError(anException.what());
+    }
 }
 
 #endif /* HAVE_TBB */

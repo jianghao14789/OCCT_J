@@ -31,7 +31,7 @@ template<int MyAlignSize = 16>
 class NCollection_AliasedArray
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 public:
 
   //! Empty constructor.

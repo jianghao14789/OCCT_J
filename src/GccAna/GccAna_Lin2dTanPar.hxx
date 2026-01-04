@@ -49,7 +49,7 @@ class GccAna_Lin2dTanPar
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This method implements the algorithms used to create a 2d

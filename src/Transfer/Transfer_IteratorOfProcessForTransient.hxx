@@ -35,7 +35,7 @@ class Transfer_IteratorOfProcessForTransient  : public Transfer_TransferIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty Iterator

@@ -30,7 +30,7 @@ class ShapeCustom_Curve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ShapeCustom_Curve();

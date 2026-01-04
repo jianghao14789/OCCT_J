@@ -39,7 +39,7 @@ class IGESGraph_ToolDefinitionLevel
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDefinitionLevel, ready to work

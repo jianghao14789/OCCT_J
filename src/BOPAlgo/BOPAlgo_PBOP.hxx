@@ -1,4 +1,4 @@
-// Created by: Peter KURNEV
+﻿// Created by: Peter KURNEV
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.

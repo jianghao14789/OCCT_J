@@ -45,7 +45,7 @@ class Geom2dToIGES_Geom2dCurve  : public Geom2dToIGES_Geom2dEntity
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dToIGES_Geom2dCurve();

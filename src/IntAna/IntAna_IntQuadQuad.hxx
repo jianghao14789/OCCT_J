@@ -44,7 +44,7 @@ class IntAna_IntQuadQuad
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty Constructor

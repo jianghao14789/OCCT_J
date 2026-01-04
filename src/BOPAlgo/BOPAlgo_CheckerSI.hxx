@@ -1,4 +1,4 @@
-// Created by: Peter Kurnev
+﻿// Created by: Peter Kurnev
 // Copyright (c) 2010-2014 OPEN CASCADE SAS
 // Copyright (c) 2007-2010 CEA/DEN, EDF R&D, OPEN CASCADE
 // Copyright (c) 2003-2007 OPEN CASCADE, EADS/CCR, LIP6, CEA/DEN, CEDRAT,
@@ -36,59 +36,59 @@
 //! in BOPAlgo_PaveFiller::PerformInternal() method, the errors from this method
 //! directly will be returned.
 
-class BOPAlgo_CheckerSI  : public BOPAlgo_PaveFiller
+class BOPAlgo_CheckerSI : public BOPAlgo_PaveFiller
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
 
-  Standard_EXPORT BOPAlgo_CheckerSI();
-  Standard_EXPORT virtual ~BOPAlgo_CheckerSI();
-  
-  Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
-  
-  //! Sets the level of checking shape on self-interference.<br>
-  //! It defines which interferences will be checked:<br>
-  //! 0 - only V/V;<br>
-  //! 1 - V/V and V/E;<br>
-  //! 2 - V/V, V/E and E/E;<br>
-  //! 3 - V/V, V/E, E/E and V/F;<br>
-  //! 4 - V/V, V/E, E/E, V/F and E/F;<br>
-  //! 5 - V/V, V/E, E/E, V/F, E/F and F/F;<br>
-  //! 6 - V/V, V/E, E/E, V/F, E/F, F/F and V/S;<br>
-  //! 7 - V/V, V/E, E/E, V/F, E/F, F/F, V/S and E/S;<br>
-  //! 8 - V/V, V/E, E/E, V/F, E/F, F/F, V/S, E/S and F/S;<br>
-  //! 9 - V/V, V/E, E/E, V/F, E/F, F/F, V/S, E/S, F/S and S/S - all interferences (Default value)
-  Standard_EXPORT void SetLevelOfCheck (const Standard_Integer theLevel);
+    Standard_EXPORT BOPAlgo_CheckerSI();
+    Standard_EXPORT virtual ~BOPAlgo_CheckerSI();
+
+    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+
+    //! Sets the level of checking shape on self-interference.<br>
+    //! It defines which interferences will be checked:<br>
+    //! 0 - only V/V;<br>
+    //! 1 - V/V and V/E;<br>
+    //! 2 - V/V, V/E and E/E;<br>
+    //! 3 - V/V, V/E, E/E and V/F;<br>
+    //! 4 - V/V, V/E, E/E, V/F and E/F;<br>
+    //! 5 - V/V, V/E, E/E, V/F, E/F and F/F;<br>
+    //! 6 - V/V, V/E, E/E, V/F, E/F, F/F and V/S;<br>
+    //! 7 - V/V, V/E, E/E, V/F, E/F, F/F, V/S and E/S;<br>
+    //! 8 - V/V, V/E, E/E, V/F, E/F, F/F, V/S, E/S and F/S;<br>
+    //! 9 - V/V, V/E, E/E, V/F, E/F, F/F, V/S, E/S, F/S and S/S - all interferences (Default value)
+    Standard_EXPORT void SetLevelOfCheck(const Standard_Integer theLevel);
 
 protected:
 
-  Standard_EXPORT virtual void Init(const Message_ProgressRange& theRange) Standard_OVERRIDE;
+    Standard_EXPORT virtual void Init(const Message_ProgressRange& theRange) Standard_OVERRIDE;
 
-  //! Treats the intersection results
-  Standard_EXPORT void PostTreat();
+    //! Treats the intersection results
+    Standard_EXPORT void PostTreat();
 
-  Standard_EXPORT void CheckFaceSelfIntersection(const Message_ProgressRange& theRange);
+    Standard_EXPORT void CheckFaceSelfIntersection(const Message_ProgressRange& theRange);
 
-  //! Methods for intersection with solids
+    //! Methods for intersection with solids
 
-  //! Vertex/Solid intersection
-  Standard_EXPORT virtual void PerformVZ(const Message_ProgressRange& theRange);
+    //! Vertex/Solid intersection
+    Standard_EXPORT virtual void PerformVZ(const Message_ProgressRange& theRange);
 
-  //! Edge/Solid intersection
-  Standard_EXPORT virtual void PerformEZ(const Message_ProgressRange& theRange);
+    //! Edge/Solid intersection
+    Standard_EXPORT virtual void PerformEZ(const Message_ProgressRange& theRange);
 
-  //! Face/Solid intersection
-  Standard_EXPORT virtual void PerformFZ(const Message_ProgressRange& theRange);
+    //! Face/Solid intersection
+    Standard_EXPORT virtual void PerformFZ(const Message_ProgressRange& theRange);
 
-  //! Solid/Solid intersection
-  Standard_EXPORT virtual void PerformZZ(const Message_ProgressRange& theRange);
+    //! Solid/Solid intersection
+    Standard_EXPORT virtual void PerformZZ(const Message_ProgressRange& theRange);
 
-  //! Used for intersection of edges and faces with solids
-  Standard_EXPORT virtual void PerformSZ(const TopAbs_ShapeEnum aTS, const Message_ProgressRange& theRange);
+    //! Used for intersection of edges and faces with solids
+    Standard_EXPORT virtual void PerformSZ(const TopAbs_ShapeEnum aTS, const Message_ProgressRange& theRange);
 
-  Standard_Integer myLevelOfCheck;
+    Standard_Integer myLevelOfCheck;
 
 private:
 

@@ -34,7 +34,7 @@ class TopOpeBRepDS_SurfaceExplorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_SurfaceExplorer();

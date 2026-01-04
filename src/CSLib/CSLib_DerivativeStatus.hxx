@@ -1,4 +1,4 @@
-// Created on: 1991-09-09
+﻿// Created on: 1991-09-09
 // Created by: Michel Chauvat
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -41,13 +41,13 @@
 //! as input data)
 enum CSLib_DerivativeStatus
 {
-CSLib_Done,
-CSLib_D1uIsNull,
-CSLib_D1vIsNull,
-CSLib_D1IsNull,
-CSLib_D1uD1vRatioIsNull,
-CSLib_D1vD1uRatioIsNull,
-CSLib_D1uIsParallelD1v
+    CSLib_Done,
+    CSLib_D1uIsNull,
+    CSLib_D1vIsNull,
+    CSLib_D1IsNull,
+    CSLib_D1uD1vRatioIsNull,
+    CSLib_D1vD1uRatioIsNull,
+    CSLib_D1uIsParallelD1v
 };
 
 #endif // _CSLib_DerivativeStatus_HeaderFile

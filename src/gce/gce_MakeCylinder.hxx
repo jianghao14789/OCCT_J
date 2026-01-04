@@ -45,7 +45,7 @@ class gce_MakeCylinder  : public gce_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! <A2> is the local cartesian coordinate system of <me>.

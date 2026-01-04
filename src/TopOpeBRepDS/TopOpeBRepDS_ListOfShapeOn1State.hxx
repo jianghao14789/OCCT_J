@@ -31,7 +31,7 @@ class TopOpeBRepDS_ListOfShapeOn1State
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_ListOfShapeOn1State();

@@ -43,7 +43,7 @@ class gp_Ax2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an axis object representing X axis of the reference co-ordinate system.
   gp_Ax2d() : loc(0.,0.)

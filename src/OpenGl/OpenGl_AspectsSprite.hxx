@@ -24,7 +24,7 @@ class OpenGl_PointSprite;
 class OpenGl_AspectsSprite
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 public:
   //! Empty constructor.
   OpenGl_AspectsSprite() : myMarkerSize (1.0f), myIsSpriteReady  (Standard_False) {}

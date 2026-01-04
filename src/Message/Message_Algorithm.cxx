@@ -1,4 +1,4 @@
-// Created on: 2003-03-04
+﻿// Created on: 2003-03-04
 // Created by: Pavel TELKOV
 // Copyright (c) 2003-2014 OPEN CASCADE SAS
 //
@@ -31,15 +31,15 @@
 #include <TColStd_MapIteratorOfPackedMapOfInteger.hxx>
 #include <TColStd_SequenceOfInteger.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Message_Algorithm,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Message_Algorithm, Standard_Transient)
 
 //=======================================================================
 //function : Message_Algorithm
 //purpose  :
 //=======================================================================
-Message_Algorithm::Message_Algorithm ()
+Message_Algorithm::Message_Algorithm()
 {
-  myMessenger = Message::DefaultMessenger();
+    myMessenger = Message::DefaultMessenger();
 }
 
 //=======================================================================
@@ -47,12 +47,12 @@ Message_Algorithm::Message_Algorithm ()
 //purpose  :
 //=======================================================================
 
-void Message_Algorithm::SetMessenger (const Handle(Message_Messenger)& theMsgr)
+void Message_Algorithm::SetMessenger(const Handle(Message_Messenger)& theMsgr)
 {
-  if ( theMsgr.IsNull() )
-    myMessenger = Message::DefaultMessenger();
-  else
-    myMessenger = theMsgr;
+    if (theMsgr.IsNull())
+        myMessenger = Message::DefaultMessenger();
+    else
+        myMessenger = theMsgr;
 }
 
 //=======================================================================
@@ -62,7 +62,7 @@ void Message_Algorithm::SetMessenger (const Handle(Message_Messenger)& theMsgr)
 
 void Message_Algorithm::SetStatus(const Message_Status& theStat)
 {
-  myStatus.Set( theStat );
+    myStatus.Set(theStat);
 }
 
 //=======================================================================
@@ -70,27 +70,27 @@ void Message_Algorithm::SetStatus(const Message_Status& theStat)
 //purpose  :
 //=======================================================================
 
-void Message_Algorithm::SetStatus (const Message_Status& theStat, 
-				   const Standard_Integer theInt)
+void Message_Algorithm::SetStatus(const Message_Status& theStat,
+    const Standard_Integer theInt)
 {
-  // Set status flag
-  SetStatus ( theStat );
+    // Set status flag
+    SetStatus(theStat);
 
-  // Find index of bit corresponding to that flag
-  Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStat);
-  if ( !aFlagIndex ) return;
+    // Find index of bit corresponding to that flag
+    Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStat);
+    if (!aFlagIndex) return;
 
-  // Create map of integer parameters for a given flag, if not yet done
-  if ( myReportIntegers.IsNull() )
-    myReportIntegers = new TColStd_HArray1OfTransient (Message_ExecStatus::FirstStatus, 
-                                                       Message_ExecStatus::LastStatus);
-  Handle(Standard_Transient)& aData = 
-    myReportIntegers->ChangeValue(aFlagIndex);
-  if ( aData.IsNull() )
-    aData = new TColStd_HPackedMapOfInteger;
+    // Create map of integer parameters for a given flag, if not yet done
+    if (myReportIntegers.IsNull())
+        myReportIntegers = new TColStd_HArray1OfTransient(Message_ExecStatus::FirstStatus,
+            Message_ExecStatus::LastStatus);
+    Handle(Standard_Transient)& aData =
+        myReportIntegers->ChangeValue(aFlagIndex);
+    if (aData.IsNull())
+        aData = new TColStd_HPackedMapOfInteger;
 
-  // add integer parameter for the status
-  Handle(TColStd_HPackedMapOfInteger)::DownCast(aData)->ChangeMap().Add(theInt);
+    // add integer parameter for the status
+    Handle(TColStd_HPackedMapOfInteger)::DownCast(aData)->ChangeMap().Add(theInt);
 }
 
 //=======================================================================
@@ -98,42 +98,42 @@ void Message_Algorithm::SetStatus (const Message_Status& theStat,
 //purpose  :
 //=======================================================================
 
-void Message_Algorithm::SetStatus (const Message_Status& theStat, 
-				   const Handle(TCollection_HExtendedString) &theStr,
-				   const Standard_Boolean noRepetitions)
+void Message_Algorithm::SetStatus(const Message_Status& theStat,
+    const Handle(TCollection_HExtendedString)& theStr,
+    const Standard_Boolean noRepetitions)
 {
-  // Set status flag
-  SetStatus ( theStat );
-  if ( theStr.IsNull() )
-    return;
+    // Set status flag
+    SetStatus(theStat);
+    if (theStr.IsNull())
+        return;
 
-  // Find index of bit corresponding to that flag
-  Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStat);
-  if ( !aFlagIndex ) return;
-    
-  // Create sequence of string parameters for a given flag, if not yet done
-  if ( myReportStrings.IsNull() )
-    myReportStrings = new TColStd_HArray1OfTransient (Message_ExecStatus::FirstStatus,
-						      Message_ExecStatus::LastStatus);
-  Handle(Standard_Transient)& aData = 
-    myReportStrings->ChangeValue(aFlagIndex);
-  if ( aData.IsNull() )
-    aData = new TColStd_HSequenceOfHExtendedString;
+    // Find index of bit corresponding to that flag
+    Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStat);
+    if (!aFlagIndex) return;
 
-  // Add string parameter
-  Handle(TColStd_HSequenceOfHExtendedString) aReportSeq = 
-    Handle(TColStd_HSequenceOfHExtendedString)::DownCast(aData);
-  if ( aReportSeq.IsNull() )
-    return;
-  if ( noRepetitions )
-  {
-    // if the provided string has been already registered, just do nothing
-    for ( Standard_Integer i=1; i <= aReportSeq->Length(); i++ )
-      if ( aReportSeq->Value(i)->String().IsEqual( theStr->String() ) ) 
-	return;
-  }
+    // Create sequence of string parameters for a given flag, if not yet done
+    if (myReportStrings.IsNull())
+        myReportStrings = new TColStd_HArray1OfTransient(Message_ExecStatus::FirstStatus,
+            Message_ExecStatus::LastStatus);
+    Handle(Standard_Transient)& aData =
+        myReportStrings->ChangeValue(aFlagIndex);
+    if (aData.IsNull())
+        aData = new TColStd_HSequenceOfHExtendedString;
 
-  aReportSeq->Append ( theStr );
+    // Add string parameter
+    Handle(TColStd_HSequenceOfHExtendedString) aReportSeq =
+        Handle(TColStd_HSequenceOfHExtendedString)::DownCast(aData);
+    if (aReportSeq.IsNull())
+        return;
+    if (noRepetitions)
+    {
+        // if the provided string has been already registered, just do nothing
+        for (Standard_Integer i = 1; i <= aReportSeq->Length(); i++)
+            if (aReportSeq->Value(i)->String().IsEqual(theStr->String()))
+                return;
+    }
+
+    aReportSeq->Append(theStr);
 }
 
 //=======================================================================
@@ -141,26 +141,26 @@ void Message_Algorithm::SetStatus (const Message_Status& theStat,
 //purpose  :
 //=======================================================================
 
-void Message_Algorithm::SetStatus (const Message_Status& theStat,
-                                   const Message_Msg&    theMsg)
+void Message_Algorithm::SetStatus(const Message_Status& theStat,
+    const Message_Msg& theMsg)
 {
-  // Set status flag
-  SetStatus (theStat);
+    // Set status flag
+    SetStatus(theStat);
 
-  // Find index of bit corresponding to that flag
-  Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex (theStat);
-  if (aFlagIndex == 0)
-  {
-    return;
-  }
+    // Find index of bit corresponding to that flag
+    Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStat);
+    if (aFlagIndex == 0)
+    {
+        return;
+    }
 
-  // Create sequence of messages for a given flag, if not yet done
-  if (myReportMessages.IsNull())
-  {
-    myReportMessages = new Message_ArrayOfMsg (Message_ExecStatus::FirstStatus, Message_ExecStatus::LastStatus);
-  }
+    // Create sequence of messages for a given flag, if not yet done
+    if (myReportMessages.IsNull())
+    {
+        myReportMessages = new Message_ArrayOfMsg(Message_ExecStatus::FirstStatus, Message_ExecStatus::LastStatus);
+    }
 
-  myReportMessages->ChangeValue (aFlagIndex) = new Message_Msg (theMsg);
+    myReportMessages->ChangeValue(aFlagIndex) = new Message_Msg(theMsg);
 }
 
 //=======================================================================
@@ -170,10 +170,10 @@ void Message_Algorithm::SetStatus (const Message_Status& theStat,
 
 void Message_Algorithm::ClearStatus()
 {
-  myStatus.Clear(); 
-  myReportIntegers.Nullify();
-  myReportStrings.Nullify();
-  myReportMessages.Nullify();
+    myStatus.Clear();
+    myReportIntegers.Nullify();
+    myReportStrings.Nullify();
+    myReportMessages.Nullify();
 }
 
 //=======================================================================
@@ -181,86 +181,86 @@ void Message_Algorithm::ClearStatus()
 //purpose  :
 //=======================================================================
 
-void Message_Algorithm::SendStatusMessages (const Message_ExecStatus& theStatus,
-                                            const Message_Gravity     theTraceLevel,
-                                            const Standard_Integer    theMaxCount) const
+void Message_Algorithm::SendStatusMessages(const Message_ExecStatus& theStatus,
+    const Message_Gravity     theTraceLevel,
+    const Standard_Integer    theMaxCount) const
 {
-  Handle(Message_Messenger) aMsgr = GetMessenger();
-  if (aMsgr.IsNull())
-  {
-    return;
-  }
-
-  // Iterate on all set flags in the specified range
-  for ( Standard_Integer i  = Message_ExecStatus::FirstStatus; 
-                         i <= Message_ExecStatus::LastStatus; i++ )
-  {
-    Message_Status stat = Message_ExecStatus::StatusByIndex( i );
-    if (!theStatus.IsSet (stat) || !myStatus.IsSet (stat))
+    Handle(Message_Messenger) aMsgr = GetMessenger();
+    if (aMsgr.IsNull())
     {
-      continue;
+        return;
     }
 
-    NCollection_Handle<Message_Msg> aMsgCustom;
-    if (! myReportMessages.IsNull())
-      aMsgCustom = myReportMessages->Value (i);
-    if (!aMsgCustom.IsNull())
+    // Iterate on all set flags in the specified range
+    for (Standard_Integer i = Message_ExecStatus::FirstStatus;
+        i <= Message_ExecStatus::LastStatus; i++)
     {
-      // print custom message
-      aMsgr->Send (*aMsgCustom, theTraceLevel);
-      continue;
-    }
+        Message_Status stat = Message_ExecStatus::StatusByIndex(i);
+        if (!theStatus.IsSet(stat) || !myStatus.IsSet(stat))
+        {
+            continue;
+        }
 
-    // construct message suffix
-    TCollection_AsciiString aSuffix;
-    switch( Message_ExecStatus::TypeOfStatus( stat ) )
-    {
-    case Message_DONE:  aSuffix.AssignCat( ".Done" ); break;
-    case Message_WARN:  aSuffix.AssignCat( ".Warn" ); break;
-    case Message_ALARM: aSuffix.AssignCat( ".Alarm"); break;
-    case Message_FAIL:  aSuffix.AssignCat( ".Fail" ); break;
-    default:            continue;  
-    }
-    aSuffix.AssignCat( Message_ExecStatus::LocalStatusIndex( stat ) );
+        NCollection_Handle<Message_Msg> aMsgCustom;
+        if (!myReportMessages.IsNull())
+            aMsgCustom = myReportMessages->Value(i);
+        if (!aMsgCustom.IsNull())
+        {
+            // print custom message
+            aMsgr->Send(*aMsgCustom, theTraceLevel);
+            continue;
+        }
 
-    // find message, prefixed by class type name, iterating by base classes if necessary
-    TCollection_AsciiString aMsgName;
-    for (Handle(Standard_Type) aType = DynamicType(); ! aType.IsNull(); aType = aType->Parent())
-    {
-      aMsgName = aType->Name();
-      aMsgName += aSuffix;
-      if (Message_MsgFile::HasMsg(aMsgName))
-        break;
-    }
+        // construct message suffix
+        TCollection_AsciiString aSuffix;
+        switch (Message_ExecStatus::TypeOfStatus(stat))
+        {
+        case Message_DONE:  aSuffix.AssignCat(".Done"); break;
+        case Message_WARN:  aSuffix.AssignCat(".Warn"); break;
+        case Message_ALARM: aSuffix.AssignCat(".Alarm"); break;
+        case Message_FAIL:  aSuffix.AssignCat(".Fail"); break;
+        default:            continue;
+        }
+        aSuffix.AssignCat(Message_ExecStatus::LocalStatusIndex(stat));
 
-    // create a message
-    Message_Msg aMsg ( aMsgName );
+        // find message, prefixed by class type name, iterating by base classes if necessary
+        TCollection_AsciiString aMsgName;
+        for (Handle(Standard_Type) aType = DynamicType(); !aType.IsNull(); aType = aType->Parent())
+        {
+            aMsgName = aType->Name();
+            aMsgName += aSuffix;
+            if (Message_MsgFile::HasMsg(aMsgName))
+                break;
+        }
 
-    // if additional parameters are defined for a given status flag,
-    // try to feed them into the message
-    if (!myReportIntegers.IsNull())
-    {
-      Handle(TColStd_HPackedMapOfInteger) aMapErrors =
-        Handle(TColStd_HPackedMapOfInteger)::DownCast(myReportIntegers->Value(i));
-      if (!aMapErrors.IsNull())
-      {
-        aMsg << PrepareReport (aMapErrors, theMaxCount);
-      }
-    }
-    if (!myReportStrings.IsNull()
-     && !myReportStrings->Value (i).IsNull())
-    {
-      Handle(TColStd_HSequenceOfHExtendedString) aReportSeq =
-        Handle(TColStd_HSequenceOfHExtendedString)::DownCast (myReportStrings->Value(i));
-      if (!aReportSeq.IsNull())
-      {
-        aMsg << PrepareReport (aReportSeq->Sequence(), theMaxCount);
-      }
-    }
+        // create a message
+        Message_Msg aMsg(aMsgName);
 
-    // output the message
-    aMsgr->Send(aMsg, theTraceLevel);
-  }
+        // if additional parameters are defined for a given status flag,
+        // try to feed them into the message
+        if (!myReportIntegers.IsNull())
+        {
+            Handle(TColStd_HPackedMapOfInteger) aMapErrors =
+                Handle(TColStd_HPackedMapOfInteger)::DownCast(myReportIntegers->Value(i));
+            if (!aMapErrors.IsNull())
+            {
+                aMsg << PrepareReport(aMapErrors, theMaxCount);
+            }
+        }
+        if (!myReportStrings.IsNull()
+            && !myReportStrings->Value(i).IsNull())
+        {
+            Handle(TColStd_HSequenceOfHExtendedString) aReportSeq =
+                Handle(TColStd_HSequenceOfHExtendedString)::DownCast(myReportStrings->Value(i));
+            if (!aReportSeq.IsNull())
+            {
+                aMsg << PrepareReport(aReportSeq->Sequence(), theMaxCount);
+            }
+        }
+
+        // output the message
+        aMsgr->Send(aMsg, theTraceLevel);
+    }
 }
 
 //=======================================================================
@@ -268,14 +268,14 @@ void Message_Algorithm::SendStatusMessages (const Message_ExecStatus& theStatus,
 //purpose  : 
 //=======================================================================
 
-void Message_Algorithm::SendMessages (const Message_Gravity theTraceLevel,
-				      const Standard_Integer theMaxCount) const
+void Message_Algorithm::SendMessages(const Message_Gravity theTraceLevel,
+    const Standard_Integer theMaxCount) const
 {
-  Message_ExecStatus aStat;
-  aStat.SetAllWarn();
-  aStat.SetAllAlarm();
-  aStat.SetAllFail();
-  SendStatusMessages( aStat, theTraceLevel, theMaxCount );
+    Message_ExecStatus aStat;
+    aStat.SetAllWarn();
+    aStat.SetAllAlarm();
+    aStat.SetAllFail();
+    SendStatusMessages(aStat, theTraceLevel, theMaxCount);
 }
 
 //=======================================================================
@@ -284,9 +284,9 @@ void Message_Algorithm::SendMessages (const Message_Gravity theTraceLevel,
 //=======================================================================
 
 void Message_Algorithm::AddStatus
-      (const Handle(Message_Algorithm)& theOtherAlgo)
+(const Handle(Message_Algorithm)& theOtherAlgo)
 {
-  AddStatus( theOtherAlgo->GetStatus(), theOtherAlgo );
+    AddStatus(theOtherAlgo->GetStatus(), theOtherAlgo);
 }
 
 //=======================================================================
@@ -295,50 +295,50 @@ void Message_Algorithm::AddStatus
 //=======================================================================
 
 void Message_Algorithm::AddStatus
-      (const Message_ExecStatus& theAllowedStatus,
-       const Handle(Message_Algorithm)& theOtherAlgo)
+(const Message_ExecStatus& theAllowedStatus,
+    const Handle(Message_Algorithm)& theOtherAlgo)
 {
-  // Iterate on all set flags in the specified range
-  const Message_ExecStatus& aStatusOfAlgo = theOtherAlgo->GetStatus();
-  for ( Standard_Integer i  = Message_ExecStatus::FirstStatus; 
-                         i <= Message_ExecStatus::LastStatus; i++ )
-  {
-    Message_Status stat = Message_ExecStatus::StatusByIndex( i );
-    if ( ! theAllowedStatus.IsSet( stat ) || ! aStatusOfAlgo.IsSet( stat ) )
-      continue;
-
-    SetStatus ( stat );
-
-    // if additional parameters are defined for a given status flag,
-    // move them to <this> algorithm
-    // a) numbers
-    Handle(TColStd_HPackedMapOfInteger) aNumsOther = 
-      theOtherAlgo->GetMessageNumbers (stat); 
-    if ( ! aNumsOther.IsNull() ) 
+    // Iterate on all set flags in the specified range
+    const Message_ExecStatus& aStatusOfAlgo = theOtherAlgo->GetStatus();
+    for (Standard_Integer i = Message_ExecStatus::FirstStatus;
+        i <= Message_ExecStatus::LastStatus; i++)
     {
-      // Create sequence of integer parameters for a given flag, if not yet done
-      if ( myReportIntegers.IsNull() )
-	myReportIntegers =
-	  new TColStd_HArray1OfTransient(Message_ExecStatus::FirstStatus, 
-                                         Message_ExecStatus::LastStatus);
-      Handle(Standard_Transient)& aData = 
-	myReportIntegers->ChangeValue(i);
-      if ( aData.IsNull() )
-	aData = new TColStd_HPackedMapOfInteger;
+        Message_Status stat = Message_ExecStatus::StatusByIndex(i);
+        if (!theAllowedStatus.IsSet(stat) || !aStatusOfAlgo.IsSet(stat))
+            continue;
 
-      // add integer parameter for the status
-      Handle(TColStd_HPackedMapOfInteger)::DownCast(aData)
-	->ChangeMap().Unite(aNumsOther->Map());
+        SetStatus(stat);
+
+        // if additional parameters are defined for a given status flag,
+        // move them to <this> algorithm
+        // a) numbers
+        Handle(TColStd_HPackedMapOfInteger) aNumsOther =
+            theOtherAlgo->GetMessageNumbers(stat);
+        if (!aNumsOther.IsNull())
+        {
+            // Create sequence of integer parameters for a given flag, if not yet done
+            if (myReportIntegers.IsNull())
+                myReportIntegers =
+                new TColStd_HArray1OfTransient(Message_ExecStatus::FirstStatus,
+                    Message_ExecStatus::LastStatus);
+            Handle(Standard_Transient)& aData =
+                myReportIntegers->ChangeValue(i);
+            if (aData.IsNull())
+                aData = new TColStd_HPackedMapOfInteger;
+
+            // add integer parameter for the status
+            Handle(TColStd_HPackedMapOfInteger)::DownCast(aData)
+                ->ChangeMap().Unite(aNumsOther->Map());
+        }
+        // b) strings
+        Handle(TColStd_HSequenceOfHExtendedString) aStrsOther =
+            theOtherAlgo->GetMessageStrings(stat);
+        if (!aStrsOther.IsNull())
+        {
+            for (Standard_Integer n = 1; n < aStrsOther->Length(); n++)
+                SetStatus(stat, aStrsOther->Value(n));
+        }
     }
-    // b) strings
-    Handle(TColStd_HSequenceOfHExtendedString) aStrsOther = 
-      theOtherAlgo->GetMessageStrings (stat); 
-    if ( ! aStrsOther.IsNull() ) 
-    {
-      for (Standard_Integer n=1; n < aStrsOther->Length(); n++ )
-	SetStatus (stat, aStrsOther->Value(n));
-    }
-  }
 }
 
 //=======================================================================
@@ -346,17 +346,17 @@ void Message_Algorithm::AddStatus
 //purpose  : 
 //=======================================================================
 
-Handle(TColStd_HPackedMapOfInteger) Message_Algorithm::GetMessageNumbers 
-       (const Message_Status& theStatus) const
+Handle(TColStd_HPackedMapOfInteger) Message_Algorithm::GetMessageNumbers
+(const Message_Status& theStatus) const
 {
-  if ( myReportIntegers.IsNull() )
-    return 0;
+    if (myReportIntegers.IsNull())
+        return 0;
 
-  // Find index of bit corresponding to that flag
-  Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStatus);
-  if ( ! aFlagIndex ) return 0;
-    
-  return Handle(TColStd_HPackedMapOfInteger)::DownCast(myReportIntegers->Value(aFlagIndex));
+    // Find index of bit corresponding to that flag
+    Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStatus);
+    if (!aFlagIndex) return 0;
+
+    return Handle(TColStd_HPackedMapOfInteger)::DownCast(myReportIntegers->Value(aFlagIndex));
 }
 
 //=======================================================================
@@ -365,16 +365,16 @@ Handle(TColStd_HPackedMapOfInteger) Message_Algorithm::GetMessageNumbers
 //=======================================================================
 
 Handle(TColStd_HSequenceOfHExtendedString) Message_Algorithm::GetMessageStrings
-       (const Message_Status& theStatus) const
+(const Message_Status& theStatus) const
 {
-  if ( myReportStrings.IsNull() )
-    return 0;
+    if (myReportStrings.IsNull())
+        return 0;
 
-  // Find index of bit corresponding to that flag
-  Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStatus);
-  if ( ! aFlagIndex ) return 0;
-    
-  return Handle(TColStd_HSequenceOfHExtendedString)::DownCast(myReportStrings->Value(aFlagIndex));
+    // Find index of bit corresponding to that flag
+    Standard_Integer aFlagIndex = Message_ExecStatus::StatusIndex(theStatus);
+    if (!aFlagIndex) return 0;
+
+    return Handle(TColStd_HSequenceOfHExtendedString)::DownCast(myReportStrings->Value(aFlagIndex));
 }
 
 //=======================================================================
@@ -382,27 +382,27 @@ Handle(TColStd_HSequenceOfHExtendedString) Message_Algorithm::GetMessageStrings
 //purpose  : static method
 //=======================================================================
 
-TCollection_ExtendedString Message_Algorithm::PrepareReport 
-  (const Handle(TColStd_HPackedMapOfInteger)& theMapError,
-   const Standard_Integer theMaxCount)
+TCollection_ExtendedString Message_Algorithm::PrepareReport
+(const Handle(TColStd_HPackedMapOfInteger)& theMapError,
+    const Standard_Integer theMaxCount)
 {
-  TCollection_ExtendedString aNewReport;
-  TColStd_MapIteratorOfPackedMapOfInteger anIt(theMapError->Map());
-  Standard_Integer nb = 1;
-  for (; anIt.More() && nb <= theMaxCount; anIt.Next(), nb++ )
-  {
-    if ( nb > 1 ) 
-      aNewReport += " ";
-    aNewReport += anIt.Key();
-  }
- 
-  if ( anIt.More() )
-  {
-    aNewReport += " ... (total ";
-    aNewReport += theMapError->Map().Extent();
-    aNewReport += ")";
-  }
-  return aNewReport;
+    TCollection_ExtendedString aNewReport;
+    TColStd_MapIteratorOfPackedMapOfInteger anIt(theMapError->Map());
+    Standard_Integer nb = 1;
+    for (; anIt.More() && nb <= theMaxCount; anIt.Next(), nb++)
+    {
+        if (nb > 1)
+            aNewReport += " ";
+        aNewReport += anIt.Key();
+    }
+
+    if (anIt.More())
+    {
+        aNewReport += " ... (total ";
+        aNewReport += theMapError->Map().Extent();
+        aNewReport += ")";
+    }
+    return aNewReport;
 }
 
 //=======================================================================
@@ -410,24 +410,24 @@ TCollection_ExtendedString Message_Algorithm::PrepareReport
 //purpose  : static method
 //=======================================================================
 
-TCollection_ExtendedString Message_Algorithm::PrepareReport 
-  (const TColStd_SequenceOfHExtendedString& theReportSeq,
-   const Standard_Integer theMaxCount)
+TCollection_ExtendedString Message_Algorithm::PrepareReport
+(const TColStd_SequenceOfHExtendedString& theReportSeq,
+    const Standard_Integer theMaxCount)
 {
-  TCollection_ExtendedString aNewReport;
-  Standard_Integer nb = 1;
-  for ( ; nb <= theReportSeq.Length() && nb <= theMaxCount; nb++)
-  {
-    aNewReport += (Standard_CString)( nb > 1 ? ", \'" : "\'" );
-    aNewReport += theReportSeq.Value(nb)->String();
-    aNewReport += "\'";
-  }
+    TCollection_ExtendedString aNewReport;
+    Standard_Integer nb = 1;
+    for (; nb <= theReportSeq.Length() && nb <= theMaxCount; nb++)
+    {
+        aNewReport += (Standard_CString)(nb > 1 ? ", \'" : "\'");
+        aNewReport += theReportSeq.Value(nb)->String();
+        aNewReport += "\'";
+    }
 
-  if (theReportSeq.Length() > theMaxCount )
-  {
-    aNewReport += " ... (total ";
-    aNewReport += theReportSeq.Length();
-    aNewReport += ") ";
-  }
-  return aNewReport;
+    if (theReportSeq.Length() > theMaxCount)
+    {
+        aNewReport += " ... (total ";
+        aNewReport += theReportSeq.Length();
+        aNewReport += ") ";
+    }
+    return aNewReport;
 }

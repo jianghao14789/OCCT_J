@@ -39,7 +39,7 @@ class IGESDimen_ToolDiameterDimension
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDiameterDimension, ready to work

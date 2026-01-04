@@ -64,7 +64,7 @@ class BOPAlgo_EdgeEdge :
  
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   //
   BOPAlgo_EdgeEdge(): 
     IntTools_EdgeEdge(),

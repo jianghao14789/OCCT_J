@@ -52,7 +52,7 @@ class ShapeAnalysis_Edge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor; initialises Status to OK

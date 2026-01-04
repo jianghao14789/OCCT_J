@@ -35,7 +35,7 @@ class BRepAlgo_Image
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepAlgo_Image();

@@ -39,7 +39,7 @@ class STEPSelections_AssemblyExplorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT STEPSelections_AssemblyExplorer(const Interface_Graph& G);

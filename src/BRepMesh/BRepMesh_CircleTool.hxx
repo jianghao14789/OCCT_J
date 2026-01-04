@@ -34,7 +34,7 @@ class BRepMesh_CircleTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Constructor.
   //! @param theAllocator memory allocator to be used by internal structures.

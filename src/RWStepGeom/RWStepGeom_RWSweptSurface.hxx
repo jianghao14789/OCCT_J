@@ -34,7 +34,7 @@ class RWStepGeom_RWSweptSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepGeom_RWSweptSurface();

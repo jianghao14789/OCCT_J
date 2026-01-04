@@ -39,7 +39,7 @@ class IGESSolid_ToolEdgeList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolEdgeList, ready to work

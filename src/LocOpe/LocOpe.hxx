@@ -56,7 +56,7 @@ class LocOpe
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns Standard_True  when the wire <W> is closed

@@ -1,4 +1,4 @@
-// Created on: 1992-06-24
+﻿// Created on: 1992-06-24
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,31 +21,31 @@
 #include <Units_Operators.hxx>
 #include <Units_UnitsDictionary.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Units_Dimensions,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Units_Dimensions, Standard_Transient)
 
 //=======================================================================
 //function : Units_Dimensions
 //purpose  : 
 //=======================================================================
-Units_Dimensions::Units_Dimensions(const Standard_Real amass                     ,
-				   const Standard_Real alength                   ,
-				   const Standard_Real atime                     ,
-				   const Standard_Real anelectriccurrent         ,
-				   const Standard_Real athermodynamictemperature ,
-				   const Standard_Real anamountofsubstance       ,
-				   const Standard_Real aluminousintensity        ,
-				   const Standard_Real aplaneangle               ,
-				   const Standard_Real asolidangle               )
+Units_Dimensions::Units_Dimensions(const Standard_Real amass,
+    const Standard_Real alength,
+    const Standard_Real atime,
+    const Standard_Real anelectriccurrent,
+    const Standard_Real athermodynamictemperature,
+    const Standard_Real anamountofsubstance,
+    const Standard_Real aluminousintensity,
+    const Standard_Real aplaneangle,
+    const Standard_Real asolidangle)
 {
-  themass                     = amass                     ;
-  thelength                   = alength                   ;
-  thetime                     = atime                     ;
-  theelectriccurrent          = anelectriccurrent         ;
-  thethermodynamictemperature = athermodynamictemperature ;
-  theamountofsubstance        = anamountofsubstance       ;
-  theluminousintensity        = aluminousintensity        ;
-  theplaneangle               = aplaneangle               ;
-  thesolidangle               = asolidangle               ;
+    themass = amass;
+    thelength = alength;
+    thetime = atime;
+    theelectriccurrent = anelectriccurrent;
+    thethermodynamictemperature = athermodynamictemperature;
+    theamountofsubstance = anamountofsubstance;
+    theluminousintensity = aluminousintensity;
+    theplaneangle = aplaneangle;
+    thesolidangle = asolidangle;
 }
 
 //=======================================================================
@@ -60,26 +60,26 @@ static Handle(Units_QuantitiesSequence) quantitySequence;
 static TCollection_AsciiString quantityName;
 Standard_CString Units_Dimensions::Quantity() const
 {
-  if( quantitySequence.IsNull() ) {
-    quantitySequence = Units::DictionaryOfUnits(Standard_False)->Sequence();
-  }
-  Handle(Units_Dimensions) dim;
-  for (Standard_Integer i=1; i <= quantitySequence->Length(); i++) {
-    dim = quantitySequence->Value(i)->Dimensions();
-    if( themass == dim->Mass()                     &&
-	thelength                   == dim->Length()                   &&
-	thetime                     == dim->Time()                     &&
-	theelectriccurrent          == dim->ElectricCurrent()          &&     
-	thethermodynamictemperature == dim->ThermodynamicTemperature() &&
-	theamountofsubstance        == dim->AmountOfSubstance()        &&
-	theluminousintensity        == dim->LuminousIntensity()        &&
-	theplaneangle               == dim->PlaneAngle()               &&
-	thesolidangle               == dim->SolidAngle() ) {
-      quantityName = quantitySequence->Value(i)->Name();
-      return quantityName.ToCString();
+    if (quantitySequence.IsNull()) {
+        quantitySequence = Units::DictionaryOfUnits(Standard_False)->Sequence();
     }
-   }
-   return NULL;
+    Handle(Units_Dimensions) dim;
+    for (Standard_Integer i = 1; i <= quantitySequence->Length(); i++) {
+        dim = quantitySequence->Value(i)->Dimensions();
+        if (themass == dim->Mass() &&
+            thelength == dim->Length() &&
+            thetime == dim->Time() &&
+            theelectriccurrent == dim->ElectricCurrent() &&
+            thethermodynamictemperature == dim->ThermodynamicTemperature() &&
+            theamountofsubstance == dim->AmountOfSubstance() &&
+            theluminousintensity == dim->LuminousIntensity() &&
+            theplaneangle == dim->PlaneAngle() &&
+            thesolidangle == dim->SolidAngle()) {
+            quantityName = quantitySequence->Value(i)->Name();
+            return quantityName.ToCString();
+        }
+    }
+    return NULL;
 }
 
 //=======================================================================
@@ -89,18 +89,18 @@ Standard_CString Units_Dimensions::Quantity() const
 //=======================================================================
 
 Handle(Units_Dimensions) Units_Dimensions::Multiply
-       (const Handle(Units_Dimensions)& adimensions) const
+(const Handle(Units_Dimensions)& adimensions) const
 {
-  return new Units_Dimensions
-    (themass                     + adimensions->Mass(),
-     thelength                   + adimensions->Length(),
-     thetime                     + adimensions->Time(),
-     theelectriccurrent          + adimensions->ElectricCurrent(),
-     thethermodynamictemperature + adimensions->ThermodynamicTemperature(),
-     theamountofsubstance        + adimensions->AmountOfSubstance(),
-     theluminousintensity        + adimensions->LuminousIntensity(),
-     theplaneangle               + adimensions->PlaneAngle(),
-     thesolidangle               + adimensions->SolidAngle());
+    return new Units_Dimensions
+    (themass + adimensions->Mass(),
+        thelength + adimensions->Length(),
+        thetime + adimensions->Time(),
+        theelectriccurrent + adimensions->ElectricCurrent(),
+        thethermodynamictemperature + adimensions->ThermodynamicTemperature(),
+        theamountofsubstance + adimensions->AmountOfSubstance(),
+        theluminousintensity + adimensions->LuminousIntensity(),
+        theplaneangle + adimensions->PlaneAngle(),
+        thesolidangle + adimensions->SolidAngle());
 }
 
 //=======================================================================
@@ -110,18 +110,18 @@ Handle(Units_Dimensions) Units_Dimensions::Multiply
 //=======================================================================
 
 Handle(Units_Dimensions) Units_Dimensions::Divide
-       (const Handle(Units_Dimensions)& adimensions) const
+(const Handle(Units_Dimensions)& adimensions) const
 {
-  return new Units_Dimensions
-    (themass                     - adimensions->Mass()                     ,
-     thelength                   - adimensions->Length()                   ,
-     thetime                     - adimensions->Time()                     ,
-     theelectriccurrent          - adimensions->ElectricCurrent()          ,
-     thethermodynamictemperature - adimensions->ThermodynamicTemperature() ,
-     theamountofsubstance        - adimensions->AmountOfSubstance()        ,
-     theluminousintensity        - adimensions->LuminousIntensity()        ,
-     theplaneangle               - adimensions->PlaneAngle()               ,
-     thesolidangle               - adimensions->SolidAngle()               );
+    return new Units_Dimensions
+    (themass - adimensions->Mass(),
+        thelength - adimensions->Length(),
+        thetime - adimensions->Time(),
+        theelectriccurrent - adimensions->ElectricCurrent(),
+        thethermodynamictemperature - adimensions->ThermodynamicTemperature(),
+        theamountofsubstance - adimensions->AmountOfSubstance(),
+        theluminousintensity - adimensions->LuminousIntensity(),
+        theplaneangle - adimensions->PlaneAngle(),
+        thesolidangle - adimensions->SolidAngle());
 }
 
 //=======================================================================
@@ -131,15 +131,15 @@ Handle(Units_Dimensions) Units_Dimensions::Divide
 
 Handle(Units_Dimensions) Units_Dimensions::Power(const Standard_Real anexponent) const
 {
-  return new Units_Dimensions(themass                     * anexponent,
-			      thelength                   * anexponent,
-			      thetime                     * anexponent,
-			      theelectriccurrent          * anexponent,
-			      thethermodynamictemperature * anexponent,
-			      theamountofsubstance        * anexponent,
-			      theluminousintensity        * anexponent,
-			      theplaneangle               * anexponent,
-			      thesolidangle               * anexponent);
+    return new Units_Dimensions(themass * anexponent,
+        thelength * anexponent,
+        thetime * anexponent,
+        theelectriccurrent * anexponent,
+        thethermodynamictemperature * anexponent,
+        theamountofsubstance * anexponent,
+        theluminousintensity * anexponent,
+        theplaneangle * anexponent,
+        thesolidangle * anexponent);
 }
 
 //=======================================================================
@@ -147,19 +147,19 @@ Handle(Units_Dimensions) Units_Dimensions::Power(const Standard_Real anexponent)
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean Units_Dimensions::IsEqual (const Handle(Units_Dimensions)& adimensions)
-     const
+Standard_Boolean Units_Dimensions::IsEqual(const Handle(Units_Dimensions)& adimensions)
+const
 {
-  return (themass                     == adimensions->Mass()                     &&
-	  thelength                   == adimensions->Length()                   &&
-	  thetime                     == adimensions->Time()                     &&
-	  theelectriccurrent          == adimensions->ElectricCurrent()          &&     
-	  thethermodynamictemperature == adimensions->ThermodynamicTemperature() &&
-	  theamountofsubstance        == adimensions->AmountOfSubstance()        &&
-	  theluminousintensity        == adimensions->LuminousIntensity()        &&
-	  theplaneangle               == adimensions->PlaneAngle()               &&
-	  thesolidangle               == adimensions->SolidAngle()
-	  ? Standard_True : Standard_False);
+    return (themass == adimensions->Mass() &&
+        thelength == adimensions->Length() &&
+        thetime == adimensions->Time() &&
+        theelectriccurrent == adimensions->ElectricCurrent() &&
+        thethermodynamictemperature == adimensions->ThermodynamicTemperature() &&
+        theamountofsubstance == adimensions->AmountOfSubstance() &&
+        theluminousintensity == adimensions->LuminousIntensity() &&
+        theplaneangle == adimensions->PlaneAngle() &&
+        thesolidangle == adimensions->SolidAngle()
+        ? Standard_True : Standard_False);
 }
 
 //=======================================================================
@@ -169,9 +169,9 @@ Standard_Boolean Units_Dimensions::IsEqual (const Handle(Units_Dimensions)& adim
 //=======================================================================
 
 Standard_Boolean Units_Dimensions::IsNotEqual
-  (const Handle(Units_Dimensions)& adimensions) const
+(const Handle(Units_Dimensions)& adimensions) const
 {
-  return !(IsEqual(adimensions)) ? Standard_True : Standard_False;
+    return !(IsEqual(adimensions)) ? Standard_True : Standard_False;
 }
 
 //=======================================================================
@@ -181,27 +181,27 @@ Standard_Boolean Units_Dimensions::IsNotEqual
 
 void Units_Dimensions::Dump(const Standard_Integer ashift) const
 {
-  int i;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<" with the physical dimensions : "<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         mass                      : "<<themass<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         length                    : "<<thelength<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         time                      : "<<thetime<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         electric current          : "<<theelectriccurrent<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         thermodynamic temperature : "<<thethermodynamictemperature<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         amount of substance       : "<<theamountofsubstance<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         luminous intensity        : "<<theluminousintensity<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         plane angle               : "<<theplaneangle<<std::endl;
-  for(i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"         solid angle               : "<<thesolidangle<<std::endl;
+    int i;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << " with the physical dimensions : " << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         mass                      : " << themass << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         length                    : " << thelength << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         time                      : " << thetime << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         electric current          : " << theelectriccurrent << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         thermodynamic temperature : " << thethermodynamictemperature << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         amount of substance       : " << theamountofsubstance << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         luminous intensity        : " << theluminousintensity << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         plane angle               : " << theplaneangle << std::endl;
+    for (i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "         solid angle               : " << thesolidangle << std::endl;
 }
 
 //=======================================================================
@@ -210,9 +210,9 @@ void Units_Dimensions::Dump(const Standard_Integer ashift) const
 //=======================================================================
 
 Handle(Units_Dimensions) operator *(const Handle(Units_Dimensions)& adimension1,
-				    const Handle(Units_Dimensions)& adimension2)
+    const Handle(Units_Dimensions)& adimension2)
 {
-  return adimension1->Multiply(adimension2);
+    return adimension1->Multiply(adimension2);
 }
 
 //=======================================================================
@@ -221,9 +221,9 @@ Handle(Units_Dimensions) operator *(const Handle(Units_Dimensions)& adimension1,
 //=======================================================================
 
 Handle(Units_Dimensions) operator /(const Handle(Units_Dimensions)& adimension1,
-				    const Handle(Units_Dimensions)& adimension2)
+    const Handle(Units_Dimensions)& adimension2)
 {
-  return adimension1->Divide(adimension2);
+    return adimension1->Divide(adimension2);
 }
 
 //=======================================================================
@@ -231,10 +231,10 @@ Handle(Units_Dimensions) operator /(const Handle(Units_Dimensions)& adimension1,
 //purpose  : 
 //=======================================================================
 
-Handle(Units_Dimensions) pow(const Handle(Units_Dimensions)&adimension,
-			     const Standard_Real areal)
+Handle(Units_Dimensions) pow(const Handle(Units_Dimensions)& adimension,
+    const Standard_Real areal)
 {
-  return adimension->Power(areal);
+    return adimension->Power(areal);
 }
 
 //=======================================================================
@@ -260,62 +260,62 @@ Handle(Units_Dimensions) pow(const Handle(Units_Dimensions)&adimension,
 //}
 
 Handle(Units_Dimensions)    Units_Dimensions::ALess() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,0.,0.,0.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 0., 0., 0., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::AMass() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(1.,0.,0.,0.,0.,0.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(1., 0., 0., 0., 0., 0., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::ALength() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,1.,0.,0.,0.,0.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 1., 0., 0., 0., 0., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::ATime() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,1.,0.,0.,0.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 1., 0., 0., 0., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::AElectricCurrent() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,1.,0.,0.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 1., 0., 0., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::AThermodynamicTemperature() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,0.,1.,0.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 0., 1., 0., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::AAmountOfSubstance() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,0.,0.,1.,0.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 0., 0., 1., 0., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::ALuminousIntensity() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,0.,0.,0.,1.,0.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 0., 0., 0., 1., 0., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::APlaneAngle() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,0.,0.,0.,0.,1.,0.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 0., 0., 0., 0., 1., 0.);
+    return aDim;
 }
 Handle(Units_Dimensions)    Units_Dimensions::ASolidAngle() {
-  static Handle(Units_Dimensions) aDim;
-  if (aDim.IsNull())
-    aDim = new Units_Dimensions(0.,0.,0.,0.,0.,0.,0.,0.,1.);
-  return aDim;
+    static Handle(Units_Dimensions) aDim;
+    if (aDim.IsNull())
+        aDim = new Units_Dimensions(0., 0., 0., 0., 0., 0., 0., 0., 1.);
+    return aDim;
 }

@@ -46,7 +46,7 @@ class IFGraph_SubPartsIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates with a Graph, whole or parts of it

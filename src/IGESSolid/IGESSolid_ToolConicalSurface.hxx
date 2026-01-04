@@ -39,7 +39,7 @@ class IGESSolid_ToolConicalSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolConicalSurface, ready to work

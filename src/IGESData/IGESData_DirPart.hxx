@@ -31,7 +31,7 @@ class IGESData_DirPart
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! creates an empty DirPart, ready to be filled by Init
   Standard_EXPORT IGESData_DirPart();

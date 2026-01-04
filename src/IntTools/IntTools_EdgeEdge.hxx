@@ -39,7 +39,7 @@ class IntTools_EdgeEdge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

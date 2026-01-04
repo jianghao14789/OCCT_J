@@ -34,7 +34,7 @@ class math_MultipleVarFunctionWithHessian  : public math_MultipleVarFunctionWith
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns the number of variables of the function.

@@ -1,4 +1,4 @@
-// Created by: Eugeny MALTCHIKOV
+﻿// Created by: Eugeny MALTCHIKOV
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,6 +19,6 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <BOPDS_ListOfPaveBlock.hxx>
 
-typedef NCollection_DataMap<Standard_Integer, BOPDS_ListOfPaveBlock, TColStd_MapIntegerHasher> BOPDS_DataMapOfIntegerListOfPaveBlock; 
- 
+typedef NCollection_DataMap<Standard_Integer, BOPDS_ListOfPaveBlock, TColStd_MapIntegerHasher> BOPDS_DataMapOfIntegerListOfPaveBlock;
+
 #endif

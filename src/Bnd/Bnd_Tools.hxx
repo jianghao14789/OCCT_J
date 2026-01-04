@@ -1,4 +1,4 @@
-// Created by: Eugeny MALTCHIKOV
+﻿// Created by: Eugeny MALTCHIKOV
 // Created on: 2019-04-17
 // Copyright (c) 2019 OPEN CASCADE SAS
 //
@@ -25,23 +25,23 @@ class Bnd_Tools
 {
 public: //! @name Bnd_Box to BVH_Box conversion
 
-  //! Converts the given Bnd_Box2d to BVH_Box
-  static BVH_Box <Standard_Real, 2> Bnd2BVH (const Bnd_Box2d& theBox)
-  {
-    Standard_Real aXMin, aYMin, aXMax, aYMax;
-    theBox.Get (aXMin, aYMin, aXMax, aYMax);
-    return BVH_Box <Standard_Real, 2> (BVH_Vec2d (aXMin, aYMin),
-                                       BVH_Vec2d (aXMax, aYMax));
-  }
+    //! Converts the given Bnd_Box2d to BVH_Box
+    static BVH_Box <Standard_Real, 2> Bnd2BVH(const Bnd_Box2d& theBox)
+    {
+        Standard_Real aXMin, aYMin, aXMax, aYMax;
+        theBox.Get(aXMin, aYMin, aXMax, aYMax);
+        return BVH_Box <Standard_Real, 2>(BVH_Vec2d(aXMin, aYMin),
+            BVH_Vec2d(aXMax, aYMax));
+    }
 
-  //! Converts the given Bnd_Box to BVH_Box
-  static BVH_Box <Standard_Real, 3> Bnd2BVH (const Bnd_Box& theBox)
-  {
-    Standard_Real aXMin, aYMin, aZMin, aXMax, aYMax, aZMax;
-    theBox.Get (aXMin, aYMin, aZMin, aXMax, aYMax, aZMax);
-    return BVH_Box <Standard_Real, 3> (BVH_Vec3d (aXMin, aYMin, aZMin),
-                                       BVH_Vec3d (aXMax, aYMax, aZMax));
-  }
+    //! Converts the given Bnd_Box to BVH_Box
+    static BVH_Box <Standard_Real, 3> Bnd2BVH(const Bnd_Box& theBox)
+    {
+        Standard_Real aXMin, aYMin, aZMin, aXMax, aYMax, aZMax;
+        theBox.Get(aXMin, aYMin, aZMin, aXMax, aYMax, aZMax);
+        return BVH_Box <Standard_Real, 3>(BVH_Vec3d(aXMin, aYMin, aZMin),
+            BVH_Vec3d(aXMax, aYMax, aZMax));
+    }
 };
 
 #endif // _Bnd_Tools_Header

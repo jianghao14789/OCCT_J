@@ -1,4 +1,4 @@
-// Created on: 1995-05-19
+﻿// Created on: 1995-05-19
 // Created by: Xavier BENVENISTE
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -58,5 +58,5 @@
         (carr)[2] = (carr2)[2]
 
 #define BSplCLib_DataContainer BSplCLib_DataContainer_3d
-  
+
 #include <BSplCLib_CurveComputation.gxx>

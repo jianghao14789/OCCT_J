@@ -36,7 +36,7 @@ class HLRTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Draw Variable Outliner to test

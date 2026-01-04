@@ -1,4 +1,4 @@
-// Created on: 1991-01-08
+﻿// Created on: 1991-01-08
 // Created by: Didier Piffault
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -20,7 +20,7 @@
 #include <gp_Pnt2d.hxx>
 #include <gp_Trsf2d.hxx>
 #include <gp_Ax2d.hxx>
- 
+
 
 #define RealType Standard_Real
 #define RealType_hxx <Standard_Real.hxx>

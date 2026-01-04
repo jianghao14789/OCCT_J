@@ -39,7 +39,7 @@ class ShapeConstruct_Curve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Modifies a curve in order to make its bounds confused with

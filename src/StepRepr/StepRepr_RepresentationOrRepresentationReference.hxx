@@ -33,7 +33,7 @@ class StepRepr_RepresentationOrRepresentationReference : public StepData_SelectT
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   Standard_EXPORT StepRepr_RepresentationOrRepresentationReference();

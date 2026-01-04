@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -25,196 +25,196 @@
 #include <TCollection_AsciiString.hxx>
 #include <TCollection_ExtendedString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Storage_Data,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Storage_Data, Standard_Transient)
 
 Storage_Data::Storage_Data()
 {
-  myRootData = new Storage_RootData;
-  myTypeData = new Storage_TypeData;
-  myInternal = new Storage_InternalData;
-  myHeaderData = new Storage_HeaderData;
+    myRootData = new Storage_RootData;
+    myTypeData = new Storage_TypeData;
+    myInternal = new Storage_InternalData;
+    myHeaderData = new Storage_HeaderData;
 }
 
 void Storage_Data::AddRoot(const Handle(Standard_Persistent)& anObject) const
 {
-  Handle(Storage_Root) aRoot = new Storage_Root(TCollection_AsciiString(myRootData->NumberOfRoots()+1),anObject);
-  myRootData->AddRoot(aRoot);
+    Handle(Storage_Root) aRoot = new Storage_Root(TCollection_AsciiString(myRootData->NumberOfRoots() + 1), anObject);
+    myRootData->AddRoot(aRoot);
 }
 
 void Storage_Data::AddRoot(const TCollection_AsciiString& aName, const Handle(Standard_Persistent)& anObject) const
 {
-  Handle(Storage_Root) aRoot = new Storage_Root(aName,anObject);
-  myRootData->AddRoot(aRoot);
+    Handle(Storage_Root) aRoot = new Storage_Root(aName, anObject);
+    myRootData->AddRoot(aRoot);
 }
 
 void Storage_Data::RemoveRoot(const TCollection_AsciiString& anObject)
 {
-  myRootData->RemoveRoot(anObject);
+    myRootData->RemoveRoot(anObject);
 }
 
 Handle(Storage_Root) Storage_Data::Find(const TCollection_AsciiString& aName) const
 {
-  return myRootData->Find(aName);
+    return myRootData->Find(aName);
 }
 
 Standard_Integer Storage_Data::NumberOfRoots() const
 {
-  return myRootData->NumberOfRoots();
+    return myRootData->NumberOfRoots();
 }
 
 Standard_Boolean Storage_Data::IsRoot(const TCollection_AsciiString& aName) const
 {
-  return myRootData->IsRoot(aName);
+    return myRootData->IsRoot(aName);
 }
 
 Handle(Storage_HSeqOfRoot) Storage_Data::Roots() const
 {
-  return myRootData->Roots();
+    return myRootData->Roots();
 }
 
 Standard_Integer Storage_Data::NumberOfTypes() const
 {
-  return myTypeData->NumberOfTypes();
+    return myTypeData->NumberOfTypes();
 }
 
 Standard_Boolean Storage_Data::IsType(const TCollection_AsciiString& aName) const
 {
-  return myTypeData->IsType(aName);
+    return myTypeData->IsType(aName);
 }
 
 Handle(TColStd_HSequenceOfAsciiString) Storage_Data::Types() const
 {
-  return myTypeData->Types();
+    return myTypeData->Types();
 }
 
 Handle(Storage_RootData) Storage_Data::RootData() const
 {
-  return myRootData;
+    return myRootData;
 }
 
 Handle(Storage_TypeData) Storage_Data::TypeData() const
 {
-  return myTypeData;
+    return myTypeData;
 }
 
 Handle(Storage_InternalData) Storage_Data::InternalData() const
 {
-  return myInternal;
+    return myInternal;
 }
 
 Handle(Storage_HeaderData) Storage_Data::HeaderData() const
 {
-  return myHeaderData;
+    return myHeaderData;
 }
 
-void Storage_Data::Clear() const 
+void Storage_Data::Clear() const
 {
-  myInternal->Clear();
-  myTypeData->Clear();
+    myInternal->Clear();
+    myTypeData->Clear();
 }
 
 // HEADER
 
 TCollection_AsciiString Storage_Data::CreationDate() const
 {
-  return myHeaderData->CreationDate();
+    return myHeaderData->CreationDate();
 }
 
 TCollection_AsciiString Storage_Data::SchemaVersion() const
 {
-  return myHeaderData->SchemaVersion();
+    return myHeaderData->SchemaVersion();
 }
 
 TCollection_AsciiString Storage_Data::SchemaName() const
 {
-  return myHeaderData->SchemaName();
+    return myHeaderData->SchemaName();
 }
 
-void Storage_Data::SetApplicationVersion(const TCollection_AsciiString& aVersion) 
+void Storage_Data::SetApplicationVersion(const TCollection_AsciiString& aVersion)
 {
-  myHeaderData->SetApplicationVersion(aVersion);
+    myHeaderData->SetApplicationVersion(aVersion);
 }
 
 TCollection_AsciiString Storage_Data::ApplicationVersion() const
 {
-  return myHeaderData->ApplicationVersion();
+    return myHeaderData->ApplicationVersion();
 }
 
-void Storage_Data::SetApplicationName(const TCollection_ExtendedString& aName) 
+void Storage_Data::SetApplicationName(const TCollection_ExtendedString& aName)
 {
-  myHeaderData->SetApplicationName(aName);
+    myHeaderData->SetApplicationName(aName);
 }
 
 TCollection_ExtendedString Storage_Data::ApplicationName() const
 {
-  return myHeaderData->ApplicationName();
+    return myHeaderData->ApplicationName();
 }
 
-void Storage_Data::AddToUserInfo(const TCollection_AsciiString& theUserInfo) 
+void Storage_Data::AddToUserInfo(const TCollection_AsciiString& theUserInfo)
 {
-  myHeaderData->AddToUserInfo(theUserInfo);
+    myHeaderData->AddToUserInfo(theUserInfo);
 }
 
 const TColStd_SequenceOfAsciiString& Storage_Data::UserInfo() const
 {
-  return myHeaderData->UserInfo();
+    return myHeaderData->UserInfo();
 }
 
-void Storage_Data::AddToComments(const TCollection_ExtendedString& theUserInfo) 
+void Storage_Data::AddToComments(const TCollection_ExtendedString& theUserInfo)
 {
-  myHeaderData->AddToComments(theUserInfo);
+    myHeaderData->AddToComments(theUserInfo);
 }
 
 const TColStd_SequenceOfExtendedString& Storage_Data::Comments() const
 {
-  return myHeaderData->Comments();
+    return myHeaderData->Comments();
 }
 
 Standard_Integer Storage_Data::NumberOfObjects() const
 {
-  return myHeaderData->NumberOfObjects();
+    return myHeaderData->NumberOfObjects();
 }
 
 TCollection_AsciiString Storage_Data::StorageVersion() const
 {
-  return myHeaderData->StorageVersion();
+    return myHeaderData->StorageVersion();
 }
 
 Storage_Error  Storage_Data::ErrorStatus() const
 {
-  return myErrorStatus;
+    return myErrorStatus;
 }
 
 void Storage_Data::SetErrorStatus(const Storage_Error anError)
 {
-  myErrorStatus = anError;
+    myErrorStatus = anError;
 }
 
 void Storage_Data::ClearErrorStatus()
 {
-  myErrorStatus = Storage_VSOk;
-  myErrorStatusExt.Clear();
-  myHeaderData->ClearErrorStatus();
-  myRootData->ClearErrorStatus();
-  myTypeData->ClearErrorStatus();
+    myErrorStatus = Storage_VSOk;
+    myErrorStatusExt.Clear();
+    myHeaderData->ClearErrorStatus();
+    myRootData->ClearErrorStatus();
+    myTypeData->ClearErrorStatus();
 }
 
-void Storage_Data::SetDataType(const TCollection_ExtendedString& aName) 
+void Storage_Data::SetDataType(const TCollection_ExtendedString& aName)
 {
-  myHeaderData->SetDataType(aName);
+    myHeaderData->SetDataType(aName);
 }
 
 TCollection_ExtendedString Storage_Data::DataType() const
 {
-  return myHeaderData->DataType();
+    return myHeaderData->DataType();
 }
 
 TCollection_AsciiString Storage_Data::ErrorStatusExtension() const
 {
-  return myErrorStatusExt;
+    return myErrorStatusExt;
 }
 
 void Storage_Data::SetErrorStatusExtension(const TCollection_AsciiString& anErrorExt)
 {
-  myErrorStatusExt = anErrorExt;
+    myErrorStatusExt = anErrorExt;
 }

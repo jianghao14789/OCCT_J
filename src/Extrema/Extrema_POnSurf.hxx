@@ -31,7 +31,7 @@ class Extrema_POnSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creation of an indefinite point on surface.

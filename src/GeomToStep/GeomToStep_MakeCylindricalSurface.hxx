@@ -34,7 +34,7 @@ class GeomToStep_MakeCylindricalSurface  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeCylindricalSurface(const Handle(Geom_CylindricalSurface)& CSurf);

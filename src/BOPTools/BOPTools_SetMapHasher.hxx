@@ -29,7 +29,7 @@ class BOPTools_SetMapHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
     
   //! Computes a hash code for the given set, in the range [1, theUpperBound]
   //! @param theSet the set which hash code is to be computed

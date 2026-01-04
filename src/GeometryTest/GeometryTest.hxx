@@ -30,7 +30,7 @@ class GeometryTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! defines all geometric commands.

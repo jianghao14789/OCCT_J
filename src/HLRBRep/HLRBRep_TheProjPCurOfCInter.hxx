@@ -33,7 +33,7 @@ class HLRBRep_TheProjPCurOfCInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns the parameter V of the point on the
   //! parametric curve corresponding to the Point Pnt.

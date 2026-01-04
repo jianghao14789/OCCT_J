@@ -31,7 +31,7 @@ class Geom2dAdaptor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Inherited  from    GHCurve.   Provides a  curve

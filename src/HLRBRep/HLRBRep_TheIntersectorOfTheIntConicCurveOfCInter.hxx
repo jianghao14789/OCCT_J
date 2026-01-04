@@ -40,7 +40,7 @@ class HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter  : public IntRes2d_Inters
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

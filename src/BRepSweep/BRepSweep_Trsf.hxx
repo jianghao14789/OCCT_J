@@ -47,7 +47,7 @@ class BRepSweep_Trsf  : public BRepSweep_NumLinearRegularSweep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! ends  the  construction  of the   swept  primitive

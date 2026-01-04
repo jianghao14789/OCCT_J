@@ -43,7 +43,7 @@ class XSControl_FuncShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Defines and loads all functions which work on shapes for XSControl (as ActFunc)

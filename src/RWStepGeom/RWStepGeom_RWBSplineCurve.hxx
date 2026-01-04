@@ -34,7 +34,7 @@ class RWStepGeom_RWBSplineCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepGeom_RWBSplineCurve();

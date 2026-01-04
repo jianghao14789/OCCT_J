@@ -54,7 +54,7 @@ class Interface_IntList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates empty IntList.

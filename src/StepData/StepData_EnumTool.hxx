@@ -48,7 +48,7 @@ class StepData_EnumTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an EnumTool with definitions given by e0 .. e<max>

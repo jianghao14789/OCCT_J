@@ -39,7 +39,7 @@ class IGESGraph_ToolLineFontDefTemplate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolLineFontDefTemplate, ready to work

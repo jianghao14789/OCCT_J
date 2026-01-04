@@ -30,7 +30,7 @@ class StepVisual_CameraModelD3MultiClippingUnionSelect  : public StepData_Select
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a CameraModelD3MultiClippingUnionSelect select type
   Standard_EXPORT StepVisual_CameraModelD3MultiClippingUnionSelect();

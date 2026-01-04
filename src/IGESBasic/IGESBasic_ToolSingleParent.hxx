@@ -40,7 +40,7 @@ class IGESBasic_ToolSingleParent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSingleParent, ready to work

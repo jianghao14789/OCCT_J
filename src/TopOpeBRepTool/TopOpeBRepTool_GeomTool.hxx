@@ -32,7 +32,7 @@ class TopOpeBRepTool_GeomTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Boolean flags <CompC3D>, <CompPC1>, <CompPC2>

@@ -41,7 +41,7 @@ class BRepMesh_EdgeParameterProvider : public Standard_Transient
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor. Initializes empty provider.
   BRepMesh_EdgeParameterProvider()

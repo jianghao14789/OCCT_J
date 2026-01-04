@@ -41,7 +41,7 @@ class Interface_ShareFlags
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a ShareFlags from a Model and builds required data

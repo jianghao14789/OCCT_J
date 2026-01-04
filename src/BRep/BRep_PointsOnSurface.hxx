@@ -1,4 +1,4 @@
-// Created on: 1993-08-10
+﻿// Created on: 1993-08-10
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -35,30 +35,30 @@ class BRep_PointsOnSurface : public BRep_PointRepresentation
 
 public:
 
-  
-  Standard_EXPORT virtual const Handle(Geom_Surface)& Surface() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Surface (const Handle(Geom_Surface)& S) Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual const Handle(Geom_Surface)& Surface() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void Surface(const Handle(Geom_Surface)& S) Standard_OVERRIDE;
 
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 
-  DEFINE_STANDARD_RTTIEXT(BRep_PointsOnSurface,BRep_PointRepresentation)
+
+
+    DEFINE_STANDARD_RTTIEXT(BRep_PointsOnSurface, BRep_PointRepresentation)
 
 protected:
 
-  
-  Standard_EXPORT BRep_PointsOnSurface(const Standard_Real P, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
+
+    Standard_EXPORT BRep_PointsOnSurface(const Standard_Real P, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
 
 
 
 private:
 
 
-  Handle(Geom_Surface) mySurface;
+    Handle(Geom_Surface) mySurface;
 
 
 };

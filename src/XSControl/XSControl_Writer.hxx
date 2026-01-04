@@ -38,7 +38,7 @@ class XSControl_Writer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Writer from scratch

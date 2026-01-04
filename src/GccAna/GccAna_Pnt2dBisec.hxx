@@ -39,7 +39,7 @@ class GccAna_Pnt2dBisec
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a bisecting line between the points Point1 and Point2.

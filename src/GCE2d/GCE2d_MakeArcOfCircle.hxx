@@ -40,7 +40,7 @@ class GCE2d_MakeArcOfCircle  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Makes an arc of circle (TrimmedCurve from Geom2d) from

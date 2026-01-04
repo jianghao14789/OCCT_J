@@ -64,7 +64,7 @@ template <class TheObjType, class TheBndType> class NCollection_UBTree
 {
 public:
   //! Memory allocation
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   DEFINE_NCOLLECTION_ALLOC
 
 public:
@@ -127,7 +127,7 @@ public:
   class TreeNode
   {
   public:
-    DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
     DEFINE_NCOLLECTION_ALLOC
 
   public:

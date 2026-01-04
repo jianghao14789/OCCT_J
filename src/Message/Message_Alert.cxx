@@ -1,4 +1,4 @@
-// Created on: 2017-06-26
+﻿// Created on: 2017-06-26
 // Created by: Andrey Betenev
 // Copyright (c) 2017 OPEN CASCADE SAS
 //
@@ -16,16 +16,16 @@
 #include <Message_Alert.hxx>
 #include <Standard_Dump.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Message_Alert,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Message_Alert, Standard_Transient)
 
 //=======================================================================
 //function : GetMessageKey
 //purpose  :
 //=======================================================================
 
-Standard_CString Message_Alert::GetMessageKey () const
+Standard_CString Message_Alert::GetMessageKey() const
 {
-  return DynamicType()->Name();
+    return DynamicType()->Name();
 }
 
 //=======================================================================
@@ -33,10 +33,10 @@ Standard_CString Message_Alert::GetMessageKey () const
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean Message_Alert::SupportsMerge () const
+Standard_Boolean Message_Alert::SupportsMerge() const
 {
-  // by default, support merge
-  return Standard_True;
+    // by default, support merge
+    return Standard_True;
 }
 
 //=======================================================================
@@ -44,17 +44,17 @@ Standard_Boolean Message_Alert::SupportsMerge () const
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean Message_Alert::Merge (const Handle(Message_Alert)& /*theTarget*/)
+Standard_Boolean Message_Alert::Merge(const Handle(Message_Alert)& /*theTarget*/)
 {
-  // by default, merge trivially
-  return Standard_True;
+    // by default, merge trivially
+    return Standard_True;
 }
 
 //=======================================================================
 //function : DumpJson
 //purpose  :
 //=======================================================================
-void Message_Alert::DumpJson (Standard_OStream& theOStream, Standard_Integer) const
+void Message_Alert::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
 {
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 }

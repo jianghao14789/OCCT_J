@@ -35,7 +35,7 @@ class StepData_FieldListD  : public StepData_FieldList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a FieldListD of <nb> Fields

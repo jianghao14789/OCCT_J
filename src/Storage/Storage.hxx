@@ -59,7 +59,7 @@ class Storage
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns the version of Storage's read/write routines

@@ -1,4 +1,4 @@
-// Created on: 2007-07-06
+﻿// Created on: 2007-07-06
 // Created by: Pavel TELKOV
 // Copyright (c) 2007-2014 OPEN CASCADE SAS
 //
@@ -91,130 +91,130 @@ class Message_Algorithm : public Standard_Transient
 
 public:
 
-  
-  //! Empty constructor
-  Standard_EXPORT Message_Algorithm();
-  
-  //! Sets status with no parameter
-  Standard_EXPORT void SetStatus (const Message_Status& theStat);
-  
-  //! Sets status with integer parameter
-  Standard_EXPORT void SetStatus (const Message_Status& theStat, const Standard_Integer theInt);
-  
-  //! Sets status with string parameter.
-  //! If noRepetitions is True, the parameter will be added only
-  //! if it has not been yet recorded for the same status flag
-    void SetStatus (const Message_Status& theStat, const Standard_CString theStr, const Standard_Boolean noRepetitions = Standard_True);
-  
-  //! Sets status with string parameter
-  //! If noRepetitions is True, the parameter will be added only
-  //! if it has not been yet recorded for the same status flag
-    void SetStatus (const Message_Status& theStat, const TCollection_AsciiString& theStr, const Standard_Boolean noRepetitions = Standard_True);
-  
-  //! Sets status with string parameter
-  //! If noRepetitions is True, the parameter will be added only
-  //! if it has not been yet recorded for the same status flag
-    void SetStatus (const Message_Status& theStat, const Handle(TCollection_HAsciiString)& theStr, const Standard_Boolean noRepetitions = Standard_True);
-  
-  //! Sets status with string parameter
-  //! If noRepetitions is True, the parameter will be added only
-  //! if it has not been yet recorded for the same status flag
-    void SetStatus (const Message_Status& theStat, const TCollection_ExtendedString& theStr, const Standard_Boolean noRepetitions = Standard_True);
-  
-  //! Sets status with string parameter
-  //! If noRepetitions is True, the parameter will be added only
-  //! if it has not been yet recorded for the same status flag
-  Standard_EXPORT void SetStatus (const Message_Status& theStat, const Handle(TCollection_HExtendedString)& theStr, const Standard_Boolean noRepetitions = Standard_True);
-  
-  //! Sets status with preformatted message. This message will be
-  //! used directly to report the status; automatic generation of
-  //! status messages will be disabled for it.
-  Standard_EXPORT void SetStatus (const Message_Status& theStat, const Message_Msg& theMsg);
-  
-  //! Returns copy of exec status of algorithm
+
+    //! Empty constructor
+    Standard_EXPORT Message_Algorithm();
+
+    //! Sets status with no parameter
+    Standard_EXPORT void SetStatus(const Message_Status& theStat);
+
+    //! Sets status with integer parameter
+    Standard_EXPORT void SetStatus(const Message_Status& theStat, const Standard_Integer theInt);
+
+    //! Sets status with string parameter.
+    //! If noRepetitions is True, the parameter will be added only
+    //! if it has not been yet recorded for the same status flag
+    void SetStatus(const Message_Status& theStat, const Standard_CString theStr, const Standard_Boolean noRepetitions = Standard_True);
+
+    //! Sets status with string parameter
+    //! If noRepetitions is True, the parameter will be added only
+    //! if it has not been yet recorded for the same status flag
+    void SetStatus(const Message_Status& theStat, const TCollection_AsciiString& theStr, const Standard_Boolean noRepetitions = Standard_True);
+
+    //! Sets status with string parameter
+    //! If noRepetitions is True, the parameter will be added only
+    //! if it has not been yet recorded for the same status flag
+    void SetStatus(const Message_Status& theStat, const Handle(TCollection_HAsciiString)& theStr, const Standard_Boolean noRepetitions = Standard_True);
+
+    //! Sets status with string parameter
+    //! If noRepetitions is True, the parameter will be added only
+    //! if it has not been yet recorded for the same status flag
+    void SetStatus(const Message_Status& theStat, const TCollection_ExtendedString& theStr, const Standard_Boolean noRepetitions = Standard_True);
+
+    //! Sets status with string parameter
+    //! If noRepetitions is True, the parameter will be added only
+    //! if it has not been yet recorded for the same status flag
+    Standard_EXPORT void SetStatus(const Message_Status& theStat, const Handle(TCollection_HExtendedString)& theStr, const Standard_Boolean noRepetitions = Standard_True);
+
+    //! Sets status with preformatted message. This message will be
+    //! used directly to report the status; automatic generation of
+    //! status messages will be disabled for it.
+    Standard_EXPORT void SetStatus(const Message_Status& theStat, const Message_Msg& theMsg);
+
+    //! Returns copy of exec status of algorithm
     const Message_ExecStatus& GetStatus() const;
-  
-  //! Returns exec status of algorithm
+
+    //! Returns exec status of algorithm
     Message_ExecStatus& ChangeStatus();
-  
-  //! Clear exec status of algorithm
-  Standard_EXPORT void ClearStatus();
-  
-  //! Sets messenger to algorithm
-  Standard_EXPORT void SetMessenger (const Handle(Message_Messenger)& theMsgr);
-  
-  //! Returns messenger of algorithm.
-  //! The returned handle is always non-null and can
-  //! be used for sending messages.
+
+    //! Clear exec status of algorithm
+    Standard_EXPORT void ClearStatus();
+
+    //! Sets messenger to algorithm
+    Standard_EXPORT void SetMessenger(const Handle(Message_Messenger)& theMsgr);
+
+    //! Returns messenger of algorithm.
+    //! The returned handle is always non-null and can
+    //! be used for sending messages.
     Handle(Message_Messenger) GetMessenger() const;
-  
-  //! Print messages for all status flags that have been set during
-  //! algorithm execution, excluding statuses that are NOT set
-  //! in theFilter.
-  //!
-  //! The messages are taken from resource file, names being
-  //! constructed as {dynamic class type}.{status name},
-  //! for instance, "Message_Algorithm.Fail5".
-  //! If message is not found in resources for this class and all
-  //! its base types, surrogate text is printed.
-  //!
-  //! For the statuses having number or string parameters,
-  //! theMaxCount defines maximal number of numbers or strings to be
-  //! included in the message
-  //!
-  //! Note that this method is virtual; this allows descendant
-  //! classes to customize message output (e.g. by adding
-  //! messages from other sub-algorithms)
-  Standard_EXPORT virtual void SendStatusMessages (const Message_ExecStatus& theFilter, const Message_Gravity theTraceLevel = Message_Warning, const Standard_Integer theMaxCount = 20) const;
-  
-  //! Convenient variant of SendStatusMessages() with theFilter
-  //! having defined all WARN, ALARM, and FAIL (but not DONE)
-  //! status flags
-  Standard_EXPORT void SendMessages (const Message_Gravity theTraceLevel = Message_Warning, const Standard_Integer theMaxCount = 20) const;
-  
-  //! Add statuses to this algorithm from other algorithm
-  //! (including messages)
-  Standard_EXPORT void AddStatus (const Handle(Message_Algorithm)& theOther);
-  
-  //! Add statuses to this algorithm from other algorithm, but
-  //! only those items are moved that correspond to statuses
-  //! set in theStatus
-  Standard_EXPORT void AddStatus (const Message_ExecStatus& theStatus, const Handle(Message_Algorithm)& theOther);
-  
-  //! Return the numbers associated with the indicated status;
-  //! Null handle if no such status or no numbers associated with it
-  Standard_EXPORT Handle(TColStd_HPackedMapOfInteger) GetMessageNumbers (const Message_Status& theStatus) const;
-  
-  //! Return the strings associated with the indicated status;
-  //! Null handle if no such status or no strings associated with it
-  Standard_EXPORT Handle(TColStd_HSequenceOfHExtendedString) GetMessageStrings (const Message_Status& theStatus) const;
-  
-  //! Prepares a string containing a list of integers contained
-  //! in theError map, but not more than theMaxCount
-  Standard_EXPORT static TCollection_ExtendedString PrepareReport (const Handle(TColStd_HPackedMapOfInteger)& theError, const Standard_Integer theMaxCount);
-  
-  //! Prepares a string containing a list of names contained
-  //! in theReportSeq sequence, but not more than theMaxCount
-  Standard_EXPORT static TCollection_ExtendedString PrepareReport (const TColStd_SequenceOfHExtendedString& theReportSeq, const Standard_Integer theMaxCount);
+
+    //! Print messages for all status flags that have been set during
+    //! algorithm execution, excluding statuses that are NOT set
+    //! in theFilter.
+    //!
+    //! The messages are taken from resource file, names being
+    //! constructed as {dynamic class type}.{status name},
+    //! for instance, "Message_Algorithm.Fail5".
+    //! If message is not found in resources for this class and all
+    //! its base types, surrogate text is printed.
+    //!
+    //! For the statuses having number or string parameters,
+    //! theMaxCount defines maximal number of numbers or strings to be
+    //! included in the message
+    //!
+    //! Note that this method is virtual; this allows descendant
+    //! classes to customize message output (e.g. by adding
+    //! messages from other sub-algorithms)
+    Standard_EXPORT virtual void SendStatusMessages(const Message_ExecStatus& theFilter, const Message_Gravity theTraceLevel = Message_Warning, const Standard_Integer theMaxCount = 20) const;
+
+    //! Convenient variant of SendStatusMessages() with theFilter
+    //! having defined all WARN, ALARM, and FAIL (but not DONE)
+    //! status flags
+    Standard_EXPORT void SendMessages(const Message_Gravity theTraceLevel = Message_Warning, const Standard_Integer theMaxCount = 20) const;
+
+    //! Add statuses to this algorithm from other algorithm
+    //! (including messages)
+    Standard_EXPORT void AddStatus(const Handle(Message_Algorithm)& theOther);
+
+    //! Add statuses to this algorithm from other algorithm, but
+    //! only those items are moved that correspond to statuses
+    //! set in theStatus
+    Standard_EXPORT void AddStatus(const Message_ExecStatus& theStatus, const Handle(Message_Algorithm)& theOther);
+
+    //! Return the numbers associated with the indicated status;
+    //! Null handle if no such status or no numbers associated with it
+    Standard_EXPORT Handle(TColStd_HPackedMapOfInteger) GetMessageNumbers(const Message_Status& theStatus) const;
+
+    //! Return the strings associated with the indicated status;
+    //! Null handle if no such status or no strings associated with it
+    Standard_EXPORT Handle(TColStd_HSequenceOfHExtendedString) GetMessageStrings(const Message_Status& theStatus) const;
+
+    //! Prepares a string containing a list of integers contained
+    //! in theError map, but not more than theMaxCount
+    Standard_EXPORT static TCollection_ExtendedString PrepareReport(const Handle(TColStd_HPackedMapOfInteger)& theError, const Standard_Integer theMaxCount);
+
+    //! Prepares a string containing a list of names contained
+    //! in theReportSeq sequence, but not more than theMaxCount
+    Standard_EXPORT static TCollection_ExtendedString PrepareReport(const TColStd_SequenceOfHExtendedString& theReportSeq, const Standard_Integer theMaxCount);
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Message_Algorithm,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Message_Algorithm, Standard_Transient)
 
 protected:
 
 
-  Message_ExecStatus myStatus;
-  Handle(Message_Messenger) myMessenger;
+    Message_ExecStatus myStatus;
+    Handle(Message_Messenger) myMessenger;
 
 
 private:
 
 
-  Handle(TColStd_HArray1OfTransient) myReportIntegers;
-  Handle(TColStd_HArray1OfTransient) myReportStrings;
-  Message_HArrayOfMsg myReportMessages;
+    Handle(TColStd_HArray1OfTransient) myReportIntegers;
+    Handle(TColStd_HArray1OfTransient) myReportStrings;
+    Message_HArrayOfMsg myReportMessages;
 
 
 };

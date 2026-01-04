@@ -34,7 +34,7 @@ class IntWalk_TheFunctionOfTheInt2S  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntWalk_TheFunctionOfTheInt2S(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2);

@@ -28,7 +28,7 @@ class IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter  : public math_Fun
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create the function.

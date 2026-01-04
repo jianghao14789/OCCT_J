@@ -1,4 +1,4 @@
-// Created on: 2017-06-26
+﻿// Created on: 2017-06-26
 // Created by: Andrey Betenev
 // Copyright (c) 2017 OPEN CASCADE SAS
 //

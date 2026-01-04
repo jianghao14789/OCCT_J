@@ -31,7 +31,7 @@ class StepToTopoDS_CartesianPointHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the cartesian point, in the range [1, theUpperBound]
   //! @param theCartesianPoint the cartesian point which hash code is to be computed

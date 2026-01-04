@@ -54,7 +54,7 @@ class BRepPrimAPI_MakeBox  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
     
   //! Default constructor

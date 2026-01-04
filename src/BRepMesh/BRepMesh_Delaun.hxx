@@ -40,7 +40,7 @@ class BRepMesh_Delaun
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates instance of triangulator, but do not run the algorithm automatically.
   Standard_EXPORT BRepMesh_Delaun (const Handle(BRepMesh_DataStructureOfDelaun)& theOldMesh,

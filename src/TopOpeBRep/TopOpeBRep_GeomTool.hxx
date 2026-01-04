@@ -36,7 +36,7 @@ class TopOpeBRep_GeomTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make the  DS curve <C> and the pcurves <PC1,PC2> from

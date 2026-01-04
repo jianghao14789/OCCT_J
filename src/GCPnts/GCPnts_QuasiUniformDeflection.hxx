@@ -41,7 +41,7 @@ class GCPnts_QuasiUniformDeflection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructs an empty algorithm.
   //! To define the problem to be solved, use the function Initialize().

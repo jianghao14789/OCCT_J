@@ -28,7 +28,7 @@ class TObjDRAW
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes all the functions

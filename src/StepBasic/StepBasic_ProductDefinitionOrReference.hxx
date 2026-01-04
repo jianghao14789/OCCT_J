@@ -31,7 +31,7 @@ class StepBasic_ProductDefinitionOrReference  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a ProductDefinitionOrReference SelectType
   Standard_EXPORT StepBasic_ProductDefinitionOrReference();

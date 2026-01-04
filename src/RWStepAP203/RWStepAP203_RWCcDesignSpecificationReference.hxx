@@ -34,7 +34,7 @@ class RWStepAP203_RWCcDesignSpecificationReference
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

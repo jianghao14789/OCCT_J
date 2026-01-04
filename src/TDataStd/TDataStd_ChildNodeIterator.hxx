@@ -32,7 +32,7 @@ class TDataStd_ChildNodeIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an empty iterator.
   Standard_EXPORT TDataStd_ChildNodeIterator();

@@ -58,7 +58,7 @@ class CPnts_UniformDeflection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creation of a indefinite UniformDeflection

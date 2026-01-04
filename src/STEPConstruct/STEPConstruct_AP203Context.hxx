@@ -49,7 +49,7 @@ class STEPConstruct_AP203Context
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates tool and fills constant fields

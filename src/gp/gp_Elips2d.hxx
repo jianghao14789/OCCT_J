@@ -45,7 +45,7 @@ class gp_Elips2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an indefinite ellipse.
   gp_Elips2d()

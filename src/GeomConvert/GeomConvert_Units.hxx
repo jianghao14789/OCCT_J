@@ -24,7 +24,7 @@ class GeomConvert_Units
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Convert 2d curve for change angle unit from radian to degree 
   Standard_EXPORT static Handle(Geom2d_Curve) RadianToDegree(

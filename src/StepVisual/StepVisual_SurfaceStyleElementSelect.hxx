@@ -34,7 +34,7 @@ class StepVisual_SurfaceStyleElementSelect  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a SurfaceStyleElementSelect SelectType

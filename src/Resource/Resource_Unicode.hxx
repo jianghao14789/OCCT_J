@@ -36,7 +36,7 @@ class Resource_Unicode
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Converts non-ASCII CString <fromstr> in SJIS format

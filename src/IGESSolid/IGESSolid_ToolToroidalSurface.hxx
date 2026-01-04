@@ -39,7 +39,7 @@ class IGESSolid_ToolToroidalSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolToroidalSurface, ready to work

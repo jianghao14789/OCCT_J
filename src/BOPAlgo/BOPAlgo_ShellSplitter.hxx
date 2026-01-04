@@ -1,4 +1,4 @@
-// Created by: Peter KURNEV
+﻿// Created by: Peter KURNEV
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -30,43 +30,43 @@ class TopoDS_Shape;
 
 //! The class provides the splitting of the set of connected faces
 //! on separate loops
-class BOPAlgo_ShellSplitter  : public BOPAlgo_Algo
+class BOPAlgo_ShellSplitter : public BOPAlgo_Algo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! empty constructor
-  Standard_EXPORT BOPAlgo_ShellSplitter();
-Standard_EXPORT virtual ~BOPAlgo_ShellSplitter();
-  
-  //! constructor
-  Standard_EXPORT BOPAlgo_ShellSplitter(const Handle(NCollection_BaseAllocator)& theAllocator);
-  
-  //! adds a face <theS> to process
-  Standard_EXPORT void AddStartElement (const TopoDS_Shape& theS);
-  
-  //! return the faces to process
-  Standard_EXPORT const TopTools_ListOfShape& StartElements() const;
-  
-  //! performs the algorithm
-  Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
-  
-  //! returns the loops
-  Standard_EXPORT const TopTools_ListOfShape& Shells() const;
-  
-  Standard_EXPORT static void SplitBlock (BOPTools_ConnexityBlock& theCB);
+
+    //! empty constructor
+    Standard_EXPORT BOPAlgo_ShellSplitter();
+    Standard_EXPORT virtual ~BOPAlgo_ShellSplitter();
+
+    //! constructor
+    Standard_EXPORT BOPAlgo_ShellSplitter(const Handle(NCollection_BaseAllocator)& theAllocator);
+
+    //! adds a face <theS> to process
+    Standard_EXPORT void AddStartElement(const TopoDS_Shape& theS);
+
+    //! return the faces to process
+    Standard_EXPORT const TopTools_ListOfShape& StartElements() const;
+
+    //! performs the algorithm
+    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+
+    //! returns the loops
+    Standard_EXPORT const TopTools_ListOfShape& Shells() const;
+
+    Standard_EXPORT static void SplitBlock(BOPTools_ConnexityBlock& theCB);
 
 
 protected:
 
-  Standard_EXPORT void MakeShells(const Message_ProgressRange& theRange);
+    Standard_EXPORT void MakeShells(const Message_ProgressRange& theRange);
 
 
-  TopTools_ListOfShape myStartShapes;
-  TopTools_ListOfShape myShells;
-  BOPTools_ListOfConnexityBlock myLCB;
+    TopTools_ListOfShape myStartShapes;
+    TopTools_ListOfShape myShells;
+    BOPTools_ListOfConnexityBlock myLCB;
 
 private:
 

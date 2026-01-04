@@ -46,7 +46,7 @@ class HLRBRep_CurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstParameter (const Standard_Address C);

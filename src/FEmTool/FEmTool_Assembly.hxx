@@ -38,7 +38,7 @@ class FEmTool_Assembly
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT FEmTool_Assembly(const TColStd_Array2OfInteger& Dependence, const Handle(FEmTool_HAssemblyTable)& Table);

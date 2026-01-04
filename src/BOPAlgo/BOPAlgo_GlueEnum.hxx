@@ -1,4 +1,4 @@
-// Created by: Eugeny MALTCHIKOV
+﻿// Created by: Eugeny MALTCHIKOV
 // Copyright (c) 2016 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -55,9 +55,9 @@
 //!
 enum BOPAlgo_GlueEnum
 {
-  BOPAlgo_GlueOff,
-  BOPAlgo_GlueShift,
-  BOPAlgo_GlueFull
+    BOPAlgo_GlueOff,
+    BOPAlgo_GlueShift,
+    BOPAlgo_GlueFull
 };
 
 #endif // _BOPAlgo_GlueEnum_HeaderFile

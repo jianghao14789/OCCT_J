@@ -38,7 +38,7 @@ class IGESToBRep_CurveAndSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates  a tool CurveAndSurface  ready  to  run, with

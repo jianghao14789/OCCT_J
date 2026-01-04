@@ -1,4 +1,4 @@
-// Created on: 2015-05-29
+﻿// Created on: 2015-05-29
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -22,59 +22,59 @@
 //! Tool object to call BVH builder subroutines.
 struct BVH_BuildTool
 {
-  //! Performs splitting of the given BVH node.
-  virtual void Perform (const Standard_Integer theNode) = 0;
+    //! Performs splitting of the given BVH node.
+    virtual void Perform(const Standard_Integer theNode) = 0;
 };
 
 //! Wrapper for BVH build thread.
 class BVH_BuildThread : public Standard_Transient
 {
-  template <class T, int N> friend class BVH_QueueBuilder;
+    template <class T, int N> friend class BVH_QueueBuilder;
 
 public:
 
-  //! Creates new BVH build thread.
-  Standard_EXPORT BVH_BuildThread (BVH_BuildTool& theBuildTool, BVH_BuildQueue& theBuildQueue);
+    //! Creates new BVH build thread.
+    Standard_EXPORT BVH_BuildThread(BVH_BuildTool& theBuildTool, BVH_BuildQueue& theBuildQueue);
 
-  //! Starts execution of BVH build thread.
-  void Run()
-  {
-    myWorkThread.Run (this);
-  }
+    //! Starts execution of BVH build thread.
+    void Run()
+    {
+        myWorkThread.Run(this);
+    }
 
-  //! Waits till the thread finishes execution.
-  void Wait()
-  {
-    myWorkThread.Wait();
-  }
-
-protected:
-
-  //! Executes BVH build thread.
-  Standard_EXPORT void execute();
-
-  //! Thread function for BVH build thread.
-  static Standard_Address threadFunction (Standard_Address theData);
-
-  //! Assignment operator (to remove VC compile warning).
-  BVH_BuildThread& operator= (const BVH_BuildThread&);
+    //! Waits till the thread finishes execution.
+    void Wait()
+    {
+        myWorkThread.Wait();
+    }
 
 protected:
 
-  //! Data needed to build the BVH.
-  BVH_BuildTool& myBuildTool;
+    //! Executes BVH build thread.
+    Standard_EXPORT void execute();
 
-  //! Reference to BVH build queue.
-  BVH_BuildQueue& myBuildQueue;
+    //! Thread function for BVH build thread.
+    static Standard_Address threadFunction(Standard_Address theData);
 
-  //! Thread to execute work items.
-  OSD_Thread myWorkThread;
+    //! Assignment operator (to remove VC compile warning).
+    BVH_BuildThread& operator= (const BVH_BuildThread&);
+
+protected:
+
+    //! Data needed to build the BVH.
+    BVH_BuildTool& myBuildTool;
+
+    //! Reference to BVH build queue.
+    BVH_BuildQueue& myBuildQueue;
+
+    //! Thread to execute work items.
+    OSD_Thread myWorkThread;
 
 public:
 
-  DEFINE_STANDARD_RTTIEXT(BVH_BuildThread,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(BVH_BuildThread, Standard_Transient)
 };
 
-DEFINE_STANDARD_HANDLE (BVH_BuildThread, Standard_Transient)
+DEFINE_STANDARD_HANDLE(BVH_BuildThread, Standard_Transient)
 
 #endif // _BVH_BuildThread_Header

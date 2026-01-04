@@ -59,7 +59,7 @@ class ShapeFix_WireSegment
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates empty segment.

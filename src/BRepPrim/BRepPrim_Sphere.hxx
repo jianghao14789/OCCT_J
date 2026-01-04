@@ -33,7 +33,7 @@ class BRepPrim_Sphere  : public BRepPrim_Revolution
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a Sphere at  origin with  Radius. The axes

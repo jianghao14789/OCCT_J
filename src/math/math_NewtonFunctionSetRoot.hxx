@@ -43,7 +43,7 @@ class math_NewtonFunctionSetRoot
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

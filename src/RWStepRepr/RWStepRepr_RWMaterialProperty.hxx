@@ -33,7 +33,7 @@ class RWStepRepr_RWMaterialProperty
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

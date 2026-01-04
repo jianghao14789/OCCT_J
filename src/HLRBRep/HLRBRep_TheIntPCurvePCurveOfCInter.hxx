@@ -40,7 +40,7 @@ class HLRBRep_TheIntPCurvePCurveOfCInter  : public IntRes2d_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_TheIntPCurvePCurveOfCInter();

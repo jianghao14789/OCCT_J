@@ -59,7 +59,7 @@ class math_Vector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructs a non-initialized vector in the range [theLower..theUpper]
   //! "theLower" and "theUpper" are the indexes of the lower and upper bounds of the constructed vector.

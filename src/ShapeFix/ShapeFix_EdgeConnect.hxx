@@ -35,7 +35,7 @@ class ShapeFix_EdgeConnect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ShapeFix_EdgeConnect();

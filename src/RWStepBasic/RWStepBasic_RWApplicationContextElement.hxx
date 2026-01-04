@@ -34,7 +34,7 @@ class RWStepBasic_RWApplicationContextElement
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepBasic_RWApplicationContextElement();

@@ -56,7 +56,7 @@ class TopTrans_SurfaceTransition
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an empty Surface Transition.

@@ -41,7 +41,7 @@ class GProp_PEquation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a framework to analyze the

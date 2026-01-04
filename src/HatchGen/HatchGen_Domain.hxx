@@ -31,7 +31,7 @@ class HatchGen_Domain
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an infinite domain.

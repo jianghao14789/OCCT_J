@@ -43,7 +43,7 @@
 //=======================================================================
 class BOPAlgo_VertexSolid {
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   BOPAlgo_VertexSolid() :
     myIV(-1), myIZ(-1), myState(TopAbs_UNKNOWN) {
@@ -136,7 +136,7 @@ typedef NCollection_Vector<BOPAlgo_VertexSolid> BOPAlgo_VectorOfVertexSolid;
 //=======================================================================
 class BOPAlgo_ShapeSolid {
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_ShapeSolid() : 
     myIE(-1), 
@@ -207,7 +207,7 @@ typedef NCollection_Vector<BOPAlgo_ShapeSolid> BOPAlgo_VectorOfShapeSolid;
 //=======================================================================
 class BOPAlgo_SolidSolid : public  BOPAlgo_ShapeSolid {
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_SolidSolid() : 
     BOPAlgo_ShapeSolid() {

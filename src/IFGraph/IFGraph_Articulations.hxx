@@ -39,7 +39,7 @@ class IFGraph_Articulations  : public Interface_GraphContent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! creates Articulations to evaluate a Graph
   //! whole True : works on the whole Model

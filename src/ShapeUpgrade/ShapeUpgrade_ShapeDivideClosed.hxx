@@ -32,7 +32,7 @@ class ShapeUpgrade_ShapeDivideClosed  : public ShapeUpgrade_ShapeDivide
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initialises tool with shape and default parameter.

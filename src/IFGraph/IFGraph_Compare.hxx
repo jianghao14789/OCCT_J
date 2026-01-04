@@ -37,7 +37,7 @@ class IFGraph_Compare  : public Interface_GraphContent
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates empty Compare, ready to work

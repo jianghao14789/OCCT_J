@@ -30,7 +30,7 @@ class IntPatch_HInterTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntPatch_HInterTool();

@@ -181,7 +181,7 @@ protected:
   Standard_Boolean myIs2d;
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 };
 

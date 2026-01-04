@@ -31,7 +31,7 @@ class StepFEA_SymmetricTensor42d  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

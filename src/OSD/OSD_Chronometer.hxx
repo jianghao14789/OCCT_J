@@ -35,7 +35,7 @@ class OSD_Chronometer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Initializes a stopped Chronometer.
   //!

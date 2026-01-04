@@ -23,7 +23,7 @@
 class Prs3d_ToolQuadric
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Return number of triangles for presentation with the given params.
   static Standard_Integer TrianglesNb (const Standard_Integer theSlicesNb,

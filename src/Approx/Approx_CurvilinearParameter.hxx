@@ -37,7 +37,7 @@ class Approx_CurvilinearParameter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! case of a free 3D curve

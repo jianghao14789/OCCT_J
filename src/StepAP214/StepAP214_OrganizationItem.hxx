@@ -34,7 +34,7 @@ class StepAP214_OrganizationItem  : public StepAP214_ApprovalItem
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a OrganizationItem SelectType

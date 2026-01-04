@@ -49,7 +49,7 @@ class IGESData_IGESWriter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an IGESWriter, empty ready to work

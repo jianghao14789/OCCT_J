@@ -56,7 +56,7 @@ class gp_Ax2
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an object corresponding to the reference
   //! coordinate system (OXYZ).

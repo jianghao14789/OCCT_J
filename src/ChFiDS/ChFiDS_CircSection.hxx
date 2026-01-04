@@ -31,7 +31,7 @@ class ChFiDS_CircSection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ChFiDS_CircSection();

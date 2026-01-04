@@ -35,7 +35,7 @@ class IntTools_ShrunkRange
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntTools_ShrunkRange();

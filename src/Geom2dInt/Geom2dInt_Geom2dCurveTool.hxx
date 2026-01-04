@@ -44,7 +44,7 @@ class Geom2dInt_Geom2dCurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static GeomAbs_CurveType GetType (const Adaptor2d_Curve2d& C);

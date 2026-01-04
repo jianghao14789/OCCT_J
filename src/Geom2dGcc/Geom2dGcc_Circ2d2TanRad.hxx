@@ -63,7 +63,7 @@ class Geom2dGcc_Circ2d2TanRad
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dGcc_Circ2d2TanRad(const Geom2dGcc_QualifiedCurve& Qualified1, const Geom2dGcc_QualifiedCurve& Qualified2, const Standard_Real Radius, const Standard_Real Tolerance);

@@ -46,7 +46,7 @@ class TopLoc_SListOfItemLocation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates an empty List.
   TopLoc_SListOfItemLocation() {}

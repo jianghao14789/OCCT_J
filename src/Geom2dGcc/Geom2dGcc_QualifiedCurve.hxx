@@ -38,7 +38,7 @@ class Geom2dGcc_QualifiedCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a qualified curve by assigning the qualifier

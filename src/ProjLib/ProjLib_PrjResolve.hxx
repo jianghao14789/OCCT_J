@@ -31,7 +31,7 @@ class ProjLib_PrjResolve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ProjLib_PrjResolve(const Adaptor3d_Curve& C, const Adaptor3d_Surface& S, const Standard_Integer Fix);

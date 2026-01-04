@@ -31,7 +31,7 @@ class ShapeBuild_Vertex
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Combines new vertex from two others. This new one is the

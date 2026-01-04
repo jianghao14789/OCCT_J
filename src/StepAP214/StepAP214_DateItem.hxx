@@ -33,7 +33,7 @@ class StepAP214_DateItem  : public StepAP214_ApprovalItem
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a DateItem SelectType

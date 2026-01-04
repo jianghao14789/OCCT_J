@@ -49,7 +49,7 @@ class STEPConstruct_ExternRefs  : public STEPConstruct_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty tool

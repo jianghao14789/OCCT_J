@@ -40,7 +40,7 @@ class IGESDimen_ToolDimensionTolerance
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolDimensionTolerance, ready to work

@@ -27,7 +27,7 @@ class XBRepMesh
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   Standard_EXPORT static Standard_Integer Discret(
     const TopoDS_Shape&    theShape,

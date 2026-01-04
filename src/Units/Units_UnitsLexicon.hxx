@@ -1,4 +1,4 @@
-// Created on: 1993-10-08
+﻿// Created on: 1993-10-08
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -40,21 +40,21 @@ class Units_UnitsLexicon : public Units_Lexicon
 
 public:
 
-  //! Returns an empty instance of UnitsLexicon
-  Standard_EXPORT Units_UnitsLexicon();
-  
-  //! Reads  the files  <afilename1>  and  <afilename2>   to
-  //! create     a   sequence     of    tokens   stored   in
-  //! <thesequenceoftokens>.
-  Standard_EXPORT void Creates (const Standard_Boolean amode = Standard_True);
+    //! Returns an empty instance of UnitsLexicon
+    Standard_EXPORT Units_UnitsLexicon();
 
-  //! Useful for debugging.
+    //! Reads  the files  <afilename1>  and  <afilename2>   to
+    //! create     a   sequence     of    tokens   stored   in
+    //! <thesequenceoftokens>.
+    Standard_EXPORT void Creates(const Standard_Boolean amode = Standard_True);
+
+    //! Useful for debugging.
     virtual void Dump() const Standard_OVERRIDE;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Units_UnitsLexicon,Units_Lexicon)
+    DEFINE_STANDARD_RTTIEXT(Units_UnitsLexicon, Units_Lexicon)
 
 protected:
 

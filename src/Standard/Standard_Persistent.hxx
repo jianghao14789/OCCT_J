@@ -22,7 +22,7 @@
 class Standard_Persistent : public Standard_Transient
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   Standard_Persistent() : _typenum(0), _refnum(0) {}
 

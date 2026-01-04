@@ -1,4 +1,4 @@
-// Created by: Olga Suryaninova
+﻿// Created by: Olga Suryaninova
 // Created on: 2019-11-25
 // Copyright (c) 2019 OPEN CASCADE SAS
 //
@@ -22,18 +22,19 @@ class BVH_Ray
 {
 public:
 
-  typedef typename BVH::VectorType<T, N>::Type BVH_VecNt;
+    typedef typename BVH::VectorType<T, N>::Type BVH_VecNt;
 
 public:
 
-  BVH_VecNt Origin;
-  BVH_VecNt Direct;
+    BVH_VecNt Origin;
+    BVH_VecNt Direct;
 
 public:
 
-  BVH_Ray (const BVH_VecNt& theOrigin,
-           const BVH_VecNt& theDirect) : Origin (theOrigin),
-                                         Direct (theDirect) { }
+    BVH_Ray(const BVH_VecNt& theOrigin,
+        const BVH_VecNt& theDirect) : Origin(theOrigin),
+        Direct(theDirect) {
+    }
 };
 
 #endif // _BVH_Ray_Header

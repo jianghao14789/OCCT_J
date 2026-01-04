@@ -35,7 +35,7 @@ class GeomToStep_MakeConic  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeConic(const Handle(Geom_Conic)& C);

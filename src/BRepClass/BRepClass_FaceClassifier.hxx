@@ -34,7 +34,7 @@ class BRepClass_FaceClassifier  : public BRepClass_FClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor, undefined algorithm.

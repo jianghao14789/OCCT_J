@@ -42,7 +42,7 @@ class Law_Interpolate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Tolerance is to check if  the points are not too close

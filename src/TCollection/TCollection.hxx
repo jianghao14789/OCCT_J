@@ -28,7 +28,7 @@ class TCollection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Returns a  prime number greater than  <I> suitable
   //! to dimension a Map.  When  <I> becomes great there

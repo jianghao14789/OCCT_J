@@ -41,7 +41,7 @@ class GccAna_LinPnt2dBisec
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a bisecting curve between the line Line1 and the point Point2.

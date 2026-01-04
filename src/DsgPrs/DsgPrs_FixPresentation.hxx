@@ -32,7 +32,7 @@ class DsgPrs_FixPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! draws the presentation of fixed objects by

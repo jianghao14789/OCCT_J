@@ -94,7 +94,7 @@ public:
   Standard_EXPORT void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 
   // Memory management
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   TNaming_PtrRefShape  myOld;
   TNaming_PtrRefShape  myNew;

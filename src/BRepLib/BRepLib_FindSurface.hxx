@@ -52,7 +52,7 @@ class BRepLib_FindSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepLib_FindSurface();

@@ -30,7 +30,7 @@ class IGESCAFControl
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Provides a tool for writing IGES file

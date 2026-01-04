@@ -33,7 +33,7 @@ class StepRepr_Transformation  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a Transformation SelectType

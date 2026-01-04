@@ -34,7 +34,7 @@ class TNaming_Scope
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! WithValid = FALSE

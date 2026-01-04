@@ -39,7 +39,7 @@ class IGESGeom_ToolCompositeCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolCompositeCurve, ready to work

@@ -41,7 +41,7 @@ class BRepBlend_AppSurface  : public AppBlend_Approx
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Approximation     of   the   new  Surface  (and

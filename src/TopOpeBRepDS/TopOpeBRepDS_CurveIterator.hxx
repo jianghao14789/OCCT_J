@@ -36,7 +36,7 @@ class TopOpeBRepDS_CurveIterator  : public TopOpeBRepDS_InterferenceIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an  iterator on the  curves on surface

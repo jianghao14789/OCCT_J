@@ -58,7 +58,7 @@ class Geom2dConvert
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! -- Convert a curve to BSpline  by Approximation

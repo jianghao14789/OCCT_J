@@ -34,7 +34,7 @@ class ShapeConstruct_MakeTriangulation  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ShapeConstruct_MakeTriangulation(const TColgp_Array1OfPnt& pnts, const Standard_Real prec = 0.0);

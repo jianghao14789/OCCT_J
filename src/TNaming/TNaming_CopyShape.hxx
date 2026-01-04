@@ -31,7 +31,7 @@ class TNaming_CopyShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Makes  copy  a  set  of  shape(s),  using the  aMap

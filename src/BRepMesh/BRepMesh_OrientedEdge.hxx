@@ -24,7 +24,7 @@ class BRepMesh_OrientedEdge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Default constructor.
   BRepMesh_OrientedEdge()

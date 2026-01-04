@@ -31,7 +31,7 @@ class StepDimTol_DatumSystemOrReference  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns a DatumSystemOrReference select type
   Standard_EXPORT StepDimTol_DatumSystemOrReference();

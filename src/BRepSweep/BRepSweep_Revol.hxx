@@ -36,7 +36,7 @@ class BRepSweep_Revol
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds the Revol of meridian S axis A  and angle D. If

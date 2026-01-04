@@ -1,4 +1,4 @@
-// Created on: 2021-07-20
+﻿// Created on: 2021-07-20
 // Copyright (c) 2021 OPEN CASCADE SAS
 // Created by: Oleg AGASHIN
 //
@@ -15,4 +15,4 @@
 
 #include <Poly_TriangulationParameters.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT (Poly_TriangulationParameters, Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Poly_TriangulationParameters, Standard_Transient)

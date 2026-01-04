@@ -40,7 +40,7 @@ class TopOpeBRepBuild_WireEdgeClassifier  : public TopOpeBRepBuild_CompositeClas
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a classifier on edge <F>.

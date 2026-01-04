@@ -30,7 +30,7 @@ class IntPolyh_Triangle
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor
   IntPolyh_Triangle() :

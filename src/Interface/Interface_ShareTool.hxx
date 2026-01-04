@@ -37,7 +37,7 @@ class Interface_ShareTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a ShareTool from a Model and builds all required data,

@@ -47,7 +47,7 @@ class HLRBRep_BCurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstParameter (const BRepAdaptor_Curve& C);

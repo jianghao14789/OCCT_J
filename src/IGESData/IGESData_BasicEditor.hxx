@@ -45,7 +45,7 @@ class IGESData_BasicEditor
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty Basic Editor which should be initialized via Init() method.

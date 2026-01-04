@@ -1,4 +1,4 @@
-// Created on: 1991-04-11
+﻿// Created on: 1991-04-11
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -20,7 +20,7 @@
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Expr_NamedExpression,Expr_GeneralExpression)
+IMPLEMENT_STANDARD_RTTIEXT(Expr_NamedExpression, Expr_GeneralExpression)
 
 //=======================================================================
 //function : GetName
@@ -28,7 +28,7 @@ IMPLEMENT_STANDARD_RTTIEXT(Expr_NamedExpression,Expr_GeneralExpression)
 //=======================================================================
 const TCollection_AsciiString& Expr_NamedExpression::GetName() const
 {
-  return myName;
+    return myName;
 }
 
 //=======================================================================
@@ -38,7 +38,7 @@ const TCollection_AsciiString& Expr_NamedExpression::GetName() const
 
 void Expr_NamedExpression::SetName(const TCollection_AsciiString& name)
 {
-  myName = name;
+    myName = name;
 }
 
 //=======================================================================
@@ -46,9 +46,9 @@ void Expr_NamedExpression::SetName(const TCollection_AsciiString& name)
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean Expr_NamedExpression::IsShareable () const
+Standard_Boolean Expr_NamedExpression::IsShareable() const
 {
-  return Standard_True;
+    return Standard_True;
 }
 
 //=======================================================================
@@ -57,24 +57,24 @@ Standard_Boolean Expr_NamedExpression::IsShareable () const
 //=======================================================================
 
 Standard_Boolean Expr_NamedExpression::IsIdentical
-                        (const Handle(Expr_GeneralExpression)& theOther) const
+(const Handle(Expr_GeneralExpression)& theOther) const
 {
-  Standard_Boolean aResult(Standard_False);
-  if (theOther->IsKind(STANDARD_TYPE(Expr_NamedExpression))) {
-//  Handle(Expr_NamedExpression) me = this;
-//  Handle(Expr_NamedExpression) NEOther = Handle(Expr_NamedExpression)::DownCast(Other);
-//  return  (me == NEOther);
+    Standard_Boolean aResult(Standard_False);
+    if (theOther->IsKind(STANDARD_TYPE(Expr_NamedExpression))) {
+        //  Handle(Expr_NamedExpression) me = this;
+        //  Handle(Expr_NamedExpression) NEOther = Handle(Expr_NamedExpression)::DownCast(Other);
+        //  return  (me == NEOther);
 
-//AGV 22.03.12: Comparison should be based on names rather than Handles
-    const Expr_NamedExpression* pOther =
-      static_cast<const Expr_NamedExpression*>(theOther.get());
-    if (pOther == this || pOther->GetName().IsEqual(myName))
-      aResult = Standard_True;
-  }
-  return aResult;
+        //AGV 22.03.12: Comparison should be based on names rather than Handles
+        const Expr_NamedExpression* pOther =
+            static_cast<const Expr_NamedExpression*>(theOther.get());
+        if (pOther == this || pOther->GetName().IsEqual(myName))
+            aResult = Standard_True;
+    }
+    return aResult;
 }
 
 TCollection_AsciiString Expr_NamedExpression::String() const
 {
-  return GetName();
+    return GetName();
 }

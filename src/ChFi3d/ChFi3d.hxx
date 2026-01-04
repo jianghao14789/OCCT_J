@@ -36,7 +36,7 @@ class ChFi3d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Defines the type of concavity in the edge of connection of two faces
   Standard_EXPORT static ChFiDS_TypeOfConcavity DefineConnectType (const TopoDS_Edge&     E,

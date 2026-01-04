@@ -1,4 +1,4 @@
-// Created on: 1991-05-13
+﻿// Created on: 1991-05-13
 // Created by: Laurent Painnot
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -30,30 +30,30 @@
 //! This abstract class describes the virtual functions associated with
 //! a function of a single variable for which the first derivative is
 //! available.
-class math_FunctionWithDerivative  : public math_Function
+class math_FunctionWithDerivative : public math_Function
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;;
 
-  
-  //! Computes the value <F>of the function for the variable <X>.
-  //! Returns True if the calculation were successfully done,
-  //! False otherwise.
-  Standard_EXPORT virtual Standard_Boolean Value (const Standard_Real X, Standard_Real& F) = 0;
-  
-  //! Computes the derivative <D> of the function
-  //! for the variable <X>.
-  //! Returns True if the calculation were successfully done,
-  //! False otherwise.
-  Standard_EXPORT virtual Standard_Boolean Derivative (const Standard_Real X, Standard_Real& D) = 0;
-  
-  //! Computes the value <F> and the derivative <D> of the
-  //! function for the variable <X>.
-  //! Returns True if the calculation were successfully done,
-  //! False otherwise.
-  Standard_EXPORT virtual Standard_Boolean Values (const Standard_Real X, Standard_Real& F, Standard_Real& D) = 0;
-  Standard_EXPORT virtual ~math_FunctionWithDerivative();
+
+    //! Computes the value <F>of the function for the variable <X>.
+    //! Returns True if the calculation were successfully done,
+    //! False otherwise.
+    Standard_EXPORT virtual Standard_Boolean Value(const Standard_Real X, Standard_Real& F) = 0;
+
+    //! Computes the derivative <D> of the function
+    //! for the variable <X>.
+    //! Returns True if the calculation were successfully done,
+    //! False otherwise.
+    Standard_EXPORT virtual Standard_Boolean Derivative(const Standard_Real X, Standard_Real& D) = 0;
+
+    //! Computes the value <F> and the derivative <D> of the
+    //! function for the variable <X>.
+    //! Returns True if the calculation were successfully done,
+    //! False otherwise.
+    Standard_EXPORT virtual Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& D) = 0;
+    Standard_EXPORT virtual ~math_FunctionWithDerivative();
 
 
 

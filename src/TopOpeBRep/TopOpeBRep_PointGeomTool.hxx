@@ -34,7 +34,7 @@ class TopOpeBRep_PointGeomTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static TopOpeBRepDS_Point MakePoint (const TopOpeBRep_VPointInter& IP);

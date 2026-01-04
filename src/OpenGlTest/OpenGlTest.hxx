@@ -21,7 +21,7 @@ class OpenGlTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Adds Draw commands to the draw interpretor.
   Standard_EXPORT static void Commands (Draw_Interpretor& theDI);

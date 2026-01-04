@@ -31,7 +31,7 @@ class BRepFill_EdgeFaceAndOrder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepFill_EdgeFaceAndOrder();

@@ -31,7 +31,7 @@ class TDocStd_PathParser
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TDocStd_PathParser(const TCollection_ExtendedString& path);

@@ -37,7 +37,7 @@ class TNaming_SameShapeIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TNaming_SameShapeIterator(const TopoDS_Shape& aShape, const TDF_Label& access);

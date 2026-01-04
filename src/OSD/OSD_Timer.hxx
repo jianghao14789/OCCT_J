@@ -50,7 +50,7 @@ public:
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Builds a Chronometer initialized and stopped.
   //! @param theThisThreadOnly when TRUE, measured CPU time will account time of the current thread only;

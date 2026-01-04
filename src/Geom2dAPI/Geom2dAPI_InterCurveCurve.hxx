@@ -40,7 +40,7 @@ class Geom2dAPI_InterCurveCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an empty intersector. Use the

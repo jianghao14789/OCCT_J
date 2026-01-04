@@ -27,7 +27,7 @@ class IntTools_WLineTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT static
     Standard_Boolean NotUseSurfacesForApprox(const TopoDS_Face& aF1,

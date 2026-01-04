@@ -40,7 +40,7 @@ class IGESBasic_ToolGroupWithoutBackP
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolGroupWithoutBackP, ready to work

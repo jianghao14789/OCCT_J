@@ -40,7 +40,7 @@ class IGESAppli_ToolPipingFlow
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolPipingFlow, ready to work

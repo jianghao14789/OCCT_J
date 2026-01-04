@@ -31,7 +31,7 @@ class StepToTopoDS_PointPairHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the point pair, in the range [1, theUpperBound]
   //! @param thePointPair the point pair which hash code is to be computed

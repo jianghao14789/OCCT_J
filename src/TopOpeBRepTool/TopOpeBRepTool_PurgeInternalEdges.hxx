@@ -47,7 +47,7 @@ class TopOpeBRepTool_PurgeInternalEdges
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initialize   members and  begin  exploration   of  shape

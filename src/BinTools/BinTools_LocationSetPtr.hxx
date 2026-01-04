@@ -1,4 +1,4 @@
-// Created on: 2004-05-11
+﻿// Created on: 2004-05-11
 // Created by: Sergey ZARITCHNY <szy@opencascade.com>
 // Copyright (c) 2004-2014 OPEN CASCADE SAS
 //

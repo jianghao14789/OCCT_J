@@ -39,7 +39,7 @@ class IGESSolid_ToolFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolFace, ready to work

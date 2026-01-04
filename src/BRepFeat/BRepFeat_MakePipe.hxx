@@ -54,7 +54,7 @@ class BRepFeat_MakePipe  : public BRepFeat_Form
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! initializes the pipe class.

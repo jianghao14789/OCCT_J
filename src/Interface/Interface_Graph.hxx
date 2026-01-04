@@ -63,7 +63,7 @@ class Interface_Graph
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty graph, ready to receive Entities from amodel

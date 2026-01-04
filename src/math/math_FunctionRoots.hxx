@@ -40,7 +40,7 @@ class math_FunctionRoots
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Calculates all the real roots of a function F-K within the range

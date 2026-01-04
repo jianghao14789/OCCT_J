@@ -39,7 +39,7 @@ class IGESDimen_ToolLeaderArrow
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolLeaderArrow, ready to work

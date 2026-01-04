@@ -39,7 +39,7 @@ class LocOpe_FindEdgesInFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     LocOpe_FindEdgesInFace();

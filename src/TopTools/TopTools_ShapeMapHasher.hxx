@@ -31,7 +31,7 @@ class TopTools_ShapeMapHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes a hash code for the given shape, in the range [1, theUpperBound]
   //! @param theShape the shape which hash code is to be computed

@@ -34,7 +34,7 @@ class Intf_TangentZone
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns number of SectionPoint in this TangentZone.

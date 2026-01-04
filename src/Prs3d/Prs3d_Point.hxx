@@ -23,7 +23,7 @@ template <class AnyPoint, class PointTool>
 class Prs3d_Point
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 private:
   Standard_EXPORT static void DrawPoint

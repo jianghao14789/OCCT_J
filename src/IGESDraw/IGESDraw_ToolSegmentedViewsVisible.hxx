@@ -39,7 +39,7 @@ class IGESDraw_ToolSegmentedViewsVisible
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolSegmentedViewsVisible, ready to work

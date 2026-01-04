@@ -39,7 +39,7 @@ class IGESGeom_ToolBSplineCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolBSplineCurve, ready to work

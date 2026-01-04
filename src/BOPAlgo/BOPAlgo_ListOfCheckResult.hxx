@@ -1,4 +1,4 @@
-// Copyright (c) 20010-2014 OPEN CASCADE SAS
+﻿// Copyright (c) 20010-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -17,7 +17,7 @@
 #include <NCollection_List.hxx>   
 #include <BOPAlgo_CheckResult.hxx>   
 
-typedef NCollection_List<BOPAlgo_CheckResult> BOPAlgo_ListOfCheckResult; 
+typedef NCollection_List<BOPAlgo_CheckResult> BOPAlgo_ListOfCheckResult;
 typedef BOPAlgo_ListOfCheckResult::Iterator BOPAlgo_ListIteratorOfListOfCheckResult;
 
 #endif

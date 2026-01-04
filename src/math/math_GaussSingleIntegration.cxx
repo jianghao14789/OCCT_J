@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -13,12 +13,12 @@
 // commercial license or contractual agreement.
 
 /*
-Par Gauss le calcul d'une integrale simple se transforme en sommation des 
+Par Gauss le calcul d'une integrale simple se transforme en sommation des
 valeurs de la fonction donnee aux <Order> points de Gauss affectee des poids
 de Gauss.
 
 Les points et poids de Gauss sont stockes dans GaussPoints.cxx.
-Les points sont compris entre les valeurs -1 et +1, ce qui necessite un 
+Les points sont compris entre les valeurs -1 et +1, ce qui necessite un
 changement de variable pour les faire varier dans l'intervalle [Lower, Upper].
 
 
@@ -50,107 +50,106 @@ Etapes du calcul:
 #include <math_Vector.hxx>
 #include <StdFail_NotDone.hxx>
 
-math_GaussSingleIntegration::math_GaussSingleIntegration() : Done(Standard_False)  
+math_GaussSingleIntegration::math_GaussSingleIntegration() : Done(Standard_False)
 {
 }
 
 math_GaussSingleIntegration::
-                 math_GaussSingleIntegration(math_Function& F,
-					     const Standard_Real Lower,
-					     const Standard_Real Upper,
-					     const Standard_Integer Order)
+math_GaussSingleIntegration(math_Function& F,
+    const Standard_Real Lower,
+    const Standard_Real Upper,
+    const Standard_Integer Order)
 {
-  Standard_Integer theOrder = Min(math::GaussPointsMax(), Order);
-  Perform(F, Lower, Upper, theOrder);
+    Standard_Integer theOrder = Min(math::GaussPointsMax(), Order);
+    Perform(F, Lower, Upper, theOrder);
 }
 
 math_GaussSingleIntegration::
-                 math_GaussSingleIntegration(math_Function& F,
-					     const Standard_Real Lower,
-					     const Standard_Real Upper,
-					     const Standard_Integer Order,
-					     const Standard_Real Tol)
+math_GaussSingleIntegration(math_Function& F,
+    const Standard_Real Lower,
+    const Standard_Real Upper,
+    const Standard_Integer Order,
+    const Standard_Real Tol)
 {
-  Standard_Integer theOrder = Min(math::GaussPointsMax(), Order);
+    Standard_Integer theOrder = Min(math::GaussPointsMax(), Order);
 
-  const Standard_Integer IterMax = 13;   // Max number of iteration
-  Standard_Integer NIter = 1;            // current number of iteration
-  Standard_Integer NbInterval = 1;       // current number of subintervals
-  Standard_Real    dU,OldLen,Len;
+    const Standard_Integer IterMax = 13;   // Max number of iteration
+    Standard_Integer NIter = 1;            // current number of iteration
+    Standard_Integer NbInterval = 1;       // current number of subintervals
+    Standard_Real    dU, OldLen, Len;
 
-  Perform(F, Lower, Upper, theOrder);
-  Len = Val;
-  do {
-    OldLen = Len;
-    Len = 0.;
-    NbInterval *= 2;
-    dU = (Upper-Lower)/NbInterval;    
-    for (Standard_Integer i=1; i<=NbInterval; i++) {
-      Perform(F, Lower+(i-1)*dU, Lower+i*dU, theOrder);
-      if (!Done) return;
-      Len += Val;
-    }
-    NIter++;
-  }    
-  while (fabs(OldLen-Len) > Tol && NIter <= IterMax);
+    Perform(F, Lower, Upper, theOrder);
+    Len = Val;
+    do {
+        OldLen = Len;
+        Len = 0.;
+        NbInterval *= 2;
+        dU = (Upper - Lower) / NbInterval;
+        for (Standard_Integer i = 1; i <= NbInterval; i++) {
+            Perform(F, Lower + (i - 1) * dU, Lower + i * dU, theOrder);
+            if (!Done) return;
+            Len += Val;
+        }
+        NIter++;
+    } while (fabs(OldLen - Len) > Tol && NIter <= IterMax);
 
-  Val = Len;
+    Val = Len;
 }
 
 void math_GaussSingleIntegration::Perform(math_Function& F,
-					  const Standard_Real Lower,
-					  const Standard_Real Upper,
-					  const Standard_Integer Order)
+    const Standard_Real Lower,
+    const Standard_Real Upper,
+    const Standard_Integer Order)
 {
-  Standard_Real xr, xm, dx;
-  Standard_Integer j;
-  Standard_Real F1, F2;
-  Standard_Boolean Ok1;
-  math_Vector GaussP(1, Order);
-  math_Vector GaussW(1, Order);
-  Done = Standard_False;
+    Standard_Real xr, xm, dx;
+    Standard_Integer j;
+    Standard_Real F1, F2;
+    Standard_Boolean Ok1;
+    math_Vector GaussP(1, Order);
+    math_Vector GaussW(1, Order);
+    Done = Standard_False;
 
-//Recuperation des points de Gauss dans le fichier GaussPoints.
-  math::GaussPoints(Order,GaussP);
-  math::GaussWeights(Order,GaussW);
+    //Recuperation des points de Gauss dans le fichier GaussPoints.
+    math::GaussPoints(Order, GaussP);
+    math::GaussWeights(Order, GaussW);
 
-// Calcul de l'integrale aux points de Gauss :
+    // Calcul de l'integrale aux points de Gauss :
 
-// Changement de variable pour la mise a l'echelle [Lower, Upper] :
-  xm = 0.5*(Upper + Lower);
-  xr = 0.5*(Upper - Lower);
-  Val = 0.;
+    // Changement de variable pour la mise a l'echelle [Lower, Upper] :
+    xm = 0.5 * (Upper + Lower);
+    xr = 0.5 * (Upper - Lower);
+    Val = 0.;
 
-  Standard_Integer ind = Order/2, ind1 = (Order+1)/2;
-  if(ind1 > ind) { // odder case
-    Ok1 = F.Value(xm, Val);
-    if (!Ok1) return;
-    Val *= GaussW(ind1);
-  }
-// Sommation sur tous les points de Gauss: avec utilisation de la symetrie.
-  for (j = 1; j <= ind; j++) {
-    dx = xr*GaussP(j);
-    Ok1 = F.Value(xm-dx, F1);
-    if(!Ok1) return;
-    Ok1 = F.Value(xm+dx, F2);
-    if(!Ok1) return;
-    // Multiplication par les poids de Gauss.
-    Standard_Real FT = F1+F2;
-    Val += GaussW(j)*FT;  
-  }
-  // Mise a l'echelle de l'intervalle [Lower, Upper]
-  Val *= xr;
-  Done = Standard_True;
+    Standard_Integer ind = Order / 2, ind1 = (Order + 1) / 2;
+    if (ind1 > ind) { // odder case
+        Ok1 = F.Value(xm, Val);
+        if (!Ok1) return;
+        Val *= GaussW(ind1);
+    }
+    // Sommation sur tous les points de Gauss: avec utilisation de la symetrie.
+    for (j = 1; j <= ind; j++) {
+        dx = xr * GaussP(j);
+        Ok1 = F.Value(xm - dx, F1);
+        if (!Ok1) return;
+        Ok1 = F.Value(xm + dx, F2);
+        if (!Ok1) return;
+        // Multiplication par les poids de Gauss.
+        Standard_Real FT = F1 + F2;
+        Val += GaussW(j) * FT;
+    }
+    // Mise a l'echelle de l'intervalle [Lower, Upper]
+    Val *= xr;
+    Done = Standard_True;
 }
 
 void math_GaussSingleIntegration::Dump(Standard_OStream& o) const {
 
-  o <<"math_GaussSingleIntegration ";
-   if (Done) {
-     o << " Status = Done \n";
-     o << "Integration Value = " << Val<<"\n";
-   }
-   else {
-     o << "Status = not Done \n";
-   }
+    o << "math_GaussSingleIntegration ";
+    if (Done) {
+        o << " Status = Done \n";
+        o << "Integration Value = " << Val << "\n";
+    }
+    else {
+        o << "Status = not Done \n";
+    }
 }

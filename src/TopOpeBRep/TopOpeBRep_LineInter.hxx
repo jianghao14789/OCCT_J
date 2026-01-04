@@ -54,7 +54,7 @@ class TopOpeBRep_LineInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     TopOpeBRep_LineInter();

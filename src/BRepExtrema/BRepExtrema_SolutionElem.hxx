@@ -25,7 +25,7 @@ class BRepExtrema_SolutionElem
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor
   BRepExtrema_SolutionElem()

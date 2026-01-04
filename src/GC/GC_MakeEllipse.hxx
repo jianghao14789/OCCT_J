@@ -40,7 +40,7 @@ class GC_MakeEllipse  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

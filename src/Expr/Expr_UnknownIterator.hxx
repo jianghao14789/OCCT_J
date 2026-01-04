@@ -34,7 +34,7 @@ class Expr_UnknownIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Expr_UnknownIterator(const Handle(Expr_GeneralExpression)& exp);

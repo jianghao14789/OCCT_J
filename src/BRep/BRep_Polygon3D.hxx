@@ -1,4 +1,4 @@
-// Created on: 1995-03-09
+﻿// Created on: 1995-03-09
 // Created by: Laurent PAINNOT
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -35,26 +35,26 @@ class BRep_Polygon3D : public BRep_CurveRepresentation
 
 public:
 
-  
-  Standard_EXPORT BRep_Polygon3D(const Handle(Poly_Polygon3D)& P, const TopLoc_Location& L);
-  
-  //! Returns True.
-  Standard_EXPORT virtual Standard_Boolean IsPolygon3D() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual const Handle(Poly_Polygon3D)& Polygon3D() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Polygon3D (const Handle(Poly_Polygon3D)& P) Standard_OVERRIDE;
-  
-  //! Return a copy of this representation.
-  Standard_EXPORT Handle(BRep_CurveRepresentation) Copy() const Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT BRep_Polygon3D(const Handle(Poly_Polygon3D)& P, const TopLoc_Location& L);
 
+    //! Returns True.
+    Standard_EXPORT virtual Standard_Boolean IsPolygon3D() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual const Handle(Poly_Polygon3D)& Polygon3D() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void Polygon3D(const Handle(Poly_Polygon3D)& P) Standard_OVERRIDE;
+
+    //! Return a copy of this representation.
+    Standard_EXPORT Handle(BRep_CurveRepresentation) Copy() const Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 
-  DEFINE_STANDARD_RTTIEXT(BRep_Polygon3D,BRep_CurveRepresentation)
+
+
+    DEFINE_STANDARD_RTTIEXT(BRep_Polygon3D, BRep_CurveRepresentation)
 
 protected:
 
@@ -64,7 +64,7 @@ protected:
 private:
 
 
-  Handle(Poly_Polygon3D) myPolygon3D;
+    Handle(Poly_Polygon3D) myPolygon3D;
 
 
 };

@@ -1,4 +1,4 @@
-// Created on: 2004-09-03
+﻿// Created on: 2004-09-03
 // Created by: Oleg FEDYAEV
 // Copyright (c) 2004-2014 OPEN CASCADE SAS
 //
@@ -30,127 +30,127 @@
 
 
 //! check the validity of argument(s) for Boolean Operations
-class BOPAlgo_ArgumentAnalyzer  : public BOPAlgo_Algo
+class BOPAlgo_ArgumentAnalyzer : public BOPAlgo_Algo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! empty constructor
-  Standard_EXPORT BOPAlgo_ArgumentAnalyzer();
-Standard_EXPORT virtual ~BOPAlgo_ArgumentAnalyzer();
-  
-  //! sets object shape
-  Standard_EXPORT void SetShape1 (const TopoDS_Shape& TheShape);
-  
-  //! sets tool shape
-  Standard_EXPORT void SetShape2 (const TopoDS_Shape& TheShape);
-  
-  //! returns object shape;
-  Standard_EXPORT const TopoDS_Shape& GetShape1() const;
-  
-  //! returns tool shape
-  Standard_EXPORT const TopoDS_Shape& GetShape2() const;
-  
-  //! returns ref
-  Standard_EXPORT BOPAlgo_Operation& OperationType();
-  
-  //! returns ref
-  Standard_EXPORT Standard_Boolean& StopOnFirstFaulty();
-  
-  //! Returns (modifiable) mode
-  //! that means checking types of shapes.
+
+    //! empty constructor
+    Standard_EXPORT BOPAlgo_ArgumentAnalyzer();
+    Standard_EXPORT virtual ~BOPAlgo_ArgumentAnalyzer();
+
+    //! sets object shape
+    Standard_EXPORT void SetShape1(const TopoDS_Shape& TheShape);
+
+    //! sets tool shape
+    Standard_EXPORT void SetShape2(const TopoDS_Shape& TheShape);
+
+    //! returns object shape;
+    Standard_EXPORT const TopoDS_Shape& GetShape1() const;
+
+    //! returns tool shape
+    Standard_EXPORT const TopoDS_Shape& GetShape2() const;
+
+    //! returns ref
+    Standard_EXPORT BOPAlgo_Operation& OperationType();
+
+    //! returns ref
+    Standard_EXPORT Standard_Boolean& StopOnFirstFaulty();
+
+    //! Returns (modifiable) mode
+    //! that means checking types of shapes.
     Standard_Boolean& ArgumentTypeMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of self-intersection of shapes.
+
+    //! Returns (modifiable) mode that means
+    //! checking of self-intersection of shapes.
     Standard_Boolean& SelfInterMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of small edges.
+
+    //! Returns (modifiable) mode that means
+    //! checking of small edges.
     Standard_Boolean& SmallEdgeMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of possibility to split or rebuild faces.
+
+    //! Returns (modifiable) mode that means
+    //! checking of possibility to split or rebuild faces.
     Standard_Boolean& RebuildFaceMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of tangency between subshapes.
+
+    //! Returns (modifiable) mode that means
+    //! checking of tangency between subshapes.
     Standard_Boolean& TangentMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of problem of merging vertices.
+
+    //! Returns (modifiable) mode that means
+    //! checking of problem of merging vertices.
     Standard_Boolean& MergeVertexMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of problem of merging edges.
+
+    //! Returns (modifiable) mode that means
+    //! checking of problem of merging edges.
     Standard_Boolean& MergeEdgeMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of problem of continuity of the shape.
+
+    //! Returns (modifiable) mode that means
+    //! checking of problem of continuity of the shape.
     Standard_Boolean& ContinuityMode();
-  
-  //! Returns (modifiable) mode that means
-  //! checking of problem of invalid curve on surface.
+
+    //! Returns (modifiable) mode that means
+    //! checking of problem of invalid curve on surface.
     Standard_Boolean& CurveOnSurfaceMode();
-  
-  //! performs analysis
-  Standard_EXPORT void Perform(const Message_ProgressRange& theRange = Message_ProgressRange());
-  
-  //! result of test
-  Standard_EXPORT Standard_Boolean HasFaulty() const;
-  
-  //! returns a result of test
-  Standard_EXPORT const BOPAlgo_ListOfCheckResult& GetCheckResult() const;
-  
+
+    //! performs analysis
+    Standard_EXPORT void Perform(const Message_ProgressRange& theRange = Message_ProgressRange());
+
+    //! result of test
+    Standard_EXPORT Standard_Boolean HasFaulty() const;
+
+    //! returns a result of test
+    Standard_EXPORT const BOPAlgo_ListOfCheckResult& GetCheckResult() const;
+
 
 protected:
 
-  
-  //! Prepares data;
-  Standard_EXPORT void Prepare();
-  
-  Standard_EXPORT void TestTypes();
-  
-  Standard_EXPORT void TestSelfInterferences(const Message_ProgressRange& theRange);
-  
-  Standard_EXPORT void TestSmallEdge();
-  
-  Standard_EXPORT void TestRebuildFace();
-  
-  Standard_EXPORT void TestTangent();
-  
-  Standard_EXPORT void TestMergeSubShapes (const TopAbs_ShapeEnum theType);
-  
-  Standard_EXPORT void TestMergeVertex();
-  
-  Standard_EXPORT void TestMergeEdge();
-  
-  Standard_EXPORT void TestContinuity();
-  
-  Standard_EXPORT void TestCurveOnSurface();
-  
+
+    //! Prepares data;
+    Standard_EXPORT void Prepare();
+
+    Standard_EXPORT void TestTypes();
+
+    Standard_EXPORT void TestSelfInterferences(const Message_ProgressRange& theRange);
+
+    Standard_EXPORT void TestSmallEdge();
+
+    Standard_EXPORT void TestRebuildFace();
+
+    Standard_EXPORT void TestTangent();
+
+    Standard_EXPORT void TestMergeSubShapes(const TopAbs_ShapeEnum theType);
+
+    Standard_EXPORT void TestMergeVertex();
+
+    Standard_EXPORT void TestMergeEdge();
+
+    Standard_EXPORT void TestContinuity();
+
+    Standard_EXPORT void TestCurveOnSurface();
+
 
 private:
 
 
-  TopoDS_Shape myShape1;
-  TopoDS_Shape myShape2;
-  Standard_Boolean myStopOnFirst;
-  BOPAlgo_Operation myOperation;
-  Standard_Boolean myArgumentTypeMode;
-  Standard_Boolean mySelfInterMode;
-  Standard_Boolean mySmallEdgeMode;
-  Standard_Boolean myRebuildFaceMode;
-  Standard_Boolean myTangentMode;
-  Standard_Boolean myMergeVertexMode;
-  Standard_Boolean myMergeEdgeMode;
-  Standard_Boolean myContinuityMode;
-  Standard_Boolean myCurveOnSurfaceMode;
-  Standard_Boolean myEmpty1;
-  Standard_Boolean myEmpty2;
-  BOPAlgo_ListOfCheckResult myResult;
+    TopoDS_Shape myShape1;
+    TopoDS_Shape myShape2;
+    Standard_Boolean myStopOnFirst;
+    BOPAlgo_Operation myOperation;
+    Standard_Boolean myArgumentTypeMode;
+    Standard_Boolean mySelfInterMode;
+    Standard_Boolean mySmallEdgeMode;
+    Standard_Boolean myRebuildFaceMode;
+    Standard_Boolean myTangentMode;
+    Standard_Boolean myMergeVertexMode;
+    Standard_Boolean myMergeEdgeMode;
+    Standard_Boolean myContinuityMode;
+    Standard_Boolean myCurveOnSurfaceMode;
+    Standard_Boolean myEmpty1;
+    Standard_Boolean myEmpty2;
+    BOPAlgo_ListOfCheckResult myResult;
 
 };
 

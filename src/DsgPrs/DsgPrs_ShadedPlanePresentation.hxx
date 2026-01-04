@@ -31,7 +31,7 @@ class DsgPrs_ShadedPlanePresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the points aPt1, aPt2 and aPt3 to the

@@ -37,7 +37,7 @@ class FairCurve_Energy  : public math_MultipleVarFunctionWithHessian
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns the number of variables of the energy.

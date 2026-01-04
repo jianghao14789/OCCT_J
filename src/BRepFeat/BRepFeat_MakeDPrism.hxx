@@ -55,7 +55,7 @@ class BRepFeat_MakeDPrism  : public BRepFeat_Form
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! A face Pbase is selected in the shape

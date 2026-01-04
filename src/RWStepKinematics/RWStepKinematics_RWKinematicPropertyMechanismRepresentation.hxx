@@ -32,7 +32,7 @@ class RWStepKinematics_RWKinematicPropertyMechanismRepresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   Standard_EXPORT RWStepKinematics_RWKinematicPropertyMechanismRepresentation();
 

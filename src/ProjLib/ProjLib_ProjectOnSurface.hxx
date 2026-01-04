@@ -27,7 +27,7 @@ class ProjLib_ProjectOnSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Create an empty projector.
   Standard_EXPORT ProjLib_ProjectOnSurface();

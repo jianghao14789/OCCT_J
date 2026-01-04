@@ -44,7 +44,7 @@ class StepAP214_GroupItem  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a GroupItem SelectType

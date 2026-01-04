@@ -33,7 +33,7 @@ class HLRBRep_BiPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   HLRBRep_BiPoint()
   : myRg1Line (false),

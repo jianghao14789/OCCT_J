@@ -1,4 +1,4 @@
-// Created on: 2016-01-06
+﻿// Created on: 2016-01-06
 // Created by: Andrey Betenev
 // Copyright (c) 2016 OPEN CASCADE SAS
 //
@@ -22,7 +22,7 @@
 #include <algorithm>
 #include <stdlib.h>
 
-IMPLEMENT_STANDARD_RTTIEXT(Standard_OutOfMemory,Standard_ProgramError)
+IMPLEMENT_STANDARD_RTTIEXT(Standard_OutOfMemory, Standard_ProgramError)
 
 //=======================================================================
 //function : Standard_OutOfMemory
@@ -31,8 +31,8 @@ IMPLEMENT_STANDARD_RTTIEXT(Standard_OutOfMemory,Standard_ProgramError)
 
 Standard_OutOfMemory::Standard_OutOfMemory(const Standard_CString theMessage)
 {
-  // call explicitly own method (non-virtual call)
-  Standard_OutOfMemory::SetMessageString (theMessage);
+    // call explicitly own method (non-virtual call)
+    Standard_OutOfMemory::SetMessageString(theMessage);
 }
 
 //=======================================================================
@@ -42,23 +42,23 @@ Standard_OutOfMemory::Standard_OutOfMemory(const Standard_CString theMessage)
 
 Standard_CString Standard_OutOfMemory::GetMessageString() const
 {
-  return myBuffer;
+    return myBuffer;
 }
-  
+
 //=======================================================================
 //function : SetMessageString
 //purpose  :
 //=======================================================================
 
-void Standard_OutOfMemory::SetMessageString (const Standard_CString theMessage)
+void Standard_OutOfMemory::SetMessageString(const Standard_CString theMessage)
 {
-  // restrict length of the message by buffer size
-  size_t n = (theMessage ? std::min (strlen (theMessage), sizeof(myBuffer) - 1) : 0);
+    // restrict length of the message by buffer size
+    size_t n = (theMessage ? std::min(strlen(theMessage), sizeof(myBuffer) - 1) : 0);
 
-  // first set line end symbol to be safe in case of concurrent call
-  myBuffer[n] = '\0';
-  if (n > 0)
-    memcpy (myBuffer, theMessage, n);
+    // first set line end symbol to be safe in case of concurrent call
+    myBuffer[n] = '\0';
+    if (n > 0)
+        memcpy(myBuffer, theMessage, n);
 }
 
 //=======================================================================
@@ -68,7 +68,7 @@ void Standard_OutOfMemory::SetMessageString (const Standard_CString theMessage)
 
 void Standard_OutOfMemory::Raise(const Standard_CString theMessage)
 {
-  NewInstance(theMessage)->Reraise();
+    NewInstance(theMessage)->Reraise();
 }
 
 //=======================================================================
@@ -78,7 +78,7 @@ void Standard_OutOfMemory::Raise(const Standard_CString theMessage)
 
 void Standard_OutOfMemory::Raise(Standard_SStream& theMessage)
 {
-  NewInstance(theMessage.str().c_str())->Reraise();
+    NewInstance(theMessage.str().c_str())->Reraise();
 }
 
 //=======================================================================
@@ -89,18 +89,18 @@ void Standard_OutOfMemory::Raise(Standard_SStream& theMessage)
 // global instance must be allocated at load-time
 static Handle(Standard_OutOfMemory) anOutOfMemInstance = new Standard_OutOfMemory;
 
-Handle(Standard_OutOfMemory) Standard_OutOfMemory::NewInstance (Standard_CString theMessage)
+Handle(Standard_OutOfMemory) Standard_OutOfMemory::NewInstance(Standard_CString theMessage)
 {
-  anOutOfMemInstance->SetMessageString (theMessage);
-  return anOutOfMemInstance;
+    anOutOfMemInstance->SetMessageString(theMessage);
+    return anOutOfMemInstance;
 }
 
-Handle(Standard_OutOfMemory) Standard_OutOfMemory::NewInstance (Standard_CString theMessage,
-                                                                Standard_CString theStackTrace)
+Handle(Standard_OutOfMemory) Standard_OutOfMemory::NewInstance(Standard_CString theMessage,
+    Standard_CString theStackTrace)
 {
-  anOutOfMemInstance->SetMessageString (theMessage);
-  anOutOfMemInstance->SetStackString (theStackTrace);
-  return anOutOfMemInstance;
+    anOutOfMemInstance->SetMessageString(theMessage);
+    anOutOfMemInstance->SetStackString(theStackTrace);
+    return anOutOfMemInstance;
 }
 
 //=======================================================================
@@ -108,7 +108,7 @@ Handle(Standard_OutOfMemory) Standard_OutOfMemory::NewInstance (Standard_CString
 //purpose  :
 //=======================================================================
 
-void Standard_OutOfMemory::Throw () const
+void Standard_OutOfMemory::Throw() const
 {
-  throw *this;
+    throw* this;
 }

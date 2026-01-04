@@ -30,7 +30,7 @@ class StepVisual_BoxCharacteristicSelect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StepVisual_BoxCharacteristicSelect();

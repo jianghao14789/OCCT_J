@@ -31,7 +31,7 @@ class IntCurveSurface_ThePolygonOfHInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntCurveSurface_ThePolygonOfHInter(const Handle(Adaptor3d_Curve)& Curve, const Standard_Integer NbPnt);

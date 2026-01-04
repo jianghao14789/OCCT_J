@@ -31,7 +31,7 @@ class IntTools_PntOnFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

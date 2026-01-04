@@ -33,7 +33,7 @@ class BRepMesh_DiscretFactory
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Returns the global factory instance.
   Standard_EXPORT static BRepMesh_DiscretFactory& Get();

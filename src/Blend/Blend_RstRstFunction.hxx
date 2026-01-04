@@ -52,7 +52,7 @@ class Blend_RstRstFunction  : public Blend_AppFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns 2 (default value). Can be redefined.

@@ -44,7 +44,7 @@ class StdSelect
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! puts The same drawer in every BRepOwner Of SensitivePrimitive
   //! Used Only for hilight Of BRepOwner...

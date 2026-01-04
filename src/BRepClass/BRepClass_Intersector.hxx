@@ -34,7 +34,7 @@ class BRepClass_Intersector  : public Geom2dInt_IntConicCurveOfGInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepClass_Intersector();

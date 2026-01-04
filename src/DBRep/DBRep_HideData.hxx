@@ -47,7 +47,7 @@ class DBRep_HideData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT DBRep_HideData();

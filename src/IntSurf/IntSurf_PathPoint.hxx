@@ -35,7 +35,7 @@ class IntSurf_PathPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntSurf_PathPoint();

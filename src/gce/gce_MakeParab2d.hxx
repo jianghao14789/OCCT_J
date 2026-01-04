@@ -59,7 +59,7 @@ class gce_MakeParab2d  : public gce_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

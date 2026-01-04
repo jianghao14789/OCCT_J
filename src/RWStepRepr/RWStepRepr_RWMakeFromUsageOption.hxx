@@ -33,7 +33,7 @@ class RWStepRepr_RWMakeFromUsageOption
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

@@ -27,7 +27,7 @@ class GeomLib_CheckCurveOnSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Default constructor
   Standard_EXPORT GeomLib_CheckCurveOnSurface(void);

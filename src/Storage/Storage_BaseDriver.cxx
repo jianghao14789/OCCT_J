@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -28,24 +28,25 @@ Storage_BaseDriver::Storage_BaseDriver() : myOpenMode(Storage_VSNone)
 }
 
 Storage_BaseDriver::~Storage_BaseDriver()
-{}
-
-TCollection_AsciiString Storage_BaseDriver::ReadMagicNumber (Standard_IStream& theIStream)
 {
-  // magic number has the same length which is 7: BINFILE, CMPFILE and FSDFILE
-  Standard_Size aMagicNumberLen = 7;
+}
 
-  TCollection_AsciiString aReadMagicNumber;
+TCollection_AsciiString Storage_BaseDriver::ReadMagicNumber(Standard_IStream& theIStream)
+{
+    // magic number has the same length which is 7: BINFILE, CMPFILE and FSDFILE
+    Standard_Size aMagicNumberLen = 7;
 
-  char aChar;
-  Standard_Size aReadCharNb = 0;
+    TCollection_AsciiString aReadMagicNumber;
 
-  while (theIStream.good() && (aReadCharNb < aMagicNumberLen))
-  {
-    theIStream.get(aChar);
-    aReadCharNb += (Standard_Size)theIStream.gcount();
-    aReadMagicNumber += aChar;
-  }
+    char aChar;
+    Standard_Size aReadCharNb = 0;
 
-  return aReadMagicNumber;
+    while (theIStream.good() && (aReadCharNb < aMagicNumberLen))
+    {
+        theIStream.get(aChar);
+        aReadCharNb += (Standard_Size)theIStream.gcount();
+        aReadMagicNumber += aChar;
+    }
+
+    return aReadMagicNumber;
 }

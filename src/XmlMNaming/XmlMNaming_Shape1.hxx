@@ -37,7 +37,7 @@ class XmlMNaming_Shape1
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT XmlMNaming_Shape1(XmlObjMgt_Document& Doc);

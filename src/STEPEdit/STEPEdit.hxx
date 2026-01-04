@@ -35,7 +35,7 @@ class STEPEdit
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a Protocol fit for STEP (creates the first time)

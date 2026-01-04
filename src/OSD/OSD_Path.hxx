@@ -26,7 +26,7 @@
 class OSD_Path 
 {
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a Path object initialized to an empty string.
   //! i.e. current directory.

@@ -35,7 +35,7 @@ class BRepGProp_MeshCinert  : public GProp_GProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepGProp_MeshCinert();

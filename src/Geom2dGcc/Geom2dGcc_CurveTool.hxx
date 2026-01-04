@@ -33,7 +33,7 @@ class Geom2dGcc_CurveTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Real FirstParameter (const Geom2dAdaptor_Curve& C);

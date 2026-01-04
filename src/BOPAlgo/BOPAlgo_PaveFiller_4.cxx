@@ -45,7 +45,7 @@
 //=======================================================================
 class BOPAlgo_VertexFace : public BOPAlgo_ParallelAlgo {
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_VertexFace() : 
     BOPAlgo_ParallelAlgo(),

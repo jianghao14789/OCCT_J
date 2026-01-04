@@ -32,7 +32,7 @@ class RWStepVisual_RWCoordinatesList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   Standard_EXPORT RWStepVisual_RWCoordinatesList();
   

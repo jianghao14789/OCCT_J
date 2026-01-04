@@ -68,7 +68,7 @@ class Hatch_Hatcher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a empty  hatcher.  <Tol> is the  tolerance

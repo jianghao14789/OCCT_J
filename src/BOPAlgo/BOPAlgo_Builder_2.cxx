@@ -72,7 +72,7 @@ static
 class BOPAlgo_PairOfShapeBoolean : public BOPAlgo_ParallelAlgo {
 
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_PairOfShapeBoolean() : 
     BOPAlgo_ParallelAlgo(),
@@ -163,7 +163,7 @@ typedef NCollection_Vector<BOPAlgo_SplitFace> BOPAlgo_VectorOfBuilderFace;
 class BOPAlgo_VFI : public BOPAlgo_ParallelAlgo {
 
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   BOPAlgo_VFI() :
     BOPAlgo_ParallelAlgo(),

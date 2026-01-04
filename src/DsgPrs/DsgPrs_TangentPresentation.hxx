@@ -32,7 +32,7 @@ class DsgPrs_TangentPresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the point OffsetPoint, the direction aDirection

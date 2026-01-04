@@ -48,7 +48,7 @@ class Blend_Function  : public Blend_AppFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns 4.

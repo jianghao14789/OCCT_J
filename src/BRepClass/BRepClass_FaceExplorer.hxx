@@ -39,7 +39,7 @@ class BRepClass_FaceExplorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepClass_FaceExplorer(const TopoDS_Face& F);

@@ -53,7 +53,7 @@ class GProp_PGProps  : public GProp_GProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes a framework to compute global properties

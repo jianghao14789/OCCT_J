@@ -35,7 +35,7 @@ class BOPDS_FaceInfo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

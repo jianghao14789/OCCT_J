@@ -47,7 +47,7 @@ class math_Householder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Given an input matrix A with n>= m, given an input matrix B

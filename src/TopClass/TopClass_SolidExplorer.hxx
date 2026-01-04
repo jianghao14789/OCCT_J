@@ -35,7 +35,7 @@ class TopClass_SolidExplorer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Should  return  True  if the  point  is  outside a

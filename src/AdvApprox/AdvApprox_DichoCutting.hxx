@@ -32,7 +32,7 @@ class AdvApprox_DichoCutting  : public AdvApprox_Cutting
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT AdvApprox_DichoCutting();

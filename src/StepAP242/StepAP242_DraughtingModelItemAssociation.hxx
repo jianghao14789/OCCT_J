@@ -1,4 +1,4 @@
-// Created on: 2015-10-29
+﻿// Created on: 2015-10-29
 // Created by: Irina KRYLOVA
 // Copyright (c) 2015 OPEN CASCADE SAS
 //
@@ -28,10 +28,10 @@ class StepAP242_DraughtingModelItemAssociation : public StepAP242_ItemIdentified
 {
 
 public:
-  
-  Standard_EXPORT StepAP242_DraughtingModelItemAssociation();
 
-  DEFINE_STANDARD_RTTIEXT(StepAP242_DraughtingModelItemAssociation, StepAP242_ItemIdentifiedRepresentationUsage)
+    Standard_EXPORT StepAP242_DraughtingModelItemAssociation();
+
+    DEFINE_STANDARD_RTTIEXT(StepAP242_DraughtingModelItemAssociation, StepAP242_ItemIdentifiedRepresentationUsage)
 
 };
 #endif // _StepAP242_DraughtingModelItemAssociation_HeaderFile

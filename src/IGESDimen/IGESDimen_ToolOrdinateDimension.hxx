@@ -39,7 +39,7 @@ class IGESDimen_ToolOrdinateDimension
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolOrdinateDimension, ready to work

@@ -39,7 +39,7 @@ class IGESDraw_ToolView
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolView, ready to work

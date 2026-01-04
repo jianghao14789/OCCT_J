@@ -39,7 +39,7 @@ class BOPTools_AlgoTools2D
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Compute P-Curve for the edge <aE> on the face <aF>.<br>
   //! Raises exception Standard_ConstructionError if projection algorithm fails.<br>

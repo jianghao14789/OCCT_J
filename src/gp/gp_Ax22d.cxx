@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -27,42 +27,42 @@
 #include <Standard_ConstructionError.hxx>
 #include <Standard_Dump.hxx>
 
-void gp_Ax22d::Mirror (const gp_Pnt2d& P)
+void gp_Ax22d::Mirror(const gp_Pnt2d& P)
 {
-  gp_Pnt2d Temp = point;
-  Temp.Mirror (P);
-  point = Temp;
-  vxdir.Reverse ();
-  vydir.Reverse ();
+    gp_Pnt2d Temp = point;
+    Temp.Mirror(P);
+    point = Temp;
+    vxdir.Reverse();
+    vydir.Reverse();
 }
 
 gp_Ax22d gp_Ax22d::Mirrored(const gp_Pnt2d& P) const
 {
-  gp_Ax22d Temp = *this;
-  Temp.Mirror (P);
-  return Temp;
+    gp_Ax22d Temp = *this;
+    Temp.Mirror(P);
+    return Temp;
 }
 
-void gp_Ax22d::Mirror (const gp_Ax2d& A1)
+void gp_Ax22d::Mirror(const gp_Ax2d& A1)
 {
-  vydir.Mirror (A1);
-  vxdir.Mirror (A1);
-  gp_Pnt2d Temp = point;
-  Temp.Mirror (A1);
-  point = Temp;
+    vydir.Mirror(A1);
+    vxdir.Mirror(A1);
+    gp_Pnt2d Temp = point;
+    Temp.Mirror(A1);
+    point = Temp;
 }
 
 gp_Ax22d gp_Ax22d::Mirrored(const gp_Ax2d& A1) const
 {
-  gp_Ax22d Temp = *this;
-  Temp.Mirror (A1);
-  return Temp;
+    gp_Ax22d Temp = *this;
+    Temp.Mirror(A1);
+    return Temp;
 }
 
-void gp_Ax22d::DumpJson (Standard_OStream& theOStream, Standard_Integer) const
+void gp_Ax22d::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
 {
-  OCCT_DUMP_VECTOR_CLASS (theOStream, "Location", 2, point.X(), point.Y())
+    OCCT_DUMP_VECTOR_CLASS(theOStream, "Location", 2, point.X(), point.Y())
 
-  OCCT_DUMP_VECTOR_CLASS (theOStream, "XAxis", 2, vxdir.X(), vxdir.Y())
-  OCCT_DUMP_VECTOR_CLASS (theOStream, "YAxis", 2, vydir.X(), vydir.Y())
+        OCCT_DUMP_VECTOR_CLASS(theOStream, "XAxis", 2, vxdir.X(), vxdir.Y())
+        OCCT_DUMP_VECTOR_CLASS(theOStream, "YAxis", 2, vydir.X(), vydir.Y())
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 OPEN CASCADE SAS
+﻿// Copyright (c) 2019 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -17,15 +17,15 @@
 //! Color definition for console/terminal output (limited palette).
 enum Message_ConsoleColor
 {
-  Message_ConsoleColor_Default, //!< default (white) color
-  Message_ConsoleColor_Black,   //!< black   color
-  Message_ConsoleColor_White,   //!< white   color
-  Message_ConsoleColor_Red,     //!< red     color
-  Message_ConsoleColor_Blue,    //!< blue    color
-  Message_ConsoleColor_Green,   //!< green   color
-  Message_ConsoleColor_Yellow,  //!< yellow  color
-  Message_ConsoleColor_Cyan,    //!< cyan    color
-  Message_ConsoleColor_Magenta, //!< magenta color
+    Message_ConsoleColor_Default, //!< default (white) color
+    Message_ConsoleColor_Black,   //!< black   color
+    Message_ConsoleColor_White,   //!< white   color
+    Message_ConsoleColor_Red,     //!< red     color
+    Message_ConsoleColor_Blue,    //!< blue    color
+    Message_ConsoleColor_Green,   //!< green   color
+    Message_ConsoleColor_Yellow,  //!< yellow  color
+    Message_ConsoleColor_Cyan,    //!< cyan    color
+    Message_ConsoleColor_Magenta, //!< magenta color
 };
 
 #endif // _Message_ConsoleColor_HeaderFile

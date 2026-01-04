@@ -32,7 +32,7 @@ class BndLib_AddSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds to the bounding box B the surface S

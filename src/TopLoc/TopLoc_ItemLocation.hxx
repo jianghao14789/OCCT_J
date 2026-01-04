@@ -43,7 +43,7 @@ class TopLoc_ItemLocation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Sets the elementary Datum to <D>

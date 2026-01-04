@@ -41,7 +41,7 @@ class HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter  : public Intf_Polygon2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Compute a polygon on the domain of the curve.

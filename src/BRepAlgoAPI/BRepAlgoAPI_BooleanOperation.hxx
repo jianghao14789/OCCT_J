@@ -52,7 +52,7 @@ class BRepAlgoAPI_BooleanOperation  : public BRepAlgoAPI_BuilderAlgo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public: //! @name Constructors
 

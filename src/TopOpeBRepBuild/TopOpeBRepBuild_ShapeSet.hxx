@@ -62,7 +62,7 @@ class TopOpeBRepBuild_ShapeSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a ShapeSet  in order to build shapes connected

@@ -1,4 +1,4 @@
-// Created on: 2017-06-27
+﻿// Created on: 2017-06-27
 // Created by: Andrey Betenev
 // Copyright (c) 2017 OPEN CASCADE SAS
 //
@@ -20,29 +20,29 @@
 #include <TopoDS_Shape.hxx>
 
 //! Alert object storing TopoDS shape in its field
-class TopoDS_AlertWithShape : public Message_Alert 
+class TopoDS_AlertWithShape : public Message_Alert
 {
 public:
-  //! Constructor with shape argument
-  Standard_EXPORT TopoDS_AlertWithShape (const TopoDS_Shape& theShape);
+    //! Constructor with shape argument
+    Standard_EXPORT TopoDS_AlertWithShape(const TopoDS_Shape& theShape);
 
-  //! Returns contained shape
-  const TopoDS_Shape& GetShape() const { return myShape; }
+    //! Returns contained shape
+    const TopoDS_Shape& GetShape() const { return myShape; }
 
-  //! Sets the shape
-  void SetShape(const TopoDS_Shape& theShape) { myShape = theShape; }
+    //! Sets the shape
+    void SetShape(const TopoDS_Shape& theShape) { myShape = theShape; }
 
-  //! Returns false.
-  virtual Standard_EXPORT Standard_Boolean SupportsMerge () const Standard_OVERRIDE;
+    //! Returns false.
+    virtual Standard_EXPORT Standard_Boolean SupportsMerge() const Standard_OVERRIDE;
 
-  //! Returns false.
-  virtual Standard_EXPORT Standard_Boolean Merge (const Handle(Message_Alert)& theTarget) Standard_OVERRIDE;
+    //! Returns false.
+    virtual Standard_EXPORT Standard_Boolean Merge(const Handle(Message_Alert)& theTarget) Standard_OVERRIDE;
 
-  // OCCT RTTI
-  DEFINE_STANDARD_RTTIEXT(TopoDS_AlertWithShape, Message_Alert)
+    // OCCT RTTI
+    DEFINE_STANDARD_RTTIEXT(TopoDS_AlertWithShape, Message_Alert)
 
 private:
-  TopoDS_Shape myShape;
+    TopoDS_Shape myShape;
 };
 
 //! Helper macro allowing to define alert with shape argument in one line of code

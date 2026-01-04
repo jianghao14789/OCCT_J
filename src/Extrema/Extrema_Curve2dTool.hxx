@@ -47,7 +47,7 @@ class Extrema_Curve2dTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     static Standard_Real FirstParameter (const Adaptor2d_Curve2d& C);

@@ -77,7 +77,7 @@ static void UpdateVertices(const TopoDS_Edge& aE,
 class BOPAlgo_SplitEdge : public BOPAlgo_ParallelAlgo  {
  
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_SplitEdge() :
     BOPAlgo_ParallelAlgo() {
@@ -182,7 +182,7 @@ typedef NCollection_Vector<BOPAlgo_SplitEdge> BOPAlgo_VectorOfSplitEdge;
 class BOPAlgo_MPC : public BOPAlgo_ParallelAlgo  {
  
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_MPC() : 
     BOPAlgo_ParallelAlgo(),

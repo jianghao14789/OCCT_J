@@ -31,7 +31,7 @@ class AppParCurves_ConstraintCouple
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! returns an indefinite ConstraintCouple.

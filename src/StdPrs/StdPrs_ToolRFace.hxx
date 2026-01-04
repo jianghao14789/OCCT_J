@@ -31,7 +31,7 @@ class StdPrs_ToolRFace
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor.
   Standard_EXPORT StdPrs_ToolRFace();

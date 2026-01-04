@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,4 +19,4 @@
 #include <Storage_CallBack.hxx>
 #include <Storage_Schema.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Storage_CallBack,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Storage_CallBack, Standard_Transient)

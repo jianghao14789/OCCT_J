@@ -39,7 +39,7 @@ class GC_MakeTrimmedCone  : public GC_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a RectangularTrimmedSurface <TheCone> from Geom

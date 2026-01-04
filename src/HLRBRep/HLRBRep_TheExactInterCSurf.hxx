@@ -40,7 +40,7 @@ class HLRBRep_TheExactInterCSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! compute the solution point with the close point

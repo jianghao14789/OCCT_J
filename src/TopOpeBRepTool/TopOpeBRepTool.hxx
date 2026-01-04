@@ -60,7 +60,7 @@ class TopOpeBRepTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Fuse  edges (in a   wire) of a  shape   where we have

@@ -29,7 +29,7 @@ class TDocStd_Context
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TDocStd_Context();

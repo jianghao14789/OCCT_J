@@ -31,7 +31,7 @@ class OSD_FileIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Instantiates Object as empty Iterator;

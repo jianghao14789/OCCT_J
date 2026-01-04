@@ -34,7 +34,7 @@ class RWStepBasic_RWApplicationProtocolDefinition
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepBasic_RWApplicationProtocolDefinition();

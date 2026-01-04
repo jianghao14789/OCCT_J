@@ -49,7 +49,7 @@ class HLRAlgo_Projector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRAlgo_Projector();

@@ -36,7 +36,7 @@ class IntPatch_PolyLine  : public IntPatch_Polygo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntPatch_PolyLine();

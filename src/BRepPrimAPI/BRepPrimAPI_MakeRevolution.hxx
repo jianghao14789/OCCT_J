@@ -38,7 +38,7 @@ class BRepPrimAPI_MakeRevolution  : public BRepPrimAPI_MakeOneAxis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a revolution body by rotating a curve around Z.

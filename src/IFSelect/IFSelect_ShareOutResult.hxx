@@ -42,7 +42,7 @@ class IFSelect_ShareOutResult
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a ShareOutResult from a ShareOut, to work on a Model
   //! (without any more precision; uses Active Protocol)

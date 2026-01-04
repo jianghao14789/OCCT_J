@@ -34,7 +34,7 @@ class IntAna_IntLinTorus
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntAna_IntLinTorus();

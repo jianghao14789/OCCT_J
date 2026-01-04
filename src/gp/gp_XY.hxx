@@ -30,7 +30,7 @@ class gp_XY
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates XY object with zero coordinates (0,0).
   gp_XY()

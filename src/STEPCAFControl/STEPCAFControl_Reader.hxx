@@ -59,7 +59,7 @@ class STEPCAFControl_Reader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a reader with an empty

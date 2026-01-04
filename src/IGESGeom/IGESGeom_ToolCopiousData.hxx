@@ -39,7 +39,7 @@ class IGESGeom_ToolCopiousData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolCopiousData, ready to work

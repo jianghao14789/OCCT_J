@@ -1,4 +1,4 @@
-// Created on: 1995-11-15
+﻿// Created on: 1995-11-15
 // Created by: Jean-Louis Frenkel <rmi@pernox>
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,9 +29,9 @@
 //! of these unit systems as working environment.
 enum UnitsAPI_SystemUnits
 {
-UnitsAPI_DEFAULT,
-UnitsAPI_SI,
-UnitsAPI_MDTV
+    UnitsAPI_DEFAULT,
+    UnitsAPI_SI,
+    UnitsAPI_MDTV
 };
 
 #endif // _UnitsAPI_SystemUnits_HeaderFile

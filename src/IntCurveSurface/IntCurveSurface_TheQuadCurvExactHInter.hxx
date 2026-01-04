@@ -29,7 +29,7 @@ class IntCurveSurface_TheQuadCurvExactHInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Provides the signed distance function : Q(w)

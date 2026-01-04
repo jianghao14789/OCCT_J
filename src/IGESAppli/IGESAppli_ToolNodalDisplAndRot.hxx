@@ -39,7 +39,7 @@ class IGESAppli_ToolNodalDisplAndRot
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolNodalDisplAndRot, ready to work

@@ -1,4 +1,4 @@
-// Created on: 1993-08-10
+﻿// Created on: 1993-08-10
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -38,25 +38,25 @@ class BRep_PointOnCurveOnSurface : public BRep_PointsOnSurface
 
 public:
 
-  
-  Standard_EXPORT BRep_PointOnCurveOnSurface(const Standard_Real P, const Handle(Geom2d_Curve)& C, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
-  
-  //! Returns True
-  Standard_EXPORT virtual Standard_Boolean IsPointOnCurveOnSurface() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Boolean IsPointOnCurveOnSurface (const Handle(Geom2d_Curve)& PC, const Handle(Geom_Surface)& S, const TopLoc_Location& L) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual const Handle(Geom2d_Curve)& PCurve() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void PCurve (const Handle(Geom2d_Curve)& C) Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT BRep_PointOnCurveOnSurface(const Standard_Real P, const Handle(Geom2d_Curve)& C, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
 
+    //! Returns True
+    Standard_EXPORT virtual Standard_Boolean IsPointOnCurveOnSurface() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Standard_Boolean IsPointOnCurveOnSurface(const Handle(Geom2d_Curve)& PC, const Handle(Geom_Surface)& S, const TopLoc_Location& L) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual const Handle(Geom2d_Curve)& PCurve() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void PCurve(const Handle(Geom2d_Curve)& C) Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 
-  DEFINE_STANDARD_RTTIEXT(BRep_PointOnCurveOnSurface,BRep_PointsOnSurface)
+
+
+    DEFINE_STANDARD_RTTIEXT(BRep_PointOnCurveOnSurface, BRep_PointsOnSurface)
 
 protected:
 
@@ -66,7 +66,7 @@ protected:
 private:
 
 
-  Handle(Geom2d_Curve) myPCurve;
+    Handle(Geom2d_Curve) myPCurve;
 
 
 };

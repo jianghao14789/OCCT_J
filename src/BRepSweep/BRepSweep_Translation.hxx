@@ -36,7 +36,7 @@ class BRepSweep_Translation  : public BRepSweep_Trsf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates  a  topology by  translating <S>  with the

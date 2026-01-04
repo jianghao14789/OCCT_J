@@ -32,7 +32,7 @@ class IntTools_CurveRangeSample  : public IntTools_BaseRangeSample
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntTools_CurveRangeSample();

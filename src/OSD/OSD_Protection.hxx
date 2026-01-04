@@ -51,7 +51,7 @@ class OSD_Protection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes global access rights as follows

@@ -31,7 +31,7 @@ class IFGraph_SCRoots  : public IFGraph_StrongComponants
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! creates with a Graph, and will analyse :

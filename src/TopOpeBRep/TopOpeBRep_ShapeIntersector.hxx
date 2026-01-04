@@ -63,7 +63,7 @@ class TopOpeBRep_ShapeIntersector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRep_ShapeIntersector();

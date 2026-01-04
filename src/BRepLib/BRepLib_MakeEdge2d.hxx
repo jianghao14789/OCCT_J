@@ -70,7 +70,7 @@ class BRepLib_MakeEdge2d  : public BRepLib_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepLib_MakeEdge2d(const TopoDS_Vertex& V1, const TopoDS_Vertex& V2);

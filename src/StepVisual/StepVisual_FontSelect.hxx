@@ -33,7 +33,7 @@ class StepVisual_FontSelect  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a FontSelect SelectType

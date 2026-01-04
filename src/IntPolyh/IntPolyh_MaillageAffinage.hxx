@@ -36,7 +36,7 @@ class IntPolyh_MaillageAffinage
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 
   Standard_EXPORT IntPolyh_MaillageAffinage(const Handle(Adaptor3d_Surface)& S1, const Standard_Integer NbSU1, const Standard_Integer NbSV1, const Handle(Adaptor3d_Surface)& S2, const Standard_Integer NbSU2, const Standard_Integer NbSV2, const Standard_Integer PRINT);

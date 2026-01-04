@@ -1097,7 +1097,7 @@ protected: //! @name fields related to ray-tracing
 
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   DEFINE_STANDARD_RTTIEXT(OpenGl_View,Graphic3d_CView) // Type definition
 
   friend class OpenGl_GraphicDriver;

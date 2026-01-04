@@ -65,7 +65,7 @@ class BRepBuilderAPI_MakeFace  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Not done.

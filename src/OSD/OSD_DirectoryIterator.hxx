@@ -40,7 +40,7 @@ class OSD_DirectoryIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Instantiates Object as empty Iterator;

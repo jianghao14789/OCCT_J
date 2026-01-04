@@ -32,7 +32,7 @@ class StepVisual_FillStyleSelect  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a FillStyleSelect SelectType

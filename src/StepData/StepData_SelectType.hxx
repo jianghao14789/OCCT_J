@@ -55,7 +55,7 @@ class StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Recognizes the Type of an Entity. Returns a positive Number

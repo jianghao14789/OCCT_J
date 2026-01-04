@@ -39,7 +39,7 @@ class IGESGeom_ToolLine
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolLine, ready to work

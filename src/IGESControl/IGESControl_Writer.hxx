@@ -49,7 +49,7 @@ class IGESControl_Writer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   //! Creates a writer object with the
   //! default unit (millimeters) and write mode (Face).

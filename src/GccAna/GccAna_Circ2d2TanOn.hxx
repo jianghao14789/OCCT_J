@@ -51,7 +51,7 @@ class GccAna_Circ2d2TanOn
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! This method implements the algorithms used to

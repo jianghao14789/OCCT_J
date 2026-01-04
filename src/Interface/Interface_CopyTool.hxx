@@ -63,7 +63,7 @@ class Interface_CopyTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a CopyTool adapted to work from a Model. Works

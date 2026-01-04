@@ -35,7 +35,7 @@ class GeomPlate_MakeApprox
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Converts SurfPlate into a Geom_BSplineSurface with

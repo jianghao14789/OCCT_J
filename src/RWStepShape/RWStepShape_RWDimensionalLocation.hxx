@@ -33,7 +33,7 @@ class RWStepShape_RWDimensionalLocation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

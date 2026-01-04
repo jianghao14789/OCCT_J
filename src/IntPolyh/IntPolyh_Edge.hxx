@@ -29,7 +29,7 @@ class IntPolyh_Edge
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor
   IntPolyh_Edge() :

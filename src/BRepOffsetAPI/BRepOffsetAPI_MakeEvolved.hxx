@@ -82,7 +82,7 @@ class BRepOffsetAPI_MakeEvolved  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepOffsetAPI_MakeEvolved();

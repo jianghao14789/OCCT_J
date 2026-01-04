@@ -43,7 +43,7 @@ class TopOpeBRep_VPointInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     TopOpeBRep_VPointInter();

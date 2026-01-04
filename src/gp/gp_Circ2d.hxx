@@ -50,7 +50,7 @@ class gp_Circ2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! creates an indefinite circle.
   gp_Circ2d()

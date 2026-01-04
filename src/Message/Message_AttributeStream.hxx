@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -21,25 +21,25 @@
 //! Alert object storing stream value
 class Message_AttributeStream : public Message_Attribute
 {
-  DEFINE_STANDARD_RTTIEXT(Message_AttributeStream, Message_Attribute)
+    DEFINE_STANDARD_RTTIEXT(Message_AttributeStream, Message_Attribute)
 public:
 
-  //! Constructor with string argument
-  Standard_EXPORT Message_AttributeStream (const Standard_SStream& theStream,
-                                           const TCollection_AsciiString& theName = TCollection_AsciiString());
+    //! Constructor with string argument
+    Standard_EXPORT Message_AttributeStream(const Standard_SStream& theStream,
+        const TCollection_AsciiString& theName = TCollection_AsciiString());
 
-  //! Returns stream value
-  const Standard_SStream& Stream() const { return myStream; }
+    //! Returns stream value
+    const Standard_SStream& Stream() const { return myStream; }
 
-  //! Sets stream value
-  Standard_EXPORT void SetStream (const Standard_SStream& theStream);
+    //! Sets stream value
+    Standard_EXPORT void SetStream(const Standard_SStream& theStream);
 
-  //! Dumps the content of me into the stream
-  virtual Standard_EXPORT void DumpJson (Standard_OStream& theOStream,
-                                         Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Dumps the content of me into the stream
+    virtual Standard_EXPORT void DumpJson(Standard_OStream& theOStream,
+        Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 private:
-  Standard_SStream myStream; //!< container of values
+    Standard_SStream myStream; //!< container of values
 };
 
 #endif // _Message_AttributeStream_HeaderFile

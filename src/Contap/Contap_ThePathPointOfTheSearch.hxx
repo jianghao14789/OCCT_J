@@ -28,7 +28,7 @@ class Contap_ThePathPointOfTheSearch
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Contap_ThePathPointOfTheSearch();

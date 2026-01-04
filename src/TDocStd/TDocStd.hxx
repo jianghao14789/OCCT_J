@@ -71,7 +71,7 @@ class TDocStd
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! specific GUID of this package

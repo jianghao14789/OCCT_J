@@ -40,7 +40,7 @@ class HLRBRep_ThePolygonOfInterCSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_ThePolygonOfInterCSurf(const gp_Lin& Curve, const Standard_Integer NbPnt);

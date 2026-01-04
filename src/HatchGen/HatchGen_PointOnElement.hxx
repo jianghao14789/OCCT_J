@@ -34,7 +34,7 @@ class HatchGen_PointOnElement  : public HatchGen_IntersectionPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! ---Purpose; Creates an empty point on element

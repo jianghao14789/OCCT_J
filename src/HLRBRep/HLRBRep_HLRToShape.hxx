@@ -63,7 +63,7 @@ class HLRBRep_HLRToShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a framework for filtering the

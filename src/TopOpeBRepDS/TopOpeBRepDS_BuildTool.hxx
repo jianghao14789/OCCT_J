@@ -49,7 +49,7 @@ class TopOpeBRepDS_BuildTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_BuildTool();

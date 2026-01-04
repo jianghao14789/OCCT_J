@@ -30,7 +30,7 @@ class Draw
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! (Re)Load a Draw Harness plugin.
   //! @param theDI  [in] [out] Tcl interpretor to append loaded commands

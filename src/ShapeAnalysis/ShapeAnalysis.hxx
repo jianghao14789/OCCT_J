@@ -64,7 +64,7 @@ class ShapeAnalysis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the outer wire on the face <Face>.

@@ -44,7 +44,7 @@ class BRepBuilderAPI_MakeSolid  : public BRepBuilderAPI_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes the construction of a solid. An empty solid is

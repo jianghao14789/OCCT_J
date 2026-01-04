@@ -31,7 +31,7 @@ class IntCurveSurface_TheCSFunctionOfHInter  : public math_FunctionSetWithDeriva
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT IntCurveSurface_TheCSFunctionOfHInter(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C);

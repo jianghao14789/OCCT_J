@@ -39,7 +39,7 @@ class IGESDefs_ToolUnitsData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolUnitsData, ready to work

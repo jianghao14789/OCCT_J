@@ -65,7 +65,7 @@ class BRepLib_MakeFace  : public BRepLib_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Not done.

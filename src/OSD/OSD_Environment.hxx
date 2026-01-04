@@ -41,7 +41,7 @@ class OSD_Environment
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates the object Environment.

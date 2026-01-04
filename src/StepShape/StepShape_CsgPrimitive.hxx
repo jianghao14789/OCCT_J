@@ -37,7 +37,7 @@ class StepShape_CsgPrimitive  : public StepData_SelectType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a CsgPrimitive SelectType

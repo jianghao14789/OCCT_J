@@ -36,7 +36,7 @@ class Transfer_FindHasher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns hash code for the given finder, in the range [1, theUpperBound].

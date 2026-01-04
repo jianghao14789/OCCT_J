@@ -1,4 +1,4 @@
-// Created by: Peter KURNEV
+﻿// Created by: Peter KURNEV
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -18,12 +18,12 @@
 
 enum BOPAlgo_Operation
 {
-BOPAlgo_COMMON,
-BOPAlgo_FUSE,
-BOPAlgo_CUT,
-BOPAlgo_CUT21,
-BOPAlgo_SECTION,
-BOPAlgo_UNKNOWN
+    BOPAlgo_COMMON,
+    BOPAlgo_FUSE,
+    BOPAlgo_CUT,
+    BOPAlgo_CUT21,
+    BOPAlgo_SECTION,
+    BOPAlgo_UNKNOWN
 };
 
 #endif // _BOPAlgo_Operation_HeaderFile

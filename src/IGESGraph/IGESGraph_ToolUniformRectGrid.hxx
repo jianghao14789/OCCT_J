@@ -40,7 +40,7 @@ class IGESGraph_ToolUniformRectGrid
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolUniformRectGrid, ready to work

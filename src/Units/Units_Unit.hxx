@@ -1,4 +1,4 @@
-// Created on: 1992-10-29
+﻿// Created on: 1992-10-29
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -42,72 +42,72 @@ class Units_Unit : public Standard_Transient
 
 public:
 
-  
-  //! Creates  and returns a  unit.  <aname> is  the name of
-  //! the  unit, <asymbol> is the  usual abbreviation of the
-  //! unit,  and  <avalue> is the  value in relation to  the
-  //! International System of Units.
-  Standard_EXPORT Units_Unit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue, const Handle(Units_Quantity)& aquantity);
-  
-  //! Creates  and returns a  unit.  <aname> is  the name of
-  //! the  unit, <asymbol> is the  usual abbreviation of the
-  //! unit.
-  Standard_EXPORT Units_Unit(const Standard_CString aname, const Standard_CString asymbol);
-  
-  //! Creates  and returns a  unit.  <aname> is  the name of
-  //! the  unit.
-  Standard_EXPORT Units_Unit(const Standard_CString aname);
-  
-  //! Returns the name of the unit <thename>
+
+    //! Creates  and returns a  unit.  <aname> is  the name of
+    //! the  unit, <asymbol> is the  usual abbreviation of the
+    //! unit,  and  <avalue> is the  value in relation to  the
+    //! International System of Units.
+    Standard_EXPORT Units_Unit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue, const Handle(Units_Quantity)& aquantity);
+
+    //! Creates  and returns a  unit.  <aname> is  the name of
+    //! the  unit, <asymbol> is the  usual abbreviation of the
+    //! unit.
+    Standard_EXPORT Units_Unit(const Standard_CString aname, const Standard_CString asymbol);
+
+    //! Creates  and returns a  unit.  <aname> is  the name of
+    //! the  unit.
+    Standard_EXPORT Units_Unit(const Standard_CString aname);
+
+    //! Returns the name of the unit <thename>
     TCollection_AsciiString Name() const;
-  
-  //! Adds a new symbol <asymbol> attached to <me>.
-  Standard_EXPORT void Symbol (const Standard_CString asymbol);
-  
-  //! Returns the  value in relation  with the International
-  //! System of Units.
+
+    //! Adds a new symbol <asymbol> attached to <me>.
+    Standard_EXPORT void Symbol(const Standard_CString asymbol);
+
+    //! Returns the  value in relation  with the International
+    //! System of Units.
     Standard_Real Value() const;
-  
-  //! Returns <thequantity> contained in <me>.
+
+    //! Returns <thequantity> contained in <me>.
     Handle(Units_Quantity) Quantity() const;
-  
-  //! Returns the sequence of symbols <thesymbolssequence>
+
+    //! Returns the sequence of symbols <thesymbolssequence>
     Handle(TColStd_HSequenceOfHAsciiString) SymbolsSequence() const;
-  
-  //! Sets the value <avalue> to <me>.
-    void Value (const Standard_Real avalue);
-  
-  //! Sets the physical Quantity <aquantity> to <me>.
-    void Quantity (const Handle(Units_Quantity)& aquantity);
-  
-  //! Starting with <me>, returns a new Token object.
-  Standard_EXPORT virtual Handle(Units_Token) Token() const;
-  
-  //! Compares all the symbols  linked  within <me> with the
-  //! name of <atoken>,  and returns  True  if there is  one
-  //! symbol equal to the name, False otherwise.
-  Standard_EXPORT Standard_Boolean IsEqual (const Standard_CString astring) const;
-  
-  //! Useful for debugging
-  Standard_EXPORT virtual void Dump (const Standard_Integer ashift, const Standard_Integer alevel) const;
+
+    //! Sets the value <avalue> to <me>.
+    void Value(const Standard_Real avalue);
+
+    //! Sets the physical Quantity <aquantity> to <me>.
+    void Quantity(const Handle(Units_Quantity)& aquantity);
+
+    //! Starting with <me>, returns a new Token object.
+    Standard_EXPORT virtual Handle(Units_Token) Token() const;
+
+    //! Compares all the symbols  linked  within <me> with the
+    //! name of <atoken>,  and returns  True  if there is  one
+    //! symbol equal to the name, False otherwise.
+    Standard_EXPORT Standard_Boolean IsEqual(const Standard_CString astring) const;
+
+    //! Useful for debugging
+    Standard_EXPORT virtual void Dump(const Standard_Integer ashift, const Standard_Integer alevel) const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Units_Unit,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Units_Unit, Standard_Transient)
 
 protected:
 
 
-  Handle(TColStd_HSequenceOfHAsciiString) thesymbolssequence;
-  Standard_Real thevalue;
+    Handle(TColStd_HSequenceOfHAsciiString) thesymbolssequence;
+    Standard_Real thevalue;
 
 
 private:
 
 
-  Handle(TCollection_HAsciiString) thename;
-  Handle(Units_Quantity) thequantity;
+    Handle(TCollection_HAsciiString) thename;
+    Handle(Units_Quantity) thequantity;
 
 
 };

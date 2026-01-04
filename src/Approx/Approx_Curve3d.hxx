@@ -25,7 +25,7 @@ class Approx_Curve3d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Approximation  of  a  curve  with respect of the

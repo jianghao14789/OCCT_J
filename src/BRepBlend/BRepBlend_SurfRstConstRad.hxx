@@ -46,7 +46,7 @@ class BRepBlend_SurfRstConstRad  : public Blend_SurfRstFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepBlend_SurfRstConstRad(const Handle(Adaptor3d_Surface)& Surf, const Handle(Adaptor3d_Surface)& SurfRst, const Handle(Adaptor2d_Curve2d)& Rst, const Handle(Adaptor3d_Curve)& CGuide);

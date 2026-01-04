@@ -44,7 +44,7 @@ class math_Gauss
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Given an input n X n matrix A this constructor performs its LU
   //! decomposition with partial pivoting (interchange of rows).

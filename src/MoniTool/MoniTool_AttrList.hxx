@@ -38,7 +38,7 @@ class MoniTool_AttrList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an AttrList, empty

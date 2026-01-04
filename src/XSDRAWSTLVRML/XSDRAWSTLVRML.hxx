@@ -31,7 +31,7 @@ class XSDRAWSTLVRML
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Inits commands for writing to STL and VRML formats

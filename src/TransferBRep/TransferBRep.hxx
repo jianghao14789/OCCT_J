@@ -56,7 +56,7 @@ class TransferBRep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Get the Shape recorded in a Binder

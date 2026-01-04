@@ -1,4 +1,4 @@
-// Created on: 2012-01-19
+﻿// Created on: 2012-01-19
 // Created by: Dmitry BOBYLEV 
 // Copyright (c) 2012-2014 OPEN CASCADE SAS
 //
@@ -69,9 +69,9 @@
 #ifndef WORKAROUND_SUNPRO_NEW_PLACEMENT
 #define WORKAROUND_SUNPRO_NEW_PLACEMENT
 #if defined(__SUNPRO_CC) && (__SUNPRO_CC <= 0x420)
-inline void* operator new(size_t,void* anAddress) 
+inline void* operator new(size_t, void* anAddress)
 {
-  return anAddress;
+    return anAddress;
 }
 #endif
 #endif
@@ -82,11 +82,11 @@ inline void* operator new(size_t,void* anAddress)
 //!   static const STANDARD_ALIGNED(8, char, THE_ARRAY)[] = {0xFF, 0xFE, 0xFA, 0xFB, 0xFF, 0x11, 0x22, 0x33};
 //! @endcode
 #if defined(_MSC_VER)
-  #define STANDARD_ALIGNED(theAlignment, theType, theVar) __declspec(align(theAlignment)) theType theVar
+#define STANDARD_ALIGNED(theAlignment, theType, theVar) __declspec(align(theAlignment)) theType theVar
 #elif defined(__GNUC__)
-  #define STANDARD_ALIGNED(theAlignment, theType, theVar) theType __attribute__ ((aligned (theAlignment))) theVar
+#define STANDARD_ALIGNED(theAlignment, theType, theVar) theType __attribute__ ((aligned (theAlignment))) theVar
 #else
-  #define STANDARD_ALIGNED(theAlignment, theType, theVar) theType theVar
+#define STANDARD_ALIGNED(theAlignment, theType, theVar) theType theVar
 #endif
 
 #endif // _Standard_DefineAlloc_HeaderFile

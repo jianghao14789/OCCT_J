@@ -40,7 +40,7 @@ class Geom2dHatch_Hatching
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dHatch_Hatching();

@@ -37,7 +37,7 @@ class GeomToStep_MakeCartesianPoint  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeCartesianPoint(const gp_Pnt& P);

@@ -56,7 +56,7 @@ class TopOpeBRep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Prints the name  of  <TLC>  as  a String  on the

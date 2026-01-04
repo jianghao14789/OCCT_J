@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -29,24 +29,24 @@
 //! suppot it; empty in other cases.
 #if defined(__cplusplus) && (__cplusplus >= 201100L)
   // part of C++11 standard
-  #define Standard_OVERRIDE override
+#define Standard_OVERRIDE override
 #elif defined(_MSC_VER) && (_MSC_VER >= 1700)
   // MSVC extension since VS2012
-  #define Standard_OVERRIDE override
+#define Standard_OVERRIDE override
 #else
-  #define Standard_OVERRIDE
+#define Standard_OVERRIDE
 #endif
 
 //! @def Standard_DELETE
 //! Alias for C++11 keyword "=delete" marking methods to be deleted.
 #if defined(__cplusplus) && (__cplusplus >= 201100L)
   // part of C++11 standard
-  #define Standard_DELETE =delete
+#define Standard_DELETE =delete
 #elif defined(_MSC_VER) && (_MSC_VER >= 1800)
   // implemented since VS2013
-  #define Standard_DELETE =delete
+#define Standard_DELETE =delete
 #else
-  #define Standard_DELETE
+#define Standard_DELETE
 #endif
 
 //! @def Standard_FALLTHROUGH
@@ -61,12 +61,12 @@
 //! GCC 7+.
 #if defined(__cplusplus) && (__cplusplus >= 201703L)
   // part of C++17 standard
-  #define Standard_FALLTHROUGH [[fallthrough]];
+#define Standard_FALLTHROUGH [[fallthrough]];
 #elif defined(__GNUC__) && (__GNUC__ >= 7)
   // gcc 7+
-  #define Standard_FALLTHROUGH __attribute__((fallthrough));
+#define Standard_FALLTHROUGH __attribute__((fallthrough));
 #else
-  #define Standard_FALLTHROUGH
+#define Standard_FALLTHROUGH
 #endif
 
 //! @def Standard_NODISCARD
@@ -77,18 +77,18 @@
 //! Expands to C++17 attribute statement "[[nodiscard]]" on compilers that
 //! declare support of this attribute, or equivalent attribute on GCC.
 #if defined(__has_cpp_attribute)
-  #if __has_cpp_attribute(nodiscard)
-    #define Standard_NODISCARD [[nodiscard]]
-  #else
-    #define Standard_NODISCARD
-  #endif
+#if __has_cpp_attribute(nodiscard)
+#define Standard_NODISCARD [[nodiscard]]
+#else
+#define Standard_NODISCARD
+#endif
 #elif defined(__GNUC__) && ! defined(INTEL_COMPILER)
   // According to available documentation, GCC-style __attribute__ ((warn_unused_result))
   // should be available in GCC since version 3.4, and in CLang since 3.9;
   // Intel compiler does not seem to support this
-  #define Standard_NODISCARD __attribute__ ((warn_unused_result))
+#define Standard_NODISCARD __attribute__ ((warn_unused_result))
 #else
-  #define Standard_NODISCARD
+#define Standard_NODISCARD
 #endif
 
 //! @def Standard_UNUSED
@@ -97,20 +97,20 @@
 //!
 //! Expands to "__attribute__((unused))" on GCC and CLang.
 #if defined(__GNUC__) || defined(__clang__)
-  #define Standard_UNUSED __attribute__((unused))
+#define Standard_UNUSED __attribute__((unused))
 #else
-  #define Standard_UNUSED
+#define Standard_UNUSED
 #endif
 
 //! @def Standard_NOINLINE
 //! Macro for disallowing function inlining.
 //! Expands to "__attribute__((noinline))" on GCC and CLang.
 #if defined(__clang__) || (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1)))
-  #define Standard_NOINLINE __attribute__((noinline))
+#define Standard_NOINLINE __attribute__((noinline))
 #elif defined(_MSC_VER)
-  #define Standard_NOINLINE __declspec(noinline)
+#define Standard_NOINLINE __declspec(noinline)
 #else
-  #define Standard_NOINLINE
+#define Standard_NOINLINE
 #endif
 
 //! @def Standard_THREADLOCAL
@@ -118,26 +118,26 @@
 #if defined(__clang__)
   // CLang version: standard CLang > 3.3 or XCode >= 8 (but excluding 32-bit ARM)
   // Note: this has to be in separate #if to avoid failure of preprocessor on other platforms
-  #if __has_feature(cxx_thread_local)
-    #define Standard_THREADLOCAL thread_local
-  #endif
+#if __has_feature(cxx_thread_local)
+#define Standard_THREADLOCAL thread_local
+#endif
 #elif defined(__INTEL_COMPILER)
-  #if (defined(_MSC_VER) && _MSC_VER >= 1900 && __INTEL_COMPILER > 1400)
-    // requires msvcrt vc14+ (Visual Studio 2015+)
-    #define Standard_THREADLOCAL thread_local
-  #elif (!defined(_MSC_VER) && __INTEL_COMPILER > 1500)
-    #define Standard_THREADLOCAL thread_local
-  #endif
+#if (defined(_MSC_VER) && _MSC_VER >= 1900 && __INTEL_COMPILER > 1400)
+  // requires msvcrt vc14+ (Visual Studio 2015+)
+#define Standard_THREADLOCAL thread_local
+#elif (!defined(_MSC_VER) && __INTEL_COMPILER > 1500)
+#define Standard_THREADLOCAL thread_local
+#endif
 #elif (defined(_MSC_VER) && _MSC_VER >= 1900)
   // msvcrt coming with vc14+ (VS2015+)
-  #define Standard_THREADLOCAL thread_local
+#define Standard_THREADLOCAL thread_local
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)))
   // GCC >= 4.8
-  #define Standard_THREADLOCAL thread_local
+#define Standard_THREADLOCAL thread_local
 #endif
 
 #ifndef Standard_THREADLOCAL
-  #define Standard_THREADLOCAL
+#define Standard_THREADLOCAL
 #endif
 
 //! @def Standard_DEPRECATED("message")
@@ -146,16 +146,16 @@
 //! compiler and unless disabled).
 //! If macro OCCT_NO_DEPRECATED is defined, Standard_DEPRECATED is defined empty.
 #ifdef OCCT_NO_DEPRECATED
-  #define Standard_DEPRECATED(theMsg)
+#define Standard_DEPRECATED(theMsg)
 #else
 #if defined(_MSC_VER)
-  #define Standard_DEPRECATED(theMsg) __declspec(deprecated(theMsg))
+#define Standard_DEPRECATED(theMsg) __declspec(deprecated(theMsg))
 #elif defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5) || defined(__clang__))
-  #define Standard_DEPRECATED(theMsg) __attribute__((deprecated(theMsg)))
+#define Standard_DEPRECATED(theMsg) __attribute__((deprecated(theMsg)))
 #elif defined(__GNUC__) && (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-  #define Standard_DEPRECATED(theMsg) __attribute__((deprecated))
+#define Standard_DEPRECATED(theMsg) __attribute__((deprecated))
 #else
-  #define Standard_DEPRECATED(theMsg)
+#define Standard_DEPRECATED(theMsg)
 #endif
 #endif
 
@@ -168,26 +168,26 @@
 //! Enables warnings on use of deprecated features previously disabled by
 //! Standard_DISABLE_DEPRECATION_WARNINGS.
 #if defined(__ICL) || defined (__INTEL_COMPILER)
-  #define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable:1478))
-  #define Standard_ENABLE_DEPRECATION_WARNINGS  __pragma(warning(pop))
+#define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable:1478))
+#define Standard_ENABLE_DEPRECATION_WARNINGS  __pragma(warning(pop))
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))) || defined(__clang__)
   // available since at least gcc 4.2 (maybe earlier), however only gcc 4.6+ supports this pragma inside the function body
   // CLang also supports this gcc syntax (in addition to "clang diagnostic ignored")
-  #define Standard_DISABLE_DEPRECATION_WARNINGS _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"")
-  #define Standard_ENABLE_DEPRECATION_WARNINGS  _Pragma("GCC diagnostic warning \"-Wdeprecated-declarations\"")
+#define Standard_DISABLE_DEPRECATION_WARNINGS _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"")
+#define Standard_ENABLE_DEPRECATION_WARNINGS  _Pragma("GCC diagnostic warning \"-Wdeprecated-declarations\"")
 #elif defined(_MSC_VER)
-  #define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable:4996))
-  #define Standard_ENABLE_DEPRECATION_WARNINGS  __pragma(warning(pop))
+#define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable:4996))
+#define Standard_ENABLE_DEPRECATION_WARNINGS  __pragma(warning(pop))
 #else
-  #define Standard_DISABLE_DEPRECATION_WARNINGS
-  #define Standard_ENABLE_DEPRECATION_WARNINGS
+#define Standard_DISABLE_DEPRECATION_WARNINGS
+#define Standard_ENABLE_DEPRECATION_WARNINGS
 #endif
 
 //! @def OCCT_NO_RVALUE_REFERENCE
 //! Disables methods and constructors that use rvalue references
 //! (C++11 move semantics) not supported by obsolete compilers.
 #if (defined(_MSC_VER) && (_MSC_VER < 1600))
-  #define OCCT_NO_RVALUE_REFERENCE
+#define OCCT_NO_RVALUE_REFERENCE
 #endif
 
 # ifdef _WIN32
@@ -297,11 +297,11 @@
 //! This macro is defined on Windows platform in the case if the code
 //! is being compiled for UWP (Universal Windows Platform).
 #if defined(WINAPI_FAMILY) && WINAPI_FAMILY == WINAPI_FAMILY_APP
- #define OCCT_UWP
+#define OCCT_UWP
 #else
- #ifdef OCCT_UWP
-   #undef OCCT_UWP
- #endif
+#ifdef OCCT_UWP
+#undef OCCT_UWP
+#endif
 #endif
 
 //! @def Standard_ATOMIC
@@ -312,10 +312,10 @@
 //! #endif
 #if (defined(__cplusplus) && __cplusplus >= 201100L) || (defined(_MSC_VER) && _MSC_VER >= 1800) || \
     (defined(__GNUC__) && ((__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7)))
-  #define Standard_HASATOMIC
-  #define Standard_ATOMIC(theType) std::atomic<theType> 
+#define Standard_HASATOMIC
+#define Standard_ATOMIC(theType) std::atomic<theType> 
 #else
-  #define Standard_ATOMIC(theType) theType
+#define Standard_ATOMIC(theType) theType
 #endif
 
 

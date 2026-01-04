@@ -37,7 +37,7 @@ class gce_MakeRotation2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs a rotation through angle Angle about the center Point.

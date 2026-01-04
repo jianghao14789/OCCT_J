@@ -27,7 +27,7 @@ class math_ValueAndWeight
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   math_ValueAndWeight () : myValue(0.), myWeight(0.) {}
   

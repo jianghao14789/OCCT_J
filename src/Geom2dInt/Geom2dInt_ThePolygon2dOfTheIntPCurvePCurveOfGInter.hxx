@@ -41,7 +41,7 @@ class Geom2dInt_ThePolygon2dOfTheIntPCurvePCurveOfGInter  : public Intf_Polygon2
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Compute a polygon on the domain of the curve.

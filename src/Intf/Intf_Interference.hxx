@@ -40,7 +40,7 @@ class Intf_Interference
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Gives the number   of  points of  intersection  in the

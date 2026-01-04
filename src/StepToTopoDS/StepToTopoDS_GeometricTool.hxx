@@ -38,7 +38,7 @@ class StepToTopoDS_GeometricTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Standard_Integer PCurve (const Handle(StepGeom_SurfaceCurve)& SC, const Handle(StepGeom_Surface)& S, Handle(StepGeom_Pcurve)& PC, const Standard_Integer last = 0);

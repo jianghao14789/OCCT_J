@@ -53,7 +53,7 @@ class TopOpeBRepBuild_Builder1  : public TopOpeBRepBuild_Builder
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepBuild_Builder1(const TopOpeBRepDS_BuildTool& BT);

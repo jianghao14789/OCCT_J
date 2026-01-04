@@ -39,7 +39,7 @@ class TopOpeBRepTool_ShapeTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the tolerance of the shape <S>.

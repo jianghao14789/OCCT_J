@@ -35,7 +35,7 @@ class GeomFill_PlanFunc  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_PlanFunc(const gp_Pnt& P, const gp_Vec& V, const Handle(Adaptor3d_Curve)& C);

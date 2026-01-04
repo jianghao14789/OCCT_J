@@ -70,7 +70,7 @@ class StepData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the recorded HeaderProtocol, which can be :

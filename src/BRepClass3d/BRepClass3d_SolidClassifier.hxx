@@ -34,7 +34,7 @@ class BRepClass3d_SolidClassifier  : public BRepClass3d_SClassifier
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! empty constructor

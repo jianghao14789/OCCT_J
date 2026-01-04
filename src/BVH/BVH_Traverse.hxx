@@ -1,4 +1,4 @@
-// Created by: Eugeny MALTCHIKOV
+﻿// Created by: Eugeny MALTCHIKOV
 // Created on: 2019-04-17
 // Copyright (c) 2019 OPEN CASCADE SAS
 //
@@ -135,42 +135,42 @@ class BVH_BaseTraverse
 {
 public: //! @name Metrics comparison for choosing the best branch
 
-  //! Compares the two metrics and chooses the best one.
-  //! Returns true if the first metric is better than the second,
-  //! false otherwise.
-  virtual Standard_Boolean IsMetricBetter (const MetricType&,
-                                           const MetricType&) const
-  {
-    // Keep the left to right tree descend by default
-    return Standard_True;
-  }
+    //! Compares the two metrics and chooses the best one.
+    //! Returns true if the first metric is better than the second,
+    //! false otherwise.
+    virtual Standard_Boolean IsMetricBetter(const MetricType&,
+        const MetricType&) const
+    {
+        // Keep the left to right tree descend by default
+        return Standard_True;
+    }
 
 public: //! @name Rejection of the node by metric
 
-  //! Rejects the node by the metric
-  virtual Standard_Boolean RejectMetric (const MetricType&) const
-  {
-    // Do not reject any nodes by metric by default
-    return Standard_False;
-  }
+    //! Rejects the node by the metric
+    virtual Standard_Boolean RejectMetric(const MetricType&) const
+    {
+        // Do not reject any nodes by metric by default
+        return Standard_False;
+    }
 
 public: //! @name Condition to stop the descend
 
-  //! Returns the flag controlling the tree descend.
-  //! Returns true if the tree descend should be stopped.
-  virtual Standard_Boolean Stop() const
-  {
-    // Do not stop tree descend by default
-    return Standard_False;
-  }
+    //! Returns the flag controlling the tree descend.
+    //! Returns true if the tree descend should be stopped.
+    virtual Standard_Boolean Stop() const
+    {
+        // Do not stop tree descend by default
+        return Standard_False;
+    }
 
 protected: //! @name Constructors
 
-  //! Constructor
-  BVH_BaseTraverse() {}
+    //! Constructor
+    BVH_BaseTraverse() {}
 
-  //! Destructor
-  virtual ~BVH_BaseTraverse() {}
+    //! Destructor
+    virtual ~BVH_BaseTraverse() {}
 };
 
 //! Abstract class implementing the traverse of the single binary tree.
@@ -187,73 +187,74 @@ class BVH_Traverse : public BVH_BaseTraverse<MetricType>
 {
 public: //! @name public types
 
-  typedef typename BVH_Box<NumType, Dimension>::BVH_VecNt BVH_VecNt;
+    typedef typename BVH_Box<NumType, Dimension>::BVH_VecNt BVH_VecNt;
 
 public: //! @name Constructor
 
-  //! Constructor
-  BVH_Traverse()
-    : BVH_BaseTraverse<MetricType>(),
-      myBVHSet (NULL)
-  {}
+    //! Constructor
+    BVH_Traverse()
+        : BVH_BaseTraverse<MetricType>(),
+        myBVHSet(NULL)
+    {
+    }
 
 public: //! @name Setting the set to access the elements and BVH tree
 
-  //! Sets the BVH Set containing the BVH tree
-  void SetBVHSet (BVHSetType* theBVHSet)
-  {
-    myBVHSet = theBVHSet;
-  }
+    //! Sets the BVH Set containing the BVH tree
+    void SetBVHSet(BVHSetType* theBVHSet)
+    {
+        myBVHSet = theBVHSet;
+    }
 
 public: //! @name Rules for Accept/Reject
 
-  //! Basing on the given metric, checks if the whole branch may be
-  //! accepted without any further checks.
-  //! Returns true if the metric is accepted, false otherwise.
-  virtual Standard_Boolean AcceptMetric (const MetricType&) const
-  {
-    // Do not accept the whole branch by default
-    return Standard_False;
-  }
+    //! Basing on the given metric, checks if the whole branch may be
+    //! accepted without any further checks.
+    //! Returns true if the metric is accepted, false otherwise.
+    virtual Standard_Boolean AcceptMetric(const MetricType&) const
+    {
+        // Do not accept the whole branch by default
+        return Standard_False;
+    }
 
-  //! Rejection of the node by bounding box.
-  //! Metric is computed to choose the best branch.
-  //! Returns true if the node should be rejected, false otherwise.
-  virtual Standard_Boolean RejectNode (const BVH_VecNt& theCornerMin,
-                                       const BVH_VecNt& theCornerMax,
-                                       MetricType& theMetric) const = 0;
+    //! Rejection of the node by bounding box.
+    //! Metric is computed to choose the best branch.
+    //! Returns true if the node should be rejected, false otherwise.
+    virtual Standard_Boolean RejectNode(const BVH_VecNt& theCornerMin,
+        const BVH_VecNt& theCornerMax,
+        MetricType& theMetric) const = 0;
 
-  //! Leaf element acceptance.
-  //! Metric of the parent leaf-node is passed to avoid the check on the
-  //! element and accept it unconditionally.
-  //! Returns true if the element has been accepted, false otherwise.
-  virtual Standard_Boolean Accept (const Standard_Integer theIndex,
-                                   const MetricType& theMetric) = 0;
+    //! Leaf element acceptance.
+    //! Metric of the parent leaf-node is passed to avoid the check on the
+    //! element and accept it unconditionally.
+    //! Returns true if the element has been accepted, false otherwise.
+    virtual Standard_Boolean Accept(const Standard_Integer theIndex,
+        const MetricType& theMetric) = 0;
 
 public: //! @name Selection
 
-  //! Selection of the elements from the BVH tree by the
-  //! rules defined in Accept/Reject methods.
-  //! The method requires the BVHSet containing BVH tree to be set.
-  //! Returns the number of accepted elements.
-  Standard_Integer Select()
-  {
-    if (myBVHSet)
+    //! Selection of the elements from the BVH tree by the
+    //! rules defined in Accept/Reject methods.
+    //! The method requires the BVHSet containing BVH tree to be set.
+    //! Returns the number of accepted elements.
+    Standard_Integer Select()
     {
-      const opencascade::handle<BVH_Tree <NumType, Dimension>>& aBVH = myBVHSet->BVH();
-      return Select (aBVH);
+        if (myBVHSet)
+        {
+            const opencascade::handle<BVH_Tree <NumType, Dimension>>& aBVH = myBVHSet->BVH();
+            return Select(aBVH);
+        }
+        return 0;
     }
-    return 0;
-  }
 
-  //! Performs selection of the elements from the BVH tree by the
-  //! rules defined in Accept/Reject methods.
-  //! Returns the number of accepted elements.
-  Standard_Integer Select (const opencascade::handle<BVH_Tree <NumType, Dimension>>& theBVH);
+    //! Performs selection of the elements from the BVH tree by the
+    //! rules defined in Accept/Reject methods.
+    //! Returns the number of accepted elements.
+    Standard_Integer Select(const opencascade::handle<BVH_Tree <NumType, Dimension>>& theBVH);
 
 protected: //! @name Fields
 
-  BVHSetType* myBVHSet;
+    BVHSetType* myBVHSet;
 };
 
 //! Abstract class implementing the parallel traverse of two binary trees.
@@ -270,71 +271,71 @@ class BVH_PairTraverse : public BVH_BaseTraverse<MetricType>
 {
 public: //! @name public types
 
-  typedef typename BVH_Box<NumType, Dimension>::BVH_VecNt BVH_VecNt;
+    typedef typename BVH_Box<NumType, Dimension>::BVH_VecNt BVH_VecNt;
 
 public: //! @name Constructor
 
-  //! Constructor
-  BVH_PairTraverse()
-    : BVH_BaseTraverse<MetricType>(),
-      myBVHSet1 (NULL),
-      myBVHSet2 (NULL)
-  {
-  }
+    //! Constructor
+    BVH_PairTraverse()
+        : BVH_BaseTraverse<MetricType>(),
+        myBVHSet1(NULL),
+        myBVHSet2(NULL)
+    {
+    }
 
 public: //! @name Setting the sets to access the elements and BVH trees
 
-  //! Sets the BVH Sets containing the BVH trees
-  void SetBVHSets (BVHSetType* theBVHSet1,
-                   BVHSetType* theBVHSet2)
-  {
-    myBVHSet1 = theBVHSet1;
-    myBVHSet2 = theBVHSet2;
-  }
+    //! Sets the BVH Sets containing the BVH trees
+    void SetBVHSets(BVHSetType* theBVHSet1,
+        BVHSetType* theBVHSet2)
+    {
+        myBVHSet1 = theBVHSet1;
+        myBVHSet2 = theBVHSet2;
+    }
 
 public: //! @name Rules for Accept/Reject
 
-  //! Rejection of the pair of nodes by bounding boxes.
-  //! Metric is computed to choose the best branch.
-  //! Returns true if the pair of nodes should be rejected, false otherwise.
-  virtual Standard_Boolean RejectNode (const BVH_VecNt& theCornerMin1,
-                                       const BVH_VecNt& theCornerMax1,
-                                       const BVH_VecNt& theCornerMin2,
-                                       const BVH_VecNt& theCornerMax2,
-                                       MetricType& theMetric) const = 0;
+    //! Rejection of the pair of nodes by bounding boxes.
+    //! Metric is computed to choose the best branch.
+    //! Returns true if the pair of nodes should be rejected, false otherwise.
+    virtual Standard_Boolean RejectNode(const BVH_VecNt& theCornerMin1,
+        const BVH_VecNt& theCornerMax1,
+        const BVH_VecNt& theCornerMin2,
+        const BVH_VecNt& theCornerMax2,
+        MetricType& theMetric) const = 0;
 
-  //! Leaf element acceptance.
-  //! Returns true if the pair of elements is accepted, false otherwise.
-  virtual Standard_Boolean Accept (const Standard_Integer theIndex1,
-                                   const Standard_Integer theIndex2) = 0;
+    //! Leaf element acceptance.
+    //! Returns true if the pair of elements is accepted, false otherwise.
+    virtual Standard_Boolean Accept(const Standard_Integer theIndex1,
+        const Standard_Integer theIndex2) = 0;
 
 public: //! @name Selection
 
-  //! Selection of the pairs of elements of two BVH trees by the
-  //! rules defined in Accept/Reject methods.
-  //! The method requires the BVHSets containing BVH trees to be set.
-  //! Returns the number of accepted pairs of elements.
-  Standard_Integer Select()
-  {
-    if (myBVHSet1 && myBVHSet2)
+    //! Selection of the pairs of elements of two BVH trees by the
+    //! rules defined in Accept/Reject methods.
+    //! The method requires the BVHSets containing BVH trees to be set.
+    //! Returns the number of accepted pairs of elements.
+    Standard_Integer Select()
     {
-      const opencascade::handle <BVH_Tree <NumType, Dimension> >& aBVH1 = myBVHSet1->BVH();
-      const opencascade::handle <BVH_Tree <NumType, Dimension> >& aBVH2 = myBVHSet2->BVH();
-      return Select (aBVH1, aBVH2);
+        if (myBVHSet1 && myBVHSet2)
+        {
+            const opencascade::handle <BVH_Tree <NumType, Dimension> >& aBVH1 = myBVHSet1->BVH();
+            const opencascade::handle <BVH_Tree <NumType, Dimension> >& aBVH2 = myBVHSet2->BVH();
+            return Select(aBVH1, aBVH2);
+        }
+        return 0;
     }
-    return 0;
-  }
 
-  //! Performs selection of the elements from two BVH trees by the
-  //! rules defined in Accept/Reject methods.
-  //! Returns the number of accepted pairs of elements.
-  Standard_Integer Select (const opencascade::handle<BVH_Tree <NumType, Dimension>>& theBVH1,
-                           const opencascade::handle<BVH_Tree <NumType, Dimension>>& theBVH2);
+    //! Performs selection of the elements from two BVH trees by the
+    //! rules defined in Accept/Reject methods.
+    //! Returns the number of accepted pairs of elements.
+    Standard_Integer Select(const opencascade::handle<BVH_Tree <NumType, Dimension>>& theBVH1,
+        const opencascade::handle<BVH_Tree <NumType, Dimension>>& theBVH2);
 
 protected: //! @name Fields
 
-  BVHSetType* myBVHSet1;
-  BVHSetType* myBVHSet2;
+    BVHSetType* myBVHSet1;
+    BVHSetType* myBVHSet2;
 
 };
 

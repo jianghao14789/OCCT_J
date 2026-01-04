@@ -36,7 +36,7 @@ class DBRep_IsoBuilder  : public Geom2dHatch_Hatcher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates the builder.

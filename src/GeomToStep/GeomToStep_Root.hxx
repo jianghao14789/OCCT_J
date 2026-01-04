@@ -30,7 +30,7 @@ class GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Standard_Boolean IsDone() const;

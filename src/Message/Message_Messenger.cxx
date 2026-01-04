@@ -1,4 +1,4 @@
-// Created on: 2001-01-06
+﻿// Created on: 2001-01-06
 // Created by: OCC Team
 // Copyright (c) 2001-2014 OPEN CASCADE SAS
 //
@@ -19,15 +19,15 @@
 #include <Message_PrinterOStream.hxx>
 #include <Standard_Dump.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Message_Messenger,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Message_Messenger, Standard_Transient)
 
 //=======================================================================
 //function : Message_Messenger
 //purpose  : 
 //=======================================================================
-Message_Messenger::Message_Messenger ()
+Message_Messenger::Message_Messenger()
 {
-  AddPrinter ( new Message_PrinterOStream );
+    AddPrinter(new Message_PrinterOStream);
 }
 
 //=======================================================================
@@ -35,9 +35,9 @@ Message_Messenger::Message_Messenger ()
 //purpose  : 
 //=======================================================================
 
-Message_Messenger::Message_Messenger (const Handle(Message_Printer)& thePrinter)
+Message_Messenger::Message_Messenger(const Handle(Message_Printer)& thePrinter)
 {
-  AddPrinter (thePrinter);
+    AddPrinter(thePrinter);
 }
 
 //=======================================================================
@@ -45,20 +45,20 @@ Message_Messenger::Message_Messenger (const Handle(Message_Printer)& thePrinter)
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean Message_Messenger::AddPrinter (const Handle(Message_Printer)& thePrinter)
+Standard_Boolean Message_Messenger::AddPrinter(const Handle(Message_Printer)& thePrinter)
 {
-  // check whether printer is already in the list
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (aPrinter == thePrinter)
+    // check whether printer is already in the list
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      return Standard_False;
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (aPrinter == thePrinter)
+        {
+            return Standard_False;
+        }
     }
-  }
 
-  myPrinters.Append (thePrinter);
-  return Standard_True;
+    myPrinters.Append(thePrinter);
+    return Standard_True;
 }
 
 //=======================================================================
@@ -66,19 +66,19 @@ Standard_Boolean Message_Messenger::AddPrinter (const Handle(Message_Printer)& t
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean Message_Messenger::RemovePrinter (const Handle(Message_Printer)& thePrinter)
+Standard_Boolean Message_Messenger::RemovePrinter(const Handle(Message_Printer)& thePrinter)
 {
-  // find printer in the list
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (aPrinter == thePrinter)
+    // find printer in the list
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      myPrinters.Remove (aPrinterIter);
-      return Standard_True;
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (aPrinter == thePrinter)
+        {
+            myPrinters.Remove(aPrinterIter);
+            return Standard_True;
+        }
     }
-  }
-  return Standard_False;
+    return Standard_False;
 }
 
 //=======================================================================
@@ -86,24 +86,24 @@ Standard_Boolean Message_Messenger::RemovePrinter (const Handle(Message_Printer)
 //purpose  : 
 //=======================================================================
 
-Standard_Integer Message_Messenger::RemovePrinters (const Handle(Standard_Type)& theType)
+Standard_Integer Message_Messenger::RemovePrinters(const Handle(Standard_Type)& theType)
 {
-  // remove printers from the list
-  Standard_Integer nb = 0;
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More();)
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (!aPrinter.IsNull() && aPrinter->IsKind (theType))
+    // remove printers from the list
+    Standard_Integer nb = 0;
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More();)
     {
-      myPrinters.Remove (aPrinterIter);
-      nb++;
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull() && aPrinter->IsKind(theType))
+        {
+            myPrinters.Remove(aPrinterIter);
+            nb++;
+        }
+        else
+        {
+            aPrinterIter.Next();
+        }
     }
-    else
-    {
-      aPrinterIter.Next();
-    }
-  }
-  return nb;
+    return nb;
 }
 
 //=======================================================================
@@ -111,51 +111,51 @@ Standard_Integer Message_Messenger::RemovePrinters (const Handle(Standard_Type)&
 //purpose  : 
 //=======================================================================
 
-void Message_Messenger::Send (const Standard_CString theString,
-			      const Message_Gravity theGravity) const
+void Message_Messenger::Send(const Standard_CString theString,
+    const Message_Gravity theGravity) const
 {
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (!aPrinter.IsNull())
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      aPrinter->Send (theString, theGravity);
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull())
+        {
+            aPrinter->Send(theString, theGravity);
+        }
     }
-  }
 }
 
 //=======================================================================
 //function : Send
 //purpose  :
 //=======================================================================
-void Message_Messenger::Send (const Standard_SStream& theStream,
-                              const Message_Gravity theGravity) const
+void Message_Messenger::Send(const Standard_SStream& theStream,
+    const Message_Gravity theGravity) const
 {
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (!aPrinter.IsNull())
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      aPrinter->SendStringStream (theStream, theGravity);
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull())
+        {
+            aPrinter->SendStringStream(theStream, theGravity);
+        }
     }
-  }
 }
 
 //=======================================================================
 //function : Send
 //purpose  :
 //=======================================================================
-void Message_Messenger::Send (const TCollection_AsciiString& theString,
-                              const Message_Gravity theGravity) const
+void Message_Messenger::Send(const TCollection_AsciiString& theString,
+    const Message_Gravity theGravity) const
 {
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (!aPrinter.IsNull())
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      aPrinter->Send (theString, theGravity);
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull())
+        {
+            aPrinter->Send(theString, theGravity);
+        }
     }
-  }
 }
 
 //=======================================================================
@@ -163,43 +163,43 @@ void Message_Messenger::Send (const TCollection_AsciiString& theString,
 //purpose  : 
 //=======================================================================
 
-void Message_Messenger::Send (const TCollection_ExtendedString& theString,
-                              const Message_Gravity theGravity) const
+void Message_Messenger::Send(const TCollection_ExtendedString& theString,
+    const Message_Gravity theGravity) const
 {
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (!aPrinter.IsNull())
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      aPrinter->Send (theString, theGravity);
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull())
+        {
+            aPrinter->Send(theString, theGravity);
+        }
     }
-  }
 }
 
 //=======================================================================
 //function : Send
 //purpose  :
 //=======================================================================
-void Message_Messenger::Send (const Handle(Standard_Transient)& theObject,
-                              const Message_Gravity theGravity) const
+void Message_Messenger::Send(const Handle(Standard_Transient)& theObject,
+    const Message_Gravity theGravity) const
 {
-  for (Message_SequenceOfPrinters::Iterator aPrinterIter (myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-  {
-    const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-    if (!aPrinter.IsNull())
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
     {
-      aPrinter->SendObject (theObject, theGravity);
+        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull())
+        {
+            aPrinter->SendObject(theObject, theGravity);
+        }
     }
-  }
 }
 
 //=======================================================================
 //function : DumpJson
 //purpose  :
 //=======================================================================
-void Message_Messenger::DumpJson (Standard_OStream& theOStream, Standard_Integer) const
+void Message_Messenger::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
 {
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myPrinters.Size())
+        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myPrinters.Size())
 }

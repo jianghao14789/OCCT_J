@@ -44,7 +44,7 @@ class Interface_CheckIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty CheckIterator

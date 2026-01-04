@@ -39,7 +39,7 @@ class gce_MakeMirror2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT gce_MakeMirror2d(const gp_Pnt2d& Point);

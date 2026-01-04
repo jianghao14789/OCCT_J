@@ -57,7 +57,7 @@ class GeomPlate_BuildPlateSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructor  compatible  with  the  old  version

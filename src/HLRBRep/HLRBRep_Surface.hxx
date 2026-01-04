@@ -47,7 +47,7 @@ class HLRBRep_Surface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an undefined surface with no face loaded.

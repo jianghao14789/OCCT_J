@@ -34,7 +34,7 @@ class V3d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Determines the orientation vector corresponding to the predefined orientation type.
   static gp_Dir GetProjAxis (const V3d_TypeOfOrientation theOrientation)

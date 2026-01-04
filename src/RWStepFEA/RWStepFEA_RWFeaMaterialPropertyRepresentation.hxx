@@ -33,7 +33,7 @@ class RWStepFEA_RWFeaMaterialPropertyRepresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor

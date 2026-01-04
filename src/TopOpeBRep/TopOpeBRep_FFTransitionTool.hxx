@@ -34,7 +34,7 @@ class TopOpeBRep_FFTransitionTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static TopOpeBRepDS_Transition ProcessLineTransition (const TopOpeBRep_VPointInter& P, const Standard_Integer Index, const TopAbs_Orientation EdgeOrientation);

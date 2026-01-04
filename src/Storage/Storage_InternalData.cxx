@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -17,7 +17,7 @@
 #include <Storage_InternalData.hxx>
 #include <Storage_Schema.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Storage_InternalData,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Storage_InternalData, Standard_Transient)
 
 Storage_InternalData::Storage_InternalData() : myObjId(1), myTypeId(1)
 {
@@ -25,10 +25,10 @@ Storage_InternalData::Storage_InternalData() : myObjId(1), myTypeId(1)
 
 void Storage_InternalData::Clear()
 {
-  myTypeId = 1;
-  myObjId  = 1;
-  myReadArray.Nullify();
-  myPtoA.Clear();
-  myTypeBinding.Clear();
+    myTypeId = 1;
+    myObjId = 1;
+    myReadArray.Nullify();
+    myPtoA.Clear();
+    myTypeBinding.Clear();
 }
 

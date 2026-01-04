@@ -45,7 +45,7 @@ class XSControl
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the WorkSession of a SessionPilot, but casts it as

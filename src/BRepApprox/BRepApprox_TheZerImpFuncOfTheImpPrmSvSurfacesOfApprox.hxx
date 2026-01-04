@@ -46,7 +46,7 @@ class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox  : public math_Funct
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox();

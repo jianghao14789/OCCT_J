@@ -37,7 +37,7 @@ class TopOpeBRepTool_AncestorsTool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! same as package method TopExp::MapShapeListOfShapes()

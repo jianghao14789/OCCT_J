@@ -41,7 +41,7 @@ class GeomLib_Interpolate
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomLib_Interpolate(const Standard_Integer Degree, const Standard_Integer NumPoints, const TColgp_Array1OfPnt& Points, const TColStd_Array1OfReal& Parameters);

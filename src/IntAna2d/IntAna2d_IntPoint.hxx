@@ -31,7 +31,7 @@ class IntAna2d_IntPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Create an intersection point between 2 parametric 2d lines.

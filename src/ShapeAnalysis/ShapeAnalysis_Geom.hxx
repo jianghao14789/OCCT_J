@@ -35,7 +35,7 @@ class ShapeAnalysis_Geom
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Builds a plane out of a set of points in array

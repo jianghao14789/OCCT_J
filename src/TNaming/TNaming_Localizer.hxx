@@ -43,7 +43,7 @@ class TNaming_Localizer
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TNaming_Localizer();

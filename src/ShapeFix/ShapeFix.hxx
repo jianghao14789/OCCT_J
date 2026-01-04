@@ -64,7 +64,7 @@ class ShapeFix
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Runs SameParameter from BRepLib with these adaptations :

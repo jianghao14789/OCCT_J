@@ -53,7 +53,7 @@ class ShapeConstruct
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Tool for wire triangulation

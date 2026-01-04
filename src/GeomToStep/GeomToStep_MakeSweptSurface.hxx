@@ -35,7 +35,7 @@ class GeomToStep_MakeSweptSurface  : public GeomToStep_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeSweptSurface(const Handle(Geom_SweptSurface)& S);

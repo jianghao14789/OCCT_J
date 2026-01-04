@@ -33,7 +33,7 @@ class StepAP214_AutoDesignOrganizationItem  : public StepAP214_AutoDesignGeneral
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT StepAP214_AutoDesignOrganizationItem();

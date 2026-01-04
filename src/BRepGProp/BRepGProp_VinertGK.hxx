@@ -58,7 +58,7 @@ class BRepGProp_VinertGK  : public GProp_GProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty constructor.

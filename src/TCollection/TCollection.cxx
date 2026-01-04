@@ -1,4 +1,4 @@
-// Created on: 1993-01-14
+﻿// Created on: 1993-01-14
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -63,12 +63,12 @@ static const Standard_Integer THE_TCollection_Primes[THE_NB_PRIMES] =
 // =======================================================================
 Standard_Integer TCollection::NextPrimeForMap(const Standard_Integer N)
 {
-  for (Standard_Integer aPrimeIter = 0; aPrimeIter < THE_NB_PRIMES; ++aPrimeIter)
-  {
-    if (THE_TCollection_Primes[aPrimeIter] > N)
+    for (Standard_Integer aPrimeIter = 0; aPrimeIter < THE_NB_PRIMES; ++aPrimeIter)
     {
-      return THE_TCollection_Primes[aPrimeIter];
+        if (THE_TCollection_Primes[aPrimeIter] > N)
+        {
+            return THE_TCollection_Primes[aPrimeIter];
+        }
     }
-  }
-  throw Standard_OutOfRange ("TCollection::NextPrimeForMap() - requested too big size");
+    throw Standard_OutOfRange("TCollection::NextPrimeForMap() - requested too big size");
 }

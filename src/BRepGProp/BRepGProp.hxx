@@ -46,7 +46,7 @@ class BRepGProp
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes the linear global properties of the shape S,

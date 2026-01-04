@@ -32,7 +32,7 @@ class SWDRAW_ShapeCustom
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Loads commands defined in ShapeCustom

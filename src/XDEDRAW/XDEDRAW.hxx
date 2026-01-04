@@ -35,7 +35,7 @@ class XDEDRAW
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Provides common commands for work XDE

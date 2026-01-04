@@ -1,4 +1,4 @@
-// Created on: 1991-10-10
+﻿// Created on: 1991-10-10
 // Created by: Jean Claude VAUTHIER
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -37,18 +37,18 @@ class gp_Hypr2d;
 //! of the hyperbola.
 //! KeyWords :
 //! Convert, Hyperbola, BSplineCurve, 2D .
-class Convert_HyperbolaToBSplineCurve  : public Convert_ConicToBSplineCurve
+class Convert_HyperbolaToBSplineCurve : public Convert_ConicToBSplineCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! The hyperbola H is limited between the parametric values U1, U2
-  //! and the equivalent B-spline curve has the same orientation as the
-  //! hyperbola.
-  Standard_EXPORT Convert_HyperbolaToBSplineCurve(const gp_Hypr2d& H, const Standard_Real U1, const Standard_Real U2);
+
+        //! The hyperbola H is limited between the parametric values U1, U2
+        //! and the equivalent B-spline curve has the same orientation as the
+        //! hyperbola.
+        Standard_EXPORT Convert_HyperbolaToBSplineCurve(const gp_Hypr2d& H, const Standard_Real U1, const Standard_Real U2);
 
 
 

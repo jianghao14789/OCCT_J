@@ -43,7 +43,7 @@ class TopTools_LocationSet
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns an empty set of locations.

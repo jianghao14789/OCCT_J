@@ -33,7 +33,7 @@ class Plate_LineConstraint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Plate_LineConstraint(const gp_XY& point2d, const gp_Lin& lin, const Standard_Integer iu = 0, const Standard_Integer iv = 0);

@@ -32,7 +32,7 @@ class TopOpeBRepDS_Filter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT TopOpeBRepDS_Filter(const Handle(TopOpeBRepDS_HDataStructure)& HDS, const TopOpeBRepTool_PShapeClassifier& pClassif = 0);

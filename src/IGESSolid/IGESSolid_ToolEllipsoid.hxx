@@ -39,7 +39,7 @@ class IGESSolid_ToolEllipsoid
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolEllipsoid, ready to work

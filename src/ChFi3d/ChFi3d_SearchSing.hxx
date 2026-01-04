@@ -33,7 +33,7 @@ class ChFi3d_SearchSing  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ChFi3d_SearchSing(const Handle(Geom_Curve)& C1, const Handle(Geom_Curve)& C2);

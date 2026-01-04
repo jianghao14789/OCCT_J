@@ -39,7 +39,7 @@ class gp_Lin2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Creates a Line corresponding to X axis of the
   //! reference coordinate system.

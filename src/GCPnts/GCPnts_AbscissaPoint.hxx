@@ -34,7 +34,7 @@ class GCPnts_AbscissaPoint
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Computes the length of the 3D Curve.
   Standard_EXPORT static Standard_Real Length (const Adaptor3d_Curve& theC);

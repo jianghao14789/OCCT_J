@@ -40,7 +40,7 @@ class IGESBasic_ToolAssocGroupType
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolAssocGroupType, ready to work

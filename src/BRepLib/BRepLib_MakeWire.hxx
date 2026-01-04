@@ -80,7 +80,7 @@ class BRepLib_MakeWire  : public BRepLib_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! NotDone MakeWire.

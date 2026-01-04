@@ -41,7 +41,7 @@ class GeomFill_BezierCurves
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty framework for building a Bezier

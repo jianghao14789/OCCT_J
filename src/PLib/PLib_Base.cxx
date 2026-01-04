@@ -1,4 +1,4 @@
-// Created on: 1997-10-22
+﻿// Created on: 1997-10-22
 // Created by: Sergey SOKOLOV
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -18,4 +18,4 @@
 #include <PLib_Base.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(PLib_Base,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(PLib_Base, Standard_Transient)

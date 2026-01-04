@@ -32,7 +32,7 @@ class XmlMFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds the attribute storage drivers to <aDriverTable>.

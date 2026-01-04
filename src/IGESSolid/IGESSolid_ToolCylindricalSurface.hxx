@@ -39,7 +39,7 @@ class IGESSolid_ToolCylindricalSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolCylindricalSurface, ready to work

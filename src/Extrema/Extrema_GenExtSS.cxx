@@ -30,7 +30,7 @@
 class Extrema_FuncDistSS  : public math_MultipleVarFunctionWithGradient
 {
 public:
-    DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Extrema_FuncDistSS(const Adaptor3d_Surface& S1,
                                        const Adaptor3d_Surface& S2)

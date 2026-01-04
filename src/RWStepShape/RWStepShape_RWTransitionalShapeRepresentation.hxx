@@ -34,7 +34,7 @@ class RWStepShape_RWTransitionalShapeRepresentation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT RWStepShape_RWTransitionalShapeRepresentation();

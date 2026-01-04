@@ -41,7 +41,7 @@ class GeomFill_SectionGenerator  : public GeomFill_Profiler
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_SectionGenerator();

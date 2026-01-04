@@ -40,7 +40,7 @@ class ViewerTest
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Loads all Draw commands of  V2d & V3d. Used for plugin.
   Standard_EXPORT static void Factory (Draw_Interpretor& theDI);

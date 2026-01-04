@@ -44,7 +44,7 @@ class Geom2dLProp_CLProps2d
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes the local properties of the curve <C>

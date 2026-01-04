@@ -1,4 +1,4 @@
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
+﻿// Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -13,17 +13,17 @@
 
 #include <Message_ProgressIndicator.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Message_ProgressIndicator,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Message_ProgressIndicator, Standard_Transient)
 
 //=======================================================================
 //function : Message_ProgressIndicator
 //purpose  :
 //=======================================================================
 Message_ProgressIndicator::Message_ProgressIndicator()
-: myPosition(0.),
-  myRootScope (NULL)
+    : myPosition(0.),
+    myRootScope(NULL)
 {
-  myRootScope = new Message_ProgressScope (this);
+    myRootScope = new Message_ProgressScope(this);
 }
 
 //=======================================================================
@@ -32,10 +32,10 @@ Message_ProgressIndicator::Message_ProgressIndicator()
 //=======================================================================
 Message_ProgressIndicator::~Message_ProgressIndicator()
 {
-  // Avoid calling Increment() from myRootScope.Close()
-  myRootScope->myProgress = 0;
-  myRootScope->myIsActive = false;
-  delete myRootScope;
+    // Avoid calling Increment() from myRootScope.Close()
+    myRootScope->myProgress = 0;
+    myRootScope->myIsActive = false;
+    delete myRootScope;
 }
 
 //=======================================================================
@@ -44,11 +44,11 @@ Message_ProgressIndicator::~Message_ProgressIndicator()
 //=======================================================================
 Message_ProgressRange Message_ProgressIndicator::Start()
 {
-  myPosition = 0.;
-  myRootScope->myValue = 0.;
-  Reset();
-  Show (*myRootScope, Standard_False);
-  return myRootScope->Next();
+    myPosition = 0.;
+    myRootScope->myValue = 0.;
+    Reset();
+    Show(*myRootScope, Standard_False);
+    return myRootScope->Next();
 }
 
 //=======================================================================
@@ -56,7 +56,7 @@ Message_ProgressRange Message_ProgressIndicator::Start()
 //purpose  :
 //=======================================================================
 Message_ProgressRange Message_ProgressIndicator::Start
-                       (const Handle(Message_ProgressIndicator)& theProgress)
+(const Handle(Message_ProgressIndicator)& theProgress)
 {
-  return theProgress.IsNull() ? Message_ProgressRange() : theProgress->Start();
+    return theProgress.IsNull() ? Message_ProgressRange() : theProgress->Start();
 }

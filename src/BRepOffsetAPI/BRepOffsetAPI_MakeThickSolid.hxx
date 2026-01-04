@@ -49,7 +49,7 @@ class BRepOffsetAPI_MakeThickSolid  : public BRepOffsetAPI_MakeOffsetShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Constructor does nothing.
   Standard_EXPORT BRepOffsetAPI_MakeThickSolid();

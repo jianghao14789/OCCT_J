@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -30,57 +30,57 @@ class Message_CompositeAlerts;
 class Message_AlertExtended : public Message_Alert
 {
 public:
-  //! Creates new instance of the alert and put it into report with Message_Info gravity.
-  //! It does nothing if such kind of gravity is not active in the report
-  //! @param theReport the message report where new alert is placed
-  //! @param theAttribute container of additional values of the alert
-  //! @return created alert or NULL if Message_Info is not active in report
-  Standard_EXPORT static Handle(Message_Alert) AddAlert (const Handle(Message_Report)& theReport,
-                                                         const Handle(Message_Attribute)& theAttribute,
-                                                         const Message_Gravity theGravity);
+    //! Creates new instance of the alert and put it into report with Message_Info gravity.
+    //! It does nothing if such kind of gravity is not active in the report
+    //! @param theReport the message report where new alert is placed
+    //! @param theAttribute container of additional values of the alert
+    //! @return created alert or NULL if Message_Info is not active in report
+    Standard_EXPORT static Handle(Message_Alert) AddAlert(const Handle(Message_Report)& theReport,
+        const Handle(Message_Attribute)& theAttribute,
+        const Message_Gravity theGravity);
 
 public:
-  //! Empty constructor
-  Message_AlertExtended() : Message_Alert() {}
+    //! Empty constructor
+    Message_AlertExtended() : Message_Alert() {}
 
-  //! Return a C string to be used as a key for generating text user messages describing this alert.
-  //! The messages are generated with help of Message_Msg class, in Message_Report::Dump().
-  //! Base implementation returns dynamic type name of the instance.
-  Standard_EXPORT virtual Standard_CString GetMessageKey() const Standard_OVERRIDE;
+    //! Return a C string to be used as a key for generating text user messages describing this alert.
+    //! The messages are generated with help of Message_Msg class, in Message_Report::Dump().
+    //! Base implementation returns dynamic type name of the instance.
+    Standard_EXPORT virtual Standard_CString GetMessageKey() const Standard_OVERRIDE;
 
-  //! Returns container of the alert attributes
-  const Handle(Message_Attribute)& Attribute() const { return myAttribute; }
+    //! Returns container of the alert attributes
+    const Handle(Message_Attribute)& Attribute() const { return myAttribute; }
 
-  //! Sets container of the alert attributes
-  //! @param theAttributes an attribute values
-  void SetAttribute (const Handle(Message_Attribute)& theAttribute) { myAttribute = theAttribute; }
+    //! Sets container of the alert attributes
+    //! @param theAttributes an attribute values
+    void SetAttribute(const Handle(Message_Attribute)& theAttribute) { myAttribute = theAttribute; }
 
-  //! Returns class provided hierarchy of alerts if created or create if the parameter is true
-  //! @param theToCreate if composite alert has not been created for this alert, it should be created
-  //! @return instance or NULL
-  Standard_EXPORT Handle(Message_CompositeAlerts) CompositeAlerts (const Standard_Boolean theToCreate = Standard_False);
+    //! Returns class provided hierarchy of alerts if created or create if the parameter is true
+    //! @param theToCreate if composite alert has not been created for this alert, it should be created
+    //! @return instance or NULL
+    Standard_EXPORT Handle(Message_CompositeAlerts) CompositeAlerts(const Standard_Boolean theToCreate = Standard_False);
 
-  //! Return true if this type of alert can be merged with other
-  //! of the same type to avoid duplication.
-  //! Hierarchical alerts can not be merged
-  //! Basis implementation returns true.
-  Standard_EXPORT virtual Standard_Boolean SupportsMerge() const Standard_OVERRIDE;
+    //! Return true if this type of alert can be merged with other
+    //! of the same type to avoid duplication.
+    //! Hierarchical alerts can not be merged
+    //! Basis implementation returns true.
+    Standard_EXPORT virtual Standard_Boolean SupportsMerge() const Standard_OVERRIDE;
 
-  //! If possible, merge data contained in this alert to theTarget.
-  //! Base implementation always returns false.
-  //! @return True if merged
-  Standard_EXPORT virtual Standard_Boolean Merge (const Handle(Message_Alert)& theTarget) Standard_OVERRIDE;
+    //! If possible, merge data contained in this alert to theTarget.
+    //! Base implementation always returns false.
+    //! @return True if merged
+    Standard_EXPORT virtual Standard_Boolean Merge(const Handle(Message_Alert)& theTarget) Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  virtual Standard_EXPORT void DumpJson (Standard_OStream& theOStream,
-                                         Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Dumps the content of me into the stream
+    virtual Standard_EXPORT void DumpJson(Standard_OStream& theOStream,
+        Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(Message_AlertExtended, Message_Alert)
+    DEFINE_STANDARD_RTTIEXT(Message_AlertExtended, Message_Alert)
 
 protected:
 
-  Handle(Message_CompositeAlerts) myCompositAlerts; //!< class provided hierarchical structure of alerts
-  Handle(Message_Attribute) myAttribute; //!< container of the alert attributes
+    Handle(Message_CompositeAlerts) myCompositAlerts; //!< class provided hierarchical structure of alerts
+    Handle(Message_Attribute) myAttribute; //!< container of the alert attributes
 };
 
 DEFINE_STANDARD_HANDLE(Message_AlertExtended, Message_Alert)

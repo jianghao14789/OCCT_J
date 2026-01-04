@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -26,10 +26,10 @@
 //function : Origin
 //purpose  : 
 //=======================================================================
-const gp_Pnt&  gp::Origin()
+const gp_Pnt& gp::Origin()
 {
-  static gp_Pnt gp_Origin(0,0,0);
-  return gp_Origin;
+    static gp_Pnt gp_Origin(0, 0, 0);
+    return gp_Origin;
 }
 
 //=======================================================================
@@ -37,10 +37,10 @@ const gp_Pnt&  gp::Origin()
 //purpose  : 
 //=======================================================================
 
-const gp_Dir&  gp::DX()
+const gp_Dir& gp::DX()
 {
-  static gp_Dir gp_DX(1,0,0);
-  return gp_DX;
+    static gp_Dir gp_DX(1, 0, 0);
+    return gp_DX;
 }
 
 //=======================================================================
@@ -48,10 +48,10 @@ const gp_Dir&  gp::DX()
 //purpose  : 
 //=======================================================================
 
-const gp_Dir&  gp::DY()
+const gp_Dir& gp::DY()
 {
-  static gp_Dir gp_DY(0,1,0);
-  return gp_DY;
+    static gp_Dir gp_DY(0, 1, 0);
+    return gp_DY;
 }
 
 //=======================================================================
@@ -59,10 +59,10 @@ const gp_Dir&  gp::DY()
 //purpose  : 
 //=======================================================================
 
-const gp_Dir&  gp::DZ()
+const gp_Dir& gp::DZ()
 {
-  static gp_Dir gp_DZ(0,0,1);
-  return gp_DZ;
+    static gp_Dir gp_DZ(0, 0, 1);
+    return gp_DZ;
 }
 
 //=======================================================================
@@ -70,10 +70,10 @@ const gp_Dir&  gp::DZ()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax1&  gp::OX()
+const gp_Ax1& gp::OX()
 {
-  static gp_Ax1 gp_OX(gp_Pnt(0,0,0),gp_Dir(1,0,0));
-  return gp_OX;
+    static gp_Ax1 gp_OX(gp_Pnt(0, 0, 0), gp_Dir(1, 0, 0));
+    return gp_OX;
 }
 
 //=======================================================================
@@ -81,10 +81,10 @@ const gp_Ax1&  gp::OX()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax1&  gp::OY()
+const gp_Ax1& gp::OY()
 {
-  static gp_Ax1 gp_OY(gp_Pnt(0,0,0),gp_Dir(0,1,0));
-  return gp_OY;
+    static gp_Ax1 gp_OY(gp_Pnt(0, 0, 0), gp_Dir(0, 1, 0));
+    return gp_OY;
 }
 
 //=======================================================================
@@ -92,10 +92,10 @@ const gp_Ax1&  gp::OY()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax1&  gp::OZ()
+const gp_Ax1& gp::OZ()
 {
-  static gp_Ax1 gp_OZ(gp_Pnt(0,0,0),gp_Dir(0,0,1));
-  return gp_OZ;
+    static gp_Ax1 gp_OZ(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1));
+    return gp_OZ;
 }
 
 //=======================================================================
@@ -103,10 +103,10 @@ const gp_Ax1&  gp::OZ()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax2&  gp::XOY()
+const gp_Ax2& gp::XOY()
 {
-  static gp_Ax2 gp_XOY(gp_Pnt(0,0,0),gp_Dir(0,0,1),gp_Dir(1,0,0));
-  return gp_XOY;
+    static gp_Ax2 gp_XOY(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1), gp_Dir(1, 0, 0));
+    return gp_XOY;
 }
 
 //=======================================================================
@@ -114,10 +114,10 @@ const gp_Ax2&  gp::XOY()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax2&  gp::ZOX()
+const gp_Ax2& gp::ZOX()
 {
-  static gp_Ax2 gp_ZOX(gp_Pnt(0,0,0),gp_Dir(0,1,0),gp_Dir(0,0,1));
-  return gp_ZOX;
+    static gp_Ax2 gp_ZOX(gp_Pnt(0, 0, 0), gp_Dir(0, 1, 0), gp_Dir(0, 0, 1));
+    return gp_ZOX;
 }
 
 //=======================================================================
@@ -125,10 +125,10 @@ const gp_Ax2&  gp::ZOX()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax2&  gp::YOZ()
+const gp_Ax2& gp::YOZ()
 {
-  static gp_Ax2 gp_YOZ(gp_Pnt(0,0,0),gp_Dir(1,0,0),gp_Dir(0,1,0));
-  return gp_YOZ;
+    static gp_Ax2 gp_YOZ(gp_Pnt(0, 0, 0), gp_Dir(1, 0, 0), gp_Dir(0, 1, 0));
+    return gp_YOZ;
 }
 
 //=======================================================================
@@ -136,10 +136,10 @@ const gp_Ax2&  gp::YOZ()
 //purpose  : 
 //=======================================================================
 
-const gp_Pnt2d&  gp::Origin2d()
+const gp_Pnt2d& gp::Origin2d()
 {
-  static gp_Pnt2d gp_Origin2d(0,0);
-  return gp_Origin2d;
+    static gp_Pnt2d gp_Origin2d(0, 0);
+    return gp_Origin2d;
 }
 
 //=======================================================================
@@ -147,10 +147,10 @@ const gp_Pnt2d&  gp::Origin2d()
 //purpose  : 
 //=======================================================================
 
-const gp_Dir2d&  gp::DX2d()
+const gp_Dir2d& gp::DX2d()
 {
-  static gp_Dir2d gp_DX2d(1,0);
-  return gp_DX2d;
+    static gp_Dir2d gp_DX2d(1, 0);
+    return gp_DX2d;
 }
 
 //=======================================================================
@@ -158,10 +158,10 @@ const gp_Dir2d&  gp::DX2d()
 //purpose  : 
 //=======================================================================
 
-const gp_Dir2d&  gp::DY2d()
+const gp_Dir2d& gp::DY2d()
 {
-  static gp_Dir2d gp_DY2d(0,1);
-  return gp_DY2d;
+    static gp_Dir2d gp_DY2d(0, 1);
+    return gp_DY2d;
 }
 
 //=======================================================================
@@ -169,10 +169,10 @@ const gp_Dir2d&  gp::DY2d()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax2d&  gp::OX2d()
+const gp_Ax2d& gp::OX2d()
 {
-  static gp_Ax2d gp_OX2d(gp_Pnt2d(0,0),gp_Dir2d(1,0));
-  return gp_OX2d;
+    static gp_Ax2d gp_OX2d(gp_Pnt2d(0, 0), gp_Dir2d(1, 0));
+    return gp_OX2d;
 }
 
 //=======================================================================
@@ -180,9 +180,9 @@ const gp_Ax2d&  gp::OX2d()
 //purpose  : 
 //=======================================================================
 
-const gp_Ax2d&  gp::OY2d()
+const gp_Ax2d& gp::OY2d()
 {
-  static gp_Ax2d gp_OY2d(gp_Pnt2d(0,0),gp_Dir2d(0,1));
-  return gp_OY2d;
+    static gp_Ax2d gp_OY2d(gp_Pnt2d(0, 0), gp_Dir2d(0, 1));
+    return gp_OY2d;
 }
 

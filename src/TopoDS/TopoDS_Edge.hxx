@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -32,14 +32,14 @@
 //! - has an orientation for the underlying edge, in terms
 //! of its geometry (as opposed to orientation in
 //! relation to other shapes).
-class TopoDS_Edge  : public TopoDS_Shape
+class TopoDS_Edge : public TopoDS_Shape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Undefined Edge.
+
+    //! Undefined Edge.
     TopoDS_Edge();
 
 

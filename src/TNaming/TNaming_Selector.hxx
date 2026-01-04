@@ -67,7 +67,7 @@ class TNaming_Selector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! To know if a shape is already identified (not selected)

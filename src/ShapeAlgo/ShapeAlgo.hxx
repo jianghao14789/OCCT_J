@@ -30,7 +30,7 @@ class ShapeAlgo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Provides initerface to the algorithms from Shape Healing.

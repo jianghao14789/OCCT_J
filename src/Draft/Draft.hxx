@@ -31,7 +31,7 @@ class Draft
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns the draft angle of the  face <F> using the

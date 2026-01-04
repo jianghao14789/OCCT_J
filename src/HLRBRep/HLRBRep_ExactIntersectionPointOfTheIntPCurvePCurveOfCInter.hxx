@@ -39,7 +39,7 @@ class HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_ExactIntersectionPointOfTheIntPCurvePCurveOfCInter(const Standard_Address& C1, const Standard_Address& C2, const Standard_Real Tol);

@@ -29,7 +29,7 @@ class Approx_CurveOnSurface
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! This constructor calls perform method. This constructor is deprecated.
   Standard_DEPRECATED("This constructor is deprecated. Use other constructor and perform method instead.")

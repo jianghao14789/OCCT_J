@@ -30,7 +30,7 @@ class HLRTopoBRep_VData
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
     HLRTopoBRep_VData();

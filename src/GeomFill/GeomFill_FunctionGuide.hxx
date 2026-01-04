@@ -42,7 +42,7 @@ class GeomFill_FunctionGuide  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomFill_FunctionGuide(const Handle(GeomFill_SectionLaw)& S, const Handle(Adaptor3d_Curve)& Guide, const Standard_Real ParamOnLaw = 0.0);

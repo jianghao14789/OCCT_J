@@ -39,7 +39,7 @@ class Interface_FloatWriter
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a FloatWriter ready to work, with default options  -

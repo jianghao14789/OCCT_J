@@ -66,7 +66,7 @@ class TopoDSToStep
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeBuilderError (const TopoDSToStep_BuilderError E);

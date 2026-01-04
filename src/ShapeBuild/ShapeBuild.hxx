@@ -33,7 +33,7 @@ class ShapeBuild
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Rebuilds a shape with substitution of some components

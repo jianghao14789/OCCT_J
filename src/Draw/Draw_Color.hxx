@@ -29,7 +29,7 @@ class Draw_Color
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Draw_Color();

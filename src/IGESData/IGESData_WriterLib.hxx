@@ -37,7 +37,7 @@ class IGESData_WriterLib
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds a couple (Module-Protocol) into the global definition set

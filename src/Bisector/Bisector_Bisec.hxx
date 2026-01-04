@@ -55,7 +55,7 @@ class Bisector_Bisec
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Bisector_Bisec();

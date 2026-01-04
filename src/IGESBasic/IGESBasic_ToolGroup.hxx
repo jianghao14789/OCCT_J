@@ -41,7 +41,7 @@ class IGESBasic_ToolGroup
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolGroup, ready to work

@@ -1,4 +1,4 @@
-// Created on: 1995-03-15
+﻿// Created on: 1995-03-15
 // Created by: Laurent PAINNOT
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -38,26 +38,26 @@ class BRep_PolygonOnClosedTriangulation : public BRep_PolygonOnTriangulation
 
 public:
 
-  
-  Standard_EXPORT BRep_PolygonOnClosedTriangulation(const Handle(Poly_PolygonOnTriangulation)& P1, const Handle(Poly_PolygonOnTriangulation)& P2, const Handle(Poly_Triangulation)& Tr, const TopLoc_Location& L);
-  
-  //! Returns True.
-  Standard_EXPORT virtual Standard_Boolean IsPolygonOnClosedTriangulation() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void PolygonOnTriangulation2 (const Handle(Poly_PolygonOnTriangulation)& P2) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual const Handle(Poly_PolygonOnTriangulation)& PolygonOnTriangulation2() const Standard_OVERRIDE;
-  
-  //! Return a copy of this representation.
-  Standard_EXPORT virtual Handle(BRep_CurveRepresentation) Copy() const Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT BRep_PolygonOnClosedTriangulation(const Handle(Poly_PolygonOnTriangulation)& P1, const Handle(Poly_PolygonOnTriangulation)& P2, const Handle(Poly_Triangulation)& Tr, const TopLoc_Location& L);
 
+    //! Returns True.
+    Standard_EXPORT virtual Standard_Boolean IsPolygonOnClosedTriangulation() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void PolygonOnTriangulation2(const Handle(Poly_PolygonOnTriangulation)& P2) Standard_OVERRIDE;
+
+    Standard_EXPORT virtual const Handle(Poly_PolygonOnTriangulation)& PolygonOnTriangulation2() const Standard_OVERRIDE;
+
+    //! Return a copy of this representation.
+    Standard_EXPORT virtual Handle(BRep_CurveRepresentation) Copy() const Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 
-  DEFINE_STANDARD_RTTIEXT(BRep_PolygonOnClosedTriangulation,BRep_PolygonOnTriangulation)
+
+
+    DEFINE_STANDARD_RTTIEXT(BRep_PolygonOnClosedTriangulation, BRep_PolygonOnTriangulation)
 
 protected:
 
@@ -67,7 +67,7 @@ protected:
 private:
 
 
-  Handle(Poly_PolygonOnTriangulation) myPolygon2;
+    Handle(Poly_PolygonOnTriangulation) myPolygon2;
 
 
 };

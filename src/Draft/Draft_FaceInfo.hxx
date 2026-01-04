@@ -32,7 +32,7 @@ class Draft_FaceInfo
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Draft_FaceInfo();

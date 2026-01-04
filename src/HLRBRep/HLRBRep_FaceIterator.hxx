@@ -34,7 +34,7 @@ class HLRBRep_FaceIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT HLRBRep_FaceIterator();

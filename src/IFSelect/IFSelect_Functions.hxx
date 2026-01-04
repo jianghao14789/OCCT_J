@@ -38,7 +38,7 @@ class IFSelect_Functions
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Takes the name of an entity, either as argument,
   //! or (if <name> is empty) on keyboard, and returns the entity

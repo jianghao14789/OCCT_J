@@ -42,7 +42,7 @@ class FairCurve_MinimalVariation  : public FairCurve_Batten
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs the two contact points P1 and P2  and the geometrical

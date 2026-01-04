@@ -39,7 +39,7 @@ class OSD_Host
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes current host by default.

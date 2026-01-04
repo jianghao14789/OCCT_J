@@ -34,7 +34,7 @@ class StepData_FieldList
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Destructor is virtual
   Standard_EXPORT virtual ~StepData_FieldList();

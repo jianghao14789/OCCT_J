@@ -32,7 +32,7 @@ class Geom2dLProp_FuncCurExt  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Geom2dLProp_FuncCurExt(const Handle(Geom2d_Curve)& C, const Standard_Real Tol);

@@ -26,7 +26,7 @@ class BRepExtrema_ExtPC
 {
  public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
   
   BRepExtrema_ExtPC()
   {

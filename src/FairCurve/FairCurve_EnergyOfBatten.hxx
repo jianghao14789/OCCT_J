@@ -43,7 +43,7 @@ class FairCurve_EnergyOfBatten  : public FairCurve_Energy
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Angles corresspond to the Ox axis

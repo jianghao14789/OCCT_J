@@ -45,7 +45,7 @@ class TransferBRep_Reader
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes a non-specialised Reader. Typically, for each norm

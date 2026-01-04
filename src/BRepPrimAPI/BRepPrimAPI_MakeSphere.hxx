@@ -38,7 +38,7 @@ class BRepPrimAPI_MakeSphere  : public BRepPrimAPI_MakeOneAxis
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Make a sphere.

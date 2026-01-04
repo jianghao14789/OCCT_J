@@ -35,7 +35,7 @@ class HLRBRep_ThePolygonToolOfInterCSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Give the bounding box of the polygon.

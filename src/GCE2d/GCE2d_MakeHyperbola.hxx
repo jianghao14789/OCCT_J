@@ -60,7 +60,7 @@ class GCE2d_MakeHyperbola  : public GCE2d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
 

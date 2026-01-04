@@ -1,4 +1,4 @@
-// Created on: 2005-12-19
+﻿// Created on: 2005-12-19
 // Created by: Julia GERASIMOVA
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -22,78 +22,79 @@
 #include <algorithm>
 math_ComputeGaussPointsAndWeights::math_ComputeGaussPointsAndWeights(const Standard_Integer Number)
 {
-  myIsDone = Standard_False;
+    myIsDone = Standard_False;
 
-  try {
-    myPoints  = new TColStd_HArray1OfReal(1, Number);
-    myWeights = new TColStd_HArray1OfReal(1, Number);
+    try {
+        myPoints = new TColStd_HArray1OfReal(1, Number);
+        myWeights = new TColStd_HArray1OfReal(1, Number);
 
-    Standard_Integer i;
+        Standard_Integer i;
 
-    TColStd_Array1OfReal aDiag(1, Number);
-    TColStd_Array1OfReal aSubDiag(1, Number);
+        TColStd_Array1OfReal aDiag(1, Number);
+        TColStd_Array1OfReal aSubDiag(1, Number);
 
-    //Initialization of a real symmetric tridiagonal matrix for
-    //computation of Gauss quadrature.
+        //Initialization of a real symmetric tridiagonal matrix for
+        //computation of Gauss quadrature.
 
-    for (i = 1; i <= Number; i++) {
-      aDiag(i) = 0.;
+        for (i = 1; i <= Number; i++) {
+            aDiag(i) = 0.;
 
-      if (i == 1)
-	aSubDiag(i) = 0.;
-      else {
-	Standard_Integer sqrIm1 = (i-1)*(i-1);
-	aSubDiag(i) = sqrIm1/(4.*sqrIm1 - 1);
-	aSubDiag(i) = Sqrt(aSubDiag(i));
-      }
+            if (i == 1)
+                aSubDiag(i) = 0.;
+            else {
+                Standard_Integer sqrIm1 = (i - 1) * (i - 1);
+                aSubDiag(i) = sqrIm1 / (4. * sqrIm1 - 1);
+                aSubDiag(i) = Sqrt(aSubDiag(i));
+            }
+        }
+
+        // Compute eigen values.
+        math_EigenValuesSearcher EVsearch(aDiag, aSubDiag);
+
+        if (EVsearch.IsDone()) {
+            math_Array1OfValueAndWeight VWarray(1, Number);
+            for (i = 1; i <= Number; i++) {
+                math_Vector anEigenVector = EVsearch.EigenVector(i);
+                Standard_Real aWeight = anEigenVector(1);
+                aWeight = 2. * aWeight * aWeight;
+                math_ValueAndWeight EVW(EVsearch.EigenValue(i), aWeight);
+                VWarray(i) = EVW;
+            }
+
+            std::sort(VWarray.begin(), VWarray.end());
+
+            for (i = 1; i <= Number; i++) {
+                myPoints->ChangeValue(i) = VWarray(i).Value();
+                myWeights->ChangeValue(i) = VWarray(i).Weight();
+            }
+            myIsDone = Standard_True;
+        }
     }
-
-    // Compute eigen values.
-    math_EigenValuesSearcher EVsearch(aDiag, aSubDiag); 
-
-    if (EVsearch.IsDone()) {
-      math_Array1OfValueAndWeight VWarray(1, Number);
-      for (i = 1; i <= Number; i++) {
-	math_Vector anEigenVector = EVsearch.EigenVector(i);
-	Standard_Real aWeight = anEigenVector(1);
-	aWeight = 2. * aWeight * aWeight;
-	math_ValueAndWeight EVW( EVsearch.EigenValue(i), aWeight );
-	VWarray(i) = EVW;
-      }
-
-      std::sort (VWarray.begin(), VWarray.end());
-
-      for (i = 1; i <= Number; i++) {
-	myPoints->ChangeValue(i)  = VWarray(i).Value();
-	myWeights->ChangeValue(i) = VWarray(i).Weight();
-      }      
-      myIsDone = Standard_True;
+    catch (Standard_Failure const&) {
     }
-  } catch (Standard_Failure const&) {
-  }
 }
 
 Standard_Boolean math_ComputeGaussPointsAndWeights::IsDone() const
 {
-  return myIsDone;
+    return myIsDone;
 }
 
 math_Vector math_ComputeGaussPointsAndWeights::Points() const
 {
-  Standard_Integer Number = myPoints->Length();
-  math_Vector thePoints(1, Number);
-  for (Standard_Integer i = 1; i <= Number; i++)
-    thePoints(i) = myPoints->Value(i);
+    Standard_Integer Number = myPoints->Length();
+    math_Vector thePoints(1, Number);
+    for (Standard_Integer i = 1; i <= Number; i++)
+        thePoints(i) = myPoints->Value(i);
 
-  return thePoints;
+    return thePoints;
 }
 
 math_Vector math_ComputeGaussPointsAndWeights::Weights() const
 {
-  Standard_Integer Number = myWeights->Length();
-  math_Vector theWeights(1, Number);
-  for (Standard_Integer i = 1; i <= Number; i++)
-    theWeights(i) = myWeights->Value(i);
+    Standard_Integer Number = myWeights->Length();
+    math_Vector theWeights(1, Number);
+    for (Standard_Integer i = 1; i <= Number; i++)
+        theWeights(i) = myWeights->Value(i);
 
-  return theWeights;
+    return theWeights;
 }

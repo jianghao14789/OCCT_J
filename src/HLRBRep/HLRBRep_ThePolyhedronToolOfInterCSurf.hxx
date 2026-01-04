@@ -34,7 +34,7 @@ class HLRBRep_ThePolyhedronToolOfInterCSurf
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Give the bounding box of the PolyhedronTool.
   static const Bnd_Box& Bounding (const HLRBRep_ThePolyhedronOfInterCSurf& thePolyh);

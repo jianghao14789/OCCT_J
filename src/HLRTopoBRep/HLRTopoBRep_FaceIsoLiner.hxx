@@ -36,7 +36,7 @@ class HLRTopoBRep_FaceIsoLiner
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void Perform (const Standard_Integer FI, const TopoDS_Face& F, HLRTopoBRep_Data& DS, const Standard_Integer nbIsos);

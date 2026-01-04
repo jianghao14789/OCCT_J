@@ -30,7 +30,7 @@ class StdPrs_DeflectionCurve  : public Prs3d_Root
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! adds to the presentation aPresentation the drawing of the curve

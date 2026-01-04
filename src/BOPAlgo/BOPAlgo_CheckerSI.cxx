@@ -53,7 +53,7 @@ class BOPAlgo_FaceSelfIntersect :
   public BOPAlgo_ParallelAlgo {
 
  public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   BOPAlgo_FaceSelfIntersect() : 
     IntTools_FaceFace(),  

@@ -37,7 +37,7 @@ class IntPatch_InterferencePolyhedron  : public Intf_Interference
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Constructs an empty interference of Polyhedron.

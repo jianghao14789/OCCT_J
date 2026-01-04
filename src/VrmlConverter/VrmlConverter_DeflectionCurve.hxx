@@ -42,7 +42,7 @@ class VrmlConverter_DeflectionCurve
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! adds to the OStream the drawing of the curve aCurve with

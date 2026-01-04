@@ -59,7 +59,7 @@ class BOPTools_AlgoTools
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public: //! @name Constants
 

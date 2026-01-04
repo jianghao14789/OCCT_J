@@ -86,7 +86,7 @@ class Interface_STAT
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates a STAT form. At start, one default phase is defined,

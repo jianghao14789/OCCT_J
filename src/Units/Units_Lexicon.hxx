@@ -1,4 +1,4 @@
-// Created on: 1992-06-22
+﻿// Created on: 1992-06-22
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -42,30 +42,30 @@ class Units_Lexicon : public Standard_Transient
 
 public:
 
-  
-  //! Creates an empty instance of Lexicon.
-  Standard_EXPORT Units_Lexicon();
-  
-  //! Reads the file <afilename> to create a sequence  of tokens
-  //! stored in <thesequenceoftokens>.
-  Standard_EXPORT void Creates ();
-  
-  //! Returns the first item of the sequence of tokens.
+
+    //! Creates an empty instance of Lexicon.
+    Standard_EXPORT Units_Lexicon();
+
+    //! Reads the file <afilename> to create a sequence  of tokens
+    //! stored in <thesequenceoftokens>.
+    Standard_EXPORT void Creates();
+
+    //! Returns the first item of the sequence of tokens.
     Handle(Units_TokensSequence) Sequence() const;
 
-  //! Adds to the lexicon a new token with <aword>, <amean>,
-  //! <avalue>  as  arguments.  If there is  already a token
-  //! with   the  field  <theword>  equal    to <aword>, the
-  //! existing token is updated.
-  Standard_EXPORT void AddToken (const Standard_CString aword, const Standard_CString amean, const Standard_Real avalue);
-  
-  //! Useful for debugging.
+    //! Adds to the lexicon a new token with <aword>, <amean>,
+    //! <avalue>  as  arguments.  If there is  already a token
+    //! with   the  field  <theword>  equal    to <aword>, the
+    //! existing token is updated.
+    Standard_EXPORT void AddToken(const Standard_CString aword, const Standard_CString amean, const Standard_Real avalue);
+
+    //! Useful for debugging.
     virtual void Dump() const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Units_Lexicon,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Units_Lexicon, Standard_Transient)
 
 protected:
 
@@ -74,7 +74,7 @@ protected:
 
 private:
 
-  Handle(Units_TokensSequence) thesequenceoftokens;
+    Handle(Units_TokensSequence) thesequenceoftokens;
 
 
 };

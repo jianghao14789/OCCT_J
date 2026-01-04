@@ -28,7 +28,7 @@ class Contap_SurfProps
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Computes  the point <P>, and  normal vector <N> on

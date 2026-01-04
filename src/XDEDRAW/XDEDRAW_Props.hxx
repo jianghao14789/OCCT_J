@@ -29,7 +29,7 @@ class XDEDRAW_Props
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT static void InitCommands (Draw_Interpretor& theCommands);

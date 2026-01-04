@@ -36,7 +36,7 @@ class Interface_GraphContent  : public Interface_EntityIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates an empty GraphContent, ready to be filled

@@ -34,7 +34,7 @@ class Bisector_FunctionInter  : public math_FunctionWithDerivative
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Bisector_FunctionInter();

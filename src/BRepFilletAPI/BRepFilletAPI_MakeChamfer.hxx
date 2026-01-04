@@ -47,7 +47,7 @@ class BRepFilletAPI_MakeChamfer  : public BRepFilletAPI_LocalOperation
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Initializes an algorithm for computing chamfers on the shape S.

@@ -31,7 +31,7 @@ class GeomLib_LogSample  : public math_FunctionSample
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomLib_LogSample(const Standard_Real A, const Standard_Real B, const Standard_Integer N);

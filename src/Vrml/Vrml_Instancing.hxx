@@ -40,7 +40,7 @@ class Vrml_Instancing
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Adds "DEF  <myName>" in  anOStream  (VRML  file).

@@ -35,7 +35,7 @@ class GeomToStep_MakeBSplineSurfaceWithKnotsAndRationalBSplineSurface  : public 
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT GeomToStep_MakeBSplineSurfaceWithKnotsAndRationalBSplineSurface(const Handle(Geom_BSplineSurface)& Bsplin);

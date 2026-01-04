@@ -1,4 +1,4 @@
-// Created on: 1991-06-27
+﻿// Created on: 1991-06-27
 // Created by: Remi LEQUETTE
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS

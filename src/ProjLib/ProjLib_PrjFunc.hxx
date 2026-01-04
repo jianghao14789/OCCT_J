@@ -31,7 +31,7 @@ class ProjLib_PrjFunc  : public math_FunctionSetWithDerivatives
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT ProjLib_PrjFunc(const Adaptor3d_Curve* C, const Standard_Real FixVal, const Adaptor3d_Surface* S, const Standard_Integer Fix);

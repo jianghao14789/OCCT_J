@@ -57,7 +57,7 @@ class gp_Torus
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! creates an indefinite Torus.
   gp_Torus()

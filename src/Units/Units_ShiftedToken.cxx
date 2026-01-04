@@ -1,4 +1,4 @@
-// Created on: 1992-11-05
+﻿// Created on: 1992-11-05
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,20 +21,20 @@
 #include <Units_ShiftedToken.hxx>
 #include <Units_Token.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Units_ShiftedToken,Units_Token)
+IMPLEMENT_STANDARD_RTTIEXT(Units_ShiftedToken, Units_Token)
 
 //=======================================================================
 //function : Units_ShiftedToken
 //purpose  : 
 //=======================================================================
 Units_ShiftedToken::Units_ShiftedToken(const Standard_CString aword,
-				       const Standard_CString amean,
-				       const Standard_Real avalue,
-				       const Standard_Real amove,
-				       const Handle(Units_Dimensions)& adimensions)
-     : Units_Token(aword,amean,avalue,adimensions)
+    const Standard_CString amean,
+    const Standard_Real avalue,
+    const Standard_Real amove,
+    const Handle(Units_Dimensions)& adimensions)
+    : Units_Token(aword, amean, avalue, adimensions)
 {
-  themove = amove;
+    themove = amove;
 }
 
 //=======================================================================
@@ -44,9 +44,9 @@ Units_ShiftedToken::Units_ShiftedToken(const Standard_CString aword,
 
 Handle(Units_Token) Units_ShiftedToken::Creates() const
 {
-  TCollection_AsciiString word = Word();
-  TCollection_AsciiString mean = Mean();
-  return new Units_ShiftedToken(word.ToCString(),mean.ToCString(),Value(),Move(),Dimensions());
+    TCollection_AsciiString word = Word();
+    TCollection_AsciiString mean = Mean();
+    return new Units_ShiftedToken(word.ToCString(), mean.ToCString(), Value(), Move(), Dimensions());
 }
 
 //=======================================================================
@@ -56,7 +56,7 @@ Handle(Units_Token) Units_ShiftedToken::Creates() const
 
 Standard_Real Units_ShiftedToken::Move() const
 {
-  return themove;
+    return themove;
 }
 
 //=======================================================================
@@ -64,9 +64,9 @@ Standard_Real Units_ShiftedToken::Move() const
 //purpose  : 
 //=======================================================================
 
-Standard_Real Units_ShiftedToken::Multiplied (const Standard_Real avalue) const
+Standard_Real Units_ShiftedToken::Multiplied(const Standard_Real avalue) const
 {
-  return (avalue + themove) * Value();
+    return (avalue + themove) * Value();
 }
 
 //=======================================================================
@@ -74,9 +74,9 @@ Standard_Real Units_ShiftedToken::Multiplied (const Standard_Real avalue) const
 //purpose  : 
 //=======================================================================
 
-Standard_Real Units_ShiftedToken::Divided (const Standard_Real avalue) const
+Standard_Real Units_ShiftedToken::Divided(const Standard_Real avalue) const
 {
-  return (avalue / Value()) - themove;
+    return (avalue / Value()) - themove;
 }
 
 //=======================================================================
@@ -85,9 +85,9 @@ Standard_Real Units_ShiftedToken::Divided (const Standard_Real avalue) const
 //=======================================================================
 
 void Units_ShiftedToken::Dump(const Standard_Integer ashift,
-			      const Standard_Integer alevel) const
+    const Standard_Integer alevel) const
 {
-  Units_Token::Dump(ashift,alevel);
-  for(int i=0; i<ashift; i++)std::cout<<"  ";
-  std::cout<<"  move  : "<<themove<<std::endl;
+    Units_Token::Dump(ashift, alevel);
+    for (int i = 0; i < ashift; i++)std::cout << "  ";
+    std::cout << "  move  : " << themove << std::endl;
 }

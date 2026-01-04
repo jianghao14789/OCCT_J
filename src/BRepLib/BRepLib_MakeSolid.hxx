@@ -35,7 +35,7 @@ class BRepLib_MakeSolid  : public BRepLib_MakeShape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Solid covers whole space.

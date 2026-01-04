@@ -39,7 +39,7 @@ public:
   Standard_Integer   NbOwnerMatches;  //!< overall number of entities collected for the same owner
 
 public:
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   //! Empty constructor.
   SelectMgr_SortCriterion()

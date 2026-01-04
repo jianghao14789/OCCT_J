@@ -43,7 +43,7 @@ class STEPConstruct_Assembly
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT STEPConstruct_Assembly();

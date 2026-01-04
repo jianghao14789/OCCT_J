@@ -38,7 +38,7 @@ class Extrema_LocEPCOfLocateExtPC
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   Standard_EXPORT Extrema_LocEPCOfLocateExtPC();

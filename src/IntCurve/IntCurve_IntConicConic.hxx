@@ -43,7 +43,7 @@ class IntCurve_IntConicConic  : public IntRes2d_Intersection
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Empty Constructor

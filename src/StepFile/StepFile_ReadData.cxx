@@ -60,7 +60,7 @@ class StepFile_ReadData::Argument {
 
 public:
   // Standard OCCT memory allocation stuff
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public:
 
@@ -79,7 +79,7 @@ class StepFile_ReadData::ArgumentsPage {
 
 public:
   // Standard OCCT memory allocation stuff
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public:
 
@@ -105,7 +105,7 @@ class StepFile_ReadData::Record {
 
 public:
   // Standard OCCT memory allocation stuff
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public:
 
@@ -125,7 +125,7 @@ class StepFile_ReadData::Scope {
 
 public:
   // Standard OCCT memory allocation stuff
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
 public:
 

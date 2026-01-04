@@ -36,7 +36,7 @@ class MeshVS_Tool
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Creates fill area aspect with values from Drawer according to keys from DrawerAttribute

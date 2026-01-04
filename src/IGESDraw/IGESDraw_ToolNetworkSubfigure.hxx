@@ -39,7 +39,7 @@ class IGESDraw_ToolNetworkSubfigure
 {
 public:
 
-  DEFINE_STANDARD_ALLOC
+  DEFINE_STANDARD_ALLOC;
 
   
   //! Returns a ToolNetworkSubfigure, ready to work

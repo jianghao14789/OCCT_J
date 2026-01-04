@@ -1,4 +1,4 @@
-// Created on: 2013-12-20
+﻿// Created on: 2013-12-20
 // Created by: Denis BOGOLEPOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -33,81 +33,81 @@ class BVH_PrimitiveSet : public BVH_Object<T, N>, public BVH_Set<T, N>
 {
 protected:
 
-  using BVH_Set<T, N>::Box;
+    using BVH_Set<T, N>::Box;
 
 public:
-  static const Standard_Integer MaxTreeDepth = BVH_Constants_MaxTreeDepth;
+    static const Standard_Integer MaxTreeDepth = BVH_Constants_MaxTreeDepth;
 
-  //! Creates set of abstract primitives.
-  BVH_PrimitiveSet()
-  : myBVH (new BVH_Tree<T, N>()),
-    // set default builder - binned SAH split
-    myBuilder (new BVH_BinnedBuilder<T, N, BVH_Constants_NbBinsBest> (BVH_Constants_LeafNodeSizeDefault, BVH_Constants_MaxTreeDepth))
-  {
-    //
-  }
+    //! Creates set of abstract primitives.
+    BVH_PrimitiveSet()
+        : myBVH(new BVH_Tree<T, N>()),
+        // set default builder - binned SAH split
+        myBuilder(new BVH_BinnedBuilder<T, N, BVH_Constants_NbBinsBest>(BVH_Constants_LeafNodeSizeDefault, BVH_Constants_MaxTreeDepth))
+    {
+        //
+    }
 
-  //! Creates set of abstract primitives.
-  BVH_PrimitiveSet (const opencascade::handle<BVH_Builder<T, N> >& theBuilder)
-  : myBVH (new BVH_Tree<T, N>()),
-    myBuilder (theBuilder)
-  {
-    //
-  }
+    //! Creates set of abstract primitives.
+    BVH_PrimitiveSet(const opencascade::handle<BVH_Builder<T, N> >& theBuilder)
+        : myBVH(new BVH_Tree<T, N>()),
+        myBuilder(theBuilder)
+    {
+        //
+    }
 
-  //! Releases resources of set of abstract primitives.
-  virtual ~BVH_PrimitiveSet()
-  {
-    myBVH.Nullify();
-    myBuilder.Nullify();
-  }
+    //! Releases resources of set of abstract primitives.
+    virtual ~BVH_PrimitiveSet()
+    {
+        myBVH.Nullify();
+        myBuilder.Nullify();
+    }
 
 public:
 
-  //! Returns AABB of primitive set.
-  virtual BVH_Box<T, N> Box() const Standard_OVERRIDE
-  {
-    if (BVH_Object<T, N>::myIsDirty)
+    //! Returns AABB of primitive set.
+    virtual BVH_Box<T, N> Box() const Standard_OVERRIDE
     {
-      myBox = BVH_Set<T, N>::Box();
+        if (BVH_Object<T, N>::myIsDirty)
+        {
+            myBox = BVH_Set<T, N>::Box();
+        }
+        return myBox;
     }
-    return myBox;
-  }
 
-  //! Returns BVH tree (and builds it if necessary).
-  virtual const opencascade::handle<BVH_Tree<T, N> >& BVH()
-  {
-    if (BVH_Object<T, N>::myIsDirty)
+    //! Returns BVH tree (and builds it if necessary).
+    virtual const opencascade::handle<BVH_Tree<T, N> >& BVH()
     {
-      Update();
+        if (BVH_Object<T, N>::myIsDirty)
+        {
+            Update();
+        }
+        return myBVH;
     }
-    return myBVH;
-  }
 
-  //! Returns the method (builder) used to construct BVH.
-  virtual const opencascade::handle<BVH_Builder<T, N> >& Builder() const { return myBuilder; }
+    //! Returns the method (builder) used to construct BVH.
+    virtual const opencascade::handle<BVH_Builder<T, N> >& Builder() const { return myBuilder; }
 
-  //! Sets the method (builder) used to construct BVH.
-  virtual void SetBuilder (const opencascade::handle<BVH_Builder<T, N> >& theBuilder) { myBuilder = theBuilder; }
+    //! Sets the method (builder) used to construct BVH.
+    virtual void SetBuilder(const opencascade::handle<BVH_Builder<T, N> >& theBuilder) { myBuilder = theBuilder; }
 
 protected:
 
-  //! Updates BVH of primitive set.
-  virtual void Update()
-  {
-    if (BVH_Object<T, N>::myIsDirty)
+    //! Updates BVH of primitive set.
+    virtual void Update()
     {
-      myBuilder->Build (this, myBVH.operator->(), Box());
-      BVH_Object<T, N>::myIsDirty = Standard_False;
+        if (BVH_Object<T, N>::myIsDirty)
+        {
+            myBuilder->Build(this, myBVH.operator->(), Box());
+            BVH_Object<T, N>::myIsDirty = Standard_False;
+        }
     }
-  }
 
 protected:
 
-  opencascade::handle<BVH_Tree<T, N> >    myBVH;     //!< Constructed bottom-level BVH
-  opencascade::handle<BVH_Builder<T, N> > myBuilder; //!< Builder for bottom-level BVH
+    opencascade::handle<BVH_Tree<T, N> >    myBVH;     //!< Constructed bottom-level BVH
+    opencascade::handle<BVH_Builder<T, N> > myBuilder; //!< Builder for bottom-level BVH
 
-  mutable BVH_Box<T, N> myBox; //!< Cached bounding box of geometric primitives
+    mutable BVH_Box<T, N> myBox; //!< Cached bounding box of geometric primitives
 
 };
 
