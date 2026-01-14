@@ -26,63 +26,63 @@ public:
 
     DEFINE_STANDARD_ALLOC;
 
-        //! Sets or removes signal and FPE (floating-point exception) handlers.
-        //! OCCT signal handlers translate signals raised by C subsystem to C++
-        //! exceptions inheriting Standard_Failure.
-        //!
-        //! ### Windows-specific notes
-        //!
-        //! Compiled with MS VC++ sets 3 main handlers:
-        //! @li Signal handlers (via ::signal() functions) that translate system signals
-        //! (SIGSEGV, SIGFPE, SIGILL) into C++ exceptions (classes inheriting
-        //! Standard_Failure). They only be called if function ::raise() is called
-        //! with one of supported signal type set.
-        //! @li Exception handler OSD::WntHandler() (via ::SetUnhandledExceptionFilter())
-        //! that will be used when user's code is compiled with /EHs option.
-        //! @li Structured exception (SE) translator (via _set_se_translator()) that
-        //! translates SE exceptions (aka asynchronous exceptions) into the
-        //! C++ exceptions inheriting Standard_Failure. This translator will be
-        //! used when user's code is compiled with /EHa option.
-        //!
-        //! This approach ensures that regardless of the option the user chooses to
-        //! compile his code with (/EHs or /EHa), signals (or SE exceptions) will be
-        //! translated into Open CASCADE C++ exceptions.
-        //!
-        //! MinGW should use SEH exception mode for signal handling to work.
-        //!
-        //! ### Linux-specific notes
-        //!
-        //! OSD::SetSignal() sets handlers (via ::sigaction()) for multiple signals
-        //! (SIGFPE, SIGSEGV, etc).
-        //!
-        //! ### Common notes
-        //!
-        //! If @a theFloatingSignal is TRUE then floating point exceptions will
-        //! generate SIGFPE in accordance with the mask
-        //! - Windows: _EM_INVALID | _EM_DENORMAL | _EM_ZERODIVIDE | _EM_OVERFLOW,
-        //!            see _controlfp() system function.
-        //! - Linux:   FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW,
-        //!            see feenableexcept() system function.
-        //!
-        //! If @a theFloatingSignal is FALSE then floating point calculations will gracefully
-        //! complete regardless of occurred exceptions (e.g. division by zero).
-        //! Otherwise the (thread-specific) FPE flags are set to raise signal if one of
-        //! floating-point exceptions (division by zero, overflow, or invalid operation) occurs.
-        //!
-        //! The recommended approach is to call OSD::SetSignal() in the beginning of the 
-        //! execution of the program, in function main() or its equivalent.
-        //! In multithreaded programs it is advisable to call OSD::SetSignal() or
-        //! OSD::SetThreadLocalSignal() with the same parameters in other threads where 
-        //! OCCT is used, to ensure consistency of behavior.
-        //!
-        //! Note that in order to handle signals as C++ exceptions on Linux and under 
-        //! MinGW on Windows it is necessary to compile both OCCT and application with
-        //! OCC_CONVERT_SIGNALS macro, and use macro OCC_CATCH_SIGNALS within each try{}
-        //! block that has to catch this kind of exceptions. 
-        //! 
-        //! Refer to documentation of Standard_ErrorHandler.hxx for details.
-        Standard_EXPORT static void SetSignal(OSD_SignalMode theSignalMode,
-            Standard_Boolean theFloatingSignal);
+    //! Sets or removes signal and FPE (floating-point exception) handlers.
+    //! OCCT signal handlers translate signals raised by C subsystem to C++
+    //! exceptions inheriting Standard_Failure.
+    //!
+    //! ### Windows-specific notes
+    //!
+    //! Compiled with MS VC++ sets 3 main handlers:
+    //! @li Signal handlers (via ::signal() functions) that translate system signals
+    //! (SIGSEGV, SIGFPE, SIGILL) into C++ exceptions (classes inheriting
+    //! Standard_Failure). They only be called if function ::raise() is called
+    //! with one of supported signal type set.
+    //! @li Exception handler OSD::WntHandler() (via ::SetUnhandledExceptionFilter())
+    //! that will be used when user's code is compiled with /EHs option.
+    //! @li Structured exception (SE) translator (via _set_se_translator()) that
+    //! translates SE exceptions (aka asynchronous exceptions) into the
+    //! C++ exceptions inheriting Standard_Failure. This translator will be
+    //! used when user's code is compiled with /EHa option.
+    //!
+    //! This approach ensures that regardless of the option the user chooses to
+    //! compile his code with (/EHs or /EHa), signals (or SE exceptions) will be
+    //! translated into Open CASCADE C++ exceptions.
+    //!
+    //! MinGW should use SEH exception mode for signal handling to work.
+    //!
+    //! ### Linux-specific notes
+    //!
+    //! OSD::SetSignal() sets handlers (via ::sigaction()) for multiple signals
+    //! (SIGFPE, SIGSEGV, etc).
+    //!
+    //! ### Common notes
+    //!
+    //! If @a theFloatingSignal is TRUE then floating point exceptions will
+    //! generate SIGFPE in accordance with the mask
+    //! - Windows: _EM_INVALID | _EM_DENORMAL | _EM_ZERODIVIDE | _EM_OVERFLOW,
+    //!            see _controlfp() system function.
+    //! - Linux:   FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW,
+    //!            see feenableexcept() system function.
+    //!
+    //! If @a theFloatingSignal is FALSE then floating point calculations will gracefully
+    //! complete regardless of occurred exceptions (e.g. division by zero).
+    //! Otherwise the (thread-specific) FPE flags are set to raise signal if one of
+    //! floating-point exceptions (division by zero, overflow, or invalid operation) occurs.
+    //!
+    //! The recommended approach is to call OSD::SetSignal() in the beginning of the 
+    //! execution of the program, in function main() or its equivalent.
+    //! In multithreaded programs it is advisable to call OSD::SetSignal() or
+    //! OSD::SetThreadLocalSignal() with the same parameters in other threads where 
+    //! OCCT is used, to ensure consistency of behavior.
+    //!
+    //! Note that in order to handle signals as C++ exceptions on Linux and under 
+    //! MinGW on Windows it is necessary to compile both OCCT and application with
+    //! OCC_CONVERT_SIGNALS macro, and use macro OCC_CATCH_SIGNALS within each try{}
+    //! block that has to catch this kind of exceptions. 
+    //! 
+    //! Refer to documentation of Standard_ErrorHandler.hxx for details.
+    Standard_EXPORT static void SetSignal(OSD_SignalMode theSignalMode,
+        Standard_Boolean theFloatingSignal);
 
     //! Sets signal and FPE handlers.
     //! Short-cut for OSD::SetSignal (OSD_SignalMode_Set, theFloatingSignal).

@@ -48,9 +48,9 @@ public:
 
 
 
-        //! The equivalent B-spline curve has the same orientation
-        //! as the circle C.
-        Standard_EXPORT Convert_CircleToBSplineCurve(const gp_Circ2d& C, const Convert_ParameterisationType Parameterisation = Convert_TgtThetaOver2);
+    //! The equivalent B-spline curve has the same orientation
+    //! as the circle C.
+    Standard_EXPORT Convert_CircleToBSplineCurve(const gp_Circ2d& C, const Convert_ParameterisationType Parameterisation = Convert_TgtThetaOver2);
 
 
     //! The circle C is limited between the parametric values U1, U2

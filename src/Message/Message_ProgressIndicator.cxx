@@ -17,7 +17,7 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_ProgressIndicator, Standard_Transient)
 
 //=======================================================================
 //function : Message_ProgressIndicator
-//purpose  :
+//purpose  : 构造函数，初始化进度指示器
 //=======================================================================
 Message_ProgressIndicator::Message_ProgressIndicator()
     : myPosition(0.),
@@ -28,10 +28,11 @@ Message_ProgressIndicator::Message_ProgressIndicator()
 
 //=======================================================================
 //function : ~Message_ProgressIndicator
-//purpose  :
+//purpose  : 析构函数
 //=======================================================================
 Message_ProgressIndicator::~Message_ProgressIndicator()
 {
+    // 避免从 myRootScope.Close() 调用 Increment()
     // Avoid calling Increment() from myRootScope.Close()
     myRootScope->myProgress = 0;
     myRootScope->myIsActive = false;
@@ -40,7 +41,7 @@ Message_ProgressIndicator::~Message_ProgressIndicator()
 
 //=======================================================================
 //function : Start()
-//purpose  :
+//purpose  : 启动进度指示
 //=======================================================================
 Message_ProgressRange Message_ProgressIndicator::Start()
 {
@@ -53,7 +54,7 @@ Message_ProgressRange Message_ProgressIndicator::Start()
 
 //=======================================================================
 //function : Start()
-//purpose  :
+//purpose  : 从给定的进度指示器启动进度
 //=======================================================================
 Message_ProgressRange Message_ProgressIndicator::Start
 (const Handle(Message_ProgressIndicator)& theProgress)

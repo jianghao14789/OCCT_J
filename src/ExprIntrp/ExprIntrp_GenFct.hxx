@@ -1,4 +1,4 @@
-// Created on: 1992-08-18
+﻿// Created on: 1992-08-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,17 +36,17 @@ class ExprIntrp_GenFct : public ExprIntrp_Generator
 
 public:
 
-  
-  Standard_EXPORT static Handle(ExprIntrp_GenFct) Create();
-  
-  Standard_EXPORT void Process (const TCollection_AsciiString& str);
-  
-  Standard_EXPORT Standard_Boolean IsDone() const;
+
+    Standard_EXPORT static Handle(ExprIntrp_GenFct) Create();
+
+    Standard_EXPORT void Process(const TCollection_AsciiString& str);
+
+    Standard_EXPORT Standard_Boolean IsDone() const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenFct,ExprIntrp_Generator)
+    DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenFct, ExprIntrp_Generator)
 
 protected:
 
@@ -55,10 +55,10 @@ protected:
 
 private:
 
-  
-  Standard_EXPORT ExprIntrp_GenFct();
 
-  Standard_Boolean done;
+    Standard_EXPORT ExprIntrp_GenFct();
+
+    Standard_Boolean done;
 
 
 };

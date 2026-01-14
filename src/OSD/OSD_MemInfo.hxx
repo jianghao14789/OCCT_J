@@ -1,4 +1,4 @@
-// Created on: 2011-10-05
+﻿// Created on: 2011-10-05
 // Created by: Kirill GAVRILOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -52,74 +52,76 @@ class OSD_MemInfo
 
 public:
 
-  enum Counter
-  {
-    MemPrivate = 0,    //!< Virtual memory allocated for data and stack excluding libraries
-    MemVirtual,        //!< Reserved and committed memory of the virtual address space
-    MemWorkingSet,     //!< Memory pages that are currently resident in physical memory
-    MemWorkingSetPeak, //!< Peak working set size
-    MemSwapUsage,      //!< Space allocated for the pagefile
-    MemSwapUsagePeak,  //!< Peak space allocated for the pagefile
-    MemHeapUsage,      //!< Total space allocated from the heap
-    MemCounter_NB      //!< Indicates total counters number
-  };
+    enum Counter
+    {
+        MemPrivate = 0,    //!< Virtual memory allocated for data and stack excluding libraries
+        MemVirtual,        //!< Reserved and committed memory of the virtual address space
+        MemWorkingSet,     //!< Memory pages that are currently resident in physical memory
+        MemWorkingSetPeak, //!< Peak working set size
+        MemSwapUsage,      //!< Space allocated for the pagefile
+        MemSwapUsagePeak,  //!< Peak space allocated for the pagefile
+        MemHeapUsage,      //!< Total space allocated from the heap
+        MemCounter_NB      //!< Indicates total counters number
+    };
 
 public:
 
-  //! Create and initialize. By default all countes are active
-  Standard_EXPORT OSD_MemInfo (const Standard_Boolean theImmediateUpdate = Standard_True);
+    //! Create and initialize. By default all countes are active
+    Standard_EXPORT OSD_MemInfo(const Standard_Boolean theImmediateUpdate = Standard_True);
 
-  //! Return true if the counter is active
-  Standard_Boolean IsActive (const OSD_MemInfo::Counter theCounter) const { return myActiveCounters[theCounter]; }
+    //! Return true if the counter is active
+    Standard_Boolean IsActive(const OSD_MemInfo::Counter theCounter) const { return myActiveCounters[theCounter]; }
 
-  //! Set all counters active. The information is collected for active counters.
-  //! @param theActive state for counters
-  Standard_EXPORT void SetActive (const Standard_Boolean theActive);
+    //! Set all counters active. The information is collected for active counters.
+    //! @param theActive state for counters
+    Standard_EXPORT void SetActive(const Standard_Boolean theActive);
 
-  //! Set the counter active. The information is collected for active counters.
-  //! @param theCounter type of counter
-  //! @param theActive state for the counter
-  void SetActive (const OSD_MemInfo::Counter theCounter, const Standard_Boolean theActive) { myActiveCounters[theCounter] = theActive; }
+    //! Set the counter active. The information is collected for active counters.
+    //! @param theCounter type of counter
+    //! @param theActive state for the counter
+    void SetActive(const OSD_MemInfo::Counter theCounter, const Standard_Boolean theActive) { myActiveCounters[theCounter] = theActive; }
 
-  //! Clear counters
-  Standard_EXPORT void Clear();
+    //! Clear counters
+    Standard_EXPORT void Clear();
 
-  //! Update counters
-  Standard_EXPORT void Update();
+    //! Update counters
+    Standard_EXPORT void Update();
 
-  //! Return the string representation for all available counter.
-  Standard_EXPORT TCollection_AsciiString ToString() const;
+    //! Return the string representation for all available counter.
+    Standard_EXPORT TCollection_AsciiString ToString() const;
 
-  //! Return value of specified counter in bytes.
-  //! Notice that NOT all counters are available on various systems.
-  //! Standard_Size(-1) means invalid (unavailable) value.
-  Standard_EXPORT Standard_Size Value (const OSD_MemInfo::Counter theCounter) const;
+    //! Return value of specified counter in bytes.
+    //! Notice that NOT all counters are available on various systems.
+    //! Standard_Size(-1) means invalid (unavailable) value.
+    Standard_EXPORT Standard_Size Value(const OSD_MemInfo::Counter theCounter) const;
 
-  //! Return value of specified counter in MiB.
-  //! Notice that NOT all counters are available on various systems.
-  //! Standard_Size(-1) means invalid (unavailable) value.
-  Standard_EXPORT Standard_Size ValueMiB (const OSD_MemInfo::Counter theCounter) const;
+    //! Return value of specified counter in MiB.
+    //! Notice that NOT all counters are available on various systems.
+    //! Standard_Size(-1) means invalid (unavailable) value.
+    Standard_EXPORT Standard_Size ValueMiB(const OSD_MemInfo::Counter theCounter) const;
 
-  //! Return floating value of specified counter in MiB.
-  //! Notice that NOT all counters are available on various systems.
-  //! Standard_Real(-1) means invalid (unavailable) value.
-  Standard_EXPORT Standard_Real ValuePreciseMiB (const OSD_MemInfo::Counter theCounter) const;
+    //! Return floating value of specified counter in MiB.
+    //! Notice that NOT all counters are available on various systems.
+    //! Standard_Real(-1) means invalid (unavailable) value.
+    Standard_EXPORT Standard_Real ValuePreciseMiB(const OSD_MemInfo::Counter theCounter) const;
 
 public:
 
-  //! Return the string representation for all available counter.
-  Standard_EXPORT static TCollection_AsciiString PrintInfo();
+    //! Return the string representation for all available counter.
+    Standard_EXPORT static TCollection_AsciiString PrintInfo();
 
 protected:
 
-  //! Return true if the counter is active and the value is valid
-  Standard_Boolean hasValue (const OSD_MemInfo::Counter theCounter) const
-  { return IsActive (theCounter) && myCounters[theCounter] != Standard_Size(-1); }
+    //! Return true if the counter is active and the value is valid
+    Standard_Boolean hasValue(const OSD_MemInfo::Counter theCounter) const
+    {
+        return IsActive(theCounter) && myCounters[theCounter] != Standard_Size(-1);
+    }
 
 private:
 
-  Standard_Size myCounters[MemCounter_NB]; //!< Counters' values, in bytes
-  Standard_Boolean myActiveCounters[MemCounter_NB]; //!< container of active state for a counter
+    Standard_Size myCounters[MemCounter_NB]; //!< Counters' values, in bytes
+    Standard_Boolean myActiveCounters[MemCounter_NB]; //!< container of active state for a counter
 
 };
 

@@ -1,4 +1,4 @@
-// Created on: 1991-05-14
+﻿// Created on: 1991-05-14
 // Created by: Laurent PAINNOT
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -34,27 +34,27 @@ class math_MultipleVarFunction;
 //! This class implements the integration of a function of multiple
 //! variables between the parameter bounds Lower[a..b] and Upper[a..b].
 //! Warning: Each element of Order must be inferior or equal to 61.
-class math_GaussMultipleIntegration 
+class math_GaussMultipleIntegration
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! The Gauss-Legendre integration with Order = points of
-  //! integration for each unknown, is done on the function F
-  //! between the bounds Lower and Upper.
-  Standard_EXPORT math_GaussMultipleIntegration(math_MultipleVarFunction& F, const math_Vector& Lower, const math_Vector& Upper, const math_IntegerVector& Order);
-  
-  //! returns True if all has been correctly done.
+
+    //! The Gauss-Legendre integration with Order = points of
+    //! integration for each unknown, is done on the function F
+    //! between the bounds Lower and Upper.
+    Standard_EXPORT math_GaussMultipleIntegration(math_MultipleVarFunction& F, const math_Vector& Lower, const math_Vector& Upper, const math_IntegerVector& Order);
+
+    //! returns True if all has been correctly done.
     Standard_Boolean IsDone() const;
-  
-  //! returns the value of the integral.
+
+    //! returns the value of the integral.
     Standard_Real Value() const;
-  
-  //! Prints information on the current state of the object.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+
+    //! Prints information on the current state of the object.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
@@ -69,8 +69,8 @@ private:
 
 
 
-  Standard_Real Val;
-  Standard_Boolean Done;
+    Standard_Real Val;
+    Standard_Boolean Done;
 
 
 };

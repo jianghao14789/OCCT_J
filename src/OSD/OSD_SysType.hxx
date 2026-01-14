@@ -1,4 +1,4 @@
-// Copyright (c) 1992-1999 Matra Datavision
+﻿// Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -24,18 +24,18 @@
 //! WindowsNT and OS2.
 enum OSD_SysType
 {
-OSD_Unknown,
-OSD_Default,
-OSD_UnixBSD,
-OSD_UnixSystemV,
-OSD_VMS,
-OSD_OS2,
-OSD_OSF,
-OSD_MacOs,
-OSD_Taligent,
-OSD_WindowsNT,
-OSD_LinuxREDHAT,
-OSD_Aix
+    OSD_Unknown,
+    OSD_Default,
+    OSD_UnixBSD,
+    OSD_UnixSystemV,
+    OSD_VMS,
+    OSD_OS2,
+    OSD_OSF,
+    OSD_MacOs,
+    OSD_Taligent,
+    OSD_WindowsNT,
+    OSD_LinuxREDHAT,
+    OSD_Aix
 };
 
 #endif // _OSD_SysType_HeaderFile

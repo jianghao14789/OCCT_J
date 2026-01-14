@@ -1,4 +1,4 @@
-// Created on: 2005-12-20
+﻿// Created on: 2005-12-20
 // Created by: Julia GERASIMOVA
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -23,33 +23,34 @@
 #include <Standard_Real.hxx>
 
 //! Simple container storing two reals: value and weight
-class math_ValueAndWeight 
+class math_ValueAndWeight
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
-  
-  math_ValueAndWeight () : myValue(0.), myWeight(0.) {}
-  
-  math_ValueAndWeight (Standard_Real theValue, Standard_Real theWeight)
-  : myValue(theValue), myWeight(theWeight)
-  {}
-  
-  Standard_Real Value() const { return myValue; }
-  
-  Standard_Real Weight() const { return myWeight; }
+    DEFINE_STANDARD_ALLOC;
+
+    math_ValueAndWeight() : myValue(0.), myWeight(0.) {}
+
+    math_ValueAndWeight(Standard_Real theValue, Standard_Real theWeight)
+        : myValue(theValue), myWeight(theWeight)
+    {
+    }
+
+    Standard_Real Value() const { return myValue; }
+
+    Standard_Real Weight() const { return myWeight; }
 
 
 private:
-  Standard_Real myValue;
-  Standard_Real myWeight;
+    Standard_Real myValue;
+    Standard_Real myWeight;
 };
 
 //! Comparison operator for math_ValueAndWeight, needed for sorting algorithms
-inline bool operator < (const math_ValueAndWeight& theLeft, 
-                        const math_ValueAndWeight& theRight)
+inline bool operator < (const math_ValueAndWeight& theLeft,
+    const math_ValueAndWeight& theRight)
 {
-  return theLeft.Value() < theRight.Value();
+    return theLeft.Value() < theRight.Value();
 }
 
 #endif // _math_ValueAndWeight_HeaderFile

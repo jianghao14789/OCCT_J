@@ -1,4 +1,4 @@
-// Created on: 1995-03-06
+﻿// Created on: 1995-03-06
 // Created by: Laurent PAINNOT
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -31,67 +31,67 @@ class Poly_Triangle
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  //! Constructs a triangle and sets all indices to zero.
-  Poly_Triangle() { myNodes[0] =  myNodes[1] = myNodes[2] = 0; }
+    //! Constructs a triangle and sets all indices to zero.
+    Poly_Triangle() { myNodes[0] = myNodes[1] = myNodes[2] = 0; }
 
-  //! Constructs a triangle and sets its three indices,
-  //! where these node values are indices in the table of nodes specific to an existing triangulation of a shape.
-  Poly_Triangle (const Standard_Integer theN1, const Standard_Integer theN2, const Standard_Integer theN3)
-  {
-    myNodes[0] = theN1;
-    myNodes[1] = theN2;
-    myNodes[2] = theN3;
-  }
+    //! Constructs a triangle and sets its three indices,
+    //! where these node values are indices in the table of nodes specific to an existing triangulation of a shape.
+    Poly_Triangle(const Standard_Integer theN1, const Standard_Integer theN2, const Standard_Integer theN3)
+    {
+        myNodes[0] = theN1;
+        myNodes[1] = theN2;
+        myNodes[2] = theN3;
+    }
 
-  //! Sets the value of the three nodes of this triangle.
-  void Set (const Standard_Integer theN1, const Standard_Integer theN2, const Standard_Integer theN3)
-  {
-    myNodes[0] = theN1;
-    myNodes[1] = theN2;
-    myNodes[2] = theN3;
-  }
-  
-  //! Sets the value of node with specified index of this triangle.
-  //! Raises Standard_OutOfRange if index is not in 1,2,3
-  void Set (const Standard_Integer theIndex, const Standard_Integer theNode)
-  {
-    Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 3, "Poly_Triangle::Set(), invalid index");
-    myNodes[theIndex - 1] = theNode;
-  }
+    //! Sets the value of the three nodes of this triangle.
+    void Set(const Standard_Integer theN1, const Standard_Integer theN2, const Standard_Integer theN3)
+    {
+        myNodes[0] = theN1;
+        myNodes[1] = theN2;
+        myNodes[2] = theN3;
+    }
 
-  //! Returns the node indices of this triangle.
-  void Get (Standard_Integer& theN1, Standard_Integer& theN2, Standard_Integer& theN3) const
-  {
-    theN1 = myNodes[0];
-    theN2 = myNodes[1];
-    theN3 = myNodes[2];
-  }
+    //! Sets the value of node with specified index of this triangle.
+    //! Raises Standard_OutOfRange if index is not in 1,2,3
+    void Set(const Standard_Integer theIndex, const Standard_Integer theNode)
+    {
+        Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 3, "Poly_Triangle::Set(), invalid index");
+        myNodes[theIndex - 1] = theNode;
+    }
 
-  //! Get the node of given Index.
-  //! Raises OutOfRange from Standard if Index is not in 1,2,3
-  Standard_Integer Value (const Standard_Integer theIndex) const
-  {
-    Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 3, "Poly_Triangle::Value(), invalid index");
-    return myNodes[theIndex - 1];
-  }
+    //! Returns the node indices of this triangle.
+    void Get(Standard_Integer& theN1, Standard_Integer& theN2, Standard_Integer& theN3) const
+    {
+        theN1 = myNodes[0];
+        theN2 = myNodes[1];
+        theN3 = myNodes[2];
+    }
 
-  Standard_Integer operator() (const Standard_Integer Index) const { return Value(Index); }
+    //! Get the node of given Index.
+    //! Raises OutOfRange from Standard if Index is not in 1,2,3
+    Standard_Integer Value(const Standard_Integer theIndex) const
+    {
+        Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 3, "Poly_Triangle::Value(), invalid index");
+        return myNodes[theIndex - 1];
+    }
 
-  //! Get the node of given Index.
-  //! Raises OutOfRange if Index is not in 1,2,3
-  Standard_Integer& ChangeValue (const Standard_Integer theIndex)
-  {
-    Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 3, "Poly_Triangle::ChangeValue(), invalid index");
-    return myNodes[theIndex - 1];
-  }
+    Standard_Integer operator() (const Standard_Integer Index) const { return Value(Index); }
 
-  Standard_Integer& operator() (const Standard_Integer Index) { return ChangeValue(Index); }
+    //! Get the node of given Index.
+    //! Raises OutOfRange if Index is not in 1,2,3
+    Standard_Integer& ChangeValue(const Standard_Integer theIndex)
+    {
+        Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 3, "Poly_Triangle::ChangeValue(), invalid index");
+        return myNodes[theIndex - 1];
+    }
+
+    Standard_Integer& operator() (const Standard_Integer Index) { return ChangeValue(Index); }
 
 protected:
 
-  Standard_Integer myNodes[3];
+    Standard_Integer myNodes[3];
 
 };
 

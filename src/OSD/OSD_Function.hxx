@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -18,6 +18,6 @@
 // This is in fact a pointer to a function.
 // This is not an "enumeration" but a trick to solve an omission from CDL.
 
-typedef int (* OSD_Function)(...);
+typedef int (*OSD_Function)(...);
 
 #endif

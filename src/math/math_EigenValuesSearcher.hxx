@@ -1,4 +1,4 @@
-// Created on: 2005-12-15
+﻿// Created on: 2005-12-15
 // Created by: Julia GERASIMOVA
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -32,29 +32,29 @@ class StdFail_NotDone;
 
 //! This class finds eigen values and vectors of
 //! real symmetric tridiagonal matrix
-class math_EigenValuesSearcher 
+class math_EigenValuesSearcher
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT math_EigenValuesSearcher(const TColStd_Array1OfReal& Diagonal, const TColStd_Array1OfReal& Subdiagonal);
-  
-  //! Returns Standard_True if computation is performed
-  //! successfully.
-  Standard_EXPORT Standard_Boolean IsDone() const;
-  
-  //! Returns the dimension of matrix
-  Standard_EXPORT Standard_Integer Dimension() const;
-  
-  //! Returns the Index_th eigen value of matrix
-  //! Index must be in [1, Dimension()]
-  Standard_EXPORT Standard_Real EigenValue (const Standard_Integer Index) const;
-  
-  //! Returns the Index_th eigen vector of matrix
-  //! Index must be in [1, Dimension()]
-  Standard_EXPORT math_Vector EigenVector (const Standard_Integer Index) const;
+
+    Standard_EXPORT math_EigenValuesSearcher(const TColStd_Array1OfReal& Diagonal, const TColStd_Array1OfReal& Subdiagonal);
+
+    //! Returns Standard_True if computation is performed
+    //! successfully.
+    Standard_EXPORT Standard_Boolean IsDone() const;
+
+    //! Returns the dimension of matrix
+    Standard_EXPORT Standard_Integer Dimension() const;
+
+    //! Returns the Index_th eigen value of matrix
+    //! Index must be in [1, Dimension()]
+    Standard_EXPORT Standard_Real EigenValue(const Standard_Integer Index) const;
+
+    //! Returns the Index_th eigen vector of matrix
+    //! Index must be in [1, Dimension()]
+    Standard_EXPORT math_Vector EigenVector(const Standard_Integer Index) const;
 
 
 
@@ -69,12 +69,12 @@ private:
 
 
 
-  Handle(TColStd_HArray1OfReal) myDiagonal;
-  Handle(TColStd_HArray1OfReal) mySubdiagonal;
-  Standard_Boolean myIsDone;
-  Standard_Integer myN;
-  Handle(TColStd_HArray1OfReal) myEigenValues;
-  Handle(TColStd_HArray2OfReal) myEigenVectors;
+    Handle(TColStd_HArray1OfReal) myDiagonal;
+    Handle(TColStd_HArray1OfReal) mySubdiagonal;
+    Standard_Boolean myIsDone;
+    Standard_Integer myN;
+    Handle(TColStd_HArray1OfReal) myEigenValues;
+    Handle(TColStd_HArray2OfReal) myEigenVectors;
 
 
 };

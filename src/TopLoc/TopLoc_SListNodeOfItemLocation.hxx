@@ -1,4 +1,4 @@
-// Created on: 1993-02-26
+﻿// Created on: 1993-02-26
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,17 +36,17 @@ class TopLoc_SListNodeOfItemLocation : public Standard_Transient
 
 public:
 
-  
+
     TopLoc_SListNodeOfItemLocation(const TopLoc_ItemLocation& I, const TopLoc_SListOfItemLocation& aTail);
-  
+
     TopLoc_SListOfItemLocation& Tail() const;
-  
+
     TopLoc_ItemLocation& Value() const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(TopLoc_SListNodeOfItemLocation,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(TopLoc_SListNodeOfItemLocation, Standard_Transient)
 
 protected:
 
@@ -56,8 +56,8 @@ protected:
 private:
 
 
-  TopLoc_SListOfItemLocation myTail;
-  TopLoc_ItemLocation myValue;
+    TopLoc_SListOfItemLocation myTail;
+    TopLoc_ItemLocation myValue;
 
 
 };

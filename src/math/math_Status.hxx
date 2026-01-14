@@ -1,4 +1,4 @@
-// Created on: 1991-01-21
+﻿// Created on: 1991-01-21
 // Created by: Isabelle GRIGNON
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -20,11 +20,11 @@
 
 enum math_Status
 {
-math_OK,
-math_TooManyIterations,
-math_FunctionError,
-math_DirectionSearchError,
-math_NotBracketed
+    math_OK,
+    math_TooManyIterations,
+    math_FunctionError,
+    math_DirectionSearchError,
+    math_NotBracketed
 };
 
 #endif // _math_Status_HeaderFile

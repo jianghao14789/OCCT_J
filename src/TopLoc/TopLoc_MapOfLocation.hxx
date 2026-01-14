@@ -1,4 +1,4 @@
-// Created on: 1990-12-19
+﻿// Created on: 1990-12-19
 // Created by: Christophe MARION
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,8 +21,8 @@
 #include <TopLoc_MapLocationHasher.hxx>
 #include <NCollection_Map.hxx>
 
-typedef NCollection_Map<TopLoc_Location,TopLoc_MapLocationHasher> TopLoc_MapOfLocation;
-typedef NCollection_Map<TopLoc_Location,TopLoc_MapLocationHasher>::Iterator TopLoc_MapIteratorOfMapOfLocation;
+typedef NCollection_Map<TopLoc_Location, TopLoc_MapLocationHasher> TopLoc_MapOfLocation;
+typedef NCollection_Map<TopLoc_Location, TopLoc_MapLocationHasher>::Iterator TopLoc_MapIteratorOfMapOfLocation;
 
 
 #endif

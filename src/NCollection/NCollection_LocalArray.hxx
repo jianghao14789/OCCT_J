@@ -1,4 +1,4 @@
-// Created on: 2009-09-23
+﻿// Created on: 2009-09-23
 // Copyright (c) 2009-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -24,59 +24,60 @@ template<class theItem, Standard_Integer MAX_ARRAY_SIZE = 1024> class NCollectio
 {
 public:
 
-  explicit NCollection_LocalArray (const size_t theSize)
-  : myPtr (myBuffer)
-  {
-    Allocate(theSize);
-  }
+    explicit NCollection_LocalArray(const size_t theSize)
+        : myPtr(myBuffer)
+    {
+        Allocate(theSize);
+    }
 
-  NCollection_LocalArray ()
-  : myPtr (myBuffer), mySize(0) {}
+    NCollection_LocalArray()
+        : myPtr(myBuffer), mySize(0) {
+    }
 
-  ~NCollection_LocalArray()
-  {
-    Deallocate();
-  }
+    ~NCollection_LocalArray()
+    {
+        Deallocate();
+    }
 
-  void Allocate (const size_t theSize)
-  {
-    Deallocate();
-    if (theSize > MAX_ARRAY_SIZE)
-      myPtr = (theItem*)Standard::Allocate (theSize * sizeof(theItem));
-    else
-      myPtr = myBuffer;
+    void Allocate(const size_t theSize)
+    {
+        Deallocate();
+        if (theSize > MAX_ARRAY_SIZE)
+            myPtr = (theItem*)Standard::Allocate(theSize * sizeof(theItem));
+        else
+            myPtr = myBuffer;
 
-    mySize = theSize;
-  }
+        mySize = theSize;
+    }
 
-  size_t Size() const
-  {
-    return mySize;
-  }
+    size_t Size() const
+    {
+        return mySize;
+    }
 
-  operator theItem*() const
-  {
-    return myPtr;
-  }
+    operator theItem* () const
+    {
+        return myPtr;
+    }
 
 private:
 
-  NCollection_LocalArray (const NCollection_LocalArray& );
-  NCollection_LocalArray& operator= (const NCollection_LocalArray& );
+    NCollection_LocalArray(const NCollection_LocalArray&);
+    NCollection_LocalArray& operator= (const NCollection_LocalArray&);
 
 protected:
 
-  void Deallocate()
-  {
-    if (myPtr != myBuffer)
-      Standard::Free (myPtr);
-  }
+    void Deallocate()
+    {
+        if (myPtr != myBuffer)
+            Standard::Free(myPtr);
+    }
 
 protected:
 
-  theItem  myBuffer[MAX_ARRAY_SIZE];
-  theItem* myPtr;
-  size_t mySize;
+    theItem  myBuffer[MAX_ARRAY_SIZE];
+    theItem* myPtr;
+    size_t mySize;
 
 };
 

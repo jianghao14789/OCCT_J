@@ -1,4 +1,4 @@
-// Created on: 1994-02-08
+﻿// Created on: 1994-02-08
 // Created by: Gilles DEBARBOUILLE
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Quantity_PeriodDefinitionError;
 DEFINE_STANDARD_HANDLE(Quantity_PeriodDefinitionError, Standard_DomainError)
 
 #if !defined No_Exception && !defined No_Quantity_PeriodDefinitionError
-  #define Quantity_PeriodDefinitionError_Raise_if(CONDITION, MESSAGE) \
+#define Quantity_PeriodDefinitionError_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Quantity_PeriodDefinitionError(MESSAGE);
 #else
-  #define Quantity_PeriodDefinitionError_Raise_if(CONDITION, MESSAGE)
+#define Quantity_PeriodDefinitionError_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Quantity_PeriodDefinitionError, Standard_DomainError)

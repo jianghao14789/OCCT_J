@@ -61,9 +61,9 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Returns the degree of the BSpline curve whose data is
-        //! computed in this framework.
-        Standard_EXPORT Standard_Integer Degree() const;
+    //! Returns the degree of the BSpline curve whose data is
+    //! computed in this framework.
+    Standard_EXPORT Standard_Integer Degree() const;
 
     //! Returns the number of poles of the BSpline curve whose
     //! data is computed in this framework.

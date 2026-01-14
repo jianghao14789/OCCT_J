@@ -1,4 +1,4 @@
-// Created on: 1997-03-03
+﻿// Created on: 1997-03-03
 // Created by: Xavier BENVENISTE
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,36 +29,36 @@ class BSplCLib_EvaluatorFunction
 {
 public:
 
-  //! Empty constructor
-  BSplCLib_EvaluatorFunction () {}
+    //! Empty constructor
+    BSplCLib_EvaluatorFunction() {}
 
-  //! Destructor should be declared as virtual
-  virtual ~BSplCLib_EvaluatorFunction () {}
+    //! Destructor should be declared as virtual
+    virtual ~BSplCLib_EvaluatorFunction() {}
 
-  //! Function evaluation method to be defined by descendant
-  virtual void Evaluate (const Standard_Integer theDerivativeRequest,
-                         const Standard_Real*   theStartEnd,
-                         const Standard_Real    theParameter,
-                         Standard_Real&         theResult,
-                         Standard_Integer&      theErrorCode) const = 0;
+    //! Function evaluation method to be defined by descendant
+    virtual void Evaluate(const Standard_Integer theDerivativeRequest,
+        const Standard_Real* theStartEnd,
+        const Standard_Real    theParameter,
+        Standard_Real& theResult,
+        Standard_Integer& theErrorCode) const = 0;
 
-  //! Shortcut for function-call style usage
-  void operator () (const Standard_Integer theDerivativeRequest,
-                    const Standard_Real*   theStartEnd,
-                    const Standard_Real    theParameter,
-                    Standard_Real&         theResult,
-                    Standard_Integer&      theErrorCode) const
-  {
-    Evaluate (theDerivativeRequest, theStartEnd, theParameter, theResult, theErrorCode);
-  }
+    //! Shortcut for function-call style usage
+    void operator () (const Standard_Integer theDerivativeRequest,
+        const Standard_Real* theStartEnd,
+        const Standard_Real    theParameter,
+        Standard_Real& theResult,
+        Standard_Integer& theErrorCode) const
+    {
+        Evaluate(theDerivativeRequest, theStartEnd, theParameter, theResult, theErrorCode);
+    }
 
 private:
 
-  //! Copy constructor is declared private to forbid copying
-  BSplCLib_EvaluatorFunction (const BSplCLib_EvaluatorFunction&) {}
+    //! Copy constructor is declared private to forbid copying
+    BSplCLib_EvaluatorFunction(const BSplCLib_EvaluatorFunction&) {}
 
-  //! Assignment operator is declared private to forbid copying
-  void operator = (const BSplCLib_EvaluatorFunction&) {}
+    //! Assignment operator is declared private to forbid copying
+    void operator = (const BSplCLib_EvaluatorFunction&) {}
 };
 
 #endif

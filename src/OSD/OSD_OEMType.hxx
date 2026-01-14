@@ -1,4 +1,4 @@
-// Copyright (c) 1992-1999 Matra Datavision
+﻿// Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,18 +19,18 @@
 //! used in OSD_Host::MachineType
 enum OSD_OEMType
 {
-OSD_Unavailable,
-OSD_SUN,
-OSD_DEC,
-OSD_SGI,
-OSD_NEC,
-OSD_MAC,
-OSD_PC,
-OSD_HP,
-OSD_IBM,
-OSD_VAX,
-OSD_LIN,
-OSD_AIX
+    OSD_Unavailable,
+    OSD_SUN,
+    OSD_DEC,
+    OSD_SGI,
+    OSD_NEC,
+    OSD_MAC,
+    OSD_PC,
+    OSD_HP,
+    OSD_IBM,
+    OSD_VAX,
+    OSD_LIN,
+    OSD_AIX
 };
 
 #endif // _OSD_OEMType_HeaderFile

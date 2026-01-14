@@ -1,4 +1,4 @@
-// Copyright (c) 2018 OPEN CASCADE SAS
+﻿// Copyright (c) 2018 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -28,10 +28,10 @@
 //! @endcode
 
 #if defined(__clang__)
-  #pragma clang diagnostic pop
+#pragma clang diagnostic pop
 #elif defined(_MSC_VER)
-  #pragma warning(pop)
+#pragma warning(pop)
 #elif defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-  #pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
 

@@ -1,4 +1,4 @@
-// Created on: 1991-01-14
+﻿// Created on: 1991-01-14
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,32 +36,32 @@ class Expr_Different : public Expr_SingleRelation
 
 public:
 
-  
-  //! Creates the relation <exp1> # <exp2>.
-  Standard_EXPORT Expr_Different(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2);
-  
-  Standard_EXPORT Standard_Boolean IsSatisfied() const Standard_OVERRIDE;
-  
-  //! Returns a GeneralRelation after replacement of
-  //! NamedUnknowns by an associated expression, and after
-  //! values computation.
-  Standard_EXPORT Handle(Expr_GeneralRelation) Simplified() const Standard_OVERRIDE;
-  
-  //! Replaces NamedUnknowns by associated expressions,
-  //! and computes values in <me>.
-  Standard_EXPORT void Simplify() Standard_OVERRIDE;
-  
-  //! Returns a copy of <me> having the same unknowns and
-  //! functions.
-  Standard_EXPORT Handle(Expr_GeneralRelation) Copy() const Standard_OVERRIDE;
-  
-  //! returns a string representing <me> in a readable way.
-  Standard_EXPORT TCollection_AsciiString String() const Standard_OVERRIDE;
+
+    //! Creates the relation <exp1> # <exp2>.
+    Standard_EXPORT Expr_Different(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2);
+
+    Standard_EXPORT Standard_Boolean IsSatisfied() const Standard_OVERRIDE;
+
+    //! Returns a GeneralRelation after replacement of
+    //! NamedUnknowns by an associated expression, and after
+    //! values computation.
+    Standard_EXPORT Handle(Expr_GeneralRelation) Simplified() const Standard_OVERRIDE;
+
+    //! Replaces NamedUnknowns by associated expressions,
+    //! and computes values in <me>.
+    Standard_EXPORT void Simplify() Standard_OVERRIDE;
+
+    //! Returns a copy of <me> having the same unknowns and
+    //! functions.
+    Standard_EXPORT Handle(Expr_GeneralRelation) Copy() const Standard_OVERRIDE;
+
+    //! returns a string representing <me> in a readable way.
+    Standard_EXPORT TCollection_AsciiString String() const Standard_OVERRIDE;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Expr_Different,Expr_SingleRelation)
+    DEFINE_STANDARD_RTTIEXT(Expr_Different, Expr_SingleRelation)
 
 protected:
 

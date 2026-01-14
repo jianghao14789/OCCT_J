@@ -1,4 +1,4 @@
-// Created on: 1991-05-14
+﻿// Created on: 1991-05-14
 // Created by: Laurent PAINNOT
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -35,44 +35,44 @@ class math_Matrix;
 //! This class implements the Jacobi method to find the eigenvalues and
 //! the eigenvectors of a real symmetric square matrix.
 //! A sort of eigenvalues is done.
-class math_Jacobi 
+class math_Jacobi
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! Given a Real n X n matrix A, this constructor computes all its
-  //! eigenvalues and eigenvectors using the Jacobi method.
-  //! The exception NotSquare is raised if the matrix is not square.
-  //! No verification that the matrix A is really symmetric is done.
-  Standard_EXPORT math_Jacobi(const math_Matrix& A);
-  
-  //! Returns true if the computations are successful, otherwise returns false.
+
+    //! Given a Real n X n matrix A, this constructor computes all its
+    //! eigenvalues and eigenvectors using the Jacobi method.
+    //! The exception NotSquare is raised if the matrix is not square.
+    //! No verification that the matrix A is really symmetric is done.
+    Standard_EXPORT math_Jacobi(const math_Matrix& A);
+
+    //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
-  
-  //! Returns the eigenvalues vector.
-  //! Exception NotDone is raised if calculation is not done successfully.
+
+    //! Returns the eigenvalues vector.
+    //! Exception NotDone is raised if calculation is not done successfully.
     const math_Vector& Values() const;
-  
-  //! returns the eigenvalue number Num.
-  //! Eigenvalues are in the range (1..n).
-  //! Exception NotDone is raised if calculation is not done successfully.
-    Standard_Real Value (const Standard_Integer Num) const;
-  
-  //! returns the eigenvectors matrix.
-  //! Exception NotDone is raised if calculation is not done successfully.
+
+    //! returns the eigenvalue number Num.
+    //! Eigenvalues are in the range (1..n).
+    //! Exception NotDone is raised if calculation is not done successfully.
+    Standard_Real Value(const Standard_Integer Num) const;
+
+    //! returns the eigenvectors matrix.
+    //! Exception NotDone is raised if calculation is not done successfully.
     const math_Matrix& Vectors() const;
-  
-  //! Returns the eigenvector V of number Num.
-  //! Eigenvectors are in the range (1..n).
-  //! Exception NotDone is raised if calculation is not done successfully.
-    void Vector (const Standard_Integer Num, math_Vector& V) const;
-  
-  //! Prints information on the current state of the object.
-  //! Is used to redefine the operator <<.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+
+    //! Returns the eigenvector V of number Num.
+    //! Eigenvectors are in the range (1..n).
+    //! Exception NotDone is raised if calculation is not done successfully.
+    void Vector(const Standard_Integer Num, math_Vector& V) const;
+
+    //! Prints information on the current state of the object.
+    //! Is used to redefine the operator <<.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
@@ -87,20 +87,17 @@ private:
 
 
 
-  Standard_Boolean Done;
-  math_Matrix AA;
-  Standard_Integer NbRotations;
-  math_Vector EigenValues;
-  math_Matrix EigenVectors;
+    Standard_Boolean Done;
+    math_Matrix AA;
+    Standard_Integer NbRotations;
+    math_Vector EigenValues;
+    math_Matrix EigenVectors;
 
 
 };
 
 
 #include <math_Jacobi.lxx>
-
-
-
 
 
 #endif // _math_Jacobi_HeaderFile

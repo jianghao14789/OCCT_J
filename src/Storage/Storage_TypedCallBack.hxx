@@ -1,4 +1,4 @@
-// Created on: 1997-02-28
+﻿// Created on: 1997-02-28
 // Created by: Christophe LEYNADIER
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,27 +36,27 @@ class Storage_TypedCallBack : public Standard_Transient
 
 public:
 
-  
-  Standard_EXPORT Storage_TypedCallBack();
-  
-  Standard_EXPORT Storage_TypedCallBack(const TCollection_AsciiString& aTypeName, const Handle(Storage_CallBack)& aCallBack);
-  
-  Standard_EXPORT void SetType (const TCollection_AsciiString& aType);
-  
-  Standard_EXPORT TCollection_AsciiString Type() const;
-  
-  Standard_EXPORT void SetCallBack (const Handle(Storage_CallBack)& aCallBack);
-  
-  Standard_EXPORT Handle(Storage_CallBack) CallBack() const;
-  
-  Standard_EXPORT void SetIndex (const Standard_Integer anIndex);
-  
-  Standard_EXPORT Standard_Integer Index() const;
+
+    Standard_EXPORT Storage_TypedCallBack();
+
+    Standard_EXPORT Storage_TypedCallBack(const TCollection_AsciiString& aTypeName, const Handle(Storage_CallBack)& aCallBack);
+
+    Standard_EXPORT void SetType(const TCollection_AsciiString& aType);
+
+    Standard_EXPORT TCollection_AsciiString Type() const;
+
+    Standard_EXPORT void SetCallBack(const Handle(Storage_CallBack)& aCallBack);
+
+    Standard_EXPORT Handle(Storage_CallBack) CallBack() const;
+
+    Standard_EXPORT void SetIndex(const Standard_Integer anIndex);
+
+    Standard_EXPORT Standard_Integer Index() const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(Storage_TypedCallBack,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Storage_TypedCallBack, Standard_Transient)
 
 protected:
 
@@ -66,9 +66,9 @@ protected:
 private:
 
 
-  TCollection_AsciiString myType;
-  Handle(Storage_CallBack) myCallBack;
-  Standard_Integer myIndex;
+    TCollection_AsciiString myType;
+    Handle(Storage_CallBack) myCallBack;
+    Standard_Integer myIndex;
 
 
 };

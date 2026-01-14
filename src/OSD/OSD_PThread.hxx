@@ -1,4 +1,4 @@
-// Created on: 2006-03-10
+﻿// Created on: 2006-03-10
 // Created by: data exchange team
 // Copyright (c) 2006-2014 OPEN CASCADE SAS
 //

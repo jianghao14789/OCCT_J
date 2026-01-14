@@ -19,27 +19,33 @@
 #include <Standard_SStream.hxx>
 
 //! Alert object storing stream value
+//! 存储流值的警报对象
 class Message_AttributeStream : public Message_Attribute
 {
     DEFINE_STANDARD_RTTIEXT(Message_AttributeStream, Message_Attribute)
 public:
 
     //! Constructor with string argument
+    //! 带字符串参数的构造函数
     Standard_EXPORT Message_AttributeStream(const Standard_SStream& theStream,
         const TCollection_AsciiString& theName = TCollection_AsciiString());
 
     //! Returns stream value
+    //! 返回流值
     const Standard_SStream& Stream() const { return myStream; }
 
     //! Sets stream value
+    //! 设置流值
     Standard_EXPORT void SetStream(const Standard_SStream& theStream);
 
     //! Dumps the content of me into the stream
+    //! 将内容转储到流中
     virtual Standard_EXPORT void DumpJson(Standard_OStream& theOStream,
         Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 private:
-    Standard_SStream myStream; //!< container of values
+    Standard_SStream myStream; //!< 值的容器
+                               //!< container of values
 };
 
 #endif // _Message_AttributeStream_HeaderFile

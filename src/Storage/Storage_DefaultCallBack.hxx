@@ -1,4 +1,4 @@
-// Created on: 1997-03-03
+﻿// Created on: 1997-03-03
 // Created by: Christophe LEYNADIER
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -31,23 +31,23 @@ DEFINE_STANDARD_HANDLE(Storage_DefaultCallBack, Storage_CallBack)
 class Storage_DefaultCallBack : public Storage_CallBack
 {
 public:
- 
-  Standard_EXPORT Storage_DefaultCallBack();
-  
-  Standard_EXPORT Handle(Standard_Persistent) New() const Standard_OVERRIDE;
-  
-  Standard_EXPORT void Add (const Handle(Standard_Persistent)& thePers, 
-                            const Handle(Storage_Schema)& theSchema) const Standard_OVERRIDE;
-  
-  Standard_EXPORT void Write (const Handle(Standard_Persistent)& thePers, 
-                              const Handle(Storage_BaseDriver)& theDriver, 
-                              const Handle(Storage_Schema)& theSchema) const Standard_OVERRIDE;
-  
-  Standard_EXPORT void Read (const Handle(Standard_Persistent)& thePers, 
-                             const Handle(Storage_BaseDriver)& theDriver, 
-                             const Handle(Storage_Schema)& theSchema) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(Storage_DefaultCallBack,Storage_CallBack)
+    Standard_EXPORT Storage_DefaultCallBack();
+
+    Standard_EXPORT Handle(Standard_Persistent) New() const Standard_OVERRIDE;
+
+    Standard_EXPORT void Add(const Handle(Standard_Persistent)& thePers,
+        const Handle(Storage_Schema)& theSchema) const Standard_OVERRIDE;
+
+    Standard_EXPORT void Write(const Handle(Standard_Persistent)& thePers,
+        const Handle(Storage_BaseDriver)& theDriver,
+        const Handle(Storage_Schema)& theSchema) const Standard_OVERRIDE;
+
+    Standard_EXPORT void Read(const Handle(Standard_Persistent)& thePers,
+        const Handle(Storage_BaseDriver)& theDriver,
+        const Handle(Storage_Schema)& theSchema) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(Storage_DefaultCallBack, Storage_CallBack)
 };
 
 #endif // _Storage_DefaultCallBack_HeaderFile

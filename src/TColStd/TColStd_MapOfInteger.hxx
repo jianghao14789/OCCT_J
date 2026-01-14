@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,8 +19,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_Map.hxx>
 
-typedef NCollection_Map<Standard_Integer,TColStd_MapIntegerHasher> TColStd_MapOfInteger;
-typedef NCollection_Map<Standard_Integer,TColStd_MapIntegerHasher>::Iterator TColStd_MapIteratorOfMapOfInteger;
+typedef NCollection_Map<Standard_Integer, TColStd_MapIntegerHasher> TColStd_MapOfInteger;
+typedef NCollection_Map<Standard_Integer, TColStd_MapIntegerHasher>::Iterator TColStd_MapIteratorOfMapOfInteger;
 
 
 #endif

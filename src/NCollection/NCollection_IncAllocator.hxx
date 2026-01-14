@@ -1,4 +1,4 @@
-// Created on: 2002-04-12
+﻿// Created on: 2002-04-12
 // Created by: Alexander GRIGORIEV
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -41,92 +41,92 @@ class Standard_Mutex;
  */
 class NCollection_IncAllocator : public NCollection_BaseAllocator
 {
- public:
-  // The type defining the alignement of allocated objects
-  typedef void * aligned_t;
+public:
+    // The type defining the alignement of allocated objects
+    typedef void* aligned_t;
 
-  // ---------- PUBLIC METHODS ----------
+    // ---------- PUBLIC METHODS ----------
 
-  //! Constructor.
-  //! Note that this constructor does NOT setup mutex for using allocator concurrently from different threads,
-  //! see SetThreadSafe() method.
-  Standard_EXPORT NCollection_IncAllocator (size_t theBlockSize = DefaultBlockSize);
+    //! Constructor.
+    //! Note that this constructor does NOT setup mutex for using allocator concurrently from different threads,
+    //! see SetThreadSafe() method.
+    Standard_EXPORT NCollection_IncAllocator(size_t theBlockSize = DefaultBlockSize);
 
-  //! Setup mutex for thread-safe allocations.
-  Standard_EXPORT void SetThreadSafe (bool theIsThreadSafe = true);
+    //! Setup mutex for thread-safe allocations.
+    Standard_EXPORT void SetThreadSafe(bool theIsThreadSafe = true);
 
-  //! Allocate memory with given size. Returns NULL on failure
-  Standard_EXPORT virtual void* Allocate        (const size_t size) Standard_OVERRIDE;
+    //! Allocate memory with given size. Returns NULL on failure
+    Standard_EXPORT virtual void* Allocate(const size_t size) Standard_OVERRIDE;
 
-  //! Free a previously allocated memory. Does nothing
-  Standard_EXPORT virtual void  Free            (void *anAddress) Standard_OVERRIDE;
+    //! Free a previously allocated memory. Does nothing
+    Standard_EXPORT virtual void  Free(void* anAddress) Standard_OVERRIDE;
 
-  //! Diagnostic method, returns the total allocated size
-  Standard_EXPORT size_t        GetMemSize      () const;
+    //! Diagnostic method, returns the total allocated size
+    Standard_EXPORT size_t        GetMemSize() const;
 
-  //! Destructor (calls Clean() internally)
-  Standard_EXPORT ~NCollection_IncAllocator     ();
+    //! Destructor (calls Clean() internally)
+    Standard_EXPORT ~NCollection_IncAllocator();
 
-  //! Reallocation: it is always allowed but is only efficient with the
-  //! last allocated item
-  Standard_EXPORT void *        Reallocate      (void * anAddress,
-                                                 const size_t oldSize,
-                                                 const size_t newSize);
+    //! Reallocation: it is always allowed but is only efficient with the
+    //! last allocated item
+    Standard_EXPORT void* Reallocate(void* anAddress,
+        const size_t oldSize,
+        const size_t newSize);
 
-  //! Re-initialize the allocator so that the next Allocate call should
-  //! start allocating in the very beginning as though the allocator is just
-  //! constructed. Warning: make sure that all previously allocated data are
-  //! no more used in your code!
-  //! @param doReleaseMem
-  //!   True - release all previously allocated memory, False - preserve it
-  //!   for future allocations.
-  Standard_EXPORT void          Reset           (const Standard_Boolean
-                                                 doReleaseMem=Standard_True);
+    //! Re-initialize the allocator so that the next Allocate call should
+    //! start allocating in the very beginning as though the allocator is just
+    //! constructed. Warning: make sure that all previously allocated data are
+    //! no more used in your code!
+    //! @param doReleaseMem
+    //!   True - release all previously allocated memory, False - preserve it
+    //!   for future allocations.
+    Standard_EXPORT void          Reset(const Standard_Boolean
+        doReleaseMem = Standard_True);
 
-  static const size_t DefaultBlockSize = 24600;
+    static const size_t DefaultBlockSize = 24600;
 
- protected:
-  struct         IBlock;
+protected:
+    struct         IBlock;
 
-  //! Flush all previously allocated data. All pointers returned by
-  //! Allocate() become invalid -- be very careful with this
-  Standard_EXPORT void  Clean                   ();
+    //! Flush all previously allocated data. All pointers returned by
+    //! Allocate() become invalid -- be very careful with this
+    Standard_EXPORT void  Clean();
 
-  //! Allocate a new block and return a pointer to it
-  //! ** only for internal usage **
-  void *                allocateNewBlock        (const size_t cSize);
+    //! Allocate a new block and return a pointer to it
+    //! ** only for internal usage **
+    void* allocateNewBlock(const size_t cSize);
 
- private:
-  // Prohibited methods
-  NCollection_IncAllocator (const NCollection_IncAllocator&);
-  NCollection_IncAllocator& operator = (const NCollection_IncAllocator&);
+private:
+    // Prohibited methods
+    NCollection_IncAllocator(const NCollection_IncAllocator&);
+    NCollection_IncAllocator& operator = (const NCollection_IncAllocator&);
 
- protected:
-  // ----- PROTECTED CLASS IBlock -------
-  struct IBlock {
-    aligned_t * allocateInBlock (const size_t cSize)
-    {
-      aligned_t * aResult = p_free_space;
-      p_free_space += cSize;
-      return aResult;
-    }
-    aligned_t     * p_free_space;
-    aligned_t     * p_end_block;
-    struct IBlock * p_next;
-  };
- protected:
-  // --------- PROTECTED FIELDS ---------
-  Standard_Mutex* myMutex;
-  IBlock        * myFirstBlock;
-  size_t        mySize;
-  size_t        myMemSize;
+protected:
+    // ----- PROTECTED CLASS IBlock -------
+    struct IBlock {
+        aligned_t* allocateInBlock(const size_t cSize)
+        {
+            aligned_t* aResult = p_free_space;
+            p_free_space += cSize;
+            return aResult;
+        }
+        aligned_t* p_free_space;
+        aligned_t* p_end_block;
+        struct IBlock* p_next;
+    };
+protected:
+    // --------- PROTECTED FIELDS ---------
+    Standard_Mutex* myMutex;
+    IBlock* myFirstBlock;
+    size_t        mySize;
+    size_t        myMemSize;
 
- public:
-// Declaration of CASCADE RTTI
-  DEFINE_STANDARD_RTTIEXT(NCollection_IncAllocator,NCollection_BaseAllocator)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(NCollection_IncAllocator, NCollection_BaseAllocator)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (NCollection_IncAllocator, NCollection_BaseAllocator)
+DEFINE_STANDARD_HANDLE(NCollection_IncAllocator, NCollection_BaseAllocator)
 
 #endif

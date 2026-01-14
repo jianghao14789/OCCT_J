@@ -21,7 +21,7 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_CompositeAlerts, Standard_Transient)
 
 //=======================================================================
 //function : Alerts
-//purpose  :
+//purpose  : 获取给定严重级别的警报列表
 //=======================================================================
 const Message_ListOfAlert& Message_CompositeAlerts::Alerts(const Message_Gravity theGravity) const
 {
@@ -33,7 +33,7 @@ const Message_ListOfAlert& Message_CompositeAlerts::Alerts(const Message_Gravity
 
 //=======================================================================
 //function : AddAlert
-//purpose  :
+//purpose  : 添加警报，如果支持合并则尝试合并
 //=======================================================================
 Standard_Boolean Message_CompositeAlerts::AddAlert(Message_Gravity theGravity, const Handle(Message_Alert)& theAlert)
 {
@@ -44,16 +44,19 @@ Standard_Boolean Message_CompositeAlerts::AddAlert(Message_Gravity theGravity, c
     Message_ListOfAlert& aList = myAlerts[theGravity];
     if (theAlert->SupportsMerge() && !aList.IsEmpty())
     {
+        // 合并仅对完全相同类型的警报执行
         // merge is performed only for alerts of exactly same type
         const Handle(Standard_Type)& aType = theAlert->DynamicType();
         for (Message_ListOfAlert::Iterator anIt(aList); anIt.More(); anIt.Next())
         {
+            // 如果成功合并，则返回
             // if merged successfully, just return
             if (aType == anIt.Value()->DynamicType() && theAlert->Merge(anIt.Value()))
                 return Standard_False;
         }
     }
 
+    // 如果未合并，只需添加到列表
     // if not merged, just add to the list
     aList.Append(theAlert);
     return Standard_True;
@@ -61,7 +64,7 @@ Standard_Boolean Message_CompositeAlerts::AddAlert(Message_Gravity theGravity, c
 
 //=======================================================================
 //function : RemoveAlert
-//purpose  :
+//purpose  : 从列表中移除警报
 //=======================================================================
 Standard_Boolean Message_CompositeAlerts::RemoveAlert(Message_Gravity theGravity,
     const Handle(Message_Alert)& theAlert)
@@ -81,7 +84,7 @@ Standard_Boolean Message_CompositeAlerts::RemoveAlert(Message_Gravity theGravity
 
 //=======================================================================
 //function : HasAlerts
-//purpose  :
+//purpose  : 检查是否存在给定的警报
 //=======================================================================
 Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Message_Alert)& theAlert)
 {
@@ -98,7 +101,7 @@ Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Message_Alert)& 
 
 //=======================================================================
 //function : HasAlerts
-//purpose  :
+//purpose  : 检查是否存在给定类型和严重级别的警报
 //=======================================================================
 Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Standard_Type)& theType, Message_Gravity theGravity)
 {
@@ -117,7 +120,7 @@ Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Standard_Type)& 
 
 //=======================================================================
 //function : Clear
-//purpose  :
+//purpose  : 清除所有严重级别的所有警报
 //=======================================================================
 void Message_CompositeAlerts::Clear()
 {
@@ -129,7 +132,7 @@ void Message_CompositeAlerts::Clear()
 
 //=======================================================================
 //function : Clear
-//purpose  :
+//purpose  : 清除给定严重级别的所有警报
 //=======================================================================
 void Message_CompositeAlerts::Clear(Message_Gravity theGravity)
 {
@@ -140,7 +143,7 @@ void Message_CompositeAlerts::Clear(Message_Gravity theGravity)
 
 //=======================================================================
 //function : Clear
-//purpose  :
+//purpose  : 清除给定类型的所有警报
 //=======================================================================
 void Message_CompositeAlerts::Clear(const Handle(Standard_Type)& theType)
 {
@@ -162,7 +165,7 @@ void Message_CompositeAlerts::Clear(const Handle(Standard_Type)& theType)
 
 //=======================================================================
 //function : DumpJson
-//purpose  :
+//purpose  : 将对象内容导出为 JSON 格式
 //=======================================================================
 void Message_CompositeAlerts::DumpJson(Standard_OStream& theOStream,
     Standard_Integer theDepth) const

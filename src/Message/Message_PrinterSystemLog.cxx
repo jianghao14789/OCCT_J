@@ -22,6 +22,7 @@
 #if defined(OCCT_UWP)
   //
 #elif defined(_WIN32)
+  //! 将消息严重级别转换为 EventLog 枚举
   //! Convert message gravity into EventLog enumeration.
 static WORD getEventLogPriority(const Message_Gravity theGravity)
 {
@@ -41,6 +42,7 @@ static WORD getEventLogPriority(const Message_Gravity theGravity)
 #elif defined(__ANDROID__)
 #include <android/log.h>
 
+//! 将消息严重级别转换为 Android 日志枚举
 //! Convert message gravity into Android log enumeration.
 static android_LogPriority getAndroidLogPriority(const Message_Gravity theGravity)
 {
@@ -57,21 +59,25 @@ static android_LogPriority getAndroidLogPriority(const Message_Gravity theGravit
 #elif defined(__EMSCRIPTEN__)
 #include <emscripten/emscripten.h>
 
+//! 将消息打印到 console.debug()
 //! Print message to console.debug().
 EM_JS(void, occJSConsoleDebug, (const char* theStr), {
   console.debug(UTF8ToString(theStr));
     });
 
+//! 将消息打印到 console.info()
 //! Print message to console.info().
 EM_JS(void, occJSConsoleInfo, (const char* theStr), {
   console.info(UTF8ToString(theStr));
     });
 
+//! 将消息打印到 console.warn()
 //! Print message to console.warn().
 EM_JS(void, occJSConsoleWarn, (const char* theStr), {
   console.warn(UTF8ToString(theStr));
     });
 
+//! 将消息打印到 console.error()
 //! Print message to console.error().
 EM_JS(void, occJSConsoleError, (const char* theStr), {
   console.error(UTF8ToString(theStr));
@@ -79,6 +85,7 @@ EM_JS(void, occJSConsoleError, (const char* theStr), {
 #else
 #include <syslog.h>
 
+//! 将消息严重级别转换为 syslog() 枚举
 //! Convert message gravity into syslog() enumeration.
 static int getSysLogPriority(const Message_Gravity theGravity)
 {
@@ -98,7 +105,7 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_PrinterSystemLog, Message_Printer)
 
 //=======================================================================
 //function : Constructor
-//purpose  :
+//purpose  : 构造函数，初始化系统日志打印机
 //=======================================================================
 Message_PrinterSystemLog::Message_PrinterSystemLog(const TCollection_AsciiString& theEventSourceName,
     const Message_Gravity theTraceLevel)
@@ -121,7 +128,7 @@ Message_PrinterSystemLog::Message_PrinterSystemLog(const TCollection_AsciiString
 
 //=======================================================================
 //function : ~Message_PrinterSystemLog
-//purpose  :
+//purpose  : 析构函数，清理资源
 //=======================================================================
 Message_PrinterSystemLog::~Message_PrinterSystemLog()
 {
@@ -143,7 +150,7 @@ Message_PrinterSystemLog::~Message_PrinterSystemLog()
 
 //=======================================================================
 //function : send
-//purpose  :
+//purpose  : 将消息发送到系统日志
 //=======================================================================
 void Message_PrinterSystemLog::send(const TCollection_AsciiString& theString,
     const Message_Gravity theGravity) const
@@ -169,6 +176,7 @@ void Message_PrinterSystemLog::send(const TCollection_AsciiString& theString,
 #elif defined(__ANDROID__)
     __android_log_write(getAndroidLogPriority(theGravity), myEventSourceName.ToCString(), theString.ToCString());
 #elif defined(__EMSCRIPTEN__)
+    // 不要使用虚假的 emscripten_log() 破坏 UNICODE 字符串
     // don't use bogus emscripten_log() corrupting UNICODE strings
     switch (theGravity)
     {

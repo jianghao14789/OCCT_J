@@ -17,6 +17,10 @@
 
 #include <stdio.h>
 
+// FSD_BStream 是二进制文件流的别名定义
+// FSD = File Storage Driver（文件存储驱动）
+// 用于在 FSD_BinaryFile 中进行低级的二进制数据读写操作
+// FILE* 指针用于标准 C 库的文件 I/O 操作
 typedef FILE* FSD_BStream;
 
 #endif

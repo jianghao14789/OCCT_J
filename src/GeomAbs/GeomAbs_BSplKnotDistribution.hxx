@@ -1,4 +1,4 @@
-// Created on: 1993-02-22
+﻿// Created on: 1993-02-22
 // Created by: Modelistation
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -23,10 +23,10 @@
 //! (comments in classes BSplineCurve and BSplineSurface)
 enum GeomAbs_BSplKnotDistribution
 {
-GeomAbs_NonUniform,
-GeomAbs_Uniform,
-GeomAbs_QuasiUniform,
-GeomAbs_PiecewiseBezier
+    GeomAbs_NonUniform,
+    GeomAbs_Uniform,
+    GeomAbs_QuasiUniform,
+    GeomAbs_PiecewiseBezier
 };
 
 #endif // _GeomAbs_BSplKnotDistribution_HeaderFile

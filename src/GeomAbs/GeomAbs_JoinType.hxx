@@ -1,4 +1,4 @@
-// Created on: 1993-02-22
+﻿// Created on: 1993-02-22
 // Created by: Modelistation
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,9 +22,9 @@
 //! arcs of a contour parallel to a given contour.
 enum GeomAbs_JoinType
 {
-GeomAbs_Arc,
-GeomAbs_Tangent,
-GeomAbs_Intersection
+    GeomAbs_Arc,
+    GeomAbs_Tangent,
+    GeomAbs_Intersection
 };
 
 #endif // _GeomAbs_JoinType_HeaderFile

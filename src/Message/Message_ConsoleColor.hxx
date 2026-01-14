@@ -15,17 +15,27 @@
 #define _Message_ConsoleColor_HeaderFile
 
 //! Color definition for console/terminal output (limited palette).
+//! 控制台/终端输出的颜色定义（有限的调色板）
 enum Message_ConsoleColor
 {
     Message_ConsoleColor_Default, //!< default (white) color
+                                  //!< 默认（白色）颜色
     Message_ConsoleColor_Black,   //!< black   color
+                                  //!< 黑色
     Message_ConsoleColor_White,   //!< white   color
+                                  //!< 白色
     Message_ConsoleColor_Red,     //!< red     color
+                                  //!< 红色
     Message_ConsoleColor_Blue,    //!< blue    color
+                                  //!< 蓝色
     Message_ConsoleColor_Green,   //!< green   color
+                                  //!< 绿色
     Message_ConsoleColor_Yellow,  //!< yellow  color
+                                  //!< 黄色
     Message_ConsoleColor_Cyan,    //!< cyan    color
+                                  //!< 青色
     Message_ConsoleColor_Magenta, //!< magenta color
+                                  //!< 洋红色
 };
 
 #endif // _Message_ConsoleColor_HeaderFile

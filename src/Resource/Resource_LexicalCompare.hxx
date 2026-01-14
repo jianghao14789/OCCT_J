@@ -1,4 +1,4 @@
-// Created on: 1998-12-04
+﻿// Created on: 1998-12-04
 // Created by: DUSUZEAU Louis
 // Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,17 +26,17 @@ class TCollection_AsciiString;
 
 
 
-class Resource_LexicalCompare 
+class Resource_LexicalCompare
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT Resource_LexicalCompare();
-  
-  //! Returns True if <Left> is lower than <Right>.
-  Standard_EXPORT Standard_Boolean IsLower (const TCollection_AsciiString& Left, const TCollection_AsciiString& Right) const;
+
+    Standard_EXPORT Resource_LexicalCompare();
+
+    //! Returns True if <Left> is lower than <Right>.
+    Standard_EXPORT Standard_Boolean IsLower(const TCollection_AsciiString& Left, const TCollection_AsciiString& Right) const;
 
 
 

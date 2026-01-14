@@ -1,4 +1,4 @@
-// Created on: 2005-12-08
+﻿// Created on: 2005-12-08
 // Created by: Sergey KHROMOV
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -20,9 +20,9 @@
 //           Returns Standard_True if computation is performed successfully.
 //==========================================================================
 
-inline Standard_Boolean math_KronrodSingleIntegration::IsDone() const 
+inline Standard_Boolean math_KronrodSingleIntegration::IsDone() const
 {
-  return myIsDone;
+    return myIsDone;
 }
 
 //==========================================================================
@@ -32,8 +32,8 @@ inline Standard_Boolean math_KronrodSingleIntegration::IsDone() const
 
 inline Standard_Real math_KronrodSingleIntegration::Value() const
 {
-  StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
-  return myValue;
+    StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
+    return myValue;
 }
 
 //==========================================================================
@@ -43,8 +43,8 @@ inline Standard_Real math_KronrodSingleIntegration::Value() const
 
 inline Standard_Real math_KronrodSingleIntegration::ErrorReached() const
 {
-  StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
-  return myErrorReached;
+    StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
+    return myErrorReached;
 }
 
 //=======================================================================
@@ -54,10 +54,10 @@ inline Standard_Real math_KronrodSingleIntegration::ErrorReached() const
 
 inline Standard_Real math_KronrodSingleIntegration::AbsolutError() const
 {
-  StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
-  return myAbsolutError;
+    StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
+    return myAbsolutError;
 }
- 
+
 //==========================================================================
 //function : OrderReached
 //           Returns the number of Kronrod points for which the result
@@ -66,8 +66,8 @@ inline Standard_Real math_KronrodSingleIntegration::AbsolutError() const
 
 inline Standard_Integer math_KronrodSingleIntegration::OrderReached() const
 {
-  StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
-  return myNbPntsReached;
+    StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
+    return myNbPntsReached;
 }
 
 //==========================================================================
@@ -77,6 +77,6 @@ inline Standard_Integer math_KronrodSingleIntegration::OrderReached() const
 
 inline Standard_Integer math_KronrodSingleIntegration::NbIterReached() const
 {
-  StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
-  return myNbIterReached;
+    StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
+    return myNbIterReached;
 }

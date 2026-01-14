@@ -1,4 +1,4 @@
-// Created on: 1991-01-14
+﻿// Created on: 1991-01-14
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,7 +21,7 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_IndexedMap.hxx>
 
-typedef NCollection_IndexedMap<Handle(Expr_NamedUnknown),TColStd_MapTransientHasher> Expr_MapOfNamedUnknown;
+typedef NCollection_IndexedMap<Handle(Expr_NamedUnknown), TColStd_MapTransientHasher> Expr_MapOfNamedUnknown;
 
 
 #endif

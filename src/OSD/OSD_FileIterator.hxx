@@ -1,4 +1,4 @@
-// Created on: 1992-03-18
+﻿// Created on: 1992-03-18
 // Created by: Stephan GARNAUD
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -27,71 +27,71 @@ class OSD_File;
 
 //! Manages a breadth-only search for files in the specified Path.
 //! There is no specific order of results.
-class OSD_FileIterator 
+class OSD_FileIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Instantiates Object as empty Iterator;
-  Standard_EXPORT OSD_FileIterator();
-  
-  //! Instantiates Object as Iterator;
-  //! Wild-card "*" can be used in Mask the same way it
-  //! is used by unix shell for file names
-  Standard_EXPORT OSD_FileIterator(const OSD_Path& where, const TCollection_AsciiString& Mask);
-  
-  Standard_EXPORT void Destroy();
-~OSD_FileIterator()
-{
-  Destroy();
-}
-  
-  //! Initializes the current File Iterator
-  Standard_EXPORT void Initialize (const OSD_Path& where, const TCollection_AsciiString& Mask);
-  
-  //! Returns TRUE if there are other items using the 'Tree'
-  //! method.
-  Standard_EXPORT Standard_Boolean More();
-  
-  //! Sets the iterator to the next item.
-  //! Returns the item value corresponding to the current
-  //! position of the iterator.
-  Standard_EXPORT void Next();
-  
-  //! Returns the next file found .
-  Standard_EXPORT OSD_File Values();
-  
-  //! Returns TRUE if an error occurs
-  Standard_EXPORT Standard_Boolean Failed() const;
-  
-  //! Resets error counter to zero
-  Standard_EXPORT void Reset();
-  
-  //! Raises OSD_Error
-  Standard_EXPORT void Perror();
-  
-  //! Returns error number if 'Failed' is TRUE.
-  Standard_EXPORT Standard_Integer Error() const;
+
+    //! Instantiates Object as empty Iterator;
+    Standard_EXPORT OSD_FileIterator();
+
+    //! Instantiates Object as Iterator;
+    //! Wild-card "*" can be used in Mask the same way it
+    //! is used by unix shell for file names
+    Standard_EXPORT OSD_FileIterator(const OSD_Path& where, const TCollection_AsciiString& Mask);
+
+    Standard_EXPORT void Destroy();
+    ~OSD_FileIterator()
+    {
+        Destroy();
+    }
+
+    //! Initializes the current File Iterator
+    Standard_EXPORT void Initialize(const OSD_Path& where, const TCollection_AsciiString& Mask);
+
+    //! Returns TRUE if there are other items using the 'Tree'
+    //! method.
+    Standard_EXPORT Standard_Boolean More();
+
+    //! Sets the iterator to the next item.
+    //! Returns the item value corresponding to the current
+    //! position of the iterator.
+    Standard_EXPORT void Next();
+
+    //! Returns the next file found .
+    Standard_EXPORT OSD_File Values();
+
+    //! Returns TRUE if an error occurs
+    Standard_EXPORT Standard_Boolean Failed() const;
+
+    //! Resets error counter to zero
+    Standard_EXPORT void Reset();
+
+    //! Raises OSD_Error
+    Standard_EXPORT void Perror();
+
+    //! Returns error number if 'Failed' is TRUE.
+    Standard_EXPORT Standard_Integer Error() const;
 
 private:
 
-  OSD_File TheIterator;
-  Standard_Boolean myFlag;
-  TCollection_AsciiString myMask;
-  TCollection_AsciiString myPlace;
-  OSD_Error myError;
+    OSD_File TheIterator;
+    Standard_Boolean myFlag;
+    TCollection_AsciiString myMask;
+    TCollection_AsciiString myPlace;
+    OSD_Error myError;
 
-  // platform-specific fields
+    // platform-specific fields
 #ifdef _WIN32
-  Standard_Address myHandle;
-  Standard_Address myData;
-  Standard_Boolean myFirstCall;
+    Standard_Address myHandle;
+    Standard_Address myData;
+    Standard_Boolean myFirstCall;
 #else
-  Standard_Address myDescr;
-  Standard_Address myEntry;
-  Standard_Integer myInit;
+    Standard_Address myDescr;
+    Standard_Address myEntry;
+    Standard_Integer myInit;
 #endif
 };
 

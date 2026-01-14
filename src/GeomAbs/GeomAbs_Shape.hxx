@@ -1,4 +1,4 @@
-// Created on: 1993-02-22
+﻿// Created on: 1993-02-22
 // Created by: Modelistation
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -47,13 +47,13 @@
 //! i in the u parametric direction, and j in the v parametric direction.
 enum GeomAbs_Shape
 {
-GeomAbs_C0,
-GeomAbs_G1,
-GeomAbs_C1,
-GeomAbs_G2,
-GeomAbs_C2,
-GeomAbs_C3,
-GeomAbs_CN
+    GeomAbs_C0,
+    GeomAbs_G1,
+    GeomAbs_C1,
+    GeomAbs_G2,
+    GeomAbs_C2,
+    GeomAbs_C3,
+    GeomAbs_CN
 };
 
 #endif // _GeomAbs_Shape_HeaderFile

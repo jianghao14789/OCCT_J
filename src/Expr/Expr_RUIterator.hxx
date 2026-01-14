@@ -1,4 +1,4 @@
-// Created on: 1991-02-06
+﻿// Created on: 1991-02-06
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,25 +29,25 @@ class Expr_NamedUnknown;
 
 
 //! Iterates on NamedUnknowns in a GeneralRelation.
-class Expr_RUIterator 
+class Expr_RUIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Creates an iterator on every NamedUnknown contained in
-  //! <rel>.
-  Standard_EXPORT Expr_RUIterator(const Handle(Expr_GeneralRelation)& rel);
-  
-  //! Returns False if on other unknown remains.
-  Standard_EXPORT Standard_Boolean More() const;
-  
-  Standard_EXPORT void Next();
-  
-  //! Returns current NamedUnknown.
-  //! Raises exception if no more unknowns remain.
-  Standard_EXPORT Handle(Expr_NamedUnknown) Value() const;
+
+    //! Creates an iterator on every NamedUnknown contained in
+    //! <rel>.
+    Standard_EXPORT Expr_RUIterator(const Handle(Expr_GeneralRelation)& rel);
+
+    //! Returns False if on other unknown remains.
+    Standard_EXPORT Standard_Boolean More() const;
+
+    Standard_EXPORT void Next();
+
+    //! Returns current NamedUnknown.
+    //! Raises exception if no more unknowns remain.
+    Standard_EXPORT Handle(Expr_NamedUnknown) Value() const;
 
 
 
@@ -62,8 +62,8 @@ private:
 
 
 
-  Expr_MapOfNamedUnknown myMap;
-  Standard_Integer myCurrent;
+    Expr_MapOfNamedUnknown myMap;
+    Standard_Integer myCurrent;
 
 
 };

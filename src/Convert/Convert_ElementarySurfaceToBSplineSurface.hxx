@@ -67,7 +67,7 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        Standard_EXPORT Standard_Integer UDegree() const;
+    Standard_EXPORT Standard_Integer UDegree() const;
 
     //! Returns the degree for the u or v parametric direction of
     //! the BSpline surface whose data is computed in this framework.

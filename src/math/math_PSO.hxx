@@ -1,4 +1,4 @@
-// Created on: 2014-07-18
+﻿// Created on: 2014-07-18
 // Created by: Alexander Malyshev
 // Copyright (c) 2014-2014 OPEN CASCADE SAS
 //
@@ -57,52 +57,52 @@ class math_PSO
 {
 public:
 
-  /**
-  * Constructor.
-  *
-  * @param theFunc defines the objective function. It should exist during all lifetime of class instance.
-  * @param theLowBorder defines lower border of search space.
-  * @param theUppBorder defines upper border of search space.
-  * @param theSteps defines steps of regular grid, used for particle generation.
-                    This parameter used to define stop condition (TerminalVelocity).
-  * @param theNbParticles defines number of particles.
-  * @param theNbIter defines maximum number of iterations.
-  */
-  Standard_EXPORT math_PSO(math_MultipleVarFunction* theFunc,
-                           const math_Vector& theLowBorder,
-                           const math_Vector& theUppBorder,
-                           const math_Vector& theSteps,
-                           const Standard_Integer theNbParticles = 32,
-                           const Standard_Integer theNbIter = 100);
+    /**
+    * Constructor.
+    *
+    * @param theFunc defines the objective function. It should exist during all lifetime of class instance.
+    * @param theLowBorder defines lower border of search space.
+    * @param theUppBorder defines upper border of search space.
+    * @param theSteps defines steps of regular grid, used for particle generation.
+                      This parameter used to define stop condition (TerminalVelocity).
+    * @param theNbParticles defines number of particles.
+    * @param theNbIter defines maximum number of iterations.
+    */
+    Standard_EXPORT math_PSO(math_MultipleVarFunction* theFunc,
+        const math_Vector& theLowBorder,
+        const math_Vector& theUppBorder,
+        const math_Vector& theSteps,
+        const Standard_Integer theNbParticles = 32,
+        const Standard_Integer theNbIter = 100);
 
-  //! Perform computations, particles array is constructed inside of this function.
-  Standard_EXPORT void Perform(const math_Vector& theSteps,
-                               Standard_Real& theValue,
-                               math_Vector& theOutPnt,
-                               const Standard_Integer theNbIter = 100);
+    //! Perform computations, particles array is constructed inside of this function.
+    Standard_EXPORT void Perform(const math_Vector& theSteps,
+        Standard_Real& theValue,
+        math_Vector& theOutPnt,
+        const Standard_Integer theNbIter = 100);
 
-  //! Perform computations with given particles array.
-  Standard_EXPORT void Perform(math_PSOParticlesPool& theParticles,
-                               Standard_Integer theNbParticles,
-                               Standard_Real& theValue,
-                               math_Vector& theOutPnt,
-                               const Standard_Integer theNbIter = 100);
+    //! Perform computations with given particles array.
+    Standard_EXPORT void Perform(math_PSOParticlesPool& theParticles,
+        Standard_Integer theNbParticles,
+        Standard_Real& theValue,
+        math_Vector& theOutPnt,
+        const Standard_Integer theNbIter = 100);
 
 private:
 
-  void performPSOWithGivenParticles(math_PSOParticlesPool& theParticles,
-                                    Standard_Integer theNbParticles,
-                                    Standard_Real& theValue,
-                                    math_Vector& theOutPnt,
-                                    const Standard_Integer theNbIter = 100);
+    void performPSOWithGivenParticles(math_PSOParticlesPool& theParticles,
+        Standard_Integer theNbParticles,
+        Standard_Real& theValue,
+        math_Vector& theOutPnt,
+        const Standard_Integer theNbIter = 100);
 
-  math_MultipleVarFunction *myFunc;
-  math_Vector myLowBorder; // Lower border.
-  math_Vector myUppBorder; // Upper border.
-  math_Vector mySteps; // steps used in PSO algorithm.
-  Standard_Integer myN; // Dimension count.
-  Standard_Integer myNbParticles; // Particles number.
-  Standard_Integer myNbIter;
+    math_MultipleVarFunction* myFunc;
+    math_Vector myLowBorder; // Lower border.
+    math_Vector myUppBorder; // Upper border.
+    math_Vector mySteps; // steps used in PSO algorithm.
+    Standard_Integer myN; // Dimension count.
+    Standard_Integer myNbParticles; // Particles number.
+    Standard_Integer myNbIter;
 };
 
 #endif

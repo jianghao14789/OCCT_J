@@ -1,4 +1,4 @@
-// Created on: 1993-04-13
+﻿// Created on: 1993-04-13
 // Created by: JCV
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -39,78 +39,78 @@ class gp_Ax2d;
 //! surfaces.
 //! These entities are defined in 2d and 3d space.
 //! All the classes of this package are non-persistent.
-class gp 
+class gp
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  //! Method of package gp
-  //!
-  //! In geometric computations, defines the tolerance criterion
-  //! used to determine when two numbers can be considered equal.
-  //! Many class functions use this tolerance criterion, for
-  //! example, to avoid division by zero in geometric
-  //! computations. In the documentation, tolerance criterion is
-  //! always referred to as gp::Resolution().
-  static Standard_Real Resolution() { return RealSmall(); }
+    //! Method of package gp
+    //!
+    //! In geometric computations, defines the tolerance criterion
+    //! used to determine when two numbers can be considered equal.
+    //! Many class functions use this tolerance criterion, for
+    //! example, to avoid division by zero in geometric
+    //! computations. In the documentation, tolerance criterion is
+    //! always referred to as gp::Resolution().
+    static Standard_Real Resolution() { return RealSmall(); }
 
-  //! Identifies a Cartesian point with coordinates X = Y = Z = 0.0.0
-  Standard_EXPORT static const gp_Pnt& Origin();
+    //! Identifies a Cartesian point with coordinates X = Y = Z = 0.0.0
+    Standard_EXPORT static const gp_Pnt& Origin();
 
-  //! Returns a unit vector with the combination (1,0,0)
-  Standard_EXPORT static const gp_Dir& DX();
+    //! Returns a unit vector with the combination (1,0,0)
+    Standard_EXPORT static const gp_Dir& DX();
 
-  //! Returns a unit vector with the combination (0,1,0)
-  Standard_EXPORT static const gp_Dir& DY();
+    //! Returns a unit vector with the combination (0,1,0)
+    Standard_EXPORT static const gp_Dir& DY();
 
-  //! Returns a unit vector with the combination (0,0,1)
-  Standard_EXPORT static const gp_Dir& DZ();
+    //! Returns a unit vector with the combination (0,0,1)
+    Standard_EXPORT static const gp_Dir& DZ();
 
-  //! Identifies an axis where its origin is Origin
-  //! and its unit vector coordinates  X = 1.0,  Y = Z = 0.0
-  Standard_EXPORT static const gp_Ax1& OX();
+    //! Identifies an axis where its origin is Origin
+    //! and its unit vector coordinates  X = 1.0,  Y = Z = 0.0
+    Standard_EXPORT static const gp_Ax1& OX();
 
-  //! Identifies an axis where its origin is Origin
-  //! and its unit vector coordinates Y = 1.0,  X = Z = 0.0
-  Standard_EXPORT static const gp_Ax1& OY();
+    //! Identifies an axis where its origin is Origin
+    //! and its unit vector coordinates Y = 1.0,  X = Z = 0.0
+    Standard_EXPORT static const gp_Ax1& OY();
 
-  //! Identifies an axis where its origin is Origin
-  //! and its unit vector coordinates Z = 1.0,  Y = X = 0.0
-  Standard_EXPORT static const gp_Ax1& OZ();
+    //! Identifies an axis where its origin is Origin
+    //! and its unit vector coordinates Z = 1.0,  Y = X = 0.0
+    Standard_EXPORT static const gp_Ax1& OZ();
 
-  //! Identifies a coordinate system where its origin is Origin,
-  //! and its "main Direction" and "X Direction" coordinates
-  //! Z = 1.0, X = Y =0.0 and X direction coordinates X = 1.0, Y = Z = 0.0
-  Standard_EXPORT static const gp_Ax2& XOY();
+    //! Identifies a coordinate system where its origin is Origin,
+    //! and its "main Direction" and "X Direction" coordinates
+    //! Z = 1.0, X = Y =0.0 and X direction coordinates X = 1.0, Y = Z = 0.0
+    Standard_EXPORT static const gp_Ax2& XOY();
 
-  //! Identifies a coordinate system where its origin is Origin,
-  //! and its "main Direction" and "X Direction" coordinates
-  //! Y = 1.0, X = Z =0.0 and X direction coordinates Z = 1.0, X = Y = 0.0
-  Standard_EXPORT static const gp_Ax2& ZOX();
+    //! Identifies a coordinate system where its origin is Origin,
+    //! and its "main Direction" and "X Direction" coordinates
+    //! Y = 1.0, X = Z =0.0 and X direction coordinates Z = 1.0, X = Y = 0.0
+    Standard_EXPORT static const gp_Ax2& ZOX();
 
-  //! Identifies a coordinate system where its origin is Origin,
-  //! and its "main Direction" and "X Direction" coordinates
-  //! X = 1.0, Z = Y =0.0 and X direction coordinates Y = 1.0, X = Z = 0.0
-  //! In 2D space
-  Standard_EXPORT static const gp_Ax2& YOZ();
+    //! Identifies a coordinate system where its origin is Origin,
+    //! and its "main Direction" and "X Direction" coordinates
+    //! X = 1.0, Z = Y =0.0 and X direction coordinates Y = 1.0, X = Z = 0.0
+    //! In 2D space
+    Standard_EXPORT static const gp_Ax2& YOZ();
 
-  //! Identifies a Cartesian point with coordinates X = Y = 0.0
-  Standard_EXPORT static const gp_Pnt2d& Origin2d();
+    //! Identifies a Cartesian point with coordinates X = Y = 0.0
+    Standard_EXPORT static const gp_Pnt2d& Origin2d();
 
-  //! Returns a unit vector with the combinations (1,0)
-  Standard_EXPORT static const gp_Dir2d& DX2d();
+    //! Returns a unit vector with the combinations (1,0)
+    Standard_EXPORT static const gp_Dir2d& DX2d();
 
-  //! Returns a unit vector with the combinations (0,1)
-  Standard_EXPORT static const gp_Dir2d& DY2d();
+    //! Returns a unit vector with the combinations (0,1)
+    Standard_EXPORT static const gp_Dir2d& DY2d();
 
-  //! Identifies an axis where its origin is Origin2d
-  //! and its unit vector coordinates are: X = 1.0,  Y = 0.0
-  Standard_EXPORT static const gp_Ax2d& OX2d();
+    //! Identifies an axis where its origin is Origin2d
+    //! and its unit vector coordinates are: X = 1.0,  Y = 0.0
+    Standard_EXPORT static const gp_Ax2d& OX2d();
 
-  //! Identifies an axis where its origin is Origin2d
-  //! and its unit vector coordinates are Y = 1.0,  X = 0.0
-  Standard_EXPORT static const gp_Ax2d& OY2d();
+    //! Identifies an axis where its origin is Origin2d
+    //! and its unit vector coordinates are Y = 1.0,  X = 0.0
+    Standard_EXPORT static const gp_Ax2d& OY2d();
 
 };
 

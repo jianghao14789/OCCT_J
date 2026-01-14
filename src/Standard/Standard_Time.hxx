@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2014 OPEN CASCADE SAS
+﻿// Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -20,13 +20,13 @@
 // IsEqual : Returns Standard_True if two time values are equal
 // ------------------------------------------------------------------
 template<typename TheTimeType>
-typename opencascade::std::enable_if<opencascade::std::is_same<TheTimeType,      Standard_Time>::value
-                                 && !opencascade::std::is_same<Standard_Size,    Standard_Time>::value
-                                 && !opencascade::std::is_same<Standard_Integer, Standard_Time>::value,
-                                     Standard_Boolean>::type
-IsEqual (const TheTimeType theOne, const TheTimeType theTwo)
+typename opencascade::std::enable_if<opencascade::std::is_same<TheTimeType, Standard_Time>::value
+    && !opencascade::std::is_same<Standard_Size, Standard_Time>::value
+    && !opencascade::std::is_same<Standard_Integer, Standard_Time>::value,
+    Standard_Boolean>::type
+    IsEqual(const TheTimeType theOne, const TheTimeType theTwo)
 {
-  return theOne == theTwo;
+    return theOne == theTwo;
 }
 
 #endif

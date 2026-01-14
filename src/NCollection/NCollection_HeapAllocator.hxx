@@ -1,4 +1,4 @@
-// Created on: 2009-12-30
+﻿// Created on: 2009-12-30
 // Created by: Alexander GRIGORIEV
 // Copyright (c) 2009-2014 OPEN CASCADE SAS
 //
@@ -20,33 +20,33 @@
 
 
 /**
- * Allocator that uses the global dynamic heap (malloc / free). 
+ * Allocator that uses the global dynamic heap (malloc / free).
  */
 
 class NCollection_HeapAllocator : public NCollection_BaseAllocator
 {
- public:
-  // ---------- PUBLIC METHODS ----------
-  Standard_EXPORT virtual void* Allocate (const Standard_Size theSize) Standard_OVERRIDE;
-  Standard_EXPORT virtual void  Free     (void * anAddress) Standard_OVERRIDE;
+public:
+    // ---------- PUBLIC METHODS ----------
+    Standard_EXPORT virtual void* Allocate(const Standard_Size theSize) Standard_OVERRIDE;
+    Standard_EXPORT virtual void  Free(void* anAddress) Standard_OVERRIDE;
 
-  Standard_EXPORT static const Handle(NCollection_HeapAllocator)&
-                                GlobalHeapAllocator();
+    Standard_EXPORT static const Handle(NCollection_HeapAllocator)&
+        GlobalHeapAllocator();
 
- protected:
-  //! Constructor - prohibited
-  NCollection_HeapAllocator(void) {}
+protected:
+    //! Constructor - prohibited
+    NCollection_HeapAllocator(void) {}
 
- private:
-  //! Copy constructor - prohibited
-  NCollection_HeapAllocator(const NCollection_HeapAllocator&);
+private:
+    //! Copy constructor - prohibited
+    NCollection_HeapAllocator(const NCollection_HeapAllocator&);
 
- public:
-// Declaration of CASCADE RTTI
-DEFINE_STANDARD_RTTIEXT(NCollection_HeapAllocator,NCollection_BaseAllocator)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(NCollection_HeapAllocator, NCollection_BaseAllocator)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (NCollection_HeapAllocator, NCollection_BaseAllocator)
+DEFINE_STANDARD_HANDLE(NCollection_HeapAllocator, NCollection_BaseAllocator)
 
 #endif

@@ -24,7 +24,7 @@
 
 inline Handle(Units_TokensSequence) Units_Sentence::Sequence() const
 {
-  return thesequenceoftokens;
+    return thesequenceoftokens;
 }
 
 //=======================================================================
@@ -34,9 +34,9 @@ inline Handle(Units_TokensSequence) Units_Sentence::Sequence() const
 //=======================================================================
 
 inline void Units_Sentence::Sequence
-  (const Handle(Units_TokensSequence)& asequenceoftokens)
+(const Handle(Units_TokensSequence)& asequenceoftokens)
 {
-  thesequenceoftokens=asequenceoftokens;
+    thesequenceoftokens = asequenceoftokens;
 }
 
 
@@ -47,7 +47,7 @@ inline void Units_Sentence::Sequence
 
 inline Standard_Boolean Units_Sentence::IsDone() const
 {
-  return thesequenceoftokens->Length()>0;
+    return thesequenceoftokens->Length() > 0;
 }
 
 
@@ -58,8 +58,8 @@ inline Standard_Boolean Units_Sentence::IsDone() const
 
 inline void Units_Sentence::Dump() const
 {
-  Standard_Integer index;
-  std::cout<<" UNIT SENTENCE with : "<<std::endl;
-  for(index=1;index<=thesequenceoftokens->Length();index++)
-    thesequenceoftokens->Value(index)->Dump(1,1);
+    Standard_Integer index;
+    std::cout << " UNIT SENTENCE with : " << std::endl;
+    for (index = 1; index <= thesequenceoftokens->Length(); index++)
+        thesequenceoftokens->Value(index)->Dump(1, 1);
 }

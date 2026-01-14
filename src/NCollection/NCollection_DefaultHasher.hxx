@@ -1,4 +1,4 @@
-// Created by: Eugene Maltchikov
+﻿// Created by: Eugene Maltchikov
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -29,9 +29,9 @@
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
 template <class TheKeyType>
-inline Standard_Integer HashCode_Proxy (const TheKeyType& theKey, const Standard_Integer theUpperBound)
+inline Standard_Integer HashCode_Proxy(const TheKeyType& theKey, const Standard_Integer theUpperBound)
 {
-  return HashCode (theKey, theUpperBound);
+    return HashCode(theKey, theUpperBound);
 }
 
 //=======================================================================
@@ -39,11 +39,11 @@ inline Standard_Integer HashCode_Proxy (const TheKeyType& theKey, const Standard
 //purpose  : Default implementation of IsEqual via operator ==
 //=======================================================================
 
-template <class TheKeyType> 
-inline Standard_Boolean IsEqual (const TheKeyType& theKey1, 
-                                 const TheKeyType& theKey2)
+template <class TheKeyType>
+inline Standard_Boolean IsEqual(const TheKeyType& theKey1,
+    const TheKeyType& theKey2)
 {
-  return theKey1 == theKey2;
+    return theKey1 == theKey2;
 }
 
 //=======================================================================
@@ -51,38 +51,38 @@ inline Standard_Boolean IsEqual (const TheKeyType& theKey1,
 //purpose  : Function is required to call the global function IsEqual.
 //=======================================================================
 
-template <class TheKeyType> 
-inline Standard_Boolean IsEqual_Proxy (const TheKeyType& theKey1, 
-                                       const TheKeyType& theKey2)
+template <class TheKeyType>
+inline Standard_Boolean IsEqual_Proxy(const TheKeyType& theKey1,
+    const TheKeyType& theKey2)
 {
-  return IsEqual (theKey1, theKey2);
+    return IsEqual(theKey1, theKey2);
 }
 
 
 /**
  * Purpose:     The  DefaultHasher  is a  Hasher  that is used by
- *              default in NCollection maps. 
+ *              default in NCollection maps.
  *              To compute the  hash code of the key  is used the
  *              global function HashCode.
- *              To compare two keys is used  the  global function 
+ *              To compare two keys is used  the  global function
  *              IsEqual.
 */
 template <class TheKeyType> class NCollection_DefaultHasher {
 public:
-  //! Returns hash code for the given key, in the range [1, theUpperBound]
-  //! @param theKey the key which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const TheKeyType& theKey, const Standard_Integer theUpperBound)
-  {
-    return HashCode_Proxy (theKey, theUpperBound);
-  }
+    //! Returns hash code for the given key, in the range [1, theUpperBound]
+    //! @param theKey the key which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const TheKeyType& theKey, const Standard_Integer theUpperBound)
+    {
+        return HashCode_Proxy(theKey, theUpperBound);
+    }
 
-  //
-  static Standard_Boolean IsEqual(const TheKeyType& theKey1, 
-                                  const TheKeyType& theKey2) {
-    return IsEqual_Proxy(theKey1, theKey2);
-  }
+    //
+    static Standard_Boolean IsEqual(const TheKeyType& theKey1,
+        const TheKeyType& theKey2) {
+        return IsEqual_Proxy(theKey1, theKey2);
+    }
 };
 
 #endif

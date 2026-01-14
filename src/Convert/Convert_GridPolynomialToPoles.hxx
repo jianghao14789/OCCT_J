@@ -40,15 +40,15 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! To    only  one   polynomial  Surface.
-        //! The  Length  of  <PolynomialUIntervals> and <PolynomialVIntervals>
-        //! have to be 2.
-        //! This values defined the parametric domain of the Polynomial Equation.
-        //!
-        //! Coefficients :
-        //! The <Coefficients> have to be formatted than an "C array"
-        //! [MaxUDegree+1] [MaxVDegree+1] [3]
-        Standard_EXPORT Convert_GridPolynomialToPoles(const Standard_Integer MaxUDegree, const Standard_Integer MaxVDegree, const Handle(TColStd_HArray1OfInteger)& NumCoeff, const Handle(TColStd_HArray1OfReal)& Coefficients, const Handle(TColStd_HArray1OfReal)& PolynomialUIntervals, const Handle(TColStd_HArray1OfReal)& PolynomialVIntervals);
+    //! To    only  one   polynomial  Surface.
+    //! The  Length  of  <PolynomialUIntervals> and <PolynomialVIntervals>
+    //! have to be 2.
+    //! This values defined the parametric domain of the Polynomial Equation.
+    //!
+    //! Coefficients :
+    //! The <Coefficients> have to be formatted than an "C array"
+    //! [MaxUDegree+1] [MaxVDegree+1] [3]
+    Standard_EXPORT Convert_GridPolynomialToPoles(const Standard_Integer MaxUDegree, const Standard_Integer MaxVDegree, const Handle(TColStd_HArray1OfInteger)& NumCoeff, const Handle(TColStd_HArray1OfReal)& Coefficients, const Handle(TColStd_HArray1OfReal)& PolynomialUIntervals, const Handle(TColStd_HArray1OfReal)& PolynomialVIntervals);
 
     //! To one grid of polynomial Surface.
     //! Warning!

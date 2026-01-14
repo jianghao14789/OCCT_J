@@ -1,4 +1,4 @@
-// Created on: 2002-04-29
+﻿// Created on: 2002-04-29
 // Created by: Alexander KARTOMIN (akm)
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //

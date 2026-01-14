@@ -1,4 +1,4 @@
-// Created on: 1992-02-07
+﻿// Created on: 1992-02-07
 // Created by: Laurent PAINNOT
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -28,38 +28,38 @@
 
 
 
-class math_DoubleTab 
+class math_DoubleTab
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT math_DoubleTab(const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
-  
-  Standard_EXPORT math_DoubleTab(const Standard_Address Tab, const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
-  
-  Standard_EXPORT void Init (const Standard_Real InitValue);
-  
-  Standard_EXPORT math_DoubleTab(const math_DoubleTab& Other);
-  
-    void Copy (math_DoubleTab& Other) const;
-  
-  Standard_EXPORT void SetLowerRow (const Standard_Integer LowerRow);
-  
-  Standard_EXPORT void SetLowerCol (const Standard_Integer LowerCol);
-  
-    Standard_Real& Value (const Standard_Integer RowIndex, const Standard_Integer ColIndex) const;
-  Standard_Real& operator() (const Standard_Integer RowIndex, const Standard_Integer ColIndex) const
-{
-  return Value(RowIndex,ColIndex);
-}
-  
-  Standard_EXPORT void Free();
-~math_DoubleTab()
-{
-  Free();
-}
+
+    Standard_EXPORT math_DoubleTab(const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
+
+    Standard_EXPORT math_DoubleTab(const Standard_Address Tab, const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
+
+    Standard_EXPORT void Init(const Standard_Real InitValue);
+
+    Standard_EXPORT math_DoubleTab(const math_DoubleTab& Other);
+
+    void Copy(math_DoubleTab& Other) const;
+
+    Standard_EXPORT void SetLowerRow(const Standard_Integer LowerRow);
+
+    Standard_EXPORT void SetLowerCol(const Standard_Integer LowerCol);
+
+    Standard_Real& Value(const Standard_Integer RowIndex, const Standard_Integer ColIndex) const;
+    Standard_Real& operator() (const Standard_Integer RowIndex, const Standard_Integer ColIndex) const
+    {
+        return Value(RowIndex, ColIndex);
+    }
+
+    Standard_EXPORT void Free();
+    ~math_DoubleTab()
+    {
+        Free();
+    }
 
 
 
@@ -72,17 +72,17 @@ protected:
 
 private:
 
-  
-  Standard_EXPORT void Allocate();
+
+    Standard_EXPORT void Allocate();
 
 
-  Standard_Address Addr;
-  Standard_Real Buf[16];
-  Standard_Boolean isAllocated;
-  Standard_Integer LowR;
-  Standard_Integer UppR;
-  Standard_Integer LowC;
-  Standard_Integer UppC;
+    Standard_Address Addr;
+    Standard_Real Buf[16];
+    Standard_Boolean isAllocated;
+    Standard_Integer LowR;
+    Standard_Integer UppR;
+    Standard_Integer LowC;
+    Standard_Integer UppC;
 
 
 };

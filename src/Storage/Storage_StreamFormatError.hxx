@@ -1,4 +1,4 @@
-// Created on: 1996-04-30
+﻿// Created on: 1996-04-30
 // Created by: cle
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Storage_StreamFormatError;
 DEFINE_STANDARD_HANDLE(Storage_StreamFormatError, Standard_Failure)
 
 #if !defined No_Exception && !defined No_Storage_StreamFormatError
-  #define Storage_StreamFormatError_Raise_if(CONDITION, MESSAGE) \
+#define Storage_StreamFormatError_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Storage_StreamFormatError(MESSAGE);
 #else
-  #define Storage_StreamFormatError_Raise_if(CONDITION, MESSAGE)
+#define Storage_StreamFormatError_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Storage_StreamFormatError, Standard_Failure)

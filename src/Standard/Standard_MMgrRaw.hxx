@@ -1,4 +1,4 @@
-// Created on: 2005-03-15
+﻿// Created on: 2005-03-15
 // Created by: Peter KURNEV
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -20,30 +20,30 @@
 
 /**
 * Implementation of raw OCC memory manager which uses standard C
-* functions: malloc (or calloc), free and realloc 
+* functions: malloc (or calloc), free and realloc
 * without any optimization
 */
 
 class Standard_MMgrRaw : public Standard_MMgrRoot
 {
- public:
-  //! Constructor; if aClear is True, the memory will be nullified
-  //! upon allocation.
-  Standard_EXPORT Standard_MMgrRaw(const Standard_Boolean aClear=Standard_False);
+public:
+    //! Constructor; if aClear is True, the memory will be nullified
+    //! upon allocation.
+    Standard_EXPORT Standard_MMgrRaw(const Standard_Boolean aClear = Standard_False);
 
-  //! Allocate aSize bytes 
-  Standard_EXPORT virtual Standard_Address Allocate(const Standard_Size aSize);
-  
-  //! Reallocate aPtr to the size aSize. 
-  //! The new pointer is returned.
-  Standard_EXPORT virtual Standard_Address Reallocate(Standard_Address thePtr, 
-						      const Standard_Size theSize);
-  
-  //! Free allocated memory. The pointer is nullified.
-  Standard_EXPORT virtual void Free (Standard_Address thePtr);
+    //! Allocate aSize bytes 
+    Standard_EXPORT virtual Standard_Address Allocate(const Standard_Size aSize);
 
- protected:
-  Standard_Boolean myClear; //! Option to nullify allocated memory
+    //! Reallocate aPtr to the size aSize. 
+    //! The new pointer is returned.
+    Standard_EXPORT virtual Standard_Address Reallocate(Standard_Address thePtr,
+        const Standard_Size theSize);
+
+    //! Free allocated memory. The pointer is nullified.
+    Standard_EXPORT virtual void Free(Standard_Address thePtr);
+
+protected:
+    Standard_Boolean myClear; //! Option to nullify allocated memory
 };
 
 #endif

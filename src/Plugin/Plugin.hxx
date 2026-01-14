@@ -1,4 +1,4 @@
-// Created on: 1997-02-28
+﻿// Created on: 1997-02-28
 // Created by: Jean-Louis Frenkel
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,11 +26,11 @@ class Standard_Transient;
 class Standard_GUID;
 class Resource_Manager;
 
-class Plugin 
+class Plugin
 {
 public:
-  
-  Standard_EXPORT static Handle(Standard_Transient) Load (const Standard_GUID& aGUID, const Standard_Boolean theVerbose = Standard_True);  
+
+    Standard_EXPORT static Handle(Standard_Transient) Load(const Standard_GUID& aGUID, const Standard_Boolean theVerbose = Standard_True);
 };
 
 #endif // _Plugin_HeaderFile

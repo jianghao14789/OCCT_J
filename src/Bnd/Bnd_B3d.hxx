@@ -39,8 +39,8 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Empty constructor.
-        Bnd_B3d();
+    //! Empty constructor.
+    Bnd_B3d();
 
     //! Constructor.
     Bnd_B3d(const gp_XYZ& theCenter, const gp_XYZ& theHSize);

@@ -65,9 +65,9 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Creates an empty Box.
-        //! The constructed box is qualified Void. Its gap is null.
-        Standard_EXPORT Bnd_Box();
+    //! Creates an empty Box.
+    //! The constructed box is qualified Void. Its gap is null.
+    Standard_EXPORT Bnd_Box();
 
     //! Creates a bounding box, it contains:
     //! -   minimum/maximum point of bounding box,

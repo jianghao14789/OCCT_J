@@ -1,4 +1,4 @@
-// Created on: 1997-02-27
+﻿// Created on: 1997-02-27
 // Created by: Christophe LEYNADIER
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -32,20 +32,20 @@ DEFINE_STANDARD_HANDLE(Storage_CallBack, Standard_Transient)
 class Storage_CallBack : public Standard_Transient
 {
 public:
-  
-  Standard_EXPORT virtual Handle(Standard_Persistent) New() const = 0;
-  
-  Standard_EXPORT virtual void Add (const Handle(Standard_Persistent)& aPers, const Handle(Storage_Schema)& aSchema) const = 0;
-  
-  Standard_EXPORT virtual void Write (const Handle(Standard_Persistent)& aPers, 
-                                      const Handle(Storage_BaseDriver)& aDriver, 
-                                      const Handle(Storage_Schema)& aSchema) const = 0;
-  
-  Standard_EXPORT virtual void Read (const Handle(Standard_Persistent)& aPers, 
-                                     const Handle(Storage_BaseDriver)& aDriver,
-                                     const Handle(Storage_Schema)& aSchema) const = 0;
 
-  DEFINE_STANDARD_RTTIEXT(Storage_CallBack,Standard_Transient)
+    Standard_EXPORT virtual Handle(Standard_Persistent) New() const = 0;
+
+    Standard_EXPORT virtual void Add(const Handle(Standard_Persistent)& aPers, const Handle(Storage_Schema)& aSchema) const = 0;
+
+    Standard_EXPORT virtual void Write(const Handle(Standard_Persistent)& aPers,
+        const Handle(Storage_BaseDriver)& aDriver,
+        const Handle(Storage_Schema)& aSchema) const = 0;
+
+    Standard_EXPORT virtual void Read(const Handle(Standard_Persistent)& aPers,
+        const Handle(Storage_BaseDriver)& aDriver,
+        const Handle(Storage_Schema)& aSchema) const = 0;
+
+    DEFINE_STANDARD_RTTIEXT(Storage_CallBack, Standard_Transient)
 
 };
 

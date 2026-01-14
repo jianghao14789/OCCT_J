@@ -1,4 +1,4 @@
-// Copyright (c) 1992-1999 Matra Datavision
+﻿// Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -24,10 +24,10 @@ class OSD_Exception_FLT_OVERFLOW;
 DEFINE_STANDARD_HANDLE(OSD_Exception_FLT_OVERFLOW, OSD_Exception)
 
 #if !defined No_Exception && !defined No_OSD_Exception_FLT_OVERFLOW
-  #define OSD_Exception_FLT_OVERFLOW_Raise_if(CONDITION, MESSAGE) \
+#define OSD_Exception_FLT_OVERFLOW_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw OSD_Exception_FLT_OVERFLOW(MESSAGE);
 #else
-  #define OSD_Exception_FLT_OVERFLOW_Raise_if(CONDITION, MESSAGE)
+#define OSD_Exception_FLT_OVERFLOW_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(OSD_Exception_FLT_OVERFLOW, OSD_Exception)

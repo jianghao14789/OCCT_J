@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -27,7 +27,7 @@
 extern "C" {
 # endif  /* __cplusplus */
 
-enum DIR_RESPONSE { DIR_ABORT, DIR_RETRY, DIR_IGNORE };
+    enum DIR_RESPONSE { DIR_ABORT, DIR_RETRY, DIR_IGNORE };
 
 #define FLAG_READ_PIPE  0x00000001
 #define FLAG_EOF        0x00000002
@@ -39,26 +39,26 @@ enum DIR_RESPONSE { DIR_ABORT, DIR_RETRY, DIR_IGNORE };
 #define FLAG_DEVICE     0x00000080
 #define FLAG_TYPE       0x0000007C
 
-// 2 macros modified for VisualAge
-//#define LODWORD( a ) ( DWORD )(   ( ( DWORDLONG )( a ) ) & 0x00000000FFFFFFFF   )
-//#define HIDWORD( a ) ( DWORD )(   ( ( DWORDLONG )( a ) ) >> 32                  )
+    // 2 macros modified for VisualAge
+    //#define LODWORD( a ) ( DWORD )(   ( ( DWORDLONG )( a ) ) & 0x00000000FFFFFFFF   )
+    //#define HIDWORD( a ) ( DWORD )(   ( ( DWORDLONG )( a ) ) >> 32                  )
 
 #define LODWORD( a ) ( DWORD )(   ( ( _int64 )( a ) ) & 0x00000000FFFFFFFF   )
 #define HIDWORD( a ) ( DWORD )(   ( ( _int64 )( a ) ) >> 32                  )
 
-typedef struct _file_ace {
+    typedef struct _file_ace {
 
-                ACE_HEADER header;
-                DWORD      dwMask;
-                PSID       pSID;
+        ACE_HEADER header;
+        DWORD      dwMask;
+        PSID       pSID;
 
-               } FILE_ACE, *PFILE_ACE;
+    } FILE_ACE, * PFILE_ACE;
 
-typedef void ( *MOVE_DIR_PROC   ) ( LPCWSTR, LPCWSTR );
-typedef void ( *COPY_DIR_PROC   ) ( LPCWSTR, LPCWSTR );
-typedef void ( *DELETE_DIR_PROC ) ( LPCWSTR          );
+    typedef void (*MOVE_DIR_PROC) (LPCWSTR, LPCWSTR);
+    typedef void (*COPY_DIR_PROC) (LPCWSTR, LPCWSTR);
+    typedef void (*DELETE_DIR_PROC) (LPCWSTR);
 
-typedef DIR_RESPONSE ( *RESPONSE_DIR_PROC ) ( LPCWSTR );
+    typedef DIR_RESPONSE(*RESPONSE_DIR_PROC) (LPCWSTR);
 
 #define GET_SID( pACE ) (  ( PSID )(   (  ( PBYTE )pACE    ) + \
                                        sizeof ( ACE_HEADER ) + \
@@ -71,40 +71,40 @@ typedef DIR_RESPONSE ( *RESPONSE_DIR_PROC ) ( LPCWSTR );
                                      )                           \
                         )
 
-PSECURITY_DESCRIPTOR AllocSD ( void                 );
-void                 FreeSD  ( PSECURITY_DESCRIPTOR );
+    PSECURITY_DESCRIPTOR AllocSD(void);
+    void                 FreeSD(PSECURITY_DESCRIPTOR);
 
-LPVOID GetTokenInformationEx ( HANDLE, TOKEN_INFORMATION_CLASS );
-void   FreeTokenInformation  ( LPVOID                          );
+    LPVOID GetTokenInformationEx(HANDLE, TOKEN_INFORMATION_CLASS);
+    void   FreeTokenInformation(LPVOID);
 
-PSECURITY_DESCRIPTOR GetFileSecurityEx ( LPCWSTR, SECURITY_INFORMATION );
-void                 FreeFileSecurity  ( PSECURITY_DESCRIPTOR          );
+    PSECURITY_DESCRIPTOR GetFileSecurityEx(LPCWSTR, SECURITY_INFORMATION);
+    void                 FreeFileSecurity(PSECURITY_DESCRIPTOR);
 
-PACL CreateAcl ( DWORD );
-void FreeAcl   ( PACL  );
+    PACL CreateAcl(DWORD);
+    void FreeAcl(PACL);
 
-BOOL PredefinedSid   ( PSID );
-BOOL NtPredefinedSid ( PSID );
-PSID AdminSid        ( void );
-PSID WorldSid        ( void );
-PSID InteractiveSid  ( void );
-PSID NetworkSid      ( void );
-PSID LocalSid        ( void );
-PSID DialupSid       ( void );
-PSID BatchSid        ( void );
-PSID CreatorOwnerSid ( void );
-PSID NullSid         ( void );
-PSID NtSid           ( void );
+    BOOL PredefinedSid(PSID);
+    BOOL NtPredefinedSid(PSID);
+    PSID AdminSid(void);
+    PSID WorldSid(void);
+    PSID InteractiveSid(void);
+    PSID NetworkSid(void);
+    PSID LocalSid(void);
+    PSID DialupSid(void);
+    PSID BatchSid(void);
+    PSID CreatorOwnerSid(void);
+    PSID NullSid(void);
+    PSID NtSid(void);
 
-PVOID AllocAccessAllowedAce ( DWORD, BYTE, PSID );
-void  FreeAce ( PVOID );
+    PVOID AllocAccessAllowedAce(DWORD, BYTE, PSID);
+    void  FreeAce(PVOID);
 
-BOOL MoveDirectory   ( LPCWSTR, LPCWSTR );
-BOOL CopyDirectory   ( LPCWSTR, LPCWSTR );
+    BOOL MoveDirectory(LPCWSTR, LPCWSTR);
+    BOOL CopyDirectory(LPCWSTR, LPCWSTR);
 
-void SetMoveDirectoryProc     ( MOVE_DIR_PROC     );
-void SetCopyDirectoryProc     ( COPY_DIR_PROC     );
-void SetResponseDirectoryProc ( RESPONSE_DIR_PROC );
+    void SetMoveDirectoryProc(MOVE_DIR_PROC);
+    void SetCopyDirectoryProc(COPY_DIR_PROC);
+    void SetResponseDirectoryProc(RESPONSE_DIR_PROC);
 
 # ifdef __cplusplus
 }

@@ -1,4 +1,4 @@
-// Created on: 2007-07-04
+﻿// Created on: 2007-07-04
 // Created by: Pavel TELKOV
 // Copyright (c) 2007-2014 OPEN CASCADE SAS
 //
@@ -24,60 +24,66 @@
 
 //=======================================================================
 //function : Arg (TCollection_AsciiString)
-//purpose  : 
+//purpose  : 为 %..s 转换设置 ASCII 字符串值
+//purpose  : Set value for %..s conversion from ASCII string
 //=======================================================================
 
-inline Message_Msg& Message_Msg::Arg (const TCollection_AsciiString& theString)
+inline Message_Msg& Message_Msg::Arg(const TCollection_AsciiString& theString)
 {
-  return Arg (theString.ToCString());
+    return Arg(theString.ToCString());
 }
 
 //=======================================================================
 //function : Arg (TCollection_HAsciiString)
-//purpose  : 
+//purpose  : 为 %..s 转换设置 HAsciiString Handle 值
+//purpose  : Set value for %..s conversion from HAsciiString Handle
 //=======================================================================
 
-inline Message_Msg& Message_Msg::Arg (const Handle(TCollection_HAsciiString)& theString)
+inline Message_Msg& Message_Msg::Arg(const Handle(TCollection_HAsciiString)& theString)
 {
-  return Arg (theString->String().ToCString());
+    return Arg(theString->String().ToCString());
 }
 
 //=======================================================================
 //function : Arg (TCollection_HExtendedString)
-//purpose  : 
+//purpose  : 为 %..s 转换设置 HExtendedString Handle 值
+//purpose  : Set value for %..s conversion from HExtendedString Handle
 //=======================================================================
 
-inline Message_Msg& Message_Msg::Arg (const Handle(TCollection_HExtendedString)& theString)
+inline Message_Msg& Message_Msg::Arg(const Handle(TCollection_HExtendedString)& theString)
 {
-  return Arg (theString->String());
+    return Arg(theString->String());
 }
 
 //=======================================================================
 //function : Original
-//purpose  : 
+//purpose  : 返回原始消息文本（未填充参数）
+//purpose  : Return original message text (without filled parameters)
 //=======================================================================
 
 inline const TCollection_ExtendedString& Message_Msg::Original() const
 {
-  return myOriginal;
+    return myOriginal;
 }
- 
+
 //=======================================================================
 //function : Value
-//purpose  : 
+//purpose  : 返回当前消息体文本（包含填充的参数）
+//purpose  : Return current message body text (with filled parameters)
 //=======================================================================
 
 inline const TCollection_ExtendedString& Message_Msg::Value() const
 {
-  return myMessageBody;
+    return myMessageBody;
 }
- 
+
 //=======================================================================
 //function : IsEdited
-//purpose  : 
+//purpose  : 检查消息是否已被编辑（Value 是否与 Original 不同）
+//purpose  : Check if message was edited (Value differs from Original)
 //=======================================================================
 
 inline Standard_Boolean Message_Msg::IsEdited() const
 {
-  return !myOriginal.IsEqual( myMessageBody );
+    return !myOriginal.IsEqual(myMessageBody);
 }

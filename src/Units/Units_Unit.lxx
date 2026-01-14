@@ -27,7 +27,7 @@
 
 inline TCollection_AsciiString Units_Unit::Name() const
 {
-  return thename->String();
+    return thename->String();
 }
 
 //=======================================================================
@@ -37,7 +37,7 @@ inline TCollection_AsciiString Units_Unit::Name() const
 
 inline Standard_Real Units_Unit::Value() const
 {
-  return thevalue;
+    return thevalue;
 }
 
 //=======================================================================
@@ -47,7 +47,7 @@ inline Standard_Real Units_Unit::Value() const
 
 inline Handle(Units_Quantity) Units_Unit::Quantity() const
 {
-  return thequantity;
+    return thequantity;
 }
 
 //=======================================================================
@@ -57,7 +57,7 @@ inline Handle(Units_Quantity) Units_Unit::Quantity() const
 
 inline Handle(TColStd_HSequenceOfHAsciiString) Units_Unit::SymbolsSequence() const
 {
-  return thesymbolssequence;
+    return thesymbolssequence;
 }
 
 //=======================================================================
@@ -67,7 +67,7 @@ inline Handle(TColStd_HSequenceOfHAsciiString) Units_Unit::SymbolsSequence() con
 
 inline void Units_Unit::Value(const Standard_Real avalue)
 {
-  thevalue = avalue;
+    thevalue = avalue;
 }
 
 //=======================================================================
@@ -77,5 +77,5 @@ inline void Units_Unit::Value(const Standard_Real avalue)
 
 inline void Units_Unit::Quantity(const Handle(Units_Quantity)& aquantity)
 {
-  thequantity = aquantity;
+    thequantity = aquantity;
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2016 OPEN CASCADE SAS
+﻿// Copyright (c) 2016 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -32,60 +32,60 @@ template<> class NCollection_Lerp<gp_Trsf>
 {
 public:
 
-  //! Empty constructor
-  NCollection_Lerp() {}
+    //! Empty constructor
+    NCollection_Lerp() {}
 
-  //! Main constructor.
-  NCollection_Lerp (const gp_Trsf& theStart, const gp_Trsf& theEnd)
-  {
-    Init (theStart, theEnd);
-  }
-
-  //! Initialize values.
-  void Init (const gp_Trsf& theStart, const gp_Trsf& theEnd)
-  {
-    myTrsfStart = theStart;
-    myTrsfEnd   = theEnd;
-    myLocLerp  .Init (theStart.TranslationPart(), theEnd.TranslationPart());
-    myRotLerp  .Init (theStart.GetRotation(),     theEnd.GetRotation());
-    myScaleLerp.Init (theStart.ScaleFactor(),     theEnd.ScaleFactor());
-  }
-
-  //! Compute interpolated value between two values.
-  //! @param theT normalized interpolation coefficient within [0, 1] range,
-  //!             with 0 pointing to first value and 1 to the second value.
-  //! @param theResult [out] interpolated value
-  void Interpolate (double theT, gp_Trsf& theResult) const
-  {
-    if (Abs (theT - 0.0) < Precision::Confusion())
+    //! Main constructor.
+    NCollection_Lerp(const gp_Trsf& theStart, const gp_Trsf& theEnd)
     {
-      theResult = myTrsfStart;
-      return;
-    }
-    else if (Abs (theT - 1.0) < Precision::Confusion())
-    {
-      theResult = myTrsfEnd;
-      return;
+        Init(theStart, theEnd);
     }
 
-    gp_XYZ aLoc;
-    gp_Quaternion aRot;
-    Standard_Real aScale = 1.0;
-    myLocLerp  .Interpolate (theT, aLoc);
-    myRotLerp  .Interpolate (theT, aRot);
-    myScaleLerp.Interpolate (theT, aScale);
-    theResult = gp_Trsf();
-    theResult.SetRotation (aRot);
-    theResult.SetTranslationPart (aLoc);
-    theResult.SetScaleFactor (aScale);
-  }
+    //! Initialize values.
+    void Init(const gp_Trsf& theStart, const gp_Trsf& theEnd)
+    {
+        myTrsfStart = theStart;
+        myTrsfEnd = theEnd;
+        myLocLerp.Init(theStart.TranslationPart(), theEnd.TranslationPart());
+        myRotLerp.Init(theStart.GetRotation(), theEnd.GetRotation());
+        myScaleLerp.Init(theStart.ScaleFactor(), theEnd.ScaleFactor());
+    }
+
+    //! Compute interpolated value between two values.
+    //! @param theT normalized interpolation coefficient within [0, 1] range,
+    //!             with 0 pointing to first value and 1 to the second value.
+    //! @param theResult [out] interpolated value
+    void Interpolate(double theT, gp_Trsf& theResult) const
+    {
+        if (Abs(theT - 0.0) < Precision::Confusion())
+        {
+            theResult = myTrsfStart;
+            return;
+        }
+        else if (Abs(theT - 1.0) < Precision::Confusion())
+        {
+            theResult = myTrsfEnd;
+            return;
+        }
+
+        gp_XYZ aLoc;
+        gp_Quaternion aRot;
+        Standard_Real aScale = 1.0;
+        myLocLerp.Interpolate(theT, aLoc);
+        myRotLerp.Interpolate(theT, aRot);
+        myScaleLerp.Interpolate(theT, aScale);
+        theResult = gp_Trsf();
+        theResult.SetRotation(aRot);
+        theResult.SetTranslationPart(aLoc);
+        theResult.SetScaleFactor(aScale);
+    }
 
 private:
-  NCollection_Lerp<gp_XYZ>        myLocLerp;
-  NCollection_Lerp<Standard_Real> myScaleLerp;
-  gp_QuaternionNLerp              myRotLerp;
-  gp_Trsf                         myTrsfStart;
-  gp_Trsf                         myTrsfEnd;
+    NCollection_Lerp<gp_XYZ>        myLocLerp;
+    NCollection_Lerp<Standard_Real> myScaleLerp;
+    gp_QuaternionNLerp              myRotLerp;
+    gp_Trsf                         myTrsfStart;
+    gp_Trsf                         myTrsfEnd;
 };
 
 typedef NCollection_Lerp<gp_Trsf> gp_TrsfNLerp;

@@ -1,4 +1,4 @@
-// Created on: 1994-01-05
+﻿// Created on: 1994-01-05
 // Created by: Arnaud BOUZY
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -15,12 +15,12 @@
 // commercial license or contractual agreement.
 
 inline const Handle(Expr_GeneralExpression)& Expr_BinaryExpression::FirstOperand() const
-{   
-  return myFirstOperand;
+{
+    return myFirstOperand;
 }
 
-inline const Handle(Expr_GeneralExpression)& Expr_BinaryExpression::SecondOperand () const
+inline const Handle(Expr_GeneralExpression)& Expr_BinaryExpression::SecondOperand() const
 {
-  return mySecondOperand;
+    return mySecondOperand;
 }
 

@@ -12,6 +12,27 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+// ============================================================================
+// FSD_BinaryFile.cxx - 二进制文件存储驱动程序的实现
+// ============================================================================
+// 
+// 主要功能：
+// 1. 以二进制格式读写对象数据到文件
+// 2. 管理文件的逻辑段（Info、Comment、Type、Root、Ref、Data）
+// 3. 处理大小端字节序的自动转换
+// 4. 支持整数、浮点数、字符串等基本数据类型的序列化
+//
+// 文件结构：
+// - Magic Number: "BINFILE" (标识符)
+// - File Header: 各段位置信息（13个整数）
+// - Info Section: 数据库元信息
+// - Comment Section: 注释信息
+// - Type Section: 类型定义
+// - Root Section: 根对象列表
+// - Ref Section: 对象引用关系
+// - Data Section: 对象数据
+//
+// ============================================================================
 
 #include <FSD_BinaryFile.hxx>
 #include <OSD.hxx>
@@ -30,13 +51,14 @@
 #include <TCollection_ExtendedString.hxx>
 #include <Standard_Assert.hxx>
 
+// 文件魔数，用于识别文件类型
 const Standard_CString MAGICNUMBER = "BINFILE";
 
 IMPLEMENT_STANDARD_RTTIEXT(FSD_BinaryFile, Storage_BaseDriver)
 
 //=======================================================================
-//function : FSD_BinaryFile
-//purpose  : 
+//function : FSD_BinaryFile (构造函数)
+//purpose  : 初始化二进制文件驱动，将文件头各字段设置为 -1
 //=======================================================================
 
 FSD_BinaryFile::FSD_BinaryFile() :
@@ -58,9 +80,9 @@ FSD_BinaryFile::FSD_BinaryFile() :
 }
 
 //=======================================================================
-//function : IsGoodFileType
-//purpose  : INFO SECTION
-//           write
+//function : IsGoodFileType (静态)
+//purpose  : 检查指定文件是否为有效的 FSD 二进制格式文件
+//           通过读取文件头的魔数来判断
 //=======================================================================
 
 Storage_Error FSD_BinaryFile::IsGoodFileType(const TCollection_AsciiString& aName)
@@ -88,7 +110,8 @@ Storage_Error FSD_BinaryFile::IsGoodFileType(const TCollection_AsciiString& aNam
 
 //=======================================================================
 //function : Open
-//purpose  : 
+//purpose  : 打开或创建二进制存储文件
+//           支持读、写、读写三种模式
 //=======================================================================
 
 Storage_Error FSD_BinaryFile::Open(const TCollection_AsciiString& aName, const Storage_OpenMode aMode)
@@ -124,7 +147,7 @@ Storage_Error FSD_BinaryFile::Open(const TCollection_AsciiString& aName, const S
 
 //=======================================================================
 //function : IsEnd
-//purpose  : 
+//purpose  : 判断是否已到达文件末尾
 //=======================================================================
 
 Standard_Boolean FSD_BinaryFile::IsEnd()
@@ -134,7 +157,7 @@ Standard_Boolean FSD_BinaryFile::IsEnd()
 
 //=======================================================================
 //function : Close
-//purpose  : 
+//purpose  : 关闭当前打开的文件
 //=======================================================================
 
 Storage_Error FSD_BinaryFile::Close()
@@ -153,8 +176,8 @@ Storage_Error FSD_BinaryFile::Close()
 }
 
 //=======================================================================
-//function : MagicNumber
-//purpose  : ------------------ PROTECTED
+//function : MagicNumber (静态)
+//purpose  : 返回文件魔数，用于识别 FSD 二进制格式
 //=======================================================================
 
 Standard_CString FSD_BinaryFile::MagicNumber()
@@ -164,7 +187,7 @@ Standard_CString FSD_BinaryFile::MagicNumber()
 
 //=======================================================================
 //function : ReadChar
-//purpose  : read <rsize> character from the current position.
+//purpose  : 从当前位置读取指定字节数的字符到缓冲区
 //=======================================================================
 
 void FSD_BinaryFile::ReadChar(TCollection_AsciiString& buffer, const Standard_Size rsize)
@@ -182,7 +205,7 @@ void FSD_BinaryFile::ReadChar(TCollection_AsciiString& buffer, const Standard_Si
 
 //=======================================================================
 //function : SkipObject
-//purpose  : 
+//purpose  : 跳过当前对象（占位符，未实现）
 //=======================================================================
 
 void FSD_BinaryFile::SkipObject()
@@ -192,7 +215,8 @@ void FSD_BinaryFile::SkipObject()
 
 //=======================================================================
 //function : PutReference
-//purpose  : ---------------------- PUBLIC : PUT
+//purpose  : 写入对象引用（整数值）
+//           自动处理字节序反转（如果需要）
 //=======================================================================
 
 Storage_BaseDriver& FSD_BinaryFile::PutReference(const Standard_Integer aValue)
@@ -1807,7 +1831,8 @@ void FSD_BinaryFile::ReadHeaderData(Standard_IStream& theIStream, const Handle(S
 
 //=======================================================================
 //function : Tell
-//purpose  : return position in the file. Return -1 upon error.
+//purpose  : 获取文件当前位置（字节偏移）
+//           失败返回 -1
 //=======================================================================
 
 Storage_Position FSD_BinaryFile::Tell()

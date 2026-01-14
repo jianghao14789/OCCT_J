@@ -1,4 +1,4 @@
-// Created on: 1992-08-18
+﻿// Created on: 1992-08-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,24 +36,24 @@ class ExprIntrp_GenRel : public ExprIntrp_Generator
 
 public:
 
-  
-  Standard_EXPORT static Handle(ExprIntrp_GenRel) Create();
-  
-  //! Processes given string.
-  Standard_EXPORT void Process (const TCollection_AsciiString& str);
-  
-  //! Returns false if any syntax error has occurred during
-  //! process.
-  Standard_EXPORT Standard_Boolean IsDone() const;
-  
-  //! Returns relation generated. Raises an exception if
-  //! IsDone answers false.
-  Standard_EXPORT Handle(Expr_GeneralRelation) Relation() const;
+
+    Standard_EXPORT static Handle(ExprIntrp_GenRel) Create();
+
+    //! Processes given string.
+    Standard_EXPORT void Process(const TCollection_AsciiString& str);
+
+    //! Returns false if any syntax error has occurred during
+    //! process.
+    Standard_EXPORT Standard_Boolean IsDone() const;
+
+    //! Returns relation generated. Raises an exception if
+    //! IsDone answers false.
+    Standard_EXPORT Handle(Expr_GeneralRelation) Relation() const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenRel,ExprIntrp_Generator)
+    DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenRel, ExprIntrp_Generator)
 
 protected:
 
@@ -62,12 +62,12 @@ protected:
 
 private:
 
-  
-  //! Creates an empty generator
-  Standard_EXPORT ExprIntrp_GenRel();
 
-  Standard_Boolean done;
-  Handle(Expr_GeneralRelation) myRelation;
+    //! Creates an empty generator
+    Standard_EXPORT ExprIntrp_GenRel();
+
+    Standard_Boolean done;
+    Handle(Expr_GeneralRelation) myRelation;
 
 
 };

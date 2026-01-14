@@ -1,4 +1,4 @@
-// Created on: 1991-08-22
+﻿// Created on: 1991-08-22
 // Created by: Laurent PAINNOT
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -42,80 +42,80 @@ class math_Matrix;
 //! done and is similar to Gauss resolution with an optimisation
 //! because the matrix is a symmetric matrix.
 //! (The resolution is done with Crout algorithm)
-class math_Uzawa 
+class math_Uzawa
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Given an input matrix Cont, two input vectors Secont
-  //! and StartingPoint, it solves Cont*X = Secont (only
-  //! = equations) with a minimization of Norme(X-X0).
-  //! The maximum iterations number allowed is fixed to
-  //! NbIterations.
-  //! The tolerance EpsLic is fixed for the dual variable
-  //! convergence. The tolerance EpsLix is used for the
-  //! convergence of X.
-  //! Exception ConstructionError is raised if the line number
-  //! of Cont is different from the length of Secont.
-  Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
-  
-  //! Given an input matrix Cont, two input vectors Secont
-  //! and StartingPoint, it solves Cont*X = Secont (the Nce
-  //! first equations are equal equations and the Nci last
-  //! equations are inequalities <) with a minimization
-  //! of Norme(X-X0).
-  //! The maximum iterations number allowed is fixed to
-  //! NbIterations.
-  //! The tolerance EpsLic is fixed for the dual variable
-  //! convergence. The tolerance EpsLix is used for the
-  //! convergence of X.
-  //! There are no conditions on Nce and Nci.
-  //! Exception ConstructionError is raised if the line number
-  //! of Cont is different from the length of Secont and from
-  //! Nce + Nci.
-  Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
-  
-  //! Returns true if the computations are successful, otherwise returns false.
+
+    //! Given an input matrix Cont, two input vectors Secont
+    //! and StartingPoint, it solves Cont*X = Secont (only
+    //! = equations) with a minimization of Norme(X-X0).
+    //! The maximum iterations number allowed is fixed to
+    //! NbIterations.
+    //! The tolerance EpsLic is fixed for the dual variable
+    //! convergence. The tolerance EpsLix is used for the
+    //! convergence of X.
+    //! Exception ConstructionError is raised if the line number
+    //! of Cont is different from the length of Secont.
+    Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
+
+    //! Given an input matrix Cont, two input vectors Secont
+    //! and StartingPoint, it solves Cont*X = Secont (the Nce
+    //! first equations are equal equations and the Nci last
+    //! equations are inequalities <) with a minimization
+    //! of Norme(X-X0).
+    //! The maximum iterations number allowed is fixed to
+    //! NbIterations.
+    //! The tolerance EpsLic is fixed for the dual variable
+    //! convergence. The tolerance EpsLix is used for the
+    //! convergence of X.
+    //! There are no conditions on Nce and Nci.
+    //! Exception ConstructionError is raised if the line number
+    //! of Cont is different from the length of Secont and from
+    //! Nce + Nci.
+    Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
+
+    //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
-  
-  //! Returns the vector solution of the system above.
-  //! An exception is raised if NotDone.
+
+    //! Returns the vector solution of the system above.
+    //! An exception is raised if NotDone.
     const math_Vector& Value() const;
-  
-  //! Returns the initial error Cont*StartingPoint-Secont.
-  //! An exception is raised if NotDone.
+
+    //! Returns the initial error Cont*StartingPoint-Secont.
+    //! An exception is raised if NotDone.
     const math_Vector& InitialError() const;
-  
-  //! returns the duale variables V of the systeme.
-  Standard_EXPORT void Duale (math_Vector& V) const;
-  
-  //! Returns the difference between X solution and the
-  //! StartingPoint.
-  //! An exception is raised if NotDone.
+
+    //! returns the duale variables V of the systeme.
+    Standard_EXPORT void Duale(math_Vector& V) const;
+
+    //! Returns the difference between X solution and the
+    //! StartingPoint.
+    //! An exception is raised if NotDone.
     const math_Vector& Error() const;
-  
-  //! returns the number of iterations really done.
-  //! An exception is raised if NotDone.
+
+    //! returns the number of iterations really done.
+    //! An exception is raised if NotDone.
     Standard_Integer NbIterations() const;
-  
-  //! returns the inverse matrix of (C * Transposed(C)).
-  //! This result is needed for the computation of the gradient
-  //! when approximating a curve.
+
+    //! returns the inverse matrix of (C * Transposed(C)).
+    //! This result is needed for the computation of the gradient
+    //! when approximating a curve.
     const math_Matrix& InverseCont() const;
-  
-  //! Prints information on the current state of the object.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+
+    //! Prints information on the current state of the object.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
 
 protected:
 
-  
-  //! Is used internally by the two constructors above.
-  Standard_EXPORT void Perform (const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
+
+    //! Is used internally by the two constructors above.
+    Standard_EXPORT void Perform(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
 
 
 
@@ -124,13 +124,13 @@ private:
 
 
 
-  math_Vector Resul;
-  math_Vector Erruza;
-  math_Vector Errinit;
-  math_Vector Vardua;
-  math_Matrix CTCinv;
-  Standard_Integer NbIter;
-  Standard_Boolean Done;
+    math_Vector Resul;
+    math_Vector Erruza;
+    math_Vector Errinit;
+    math_Vector Vardua;
+    math_Matrix CTCinv;
+    Standard_Integer NbIter;
+    Standard_Boolean Done;
 
 
 };

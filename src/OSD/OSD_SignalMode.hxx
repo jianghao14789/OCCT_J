@@ -1,4 +1,4 @@
-// Copyright (c) 2019 OPEN CASCADE SAS
+﻿// Copyright (c) 2019 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -17,10 +17,10 @@
 //! Mode of operation for OSD::SetSignal() function
 enum OSD_SignalMode
 {
-OSD_SignalMode_AsIs,         //!< Do not set or remove signal handlers
-OSD_SignalMode_Set,          //!< Set OCCT signal handlers
-OSD_SignalMode_SetUnhandled, //!< Set OCCT signal handler but only if no handler is set, for each particular signal type
-OSD_SignalMode_Unset         //!< Unset signal handler to system default
+    OSD_SignalMode_AsIs,         //!< Do not set or remove signal handlers
+    OSD_SignalMode_Set,          //!< Set OCCT signal handlers
+    OSD_SignalMode_SetUnhandled, //!< Set OCCT signal handler but only if no handler is set, for each particular signal type
+    OSD_SignalMode_Unset         //!< Unset signal handler to system default
 };
 
 #endif // _OSD_SignalMode_HeaderFile

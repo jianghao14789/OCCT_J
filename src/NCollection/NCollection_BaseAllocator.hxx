@@ -1,4 +1,4 @@
-// Created on: 2002-04-12
+﻿// Created on: 2002-04-12
 // Created by: Alexander KARTOMIN (akm)
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -43,44 +43,44 @@
 *              inaccessible.  To  create the  BaseAllocator use  the method
 *              CommonBaseAllocator.
 *              Note that this object is managed by Handle.
-*/              
+*/
 class NCollection_BaseAllocator : public Standard_Transient
 {
- public:
-  // ---------- PUBLIC METHODS ------------
-  Standard_EXPORT virtual void* Allocate (const size_t size);
-  Standard_EXPORT virtual void  Free     (void * anAddress);
-  
-  //! CommonBaseAllocator
-  //! This method is designed to have the only one BaseAllocator (to avoid
-  //! useless copying of collections). However one can use operator new to
-  //! create more BaseAllocators, but it is injurious.
-  Standard_EXPORT static const Handle(NCollection_BaseAllocator)&
-    CommonBaseAllocator(void);
+public:
+    // ---------- PUBLIC METHODS ------------
+    Standard_EXPORT virtual void* Allocate(const size_t size);
+    Standard_EXPORT virtual void  Free(void* anAddress);
 
-  //! Callback function to register alloc/free calls
-  Standard_EXPORT static void StandardCallBack
-                    (const Standard_Boolean theIsAlloc,
-                     const Standard_Address theStorage,
-                     const Standard_Size theRoundSize,
-                     const Standard_Size theSize);
+    //! CommonBaseAllocator
+    //! This method is designed to have the only one BaseAllocator (to avoid
+    //! useless copying of collections). However one can use operator new to
+    //! create more BaseAllocators, but it is injurious.
+    Standard_EXPORT static const Handle(NCollection_BaseAllocator)&
+        CommonBaseAllocator(void);
 
-  //! Prints memory usage statistics cumulated by StandardCallBack
-  Standard_EXPORT static void PrintMemUsageStatistics();
+    //! Callback function to register alloc/free calls
+    Standard_EXPORT static void StandardCallBack
+    (const Standard_Boolean theIsAlloc,
+        const Standard_Address theStorage,
+        const Standard_Size theRoundSize,
+        const Standard_Size theSize);
 
- protected:
-  //! Constructor - prohibited
-  NCollection_BaseAllocator(void) {}
+    //! Prints memory usage statistics cumulated by StandardCallBack
+    Standard_EXPORT static void PrintMemUsageStatistics();
 
- private:
-  //! Copy constructor - prohibited
-  NCollection_BaseAllocator(const NCollection_BaseAllocator&);
+protected:
+    //! Constructor - prohibited
+    NCollection_BaseAllocator(void) {}
 
- public:
-  // ---------- CasCade RunTime Type Information
-  DEFINE_STANDARD_RTTIEXT(NCollection_BaseAllocator,Standard_Transient)
+private:
+    //! Copy constructor - prohibited
+    NCollection_BaseAllocator(const NCollection_BaseAllocator&);
+
+public:
+    // ---------- CasCade RunTime Type Information
+    DEFINE_STANDARD_RTTIEXT(NCollection_BaseAllocator, Standard_Transient)
 };
 
-DEFINE_STANDARD_HANDLE(NCollection_BaseAllocator,Standard_Transient)
+DEFINE_STANDARD_HANDLE(NCollection_BaseAllocator, Standard_Transient)
 
 #endif

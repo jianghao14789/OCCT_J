@@ -1,4 +1,4 @@
-// Created on: 1992-05-07
+﻿// Created on: 1992-05-07
 // Created by: Modelistation
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class StdFail_UndefinedDerivative;
 DEFINE_STANDARD_HANDLE(StdFail_UndefinedDerivative, Standard_DomainError)
 
 #if !defined No_Exception && !defined No_StdFail_UndefinedDerivative
-  #define StdFail_UndefinedDerivative_Raise_if(CONDITION, MESSAGE) \
+#define StdFail_UndefinedDerivative_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw StdFail_UndefinedDerivative(MESSAGE);
 #else
-  #define StdFail_UndefinedDerivative_Raise_if(CONDITION, MESSAGE)
+#define StdFail_UndefinedDerivative_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(StdFail_UndefinedDerivative, Standard_DomainError)

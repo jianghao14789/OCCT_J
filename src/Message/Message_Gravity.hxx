@@ -23,13 +23,20 @@
 //! - Warning: warning message
 //! - Alarm: non-critical error
 //! - Fail: fatal error
+//!
+//! 定义消息的严重级别（从低到高）
+//! - Trace: 算法执行的低级细节（通常用于调试目的）
+//! - Info: 信息性消息
+//! - Warning: 警告消息
+//! - Alarm: 非严重错误
+//! - Fail: 致命错误（最严重）
 enum Message_Gravity
 {
-    Message_Trace,
-    Message_Info,
-    Message_Warning,
-    Message_Alarm,
-    Message_Fail
+    Message_Trace,      // 跟踪级别：低级调试信息
+    Message_Info,       // 信息级别：一般性信息
+    Message_Warning,    // 警告级别：可能的问题
+    Message_Alarm,      // 警报级别：错误但可恢复
+    Message_Fail        // 失败级别：致命错误（最严重）
 };
 
 #endif // _Message_Gravity_HeaderFile

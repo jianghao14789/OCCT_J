@@ -1,4 +1,4 @@
-// Created on: 1991-01-14
+﻿// Created on: 1991-01-14
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Expr_InvalidAssignment;
 DEFINE_STANDARD_HANDLE(Expr_InvalidAssignment, Expr_ExprFailure)
 
 #if !defined No_Exception && !defined No_Expr_InvalidAssignment
-  #define Expr_InvalidAssignment_Raise_if(CONDITION, MESSAGE) \
+#define Expr_InvalidAssignment_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Expr_InvalidAssignment(MESSAGE);
 #else
-  #define Expr_InvalidAssignment_Raise_if(CONDITION, MESSAGE)
+#define Expr_InvalidAssignment_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Expr_InvalidAssignment, Expr_ExprFailure)

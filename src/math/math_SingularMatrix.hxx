@@ -1,4 +1,4 @@
-// Created on: 1991-01-21
+﻿// Created on: 1991-01-21
 // Created by: Isabelle GRIGNON
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class math_SingularMatrix;
 DEFINE_STANDARD_HANDLE(math_SingularMatrix, Standard_Failure)
 
 #if !defined No_Exception && !defined No_math_SingularMatrix
-  #define math_SingularMatrix_Raise_if(CONDITION, MESSAGE) \
+#define math_SingularMatrix_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw math_SingularMatrix(MESSAGE);
 #else
-  #define math_SingularMatrix_Raise_if(CONDITION, MESSAGE)
+#define math_SingularMatrix_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(math_SingularMatrix, Standard_Failure)

@@ -1,4 +1,4 @@
-// Created on: 1991-07-18
+﻿// Created on: 1991-07-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS

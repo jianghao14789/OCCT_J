@@ -1,4 +1,4 @@
-// Created on: 1993-02-22
+﻿// Created on: 1993-02-22
 // Created by: Modelistation
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,15 +21,15 @@
 //! Identifies the type of a curve.
 enum GeomAbs_CurveType
 {
-GeomAbs_Line,
-GeomAbs_Circle,
-GeomAbs_Ellipse,
-GeomAbs_Hyperbola,
-GeomAbs_Parabola,
-GeomAbs_BezierCurve,
-GeomAbs_BSplineCurve,
-GeomAbs_OffsetCurve,
-GeomAbs_OtherCurve
+    GeomAbs_Line,
+    GeomAbs_Circle,
+    GeomAbs_Ellipse,
+    GeomAbs_Hyperbola,
+    GeomAbs_Parabola,
+    GeomAbs_BezierCurve,
+    GeomAbs_BSplineCurve,
+    GeomAbs_OffsetCurve,
+    GeomAbs_OtherCurve
 };
 
 #endif // _GeomAbs_CurveType_HeaderFile

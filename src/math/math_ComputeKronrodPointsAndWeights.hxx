@@ -1,4 +1,4 @@
-// Created on: 2005-12-21
+﻿// Created on: 2005-12-21
 // Created by: Julia GERASIMOVA
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //
@@ -27,20 +27,20 @@
 
 
 
-class math_ComputeKronrodPointsAndWeights 
+class math_ComputeKronrodPointsAndWeights
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT math_ComputeKronrodPointsAndWeights(const Standard_Integer Number);
-  
-  Standard_EXPORT Standard_Boolean IsDone() const;
-  
-  Standard_EXPORT math_Vector Points() const;
-  
-  Standard_EXPORT math_Vector Weights() const;
+
+    Standard_EXPORT math_ComputeKronrodPointsAndWeights(const Standard_Integer Number);
+
+    Standard_EXPORT Standard_Boolean IsDone() const;
+
+    Standard_EXPORT math_Vector Points() const;
+
+    Standard_EXPORT math_Vector Weights() const;
 
 
 
@@ -55,9 +55,9 @@ private:
 
 
 
-  Handle(TColStd_HArray1OfReal) myPoints;
-  Handle(TColStd_HArray1OfReal) myWeights;
-  Standard_Boolean myIsDone;
+    Handle(TColStd_HArray1OfReal) myPoints;
+    Handle(TColStd_HArray1OfReal) myWeights;
+    Standard_Boolean myIsDone;
 
 
 };

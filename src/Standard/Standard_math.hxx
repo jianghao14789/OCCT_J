@@ -1,4 +1,4 @@
-// Copyright (c) 1991-1999 Matra Datavision
+﻿// Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -29,9 +29,9 @@
 
 // MSVC versions prior to 12 did not provided acosh, asinh, atanh functions in standard library
 #if _MSC_VER < 1800
-Standard_EXPORT double __cdecl acosh ( double );
-Standard_EXPORT double __cdecl asinh ( double );
-Standard_EXPORT double __cdecl atanh ( double );
+Standard_EXPORT double __cdecl acosh(double);
+Standard_EXPORT double __cdecl asinh(double);
+Standard_EXPORT double __cdecl atanh(double);
 #endif
 
 #endif  /* _MSC_VER */

@@ -1,4 +1,4 @@
-// Created on: 1991-07-18
+﻿// Created on: 1991-07-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -38,24 +38,24 @@ class ExprIntrp_GenExp : public ExprIntrp_Generator
 
 public:
 
-  
-  Standard_EXPORT static Handle(ExprIntrp_GenExp) Create();
-  
-  //! Processes given string.
-  Standard_EXPORT void Process (const TCollection_AsciiString& str);
-  
-  //! Returns false if any syntax error has occurred during
-  //! process.
-  Standard_EXPORT Standard_Boolean IsDone() const;
-  
-  //! Returns expression generated. Raises an exception if
-  //! IsDone answers false.
-  Standard_EXPORT Handle(Expr_GeneralExpression) Expression() const;
+
+    Standard_EXPORT static Handle(ExprIntrp_GenExp) Create();
+
+    //! Processes given string.
+    Standard_EXPORT void Process(const TCollection_AsciiString& str);
+
+    //! Returns false if any syntax error has occurred during
+    //! process.
+    Standard_EXPORT Standard_Boolean IsDone() const;
+
+    //! Returns expression generated. Raises an exception if
+    //! IsDone answers false.
+    Standard_EXPORT Handle(Expr_GeneralExpression) Expression() const;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenExp,ExprIntrp_Generator)
+    DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenExp, ExprIntrp_Generator)
 
 protected:
 
@@ -64,12 +64,12 @@ protected:
 
 private:
 
-  
-  //! Creates an empty generator
-  Standard_EXPORT ExprIntrp_GenExp();
 
-  Standard_Boolean done;
-  Handle(Expr_GeneralExpression) myExpression;
+    //! Creates an empty generator
+    Standard_EXPORT ExprIntrp_GenExp();
+
+    Standard_Boolean done;
+    Handle(Expr_GeneralExpression) myExpression;
 
 
 };

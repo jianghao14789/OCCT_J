@@ -1,4 +1,4 @@
-// Created on: 1997-02-06
+﻿// Created on: 1997-02-06
 // Created by: Kernel
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -37,17 +37,17 @@ class Storage_InternalData : public Standard_Transient
 
 public:
 
-  Handle(Storage_HPArray)& ReadArray() { return myReadArray; }
-  
-  Standard_EXPORT Storage_InternalData();
-  
-  Standard_EXPORT void Clear();
+    Handle(Storage_HPArray)& ReadArray() { return myReadArray; }
+
+    Standard_EXPORT Storage_InternalData();
+
+    Standard_EXPORT void Clear();
 
 
-friend class Storage_Schema;
+    friend class Storage_Schema;
 
 
-  DEFINE_STANDARD_RTTIEXT(Storage_InternalData,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Storage_InternalData, Standard_Transient)
 
 protected:
 
@@ -57,11 +57,11 @@ protected:
 private:
 
 
-  Storage_BucketOfPersistent myPtoA;
-  Standard_Integer myObjId;
-  Standard_Integer myTypeId;
-  Handle(Storage_HPArray) myReadArray;
-  Storage_MapOfCallBack myTypeBinding;
+    Storage_BucketOfPersistent myPtoA;
+    Standard_Integer myObjId;
+    Standard_Integer myTypeId;
+    Handle(Storage_HPArray) myReadArray;
+    Storage_MapOfCallBack myTypeBinding;
 
 
 };

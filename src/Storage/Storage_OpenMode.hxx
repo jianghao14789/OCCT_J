@@ -1,4 +1,4 @@
-// Created on: 1996-04-30
+﻿// Created on: 1996-04-30
 // Created by: cle
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@
 //! for both reading and writing operations.
 enum Storage_OpenMode
 {
-Storage_VSNone,
-Storage_VSRead,
-Storage_VSWrite,
-Storage_VSReadWrite
+    Storage_VSNone,
+    Storage_VSRead,
+    Storage_VSWrite,
+    Storage_VSReadWrite
 };
 
 #endif // _Storage_OpenMode_HeaderFile

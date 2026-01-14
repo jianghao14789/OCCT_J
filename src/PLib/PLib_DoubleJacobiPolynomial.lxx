@@ -1,4 +1,4 @@
-// Created on: 1997-06-06
+﻿// Created on: 1997-06-06
 // Created by: Sergey SOKOLOV
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -17,24 +17,24 @@
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_HArray1OfReal.hxx>
 
-inline Handle(PLib_JacobiPolynomial) PLib_DoubleJacobiPolynomial::U() const 
+inline Handle(PLib_JacobiPolynomial) PLib_DoubleJacobiPolynomial::U() const
 {
-  return myJacPolU;
+    return myJacPolU;
 }
 
- inline Handle(PLib_JacobiPolynomial) PLib_DoubleJacobiPolynomial::V() const 
+inline Handle(PLib_JacobiPolynomial) PLib_DoubleJacobiPolynomial::V() const
 {
-  return myJacPolV;
+    return myJacPolV;
 }
 
- inline Handle(TColStd_HArray1OfReal) PLib_DoubleJacobiPolynomial::TabMaxU() const 
+inline Handle(TColStd_HArray1OfReal) PLib_DoubleJacobiPolynomial::TabMaxU() const
 {
-  return myTabMaxU;
+    return myTabMaxU;
 }
 
- inline Handle(TColStd_HArray1OfReal) PLib_DoubleJacobiPolynomial::TabMaxV() const 
+inline Handle(TColStd_HArray1OfReal) PLib_DoubleJacobiPolynomial::TabMaxV() const
 {
-  return myTabMaxV;
+    return myTabMaxV;
 }
 
 

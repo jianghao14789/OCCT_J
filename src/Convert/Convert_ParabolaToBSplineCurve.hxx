@@ -44,10 +44,10 @@ public:
 
 
 
-        //! The parabola Prb is limited between the parametric values U1, U2
-        //! and the equivalent B-spline curve as the same orientation as the
-        //! parabola Prb.
-        Standard_EXPORT Convert_ParabolaToBSplineCurve(const gp_Parab2d& Prb, const Standard_Real U1, const Standard_Real U2);
+    //! The parabola Prb is limited between the parametric values U1, U2
+    //! and the equivalent B-spline curve as the same orientation as the
+    //! parabola Prb.
+    Standard_EXPORT Convert_ParabolaToBSplineCurve(const gp_Parab2d& Prb, const Standard_Real U1, const Standard_Real U2);
 
 
 

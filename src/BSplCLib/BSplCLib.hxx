@@ -124,16 +124,16 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! This routine searches the position of the real value theX
-        //! in the monotonically increasing set of real values theArray using bisection algorithm.
-        //!
-        //! If the given value is out of range or array values, algorithm returns either
-        //! theArray.Lower()-1 or theArray.Upper()+1 depending on theX position in the ordered set.
-        //!
-        //! This routine is used to locate a knot value in a set of knots.
-        Standard_EXPORT static void Hunt(const TColStd_Array1OfReal& theArray,
-            const Standard_Real theX,
-            Standard_Integer& theXPos);
+    //! This routine searches the position of the real value theX
+    //! in the monotonically increasing set of real values theArray using bisection algorithm.
+    //!
+    //! If the given value is out of range or array values, algorithm returns either
+    //! theArray.Lower()-1 or theArray.Upper()+1 depending on theX position in the ordered set.
+    //!
+    //! This routine is used to locate a knot value in a set of knots.
+    Standard_EXPORT static void Hunt(const TColStd_Array1OfReal& theArray,
+        const Standard_Real theX,
+        Standard_Integer& theXPos);
 
     //! Computes the index of the knots value which gives
     //! the start point of the curve.

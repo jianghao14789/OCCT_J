@@ -1,4 +1,4 @@
-// Created on: 1991-09-18
+﻿// Created on: 1991-09-18
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -30,20 +30,20 @@ class Expr_NamedUnknown;
 
 //! Describes an iterator on NamedUnknowns contained
 //! in any GeneralExpression.
-class Expr_UnknownIterator 
+class Expr_UnknownIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT Expr_UnknownIterator(const Handle(Expr_GeneralExpression)& exp);
-  
-  Standard_EXPORT Standard_Boolean More() const;
-  
-  Standard_EXPORT void Next();
-  
-  Standard_EXPORT Handle(Expr_NamedUnknown) Value() const;
+
+    Standard_EXPORT Expr_UnknownIterator(const Handle(Expr_GeneralExpression)& exp);
+
+    Standard_EXPORT Standard_Boolean More() const;
+
+    Standard_EXPORT void Next();
+
+    Standard_EXPORT Handle(Expr_NamedUnknown) Value() const;
 
 
 
@@ -56,12 +56,12 @@ protected:
 
 private:
 
-  
-  Standard_EXPORT void Perform (const Handle(Expr_GeneralExpression)& exp);
+
+    Standard_EXPORT void Perform(const Handle(Expr_GeneralExpression)& exp);
 
 
-  Expr_MapOfNamedUnknown myMap;
-  Standard_Integer myCurrent;
+    Expr_MapOfNamedUnknown myMap;
+    Standard_Integer myCurrent;
 
 
 };

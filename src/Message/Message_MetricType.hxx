@@ -15,21 +15,35 @@
 #define _Message_MetricType_HeaderFile
 
 //! Specifies kind of report information to collect
+//! 指定要收集的报告信息的类型
 enum Message_MetricType
 {
     Message_MetricType_None,                 //!< no computation
+                                             //!< 无计算
     Message_MetricType_ThreadCPUUserTime,    //!< OSD_Chronometer::GetThreadCPU user time
+                                             //!< 线程 CPU 用户时间
     Message_MetricType_ThreadCPUSystemTime,  //!< OSD_Chronometer::GetThreadCPU system time
+                                             //!< 线程 CPU 系统时间
     Message_MetricType_ProcessCPUUserTime,   //!< OSD_Chronometer::GetProcessCPU user time
+                                             //!< 进程 CPU 用户时间
     Message_MetricType_ProcessCPUSystemTime, //!< OSD_Chronometer::GetProcessCPU system time
+                                             //!< 进程 CPU 系统时间
     Message_MetricType_WallClock,            //!< OSD_Timer elapsed time
+                                             //!< 墙钟时间（实际时间）
     Message_MetricType_MemPrivate,           //!< OSD_MemInfo::MemPrivate
+                                             //!< 私有内存
     Message_MetricType_MemVirtual,           //!< OSD_MemInfo::MemVirtual
+                                             //!< 虚拟内存
     Message_MetricType_MemWorkingSet,        //!< OSD_MemInfo::MemWorkingSet
+                                             //!< 工作集内存
     Message_MetricType_MemWorkingSetPeak,    //!< OSD_MemInfo::MemWorkingSetPeak
+                                             //!< 工作集峰值内存
     Message_MetricType_MemSwapUsage,         //!< OSD_MemInfo::MemSwapUsage
+                                             //!< 交换内存使用量
     Message_MetricType_MemSwapUsagePeak,     //!< OSD_MemInfo::MemSwapUsagePeak
+                                             //!< 交换内存使用峰值
     Message_MetricType_MemHeapUsage          //!< OSD_MemInfo::MemHeapUsage
+                                             //!< 堆内存使用量
 };
 
 #endif // _Message_MetricType_HeaderFile

@@ -1,4 +1,4 @@
-// Copyright (c) 1992-1999 Matra Datavision
+﻿// Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -18,8 +18,8 @@
 //! This enumeration is used to load shareable libraries.
 enum OSD_LoadMode
 {
-OSD_RTLD_LAZY,
-OSD_RTLD_NOW
+    OSD_RTLD_LAZY,
+    OSD_RTLD_NOW
 };
 
 #endif // _OSD_LoadMode_HeaderFile

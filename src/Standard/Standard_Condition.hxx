@@ -1,4 +1,4 @@
-// Created by: Kirill Gavrilov
+﻿// Created by: Kirill Gavrilov
 // Copyright (c) 2018 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -18,7 +18,7 @@
 #include <Standard.hxx>
 
 #ifndef _WIN32
-  #include <pthread.h>
+#include <pthread.h>
 #endif
 
 //! This is boolean flag intended for communication between threads.
@@ -30,55 +30,55 @@ class Standard_Condition
 {
 public:
 
-  //! Default constructor.
-  //! @param theIsSet Initial flag state
-  Standard_EXPORT Standard_Condition (bool theIsSet);
+    //! Default constructor.
+    //! @param theIsSet Initial flag state
+    Standard_EXPORT Standard_Condition(bool theIsSet);
 
-  //! Destructor.
-  Standard_EXPORT ~Standard_Condition();
+    //! Destructor.
+    Standard_EXPORT ~Standard_Condition();
 
-  //! Set event into signaling state.
-  Standard_EXPORT void Set();
+    //! Set event into signaling state.
+    Standard_EXPORT void Set();
 
-  //! Reset event (unset signaling state)
-  Standard_EXPORT void Reset();
+    //! Reset event (unset signaling state)
+    Standard_EXPORT void Reset();
 
-  //! Wait for Event (infinity).
-  Standard_EXPORT void Wait();
+    //! Wait for Event (infinity).
+    Standard_EXPORT void Wait();
 
-  //! Wait for signal requested time.
-  //! @param theTimeMilliseconds wait limit in milliseconds
-  //! @return true if get event
-  Standard_EXPORT bool Wait (int theTimeMilliseconds);
+    //! Wait for signal requested time.
+    //! @param theTimeMilliseconds wait limit in milliseconds
+    //! @return true if get event
+    Standard_EXPORT bool Wait(int theTimeMilliseconds);
 
-  //! Do not wait for signal - just test it state.
-  //! @return true if get event
-  Standard_EXPORT bool Check();
+    //! Do not wait for signal - just test it state.
+    //! @return true if get event
+    Standard_EXPORT bool Check();
 
-  //! Method perform two steps at-once - reset the event object
-  //! and returns true if it was in signaling state.
-  //! @return true if event object was in signaling state.
-  Standard_EXPORT bool CheckReset();
+    //! Method perform two steps at-once - reset the event object
+    //! and returns true if it was in signaling state.
+    //! @return true if event object was in signaling state.
+    Standard_EXPORT bool CheckReset();
 
 #ifdef _WIN32
-  //! Access native HANDLE to Event object.
-  void* getHandle() const { return myEvent; }
+    //! Access native HANDLE to Event object.
+    void* getHandle() const { return myEvent; }
 #endif
 
 private:
-  //! This method should not be called (prohibited).
-  Standard_Condition (const Standard_Condition& theCopy);
-  //! This method should not be called (prohibited).
-  Standard_Condition& operator= (const Standard_Condition& theCopy);
+    //! This method should not be called (prohibited).
+    Standard_Condition(const Standard_Condition& theCopy);
+    //! This method should not be called (prohibited).
+    Standard_Condition& operator= (const Standard_Condition& theCopy);
 
 private:
 
 #ifdef _WIN32
-  void*           myEvent;
+    void* myEvent;
 #else
-  pthread_mutex_t myMutex;
-  pthread_cond_t  myCond;
-  bool            myFlag;
+    pthread_mutex_t myMutex;
+    pthread_cond_t  myCond;
+    bool            myFlag;
 #endif
 
 };

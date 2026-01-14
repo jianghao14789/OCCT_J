@@ -47,12 +47,12 @@ public:
 
 
 
-        //! The equivalent B-spline surface as the same orientation as the
-        //! Cone in the U and V parametric directions.
-        //!
-        //! Raised if U1 = U2 or U1 = U2 + 2.0 * Pi
-        //! Raised if V1 = V2.
-        Standard_EXPORT Convert_ConeToBSplineSurface(const gp_Cone& C, const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2);
+    //! The equivalent B-spline surface as the same orientation as the
+    //! Cone in the U and V parametric directions.
+    //!
+    //! Raised if U1 = U2 or U1 = U2 + 2.0 * Pi
+    //! Raised if V1 = V2.
+    Standard_EXPORT Convert_ConeToBSplineSurface(const gp_Cone& C, const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2);
 
 
     //! The equivalent B-spline surface as the same orientation as the

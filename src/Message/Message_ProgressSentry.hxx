@@ -18,11 +18,15 @@
 
 //! Functionality of this class (Message_ProgressSentry) has been superseded by Message_ProgressScope.
 //! This class is kept just to simplify transition of an old code and will be removed in future.
+//! 
+//! 此类（Message_ProgressSentry）的功能已被 Message_ProgressScope 取代。
+//! 保留此类只是为了简化旧代码的过渡，将来会被删除。
 class Standard_DEPRECATED("Deprecated class, Message_ProgressScope should be used instead")
     Message_ProgressSentry : public Message_ProgressScope
 {
 public:
     //! Deprecated constructor, Message_ProgressScope should be created instead.
+    //! 已弃用的构造函数，应创建 Message_ProgressScope
     Message_ProgressSentry(const Message_ProgressRange & theRange,
                             const Standard_CString theName,
                             const Standard_Real theMin,
@@ -39,10 +43,12 @@ public:
     }
 
     //! Method Relieve() was replaced by Close() in Message_ProgressScope
+    //! 方法 Relieve() 已在 Message_ProgressScope 中被 Close() 替换
     void Relieve() { Close(); }
 
   private:
       //! Message_ProgressRange should be passed to constructor instead of Message_ProgressIndicator.
+      //! 应将 Message_ProgressRange 传递给构造函数，而不是 Message_ProgressIndicator
       Message_ProgressSentry(const Handle(Message_ProgressIndicator) & theProgress,
                               const Standard_CString theName,
                               const Standard_Real theMin,

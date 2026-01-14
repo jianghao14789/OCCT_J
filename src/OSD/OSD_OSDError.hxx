@@ -1,4 +1,4 @@
-// Copyright (c) 1992-1999 Matra Datavision
+﻿// Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -24,10 +24,10 @@ class OSD_OSDError;
 DEFINE_STANDARD_HANDLE(OSD_OSDError, Standard_Failure)
 
 #if !defined No_Exception && !defined No_OSD_OSDError
-  #define OSD_OSDError_Raise_if(CONDITION, MESSAGE) \
+#define OSD_OSDError_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw OSD_OSDError(MESSAGE);
 #else
-  #define OSD_OSDError_Raise_if(CONDITION, MESSAGE)
+#define OSD_OSDError_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(OSD_OSDError, Standard_Failure)

@@ -1,4 +1,4 @@
-// Created on: 1995-04-20
+﻿// Created on: 1995-04-20
 // Created by: Tony GEORGIADES
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Resource_NoSuchResource;
 DEFINE_STANDARD_HANDLE(Resource_NoSuchResource, Standard_NoSuchObject)
 
 #if !defined No_Exception && !defined No_Resource_NoSuchResource
-  #define Resource_NoSuchResource_Raise_if(CONDITION, MESSAGE) \
+#define Resource_NoSuchResource_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Resource_NoSuchResource(MESSAGE);
 #else
-  #define Resource_NoSuchResource_Raise_if(CONDITION, MESSAGE)
+#define Resource_NoSuchResource_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Resource_NoSuchResource, Standard_NoSuchObject)

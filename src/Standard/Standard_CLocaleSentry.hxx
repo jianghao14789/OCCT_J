@@ -1,4 +1,4 @@
-// Created on: 2013-01-17
+﻿// Created on: 2013-01-17
 // Created by: Kirill GAVRILOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -21,7 +21,7 @@
 #include <locale.h>
 
 #if defined(__APPLE__)
-  #include <xlocale.h>
+#include <xlocale.h>
 #endif
 
 #ifndef OCCT_CLOCALE_POSIX2008
@@ -31,14 +31,14 @@
   //! Presence of this extension cannot be checked in straightforward way (like (_POSIX_C_SOURCE >= 200809L))
   //! due to missing such declarations in standard.
   //! On macOS new functions are declared within "xlocale.h" header (the same is for glibc, but this header has been removed since glibc 2.26).
-  #if defined(__APPLE__)
-    #define OCCT_CLOCALE_POSIX2008
-  #endif
+#if defined(__APPLE__)
+#define OCCT_CLOCALE_POSIX2008
+#endif
 
-  //! We check _GNU_SOURCE for glibc extensions here and it is always defined by g++ compiler.
-  #if defined(_GNU_SOURCE) && !defined(__ANDROID__)
-    #define OCCT_CLOCALE_POSIX2008
-  #endif
+//! We check _GNU_SOURCE for glibc extensions here and it is always defined by g++ compiler.
+#if defined(_GNU_SOURCE) && !defined(__ANDROID__)
+#define OCCT_CLOCALE_POSIX2008
+#endif
 #endif
 
 #if !defined(__ANDROID__)
@@ -57,38 +57,38 @@ class Standard_CLocaleSentry
 {
 public:
 
-  //! Setup current C locale to "C".
-  Standard_EXPORT Standard_CLocaleSentry();
+    //! Setup current C locale to "C".
+    Standard_EXPORT Standard_CLocaleSentry();
 
-  //! Restore previous locale.
-  Standard_EXPORT ~Standard_CLocaleSentry();
+    //! Restore previous locale.
+    Standard_EXPORT ~Standard_CLocaleSentry();
 
 public:
 
 #ifdef OCCT_CLOCALE_POSIX2008
-  typedef  locale_t clocale_t;
+    typedef  locale_t clocale_t;
 #elif defined(_MSC_VER)
-  typedef _locale_t clocale_t;
+    typedef _locale_t clocale_t;
 #else
-  typedef void*     clocale_t;
+    typedef void* clocale_t;
 #endif
 
-  //! @return locale "C" instance (locale_t within xlocale or _locale_t within Windows)
-  //! to be used for _l functions with locale argument.
-  static Standard_EXPORT clocale_t GetCLocale();
+    //! @return locale "C" instance (locale_t within xlocale or _locale_t within Windows)
+    //! to be used for _l functions with locale argument.
+    static Standard_EXPORT clocale_t GetCLocale();
 
 private:
 
-  void* myPrevLocale;       //!< previous locale, platform-dependent pointer!
+    void* myPrevLocale;       //!< previous locale, platform-dependent pointer!
 #ifdef _MSC_VER
-  int   myPrevTLocaleState; //!< previous thread-locale state, MSVCRT-specific
+    int   myPrevTLocaleState; //!< previous thread-locale state, MSVCRT-specific
 #endif
 
 private:
 
-  //! Copying disallowed
-  Standard_CLocaleSentry            (const Standard_CLocaleSentry& );
-  Standard_CLocaleSentry& operator= (const Standard_CLocaleSentry& );
+    //! Copying disallowed
+    Standard_CLocaleSentry(const Standard_CLocaleSentry&);
+    Standard_CLocaleSentry& operator= (const Standard_CLocaleSentry&);
 
 };
 
@@ -98,9 +98,9 @@ private:
 class Standard_CLocaleSentry
 {
 public:
-  Standard_CLocaleSentry() {}
-  typedef void* clocale_t;
-  static clocale_t GetCLocale() { return 0; }
+    Standard_CLocaleSentry() {}
+    typedef void* clocale_t;
+    static clocale_t GetCLocale() { return 0; }
 };
 
 #endif // __ANDROID__

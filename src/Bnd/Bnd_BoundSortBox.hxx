@@ -45,9 +45,9 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Constructs an empty comparison algorithm for bounding boxes.
-        //! The bounding boxes are then defined using the Initialize function.
-        Standard_EXPORT Bnd_BoundSortBox();
+    //! Constructs an empty comparison algorithm for bounding boxes.
+    //! The bounding boxes are then defined using the Initialize function.
+    Standard_EXPORT Bnd_BoundSortBox();
 
     //! Initializes this comparison algorithm with
     //! -   the set of bounding boxes SetOfBox.

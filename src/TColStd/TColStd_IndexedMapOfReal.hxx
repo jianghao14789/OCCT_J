@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,7 +19,7 @@
 #include <TColStd_MapRealHasher.hxx>
 #include <NCollection_IndexedMap.hxx>
 
-typedef NCollection_IndexedMap<Standard_Real,TColStd_MapRealHasher> TColStd_IndexedMapOfReal;
+typedef NCollection_IndexedMap<Standard_Real, TColStd_MapRealHasher> TColStd_IndexedMapOfReal;
 
 
 #endif

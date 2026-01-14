@@ -1,4 +1,4 @@
-// Created on: 1995-04-20
+﻿// Created on: 1995-04-20
 // Created by: Tony GEORGIADES
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -20,8 +20,8 @@
 #include <TCollection_AsciiString.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TCollection_AsciiString,TCollection_AsciiString,TCollection_AsciiString> Resource_DataMapOfAsciiStringAsciiString;
-typedef NCollection_DataMap<TCollection_AsciiString,TCollection_AsciiString,TCollection_AsciiString>::Iterator Resource_DataMapIteratorOfDataMapOfAsciiStringAsciiString;
+typedef NCollection_DataMap<TCollection_AsciiString, TCollection_AsciiString, TCollection_AsciiString> Resource_DataMapOfAsciiStringAsciiString;
+typedef NCollection_DataMap<TCollection_AsciiString, TCollection_AsciiString, TCollection_AsciiString>::Iterator Resource_DataMapIteratorOfDataMapOfAsciiStringAsciiString;
 
 
 #endif

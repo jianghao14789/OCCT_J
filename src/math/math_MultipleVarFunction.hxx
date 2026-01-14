@@ -1,4 +1,4 @@
-// Created on: 1991-05-13
+﻿// Created on: 1991-05-13
 // Created by: Laurent Painnot
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,39 +29,39 @@
 
 
 //! Describes the virtual functions associated with a multiple variable function.
-class math_MultipleVarFunction 
+class math_MultipleVarFunction
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! Returns the number of variables of the function
-  Standard_EXPORT virtual Standard_Integer NbVariables() const = 0;
-  
-  //! Computes the values of the Functions <F> for the
-  //! variable <X>.
-  //! returns True if the computation was done successfully,
-  //! otherwise false.
-  Standard_EXPORT virtual Standard_Boolean Value (const math_Vector& X, Standard_Real& F) = 0;
-  
-  //! return the state of the function corresponding to the latestt
-  //! call of any methods associated to the function. This
-  //! function is called by each of the algorithms described
-  //! later which define the function Integer
-  //! Algorithm::StateNumber(). The algorithm has the
-  //! responsibility to call this function when it has found
-  //! a solution (i.e. a root or a minimum) and has to maintain
-  //! the association between the solution found and this
-  //! StateNumber.
-  //! Byu default, this method returns 0 (which means for the
-  //! algorithm: no state has been saved). It is the
-  //! responsibility of the programmer to decide if he needs
-  //! to save the current state of the function and to return
-  //! an Integer that allows retrieval of the state.
-  Standard_EXPORT virtual Standard_Integer GetStateNumber();
-  Standard_EXPORT virtual ~math_MultipleVarFunction();
+
+    //! Returns the number of variables of the function
+    Standard_EXPORT virtual Standard_Integer NbVariables() const = 0;
+
+    //! Computes the values of the Functions <F> for the
+    //! variable <X>.
+    //! returns True if the computation was done successfully,
+    //! otherwise false.
+    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& X, Standard_Real& F) = 0;
+
+    //! return the state of the function corresponding to the latestt
+    //! call of any methods associated to the function. This
+    //! function is called by each of the algorithms described
+    //! later which define the function Integer
+    //! Algorithm::StateNumber(). The algorithm has the
+    //! responsibility to call this function when it has found
+    //! a solution (i.e. a root or a minimum) and has to maintain
+    //! the association between the solution found and this
+    //! StateNumber.
+    //! Byu default, this method returns 0 (which means for the
+    //! algorithm: no state has been saved). It is the
+    //! responsibility of the programmer to decide if he needs
+    //! to save the current state of the function and to return
+    //! an Integer that allows retrieval of the state.
+    Standard_EXPORT virtual Standard_Integer GetStateNumber();
+    Standard_EXPORT virtual ~math_MultipleVarFunction();
 
 
 

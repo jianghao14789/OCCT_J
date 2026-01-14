@@ -1,4 +1,4 @@
-// Created on: 1991-09-05
+﻿// Created on: 1991-09-05
 // Created by: J.P. TIRAUlt
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Standard_LicenseNotFound;
 DEFINE_STANDARD_HANDLE(Standard_LicenseNotFound, Standard_LicenseError)
 
 #if !defined No_Exception && !defined No_Standard_LicenseNotFound
-  #define Standard_LicenseNotFound_Raise_if(CONDITION, MESSAGE) \
+#define Standard_LicenseNotFound_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Standard_LicenseNotFound(MESSAGE);
 #else
-  #define Standard_LicenseNotFound_Raise_if(CONDITION, MESSAGE)
+#define Standard_LicenseNotFound_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Standard_LicenseNotFound, Standard_LicenseError)

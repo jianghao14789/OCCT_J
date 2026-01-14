@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -25,17 +25,17 @@ class math_IntegerVector;
 class math_Vector;
 class math_Matrix;
 
-const Standard_Integer math_Status_UserAborted         = -1;
-const Standard_Integer math_Status_OK                  = 0;
-const Standard_Integer math_Status_SingularMatrix      = 1;
-const Standard_Integer math_Status_ArgumentError       = 2;
-const Standard_Integer math_Status_NoConvergence       = 3;
+const Standard_Integer math_Status_UserAborted = -1;
+const Standard_Integer math_Status_OK = 0;
+const Standard_Integer math_Status_SingularMatrix = 1;
+const Standard_Integer math_Status_ArgumentError = 2;
+const Standard_Integer math_Status_NoConvergence = 3;
 
-Standard_EXPORT Standard_Integer  LU_Decompose(math_Matrix& a, 
-                                        math_IntegerVector& indx,
-                                        Standard_Real&   d,
-                                        Standard_Real    TINY = 1.0e-20,
-                                        const Message_ProgressRange& theProgress = Message_ProgressRange());
+Standard_EXPORT Standard_Integer  LU_Decompose(math_Matrix& a,
+    math_IntegerVector& indx,
+    Standard_Real& d,
+    Standard_Real    TINY = 1.0e-20,
+    const Message_ProgressRange& theProgress = Message_ProgressRange());
 
 // Given a matrix a(1..n, 1..n), this routine computes its LU decomposition, 
 // The matrix a is replaced by this LU decomposition and the vector indx(1..n)
@@ -43,20 +43,20 @@ Standard_EXPORT Standard_Integer  LU_Decompose(math_Matrix& a,
 // pivoting; d is output as +1 or -1 depending on whether the number of row
 // interchanges was even or odd.
 
-Standard_EXPORT Standard_Integer LU_Decompose(math_Matrix& a, 
-                                        math_IntegerVector& indx,
-                                        Standard_Real&   d,
-                                        math_Vector& vv,
-                                        Standard_Real    TINY = 1.0e-30,
-                                        const Message_ProgressRange& theProgress = Message_ProgressRange());
+Standard_EXPORT Standard_Integer LU_Decompose(math_Matrix& a,
+    math_IntegerVector& indx,
+    Standard_Real& d,
+    math_Vector& vv,
+    Standard_Real    TINY = 1.0e-30,
+    const Message_ProgressRange& theProgress = Message_ProgressRange());
 
 // Idem to the previous LU_Decompose function. But the input Vector vv(1..n) is
 // used internally as a scratch area.
 
 
 Standard_EXPORT void LU_Solve(const math_Matrix& a,
-              const math_IntegerVector& indx, 
-              math_Vector& b);
+    const math_IntegerVector& indx,
+    math_Vector& b);
 
 // Solves a * x = b for a vector x, where x is specified by a(1..n, 1..n),
 // indx(1..n) as returned by LU_Decompose. n is the dimension of the 
@@ -72,8 +72,8 @@ Standard_EXPORT Standard_Integer LU_Invert(math_Matrix& a);
 
 
 Standard_EXPORT Standard_Integer SVD_Decompose(math_Matrix& a,
-					  math_Vector& w,                    
-					  math_Matrix& v);
+    math_Vector& w,
+    math_Matrix& v);
 
 // Given a matrix a(1..m, 1..n), this routine computes its singular value 
 // decomposition, a = u * w * transposed(v). The matrix u replaces a on 
@@ -84,9 +84,9 @@ Standard_EXPORT Standard_Integer SVD_Decompose(math_Matrix& a,
 
 
 Standard_EXPORT Standard_Integer SVD_Decompose(math_Matrix& a,
-					  math_Vector& w,
-					  math_Matrix& v,
-					  math_Vector& rv1);
+    math_Vector& w,
+    math_Matrix& v,
+    math_Vector& rv1);
 
 
 // Idem to the previous LU_Decompose function. But the input Vector vv(1..m) 
@@ -94,10 +94,10 @@ Standard_EXPORT Standard_Integer SVD_Decompose(math_Matrix& a,
 
 
 Standard_EXPORT void SVD_Solve(const math_Matrix& u,
-			  const math_Vector& w,
-			  const math_Matrix& v,
-			  const math_Vector& b,
-			  math_Vector& x);
+    const math_Vector& w,
+    const math_Matrix& v,
+    const math_Vector& b,
+    math_Vector& x);
 
 // Solves a * x = b for a vector x, where x is specified by u(1..m, 1..n),
 // w(1..n), v(1..n, 1..n) as returned by SVD_Decompose. m and n are the 
@@ -109,7 +109,7 @@ Standard_EXPORT void SVD_Solve(const math_Matrix& u,
 
 
 Standard_EXPORT Standard_Integer DACTCL_Decompose(math_Vector& a, const math_IntegerVector& indx,
-					     const Standard_Real MinPivot = 1.e-20);
+    const Standard_Real MinPivot = 1.e-20);
 
 // Given a SYMMETRIC matrix a, this routine computes its 
 // LU decomposition. 
@@ -122,9 +122,9 @@ Standard_EXPORT Standard_Integer DACTCL_Decompose(math_Vector& a, const math_Int
 
 
 
-Standard_EXPORT Standard_Integer DACTCL_Solve(const math_Vector& a, math_Vector& b, 
-					 const math_IntegerVector& indx, 
-					 const Standard_Real MinPivot = 1.e-20);
+Standard_EXPORT Standard_Integer DACTCL_Solve(const math_Vector& a, math_Vector& b,
+    const math_IntegerVector& indx,
+    const Standard_Real MinPivot = 1.e-20);
 
 // Solves a * x = b for a vector x and a matrix a coming from DACTCL_Decompose.
 // indx is the same vector as in DACTCL_Decompose.

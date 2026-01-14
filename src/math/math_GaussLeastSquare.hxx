@@ -1,4 +1,4 @@
-// Created on: 1991-05-13
+﻿// Created on: 1991-05-13
 // Created by: Laurent PAINNOT
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -38,39 +38,39 @@ class math_Matrix;
 //! decomposition algorithm.
 //! This algorithm is more likely subject to numerical instability
 //! than math_SVD.
-class math_GaussLeastSquare 
+class math_GaussLeastSquare
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Given an input n X m matrix A with n >= m this constructor
-  //! performs the LU decomposition with partial pivoting
-  //! (interchange of rows) of the matrix AA = A.Transposed() * A;
-  //! This LU decomposition is stored internally and may be used
-  //! to do subsequent calculation.
-  //! If the largest pivot found is less than MinPivot the matrix <A>
-  //! is considered as singular.
-  Standard_EXPORT math_GaussLeastSquare(const math_Matrix& A, const Standard_Real MinPivot = 1.0e-20);
-  
-  //! Returns true if the computations are successful, otherwise returns false.e
+
+    //! Given an input n X m matrix A with n >= m this constructor
+    //! performs the LU decomposition with partial pivoting
+    //! (interchange of rows) of the matrix AA = A.Transposed() * A;
+    //! This LU decomposition is stored internally and may be used
+    //! to do subsequent calculation.
+    //! If the largest pivot found is less than MinPivot the matrix <A>
+    //! is considered as singular.
+    Standard_EXPORT math_GaussLeastSquare(const math_Matrix& A, const Standard_Real MinPivot = 1.0e-20);
+
+    //! Returns true if the computations are successful, otherwise returns false.e
     Standard_Boolean IsDone() const;
-  
-  //! Given the input Vector <B> this routine solves the set
-  //! of linear equations A . X = B.
-  //! Exception NotDone is raised if the decomposition of A was
-  //! not done successfully.
-  //! Exception DimensionError is raised if the range of B Inv is
-  //! not equal to the rowrange of A.
-  //! Exception DimensionError is raised if the range of X Inv is
-  //! not equal to the colrange of A.
-  Standard_EXPORT void Solve (const math_Vector& B, math_Vector& X) const;
-  
-  //! Prints on the stream o information on the current state
-  //! of the object.
-  //! Is used to redefine the operator <<.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+
+    //! Given the input Vector <B> this routine solves the set
+    //! of linear equations A . X = B.
+    //! Exception NotDone is raised if the decomposition of A was
+    //! not done successfully.
+    //! Exception DimensionError is raised if the range of B Inv is
+    //! not equal to the rowrange of A.
+    //! Exception DimensionError is raised if the range of X Inv is
+    //! not equal to the colrange of A.
+    Standard_EXPORT void Solve(const math_Vector& B, math_Vector& X) const;
+
+    //! Prints on the stream o information on the current state
+    //! of the object.
+    //! Is used to redefine the operator <<.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
@@ -79,18 +79,18 @@ protected:
 
 
 
-  Standard_Boolean Singular;
-  math_Matrix LU;
-  math_Matrix A2;
-  math_IntegerVector Index;
-  Standard_Real D;
+    Standard_Boolean Singular;
+    math_Matrix LU;
+    math_Matrix A2;
+    math_IntegerVector Index;
+    Standard_Real D;
 
 
 private:
 
 
 
-  Standard_Boolean Done;
+    Standard_Boolean Done;
 
 
 };

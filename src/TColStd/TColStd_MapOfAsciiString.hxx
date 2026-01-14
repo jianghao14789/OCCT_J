@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -19,8 +19,8 @@
 #include <TCollection_AsciiString.hxx>
 #include <NCollection_Map.hxx>
 
-typedef NCollection_Map<TCollection_AsciiString,TCollection_AsciiString> TColStd_MapOfAsciiString;
-typedef NCollection_Map<TCollection_AsciiString,TCollection_AsciiString>::Iterator TColStd_MapIteratorOfMapOfAsciiString;
+typedef NCollection_Map<TCollection_AsciiString, TCollection_AsciiString> TColStd_MapOfAsciiString;
+typedef NCollection_Map<TCollection_AsciiString, TCollection_AsciiString>::Iterator TColStd_MapIteratorOfMapOfAsciiString;
 
 
 #endif

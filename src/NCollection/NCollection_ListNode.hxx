@@ -1,4 +1,4 @@
-// Created on: 2002-04-17
+﻿// Created on: 2002-04-17
 // Created by: Alexander KARTOMIN (akm)
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -21,35 +21,40 @@
 
 /**
  * Purpose:     This class is used to  represent a node  in the BaseList and
- *              BaseMap. 
- */              
+ *              BaseMap.
+ */
 class NCollection_ListNode
 {
 public:
-  // define new operator for use with NCollection allocators
-  DEFINE_NCOLLECTION_ALLOC
+    // define new operator for use with NCollection allocators
+    DEFINE_NCOLLECTION_ALLOC
 public:
-  //! The only constructor
-  NCollection_ListNode (NCollection_ListNode* theNext)
-  : myNext(theNext) {}
+    //! The only constructor
+    NCollection_ListNode(NCollection_ListNode* theNext)
+        : myNext(theNext) {
+    }
 
-  //! Next pointer access
-  NCollection_ListNode*& Next (void)
-  { return myNext; }
+    //! Next pointer access
+    NCollection_ListNode*& Next(void)
+    {
+        return myNext;
+    }
 
-  //! Next pointer const access
-  NCollection_ListNode* Next (void) const
-  { return myNext; }
+    //! Next pointer const access
+    NCollection_ListNode* Next(void) const
+    {
+        return myNext;
+    }
 
- private:
-  //! operator= - forbidden
-  NCollection_ListNode& operator= (const NCollection_ListNode&);
-  
-  //! copy constructor - forbidden
-  NCollection_ListNode (const NCollection_ListNode&);
+private:
+    //! operator= - forbidden
+    NCollection_ListNode& operator= (const NCollection_ListNode&);
 
- private:
-  NCollection_ListNode * myNext; //!< Pointer to the next node
+    //! copy constructor - forbidden
+    NCollection_ListNode(const NCollection_ListNode&);
+
+private:
+    NCollection_ListNode* myNext; //!< Pointer to the next node
 };
 
 #endif

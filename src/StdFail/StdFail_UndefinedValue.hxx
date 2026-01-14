@@ -1,4 +1,4 @@
-// Created on: 1992-05-07
+﻿// Created on: 1992-05-07
 // Created by: Modelistation
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class StdFail_UndefinedValue;
 DEFINE_STANDARD_HANDLE(StdFail_UndefinedValue, Standard_DomainError)
 
 #if !defined No_Exception && !defined No_StdFail_UndefinedValue
-  #define StdFail_UndefinedValue_Raise_if(CONDITION, MESSAGE) \
+#define StdFail_UndefinedValue_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw StdFail_UndefinedValue(MESSAGE);
 #else
-  #define StdFail_UndefinedValue_Raise_if(CONDITION, MESSAGE)
+#define StdFail_UndefinedValue_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(StdFail_UndefinedValue, Standard_DomainError)

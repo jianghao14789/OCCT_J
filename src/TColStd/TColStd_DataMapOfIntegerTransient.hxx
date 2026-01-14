@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -20,8 +20,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Handle(Standard_Transient),TColStd_MapIntegerHasher> TColStd_DataMapOfIntegerTransient;
-typedef NCollection_DataMap<Standard_Integer,Handle(Standard_Transient),TColStd_MapIntegerHasher>::Iterator TColStd_DataMapIteratorOfDataMapOfIntegerTransient;
+typedef NCollection_DataMap<Standard_Integer, Handle(Standard_Transient), TColStd_MapIntegerHasher> TColStd_DataMapOfIntegerTransient;
+typedef NCollection_DataMap<Standard_Integer, Handle(Standard_Transient), TColStd_MapIntegerHasher>::Iterator TColStd_DataMapIteratorOfDataMapOfIntegerTransient;
 
 
 #endif

@@ -1,4 +1,4 @@
-// Created on: 1997-02-28
+﻿// Created on: 1997-02-28
 // Created by: Jean-Louis Frenkel
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,8 +22,8 @@
 #include <TCollection_AsciiString.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TCollection_AsciiString,OSD_Function,TCollection_AsciiString> Plugin_MapOfFunctions;
-typedef NCollection_DataMap<TCollection_AsciiString,OSD_Function,TCollection_AsciiString>::Iterator Plugin_DataMapIteratorOfMapOfFunctions;
+typedef NCollection_DataMap<TCollection_AsciiString, OSD_Function, TCollection_AsciiString> Plugin_MapOfFunctions;
+typedef NCollection_DataMap<TCollection_AsciiString, OSD_Function, TCollection_AsciiString>::Iterator Plugin_DataMapIteratorOfMapOfFunctions;
 
 
 #endif

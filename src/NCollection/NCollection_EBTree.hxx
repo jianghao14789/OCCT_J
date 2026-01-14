@@ -1,4 +1,4 @@
-// Created on: 2002-07-30
+﻿// Created on: 2002-07-30
 // Created by: Michael SAZONOV
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -34,95 +34,100 @@
  * the key.
  */
 template <class TheObjType, class TheBndType> class NCollection_EBTree
-  : public NCollection_UBTree <TheObjType, TheBndType>
+    : public NCollection_UBTree <TheObjType, TheBndType>
 {
- public:
-  typedef NCollection_UBTree <TheObjType, TheBndType> UBTree;
-  typedef TYPENAME UBTree::TreeNode TreeNode;
-  // ---------- PUBLIC METHODS ----------
+public:
+    typedef NCollection_UBTree <TheObjType, TheBndType> UBTree;
+    typedef TYPENAME UBTree::TreeNode TreeNode;
+    // ---------- PUBLIC METHODS ----------
 
-  /**
-   * Constructor.
-   */
-  NCollection_EBTree (const Handle(NCollection_BaseAllocator)& theAllocator=0L)
-    : UBTree (theAllocator) {}
-
-  /**
-   * Updates the tree with a new object and its bounding box.
-   * Extends the functionality of the parent method by maintaining
-   * the map myObjNodeMap. Redefined virtual method.
-   * @return
-   *   False if the tree already contains theObj.
-   */ 
-  Standard_Boolean Add (const TheObjType& theObj, const TheBndType& theBnd) Standard_OVERRIDE
-  {
-    Standard_Boolean result = Standard_False;
-    if (!Contains (theObj))
-    {
-      // Add object in the tree using parent method
-      UBTree::Add (theObj, theBnd);
-
-      // Update the map
-      TreeNode& aNewNode = this->ChangeLastNode ();
-      myObjNodeMap.Bind (theObj, &aNewNode);
-      // If the new node is not the root (has a parent) check the neighbour node
-      if (!aNewNode.IsRoot ())
-      {
-        TreeNode& aNeiNode = aNewNode.ChangeParent ().ChangeChild (0);
-        if (aNeiNode.IsLeaf ())
-        {
-          myObjNodeMap.UnBind (aNeiNode.Object ());
-          myObjNodeMap.Bind (aNeiNode.Object (), &aNeiNode);
-        }
-      }
-      result = Standard_True;
+    /**
+     * Constructor.
+     */
+    NCollection_EBTree(const Handle(NCollection_BaseAllocator)& theAllocator = 0L)
+        : UBTree(theAllocator) {
     }
-    return result;
-  }
 
-  /**
-   * Removes the given object and updates the tree.
-   * @return
-   *   False if the tree does not contain theObj
-   */
-  Standard_Boolean Remove (const TheObjType& theObj);
+    /**
+     * Updates the tree with a new object and its bounding box.
+     * Extends the functionality of the parent method by maintaining
+     * the map myObjNodeMap. Redefined virtual method.
+     * @return
+     *   False if the tree already contains theObj.
+     */
+    Standard_Boolean Add(const TheObjType& theObj, const TheBndType& theBnd) Standard_OVERRIDE
+    {
+        Standard_Boolean result = Standard_False;
+        if (!Contains(theObj))
+        {
+            // Add object in the tree using parent method
+            UBTree::Add(theObj, theBnd);
 
-  /**
-   * @return
-   *   True if the tree contains the object.
-   */
-  Standard_Boolean Contains (const TheObjType& theObj) const
-        { return myObjNodeMap.IsBound (theObj); }
+            // Update the map
+            TreeNode& aNewNode = this->ChangeLastNode();
+            myObjNodeMap.Bind(theObj, &aNewNode);
+            // If the new node is not the root (has a parent) check the neighbour node
+            if (!aNewNode.IsRoot())
+            {
+                TreeNode& aNeiNode = aNewNode.ChangeParent().ChangeChild(0);
+                if (aNeiNode.IsLeaf())
+                {
+                    myObjNodeMap.UnBind(aNeiNode.Object());
+                    myObjNodeMap.Bind(aNeiNode.Object(), &aNeiNode);
+                }
+            }
+            result = Standard_True;
+        }
+        return result;
+    }
 
-  /**
-   * @return
-   *   The leaf node containing the object.
-   */
-  const TreeNode& FindNode (const TheObjType& theObj) const
-        { return *myObjNodeMap.Find (theObj); }
+    /**
+     * Removes the given object and updates the tree.
+     * @return
+     *   False if the tree does not contain theObj
+     */
+    Standard_Boolean Remove(const TheObjType& theObj);
 
-  /**
-   * Clears the contents of the tree. Redefined virtual method
-   */
-  void Clear (const Handle(NCollection_BaseAllocator)& aNewAlloc = 0L) Standard_OVERRIDE
-  {
-    myObjNodeMap.Clear ();
-    UBTree::Clear (aNewAlloc);
-  }
+    /**
+     * @return
+     *   True if the tree contains the object.
+     */
+    Standard_Boolean Contains(const TheObjType& theObj) const
+    {
+        return myObjNodeMap.IsBound(theObj);
+    }
 
- private:
-  // ---------- PRIVATE METHODS ----------
+    /**
+     * @return
+     *   The leaf node containing the object.
+     */
+    const TreeNode& FindNode(const TheObjType& theObj) const
+    {
+        return *myObjNodeMap.Find(theObj);
+    }
 
-  /// Copy constructor (prohibited).
-  NCollection_EBTree (const NCollection_EBTree&);
+    /**
+     * Clears the contents of the tree. Redefined virtual method
+     */
+    void Clear(const Handle(NCollection_BaseAllocator)& aNewAlloc = 0L) Standard_OVERRIDE
+    {
+        myObjNodeMap.Clear();
+        UBTree::Clear(aNewAlloc);
+    }
 
-  /// Assignment operator (prohibited).
-  NCollection_EBTree& operator = (const NCollection_EBTree&);
+private:
+    // ---------- PRIVATE METHODS ----------
 
-  // ---------- PRIVATE FIELDS ----------
+    /// Copy constructor (prohibited).
+    NCollection_EBTree(const NCollection_EBTree&);
 
-  NCollection_DataMap <TheObjType, TreeNode*>
-                            myObjNodeMap;   ///< map of object to node pointer
+    /// Assignment operator (prohibited).
+    NCollection_EBTree& operator = (const NCollection_EBTree&);
+
+    // ---------- PRIVATE FIELDS ----------
+
+    NCollection_DataMap <TheObjType, TreeNode*>
+        myObjNodeMap;   ///< map of object to node pointer
 };
 
 // ================== METHODS TEMPLATES =====================
@@ -134,38 +139,38 @@ template <class TheObjType, class TheBndType> class NCollection_EBTree
 //=======================================================================
 
 template <class TheObjType, class TheBndType>
-Standard_Boolean NCollection_EBTree<TheObjType,TheBndType>::Remove
-                                (const TheObjType& theObj)
+Standard_Boolean NCollection_EBTree<TheObjType, TheBndType>::Remove
+(const TheObjType& theObj)
 {
-  Standard_Boolean result = Standard_False;
-  if (Contains (theObj)) {
-    TreeNode* pNode = myObjNodeMap (theObj);
-    if (pNode->IsRoot()) {
-      // it is the root, so clear all the tree
-      Clear();
+    Standard_Boolean result = Standard_False;
+    if (Contains(theObj)) {
+        TreeNode* pNode = myObjNodeMap(theObj);
+        if (pNode->IsRoot()) {
+            // it is the root, so clear all the tree
+            Clear();
+        }
+        else {
+            // it is a child of some parent,
+            // so kill the child that contains theObj
+            // and update bounding boxes of all ancestors
+            myObjNodeMap.UnBind(theObj);
+            TreeNode* pParent = &pNode->ChangeParent();
+            pParent->Kill((pNode == &pParent->Child(0) ? 0 : 1),
+                this->Allocator());
+            if (pParent->IsLeaf()) {
+                // the parent node became a leaf, so update the map
+                myObjNodeMap.UnBind(pParent->Object());
+                myObjNodeMap.Bind(pParent->Object(), pParent);
+            }
+            while (!pParent->IsRoot()) {
+                pParent = &pParent->ChangeParent();
+                pParent->ChangeBnd() = pParent->Child(0).Bnd();
+                pParent->ChangeBnd().Add(pParent->Child(1).Bnd());
+            }
+        }
+        result = Standard_True;
     }
-    else {
-      // it is a child of some parent,
-      // so kill the child that contains theObj
-      // and update bounding boxes of all ancestors
-      myObjNodeMap.UnBind (theObj);
-      TreeNode* pParent = &pNode->ChangeParent();
-      pParent->Kill ((pNode == &pParent->Child(0) ? 0 : 1),
-                     this->Allocator());
-      if (pParent->IsLeaf()) {
-        // the parent node became a leaf, so update the map
-        myObjNodeMap.UnBind (pParent->Object());
-        myObjNodeMap.Bind (pParent->Object(), pParent);
-      }
-      while (!pParent->IsRoot()) {
-        pParent = &pParent->ChangeParent();
-        pParent->ChangeBnd() = pParent->Child(0).Bnd();
-        pParent->ChangeBnd().Add (pParent->Child(1).Bnd());
-      }
-    }
-    result = Standard_True;
-  }
-  return result;
+    return result;
 }
 
 // ======================================================================

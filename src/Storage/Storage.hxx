@@ -1,4 +1,4 @@
-// Created on: 1996-04-30
+﻿// Created on: 1996-04-30
 // Created by: cle
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -55,15 +55,15 @@ class Storage_TypedCallBack;
 //! -   call the function Write from the schema,
 //! setting the driver and the Storage_Data   instance as parameters,
 //! -      close the driver.
-class Storage 
+class Storage
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! returns the version of Storage's read/write routines
-  Standard_EXPORT static TCollection_AsciiString Version();
+
+    //! returns the version of Storage's read/write routines
+    Standard_EXPORT static TCollection_AsciiString Version();
 
 
 
@@ -79,18 +79,18 @@ private:
 
 
 
-friend class Storage_BaseDriver;
-friend class Storage_CallBack;
-friend class Storage_DefaultCallBack;
-friend class Storage_HeaderData;
-friend class Storage_Data;
-friend class Storage_TypeData;
-friend class Storage_RootData;
-friend class Storage_Root;
-friend class Storage_Schema;
-friend class Storage_InternalData;
-friend class Storage_stCONSTclCOM;
-friend class Storage_TypedCallBack;
+    friend class Storage_BaseDriver;
+    friend class Storage_CallBack;
+    friend class Storage_DefaultCallBack;
+    friend class Storage_HeaderData;
+    friend class Storage_Data;
+    friend class Storage_TypeData;
+    friend class Storage_RootData;
+    friend class Storage_Root;
+    friend class Storage_Schema;
+    friend class Storage_InternalData;
+    friend class Storage_stCONSTclCOM;
+    friend class Storage_TypedCallBack;
 
 };
 

@@ -1,4 +1,4 @@
-// Created on: 1991-09-05
+﻿// Created on: 1991-09-05
 // Created by: J.P. TIRAUlt
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Standard_MultiplyDefined;
 DEFINE_STANDARD_HANDLE(Standard_MultiplyDefined, Standard_DomainError)
 
 #if !defined No_Exception && !defined No_Standard_MultiplyDefined
-  #define Standard_MultiplyDefined_Raise_if(CONDITION, MESSAGE) \
+#define Standard_MultiplyDefined_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Standard_MultiplyDefined(MESSAGE);
 #else
-  #define Standard_MultiplyDefined_Raise_if(CONDITION, MESSAGE)
+#define Standard_MultiplyDefined_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Standard_MultiplyDefined, Standard_DomainError)

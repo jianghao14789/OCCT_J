@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -36,8 +36,8 @@
 // ------------------------------------------------------------------
 inline Standard_ExtCharacter ToExtCharacter(const Standard_Character achar)
 {
-//  extension a zero (partie haute-->octet de gauche) de achar
-    return (Standard_ExtCharacter)( (unsigned char)achar & 0x00ff );
+    //  extension a zero (partie haute-->octet de gauche) de achar
+    return (Standard_ExtCharacter)((unsigned char)achar & 0x00ff);
 }
 
 // ------------------------------------------------------------------
@@ -45,7 +45,7 @@ inline Standard_ExtCharacter ToExtCharacter(const Standard_Character achar)
 // ------------------------------------------------------------------
 inline Standard_Character ToCharacter(const Standard_ExtCharacter achar)
 {
-//  recuperer partie basse(octet de droite) de achar
+    //  recuperer partie basse(octet de droite) de achar
     return (Standard_Character)(unsigned char)(achar & 0x00ff);
 }
 
@@ -54,14 +54,16 @@ inline Standard_Character ToCharacter(const Standard_ExtCharacter achar)
 // ------------------------------------------------------------------
 inline Standard_Boolean IsAnAscii(const Standard_ExtCharacter achar)
 {
-    return ! ( achar & 0xff00 );
+    return !(achar & 0xff00);
 }
 
 // ------------------------------------------------------------------
 // IsEqual : Returns Standard_True if two characters have the same value
 // ------------------------------------------------------------------
 inline Standard_Boolean IsEqual(const Standard_ExtCharacter One,
-				const Standard_ExtCharacter Two)
-{ return One == Two; }
+    const Standard_ExtCharacter Two)
+{
+    return One == Two;
+}
 
 #endif

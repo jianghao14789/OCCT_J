@@ -1,4 +1,4 @@
-/*
+﻿/*
  Created on: 2011-06-02
  Created by: Andrey BETENEV
  Copyright (c) 2011-2014 OPEN CASCADE SAS
@@ -37,53 +37,53 @@ using namespace System::Collections::Generic;
 //!   returned by operator new for a handled class)
 //! - Underlying C++ instance is accessed by operator ()
 
-template <class CPPClass> 
-public ref class NCollection_Haft 
+template <class CPPClass>
+public ref class NCollection_Haft
 {
 public:
-  //! Initialize CLI Haft object by default-constructed C++ object
-  NCollection_Haft ()
-  {
-    myPtr = new CPPClass;
-  }
+    //! Initialize CLI Haft object by default-constructed C++ object
+    NCollection_Haft()
+    {
+        myPtr = new CPPClass;
+    }
 
-  //! Initialize CLI Haft object by compatible C++ pointer
-  template <class T>
-  NCollection_Haft (const T* aPtr)
-  {
-    myPtr = new CPPClass (aPtr);
-  }
+    //! Initialize CLI Haft object by compatible C++ pointer
+    template <class T>
+    NCollection_Haft(const T* aPtr)
+    {
+        myPtr = new CPPClass(aPtr);
+    }
 
-  //! Initialize CLI Haft object by C++ class object
-  NCollection_Haft (const CPPClass& aPtr)
-  {
-    myPtr = new CPPClass (aPtr);
-  }
+    //! Initialize CLI Haft object by C++ class object
+    NCollection_Haft(const CPPClass& aPtr)
+    {
+        myPtr = new CPPClass(aPtr);
+    }
 
-  //! Destructor - invoked explicitly by delete, or automatically 
-  //! when local variable is scoped out
-  ~NCollection_Haft ()
-  {
-    this->Nullify();
-  }
+    //! Destructor - invoked explicitly by delete, or automatically 
+    //! when local variable is scoped out
+    ~NCollection_Haft()
+    {
+        this->Nullify();
+    }
 
-  //! Finalizer - called undeterministically by garbage collector
-  !NCollection_Haft ()
-  {
-    this->Nullify();
-  }
+    //! Finalizer - called undeterministically by garbage collector
+    !NCollection_Haft()
+    {
+        this->Nullify();
+    }
 
-  //! Function call operator is provided to access underlying C++ object
-  CPPClass& operator () () { return *myPtr; }
-
-protected:
-  //! Invalidate the haft
-  void Nullify ()
-  {
-    delete myPtr;
-    myPtr = 0;
-  }
+    //! Function call operator is provided to access underlying C++ object
+    CPPClass& operator () () { return *myPtr; }
 
 protected:
-  CPPClass* myPtr;
+    //! Invalidate the haft
+    void Nullify()
+    {
+        delete myPtr;
+        myPtr = 0;
+    }
+
+protected:
+    CPPClass* myPtr;
 };

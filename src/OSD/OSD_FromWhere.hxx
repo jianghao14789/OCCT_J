@@ -1,4 +1,4 @@
-// Copyright (c) 1992-1999 Matra Datavision
+﻿// Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -18,9 +18,9 @@
 //! Used by OSD_File in the method Seek.
 enum OSD_FromWhere
 {
-OSD_FromBeginning,
-OSD_FromHere,
-OSD_FromEnd
+    OSD_FromBeginning,
+    OSD_FromHere,
+    OSD_FromEnd
 };
 
 #endif // _OSD_FromWhere_HeaderFile

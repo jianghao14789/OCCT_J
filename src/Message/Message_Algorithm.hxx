@@ -86,6 +86,32 @@ DEFINE_STANDARD_HANDLE(Message_Algorithm, Standard_Transient)
 //! The messages are output to the messenger, stored in the field;
 //! though messenger can be changed, it is guaranteed to be non-null.
 //! By default, Message::DefaultMessenger() is used.
+//! 
+//! Message_Algorithm 类是实现算法或任何需要向调用者/用户提供执行的扩展信息的操作的基类
+//! 
+//! 它为执行状态、消息的收集和输出的管理提供了通用机制
+//! 
+//! 算法使用 SetStatus() 方法来设置执行状态。可以将状态与数字或字符串
+//! (SetStatus() 方法的第二个参数) 相关联，以准确指示导致问题的输入数据中的项目
+//! (对象、元素等)
+//! 
+//! 由算法生成的每个执行状态都有关联的文本消息，该消息应在使用 Message_MsgFile::LoadFile() 
+//! 的调用加载的资源文件中定义
+//! 
+//! 与算法执行期间生成的状态对应的消息使用 SendMessages() 方法输出到 Message_Messenger
+//! 如果状态有关联的数字或字符串，它们将被包含在消息体中代替 "%s" 占位符的位置
+//! (应在消息文本中出现此占位符)
+//! 
+//! 资源文件中消息文本的名称由类名和状态名构成，以点分隔，例如:
+//! .TObj_CheckModel.Alarm2
+//! Error: Some objects (%s) have references to dead object(s)
+//! 
+//! 如果在当前类类型的前缀中找不到状态的消息，则会递归地在基类中搜索相同的消息
+//! 
+//! 可以为状态显式设置消息；在这种情况下，不使用上述过程，供应的消息按原样使用
+//! 
+//! 消息输出到 messenger（存储在字段中）；虽然可以更改 messenger，但保证其为非 null
+//! 默认情况下，使用 Message::DefaultMessenger()
 class Message_Algorithm : public Standard_Transient
 {
 
@@ -93,59 +119,84 @@ public:
 
 
     //! Empty constructor
+    //! 空构造函数
     Standard_EXPORT Message_Algorithm();
 
     //! Sets status with no parameter
+    //! 设置没有参数的状态
     Standard_EXPORT void SetStatus(const Message_Status& theStat);
 
     //! Sets status with integer parameter
+    //! 设置带有整数参数的状态
     Standard_EXPORT void SetStatus(const Message_Status& theStat, const Standard_Integer theInt);
 
     //! Sets status with string parameter.
     //! If noRepetitions is True, the parameter will be added only
     //! if it has not been yet recorded for the same status flag
+    //! 
+    //! 设置带有字符串参数的状态
+    //! 如果 noRepetitions 为 True，只有在尚未为同一状态标记记录参数时，
+    //! 才会添加该参数
     void SetStatus(const Message_Status& theStat, const Standard_CString theStr, const Standard_Boolean noRepetitions = Standard_True);
 
     //! Sets status with string parameter
     //! If noRepetitions is True, the parameter will be added only
     //! if it has not been yet recorded for the same status flag
+    //! 
+    //! 设置带有 ASCII 字符串参数的状态
     void SetStatus(const Message_Status& theStat, const TCollection_AsciiString& theStr, const Standard_Boolean noRepetitions = Standard_True);
 
     //! Sets status with string parameter
     //! If noRepetitions is True, the parameter will be added only
     //! if it has not been yet recorded for the same status flag
+    //! 
+    //! 设置带有 HAsciiString Handle 参数的状态
     void SetStatus(const Message_Status& theStat, const Handle(TCollection_HAsciiString)& theStr, const Standard_Boolean noRepetitions = Standard_True);
 
     //! Sets status with string parameter
     //! If noRepetitions is True, the parameter will be added only
     //! if it has not been yet recorded for the same status flag
+    //! 
+    //! 设置带有扩展字符串参数的状态
     void SetStatus(const Message_Status& theStat, const TCollection_ExtendedString& theStr, const Standard_Boolean noRepetitions = Standard_True);
 
     //! Sets status with string parameter
     //! If noRepetitions is True, the parameter will be added only
     //! if it has not been yet recorded for the same status flag
+    //! 
+    //! 设置带有 HExtendedString Handle 参数的状态
     Standard_EXPORT void SetStatus(const Message_Status& theStat, const Handle(TCollection_HExtendedString)& theStr, const Standard_Boolean noRepetitions = Standard_True);
 
     //! Sets status with preformatted message. This message will be
     //! used directly to report the status; automatic generation of
     //! status messages will be disabled for it.
+    //! 
+    //! 使用预格式化的消息设置状态。此消息将直接用于报告状态；
+    //! 对其禁用状态消息的自动生成
     Standard_EXPORT void SetStatus(const Message_Status& theStat, const Message_Msg& theMsg);
 
     //! Returns copy of exec status of algorithm
+    //! 返回算法执行状态的副本
     const Message_ExecStatus& GetStatus() const;
 
     //! Returns exec status of algorithm
+    //! 返回算法的执行状态
     Message_ExecStatus& ChangeStatus();
 
     //! Clear exec status of algorithm
+    //! 清除算法的执行状态
     Standard_EXPORT void ClearStatus();
 
     //! Sets messenger to algorithm
+    //! 为算法设置消息传递器
     Standard_EXPORT void SetMessenger(const Handle(Message_Messenger)& theMsgr);
 
     //! Returns messenger of algorithm.
     //! The returned handle is always non-null and can
     //! be used for sending messages.
+    //! 
+    //! 返回算法的消息传递器。返回的 handle 始终非 null，
+    //! 可用于发送消息
     Handle(Message_Messenger) GetMessenger() const;
 
     //! Print messages for all status flags that have been set during
@@ -165,36 +216,60 @@ public:
     //! Note that this method is virtual; this allows descendant
     //! classes to customize message output (e.g. by adding
     //! messages from other sub-algorithms)
+    //! 
+    //! 打印在算法执行期间设置的所有状态标记的消息，
+    //! 排除在 theFilter 中 NOT 设置的状态
+    //! 
+    //! 消息从资源文件获取，名称构成为 {dynamic class type}.{status name}，
+    //! 例如 "Message_Algorithm.Fail5"
+    //! 如果在此类及其所有基类的资源中找不到消息，则打印替代文本
+    //! 
+    //! 对于具有数字或字符串参数的状态，theMaxCount 定义要包含在消息中的
+    //! 最大数字或字符串数
+    //! 
+    //! 注意：此方法是虚拟的；这允许后代类自定义消息输出
+    //! (例如，通过添加来自其他子算法的消息)
     Standard_EXPORT virtual void SendStatusMessages(const Message_ExecStatus& theFilter, const Message_Gravity theTraceLevel = Message_Warning, const Standard_Integer theMaxCount = 20) const;
 
     //! Convenient variant of SendStatusMessages() with theFilter
     //! having defined all WARN, ALARM, and FAIL (but not DONE)
     //! status flags
+    //! 
+    //! SendStatusMessages() 的方便变体，theFilter 定义了所有 WARN、ALARM 和 FAIL
+    //! (但不是 DONE) 状态标记
     Standard_EXPORT void SendMessages(const Message_Gravity theTraceLevel = Message_Warning, const Standard_Integer theMaxCount = 20) const;
 
     //! Add statuses to this algorithm from other algorithm
     //! (including messages)
+    //! 从其他算法向此算法添加状态（包括消息）
     Standard_EXPORT void AddStatus(const Handle(Message_Algorithm)& theOther);
 
     //! Add statuses to this algorithm from other algorithm, but
     //! only those items are moved that correspond to statuses
     //! set in theStatus
+    //! 从其他算法向此算法添加状态，但仅移动与 theStatus 中设置的状态相对应的项
     Standard_EXPORT void AddStatus(const Message_ExecStatus& theStatus, const Handle(Message_Algorithm)& theOther);
 
     //! Return the numbers associated with the indicated status;
     //! Null handle if no such status or no numbers associated with it
+    //! 返回与指示的状态关联的数字；如果没有此类状态或没有关联的数字，则为 Null handle
     Standard_EXPORT Handle(TColStd_HPackedMapOfInteger) GetMessageNumbers(const Message_Status& theStatus) const;
 
     //! Return the strings associated with the indicated status;
     //! Null handle if no such status or no strings associated with it
+    //! 返回与指示的状态关联的字符串；如果没有此类状态或没有关联的字符串，则为 Null handle
     Standard_EXPORT Handle(TColStd_HSequenceOfHExtendedString) GetMessageStrings(const Message_Status& theStatus) const;
 
     //! Prepares a string containing a list of integers contained
     //! in theError map, but not more than theMaxCount
+    //! 
+    //! 准备一个包含 theError 映射中包含的整数列表的字符串，但不超过 theMaxCount
     Standard_EXPORT static TCollection_ExtendedString PrepareReport(const Handle(TColStd_HPackedMapOfInteger)& theError, const Standard_Integer theMaxCount);
 
     //! Prepares a string containing a list of names contained
     //! in theReportSeq sequence, but not more than theMaxCount
+    //! 
+    //! 准备一个包含 theReportSeq 序列中包含的名称列表的字符串，但不超过 theMaxCount
     Standard_EXPORT static TCollection_ExtendedString PrepareReport(const TColStd_SequenceOfHExtendedString& theReportSeq, const Standard_Integer theMaxCount);
 
 
@@ -205,23 +280,22 @@ public:
 protected:
 
 
-    Message_ExecStatus myStatus;
-    Handle(Message_Messenger) myMessenger;
+    Message_ExecStatus myStatus;                  // 执行状态
+    Handle(Message_Messenger) myMessenger;        // 消息传递器
 
 
 private:
 
 
-    Handle(TColStd_HArray1OfTransient) myReportIntegers;
-    Handle(TColStd_HArray1OfTransient) myReportStrings;
-    Message_HArrayOfMsg myReportMessages;
+    Handle(TColStd_HArray1OfTransient) myReportIntegers;  // 报告整数数组
+    Handle(TColStd_HArray1OfTransient) myReportStrings;   // 报告字符串数组
+    Message_HArrayOfMsg myReportMessages;                 // 报告消息数组
 
 
 };
 
 
 #include <Message_Algorithm.lxx>
-
 
 
 

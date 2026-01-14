@@ -1,4 +1,4 @@
-// Created on: 1995-04-20
+﻿// Created on: 1995-04-20
 // Created by: Tony GEORGIADES
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -41,93 +41,93 @@ DEFINE_STANDARD_HANDLE(Resource_Manager, Standard_Transient)
 //! Defines a resource structure and its management methods.
 class Resource_Manager : public Standard_Transient
 {
-  DEFINE_STANDARD_RTTIEXT(Resource_Manager,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Resource_Manager, Standard_Transient)
 public:
 
-  //! Create a Resource manager.
-  //! Attempts to find the two following files:
-  //! $CSF_`aName`Defaults/aName
-  //! $CSF_`aName`UserDefaults/aName
-  //! and load them respectively into a reference and a user resource structure.
-  //!
-  //! If CSF_ResourceVerbose defined, seeked files will be printed.
-  //!
-  //! FILE SYNTAX
-  //! The syntax of a resource file is a sequence of resource
-  //! lines terminated by newline characters or end of file.  The
-  //! syntax of an individual resource line is:
-  Standard_EXPORT Resource_Manager(const Standard_CString aName, const Standard_Boolean Verbose = Standard_False);
+    //! Create a Resource manager.
+    //! Attempts to find the two following files:
+    //! $CSF_`aName`Defaults/aName
+    //! $CSF_`aName`UserDefaults/aName
+    //! and load them respectively into a reference and a user resource structure.
+    //!
+    //! If CSF_ResourceVerbose defined, seeked files will be printed.
+    //!
+    //! FILE SYNTAX
+    //! The syntax of a resource file is a sequence of resource
+    //! lines terminated by newline characters or end of file.  The
+    //! syntax of an individual resource line is:
+    Standard_EXPORT Resource_Manager(const Standard_CString aName, const Standard_Boolean Verbose = Standard_False);
 
-  //! Create a Resource manager.
-  //! @param theName [in] description file name
-  //! @param theDefaultsDirectory  [in] default folder for looking description file
-  //! @param theUserDefaultsDirectory [in] user folder for looking description file
-  //! @param theIsVerbose [in] print verbose messages
-  Standard_EXPORT Resource_Manager (const TCollection_AsciiString& theName,
-                                    const TCollection_AsciiString& theDefaultsDirectory,
-                                    const TCollection_AsciiString& theUserDefaultsDirectory,
-                                    const Standard_Boolean theIsVerbose = Standard_False);
-  
-  //! Save the user resource structure in the specified file.
-  //! Creates the file if it does not exist.
-  Standard_EXPORT Standard_Boolean Save() const;
-  
-  //! returns True if the Resource does exist.
-  Standard_EXPORT Standard_Boolean Find (const Standard_CString aResource) const;
+    //! Create a Resource manager.
+    //! @param theName [in] description file name
+    //! @param theDefaultsDirectory  [in] default folder for looking description file
+    //! @param theUserDefaultsDirectory [in] user folder for looking description file
+    //! @param theIsVerbose [in] print verbose messages
+    Standard_EXPORT Resource_Manager(const TCollection_AsciiString& theName,
+        const TCollection_AsciiString& theDefaultsDirectory,
+        const TCollection_AsciiString& theUserDefaultsDirectory,
+        const Standard_Boolean theIsVerbose = Standard_False);
 
-  //! returns True if the Resource does exist.
-  Standard_EXPORT Standard_Boolean Find (const TCollection_AsciiString& theResource,
-                                         TCollection_AsciiString& theValue) const;
+    //! Save the user resource structure in the specified file.
+    //! Creates the file if it does not exist.
+    Standard_EXPORT Standard_Boolean Save() const;
 
-  //! Gets the value of an integer resource according to its
-  //! instance and its type.
-  Standard_EXPORT virtual Standard_Integer Integer (const Standard_CString aResourceName) const;
-  
-  //! Gets the value of a real resource according to its instance
-  //! and its type.
-  Standard_EXPORT virtual Standard_Real Real (const Standard_CString aResourceName) const;
-  
-  //! Gets the value of a CString resource according to its instance
-  //! and its type.
-  Standard_EXPORT virtual Standard_CString Value (const Standard_CString aResourceName) const;
-  
-  //! Gets the value of an ExtString resource according to its instance
-  //! and its type.
-  Standard_EXPORT virtual Standard_ExtString ExtValue (const Standard_CString aResourceName);
-  
-  //! Sets the new value of an integer resource.
-  //! If the resource does not exist, it is created.
-  Standard_EXPORT virtual void SetResource (const Standard_CString aResourceName, const Standard_Integer aValue);
-  
-  //! Sets the new value of a real resource.
-  //! If the resource does not exist, it is created.
-  Standard_EXPORT virtual void SetResource (const Standard_CString aResourceName, const Standard_Real aValue);
-  
-  //! Sets the new value of an CString resource.
-  //! If the resource does not exist, it is created.
-  Standard_EXPORT virtual void SetResource (const Standard_CString aResourceName, const Standard_CString aValue);
-  
-  //! Sets the new value of an ExtString resource.
-  //! If the resource does not exist, it is created.
-  Standard_EXPORT virtual void SetResource (const Standard_CString aResourceName, const Standard_ExtString aValue);
-  
-  //! Gets the resource file full path by its name.
-  //! If corresponding environment variable is not set
-  //! or file doesn't exist returns empty string.
-  Standard_EXPORT static void GetResourcePath (TCollection_AsciiString& aPath, const Standard_CString aName, const Standard_Boolean isUserDefaults);
+    //! returns True if the Resource does exist.
+    Standard_EXPORT Standard_Boolean Find(const Standard_CString aResource) const;
 
-private:
+    //! returns True if the Resource does exist.
+    Standard_EXPORT Standard_Boolean Find(const TCollection_AsciiString& theResource,
+        TCollection_AsciiString& theValue) const;
 
-  Standard_EXPORT void Load (const TCollection_AsciiString& thePath,
-                             Resource_DataMapOfAsciiStringAsciiString& aMap);
+    //! Gets the value of an integer resource according to its
+    //! instance and its type.
+    Standard_EXPORT virtual Standard_Integer Integer(const Standard_CString aResourceName) const;
+
+    //! Gets the value of a real resource according to its instance
+    //! and its type.
+    Standard_EXPORT virtual Standard_Real Real(const Standard_CString aResourceName) const;
+
+    //! Gets the value of a CString resource according to its instance
+    //! and its type.
+    Standard_EXPORT virtual Standard_CString Value(const Standard_CString aResourceName) const;
+
+    //! Gets the value of an ExtString resource according to its instance
+    //! and its type.
+    Standard_EXPORT virtual Standard_ExtString ExtValue(const Standard_CString aResourceName);
+
+    //! Sets the new value of an integer resource.
+    //! If the resource does not exist, it is created.
+    Standard_EXPORT virtual void SetResource(const Standard_CString aResourceName, const Standard_Integer aValue);
+
+    //! Sets the new value of a real resource.
+    //! If the resource does not exist, it is created.
+    Standard_EXPORT virtual void SetResource(const Standard_CString aResourceName, const Standard_Real aValue);
+
+    //! Sets the new value of an CString resource.
+    //! If the resource does not exist, it is created.
+    Standard_EXPORT virtual void SetResource(const Standard_CString aResourceName, const Standard_CString aValue);
+
+    //! Sets the new value of an ExtString resource.
+    //! If the resource does not exist, it is created.
+    Standard_EXPORT virtual void SetResource(const Standard_CString aResourceName, const Standard_ExtString aValue);
+
+    //! Gets the resource file full path by its name.
+    //! If corresponding environment variable is not set
+    //! or file doesn't exist returns empty string.
+    Standard_EXPORT static void GetResourcePath(TCollection_AsciiString& aPath, const Standard_CString aName, const Standard_Boolean isUserDefaults);
 
 private:
 
-  TCollection_AsciiString myName;
-  Resource_DataMapOfAsciiStringAsciiString myRefMap;
-  Resource_DataMapOfAsciiStringAsciiString myUserMap;
-  Resource_DataMapOfAsciiStringExtendedString myExtStrMap;
-  Standard_Boolean myVerbose;
+    Standard_EXPORT void Load(const TCollection_AsciiString& thePath,
+        Resource_DataMapOfAsciiStringAsciiString& aMap);
+
+private:
+
+    TCollection_AsciiString myName;
+    Resource_DataMapOfAsciiStringAsciiString myRefMap;
+    Resource_DataMapOfAsciiStringAsciiString myUserMap;
+    Resource_DataMapOfAsciiStringExtendedString myExtStrMap;
+    Standard_Boolean myVerbose;
 
 };
 

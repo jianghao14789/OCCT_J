@@ -1,4 +1,4 @@
-// Created on: 1991-08-09
+﻿// Created on: 1991-08-09
 // Created by: Jean Claude VAUTHIER
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -24,8 +24,8 @@
 //! <NonUniform>
 enum BSplCLib_KnotDistribution
 {
-BSplCLib_NonUniform,
-BSplCLib_Uniform
+    BSplCLib_NonUniform,
+    BSplCLib_Uniform
 };
 
 #endif // _BSplCLib_KnotDistribution_HeaderFile

@@ -1,4 +1,4 @@
-// Created on: 1992-02-17
+﻿// Created on: 1992-02-17
 // Created by: Arnaud BOUZY
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,16 +21,16 @@
 extern "C" {
 #endif 
 
-int ExprIntrpparse();
-void ExprIntrperror(char* msg);
+    int ExprIntrpparse();
+    void ExprIntrperror(char* msg);
 
-void ExprIntrp_start_string(const char* str);
-void ExprIntrp_stop_string();
+    void ExprIntrp_start_string(const char* str);
+    void ExprIntrp_stop_string();
 
-void ExprIntrp_SetResult();
-void ExprIntrp_SetDegree();
+    void ExprIntrp_SetResult();
+    void ExprIntrp_SetDegree();
 
-int ExprIntrplex(void);
+    int ExprIntrplex(void);
 
 #ifdef __cplusplus
 }
@@ -40,7 +40,7 @@ int ExprIntrplex(void);
 
 #include <TCollection_AsciiString.hxx>
 
-const TCollection_AsciiString& ExprIntrp_GetResult ();
+const TCollection_AsciiString& ExprIntrp_GetResult();
 int ExprIntrp_GetDegree();
 
 #endif

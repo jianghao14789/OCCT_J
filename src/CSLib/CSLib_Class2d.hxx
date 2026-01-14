@@ -42,21 +42,21 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Constructs the 2D-polygon.
-        //! thePnts2d is the set of the vertices (closed polygon
-        //! will always be created inside of this constructor;
-        //! consequently, there is no point in repeating first and
-        //! last point in thePnts2d).
-        //! theTolu and theTolv are tolerances.
-        //! theUmin, theVmin, theUmax, theVmax are
-        //! UV-bounds of the polygon.
-        Standard_EXPORT CSLib_Class2d(const TColgp_Array1OfPnt2d& thePnts2d,
-            const Standard_Real theTolU,
-            const Standard_Real theTolV,
-            const Standard_Real theUMin,
-            const Standard_Real theVMin,
-            const Standard_Real theUMax,
-            const Standard_Real theVMax);
+    //! Constructs the 2D-polygon.
+    //! thePnts2d is the set of the vertices (closed polygon
+    //! will always be created inside of this constructor;
+    //! consequently, there is no point in repeating first and
+    //! last point in thePnts2d).
+    //! theTolu and theTolv are tolerances.
+    //! theUmin, theVmin, theUmax, theVmax are
+    //! UV-bounds of the polygon.
+    Standard_EXPORT CSLib_Class2d(const TColgp_Array1OfPnt2d& thePnts2d,
+        const Standard_Real theTolU,
+        const Standard_Real theTolV,
+        const Standard_Real theUMin,
+        const Standard_Real theVMin,
+        const Standard_Real theUMax,
+        const Standard_Real theVMax);
 
     //! Constructs the 2D-polygon.
     //! thePnts2d is the set of the vertices (closed polygon

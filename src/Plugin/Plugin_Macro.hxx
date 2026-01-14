@@ -1,4 +1,4 @@
-// Created on: 1997-03-04
+﻿// Created on: 1997-03-04
 // Created by: Mister rmi
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -18,7 +18,7 @@
 #define _Plugin_Macro_HeaderFile
 
 #ifdef OCCT_NO_PLUGINS
-  #define PLUGIN(name)
+#define PLUGIN(name)
 #else
 //! Macro implementing C-style interface function to get factory object from the dynamically loaded library
 #define PLUGIN(name) \

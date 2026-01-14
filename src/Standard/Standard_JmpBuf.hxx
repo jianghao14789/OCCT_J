@@ -1,4 +1,4 @@
-// Copyright (c) 1999-2014 OPEN CASCADE SAS
+﻿// Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -17,13 +17,13 @@
 #include <stdlib.h>
 #include <setjmp.h>
 
-typedef 
+typedef
 #ifdef SOLARIS
-           sigjmp_buf   
+sigjmp_buf
 #elif defined(IRIX)
-           sigjmp_buf   
+sigjmp_buf
 #else
-           jmp_buf      
+jmp_buf
 #endif
 Standard_JmpBuf;
 

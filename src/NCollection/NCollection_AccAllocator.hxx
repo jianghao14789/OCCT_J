@@ -1,4 +1,4 @@
-// Created on: 2013-11-12
+﻿// Created on: 2013-11-12
 // Created by: Maxim YAKUNIN (myn)
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -41,149 +41,173 @@
 
 class NCollection_AccAllocator : public NCollection_BaseAllocator
 {
-// --------- PUBLIC CONSTANTS ---------
+    // --------- PUBLIC CONSTANTS ---------
 public:
-  //! Alignment of all allocated objects: 4 bytes
-  static const Standard_Size    Align            = 4;
+    //! Alignment of all allocated objects: 4 bytes
+    static const Standard_Size    Align = 4;
 
-  //! Default block size
-  static const Standard_Size    DefaultBlockSize = 24600;
+    //! Default block size
+    static const Standard_Size    DefaultBlockSize = 24600;
 
-  //! Number of last blocks to check for free space
-  static const Standard_Integer MaxLookupBlocks  = 16;
+    //! Number of last blocks to check for free space
+    static const Standard_Integer MaxLookupBlocks = 16;
 
-// ---------- PUBLIC METHODS ----------
+    // ---------- PUBLIC METHODS ----------
 public:
-  //! Constructor
-  Standard_EXPORT NCollection_AccAllocator(const size_t
-                                           theBlockSize = DefaultBlockSize);
+    //! Constructor
+    Standard_EXPORT NCollection_AccAllocator(const size_t
+        theBlockSize = DefaultBlockSize);
 
-  //! Destructor
-  Standard_EXPORT ~NCollection_AccAllocator();
+    //! Destructor
+    Standard_EXPORT ~NCollection_AccAllocator();
 
-  //! Allocate memory with given size
-  Standard_EXPORT virtual void* Allocate  (const size_t theSize) Standard_OVERRIDE;
+    //! Allocate memory with given size
+    Standard_EXPORT virtual void* Allocate(const size_t theSize) Standard_OVERRIDE;
 
-  //! Free a previously allocated memory;
-  //! memory is returned to the OS when all allocations in some block are freed
-  Standard_EXPORT virtual void  Free      (void* theAddress) Standard_OVERRIDE;
+    //! Free a previously allocated memory;
+    //! memory is returned to the OS when all allocations in some block are freed
+    Standard_EXPORT virtual void  Free(void* theAddress) Standard_OVERRIDE;
 
-// --------- PROTECTED TYPES ---------
+    // --------- PROTECTED TYPES ---------
 protected:
-  //! Size value aligned to a 4 byte boundary
-  class AlignedSize
-  {
-    Standard_Size myValue;
-  public:
-    AlignedSize() : myValue(0) {}
-    AlignedSize(const Standard_Size theValue)
-      : myValue((theValue + Align - 1) & ~(Align - 1)) {}
-    operator Standard_Size() const {return myValue;}
-  };
-
-  //! A pointer aligned to a 4 byte boundary
-  class AlignedPtr
-  {
-    Standard_Byte* myValue;
-  public:
-    AlignedPtr() : myValue(0) {}
-    AlignedPtr(const Standard_Address theValue)
-      : myValue((Standard_Byte*)((Standard_Size)theValue & ~(Align - 1))) {}
-    operator Standard_Address       () const {return myValue;}
-    operator Standard_Byte*         () const {return myValue;}
-    AlignedPtr operator -(const AlignedSize theValue) const
-      {return myValue - theValue;}
-    AlignedPtr operator +(const AlignedSize theValue) const
-      {return myValue + theValue;}
-    AlignedPtr operator -=(const AlignedSize theValue)
-      {return myValue -= theValue;}
-    AlignedPtr operator +=(const AlignedSize theValue)
-      {return myValue += theValue;}
-  };
-
-  //! A key for the map of blocks
-  struct Key {Standard_Size Value;};
-
-  //! Key hasher
-  class Hasher
-  {
-  public:
-    //! Returns hash code for the given key, in the range [1, theUpperBound]
-    //! @param theKey the key which hash code is to be computed
-    //! @param theUpperBound the upper bound of the range a computing hash code must be within
-    //! @return a computed hash code, in the range [1, theUpperBound]
-    static Standard_Integer HashCode (const Key theKey, const Standard_Integer theUpperBound)
+    //! Size value aligned to a 4 byte boundary
+    class AlignedSize
     {
-      return ::HashCode (theKey.Value, theUpperBound);
+        Standard_Size myValue;
+    public:
+        AlignedSize() : myValue(0) {}
+        AlignedSize(const Standard_Size theValue)
+            : myValue((theValue + Align - 1) & ~(Align - 1)) {
+        }
+        operator Standard_Size() const { return myValue; }
+    };
+
+    //! A pointer aligned to a 4 byte boundary
+    class AlignedPtr
+    {
+        Standard_Byte* myValue;
+    public:
+        AlignedPtr() : myValue(0) {}
+        AlignedPtr(const Standard_Address theValue)
+            : myValue((Standard_Byte*)((Standard_Size)theValue & ~(Align - 1))) {
+        }
+        operator Standard_Address       () const { return myValue; }
+        operator Standard_Byte* () const { return myValue; }
+        AlignedPtr operator -(const AlignedSize theValue) const
+        {
+            return myValue - theValue;
+        }
+        AlignedPtr operator +(const AlignedSize theValue) const
+        {
+            return myValue + theValue;
+        }
+        AlignedPtr operator -=(const AlignedSize theValue)
+        {
+            return myValue -= theValue;
+        }
+        AlignedPtr operator +=(const AlignedSize theValue)
+        {
+            return myValue += theValue;
+        }
+    };
+
+    //! A key for the map of blocks
+    struct Key { Standard_Size Value; };
+
+    //! Key hasher
+    class Hasher
+    {
+    public:
+        //! Returns hash code for the given key, in the range [1, theUpperBound]
+        //! @param theKey the key which hash code is to be computed
+        //! @param theUpperBound the upper bound of the range a computing hash code must be within
+        //! @return a computed hash code, in the range [1, theUpperBound]
+        static Standard_Integer HashCode(const Key theKey, const Standard_Integer theUpperBound)
+        {
+            return ::HashCode(theKey.Value, theUpperBound);
+        }
+
+        static Standard_Boolean IsEqual(const Key theOne, const Key theTwo)
+        {
+            return theOne.Value == theTwo.Value;
+        }
+    };
+
+    //! Descriptor of a block
+    struct Block
+    {
+        Standard_Address address;
+        AlignedPtr       allocStart;
+        Block* prevBlock;
+        Standard_Integer allocCount;
+
+        Block(const Standard_Address theAddress,
+            const Standard_Size    theSize,
+            Block* thePrevBlock = 0L)
+            : address(theAddress), prevBlock(thePrevBlock), allocCount(0)
+        {
+            SetFreeSize(theSize);
+        }
+
+        void SetFreeSize(const Standard_Size theSize)
+        {
+            allocStart = (Standard_Byte*)address + theSize;
+        }
+
+        Standard_Size FreeSize() const
+        {
+            return (Standard_Byte*)allocStart - (Standard_Byte*)address;
+        }
+
+        AlignedPtr Allocate(const AlignedSize theSize)
+        {
+            allocCount++; return allocStart -= theSize;
+        }
+
+        void Free()
+        {
+            allocCount--;
+        }
+
+        Standard_Boolean IsEmpty() const
+        {
+            return allocCount == 0;
+        }
+    };
+
+    // --------- PROTECTED METHODS ---------
+protected:
+    //! Calculate a key for the data map basing on the given address
+    inline Key getKey(const Standard_Address theAddress) const
+    {
+        Key aKey = { (Standard_Size)theAddress / myBlockSize };
+        return aKey;
     }
 
-    static Standard_Boolean IsEqual(const Key theOne, const Key theTwo)
-    { return theOne.Value == theTwo.Value; }
-  };
-  
-  //! Descriptor of a block
-  struct Block
-  {
-    Standard_Address address;
-    AlignedPtr       allocStart;
-    Block*           prevBlock;
-    Standard_Integer allocCount;
+    //! Find a block that the given allocation unit belongs to
+    Standard_EXPORT Block* findBlock(const Standard_Address theAddress, Key& theKey);
 
-    Block(const Standard_Address theAddress,
-          const Standard_Size    theSize,
-          Block*                 thePrevBlock = 0L)
-      : address(theAddress), prevBlock(thePrevBlock), allocCount(0)
-      {SetFreeSize (theSize);}
+    //! Allocate a new block and return a pointer to it
+    Standard_EXPORT Block* allocateNewBlock(const Standard_Size theSize);
 
-    void SetFreeSize(const Standard_Size theSize)
-      {allocStart = (Standard_Byte*)address + theSize;}
-
-    Standard_Size FreeSize() const
-      {return (Standard_Byte*)allocStart - (Standard_Byte*)address;}
-
-    AlignedPtr Allocate(const AlignedSize theSize)
-      {allocCount++; return allocStart -= theSize;}
-
-    void Free()
-      {allocCount--;}
-
-    Standard_Boolean IsEmpty() const
-      {return allocCount == 0;}
-  };
-
-// --------- PROTECTED METHODS ---------
-protected:
-  //! Calculate a key for the data map basing on the given address
-  inline Key getKey(const Standard_Address theAddress) const
-  {
-    Key aKey = {(Standard_Size)theAddress / myBlockSize};
-    return aKey;
-  }
-
-  //! Find a block that the given allocation unit belongs to
-  Standard_EXPORT Block* findBlock(const Standard_Address theAddress, Key& theKey);
-
-  //! Allocate a new block and return a pointer to it
-  Standard_EXPORT Block* allocateNewBlock(const Standard_Size theSize);
-
-// --------- PROHIBITED METHODS ---------
+    // --------- PROHIBITED METHODS ---------
 private:
-  NCollection_AccAllocator (const NCollection_AccAllocator&);
-  NCollection_AccAllocator& operator = (const NCollection_AccAllocator&);
+    NCollection_AccAllocator(const NCollection_AccAllocator&);
+    NCollection_AccAllocator& operator = (const NCollection_AccAllocator&);
 
-// --------- PROTECTED DATA ---------
+    // --------- PROTECTED DATA ---------
 protected:
-  AlignedSize myBlockSize;
-  Block*      mypLastBlock;
-  NCollection_DataMap<Key, Block, Hasher> myBlocks;
+    AlignedSize myBlockSize;
+    Block* mypLastBlock;
+    NCollection_DataMap<Key, Block, Hasher> myBlocks;
 
-// Declaration of CASCADE RTTI
+    // Declaration of CASCADE RTTI
 public:
-  DEFINE_STANDARD_RTTIEXT(NCollection_AccAllocator,NCollection_BaseAllocator)
+    DEFINE_STANDARD_RTTIEXT(NCollection_AccAllocator, NCollection_BaseAllocator)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (NCollection_AccAllocator, NCollection_BaseAllocator)
+DEFINE_STANDARD_HANDLE(NCollection_AccAllocator, NCollection_BaseAllocator)
 
 
 #endif

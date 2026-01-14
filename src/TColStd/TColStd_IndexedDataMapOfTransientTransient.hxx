@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -20,7 +20,7 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 
-typedef NCollection_IndexedDataMap<Handle(Standard_Transient),Handle(Standard_Transient),TColStd_MapTransientHasher> TColStd_IndexedDataMapOfTransientTransient;
+typedef NCollection_IndexedDataMap<Handle(Standard_Transient), Handle(Standard_Transient), TColStd_MapTransientHasher> TColStd_IndexedDataMapOfTransientTransient;
 
 
 #endif

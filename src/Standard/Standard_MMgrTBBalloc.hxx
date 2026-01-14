@@ -1,4 +1,4 @@
-// Created on: 2010-03-15
+﻿// Created on: 2010-03-15
 // Created by: Sergey KUUL
 // Copyright (c) 2010-2014 OPEN CASCADE SAS
 //
@@ -27,24 +27,24 @@
 
 class Standard_MMgrTBBalloc : public Standard_MMgrRoot
 {
- public:
-  //! Constructor; if aClear is True, the memory will be nullified
-  //! upon allocation.
-  Standard_EXPORT Standard_MMgrTBBalloc(const Standard_Boolean aClear=Standard_False);
+public:
+    //! Constructor; if aClear is True, the memory will be nullified
+    //! upon allocation.
+    Standard_EXPORT Standard_MMgrTBBalloc(const Standard_Boolean aClear = Standard_False);
 
-  //! Allocate aSize bytes 
-  Standard_EXPORT virtual Standard_Address Allocate(const Standard_Size aSize);
-  
-  //! Reallocate aPtr to the size aSize. 
-  //! The new pointer is returned.
-  Standard_EXPORT virtual Standard_Address Reallocate (Standard_Address thePtr,
-						       const Standard_Size theSize);
-  
-  //! Free allocated memory
-  Standard_EXPORT virtual void Free (Standard_Address thePtr);
+    //! Allocate aSize bytes 
+    Standard_EXPORT virtual Standard_Address Allocate(const Standard_Size aSize);
 
- protected:
-  Standard_Boolean myClear; //! Option to nullify allocated memory
+    //! Reallocate aPtr to the size aSize. 
+    //! The new pointer is returned.
+    Standard_EXPORT virtual Standard_Address Reallocate(Standard_Address thePtr,
+        const Standard_Size theSize);
+
+    //! Free allocated memory
+    Standard_EXPORT virtual void Free(Standard_Address thePtr);
+
+protected:
+    Standard_Boolean myClear; //! Option to nullify allocated memory
 };
 
 #endif

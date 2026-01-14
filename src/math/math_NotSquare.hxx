@@ -1,4 +1,4 @@
-// Created on: 1991-01-21
+﻿// Created on: 1991-01-21
 // Created by: Isabelle GRIGNON
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class math_NotSquare;
 DEFINE_STANDARD_HANDLE(math_NotSquare, Standard_DimensionError)
 
 #if !defined No_Exception && !defined No_math_NotSquare
-  #define math_NotSquare_Raise_if(CONDITION, MESSAGE) \
+#define math_NotSquare_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw math_NotSquare(MESSAGE);
 #else
-  #define math_NotSquare_Raise_if(CONDITION, MESSAGE)
+#define math_NotSquare_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(math_NotSquare, Standard_DimensionError)

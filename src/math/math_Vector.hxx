@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -22,7 +22,7 @@
 
 // resolve name collisions with X11 headers
 #ifdef Opposite
-  #undef Opposite
+#undef Opposite
 #endif
 
 class math_Matrix;
@@ -59,287 +59,287 @@ class math_Vector
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  //! Constructs a non-initialized vector in the range [theLower..theUpper]
-  //! "theLower" and "theUpper" are the indexes of the lower and upper bounds of the constructed vector.
-  Standard_EXPORT math_Vector(const Standard_Integer theLower, const Standard_Integer theUpper);
+    //! Constructs a non-initialized vector in the range [theLower..theUpper]
+    //! "theLower" and "theUpper" are the indexes of the lower and upper bounds of the constructed vector.
+    Standard_EXPORT math_Vector(const Standard_Integer theLower, const Standard_Integer theUpper);
 
-  //! Constructs a vector in the range [theLower..theUpper]
-  //! whose values are all initialized with the value "theInitialValue"
-  Standard_EXPORT math_Vector(const Standard_Integer theLower, const Standard_Integer theUpper, const Standard_Real theInitialValue);
+    //! Constructs a vector in the range [theLower..theUpper]
+    //! whose values are all initialized with the value "theInitialValue"
+    Standard_EXPORT math_Vector(const Standard_Integer theLower, const Standard_Integer theUpper, const Standard_Real theInitialValue);
 
-  //! Constructs a vector in the range [theLower..theUpper]
-  //! with the "c array" theTab.
-  Standard_EXPORT math_Vector(const Standard_Real* theTab, const Standard_Integer theLower, const Standard_Integer theUpper);
+    //! Constructs a vector in the range [theLower..theUpper]
+    //! with the "c array" theTab.
+    Standard_EXPORT math_Vector(const Standard_Real* theTab, const Standard_Integer theLower, const Standard_Integer theUpper);
 
-  //! Constructor for converting gp_XY to math_Vector
-  Standard_EXPORT math_Vector(const gp_XY& Other);
-  
-  //! Constructor for converting gp_XYZ to math_Vector
-  Standard_EXPORT math_Vector(const gp_XYZ& Other);
+    //! Constructor for converting gp_XY to math_Vector
+    Standard_EXPORT math_Vector(const gp_XY& Other);
 
-  //! Initialize all the elements of a vector with "theInitialValue".
-  Standard_EXPORT void Init(const Standard_Real theInitialValue);
+    //! Constructor for converting gp_XYZ to math_Vector
+    Standard_EXPORT math_Vector(const gp_XYZ& Other);
 
-  //! Constructs a copy for initialization.
-  //! An exception is raised if the lengths of the vectors are different.
-  Standard_EXPORT math_Vector(const math_Vector& theOther);
+    //! Initialize all the elements of a vector with "theInitialValue".
+    Standard_EXPORT void Init(const Standard_Real theInitialValue);
 
-  //! Returns the length of a vector
-  inline Standard_Integer Length() const
-  {
-    return Array.Length();
-  }
+    //! Constructs a copy for initialization.
+    //! An exception is raised if the lengths of the vectors are different.
+    Standard_EXPORT math_Vector(const math_Vector& theOther);
 
-  //! Returns the value of the theLower index of a vector.
-  inline Standard_Integer Lower() const
-  {
-    return Array.Lower();
-  }
+    //! Returns the length of a vector
+    inline Standard_Integer Length() const
+    {
+        return Array.Length();
+    }
 
-  //! Returns the value of the theUpper index of a vector.
-  inline Standard_Integer Upper() const
-  {
-    return Array.Upper();
-  }
+    //! Returns the value of the theLower index of a vector.
+    inline Standard_Integer Lower() const
+    {
+        return Array.Lower();
+    }
 
-  //! Returns the value or the square  of the norm of this vector.
-  Standard_EXPORT Standard_Real Norm() const;
+    //! Returns the value of the theUpper index of a vector.
+    inline Standard_Integer Upper() const
+    {
+        return Array.Upper();
+    }
 
-  //! Returns the value of the square of the norm of a vector.
-  Standard_EXPORT Standard_Real Norm2() const;
+    //! Returns the value or the square  of the norm of this vector.
+    Standard_EXPORT Standard_Real Norm() const;
 
-  //! Returns the value of the "Index" of the maximum element of a vector.
-  Standard_EXPORT Standard_Integer Max() const;
+    //! Returns the value of the square of the norm of a vector.
+    Standard_EXPORT Standard_Real Norm2() const;
 
-  //! Returns the value of the "Index" of the minimum element  of a vector.
-  Standard_EXPORT Standard_Integer Min() const;
+    //! Returns the value of the "Index" of the maximum element of a vector.
+    Standard_EXPORT Standard_Integer Max() const;
 
-  //! Normalizes this vector (the norm of the result
-  //! is equal to 1.0) and assigns the result to this vector
-  //! Exceptions
-  //! Standard_NullValue if this vector is null (i.e. if its norm is
-  //! less than or equal to Standard_Real::RealEpsilon().
-  Standard_EXPORT void Normalize();
+    //! Returns the value of the "Index" of the minimum element  of a vector.
+    Standard_EXPORT Standard_Integer Min() const;
 
-  //! Normalizes this vector (the norm of the result
-  //! is equal to 1.0) and creates a new vector
-  //! Exceptions
-  //! Standard_NullValue if this vector is null (i.e. if its norm is
-  //! less than or equal to Standard_Real::RealEpsilon().
-  Standard_NODISCARD Standard_EXPORT math_Vector Normalized() const;
+    //! Normalizes this vector (the norm of the result
+    //! is equal to 1.0) and assigns the result to this vector
+    //! Exceptions
+    //! Standard_NullValue if this vector is null (i.e. if its norm is
+    //! less than or equal to Standard_Real::RealEpsilon().
+    Standard_EXPORT void Normalize();
 
-  //! Inverts this vector and assigns the result to this vector.
-  Standard_EXPORT void Invert();
+    //! Normalizes this vector (the norm of the result
+    //! is equal to 1.0) and creates a new vector
+    //! Exceptions
+    //! Standard_NullValue if this vector is null (i.e. if its norm is
+    //! less than or equal to Standard_Real::RealEpsilon().
+    Standard_NODISCARD Standard_EXPORT math_Vector Normalized() const;
 
-  //! Inverts this vector and creates a new vector.
-  Standard_EXPORT math_Vector Inverse() const;
+    //! Inverts this vector and assigns the result to this vector.
+    Standard_EXPORT void Invert();
 
-  //! sets a vector from "theI1" to "theI2" to the vector "theV";
-  //! An exception is raised if "theI1" is less than "LowerIndex" or "theI2" is greater than "UpperIndex" or "theI1" is greater than "theI2".
-  //! An exception is raised if "theI2-theI1+1" is different from the "Length" of "theV".
-  Standard_EXPORT void Set(const Standard_Integer theI1, const Standard_Integer theI2, const math_Vector& theV);
+    //! Inverts this vector and creates a new vector.
+    Standard_EXPORT math_Vector Inverse() const;
 
-  //!Creates a new vector by inverting the values of this vector
-  //! between indexes "theI1" and "theI2".
-  //! If the values of this vector were (1., 2., 3., 4.,5., 6.),
-  //! by slicing it between indexes 2 and 5 the values
-  //! of the resulting vector are (1., 5., 4., 3., 2., 6.)
-  Standard_EXPORT math_Vector Slice(const Standard_Integer theI1, const Standard_Integer theI2) const;
+    //! sets a vector from "theI1" to "theI2" to the vector "theV";
+    //! An exception is raised if "theI1" is less than "LowerIndex" or "theI2" is greater than "UpperIndex" or "theI1" is greater than "theI2".
+    //! An exception is raised if "theI2-theI1+1" is different from the "Length" of "theV".
+    Standard_EXPORT void Set(const Standard_Integer theI1, const Standard_Integer theI2, const math_Vector& theV);
 
-  //! returns the product of a vector and a real value.
-  Standard_EXPORT void Multiply(const Standard_Real theRight);
+    //!Creates a new vector by inverting the values of this vector
+    //! between indexes "theI1" and "theI2".
+    //! If the values of this vector were (1., 2., 3., 4.,5., 6.),
+    //! by slicing it between indexes 2 and 5 the values
+    //! of the resulting vector are (1., 5., 4., 3., 2., 6.)
+    Standard_EXPORT math_Vector Slice(const Standard_Integer theI1, const Standard_Integer theI2) const;
 
-  void operator *=(const Standard_Real theRight)
-  {
-    Multiply(theRight);
-  }
+    //! returns the product of a vector and a real value.
+    Standard_EXPORT void Multiply(const Standard_Real theRight);
 
-  //! returns the product of a vector and a real value.
-  Standard_NODISCARD Standard_EXPORT math_Vector Multiplied(const Standard_Real theRight) const;
+    void operator *=(const Standard_Real theRight)
+    {
+        Multiply(theRight);
+    }
 
-  Standard_NODISCARD math_Vector operator*(const Standard_Real theRight) const
-  {
-    return Multiplied(theRight);
-  }
+    //! returns the product of a vector and a real value.
+    Standard_NODISCARD Standard_EXPORT math_Vector Multiplied(const Standard_Real theRight) const;
 
-  //! returns the product of a vector and a real value.
-  Standard_NODISCARD Standard_EXPORT math_Vector TMultiplied(const Standard_Real theRight) const;
+    Standard_NODISCARD math_Vector operator*(const Standard_Real theRight) const
+    {
+        return Multiplied(theRight);
+    }
 
-  friend inline math_Vector operator* (const Standard_Real theLeft, const math_Vector& theRight) 
-  {
-    return theRight.Multiplied(theLeft);
-  }
+    //! returns the product of a vector and a real value.
+    Standard_NODISCARD Standard_EXPORT math_Vector TMultiplied(const Standard_Real theRight) const;
 
-  //! divides a vector by the value "theRight".
-  //! An exception is raised if "theRight" = 0.
-  Standard_EXPORT void Divide(const Standard_Real theRight);
+    friend inline math_Vector operator* (const Standard_Real theLeft, const math_Vector& theRight)
+    {
+        return theRight.Multiplied(theLeft);
+    }
 
-  void operator /=(const Standard_Real theRight) 
-  {
-    Divide(theRight);
-  }
+    //! divides a vector by the value "theRight".
+    //! An exception is raised if "theRight" = 0.
+    Standard_EXPORT void Divide(const Standard_Real theRight);
 
-  //! divides a vector by the value "theRight".
-  //! An exception is raised if "theRight" = 0.
-  Standard_NODISCARD Standard_EXPORT math_Vector Divided(const Standard_Real theRight) const;
+    void operator /=(const Standard_Real theRight)
+    {
+        Divide(theRight);
+    }
 
-  Standard_NODISCARD math_Vector operator/(const Standard_Real theRight) const
-  {
-    return Divided(theRight);
-  }
+    //! divides a vector by the value "theRight".
+    //! An exception is raised if "theRight" = 0.
+    Standard_NODISCARD Standard_EXPORT math_Vector Divided(const Standard_Real theRight) const;
 
-  //! adds the vector "theRight" to a vector.
-  //! An exception is raised if the vectors have not the same length.
-  //! Warning
-  //! In order to avoid time-consuming copying of vectors, it
-  //! is preferable to use operator += or the function Add whenever possible.
-  Standard_EXPORT void Add(const math_Vector& theRight);
+    Standard_NODISCARD math_Vector operator/(const Standard_Real theRight) const
+    {
+        return Divided(theRight);
+    }
 
-  void operator +=(const math_Vector& theRight) 
-  {
-    Add(theRight);
-  }
+    //! adds the vector "theRight" to a vector.
+    //! An exception is raised if the vectors have not the same length.
+    //! Warning
+    //! In order to avoid time-consuming copying of vectors, it
+    //! is preferable to use operator += or the function Add whenever possible.
+    Standard_EXPORT void Add(const math_Vector& theRight);
 
-  //! adds the vector theRight to a vector.
-  //! An exception is raised if the vectors have not the same length.
-  //! An exception is raised if the lengths are not equal.
-  Standard_NODISCARD Standard_EXPORT math_Vector Added(const math_Vector& theRight) const;
+    void operator +=(const math_Vector& theRight)
+    {
+        Add(theRight);
+    }
 
-  Standard_NODISCARD math_Vector operator+(const math_Vector& theRight) const
-  {
-    return Added(theRight);
-  }
+    //! adds the vector theRight to a vector.
+    //! An exception is raised if the vectors have not the same length.
+    //! An exception is raised if the lengths are not equal.
+    Standard_NODISCARD Standard_EXPORT math_Vector Added(const math_Vector& theRight) const;
 
-  //! sets a vector to the product of the vector "theLeft"
-  //! with the matrix "theRight".
-  Standard_EXPORT void Multiply(const math_Vector& theLeft, const math_Matrix& theRight);
+    Standard_NODISCARD math_Vector operator+(const math_Vector& theRight) const
+    {
+        return Added(theRight);
+    }
 
-  //!sets a vector to the product of the matrix "theLeft"
-  //! with the vector "theRight".
-  Standard_EXPORT void Multiply(const math_Matrix& theLeft, const math_Vector& theRight);
+    //! sets a vector to the product of the vector "theLeft"
+    //! with the matrix "theRight".
+    Standard_EXPORT void Multiply(const math_Vector& theLeft, const math_Matrix& theRight);
 
-  //! sets a vector to the product of the transpose
-  //! of the matrix "theTLeft" by the vector "theRight".
-  Standard_EXPORT void TMultiply(const math_Matrix& theTLeft, const math_Vector& theRight);
+    //!sets a vector to the product of the matrix "theLeft"
+    //! with the vector "theRight".
+    Standard_EXPORT void Multiply(const math_Matrix& theLeft, const math_Vector& theRight);
 
-  //! sets a vector to the product of the vector
-  //! "theLeft" by the transpose of the matrix "theTRight".
-  Standard_EXPORT void TMultiply(const math_Vector& theLeft, const math_Matrix& theTRight);
+    //! sets a vector to the product of the transpose
+    //! of the matrix "theTLeft" by the vector "theRight".
+    Standard_EXPORT void TMultiply(const math_Matrix& theTLeft, const math_Vector& theRight);
 
-  //! sets a vector to the sum of the vector "theLeft"
-  //! and the vector "theRight".
-  //! An exception is raised if the lengths are different.
-  Standard_EXPORT void Add(const math_Vector& theLeft, const math_Vector& theRight);
+    //! sets a vector to the product of the vector
+    //! "theLeft" by the transpose of the matrix "theTRight".
+    Standard_EXPORT void TMultiply(const math_Vector& theLeft, const math_Matrix& theTRight);
 
-  //! sets a vector to the Subtraction of the
-  //! vector theRight from the vector theLeft.
-  //! An exception is raised if the vectors have not the same length.
-  //! Warning
-  //! In order to avoid time-consuming copying of vectors, it
-  //! is preferable to use operator -= or the function
-  //! Subtract whenever possible.
-  Standard_EXPORT void Subtract(const math_Vector& theLeft,const math_Vector& theRight);
+    //! sets a vector to the sum of the vector "theLeft"
+    //! and the vector "theRight".
+    //! An exception is raised if the lengths are different.
+    Standard_EXPORT void Add(const math_Vector& theLeft, const math_Vector& theRight);
 
-  //! accesses the value of index "theNum" of a vector.
-  const Standard_Real& Value (const Standard_Integer theNum) const
-  {
-    return Array(theNum);
-  }
+    //! sets a vector to the Subtraction of the
+    //! vector theRight from the vector theLeft.
+    //! An exception is raised if the vectors have not the same length.
+    //! Warning
+    //! In order to avoid time-consuming copying of vectors, it
+    //! is preferable to use operator -= or the function
+    //! Subtract whenever possible.
+    Standard_EXPORT void Subtract(const math_Vector& theLeft, const math_Vector& theRight);
 
-  //! accesses (in read or write mode) the value of index "theNum" of a vector.
-  inline Standard_Real& Value (const Standard_Integer theNum)
-  {
-    return Array(theNum);
-  }
+    //! accesses the value of index "theNum" of a vector.
+    const Standard_Real& Value(const Standard_Integer theNum) const
+    {
+        return Array(theNum);
+    }
 
-  const Standard_Real& operator()(const Standard_Integer theNum) const
-  {
-    return Value(theNum);
-  }
+    //! accesses (in read or write mode) the value of index "theNum" of a vector.
+    inline Standard_Real& Value(const Standard_Integer theNum)
+    {
+        return Array(theNum);
+    }
 
-  Standard_Real& operator()(const Standard_Integer theNum)
-  {
-    return Value(theNum);
-  }
+    const Standard_Real& operator()(const Standard_Integer theNum) const
+    {
+        return Value(theNum);
+    }
 
-  //! Initialises a vector by copying "theOther".
-  //! An exception is raised if the Lengths are different.
-  Standard_EXPORT math_Vector& Initialized(const math_Vector& theOther);
+    Standard_Real& operator()(const Standard_Integer theNum)
+    {
+        return Value(theNum);
+    }
 
-  math_Vector& operator=(const math_Vector& theOther)
-  {
-    return Initialized(theOther);
-  }
+    //! Initialises a vector by copying "theOther".
+    //! An exception is raised if the Lengths are different.
+    Standard_EXPORT math_Vector& Initialized(const math_Vector& theOther);
 
-  //! returns the inner product of 2 vectors.
-  //! An exception is raised if the lengths are not equal.
-  Standard_NODISCARD Standard_EXPORT Standard_Real Multiplied(const math_Vector& theRight) const;
-  Standard_NODISCARD Standard_Real operator*(const math_Vector& theRight) const
-  {
-    return Multiplied(theRight);
-  }
+    math_Vector& operator=(const math_Vector& theOther)
+    {
+        return Initialized(theOther);
+    }
 
-  //! returns the product of a vector by a matrix.
-  Standard_NODISCARD Standard_EXPORT math_Vector Multiplied(const math_Matrix& theRight) const;
+    //! returns the inner product of 2 vectors.
+    //! An exception is raised if the lengths are not equal.
+    Standard_NODISCARD Standard_EXPORT Standard_Real Multiplied(const math_Vector& theRight) const;
+    Standard_NODISCARD Standard_Real operator*(const math_Vector& theRight) const
+    {
+        return Multiplied(theRight);
+    }
 
-  Standard_NODISCARD math_Vector operator*(const math_Matrix& theRight) const
-  {
-    return Multiplied(theRight);
-  }
+    //! returns the product of a vector by a matrix.
+    Standard_NODISCARD Standard_EXPORT math_Vector Multiplied(const math_Matrix& theRight) const;
 
-  //! returns the opposite of a vector.
-  Standard_EXPORT math_Vector Opposite();
+    Standard_NODISCARD math_Vector operator*(const math_Matrix& theRight) const
+    {
+        return Multiplied(theRight);
+    }
 
-  math_Vector operator-()
-  {
-    return Opposite();
-  }
+    //! returns the opposite of a vector.
+    Standard_EXPORT math_Vector Opposite();
 
-  //! returns the subtraction of "theRight" from "me".
-  //! An exception is raised if the vectors have not the same length.
-  Standard_EXPORT void Subtract(const math_Vector& theRight);
+    math_Vector operator-()
+    {
+        return Opposite();
+    }
 
-  void operator-=(const math_Vector& theRight)
-  {
-    Subtract(theRight);
-  }
+    //! returns the subtraction of "theRight" from "me".
+    //! An exception is raised if the vectors have not the same length.
+    Standard_EXPORT void Subtract(const math_Vector& theRight);
 
-  //! returns the subtraction of "theRight" from "me".
-  //! An exception is raised if the vectors have not the same length.
-  Standard_NODISCARD Standard_EXPORT math_Vector Subtracted(const math_Vector& theRight) const;
+    void operator-=(const math_Vector& theRight)
+    {
+        Subtract(theRight);
+    }
 
-  Standard_NODISCARD math_Vector operator-(const math_Vector& theRight) const
-  {
-    return Subtracted(theRight);
-  }
+    //! returns the subtraction of "theRight" from "me".
+    //! An exception is raised if the vectors have not the same length.
+    Standard_NODISCARD Standard_EXPORT math_Vector Subtracted(const math_Vector& theRight) const;
 
-  //! returns the multiplication of a real by a vector.
-  //! "me" = "theLeft" * "theRight"
-  Standard_EXPORT void Multiply(const Standard_Real theLeft,const math_Vector& theRight);
+    Standard_NODISCARD math_Vector operator-(const math_Vector& theRight) const
+    {
+        return Subtracted(theRight);
+    }
 
-  //! Prints information on the current state of the object.
-  //! Is used to redefine the operator <<.
-  Standard_EXPORT void Dump(Standard_OStream& theO) const;
+    //! returns the multiplication of a real by a vector.
+    //! "me" = "theLeft" * "theRight"
+    Standard_EXPORT void Multiply(const Standard_Real theLeft, const math_Vector& theRight);
 
-  friend inline Standard_OStream& operator<<(Standard_OStream& theO, const math_Vector& theVec)
-  {
-    theVec.Dump(theO);
-    return theO;
-  }
+    //! Prints information on the current state of the object.
+    //! Is used to redefine the operator <<.
+    Standard_EXPORT void Dump(Standard_OStream& theO) const;
 
-  friend class math_Matrix;
+    friend inline Standard_OStream& operator<<(Standard_OStream& theO, const math_Vector& theVec)
+    {
+        theVec.Dump(theO);
+        return theO;
+    }
+
+    friend class math_Matrix;
 
 protected:
 
-  //! Is used internally to set the "theLower" value of the vector.
-  void SetLower(const Standard_Integer theLower);
+    //! Is used internally to set the "theLower" value of the vector.
+    void SetLower(const Standard_Integer theLower);
 
 private:
 
-  NCollection_LocalArray<Standard_Real, 512> myLocArray;
-  NCollection_Array1<Standard_Real> Array;
+    NCollection_LocalArray<Standard_Real, 512> myLocArray;
+    NCollection_Array1<Standard_Real> Array;
 
 };
 

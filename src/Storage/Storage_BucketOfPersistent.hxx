@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -23,91 +23,91 @@ class Storage_BucketOfPersistent;
 class Storage_BucketIterator;
 
 class Storage_Bucket {
-  friend class Storage_BucketIterator;
-  friend class Storage_Schema;
-  friend class Storage_BucketOfPersistent;
+    friend class Storage_BucketIterator;
+    friend class Storage_Schema;
+    friend class Storage_BucketOfPersistent;
 
-  Standard_Persistent** mySpace;
-  Standard_Integer mySpaceSize;
-  Standard_Integer myCurrentSpace;
+    Standard_Persistent** mySpace;
+    Standard_Integer mySpaceSize;
+    Standard_Integer myCurrentSpace;
 
 
-  void Append(Standard_Persistent *);
- 
-  Standard_Persistent* Value(const Standard_Integer theIndex) const;
+    void Append(Standard_Persistent*);
+
+    Standard_Persistent* Value(const Standard_Integer theIndex) const;
 
 public:
-  Storage_Bucket() : mySpace(0L), mySpaceSize(200000), myCurrentSpace(-1)
+    Storage_Bucket() : mySpace(0L), mySpaceSize(200000), myCurrentSpace(-1)
     {
-      mySpace = (Standard_Persistent**)Standard::Allocate(sizeof(Standard_Persistent*) * mySpaceSize);
+        mySpace = (Standard_Persistent**)Standard::Allocate(sizeof(Standard_Persistent*) * mySpaceSize);
     }
 
-  Storage_Bucket(const Standard_Integer theSpaceSize) :  mySpace(0L), mySpaceSize(theSpaceSize), myCurrentSpace(-1)
+    Storage_Bucket(const Standard_Integer theSpaceSize) : mySpace(0L), mySpaceSize(theSpaceSize), myCurrentSpace(-1)
     {
-      mySpace = (Standard_Persistent**)Standard::Allocate(sizeof(Standard_Persistent*) * mySpaceSize);
+        mySpace = (Standard_Persistent**)Standard::Allocate(sizeof(Standard_Persistent*) * mySpaceSize);
     }
 
-  void Clear();
+    void Clear();
 
-  ~Storage_Bucket();
+    ~Storage_Bucket();
 };
 
 
 class Storage_BucketOfPersistent {
-  friend class Storage_BucketIterator;
-  Storage_Bucket** myBuckets;
-  Standard_Integer myNumberOfBucket;
-  Standard_Integer myNumberOfBucketAllocated;
-  Storage_Bucket*  myCurrentBucket;
-  Standard_Integer myCurrentBucketNumber;
-  Standard_Integer myLength;
-  Standard_Integer myBucketSize;
-  
+    friend class Storage_BucketIterator;
+    Storage_Bucket** myBuckets;
+    Standard_Integer myNumberOfBucket;
+    Standard_Integer myNumberOfBucketAllocated;
+    Storage_Bucket* myCurrentBucket;
+    Standard_Integer myCurrentBucketNumber;
+    Standard_Integer myLength;
+    Standard_Integer myBucketSize;
+
 public:
-  Storage_BucketOfPersistent(const Standard_Integer theBucketSize = 300000, const Standard_Integer theBucketNumber = 100);
-  
-  Standard_Integer Length() const
+    Storage_BucketOfPersistent(const Standard_Integer theBucketSize = 300000, const Standard_Integer theBucketNumber = 100);
+
+    Standard_Integer Length() const
     {
-      return myLength;
+        return myLength;
     }
 
-  void Append(const Handle(Standard_Persistent)& sp);
-  
-  Standard_Persistent* Value(const Standard_Integer theIndex);
+    void Append(const Handle(Standard_Persistent)& sp);
 
-  void Clear();
+    Standard_Persistent* Value(const Standard_Integer theIndex);
 
-  ~Storage_BucketOfPersistent() ;
+    void Clear();
+
+    ~Storage_BucketOfPersistent();
 
 };
 
 class Storage_BucketIterator {
-  Storage_BucketOfPersistent *myBucket;
-  Storage_Bucket             *myCurrentBucket;
-  Standard_Integer            myCurrentBucketIndex;
-  Standard_Integer            myCurrentIndex;
-  Standard_Integer            myBucketNumber;
-  Standard_Boolean            myMoreObject;
+    Storage_BucketOfPersistent* myBucket;
+    Storage_Bucket* myCurrentBucket;
+    Standard_Integer            myCurrentBucketIndex;
+    Standard_Integer            myCurrentIndex;
+    Standard_Integer            myBucketNumber;
+    Standard_Boolean            myMoreObject;
 
 public:
-  Storage_BucketIterator(Storage_BucketOfPersistent*);
-  void Init(Storage_BucketOfPersistent*);
-  void Reset();
+    Storage_BucketIterator(Storage_BucketOfPersistent*);
+    void Init(Storage_BucketOfPersistent*);
+    void Reset();
 
-  Standard_Persistent* Value() const
+    Standard_Persistent* Value() const
     {
-      if (myCurrentBucket) {
-	return myCurrentBucket->mySpace[myCurrentIndex];
-      }
-      else return 0L;
+        if (myCurrentBucket) {
+            return myCurrentBucket->mySpace[myCurrentIndex];
+        }
+        else return 0L;
     }
 
-  Standard_Boolean More() const
+    Standard_Boolean More() const
     {
-      return myMoreObject;
+        return myMoreObject;
     }
 
-  void Next();
+    void Next();
 };
 
 #endif

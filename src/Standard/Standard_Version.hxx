@@ -1,4 +1,4 @@
-// Created on: 2002-07-09
+﻿// Created on: 2002-07-09
 // Created by: Andrey BETENEV
 // Copyright (c) 2002-2014 OPEN CASCADE SAS
 //
@@ -14,19 +14,19 @@
 // commercial license or contractual agreement.
 
 /*======================================================================
-// 
+//
 // Purpose:   Defines macros identifying current version of Open CASCADE
 //
-//            OCC_VERSION_MAJOR       : (integer) number identifying major version 
-//            OCC_VERSION_MINOR       : (integer) number identifying minor version 
-//            OCC_VERSION_MAINTENANCE : (integer) number identifying maintenance version 
+//            OCC_VERSION_MAJOR       : (integer) number identifying major version
+//            OCC_VERSION_MINOR       : (integer) number identifying minor version
+//            OCC_VERSION_MAINTENANCE : (integer) number identifying maintenance version
 //            OCC_VERSION_DEVELOPMENT : (string)  if defined, indicates development or modified version
 //            OCC_VERSION             : (real)    complete number (major.minor)
 //            OCC_VERSION_STRING      : (string)  short version number ("major.minor")
 //            OCC_VERSION_COMPLETE    : (string)  complete version number ("major.minor.maintenance")
 //            OCC_VERSION_STRING_EXT  : (string)  extended version ("major.minor.maintenance.development")
-//            OCC_VERSION_HEX         : (hex)     complete number as hex, two positions per each of major, minor, and patch number 
-//            
+//            OCC_VERSION_HEX         : (hex)     complete number as hex, two positions per each of major, minor, and patch number
+//
 //======================================================================*/
 
 #ifndef _Standard_Version_HeaderFile

@@ -26,14 +26,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// 扩展字符串的数据映射
 typedef NCollection_DataMap<TCollection_AsciiString, TCollection_ExtendedString> Message_DataMapOfExtendedString;
 
+// 消息数据映射的全局实例
 static Message_DataMapOfExtendedString& msgsDataMap()
 {
     static Message_DataMapOfExtendedString aDataMap;
     return aDataMap;
 }
 
+// 用于防止对消息注册表的并发访问的互斥锁
 // mutex used to prevent concurrent access to message registry
 static Standard_Mutex& Message_MsgFile_Mutex()
 {
@@ -41,18 +44,19 @@ static Standard_Mutex& Message_MsgFile_Mutex()
     return theMutex;
 }
 
+// 文件加载状态枚举
 typedef enum
 {
-    MsgFile_WaitingKeyword,
-    MsgFile_WaitingMessage,
-    MsgFile_WaitingMoreMessage,
-    MsgFile_Indefinite
+    MsgFile_WaitingKeyword,      // 等待关键字
+    MsgFile_WaitingMessage,      // 等待消息
+    MsgFile_WaitingMoreMessage,  // 等待更多消息行
+    MsgFile_Indefinite           // 未定义状态
 } LoadingState;
 
 //=======================================================================
 //function : Message_MsgFile
-//purpose  : Load file from given directories
-//           theDirName may be represented as list: "/dirA/dirB /dirA/dirC"
+//purpose  : 从给定的目录加载文件
+//           theDirName 可能表示为列表："/ dirA / dirB / dirA / dirC"
 //=======================================================================
 
 Standard_Boolean Message_MsgFile::Load(const Standard_CString theDirName,
@@ -62,6 +66,7 @@ Standard_Boolean Message_MsgFile::Load(const Standard_CString theDirName,
 
     Standard_Boolean ret = Standard_True;
     TCollection_AsciiString aDirList(theDirName);
+    //  尝试从列表中的所有连续目录加载
     //  Try to load from all consecutive directories in list
     for (int i = 1;; i++)
     {
@@ -81,8 +86,8 @@ Standard_Boolean Message_MsgFile::Load(const Standard_CString theDirName,
 
 //=======================================================================
 //function : getString
-//purpose  : Takes a TCollection_ExtendedString from Ascii or Unicode
-//           Strings are left-trimmed; those beginning with '!' are omitted
+//purpose  : 从 ASCII 或 Unicode 字符串中取出 TCollection_ExtendedString
+//           字符串左修剪；以 '!' 开头的省略
 //Called   : from loadFile()
 //=======================================================================
 
@@ -101,6 +106,7 @@ getString(CharType*& thePtr,
 
     do
     {
+        //    跳过字符串开头的空白
         //    Skip whitespaces in the beginning of the string
         aPtr = anEndPtr;
         aLeftSpaces = 0;
@@ -114,6 +120,7 @@ getString(CharType*& thePtr,
             aPtr++;
         }
 
+        //    查找字符串的结尾
         //    Find the end of the string
         for (anEndPtr = aPtr; *anEndPtr; anEndPtr++)
             if (anEndPtr[0] == '\n')
@@ -124,6 +131,7 @@ getString(CharType*& thePtr,
 
     } while (aPtr[0] == '!');
 
+    //    形成结果
     //    form the result
     if (aPtr == anEndPtr) return Standard_False;
     thePtr = anEndPtr;
@@ -136,7 +144,7 @@ getString(CharType*& thePtr,
 
 //=======================================================================
 //function : loadFile
-//purpose  : Static function, fills the DataMap of Messages from Ascii or Unicode
+//purpose  : 静态函数，从 ASCII 或 Unicode 填充消息的数据映射
 //Called   : from LoadFile()
 //=======================================================================
 
@@ -148,6 +156,7 @@ template <class _Char> static inline Standard_Boolean loadFile(_Char* theBuffer)
     _Char* sCurrentString = theBuffer;
     Standard_Integer                      aLeftSpaces = 0, aFirstLeftSpaces = 0;
 
+    //    逐个获取字符串；注释已被过滤
     //    Take strings one-by-one; comments already screened
     while (::getString(sCurrentString, aString, aLeftSpaces))
     {
@@ -156,11 +165,11 @@ template <class _Char> static inline Standard_Boolean loadFile(_Char* theBuffer)
         {
         case MsgFile_WaitingMoreMessage:
             if (isKeyword)
-                Message_MsgFile::AddMsg(aKeyword, aMessage); // terminate the previous one
-            //      Pass from here to 'case MsgFile_WaitingKeyword'
+                Message_MsgFile::AddMsg(aKeyword, aMessage); // 终止前一个
+            //      从这里传递到 'case MsgFile_WaitingKeyword'
             else
             {
-                //      Add another line to the message already in the buffer 'aMessage'
+                //      将另一行添加到已在缓冲区 'aMessage' 中的消息
                 aMessage += '\n';
                 aLeftSpaces -= aFirstLeftSpaces;
                 if (aLeftSpaces > 0) aMessage += TCollection_ExtendedString(aLeftSpaces, ' ');
@@ -172,16 +181,16 @@ template <class _Char> static inline Standard_Boolean loadFile(_Char* theBuffer)
             if (isKeyword == Standard_False)
             {
                 aMessage = aString;
-                aFirstLeftSpaces = aLeftSpaces;         // remember the starting position
+                aFirstLeftSpaces = aLeftSpaces;         // 记住起始位置
                 aState = MsgFile_WaitingMoreMessage;
                 break;
             }
-            //      Pass from here to 'case MsgFile_WaitingKeyword'
+            //      从这里传递到 'case MsgFile_WaitingKeyword'
             Standard_FALLTHROUGH
         case MsgFile_WaitingKeyword:
             if (isKeyword)
             {
-                // remove the first dot character and all subsequent spaces + right-trim
+                // 移除第一个点字符和所有后续空格 + 右修剪
                 aKeyword = TCollection_AsciiString(aString.Split(1));
                 aKeyword.LeftAdjust();
                 aKeyword.RightAdjust();
@@ -192,6 +201,7 @@ template <class _Char> static inline Standard_Boolean loadFile(_Char* theBuffer)
             break;
         }
     }
+    //    处理仍在缓冲区中的最后一个字符串
     //    Process the last string still remaining in the buffer
     if (aState == MsgFile_WaitingMoreMessage)
         Message_MsgFile::AddMsg(aKeyword, aMessage);
@@ -200,13 +210,14 @@ template <class _Char> static inline Standard_Boolean loadFile(_Char* theBuffer)
 
 //=======================================================================
 //function : GetFileSize
-//purpose  : 
+//purpose  : 获取文件大小
 //=======================================================================
 
 static Standard_Integer GetFileSize(FILE* theFile)
 {
     if (!theFile) return -1;
 
+    // 获取真实文件大小
     // get real file size
     long nRealFileSize = 0;
     if (fseek(theFile, 0, SEEK_END) != 0) return -1;
@@ -218,13 +229,14 @@ static Standard_Integer GetFileSize(FILE* theFile)
 
 //=======================================================================
 //function : LoadFile
-//purpose  : Load the list of messages from a file
+//purpose  : 从文件加载消息列表
 //=======================================================================
 
 Standard_Boolean Message_MsgFile::LoadFile(const Standard_CString theFileName)
 {
     if (theFileName == NULL || *theFileName == '\0') return Standard_False;
 
+    //    打开文件
     //    Open the file
     FILE* anMsgFile = OSD_OpenFile(theFileName, "rb");
     if (!anMsgFile)
@@ -249,6 +261,7 @@ Standard_Boolean Message_MsgFile::LoadFile(const Standard_CString theFileName)
     anMsgBuffer[aFileSize] = 0;
     anMsgBuffer[aFileSize + 1] = 0;
 
+    // 读取文件中的消息并将其附加到全局数据映射
     // Read the messages in the file and append them to the global DataMap
     Standard_Boolean isLittleEndian = (anMsgBuffer[0] == '\xff' && anMsgBuffer[1] == '\xfe');
     Standard_Boolean isBigEndian = (anMsgBuffer[0] == '\xfe' && anMsgBuffer[1] == '\xff');
@@ -256,6 +269,7 @@ Standard_Boolean Message_MsgFile::LoadFile(const Standard_CString theFileName)
     {
         Standard_ExtCharacter* aUnicodeBuffer =
             reinterpret_cast<Standard_ExtCharacter*>(&anMsgBuffer[2]);
+        // 将 Unicode 表示转换为当前平台上采用的顺序
         // Convert Unicode representation to order adopted on current platform
 #if defined(__sparc) && defined(__sun)
         if (isLittleEndian)
@@ -263,6 +277,7 @@ Standard_Boolean Message_MsgFile::LoadFile(const Standard_CString theFileName)
         if (isBigEndian)
 #endif
         {
+            // 反转整个缓冲区中的字节
             // Reverse the bytes throughout the buffer
             const Standard_ExtCharacter* const anEnd =
                 reinterpret_cast<const Standard_ExtCharacter*>(&anMsgBuffer[aFileSize]);
@@ -281,7 +296,7 @@ Standard_Boolean Message_MsgFile::LoadFile(const Standard_CString theFileName)
 
 //=======================================================================
 //function : LoadFromEnv
-//purpose  :
+//purpose  : 从环境变量中加载消息文件
 //=======================================================================
 Standard_Boolean Message_MsgFile::LoadFromEnv(const Standard_CString theEnvName,
     const Standard_CString theFileName,
@@ -325,7 +340,7 @@ Standard_Boolean Message_MsgFile::LoadFromEnv(const Standard_CString theEnvName,
 
 //=======================================================================
 //function : LoadFromString
-//purpose  :
+//purpose  : 从字符串内容加载消息
 //=======================================================================
 Standard_Boolean Message_MsgFile::LoadFromString(const Standard_CString theContent,
     const Standard_Integer theLength)
@@ -346,8 +361,8 @@ Standard_Boolean Message_MsgFile::LoadFromString(const Standard_CString theConte
 
 //=======================================================================
 //function : AddMsg
-//purpose  : Add one message to the global table. Fails if the same keyword
-//           already exists in the table
+//purpose  : 向全局表添加一条消息。如果相同的关键字
+//           已在表中，则失败
 //=======================================================================
 Standard_Boolean Message_MsgFile::AddMsg(const TCollection_AsciiString& theKeyword,
     const TCollection_ExtendedString& theMessage)
@@ -361,7 +376,7 @@ Standard_Boolean Message_MsgFile::AddMsg(const TCollection_AsciiString& theKeywo
 
 //=======================================================================
 //function : getMsg
-//purpose  : retrieve the message previously defined for the given keyword
+//purpose  : 检索为给定关键字定义的消息
 //=======================================================================
 const TCollection_ExtendedString& Message_MsgFile::Msg(const Standard_CString theKeyword)
 {
@@ -371,7 +386,7 @@ const TCollection_ExtendedString& Message_MsgFile::Msg(const Standard_CString th
 
 //=======================================================================
 //function : HasMsg
-//purpose  :
+//purpose  : 检查给定关键字是否存在消息
 //=======================================================================
 Standard_Boolean Message_MsgFile::HasMsg(const TCollection_AsciiString& theKeyword)
 {
@@ -381,26 +396,30 @@ Standard_Boolean Message_MsgFile::HasMsg(const TCollection_AsciiString& theKeywo
 
 //=======================================================================
 //function : Msg
-//purpose  : retrieve the message previously defined for the given keyword
+//purpose  : 检索为给定关键字定义的消息
 //=======================================================================
 const TCollection_ExtendedString& Message_MsgFile::Msg(const TCollection_AsciiString& theKeyword)
 {
+    // 在映射中查找消息
     // find message in the map
     Message_DataMapOfExtendedString& aDataMap = ::msgsDataMap();
     Standard_Mutex::Sentry aSentry(Message_MsgFile_Mutex());
 
+    // 如果未找到消息，生成错误消息并将其添加到映射中以最小化开销
+    // 对后续调用具有相同的键
     // if message is not found, generate error message and add it to the map to minimize overhead
     // on consequent calls with the same key
     const TCollection_ExtendedString* aValPtr = aDataMap.Seek(theKeyword);
     if (aValPtr == NULL)
     {
+        // 错误消息的文本本身可以在映射中定义
         // text of the error message can be itself defined in the map
         static const TCollection_AsciiString aPrefixCode("Message_Msg_BadKeyword");
         static const TCollection_ExtendedString aDefPrefix("Unknown message invoked with the keyword ");
         const TCollection_ExtendedString* aPrefValPtr = aDataMap.Seek(aPrefixCode);
         TCollection_AsciiString aErrorMessage = (aPrefValPtr != NULL ? *aPrefValPtr : aDefPrefix);
         aErrorMessage += theKeyword;
-        aDataMap.Bind(theKeyword, aErrorMessage); // do not use AddMsg() here to avoid mutex deadlock
+        aDataMap.Bind(theKeyword, aErrorMessage); // 不要在此处使用 AddMsg() 以避免互斥死锁
         aValPtr = aDataMap.Seek(theKeyword);
     }
 

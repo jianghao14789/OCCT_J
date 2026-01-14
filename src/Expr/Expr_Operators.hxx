@@ -1,4 +1,4 @@
-// Created on: 1991-09-17
+﻿// Created on: 1991-09-17
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -25,9 +25,9 @@
 #include <Expr_Product.hxx>
 #include <Expr_Division.hxx>
 
-Standard_EXPORT Handle(Expr_Sum) operator+(const Handle(Expr_GeneralExpression)& x,const Handle(Expr_GeneralExpression)& y);
+Standard_EXPORT Handle(Expr_Sum) operator+(const Handle(Expr_GeneralExpression)& x, const Handle(Expr_GeneralExpression)& y);
 
-Standard_EXPORT Handle(Expr_Sum) operator+(const Standard_Real x,const Handle(Expr_GeneralExpression)& y);
+Standard_EXPORT Handle(Expr_Sum) operator+(const Standard_Real x, const Handle(Expr_GeneralExpression)& y);
 
 Standard_EXPORT Handle(Expr_Sum) operator+(const Handle(Expr_GeneralExpression)& x, const Standard_Real y);
 

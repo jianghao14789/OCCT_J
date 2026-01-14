@@ -1,4 +1,4 @@
-// Created on: 1991-01-23
+﻿// Created on: 1991-01-23
 // Created by: Christophe MARION
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -37,38 +37,38 @@ class TopLoc_Datum3D : public Standard_Transient
 
 public:
 
-  //! Constructs a default Datum3D.
-  Standard_EXPORT TopLoc_Datum3D();
-  
-  //! Constructs a Datum3D form a Trsf from gp. An error is
-  //! raised if the Trsf is not a rigid transformation.
-  Standard_EXPORT TopLoc_Datum3D(const gp_Trsf& T);
-  
-  //! Returns a gp_Trsf which, when applied to this datum, produces the default datum.
-  const gp_Trsf& Transformation() const { return myTrsf; }
+    //! Constructs a default Datum3D.
+    Standard_EXPORT TopLoc_Datum3D();
 
-  //! Returns a gp_Trsf which, when applied to this datum, produces the default datum.
-  const gp_Trsf& Trsf() const { return myTrsf; }
+    //! Constructs a Datum3D form a Trsf from gp. An error is
+    //! raised if the Trsf is not a rigid transformation.
+    Standard_EXPORT TopLoc_Datum3D(const gp_Trsf& T);
 
-  //! Return transformation form.
-  gp_TrsfForm Form() const { return myTrsf.Form(); }
+    //! Returns a gp_Trsf which, when applied to this datum, produces the default datum.
+    const gp_Trsf& Transformation() const { return myTrsf; }
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
+    //! Returns a gp_Trsf which, when applied to this datum, produces the default datum.
+    const gp_Trsf& Trsf() const { return myTrsf; }
 
-  //! Writes the contents of this Datum3D to the stream S.
-  Standard_EXPORT void ShallowDump (Standard_OStream& S) const;
+    //! Return transformation form.
+    gp_TrsfForm Form() const { return myTrsf.Form(); }
 
-  DEFINE_STANDARD_RTTIEXT(TopLoc_Datum3D,Standard_Transient)
+    //! Dumps the content of me into the stream
+    Standard_EXPORT void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
+
+    //! Writes the contents of this Datum3D to the stream S.
+    Standard_EXPORT void ShallowDump(Standard_OStream& S) const;
+
+    DEFINE_STANDARD_RTTIEXT(TopLoc_Datum3D, Standard_Transient)
 
 private:
 
-  gp_Trsf myTrsf;
+    gp_Trsf myTrsf;
 
 };
 
-inline void ShallowDump(const Handle(TopLoc_Datum3D)& me,Standard_OStream& S) {
- me->ShallowDump(S);
+inline void ShallowDump(const Handle(TopLoc_Datum3D)& me, Standard_OStream& S) {
+    me->ShallowDump(S);
 }
 
 #endif // _TopLoc_Datum3D_HeaderFile

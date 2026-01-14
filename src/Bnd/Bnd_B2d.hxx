@@ -38,8 +38,8 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Empty constructor.
-        Bnd_B2d();
+    //! Empty constructor.
+    Bnd_B2d();
 
     //! Constructor.
     Bnd_B2d(const gp_XY& theCenter, const gp_XY& theHSize);

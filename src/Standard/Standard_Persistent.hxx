@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -22,18 +22,18 @@
 class Standard_Persistent : public Standard_Transient
 {
 public:
-  DEFINE_STANDARD_ALLOC;
-  
-  Standard_Persistent() : _typenum(0), _refnum(0) {}
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_RTTIEXT(Standard_Persistent,Standard_Transient)
-  Standard_Integer& TypeNum() { return _typenum; }
+    Standard_Persistent() : _typenum(0), _refnum(0) {}
+
+    DEFINE_STANDARD_RTTIEXT(Standard_Persistent, Standard_Transient)
+        Standard_Integer& TypeNum() { return _typenum; }
 
 private:
-  Standard_Integer _typenum;
-  Standard_Integer _refnum;
+    Standard_Integer _typenum;
+    Standard_Integer _refnum;
 
-  friend class Storage_Schema;
+    friend class Storage_Schema;
 };
 
 #endif // _Standard_Persistent_HeaderFile

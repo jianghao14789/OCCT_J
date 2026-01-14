@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -20,8 +20,8 @@
 #include <TCollection_ExtendedString.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TCollection_ExtendedString,Standard_Integer,TCollection_ExtendedString> TColStd_DataMapOfStringInteger;
-typedef NCollection_DataMap<TCollection_ExtendedString,Standard_Integer,TCollection_ExtendedString>::Iterator TColStd_DataMapIteratorOfDataMapOfStringInteger;
+typedef NCollection_DataMap<TCollection_ExtendedString, Standard_Integer, TCollection_ExtendedString> TColStd_DataMapOfStringInteger;
+typedef NCollection_DataMap<TCollection_ExtendedString, Standard_Integer, TCollection_ExtendedString>::Iterator TColStd_DataMapIteratorOfDataMapOfStringInteger;
 
 
 #endif

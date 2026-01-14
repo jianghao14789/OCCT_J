@@ -54,9 +54,9 @@ public:
 
     DEFINE_STANDARD_ALLOC;
 
-        //! Creates an empty 2D bounding box.
-        //! The constructed box is qualified Void. Its gap is null.
-        Bnd_Box2d() : Xmin(0.), Xmax(0.), Ymin(0.), Ymax(0.), Gap(0.), Flags(VoidMask) {}
+    //! Creates an empty 2D bounding box.
+    //! The constructed box is qualified Void. Its gap is null.
+    Bnd_Box2d() : Xmin(0.), Xmax(0.), Ymin(0.), Ymax(0.), Gap(0.), Flags(VoidMask) {}
 
     //! Sets this bounding box so that it covers the whole 2D
     //! space, i.e. it is infinite in all directions.

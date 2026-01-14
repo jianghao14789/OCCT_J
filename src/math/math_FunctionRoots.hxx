@@ -1,4 +1,4 @@
-// Created on: 1991-05-13
+﻿// Created on: 1991-05-13
 // Created by: Laurent PAINNOT
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,49 +36,49 @@ class math_FunctionWithDerivative;
 //! This class implements an algorithm which finds all the real roots of
 //! a function with derivative within a given range.
 //! Knowledge of the derivative is required.
-class math_FunctionRoots 
+class math_FunctionRoots
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Calculates all the real roots of a function F-K within the range
-  //! A..B. without conditions on A and B
-  //! A solution X is found when
-  //! abs(Xi - Xi-1) <= Epsx and abs(F(Xi)-K) <= EpsF.
-  //! The function is considered as null between A and B if
-  //! abs(F-K) <= EpsNull within this range.
-  Standard_EXPORT math_FunctionRoots(math_FunctionWithDerivative& F, const Standard_Real A, const Standard_Real B, const Standard_Integer NbSample, const Standard_Real EpsX = 0.0, const Standard_Real EpsF = 0.0, const Standard_Real EpsNull = 0.0, const Standard_Real K = 0.0);
-  
-  //! Returns true if the computations are successful, otherwise returns false.
+
+    //! Calculates all the real roots of a function F-K within the range
+    //! A..B. without conditions on A and B
+    //! A solution X is found when
+    //! abs(Xi - Xi-1) <= Epsx and abs(F(Xi)-K) <= EpsF.
+    //! The function is considered as null between A and B if
+    //! abs(F-K) <= EpsNull within this range.
+    Standard_EXPORT math_FunctionRoots(math_FunctionWithDerivative& F, const Standard_Real A, const Standard_Real B, const Standard_Integer NbSample, const Standard_Real EpsX = 0.0, const Standard_Real EpsF = 0.0, const Standard_Real EpsNull = 0.0, const Standard_Real K = 0.0);
+
+    //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
-  
 
-  //! returns true if the function is considered as null between A and B.
-  //! Exceptions
-  //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
+
+    //! returns true if the function is considered as null between A and B.
+    //! Exceptions
+    //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
     Standard_Boolean IsAllNull() const;
-  
-  //! Returns the number of solutions found.
-  //! Exceptions
-  //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
-    Standard_Integer NbSolutions() const;
-  
-  //! Returns the Nth value of the root of function F.
-  //! Exceptions
-  //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
-    Standard_Real Value (const Standard_Integer Nieme) const;
-  
 
-  //! returns the StateNumber  of the Nieme root.
-  //! Exception RangeError is raised if Nieme is < 1
-  //! or Nieme > NbSolutions.
-    Standard_Integer StateNumber (const Standard_Integer Nieme) const;
-  
-  //! Prints on the stream o information on the current state
-  //! of the object.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+    //! Returns the number of solutions found.
+    //! Exceptions
+    //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
+    Standard_Integer NbSolutions() const;
+
+    //! Returns the Nth value of the root of function F.
+    //! Exceptions
+    //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
+    Standard_Real Value(const Standard_Integer Nieme) const;
+
+
+    //! returns the StateNumber  of the Nieme root.
+    //! Exception RangeError is raised if Nieme is < 1
+    //! or Nieme > NbSolutions.
+    Standard_Integer StateNumber(const Standard_Integer Nieme) const;
+
+    //! Prints on the stream o information on the current state
+    //! of the object.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
@@ -93,10 +93,10 @@ private:
 
 
 
-  Standard_Boolean Done;
-  Standard_Boolean AllNull;
-  TColStd_SequenceOfReal Sol;
-  TColStd_SequenceOfInteger NbStateSol;
+    Standard_Boolean Done;
+    Standard_Boolean AllNull;
+    TColStd_SequenceOfReal Sol;
+    TColStd_SequenceOfInteger NbStateSol;
 
 
 };

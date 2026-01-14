@@ -1,4 +1,4 @@
-// Created on: 1993-02-22
+﻿// Created on: 1993-02-22
 // Created by: Modelistation
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,9 +21,9 @@
 //! or V isoparametric
 enum GeomAbs_IsoType
 {
-GeomAbs_IsoU,
-GeomAbs_IsoV,
-GeomAbs_NoneIso
+    GeomAbs_IsoU,
+    GeomAbs_IsoV,
+    GeomAbs_NoneIso
 };
 
 #endif // _GeomAbs_IsoType_HeaderFile

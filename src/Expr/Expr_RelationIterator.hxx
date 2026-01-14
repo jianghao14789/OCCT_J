@@ -1,4 +1,4 @@
-// Created on: 1991-01-14
+﻿// Created on: 1991-01-14
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -30,23 +30,23 @@ class Expr_SingleRelation;
 
 //! Iterates on every basic relation contained in
 //! a GeneralRelation.
-class Expr_RelationIterator 
+class Expr_RelationIterator
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT Expr_RelationIterator(const Handle(Expr_GeneralRelation)& rel);
-  
-  //! Returns False if no other relation remains.
-  Standard_EXPORT Standard_Boolean More() const;
-  
-  Standard_EXPORT void Next();
-  
-  //! Returns current basic relation.
-  //! Exception is raised if no more relation remains.
-  Standard_EXPORT Handle(Expr_SingleRelation) Value() const;
+
+    Standard_EXPORT Expr_RelationIterator(const Handle(Expr_GeneralRelation)& rel);
+
+    //! Returns False if no other relation remains.
+    Standard_EXPORT Standard_Boolean More() const;
+
+    Standard_EXPORT void Next();
+
+    //! Returns current basic relation.
+    //! Exception is raised if no more relation remains.
+    Standard_EXPORT Handle(Expr_SingleRelation) Value() const;
 
 
 
@@ -61,8 +61,8 @@ private:
 
 
 
-  Expr_Array1OfSingleRelation myRelation;
-  Standard_Integer current;
+    Expr_Array1OfSingleRelation myRelation;
+    Standard_Integer current;
 
 
 };

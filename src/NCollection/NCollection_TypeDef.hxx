@@ -1,4 +1,4 @@
-// Created on: 2005-08-24
+﻿// Created on: 2005-08-24
 // Created by: ABV
 // Copyright (c) 2005-2014 OPEN CASCADE SAS
 //

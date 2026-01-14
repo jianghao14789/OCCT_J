@@ -1,4 +1,4 @@
-// Copyright (c) 1998-1999 Matra Datavision
+﻿// Copyright (c) 1998-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -21,14 +21,14 @@
 #include <windows.h>
 #else
 typedef struct {
-  unsigned long Data1 ;
-  unsigned short Data2 ;
-  unsigned short Data3 ;
-  unsigned char Data4[8] ;
-} GUID ;
+    unsigned long Data1;
+    unsigned short Data2;
+    unsigned short Data3;
+    unsigned char Data4[8];
+} GUID;
 #endif
 
-typedef GUID Standard_UUID ;
+typedef GUID Standard_UUID;
 
 #endif
 

@@ -1,4 +1,4 @@
-// Created on: 1991-12-02
+﻿// Created on: 1991-12-02
 // Created by: Arnaud BOUZY
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -16,12 +16,12 @@
 
 inline Standard_Boolean Expr_NamedUnknown::IsAssigned() const
 {
-  return !(myExpression.IsNull());
+    return !(myExpression.IsNull());
 }
 
-inline void Expr_NamedUnknown::Deassign ()
+inline void Expr_NamedUnknown::Deassign()
 {
-  myExpression.Nullify();
+    myExpression.Nullify();
 }
-    
+
 

@@ -1,4 +1,4 @@
-// Copyright (c) 1997-1999 Matra Datavision
+﻿// Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -17,64 +17,64 @@
 
 inline Standard_Boolean math_FunctionSetRoot::IsSolutionReached(math_FunctionSetWithDerivatives&)
 {
-  for (Standard_Integer i = 1; i <= Sol.Length(); ++i)
-    if ( Abs(Delta(i)) > Tol(i) )
-      return Standard_False;
+    for (Standard_Integer i = 1; i <= Sol.Length(); ++i)
+        if (Abs(Delta(i)) > Tol(i))
+            return Standard_False;
 
-  return Standard_True;
+    return Standard_True;
 }
 
 
 inline Standard_Boolean math_FunctionSetRoot::IsDone() const
 {
-  return Done;
+    return Done;
 }
 
 
 inline Standard_OStream& operator<<(Standard_OStream& o,
-				    const math_FunctionSetRoot& F)
+    const math_FunctionSetRoot& F)
 {
-  F.Dump(o);
-  return o;
+    F.Dump(o);
+    return o;
 }
 
 
-inline const math_Vector& math_FunctionSetRoot::Root() const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  return Sol;
+inline const math_Vector& math_FunctionSetRoot::Root() const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    return Sol;
 }
 
 
-inline const math_Vector& math_FunctionSetRoot::FunctionSetErrors() const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  return Delta;
+inline const math_Vector& math_FunctionSetRoot::FunctionSetErrors() const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    return Delta;
 }
 
 
-inline const math_Matrix& math_FunctionSetRoot::Derivative() const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  return DF;
+inline const math_Matrix& math_FunctionSetRoot::Derivative() const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    return DF;
 }
 
-inline void math_FunctionSetRoot::Derivative(math_Matrix& Der) const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  Standard_DimensionError_Raise_if(Der.ColNumber() != Sol.Length(), " ");
-  Der = DF;
-}
-
-
-inline Standard_Integer math_FunctionSetRoot::StateNumber() const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  return State;
+inline void math_FunctionSetRoot::Derivative(math_Matrix& Der) const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    Standard_DimensionError_Raise_if(Der.ColNumber() != Sol.Length(), " ");
+    Der = DF;
 }
 
 
-inline Standard_Integer math_FunctionSetRoot::NbIterations() const{
-  StdFail_NotDone_Raise_if(!Done, " ");
-  return Kount;
-}    
+inline Standard_Integer math_FunctionSetRoot::StateNumber() const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    return State;
+}
+
+
+inline Standard_Integer math_FunctionSetRoot::NbIterations() const {
+    StdFail_NotDone_Raise_if(!Done, " ");
+    return Kount;
+}
 
 inline Standard_Boolean math_FunctionSetRoot::IsDivergent() const
 {
-  return myIsDivergent;
+    return myIsDivergent;
 }

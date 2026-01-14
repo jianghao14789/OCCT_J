@@ -1,4 +1,4 @@
-// Created on: 1992-05-07
+﻿// Created on: 1992-05-07
 // Created by: Modelistation
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class StdFail_NotDone;
 DEFINE_STANDARD_HANDLE(StdFail_NotDone, Standard_Failure)
 
 #if !defined No_Exception && !defined No_StdFail_NotDone
-  #define StdFail_NotDone_Raise_if(CONDITION, MESSAGE) \
+#define StdFail_NotDone_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw StdFail_NotDone(MESSAGE);
 #else
-  #define StdFail_NotDone_Raise_if(CONDITION, MESSAGE)
+#define StdFail_NotDone_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(StdFail_NotDone, Standard_Failure)

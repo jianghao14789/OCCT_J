@@ -1,4 +1,4 @@
-// Created on: 1996-04-30
+﻿// Created on: 1996-04-30
 // Created by: cle
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -22,8 +22,8 @@
 #include <TCollection_AsciiString.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TCollection_AsciiString,Handle(Storage_Root),TCollection_AsciiString> Storage_MapOfPers;
-typedef NCollection_DataMap<TCollection_AsciiString,Handle(Storage_Root),TCollection_AsciiString>::Iterator Storage_DataMapIteratorOfMapOfPers;
+typedef NCollection_DataMap<TCollection_AsciiString, Handle(Storage_Root), TCollection_AsciiString> Storage_MapOfPers;
+typedef NCollection_DataMap<TCollection_AsciiString, Handle(Storage_Root), TCollection_AsciiString>::Iterator Storage_DataMapIteratorOfMapOfPers;
 
 
 #endif

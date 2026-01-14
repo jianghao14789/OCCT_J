@@ -35,8 +35,8 @@ public:
     DEFINE_STANDARD_ALLOC;
 
 
-        //! Empty constructor
-        Standard_EXPORT Bnd_Sphere();
+    //! Empty constructor
+    Standard_EXPORT Bnd_Sphere();
 
     //! Constructor of a definite sphere
     Standard_EXPORT Bnd_Sphere(const gp_XYZ& theCntr, const Standard_Real theRad, const Standard_Integer theU, const Standard_Integer theV);

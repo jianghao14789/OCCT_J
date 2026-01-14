@@ -1,4 +1,4 @@
-// Created on: 1996-01-22
+﻿// Created on: 1996-01-22
 // Created by: Philippe MANGIN
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -34,27 +34,27 @@ class math_FunctionSet;
 //! functions of M  variables variables between the
 //! parameter bounds Lower[a..b] and Upper[a..b].
 //! Warning: - The case M>1 is not implemented.
-class math_GaussSetIntegration 
+class math_GaussSetIntegration
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! The Gauss-Legendre integration with Order = points of
-  //! integration for each unknown, is done on the function F
-  //! between the bounds Lower and Upper.
-  Standard_EXPORT math_GaussSetIntegration(math_FunctionSet& F, const math_Vector& Lower, const math_Vector& Upper, const math_IntegerVector& Order);
-  
-  //! returns True if all has been correctly done.
+
+    //! The Gauss-Legendre integration with Order = points of
+    //! integration for each unknown, is done on the function F
+    //! between the bounds Lower and Upper.
+    Standard_EXPORT math_GaussSetIntegration(math_FunctionSet& F, const math_Vector& Lower, const math_Vector& Upper, const math_IntegerVector& Order);
+
+    //! returns True if all has been correctly done.
     Standard_Boolean IsDone() const;
-  
-  //! returns the value of the integral.
+
+    //! returns the value of the integral.
     const math_Vector& Value() const;
-  
-  //! Prints information on the current state of the object.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+
+    //! Prints information on the current state of the object.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
@@ -69,8 +69,8 @@ private:
 
 
 
-  math_Vector Val;
-  Standard_Boolean Done;
+    math_Vector Val;
+    Standard_Boolean Done;
 
 
 };

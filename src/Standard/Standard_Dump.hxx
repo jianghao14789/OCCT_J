@@ -1,4 +1,4 @@
-// Copyright (c) 2019 OPEN CASCADE SAS
+﻿// Copyright (c) 2019 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -277,174 +277,175 @@
 //! Kind of key in Json string
 enum Standard_JsonKey
 {
-  Standard_JsonKey_None, //!< no key
-  Standard_JsonKey_OpenChild, //!< "{"
-  Standard_JsonKey_CloseChild, //!< "}"
-  Standard_JsonKey_OpenContainer, //!< "["
-  Standard_JsonKey_CloseContainer, //!< "]"
-  Standard_JsonKey_Quote, //!< "\""
-  Standard_JsonKey_SeparatorKeyToValue, //!< ": "
-  Standard_JsonKey_SeparatorValueToValue //!< ", "
+    Standard_JsonKey_None, //!< no key
+    Standard_JsonKey_OpenChild, //!< "{"
+    Standard_JsonKey_CloseChild, //!< "}"
+    Standard_JsonKey_OpenContainer, //!< "["
+    Standard_JsonKey_CloseContainer, //!< "]"
+    Standard_JsonKey_Quote, //!< "\""
+    Standard_JsonKey_SeparatorKeyToValue, //!< ": "
+    Standard_JsonKey_SeparatorValueToValue //!< ", "
 };
 
 //! Type for storing a dump value with the stream position
 struct Standard_DumpValue
 {
-  Standard_DumpValue() : myStartPosition (0) {}
-  Standard_DumpValue (const TCollection_AsciiString& theValue, const Standard_Integer theStartPos)
-    : myValue (theValue), myStartPosition (theStartPos) {}
+    Standard_DumpValue() : myStartPosition(0) {}
+    Standard_DumpValue(const TCollection_AsciiString& theValue, const Standard_Integer theStartPos)
+        : myValue(theValue), myStartPosition(theStartPos) {
+    }
 
-  TCollection_AsciiString myValue; //!< current string value
-  Standard_Integer myStartPosition; //!< position of the value first char in the whole stream
+    TCollection_AsciiString myValue; //!< current string value
+    Standard_Integer myStartPosition; //!< position of the value first char in the whole stream
 };
 
 //! This interface has some tool methods for stream (in JSON format) processing.
 class Standard_Dump
 {
 public:
-  //! Converts stream value to string value. The result is original stream value.
-  //! @param theStream source value
-  //! @return text presentation
-  Standard_EXPORT static TCollection_AsciiString Text (const Standard_SStream& theStream);
+    //! Converts stream value to string value. The result is original stream value.
+    //! @param theStream source value
+    //! @return text presentation
+    Standard_EXPORT static TCollection_AsciiString Text(const Standard_SStream& theStream);
 
-  //! Converts stream value to string value. Improves the text presentation with the following cases:
-  //! - for '{' append after '\n' and indent to the next value, increment current indent value
-  //! - for '}' append '\n' and current indent before it, decrement indent value
-  //! - for ',' append after '\n' and indent to the next value. If the current symbol is in massive container [], do nothing
-  //! Covers result with opened and closed brackets on the top level, if it has no symbols there.
-  //! @param theStream source value
-  //! @param theIndent count of ' ' symbols to apply hierarchical indent of the text values
-  //! @return text presentation
-  Standard_EXPORT static TCollection_AsciiString FormatJson (const Standard_SStream& theStream, const Standard_Integer theIndent = 3);
+    //! Converts stream value to string value. Improves the text presentation with the following cases:
+    //! - for '{' append after '\n' and indent to the next value, increment current indent value
+    //! - for '}' append '\n' and current indent before it, decrement indent value
+    //! - for ',' append after '\n' and indent to the next value. If the current symbol is in massive container [], do nothing
+    //! Covers result with opened and closed brackets on the top level, if it has no symbols there.
+    //! @param theStream source value
+    //! @param theIndent count of ' ' symbols to apply hierarchical indent of the text values
+    //! @return text presentation
+    Standard_EXPORT static TCollection_AsciiString FormatJson(const Standard_SStream& theStream, const Standard_Integer theIndent = 3);
 
-  //! Converts stream into map of values.
-  //!
-  //! The one level stream example: 'key_1: value_1, key_2: value_2'
-  //! In output: values contain 'key_1: value_1' and 'key_2: value_2'.
-  //!
-  //! The two level stream example: 'key_1: value_1, key_2: value_2, key_3: {sublevel_key_1: sublevel_value_1}, key_4: value_4'
-  //! In output values contain 'key_1: value_1', 'key_2: value_2', 'key_3: {sublevel_key_1: sublevel_value_1}' and 'key_4: value_4'.
-  //! The sublevel value might be processed later using the same method.
-  //!
-  //! @param theStreamStr stream value
-  //! @param theKeyToValues [out] container of split values. It contains key to value and position of the value in the stream text
-  Standard_EXPORT static Standard_Boolean SplitJson (const TCollection_AsciiString& theStreamStr,
-                                                     NCollection_IndexedDataMap<TCollection_AsciiString, Standard_DumpValue>& theKeyToValues);
+    //! Converts stream into map of values.
+    //!
+    //! The one level stream example: 'key_1: value_1, key_2: value_2'
+    //! In output: values contain 'key_1: value_1' and 'key_2: value_2'.
+    //!
+    //! The two level stream example: 'key_1: value_1, key_2: value_2, key_3: {sublevel_key_1: sublevel_value_1}, key_4: value_4'
+    //! In output values contain 'key_1: value_1', 'key_2: value_2', 'key_3: {sublevel_key_1: sublevel_value_1}' and 'key_4: value_4'.
+    //! The sublevel value might be processed later using the same method.
+    //!
+    //! @param theStreamStr stream value
+    //! @param theKeyToValues [out] container of split values. It contains key to value and position of the value in the stream text
+    Standard_EXPORT static Standard_Boolean SplitJson(const TCollection_AsciiString& theStreamStr,
+        NCollection_IndexedDataMap<TCollection_AsciiString, Standard_DumpValue>& theKeyToValues);
 
-  //! Returns container of indices in values, that has hierarchical value
-  Standard_EXPORT static NCollection_List<Standard_Integer> HierarchicalValueIndices (
-    const NCollection_IndexedDataMap<TCollection_AsciiString, TCollection_AsciiString>& theValues);
+    //! Returns container of indices in values, that has hierarchical value
+    Standard_EXPORT static NCollection_List<Standard_Integer> HierarchicalValueIndices(
+        const NCollection_IndexedDataMap<TCollection_AsciiString, TCollection_AsciiString>& theValues);
 
-  //! Returns true if the value has bracket key
-  Standard_EXPORT static Standard_Boolean HasChildKey (const TCollection_AsciiString& theSourceValue);
+    //! Returns true if the value has bracket key
+    Standard_EXPORT static Standard_Boolean HasChildKey(const TCollection_AsciiString& theSourceValue);
 
-  //! Returns key value for enum type
-  Standard_EXPORT static Standard_CString JsonKeyToString (const Standard_JsonKey theKey);
+    //! Returns key value for enum type
+    Standard_EXPORT static Standard_CString JsonKeyToString(const Standard_JsonKey theKey);
 
-  //! Returns length value for enum type
-  Standard_EXPORT static Standard_Integer JsonKeyLength (const Standard_JsonKey theKey);
+    //! Returns length value for enum type
+    Standard_EXPORT static Standard_Integer JsonKeyLength(const Standard_JsonKey theKey);
 
-  //! @param theOStream source value
-  static Standard_EXPORT void AddValuesSeparator (Standard_OStream& theOStream);
+    //! @param theOStream source value
+    static Standard_EXPORT void AddValuesSeparator(Standard_OStream& theOStream);
 
-  //! Returns default prefix added for each pointer info string if short presentation of pointer used
-  static TCollection_AsciiString GetPointerPrefix() { return "0x"; }
+    //! Returns default prefix added for each pointer info string if short presentation of pointer used
+    static TCollection_AsciiString GetPointerPrefix() { return "0x"; }
 
-  //! Convert handle pointer to address of the pointer. If the handle is NULL, the result is an empty string.
-  //! @param thePointer a pointer
-  //! @param isShortInfo if true, all '0' symbols in the beginning of the pointer are skipped
-  //! @return the string value
-  Standard_EXPORT static TCollection_AsciiString GetPointerInfo (const Handle(Standard_Transient)& thePointer,
-                                                                 const bool isShortInfo = true);
+    //! Convert handle pointer to address of the pointer. If the handle is NULL, the result is an empty string.
+    //! @param thePointer a pointer
+    //! @param isShortInfo if true, all '0' symbols in the beginning of the pointer are skipped
+    //! @return the string value
+    Standard_EXPORT static TCollection_AsciiString GetPointerInfo(const Handle(Standard_Transient)& thePointer,
+        const bool isShortInfo = true);
 
-  //! Convert pointer to address of the pointer. If the handle is NULL, the result is an empty string.
-  //! @param thePointer a pointer
-  //! @param isShortInfo if true, all '0' symbols in the beginning of the pointer are skipped
-  //! @return the string value
-  Standard_EXPORT static TCollection_AsciiString GetPointerInfo (const void* thePointer,
-                                                                 const bool isShortInfo = true);
+    //! Convert pointer to address of the pointer. If the handle is NULL, the result is an empty string.
+    //! @param thePointer a pointer
+    //! @param isShortInfo if true, all '0' symbols in the beginning of the pointer are skipped
+    //! @return the string value
+    Standard_EXPORT static TCollection_AsciiString GetPointerInfo(const void* thePointer,
+        const bool isShortInfo = true);
 
-  //! Append into output value: "Name": { Field }
-  //! @param theOStream [out] stream to be fill with values
-  //! @param theKey a source value
-  //! @param theField stream value
-  Standard_EXPORT static void DumpKeyToClass (Standard_OStream& theOStream,
-                                              const TCollection_AsciiString& theKey,
-                                              const TCollection_AsciiString& theField);
+    //! Append into output value: "Name": { Field }
+    //! @param theOStream [out] stream to be fill with values
+    //! @param theKey a source value
+    //! @param theField stream value
+    Standard_EXPORT static void DumpKeyToClass(Standard_OStream& theOStream,
+        const TCollection_AsciiString& theKey,
+        const TCollection_AsciiString& theField);
 
-  //! Unite values in one value using template: "value_1", "value_2", ..., "value_n"
-  //! @param theOStream [out] stream to be fill with values
-  //! @param theCount   [in]  number of values
-  Standard_EXPORT static void DumpCharacterValues (Standard_OStream& theOStream, int theCount, ...);
+    //! Unite values in one value using template: "value_1", "value_2", ..., "value_n"
+    //! @param theOStream [out] stream to be fill with values
+    //! @param theCount   [in]  number of values
+    Standard_EXPORT static void DumpCharacterValues(Standard_OStream& theOStream, int theCount, ...);
 
-  //! Unite values in one value using template: value_1, value_2, ..., value_n
-  //! @param theOStream [out] stream to be fill with values
-  //! @param theCount   [in]  number of values
-  Standard_EXPORT static void DumpRealValues (Standard_OStream& theOStream, int theCount, ...);
+    //! Unite values in one value using template: value_1, value_2, ..., value_n
+    //! @param theOStream [out] stream to be fill with values
+    //! @param theCount   [in]  number of values
+    Standard_EXPORT static void DumpRealValues(Standard_OStream& theOStream, int theCount, ...);
 
-  //! Check whether the parameter name is equal to the name in the stream at position
-  //! @param theSStream   [in]  stream with values
-  //! @param theName      [in]  stream key value
-  //! @param theStreamPos [out] current position in the stream
-  Standard_EXPORT static Standard_Boolean ProcessStreamName (const TCollection_AsciiString& theStreamStr,
-                                                             const TCollection_AsciiString& theName,
-                                                             Standard_Integer& theStreamPos);
+    //! Check whether the parameter name is equal to the name in the stream at position
+    //! @param theSStream   [in]  stream with values
+    //! @param theName      [in]  stream key value
+    //! @param theStreamPos [out] current position in the stream
+    Standard_EXPORT static Standard_Boolean ProcessStreamName(const TCollection_AsciiString& theStreamStr,
+        const TCollection_AsciiString& theName,
+        Standard_Integer& theStreamPos);
 
-  //! Check whether the field name is equal to the name in the stream at position
-  //! @param theSStream   [in]  stream with values
-  //! @param theName      [in]  stream key field value
-  //! @param theStreamPos [out] current position in the stream
-  Standard_EXPORT static Standard_Boolean ProcessFieldName (const TCollection_AsciiString& theStreamStr,
-                                                            const TCollection_AsciiString& theName,
-                                                            Standard_Integer& theStreamPos);
+    //! Check whether the field name is equal to the name in the stream at position
+    //! @param theSStream   [in]  stream with values
+    //! @param theName      [in]  stream key field value
+    //! @param theStreamPos [out] current position in the stream
+    Standard_EXPORT static Standard_Boolean ProcessFieldName(const TCollection_AsciiString& theStreamStr,
+        const TCollection_AsciiString& theName,
+        Standard_Integer& theStreamPos);
 
-  //! Unite values in one value using template: value_1, value_2, ..., value_n
-  //! @param theSStream   [in]  stream with values
-  //! @param theStreamPos [out] current position in the stream
-  //! @param theCount     [in]  number of values
-  Standard_EXPORT static Standard_Boolean InitRealValues (const TCollection_AsciiString& theStreamStr,
-                                                          Standard_Integer& theStreamPos,
-                                                          int theCount, ...);
+    //! Unite values in one value using template: value_1, value_2, ..., value_n
+    //! @param theSStream   [in]  stream with values
+    //! @param theStreamPos [out] current position in the stream
+    //! @param theCount     [in]  number of values
+    Standard_EXPORT static Standard_Boolean InitRealValues(const TCollection_AsciiString& theStreamStr,
+        Standard_Integer& theStreamPos,
+        int theCount, ...);
 
-  //! Returns real value
-  //! @param theSStream   [in]  stream with values
-  //! @param theStreamPos [out] current position in the stream
-  //! @param theValue     [out] stream value
-  Standard_EXPORT static Standard_Boolean InitValue (const TCollection_AsciiString& theStreamStr,
-                                                     Standard_Integer& theStreamPos,
-                                                     TCollection_AsciiString& theValue);
+    //! Returns real value
+    //! @param theSStream   [in]  stream with values
+    //! @param theStreamPos [out] current position in the stream
+    //! @param theValue     [out] stream value
+    Standard_EXPORT static Standard_Boolean InitValue(const TCollection_AsciiString& theStreamStr,
+        Standard_Integer& theStreamPos,
+        TCollection_AsciiString& theValue);
 
-  //! Convert field name into dump text value, removes "&" and "my" prefixes
-  //! An example, for field myValue, theName is Value, for &myCLass, the name is Class
-  //! @param theField a source value 
-  Standard_EXPORT static TCollection_AsciiString DumpFieldToName (const TCollection_AsciiString& theField);
+    //! Convert field name into dump text value, removes "&" and "my" prefixes
+    //! An example, for field myValue, theName is Value, for &myCLass, the name is Class
+    //! @param theField a source value 
+    Standard_EXPORT static TCollection_AsciiString DumpFieldToName(const TCollection_AsciiString& theField);
 
 private:
-  //! Extracts from the string value a pair (key, value), add it into output container, update index value
-  //! Example:
-  //! stream string starting the index position contains: ..."key": <value>...
-  //! a pair key, value will be added into theValues
-  //! at beginning theIndex is the position of the quota before <key>, after the index is the next position after the value
-  //! splitDumped(aString) gives theSplitValue = "abc", theTailValue = "defg", theKey = "key"
-  Standard_EXPORT static Standard_Boolean splitKeyToValue (const TCollection_AsciiString& theStreamStr,
-                                                           Standard_Integer theStartIndex,
-                                                           Standard_Integer& theNextIndex,
-                                                           NCollection_IndexedDataMap<TCollection_AsciiString, Standard_DumpValue>& theValues);
+    //! Extracts from the string value a pair (key, value), add it into output container, update index value
+    //! Example:
+    //! stream string starting the index position contains: ..."key": <value>...
+    //! a pair key, value will be added into theValues
+    //! at beginning theIndex is the position of the quota before <key>, after the index is the next position after the value
+    //! splitDumped(aString) gives theSplitValue = "abc", theTailValue = "defg", theKey = "key"
+    Standard_EXPORT static Standard_Boolean splitKeyToValue(const TCollection_AsciiString& theStreamStr,
+        Standard_Integer theStartIndex,
+        Standard_Integer& theNextIndex,
+        NCollection_IndexedDataMap<TCollection_AsciiString, Standard_DumpValue>& theValues);
 
 
-  //! Returns key of json in the index position. Incement the index position to the next symbol in the row
-  Standard_EXPORT static Standard_Boolean jsonKey (const TCollection_AsciiString& theStreamStr,
-                                                   Standard_Integer theStartIndex,
-                                                   Standard_Integer& theNextIndex,
-                                                   Standard_JsonKey& theKey);
+    //! Returns key of json in the index position. Incement the index position to the next symbol in the row
+    Standard_EXPORT static Standard_Boolean jsonKey(const TCollection_AsciiString& theStreamStr,
+        Standard_Integer theStartIndex,
+        Standard_Integer& theNextIndex,
+        Standard_JsonKey& theKey);
 
-  //! Find position in the source string of the symbol close after the start position.
-  //! Ignore combination <symbol open> ... <symbol close> between the close symbol.
-  //! Example, for case ... { ... { ... } ...} ... } it returns the position of the forth brace
-  Standard_EXPORT static Standard_Integer nextClosePosition (const TCollection_AsciiString& theSourceValue,
-                                                             const Standard_Integer theStartPosition,
-                                                             const Standard_JsonKey theCloseKey,
-                                                             const Standard_JsonKey theOpenKey);
+    //! Find position in the source string of the symbol close after the start position.
+    //! Ignore combination <symbol open> ... <symbol close> between the close symbol.
+    //! Example, for case ... { ... { ... } ...} ... } it returns the position of the forth brace
+    Standard_EXPORT static Standard_Integer nextClosePosition(const TCollection_AsciiString& theSourceValue,
+        const Standard_Integer theStartPosition,
+        const Standard_JsonKey theCloseKey,
+        const Standard_JsonKey theOpenKey);
 
 };
 

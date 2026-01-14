@@ -1,4 +1,4 @@
-// Created on: 1991-01-21
+﻿// Created on: 1991-01-21
 // Created by: Isabelle GRIGNON
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -67,110 +67,93 @@ class math_DoubleTab;
 
 
 
-class math 
+class math
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  Standard_EXPORT static Standard_Integer GaussPointsMax();
-  
-  Standard_EXPORT static void GaussPoints (const Standard_Integer Index, math_Vector& Points);
-  
-  Standard_EXPORT static void GaussWeights (const Standard_Integer Index, math_Vector& Weights);
-  
-  //! Returns the maximal number of points for that the values
-  //! are stored in the table. If the number is greater then
-  //! KronrodPointsMax, the points will be computed.
-  Standard_EXPORT static Standard_Integer KronrodPointsMax();
-  
-  //! Returns a vector of Gauss points and a vector of their weights.
-  //! The difference with the
-  //! method GaussPoints is the following:
-  //! - the points are returned in increasing order.
-  //! - if Index is greater then GaussPointsMax, the points are
-  //! computed.
-  //! Returns Standard_True if Index is positive, Points' and Weights'
-  //! length is equal to Index, Points and Weights are successfully computed.
-  Standard_EXPORT static Standard_Boolean OrderedGaussPointsAndWeights (const Standard_Integer Index, math_Vector& Points, math_Vector& Weights);
-  
-  //! Returns a vector of Kronrod points and a vector of their
-  //! weights for Gauss-Kronrod computation method.
-  //! Index should be odd and greater then or equal to 3,
-  //! as the number of Kronrod points is equal to 2*N + 1,
-  //! where N is a number of Gauss points. Points and Weights should
-  //! have the size equal to Index. Each even element of Points
-  //! represents a Gauss point value of N-th Gauss quadrature.
-  //! The values from Index equal to 3 to 123 are stored in a
-  //! table (see the file math_Kronrod.cxx). If Index is greater,
-  //! then points and weights will be computed. Returns Standard_True
-  //! if Index is odd, it is equal to the size of Points and Weights
-  //! and the computation of Points and Weights is performed successfully.
-  //! Otherwise this method returns Standard_False.
-  Standard_EXPORT static Standard_Boolean KronrodPointsAndWeights (const Standard_Integer Index, math_Vector& Points, math_Vector& Weights);
+    DEFINE_STANDARD_ALLOC;
 
 
+    Standard_EXPORT static Standard_Integer GaussPointsMax();
 
+    Standard_EXPORT static void GaussPoints(const Standard_Integer Index, math_Vector& Points);
+
+    Standard_EXPORT static void GaussWeights(const Standard_Integer Index, math_Vector& Weights);
+
+    //! Returns the maximal number of points for that the values
+    //! are stored in the table. If the number is greater then
+    //! KronrodPointsMax, the points will be computed.
+    Standard_EXPORT static Standard_Integer KronrodPointsMax();
+
+    //! Returns a vector of Gauss points and a vector of their weights.
+    //! The difference with the
+    //! method GaussPoints is the following:
+    //! - the points are returned in increasing order.
+    //! - if Index is greater then GaussPointsMax, the points are
+    //! computed.
+    //! Returns Standard_True if Index is positive, Points' and Weights'
+    //! length is equal to Index, Points and Weights are successfully computed.
+    Standard_EXPORT static Standard_Boolean OrderedGaussPointsAndWeights(const Standard_Integer Index, math_Vector& Points, math_Vector& Weights);
+
+    //! Returns a vector of Kronrod points and a vector of their
+    //! weights for Gauss-Kronrod computation method.
+    //! Index should be odd and greater then or equal to 3,
+    //! as the number of Kronrod points is equal to 2*N + 1,
+    //! where N is a number of Gauss points. Points and Weights should
+    //! have the size equal to Index. Each even element of Points
+    //! represents a Gauss point value of N-th Gauss quadrature.
+    //! The values from Index equal to 3 to 123 are stored in a
+    //! table (see the file math_Kronrod.cxx). If Index is greater,
+    //! then points and weights will be computed. Returns Standard_True
+    //! if Index is odd, it is equal to the size of Points and Weights
+    //! and the computation of Points and Weights is performed successfully.
+    //! Otherwise this method returns Standard_False.
+    Standard_EXPORT static Standard_Boolean KronrodPointsAndWeights(const Standard_Integer Index, math_Vector& Points, math_Vector& Weights);
 
 protected:
 
-
-
-
-
 private:
 
-
-
-
-friend class math_Matrix;
-friend class math_Function;
-friend class math_FunctionWithDerivative;
-friend class math_MultipleVarFunction;
-friend class math_MultipleVarFunctionWithGradient;
-friend class math_MultipleVarFunctionWithHessian;
-friend class math_FunctionSet;
-friend class math_FunctionSetWithDerivatives;
-friend class math_Gauss;
-friend class math_GaussLeastSquare;
-friend class math_SVD;
-friend class math_DirectPolynomialRoots;
-friend class math_FunctionRoots;
-friend class math_BissecNewton;
-friend class math_FunctionRoot;
-friend class math_NewtonFunctionRoot;
-friend class math_BracketedRoot;
-friend class math_FunctionSetRoot;
-friend class math_NewtonFunctionSetRoot;
-friend class math_BracketMinimum;
-friend class math_BrentMinimum;
-friend class math_Powell;
-friend class math_FRPR;
-friend class math_BFGS;
-friend class math_NewtonMinimum;
-friend class math_Jacobi;
-friend class math_GaussSingleIntegration;
-friend class math_GaussMultipleIntegration;
-friend class math_GaussSetIntegration;
-friend class math_FunctionSample;
-friend class math_FunctionAllRoots;
-friend class math_Householder;
-friend class math_Crout;
-friend class math_Uzawa;
-friend class math_TrigonometricFunctionRoots;
-friend class math_KronrodSingleIntegration;
-friend class math_EigenValuesSearcher;
-friend class math_ComputeGaussPointsAndWeights;
-friend class math_ComputeKronrodPointsAndWeights;
-friend class math_DoubleTab;
-
+    friend class math_Matrix;
+    friend class math_Function;
+    friend class math_FunctionWithDerivative;
+    friend class math_MultipleVarFunction;
+    friend class math_MultipleVarFunctionWithGradient;
+    friend class math_MultipleVarFunctionWithHessian;
+    friend class math_FunctionSet;
+    friend class math_FunctionSetWithDerivatives;
+    friend class math_Gauss;
+    friend class math_GaussLeastSquare;
+    friend class math_SVD;
+    friend class math_DirectPolynomialRoots;
+    friend class math_FunctionRoots;
+    friend class math_BissecNewton;
+    friend class math_FunctionRoot;
+    friend class math_NewtonFunctionRoot;
+    friend class math_BracketedRoot;
+    friend class math_FunctionSetRoot;
+    friend class math_NewtonFunctionSetRoot;
+    friend class math_BracketMinimum;
+    friend class math_BrentMinimum;
+    friend class math_Powell;
+    friend class math_FRPR;
+    friend class math_BFGS;
+    friend class math_NewtonMinimum;
+    friend class math_Jacobi;
+    friend class math_GaussSingleIntegration;
+    friend class math_GaussMultipleIntegration;
+    friend class math_GaussSetIntegration;
+    friend class math_FunctionSample;
+    friend class math_FunctionAllRoots;
+    friend class math_Householder;
+    friend class math_Crout;
+    friend class math_Uzawa;
+    friend class math_TrigonometricFunctionRoots;
+    friend class math_KronrodSingleIntegration;
+    friend class math_EigenValuesSearcher;
+    friend class math_ComputeGaussPointsAndWeights;
+    friend class math_ComputeKronrodPointsAndWeights;
+    friend class math_DoubleTab;
 };
-
-
-
-
-
-
 
 #endif // _math_HeaderFile

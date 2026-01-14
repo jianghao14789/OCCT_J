@@ -1,4 +1,4 @@
-// Created on: 1993-04-13
+﻿// Created on: 1993-04-13
 // Created by: JCV
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -20,15 +20,15 @@
 //! Identifies the type of a geometric transformation.
 enum gp_TrsfForm
 {
-  gp_Identity,     //!< No transformation (matrix is identity)
-  gp_Rotation,     //!< Rotation
-  gp_Translation,  //!< Translation
-  gp_PntMirror,    //!< Central symmetry
-  gp_Ax1Mirror,    //!< Rotational symmetry
-  gp_Ax2Mirror,    //!< Bilateral symmetry
-  gp_Scale,        //!< Scale
-  gp_CompoundTrsf, //!< Combination of the above transformations
-  gp_Other         //!< Transformation with not-orthogonal matrix
+    gp_Identity,     //!< No transformation (matrix is identity)
+    gp_Rotation,     //!< Rotation
+    gp_Translation,  //!< Translation
+    gp_PntMirror,    //!< Central symmetry
+    gp_Ax1Mirror,    //!< Rotational symmetry
+    gp_Ax2Mirror,    //!< Bilateral symmetry
+    gp_Scale,        //!< Scale
+    gp_CompoundTrsf, //!< Combination of the above transformations
+    gp_Other         //!< Transformation with not-orthogonal matrix
 };
 
 #endif // _gp_TrsfForm_HeaderFile

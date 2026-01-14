@@ -1,4 +1,4 @@
-// Created on: 1991-05-13
+﻿// Created on: 1991-05-13
 // Created by: Laurent PAINNOT
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -37,42 +37,42 @@ class math_Matrix;
 //! Value Decomposition algorithm is used. For singular or
 //! nearly singular matrices SVD is a better choice than Gauss
 //! or GaussLeastSquare.
-class math_SVD 
+class math_SVD
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
 
-  //! Given as input an n X m matrix A with n < m, n = m or n > m
-  //! this constructor performs the Singular Value Decomposition.
-  Standard_EXPORT math_SVD(const math_Matrix& A);
-  
-  //! Returns true if the computations are successful, otherwise returns false.
+
+    //! Given as input an n X m matrix A with n < m, n = m or n > m
+    //! this constructor performs the Singular Value Decomposition.
+    Standard_EXPORT math_SVD(const math_Matrix& A);
+
+    //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
-  
 
-  //! Given the input Vector B this routine solves the set of linear
-  //! equations A . X = B.
-  //! Exception NotDone is raised if the decomposition of A was not done
-  //! successfully.
-  //! Exception DimensionError is raised if the range of B is not
-  //! equal to the rowrange of A.
-  //! Exception DimensionError is raised if the range of X is not
-  //! equal to the colrange of A.
-  Standard_EXPORT void Solve (const math_Vector& B, math_Vector& X, const Standard_Real Eps = 1.0e-6);
-  
-  //! Computes the inverse Inv of matrix A such as A * Inverse = Identity.
-  //! Exceptions
-  //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
-  //! Standard_DimensionError if the ranges of Inv are
-  //! compatible with the ranges of A.
-  Standard_EXPORT void PseudoInverse (math_Matrix& Inv, const Standard_Real Eps = 1.0e-6);
-  
-  //! Prints information on the current state of the object.
-  //! Is used to redefine the operator <<.
-  Standard_EXPORT void Dump (Standard_OStream& o) const;
+
+    //! Given the input Vector B this routine solves the set of linear
+    //! equations A . X = B.
+    //! Exception NotDone is raised if the decomposition of A was not done
+    //! successfully.
+    //! Exception DimensionError is raised if the range of B is not
+    //! equal to the rowrange of A.
+    //! Exception DimensionError is raised if the range of X is not
+    //! equal to the colrange of A.
+    Standard_EXPORT void Solve(const math_Vector& B, math_Vector& X, const Standard_Real Eps = 1.0e-6);
+
+    //! Computes the inverse Inv of matrix A such as A * Inverse = Identity.
+    //! Exceptions
+    //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
+    //! Standard_DimensionError if the ranges of Inv are
+    //! compatible with the ranges of A.
+    Standard_EXPORT void PseudoInverse(math_Matrix& Inv, const Standard_Real Eps = 1.0e-6);
+
+    //! Prints information on the current state of the object.
+    //! Is used to redefine the operator <<.
+    Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 
 
@@ -87,11 +87,11 @@ private:
 
 
 
-  Standard_Boolean Done;
-  math_Matrix U;
-  math_Matrix V;
-  math_Vector Diag;
-  Standard_Integer RowA;
+    Standard_Boolean Done;
+    math_Matrix U;
+    math_Matrix V;
+    math_Vector Diag;
+    Standard_Integer RowA;
 
 
 };

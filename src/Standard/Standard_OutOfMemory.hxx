@@ -1,4 +1,4 @@
-// Created on: 1991-09-05
+﻿// Created on: 1991-09-05
 // Created by: J.P. TIRAUlt
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Standard_OutOfMemory;
 DEFINE_STANDARD_HANDLE(Standard_OutOfMemory, Standard_ProgramError)
 
 #if !defined No_Exception && !defined No_Standard_OutOfMemory
-  #define Standard_OutOfMemory_Raise_if(CONDITION, MESSAGE) \
+#define Standard_OutOfMemory_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Standard_OutOfMemory(MESSAGE);
 #else
-  #define Standard_OutOfMemory_Raise_if(CONDITION, MESSAGE)
+#define Standard_OutOfMemory_Raise_if(CONDITION, MESSAGE)
 #endif
 
 //! Standard_OutOfMemory exception is defined explicitly and not by
@@ -48,36 +48,36 @@ DEFINE_STANDARD_HANDLE(Standard_OutOfMemory, Standard_ProgramError)
 
 class Standard_OutOfMemory : public Standard_ProgramError
 {
-  Standard_EXPORT void Throw () const Standard_OVERRIDE;
+    Standard_EXPORT void Throw() const Standard_OVERRIDE;
 
 public:
 
-  //! Constructor is kept public for backward compatibility
-  Standard_EXPORT Standard_OutOfMemory(const Standard_CString theMessage = 0);
+    //! Constructor is kept public for backward compatibility
+    Standard_EXPORT Standard_OutOfMemory(const Standard_CString theMessage = 0);
 
-  //! Returns error message
-  Standard_EXPORT Standard_CString GetMessageString() const Standard_OVERRIDE;
-  
-  //! Sets error message
-  Standard_EXPORT void SetMessageString (const Standard_CString aMessage) Standard_OVERRIDE;
+    //! Returns error message
+    Standard_EXPORT Standard_CString GetMessageString() const Standard_OVERRIDE;
 
-  //! Raises exception with specified message string
-  Standard_EXPORT static void Raise(const Standard_CString theMessage = "");
+    //! Sets error message
+    Standard_EXPORT void SetMessageString(const Standard_CString aMessage) Standard_OVERRIDE;
 
-  //! Raises exception with specified message string
-  Standard_EXPORT static void Raise(Standard_SStream& theMessage);
+    //! Raises exception with specified message string
+    Standard_EXPORT static void Raise(const Standard_CString theMessage = "");
 
-  //! Returns global instance of exception
-  Standard_EXPORT static Handle(Standard_OutOfMemory) NewInstance (Standard_CString theMessage = "");
+    //! Raises exception with specified message string
+    Standard_EXPORT static void Raise(Standard_SStream& theMessage);
 
-  //! Returns global instance of exception
-  Standard_EXPORT static Handle(Standard_OutOfMemory) NewInstance (Standard_CString theMessage,
-                                                                   Standard_CString theStackTrace);
+    //! Returns global instance of exception
+    Standard_EXPORT static Handle(Standard_OutOfMemory) NewInstance(Standard_CString theMessage = "");
 
-  DEFINE_STANDARD_RTTIEXT(Standard_OutOfMemory,Standard_ProgramError)
+    //! Returns global instance of exception
+    Standard_EXPORT static Handle(Standard_OutOfMemory) NewInstance(Standard_CString theMessage,
+        Standard_CString theStackTrace);
+
+    DEFINE_STANDARD_RTTIEXT(Standard_OutOfMemory, Standard_ProgramError)
 
 protected:
-  char myBuffer[1024];
+    char myBuffer[1024];
 };
 
 #endif // _Standard_OutOfMemory_HeaderFile

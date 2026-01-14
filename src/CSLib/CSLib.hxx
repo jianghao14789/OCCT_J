@@ -44,18 +44,18 @@ public:
 
 
 
-        //! The following functions computes the normal to a surface
-        //! inherits FunctionWithDerivative from math
-        //!
-        //! Computes the normal direction of a surface as the cross product
-        //! between D1U and D1V.
-        //! If D1U has null length or D1V has null length or D1U and D1V are
-        //! parallel the normal is undefined.
-        //! To check that D1U and D1V are colinear the sinus of the angle
-        //! between D1U and D1V is computed and compared with SinTol.
-        //! The normal is computed if theStatus == Done else the theStatus gives the
-        //! reason why the computation has failed.
-        Standard_EXPORT static void Normal(const gp_Vec& D1U, const gp_Vec& D1V, const Standard_Real SinTol, CSLib_DerivativeStatus& theStatus, gp_Dir& Normal);
+    //! The following functions computes the normal to a surface
+    //! inherits FunctionWithDerivative from math
+    //!
+    //! Computes the normal direction of a surface as the cross product
+    //! between D1U and D1V.
+    //! If D1U has null length or D1V has null length or D1U and D1V are
+    //! parallel the normal is undefined.
+    //! To check that D1U and D1V are colinear the sinus of the angle
+    //! between D1U and D1V is computed and compared with SinTol.
+    //! The normal is computed if theStatus == Done else the theStatus gives the
+    //! reason why the computation has failed.
+    Standard_EXPORT static void Normal(const gp_Vec& D1U, const gp_Vec& D1V, const Standard_Real SinTol, CSLib_DerivativeStatus& theStatus, gp_Dir& Normal);
 
 
     //! If there is a singularity on the surface  the previous method

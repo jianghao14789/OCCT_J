@@ -1,4 +1,4 @@
-// Created on: 1991-08-09
+﻿// Created on: 1991-08-09
 // Created by: Jean Claude VAUTHIER
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -30,9 +30,9 @@
 //! NonConstant in other cases.
 enum BSplCLib_MultDistribution
 {
-BSplCLib_NonConstant,
-BSplCLib_Constant,
-BSplCLib_QuasiConstant
+    BSplCLib_NonConstant,
+    BSplCLib_Constant,
+    BSplCLib_QuasiConstant
 };
 
 #endif // _BSplCLib_MultDistribution_HeaderFile

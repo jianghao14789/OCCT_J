@@ -43,8 +43,8 @@ public:
 
     DEFINE_STANDARD_ALLOC;
 
-        //! Empty constructor
-        Bnd_OBB() :myIsAABox(Standard_False)
+    //! Empty constructor
+    Bnd_OBB() :myIsAABox(Standard_False)
     {
         myHDims[0] = myHDims[1] = myHDims[2] = -1.0;
     }

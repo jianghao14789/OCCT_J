@@ -1,4 +1,4 @@
-// Created on: 1996-04-30
+﻿// Created on: 1996-04-30
 // Created by: cle
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -26,10 +26,10 @@ class Storage_StreamUnknownTypeError;
 DEFINE_STANDARD_HANDLE(Storage_StreamUnknownTypeError, Storage_StreamReadError)
 
 #if !defined No_Exception && !defined No_Storage_StreamUnknownTypeError
-  #define Storage_StreamUnknownTypeError_Raise_if(CONDITION, MESSAGE) \
+#define Storage_StreamUnknownTypeError_Raise_if(CONDITION, MESSAGE) \
   if (CONDITION) throw Storage_StreamUnknownTypeError(MESSAGE);
 #else
-  #define Storage_StreamUnknownTypeError_Raise_if(CONDITION, MESSAGE)
+#define Storage_StreamUnknownTypeError_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Storage_StreamUnknownTypeError, Storage_StreamReadError)
