@@ -18,6 +18,7 @@
 #include <Standard_TypeDef.hxx>
 #include <Standard_Stream.hxx>
 
+// READ
 typedef std::ostream Standard_OStream;
 
 #endif

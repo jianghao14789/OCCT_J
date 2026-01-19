@@ -20,7 +20,7 @@
 
 void Standard_Transient::Delete() const
 {
-    delete this;
+    delete this; // 触发析构
 }
 
 const Handle(Standard_Type)& Standard_Transient::get_type_descriptor()
@@ -75,6 +75,8 @@ Standard_Transient* Standard_Transient::This() const
 // Increment reference counter
 void Standard_Transient::IncrementRefCounter() const
 {
+    // 调用封装的原子自增操作
+    // 该自增操作将编译为特殊的指令, 效率更高
     Standard_Atomic_Increment(&myRefCount_);
 }
 

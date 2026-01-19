@@ -34,11 +34,8 @@ DEFINE_STANDARD_HANDLE(BRep_TVertex, TopoDS_TVertex)
 //! from TopoDS. It contains the geometric data.
 //!
 //! The  TVertex contains a 3d point, location and a tolerance.
-class BRep_TVertex : public TopoDS_TVertex
-{
-
+class BRep_TVertex : public TopoDS_TVertex {
 public:
-
 
     Standard_EXPORT BRep_TVertex();
 
@@ -64,31 +61,18 @@ public:
     //! Dumps the content of me into the stream
     Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(BRep_TVertex, TopoDS_TVertex)
 
 protected:
 
-
-
-
 private:
-
 
     gp_Pnt myPnt;
     Standard_Real myTolerance;
     BRep_ListOfPointRepresentation myPoints;
 
-
 };
 
-
 #include <BRep_TVertex.lxx>
-
-
-
-
 
 #endif // _BRep_TVertex_HeaderFile

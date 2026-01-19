@@ -1,4 +1,4 @@
-// Created on: 1993-07-23
+﻿// Created on: 1993-07-23
 // Created by: Remi LEQUETTE
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -45,14 +45,14 @@ void BRepBuilderAPI_MakeShape::Build(const Message_ProgressRange& /*theRange*/)
 //purpose  : 
 //=======================================================================
 
-const TopoDS_Shape&  BRepBuilderAPI_MakeShape::Shape()
+const TopoDS_Shape& BRepBuilderAPI_MakeShape::Shape()
 {
-  if (!IsDone()) {
-    // the following is const cast away
-    ((BRepBuilderAPI_MakeShape*) (void*) this)->Build();
-    Check();
-  }
-  return myShape;
+    if (!IsDone()) {
+        // the following is const cast away
+        ((BRepBuilderAPI_MakeShape*)(void*)this)->Build();
+        Check();
+    }
+    return myShape;
 }
 
 
@@ -63,7 +63,7 @@ const TopoDS_Shape&  BRepBuilderAPI_MakeShape::Shape()
 
 BRepBuilderAPI_MakeShape::operator TopoDS_Shape()
 {
-  return Shape();
+    return Shape();
 }
 
 
@@ -72,11 +72,11 @@ BRepBuilderAPI_MakeShape::operator TopoDS_Shape()
 //purpose  : 
 //=======================================================================
 
-const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Generated (const TopoDS_Shape&) 
+const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Generated(const TopoDS_Shape&)
 
 {
-  myGenerated.Clear();
-  return myGenerated;
+    myGenerated.Clear();
+    return myGenerated;
 }
 
 
@@ -85,11 +85,11 @@ const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Generated (const TopoDS_Sh
 //purpose  : 
 //=======================================================================
 
-const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Modified (const TopoDS_Shape&) 
+const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Modified(const TopoDS_Shape&)
 
 {
-  myGenerated.Clear();
-  return myGenerated;
+    myGenerated.Clear();
+    return myGenerated;
 }
 
 
@@ -98,10 +98,10 @@ const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Modified (const TopoDS_Sha
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean BRepBuilderAPI_MakeShape::IsDeleted (const TopoDS_Shape&) 
+Standard_Boolean BRepBuilderAPI_MakeShape::IsDeleted(const TopoDS_Shape&)
 
 {
-  return Standard_False;
+    return Standard_False;
 }
 
 

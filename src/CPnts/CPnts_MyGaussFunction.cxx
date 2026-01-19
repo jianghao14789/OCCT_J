@@ -1,4 +1,4 @@
-// Copyright (c) 1995-1999 Matra Datavision
+﻿// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -16,25 +16,15 @@
 #include <CPnts_MyGaussFunction.hxx>
 
 void CPnts_MyGaussFunction::Init(const CPnts_RealFunction& F,
-				 const Standard_Address D) 
+    const Standard_Address D)
 {
-  myFunction = F;
-  myData = D;
+    myFunction = F;
+    myData = D;
 }
 
 Standard_Boolean CPnts_MyGaussFunction::Value(const Standard_Real X,
-					      Standard_Real& F)
+    Standard_Real& F)
 {
-  F = myFunction(X,myData);
-  return Standard_True;
+    F = myFunction(X, myData);
+    return Standard_True;
 }
-
-
-
-
-
-
-
-
-
-

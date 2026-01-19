@@ -1,4 +1,4 @@
-// Created on: 2012-04-10
+﻿// Created on: 2012-04-10
 // Created by: Kirill GAVRILOV
 // Copyright (c) 2012-2014 OPEN CASCADE SAS
 //
@@ -21,7 +21,7 @@
 //! TBO is available on OpenGL 3.0+ and OpenGL ES 3.2+ hardware
 struct OpenGl_ArbTBO : protected OpenGl_GlFunctions
 {
-  using OpenGl_GlFunctions::glTexBuffer;
+    using OpenGl_GlFunctions::glTexBuffer;
 };
 
 #endif // _OpenGl_ArbTBO_H__

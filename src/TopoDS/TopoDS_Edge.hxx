@@ -42,9 +42,6 @@ public:
     //! Undefined Edge.
     TopoDS_Edge();
 
-
-
-
 protected:
 
 

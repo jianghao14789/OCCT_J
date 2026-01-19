@@ -1,4 +1,4 @@
-// Copyright (c) 2015 OPEN CASCADE SAS
+﻿// Copyright (c) 2015 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -25,30 +25,38 @@
 class StdPersistent_TopoDS : protected StdObjMgt_SharedObject
 {
 protected:
-  class pTShape : public Standard_Transient
-  {
-    friend class ShapePersistent_TopoDS;
+    class pTShape : public Standard_Transient
+    {
+        friend class ShapePersistent_TopoDS;
 
-    DEFINE_STANDARD_RTTI_INLINE(pTShape, Standard_Transient)
+        DEFINE_STANDARD_RTTI_INLINE(pTShape, Standard_Transient)
 
-  public:
-    pTShape() : myFlags(0) {}
-    inline void Read (StdObjMgt_ReadData& theReadData)
-      { theReadData >> myShapes >> myFlags; }
-    inline void Write (StdObjMgt_WriteData& theWriteData) const
-      { theWriteData << myShapes << myFlags; }
-    inline void PChildren(StdObjMgt_Persistent::SequenceOfPersistent& theChildren) const
-      { theChildren.Append(myShapes); }
-    inline Standard_CString PName() const 
-      { return "PTopoDS_TShape"; }
+    public:
+        pTShape() : myFlags(0) {}
+        inline void Read(StdObjMgt_ReadData& theReadData)
+        {
+            theReadData >> myShapes >> myFlags;
+        }
+        inline void Write(StdObjMgt_WriteData& theWriteData) const
+        {
+            theWriteData << myShapes << myFlags;
+        }
+        inline void PChildren(StdObjMgt_Persistent::SequenceOfPersistent& theChildren) const
+        {
+            theChildren.Append(myShapes);
+        }
+        inline Standard_CString PName() const
+        {
+            return "PTopoDS_TShape";
+        }
 
-  protected:
-    Handle(StdObjMgt_Persistent) myShapes;
-    Standard_Integer             myFlags;
-  };
+    protected:
+        Handle(StdObjMgt_Persistent) myShapes;
+        Standard_Integer             myFlags;
+    };
 
 public:
-  typedef IgnoreData<StdObjMgt_Persistent, pTShape, TopoDS_TShape> TShape;
+    typedef IgnoreData<StdObjMgt_Persistent, pTShape, TopoDS_TShape> TShape;
 };
 
 #endif

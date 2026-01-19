@@ -31,17 +31,12 @@ class Standard_RangeError;
 class StdFail_NotDone;
 class math_FunctionWithDerivative;
 
-
-
 //! This class implements an algorithm which finds all the real roots of
 //! a function with derivative within a given range.
 //! Knowledge of the derivative is required.
-class math_FunctionRoots
-{
+class math_FunctionRoots {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Calculates all the real roots of a function F-K within the range
     //! A..B. without conditions on A and B
@@ -53,7 +48,6 @@ public:
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
-
 
     //! returns true if the function is considered as null between A and B.
     //! Exceptions
@@ -70,7 +64,6 @@ public:
     //! StdFail_NotDone if the algorithm fails (and IsDone returns false).
     Standard_Real Value(const Standard_Integer Nieme) const;
 
-
     //! returns the StateNumber  of the Nieme root.
     //! Exception RangeError is raised if Nieme is < 1
     //! or Nieme > NbSolutions.
@@ -80,32 +73,16 @@ public:
     //! of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
 
     Standard_Boolean Done;
     Standard_Boolean AllNull;
     TColStd_SequenceOfReal Sol;
     TColStd_SequenceOfInteger NbStateSol;
-
-
 };
 
-
 #include <math_FunctionRoots.lxx>
-
-
-
-
 
 #endif // _math_FunctionRoots_HeaderFile

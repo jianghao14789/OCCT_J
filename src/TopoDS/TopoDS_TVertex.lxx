@@ -1,4 +1,4 @@
-// Created on: 1991-04-10
+﻿// Created on: 1991-04-10
 // Created by: Remi LEQUETTE
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -21,6 +21,6 @@
 
 inline TopoDS_TVertex::TopoDS_TVertex() : TopoDS_TShape()
 {
-  Closed(Standard_True);
-  Convex(Standard_True);
+    Closed(Standard_True);
+    Convex(Standard_True);
 }

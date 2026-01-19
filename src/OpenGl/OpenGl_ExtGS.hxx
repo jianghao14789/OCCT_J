@@ -1,4 +1,4 @@
-// Created on: 2012-09-26
+﻿// Created on: 2012-09-26
 // Created by: Olga SURYANINOVA
 // Copyright (c) 2012-2014 OPEN CASCADE SAS
 //
@@ -22,7 +22,7 @@
 struct OpenGl_ExtGS : protected OpenGl_GlFunctions
 {
 #if !defined(GL_ES_VERSION_2_0)
-  using OpenGl_GlFunctions::glProgramParameteriEXT;
+    using OpenGl_GlFunctions::glProgramParameteriEXT;
 #endif
 };
 

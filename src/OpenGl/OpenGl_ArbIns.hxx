@@ -1,4 +1,4 @@
-// Created on: 2012-04-10
+﻿// Created on: 2012-04-10
 // Created by: Kirill GAVRILOV
 // Copyright (c) 2012-2014 OPEN CASCADE SAS
 //
@@ -25,8 +25,8 @@
 //! which has been introduced in later OpenGL versions (OpenGL 3.3 or OpenGL ES 3.0).
 struct OpenGl_ArbIns : protected OpenGl_GlFunctions
 {
-  using OpenGl_GlFunctions::glDrawArraysInstanced;
-  using OpenGl_GlFunctions::glDrawElementsInstanced;
+    using OpenGl_GlFunctions::glDrawArraysInstanced;
+    using OpenGl_GlFunctions::glDrawElementsInstanced;
 };
 
 #endif // _OpenGl_ArbIns_H__

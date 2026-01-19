@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,43 +29,25 @@ class TopoDS_TCompSolid;
 DEFINE_STANDARD_HANDLE(TopoDS_TCompSolid, TopoDS_TShape)
 
 //! A set of solids connected by their faces.
-class TopoDS_TCompSolid : public TopoDS_TShape
-{
-
+class TopoDS_TCompSolid : public TopoDS_TShape {
 public:
-
-  
-  //! Creates an empty TCompSolid.
+    //! Creates an empty TCompSolid.
     TopoDS_TCompSolid();
-  
-  //! returns COMPSOLID
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
-  
-  //! Returns an empty TCompSolid.
-  Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
+    //! returns COMPSOLID
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
+    //! Returns an empty TCompSolid.
+    Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TCompSolid,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TCompSolid, TopoDS_TShape)
 
 protected:
 
-
-
-
 private:
-
-
-
 
 };
 
-
 #include <TopoDS_TCompSolid.lxx>
-
-
-
-
 
 #endif // _TopoDS_TCompSolid_HeaderFile

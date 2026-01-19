@@ -30,12 +30,10 @@
 //! This abstract class describes the virtual functions associated with
 //! a function of a single variable for which the first derivative is
 //! available.
-class math_FunctionWithDerivative : public math_Function
-{
+class math_FunctionWithDerivative : public math_Function {
 public:
 
     DEFINE_STANDARD_ALLOC;;
-
 
     //! Computes the value <F>of the function for the variable <X>.
     //! Returns True if the calculation were successfully done,
@@ -55,27 +53,10 @@ public:
     Standard_EXPORT virtual Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& D) = 0;
     Standard_EXPORT virtual ~math_FunctionWithDerivative();
 
-
-
-
 protected:
-
-
-
-
 
 private:
 
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _math_FunctionWithDerivative_HeaderFile

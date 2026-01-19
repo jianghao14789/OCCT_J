@@ -21,6 +21,7 @@
 
 class Standard_Type;
 
+// 对 class handle 的前置声明
 namespace opencascade {
     template <class T> class handle;
 }
@@ -28,43 +29,76 @@ namespace opencascade {
 //! Abstract class which forms the root of the entire 
 //! Transient class hierarchy.
 //!
-//! 抽象类，是整个瞬时对象类层次结构的根
-//! 
-//! 说明：Transient 意为"短暂的"，这里表示这些对象具有生命周期管理的特性。
-//! 在 OCCT 中，所有需要通过 Handle（智能指针）管理的对象都继承自 Standard_Transient。
-//! 它通过引用计数机制来管理对象的生命周期。
+// 抽象类，是整个瞬时对象类层次结构的根
+// 
+// 说明：Transient 意为"短暂的", 这里表示这些对象具有生命周期管理的特性.
+// 在 OCCT 中, 所有需要通过 Handle(智能指针) 管理的对象都继承自 Standard_Transient.
+// 它通过引用计数机制来管理对象的生命周期
 
-class Standard_Transient
-{
+// 继承自 Standard_Transient 的对象必须存在于堆上, 一般不需要手动释放
+class Standard_Transient {
 public:
     // Standard OCCT memory allocation stuff
     // OCCT 标准内存分配定义
     DEFINE_STANDARD_ALLOC;
 
+    // 重载 new（单对象版本）: 当执行 new Standard_Transient() 时被调用
+    //void* operator new (size_t theSize) {
+    //    return Standard::Allocate(theSize);
+    //}
+
+    // 重载 delete（单对象版本）: 当执行 delete ptr 时被调用
+    //void operator delete (void* theAddress) {
+    //    Standard::Free(theAddress);
+    //}
+
+    // 重载 new[]（数组版本）
+    // void* operator new[](size_t theSize) {
+    //    return Standard::Allocate(theSize);
+    //}
+
+    // 重载 delete[]（数组版本）
+    //void operator delete[](void* theAddress) {
+    //    Standard::Free(theAddress);
+    //}
+
+    // 定位 new
+    //void* operator new (size_t, void* theAddress) {
+    //    return theAddress;
+    //}
+
+    // 定位 delete
+    //void operator delete (void*, void*) {
+    //    ;
+    //};
+
+    // 数组版本的定位 new/delete 是有意不写的, 工程实践时更偏向于循环逐个构造、析构
+    // 因为编译器在处理数组时, 会有一个隐藏的 Cookie 的问题
+
 public:
 
     //! Empty constructor
-    //! 空构造函数 - 初始化引用计数为 0
+    // 空构造函数 - 初始化引用计数为 0
     Standard_Transient() : myRefCount_(0) {}
 
     //! Copy constructor -- does nothing
-    //! 拷贝构造函数 - 不执行任何操作（引用计数不复制）
-    //! 这样做的原因是新对象应该有自己独立的引用计数
+    // 拷贝构造函数 - 不执行任何操作（引用计数不复制）
+    // 这样做的原因是新对象应该有自己独立的引用计数
     Standard_Transient(const Standard_Transient&) : myRefCount_(0) {}
 
     //! Assignment operator, needed to avoid copying reference counter
-    //! 赋值运算符 - 避免复制引用计数
-    //! 类似地，赋值时不修改对象本身的引用计数
+    // 赋值运算符 - 避免复制引用计数
+    // 类似地，赋值时不修改对象本身的引用计数
     Standard_Transient& operator= (const Standard_Transient&) { return *this; }
 
     //! Destructor must be virtual
-    //! 虚析构函数 - 确保派生类能被正确销毁
-    //! 当引用计数降到 0 时，系统会调用此函数
+    // 虚析构函数 - 确保派生类能被正确销毁
+    // 当引用计数降到 0 时，系统会调用此函数
     virtual ~Standard_Transient() {}
 
     //! Memory deallocator for transient classes
-    //! 为瞬时类删除内存的函数
-    //! 由 Handle 智能指针在引用计数为 0 时调用
+    // 为瞬时类删除内存的函数
+    // 由 Handle 智能指针在引用计数为 0 时调用
     Standard_EXPORT virtual void Delete() const;
 
 public:
@@ -121,24 +155,24 @@ public:
 
 public:
     //!@name Reference counting, for use by handle<>
-    //! 引用计数 - 供 Handle 智能指针使用
-    //! 这是 OCCT 内存管理的核心机制
+    // 引用计数 - 供 Handle 智能指针使用
+    // 这是 OCCT 内存管理的核心机制
 
     //! Get the reference counter of this object
-    //! 获取此对象的引用计数
-    //! 返回值表示有多少个 Handle 指向此对象
+    // 获取此对象的引用计数
+    // 返回值表示有多少个 Handle 指向此对象
     Standard_Integer GetRefCount() const { return myRefCount_; }
 
     //! Increments the reference counter of this object
-    //! 增加此对象的引用计数
-    //! 当新建一个 Handle 指向此对象时调用（+1）
+    // 增加此对象的引用计数
+    // 当新建一个 Handle 指向此对象时调用（+1）
     Standard_EXPORT void IncrementRefCounter() const;
 
     //! Decrements the reference counter of this object;
     //! returns the decremented value
-    //! 减少此对象的引用计数，并返回减少后的值
-    //! 当一个 Handle 不再指向此对象时调用（-1）
-    //! 当返回值为 0 时，对象应该被删除
+    // 减少此对象的引用计数，并返回减少后的值
+    // 当一个 Handle 不再指向此对象时调用（-1）
+    // 当返回值为 0 时，对象应该被删除
     Standard_EXPORT Standard_Integer DecrementRefCounter() const;
 
 private:
@@ -146,9 +180,10 @@ private:
     //! Reference counter.
     //! Note use of underscore, aimed to reduce probability 
     //! of conflict with names of members of derived classes.
-    //! 引用计数 - 追踪有多少个 Handle 指向此对象
-    //! 使用 myRefCount_ 这样的名称（带下划线）是为了减少与派生类成员变量名冲突的概率
-    //! volatile 关键字确保在多线程环境下的正确性
+    // 引用计数 - 追踪有多少个 Handle 指向此对象
+    // 使用 myRefCount_ 这样的名称（带下划线）是为了减少与派生类成员变量名冲突的概率
+    // volatile 关键字确保在多线程环境下的正确性
+    // mutable 关键字是为了解 const 函数之困
     mutable volatile Standard_Integer myRefCount_;
 };
 

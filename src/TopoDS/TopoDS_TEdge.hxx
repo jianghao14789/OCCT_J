@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,40 +29,24 @@ DEFINE_STANDARD_HANDLE(TopoDS_TEdge, TopoDS_TShape)
 
 //! A topological part  of a  curve  in 2D or 3D,  the
 //! boundary    is   a   set  of oriented    Vertices.
-class TopoDS_TEdge : public TopoDS_TShape
-{
+class TopoDS_TEdge : public TopoDS_TShape {
 
 public:
 
-  
-  //! Returns  EDGE.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
+    //! Returns  EDGE.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TEdge,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TEdge, TopoDS_TShape)
 
 protected:
 
-  
-  //! Construct an edge.
+    //! Construct an edge.
     TopoDS_TEdge();
-
-
 
 private:
 
-
-
-
 };
 
-
 #include <TopoDS_TEdge.lxx>
-
-
-
-
 
 #endif // _TopoDS_TEdge_HeaderFile

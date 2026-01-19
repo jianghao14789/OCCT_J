@@ -36,7 +36,6 @@ namespace {
 }
 
 class DirFunctionBis : public math_Function {
-
     math_Vector* P0;
     math_Vector* Dir;
     math_Vector* P;

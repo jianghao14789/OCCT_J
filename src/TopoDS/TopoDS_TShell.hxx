@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,43 +29,26 @@ class TopoDS_TShell;
 DEFINE_STANDARD_HANDLE(TopoDS_TShell, TopoDS_TShape)
 
 //! A set of faces connected by their edges.
-class TopoDS_TShell : public TopoDS_TShape
-{
-
+class TopoDS_TShell : public TopoDS_TShape {
 public:
 
-  
-  //! Creates an empty TShell.
+    //! Creates an empty TShell.
     TopoDS_TShell();
-  
-  //! Returns SHELL.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
-  
-  //! Returns an empty TShell.
-  Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
+    //! Returns SHELL.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
+    //! Returns an empty TShell.
+    Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TShell,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TShell, TopoDS_TShape)
 
 protected:
 
-
-
-
 private:
-
-
-
 
 };
 
-
 #include <TopoDS_TShell.lxx>
-
-
-
-
 
 #endif // _TopoDS_TShell_HeaderFile

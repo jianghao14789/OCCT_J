@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -36,20 +36,20 @@ class TopoDS_TFace : public TopoDS_TShape
 
 public:
 
-  
-  //! Creates an empty TFace.
+
+    //! Creates an empty TFace.
     TopoDS_TFace();
-  
-  //! returns FACE.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
-  
-  //! Returns an empty TFace.
-  Standard_EXPORT virtual Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
+
+    //! returns FACE.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
+
+    //! Returns an empty TFace.
+    Standard_EXPORT virtual Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
 
 
 
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TFace,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TFace, TopoDS_TShape)
 
 protected:
 

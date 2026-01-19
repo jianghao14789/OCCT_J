@@ -39,13 +39,10 @@ class math_Matrix;
 //! knowing an initial guess at the solution and using the
 //! Newton Raphson algorithm. Knowledge of all the partial
 //! derivatives (Jacobian) is required.
-class math_NewtonFunctionSetRoot
-{
+class math_NewtonFunctionSetRoot {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! Initialize correctly all the fields of this class.
     //! The range (1, F.NbVariables()) must be especially respected for
@@ -66,19 +63,16 @@ public:
     //! Initializes the tolerance values for the unknowns.
     Standard_EXPORT void SetTolerance(const math_Vector& XTol);
 
-
     //! The Newton method is done to improve the root of the function
     //! from the initial guess point. The solution is found when:
     //! abs(Xj - Xj-1)(i) <= XTol(i) and abs(Fi) <= FTol for all i;
     Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint);
-
 
     //! The Newton method is done to improve the root of the function
     //! from the initial guess point. Bounds may be given, to constrain the solution.
     //! The solution is found when:
     //! abs(Xj - Xj-1)(i) <= XTol(i) and abs(Fi) <= FTol for all i;
     Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint, const math_Vector& theInfBound, const math_Vector& theSupBound);
-
 
     //! This method is called at the end of each iteration to check if the
     //! solution is found.
@@ -137,12 +131,7 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
 
     math_Vector TolX;
     Standard_Real TolF;
@@ -153,24 +142,14 @@ protected:
     math_Vector FValues;
     math_Matrix Jacobian;
 
-
 private:
-
-
 
     Standard_Boolean Done;
     Standard_Integer State;
     Standard_Integer Iter;
     Standard_Integer Itermax;
-
-
 };
 
-
 #include <math_NewtonFunctionSetRoot.lxx>
-
-
-
-
 
 #endif // _math_NewtonFunctionSetRoot_HeaderFile

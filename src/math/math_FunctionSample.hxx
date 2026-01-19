@@ -49,23 +49,13 @@ public:
     //! An exception is raised if Index<=0 or Index>NbPoints.
     Standard_EXPORT virtual Standard_Real GetParameter(const Standard_Integer Index) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
 
     Standard_Real a;
     Standard_Real b;
     Standard_Integer n;
-
 
 };
 

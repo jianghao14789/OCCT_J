@@ -39,12 +39,10 @@ class math_FunctionSample;
 //! uses the FunctionRoots algorithm to find the points
 //! where the function is null outside the "null intervals".
 //! Knowledge of the derivative is required.
-class math_FunctionAllRoots
-{
+class math_FunctionAllRoots {
 public:
 
     DEFINE_STANDARD_ALLOC;;
-
 
     //! The algorithm uses the sample to find intervals on which
     //! the function is null. An interval is found if, for at least
@@ -92,19 +90,9 @@ public:
     //! of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     Standard_Boolean done;
     TColStd_SequenceOfReal pdeb;
     TColStd_SequenceOfReal pfin;
@@ -112,15 +100,8 @@ private:
     TColStd_SequenceOfInteger ideb;
     TColStd_SequenceOfInteger ifin;
     TColStd_SequenceOfInteger iiso;
-
-
 };
 
-
 #include <math_FunctionAllRoots.lxx>
-
-
-
-
 
 #endif // _math_FunctionAllRoots_HeaderFile

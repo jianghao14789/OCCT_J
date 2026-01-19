@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -31,38 +31,21 @@
 //! placement in the local coordinate system
 //! - has an orientation for the underlying face, in terms
 //! of its geometry (as opposed to orientation in relation to other shapes).
-class TopoDS_Face  : public TopoDS_Shape
+class TopoDS_Face : public TopoDS_Shape
 {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  //! Undefined Face.
+    //! Undefined Face.
     TopoDS_Face();
-
-
-
 
 protected:
 
-
-
-
-
 private:
-
-
-
-
 
 };
 
-
 #include <TopoDS_Face.lxx>
-
-
-
-
 
 #endif // _TopoDS_Face_HeaderFile

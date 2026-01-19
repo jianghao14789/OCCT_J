@@ -29,13 +29,10 @@
 
 
 //! Describes the virtual functions associated with a multiple variable function.
-class math_MultipleVarFunction
-{
+class math_MultipleVarFunction {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! Returns the number of variables of the function
     Standard_EXPORT virtual Standard_Integer NbVariables() const = 0;
@@ -63,20 +60,9 @@ public:
     Standard_EXPORT virtual Standard_Integer GetStateNumber();
     Standard_EXPORT virtual ~math_MultipleVarFunction();
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
-
 
 };
 

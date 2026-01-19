@@ -45,12 +45,8 @@ DEFINE_STANDARD_HANDLE(BRep_TEdge, TopoDS_TEdge)
 //! * A Degenerated flag.
 //!
 //! *  A  list   of curve representation.
-class BRep_TEdge : public TopoDS_TEdge
-{
-
+class BRep_TEdge : public TopoDS_TEdge {
 public:
-
-
     //! Creates an empty TEdge.
     Standard_EXPORT BRep_TEdge();
 
@@ -84,31 +80,16 @@ public:
     //! Dumps the content of me into the stream
     Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(BRep_TEdge, TopoDS_TEdge)
 
 protected:
 
-
-
-
 private:
-
-
     Standard_Real myTolerance;
     Standard_Integer myFlags;
     BRep_ListOfCurveRepresentation myCurves;
-
-
 };
 
-
 #include <BRep_TEdge.lxx>
-
-
-
-
 
 #endif // _BRep_TEdge_HeaderFile

@@ -1,4 +1,4 @@
-// Created on: 1991-07-19
+﻿// Created on: 1991-07-19
 // Created by: Isabelle GRIGNON
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,46 +29,29 @@
 
 
 //! for implementation, compute values for Gauss
-class CPnts_MyGaussFunction  : public math_Function
-{
+class CPnts_MyGaussFunction : public math_Function {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
     CPnts_MyGaussFunction();
-  
-  //! F  is a pointer on a  function  D is a client data
-  //!
-  //! Each value is computed with F(D)
-  Standard_EXPORT void Init (const CPnts_RealFunction& F, const Standard_Address D);
-  
-  Standard_EXPORT Standard_Boolean Value (const Standard_Real X, Standard_Real& F);
 
+    //! F  is a pointer on a  function  D is a client data
+    //!
+    //! Each value is computed with F(D)
+    Standard_EXPORT void Init(const CPnts_RealFunction& F, const Standard_Address D);
 
-
+    Standard_EXPORT Standard_Boolean Value(const Standard_Real X, Standard_Real& F);
 
 protected:
 
-
-
-
-
 private:
 
-
-
-  CPnts_RealFunction myFunction;
-  Standard_Address myData;
-
+    CPnts_RealFunction myFunction;
+    Standard_Address myData;
 
 };
 
-
 #include <CPnts_MyGaussFunction.lxx>
-
-
-
-
 
 #endif // _CPnts_MyGaussFunction_HeaderFile

@@ -1,4 +1,4 @@
-// Created on: 1990-12-13
+﻿// Created on: 1990-12-13
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -28,47 +28,30 @@ class TopoDS_TVertex;
 
 // resolve name collisions with X11 headers
 #ifdef Convex
-  #undef Convex
+#undef Convex
 #endif
 
 DEFINE_STANDARD_HANDLE(TopoDS_TVertex, TopoDS_TShape)
 
 //! A  Vertex is a topological  point in  two or three
 //! dimensions.
-class TopoDS_TVertex : public TopoDS_TShape
-{
-
+class TopoDS_TVertex : public TopoDS_TShape {
 public:
 
-  
-  //! Returns VERTEX.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
+    //! Returns VERTEX.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TVertex,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TVertex, TopoDS_TShape)
 
 protected:
 
-  
-  //! Construct a vertex.
+    //! Construct a vertex.
     TopoDS_TVertex();
-
-
 
 private:
 
-
-
-
 };
 
-
 #include <TopoDS_TVertex.lxx>
-
-
-
-
 
 #endif // _TopoDS_TVertex_HeaderFile

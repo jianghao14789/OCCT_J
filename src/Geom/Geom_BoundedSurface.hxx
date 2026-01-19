@@ -1,4 +1,4 @@
-// Created on: 1993-03-10
+﻿// Created on: 1993-03-10
 // Created by: Philippe DAUTRY
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -51,33 +51,14 @@ DEFINE_STANDARD_HANDLE(Geom_BoundedSurface, Geom_Surface)
 //! trims a surface using four isoparametric curves, i.e. it
 //! limits the variation of its parameters to a rectangle in
 //! 2D parametric space.
-class Geom_BoundedSurface : public Geom_Surface
-{
-
+class Geom_BoundedSurface : public Geom_Surface {
 public:
-
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(Geom_BoundedSurface,Geom_Surface)
+    DEFINE_STANDARD_RTTIEXT(Geom_BoundedSurface, Geom_Surface)
 
 protected:
 
-
-
-
 private:
 
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Geom_BoundedSurface_HeaderFile

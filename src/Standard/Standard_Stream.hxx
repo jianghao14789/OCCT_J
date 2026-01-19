@@ -12,13 +12,14 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+// READ
 #ifndef _Standard_Stream_HeaderFile
 #define _Standard_Stream_HeaderFile
 
 #include <Standard_Macro.hxx>
 
 #include <iostream>
-#include <iomanip>
+#include <iomanip> // 输入输出操纵符
 #include <fstream>
 
 #endif // _Standard_Stream_HeaderFile

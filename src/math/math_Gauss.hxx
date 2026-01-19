@@ -40,10 +40,8 @@ class math_Matrix;
 //! - solution of a set of linear equations.
 //! - inverse of a matrix.
 //! - determinant of a matrix.
-class math_Gauss
-{
+class math_Gauss {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Given an input n X n matrix A this constructor performs its LU

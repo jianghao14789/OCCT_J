@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -30,43 +30,26 @@ DEFINE_STANDARD_HANDLE(TopoDS_TSolid, TopoDS_TShape)
 
 //! A Topological part of 3D space, bounded by shells,
 //! edges and vertices.
-class TopoDS_TSolid : public TopoDS_TShape
-{
-
+class TopoDS_TSolid : public TopoDS_TShape {
 public:
 
-  
-  //! Creates an empty TSolid.
+    //! Creates an empty TSolid.
     TopoDS_TSolid();
-  
-  //! returns SOLID.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
-  
-  //! Returns an empty TSolid.
-  Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
+    //! returns SOLID.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
+    //! Returns an empty TSolid.
+    Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TSolid,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TSolid, TopoDS_TShape)
 
 protected:
 
-
-
-
 private:
-
-
-
 
 };
 
-
 #include <TopoDS_TSolid.lxx>
-
-
-
-
 
 #endif // _TopoDS_TSolid_HeaderFile

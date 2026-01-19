@@ -38,8 +38,7 @@ static Standard_Boolean myDebug = 0;
 static Standard_Integer nbsolve = 0;
 #endif
 
-class DerivFunction : public math_Function
-{
+class DerivFunction : public math_Function {
     math_FunctionWithDerivative* myF;
 
 public:
@@ -1077,9 +1076,7 @@ math_FunctionRoots::math_FunctionRoots(math_FunctionWithDerivative& F,
 }
 
 
-void math_FunctionRoots::Dump(Standard_OStream& o) const
-{
-
+void math_FunctionRoots::Dump(Standard_OStream& o) const {
     o << "math_FunctionRoots ";
     if (Done) {
         o << " Status = Done \n";

@@ -66,9 +66,7 @@
 //#define FSR_DEBUG(arg) {if (mydebug) { std::cout << arg << std::endl; }}
 //===========================================================
 
-class MyDirFunction : public math_Function
-{
-
+class MyDirFunction : public math_Function {
     math_Vector* P0;
     math_Vector* Dir;
     math_Vector* P;

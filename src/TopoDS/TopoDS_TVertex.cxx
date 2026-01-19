@@ -1,4 +1,4 @@
-// Created on: 1991-04-10
+﻿// Created on: 1991-04-10
 // Created by: Remi LEQUETTE
 // Copyright (c) 1991-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -20,7 +20,7 @@
 #include <TopoDS_TVertex.hxx>
 #include <TopoDS_Shape.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(TopoDS_TVertex,TopoDS_TShape)
+IMPLEMENT_STANDARD_RTTIEXT(TopoDS_TVertex, TopoDS_TShape)
 
 //=======================================================================
 //function : ShapeType
@@ -28,5 +28,5 @@ IMPLEMENT_STANDARD_RTTIEXT(TopoDS_TVertex,TopoDS_TShape)
 //=======================================================================
 TopAbs_ShapeEnum TopoDS_TVertex::ShapeType() const
 {
-  return TopAbs_VERTEX;
+    return TopAbs_VERTEX;
 }

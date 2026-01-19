@@ -1,4 +1,4 @@
-// Created on: 2013-08-25
+﻿// Created on: 2013-08-25
 // Created by: Kirill GAVRILOV
 // Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
@@ -21,10 +21,10 @@
 //! Debug context routines
 struct OpenGl_ArbDbg : protected OpenGl_GlFunctions
 {
-  using OpenGl_GlFunctions::glDebugMessageControl;
-  using OpenGl_GlFunctions::glDebugMessageInsert;
-  using OpenGl_GlFunctions::glDebugMessageCallback;
-  using OpenGl_GlFunctions::glGetDebugMessageLog;
+    using OpenGl_GlFunctions::glDebugMessageControl;
+    using OpenGl_GlFunctions::glDebugMessageInsert;
+    using OpenGl_GlFunctions::glDebugMessageCallback;
+    using OpenGl_GlFunctions::glGetDebugMessageLog;
 };
 
 #endif // _OpenGl_ArbDbg_H__

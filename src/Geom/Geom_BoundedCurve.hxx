@@ -1,4 +1,4 @@
-// Created on: 1993-03-10
+﻿// Created on: 1993-03-10
 // Created by: JCV
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -42,42 +42,25 @@ DEFINE_STANDARD_HANDLE(Geom_BoundedCurve, Geom_Curve)
 //! - Geom_TrimmedCurve to trim a curve, i.e. to only
 //! take part of the curve limited by two values of the
 //! parameter of the basis curve.
-class Geom_BoundedCurve : public Geom_Curve
-{
+class Geom_BoundedCurve : public Geom_Curve {
 
 public:
 
-  
-  //! Returns the end point of the curve.
-  Standard_EXPORT virtual gp_Pnt EndPoint() const = 0;
-  
-  //! Returns the start point of the curve.
-  Standard_EXPORT virtual gp_Pnt StartPoint() const = 0;
+    //! Returns the end point of the curve.
+    Standard_EXPORT virtual gp_Pnt EndPoint() const = 0;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Returns the start point of the curve.
+    Standard_EXPORT virtual gp_Pnt StartPoint() const = 0;
 
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(Geom_BoundedCurve,Geom_Curve)
+    DEFINE_STANDARD_RTTIEXT(Geom_BoundedCurve, Geom_Curve)
 
 protected:
 
-
-
-
 private:
 
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Geom_BoundedCurve_HeaderFile

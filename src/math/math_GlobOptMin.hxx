@@ -48,8 +48,7 @@
 //! It is possible to set / get minimal value of the functional.
 //! It works well together with single solution search.
 //! This functionality is covered by SetFunctionalMinimalValue and GetFunctionalMinimalValue API.
-class math_GlobOptMin
-{
+class math_GlobOptMin {
 public:
 
     //! Constructor. Perform method is not called from it.

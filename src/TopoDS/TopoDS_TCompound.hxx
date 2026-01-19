@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,43 +29,26 @@ class TopoDS_TCompound;
 DEFINE_STANDARD_HANDLE(TopoDS_TCompound, TopoDS_TShape)
 
 //! A TCompound is an all-purpose set of Shapes.
-class TopoDS_TCompound : public TopoDS_TShape
-{
-
+class TopoDS_TCompound : public TopoDS_TShape {
 public:
 
-  
-  //! Creates an empty TCompound.
+    //! Creates an empty TCompound.
     TopoDS_TCompound();
-  
-  //! Returns COMPOUND.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
-  
-  //! Returns an empty TCompound.
-  Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
+    //! Returns COMPOUND.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
+    //! Returns an empty TCompound.
+    Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TCompound,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TCompound, TopoDS_TShape)
 
 protected:
 
-
-
-
 private:
-
-
-
 
 };
 
-
 #include <TopoDS_TCompound.lxx>
-
-
-
-
 
 #endif // _TopoDS_TCompound_HeaderFile

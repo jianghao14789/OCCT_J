@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2014 OPEN CASCADE SAS
+﻿// Copyright (c) 2014-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -24,23 +24,22 @@
 //! C(u), U1 <= u <= U2 and line passing through points C(U1) and C(U2)
 //! This function is used in any minimisation algorithm to define maximal deviation between curve and line,
 //! which required one variable function without derivative (for ex. math_BrentMinimum)
-class GCPnts_DistFunction2d : public math_Function
-{
+class GCPnts_DistFunction2d : public math_Function {
 public:
-  Standard_EXPORT GCPnts_DistFunction2d(const Adaptor2d_Curve2d& theCurve,
-                                        const Standard_Real U1, const Standard_Real U2);
-  //
-  Standard_EXPORT GCPnts_DistFunction2d(const GCPnts_DistFunction2d& theOther);
+    Standard_EXPORT GCPnts_DistFunction2d(const Adaptor2d_Curve2d& theCurve,
+        const Standard_Real U1, const Standard_Real U2);
+    //
+    Standard_EXPORT GCPnts_DistFunction2d(const GCPnts_DistFunction2d& theOther);
 
-  Standard_EXPORT virtual Standard_Boolean Value (const Standard_Real X,
-                                                        Standard_Real& F);
+    Standard_EXPORT virtual Standard_Boolean Value(const Standard_Real X,
+        Standard_Real& F);
 private:
-  GCPnts_DistFunction2d & operator = (const GCPnts_DistFunction2d & theOther);
+    GCPnts_DistFunction2d& operator = (const GCPnts_DistFunction2d& theOther);
 
-  const Adaptor2d_Curve2d& myCurve;
-  gp_Lin2d myLin;
-  Standard_Real myU1;
-  Standard_Real myU2;
+    const Adaptor2d_Curve2d& myCurve;
+    gp_Lin2d myLin;
+    Standard_Real myU1;
+    Standard_Real myU2;
 };
 //
 //! The same as class GCPnts_DistFunction2d, 
@@ -49,17 +48,17 @@ private:
 class GCPnts_DistFunction2dMV : public math_MultipleVarFunction
 {
 public:
-  Standard_EXPORT GCPnts_DistFunction2dMV(GCPnts_DistFunction2d& theCurvLinDist);
+    Standard_EXPORT GCPnts_DistFunction2dMV(GCPnts_DistFunction2d& theCurvLinDist);
 
-  Standard_EXPORT virtual Standard_Boolean Value (const math_Vector& X,
-                                                        Standard_Real& F);
+    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& X,
+        Standard_Real& F);
 
 
-  Standard_EXPORT virtual Standard_Integer NbVariables() const;
+    Standard_EXPORT virtual Standard_Integer NbVariables() const;
 
 private:
-  GCPnts_DistFunction2dMV & operator = (const GCPnts_DistFunction2dMV & theOther);
-  GCPnts_DistFunction2d& myMaxCurvLinDist;
+    GCPnts_DistFunction2dMV& operator = (const GCPnts_DistFunction2dMV& theOther);
+    GCPnts_DistFunction2d& myMaxCurvLinDist;
 };
 //
 

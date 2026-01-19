@@ -30,16 +30,13 @@ math_FunctionSample::math_FunctionSample(const Standard_Real A,
 }
 
 void math_FunctionSample::Bounds(Standard_Real& A, Standard_Real& B) const {
-
     A = a;
     B = b;
 }
 
-
 Standard_Integer math_FunctionSample::NbPoints() const {
     return n;
 }
-
 
 Standard_Real math_FunctionSample::GetParameter(const Standard_Integer Index) const {
     Standard_OutOfRange_Raise_if((Index <= 0) || (Index > n), " ");

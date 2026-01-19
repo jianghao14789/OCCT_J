@@ -163,74 +163,76 @@ namespace opencascade {
 //! 
 //! Only single chain of inheritance is supported, with a root base class Standard_Transient.
 //! 
-//! 该类为继承自 Standard_Transient 的 OCCT 类提供运行时类型信息（RTTI）的传统接口。
-//! 
-//! 除了标准 C++ RTTI（type_info）提供的功能，Standard_Type 允许将描述符作为对象传递，
-//! 并用于类型分析：
-//! - 获取父类的描述符
-//! - 获取类的用户定义名称
-//! - 获取对象大小
-//!
-//! 使用静态模板方法 Instance() 获取给定类型的描述符。
-//! 支持 OCCT RTTI 的对象通过 DynamicType() 方法返回其类型描述符。
-//!
-//! 为了与 OCCT 类型系统兼容，类应提供：
-//! - typedef base_type 到层次结构中的基类
-//! - get_type_name() 方法返回类的程序员定义名称（作为静态分配的常量 C 字符串或字符串文字）
-//!
-//! 注意使用用户定义的名称，因为 typeid.name() 通常以编译器相关的方式重整。
-//! 仅支持单链继承，根基类是 Standard_Transient。
+// 该类为继承自 Standard_Transient 的 OCCT 类提供运行时类型信息（RTTI）的传统接口。
+// 
+// 除了标准 C++ RTTI（type_info）提供的功能，Standard_Type 允许将描述符作为对象传递，
+// 并用于类型分析：
+// - 获取父类的描述符
+// - 获取类的用户定义名称
+// - 获取对象大小
+// 
+// 使用静态模板方法 Instance() 获取给定类型的描述符。
+// 支持 OCCT RTTI 的对象通过 DynamicType() 方法返回其类型描述符。
+// 
+// 为了与 OCCT 类型系统兼容，类应提供:
+// - typedef base_type 到层次结构中的基类
+// - get_type_name() 方法返回类的程序员定义名称 (作为静态分配的常量 C 字符串或字符串文字)
+// 
+// 注意使用用户定义的名称，因为 typeid.name() 通常以编译器相关的方式重整.
+// 仅支持单链继承, 根基类是 Standard_Transient.
 
+// RTTI 的唯一作用: 在程序运行时, 透过基类指针, 看清对象的真面目
 class Standard_Type : public Standard_Transient
 {
 public:
 
     //! Returns the system type name of the class (typeinfo.name)
-    //! 返回类的系统类型名称（来自 typeinfo.name）
-    //! 此名称是编译器生成的，通常被重整（mangled），不易读
+    // 返回类的系统类型名称（来自 typeinfo.name）
+    // 此名称是编译器生成的，通常被重整（mangled），不易读
+    // READ by jh
     Standard_CString SystemName() const { return mySystemName; }
 
     //! Returns the given name of the class type (get_type_name)
-    //! 返回类型的给定名称（来自 get_type_name）
-    //! 此名称是程序员定义的，易读，推荐使用
+    // 返回类型的给定名称（来自 get_type_name）
+    // 此名称是程序员定义的，易读，推荐使用
+    // READ by jh
     Standard_CString Name() const { return myName; }
 
     //! Returns the size of the class instance in bytes
-    //! 返回类实例的大小（字节）
-    //! 等同于 sizeof(ClassName)
+    // 返回类实例的大小（字节）
+    // 等同于 sizeof(ClassName)
+    // READ by jh
     Standard_Size Size() const { return mySize; }
 
     //! Returns descriptor of the base class in the hierarchy
-    //! 返回层次结构中基类的描述符
-    //! 如果已经是根类（Standard_Transient），返回 NULL
+    // 返回层次结构中基类的描述符
+    // 如果已经是根类（Standard_Transient），返回 NULL
+    // READ by jh
     const Handle(Standard_Type)& Parent() const { return myParent; }
 
     //! Returns True if this type is the same as theOther, or inherits from theOther.
     //! Note that multiple inheritance is not supported.
-    //! 检查此类型是否与 theOther 相同，或继承自 theOther
-    //! 返回 True 表示存在继承关系
-    //! 注意：不支持多重继承
+    // 检查此类型是否与 theOther 相同，或继承自 theOther
+    // 返回 True 表示存在继承关系
+    // 注意：不支持多重继承
     Standard_EXPORT Standard_Boolean SubType(const Handle(Standard_Type)& theOther) const;
 
     //! Returns True if this type is the same as theOther, or inherits from theOther.
-    //! Note that multiple inheritance is not supported.
-    //! 通过名称检查此类型是否与 theOther 相同，或继承自 theOther
+    // Note that multiple inheritance is not supported.
+    // 通过名称检查此类型是否与 theOther 相同，或继承自 theOther
     Standard_EXPORT Standard_Boolean SubType(const Standard_CString theOther) const;
 
     //! Prints type (address of descriptor + name) to a stream
-    //! 将类型信息（描述符地址 + 名称）打印到流
-    //! 用于调试和日志记录
+    // 将类型信息（描述符地址 + 名称）打印到流
+    // 用于调试和日志记录
     Standard_EXPORT void Print(Standard_OStream& theStream) const;
 
     //! Template function returning instance of the type descriptor for an argument class.
-    //!
     //! For optimization, each type is registered only once (due to use of the static variable).
-    //!
     //! See helper macro DEFINE_STANDARD_RTTI for defining these items in the class.
-    //! 
-    //! 模板函数返回参数类的类型描述符实例
-    //! 为优化，每个类型只被注册一次（使用静态变量）
-    //! 见宏 DEFINE_STANDARD_RTTI_INLINE 或 DEFINE_STANDARD_RTTIEXT
+    // 模板函数返回参数类的类型描述符实例
+    // 为优化，每个类型只被注册一次（使用静态变量）
+    // 见宏 DEFINE_STANDARD_RTTI_INLINE 或 DEFINE_STANDARD_RTTIEXT
     template <class T>
     static const Handle(Standard_Type)& Instance()
     {
@@ -245,19 +247,19 @@ public:
     //! @param theParent base class in the Transient hierarchy
     //!
     //! Note that this function is intended for use by opencascade::type_instance only. 
-    //! 
-    //! 注册一个类型；返回新的或现有的描述符
-    //! @param theSystemName 类的系统名称（来自 typeid(class).name()）
-    //! @param theName 要存储在 Name 字段中的类名称
-    //! @param theSize 类实例的大小
-    //! @param theParent Transient 层次结构中的基类
-    //! 注意：此函数仅供 opencascade::type_instance 内部使用
+    //
+    // 注册一个类型；返回新的或现有的描述符
+    // @param theSystemName 类的系统名称（来自 typeid(class).name()）
+    // @param theName 要存储在 Name 字段中的类名称
+    // @param theSize 类实例的大小
+    // @param theParent Transient 层次结构中的基类
+    // 注意：此函数仅供 opencascade::type_instance 内部使用
     Standard_EXPORT static
         Standard_Type* Register(const char* theSystemName, const char* theName,
             Standard_Size theSize, const Handle(Standard_Type)& theParent);
 
     //! Destructor removes the type from the registry
-    //! 析构函数从注册表中删除类型
+    // 析构函数从注册表中删除类型
     Standard_EXPORT ~Standard_Type();
 
     // Define own RTTI
@@ -273,13 +275,13 @@ private:
 
 private:
     Standard_CString mySystemName;  //!< System name of the class (typeinfo.name)
-    //!< 类的系统名称（来自 typeinfo.name）
+    // 类的系统名称（来自 typeinfo.name）
     Standard_CString myName;        //!< Given name of the class
-    //!< 给定的类名称（易读）
+    // 给定的类名称（易读）
     Standard_Size mySize;           //!< Size of the class instance, in bytes
-    //!< 类实例的大小（字节）
+    // 类实例的大小（字节）
     Handle(Standard_Type) myParent; //!< Type descriptor of parent class
-    //!< 父类的类型描述符
+    // 父类的类型描述符
 };
 
 namespace opencascade {
@@ -368,7 +370,7 @@ namespace opencascade {
 }
 
 //! Operator printing type descriptor to stream
-//! 操作符将类型描述符打印到流
+// 操作符将类型描述符打印到流
 inline Standard_OStream& operator << (Standard_OStream& theStream, const Handle(Standard_Type)& theType)
 {
     theType->Print(theStream);
@@ -376,7 +378,7 @@ inline Standard_OStream& operator << (Standard_OStream& theStream, const Handle(
 }
 
 //! Definition of Handle_Standard_Type as typedef for compatibility
-//! 为兼容性定义 Handle_Standard_Type 为 typedef
+// 为兼容性定义 Handle_Standard_Type 为 typedef
 DEFINE_STANDARD_HANDLE(Standard_Type, Standard_Transient)
 
 #endif // _Standard_Type_HeaderFile

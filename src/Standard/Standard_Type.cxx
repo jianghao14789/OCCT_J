@@ -33,6 +33,8 @@ namespace {
     }
 }
 
+// READ by jh
+// 仅能被 Standard_Type::Register() 调用
 Standard_Type::Standard_Type(const char* theSystemName,
     const char* theName,
     Standard_Size theSize,
@@ -40,27 +42,28 @@ Standard_Type::Standard_Type(const char* theSystemName,
     mySystemName(copy_string(theSystemName)),
     myName(copy_string(theName)),
     mySize(theSize),
-    myParent(theParent)
-{
+    myParent(theParent) {
 }
 
 //============================================================================
-
-Standard_Boolean Standard_Type::SubType(const Handle(Standard_Type)& theOther) const
-{
-    return !theOther.IsNull() && (theOther == this || (!myParent.IsNull() && myParent->SubType(theOther)));
+// READ by jh
+Standard_Boolean Standard_Type::SubType(const Handle(Standard_Type)& theOther) const {
+    return !theOther.IsNull()
+        && (theOther == this || (!myParent.IsNull() && myParent->SubType(theOther)));
+    // 一直向上调用
 }
 
 //============================================================================
-
-Standard_Boolean Standard_Type::SubType(const Standard_CString theName) const
-{
-    return theName != 0 && (IsEqual(myName, theName) || (!myParent.IsNull() && myParent->SubType(theName)));
+// READ by jh
+Standard_Boolean Standard_Type::SubType(const Standard_CString theName) const {
+    return theName != 0 &&
+        (IsEqual(myName, theName) || (!myParent.IsNull() && myParent->SubType(theName)));
 }
 
 // ------------------------------------------------------------------
 // Print (me; s: in out OStream) returns OStream;
 // ------------------------------------------------------------------
+// READ by jh
 void Standard_Type::Print(Standard_OStream& AStream) const
 {
     AStream << std::hex << (Standard_Address)this << " : " << std::dec << myName;
@@ -72,18 +75,15 @@ void Standard_Type::Print(Standard_OStream& AStream) const
 
 namespace {
     // Value-based hasher for plain C string (char*)
-    struct CStringHasher
-    {
+    struct CStringHasher {
         //! Computes a hash code of the given Standard_CString, in the range [1, theUpperBound]
         //! @param theKey the key which hash code is to be computed
         //! @param theUpperBound the upper bound of the range a computing hash code must be within
         //! @return a computed hash code, in the range [1, theUpperBound]
-        static Standard_Integer HashCode(const Standard_CString& theKey, const Standard_Integer theUpperBound)
-        {
+        static Standard_Integer HashCode(const Standard_CString& theKey, const Standard_Integer theUpperBound) {
             return ::HashCode(theKey, theUpperBound);
         }
-        static bool IsEqual(const Standard_CString& theKey1, const Standard_CString& theKey2)
-        {
+        static bool IsEqual(const Standard_CString& theKey1, const Standard_CString& theKey2) {
             return !strcmp(theKey1, theKey2);
         }
     };
@@ -93,8 +93,11 @@ namespace {
 
     // Registry is made static in the function to ensure that it gets
     // initialized by the time of first access
-    registry_type& GetRegistry()
-    {
+    // READ by jh
+    registry_type& GetRegistry() {
+        // C++ 保证：函数内的静态变量，只有在程序执行流 第一次经过这行代码时,
+        // 才会被初始化
+        // 这种写法还有一个有趣的名字叫 Meyers Singleton, 就是为了解决静态初始化顺序问题
         static registry_type theRegistry;
         return theRegistry;
     }
@@ -103,12 +106,14 @@ namespace {
     Handle(Standard_Type) theType = STANDARD_TYPE(Standard_Transient);
 }
 
+// READ by jh
+// 注册 Type 信息, 并加入全局的注册器里
 Standard_Type* Standard_Type::Register(const char* theSystemName, const char* theName,
     Standard_Size theSize, const Handle(Standard_Type)& theParent)
 {
     // Access to registry is protected by mutex; it should not happen often because
     // instances are cached by Standard_Type::Instance() (one per binary module)
-    static Standard_Mutex theMutex;
+    static Standard_Mutex theMutex; // 全局唯一
     Standard_Mutex::Sentry aSentry(theMutex);
 
     // return existing descriptor if already in the registry
@@ -128,8 +133,8 @@ Standard_Type* Standard_Type::Register(const char* theSystemName, const char* th
     return aType;
 }
 
-Standard_Type::~Standard_Type()
-{
+// READ by jh
+Standard_Type::~Standard_Type() {
     // remove descriptor from the registry
     registry_type& aRegistry = GetRegistry();
     Standard_ASSERT(aRegistry.UnBind(mySystemName), "Standard_Type::~Standard_Type() cannot find itself in registry", );

@@ -1,4 +1,4 @@
-// Created on: 1993-03-10
+﻿// Created on: 1993-03-10
 // Created by: JCV
 // Copyright (c) 1993-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -60,71 +60,70 @@ DEFINE_STANDARD_HANDLE(Geom_ElementarySurface, Geom_Surface)
 //! - if it is indirect, the two definitions of trigonometric
 //! sense are opposite:
 //! "main Direction" = - "X Direction" ^ "Y Direction"
-class Geom_ElementarySurface : public Geom_Surface
-{
+class Geom_ElementarySurface : public Geom_Surface {
 public:
 
-  //! Changes the main axis (ZAxis) of the elementary surface.
-  //!
-  //! Raised if the direction of A1 is parallel to the XAxis of the
-  //! coordinate system of the surface.
-  void SetAxis (const gp_Ax1& theA1) { pos.SetAxis(theA1); }
+    //! Changes the main axis (ZAxis) of the elementary surface.
+    //!
+    //! Raised if the direction of A1 is parallel to the XAxis of the
+    //! coordinate system of the surface.
+    void SetAxis(const gp_Ax1& theA1) { pos.SetAxis(theA1); }
 
-  //! Changes the location of the local coordinates system of the
-  //! surface.
-  void SetLocation (const gp_Pnt& theLoc) { pos.SetLocation(theLoc); }
+    //! Changes the location of the local coordinates system of the
+    //! surface.
+    void SetLocation(const gp_Pnt& theLoc) { pos.SetLocation(theLoc); }
 
-  //! Changes the local coordinates system of the surface.
-  void SetPosition (const gp_Ax3& theAx3) { pos = theAx3; }
-  
-  //! Returns the main axis of the surface (ZAxis).
-  const gp_Ax1& Axis() const { return pos.Axis(); }
+    //! Changes the local coordinates system of the surface.
+    void SetPosition(const gp_Ax3& theAx3) { pos = theAx3; }
 
-  //! Returns the location point of the local coordinate system of the
-  //! surface.
-  const gp_Pnt& Location() const { return pos.Location(); }
-  
-  //! Returns the local coordinates system of the surface.
-  const gp_Ax3& Position() const { return pos; }
+    //! Returns the main axis of the surface (ZAxis).
+    const gp_Ax1& Axis() const { return pos.Axis(); }
 
-  //! Reverses the U parametric direction of the surface.
-  Standard_EXPORT virtual void UReverse() Standard_OVERRIDE;
-  
-  //! Return the  parameter on the  Ureversed surface for
-  //! the point of parameter U on <me>.
-  //!
-  //! me->UReversed()->Value(me->UReversedParameter(U),V)
-  //! is the same point as
-  //! me->Value(U,V)
-  Standard_EXPORT virtual Standard_Real UReversedParameter (const Standard_Real U) const Standard_OVERRIDE = 0;  
+    //! Returns the location point of the local coordinate system of the
+    //! surface.
+    const gp_Pnt& Location() const { return pos.Location(); }
 
-  //! Reverses the V parametric direction of the surface.
-  Standard_EXPORT virtual void VReverse() Standard_OVERRIDE;
-  
-  //! Return the  parameter on the  Vreversed surface for
-  //! the point of parameter V on <me>.
-  //!
-  //! me->VReversed()->Value(U,me->VReversedParameter(V))
-  //! is the same point as
-  //! me->Value(U,V)
-  Standard_EXPORT virtual Standard_Real VReversedParameter (const Standard_Real V) const Standard_OVERRIDE = 0;
-  
-  //! Returns GeomAbs_CN, the global continuity of any elementary surface.
-  Standard_EXPORT GeomAbs_Shape Continuity() const Standard_OVERRIDE;
-  
-  //! Returns True.
-  Standard_EXPORT Standard_Boolean IsCNu (const Standard_Integer N) const Standard_OVERRIDE;
-  
-  //! Returns True.
-  Standard_EXPORT Standard_Boolean IsCNv (const Standard_Integer N) const Standard_OVERRIDE;
+    //! Returns the local coordinates system of the surface.
+    const gp_Ax3& Position() const { return pos; }
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Reverses the U parametric direction of the surface.
+    Standard_EXPORT virtual void UReverse() Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(Geom_ElementarySurface,Geom_Surface)
+    //! Return the  parameter on the  Ureversed surface for
+    //! the point of parameter U on <me>.
+    //!
+    //! me->UReversed()->Value(me->UReversedParameter(U),V)
+    //! is the same point as
+    //! me->Value(U,V)
+    Standard_EXPORT virtual Standard_Real UReversedParameter(const Standard_Real U) const Standard_OVERRIDE = 0;
+
+    //! Reverses the V parametric direction of the surface.
+    Standard_EXPORT virtual void VReverse() Standard_OVERRIDE;
+
+    //! Return the  parameter on the  Vreversed surface for
+    //! the point of parameter V on <me>.
+    //!
+    //! me->VReversed()->Value(U,me->VReversedParameter(V))
+    //! is the same point as
+    //! me->Value(U,V)
+    Standard_EXPORT virtual Standard_Real VReversedParameter(const Standard_Real V) const Standard_OVERRIDE = 0;
+
+    //! Returns GeomAbs_CN, the global continuity of any elementary surface.
+    Standard_EXPORT GeomAbs_Shape Continuity() const Standard_OVERRIDE;
+
+    //! Returns True.
+    Standard_EXPORT Standard_Boolean IsCNu(const Standard_Integer N) const Standard_OVERRIDE;
+
+    //! Returns True.
+    Standard_EXPORT Standard_Boolean IsCNv(const Standard_Integer N) const Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(Geom_ElementarySurface, Geom_Surface)
 
 protected:
-  gp_Ax3 pos;
+    gp_Ax3 pos;
 };
 
 #endif // _Geom_ElementarySurface_HeaderFile

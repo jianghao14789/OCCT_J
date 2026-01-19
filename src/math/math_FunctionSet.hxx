@@ -26,15 +26,11 @@
 #include <math_Vector.hxx>
 
 
-
 //! This abstract class describes the virtual functions associated to
 //! a set on N Functions of M independent variables.
-class math_FunctionSet
-{
+class math_FunctionSet {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns the number of variables of the function.
     Standard_EXPORT virtual Standard_Integer NbVariables() const = 0;
@@ -65,27 +61,10 @@ public:
     Standard_EXPORT virtual Standard_Integer GetStateNumber();
     Standard_EXPORT virtual ~math_FunctionSet();
 
-
-
-
 protected:
-
-
-
-
 
 private:
 
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _math_FunctionSet_HeaderFile

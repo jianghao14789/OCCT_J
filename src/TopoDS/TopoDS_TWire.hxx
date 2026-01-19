@@ -1,4 +1,4 @@
-// Created on: 1990-12-17
+﻿// Created on: 1990-12-17
 // Created by: Remi Lequette
 // Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,43 +29,26 @@ class TopoDS_TWire;
 DEFINE_STANDARD_HANDLE(TopoDS_TWire, TopoDS_TShape)
 
 //! A set of edges connected by their vertices.
-class TopoDS_TWire : public TopoDS_TShape
-{
-
+class TopoDS_TWire : public TopoDS_TShape {
 public:
 
-  
-  //! Creates an empty TWire.
+    //! Creates an empty TWire.
     TopoDS_TWire();
-  
-  //! Returns WIRE.
-  Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
-  
-  //! Returns an empty TWire.
-  Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
+    //! Returns WIRE.
+    Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
+    //! Returns an empty TWire.
+    Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_TWire,TopoDS_TShape)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_TWire, TopoDS_TShape)
 
 protected:
 
-
-
-
 private:
-
-
-
 
 };
 
-
 #include <TopoDS_TWire.lxx>
-
-
-
-
 
 #endif // _TopoDS_TWire_HeaderFile
