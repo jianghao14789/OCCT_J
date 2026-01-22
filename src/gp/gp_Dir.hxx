@@ -26,24 +26,27 @@ class gp_Ax2;
 class gp_Trsf;
 
 //! Describes a unit vector in 3D space. This unit vector is also called "Direction".
-//! See Also
-//! gce_MakeDir which provides functions for more complex
-//! unit vector constructions
-//! Geom_Direction which provides additional functions for
-//! constructing unit vectors and works, in particular, with the
-//! parametric equations of unit vectors.
+// 描述 3D 空间中的单位向量。该单位向量也被称为“方向”。
+//
+// CAD 小贴士：gp_Dir 与 gp_Vec 的区别在于，gp_Dir 的模（长度）始终为 1。
+// 它专门用于表示纯粹的方向信息，例如平面的法线、圆柱的轴线等。
+// 注意：任何改变 gp_Dir 坐标的操作都会导致它自动重新归一化。
 class gp_Dir {
 public:
     DEFINE_STANDARD_ALLOC;
 
     //! Creates a direction corresponding to X axis.
+    // 默认构造函数，创建一个指向 X 轴正方向的单位向量 (1,0,0)。
     gp_Dir() : coord(1., 0., 0.) {}
 
     //! Normalizes the vector theV and creates a direction. Raises ConstructionError if theV.Magnitude() <= Resolution.
+    // 从向量 gp_Vec 创建方向。会自动对向量进行归一化。
+    // 如果向量的长度几乎为 0，则抛出异常。
     gp_Dir(const gp_Vec& theV);
 
     //! Creates a direction from a triplet of coordinates. Raises ConstructionError if theCoord.Modulus() <= Resolution
     //! from gp.
+    // 从 gp_XYZ 坐标组创建方向。会自动归一化。
     gp_Dir(const gp_XYZ& theCoord);
 
     //! Creates a direction with its 3 cartesian coordinates. Raises ConstructionError if Sqrt(theXv*theXv + theYv*theYv
@@ -51,6 +54,7 @@ public:
     //! theZv*theZv) <= Resolution from gp where theXv, theYv ,theZv are the new coordinates it is not possible to
     //! construct the direction and the method raises the
     //! exception ConstructionError.
+    // 使用给定的 X, Y, Z 分量创建方向。会自动归一化。
     gp_Dir(const Standard_Real theXv, const Standard_Real theYv, const Standard_Real theZv);
 
     //! For this unit vector,  assigns the value Xi to:
@@ -69,23 +73,30 @@ public:
     //! -   the modulus of the number triple formed by the new
     //! value theXi and the two other coordinates of this vector
     //! that were not directly modified.
+    // 设置指定索引的分量，并重新归一化。
+    // 注意：由于归一化的存在，修改一个分量可能会间接改变其他分量的值。
     void SetCoord(const Standard_Integer theIndex, const Standard_Real theXi);
 
     //! For this unit vector,  assigns the values theXv, theYv and theZv to its three coordinates.
     //! Remember that all the coordinates of a unit vector are
     //! implicitly modified when any single one is changed directly.
+    // 同时设置三个分量，并重新归一化。
     void SetCoord(const Standard_Real theXv, const Standard_Real theYv, const Standard_Real theZv);
 
     //! Assigns the given value to the X coordinate of this   unit vector.
+    // 设置 X 分量，并重新归一化。
     void SetX(const Standard_Real theX);
 
     //! Assigns the given value to the Y coordinate of this   unit vector.
+    // 设置 Y 分量，并重新归一化。
     void SetY(const Standard_Real theY);
 
     //! Assigns the given value to the Z  coordinate of this   unit vector.
+    // 设置 Z 分量，并重新归一化。
     void SetZ(const Standard_Real theZ);
 
     //! Assigns the three coordinates of theCoord to this unit vector.
+    // 使用 gp_XYZ 设置坐标，并重新归一化。
     void SetXYZ(const gp_XYZ& theCoord);
 
     //! Returns the coordinate of range theIndex :
@@ -94,11 +105,13 @@ public:
     //! theIndex = 3 => Z is returned
     //! Exceptions
     //! Standard_OutOfRange if theIndex is not 1, 2, or 3.
+    // 获取指定索引的分量值。
     Standard_Real Coord(const Standard_Integer theIndex) const {
         return coord.Coord(theIndex);
     }
 
     //! Returns for the  unit vector  its three coordinates theXv, theYv, and theZv.
+    // 同时获取三个分量的值。
     void Coord(Standard_Real& theXv, Standard_Real& theYv, Standard_Real& theZv) const {
         coord.Coord(theXv, theYv, theZv);
     }
@@ -119,17 +132,20 @@ public:
     }
 
     //! for this unit vector, returns  its three coordinates as a number triplea.
+    // 返回底层的 gp_XYZ 对象。
     const gp_XYZ& XYZ() const {
         return coord;
     }
 
     //! Returns True if the angle between the two directions is
     //! lower or equal to theAngularTolerance.
+    // 检查两个方向是否相等（夹角在容差范围内）。
     Standard_Boolean IsEqual(const gp_Dir& theOther, const Standard_Real theAngularTolerance) const {
         return Angle(theOther) <= theAngularTolerance;
     }
 
     //! Returns True if  the angle between this unit vector and the unit vector theOther is equal to Pi/2 (normal).
+    // 检查两个方向是否垂直。
     Standard_Boolean IsNormal(const gp_Dir& theOther, const Standard_Real theAngularTolerance) const {
         Standard_Real anAng = M_PI / 2.0 - Angle(theOther);
         if (anAng < 0) {
@@ -139,6 +155,7 @@ public:
     }
 
     //! Returns True if  the angle between this unit vector and the unit vector theOther is equal to  Pi (opposite).
+    // 检查两个方向是否反向。
     Standard_Boolean IsOpposite(const gp_Dir& theOther, const Standard_Real theAngularTolerance) const {
         return M_PI - Angle(theOther) <= theAngularTolerance;
     }
@@ -146,6 +163,7 @@ public:
     //! Returns true if the angle between this unit vector and the
     //! unit vector theOther is equal to 0 or to Pi.
     //! Note: the tolerance criterion is given by theAngularTolerance.
+    // 检查两个方向是否平行。
     Standard_Boolean IsParallel(const gp_Dir& theOther, const Standard_Real theAngularTolerance) const {
         Standard_Real anAng = Angle(theOther);
         return anAng <= theAngularTolerance || M_PI - anAng <= theAngularTolerance;
@@ -154,6 +172,7 @@ public:
     //! Computes the angular value in radians between <me> and
     //! <theOther>. This value is always positive in 3D space.
     //! Returns the angle in the range [0, PI]
+    // 计算两个方向之间的夹角（弧度）。
     Standard_EXPORT Standard_Real Angle(const gp_Dir& theOther) const;
 
     //! Computes the angular value between <me> and <theOther>.
@@ -164,12 +183,15 @@ public:
     //! Returns the angular value in the range -PI and PI (in radians). Raises  DomainError if <me> and <theOther> are
     //! not parallel this exception is raised when <theVRef> is in the same plane as <me> and <theOther> The tolerance
     //! criterion is Resolution from package gp.
+    // 计算相对于参考方向 theVRef 的夹角（带正负号）。
     Standard_EXPORT Standard_Real AngleWithRef(const gp_Dir& theOther, const gp_Dir& theVRef) const;
 
     //! Computes the cross product between two directions
     //! Raises the exception ConstructionError if the two directions
     //! are parallel because the computed vector cannot be normalized
     //! to create a direction.
+    // 计算叉积，并更新当前对象。由于结果必须是单位向量，会自动进行归一化。
+    // 如果两个方向平行，叉积为零向量，无法归一化，会抛出异常。
     void Cross(const gp_Dir& theRight);
 
     void operator^=(const gp_Dir& theRight) {
@@ -181,12 +203,14 @@ public:
     //! Raises the exception ConstructionError if V1 and V2 are parallel
     //! or <me> and (V1^V2) are parallel because the computed vector
     //! can't be normalized to create a direction.
+    // 返回叉积后的新方向。
     Standard_NODISCARD gp_Dir Crossed(const gp_Dir& theRight) const;
 
     Standard_NODISCARD gp_Dir operator^(const gp_Dir& theRight) const {
         return Crossed(theRight);
     }
 
+    // 计算三重矢量积，并更新当前对象。
     void CrossCross(const gp_Dir& theV1, const gp_Dir& theV2);
 
     //! Computes the double vector product this ^ (theV1 ^ theV2).
@@ -197,9 +221,11 @@ public:
     //! -   this unit vector and (theV1 ^ theV2) are parallel.
     //! This is because, in these conditions, the computed vector
     //! is null and cannot be normalized.
+    // 返回三重矢量积后的新方向。
     Standard_NODISCARD gp_Dir CrossCrossed(const gp_Dir& theV1, const gp_Dir& theV2) const;
 
     //! Computes the scalar product
+    // 计算点积（数量积）。由于两个输入都是单位向量，结果等于它们夹角的余弦值。
     Standard_Real Dot(const gp_Dir& theOther) const {
         return coord.Dot(theOther.coord);
     }
@@ -213,10 +239,12 @@ public:
     //! The computed vector theV1' = theV1 ^ theV2 is not normalized
     //! to create a unitary vector. So this method never
     //! raises an exception even if theV1 and theV2 are parallel.
+    // 计算混合积。
     Standard_Real DotCross(const gp_Dir& theV1, const gp_Dir& theV2) const {
         return coord.Dot(theV1.coord.Crossed(theV2.coord));
     }
 
+    // 方向取反。
     void Reverse() {
         coord.Reverse();
     }
@@ -226,6 +254,7 @@ public:
     //! Performs the symmetrical transformation of a direction
     //! with respect to the direction V which is the center of
     //! the  symmetry.]
+    // 返回反向后的新方向。
     Standard_NODISCARD gp_Dir Reversed() const {
         gp_Dir aV = *this;
         aV.coord.Reverse();
@@ -236,6 +265,7 @@ public:
         return Reversed();
     }
 
+    // 关于方向 theV 进行镜像。
     Standard_EXPORT void Mirror(const gp_Dir& theV);
 
     //! Performs the symmetrical transformation of a direction
@@ -243,6 +273,7 @@ public:
     //! the  symmetry.
     Standard_NODISCARD Standard_EXPORT gp_Dir Mirrored(const gp_Dir& theV) const;
 
+    // 关于轴 theA1 进行对称变换。
     Standard_EXPORT void Mirror(const gp_Ax1& theA1);
 
     //! Performs the symmetrical transformation of a direction
@@ -250,6 +281,7 @@ public:
     //! of the symmetry.
     Standard_NODISCARD Standard_EXPORT gp_Dir Mirrored(const gp_Ax1& theA1) const;
 
+    // 关于面 theA2 进行对称变换。
     Standard_EXPORT void Mirror(const gp_Ax2& theA2);
 
     //! Performs the symmetrical transformation of a direction
@@ -257,6 +289,7 @@ public:
     //! the plane of the symmetry : (Location, XDirection, YDirection).
     Standard_NODISCARD Standard_EXPORT gp_Dir Mirrored(const gp_Ax2& theA2) const;
 
+    // 绕轴 theA1 旋转。
     void Rotate(const gp_Ax1& theA1, const Standard_Real theAng);
 
     //! Rotates a direction. theA1 is the axis of the rotation.
@@ -267,6 +300,7 @@ public:
         return aV;
     }
 
+    // 对方向进行变换。注意：变换可能会包含镜像（缩放系数为负），这会改变方向。
     Standard_EXPORT void Transform(const gp_Trsf& theT);
 
     //! Transforms a direction with a "Trsf" from gp.
