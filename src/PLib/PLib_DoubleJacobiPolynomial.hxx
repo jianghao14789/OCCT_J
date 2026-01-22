@@ -33,19 +33,37 @@ public:
 
     Standard_EXPORT PLib_DoubleJacobiPolynomial();
 
-    Standard_EXPORT PLib_DoubleJacobiPolynomial(const Handle(PLib_JacobiPolynomial)& JacPolU, const Handle(PLib_JacobiPolynomial)& JacPolV);
+    Standard_EXPORT PLib_DoubleJacobiPolynomial(const Handle(PLib_JacobiPolynomial) & JacPolU,
+                                                const Handle(PLib_JacobiPolynomial) & JacPolV);
 
-    Standard_EXPORT Standard_Real MaxErrorU(const Standard_Integer Dimension, const Standard_Integer DegreeU, const Standard_Integer DegreeV, const Standard_Integer dJacCoeff, const TColStd_Array1OfReal& JacCoeff) const;
+    Standard_EXPORT Standard_Real MaxErrorU(const Standard_Integer Dimension, const Standard_Integer DegreeU,
+                                            const Standard_Integer DegreeV, const Standard_Integer dJacCoeff,
+                                            const TColStd_Array1OfReal& JacCoeff) const;
 
-    Standard_EXPORT Standard_Real MaxErrorV(const Standard_Integer Dimension, const Standard_Integer DegreeU, const Standard_Integer DegreeV, const Standard_Integer dJacCoeff, const TColStd_Array1OfReal& JacCoeff) const;
+    Standard_EXPORT Standard_Real MaxErrorV(const Standard_Integer Dimension, const Standard_Integer DegreeU,
+                                            const Standard_Integer DegreeV, const Standard_Integer dJacCoeff,
+                                            const TColStd_Array1OfReal& JacCoeff) const;
 
-    Standard_EXPORT Standard_Real MaxError(const Standard_Integer Dimension, const Standard_Integer MinDegreeU, const Standard_Integer MaxDegreeU, const Standard_Integer MinDegreeV, const Standard_Integer MaxDegreeV, const Standard_Integer dJacCoeff, const TColStd_Array1OfReal& JacCoeff, const Standard_Real Error) const;
+    Standard_EXPORT Standard_Real MaxError(const Standard_Integer Dimension, const Standard_Integer MinDegreeU,
+                                           const Standard_Integer MaxDegreeU, const Standard_Integer MinDegreeV,
+                                           const Standard_Integer MaxDegreeV, const Standard_Integer dJacCoeff,
+                                           const TColStd_Array1OfReal& JacCoeff, const Standard_Real Error) const;
 
-    Standard_EXPORT void ReduceDegree(const Standard_Integer Dimension, const Standard_Integer MinDegreeU, const Standard_Integer MaxDegreeU, const Standard_Integer MinDegreeV, const Standard_Integer MaxDegreeV, const Standard_Integer dJacCoeff, const TColStd_Array1OfReal& JacCoeff, const Standard_Real EpmsCut, Standard_Real& MaxError, Standard_Integer& NewDegreeU, Standard_Integer& NewDegreeV) const;
+    Standard_EXPORT void ReduceDegree(const Standard_Integer Dimension, const Standard_Integer MinDegreeU,
+                                      const Standard_Integer MaxDegreeU, const Standard_Integer MinDegreeV,
+                                      const Standard_Integer MaxDegreeV, const Standard_Integer dJacCoeff,
+                                      const TColStd_Array1OfReal& JacCoeff, const Standard_Real EpmsCut,
+                                      Standard_Real& MaxError, Standard_Integer& NewDegreeU,
+                                      Standard_Integer& NewDegreeV) const;
 
-    Standard_EXPORT Standard_Real AverageError(const Standard_Integer Dimension, const Standard_Integer DegreeU, const Standard_Integer DegreeV, const Standard_Integer dJacCoeff, const TColStd_Array1OfReal& JacCoeff) const;
+    Standard_EXPORT Standard_Real AverageError(const Standard_Integer Dimension, const Standard_Integer DegreeU,
+                                               const Standard_Integer DegreeV, const Standard_Integer dJacCoeff,
+                                               const TColStd_Array1OfReal& JacCoeff) const;
 
-    Standard_EXPORT void WDoubleJacobiToCoefficients(const Standard_Integer Dimension, const Standard_Integer DegreeU, const Standard_Integer DegreeV, const TColStd_Array1OfReal& JacCoeff, TColStd_Array1OfReal& Coefficients) const;
+    Standard_EXPORT void WDoubleJacobiToCoefficients(const Standard_Integer Dimension, const Standard_Integer DegreeU,
+                                                     const Standard_Integer DegreeV,
+                                                     const TColStd_Array1OfReal& JacCoeff,
+                                                     TColStd_Array1OfReal& Coefficients) const;
 
     //! returns myJacPolU;
     Handle(PLib_JacobiPolynomial) U() const;
@@ -60,7 +78,6 @@ public:
     Handle(TColStd_HArray1OfReal) TabMaxV() const;
 
 protected:
-
 private:
     Handle(PLib_JacobiPolynomial) myJacPolU;
     Handle(PLib_JacobiPolynomial) myJacPolV;

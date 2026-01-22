@@ -22,103 +22,95 @@
 IMPLEMENT_DERIVED_ATTRIBUTE(TDataStd_Comment, TDataStd_GenericExtString)
 
 //=======================================================================
-//function : GetID
-//purpose  : 
+// function : GetID
+// purpose  :
 //=======================================================================
 
-const Standard_GUID& TDataStd_Comment::GetID () 
-{
-  static Standard_GUID TDataStd_CommentID ("2a96b616-ec8b-11d0-bee7-080009dc3333");
-  return TDataStd_CommentID;
+const Standard_GUID& TDataStd_Comment::GetID() {
+    static Standard_GUID TDataStd_CommentID("2a96b616-ec8b-11d0-bee7-080009dc3333");
+    return TDataStd_CommentID;
 }
 
 //=======================================================================
-//function : Set
-//purpose  : 
+// function : Set
+// purpose  :
 //=======================================================================
 
-Handle(TDataStd_Comment) TDataStd_Comment::Set (const TDF_Label& L,
-                                                const TCollection_ExtendedString& S) 
-{
-  Handle(TDataStd_Comment) A;
-  if (!L.FindAttribute(TDataStd_Comment::GetID(),A)) {
-    A = new TDataStd_Comment (); 
-    L.AddAttribute(A);
-  }
-  A->Set (S); 
-  return A;
+Handle(TDataStd_Comment) TDataStd_Comment::Set(const TDF_Label& L, const TCollection_ExtendedString& S) {
+    Handle(TDataStd_Comment) A;
+    if (!L.FindAttribute(TDataStd_Comment::GetID(), A)) {
+        A = new TDataStd_Comment();
+        L.AddAttribute(A);
+    }
+    A->Set(S);
+    return A;
 }
 
 //=======================================================================
-//function : Set
-//purpose  : 
+// function : Set
+// purpose  :
 //=======================================================================
 
-Handle(TDataStd_Comment) TDataStd_Comment::Set (const TDF_Label& L)
-{
-  Handle(TDataStd_Comment) A;
-  if (!L.FindAttribute(TDataStd_Comment::GetID(),A)) {
-    A = new TDataStd_Comment (); 
-    L.AddAttribute(A);
-  }
-  return A;
+Handle(TDataStd_Comment) TDataStd_Comment::Set(const TDF_Label& L) {
+    Handle(TDataStd_Comment) A;
+    if (!L.FindAttribute(TDataStd_Comment::GetID(), A)) {
+        A = new TDataStd_Comment();
+        L.AddAttribute(A);
+    }
+    return A;
 }
 
 //=======================================================================
-//function : TDataStd_Comment
-//purpose  : 
+// function : TDataStd_Comment
+// purpose  :
 //=======================================================================
 
-TDataStd_Comment::TDataStd_Comment () {
-  myID = GetID();
+TDataStd_Comment::TDataStd_Comment() {
+    myID = GetID();
 }
 
 //=======================================================================
-//function : Set
-//purpose  :
+// function : Set
+// purpose  :
 //=======================================================================
 
-void TDataStd_Comment::Set (const TCollection_ExtendedString& S)
-{
-  // OCC2932 correction
-  if(myString == S) return;
+void TDataStd_Comment::Set(const TCollection_ExtendedString& S) {
+    // OCC2932 correction
+    if (myString == S) return;
 
-  Backup();
-  myString = S;
+    Backup();
+    myString = S;
 }
 
 //=======================================================================
-//function : SetID
-//purpose  :
+// function : SetID
+// purpose  :
 //=======================================================================
 
-void TDataStd_Comment::SetID( const Standard_GUID&  theGuid)
-{  
-  if(myID == theGuid) return;
+void TDataStd_Comment::SetID(const Standard_GUID& theGuid) {
+    if (myID == theGuid) return;
 
-  Backup();
-  myID = theGuid;
+    Backup();
+    myID = theGuid;
 }
 
 //=======================================================================
-//function : SetID
-//purpose  : sets default ID
+// function : SetID
+// purpose  : sets default ID
 //=======================================================================
 
-void TDataStd_Comment::SetID()
-{
-  Backup();
-  myID = GetID();
+void TDataStd_Comment::SetID() {
+    Backup();
+    myID = GetID();
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-Standard_OStream& TDataStd_Comment::Dump (Standard_OStream& anOS) const
-{ 
-  TDF_Attribute::Dump(anOS);
-  anOS << "Comment=|"<<Get()<<"|";
-  return anOS;
+Standard_OStream& TDataStd_Comment::Dump(Standard_OStream& anOS) const {
+    TDF_Attribute::Dump(anOS);
+    anOS << "Comment=|" << Get() << "|";
+    return anOS;
 }

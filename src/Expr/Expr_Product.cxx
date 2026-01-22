@@ -19,7 +19,6 @@
 #define No_Standard_OutOfRange
 #endif
 
-
 #include <Expr.hxx>
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_NamedUnknown.hxx>
@@ -36,8 +35,7 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Product, Expr_PolyExpression)
 
-Expr_Product::Expr_Product(const Expr_SequenceOfGeneralExpression& exps)
-{
+Expr_Product::Expr_Product(const Expr_SequenceOfGeneralExpression& exps) {
     Standard_Integer i;
     Standard_Integer max = exps.Length();
     for (i = 1; i <= max; i++) {
@@ -45,14 +43,12 @@ Expr_Product::Expr_Product(const Expr_SequenceOfGeneralExpression& exps)
     }
 }
 
-Expr_Product::Expr_Product(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
-{
+Expr_Product::Expr_Product(const Handle(Expr_GeneralExpression) & exp1, const Handle(Expr_GeneralExpression) & exp2) {
     AddOperand(exp1);
     AddOperand(exp2);
 }
 
-Handle(Expr_GeneralExpression) Expr_Product::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Product::Copy() const {
     Standard_Integer i;
     Standard_Integer max = NbOperands();
     Expr_SequenceOfGeneralExpression simps;
@@ -62,8 +58,7 @@ Handle(Expr_GeneralExpression) Expr_Product::Copy() const
     return new Expr_Product(simps);
 }
 
-Standard_Boolean Expr_Product::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Product::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_Product))) {
         return Standard_False;
     }
@@ -100,8 +95,7 @@ Standard_Boolean Expr_Product::IsIdentical(const Handle(Expr_GeneralExpression)&
     return ident;
 }
 
-Standard_Boolean Expr_Product::IsLinear() const
-{
+Standard_Boolean Expr_Product::IsLinear() const {
     Standard_Integer i;
     Standard_Integer max = NbOperands();
     Standard_Boolean lin = Standard_True;
@@ -115,8 +109,7 @@ Standard_Boolean Expr_Product::IsLinear() const
                 if (!asimp->IsLinear()) {
                     res = Standard_False;
                 }
-            }
-            else {
+            } else {
                 res = Standard_False;
             }
         }
@@ -124,18 +117,16 @@ Standard_Boolean Expr_Product::IsLinear() const
     return res;
 }
 
-Handle(Expr_GeneralExpression) Expr_Product::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Product::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
     Handle(Expr_GeneralExpression) firstop = Expr::CopyShare(Operand(1)); // U
-    Handle(Expr_GeneralExpression) tailop;                               // V
+    Handle(Expr_GeneralExpression) tailop;                                // V
     Standard_Integer nbop = NbOperands();
     if (nbop == 2) {
         tailop = Expr::CopyShare(Operand(2));
-    }
-    else {
+    } else {
         Handle(Expr_Product) prodop = Expr::CopyShare(Operand(2)) * Expr::CopyShare(Operand(3));
         for (Standard_Integer i = 4; i <= nbop; i++) {
             prodop->AddOperand(Expr::CopyShare(Operand(i)));
@@ -155,9 +146,7 @@ Handle(Expr_GeneralExpression) Expr_Product::Derivative(const Handle(Expr_NamedU
     return resu->ShallowSimplified();
 }
 
-
-Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const {
     Standard_Integer i;
     Standard_Integer max = NbOperands();
     Handle(Expr_GeneralExpression) op;
@@ -182,8 +171,7 @@ Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const
                     other = prodop->Operand(j);
                     newops.Append(other);
                 }
-            }
-            else {
+            } else {
                 newops.Append(op);
             }
         }
@@ -201,19 +189,17 @@ Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const
                 noone = Standard_False;
                 vals = NVop->GetValue();
                 nbvals = 1;
-            }
-            else {
+            } else {
                 nbvals++;
                 vals = vals * NVop->GetValue();
             }
-        }
-        else {
+        } else {
             newops.Append(op);
         }
     }
     if (!noone) {
         // numeric operands encountered
-        if (newops.IsEmpty()) {         // result is only numericvalue (even zero)
+        if (newops.IsEmpty()) { // result is only numericvalue (even zero)
             // only numerics
             return new Expr_NumericValue(vals);
         }
@@ -228,8 +214,7 @@ Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const
                 Handle(Expr_GeneralExpression) thefact;
                 if (newops.Length() == 1) {
                     thefact = newops(1);
-                }
-                else {
+                } else {
                     thefact = new Expr_Product(newops);
                 }
                 return -(thefact);
@@ -239,10 +224,9 @@ Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const
                 return me;
             }
             Handle(Expr_NumericValue) thevals = new Expr_NumericValue(vals);
-            newops.Append(thevals);  // non-zero value added
-            return  new Expr_Product(newops);
-        }
-        else {
+            newops.Append(thevals); // non-zero value added
+            return new Expr_Product(newops);
+        } else {
             return new Expr_NumericValue(vals); // zero absorb
         }
     }
@@ -250,8 +234,7 @@ Handle(Expr_GeneralExpression) Expr_Product::ShallowSimplified() const
     return me;
 }
 
-Standard_Real Expr_Product::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Product::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Integer max = NbOperands();
     Standard_Real res = 1.0;
     for (Standard_Integer i = 1; i <= max; i++) {
@@ -260,8 +243,7 @@ Standard_Real Expr_Product::Evaluate(const Expr_Array1OfNamedUnknown& vars, cons
     return res;
 }
 
-TCollection_AsciiString Expr_Product::String() const
-{
+TCollection_AsciiString Expr_Product::String() const {
     Handle(Expr_GeneralExpression) op;
     Standard_Integer nbop = NbOperands();
     op = Operand(1);
@@ -270,8 +252,7 @@ TCollection_AsciiString Expr_Product::String() const
         str = "(";
         str += op->String();
         str += ")";
-    }
-    else {
+    } else {
         str = op->String();
     }
     for (Standard_Integer i = 2; i <= nbop; i++) {
@@ -281,8 +262,7 @@ TCollection_AsciiString Expr_Product::String() const
             str += "(";
             str += op->String();
             str += ")";
-        }
-        else {
+        } else {
             str += op->String();
         }
     }

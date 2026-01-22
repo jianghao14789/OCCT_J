@@ -31,7 +31,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_Circle;
 DEFINE_STANDARD_HANDLE(Geom_Circle, Geom_Conic)
 
@@ -133,7 +132,8 @@ public:
 
     //! Returns the point P of parameter u, the first second and third
     //! derivatives V1 V2 and V3.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! The returned vector gives the value of the derivative for the
     //! order of derivation N.
@@ -147,16 +147,14 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Circle, Geom_Conic)
 
 protected:
-
 private:
-
     Standard_Real radius;
-
 };
 
 #endif // _Geom_Circle_HeaderFile

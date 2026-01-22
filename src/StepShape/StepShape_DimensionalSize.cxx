@@ -20,66 +20,59 @@
 #include <StepShape_DimensionalSize.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_DimensionalSize,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_DimensionalSize, Standard_Transient)
 
 //=======================================================================
-//function : StepShape_DimensionalSize
-//purpose  : 
+// function : StepShape_DimensionalSize
+// purpose  :
 //=======================================================================
-StepShape_DimensionalSize::StepShape_DimensionalSize ()
-{
+StepShape_DimensionalSize::StepShape_DimensionalSize() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepShape_DimensionalSize::Init(const Handle(StepRepr_ShapeAspect) & aAppliesTo,
+                                     const Handle(TCollection_HAsciiString) & aName) {
+
+    theAppliesTo = aAppliesTo;
+
+    theName = aName;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AppliesTo
+// purpose  :
 //=======================================================================
 
-void StepShape_DimensionalSize::Init (const Handle(StepRepr_ShapeAspect) &aAppliesTo,
-                                      const Handle(TCollection_HAsciiString) &aName)
-{
-
-  theAppliesTo = aAppliesTo;
-
-  theName = aName;
+Handle(StepRepr_ShapeAspect) StepShape_DimensionalSize::AppliesTo() const {
+    return theAppliesTo;
 }
 
 //=======================================================================
-//function : AppliesTo
-//purpose  : 
+// function : SetAppliesTo
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_ShapeAspect) StepShape_DimensionalSize::AppliesTo () const
-{
-  return theAppliesTo;
+void StepShape_DimensionalSize::SetAppliesTo(const Handle(StepRepr_ShapeAspect) & aAppliesTo) {
+    theAppliesTo = aAppliesTo;
 }
 
 //=======================================================================
-//function : SetAppliesTo
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepShape_DimensionalSize::SetAppliesTo (const Handle(StepRepr_ShapeAspect) &aAppliesTo)
-{
-  theAppliesTo = aAppliesTo;
+Handle(TCollection_HAsciiString) StepShape_DimensionalSize::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepShape_DimensionalSize::Name () const
-{
-  return theName;
-}
-
-//=======================================================================
-//function : SetName
-//purpose  : 
-//=======================================================================
-
-void StepShape_DimensionalSize::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+void StepShape_DimensionalSize::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }

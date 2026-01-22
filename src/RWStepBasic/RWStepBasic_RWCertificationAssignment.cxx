@@ -25,59 +25,54 @@
 #include <StepData_StepWriter.hxx>
 
 //=======================================================================
-//function : RWStepBasic_RWCertificationAssignment
-//purpose  : 
+// function : RWStepBasic_RWCertificationAssignment
+// purpose  :
 //=======================================================================
-RWStepBasic_RWCertificationAssignment::RWStepBasic_RWCertificationAssignment ()
-{
+RWStepBasic_RWCertificationAssignment::RWStepBasic_RWCertificationAssignment() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepBasic_RWCertificationAssignment::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                     const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                     const Handle(StepBasic_CertificationAssignment) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 1, ach, "certification_assignment")) return;
+
+    // Own fields of CertificationAssignment
+
+    Handle(StepBasic_Certification) aAssignedCertification;
+    data->ReadEntity(num, 1, "assigned_certification", ach, STANDARD_TYPE(StepBasic_Certification),
+                     aAssignedCertification);
+
+    // Initialize entity
+    ent->Init(aAssignedCertification);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepBasic_RWCertificationAssignment::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                      const Standard_Integer num,
-                                                      Handle(Interface_Check)& ach,
-                                                      const Handle(StepBasic_CertificationAssignment) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,1,ach,"certification_assignment") ) return;
+void RWStepBasic_RWCertificationAssignment::WriteStep(StepData_StepWriter& SW,
+                                                      const Handle(StepBasic_CertificationAssignment) & ent) const {
 
-  // Own fields of CertificationAssignment
+    // Own fields of CertificationAssignment
 
-  Handle(StepBasic_Certification) aAssignedCertification;
-  data->ReadEntity (num, 1, "assigned_certification", ach, STANDARD_TYPE(StepBasic_Certification), aAssignedCertification);
-
-  // Initialize entity
-  ent->Init(aAssignedCertification);
+    SW.Send(ent->AssignedCertification());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepBasic_RWCertificationAssignment::WriteStep (StepData_StepWriter& SW,
-                                                       const Handle(StepBasic_CertificationAssignment) &ent) const
-{
+void RWStepBasic_RWCertificationAssignment::Share(const Handle(StepBasic_CertificationAssignment) & ent,
+                                                  Interface_EntityIterator& iter) const {
 
-  // Own fields of CertificationAssignment
+    // Own fields of CertificationAssignment
 
-  SW.Send (ent->AssignedCertification());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepBasic_RWCertificationAssignment::Share (const Handle(StepBasic_CertificationAssignment) &ent,
-                                                   Interface_EntityIterator& iter) const
-{
-
-  // Own fields of CertificationAssignment
-
-  iter.AddItem (ent->AssignedCertification());
+    iter.AddItem(ent->AssignedCertification());
 }

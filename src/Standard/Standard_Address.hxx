@@ -21,10 +21,8 @@
 //! @param thePointer the memory pointer which hash code it to be computed
 //! @param theUpperBound the upper bound of the range a resulting hash code must be within
 //! @return a value of a computed hash code, in range [1, UpperBound]
-inline Standard_Integer HashCode(const void* const thePointer, const Standard_Integer theUpperBound)
-{
-    union
-    {
+inline Standard_Integer HashCode(const void* const thePointer, const Standard_Integer theUpperBound) {
+    union {
         const void* L;
         Standard_Integer I[2];
     } U;
@@ -40,8 +38,7 @@ inline Standard_Integer HashCode(const void* const thePointer, const Standard_In
 // IsEqual : Returns Standard_True if two CString have the same value
 //============================================================================
 
-inline Standard_Boolean IsEqual(const Standard_Address One, const Standard_Address Two)
-{
+inline Standard_Boolean IsEqual(const Standard_Address One, const Standard_Address Two) {
     return One == Two;
 }
 

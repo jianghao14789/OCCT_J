@@ -25,47 +25,27 @@
 class TDF_Label;
 class AIS_InteractiveObject;
 
-
 class TPrsStd_PlaneDriver;
 DEFINE_STANDARD_HANDLE(TPrsStd_PlaneDriver, TPrsStd_Driver)
 
 //! An implementation of TPrsStd_Driver for planes.
-class TPrsStd_PlaneDriver : public TPrsStd_Driver
-{
+class TPrsStd_PlaneDriver : public TPrsStd_Driver {
 
 public:
+    //! Constructs an empty plane driver.
+    Standard_EXPORT TPrsStd_PlaneDriver();
 
-  
-  //! Constructs an empty plane driver.
-  Standard_EXPORT TPrsStd_PlaneDriver();
-  
-  //! Build the AISObject (if null) or update it.
-  //! No compute is done.
-  //! Returns <True> if information was found
-  //! and AISObject updated.
-  Standard_EXPORT virtual Standard_Boolean Update (const TDF_Label& aLabel, Handle(AIS_InteractiveObject)& anAISObject) Standard_OVERRIDE;
+    //! Build the AISObject (if null) or update it.
+    //! No compute is done.
+    //! Returns <True> if information was found
+    //! and AISObject updated.
+    Standard_EXPORT virtual Standard_Boolean Update(const TDF_Label& aLabel,
+                                                    Handle(AIS_InteractiveObject) & anAISObject) Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TPrsStd_PlaneDriver,TPrsStd_Driver)
+    DEFINE_STANDARD_RTTIEXT(TPrsStd_PlaneDriver, TPrsStd_Driver)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _TPrsStd_PlaneDriver_HeaderFile

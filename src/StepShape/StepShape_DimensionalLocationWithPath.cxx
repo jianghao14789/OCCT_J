@@ -20,53 +20,47 @@
 #include <StepShape_DimensionalLocationWithPath.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_DimensionalLocationWithPath,StepShape_DimensionalLocation)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_DimensionalLocationWithPath, StepShape_DimensionalLocation)
 
 //=======================================================================
-//function : StepShape_DimensionalLocationWithPath
-//purpose  : 
+// function : StepShape_DimensionalLocationWithPath
+// purpose  :
 //=======================================================================
-StepShape_DimensionalLocationWithPath::StepShape_DimensionalLocationWithPath ()
-{
+StepShape_DimensionalLocationWithPath::StepShape_DimensionalLocationWithPath() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepShape_DimensionalLocationWithPath::Init(
+    const Handle(TCollection_HAsciiString) & aShapeAspectRelationship_Name,
+    const Standard_Boolean hasShapeAspectRelationship_Description,
+    const Handle(TCollection_HAsciiString) & aShapeAspectRelationship_Description,
+    const Handle(StepRepr_ShapeAspect) & aShapeAspectRelationship_RelatingShapeAspect,
+    const Handle(StepRepr_ShapeAspect) & aShapeAspectRelationship_RelatedShapeAspect,
+    const Handle(StepRepr_ShapeAspect) & aPath) {
+    StepShape_DimensionalLocation::Init(
+        aShapeAspectRelationship_Name, hasShapeAspectRelationship_Description, aShapeAspectRelationship_Description,
+        aShapeAspectRelationship_RelatingShapeAspect, aShapeAspectRelationship_RelatedShapeAspect);
+
+    thePath = aPath;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Path
+// purpose  :
 //=======================================================================
 
-void StepShape_DimensionalLocationWithPath::Init (const Handle(TCollection_HAsciiString) &aShapeAspectRelationship_Name,
-                                                  const Standard_Boolean hasShapeAspectRelationship_Description,
-                                                  const Handle(TCollection_HAsciiString) &aShapeAspectRelationship_Description,
-                                                  const Handle(StepRepr_ShapeAspect) &aShapeAspectRelationship_RelatingShapeAspect,
-                                                  const Handle(StepRepr_ShapeAspect) &aShapeAspectRelationship_RelatedShapeAspect,
-                                                  const Handle(StepRepr_ShapeAspect) &aPath)
-{
-  StepShape_DimensionalLocation::Init(aShapeAspectRelationship_Name,
-                                      hasShapeAspectRelationship_Description,
-                                      aShapeAspectRelationship_Description,
-                                      aShapeAspectRelationship_RelatingShapeAspect,
-                                      aShapeAspectRelationship_RelatedShapeAspect);
-
-  thePath = aPath;
+Handle(StepRepr_ShapeAspect) StepShape_DimensionalLocationWithPath::Path() const {
+    return thePath;
 }
 
 //=======================================================================
-//function : Path
-//purpose  : 
+// function : SetPath
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_ShapeAspect) StepShape_DimensionalLocationWithPath::Path () const
-{
-  return thePath;
-}
-
-//=======================================================================
-//function : SetPath
-//purpose  : 
-//=======================================================================
-
-void StepShape_DimensionalLocationWithPath::SetPath (const Handle(StepRepr_ShapeAspect) &aPath)
-{
-  thePath = aPath;
+void StepShape_DimensionalLocationWithPath::SetPath(const Handle(StepRepr_ShapeAspect) & aPath) {
+    thePath = aPath;
 }

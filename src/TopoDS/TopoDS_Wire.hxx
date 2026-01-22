@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes a wire which
 //! - references an underlying wire with the potential to
 //! be given a location and an orientation
@@ -33,16 +32,13 @@
 //! of its geometry (as opposed to orientation in relation to other shapes).
 class TopoDS_Wire : public TopoDS_Shape {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Undefined Wire.
     TopoDS_Wire();
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_Wire.lxx>

@@ -11,16 +11,14 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _BRepMesh_FactoryError_HeaderFile
 #define _BRepMesh_FactoryError_HeaderFile
 
-enum BRepMesh_FactoryError
-{
-  BRepMesh_FE_NOERROR,
-  BRepMesh_FE_LIBRARYNOTFOUND,
-  BRepMesh_FE_FUNCTIONNOTFOUND,
-  BRepMesh_FE_CANNOTCREATEALGO
+enum BRepMesh_FactoryError {
+    BRepMesh_FE_NOERROR,
+    BRepMesh_FE_LIBRARYNOTFOUND,
+    BRepMesh_FE_FUNCTIONNOTFOUND,
+    BRepMesh_FE_CANNOTCREATEALGO
 };
 
 #endif

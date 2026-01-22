@@ -15,35 +15,30 @@
 #include <StdPersistent_TopLoc.hxx>
 
 //=======================================================================
-//function : Translate
-//purpose  : Creates a persistent wrapper object for a location
+// function : Translate
+// purpose  : Creates a persistent wrapper object for a location
 //=======================================================================
-StdObject_Location 
-StdObject_Location::Translate (const TopLoc_Location& theLoc,
-                               StdObjMgt_TransientPersistentMap& theMap)
-{
-  StdObject_Location aLoc;
-  if (!theLoc.IsIdentity())
-    aLoc.myData = StdPersistent_TopLoc::Translate(theLoc, theMap);
-  return aLoc;
+StdObject_Location StdObject_Location::Translate(const TopLoc_Location& theLoc,
+                                                 StdObjMgt_TransientPersistentMap& theMap) {
+    StdObject_Location aLoc;
+    if (!theLoc.IsIdentity()) aLoc.myData = StdPersistent_TopLoc::Translate(theLoc, theMap);
+    return aLoc;
 }
 
 //=======================================================================
-//function : Location
-//purpose  : Changes current location
+// function : Location
+// purpose  : Changes current location
 //=======================================================================
-void StdObject_Location::PChildren(StdObjMgt_Persistent::SequenceOfPersistent& theChildren) const
-{
-  theChildren.Append(myData);
+void StdObject_Location::PChildren(StdObjMgt_Persistent::SequenceOfPersistent& theChildren) const {
+    theChildren.Append(myData);
 }
 
 //=======================================================================
-//function : Import
-//purpose  : Import transient object from the persistent data
+// function : Import
+// purpose  : Import transient object from the persistent data
 //=======================================================================
-TopLoc_Location StdObject_Location::Import() const
-{
-  Handle(StdPersistent_TopLoc::ItemLocation) anItemLocation =
-    Handle(StdPersistent_TopLoc::ItemLocation)::DownCast (myData);
-  return anItemLocation ? anItemLocation->Import() : TopLoc_Location();
+TopLoc_Location StdObject_Location::Import() const {
+    Handle(StdPersistent_TopLoc::ItemLocation) anItemLocation =
+        Handle(StdPersistent_TopLoc::ItemLocation)::DownCast(myData);
+    return anItemLocation ? anItemLocation->Import() : TopLoc_Location();
 }

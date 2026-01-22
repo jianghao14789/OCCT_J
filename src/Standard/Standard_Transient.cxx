@@ -18,70 +18,61 @@
 #include <Standard_CString.hxx>
 #include <Standard_ProgramError.hxx>
 
-void Standard_Transient::Delete() const
-{
+void Standard_Transient::Delete() const {
     delete this; // 触发析构
 }
 
-const Handle(Standard_Type)& Standard_Transient::get_type_descriptor()
-{
+const Handle(Standard_Type) & Standard_Transient::get_type_descriptor() {
     return opencascade::type_instance<Standard_Transient>::get();
 }
 
 //
 //
-const Handle(Standard_Type)& Standard_Transient::DynamicType() const
-{
+const Handle(Standard_Type) & Standard_Transient::DynamicType() const {
     return get_type_descriptor();
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsInstance(const Handle(Standard_Type)& AType) const
-{
+Standard_Boolean Standard_Transient::IsInstance(const Handle(Standard_Type) & AType) const {
     return (AType == DynamicType());
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsInstance(const Standard_CString theTypeName) const
-{
+Standard_Boolean Standard_Transient::IsInstance(const Standard_CString theTypeName) const {
     return IsEqual(DynamicType()->Name(), theTypeName);
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsKind(const Handle(Standard_Type)& aType) const
-{
+Standard_Boolean Standard_Transient::IsKind(const Handle(Standard_Type) & aType) const {
     return DynamicType()->SubType(aType);
 }
 
 //
 //
-Standard_Boolean Standard_Transient::IsKind(const Standard_CString theTypeName) const
-{
+Standard_Boolean Standard_Transient::IsKind(const Standard_CString theTypeName) const {
     return DynamicType()->SubType(theTypeName);
 }
 
 //
 //
-Standard_Transient* Standard_Transient::This() const
-{
+Standard_Transient* Standard_Transient::This() const {
     if (GetRefCount() == 0)
-        throw Standard_ProgramError("Attempt to create handle to object created in stack, not yet constructed, or destroyed");
-    return const_cast<Standard_Transient*> (this);
+        throw Standard_ProgramError(
+            "Attempt to create handle to object created in stack, not yet constructed, or destroyed");
+    return const_cast<Standard_Transient*>(this);
 }
 
 // Increment reference counter
-void Standard_Transient::IncrementRefCounter() const
-{
+void Standard_Transient::IncrementRefCounter() const {
     // 调用封装的原子自增操作
     // 该自增操作将编译为特殊的指令, 效率更高
     Standard_Atomic_Increment(&myRefCount_);
 }
 
 // Decrement reference counter
-Standard_Integer Standard_Transient::DecrementRefCounter() const
-{
+Standard_Integer Standard_Transient::DecrementRefCounter() const {
     return Standard_Atomic_Decrement(&myRefCount_);
 }

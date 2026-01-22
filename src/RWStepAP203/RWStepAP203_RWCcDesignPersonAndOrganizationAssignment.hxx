@@ -28,48 +28,29 @@ class StepAP203_CcDesignPersonAndOrganizationAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CcDesignPersonAndOrganizationAssignment
-class RWStepAP203_RWCcDesignPersonAndOrganizationAssignment 
-{
+class RWStepAP203_RWCcDesignPersonAndOrganizationAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP203_RWCcDesignPersonAndOrganizationAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP203_RWCcDesignPersonAndOrganizationAssignment();
-  
-  //! Reads CcDesignPersonAndOrganizationAssignment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP203_CcDesignPersonAndOrganizationAssignment)& ent) const;
-  
-  //! Writes CcDesignPersonAndOrganizationAssignment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP203_CcDesignPersonAndOrganizationAssignment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP203_CcDesignPersonAndOrganizationAssignment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CcDesignPersonAndOrganizationAssignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP203_CcDesignPersonAndOrganizationAssignment) & ent) const;
 
+    //! Writes CcDesignPersonAndOrganizationAssignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP203_CcDesignPersonAndOrganizationAssignment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP203_CcDesignPersonAndOrganizationAssignment) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP203_RWCcDesignPersonAndOrganizationAssignment_HeaderFile

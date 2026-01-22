@@ -23,14 +23,14 @@ class Standard_Type;
 
 // 对 class handle 的前置声明
 namespace opencascade {
-    template <class T> class handle;
+template <class T> class handle;
 }
 
-//! Abstract class which forms the root of the entire 
+//! Abstract class which forms the root of the entire
 //! Transient class hierarchy.
 //!
 // 抽象类，是整个瞬时对象类层次结构的根
-// 
+//
 // 说明：Transient 意为"短暂的", 这里表示这些对象具有生命周期管理的特性.
 // 在 OCCT 中, 所有需要通过 Handle(智能指针) 管理的对象都继承自 Standard_Transient.
 // 它通过引用计数机制来管理对象的生命周期
@@ -43,12 +43,12 @@ public:
     DEFINE_STANDARD_ALLOC;
 
     // 重载 new（单对象版本）: 当执行 new Standard_Transient() 时被调用
-    //void* operator new (size_t theSize) {
+    // void* operator new (size_t theSize) {
     //    return Standard::Allocate(theSize);
     //}
 
     // 重载 delete（单对象版本）: 当执行 delete ptr 时被调用
-    //void operator delete (void* theAddress) {
+    // void operator delete (void* theAddress) {
     //    Standard::Free(theAddress);
     //}
 
@@ -58,17 +58,17 @@ public:
     //}
 
     // 重载 delete[]（数组版本）
-    //void operator delete[](void* theAddress) {
+    // void operator delete[](void* theAddress) {
     //    Standard::Free(theAddress);
     //}
 
     // 定位 new
-    //void* operator new (size_t, void* theAddress) {
+    // void* operator new (size_t, void* theAddress) {
     //    return theAddress;
     //}
 
     // 定位 delete
-    //void operator delete (void*, void*) {
+    // void operator delete (void*, void*) {
     //    ;
     //};
 
@@ -76,7 +76,6 @@ public:
     // 因为编译器在处理数组时, 会有一个隐藏的 Cookie 的问题
 
 public:
-
     //! Empty constructor
     // 空构造函数 - 初始化引用计数为 0
     Standard_Transient() : myRefCount_(0) {}
@@ -89,7 +88,9 @@ public:
     //! Assignment operator, needed to avoid copying reference counter
     // 赋值运算符 - 避免复制引用计数
     // 类似地，赋值时不修改对象本身的引用计数
-    Standard_Transient& operator= (const Standard_Transient&) { return *this; }
+    Standard_Transient& operator=(const Standard_Transient&) {
+        return *this;
+    }
 
     //! Destructor must be virtual
     // 虚析构函数 - 确保派生类能被正确销毁
@@ -107,7 +108,9 @@ public:
 
     typedef void base_type;
 
-    static const char* get_type_name() { return "Standard_Transient"; }
+    static const char* get_type_name() {
+        return "Standard_Transient";
+    }
 
     //! Returns type descriptor of Standard_Transient class
     //! 返回 Standard_Transient 类的类型描述符
@@ -161,7 +164,9 @@ public:
     //! Get the reference counter of this object
     // 获取此对象的引用计数
     // 返回值表示有多少个 Handle 指向此对象
-    Standard_Integer GetRefCount() const { return myRefCount_; }
+    Standard_Integer GetRefCount() const {
+        return myRefCount_;
+    }
 
     //! Increments the reference counter of this object
     // 增加此对象的引用计数
@@ -176,9 +181,8 @@ public:
     Standard_EXPORT Standard_Integer DecrementRefCounter() const;
 
 private:
-
     //! Reference counter.
-    //! Note use of underscore, aimed to reduce probability 
+    //! Note use of underscore, aimed to reduce probability
     //! of conflict with names of members of derived classes.
     // 引用计数 - 追踪有多少个 Handle 指向此对象
     // 使用 myRefCount_ 这样的名称（带下划线）是为了减少与派生类成员变量名冲突的概率
@@ -187,25 +191,23 @@ private:
     mutable volatile Standard_Integer myRefCount_;
 };
 
-
 //! Computes a hash code for the given transient object, in the range [1, theUpperBound]
 //! @param theTransientObject the transient object which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-//! 
+//!
 //! 为给定的瞬时对象计算哈希码（在 [1, theUpperBound] 范围内）
 //! 用于在哈希表或其他数据结构中快速查找对象
 //! @param theTransientObject 要计算哈希码的瞬时对象
 //! @param theUpperBound 哈希码范围的上界
 //! @return 计算得到的哈希码，范围在 [1, theUpperBound]
 inline Standard_Integer HashCode(const Standard_Transient* const theTransientObject,
-    const Standard_Integer          theUpperBound)
-{
-    return ::HashCode(static_cast<const void*> (theTransientObject), theUpperBound);
+                                 const Standard_Integer theUpperBound) {
+    return ::HashCode(static_cast<const void*>(theTransientObject), theUpperBound);
 }
 
 //! Definition of Handle_Standard_Transient as typedef for compatibility
 //! 定义 Handle_Standard_Transient 为兼容性别名
 typedef opencascade::handle<Standard_Transient> Handle_Standard_Transient;
 
-#endif 
+#endif

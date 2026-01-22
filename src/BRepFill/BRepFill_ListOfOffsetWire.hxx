@@ -23,5 +23,4 @@
 typedef NCollection_List<BRepFill_OffsetWire> BRepFill_ListOfOffsetWire;
 typedef NCollection_List<BRepFill_OffsetWire>::Iterator BRepFill_ListIteratorOfListOfOffsetWire;
 
-
 #endif

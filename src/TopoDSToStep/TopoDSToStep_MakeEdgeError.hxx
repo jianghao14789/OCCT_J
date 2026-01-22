@@ -17,12 +17,6 @@
 #ifndef _TopoDSToStep_MakeEdgeError_HeaderFile
 #define _TopoDSToStep_MakeEdgeError_HeaderFile
 
-
-enum TopoDSToStep_MakeEdgeError
-{
-TopoDSToStep_EdgeDone,
-TopoDSToStep_NonManifoldEdge,
-TopoDSToStep_EdgeOther
-};
+enum TopoDSToStep_MakeEdgeError { TopoDSToStep_EdgeDone, TopoDSToStep_NonManifoldEdge, TopoDSToStep_EdgeOther };
 
 #endif // _TopoDSToStep_MakeEdgeError_HeaderFile

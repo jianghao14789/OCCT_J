@@ -21,7 +21,6 @@
 #include <HLRBRep_TheIntPCurvePCurveOfCInter.hxx>
 #include <HLRBRep_ThePolygon2dOfTheIntPCurvePCurveOfCInter.hxx>
 #include <HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter.hxx>
- 
 
 #define TheCurve Standard_Address
 #define TheCurve_hxx <Standard_Address.hxx>
@@ -38,4 +37,3 @@
 #define IntCurve_IntPolyPolyGen HLRBRep_TheIntPCurvePCurveOfCInter
 #define IntCurve_IntPolyPolyGen_hxx <HLRBRep_TheIntPCurvePCurveOfCInter.hxx>
 #include <IntCurve_ExactIntersectionPoint.gxx>
-

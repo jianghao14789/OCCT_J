@@ -28,7 +28,6 @@ class Transfer_ProcessForFinder;
 class Transfer_FinderProcess;
 class Standard_Transient;
 
-
 class Transfer_ActorOfFinderProcess;
 DEFINE_STANDARD_HANDLE(Transfer_ActorOfFinderProcess, Transfer_ActorOfProcessForFinder)
 
@@ -36,54 +35,32 @@ DEFINE_STANDARD_HANDLE(Transfer_ActorOfFinderProcess, Transfer_ActorOfProcessFor
 //!
 //! ModeTrans : a simple way of transmitting a transfer mode from
 //! a user. To be interpreted for each norm
-class Transfer_ActorOfFinderProcess : public Transfer_ActorOfProcessForFinder
-{
+class Transfer_ActorOfFinderProcess : public Transfer_ActorOfProcessForFinder {
 
 public:
+    Standard_EXPORT Transfer_ActorOfFinderProcess();
 
-  
-  Standard_EXPORT Transfer_ActorOfFinderProcess();
-  
-  //! Returns the Transfer Mode, modifiable
-  Standard_EXPORT Standard_Integer& ModeTrans();
-  
-  Standard_EXPORT virtual Handle(Transfer_Binder) Transferring
-                   (const Handle(Transfer_Finder)& start,
-                    const Handle(Transfer_ProcessForFinder)& TP,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Handle(Transfer_Binder) Transfer
-                   (const Handle(Transfer_Finder)& start,
-                    const Handle(Transfer_FinderProcess)& TP,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT virtual Handle(Standard_Transient) TransferTransient
-                   (const Handle(Standard_Transient)& start,
-                    const Handle(Transfer_FinderProcess)& TP,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange());
+    //! Returns the Transfer Mode, modifiable
+    Standard_EXPORT Standard_Integer& ModeTrans();
 
+    Standard_EXPORT virtual Handle(Transfer_Binder)
+        Transferring(const Handle(Transfer_Finder) & start, const Handle(Transfer_ProcessForFinder) & TP,
+                     const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Handle(Transfer_Binder)
+        Transfer(const Handle(Transfer_Finder) & start, const Handle(Transfer_FinderProcess) & TP,
+                 const Message_ProgressRange& theProgress = Message_ProgressRange());
 
+    Standard_EXPORT virtual Handle(Standard_Transient)
+        TransferTransient(const Handle(Standard_Transient) & start, const Handle(Transfer_FinderProcess) & TP,
+                          const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-  DEFINE_STANDARD_RTTIEXT(Transfer_ActorOfFinderProcess,Transfer_ActorOfProcessForFinder)
+    DEFINE_STANDARD_RTTIEXT(Transfer_ActorOfFinderProcess, Transfer_ActorOfProcessForFinder)
 
 protected:
-
-
-  Standard_Integer themodetrans;
-
+    Standard_Integer themodetrans;
 
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Transfer_ActorOfFinderProcess_HeaderFile

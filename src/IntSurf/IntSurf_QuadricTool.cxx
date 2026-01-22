@@ -12,22 +12,20 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <gp_Cylinder.hxx>
 #include <gp_Sphere.hxx>
 #include <gp_Vec.hxx>
 #include <IntSurf_Quadric.hxx>
 #include <IntSurf_QuadricTool.hxx>
 
-Standard_Real IntSurf_QuadricTool::Tolerance (const IntSurf_Quadric& Q) {
-  switch (Q.TypeQuadric()) {
-  case GeomAbs_Sphere:
-    return 2.e-6*Q.Sphere().Radius();
-  case GeomAbs_Cylinder:
-    return 2.e-6*Q.Cylinder().Radius();
-  default: 
-    break;
-  }
-  return(1e-6);
+Standard_Real IntSurf_QuadricTool::Tolerance(const IntSurf_Quadric& Q) {
+    switch (Q.TypeQuadric()) {
+        case GeomAbs_Sphere:
+            return 2.e-6 * Q.Sphere().Radius();
+        case GeomAbs_Cylinder:
+            return 2.e-6 * Q.Cylinder().Radius();
+        default:
+            break;
+    }
+    return (1e-6);
 }
-

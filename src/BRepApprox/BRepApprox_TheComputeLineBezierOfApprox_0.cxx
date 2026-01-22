@@ -25,7 +25,6 @@
 #include <BRepApprox_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfApprox.hxx>
 #include <AppParCurves_MultiCurve.hxx>
 #include <AppParCurves_MultiBSpCurve.hxx>
- 
 
 #define MultiLine BRepApprox_TheMultiLineOfApprox
 #define MultiLine_hxx <BRepApprox_TheMultiLineOfApprox.hxx>
@@ -52,4 +51,3 @@
 #define Approx_ComputeLine BRepApprox_TheComputeLineBezierOfApprox
 #define Approx_ComputeLine_hxx <BRepApprox_TheComputeLineBezierOfApprox.hxx>
 #include <Approx_ComputeLine.gxx>
-

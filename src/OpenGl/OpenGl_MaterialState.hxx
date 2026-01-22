@@ -20,47 +20,50 @@
 #include <OpenGl_Material.hxx>
 
 //! Defines generic state of material properties.
-class OpenGl_MaterialState : public OpenGl_StateInterface
-{
+class OpenGl_MaterialState : public OpenGl_StateInterface {
 public:
+    //! Creates new material state.
+    OpenGl_MaterialState() : myAlphaCutoff(0.5f), myToDistinguish(false), myToMapTexture(false) {}
 
-  //! Creates new material state.
-  OpenGl_MaterialState() : myAlphaCutoff (0.5f), myToDistinguish (false), myToMapTexture (false) {}
+    //! Sets new material aspect.
+    void Set(const OpenGl_Material& theMat, const float theAlphaCutoff, const bool theToDistinguish,
+             const bool theToMapTexture) {
+        myMaterial = theMat;
+        myAlphaCutoff = theAlphaCutoff;
+        myToDistinguish = theToDistinguish;
+        myToMapTexture = theToMapTexture;
+    }
 
-  //! Sets new material aspect.
-  void Set (const OpenGl_Material& theMat,
-            const float theAlphaCutoff,
-            const bool theToDistinguish,
-            const bool theToMapTexture)
-  {
-    myMaterial      = theMat;
-    myAlphaCutoff   = theAlphaCutoff;
-    myToDistinguish = theToDistinguish;
-    myToMapTexture  = theToMapTexture;
-  }
+    //! Return front material.
+    const OpenGl_Material& Material() const {
+        return myMaterial;
+    }
 
-  //! Return front material.
-  const OpenGl_Material& Material() const { return myMaterial; }
+    //! Alpha cutoff value.
+    float AlphaCutoff() const {
+        return myAlphaCutoff;
+    }
 
-  //! Alpha cutoff value.
-  float AlphaCutoff() const { return myAlphaCutoff; }
+    //! Return TRUE if alpha test should be enabled.
+    bool HasAlphaCutoff() const {
+        return myAlphaCutoff <= 1.0f;
+    }
 
-  //! Return TRUE if alpha test should be enabled.
-  bool HasAlphaCutoff() const { return myAlphaCutoff <= 1.0f; }
+    //! Distinguish front/back flag.
+    bool ToDistinguish() const {
+        return myToDistinguish;
+    }
 
-  //! Distinguish front/back flag.
-  bool ToDistinguish() const { return myToDistinguish; }
-
-  //! Flag for mapping a texture.
-  bool ToMapTexture()  const { return myToMapTexture; }
+    //! Flag for mapping a texture.
+    bool ToMapTexture() const {
+        return myToMapTexture;
+    }
 
 private:
-
-  OpenGl_Material myMaterial;      //!< material
-  float           myAlphaCutoff;   //!< alpha cutoff value
-  bool            myToDistinguish; //!< distinguish front/back flag
-  bool            myToMapTexture;  //!< flag for mapping a texture
-
+    OpenGl_Material myMaterial; //!< material
+    float myAlphaCutoff;        //!< alpha cutoff value
+    bool myToDistinguish;       //!< distinguish front/back flag
+    bool myToMapTexture;        //!< flag for mapping a texture
 };
 
 #endif // _OpenGl_MaterialState_HeaderFile

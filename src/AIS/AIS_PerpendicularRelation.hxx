@@ -16,7 +16,6 @@
 
 #include <PrsDim_PerpendicularRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_PerpendicularRelation AIS_PerpendicularRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_PerpendicularRelation AIS_PerpendicularRelation;
 
 #endif // _AIS_PerpendicularRelation_HeaderFile

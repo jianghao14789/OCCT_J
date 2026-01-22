@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,62 +19,54 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_UniversalPairValue, StepKinematics_PairValue)
 
 //=======================================================================
-//function : StepKinematics_UniversalPairValue
-//purpose  :
+// function : StepKinematics_UniversalPairValue
+// purpose  :
 //=======================================================================
-StepKinematics_UniversalPairValue::StepKinematics_UniversalPairValue ()
-{
+StepKinematics_UniversalPairValue::StepKinematics_UniversalPairValue() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_UniversalPairValue::Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                                             const Handle(StepKinematics_KinematicPair) & thePairValue_AppliesToPair,
+                                             const Standard_Real theFirstRotationAngle,
+                                             const Standard_Real theSecondRotationAngle) {
+    StepKinematics_PairValue::Init(theRepresentationItem_Name, thePairValue_AppliesToPair);
+
+    myFirstRotationAngle = theFirstRotationAngle;
+
+    mySecondRotationAngle = theSecondRotationAngle;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : FirstRotationAngle
+// purpose  :
 //=======================================================================
-void StepKinematics_UniversalPairValue::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                              const Handle(StepKinematics_KinematicPair)& thePairValue_AppliesToPair,
-                                              const Standard_Real theFirstRotationAngle,
-                                              const Standard_Real theSecondRotationAngle)
-{
-  StepKinematics_PairValue::Init(theRepresentationItem_Name,
-                                 thePairValue_AppliesToPair);
-
-  myFirstRotationAngle = theFirstRotationAngle;
-
-  mySecondRotationAngle = theSecondRotationAngle;
+Standard_Real StepKinematics_UniversalPairValue::FirstRotationAngle() const {
+    return myFirstRotationAngle;
 }
 
 //=======================================================================
-//function : FirstRotationAngle
-//purpose  :
+// function : SetFirstRotationAngle
+// purpose  :
 //=======================================================================
-Standard_Real StepKinematics_UniversalPairValue::FirstRotationAngle () const
-{
-  return myFirstRotationAngle;
+void StepKinematics_UniversalPairValue::SetFirstRotationAngle(const Standard_Real theFirstRotationAngle) {
+    myFirstRotationAngle = theFirstRotationAngle;
 }
 
 //=======================================================================
-//function : SetFirstRotationAngle
-//purpose  :
+// function : SecondRotationAngle
+// purpose  :
 //=======================================================================
-void StepKinematics_UniversalPairValue::SetFirstRotationAngle (const Standard_Real theFirstRotationAngle)
-{
-  myFirstRotationAngle = theFirstRotationAngle;
+Standard_Real StepKinematics_UniversalPairValue::SecondRotationAngle() const {
+    return mySecondRotationAngle;
 }
 
 //=======================================================================
-//function : SecondRotationAngle
-//purpose  :
+// function : SetSecondRotationAngle
+// purpose  :
 //=======================================================================
-Standard_Real StepKinematics_UniversalPairValue::SecondRotationAngle () const
-{
-  return mySecondRotationAngle;
-}
-
-//=======================================================================
-//function : SetSecondRotationAngle
-//purpose  :
-//=======================================================================
-void StepKinematics_UniversalPairValue::SetSecondRotationAngle (const Standard_Real theSecondRotationAngle)
-{
-  mySecondRotationAngle = theSecondRotationAngle;
+void StepKinematics_UniversalPairValue::SetSecondRotationAngle(const Standard_Real theSecondRotationAngle) {
+    mySecondRotationAngle = theSecondRotationAngle;
 }

@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESAppli_HArray1OfNode, IGESAppli_Array1OfNode)
 
-
 #endif

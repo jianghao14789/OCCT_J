@@ -25,11 +25,10 @@
 //! -      VrmlAPI_BothRepresentation : the shape is translated
 //! to VRML format with both representations : shaded and
 //! wireframe. This is the default option.
-enum VrmlAPI_RepresentationOfShape
-{
-VrmlAPI_ShadedRepresentation,
-VrmlAPI_WireFrameRepresentation,
-VrmlAPI_BothRepresentation
+enum VrmlAPI_RepresentationOfShape {
+    VrmlAPI_ShadedRepresentation,
+    VrmlAPI_WireFrameRepresentation,
+    VrmlAPI_BothRepresentation
 };
 
 #endif // _VrmlAPI_RepresentationOfShape_HeaderFile

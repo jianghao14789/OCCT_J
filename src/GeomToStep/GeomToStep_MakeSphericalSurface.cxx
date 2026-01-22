@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom_SphericalSurface.hxx>
 #include <GeomToStep_MakeAxis2Placement3d.hxx>
 #include <GeomToStep_MakeSphericalSurface.hxx>
@@ -28,31 +27,28 @@
 // Creation d' une conical_surface de prostep a partir d' une SphericalSurface
 // de Geom
 //=============================================================================
-GeomToStep_MakeSphericalSurface::GeomToStep_MakeSphericalSurface
-  ( const Handle(Geom_SphericalSurface)& S )
-	
+GeomToStep_MakeSphericalSurface::GeomToStep_MakeSphericalSurface(const Handle(Geom_SphericalSurface) & S)
+
 {
-  Handle(StepGeom_SphericalSurface) Surf;
-  Handle(StepGeom_Axis2Placement3d) aPosition;
-  Standard_Real aRadius;
-  
-  GeomToStep_MakeAxis2Placement3d MkAxis2(S->Position());
-  aPosition = MkAxis2.Value();
-  aRadius = S->Radius();
-  Surf = new StepGeom_SphericalSurface;
-  Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
-  Surf->Init(name, aPosition, aRadius/ StepData_GlobalFactors::Intance().LengthFactor());
-  theSphericalSurface = Surf;
-  done = Standard_True;
+    Handle(StepGeom_SphericalSurface) Surf;
+    Handle(StepGeom_Axis2Placement3d) aPosition;
+    Standard_Real aRadius;
+
+    GeomToStep_MakeAxis2Placement3d MkAxis2(S->Position());
+    aPosition = MkAxis2.Value();
+    aRadius = S->Radius();
+    Surf = new StepGeom_SphericalSurface;
+    Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
+    Surf->Init(name, aPosition, aRadius / StepData_GlobalFactors::Intance().LengthFactor());
+    theSphericalSurface = Surf;
+    done = Standard_True;
 }
 
 //=============================================================================
 // renvoi des valeurs
 //=============================================================================
 
-const Handle(StepGeom_SphericalSurface) &
-      GeomToStep_MakeSphericalSurface::Value() const
-{
-  StdFail_NotDone_Raise_if (!done, "GeomToStep_MakeSphericalSurface::Value() - no result");
-  return theSphericalSurface;
+const Handle(StepGeom_SphericalSurface) & GeomToStep_MakeSphericalSurface::Value() const {
+    StdFail_NotDone_Raise_if(!done, "GeomToStep_MakeSphericalSurface::Value() - no result");
+    return theSphericalSurface;
 }

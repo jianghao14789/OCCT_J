@@ -21,41 +21,20 @@
 
 #include <StepDimTol_GeometricToleranceWithDatumReference.hxx>
 
-
 class StepDimTol_TotalRunoutTolerance;
 DEFINE_STANDARD_HANDLE(StepDimTol_TotalRunoutTolerance, StepDimTol_GeometricToleranceWithDatumReference)
 
 //! Representation of STEP entity TotalRunoutTolerance
-class StepDimTol_TotalRunoutTolerance : public StepDimTol_GeometricToleranceWithDatumReference
-{
+class StepDimTol_TotalRunoutTolerance : public StepDimTol_GeometricToleranceWithDatumReference {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepDimTol_TotalRunoutTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepDimTol_TotalRunoutTolerance();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_TotalRunoutTolerance,StepDimTol_GeometricToleranceWithDatumReference)
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_TotalRunoutTolerance, StepDimTol_GeometricToleranceWithDatumReference)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepDimTol_TotalRunoutTolerance_HeaderFile

@@ -20,5 +20,4 @@
 
 typedef NCollection_DefaultHasher<Standard_Real> TColStd_MapRealHasher;
 
-
 #endif

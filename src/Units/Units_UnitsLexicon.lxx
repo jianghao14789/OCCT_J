@@ -17,12 +17,11 @@
 #include <Units_Lexicon.hxx>
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-inline void Units_UnitsLexicon::Dump() const
-{
+inline void Units_UnitsLexicon::Dump() const {
     std::cout << " UNITSLEXICON : " << std::endl;
     Units_Lexicon::Dump();
 }

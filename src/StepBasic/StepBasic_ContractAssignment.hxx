@@ -23,51 +23,30 @@
 #include <Standard_Transient.hxx>
 class StepBasic_Contract;
 
-
 class StepBasic_ContractAssignment;
 DEFINE_STANDARD_HANDLE(StepBasic_ContractAssignment, Standard_Transient)
 
 //! Representation of STEP entity ContractAssignment
-class StepBasic_ContractAssignment : public Standard_Transient
-{
+class StepBasic_ContractAssignment : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_ContractAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_ContractAssignment();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(StepBasic_Contract)& aAssignedContract);
-  
-  //! Returns field AssignedContract
-  Standard_EXPORT Handle(StepBasic_Contract) AssignedContract() const;
-  
-  //! Set field AssignedContract
-  Standard_EXPORT void SetAssignedContract (const Handle(StepBasic_Contract)& AssignedContract);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(StepBasic_Contract) & aAssignedContract);
 
+    //! Returns field AssignedContract
+    Standard_EXPORT Handle(StepBasic_Contract) AssignedContract() const;
 
+    //! Set field AssignedContract
+    Standard_EXPORT void SetAssignedContract(const Handle(StepBasic_Contract) & AssignedContract);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepBasic_ContractAssignment,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(StepBasic_ContractAssignment, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepBasic_Contract) theAssignedContract;
-
-
+    Handle(StepBasic_Contract) theAssignedContract;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_ContractAssignment_HeaderFile

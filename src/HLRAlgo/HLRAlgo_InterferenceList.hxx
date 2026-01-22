@@ -23,5 +23,4 @@
 typedef NCollection_List<HLRAlgo_Interference> HLRAlgo_InterferenceList;
 typedef NCollection_List<HLRAlgo_Interference>::Iterator HLRAlgo_ListIteratorOfInterferenceList;
 
-
 #endif

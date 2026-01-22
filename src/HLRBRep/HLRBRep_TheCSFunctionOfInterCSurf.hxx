@@ -37,7 +37,6 @@ class gp_Pnt;
 
 class HLRBRep_TheCSFunctionOfInterCSurf : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT HLRBRep_TheCSFunctionOfInterCSurf(const Standard_Address& S, const gp_Lin& C);
@@ -61,7 +60,6 @@ public:
     Standard_EXPORT const gp_Lin& AuxillarCurve() const;
 
 protected:
-
 private:
     Standard_Address surface;
     gp_Lin curve;

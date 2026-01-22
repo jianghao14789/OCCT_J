@@ -28,66 +28,44 @@
 class TopOpeBRepDS_DataStructure;
 class TopOpeBRepDS_Point;
 
-
-
-class TopOpeBRepDS_PointExplorer 
-{
+class TopOpeBRepDS_PointExplorer {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopOpeBRepDS_PointExplorer();
 
-  
-  Standard_EXPORT TopOpeBRepDS_PointExplorer();
-  
-  Standard_EXPORT TopOpeBRepDS_PointExplorer(const TopOpeBRepDS_DataStructure& DS, const Standard_Boolean FindOnlyKeep = Standard_True);
-  
-  Standard_EXPORT void Init (const TopOpeBRepDS_DataStructure& DS, const Standard_Boolean FindOnlyKeep = Standard_True);
-  
-  Standard_EXPORT Standard_Boolean More() const;
-  
-  Standard_EXPORT void Next();
-  
-  Standard_EXPORT const TopOpeBRepDS_Point& Point() const;
-  
-  Standard_EXPORT Standard_Boolean IsPoint (const Standard_Integer I) const;
-  
-  Standard_EXPORT Standard_Boolean IsPointKeep (const Standard_Integer I) const;
-  
-  Standard_EXPORT const TopOpeBRepDS_Point& Point (const Standard_Integer I) const;
-  
-  Standard_EXPORT Standard_Integer NbPoint();
-  
-  Standard_EXPORT Standard_Integer Index() const;
+    Standard_EXPORT TopOpeBRepDS_PointExplorer(const TopOpeBRepDS_DataStructure& DS,
+                                               const Standard_Boolean FindOnlyKeep = Standard_True);
 
+    Standard_EXPORT void Init(const TopOpeBRepDS_DataStructure& DS,
+                              const Standard_Boolean FindOnlyKeep = Standard_True);
 
+    Standard_EXPORT Standard_Boolean More() const;
 
+    Standard_EXPORT void Next();
+
+    Standard_EXPORT const TopOpeBRepDS_Point& Point() const;
+
+    Standard_EXPORT Standard_Boolean IsPoint(const Standard_Integer I) const;
+
+    Standard_EXPORT Standard_Boolean IsPointKeep(const Standard_Integer I) const;
+
+    Standard_EXPORT const TopOpeBRepDS_Point& Point(const Standard_Integer I) const;
+
+    Standard_EXPORT Standard_Integer NbPoint();
+
+    Standard_EXPORT Standard_Integer Index() const;
 
 protected:
-
-
-
-
-
 private:
+    Standard_EXPORT void Find();
 
-  
-  Standard_EXPORT void Find();
-
-
-  Standard_Integer myIndex;
-  Standard_Integer myMax;
-  Standard_Address myDS;
-  Standard_Boolean myFound;
-  TopOpeBRepDS_Point myEmpty;
-  Standard_Boolean myFindKeep;
-
-
+    Standard_Integer myIndex;
+    Standard_Integer myMax;
+    Standard_Address myDS;
+    Standard_Boolean myFound;
+    TopOpeBRepDS_Point myEmpty;
+    Standard_Boolean myFindKeep;
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRepDS_PointExplorer_HeaderFile

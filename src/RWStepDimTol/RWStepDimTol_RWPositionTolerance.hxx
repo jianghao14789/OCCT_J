@@ -27,48 +27,27 @@ class StepDimTol_PositionTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for PositionTolerance
-class RWStepDimTol_RWPositionTolerance 
-{
+class RWStepDimTol_RWPositionTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWPositionTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWPositionTolerance();
-  
-  //! Reads PositionTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_PositionTolerance)& ent) const;
-  
-  //! Writes PositionTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_PositionTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_PositionTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads PositionTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_PositionTolerance) & ent) const;
 
+    //! Writes PositionTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_PositionTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_PositionTolerance) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWPositionTolerance_HeaderFile

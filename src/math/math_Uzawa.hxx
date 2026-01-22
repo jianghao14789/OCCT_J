@@ -55,7 +55,9 @@ public:
     //! convergence of X.
     //! Exception ConstructionError is raised if the line number
     //! of Cont is different from the length of Secont.
-    Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
+    Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint,
+                               const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06,
+                               const Standard_Integer NbIterations = 500);
 
     //! Given an input matrix Cont, two input vectors Secont
     //! and StartingPoint, it solves Cont*X = Secont (the Nce
@@ -71,7 +73,10 @@ public:
     //! Exception ConstructionError is raised if the line number
     //! of Cont is different from the length of Secont and from
     //! Nce + Nci.
-    Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
+    Standard_EXPORT math_Uzawa(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint,
+                               const Standard_Integer Nci, const Standard_Integer Nce,
+                               const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06,
+                               const Standard_Integer NbIterations = 500);
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
@@ -105,9 +110,11 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
     //! Is used internally by the two constructors above.
-    Standard_EXPORT void Perform(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
+    Standard_EXPORT void Perform(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint,
+                                 const Standard_Integer Nci, const Standard_Integer Nce,
+                                 const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06,
+                                 const Standard_Integer NbIterations = 500);
 
 private:
     math_Vector Resul;
@@ -117,7 +124,6 @@ private:
     math_Matrix CTCinv;
     Standard_Integer NbIter;
     Standard_Boolean Done;
-
 };
 
 #include <math_Uzawa.lxx>

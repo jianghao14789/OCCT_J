@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_GeneralRelation.hxx>
 #include <Expr_NamedUnknown.hxx>
@@ -28,18 +27,15 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_SystemRelation, Expr_GeneralRelation)
 
-Expr_SystemRelation::Expr_SystemRelation(const Handle(Expr_GeneralRelation)& relation)
-{
+Expr_SystemRelation::Expr_SystemRelation(const Handle(Expr_GeneralRelation) & relation) {
     myRelations.Append(relation);
 }
 
-void Expr_SystemRelation::Add(const Handle(Expr_GeneralRelation)& relation)
-{
+void Expr_SystemRelation::Add(const Handle(Expr_GeneralRelation) & relation) {
     myRelations.Append(relation);
 }
 
-void Expr_SystemRelation::Remove(const Handle(Expr_GeneralRelation)& relation)
-{
+void Expr_SystemRelation::Remove(const Handle(Expr_GeneralRelation) & relation) {
     Standard_Integer position = 0;
     Standard_Boolean alreadyHere = Standard_False;
 
@@ -59,8 +55,7 @@ void Expr_SystemRelation::Remove(const Handle(Expr_GeneralRelation)& relation)
     myRelations.Remove(position);
 }
 
-Standard_Boolean Expr_SystemRelation::IsLinear() const
-{
+Standard_Boolean Expr_SystemRelation::IsLinear() const {
     Standard_Integer len = myRelations.Length();
     for (Standard_Integer i = 1; i <= len; i++) {
         if (!myRelations(i)->IsLinear()) {
@@ -70,8 +65,7 @@ Standard_Boolean Expr_SystemRelation::IsLinear() const
     return Standard_True;
 }
 
-Standard_Boolean Expr_SystemRelation::Contains(const Handle(Expr_GeneralExpression)& exp) const
-{
+Standard_Boolean Expr_SystemRelation::Contains(const Handle(Expr_GeneralExpression) & exp) const {
     for (Standard_Integer i = 1; i <= myRelations.Length(); i++) {
         if (myRelations(i)->Contains(exp)) {
             return Standard_True;
@@ -80,25 +74,21 @@ Standard_Boolean Expr_SystemRelation::Contains(const Handle(Expr_GeneralExpressi
     return Standard_False;
 }
 
-void Expr_SystemRelation::Replace(const Handle(Expr_NamedUnknown)& var, const Handle(Expr_GeneralExpression)& with)
-{
+void Expr_SystemRelation::Replace(const Handle(Expr_NamedUnknown) & var, const Handle(Expr_GeneralExpression) & with) {
     for (Standard_Integer i = 1; i <= myRelations.Length(); i++) {
         myRelations(i)->Replace(var, with);
     }
 }
 
-Standard_Integer Expr_SystemRelation::NbOfSubRelations() const
-{
+Standard_Integer Expr_SystemRelation::NbOfSubRelations() const {
     return myRelations.Length();
 }
 
-Handle(Expr_GeneralRelation) Expr_SystemRelation::SubRelation(const Standard_Integer index) const
-{
+Handle(Expr_GeneralRelation) Expr_SystemRelation::SubRelation(const Standard_Integer index) const {
     return myRelations(index);
 }
 
-Standard_Boolean Expr_SystemRelation::IsSatisfied() const
-{
+Standard_Boolean Expr_SystemRelation::IsSatisfied() const {
     Standard_Integer len = myRelations.Length();
     for (Standard_Integer i = 1; i <= len; i++) {
         if (!myRelations(i)->IsSatisfied()) {
@@ -108,9 +98,7 @@ Standard_Boolean Expr_SystemRelation::IsSatisfied() const
     return Standard_True;
 }
 
-
-Handle(Expr_GeneralRelation) Expr_SystemRelation::Simplified() const
-{
+Handle(Expr_GeneralRelation) Expr_SystemRelation::Simplified() const {
     Standard_Integer len = myRelations.Length();
     Handle(Expr_GeneralRelation) rel;
     rel = myRelations(1);
@@ -123,10 +111,7 @@ Handle(Expr_GeneralRelation) Expr_SystemRelation::Simplified() const
     return result;
 }
 
-
-
-void Expr_SystemRelation::Simplify()
-{
+void Expr_SystemRelation::Simplify() {
     Standard_Integer len = myRelations.Length();
     Handle(Expr_GeneralRelation) rel;
     for (Standard_Integer i = 1; i <= len; i++) {
@@ -135,8 +120,7 @@ void Expr_SystemRelation::Simplify()
     }
 }
 
-Handle(Expr_GeneralRelation) Expr_SystemRelation::Copy() const
-{
+Handle(Expr_GeneralRelation) Expr_SystemRelation::Copy() const {
     Handle(Expr_SystemRelation) cop = new Expr_SystemRelation(myRelations(1)->Copy());
     Standard_Integer len = myRelations.Length();
     for (Standard_Integer i = 2; i <= len; i++) {
@@ -145,8 +129,7 @@ Handle(Expr_GeneralRelation) Expr_SystemRelation::Copy() const
     return cop;
 }
 
-Standard_Integer Expr_SystemRelation::NbOfSingleRelations() const
-{
+Standard_Integer Expr_SystemRelation::NbOfSingleRelations() const {
     Standard_Integer nbsing = 0;
     Standard_Integer nbrel = myRelations.Length();
     Handle(Expr_GeneralRelation) subrel;
@@ -157,8 +140,7 @@ Standard_Integer Expr_SystemRelation::NbOfSingleRelations() const
     return nbsing;
 }
 
-TCollection_AsciiString Expr_SystemRelation::String() const
-{
+TCollection_AsciiString Expr_SystemRelation::String() const {
     Standard_Integer nbrel = myRelations.Length();
     Handle(Expr_GeneralRelation) subrel;
     TCollection_AsciiString res;

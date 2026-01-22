@@ -23,44 +23,22 @@
 #include <Standard_Boolean.hxx>
 class BOPTools_Set;
 
-
-
-class BOPTools_SetMapHasher 
-{
+class BOPTools_SetMapHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-    
-  //! Computes a hash code for the given set, in the range [1, theUpperBound]
-  //! @param theSet the set which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const BOPTools_Set& theSet, Standard_Integer theUpperBound);
+    //! Computes a hash code for the given set, in the range [1, theUpperBound]
+    //! @param theSet the set which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const BOPTools_Set& theSet, Standard_Integer theUpperBound);
 
-  static Standard_Boolean IsEqual (const BOPTools_Set& aSet1, const BOPTools_Set& aSet2);
-
-
-
+    static Standard_Boolean IsEqual(const BOPTools_Set& aSet1, const BOPTools_Set& aSet2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <BOPTools_SetMapHasher.lxx>
-
-
-
-
 
 #endif // _BOPTools_SetMapHasher_HeaderFile

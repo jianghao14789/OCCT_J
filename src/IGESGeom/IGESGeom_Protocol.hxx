@@ -25,54 +25,33 @@
 #include <Standard_Type.hxx>
 class Interface_Protocol;
 
-
 class IGESGeom_Protocol;
 DEFINE_STANDARD_HANDLE(IGESGeom_Protocol, IGESData_Protocol)
 
 //! Description of Protocol for IGESGeom
-class IGESGeom_Protocol : public IGESData_Protocol
-{
+class IGESGeom_Protocol : public IGESData_Protocol {
 
 public:
+    Standard_EXPORT IGESGeom_Protocol();
 
-  
-  Standard_EXPORT IGESGeom_Protocol();
-  
-  //! Gives the count of Resource Protocol. Here, one
-  //! (Protocol from IGESBasic)
-  Standard_EXPORT virtual Standard_Integer NbResources() const Standard_OVERRIDE;
-  
-  //! Returns a Resource, given a rank.
-  Standard_EXPORT virtual Handle(Interface_Protocol) Resource (const Standard_Integer num) const Standard_OVERRIDE;
-  
-  //! Returns a Case Number, specific of each recognized Type
-  //! This Case Number is then used in Libraries : the various
-  //! Modules attached to this class of Protocol must use them
-  //! in accordance (for a given value of TypeNumber, they must
-  //! consider the same Type as the Protocol defines)
-  Standard_EXPORT virtual Standard_Integer TypeNumber (const Handle(Standard_Type)& atype) const Standard_OVERRIDE;
+    //! Gives the count of Resource Protocol. Here, one
+    //! (Protocol from IGESBasic)
+    Standard_EXPORT virtual Standard_Integer NbResources() const Standard_OVERRIDE;
 
+    //! Returns a Resource, given a rank.
+    Standard_EXPORT virtual Handle(Interface_Protocol) Resource(const Standard_Integer num) const Standard_OVERRIDE;
 
+    //! Returns a Case Number, specific of each recognized Type
+    //! This Case Number is then used in Libraries : the various
+    //! Modules attached to this class of Protocol must use them
+    //! in accordance (for a given value of TypeNumber, they must
+    //! consider the same Type as the Protocol defines)
+    Standard_EXPORT virtual Standard_Integer TypeNumber(const Handle(Standard_Type) & atype) const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(IGESGeom_Protocol,IGESData_Protocol)
+    DEFINE_STANDARD_RTTIEXT(IGESGeom_Protocol, IGESData_Protocol)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESGeom_Protocol_HeaderFile

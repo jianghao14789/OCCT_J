@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -29,30 +29,28 @@ class StepKinematics_KinematicTopologyNetworkStructure;
 class StepKinematics_KinematicTopologyStructure;
 
 //! Representation of STEP SELECT type KinematicTopologyRepresentationSelect
-class StepKinematics_KinematicTopologyRepresentationSelect : public StepData_SelectType
-{
+class StepKinematics_KinematicTopologyRepresentationSelect : public StepData_SelectType {
 
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT StepKinematics_KinematicTopologyRepresentationSelect();
 
-  //! Empty constructor
-  Standard_EXPORT StepKinematics_KinematicTopologyRepresentationSelect();
+    //! Recognizes a kind of KinematicTopologyRepresentationSelect select type
+    //! -- 1 -> KinematicTopologyDirectedStructure
+    //! -- 2 -> KinematicTopologyNetworkStructure
+    //! -- 3 -> KinematicTopologyStructure
+    Standard_EXPORT Standard_Integer CaseNum(const Handle(Standard_Transient) & ent) const Standard_OVERRIDE;
 
-  //! Recognizes a kind of KinematicTopologyRepresentationSelect select type
-  //! -- 1 -> KinematicTopologyDirectedStructure
-  //! -- 2 -> KinematicTopologyNetworkStructure
-  //! -- 3 -> KinematicTopologyStructure
-  Standard_EXPORT Standard_Integer CaseNum (const Handle(Standard_Transient)& ent) const Standard_OVERRIDE;
+    //! Returns Value as KinematicTopologyDirectedStructure (or Null if another type)
+    Standard_EXPORT Handle(StepKinematics_KinematicTopologyDirectedStructure)
+        KinematicTopologyDirectedStructure() const;
 
-  //! Returns Value as KinematicTopologyDirectedStructure (or Null if another type)
-  Standard_EXPORT Handle(StepKinematics_KinematicTopologyDirectedStructure) KinematicTopologyDirectedStructure() const;
+    //! Returns Value as KinematicTopologyNetworkStructure (or Null if another type)
+    Standard_EXPORT Handle(StepKinematics_KinematicTopologyNetworkStructure) KinematicTopologyNetworkStructure() const;
 
-  //! Returns Value as KinematicTopologyNetworkStructure (or Null if another type)
-  Standard_EXPORT Handle(StepKinematics_KinematicTopologyNetworkStructure) KinematicTopologyNetworkStructure() const;
-
-  //! Returns Value as KinematicTopologyStructure (or Null if another type)
-  Standard_EXPORT Handle(StepKinematics_KinematicTopologyStructure) KinematicTopologyStructure() const;
-
+    //! Returns Value as KinematicTopologyStructure (or Null if another type)
+    Standard_EXPORT Handle(StepKinematics_KinematicTopologyStructure) KinematicTopologyStructure() const;
 };
 #endif // _StepKinematics_KinematicTopologyRepresentationSelect_HeaderFile

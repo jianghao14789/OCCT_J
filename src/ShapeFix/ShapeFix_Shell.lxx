@@ -15,31 +15,28 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : FixFaceTool
-//purpose  : 
+// function : FixFaceTool
+// purpose  :
 //=======================================================================
 
-inline  Handle(ShapeFix_Face) ShapeFix_Shell::FixFaceTool() 
-{
-  return myFixFace;
+inline Handle(ShapeFix_Face) ShapeFix_Shell::FixFaceTool() {
+    return myFixFace;
 }
 
 //=======================================================================
-//function : FixFaceMode
-//purpose  : 
+// function : FixFaceMode
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& ShapeFix_Shell::FixFaceMode() 
-{
-  return myFixFaceMode;
+inline Standard_Integer& ShapeFix_Shell::FixFaceMode() {
+    return myFixFaceMode;
 }
 
 //=======================================================================
-//function : FixOrientationMode
-//purpose  : 
+// function : FixOrientationMode
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& ShapeFix_Shell::FixOrientationMode() 
-{
-  return myFixOrientationMode;
+inline Standard_Integer& ShapeFix_Shell::FixOrientationMode() {
+    return myFixOrientationMode;
 }

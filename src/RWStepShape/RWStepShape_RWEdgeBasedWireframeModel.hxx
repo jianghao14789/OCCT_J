@@ -27,48 +27,29 @@ class StepShape_EdgeBasedWireframeModel;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for EdgeBasedWireframeModel
-class RWStepShape_RWEdgeBasedWireframeModel 
-{
+class RWStepShape_RWEdgeBasedWireframeModel {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWEdgeBasedWireframeModel();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWEdgeBasedWireframeModel();
-  
-  //! Reads EdgeBasedWireframeModel
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_EdgeBasedWireframeModel)& ent) const;
-  
-  //! Writes EdgeBasedWireframeModel
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_EdgeBasedWireframeModel)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_EdgeBasedWireframeModel)& ent, Interface_EntityIterator& iter) const;
+    //! Reads EdgeBasedWireframeModel
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_EdgeBasedWireframeModel) & ent) const;
 
+    //! Writes EdgeBasedWireframeModel
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepShape_EdgeBasedWireframeModel) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_EdgeBasedWireframeModel) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWEdgeBasedWireframeModel_HeaderFile

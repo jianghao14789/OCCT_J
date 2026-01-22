@@ -14,8 +14,8 @@
 // commercial license or contractual agreement.
 
 //            Automatically created from NCollection_Array1.hxx by GAWK
-// Purpose:     The class Array2 represents unidimensional arrays 
-//              of fixed size known at run time. 
+// Purpose:     The class Array2 represents unidimensional arrays
+//              of fixed size known at run time.
 //              The range of the index is user defined.
 //              An array1 can be constructed with a "C array".
 //              This functionality is useful to call methods expecting
@@ -41,7 +41,6 @@
 
 // *********************************************** Template for Array1 class
 
-#define DEFINE_ARRAY1(_ClassName_, _BaseCollection_, TheItemType)              \
-typedef NCollection_Array1<TheItemType > _ClassName_;
+#define DEFINE_ARRAY1(_ClassName_, _BaseCollection_, TheItemType) typedef NCollection_Array1<TheItemType> _ClassName_;
 
 #endif

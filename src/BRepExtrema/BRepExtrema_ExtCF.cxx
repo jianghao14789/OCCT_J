@@ -25,96 +25,87 @@
 #include <BRepAdaptor_Curve.hxx>
 
 //=======================================================================
-//function : BRepExtrema_ExtCF
-//purpose  : 
+// function : BRepExtrema_ExtCF
+// purpose  :
 //=======================================================================
 
-BRepExtrema_ExtCF::BRepExtrema_ExtCF(const TopoDS_Edge& E, const TopoDS_Face& F)
-{
-  Initialize(E, F);
-  Perform(E, F);
+BRepExtrema_ExtCF::BRepExtrema_ExtCF(const TopoDS_Edge& E, const TopoDS_Face& F) {
+    Initialize(E, F);
+    Perform(E, F);
 }
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void BRepExtrema_ExtCF::Initialize(const TopoDS_Edge& E, const TopoDS_Face& F)
-{
-  BRepAdaptor_Surface Surf(F);
-  if (Surf.GetType() == GeomAbs_OtherSurface ||
-      !BRep_Tool::IsGeometric(E))
-    return; // protect against non-geometric type (e.g. triangulation)
-  BRepAdaptor_Curve aC(E);
-  myHS = new BRepAdaptor_Surface(Surf);
-  Standard_Real aTolC, aTolS;
-  //
-  aTolS = Min(BRep_Tool::Tolerance(F), Precision::Confusion());
-  aTolS = Min(Surf.UResolution(aTolS), Surf.VResolution(aTolS));
-  aTolS = Max(aTolS, Precision::PConfusion());
-  //
-  aTolC = Min(BRep_Tool::Tolerance(E), Precision::Confusion());
-  aTolC = aC.Resolution(aTolC);
-  aTolC = Max(aTolC, Precision::PConfusion());
-  //
-  Standard_Real U1, U2, V1, V2;
-  BRepTools::UVBounds(F, U1, U2, V1, V2);
-  myExtCS.Initialize (*myHS, U1, U2, V1, V2, aTolC, aTolS);
+void BRepExtrema_ExtCF::Initialize(const TopoDS_Edge& E, const TopoDS_Face& F) {
+    BRepAdaptor_Surface Surf(F);
+    if (Surf.GetType() == GeomAbs_OtherSurface || !BRep_Tool::IsGeometric(E))
+        return; // protect against non-geometric type (e.g. triangulation)
+    BRepAdaptor_Curve aC(E);
+    myHS = new BRepAdaptor_Surface(Surf);
+    Standard_Real aTolC, aTolS;
+    //
+    aTolS = Min(BRep_Tool::Tolerance(F), Precision::Confusion());
+    aTolS = Min(Surf.UResolution(aTolS), Surf.VResolution(aTolS));
+    aTolS = Max(aTolS, Precision::PConfusion());
+    //
+    aTolC = Min(BRep_Tool::Tolerance(E), Precision::Confusion());
+    aTolC = aC.Resolution(aTolC);
+    aTolC = Max(aTolC, Precision::PConfusion());
+    //
+    Standard_Real U1, U2, V1, V2;
+    BRepTools::UVBounds(F, U1, U2, V1, V2);
+    myExtCS.Initialize(*myHS, U1, U2, V1, V2, aTolC, aTolS);
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void BRepExtrema_ExtCF::Perform(const TopoDS_Edge& E, const TopoDS_Face& F2)
-{
-  mySqDist.Clear();
-  myPointsOnS.Clear();
-  myPointsOnC.Clear();
+void BRepExtrema_ExtCF::Perform(const TopoDS_Edge& E, const TopoDS_Face& F2) {
+    mySqDist.Clear();
+    myPointsOnS.Clear();
+    myPointsOnC.Clear();
 
-  if (myHS.IsNull())
-    return; // protect against non-geometric type (e.g. triangulation)
+    if (myHS.IsNull()) return; // protect against non-geometric type (e.g. triangulation)
 
-  Standard_Real U1, U2;
-  BRep_Tool::Range(E, U1, U2);
+    Standard_Real U1, U2;
+    BRep_Tool::Range(E, U1, U2);
 
-  BRepAdaptor_Curve Curv(E);
-  Handle(BRepAdaptor_Curve) HC = new BRepAdaptor_Curve(Curv);
-  myExtCS.Perform(*HC, U1, U2);
+    BRepAdaptor_Curve Curv(E);
+    Handle(BRepAdaptor_Curve) HC = new BRepAdaptor_Curve(Curv);
+    myExtCS.Perform(*HC, U1, U2);
 
-  if(!myExtCS.IsDone())
-    return;
+    if (!myExtCS.IsDone()) return;
 
-  if (myExtCS.IsParallel())
-    mySqDist.Append(myExtCS.SquareDistance(1));
-  else
-  {
-    // Exploration of points and classification
-    const Standard_Real Tol = BRep_Tool::Tolerance (F2);
-    BRepTopAdaptor_FClass2d classifier (F2, Tol);
+    if (myExtCS.IsParallel())
+        mySqDist.Append(myExtCS.SquareDistance(1));
+    else {
+        // Exploration of points and classification
+        const Standard_Real Tol = BRep_Tool::Tolerance(F2);
+        BRepTopAdaptor_FClass2d classifier(F2, Tol);
 
-    // If the underlying surface of the face is periodic
-    // Extrema should return the point within the period,
-    // so there is no point to adjust it in classifier.
-    Standard_Boolean isAdjustPeriodic = Standard_False;
+        // If the underlying surface of the face is periodic
+        // Extrema should return the point within the period,
+        // so there is no point to adjust it in classifier.
+        Standard_Boolean isAdjustPeriodic = Standard_False;
 
-    Extrema_POnCurv P1;
-    Extrema_POnSurf P2;
+        Extrema_POnCurv P1;
+        Extrema_POnSurf P2;
 
-    for (Standard_Integer i = 1; i <= myExtCS.NbExt(); i++)
-    {
-      myExtCS.Points(i, P1, P2);
-      P2.Parameter(U1, U2);
-      const gp_Pnt2d Puv(U1, U2);
-      const TopAbs_State state = classifier.Perform (Puv, isAdjustPeriodic);
-      if (state == TopAbs_ON || state == TopAbs_IN)
-      {
-        mySqDist.Append(myExtCS.SquareDistance(i));
-        myPointsOnC.Append(P1);
-        myPointsOnS.Append(P2);
-      }
+        for (Standard_Integer i = 1; i <= myExtCS.NbExt(); i++) {
+            myExtCS.Points(i, P1, P2);
+            P2.Parameter(U1, U2);
+            const gp_Pnt2d Puv(U1, U2);
+            const TopAbs_State state = classifier.Perform(Puv, isAdjustPeriodic);
+            if (state == TopAbs_ON || state == TopAbs_IN) {
+                mySqDist.Append(myExtCS.SquareDistance(i));
+                myPointsOnC.Append(P1);
+                myPointsOnS.Append(P2);
+            }
+        }
     }
-  }
 }

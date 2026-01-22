@@ -20,5 +20,4 @@
 
 DEFINE_HSEQUENCE(StepElement_HSequenceOfCurveElementPurposeMember, StepElement_SequenceOfCurveElementPurposeMember)
 
-
 #endif

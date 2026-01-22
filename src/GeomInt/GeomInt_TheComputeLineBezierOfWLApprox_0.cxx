@@ -25,7 +25,6 @@
 #include <GeomInt_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfWLApprox.hxx>
 #include <AppParCurves_MultiCurve.hxx>
 #include <AppParCurves_MultiBSpCurve.hxx>
- 
 
 #define MultiLine GeomInt_TheMultiLineOfWLApprox
 #define MultiLine_hxx <GeomInt_TheMultiLineOfWLApprox.hxx>
@@ -52,4 +51,3 @@
 #define Approx_ComputeLine GeomInt_TheComputeLineBezierOfWLApprox
 #define Approx_ComputeLine_hxx <GeomInt_TheComputeLineBezierOfWLApprox.hxx>
 #include <Approx_ComputeLine.gxx>
-

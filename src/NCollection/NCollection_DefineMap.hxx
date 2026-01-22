@@ -41,7 +41,6 @@
 
 // *********************************************** Class Map *****************
 
-#define DEFINE_MAP(_ClassName_, _BaseCollection_, TheKeyType)                  \
-typedef NCollection_Map <TheKeyType > _ClassName_;
+#define DEFINE_MAP(_ClassName_, _BaseCollection_, TheKeyType) typedef NCollection_Map<TheKeyType> _ClassName_;
 
 #endif

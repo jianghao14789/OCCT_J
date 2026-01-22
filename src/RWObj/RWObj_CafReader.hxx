@@ -18,46 +18,46 @@
 #include <RWObj_TriangulationReader.hxx>
 
 //! The OBJ mesh reader into XDE document.
-class RWObj_CafReader : public RWMesh_CafReader, protected RWObj_IShapeReceiver
-{
-  DEFINE_STANDARD_RTTIEXT(RWObj_CafReader, RWMesh_CafReader)
+class RWObj_CafReader : public RWMesh_CafReader, protected RWObj_IShapeReceiver {
+    DEFINE_STANDARD_RTTIEXT(RWObj_CafReader, RWMesh_CafReader)
 public:
+    //! Empty constructor.
+    Standard_EXPORT RWObj_CafReader();
 
-  //! Empty constructor.
-  Standard_EXPORT RWObj_CafReader();
+    //! Return single precision flag for reading vertex data (coordinates); FALSE by default.
+    Standard_Boolean IsSinglePrecision() const {
+        return myIsSinglePrecision;
+    }
 
-  //! Return single precision flag for reading vertex data (coordinates); FALSE by default.
-  Standard_Boolean IsSinglePrecision() const { return myIsSinglePrecision; }
-
-  //! Setup single/double precision flag for reading vertex data (coordinates).
-  void SetSinglePrecision (Standard_Boolean theIsSinglePrecision) { myIsSinglePrecision = theIsSinglePrecision; }
-
-protected:
-
-  //! Read the mesh from specified file.
-  Standard_EXPORT virtual Standard_Boolean performMesh (const TCollection_AsciiString& theFile,
-                                                        const Message_ProgressRange& theProgress,
-                                                        const Standard_Boolean theToProbe) Standard_OVERRIDE;
+    //! Setup single/double precision flag for reading vertex data (coordinates).
+    void SetSinglePrecision(Standard_Boolean theIsSinglePrecision) {
+        myIsSinglePrecision = theIsSinglePrecision;
+    }
 
 protected:
-
-  //! Create reader context.
-  //! Can be overridden by sub-class to read triangulation into application-specific data structures instead of Poly_Triangulation.
-  Standard_EXPORT virtual Handle(RWObj_TriangulationReader) createReaderContext();
-
-  //! @param theShape       shape to register
-  //! @param theName        shape name
-  //! @param theMaterial    shape material
-  //! @param theIsRootShape indicates that this is a root object (free shape)
-  Standard_EXPORT virtual void BindNamedShape (const TopoDS_Shape& theShape,
-                                               const TCollection_AsciiString& theName,
-                                               const RWObj_Material* theMaterial,
-                                               const Standard_Boolean theIsRootShape) Standard_OVERRIDE;
+    //! Read the mesh from specified file.
+    Standard_EXPORT virtual Standard_Boolean performMesh(const TCollection_AsciiString& theFile,
+                                                         const Message_ProgressRange& theProgress,
+                                                         const Standard_Boolean theToProbe) Standard_OVERRIDE;
 
 protected:
+    //! Create reader context.
+    //! Can be overridden by sub-class to read triangulation into application-specific data structures instead of
+    //! Poly_Triangulation.
+    Standard_EXPORT virtual Handle(RWObj_TriangulationReader) createReaderContext();
 
-  NCollection_DataMap<TCollection_AsciiString, Handle(XCAFDoc_VisMaterial)> myObjMaterialMap;
-  Standard_Boolean myIsSinglePrecision; //!< flag for reading vertex data with single or double floating point precision
+    //! @param theShape       shape to register
+    //! @param theName        shape name
+    //! @param theMaterial    shape material
+    //! @param theIsRootShape indicates that this is a root object (free shape)
+    Standard_EXPORT virtual void BindNamedShape(const TopoDS_Shape& theShape, const TCollection_AsciiString& theName,
+                                                const RWObj_Material* theMaterial,
+                                                const Standard_Boolean theIsRootShape) Standard_OVERRIDE;
+
+protected:
+    NCollection_DataMap<TCollection_AsciiString, Handle(XCAFDoc_VisMaterial)> myObjMaterialMap;
+    Standard_Boolean
+        myIsSinglePrecision; //!< flag for reading vertex data with single or double floating point precision
 };
 
 #endif // _RWObj_CafReader_HeaderFile

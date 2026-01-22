@@ -23,62 +23,39 @@
 
 class IGESDefs_Protocol;
 
-
 //! To embody general definitions of Entities
 //! (Parameters, Tables ...)
-class IGESDefs 
-{
+class IGESDefs {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Prepares dynamic data (Protocol, Modules) for this package
+    Standard_EXPORT static void Init();
 
-  
-  //! Prepares dynamic data (Protocol, Modules) for this package
-  Standard_EXPORT static void Init();
-  
-  //! Returns the Protocol for this Package
-  Standard_EXPORT static Handle(IGESDefs_Protocol) Protocol();
-
-
-
+    //! Returns the Protocol for this Package
+    Standard_EXPORT static Handle(IGESDefs_Protocol) Protocol();
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class IGESDefs_AssociativityDef;
-friend class IGESDefs_MacroDef;
-friend class IGESDefs_UnitsData;
-friend class IGESDefs_AttributeDef;
-friend class IGESDefs_TabularData;
-friend class IGESDefs_GenericData;
-friend class IGESDefs_AttributeTable;
-friend class IGESDefs_ToolAssociativityDef;
-friend class IGESDefs_ToolMacroDef;
-friend class IGESDefs_ToolUnitsData;
-friend class IGESDefs_ToolAttributeDef;
-friend class IGESDefs_ToolTabularData;
-friend class IGESDefs_ToolGenericData;
-friend class IGESDefs_ToolAttributeTable;
-friend class IGESDefs_Protocol;
-friend class IGESDefs_ReadWriteModule;
-friend class IGESDefs_GeneralModule;
-friend class IGESDefs_SpecificModule;
-friend class IGESDefs_HArray1OfHArray1OfTextDisplayTemplate;
-
+    friend class IGESDefs_AssociativityDef;
+    friend class IGESDefs_MacroDef;
+    friend class IGESDefs_UnitsData;
+    friend class IGESDefs_AttributeDef;
+    friend class IGESDefs_TabularData;
+    friend class IGESDefs_GenericData;
+    friend class IGESDefs_AttributeTable;
+    friend class IGESDefs_ToolAssociativityDef;
+    friend class IGESDefs_ToolMacroDef;
+    friend class IGESDefs_ToolUnitsData;
+    friend class IGESDefs_ToolAttributeDef;
+    friend class IGESDefs_ToolTabularData;
+    friend class IGESDefs_ToolGenericData;
+    friend class IGESDefs_ToolAttributeTable;
+    friend class IGESDefs_Protocol;
+    friend class IGESDefs_ReadWriteModule;
+    friend class IGESDefs_GeneralModule;
+    friend class IGESDefs_SpecificModule;
+    friend class IGESDefs_HArray1OfHArray1OfTextDisplayTemplate;
 };
-
-
-
-
-
-
 
 #endif // _IGESDefs_HeaderFile

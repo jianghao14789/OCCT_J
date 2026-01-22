@@ -14,7 +14,6 @@
 #ifndef _Extrema_GlobOptFuncCQuadric_HeaderFile
 #define _Extrema_GlobOptFuncCQuadric_HeaderFile
 
-
 #include <Adaptor3d_Curve.hxx>
 #include <Adaptor3d_Surface.hxx>
 #include <math_Matrix.hxx>
@@ -31,39 +30,27 @@
 //! between point on surface and nearest point on Conic.
 class Extrema_GlobOptFuncCQuadric : public math_MultipleVarFunction {
 public:
-
     //! Curve and surface should exist during all the lifetime of Extrema_GlobOptFuncCQuadric.
-    Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C);
+    Standard_EXPORT Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C);
 
-    Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C,
-        const Standard_Real   theTf,
-        const Standard_Real   theTl);
+    Standard_EXPORT Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C, const Standard_Real theTf,
+                                                const Standard_Real theTl);
 
-    Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C,
-        const Adaptor3d_Surface* S);
+    Standard_EXPORT Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C, const Adaptor3d_Surface* S);
 
-    Standard_EXPORT void LoadQuad(const Adaptor3d_Surface* S,
-        const Standard_Real     theUf,
-        const Standard_Real     theUl,
-        const Standard_Real     theVf,
-        const Standard_Real     theVl);
+    Standard_EXPORT void LoadQuad(const Adaptor3d_Surface* S, const Standard_Real theUf, const Standard_Real theUl,
+                                  const Standard_Real theVf, const Standard_Real theVl);
 
     Standard_EXPORT virtual Standard_Integer NbVariables() const;
 
-    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& theX,
-        Standard_Real& theF);
+    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& theX, Standard_Real& theF);
     //! Parameters of quadric for point on curve defined by theCT
-    Standard_EXPORT void QuadricParameters(const math_Vector& theCT,
-        math_Vector& theUV) const;
+    Standard_EXPORT void QuadricParameters(const math_Vector& theCT, math_Vector& theUV) const;
 
 private:
+    Standard_Boolean checkInputData(const math_Vector& X, Standard_Real& ct);
 
-    Standard_Boolean checkInputData(const math_Vector& X,
-        Standard_Real& ct);
-
-    void value(Standard_Real ct,
-        Standard_Real& F);
-
+    void value(Standard_Real ct, Standard_Real& F);
 
     const Adaptor3d_Curve* myC;
     const Adaptor3d_Surface* myS;
@@ -81,7 +68,6 @@ private:
     Standard_Real myUl;
     Standard_Real myVf;
     Standard_Real myVl;
-
 };
 
 #endif

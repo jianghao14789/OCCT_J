@@ -26,7 +26,6 @@
 class Standard_Transient;
 class Interface_InterfaceModel;
 
-
 class IGESSelect_SignLevelNumber;
 DEFINE_STANDARD_HANDLE(IGESSelect_SignLevelNumber, IFSelect_Signature)
 
@@ -36,43 +35,24 @@ DEFINE_STANDARD_HANDLE(IGESSelect_SignLevelNumber, IFSelect_Signature)
 //!
 //! For matching, giving /nn/ gets any entity attached to level nn
 //! whatever simple or in a level list
-class IGESSelect_SignLevelNumber : public IFSelect_Signature
-{
+class IGESSelect_SignLevelNumber : public IFSelect_Signature {
 
 public:
+    //! Creates a SignLevelNumber
+    //! <countmode> True : values are naturally displayed
+    //! <countmode> False: values are separated by slashes
+    //! in order to allow selection by signature by Draw or C++
+    Standard_EXPORT IGESSelect_SignLevelNumber(const Standard_Boolean countmode);
 
-  
-  //! Creates a SignLevelNumber
-  //! <countmode> True : values are naturally displayed
-  //! <countmode> False: values are separated by slashes
-  //! in order to allow selection by signature by Draw or C++
-  Standard_EXPORT IGESSelect_SignLevelNumber(const Standard_Boolean countmode);
-  
-  //! Returns the value (see above)
-  Standard_EXPORT Standard_CString Value (const Handle(Standard_Transient)& ent, const Handle(Interface_InterfaceModel)& model) const Standard_OVERRIDE;
+    //! Returns the value (see above)
+    Standard_EXPORT Standard_CString Value(const Handle(Standard_Transient) & ent,
+                                           const Handle(Interface_InterfaceModel) & model) const Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_SignLevelNumber,IFSelect_Signature)
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_SignLevelNumber, IFSelect_Signature)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Boolean thecountmode;
-
-
+    Standard_Boolean thecountmode;
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_SignLevelNumber_HeaderFile

@@ -22,10 +22,6 @@
 //! same positive constant from the  preceding knot the
 //! "KnotDistribution" is    <Uniform>    else   it  is
 //! <NonUniform>
-enum BSplCLib_KnotDistribution
-{
-    BSplCLib_NonUniform,
-    BSplCLib_Uniform
-};
+enum BSplCLib_KnotDistribution { BSplCLib_NonUniform, BSplCLib_Uniform };
 
 #endif // _BSplCLib_KnotDistribution_HeaderFile

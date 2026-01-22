@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<GeomInt_ParameterAndOrientation> GeomInt_SequenceOfParameterAndOrientation;
 
-
 #endif

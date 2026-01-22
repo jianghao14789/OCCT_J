@@ -26,7 +26,6 @@
 #include <ShapeUpgrade_SplitSurface.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class ShapeUpgrade_SplitSurfaceContinuity;
 DEFINE_STANDARD_HANDLE(ShapeUpgrade_SplitSurfaceContinuity, ShapeUpgrade_SplitSurface)
 
@@ -35,47 +34,27 @@ DEFINE_STANDARD_HANDLE(ShapeUpgrade_SplitSurfaceContinuity, ShapeUpgrade_SplitSu
 //! This tool works with tolerance. If C0 surface can be corrected
 //! at a knot with given tolerance then the surface is corrected,
 //! otherwise it is spltted at that knot.
-class ShapeUpgrade_SplitSurfaceContinuity : public ShapeUpgrade_SplitSurface
-{
+class ShapeUpgrade_SplitSurfaceContinuity : public ShapeUpgrade_SplitSurface {
 
 public:
+    //! Empty constructor.
+    Standard_EXPORT ShapeUpgrade_SplitSurfaceContinuity();
 
-  
-  //! Empty constructor.
-  Standard_EXPORT ShapeUpgrade_SplitSurfaceContinuity();
-  
-  //! Sets criterion for splitting.
-  Standard_EXPORT void SetCriterion (const GeomAbs_Shape Criterion);
-  
-  //! Sets tolerance.
-  Standard_EXPORT void SetTolerance (const Standard_Real Tol);
-  
-  Standard_EXPORT virtual void Compute (const Standard_Boolean Segment) Standard_OVERRIDE;
+    //! Sets criterion for splitting.
+    Standard_EXPORT void SetCriterion(const GeomAbs_Shape Criterion);
 
+    //! Sets tolerance.
+    Standard_EXPORT void SetTolerance(const Standard_Real Tol);
 
+    Standard_EXPORT virtual void Compute(const Standard_Boolean Segment) Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurfaceContinuity,ShapeUpgrade_SplitSurface)
+    DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurfaceContinuity, ShapeUpgrade_SplitSurface)
 
 protected:
-
-
-
-
 private:
-
-
-  GeomAbs_Shape myCriterion;
-  Standard_Real myTolerance;
-  Standard_Integer myCont;
-
-
+    GeomAbs_Shape myCriterion;
+    Standard_Real myTolerance;
+    Standard_Integer myCont;
 };
-
-
-
-
-
-
 
 #endif // _ShapeUpgrade_SplitSurfaceContinuity_HeaderFile

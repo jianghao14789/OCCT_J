@@ -35,7 +35,6 @@ class Standard_NegativeValue;
 class TCollection_ExtendedString;
 class TCollection_HAsciiString;
 
-
 class TCollection_HExtendedString;
 DEFINE_STANDARD_HANDLE(TCollection_HExtendedString, Standard_Transient)
 
@@ -50,12 +49,9 @@ DEFINE_STANDARD_HANDLE(TCollection_HExtendedString, Standard_Transient)
 //! - You may use an ExtendedString object to get the actual string.
 //! Note: HExtendedString objects use an
 //! ExtendedString string as a field.
-class TCollection_HExtendedString : public Standard_Transient
-{
+class TCollection_HExtendedString : public Standard_Transient {
 
 public:
-
-
     //! Initializes a HExtendedString to an empty ExtendedString.
     Standard_EXPORT TCollection_HExtendedString();
 
@@ -76,16 +72,16 @@ public:
     Standard_EXPORT TCollection_HExtendedString(const TCollection_ExtendedString& aString);
 
     //! Initializes a HExtendedString with an HAsciiString.
-    Standard_EXPORT TCollection_HExtendedString(const Handle(TCollection_HAsciiString)& aString);
+    Standard_EXPORT TCollection_HExtendedString(const Handle(TCollection_HAsciiString) & aString);
 
     //! Initializes a HExtendedString with a HExtendedString.
-    Standard_EXPORT TCollection_HExtendedString(const Handle(TCollection_HExtendedString)& aString);
+    Standard_EXPORT TCollection_HExtendedString(const Handle(TCollection_HExtendedString) & aString);
 
     //! Appends <other>  to me.
-    Standard_EXPORT void AssignCat(const Handle(TCollection_HExtendedString)& other);
+    Standard_EXPORT void AssignCat(const Handle(TCollection_HExtendedString) & other);
 
     //! Returns a string appending <other>  to me.
-    Standard_EXPORT Handle(TCollection_HExtendedString) Cat(const Handle(TCollection_HExtendedString)& other) const;
+    Standard_EXPORT Handle(TCollection_HExtendedString) Cat(const Handle(TCollection_HExtendedString) & other) const;
 
     //! Substitutes all the characters equal to aChar by NewChar
     //! in the string <me>.
@@ -109,13 +105,13 @@ public:
     Standard_EXPORT void Insert(const Standard_Integer where, const Standard_ExtCharacter what);
 
     //! Insert a HExtendedString at position <where>.
-    Standard_EXPORT void Insert(const Standard_Integer where, const Handle(TCollection_HExtendedString)& what);
+    Standard_EXPORT void Insert(const Standard_Integer where, const Handle(TCollection_HExtendedString) & what);
 
     //! Returns TRUE if <me> is less than <other>.
-    Standard_EXPORT Standard_Boolean IsLess(const Handle(TCollection_HExtendedString)& other) const;
+    Standard_EXPORT Standard_Boolean IsLess(const Handle(TCollection_HExtendedString) & other) const;
 
     //! Returns TRUE if <me> is greater than <other>.
-    Standard_EXPORT Standard_Boolean IsGreater(const Handle(TCollection_HExtendedString)& other) const;
+    Standard_EXPORT Standard_Boolean IsGreater(const Handle(TCollection_HExtendedString) & other) const;
 
     //! Returns True if the string contains only "Ascii Range"  characters
     Standard_EXPORT Standard_Boolean IsAscii() const;
@@ -144,7 +140,7 @@ public:
     Standard_EXPORT void SetValue(const Standard_Integer where, const Standard_ExtCharacter what);
 
     //! Replaces a part of <me> by another string.
-    Standard_EXPORT void SetValue(const Standard_Integer where, const Handle(TCollection_HExtendedString)& what);
+    Standard_EXPORT void SetValue(const Standard_Integer where, const Handle(TCollection_HExtendedString) & what);
 
     //! Splits a ExtendedString into two sub-strings.
     //! Example:
@@ -155,16 +151,15 @@ public:
     //! Searches a String in <me> from the beginning
     //! and returns position of first item <what> matching.
     //! It returns -1 if not found.
-    Standard_EXPORT Standard_Integer Search(const Handle(TCollection_HExtendedString)& what) const;
+    Standard_EXPORT Standard_Integer Search(const Handle(TCollection_HExtendedString) & what) const;
 
     //! Searches a ExtendedString in another ExtendedString from the end
     //! and returns position of first item <what> matching.
     //! It returns -1 if not found.
-    Standard_EXPORT Standard_Integer SearchFromEnd(const Handle(TCollection_HExtendedString)& what) const;
+    Standard_EXPORT Standard_Integer SearchFromEnd(const Handle(TCollection_HExtendedString) & what) const;
 
     //! Returns pointer to ExtString
-    Standard_ExtString ToExtString() const
-    {
+    Standard_ExtString ToExtString() const {
         return myString.ToExtString();
     }
 
@@ -183,7 +178,8 @@ public:
     //! aString contains "1234; test:message   , value"
     //! aString.Token("; :,",4) returns "value"
     //! aString.Token("; :,",2) returns "test"
-    Standard_EXPORT Handle(TCollection_HExtendedString) Token(const Standard_ExtString separators, const Standard_Integer whichone = 1) const;
+    Standard_EXPORT Handle(TCollection_HExtendedString)
+        Token(const Standard_ExtString separators, const Standard_Integer whichone = 1) const;
 
     //! Truncates <me> to <ahowmany> characters.
     //! Example:  me = "Hello Dolly" -> Trunc(3) -> me = "Hel"
@@ -203,33 +199,16 @@ public:
     //! Displays <me> .
     Standard_EXPORT void Print(Standard_OStream& astream) const;
 
-    Standard_EXPORT Standard_Boolean IsSameState(const Handle(TCollection_HExtendedString)& other) const;
-
-
-
+    Standard_EXPORT Standard_Boolean IsSameState(const Handle(TCollection_HExtendedString) & other) const;
 
     DEFINE_STANDARD_RTTIEXT(TCollection_HExtendedString, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
     //! Returns the field myString
     Standard_EXPORT TCollection_ExtendedString& ChangeString() const;
 
     TCollection_ExtendedString myString;
-
-
 };
-
-
-
-
-
-
 
 #endif // _TCollection_HExtendedString_HeaderFile

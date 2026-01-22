@@ -29,10 +29,8 @@ class Poly_Triangulation;
 
 //! Writes topology in OStream in binary format without grouping of objects by types
 //! and using relative positions in a file as references.
-class BinTools_ShapeWriter : public BinTools_ShapeSetBase
-{
+class BinTools_ShapeWriter : public BinTools_ShapeSetBase {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Builds an empty ShapeSet.
@@ -54,18 +52,18 @@ private:
     //! Writes shape to the stream (all the needed sub-information or reference if it is already used).
     virtual void WriteShape(BinTools_OStream& theStream, const TopoDS_Shape& theShape);
     //! Writes curve to the stream (all the needed sub-information or reference if it is already used).
-    void WriteCurve(BinTools_OStream& theStream, const Handle(Geom_Curve)& theCurve);
+    void WriteCurve(BinTools_OStream& theStream, const Handle(Geom_Curve) & theCurve);
     //! Writes curve2d to the stream (all the needed sub-information or reference if it is already used).
-    void WriteCurve(BinTools_OStream& theStream, const Handle(Geom2d_Curve)& theCurve);
+    void WriteCurve(BinTools_OStream& theStream, const Handle(Geom2d_Curve) & theCurve);
     //! Writes surface to the stream.
-    void WriteSurface(BinTools_OStream& theStream, const Handle(Geom_Surface)& theSurface);
+    void WriteSurface(BinTools_OStream& theStream, const Handle(Geom_Surface) & theSurface);
     //! Writes ploygon3d to the stream.
-    void WritePolygon(BinTools_OStream& theStream, const Handle(Poly_Polygon3D)& thePolygon);
+    void WritePolygon(BinTools_OStream& theStream, const Handle(Poly_Polygon3D) & thePolygon);
     //! Writes polygon on triangulation to the stream.
-    void WritePolygon(BinTools_OStream& theStream, const Handle(Poly_PolygonOnTriangulation)& thePolygon);
+    void WritePolygon(BinTools_OStream& theStream, const Handle(Poly_PolygonOnTriangulation) & thePolygon);
     //! Writes triangulation to the stream.
-    void WriteTriangulation(BinTools_OStream& theStream, const Handle(Poly_Triangulation)& theTriangulation,
-        const Standard_Boolean theNeedToWriteNormals);
+    void WriteTriangulation(BinTools_OStream& theStream, const Handle(Poly_Triangulation) & theTriangulation,
+                            const Standard_Boolean theNeedToWriteNormals);
 
     /// position of the shape previously stored
     NCollection_DataMap<TopoDS_Shape, uint64_t, TopTools_ShapeMapHasher> myShapePos;

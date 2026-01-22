@@ -21,19 +21,15 @@
 
 #include <StepRepr_Representation.hxx>
 
-
 class StepRepr_ConstructiveGeometryRepresentation;
 DEFINE_STANDARD_HANDLE(StepRepr_ConstructiveGeometryRepresentation, StepRepr_Representation)
 
-
-class StepRepr_ConstructiveGeometryRepresentation : public StepRepr_Representation
-{
+class StepRepr_ConstructiveGeometryRepresentation : public StepRepr_Representation {
 public:
-  
-  //! Returns a ConstructiveGeometryRepresentation
-  Standard_EXPORT StepRepr_ConstructiveGeometryRepresentation();
+    //! Returns a ConstructiveGeometryRepresentation
+    Standard_EXPORT StepRepr_ConstructiveGeometryRepresentation();
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ConstructiveGeometryRepresentation,StepRepr_Representation)
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ConstructiveGeometryRepresentation, StepRepr_Representation)
 };
 
 #endif // _StepRepr_ConstructiveGeometryRepresentation_HeaderFile

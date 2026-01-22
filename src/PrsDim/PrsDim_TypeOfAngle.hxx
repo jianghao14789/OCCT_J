@@ -18,10 +18,9 @@
 #define _PrsDim_TypeOfAngle_HeaderFile
 
 //! Declares the type of angle.
-enum PrsDim_TypeOfAngle
-{
-  PrsDim_TypeOfAngle_Interior, //!< the angle between two lines built on geometry parameters
-  PrsDim_TypeOfAngle_Exterior, //!< the angle equal 2 PI minus the interior angle
+enum PrsDim_TypeOfAngle {
+    PrsDim_TypeOfAngle_Interior, //!< the angle between two lines built on geometry parameters
+    PrsDim_TypeOfAngle_Exterior, //!< the angle equal 2 PI minus the interior angle
 };
 
 #endif // _PrsDim_TypeOfAngle_HeaderFile

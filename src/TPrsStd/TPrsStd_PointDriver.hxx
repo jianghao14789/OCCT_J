@@ -25,47 +25,27 @@
 class TDF_Label;
 class AIS_InteractiveObject;
 
-
 class TPrsStd_PointDriver;
 DEFINE_STANDARD_HANDLE(TPrsStd_PointDriver, TPrsStd_Driver)
 
 //! An implementation of TPrsStd_Driver for points.
-class TPrsStd_PointDriver : public TPrsStd_Driver
-{
+class TPrsStd_PointDriver : public TPrsStd_Driver {
 
 public:
+    //! Constructs an empty point driver.
+    Standard_EXPORT TPrsStd_PointDriver();
 
-  
-  //! Constructs an empty point driver.
-  Standard_EXPORT TPrsStd_PointDriver();
-  
-  //! Build the AISObject (if null) or update it.
-  //! No compute is done.
-  //! Returns <True> if information was found
-  //! and AISObject updated.
-  Standard_EXPORT virtual Standard_Boolean Update (const TDF_Label& aLabel, Handle(AIS_InteractiveObject)& anAISObject) Standard_OVERRIDE;
+    //! Build the AISObject (if null) or update it.
+    //! No compute is done.
+    //! Returns <True> if information was found
+    //! and AISObject updated.
+    Standard_EXPORT virtual Standard_Boolean Update(const TDF_Label& aLabel,
+                                                    Handle(AIS_InteractiveObject) & anAISObject) Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TPrsStd_PointDriver,TPrsStd_Driver)
+    DEFINE_STANDARD_RTTIEXT(TPrsStd_PointDriver, TPrsStd_Driver)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _TPrsStd_PointDriver_HeaderFile

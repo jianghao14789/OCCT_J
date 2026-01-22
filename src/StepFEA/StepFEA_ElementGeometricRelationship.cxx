@@ -21,89 +21,80 @@
 #include <StepFEA_ElementGeometricRelationship.hxx>
 #include <StepFEA_ElementOrElementGroup.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_ElementGeometricRelationship,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_ElementGeometricRelationship, Standard_Transient)
 
 //=======================================================================
-//function : StepFEA_ElementGeometricRelationship
-//purpose  : 
+// function : StepFEA_ElementGeometricRelationship
+// purpose  :
 //=======================================================================
-StepFEA_ElementGeometricRelationship::StepFEA_ElementGeometricRelationship ()
-{
+StepFEA_ElementGeometricRelationship::StepFEA_ElementGeometricRelationship() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_ElementGeometricRelationship::Init(const StepFEA_ElementOrElementGroup& aElementRef,
+                                                const Handle(StepElement_AnalysisItemWithinRepresentation) & aItem,
+                                                const StepElement_ElementAspect& aAspect) {
+
+    theElementRef = aElementRef;
+
+    theItem = aItem;
+
+    theAspect = aAspect;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : ElementRef
+// purpose  :
 //=======================================================================
 
-void StepFEA_ElementGeometricRelationship::Init (const StepFEA_ElementOrElementGroup &aElementRef,
-                                                 const Handle(StepElement_AnalysisItemWithinRepresentation) &aItem,
-                                                 const StepElement_ElementAspect &aAspect)
-{
-
-  theElementRef = aElementRef;
-
-  theItem = aItem;
-
-  theAspect = aAspect;
+StepFEA_ElementOrElementGroup StepFEA_ElementGeometricRelationship::ElementRef() const {
+    return theElementRef;
 }
 
 //=======================================================================
-//function : ElementRef
-//purpose  : 
+// function : SetElementRef
+// purpose  :
 //=======================================================================
 
-StepFEA_ElementOrElementGroup StepFEA_ElementGeometricRelationship::ElementRef () const
-{
-  return theElementRef;
+void StepFEA_ElementGeometricRelationship::SetElementRef(const StepFEA_ElementOrElementGroup& aElementRef) {
+    theElementRef = aElementRef;
 }
 
 //=======================================================================
-//function : SetElementRef
-//purpose  : 
+// function : Item
+// purpose  :
 //=======================================================================
 
-void StepFEA_ElementGeometricRelationship::SetElementRef (const StepFEA_ElementOrElementGroup &aElementRef)
-{
-  theElementRef = aElementRef;
+Handle(StepElement_AnalysisItemWithinRepresentation) StepFEA_ElementGeometricRelationship::Item() const {
+    return theItem;
 }
 
 //=======================================================================
-//function : Item
-//purpose  : 
+// function : SetItem
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_AnalysisItemWithinRepresentation) StepFEA_ElementGeometricRelationship::Item () const
-{
-  return theItem;
+void StepFEA_ElementGeometricRelationship::SetItem(const Handle(StepElement_AnalysisItemWithinRepresentation) & aItem) {
+    theItem = aItem;
 }
 
 //=======================================================================
-//function : SetItem
-//purpose  : 
+// function : Aspect
+// purpose  :
 //=======================================================================
 
-void StepFEA_ElementGeometricRelationship::SetItem (const Handle(StepElement_AnalysisItemWithinRepresentation) &aItem)
-{
-  theItem = aItem;
+StepElement_ElementAspect StepFEA_ElementGeometricRelationship::Aspect() const {
+    return theAspect;
 }
 
 //=======================================================================
-//function : Aspect
-//purpose  : 
+// function : SetAspect
+// purpose  :
 //=======================================================================
 
-StepElement_ElementAspect StepFEA_ElementGeometricRelationship::Aspect () const
-{
-  return theAspect;
-}
-
-//=======================================================================
-//function : SetAspect
-//purpose  : 
-//=======================================================================
-
-void StepFEA_ElementGeometricRelationship::SetAspect (const StepElement_ElementAspect &aAspect)
-{
-  theAspect = aAspect;
+void StepFEA_ElementGeometricRelationship::SetAspect(const StepElement_ElementAspect& aAspect) {
+    theAspect = aAspect;
 }

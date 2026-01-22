@@ -28,43 +28,36 @@ class TopoDS_Shape;
 class BRepCheck_Edge;
 DEFINE_STANDARD_HANDLE(BRepCheck_Edge, BRepCheck_Result)
 
-
-class BRepCheck_Edge : public BRepCheck_Result
-{
+class BRepCheck_Edge : public BRepCheck_Result {
 
 public:
+    Standard_EXPORT BRepCheck_Edge(const TopoDS_Edge& E);
 
-  
-  Standard_EXPORT BRepCheck_Edge(const TopoDS_Edge& E);
-  
-  Standard_EXPORT void InContext (const TopoDS_Shape& ContextShape) Standard_OVERRIDE;
-  
-  Standard_EXPORT void Minimum() Standard_OVERRIDE;
-  
-  Standard_EXPORT void Blind() Standard_OVERRIDE;
-  
-  Standard_EXPORT Standard_Boolean GeometricControls() const;
-  
-  Standard_EXPORT void GeometricControls (const Standard_Boolean B);
-  
-  Standard_EXPORT Standard_Real Tolerance();
-  
-  //! Sets status of Edge;
-  Standard_EXPORT void SetStatus (const BRepCheck_Status theStatus);
-  
-  //! Checks, if polygon on triangulation of heEdge
-  //! is out of 3D-curve of this edge.
-  Standard_EXPORT BRepCheck_Status CheckPolygonOnTriangulation (const TopoDS_Edge& theEdge);
+    Standard_EXPORT void InContext(const TopoDS_Shape& ContextShape) Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(BRepCheck_Edge,BRepCheck_Result)
+    Standard_EXPORT void Minimum() Standard_OVERRIDE;
+
+    Standard_EXPORT void Blind() Standard_OVERRIDE;
+
+    Standard_EXPORT Standard_Boolean GeometricControls() const;
+
+    Standard_EXPORT void GeometricControls(const Standard_Boolean B);
+
+    Standard_EXPORT Standard_Real Tolerance();
+
+    //! Sets status of Edge;
+    Standard_EXPORT void SetStatus(const BRepCheck_Status theStatus);
+
+    //! Checks, if polygon on triangulation of heEdge
+    //! is out of 3D-curve of this edge.
+    Standard_EXPORT BRepCheck_Status CheckPolygonOnTriangulation(const TopoDS_Edge& theEdge);
+
+    DEFINE_STANDARD_RTTIEXT(BRepCheck_Edge, BRepCheck_Result)
 
 private:
-
-
-  Handle(BRep_CurveRepresentation) myCref;
-  Handle(Adaptor3d_Curve) myHCurve;
-  Standard_Boolean myGctrl;
-
+    Handle(BRep_CurveRepresentation) myCref;
+    Handle(Adaptor3d_Curve) myHCurve;
+    Standard_Boolean myGctrl;
 };
 
 #endif // _BRepCheck_Edge_HeaderFile

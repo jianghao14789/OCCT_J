@@ -14,18 +14,16 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Draw.hxx>
 #include <Draw_Drawable3D.hxx>
 #include <Draw_ProgressIndicator.hxx>
 #include <TCollection_AsciiString.hxx>
 
-void Draw::Commands (Draw_Interpretor& theCommands)
-{
-  Draw::BasicCommands(theCommands);
-  Draw::MessageCommands(theCommands);
-  Draw::VariableCommands(theCommands);
-  Draw::GraphicCommands(theCommands);
-  Draw::PloadCommands(theCommands);
-  Draw::UnitCommands(theCommands);
+void Draw::Commands(Draw_Interpretor& theCommands) {
+    Draw::BasicCommands(theCommands);
+    Draw::MessageCommands(theCommands);
+    Draw::VariableCommands(theCommands);
+    Draw::GraphicCommands(theCommands);
+    Draw::PloadCommands(theCommands);
+    Draw::UnitCommands(theCommands);
 }

@@ -28,25 +28,25 @@ class StepDimTol_DatumReferenceCompartment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DatumReferenceElement
-class RWStepDimTol_RWDatumReferenceCompartment
-{
+class RWStepDimTol_RWDatumReferenceCompartment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWDatumReferenceCompartment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWDatumReferenceCompartment();
-  
-  //! Reads DatumReferenceElement
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_DatumReferenceCompartment)& ent)  const;
-  
-  //! Writes DatumReferenceElement
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_DatumReferenceCompartment)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_DatumReferenceCompartment)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads DatumReferenceElement
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_DatumReferenceCompartment) & ent) const;
+
+    //! Writes DatumReferenceElement
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_DatumReferenceCompartment) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_DatumReferenceCompartment) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWDatumReferenceCompartment_HeaderFile

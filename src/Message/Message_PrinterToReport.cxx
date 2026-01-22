@@ -28,8 +28,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_PrinterToReport, Message_Printer)
 
 //=======================================================================
-//function : Report
-//purpose  : 获取报告实例，如果未设置则返回默认报告
+// function : Report
+// purpose  : 获取报告实例，如果未设置则返回默认报告
 //
 // 说明：
 //   - 这是一个内部辅助方法，用于获取关联的 Report
@@ -55,11 +55,9 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_PrinterToReport, Message_Printer)
 //   - Message::DefaultReport(Standard_True) 获取或创建默认报告
 //   - 这样做的好处是用户可以选择使用专用报告或全局报告
 //=======================================================================
-const Handle(Message_Report)& Message_PrinterToReport::Report() const
-{
+const Handle(Message_Report) & Message_PrinterToReport::Report() const {
     // 检查是否设置了专用报告
-    if (!myReport.IsNull())
-    {
+    if (!myReport.IsNull()) {
         // 如果设置了，返回它
         return myReport;
     }
@@ -70,8 +68,8 @@ const Handle(Message_Report)& Message_PrinterToReport::Report() const
 }
 
 //=======================================================================
-//function : SendStringStream
-//purpose  : 发送流消息到报告
+// function : SendStringStream
+// purpose  : 发送流消息到报告
 //
 // 参数说明：
 //   - theStream：包含消息内容的字符串流
@@ -101,38 +99,30 @@ const Handle(Message_Report)& Message_PrinterToReport::Report() const
 //   3. 日志信息：带有时间戳和上下文的多行输出（使用 AttributeStream）
 //=======================================================================
 void Message_PrinterToReport::SendStringStream(const Standard_SStream& theStream,
-    const Message_Gravity   theGravity) const
-{
+                                               const Message_Gravity theGravity) const {
     // 获取报告对象
-    const Handle(Message_Report)& aReport = Report();
-    
+    const Handle(Message_Report) & aReport = Report();
+
     // 检查是否激活了度量（性能监测）
-    if (!aReport->ActiveMetrics().IsEmpty())
-    {
+    if (!aReport->ActiveMetrics().IsEmpty()) {
         // 如果激活了度量，发送度量警报
         // 将流转换为字符串传给 sendMetricAlert
         sendMetricAlert(theStream.str().c_str(), theGravity);
         return;
     }
-    
+
     // 检查流中是否包含子键（嵌套的结构化数据）
     // HasChildKey() 检查是否有形如 "key: value" 的子结构
-    if (Standard_Dump::HasChildKey(Standard_Dump::Text(theStream)))
-    {
+    if (Standard_Dump::HasChildKey(Standard_Dump::Text(theStream))) {
         // 如果有子键，使用 AttributeStream 保存整个流结构
         // 这样可以保留流的完整结构信息
-        Message_AlertExtended::AddAlert(aReport, 
-            new Message_AttributeStream(theStream, myName), 
-            theGravity);
+        Message_AlertExtended::AddAlert(aReport, new Message_AttributeStream(theStream, myName), theGravity);
         // 清空累积的名称，供下一条消息使用
         myName.Clear();
-    }
-    else
-    {
+    } else {
         // 流中没有子键，是简单的文本
         // 如果之前累积了名称前缀，先发送它
-        if (!myName.IsEmpty())
-        {
+        if (!myName.IsEmpty()) {
             TCollection_AsciiString aName = myName;
             myName.Clear();
             // 递归调用 send() 方法发送名称
@@ -144,8 +134,8 @@ void Message_PrinterToReport::SendStringStream(const Standard_SStream& theStream
 }
 
 //=======================================================================
-//function : SendObject
-//purpose  : 发送对象消息到报告
+// function : SendObject
+// purpose  : 发送对象消息到报告
 //
 // 参数说明：
 //   - theObject：要发送的对象
@@ -172,15 +162,13 @@ void Message_PrinterToReport::SendStringStream(const Standard_SStream& theStream
 //   - Message_AttributeObject 将对象和名称打包在一起
 //   - Message_AlertExtended::AddAlert 负责创建警报并添加属性
 //=======================================================================
-void Message_PrinterToReport::SendObject(const Handle(Standard_Transient)& theObject,
-    const Message_Gravity theGravity) const
-{
+void Message_PrinterToReport::SendObject(const Handle(Standard_Transient) & theObject,
+                                         const Message_Gravity theGravity) const {
     // 获取报告对象
-    const Handle(Message_Report)& aReport = Report();
-    
+    const Handle(Message_Report) & aReport = Report();
+
     // 检查是否激活了度量
-    if (!aReport->ActiveMetrics().IsEmpty())
-    {
+    if (!aReport->ActiveMetrics().IsEmpty()) {
         // 如果激活了度量，发送度量警报
         sendMetricAlert(myName, theGravity);
         return;
@@ -188,14 +176,12 @@ void Message_PrinterToReport::SendObject(const Handle(Standard_Transient)& theOb
 
     // 创建对象属性警报并添加到报告
     // Message_AttributeObject 用于存储对象引用和其名称
-    Message_AlertExtended::AddAlert(aReport, 
-        new Message_AttributeObject(theObject, myName), 
-        theGravity);
+    Message_AlertExtended::AddAlert(aReport, new Message_AttributeObject(theObject, myName), theGravity);
 }
 
 //=======================================================================
-//function : send
-//purpose  : 发送字符串消息到报告（虚函数实现）
+// function : send
+// purpose  : 发送字符串消息到报告（虚函数实现）
 //
 // 参数说明：
 //   - theString：要发送的文本内容
@@ -218,17 +204,14 @@ void Message_PrinterToReport::SendObject(const Handle(Standard_Transient)& theOb
 //   - 需要确保它被正确处理和清空
 //
 // 使用示例：
-//   Messenger 调用 send("Error in processing") 
+//   Messenger 调用 send("Error in processing")
 //   -> PrinterToReport::send() 创建警报
 //   -> 警报被添加到 Report 中
 //=======================================================================
-void Message_PrinterToReport::send(const TCollection_AsciiString& theString,
-    const Message_Gravity theGravity) const
-{
+void Message_PrinterToReport::send(const TCollection_AsciiString& theString, const Message_Gravity theGravity) const {
     // 如果有累积的名称，先发送它
     // 这确保名称和内容不会混淆
-    if (!myName.IsEmpty())
-    {
+    if (!myName.IsEmpty()) {
         TCollection_AsciiString aName = myName;
         myName.Clear();
         // 递归调用 send() 发送名称
@@ -236,26 +219,23 @@ void Message_PrinterToReport::send(const TCollection_AsciiString& theString,
     }
 
     // 获取报告对象
-    const Handle(Message_Report)& aReport = Report();
-    
+    const Handle(Message_Report) & aReport = Report();
+
     // 检查是否激活了度量
-    if (!aReport->ActiveMetrics().IsEmpty())
-    {
+    if (!aReport->ActiveMetrics().IsEmpty()) {
         // 如果激活了度量，发送度量警报
         sendMetricAlert(theString, theGravity);
         return;
     }
-    
+
     // 创建普通属性警报并添加到报告
     // Message_Attribute 是最简单的属性，仅包含字符串内容
-    Message_AlertExtended::AddAlert(aReport, 
-        new Message_Attribute(theString), 
-        theGravity);
+    Message_AlertExtended::AddAlert(aReport, new Message_Attribute(theString), theGravity);
 }
 
 //=======================================================================
-//function : sendMetricAlert
-//purpose  : 发送包含度量的警报到报告
+// function : sendMetricAlert
+// purpose  : 发送包含度量的警报到报告
 //
 // 参数说明：
 //   - theValue：警报的文本描述
@@ -278,11 +258,8 @@ void Message_PrinterToReport::send(const TCollection_AsciiString& theString,
 //   - 所以警报包含的度量是创建时的快照
 //=======================================================================
 void Message_PrinterToReport::sendMetricAlert(const TCollection_AsciiString theValue,
-    const Message_Gravity theGravity) const
-{
+                                              const Message_Gravity theGravity) const {
     // 创建一个度量属性并添加到报告
     // Message_AttributeMeter 会自动记录当前的各种度量
-    Message_AlertExtended::AddAlert(Report(), 
-        new Message_AttributeMeter(theValue), 
-        theGravity);
+    Message_AlertExtended::AddAlert(Report(), new Message_AttributeMeter(theValue), theGravity);
 }

@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepShape_HArray1OfValueQualifier, StepShape_Array1OfValueQualifier)
 
-
 #endif

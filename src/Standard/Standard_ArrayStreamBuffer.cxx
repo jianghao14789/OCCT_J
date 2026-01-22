@@ -17,12 +17,8 @@
 // function : Standard_ArrayStreamBuffer
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer(const char* theBegin,
-    const size_t theSize)
-    : myBegin(theBegin),
-    myEnd(theBegin + theSize),
-    myCurrent(theBegin)
-{
+Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer(const char* theBegin, const size_t theSize)
+    : myBegin(theBegin), myEnd(theBegin + theSize), myCurrent(theBegin) {
     //
 }
 
@@ -30,8 +26,7 @@ Standard_ArrayStreamBuffer::Standard_ArrayStreamBuffer(const char* theBegin,
 // function : ~Standard_ArrayStreamBuffer
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::~Standard_ArrayStreamBuffer()
-{
+Standard_ArrayStreamBuffer::~Standard_ArrayStreamBuffer() {
     //
 }
 
@@ -39,9 +34,7 @@ Standard_ArrayStreamBuffer::~Standard_ArrayStreamBuffer()
 // function : Init
 // purpose  :
 // =======================================================================
-void Standard_ArrayStreamBuffer::Init(const char* theBegin,
-    const size_t theSize)
-{
+void Standard_ArrayStreamBuffer::Init(const char* theBegin, const size_t theSize) {
     myBegin = theBegin;
     myEnd = theBegin + theSize;
     myCurrent = theBegin;
@@ -51,10 +44,8 @@ void Standard_ArrayStreamBuffer::Init(const char* theBegin,
 // function : underflow
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::underflow()
-{
-    if (myCurrent == myEnd)
-    {
+Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::underflow() {
+    if (myCurrent == myEnd) {
         return traits_type::eof();
     }
 
@@ -65,10 +56,8 @@ Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::underflow()
 // function : uflow
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::uflow()
-{
-    if (myCurrent == myEnd)
-    {
+Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::uflow() {
+    if (myCurrent == myEnd) {
         return traits_type::eof();
     }
 
@@ -79,12 +68,8 @@ Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::uflow()
 // function : pbackfail
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::pbackfail(int_type ch)
-{
-    if (myCurrent == myBegin
-        || (ch != traits_type::eof()
-            && ch != myCurrent[-1]))
-    {
+Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::pbackfail(int_type ch) {
+    if (myCurrent == myBegin || (ch != traits_type::eof() && ch != myCurrent[-1])) {
         return traits_type::eof();
     }
 
@@ -95,10 +80,8 @@ Standard_ArrayStreamBuffer::int_type Standard_ArrayStreamBuffer::pbackfail(int_t
 // function : showmanyc
 // purpose  :
 // =======================================================================
-std::streamsize Standard_ArrayStreamBuffer::showmanyc()
-{
-    if (myCurrent > myEnd)
-    {
+std::streamsize Standard_ArrayStreamBuffer::showmanyc() {
+    if (myCurrent > myEnd) {
         // assert
     }
     return myEnd - myCurrent;
@@ -108,43 +91,33 @@ std::streamsize Standard_ArrayStreamBuffer::showmanyc()
 // function : seekoff
 // purpose  :
 // =======================================================================
-Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekoff(off_type theOff,
-    std::ios_base::seekdir theWay,
-    std::ios_base::openmode theWhich)
-{
-    switch (theWay)
-    {
-    case std::ios_base::beg:
-    {
-        myCurrent = myBegin + theOff;
-        if (myCurrent >= myEnd)
-        {
-            myCurrent = myEnd;
+Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekoff(off_type theOff, std::ios_base::seekdir theWay,
+                                                                         std::ios_base::openmode theWhich) {
+    switch (theWay) {
+        case std::ios_base::beg: {
+            myCurrent = myBegin + theOff;
+            if (myCurrent >= myEnd) {
+                myCurrent = myEnd;
+            }
+            break;
         }
-        break;
-    }
-    case std::ios_base::cur:
-    {
-        myCurrent += theOff;
-        if (myCurrent >= myEnd)
-        {
-            myCurrent = myEnd;
+        case std::ios_base::cur: {
+            myCurrent += theOff;
+            if (myCurrent >= myEnd) {
+                myCurrent = myEnd;
+            }
+            break;
         }
-        break;
-    }
-    case std::ios_base::end:
-    {
-        myCurrent = myEnd - theOff;
-        if (myCurrent < myBegin)
-        {
-            myCurrent = myBegin;
+        case std::ios_base::end: {
+            myCurrent = myEnd - theOff;
+            if (myCurrent < myBegin) {
+                myCurrent = myBegin;
+            }
+            break;
         }
-        break;
-    }
-    default:
-    {
-        break;
-    }
+        default: {
+            break;
+        }
     }
     (void)theWhich;
     return myCurrent - myBegin;
@@ -155,8 +128,7 @@ Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekoff(off_typ
 // purpose  :
 // =======================================================================
 Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekpos(pos_type thePosition,
-    std::ios_base::openmode theWhich)
-{
+                                                                         std::ios_base::openmode theWhich) {
     return seekoff(off_type(thePosition), std::ios_base::beg, theWhich);
 }
 
@@ -164,17 +136,13 @@ Standard_ArrayStreamBuffer::pos_type Standard_ArrayStreamBuffer::seekpos(pos_typ
 // function : xsgetn
 // purpose  :
 // =======================================================================
-std::streamsize Standard_ArrayStreamBuffer::xsgetn(char* thePtr,
-    std::streamsize theCount)
-{
+std::streamsize Standard_ArrayStreamBuffer::xsgetn(char* thePtr, std::streamsize theCount) {
     const char* aCurrent = myCurrent + theCount;
-    if (aCurrent >= myEnd)
-    {
+    if (aCurrent >= myEnd) {
         aCurrent = myEnd;
     }
     size_t aCopied = aCurrent - myCurrent;
-    if (aCopied == 0)
-    {
+    if (aCopied == 0) {
         return 0;
     }
     memcpy(thePtr, myCurrent, aCopied);

@@ -17,7 +17,6 @@
 // Purpose:     Definition of a sequence of elements indexed by
 //              an Integer in range of 1..n
 
-
 #ifndef NCollection_DefineSequence_HeaderFile
 #define NCollection_DefineSequence_HeaderFile
 
@@ -25,7 +24,7 @@
 
 // **************************************** Template for Sequence class ********
 
-#define DEFINE_SEQUENCE(_ClassName_, _BaseCollection_, TheItemType)            \
-typedef NCollection_Sequence<TheItemType > _ClassName_;
+#define DEFINE_SEQUENCE(_ClassName_, _BaseCollection_, TheItemType)                                                    \
+    typedef NCollection_Sequence<TheItemType> _ClassName_;
 
 #endif

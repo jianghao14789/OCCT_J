@@ -29,47 +29,26 @@ class StepData_StepWriter;
 class Interface_EntityIterator;
 class Interface_ShareTool;
 
-
 //! Read & Write Module for EdgeLoop
 //! Check added by CKY , 7-OCT-1996
-class RWStepShape_RWEdgeLoop 
-{
+class RWStepShape_RWEdgeLoop {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWEdgeLoop();
 
-  
-  Standard_EXPORT RWStepShape_RWEdgeLoop();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_EdgeLoop)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_EdgeLoop)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_EdgeLoop)& ent, Interface_EntityIterator& iter) const;
-  
-  Standard_EXPORT void Check (const Handle(StepShape_EdgeLoop)& ent, const Interface_ShareTool& shares, Handle(Interface_Check)& ach) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_EdgeLoop) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_EdgeLoop) & ent) const;
 
+    Standard_EXPORT void Share(const Handle(StepShape_EdgeLoop) & ent, Interface_EntityIterator& iter) const;
 
+    Standard_EXPORT void Check(const Handle(StepShape_EdgeLoop) & ent, const Interface_ShareTool& shares,
+                               Handle(Interface_Check) & ach) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWEdgeLoop_HeaderFile

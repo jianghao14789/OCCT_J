@@ -26,43 +26,20 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Real.hxx>
 
-
-
 //! inherits class Cutting; contains a list of preferential points (di)i
 //! if Cutting is necessary in [a,b], we cut at the di nearest from (a+b)/2.
-class AdvApprox_PrefCutting  : public AdvApprox_Cutting
-{
+class AdvApprox_PrefCutting : public AdvApprox_Cutting {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT AdvApprox_PrefCutting(const TColStd_Array1OfReal& CutPnts);
 
-  
-  Standard_EXPORT AdvApprox_PrefCutting(const TColStd_Array1OfReal& CutPnts);
-  
-  Standard_EXPORT virtual Standard_Boolean Value (const Standard_Real a, const Standard_Real b, Standard_Real& cuttingvalue) const Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT virtual Standard_Boolean Value(const Standard_Real a, const Standard_Real b,
+                                                   Standard_Real& cuttingvalue) const Standard_OVERRIDE;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  TColStd_Array1OfReal myPntOfCutting;
-
-
+    TColStd_Array1OfReal myPntOfCutting;
 };
-
-
-
-
-
-
 
 #endif // _AdvApprox_PrefCutting_HeaderFile

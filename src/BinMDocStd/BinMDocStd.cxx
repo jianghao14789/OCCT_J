@@ -13,19 +13,16 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BinMDF_ADriverTable.hxx>
 #include <BinMDocStd.hxx>
 #include <BinMDocStd_XLinkDriver.hxx>
 #include <Message_Messenger.hxx>
 
 //=======================================================================
-//function : AddDrivers
-//purpose  : 
+// function : AddDrivers
+// purpose  :
 //=======================================================================
-void BinMDocStd::AddDrivers (const Handle(BinMDF_ADriverTable)& theDriverTable,
-                              const Handle(Message_Messenger)&   theMsgDriver)
-{
-  theDriverTable->AddDriver (new BinMDocStd_XLinkDriver  (theMsgDriver) );
-  
+void BinMDocStd::AddDrivers(const Handle(BinMDF_ADriverTable) & theDriverTable,
+                            const Handle(Message_Messenger) & theMsgDriver) {
+    theDriverTable->AddDriver(new BinMDocStd_XLinkDriver(theMsgDriver));
 }

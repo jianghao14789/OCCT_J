@@ -21,55 +21,53 @@
 #include <Standard_values.h>
 #include <Standard_TypeDef.hxx>
 
-         //  *********************************** //
-         //       Class methods                  //
-         //                                      //
-         //  Machine-dependent values            //
-         //  Should be taken from include file   //
-         //  *********************************** //
+//  *********************************** //
+//       Class methods                  //
+//                                      //
+//  Machine-dependent values            //
+//  Should be taken from include file   //
+//  *********************************** //
 
 //-------------------------------------------------------------------
 // ShortRealSmall : Returns the smallest positive ShortReal
 //-------------------------------------------------------------------
-inline Standard_ShortReal     ShortRealSmall()
-{
+inline Standard_ShortReal ShortRealSmall() {
     return FLT_MIN;
 }
 
 //-------------------------------------------------------------------
 // Abs : Returns the absolute value of a ShortReal
 //-------------------------------------------------------------------
-inline Standard_ShortReal     Abs(const Standard_ShortReal Value)
-#if defined (__alpha) || defined(DECOSF1)
+inline Standard_ShortReal Abs(const Standard_ShortReal Value)
+#if defined(__alpha) || defined(DECOSF1)
 {
     return fabsf(Value);
 }
 #else
-{ return float(fabs(Value)); }
+{
+    return float(fabs(Value));
+}
 #endif
 
 //-------------------------------------------------------------------
 // ShortRealDigit : Returns the number of digits of precision in a ShortReal
 //-------------------------------------------------------------------
-inline Standard_Integer  ShortRealDigits()
-{
+inline Standard_Integer ShortRealDigits() {
     return FLT_DIG;
 }
 
 //-------------------------------------------------------------------
-// ShortRealEpsilon : Returns the minimum positive ShortReal such that 
+// ShortRealEpsilon : Returns the minimum positive ShortReal such that
 //               1.0 + x is not equal to 1.0
 //-------------------------------------------------------------------
-inline Standard_ShortReal     ShortRealEpsilon()
-{
+inline Standard_ShortReal ShortRealEpsilon() {
     return FLT_EPSILON;
 }
 
 //-------------------------------------------------------------------
 // ShortRealFirst : Returns the minimum negative value of a ShortReal
 //-------------------------------------------------------------------
-inline Standard_ShortReal     ShortRealFirst()
-{
+inline Standard_ShortReal ShortRealFirst() {
     Standard_ShortReal MaxFloatTmp = -FLT_MAX;
     return MaxFloatTmp;
 }
@@ -78,63 +76,54 @@ inline Standard_ShortReal     ShortRealFirst()
 // ShortRealFirst10Exp : Returns the minimum value of exponent(base 10) of
 //                  a ShortReal.
 //-------------------------------------------------------------------
-inline Standard_Integer  ShortRealFirst10Exp()
-{
+inline Standard_Integer ShortRealFirst10Exp() {
     return FLT_MIN_10_EXP;
 }
 
 //-------------------------------------------------------------------
 // ShortRealLast : Returns the maximum value of a ShortReal
 //-------------------------------------------------------------------
-inline Standard_ShortReal     ShortRealLast()
-{
-    return  FLT_MAX;
+inline Standard_ShortReal ShortRealLast() {
+    return FLT_MAX;
 }
 
 //-------------------------------------------------------------------
 // ShortRealLast10Exp : Returns the maximum value of exponent(base 10) of
 //                 a ShortReal.
 //-------------------------------------------------------------------
-inline Standard_Integer  ShortRealLast10Exp()
-{
-    return  FLT_MAX_10_EXP;
+inline Standard_Integer ShortRealLast10Exp() {
+    return FLT_MAX_10_EXP;
 }
 
 //-------------------------------------------------------------------
-// ShortRealMantissa : Returns the size in bits of the matissa part of a 
+// ShortRealMantissa : Returns the size in bits of the matissa part of a
 //                ShortReal.
 //-------------------------------------------------------------------
-inline Standard_Integer  ShortRealMantissa()
-{
-    return  FLT_MANT_DIG;
+inline Standard_Integer ShortRealMantissa() {
+    return FLT_MANT_DIG;
 }
 
 //-------------------------------------------------------------------
 // ShortRealRadix : Returns the radix of exponent representation
 //-------------------------------------------------------------------
-inline Standard_Integer  ShortRealRadix()
-{
-    return  FLT_RADIX;
+inline Standard_Integer ShortRealRadix() {
+    return FLT_RADIX;
 }
 
 //-------------------------------------------------------------------
 // ShortRealSize : Returns the size in bits of an integer
 //-------------------------------------------------------------------
-inline Standard_Integer  ShortRealSize()
-{
+inline Standard_Integer ShortRealSize() {
     return BITS(Standard_ShortReal);
 }
 
 //-------------------------------------------------------------------
 // Max : Returns the maximum value of two ShortReals
 //-------------------------------------------------------------------
-inline Standard_ShortReal     Max(const Standard_ShortReal Val1,
-    const Standard_ShortReal Val2)
-{
+inline Standard_ShortReal Max(const Standard_ShortReal Val1, const Standard_ShortReal Val2) {
     if (Val1 >= Val2) {
         return Val1;
-    }
-    else {
+    } else {
         return Val2;
     }
 }
@@ -142,19 +131,16 @@ inline Standard_ShortReal     Max(const Standard_ShortReal Val1,
 //-------------------------------------------------------------------
 // Min : Returns the minimum value of two ShortReals
 //-------------------------------------------------------------------
-inline Standard_ShortReal     Min(const Standard_ShortReal Val1,
-    const Standard_ShortReal Val2)
-{
+inline Standard_ShortReal Min(const Standard_ShortReal Val1, const Standard_ShortReal Val2) {
     if (Val1 <= Val2) {
         return Val1;
-    }
-    else {
+    } else {
         return Val2;
     }
 }
 
 // ===============================================
-// Methods from Standard_Entity class which are redefined:  
+// Methods from Standard_Entity class which are redefined:
 //    - Hascode
 //    - IsEqual
 // ===============================================
@@ -172,12 +158,8 @@ Standard_EXPORT Standard_Integer HashCode(Standard_ShortReal theShortReal, Stand
 //-------------------------------------------------------------------
 // IsEqual : Returns Standard_True if two ShortReals are equal
 //-------------------------------------------------------------------
-inline Standard_Boolean  IsEqual(const Standard_ShortReal Value1,
-    const Standard_ShortReal Value2)
-{
+inline Standard_Boolean IsEqual(const Standard_ShortReal Value1, const Standard_ShortReal Value2) {
     return Abs((Value1 - Value2)) < ShortRealSmall();
 }
 
 #endif
-
-

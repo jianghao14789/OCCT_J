@@ -19,11 +19,10 @@
 #include <OpenGl_GlFunctions.hxx>
 
 //! Debug context routines
-struct OpenGl_ArbDbg : protected OpenGl_GlFunctions
-{
+struct OpenGl_ArbDbg : protected OpenGl_GlFunctions {
+    using OpenGl_GlFunctions::glDebugMessageCallback;
     using OpenGl_GlFunctions::glDebugMessageControl;
     using OpenGl_GlFunctions::glDebugMessageInsert;
-    using OpenGl_GlFunctions::glDebugMessageCallback;
     using OpenGl_GlFunctions::glGetDebugMessageLog;
 };
 

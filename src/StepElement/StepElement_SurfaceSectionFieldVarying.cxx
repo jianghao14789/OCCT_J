@@ -18,67 +18,61 @@
 #include <Standard_Type.hxx>
 #include <StepElement_SurfaceSectionFieldVarying.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceSectionFieldVarying,StepElement_SurfaceSectionField)
+IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceSectionFieldVarying, StepElement_SurfaceSectionField)
 
 //=======================================================================
-//function : StepElement_SurfaceSectionFieldVarying
-//purpose  : 
+// function : StepElement_SurfaceSectionFieldVarying
+// purpose  :
 //=======================================================================
-StepElement_SurfaceSectionFieldVarying::StepElement_SurfaceSectionFieldVarying ()
-{
+StepElement_SurfaceSectionFieldVarying::StepElement_SurfaceSectionFieldVarying() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepElement_SurfaceSectionFieldVarying::Init(const Handle(StepElement_HArray1OfSurfaceSection) & aDefinitions,
+                                                  const Standard_Boolean aAdditionalNodeValues) {
+    // StepElement_SurfaceSectionField::Init();
+
+    theDefinitions = aDefinitions;
+
+    theAdditionalNodeValues = aAdditionalNodeValues;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Definitions
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceSectionFieldVarying::Init (const Handle(StepElement_HArray1OfSurfaceSection) &aDefinitions,
-                                                   const Standard_Boolean aAdditionalNodeValues)
-{
-  //StepElement_SurfaceSectionField::Init();
-
-  theDefinitions = aDefinitions;
-
-  theAdditionalNodeValues = aAdditionalNodeValues;
+Handle(StepElement_HArray1OfSurfaceSection) StepElement_SurfaceSectionFieldVarying::Definitions() const {
+    return theDefinitions;
 }
 
 //=======================================================================
-//function : Definitions
-//purpose  : 
+// function : SetDefinitions
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_HArray1OfSurfaceSection) StepElement_SurfaceSectionFieldVarying::Definitions () const
-{
-  return theDefinitions;
+void StepElement_SurfaceSectionFieldVarying::SetDefinitions(const Handle(StepElement_HArray1OfSurfaceSection) &
+                                                            aDefinitions) {
+    theDefinitions = aDefinitions;
 }
 
 //=======================================================================
-//function : SetDefinitions
-//purpose  : 
+// function : AdditionalNodeValues
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceSectionFieldVarying::SetDefinitions (const Handle(StepElement_HArray1OfSurfaceSection) &aDefinitions)
-{
-  theDefinitions = aDefinitions;
+Standard_Boolean StepElement_SurfaceSectionFieldVarying::AdditionalNodeValues() const {
+    return theAdditionalNodeValues;
 }
 
 //=======================================================================
-//function : AdditionalNodeValues
-//purpose  : 
+// function : SetAdditionalNodeValues
+// purpose  :
 //=======================================================================
 
-Standard_Boolean StepElement_SurfaceSectionFieldVarying::AdditionalNodeValues () const
-{
-  return theAdditionalNodeValues;
-}
-
-//=======================================================================
-//function : SetAdditionalNodeValues
-//purpose  : 
-//=======================================================================
-
-void StepElement_SurfaceSectionFieldVarying::SetAdditionalNodeValues (const Standard_Boolean aAdditionalNodeValues)
-{
-  theAdditionalNodeValues = aAdditionalNodeValues;
+void StepElement_SurfaceSectionFieldVarying::SetAdditionalNodeValues(const Standard_Boolean aAdditionalNodeValues) {
+    theAdditionalNodeValues = aAdditionalNodeValues;
 }

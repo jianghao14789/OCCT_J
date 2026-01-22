@@ -14,102 +14,91 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Signature
-//purpose  : 
+// function : Signature
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer TDataXtd_PatternStd::Signature() const
-{
-  return mySignature;
+inline Standard_Integer TDataXtd_PatternStd::Signature() const {
+    return mySignature;
 }
 
 //=======================================================================
-//function : Axis1
-//purpose  : 
+// function : Axis1
+// purpose  :
 //=======================================================================
 
-inline Handle(TNaming_NamedShape) TDataXtd_PatternStd::Axis1() const
-{
-  return myAxis1;
+inline Handle(TNaming_NamedShape) TDataXtd_PatternStd::Axis1() const {
+    return myAxis1;
 }
 
 //=======================================================================
-//function : Axis2
-//purpose  : 
+// function : Axis2
+// purpose  :
 //=======================================================================
 
-inline Handle(TNaming_NamedShape) TDataXtd_PatternStd::Axis2() const
-{
-  return myAxis2;
+inline Handle(TNaming_NamedShape) TDataXtd_PatternStd::Axis2() const {
+    return myAxis2;
 }
 
 //=======================================================================
-//function : Axis1Reversed
-//purpose  : 
+// function : Axis1Reversed
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean TDataXtd_PatternStd::Axis1Reversed() const
-{
-  return myAxis1Reversed;
+inline Standard_Boolean TDataXtd_PatternStd::Axis1Reversed() const {
+    return myAxis1Reversed;
 }
 
 //=======================================================================
-//function : Axis2Reversed
-//purpose  : 
+// function : Axis2Reversed
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean TDataXtd_PatternStd::Axis2Reversed() const
-{
-  return myAxis2Reversed;
+inline Standard_Boolean TDataXtd_PatternStd::Axis2Reversed() const {
+    return myAxis2Reversed;
 }
 
 //=======================================================================
-//function : Value1
-//purpose  : 
+// function : Value1
+// purpose  :
 //=======================================================================
 
-inline Handle(TDataStd_Real) TDataXtd_PatternStd::Value1() const
-{
-  return myValue1;
+inline Handle(TDataStd_Real) TDataXtd_PatternStd::Value1() const {
+    return myValue1;
 }
 
 //=======================================================================
-//function : Value2
-//purpose  : 
+// function : Value2
+// purpose  :
 //=======================================================================
 
-inline Handle(TDataStd_Real) TDataXtd_PatternStd::Value2() const
-{
-  return myValue2;
+inline Handle(TDataStd_Real) TDataXtd_PatternStd::Value2() const {
+    return myValue2;
 }
 
 //=======================================================================
-//function : NbInstances1
-//purpose  : 
+// function : NbInstances1
+// purpose  :
 //=======================================================================
 
-inline Handle(TDataStd_Integer) TDataXtd_PatternStd::NbInstances1() const
-{
-  return myNb1;
+inline Handle(TDataStd_Integer) TDataXtd_PatternStd::NbInstances1() const {
+    return myNb1;
 }
 
 //=======================================================================
-//function : NbInstances2
-//purpose  : 
+// function : NbInstances2
+// purpose  :
 //=======================================================================
 
-inline Handle(TDataStd_Integer) TDataXtd_PatternStd::NbInstances2() const
-{
-  return myNb2;
+inline Handle(TDataStd_Integer) TDataXtd_PatternStd::NbInstances2() const {
+    return myNb2;
 }
 
 //=======================================================================
-//function : Mirror
-//purpose  : 
+// function : Mirror
+// purpose  :
 //=======================================================================
 
-inline Handle(TNaming_NamedShape) TDataXtd_PatternStd::Mirror() const
-{
-  return myMirror;
+inline Handle(TNaming_NamedShape) TDataXtd_PatternStd::Mirror() const {
+    return myMirror;
 }
-

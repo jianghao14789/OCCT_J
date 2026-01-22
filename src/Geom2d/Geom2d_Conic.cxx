@@ -16,69 +16,63 @@
 
 #include <Geom2d_Conic.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Geom2d_Conic,Geom2d_Curve)
+IMPLEMENT_STANDARD_RTTIEXT(Geom2d_Conic, Geom2d_Curve)
 
 //=======================================================================
-//function : XAxis
-//purpose  : 
+// function : XAxis
+// purpose  :
 //=======================================================================
 
-gp_Ax2d Geom2d_Conic::XAxis () const 
-{ 
-  return gp_Ax2d(pos.Location(), pos.XDirection()); 
+gp_Ax2d Geom2d_Conic::XAxis() const {
+    return gp_Ax2d(pos.Location(), pos.XDirection());
 }
 
 //=======================================================================
-//function : YAxis
-//purpose  : 
+// function : YAxis
+// purpose  :
 //=======================================================================
 
-gp_Ax2d Geom2d_Conic::YAxis () const 
-{
-   return gp_Ax2d(pos.Location(), pos.YDirection());
+gp_Ax2d Geom2d_Conic::YAxis() const {
+    return gp_Ax2d(pos.Location(), pos.YDirection());
 }
 
 //=======================================================================
-//function : Reverse
-//purpose  : 
+// function : Reverse
+// purpose  :
 //=======================================================================
 
-void Geom2d_Conic::Reverse ()
-{
-  gp_Dir2d Temp = pos.YDirection ();
-  Temp.Reverse ();
-  pos.SetAxis(gp_Ax22d(pos.Location(), pos.XDirection(), Temp));
+void Geom2d_Conic::Reverse() {
+    gp_Dir2d Temp = pos.YDirection();
+    Temp.Reverse();
+    pos.SetAxis(gp_Ax22d(pos.Location(), pos.XDirection(), Temp));
 }
 
 //=======================================================================
-//function : Continuity
-//purpose  : 
+// function : Continuity
+// purpose  :
 //=======================================================================
 
-GeomAbs_Shape Geom2d_Conic::Continuity () const 
-{
-  return GeomAbs_CN; 
+GeomAbs_Shape Geom2d_Conic::Continuity() const {
+    return GeomAbs_CN;
 }
 
 //=======================================================================
-//function : IsCN
-//purpose  : 
+// function : IsCN
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Geom2d_Conic::IsCN (const Standard_Integer ) const 
-{
-  return Standard_True; 
+Standard_Boolean Geom2d_Conic::IsCN(const Standard_Integer) const {
+    return Standard_True;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void Geom2d_Conic::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+void Geom2d_Conic::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, Geom2d_Curve)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Geom2d_Curve)
 
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &pos)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &pos)
 }

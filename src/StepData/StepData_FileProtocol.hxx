@@ -31,7 +31,6 @@ class Interface_Protocol;
 class Interface_Graph;
 class Interface_Check;
 
-
 class StepData_FileProtocol;
 DEFINE_STANDARD_HANDLE(StepData_FileProtocol, StepData_Protocol)
 
@@ -41,63 +40,44 @@ DEFINE_STANDARD_HANDLE(StepData_FileProtocol, StepData_Protocol)
 //! specific Protocol. Thus, a File defined with a compound Schema
 //! is processed as any other one, once built the equivalent
 //! compound Protocol, a FileProtocol
-class StepData_FileProtocol : public StepData_Protocol
-{
+class StepData_FileProtocol : public StepData_Protocol {
 
 public:
+    //! Creates an empty FileProtocol
+    Standard_EXPORT StepData_FileProtocol();
 
-  
-  //! Creates an empty FileProtocol
-  Standard_EXPORT StepData_FileProtocol();
-  
-  //! Adds a Protocol to the definition list of the FileProtocol
-  //! But ensures that each class of Protocol is present only once
-  //! in this list
-  Standard_EXPORT void Add (const Handle(StepData_Protocol)& protocol);
-  
-  //! Gives the count of Protocols used as Resource (can be zero)
-  //! i.e. the count of Protocol recorded by calling the method Add
-  Standard_EXPORT virtual Standard_Integer NbResources() const Standard_OVERRIDE;
-  
-  //! Returns a Resource, given a rank. Here, rank of calling Add
-  Standard_EXPORT virtual Handle(Interface_Protocol) Resource (const Standard_Integer num) const Standard_OVERRIDE;
-  
-  //! Returns a Case Number, specific of each recognized Type
-  //! Here, NO Type at all is recognized properly : all Types are
-  //! recognized by the resources
-  Standard_EXPORT virtual Standard_Integer TypeNumber (const Handle(Standard_Type)& atype) const Standard_OVERRIDE;
-  
-  //! Calls GlobalCheck for each of its recorded resources
-  Standard_EXPORT virtual Standard_Boolean GlobalCheck (const Interface_Graph& G, Handle(Interface_Check)& ach) const Standard_OVERRIDE;
-  
-  //! Returns the Schema Name attached to each class of Protocol
-  //! To be redefined by each sub-class
-  //! Here, SchemaName returns "" (empty String)
-  //! was C++ : return const
-  Standard_EXPORT virtual Standard_CString SchemaName() const Standard_OVERRIDE;
+    //! Adds a Protocol to the definition list of the FileProtocol
+    //! But ensures that each class of Protocol is present only once
+    //! in this list
+    Standard_EXPORT void Add(const Handle(StepData_Protocol) & protocol);
 
+    //! Gives the count of Protocols used as Resource (can be zero)
+    //! i.e. the count of Protocol recorded by calling the method Add
+    Standard_EXPORT virtual Standard_Integer NbResources() const Standard_OVERRIDE;
 
+    //! Returns a Resource, given a rank. Here, rank of calling Add
+    Standard_EXPORT virtual Handle(Interface_Protocol) Resource(const Standard_Integer num) const Standard_OVERRIDE;
 
+    //! Returns a Case Number, specific of each recognized Type
+    //! Here, NO Type at all is recognized properly : all Types are
+    //! recognized by the resources
+    Standard_EXPORT virtual Standard_Integer TypeNumber(const Handle(Standard_Type) & atype) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(StepData_FileProtocol,StepData_Protocol)
+    //! Calls GlobalCheck for each of its recorded resources
+    Standard_EXPORT virtual Standard_Boolean GlobalCheck(const Interface_Graph& G,
+                                                         Handle(Interface_Check) & ach) const Standard_OVERRIDE;
+
+    //! Returns the Schema Name attached to each class of Protocol
+    //! To be redefined by each sub-class
+    //! Here, SchemaName returns "" (empty String)
+    //! was C++ : return const
+    Standard_EXPORT virtual Standard_CString SchemaName() const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(StepData_FileProtocol, StepData_Protocol)
 
 protected:
-
-
-
-
 private:
-
-
-  TColStd_SequenceOfTransient thecomps;
-
-
+    TColStd_SequenceOfTransient thecomps;
 };
-
-
-
-
-
-
 
 #endif // _StepData_FileProtocol_HeaderFile

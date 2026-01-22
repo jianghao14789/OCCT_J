@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(ShapeAnalysis_HSequenceOfFreeBounds, ShapeAnalysis_SequenceOfFreeBounds)
 
-
 #endif

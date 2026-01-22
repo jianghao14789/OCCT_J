@@ -16,11 +16,9 @@
 
 //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620
 
-
 #ifndef No_Exception
 #define No_Exception
 #endif
-
 
 #include <ElSLib.hxx>
 #include <gp.hxx>
@@ -39,24 +37,16 @@
 
 static Standard_Real PIPI = M_PI + M_PI;
 
-gp_Pnt ElSLib::PlaneValue(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos)
-{
+gp_Pnt ElSLib::PlaneValue(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& PLoc = Pos.Location().XYZ();
-    return gp_Pnt(U * XDir.X() + V * YDir.X() + PLoc.X(),
-        U * XDir.Y() + V * YDir.Y() + PLoc.Y(),
-        U * XDir.Z() + V * YDir.Z() + PLoc.Z());
+    return gp_Pnt(U * XDir.X() + V * YDir.X() + PLoc.X(), U * XDir.Y() + V * YDir.Y() + PLoc.Y(),
+                  U * XDir.Z() + V * YDir.Z() + PLoc.Z());
 }
 
-gp_Pnt ElSLib::ConeValue(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle)
-{
+gp_Pnt ElSLib::ConeValue(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                         const Standard_Real SAngle) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -66,15 +56,12 @@ gp_Pnt ElSLib::ConeValue(const Standard_Real U,
     Standard_Real A1 = R * cos(U);
     Standard_Real A2 = R * sin(U);
     return gp_Pnt(A1 * XDir.X() + A2 * YDir.X() + A3 * ZDir.X() + PLoc.X(),
-        A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y(),
-        A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
+                  A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y(),
+                  A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
 }
 
-gp_Pnt ElSLib::CylinderValue(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius)
-{
+gp_Pnt ElSLib::CylinderValue(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos,
+                             const Standard_Real Radius) {
     // M(u,v) = C + Radius * ( Xdir * Cos(u) + Ydir * Sin(u)) + V * Zdir
     // where C is the location point of the Axis2placement
     // Xdir, Ydir ,Zdir are the directions of the local coordinates system
@@ -86,18 +73,15 @@ gp_Pnt ElSLib::CylinderValue(const Standard_Real U,
     Standard_Real A1 = Radius * cos(U);
     Standard_Real A2 = Radius * sin(U);
     return gp_Pnt(A1 * XDir.X() + A2 * YDir.X() + V * ZDir.X() + PLoc.X(),
-        A1 * XDir.Y() + A2 * YDir.Y() + V * ZDir.Y() + PLoc.Y(),
-        A1 * XDir.Z() + A2 * YDir.Z() + V * ZDir.Z() + PLoc.Z());
+                  A1 * XDir.Y() + A2 * YDir.Y() + V * ZDir.Y() + PLoc.Y(),
+                  A1 * XDir.Z() + A2 * YDir.Z() + V * ZDir.Z() + PLoc.Z());
 }
 
-gp_Pnt ElSLib::SphereValue(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius)
-{
-    //M(U,V) = Location +
-    //         R * CosV (CosU * XDirection + SinU * YDirection) +
-    //         R * SinV * Direction
+gp_Pnt ElSLib::SphereValue(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos,
+                           const Standard_Real Radius) {
+    // M(U,V) = Location +
+    //          R * CosV (CosU * XDirection + SinU * YDirection) +
+    //          R * SinV * Direction
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -108,20 +92,16 @@ gp_Pnt ElSLib::SphereValue(const Standard_Real U,
     Standard_Real A1 = R * cos(U);
     Standard_Real A2 = R * sin(U);
     return gp_Pnt(A1 * XDir.X() + A2 * YDir.X() + A3 * ZDir.X() + PLoc.X(),
-        A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y(),
-        A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
+                  A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y(),
+                  A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
 }
 
-gp_Pnt ElSLib::TorusValue(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius)
-{
-    //M(U,V) = 
-    //  Location +
-    //  (MajRadius+MinRadius*Cos(V)) * (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //  MinorRadius * Sin(V) * Direction
+gp_Pnt ElSLib::TorusValue(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos,
+                          const Standard_Real MajorRadius, const Standard_Real MinorRadius) {
+    // M(U,V) =
+    //   Location +
+    //   (MajRadius+MinRadius*Cos(V)) * (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //   MinorRadius * Sin(V) * Direction
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -134,43 +114,33 @@ gp_Pnt ElSLib::TorusValue(const Standard_Real U,
     //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
     Standard_Real eps = 10. * (MinorRadius + MajorRadius) * RealEpsilon();
 
-    if (Abs(A1) <= eps)
-        A1 = 0.;
+    if (Abs(A1) <= eps) A1 = 0.;
 
-    if (Abs(A2) <= eps)
-        A2 = 0.;
+    if (Abs(A2) <= eps) A2 = 0.;
 
-    if (Abs(A3) <= eps)
-        A3 = 0.;
+    if (Abs(A3) <= eps) A3 = 0.;
 
     //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
     return gp_Pnt(A1 * XDir.X() + A2 * YDir.X() + A3 * ZDir.X() + PLoc.X(),
-        A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y(),
-        A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
+                  A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y(),
+                  A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
 }
 
-gp_Vec ElSLib::PlaneDN(const Standard_Real,
-    const Standard_Real,
-    const gp_Ax3& Pos,
-    const Standard_Integer Nu,
-    const Standard_Integer Nv)
-{
-    if (Nu == 0 && Nv == 1) { return gp_Vec(Pos.YDirection()); }
-    else if (Nu == 1 && Nv == 0) { return gp_Vec(Pos.XDirection()); }
+gp_Vec ElSLib::PlaneDN(const Standard_Real, const Standard_Real, const gp_Ax3& Pos, const Standard_Integer Nu,
+                       const Standard_Integer Nv) {
+    if (Nu == 0 && Nv == 1) {
+        return gp_Vec(Pos.YDirection());
+    } else if (Nu == 1 && Nv == 0) {
+        return gp_Vec(Pos.XDirection());
+    }
     return gp_Vec(0., 0., 0.);
 }
 
-gp_Vec ElSLib::ConeDN(const Standard_Real    U,
-    const Standard_Real    V,
-    const gp_Ax3& Pos,
-    const Standard_Real    Radius,
-    const Standard_Real    SAngle,
-    const Standard_Integer Nu,
-    const Standard_Integer Nv)
-{
+gp_Vec ElSLib::ConeDN(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                      const Standard_Real SAngle, const Standard_Integer Nu, const Standard_Integer Nv) {
     gp_XYZ Xdir = Pos.XDirection().XYZ();
     gp_XYZ Ydir = Pos.YDirection().XYZ();
-    Standard_Real Um = U + Nu * M_PI_2;  // M_PI * 0.5
+    Standard_Real Um = U + Nu * M_PI_2; // M_PI * 0.5
     Xdir.Multiply(cos(Um));
     Ydir.Multiply(sin(Um));
     Xdir.Add(Ydir);
@@ -178,22 +148,18 @@ gp_Vec ElSLib::ConeDN(const Standard_Real    U,
         Xdir.Multiply(Radius + V * sin(SAngle));
         if (Nu == 0) Xdir.Add(Pos.Location().XYZ());
         return gp_Vec(Xdir);
-    }
-    else if (Nv == 1) {
+    } else if (Nv == 1) {
         Xdir.Multiply(sin(SAngle));
         return gp_Vec(Xdir);
     }
     return gp_Vec(0.0, 0.0, 0.0);
 }
 
-gp_Vec ElSLib::CylinderDN(const Standard_Real    U,
-    const Standard_Real,
-    const gp_Ax3& Pos,
-    const Standard_Real    Radius,
-    const Standard_Integer Nu,
-    const Standard_Integer Nv)
-{
-    if (Nu + Nv < 1 || Nu < 0 || Nv < 0) { return gp_Vec(); }
+gp_Vec ElSLib::CylinderDN(const Standard_Real U, const Standard_Real, const gp_Ax3& Pos, const Standard_Real Radius,
+                          const Standard_Integer Nu, const Standard_Integer Nv) {
+    if (Nu + Nv < 1 || Nu < 0 || Nv < 0) {
+        return gp_Vec();
+    }
     if (Nv == 0) {
         Standard_Real RCosU = Radius * cos(U);
         Standard_Real RSinU = Radius * sin(U);
@@ -202,34 +168,30 @@ gp_Vec ElSLib::CylinderDN(const Standard_Real    U,
         if ((Nu + 6) % 4 == 0) {
             Xdir.Multiply(-RCosU);
             Ydir.Multiply(-RSinU);
-        }
-        else if ((Nu + 5) % 4 == 0) {
+        } else if ((Nu + 5) % 4 == 0) {
             Xdir.Multiply(RSinU);
             Ydir.Multiply(-RCosU);
-        }
-        else if ((Nu + 3) % 4 == 0) {
+        } else if ((Nu + 3) % 4 == 0) {
             Xdir.Multiply(-RSinU);
             Ydir.Multiply(RCosU);
-        }
-        else if (Nu % 4 == 0) {
+        } else if (Nu % 4 == 0) {
             Xdir.Multiply(RCosU);
             Ydir.Multiply(RSinU);
         }
         Xdir.Add(Ydir);
         return gp_Vec(Xdir);
+    } else if (Nv == 1 && Nu == 0) {
+        return gp_Vec(Pos.Direction());
+    } else {
+        return gp_Vec(0.0, 0.0, 0.0);
     }
-    else if (Nv == 1 && Nu == 0) { return gp_Vec(Pos.Direction()); }
-    else { return gp_Vec(0.0, 0.0, 0.0); }
 }
 
-gp_Vec ElSLib::SphereDN(const Standard_Real    U,
-    const Standard_Real    V,
-    const gp_Ax3& Pos,
-    const Standard_Real    Radius,
-    const Standard_Integer Nu,
-    const Standard_Integer Nv)
-{
-    if (Nu + Nv < 1 || Nu < 0 || Nv < 0) { return gp_Vec(); }
+gp_Vec ElSLib::SphereDN(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                        const Standard_Integer Nu, const Standard_Integer Nv) {
+    if (Nu + Nv < 1 || Nu < 0 || Nv < 0) {
+        return gp_Vec();
+    }
     Standard_Real CosU = cos(U);
     Standard_Real SinU = sin(U);
     Standard_Real RCosV = Radius * cos(V);
@@ -239,56 +201,70 @@ gp_Vec ElSLib::SphereDN(const Standard_Real    U,
     Standard_Real A1, A2, A3, X, Y, Z;
     if (Nu == 0) {
         Standard_Real RSinV = Radius * sin(V);
-        if (IsOdd(Nv)) { A1 = -RSinV * CosU; A2 = -RSinV * SinU; A3 = RCosV; }
-        else { A1 = -RCosV * CosU; A2 = -RCosV * SinU; A3 = -RSinV; }
+        if (IsOdd(Nv)) {
+            A1 = -RSinV * CosU;
+            A2 = -RSinV * SinU;
+            A3 = RCosV;
+        } else {
+            A1 = -RCosV * CosU;
+            A2 = -RCosV * SinU;
+            A3 = -RSinV;
+        }
         X = A1 * XDir.X() + A2 * YDir.X() + A3 * ZDir.X();
         Y = A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y();
         Z = A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z();
-        if (!((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0))
-        {
-            X = -X; Y = -Y; Z = -Z;
+        if (!((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0)) {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
         }
-    }
-    else if (Nv == 0) {
-        if (IsOdd(Nu)) { A1 = -RCosV * SinU; A2 = RCosV * CosU; }
-        else { A1 = RCosV * CosU; A2 = RCosV * SinU; }
+    } else if (Nv == 0) {
+        if (IsOdd(Nu)) {
+            A1 = -RCosV * SinU;
+            A2 = RCosV * CosU;
+        } else {
+            A1 = RCosV * CosU;
+            A2 = RCosV * SinU;
+        }
         X = A1 * XDir.X() + A2 * YDir.X();
         Y = A1 * XDir.Y() + A2 * YDir.Y();
         Z = A1 * XDir.Z() + A2 * YDir.Z();
-        if ((Nu + 2) % 4 == 0 || (Nu + 1) % 4 == 0)
-        {
-            X = -X; Y = -Y; Z = -Z;
+        if ((Nu + 2) % 4 == 0 || (Nu + 1) % 4 == 0) {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
         }
-    }
-    else {
+    } else {
         Standard_Real RSinV = Radius * sin(V);
-        if (IsOdd(Nu)) { A1 = -SinU; A2 = CosU; }
-        else { A1 = -CosU; A2 = -SinU; }
-        if (IsOdd(Nv)) A3 = -RSinV;
-        else            A3 = -RCosV;
+        if (IsOdd(Nu)) {
+            A1 = -SinU;
+            A2 = CosU;
+        } else {
+            A1 = -CosU;
+            A2 = -SinU;
+        }
+        if (IsOdd(Nv))
+            A3 = -RSinV;
+        else
+            A3 = -RCosV;
         X = (A1 * XDir.X() + A2 * YDir.X()) * A3;
         Y = (A1 * XDir.Y() + A2 * YDir.Y()) * A3;
         Z = (A1 * XDir.Z() + A2 * YDir.Z()) * A3;
-        if ((!((Nu + 2) % 4 == 0 || (Nu + 3) % 4 == 0) &&
-            ((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0)) ||
-            (((Nu + 2) % 4 == 0 || (Nu + 3) % 4 == 0) &&
-                !((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0)))
-        {
-            X = -X; Y = -Y; Z = -Z;
+        if ((!((Nu + 2) % 4 == 0 || (Nu + 3) % 4 == 0) && ((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0)) ||
+            (((Nu + 2) % 4 == 0 || (Nu + 3) % 4 == 0) && !((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0))) {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
         }
     }
     return gp_Vec(X, Y, Z);
 }
 
-gp_Vec ElSLib::TorusDN(const Standard_Real    U,
-    const Standard_Real    V,
-    const gp_Ax3& Pos,
-    const Standard_Real    MajorRadius,
-    const Standard_Real    MinorRadius,
-    const Standard_Integer Nu,
-    const Standard_Integer Nv)
-{
-    if (Nu + Nv < 1 || Nu < 0 || Nv < 0) { return gp_Vec(); }
+gp_Vec ElSLib::TorusDN(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real MajorRadius,
+                       const Standard_Real MinorRadius, const Standard_Integer Nu, const Standard_Integer Nv) {
+    if (Nu + Nv < 1 || Nu < 0 || Nv < 0) {
+        return gp_Vec();
+    }
     Standard_Real CosU = cos(U);
     Standard_Real SinU = sin(U);
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
@@ -300,121 +276,118 @@ gp_Vec ElSLib::TorusDN(const Standard_Real    U,
     //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 End
     if (Nv == 0) {
         Standard_Real R = MajorRadius + MinorRadius * cos(V);
-        if (IsOdd(Nu)) { A1 = -R * SinU; A2 = R * CosU; }
-        else { A1 = -R * CosU; A2 = -R * SinU; }
+        if (IsOdd(Nu)) {
+            A1 = -R * SinU;
+            A2 = R * CosU;
+        } else {
+            A1 = -R * CosU;
+            A2 = -R * SinU;
+        }
         //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
-        if (Abs(A1) <= eps)
-            A1 = 0.;
+        if (Abs(A1) <= eps) A1 = 0.;
 
-        if (Abs(A2) <= eps)
-            A2 = 0.;
+        if (Abs(A2) <= eps) A2 = 0.;
         //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
         X = A1 * XDir.X() + A2 * YDir.X();
         Y = A1 * XDir.Y() + A2 * YDir.Y();
         Z = A1 * XDir.Z() + A2 * YDir.Z();
-        if (!((Nu + 2) % 4 == 0 || (Nu + 3) % 4 == 0))
-        {
-            X = -X; Y = -Y; Z = -Z;
+        if (!((Nu + 2) % 4 == 0 || (Nu + 3) % 4 == 0)) {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
         }
-    }
-    else if (Nu == 0) {
+    } else if (Nu == 0) {
         Standard_Real RCosV = MinorRadius * cos(V);
         Standard_Real RSinV = MinorRadius * sin(V);
-        if (IsOdd(Nv)) { A1 = -RSinV * CosU; A2 = -RSinV * SinU; A3 = RCosV; }
-        else { A1 = -RCosV * CosU; A2 = -RCosV * SinU; A3 = -RSinV; }
+        if (IsOdd(Nv)) {
+            A1 = -RSinV * CosU;
+            A2 = -RSinV * SinU;
+            A3 = RCosV;
+        } else {
+            A1 = -RCosV * CosU;
+            A2 = -RCosV * SinU;
+            A3 = -RSinV;
+        }
         //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
-        if (Abs(A1) <= eps)
-            A1 = 0.;
+        if (Abs(A1) <= eps) A1 = 0.;
 
-        if (Abs(A2) <= eps)
-            A2 = 0.;
+        if (Abs(A2) <= eps) A2 = 0.;
 
-        if (Abs(A3) <= eps)
-            A3 = 0.;
+        if (Abs(A3) <= eps) A3 = 0.;
         //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
         X = A1 * XDir.X() + A2 * YDir.X() + A3 * ZDir.X();
         Y = A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y();
         Z = A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z();
-        if (!((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0))
-        {
-            X = -X; Y = -Y; Z = -Z;
+        if (!((Nv + 2) % 4 == 0 || (Nv + 3) % 4 == 0)) {
+            X = -X;
+            Y = -Y;
+            Z = -Z;
         }
-    }
-    else {
-        if (IsOdd(Nu) &&
-            IsOdd(Nv)) {
+    } else {
+        if (IsOdd(Nu) && IsOdd(Nv)) {
             Standard_Real RSinV = MinorRadius * sin(V);
-            A1 = RSinV * SinU; A2 = -RSinV * CosU;
+            A1 = RSinV * SinU;
+            A2 = -RSinV * CosU;
             //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
-            if (Abs(A1) <= eps)
-                A1 = 0.;
+            if (Abs(A1) <= eps) A1 = 0.;
 
-            if (Abs(A2) <= eps)
-                A2 = 0.;
+            if (Abs(A2) <= eps) A2 = 0.;
             //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
             X = A1 * XDir.X() + A2 * YDir.X();
             Y = A1 * XDir.Y() + A2 * YDir.Y();
             Z = A1 * XDir.Z() + A2 * YDir.Z();
-        }
-        else if (IsEven(Nu) && IsEven(Nv)) {
+        } else if (IsEven(Nu) && IsEven(Nv)) {
             Standard_Real RCosV = MinorRadius * cos(V);
-            A1 = RCosV * CosU; A2 = RCosV * SinU;
+            A1 = RCosV * CosU;
+            A2 = RCosV * SinU;
             //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
-            if (Abs(A1) <= eps)
-                A1 = 0.;
+            if (Abs(A1) <= eps) A1 = 0.;
 
-            if (Abs(A2) <= eps)
-                A2 = 0.;
+            if (Abs(A2) <= eps) A2 = 0.;
             //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
             X = A1 * XDir.X() + A2 * YDir.X();
             Y = A1 * XDir.Y() + A2 * YDir.Y();
             Z = A1 * XDir.Z() + A2 * YDir.Z();
-        }
-        else if (IsEven(Nv) && IsOdd(Nu)) {
+        } else if (IsEven(Nv) && IsOdd(Nu)) {
             Standard_Real RCosV = MinorRadius * cos(V);
-            A1 = RCosV * SinU; A2 = -RCosV * CosU;
+            A1 = RCosV * SinU;
+            A2 = -RCosV * CosU;
             //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
-            if (Abs(A1) <= eps)
-                A1 = 0.;
+            if (Abs(A1) <= eps) A1 = 0.;
 
-            if (Abs(A2) <= eps)
-                A2 = 0.;
+            if (Abs(A2) <= eps) A2 = 0.;
             //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
             X = A1 * XDir.X() + A2 * YDir.X();
             Y = A1 * XDir.Y() + A2 * YDir.Y();
             Z = A1 * XDir.Z() + A2 * YDir.Z();
-            if (((Nv + Nu + 3) % 4) == 0)
-            {
-                X = -X; Y = -Y; Z = -Z;
+            if (((Nv + Nu + 3) % 4) == 0) {
+                X = -X;
+                Y = -Y;
+                Z = -Z;
             }
-        }
-        else if (IsOdd(Nv) && IsEven(Nu)) {
+        } else if (IsOdd(Nv) && IsEven(Nu)) {
             Standard_Real RSinV = MinorRadius * sin(V);
-            A1 = RSinV * CosU; A2 = RSinV * SinU;
+            A1 = RSinV * CosU;
+            A2 = RSinV * SinU;
             //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
-            if (Abs(A1) <= eps)
-                A1 = 0.;
+            if (Abs(A1) <= eps) A1 = 0.;
 
-            if (Abs(A2) <= eps)
-                A2 = 0.;
+            if (Abs(A2) <= eps) A2 = 0.;
             //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
             X = A1 * XDir.X() + A2 * YDir.X();
             Y = A1 * XDir.Y() + A2 * YDir.Y();
             Z = A1 * XDir.Z() + A2 * YDir.Z();
-            if (((Nu + Nv + 3) % 4) == 0)
-            {
-                X = -X; Y = -Y; Z = -Z;
+            if (((Nu + Nv + 3) % 4) == 0) {
+                X = -X;
+                Y = -Y;
+                Z = -Z;
             }
         }
     }
     return gp_Vec(X, Y, Z);
 }
 
-void ElSLib::PlaneD0(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    gp_Pnt& P)
-{
+void ElSLib::PlaneD0(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, gp_Pnt& P) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& PLoc = Pos.Location().XYZ();
@@ -423,13 +396,8 @@ void ElSLib::PlaneD0(const Standard_Real U,
     P.SetZ(U * XDir.Z() + V * YDir.Z() + PLoc.Z());
 }
 
-void ElSLib::ConeD0(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    gp_Pnt& P)
-{
+void ElSLib::ConeD0(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                    const Standard_Real SAngle, gp_Pnt& P) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -443,12 +411,8 @@ void ElSLib::ConeD0(const Standard_Real U,
     P.SetZ(A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
 }
 
-void ElSLib::CylinderD0(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P)
-{
+void ElSLib::CylinderD0(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                        gp_Pnt& P) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -460,11 +424,8 @@ void ElSLib::CylinderD0(const Standard_Real U,
     P.SetZ(A1 * XDir.Z() + A2 * YDir.Z() + V * ZDir.Z() + PLoc.Z());
 }
 
-void ElSLib::SphereD0(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius, gp_Pnt& P)
-{
+void ElSLib::SphereD0(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                      gp_Pnt& P) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -478,13 +439,8 @@ void ElSLib::SphereD0(const Standard_Real U,
     P.SetZ(A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
 }
 
-void ElSLib::TorusD0(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    gp_Pnt& P)
-{
+void ElSLib::TorusD0(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real MajorRadius,
+                     const Standard_Real MinorRadius, gp_Pnt& P) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -496,27 +452,19 @@ void ElSLib::TorusD0(const Standard_Real U,
     //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
     Standard_Real eps = 10. * (MinorRadius + MajorRadius) * RealEpsilon();
 
-    if (Abs(A1) <= eps)
-        A1 = 0.;
+    if (Abs(A1) <= eps) A1 = 0.;
 
-    if (Abs(A2) <= eps)
-        A2 = 0.;
+    if (Abs(A2) <= eps) A2 = 0.;
 
-    if (Abs(A3) <= eps)
-        A3 = 0.;
+    if (Abs(A3) <= eps) A3 = 0.;
     //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
     P.SetX(A1 * XDir.X() + A2 * YDir.X() + A3 * ZDir.X() + PLoc.X());
     P.SetY(A1 * XDir.Y() + A2 * YDir.Y() + A3 * ZDir.Y() + PLoc.Y());
     P.SetZ(A1 * XDir.Z() + A2 * YDir.Z() + A3 * ZDir.Z() + PLoc.Z());
 }
 
-void ElSLib::PlaneD1(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv)
-{
+void ElSLib::PlaneD1(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, gp_Pnt& P, gp_Vec& Vu,
+                     gp_Vec& Vv) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& PLoc = Pos.Location().XYZ();
@@ -531,24 +479,17 @@ void ElSLib::PlaneD1(const Standard_Real U,
     Vv.SetZ(YDir.Z());
 }
 
-void ElSLib::ConeD1(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv)
-{
+void ElSLib::ConeD1(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                    const Standard_Real SAngle, gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv) {
     // Z = V * Cos(SAngle)
     // M(U,V) = Location() + V * Cos(SAngle) * ZDirection() +
     // (Radius + V*Sin(SAng)) * (Cos(U) * XDirection() + Sin(U) * YDirection())
 
-    // D1U = 
+    // D1U =
     //(Radius + V*Sin(SAng)) * (-Sin(U) * XDirection() + Cos(U) * YDirection())
 
-    // D1V = 
-    // Direction() *Cos(SAngle) + Sin(SAng) * (Cos(U) * XDirection() + 
+    // D1V =
+    // Direction() *Cos(SAngle) + Sin(SAng) * (Cos(U) * XDirection() +
     // Sin(U) * YDirection())
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
@@ -576,14 +517,8 @@ void ElSLib::ConeD1(const Standard_Real U,
     Vv.SetZ(R1 * XDir.Z() + R2 * YDir.Z() + CosA * ZDir.Z());
 }
 
-void ElSLib::CylinderD1(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv)
-{
+void ElSLib::CylinderD1(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                        gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -601,14 +536,8 @@ void ElSLib::CylinderD1(const Standard_Real U,
     Vv.SetZ(ZDir.Z());
 }
 
-void ElSLib::SphereD1(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv)
-{
+void ElSLib::SphereD1(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                      gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv) {
     // Vxy = CosU * XDirection + SinU * YDirection
     // DVxy = -SinU * XDirection + CosU * YDirection
 
@@ -641,28 +570,21 @@ void ElSLib::SphereD1(const Standard_Real U,
     Vv.SetZ(-A3 * XDir.Z() - A4 * YDir.Z() + R1 * ZDir.Z());
 }
 
-void ElSLib::TorusD1(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv)
-{
+void ElSLib::TorusD1(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real MajorRadius,
+                     const Standard_Real MinorRadius, gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv) {
 
-    //P(U,V) = 
-    //  Location +
+    // P(U,V) =
+    //   Location +
+    //   (MajorRadius+MinorRadius*Cos(V)) *
+    //   (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //   MinorRadius * Sin(V) * Direction
+
+    // Vv = -MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //       MinorRadius * Cos(V) * Direction
+
+    // Vu =
     //  (MajorRadius+MinorRadius*Cos(V)) *
-    //  (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //  MinorRadius * Sin(V) * Direction
-
-    //Vv = -MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //      MinorRadius * Cos(V) * Direction
-
-    //Vu =
-    // (MajorRadius+MinorRadius*Cos(V)) *
-    // (-Sin(U)*XDirection + Cos(U)*YDirection)
+    //  (-Sin(U)*XDirection + Cos(U)*YDirection)
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -680,17 +602,13 @@ void ElSLib::TorusD1(const Standard_Real U,
     //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
     Standard_Real eps = 10. * (MinorRadius + MajorRadius) * RealEpsilon();
 
-    if (Abs(A1) <= eps)
-        A1 = 0.;
+    if (Abs(A1) <= eps) A1 = 0.;
 
-    if (Abs(A2) <= eps)
-        A2 = 0.;
+    if (Abs(A2) <= eps) A2 = 0.;
 
-    if (Abs(A3) <= eps)
-        A3 = 0.;
+    if (Abs(A3) <= eps) A3 = 0.;
 
-    if (Abs(A4) <= eps)
-        A4 = 0.;
+    if (Abs(A4) <= eps) A4 = 0.;
     //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
     P.SetX(A1 * XDir.X() + A2 * YDir.X() + R2 * ZDir.X() + PLoc.X());
     P.SetY(A1 * XDir.Y() + A2 * YDir.Y() + R2 * ZDir.Y() + PLoc.Y());
@@ -703,36 +621,27 @@ void ElSLib::TorusD1(const Standard_Real U,
     Vv.SetZ(-A3 * XDir.Z() - A4 * YDir.Z() + R1 * ZDir.Z());
 }
 
-void ElSLib::ConeD2(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv,
-    gp_Vec& Vuu,
-    gp_Vec& Vvv,
-    gp_Vec& Vuv)
-{
+void ElSLib::ConeD2(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                    const Standard_Real SAngle, gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv,
+                    gp_Vec& Vuv) {
     // Z = V * Cos(SAngle)
     // M(U,V) = Location() + V * Cos(SAngle) * Direction() +
     // (Radius + V*Sin(SAng)) * (Cos(U) * XDirection() + Sin(U) * YDirection())
 
-    // DU = 
+    // DU =
     //(Radius + V*Sin(SAng)) * (-Sin(U) * XDirection() + Cos(U) * YDirection())
 
-    // DV = 
-    // Direction() *Cos(SAngle) + Sin(SAng) * (Cos(U) * XDirection() + 
+    // DV =
+    // Direction() *Cos(SAngle) + Sin(SAng) * (Cos(U) * XDirection() +
     // Sin(U) * YDirection())
 
     // D2U =
     //(Radius + V*Sin(SAng)) * (-Cos(U) * XDirection() - Sin(U) * YDirection())
 
-    // D2V = 0.0   
+    // D2V = 0.0
 
-    // DUV = 
-    //Sin(SAng) * (-Sin(U) * XDirection() + Cos(U) * YDirection())
+    // DUV =
+    // Sin(SAng) * (-Sin(U) * XDirection() + Cos(U) * YDirection())
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -771,17 +680,8 @@ void ElSLib::ConeD2(const Standard_Real U,
     Vuv.SetZ(-R2 * XDir.Z() + R1 * YDir.Z());
 }
 
-void ElSLib::CylinderD2(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv,
-    gp_Vec& Vuu,
-    gp_Vec& Vvv,
-    gp_Vec& Vuv)
-{
+void ElSLib::CylinderD2(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                        gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -811,17 +711,8 @@ void ElSLib::CylinderD2(const Standard_Real U,
     Vuv.SetZ(0.0);
 }
 
-void ElSLib::SphereD2(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv,
-    gp_Vec& Vuu,
-    gp_Vec& Vvv,
-    gp_Vec& Vuv)
-{
+void ElSLib::SphereD2(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                      gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv) {
     // Vxy = CosU * XDirection + SinU * YDirection
     // DVxy = -SinU * XDirection + CosU * YDirection
 
@@ -875,40 +766,30 @@ void ElSLib::SphereD2(const Standard_Real U,
     Vuv.SetZ(A4 * XDir.Z() - A3 * YDir.Z());
 }
 
-void ElSLib::TorusD2(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    gp_Pnt& P,
-    gp_Vec& Vu,
-    gp_Vec& Vv,
-    gp_Vec& Vuu,
-    gp_Vec& Vvv,
-    gp_Vec& Vuv)
-{
-    //P(U,V) = 
-    //  Location +
+void ElSLib::TorusD2(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real MajorRadius,
+                     const Standard_Real MinorRadius, gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv,
+                     gp_Vec& Vuv) {
+    // P(U,V) =
+    //   Location +
+    //   (MajorRadius+MinorRadius*Cos(V)) *
+    //   (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //   MinorRadius * Sin(V) * Direction
+
+    // Vv = -MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //       MinorRadius * Cos(V) * Direction
+
+    // Vu =
     //  (MajorRadius+MinorRadius*Cos(V)) *
-    //  (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //  MinorRadius * Sin(V) * Direction
+    //  (-Sin(U)*XDirection + Cos(U)*YDirection)
 
-    //Vv = -MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //      MinorRadius * Cos(V) * Direction
+    // Vvv = -MinorRadius * Cos(V) * (Cos(U)*XDirection + Sin(U)*YDirection)
+    //       -MinorRadius * Sin(V) * Direction
 
-    //Vu =
-    // (MajorRadius+MinorRadius*Cos(V)) * 
-    // (-Sin(U)*XDirection + Cos(U)*YDirection)
+    // Vuu =
+    //  -(MajorRadius+MinorRadius*Cos(V)) *
+    //  (Cos(U)*XDirection + Sin(U)*YDirection)
 
-
-    //Vvv = -MinorRadius * Cos(V) * (Cos(U)*XDirection + Sin(U)*YDirection) 
-    //      -MinorRadius * Sin(V) * Direction
-
-    //Vuu =
-    // -(MajorRadius+MinorRadius*Cos(V)) * 
-    // (Cos(U)*XDirection + Sin(U)*YDirection)
-
-    //Vuv = MinorRadius * Sin(V) * (Sin(U)*XDirection - Cos(U)*YDirection)
+    // Vuv = MinorRadius * Sin(V) * (Sin(U)*XDirection - Cos(U)*YDirection)
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -928,23 +809,17 @@ void ElSLib::TorusD2(const Standard_Real U,
     //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
     Standard_Real eps = 10. * (MinorRadius + MajorRadius) * RealEpsilon();
 
-    if (Abs(A1) <= eps)
-        A1 = 0.;
+    if (Abs(A1) <= eps) A1 = 0.;
 
-    if (Abs(A2) <= eps)
-        A2 = 0.;
+    if (Abs(A2) <= eps) A2 = 0.;
 
-    if (Abs(A3) <= eps)
-        A3 = 0.;
+    if (Abs(A3) <= eps) A3 = 0.;
 
-    if (Abs(A4) <= eps)
-        A4 = 0.;
+    if (Abs(A4) <= eps) A4 = 0.;
 
-    if (Abs(A5) <= eps)
-        A5 = 0.;
+    if (Abs(A5) <= eps) A5 = 0.;
 
-    if (Abs(A6) <= eps)
-        A6 = 0.;
+    if (Abs(A6) <= eps) A6 = 0.;
     //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
     Standard_Real Som1X = A1 * XDir.X() + A2 * YDir.X();
     Standard_Real Som1Y = A1 * XDir.Y() + A2 * YDir.Y();
@@ -972,35 +847,27 @@ void ElSLib::TorusD2(const Standard_Real U,
     Vuv.SetZ(A4 * XDir.Z() - A3 * YDir.Z());
 }
 
-void ElSLib::ConeD3(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    gp_Pnt& P,
-    gp_Vec& Vu, gp_Vec& Vv,
-    gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv,
-    gp_Vec& Vuuu, gp_Vec& Vvvv,
-    gp_Vec& Vuuv, gp_Vec& Vuvv)
-{
+void ElSLib::ConeD3(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                    const Standard_Real SAngle, gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv,
+                    gp_Vec& Vuv, gp_Vec& Vuuu, gp_Vec& Vvvv, gp_Vec& Vuuv, gp_Vec& Vuvv) {
     // Z = V * Cos(SAngle)
     // M(U,V) = Location() + V * Cos(SAngle) * Direction() +
     // (Radius + V*Sin(SAng)) * (Cos(U) * XDirection() + Sin(U) * YDirection())
 
-    // DU = 
+    // DU =
     //(Radius + V*Sin(SAng)) * (-Sin(U) * XDirection() + Cos(U) * YDirection())
 
-    // DV = 
-    // Direction() *Cos(SAngle) + Sin(SAng) * (Cos(U) * XDirection() + 
+    // DV =
+    // Direction() *Cos(SAngle) + Sin(SAng) * (Cos(U) * XDirection() +
     // Sin(U) * YDirection())
 
     // D2U =
     //(Radius + V*Sin(SAng)) * (-Cos(U) * XDirection() - Sin(U) * YDirection())
 
-    // D2V = 0.0   
+    // D2V = 0.0
 
-    // DUV = 
-    //Sin(SAng) * (-Sin(U) * XDirection() + Cos(U) * YDirection()) 
+    // DUV =
+    // Sin(SAng) * (-Sin(U) * XDirection() + Cos(U) * YDirection())
 
     // D3U =
     //(Radius + V*Sin(SAng)) * (Sin(U) * XDirection() - Cos(U) * YDirection())
@@ -1010,7 +877,6 @@ void ElSLib::ConeD3(const Standard_Real U,
     // D3V = 0.0
 
     // DUUV =  Sin(SAng) * (-Cos(U)*XDirection()-Sin(U) * YDirection()) +
-
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -1067,16 +933,9 @@ void ElSLib::ConeD3(const Standard_Real U,
     Vuuv.SetZ(-Som2Z);
 }
 
-void ElSLib::CylinderD3(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P,
-    gp_Vec& Vu, gp_Vec& Vv,
-    gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv,
-    gp_Vec& Vuuu, gp_Vec& Vvvv,
-    gp_Vec& Vuuv, gp_Vec& Vuvv)
-{
+void ElSLib::CylinderD3(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                        gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv, gp_Vec& Vuuu,
+                        gp_Vec& Vvvv, gp_Vec& Vuuv, gp_Vec& Vuvv) {
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
     const gp_XYZ& ZDir = Pos.Direction().XYZ();
@@ -1121,16 +980,9 @@ void ElSLib::CylinderD3(const Standard_Real U,
     Vuuv.SetZ(0.0);
 }
 
-void ElSLib::SphereD3(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    gp_Pnt& P,
-    gp_Vec& Vu, gp_Vec& Vv,
-    gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv,
-    gp_Vec& Vuuu, gp_Vec& Vvvv,
-    gp_Vec& Vuuv, gp_Vec& Vuvv)
-{
+void ElSLib::SphereD3(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real Radius,
+                      gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv, gp_Vec& Vuuu,
+                      gp_Vec& Vvvv, gp_Vec& Vuuv, gp_Vec& Vuvv) {
 
     // Vxy = CosU * XDirection + SinU * YDirection
     // DVxy = -SinU * XDirection + CosU * YDirection
@@ -1214,47 +1066,39 @@ void ElSLib::SphereD3(const Standard_Real U,
     Vuuv.SetZ(Som3Z);
 }
 
-void ElSLib::TorusD3(const Standard_Real U,
-    const Standard_Real V,
-    const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    gp_Pnt& P,
-    gp_Vec& Vu, gp_Vec& Vv,
-    gp_Vec& Vuu, gp_Vec& Vvv, gp_Vec& Vuv,
-    gp_Vec& Vuuu, gp_Vec& Vvvv,
-    gp_Vec& Vuuv, gp_Vec& Vuvv)
-{
+void ElSLib::TorusD3(const Standard_Real U, const Standard_Real V, const gp_Ax3& Pos, const Standard_Real MajorRadius,
+                     const Standard_Real MinorRadius, gp_Pnt& P, gp_Vec& Vu, gp_Vec& Vv, gp_Vec& Vuu, gp_Vec& Vvv,
+                     gp_Vec& Vuv, gp_Vec& Vuuu, gp_Vec& Vvvv, gp_Vec& Vuuv, gp_Vec& Vuvv) {
 
-    //P(U,V) = 
-    //  Location +
-    //  (MajorRadius+MinorRadius*Cos(V)) * 
-    //  (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //   MinorRadius * Sin(V) * Direction
+    // P(U,V) =
+    //   Location +
+    //   (MajorRadius+MinorRadius*Cos(V)) *
+    //   (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //    MinorRadius * Sin(V) * Direction
 
-    //Vv = -MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection) +
-    //     MinorRadius * Cos(V) * Direction
+    // Vv = -MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection) +
+    //      MinorRadius * Cos(V) * Direction
 
-    //Vvv = -MinorRadius * Cos(V) * (Cos(U)*XDirection + Sin(U)*YDirection) 
-    //      -MinorRadius * Sin(V) * Direction
+    // Vvv = -MinorRadius * Cos(V) * (Cos(U)*XDirection + Sin(U)*YDirection)
+    //       -MinorRadius * Sin(V) * Direction
 
-    //Vvvv = - Vv
+    // Vvvv = - Vv
 
-    //Vu =
-    // (MajorRadius+MinorRadius*Cos(V)) *
-    // (-Sin(U)*XDirection + Cos(U)*YDirection)
+    // Vu =
+    //  (MajorRadius+MinorRadius*Cos(V)) *
+    //  (-Sin(U)*XDirection + Cos(U)*YDirection)
 
-    //Vuu =
-    // -(MajorRadius+MinorRadius*Cos(V)) *
-    // (Cos(U)*XDirection + Sin(U)*YDirection)
+    // Vuu =
+    //  -(MajorRadius+MinorRadius*Cos(V)) *
+    //  (Cos(U)*XDirection + Sin(U)*YDirection)
 
-    //Vuuu = -Vu
+    // Vuuu = -Vu
 
-    //Vuv = MinorRadius * Sin(V) * (Sin(U)*XDirection - Cos(U)*YDirection)
+    // Vuv = MinorRadius * Sin(V) * (Sin(U)*XDirection - Cos(U)*YDirection)
 
-    //Vuvv = MinorRadius * Cos(V) * (Sin(U)*XDirection - Cos(U)*YDirection)
+    // Vuvv = MinorRadius * Cos(V) * (Sin(U)*XDirection - Cos(U)*YDirection)
 
-    //Vuuv = MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection)
+    // Vuuv = MinorRadius * Sin(V) * (Cos(U)*XDirection + Sin(U)*YDirection)
 
     const gp_XYZ& XDir = Pos.XDirection().XYZ();
     const gp_XYZ& YDir = Pos.YDirection().XYZ();
@@ -1274,23 +1118,17 @@ void ElSLib::TorusD3(const Standard_Real U,
     //  Modified by skv - Tue Sep  9 15:10:34 2003 OCC620 Begin
     Standard_Real eps = 10. * (MinorRadius + MajorRadius) * RealEpsilon();
 
-    if (Abs(A1) <= eps)
-        A1 = 0.;
+    if (Abs(A1) <= eps) A1 = 0.;
 
-    if (Abs(A2) <= eps)
-        A2 = 0.;
+    if (Abs(A2) <= eps) A2 = 0.;
 
-    if (Abs(A3) <= eps)
-        A3 = 0.;
+    if (Abs(A3) <= eps) A3 = 0.;
 
-    if (Abs(A4) <= eps)
-        A4 = 0.;
+    if (Abs(A4) <= eps) A4 = 0.;
 
-    if (Abs(A5) <= eps)
-        A5 = 0.;
+    if (Abs(A5) <= eps) A5 = 0.;
 
-    if (Abs(A6) <= eps)
-        A6 = 0.;
+    if (Abs(A6) <= eps) A6 = 0.;
     //  Modified by skv - Tue Sep  9 15:10:35 2003 OCC620 End
     Standard_Real Som1X = A1 * XDir.X() + A2 * YDir.X();
     Standard_Real Som1Y = A1 * XDir.Y() + A2 * YDir.Y();
@@ -1340,15 +1178,11 @@ void ElSLib::TorusD3(const Standard_Real U,
 }
 
 //=======================================================================
-//function : PlaneParameters
-//purpose  : 
+// function : PlaneParameters
+// purpose  :
 //=======================================================================
 
-void ElSLib::PlaneParameters(const gp_Ax3& Pos,
-    const gp_Pnt& P,
-    Standard_Real& U,
-    Standard_Real& V)
-{
+void ElSLib::PlaneParameters(const gp_Ax3& Pos, const gp_Pnt& P, Standard_Real& U, Standard_Real& V) {
     gp_Trsf T;
     T.SetTransformation(Pos);
     gp_Pnt Ploc = P.Transformed(T);
@@ -1357,53 +1191,46 @@ void ElSLib::PlaneParameters(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : CylindreParameters
-//purpose  : 
+// function : CylindreParameters
+// purpose  :
 //=======================================================================
 
-void ElSLib::CylinderParameters(const gp_Ax3& Pos,
-    const Standard_Real,
-    const gp_Pnt& P,
-    Standard_Real& U,
-    Standard_Real& V)
-{
+void ElSLib::CylinderParameters(const gp_Ax3& Pos, const Standard_Real, const gp_Pnt& P, Standard_Real& U,
+                                Standard_Real& V) {
     gp_Trsf T;
     T.SetTransformation(Pos);
     gp_Pnt Ploc = P.Transformed(T);
     U = atan2(Ploc.Y(), Ploc.X());
-    if (U < -1.e-16)  U += PIPI;
-    else if (U < 0)        U = 0;
+    if (U < -1.e-16)
+        U += PIPI;
+    else if (U < 0)
+        U = 0;
     V = Ploc.Z();
 }
 
 //=======================================================================
-//function : ConeParameters
-//purpose  : 
+// function : ConeParameters
+// purpose  :
 //=======================================================================
 
-void ElSLib::ConeParameters(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    const gp_Pnt& P,
-    Standard_Real& U,
-    Standard_Real& V)
-{
+void ElSLib::ConeParameters(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real SAngle, const gp_Pnt& P,
+                            Standard_Real& U, Standard_Real& V) {
     gp_Trsf T;
     T.SetTransformation(Pos);
     gp_Pnt Ploc = P.Transformed(T);
 
     if (Ploc.X() == 0.0 && Ploc.Y() == 0.0) {
         U = 0.0;
-    }
-    else if (-Radius > Ploc.Z() * Tan(SAngle)) {
+    } else if (-Radius > Ploc.Z() * Tan(SAngle)) {
         // the point is at the wrong side of the apex
         U = atan2(-Ploc.Y(), -Ploc.X());
-    }
-    else {
+    } else {
         U = atan2(Ploc.Y(), Ploc.X());
     }
-    if (U < -1.e-16)  U += PIPI;
-    else if (U < 0)        U = 0;
+    if (U < -1.e-16)
+        U += PIPI;
+    else if (U < 0)
+        U = 0;
 
     // Evaluate V as follows :
     // P0 = Cone.Value(U,0)
@@ -1414,54 +1241,45 @@ void ElSLib::ConeParameters(const gp_Ax3& Pos,
     // Method that permits to find V of the projected point if the point
     // is not actually on the cone.
 
-    V = sin(SAngle) * (Ploc.X() * cos(U) + Ploc.Y() * sin(U) - Radius)
-        + cos(SAngle) * Ploc.Z();
+    V = sin(SAngle) * (Ploc.X() * cos(U) + Ploc.Y() * sin(U) - Radius) + cos(SAngle) * Ploc.Z();
 }
 
 //=======================================================================
-//function : SphereParameters
-//purpose  : 
+// function : SphereParameters
+// purpose  :
 //=======================================================================
 
-void ElSLib::SphereParameters(const gp_Ax3& Pos,
-    const Standard_Real,
-    const gp_Pnt& P,
-    Standard_Real& U,
-    Standard_Real& V)
-{
+void ElSLib::SphereParameters(const gp_Ax3& Pos, const Standard_Real, const gp_Pnt& P, Standard_Real& U,
+                              Standard_Real& V) {
     gp_Trsf T;
     T.SetTransformation(Pos);
     gp_Pnt Ploc = P.Transformed(T);
     Standard_Real x, y, z;
     Ploc.Coord(x, y, z);
     Standard_Real l = sqrt(x * x + y * y);
-    if (l < gp::Resolution()) {    // point on axis Z of the sphere
+    if (l < gp::Resolution()) { // point on axis Z of the sphere
         if (z > 0.)
             V = M_PI_2; // PI * 0.5
         else
             V = -M_PI_2; // PI * 0.5
         U = 0.;
-    }
-    else {
+    } else {
         V = atan(z / l);
         U = atan2(y, x);
-        if (U < -1.e-16)  U += PIPI;
-        else if (U < 0)        U = 0;
+        if (U < -1.e-16)
+            U += PIPI;
+        else if (U < 0)
+            U = 0;
     }
 }
 
 //=======================================================================
-//function : TorusParameters
-//purpose  : 
+// function : TorusParameters
+// purpose  :
 //=======================================================================
 
-void ElSLib::TorusParameters(const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    const gp_Pnt& P,
-    Standard_Real& U,
-    Standard_Real& V)
-{
+void ElSLib::TorusParameters(const gp_Ax3& Pos, const Standard_Real MajorRadius, const Standard_Real MinorRadius,
+                             const gp_Pnt& P, Standard_Real& U, Standard_Real& V) {
     gp_Trsf Tref;
     Tref.SetTransformation(Pos);
     gp_Pnt Ploc = P.Transformed(Tref);
@@ -1489,36 +1307,33 @@ void ElSLib::TorusParameters(const gp_Ax3& Pos,
         if (AD2 < 0) AD2 = -AD2;
         if (AD2 < AD1) U += M_PI;
     }
-    if (U < -1.e-16)  U += PIPI;
-    else if (U < 0)        U = 0;
+    if (U < -1.e-16)
+        U += PIPI;
+    else if (U < 0)
+        U = 0;
     Standard_Real cosu = cos(U);
     Standard_Real sinu = sin(U);
     gp_Dir dx(cosu, sinu, 0.);
-    gp_XYZ dPV(x - MajorRadius * cosu,
-        y - MajorRadius * sinu,
-        z);
+    gp_XYZ dPV(x - MajorRadius * cosu, y - MajorRadius * sinu, z);
     Standard_Real aMag = dPV.Modulus();
-    if (aMag <= gp::Resolution())
-    {
+    if (aMag <= gp::Resolution()) {
         V = 0.;
-    }
-    else
-    {
+    } else {
         gp_Dir dP(dPV);
         V = dx.AngleWithRef(dP, dx ^ gp::DZ());
     }
-    if (V < -1.e-16)  V += PIPI;
-    else if (V < 0)        V = 0;
+    if (V < -1.e-16)
+        V += PIPI;
+    else if (V < 0)
+        V = 0;
 }
 
 //=======================================================================
-//function : PlaneUIso
-//purpose  : 
+// function : PlaneUIso
+// purpose  :
 //=======================================================================
 
-gp_Lin  ElSLib::PlaneUIso(const gp_Ax3& Pos,
-    const Standard_Real U)
-{
+gp_Lin ElSLib::PlaneUIso(const gp_Ax3& Pos, const Standard_Real U) {
     gp_Lin L(Pos.Location(), Pos.YDirection());
     gp_Vec Ve(Pos.XDirection());
     Ve *= U;
@@ -1527,14 +1342,11 @@ gp_Lin  ElSLib::PlaneUIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : CylinderUIso
-//purpose  : 
+// function : CylinderUIso
+// purpose  :
 //=======================================================================
 
-gp_Lin  ElSLib::CylinderUIso(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real U)
-{
+gp_Lin ElSLib::CylinderUIso(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real U) {
     gp_Pnt P;
     gp_Vec DU, DV;
     CylinderD1(U, 0., Pos, Radius, P, DU, DV);
@@ -1543,15 +1355,12 @@ gp_Lin  ElSLib::CylinderUIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : ConeUIso
-//purpose  : 
+// function : ConeUIso
+// purpose  :
 //=======================================================================
 
-gp_Lin  ElSLib::ConeUIso(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    const Standard_Real U)
-{
+gp_Lin ElSLib::ConeUIso(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real SAngle,
+                        const Standard_Real U) {
     gp_Pnt P;
     gp_Vec DU, DV;
     ConeD1(U, 0, Pos, Radius, SAngle, P, DU, DV);
@@ -1560,42 +1369,32 @@ gp_Lin  ElSLib::ConeUIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : SphereUIso
-//purpose  : 
+// function : SphereUIso
+// purpose  :
 //=======================================================================
 
-gp_Circ  ElSLib::SphereUIso(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real U)
-{
+gp_Circ ElSLib::SphereUIso(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real U) {
     gp_Vec dx = Pos.XDirection();
     gp_Vec dy = Pos.YDirection();
     gp_Dir dz = Pos.Direction();
     gp_Dir cx = cos(U) * dx + sin(U) * dy;
-    gp_Ax2 axes(Pos.Location(),
-        cx.Crossed(dz),
-        cx);
+    gp_Ax2 axes(Pos.Location(), cx.Crossed(dz), cx);
     gp_Circ Circ(axes, Radius);
     return Circ;
 }
 
 //=======================================================================
-//function : TorusUIso
-//purpose  : 
+// function : TorusUIso
+// purpose  :
 //=======================================================================
 
-gp_Circ  ElSLib::TorusUIso(const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    const Standard_Real U)
-{
+gp_Circ ElSLib::TorusUIso(const gp_Ax3& Pos, const Standard_Real MajorRadius, const Standard_Real MinorRadius,
+                          const Standard_Real U) {
     gp_Vec dx = Pos.XDirection();
     gp_Vec dy = Pos.YDirection();
     gp_Dir dz = Pos.Direction();
     gp_Dir cx = cos(U) * dx + sin(U) * dy;
-    gp_Ax2 axes(Pos.Location(),
-        cx.Crossed(dz),
-        cx);
+    gp_Ax2 axes(Pos.Location(), cx.Crossed(dz), cx);
     gp_Vec Ve = cx;
     Ve *= MajorRadius;
     axes.Translate(Ve);
@@ -1604,13 +1403,11 @@ gp_Circ  ElSLib::TorusUIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : PlaneVIso
-//purpose  : 
+// function : PlaneVIso
+// purpose  :
 //=======================================================================
 
-gp_Lin  ElSLib::PlaneVIso(const gp_Ax3& Pos,
-    const Standard_Real V)
-{
+gp_Lin ElSLib::PlaneVIso(const gp_Ax3& Pos, const Standard_Real V) {
     gp_Lin L(Pos.Location(), Pos.XDirection());
     gp_Vec Ve(Pos.YDirection());
     Ve *= V;
@@ -1619,14 +1416,11 @@ gp_Lin  ElSLib::PlaneVIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : CylinderVIso
-//purpose  : 
+// function : CylinderVIso
+// purpose  :
 //=======================================================================
 
-gp_Circ  ElSLib::CylinderVIso(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real V)
-{
+gp_Circ ElSLib::CylinderVIso(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real V) {
     gp_Ax2 axes = Pos.Ax2();
     gp_Vec Ve(Pos.Direction());
     Ve.Multiply(V);
@@ -1636,15 +1430,12 @@ gp_Circ  ElSLib::CylinderVIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : ConeVIso
-//purpose  : 
+// function : ConeVIso
+// purpose  :
 //=======================================================================
 
-gp_Circ  ElSLib::ConeVIso(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real SAngle,
-    const Standard_Real V)
-{
+gp_Circ ElSLib::ConeVIso(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real SAngle,
+                         const Standard_Real V) {
     gp_Ax3 axes(Pos);
     gp_Vec Ve(Pos.Direction());
     Ve.Multiply(V * cos(SAngle));
@@ -1660,14 +1451,11 @@ gp_Circ  ElSLib::ConeVIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : SphereVIso
-//purpose  : 
+// function : SphereVIso
+// purpose  :
 //=======================================================================
 
-gp_Circ  ElSLib::SphereVIso(const gp_Ax3& Pos,
-    const Standard_Real Radius,
-    const Standard_Real V)
-{
+gp_Circ ElSLib::SphereVIso(const gp_Ax3& Pos, const Standard_Real Radius, const Standard_Real V) {
     gp_Ax2 axes = Pos.Ax2();
     gp_Vec Ve(Pos.Direction());
     Ve.Multiply(Radius * sin(V));
@@ -1676,8 +1464,7 @@ gp_Circ  ElSLib::SphereVIso(const gp_Ax3& Pos,
     // #23170: if V is even slightly (e.g. by double epsilon) greater than PI/2,
     // radius will become negative and constructor of gp_Circ will raise exception.
     // Lets try to create correct isoline even on analytical continuation for |V| > PI/2...
-    if (radius < 0.)
-    {
+    if (radius < 0.) {
         axes.SetDirection(-axes.Direction());
         radius = -radius;
     }
@@ -1686,15 +1473,12 @@ gp_Circ  ElSLib::SphereVIso(const gp_Ax3& Pos,
 }
 
 //=======================================================================
-//function : TorusVIso
-//purpose  : 
+// function : TorusVIso
+// purpose  :
 //=======================================================================
 
-gp_Circ  ElSLib::TorusVIso(const gp_Ax3& Pos,
-    const Standard_Real MajorRadius,
-    const Standard_Real MinorRadius,
-    const Standard_Real V)
-{
+gp_Circ ElSLib::TorusVIso(const gp_Ax3& Pos, const Standard_Real MajorRadius, const Standard_Real MinorRadius,
+                          const Standard_Real V) {
     gp_Ax3 axes = Pos.Ax2();
     gp_Vec Ve(Pos.Direction());
     Ve.Multiply(MinorRadius * sin(V));
@@ -1708,4 +1492,3 @@ gp_Circ  ElSLib::TorusVIso(const gp_Ax3& Pos,
     gp_Circ Circ(axes.Ax2(), R);
     return Circ;
 }
-

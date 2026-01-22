@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<Handle(StepRepr_RepresentationItem)> StepRepr_SequenceOfRepresentationItem;
 
-
 #endif

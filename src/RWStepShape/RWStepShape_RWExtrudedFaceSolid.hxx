@@ -28,44 +28,22 @@ class StepShape_ExtrudedFaceSolid;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ExtrudedFaceSolid
-class RWStepShape_RWExtrudedFaceSolid 
-{
+class RWStepShape_RWExtrudedFaceSolid {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWExtrudedFaceSolid();
 
-  
-  Standard_EXPORT RWStepShape_RWExtrudedFaceSolid();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ExtrudedFaceSolid)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ExtrudedFaceSolid)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_ExtrudedFaceSolid)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_ExtrudedFaceSolid) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_ExtrudedFaceSolid) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_ExtrudedFaceSolid) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWExtrudedFaceSolid_HeaderFile

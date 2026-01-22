@@ -26,7 +26,6 @@
 #include <Standard_Boolean.hxx>
 class SelectMgr_EntityOwner;
 
-
 class AIS_SignatureFilter;
 DEFINE_STANDARD_HANDLE(AIS_SignatureFilter, AIS_TypeFilter)
 
@@ -57,44 +56,24 @@ DEFINE_STANDARD_HANDLE(AIS_SignatureFilter, AIS_TypeFilter)
 //! -   signature 5 - Line
 //! -   signature 6 - Circle
 //! -   signature 7 - Plane
-class AIS_SignatureFilter : public AIS_TypeFilter
-{
+class AIS_SignatureFilter : public AIS_TypeFilter {
 
 public:
+    //! Initializes the signature filter, adding the signature
+    //! specification, aGivenSignature, to that for type,
+    //! aGivenKind, in AIS_TypeFilter.
+    Standard_EXPORT AIS_SignatureFilter(const AIS_KindOfInteractive aGivenKind, const Standard_Integer aGivenSignature);
 
-  
-  //! Initializes the signature filter, adding the signature
-  //! specification, aGivenSignature, to that for type,
-  //! aGivenKind, in AIS_TypeFilter.
-  Standard_EXPORT AIS_SignatureFilter(const AIS_KindOfInteractive aGivenKind, const Standard_Integer aGivenSignature);
-  
-  //! Returns False if the transient is not an AIS_InteractiveObject.
-  //! Returns False if the signature of InteractiveObject
-  //! is not the same as the stored one in the filter...
-  Standard_EXPORT Standard_Boolean IsOk (const Handle(SelectMgr_EntityOwner)& anobj) const Standard_OVERRIDE;
+    //! Returns False if the transient is not an AIS_InteractiveObject.
+    //! Returns False if the signature of InteractiveObject
+    //! is not the same as the stored one in the filter...
+    Standard_EXPORT Standard_Boolean IsOk(const Handle(SelectMgr_EntityOwner) & anobj) const Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(AIS_SignatureFilter,AIS_TypeFilter)
+    DEFINE_STANDARD_RTTIEXT(AIS_SignatureFilter, AIS_TypeFilter)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer mySig;
-
-
+    Standard_Integer mySig;
 };
-
-
-
-
-
-
 
 #endif // _AIS_SignatureFilter_HeaderFile

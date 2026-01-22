@@ -12,7 +12,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//JCV 16/10/91
+// JCV 16/10/91
 
 #include <Convert_HyperbolaToBSplineCurve.hxx>
 #include <gp.hxx>
@@ -30,21 +30,16 @@ static Standard_Integer TheDegree = 2;
 static Standard_Integer MaxNbKnots = 2;
 static Standard_Integer MaxNbPoles = 3;
 
-
 //=======================================================================
-//function : Convert_HyperbolaToBSplineCurve
-//purpose  : 
+// function : Convert_HyperbolaToBSplineCurve
+// purpose  :
 //=======================================================================
 
-Convert_HyperbolaToBSplineCurve::Convert_HyperbolaToBSplineCurve
-(const gp_Hypr2d& H,
-    const Standard_Real U1,
-    const Standard_Real U2)
+Convert_HyperbolaToBSplineCurve::Convert_HyperbolaToBSplineCurve(const gp_Hypr2d& H, const Standard_Real U1,
+                                                                 const Standard_Real U2)
 
-    : Convert_ConicToBSplineCurve(MaxNbPoles, MaxNbKnots, TheDegree)
-{
-    Standard_DomainError_Raise_if(Abs(U2 - U1) < Epsilon(0.),
-        "Convert_ParabolaToBSplineCurve");
+    : Convert_ConicToBSplineCurve(MaxNbPoles, MaxNbKnots, TheDegree) {
+    Standard_DomainError_Raise_if(Abs(U2 - U1) < Epsilon(0.), "Convert_ParabolaToBSplineCurve");
 
     Standard_Real UF = Min(U1, U2);
     Standard_Real UL = Max(U1, U2);
@@ -52,8 +47,10 @@ Convert_HyperbolaToBSplineCurve::Convert_HyperbolaToBSplineCurve
     nbPoles = 3;
     nbKnots = 2;
     isperiodic = Standard_False;
-    knots->ChangeArray1()(1) = UF;  mults->ChangeArray1()(1) = 3;
-    knots->ChangeArray1()(2) = UL;  mults->ChangeArray1()(2) = 3;
+    knots->ChangeArray1()(1) = UF;
+    mults->ChangeArray1()(1) = 3;
+    knots->ChangeArray1()(2) = UL;
+    mults->ChangeArray1()(2) = 3;
 
     // construction of hyperbola in the reference xOy.
 

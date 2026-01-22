@@ -24,58 +24,37 @@
 class StepBasic_ExternalSource;
 class StepBasic_SourceItem;
 
-
 class StepBasic_ExternallyDefinedItem;
 DEFINE_STANDARD_HANDLE(StepBasic_ExternallyDefinedItem, Standard_Transient)
 
 //! Representation of STEP entity ExternallyDefinedItem
-class StepBasic_ExternallyDefinedItem : public Standard_Transient
-{
+class StepBasic_ExternallyDefinedItem : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_ExternallyDefinedItem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_ExternallyDefinedItem();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const StepBasic_SourceItem& aItemId, const Handle(StepBasic_ExternalSource)& aSource);
-  
-  //! Returns field ItemId
-  Standard_EXPORT StepBasic_SourceItem ItemId() const;
-  
-  //! Set field ItemId
-  Standard_EXPORT void SetItemId (const StepBasic_SourceItem& ItemId);
-  
-  //! Returns field Source
-  Standard_EXPORT Handle(StepBasic_ExternalSource) Source() const;
-  
-  //! Set field Source
-  Standard_EXPORT void SetSource (const Handle(StepBasic_ExternalSource)& Source);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const StepBasic_SourceItem& aItemId, const Handle(StepBasic_ExternalSource) & aSource);
 
+    //! Returns field ItemId
+    Standard_EXPORT StepBasic_SourceItem ItemId() const;
 
+    //! Set field ItemId
+    Standard_EXPORT void SetItemId(const StepBasic_SourceItem& ItemId);
 
+    //! Returns field Source
+    Standard_EXPORT Handle(StepBasic_ExternalSource) Source() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepBasic_ExternallyDefinedItem,Standard_Transient)
+    //! Set field Source
+    Standard_EXPORT void SetSource(const Handle(StepBasic_ExternalSource) & Source);
+
+    DEFINE_STANDARD_RTTIEXT(StepBasic_ExternallyDefinedItem, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  StepBasic_SourceItem theItemId;
-  Handle(StepBasic_ExternalSource) theSource;
-
-
+    StepBasic_SourceItem theItemId;
+    Handle(StepBasic_ExternalSource) theSource;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_ExternallyDefinedItem_HeaderFile

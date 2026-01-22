@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,TopOpeBRepDS_PointData,TColStd_MapIntegerHasher> TopOpeBRepDS_MapOfPoint;
-typedef NCollection_DataMap<Standard_Integer,TopOpeBRepDS_PointData,TColStd_MapIntegerHasher>::Iterator TopOpeBRepDS_DataMapIteratorOfMapOfPoint;
-
+typedef NCollection_DataMap<Standard_Integer, TopOpeBRepDS_PointData, TColStd_MapIntegerHasher> TopOpeBRepDS_MapOfPoint;
+typedef NCollection_DataMap<Standard_Integer, TopOpeBRepDS_PointData, TColStd_MapIntegerHasher>::Iterator
+    TopOpeBRepDS_DataMapIteratorOfMapOfPoint;
 
 #endif

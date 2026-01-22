@@ -30,19 +30,15 @@ class Standard_NullObject;
 class OSD_OSDError;
 class TCollection_AsciiString;
 
-
 //! Management of system environment variables
 //! An environment variable is composed of a variable name
 //! and its value.
 //!
 //! To be portable among various systems, environment variables
 //! are local to a process.
-class OSD_Environment
-{
+class OSD_Environment {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Creates the object Environment.
     Standard_EXPORT OSD_Environment();
@@ -91,30 +87,11 @@ public:
     //! Returns error number if 'Failed' is TRUE.
     Standard_EXPORT Standard_Integer Error() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TCollection_AsciiString myName;
     TCollection_AsciiString myValue;
     OSD_Error myError;
-
-
 };
-
-
-
-
-
-
 
 #endif // _OSD_Environment_HeaderFile

@@ -24,51 +24,31 @@
 #include <StepBasic_ApprovalAssignment.hxx>
 class StepBasic_Approval;
 
-
 class StepAP203_CcDesignApproval;
 DEFINE_STANDARD_HANDLE(StepAP203_CcDesignApproval, StepBasic_ApprovalAssignment)
 
 //! Representation of STEP entity CcDesignApproval
-class StepAP203_CcDesignApproval : public StepBasic_ApprovalAssignment
-{
+class StepAP203_CcDesignApproval : public StepBasic_ApprovalAssignment {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepAP203_CcDesignApproval();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepAP203_CcDesignApproval();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(StepBasic_Approval)& aApprovalAssignment_AssignedApproval, const Handle(StepAP203_HArray1OfApprovedItem)& aItems);
-  
-  //! Returns field Items
-  Standard_EXPORT Handle(StepAP203_HArray1OfApprovedItem) Items() const;
-  
-  //! Set field Items
-  Standard_EXPORT void SetItems (const Handle(StepAP203_HArray1OfApprovedItem)& Items);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(StepBasic_Approval) & aApprovalAssignment_AssignedApproval,
+                              const Handle(StepAP203_HArray1OfApprovedItem) & aItems);
 
+    //! Returns field Items
+    Standard_EXPORT Handle(StepAP203_HArray1OfApprovedItem) Items() const;
 
+    //! Set field Items
+    Standard_EXPORT void SetItems(const Handle(StepAP203_HArray1OfApprovedItem) & Items);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepAP203_CcDesignApproval,StepBasic_ApprovalAssignment)
+    DEFINE_STANDARD_RTTIEXT(StepAP203_CcDesignApproval, StepBasic_ApprovalAssignment)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepAP203_HArray1OfApprovedItem) theItems;
-
-
+    Handle(StepAP203_HArray1OfApprovedItem) theItems;
 };
-
-
-
-
-
-
 
 #endif // _StepAP203_CcDesignApproval_HeaderFile

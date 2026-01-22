@@ -24,204 +24,163 @@ IMPLEMENT_STANDARD_RTTIEXT(RWObj_TriangulationReader, RWObj_Reader)
 // Function : addMesh
 // Purpose  :
 //================================================================
-Standard_Boolean RWObj_TriangulationReader::addMesh (const RWObj_SubMesh& theMesh,
-                                                     const RWObj_SubMeshReason theReason)
-{
-  if (!myToCreateShapes)
-  {
-    return Standard_False;
-  }
+Standard_Boolean RWObj_TriangulationReader::addMesh(const RWObj_SubMesh& theMesh, const RWObj_SubMeshReason theReason) {
+    if (!myToCreateShapes) {
+        return Standard_False;
+    }
 
-  if (Handle(Poly_Triangulation) aTris = GetTriangulation())
-  {
-    myNodes.Clear();
-    myNodesUV.Clear();
-    myNormals.Clear();
-    myTriangles.Clear();
-    if (theMesh.Group != myLastGroupName)
-    {
-      // flush previous group and start a new one
-      if (addSubShape (myLastObjectShape, myLastGroupShape, Standard_False))
-      {
-        if (myShapeReceiver != NULL)
-        {
-          const RWObj_Material* aMaterial = myLastGroupShape.ShapeType() == TopAbs_FACE
-                                        && !myLastFaceMaterial.IsEmpty()
-                                          ? myMaterials.Seek (myLastFaceMaterial)
-                                          : NULL;
-          myShapeReceiver->BindNamedShape (myLastGroupShape, myLastGroupName, aMaterial, Standard_False);
+    if (Handle(Poly_Triangulation) aTris = GetTriangulation()) {
+        myNodes.Clear();
+        myNodesUV.Clear();
+        myNormals.Clear();
+        myTriangles.Clear();
+        if (theMesh.Group != myLastGroupName) {
+            // flush previous group and start a new one
+            if (addSubShape(myLastObjectShape, myLastGroupShape, Standard_False)) {
+                if (myShapeReceiver != NULL) {
+                    const RWObj_Material* aMaterial =
+                        myLastGroupShape.ShapeType() == TopAbs_FACE && !myLastFaceMaterial.IsEmpty()
+                            ? myMaterials.Seek(myLastFaceMaterial)
+                            : NULL;
+                    myShapeReceiver->BindNamedShape(myLastGroupShape, myLastGroupName, aMaterial, Standard_False);
+                }
+            }
+            myLastGroupShape = TopoDS_Shape();
+            myLastGroupName = theMesh.Group;
         }
-      }
-      myLastGroupShape = TopoDS_Shape();
-      myLastGroupName = theMesh.Group;
+
+        TopoDS_Face aNewFace;
+        BRep_Builder aBuilder;
+        aBuilder.MakeFace(aNewFace, aTris);
+        addSubShape(myLastGroupShape, aNewFace, Standard_True);
+        myLastFaceMaterial = theMesh.Material;
+        if (myShapeReceiver != NULL) {
+            const RWObj_Material* aMaterial = myMaterials.Seek(theMesh.Material);
+            myShapeReceiver->BindNamedShape(aNewFace, "", aMaterial, Standard_False);
+        }
     }
 
-    TopoDS_Face aNewFace;
-    BRep_Builder aBuilder;
-    aBuilder.MakeFace (aNewFace, aTris);
-    addSubShape (myLastGroupShape, aNewFace, Standard_True);
-    myLastFaceMaterial = theMesh.Material;
-    if (myShapeReceiver != NULL)
-    {
-      const RWObj_Material* aMaterial = myMaterials.Seek (theMesh.Material);
-      myShapeReceiver->BindNamedShape (aNewFace, "", aMaterial, Standard_False);
-    }
-  }
+    if (theReason == RWObj_SubMeshReason_NewObject) {
+        // forced flush at the end of the object
+        if (addSubShape(myLastObjectShape, myLastGroupShape, Standard_False)) {
+            if (myShapeReceiver != NULL) {
+                const RWObj_Material* aMaterial =
+                    myLastGroupShape.ShapeType() == TopAbs_FACE && !myLastFaceMaterial.IsEmpty()
+                        ? myMaterials.Seek(myLastFaceMaterial)
+                        : NULL;
+                myShapeReceiver->BindNamedShape(myLastGroupShape, myLastGroupName, aMaterial, Standard_False);
+            }
+        }
+        myLastGroupShape = TopoDS_Shape();
+        myLastGroupName.Clear();
 
-  if (theReason == RWObj_SubMeshReason_NewObject)
-  {
-    // forced flush at the end of the object
-    if (addSubShape (myLastObjectShape, myLastGroupShape, Standard_False))
-    {
-      if (myShapeReceiver != NULL)
-      {
-        const RWObj_Material* aMaterial = myLastGroupShape.ShapeType() == TopAbs_FACE
-                                          && !myLastFaceMaterial.IsEmpty()
-                                            ? myMaterials.Seek (myLastFaceMaterial)
-                                            : NULL;
-        myShapeReceiver->BindNamedShape (myLastGroupShape, myLastGroupName, aMaterial, Standard_False);
-      }
+        if (addSubShape(myResultShape, myLastObjectShape, Standard_False)) {
+            if (myShapeReceiver != NULL) {
+                myShapeReceiver->BindNamedShape(myLastObjectShape, theMesh.Object, NULL, Standard_True);
+            }
+        }
+        myLastObjectShape = TopoDS_Compound();
     }
-    myLastGroupShape = TopoDS_Shape();
-    myLastGroupName.Clear();
-
-    if (addSubShape (myResultShape, myLastObjectShape, Standard_False))
-    {
-      if (myShapeReceiver != NULL)
-      {
-        myShapeReceiver->BindNamedShape (myLastObjectShape, theMesh.Object, NULL, Standard_True);
-      }
-    }
-    myLastObjectShape = TopoDS_Compound();
-  }
-  return Standard_True;
+    return Standard_True;
 }
 
 // =======================================================================
 // function : addSubShape
 // purpose  :
 // =======================================================================
-Standard_Boolean RWObj_TriangulationReader::addSubShape (TopoDS_Shape& theParent,
-                                                         const TopoDS_Shape& theSubShape,
-                                                         const Standard_Boolean theToExpandCompound)
-{
-  if (theSubShape.IsNull())
-  {
-    return Standard_False;
-  }
-
-  BRep_Builder aBuilder;
-  if (theParent.IsNull()
-   && theToExpandCompound)
-  {
-    theParent = theSubShape;
-    return Standard_True;
-  }
-
-  TopoDS_Compound aComp;
-  if (!theParent.IsNull()
-    && theParent.ShapeType() == TopAbs_COMPOUND)
-  {
-    aComp = TopoDS::Compound (theParent);
-  }
-  else
-  {
-    aBuilder.MakeCompound (aComp);
-    if (!theParent.IsNull())
-    {
-      aBuilder.Add (aComp, theParent);
+Standard_Boolean RWObj_TriangulationReader::addSubShape(TopoDS_Shape& theParent, const TopoDS_Shape& theSubShape,
+                                                        const Standard_Boolean theToExpandCompound) {
+    if (theSubShape.IsNull()) {
+        return Standard_False;
     }
-  }
-  aBuilder.Add (aComp, theSubShape);
-  theParent = aComp;
-  return Standard_True;
+
+    BRep_Builder aBuilder;
+    if (theParent.IsNull() && theToExpandCompound) {
+        theParent = theSubShape;
+        return Standard_True;
+    }
+
+    TopoDS_Compound aComp;
+    if (!theParent.IsNull() && theParent.ShapeType() == TopAbs_COMPOUND) {
+        aComp = TopoDS::Compound(theParent);
+    } else {
+        aBuilder.MakeCompound(aComp);
+        if (!theParent.IsNull()) {
+            aBuilder.Add(aComp, theParent);
+        }
+    }
+    aBuilder.Add(aComp, theSubShape);
+    theParent = aComp;
+    return Standard_True;
 }
 
 //=============================================================================
-//function : GetTriangulation
-//purpose  :
+// function : GetTriangulation
+// purpose  :
 //=============================================================================
-Handle(Poly_Triangulation) RWObj_TriangulationReader::GetTriangulation()
-{
-  if (myTriangles.IsEmpty())
-  {
-    return Handle(Poly_Triangulation)();
-  }
-
-  const Standard_Boolean hasNormals = myNodes.Length() == myNormals.Length();
-  const Standard_Boolean hasUV      = myNodes.Length() == myNodesUV.Length();
-
-  Handle(Poly_Triangulation) aPoly = new Poly_Triangulation (myNodes.Length(), myTriangles.Length(), hasUV);
-  for (Standard_Integer aNodeIter = 0; aNodeIter < myNodes.Size(); ++aNodeIter)
-  {
-    const gp_Pnt& aNode = myNodes.Value (aNodeIter);
-    aPoly->SetNode (aNodeIter + 1, aNode);
-  }
-  if (hasUV)
-  {
-    for (Standard_Integer aNodeIter = 0; aNodeIter < myNodes.Size(); ++aNodeIter)
-    {
-      const Graphic3d_Vec2& aNode = myNodesUV.Value (aNodeIter);
-      aPoly->SetUVNode (aNodeIter + 1, gp_Pnt2d (aNode.x(), aNode.y()));
+Handle(Poly_Triangulation) RWObj_TriangulationReader::GetTriangulation() {
+    if (myTriangles.IsEmpty()) {
+        return Handle(Poly_Triangulation)();
     }
-  }
-  if (hasNormals)
-  {
-    aPoly->AddNormals();
-    Standard_Integer aNbInvalid = 0;
-    for (Standard_Integer aNodeIter = 0; aNodeIter < myNodes.Size(); ++aNodeIter)
-    {
-      const Graphic3d_Vec3& aNorm = myNormals.Value (aNodeIter);
-      const float aMod2 = aNorm.SquareModulus();
-      if (aMod2 > 0.001f)
-      {
-        aPoly->SetNormal (aNodeIter + 1, aNorm);
-      }
-      else
-      {
-        ++aNbInvalid;
-        aPoly->SetNormal (aNodeIter + 1, Graphic3d_Vec3 (0.0f, 0.0f, 1.0f));
-      }
-    }
-    if (aNbInvalid == myNodes.Length())
-    {
-      aPoly->RemoveNormals();
-    }
-  }
 
-  for (Standard_Integer aTriIter = 0; aTriIter < myTriangles.Size(); ++aTriIter)
-  {
-    aPoly->SetTriangle (aTriIter + 1, myTriangles[aTriIter]);
-  }
+    const Standard_Boolean hasNormals = myNodes.Length() == myNormals.Length();
+    const Standard_Boolean hasUV = myNodes.Length() == myNodesUV.Length();
 
-  return aPoly;
+    Handle(Poly_Triangulation) aPoly = new Poly_Triangulation(myNodes.Length(), myTriangles.Length(), hasUV);
+    for (Standard_Integer aNodeIter = 0; aNodeIter < myNodes.Size(); ++aNodeIter) {
+        const gp_Pnt& aNode = myNodes.Value(aNodeIter);
+        aPoly->SetNode(aNodeIter + 1, aNode);
+    }
+    if (hasUV) {
+        for (Standard_Integer aNodeIter = 0; aNodeIter < myNodes.Size(); ++aNodeIter) {
+            const Graphic3d_Vec2& aNode = myNodesUV.Value(aNodeIter);
+            aPoly->SetUVNode(aNodeIter + 1, gp_Pnt2d(aNode.x(), aNode.y()));
+        }
+    }
+    if (hasNormals) {
+        aPoly->AddNormals();
+        Standard_Integer aNbInvalid = 0;
+        for (Standard_Integer aNodeIter = 0; aNodeIter < myNodes.Size(); ++aNodeIter) {
+            const Graphic3d_Vec3& aNorm = myNormals.Value(aNodeIter);
+            const float aMod2 = aNorm.SquareModulus();
+            if (aMod2 > 0.001f) {
+                aPoly->SetNormal(aNodeIter + 1, aNorm);
+            } else {
+                ++aNbInvalid;
+                aPoly->SetNormal(aNodeIter + 1, Graphic3d_Vec3(0.0f, 0.0f, 1.0f));
+            }
+        }
+        if (aNbInvalid == myNodes.Length()) {
+            aPoly->RemoveNormals();
+        }
+    }
+
+    for (Standard_Integer aTriIter = 0; aTriIter < myTriangles.Size(); ++aTriIter) {
+        aPoly->SetTriangle(aTriIter + 1, myTriangles[aTriIter]);
+    }
+
+    return aPoly;
 }
 
 //================================================================
 // Function : ResultShape
 // Purpose  :
 //================================================================
-TopoDS_Shape RWObj_TriangulationReader::ResultShape()
-{
-  if (!myToCreateShapes)
-  {
-    if (Handle(Poly_Triangulation) aTris = GetTriangulation())
-    {
-      TopoDS_Face aFace;
-      BRep_Builder aBuilder;
-      aBuilder.MakeFace (aFace, aTris);
-      return aFace;
+TopoDS_Shape RWObj_TriangulationReader::ResultShape() {
+    if (!myToCreateShapes) {
+        if (Handle(Poly_Triangulation) aTris = GetTriangulation()) {
+            TopoDS_Face aFace;
+            BRep_Builder aBuilder;
+            aBuilder.MakeFace(aFace, aTris);
+            return aFace;
+        }
+        return TopoDS_Shape();
     }
-    return TopoDS_Shape();
-  }
 
-  if (!myResultShape.IsNull()
-    && myResultShape.ShapeType() == TopAbs_COMPOUND
-    && myResultShape.NbChildren() == 1
-    && myActiveSubMesh.Object.IsEmpty())
-  {
-    TopoDS_Iterator aChildIter (myResultShape);
-    return aChildIter.Value();
-  }
-  return myResultShape;
+    if (!myResultShape.IsNull() && myResultShape.ShapeType() == TopAbs_COMPOUND && myResultShape.NbChildren() == 1 &&
+        myActiveSubMesh.Object.IsEmpty()) {
+        TopoDS_Iterator aChildIter(myResultShape);
+        return aChildIter.Value();
+    }
+    return myResultShape;
 }

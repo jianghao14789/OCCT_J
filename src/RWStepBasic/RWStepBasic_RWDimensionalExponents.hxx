@@ -27,42 +27,21 @@ class Interface_Check;
 class StepBasic_DimensionalExponents;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for DimensionalExponents
-class RWStepBasic_RWDimensionalExponents 
-{
+class RWStepBasic_RWDimensionalExponents {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWDimensionalExponents();
 
-  
-  Standard_EXPORT RWStepBasic_RWDimensionalExponents();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_DimensionalExponents)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_DimensionalExponents)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_DimensionalExponents) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_DimensionalExponents) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWDimensionalExponents_HeaderFile

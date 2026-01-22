@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(TopOpeBRepDS_Interference)> TopOpeBRepDS_ListOfInterference;
 typedef NCollection_List<Handle(TopOpeBRepDS_Interference)>::Iterator TopOpeBRepDS_ListIteratorOfListOfInterference;
 
-
 #endif

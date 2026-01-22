@@ -22,83 +22,69 @@
 //! Structure storing meshing parameters
 struct IMeshTools_Parameters {
 
-  //! Default constructor
-  IMeshTools_Parameters ()
-    :
-    MeshAlgo (IMeshTools_MeshAlgoType_DEFAULT),
-    Angle(0.5),
-    Deflection(0.001),
-    AngleInterior(-1.0),
-    DeflectionInterior(-1.0),
-    MinSize (-1.0),
-    InParallel (Standard_False),
-    Relative (Standard_False),
-    InternalVerticesMode (Standard_True),
-    ControlSurfaceDeflection (Standard_True),
-    CleanModel (Standard_True),
-    AdjustMinSize (Standard_False),
-    ForceFaceDeflection (Standard_False),
-    AllowQualityDecrease (Standard_False)
-  {
-  }
+    //! Default constructor
+    IMeshTools_Parameters()
+        : MeshAlgo(IMeshTools_MeshAlgoType_DEFAULT), Angle(0.5), Deflection(0.001), AngleInterior(-1.0),
+          DeflectionInterior(-1.0), MinSize(-1.0), InParallel(Standard_False), Relative(Standard_False),
+          InternalVerticesMode(Standard_True), ControlSurfaceDeflection(Standard_True), CleanModel(Standard_True),
+          AdjustMinSize(Standard_False), ForceFaceDeflection(Standard_False), AllowQualityDecrease(Standard_False) {}
 
-  //! Returns factor used to compute default value of MinSize 
-  //! (minimum mesh edge length) from deflection
-  static Standard_Real RelMinSize()
-  {
-    return 0.1;
-  }
+    //! Returns factor used to compute default value of MinSize
+    //! (minimum mesh edge length) from deflection
+    static Standard_Real RelMinSize() {
+        return 0.1;
+    }
 
-  //! 2D Delaunay triangulation algorithm factory to use
-  IMeshTools_MeshAlgoType                          MeshAlgo;
+    //! 2D Delaunay triangulation algorithm factory to use
+    IMeshTools_MeshAlgoType MeshAlgo;
 
-  //! Angular deflection used to tessellate the boundary edges
-  Standard_Real                                    Angle;
+    //! Angular deflection used to tessellate the boundary edges
+    Standard_Real Angle;
 
-  //!Linear deflection used to tessellate the boundary edges
-  Standard_Real                                    Deflection;
-  
-  //! Angular deflection used to tessellate the face interior
-  Standard_Real                                    AngleInterior;
+    //! Linear deflection used to tessellate the boundary edges
+    Standard_Real Deflection;
 
-  //! Linear deflection used to tessellate the face interior
-  Standard_Real                                    DeflectionInterior;
-  
-  //! Minimum size parameter limiting size of triangle's edges to prevent 
-  //! sinking into amplification in case of distorted curves and surfaces.
-  Standard_Real                                    MinSize;
+    //! Angular deflection used to tessellate the face interior
+    Standard_Real AngleInterior;
 
-  //! Switches on/off multi-thread computation
-  Standard_Boolean                                 InParallel;
+    //! Linear deflection used to tessellate the face interior
+    Standard_Real DeflectionInterior;
 
-  //! Switches on/off relative computation of edge tolerance<br>
-  //! If true, deflection used for the polygonalisation of each edge will be 
-  //! <defle> * Size of Edge. The deflection used for the faces will be the 
-  //! maximum deflection of their edges.
-  Standard_Boolean                                 Relative;
+    //! Minimum size parameter limiting size of triangle's edges to prevent
+    //! sinking into amplification in case of distorted curves and surfaces.
+    Standard_Real MinSize;
 
-  //! Mode to take or not to take internal face vertices into account
-  //! in triangulation process
-  Standard_Boolean                                 InternalVerticesMode;
+    //! Switches on/off multi-thread computation
+    Standard_Boolean InParallel;
 
-  //! Parameter to check the deviation of triangulation and interior of
-  //! the face
-  Standard_Boolean                                 ControlSurfaceDeflection;
+    //! Switches on/off relative computation of edge tolerance<br>
+    //! If true, deflection used for the polygonalisation of each edge will be
+    //! <defle> * Size of Edge. The deflection used for the faces will be the
+    //! maximum deflection of their edges.
+    Standard_Boolean Relative;
 
-  //! Cleans temporary data model when algorithm is finished.
-  Standard_Boolean                                 CleanModel;
+    //! Mode to take or not to take internal face vertices into account
+    //! in triangulation process
+    Standard_Boolean InternalVerticesMode;
 
-  //! Enables/disables local adjustment of min size depending on edge size.
-  //! Disabled by default.
-  Standard_Boolean                                 AdjustMinSize;
+    //! Parameter to check the deviation of triangulation and interior of
+    //! the face
+    Standard_Boolean ControlSurfaceDeflection;
 
-  //! Enables/disables usage of shape tolerances for computing face deflection.
-  //! Disabled by default.
-  Standard_Boolean                                 ForceFaceDeflection;
+    //! Cleans temporary data model when algorithm is finished.
+    Standard_Boolean CleanModel;
 
-  //! Allows/forbids the decrease of the quality of the generated mesh
-  //! over the existing one.
-  Standard_Boolean                                 AllowQualityDecrease;
+    //! Enables/disables local adjustment of min size depending on edge size.
+    //! Disabled by default.
+    Standard_Boolean AdjustMinSize;
+
+    //! Enables/disables usage of shape tolerances for computing face deflection.
+    //! Disabled by default.
+    Standard_Boolean ForceFaceDeflection;
+
+    //! Allows/forbids the decrease of the quality of the generated mesh
+    //! over the existing one.
+    Standard_Boolean AllowQualityDecrease;
 };
 
 #endif

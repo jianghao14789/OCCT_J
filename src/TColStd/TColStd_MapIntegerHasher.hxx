@@ -20,5 +20,4 @@
 
 typedef NCollection_DefaultHasher<Standard_Integer> TColStd_MapIntegerHasher;
 
-
 #endif

@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _StdLPersistent_Void_HeaderFile
 #define _StdLPersistent_Void_HeaderFile
 
@@ -21,43 +20,39 @@
 #include <TDataStd_Tick.hxx>
 #include <TDataStd_NoteBook.hxx>
 
-
-class StdLPersistent_Void
-{
+class StdLPersistent_Void {
 protected:
-  template <class AttribClass>
-  class instance : public StdObjMgt_Attribute<AttribClass>::Static
-  {
-  public:
-    //! Read persistent data from a file.
-    virtual void Read (StdObjMgt_ReadData&) {}
-    //! Write persistent data to a file.
-    virtual void Write (StdObjMgt_WriteData&) const {}
-    //! Gets persistent child objects
-    inline void PChildren(StdObjMgt_Persistent::SequenceOfPersistent&) const {}
-    //! Returns persistent type name
-    Standard_CString PName() const;
+    template <class AttribClass> class instance : public StdObjMgt_Attribute<AttribClass>::Static {
+    public:
+        //! Read persistent data from a file.
+        virtual void Read(StdObjMgt_ReadData&) {}
+        //! Write persistent data to a file.
+        virtual void Write(StdObjMgt_WriteData&) const {}
+        //! Gets persistent child objects
+        inline void PChildren(StdObjMgt_Persistent::SequenceOfPersistent&) const {}
+        //! Returns persistent type name
+        Standard_CString PName() const;
 
-    //! Import transient attribute from the persistent data
-    virtual void ImportAttribute() {}
-  };
+        //! Import transient attribute from the persistent data
+        virtual void ImportAttribute() {}
+    };
 
 public:
-  typedef instance<TDataStd_Directory> Directory;
-  typedef instance<TDataStd_Tick>      Tick;
-  typedef instance<TDataStd_NoteBook>  NoteBook;
+    typedef instance<TDataStd_Directory> Directory;
+    typedef instance<TDataStd_Tick> Tick;
+    typedef instance<TDataStd_NoteBook> NoteBook;
 };
 
-template<>
-inline Standard_CString StdLPersistent_Void::instance<TDataStd_Directory>::PName() const
-  { return "PDataStd_Directory"; }
+template <> inline Standard_CString StdLPersistent_Void::instance<TDataStd_Directory>::PName() const {
+    return "PDataStd_Directory";
+}
 
-template<>
-inline Standard_CString StdLPersistent_Void::instance<TDataStd_Tick>::PName() const
-  { return "PDataStd_Tick"; }
+template <> inline Standard_CString StdLPersistent_Void::instance<TDataStd_Tick>::PName() const {
+    return "PDataStd_Tick";
+}
 
-template<>
-inline Standard_CString StdLPersistent_Void::instance<TDataStd_NoteBook>::PName() const
-  { return "PDataStd_Notebook"; }
+template <> inline Standard_CString StdLPersistent_Void::instance<TDataStd_NoteBook>::PName() const {
+    return "PDataStd_Notebook";
+}
 
 #endif

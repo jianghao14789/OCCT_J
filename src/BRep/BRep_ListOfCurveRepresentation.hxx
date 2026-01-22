@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(BRep_CurveRepresentation)> BRep_ListOfCurveRepresentation;
 typedef NCollection_List<Handle(BRep_CurveRepresentation)>::Iterator BRep_ListIteratorOfListOfCurveRepresentation;
 
-
 #endif

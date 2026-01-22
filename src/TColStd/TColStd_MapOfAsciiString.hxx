@@ -20,7 +20,7 @@
 #include <NCollection_Map.hxx>
 
 typedef NCollection_Map<TCollection_AsciiString, TCollection_AsciiString> TColStd_MapOfAsciiString;
-typedef NCollection_Map<TCollection_AsciiString, TCollection_AsciiString>::Iterator TColStd_MapIteratorOfMapOfAsciiString;
-
+typedef NCollection_Map<TCollection_AsciiString, TCollection_AsciiString>::Iterator
+    TColStd_MapIteratorOfMapOfAsciiString;
 
 #endif

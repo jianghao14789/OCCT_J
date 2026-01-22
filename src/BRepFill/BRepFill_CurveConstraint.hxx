@@ -30,45 +30,29 @@ DEFINE_STANDARD_HANDLE(BRepFill_CurveConstraint, GeomPlate_CurveConstraint)
 //! same as CurveConstraint from GeomPlate
 //! with BRepAdaptor_Surface instead of
 //! GeomAdaptor_Surface
-class BRepFill_CurveConstraint : public GeomPlate_CurveConstraint
-{
+class BRepFill_CurveConstraint : public GeomPlate_CurveConstraint {
 
 public:
+    //! Create a constraint
+    //! Order is the order of the constraint. The possible values for order are -1,0,1,2.
+    //! Order i means constraints Gi
+    //! Npt is the number of points associated with the constraint.
+    //! TolDist is the maximum error to satisfy for G0 constraints
+    //! TolAng is the maximum error to satisfy for G1 constraints
+    //! TolCurv is the maximum error to satisfy for G2 constraints
+    //! These errors can be replaced by laws of criterion.
+    Standard_EXPORT BRepFill_CurveConstraint(const Handle(Adaptor3d_CurveOnSurface) & Boundary,
+                                             const Standard_Integer Order, const Standard_Integer NPt = 10,
+                                             const Standard_Real TolDist = 0.0001, const Standard_Real TolAng = 0.01,
+                                             const Standard_Real TolCurv = 0.1);
 
-  
-  //! Create a constraint
-  //! Order is the order of the constraint. The possible values for order are -1,0,1,2.
-  //! Order i means constraints Gi
-  //! Npt is the number of points associated with the constraint.
-  //! TolDist is the maximum error to satisfy for G0 constraints
-  //! TolAng is the maximum error to satisfy for G1 constraints
-  //! TolCurv is the maximum error to satisfy for G2 constraints
-  //! These errors can be replaced by laws of criterion.
-  Standard_EXPORT BRepFill_CurveConstraint(const Handle(Adaptor3d_CurveOnSurface)& Boundary, const Standard_Integer Order, const Standard_Integer NPt = 10, const Standard_Real TolDist = 0.0001, const Standard_Real TolAng = 0.01, const Standard_Real TolCurv = 0.1);
-  
-  Standard_EXPORT BRepFill_CurveConstraint(const Handle(Adaptor3d_Curve)& Boundary, const Standard_Integer Tang, const Standard_Integer NPt = 10, const Standard_Real TolDist = 0.0001);
+    Standard_EXPORT BRepFill_CurveConstraint(const Handle(Adaptor3d_Curve) & Boundary, const Standard_Integer Tang,
+                                             const Standard_Integer NPt = 10, const Standard_Real TolDist = 0.0001);
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(BRepFill_CurveConstraint,GeomPlate_CurveConstraint)
+    DEFINE_STANDARD_RTTIEXT(BRepFill_CurveConstraint, GeomPlate_CurveConstraint)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepFill_CurveConstraint_HeaderFile

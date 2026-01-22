@@ -49,71 +49,49 @@ class LocOpe_BuildShape;
 class LocOpe_SplitDrafts;
 class LocOpe_BuildWires;
 
-
 //! Provides  tools to implement local     topological
 //! operations on a shape.
-class LocOpe 
-{
+class LocOpe {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Returns Standard_True  when the wire <W> is closed
+    //! on the face <OnF>.
+    Standard_EXPORT static Standard_Boolean Closed(const TopoDS_Wire& W, const TopoDS_Face& OnF);
 
-  
-  //! Returns Standard_True  when the wire <W> is closed
-  //! on the face <OnF>.
-  Standard_EXPORT static Standard_Boolean Closed (const TopoDS_Wire& W, const TopoDS_Face& OnF);
-  
-  //! Returns Standard_True  when the edge <E> is closed
-  //! on the face <OnF>.
-  Standard_EXPORT static Standard_Boolean Closed (const TopoDS_Edge& E, const TopoDS_Face& OnF);
-  
-  //! Returns Standard_True  when the faces are tangent
-  Standard_EXPORT static Standard_Boolean TgtFaces (const TopoDS_Edge& E, const TopoDS_Face& F1, const TopoDS_Face& F2);
-  
-  Standard_EXPORT static void SampleEdges (const TopoDS_Shape& S, TColgp_SequenceOfPnt& Pt);
+    //! Returns Standard_True  when the edge <E> is closed
+    //! on the face <OnF>.
+    Standard_EXPORT static Standard_Boolean Closed(const TopoDS_Edge& E, const TopoDS_Face& OnF);
 
+    //! Returns Standard_True  when the faces are tangent
+    Standard_EXPORT static Standard_Boolean TgtFaces(const TopoDS_Edge& E, const TopoDS_Face& F1,
+                                                     const TopoDS_Face& F2);
 
-
+    Standard_EXPORT static void SampleEdges(const TopoDS_Shape& S, TColgp_SequenceOfPnt& Pt);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class LocOpe_SplitShape;
-friend class LocOpe_WiresOnShape;
-friend class LocOpe_Spliter;
-friend class LocOpe_Generator;
-friend class LocOpe_GeneratedShape;
-friend class LocOpe_GluedShape;
-friend class LocOpe_Prism;
-friend class LocOpe_Revol;
-friend class LocOpe_Pipe;
-friend class LocOpe_DPrism;
-friend class LocOpe_LinearForm;
-friend class LocOpe_RevolutionForm;
-friend class LocOpe_Gluer;
-friend class LocOpe_FindEdges;
-friend class LocOpe_FindEdgesInFace;
-friend class LocOpe_PntFace;
-friend class LocOpe_CurveShapeIntersector;
-friend class LocOpe_CSIntersector;
-friend class LocOpe_BuildShape;
-friend class LocOpe_SplitDrafts;
-friend class LocOpe_BuildWires;
-
+    friend class LocOpe_SplitShape;
+    friend class LocOpe_WiresOnShape;
+    friend class LocOpe_Spliter;
+    friend class LocOpe_Generator;
+    friend class LocOpe_GeneratedShape;
+    friend class LocOpe_GluedShape;
+    friend class LocOpe_Prism;
+    friend class LocOpe_Revol;
+    friend class LocOpe_Pipe;
+    friend class LocOpe_DPrism;
+    friend class LocOpe_LinearForm;
+    friend class LocOpe_RevolutionForm;
+    friend class LocOpe_Gluer;
+    friend class LocOpe_FindEdges;
+    friend class LocOpe_FindEdgesInFace;
+    friend class LocOpe_PntFace;
+    friend class LocOpe_CurveShapeIntersector;
+    friend class LocOpe_CSIntersector;
+    friend class LocOpe_BuildShape;
+    friend class LocOpe_SplitDrafts;
+    friend class LocOpe_BuildWires;
 };
-
-
-
-
-
-
 
 #endif // _LocOpe_HeaderFile

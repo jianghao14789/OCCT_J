@@ -24,92 +24,77 @@ IMPLEMENT_STANDARD_RTTIEXT(Font_SystemFont, Standard_Transient)
 // function : Font_SystemFont
 // purpose  :
 // =======================================================================
-Font_SystemFont::Font_SystemFont (const TCollection_AsciiString& theFontName)
-: myFontKey (theFontName),
-  myFontName (theFontName),
-  myIsSingleLine (Standard_False)
-{
-  memset (myFaceIds, 0, sizeof(myFaceIds));
-  if (theFontName.IsEmpty()) { throw Standard_ProgramError ("Font_SystemFont constructor called with empty font name"); }
-  myFontKey.LowerCase();
+Font_SystemFont::Font_SystemFont(const TCollection_AsciiString& theFontName)
+    : myFontKey(theFontName), myFontName(theFontName), myIsSingleLine(Standard_False) {
+    memset(myFaceIds, 0, sizeof(myFaceIds));
+    if (theFontName.IsEmpty()) {
+        throw Standard_ProgramError("Font_SystemFont constructor called with empty font name");
+    }
+    myFontKey.LowerCase();
 }
 
 // =======================================================================
 // function : SetFontPath
 // purpose  :
 // =======================================================================
-void Font_SystemFont::SetFontPath (Font_FontAspect theAspect,
-                                   const TCollection_AsciiString& thePath,
-                                   const Standard_Integer theFaceId)
-{
-  if (theAspect == Font_FontAspect_UNDEFINED) { throw Standard_ProgramError ("Font_SystemFont::SetFontPath() called with UNDEFINED aspect"); }
-  myFilePaths[theAspect] = thePath;
-  myFaceIds  [theAspect] = theFaceId;
+void Font_SystemFont::SetFontPath(Font_FontAspect theAspect, const TCollection_AsciiString& thePath,
+                                  const Standard_Integer theFaceId) {
+    if (theAspect == Font_FontAspect_UNDEFINED) {
+        throw Standard_ProgramError("Font_SystemFont::SetFontPath() called with UNDEFINED aspect");
+    }
+    myFilePaths[theAspect] = thePath;
+    myFaceIds[theAspect] = theFaceId;
 }
 
 // =======================================================================
 // function : IsEqual
 // purpose  :
 // =======================================================================
-Standard_Boolean Font_SystemFont::IsEqual (const Handle(Font_SystemFont)& theOtherFont) const
-{
-  return theOtherFont.get() == this
-      || myFontKey.IsEqual (theOtherFont->myFontKey);
+Standard_Boolean Font_SystemFont::IsEqual(const Handle(Font_SystemFont) & theOtherFont) const {
+    return theOtherFont.get() == this || myFontKey.IsEqual(theOtherFont->myFontKey);
 }
 
 // =======================================================================
 // function : ToString
 // purpose  :
 // =======================================================================
-TCollection_AsciiString Font_SystemFont::ToString() const
-{
-  TCollection_AsciiString aDesc;
-  aDesc += TCollection_AsciiString() + "'" + myFontName + "'";
+TCollection_AsciiString Font_SystemFont::ToString() const {
+    TCollection_AsciiString aDesc;
+    aDesc += TCollection_AsciiString() + "'" + myFontName + "'";
 
-  bool isFirstAspect = true;
-  aDesc += " [aspects: ";
-  for (int anAspectIter = 0; anAspectIter < Font_FontAspect_NB; ++anAspectIter)
-  {
-    if (!HasFontAspect ((Font_FontAspect )anAspectIter))
-    {
-      continue;
-    }
+    bool isFirstAspect = true;
+    aDesc += " [aspects: ";
+    for (int anAspectIter = 0; anAspectIter < Font_FontAspect_NB; ++anAspectIter) {
+        if (!HasFontAspect((Font_FontAspect)anAspectIter)) {
+            continue;
+        }
 
-    if (!isFirstAspect)
-    {
-      aDesc += ",";
+        if (!isFirstAspect) {
+            aDesc += ",";
+        } else {
+            isFirstAspect = false;
+        }
+        aDesc += Font_FontMgr::FontAspectToString((Font_FontAspect)anAspectIter);
     }
-    else
-    {
-      isFirstAspect = false;
-    }
-    aDesc += Font_FontMgr::FontAspectToString ((Font_FontAspect )anAspectIter);
-  }
-  aDesc += "]";
+    aDesc += "]";
 
-  isFirstAspect = true;
-  aDesc += " [paths: ";
-  for (int anAspectIter = 0; anAspectIter < Font_FontAspect_NB; ++anAspectIter)
-  {
-    if (!HasFontAspect ((Font_FontAspect )anAspectIter))
-    {
-      continue;
-    }
+    isFirstAspect = true;
+    aDesc += " [paths: ";
+    for (int anAspectIter = 0; anAspectIter < Font_FontAspect_NB; ++anAspectIter) {
+        if (!HasFontAspect((Font_FontAspect)anAspectIter)) {
+            continue;
+        }
 
-    if (!isFirstAspect)
-    {
-      aDesc += ";";
+        if (!isFirstAspect) {
+            aDesc += ";";
+        } else {
+            isFirstAspect = false;
+        }
+        aDesc += FontPath((Font_FontAspect)anAspectIter);
+        if (FontFaceId((Font_FontAspect)anAspectIter) != 0) {
+            aDesc = aDesc + "," + FontFaceId((Font_FontAspect)anAspectIter);
+        }
     }
-    else
-    {
-      isFirstAspect = false;
-    }
-    aDesc += FontPath ((Font_FontAspect )anAspectIter);
-    if (FontFaceId ((Font_FontAspect )anAspectIter) != 0)
-    {
-      aDesc = aDesc + "," + FontFaceId ((Font_FontAspect )anAspectIter);
-    }
-  }
-  aDesc += "]";
-  return aDesc;
+    aDesc += "]";
+    return aDesc;
 }

@@ -31,7 +31,6 @@ class StdFail_NotDone;
 class Standard_DimensionError;
 class math_MultipleVarFunctionWithGradient;
 
-
 //! This class implements the Broyden-Fletcher-Goldfarb-Shanno variant of
 //! Davidson-Fletcher-Powell minimization algorithm of a function of
 //! multiple variables.Knowledge of the function's gradient is required.
@@ -41,7 +40,8 @@ class math_MultipleVarFunctionWithGradient;
 //! defined, the algorithm will not make evaluations of the function outside of the
 //! borders.
 //!
-//! 此类实现了 Davidson-Fletcher-Powell 多变量函数最小化算法的 Broyden-Fletcher-Goldfarb-Shanno (BFGS) 变体。需要函数梯度信息。
+//! 此类实现了 Davidson-Fletcher-Powell 多变量函数最小化算法的 Broyden-Fletcher-Goldfarb-Shanno (BFGS)
+//! 变体。需要函数梯度信息。
 //!
 //! 它可以解决超平行六面体上的条件优化问题。
 //! SetBoundary 方法用于定义超平行六面体的边界。定义边界后，
@@ -63,7 +63,8 @@ public:
     //! 警告:
     //! 此初始化后，必须调用 Perform 方法才能有效计算
     //! 函数 F 的最小值。
-    Standard_EXPORT math_BFGS(const Standard_Integer NbVariables, const Standard_Real Tolerance = 1.0e-8, const Standard_Integer NbIterations = 200, const Standard_Real ZEPS = 1.0e-12);
+    Standard_EXPORT math_BFGS(const Standard_Integer NbVariables, const Standard_Real Tolerance = 1.0e-8,
+                              const Standard_Integer NbIterations = 200, const Standard_Real ZEPS = 1.0e-12);
 
     Standard_EXPORT virtual ~math_BFGS();
 
@@ -86,7 +87,6 @@ public:
     //! 2.0 * abs(Fi - Fi-1) <= Tolerance * (abs(Fi) + abs(Fi-1) + ZEPS)。
     //! Tolerance、ZEPS 和最大迭代次数在构造函数中给出。
     Standard_EXPORT void Perform(math_MultipleVarFunctionWithGradient& F, const math_Vector& StartingPoint);
-
 
     //! This method is called at the end of each iteration to check if the
     //! solution is found.
@@ -176,11 +176,6 @@ private:
     Standard_Integer Itermax;
 };
 
-
 #include <math_BFGS.lxx>
-
-
-
-
 
 #endif // _math_BFGS_HeaderFile

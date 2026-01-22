@@ -33,25 +33,23 @@ class gp_Trsf2d;
 //! Geom2d_Direction which provides additional functions
 //! for constructing unit vectors and works, in particular, with
 //! the parametric equations of unit vectors
-class gp_Dir2d
-{
+class gp_Dir2d {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates a direction corresponding to X axis.
-    gp_Dir2d()
-        : coord(1., 0.)
-    {
-    }
+    gp_Dir2d() : coord(1., 0.) {}
 
-    //! Normalizes the vector theV and creates a Direction. Raises ConstructionError if theV.Magnitude() <= Resolution from gp.
+    //! Normalizes the vector theV and creates a Direction. Raises ConstructionError if theV.Magnitude() <= Resolution
+    //! from gp.
     gp_Dir2d(const gp_Vec2d& theV);
 
-    //! Creates a Direction from a doublet of coordinates. Raises ConstructionError if theCoord.Modulus() <= Resolution from gp.
+    //! Creates a Direction from a doublet of coordinates. Raises ConstructionError if theCoord.Modulus() <= Resolution
+    //! from gp.
     gp_Dir2d(const gp_XY& theCoord);
 
-    //! Creates a Direction with its 2 cartesian coordinates. Raises ConstructionError if Sqrt(theXv*theXv + theYv*theYv) <= Resolution from gp.
+    //! Creates a Direction with its 2 cartesian coordinates. Raises ConstructionError if Sqrt(theXv*theXv +
+    //! theYv*theYv) <= Resolution from gp.
     gp_Dir2d(const Standard_Real theXv, const Standard_Real theYv);
 
     //! For this unit vector, assigns:
@@ -135,22 +133,32 @@ public:
     //! theIndex = 1 => X is returned
     //! theIndex = 2 => Y is returned
     //! Raises OutOfRange if theIndex != {1, 2}.
-    Standard_Real Coord(const Standard_Integer theIndex) const { return coord.Coord(theIndex); }
+    Standard_Real Coord(const Standard_Integer theIndex) const {
+        return coord.Coord(theIndex);
+    }
 
     //! For this unit vector returns its two coordinates theXv and theYv.
     //! Raises OutOfRange if theIndex != {1, 2}.
-    void Coord(Standard_Real& theXv, Standard_Real& theYv) const { coord.Coord(theXv, theYv); }
+    void Coord(Standard_Real& theXv, Standard_Real& theYv) const {
+        coord.Coord(theXv, theYv);
+    }
 
     //! For this unit vector, returns its X coordinate.
-    Standard_Real X() const { return coord.X(); }
+    Standard_Real X() const {
+        return coord.X();
+    }
 
     //! For this unit vector, returns its Y coordinate.
-    Standard_Real Y() const { return coord.Y(); }
+    Standard_Real Y() const {
+        return coord.Y();
+    }
 
     //! For this unit vector, returns its two coordinates as a number pair.
     //! Comparison between Directions
     //! The precision value is an input data.
-    const gp_XY& XY() const { return coord; }
+    const gp_XY& XY() const {
+        return coord;
+    }
 
     //! Returns True if the two vectors have the same direction
     //! i.e. the angle between this unit vector and the
@@ -178,26 +186,37 @@ public:
     Standard_EXPORT Standard_Real Angle(const gp_Dir2d& theOther) const;
 
     //! Computes the cross product between two directions.
-    Standard_NODISCARD Standard_Real Crossed(const gp_Dir2d& theRight) const { return coord.Crossed(theRight.coord); }
+    Standard_NODISCARD Standard_Real Crossed(const gp_Dir2d& theRight) const {
+        return coord.Crossed(theRight.coord);
+    }
 
-    Standard_NODISCARD Standard_Real operator ^ (const gp_Dir2d& theRight) const { return Crossed(theRight); }
+    Standard_NODISCARD Standard_Real operator^(const gp_Dir2d& theRight) const {
+        return Crossed(theRight);
+    }
 
     //! Computes the scalar product
-    Standard_Real Dot(const gp_Dir2d& theOther) const { return coord.Dot(theOther.coord); }
+    Standard_Real Dot(const gp_Dir2d& theOther) const {
+        return coord.Dot(theOther.coord);
+    }
 
-    Standard_Real operator * (const gp_Dir2d& theOther) const { return Dot(theOther); }
+    Standard_Real operator*(const gp_Dir2d& theOther) const {
+        return Dot(theOther);
+    }
 
-    void Reverse() { coord.Reverse(); }
+    void Reverse() {
+        coord.Reverse();
+    }
 
     //! Reverses the orientation of a direction
-    Standard_NODISCARD gp_Dir2d Reversed() const
-    {
+    Standard_NODISCARD gp_Dir2d Reversed() const {
         gp_Dir2d aV = *this;
         aV.coord.Reverse();
         return aV;
     }
 
-    Standard_NODISCARD gp_Dir2d operator -() const { return Reversed(); }
+    Standard_NODISCARD gp_Dir2d operator-() const {
+        return Reversed();
+    }
 
     Standard_EXPORT void Mirror(const gp_Dir2d& theV);
 
@@ -217,8 +236,7 @@ public:
 
     //! Rotates a direction.  theAng is the angular value of
     //! the rotation in radians.
-    Standard_NODISCARD gp_Dir2d Rotated(const Standard_Real theAng) const
-    {
+    Standard_NODISCARD gp_Dir2d Rotated(const Standard_Real theAng) const {
         gp_Dir2d aV = *this;
         aV.Rotate(theAng);
         return aV;
@@ -230,8 +248,7 @@ public:
     //! Warnings :
     //! If the scale factor of the "Trsf" theT is negative then the
     //! direction <me> is reversed.
-    Standard_NODISCARD gp_Dir2d Transformed(const gp_Trsf2d& theT) const
-    {
+    Standard_NODISCARD gp_Dir2d Transformed(const gp_Trsf2d& theT) const {
         gp_Dir2d aV = *this;
         aV.Transform(theT);
         return aV;
@@ -241,9 +258,7 @@ public:
     Standard_EXPORT void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 
 private:
-
     gp_XY coord;
-
 };
 
 #include <gp_Ax2d.hxx>
@@ -253,8 +268,7 @@ private:
 // function : gp_Dir2d
 // purpose  :
 // =======================================================================
-inline gp_Dir2d::gp_Dir2d(const gp_Vec2d& theV)
-{
+inline gp_Dir2d::gp_Dir2d(const gp_Vec2d& theV) {
     const gp_XY& aXY = theV.XY();
     Standard_Real aX = aXY.X();
     Standard_Real anY = aXY.Y();
@@ -268,8 +282,7 @@ inline gp_Dir2d::gp_Dir2d(const gp_Vec2d& theV)
 // function : gp_Dir2d
 // purpose  :
 // =======================================================================
-inline gp_Dir2d::gp_Dir2d(const gp_XY& theXY)
-{
+inline gp_Dir2d::gp_Dir2d(const gp_XY& theXY) {
     Standard_Real aX = theXY.X();
     Standard_Real anY = theXY.Y();
     Standard_Real aD = sqrt(aX * aX + anY * anY);
@@ -282,9 +295,7 @@ inline gp_Dir2d::gp_Dir2d(const gp_XY& theXY)
 // function : gp_Dir2d
 // purpose  :
 // =======================================================================
-inline gp_Dir2d::gp_Dir2d(const Standard_Real theXv,
-    const Standard_Real theYv)
-{
+inline gp_Dir2d::gp_Dir2d(const Standard_Real theXv, const Standard_Real theYv) {
     Standard_Real aD = sqrt(theXv * theXv + theYv * theYv);
     Standard_ConstructionError_Raise_if(aD <= gp::Resolution(), "gp_Dir2d() - input vector has zero norm");
     coord.SetX(theXv / aD);
@@ -295,18 +306,13 @@ inline gp_Dir2d::gp_Dir2d(const Standard_Real theXv,
 // function : SetCoord
 // purpose  :
 // =======================================================================
-inline void gp_Dir2d::SetCoord(const Standard_Integer theIndex,
-    const Standard_Real theXi)
-{
+inline void gp_Dir2d::SetCoord(const Standard_Integer theIndex, const Standard_Real theXi) {
     Standard_Real aX = coord.X();
     Standard_Real anY = coord.Y();
     Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > 2, "gp_Dir2d::SetCoord() - index is out of range [1, 2]");
-    if (theIndex == 1)
-    {
+    if (theIndex == 1) {
         aX = theXi;
-    }
-    else
-    {
+    } else {
         anY = theXi;
     }
     Standard_Real aD = sqrt(aX * aX + anY * anY);
@@ -319,9 +325,7 @@ inline void gp_Dir2d::SetCoord(const Standard_Integer theIndex,
 // function : SetCoord
 // purpose  :
 // =======================================================================
-inline void gp_Dir2d::SetCoord(const Standard_Real theXv,
-    const Standard_Real theYv)
-{
+inline void gp_Dir2d::SetCoord(const Standard_Real theXv, const Standard_Real theYv) {
     Standard_Real aD = sqrt(theXv * theXv + theYv * theYv);
     Standard_ConstructionError_Raise_if(aD <= gp::Resolution(), "gp_Dir2d::SetCoord() - result vector has zero norm");
     coord.SetX(theXv / aD);
@@ -332,8 +336,7 @@ inline void gp_Dir2d::SetCoord(const Standard_Real theXv,
 // function : SetX
 // purpose  :
 // =======================================================================
-inline void gp_Dir2d::SetX(const Standard_Real theX)
-{
+inline void gp_Dir2d::SetX(const Standard_Real theX) {
     Standard_Real anY = coord.Y();
     Standard_Real aD = sqrt(theX * theX + anY * anY);
     Standard_ConstructionError_Raise_if(aD <= gp::Resolution(), "gp_Dir2d::SetX() - result vector has zero norm");
@@ -345,8 +348,7 @@ inline void gp_Dir2d::SetX(const Standard_Real theX)
 // function : SetY
 // purpose  :
 // =======================================================================
-inline void gp_Dir2d::SetY(const Standard_Real theY)
-{
+inline void gp_Dir2d::SetY(const Standard_Real theY) {
     Standard_Real aX = coord.X();
     Standard_Real aD = sqrt(aX * aX + theY * theY);
     Standard_ConstructionError_Raise_if(aD <= gp::Resolution(), "gp_Dir2d::SetY() - result vector has zero norm");
@@ -358,8 +360,7 @@ inline void gp_Dir2d::SetY(const Standard_Real theY)
 // function : SetXY
 // purpose  :
 // =======================================================================
-inline void gp_Dir2d::SetXY(const gp_XY& theXY)
-{
+inline void gp_Dir2d::SetXY(const gp_XY& theXY) {
     Standard_Real aX = theXY.X();
     Standard_Real anY = theXY.Y();
     Standard_Real aD = sqrt(aX * aX + anY * anY);
@@ -372,12 +373,9 @@ inline void gp_Dir2d::SetXY(const gp_XY& theXY)
 // function : IsEqual
 // purpose  :
 // =======================================================================
-inline Standard_Boolean gp_Dir2d::IsEqual(const gp_Dir2d& theOther,
-    const Standard_Real theAngularTolerance) const
-{
+inline Standard_Boolean gp_Dir2d::IsEqual(const gp_Dir2d& theOther, const Standard_Real theAngularTolerance) const {
     Standard_Real anAng = Angle(theOther);
-    if (anAng < 0)
-    {
+    if (anAng < 0) {
         anAng = -anAng;
     }
     return anAng <= theAngularTolerance;
@@ -387,17 +385,13 @@ inline Standard_Boolean gp_Dir2d::IsEqual(const gp_Dir2d& theOther,
 // function : IsNormal
 // purpose  :
 // =======================================================================
-inline Standard_Boolean gp_Dir2d::IsNormal(const gp_Dir2d& theOther,
-    const Standard_Real theAngularTolerance) const
-{
+inline Standard_Boolean gp_Dir2d::IsNormal(const gp_Dir2d& theOther, const Standard_Real theAngularTolerance) const {
     Standard_Real anAng = Angle(theOther);
-    if (anAng < 0)
-    {
+    if (anAng < 0) {
         anAng = -anAng;
     }
     anAng = M_PI / 2.0 - anAng;
-    if (anAng < 0)
-    {
+    if (anAng < 0) {
         anAng = -anAng;
     }
     return anAng <= theAngularTolerance;
@@ -407,12 +401,9 @@ inline Standard_Boolean gp_Dir2d::IsNormal(const gp_Dir2d& theOther,
 // function : IsOpposite
 // purpose  :
 // =======================================================================
-inline Standard_Boolean gp_Dir2d::IsOpposite(const gp_Dir2d& theOther,
-    const Standard_Real theAngularTolerance) const
-{
+inline Standard_Boolean gp_Dir2d::IsOpposite(const gp_Dir2d& theOther, const Standard_Real theAngularTolerance) const {
     Standard_Real anAng = Angle(theOther);
-    if (anAng < 0)
-    {
+    if (anAng < 0) {
         anAng = -anAng;
     }
     return M_PI - anAng <= theAngularTolerance;
@@ -422,12 +413,9 @@ inline Standard_Boolean gp_Dir2d::IsOpposite(const gp_Dir2d& theOther,
 // function : IsParallel
 // purpose  :
 // =======================================================================
-inline Standard_Boolean gp_Dir2d::IsParallel(const gp_Dir2d& theOther,
-    const Standard_Real theAngularTolerance) const
-{
+inline Standard_Boolean gp_Dir2d::IsParallel(const gp_Dir2d& theOther, const Standard_Real theAngularTolerance) const {
     Standard_Real anAng = Angle(theOther);
-    if (anAng < 0)
-    {
+    if (anAng < 0) {
         anAng = -anAng;
     }
     return anAng <= theAngularTolerance || M_PI - anAng <= theAngularTolerance;
@@ -437,8 +425,7 @@ inline Standard_Boolean gp_Dir2d::IsParallel(const gp_Dir2d& theOther,
 // function : Rotate
 // purpose  :
 // =======================================================================
-inline void gp_Dir2d::Rotate(const Standard_Real theAng)
-{
+inline void gp_Dir2d::Rotate(const Standard_Real theAng) {
     gp_Trsf2d aT;
     aT.SetRotation(gp_Pnt2d(0.0, 0.0), theAng);
     coord.Multiply(aT.HVectorialPart());

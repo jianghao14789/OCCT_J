@@ -23,49 +23,29 @@
 #include <ShapeUpgrade_SplitSurface.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class ShapeUpgrade_SplitSurfaceArea;
 DEFINE_STANDARD_HANDLE(ShapeUpgrade_SplitSurfaceArea, ShapeUpgrade_SplitSurface)
 
 //! Split surface in the parametric space
 //! in according specified number of splits on the
-class ShapeUpgrade_SplitSurfaceArea : public ShapeUpgrade_SplitSurface
-{
+class ShapeUpgrade_SplitSurfaceArea : public ShapeUpgrade_SplitSurface {
 
 public:
+    //! Empty constructor.
+    Standard_EXPORT ShapeUpgrade_SplitSurfaceArea();
 
-  
-  //! Empty constructor.
-  Standard_EXPORT ShapeUpgrade_SplitSurfaceArea();
-  
-  //! Set number of split for surfaces
+    //! Set number of split for surfaces
     Standard_Integer& NbParts();
-  
-  Standard_EXPORT virtual void Compute (const Standard_Boolean Segment = Standard_True) Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void Compute(const Standard_Boolean Segment = Standard_True) Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurfaceArea,ShapeUpgrade_SplitSurface)
+    DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurfaceArea, ShapeUpgrade_SplitSurface)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer myNbParts;
-
-
+    Standard_Integer myNbParts;
 };
 
-
 #include <ShapeUpgrade_SplitSurfaceArea.lxx>
-
-
-
-
 
 #endif // _ShapeUpgrade_SplitSurfaceArea_HeaderFile

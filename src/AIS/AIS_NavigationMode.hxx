@@ -15,17 +15,12 @@
 #define _AIS_NavigationMode_HeaderFile
 
 //! Camera navigation mode.
-enum AIS_NavigationMode
-{
-  AIS_NavigationMode_Orbit,             //!< orbit rotation
-  AIS_NavigationMode_FirstPersonFlight, //!< flight rotation (first person)
-  AIS_NavigationMode_FirstPersonWalk,   //!< walking mode (first person)
+enum AIS_NavigationMode {
+    AIS_NavigationMode_Orbit,             //!< orbit rotation
+    AIS_NavigationMode_FirstPersonFlight, //!< flight rotation (first person)
+    AIS_NavigationMode_FirstPersonWalk,   //!< walking mode (first person)
 };
 
-enum
-{
-  AIS_NavigationMode_LOWER = 0,
-  AIS_NavigationMode_UPPER = AIS_NavigationMode_FirstPersonWalk
-};
+enum { AIS_NavigationMode_LOWER = 0, AIS_NavigationMode_UPPER = AIS_NavigationMode_FirstPersonWalk };
 
 #endif // _V3d_NavigationMode_HeaderFile

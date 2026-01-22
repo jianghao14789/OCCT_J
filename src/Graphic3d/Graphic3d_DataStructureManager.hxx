@@ -30,21 +30,18 @@ DEFINE_STANDARD_HANDLE(Graphic3d_DataStructureManager, Standard_Transient)
 //! which the graphic objects are associated.
 //! It allows them to be globally manipulated.
 //! It defines the global attributes.
-class Graphic3d_DataStructureManager : public Standard_Transient
-{
+class Graphic3d_DataStructureManager : public Standard_Transient {
 
-  DEFINE_STANDARD_RTTIEXT(Graphic3d_DataStructureManager,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(Graphic3d_DataStructureManager, Standard_Transient)
 protected:
+    //! Initializes the manager <me>.
+    Standard_EXPORT Graphic3d_DataStructureManager();
 
-  //! Initializes the manager <me>.
-  Standard_EXPORT Graphic3d_DataStructureManager();
+    //! Returns camera object of the view.
+    virtual const Handle(Graphic3d_Camera) & Camera() const = 0;
 
-  //! Returns camera object of the view.
-  virtual const Handle(Graphic3d_Camera)& Camera() const = 0;
-
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
-
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 };
 
 #endif // _Graphic3d_DataStructureManager_HeaderFile

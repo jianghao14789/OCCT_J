@@ -11,19 +11,17 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _BRepMesh_DegreeOfFreedom_HeaderFile
 #define _BRepMesh_DegreeOfFreedom_HeaderFile
 
-enum BRepMesh_DegreeOfFreedom
-{
-  BRepMesh_Free,
-  BRepMesh_InVolume,
-  BRepMesh_OnSurface,
-  BRepMesh_OnCurve,
-  BRepMesh_Fixed,
-  BRepMesh_Frontier,
-  BRepMesh_Deleted
+enum BRepMesh_DegreeOfFreedom {
+    BRepMesh_Free,
+    BRepMesh_InVolume,
+    BRepMesh_OnSurface,
+    BRepMesh_OnCurve,
+    BRepMesh_Fixed,
+    BRepMesh_Frontier,
+    BRepMesh_Deleted
 };
 
 #endif

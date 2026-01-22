@@ -17,11 +17,10 @@
 #include <Intf_SeqOfSectionPoint.hxx>
 
 //=======================================================================
-//function : NumberOfPoint
-//purpose  : 
+// function : NumberOfPoint
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer Intf_SectionLine::NumberOfPoints () const
-{
-  return myPoints.Length();
+inline Standard_Integer Intf_SectionLine::NumberOfPoints() const {
+    return myPoints.Length();
 }

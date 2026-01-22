@@ -26,47 +26,24 @@ class StepGeom_BSplineCurveWithKnots;
 class Geom_BSplineCurve;
 class Geom2d_BSplineCurve;
 
-
 //! This class implements the mapping between classes
 //! BSplineCurve from Geom, Geom2d and the class
 //! BSplineCurveWithKnots from StepGeom
 //! which describes a bspline_curve_with_knots from
 //! Prostep
-class GeomToStep_MakeBSplineCurveWithKnots  : public GeomToStep_Root
-{
+class GeomToStep_MakeBSplineCurveWithKnots : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeBSplineCurveWithKnots(const Handle(Geom_BSplineCurve) & Bsplin);
 
-  
-  Standard_EXPORT GeomToStep_MakeBSplineCurveWithKnots(const Handle(Geom_BSplineCurve)& Bsplin);
-  
-  Standard_EXPORT GeomToStep_MakeBSplineCurveWithKnots(const Handle(Geom2d_BSplineCurve)& Bsplin);
-  
-  Standard_EXPORT const Handle(StepGeom_BSplineCurveWithKnots)& Value() const;
+    Standard_EXPORT GeomToStep_MakeBSplineCurveWithKnots(const Handle(Geom2d_BSplineCurve) & Bsplin);
 
-
-
+    Standard_EXPORT const Handle(StepGeom_BSplineCurveWithKnots) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_BSplineCurveWithKnots) theBSplineCurveWithKnots;
-
-
+    Handle(StepGeom_BSplineCurveWithKnots) theBSplineCurveWithKnots;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeBSplineCurveWithKnots_HeaderFile

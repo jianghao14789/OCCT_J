@@ -19,29 +19,23 @@
 
 //! 3x3 Matrix class.
 //! Warning, empty constructor returns an identity matrix.
-template<typename Element_t>
-class NCollection_Mat3
-{
+template <typename Element_t> class NCollection_Mat3 {
 public:
-
     //! Return identity matrix.
-    static NCollection_Mat3 Identity()
-    {
+    static NCollection_Mat3 Identity() {
         return NCollection_Mat3();
     }
 
     //! Return zero matrix.
-    static NCollection_Mat3 Zero()
-    {
-        NCollection_Mat3 aMat; aMat.InitZero();
+    static NCollection_Mat3 Zero() {
+        NCollection_Mat3 aMat;
+        aMat.InitZero();
         return aMat;
     }
 
 public:
-
     //! Empty constructor for identity matrix.
-    NCollection_Mat3()
-    {
+    NCollection_Mat3() {
         InitIdentity();
     }
 
@@ -50,9 +44,7 @@ public:
     //! whose elements are static_cast'ed corresponding elements of theOtherMat3 matrix)
     //! @tparam OtherElement_t the element type of the other 3x3 matrix theOtherVec3
     //! @param theOtherMat3 the 3x3 matrix that needs to be converted
-    template <typename OtherElement_t>
-    explicit NCollection_Mat3(const NCollection_Mat3<OtherElement_t>& theOtherMat3)
-    {
+    template <typename OtherElement_t> explicit NCollection_Mat3(const NCollection_Mat3<OtherElement_t>& theOtherMat3) {
         ConvertFrom(theOtherMat3);
     }
 
@@ -60,8 +52,7 @@ public:
     //! @param theRow [in] the row.to address.
     //! @param theCol [in] the column to address.
     //! @return the value of the addressed element.
-    Element_t GetValue(const size_t theRow, const size_t theCol) const
-    {
+    Element_t GetValue(const size_t theRow, const size_t theCol) const {
         return myMat[theCol * 3 + theRow];
     }
 
@@ -69,8 +60,7 @@ public:
     //! @param theRow [in] the row.to access.
     //! @param theCol [in] the column to access.
     //! @return reference on the matrix element.
-    Element_t& ChangeValue(const size_t theRow, const size_t theCol)
-    {
+    Element_t& ChangeValue(const size_t theRow, const size_t theCol) {
         return myMat[theCol * 3 + theRow];
     }
 
@@ -78,47 +68,43 @@ public:
     //! @param theRow   [in] the row to change.
     //! @param theCol   [in] the column to change.
     //! @param theValue [in] the value to set.s
-    void SetValue(const size_t    theRow,
-        const size_t    theCol,
-        const Element_t theValue)
-    {
+    void SetValue(const size_t theRow, const size_t theCol, const Element_t theValue) {
         myMat[theCol * 3 + theRow] = theValue;
     }
 
     //! Return value.
-    Element_t& operator()(const size_t theRow, const size_t theCol) { return ChangeValue(theRow, theCol); }
+    Element_t& operator()(const size_t theRow, const size_t theCol) {
+        return ChangeValue(theRow, theCol);
+    }
 
     //! Return value.
-    Element_t  operator()(const size_t theRow, const size_t theCol) const { return GetValue(theRow, theCol); }
+    Element_t operator()(const size_t theRow, const size_t theCol) const {
+        return GetValue(theRow, theCol);
+    }
 
     //! Return the row.
-    NCollection_Vec3<Element_t> GetRow(const size_t theRow) const
-    {
+    NCollection_Vec3<Element_t> GetRow(const size_t theRow) const {
         return NCollection_Vec3<Element_t>(GetValue(theRow, 0), GetValue(theRow, 1), GetValue(theRow, 2));
     }
 
     //! Change first 3 row values by the passed vector.
     //! @param theRow [in] the row to change.
     //! @param theVec [in] the vector of values.
-    void SetRow(const size_t theRow, const NCollection_Vec3<Element_t>& theVec)
-    {
+    void SetRow(const size_t theRow, const NCollection_Vec3<Element_t>& theVec) {
         SetValue(theRow, 0, theVec.x());
         SetValue(theRow, 1, theVec.y());
         SetValue(theRow, 2, theVec.z());
     }
 
     //! Return the column.
-    NCollection_Vec3<Element_t> GetColumn(const size_t theCol) const
-    {
+    NCollection_Vec3<Element_t> GetColumn(const size_t theCol) const {
         return NCollection_Vec3<Element_t>(GetValue(0, theCol), GetValue(1, theCol), GetValue(2, theCol));
     }
 
     //! Change first 3 column values by the passed vector.
     //! @param theCol [in] the column to change.
     //! @param theVec [in] the vector of values.
-    void SetColumn(const size_t theCol,
-        const NCollection_Vec3<Element_t>& theVec)
-    {
+    void SetColumn(const size_t theCol, const NCollection_Vec3<Element_t>& theVec) {
         SetValue(0, theCol, theVec.x());
         SetValue(1, theCol, theVec.y());
         SetValue(2, theCol, theVec.z());
@@ -126,65 +112,65 @@ public:
 
     //! Get vector of diagonal elements.
     //! @return vector of diagonal elements.
-    NCollection_Vec3<Element_t> GetDiagonal() const
-    {
+    NCollection_Vec3<Element_t> GetDiagonal() const {
         return NCollection_Vec3<Element_t>(GetValue(0, 0), GetValue(1, 1), GetValue(2, 2));
     }
 
     //! Change first 3 elements of the diagonal matrix.
     //! @param theVec the vector of values.
-    void SetDiagonal(const NCollection_Vec3<Element_t>& theVec)
-    {
+    void SetDiagonal(const NCollection_Vec3<Element_t>& theVec) {
         SetValue(0, 0, theVec.x());
         SetValue(1, 1, theVec.y());
         SetValue(2, 2, theVec.z());
     }
 
     //! Initialize the zero matrix.
-    void InitZero()
-    {
+    void InitZero() {
         std::memcpy(this, MyZeroArray, sizeof(NCollection_Mat3));
     }
 
     //! Checks the matrix for zero (without tolerance).
-    bool IsZero() const
-    {
+    bool IsZero() const {
         return std::memcmp(this, MyZeroArray, sizeof(NCollection_Mat3)) == 0;
     }
 
     //! Initialize the identity matrix.
-    void InitIdentity()
-    {
+    void InitIdentity() {
         std::memcpy(this, MyIdentityArray, sizeof(NCollection_Mat3));
     }
 
     //! Checks the matrix for identity (without tolerance).
-    bool IsIdentity() const
-    {
+    bool IsIdentity() const {
         return std::memcmp(this, MyIdentityArray, sizeof(NCollection_Mat3)) == 0;
     }
 
     //! Check this matrix for equality with another matrix (without tolerance!).
-    bool IsEqual(const NCollection_Mat3& theOther) const
-    {
+    bool IsEqual(const NCollection_Mat3& theOther) const {
         return std::memcmp(this, &theOther, sizeof(NCollection_Mat3)) == 0;
     }
 
     //! Comparison operator.
-    bool operator== (const NCollection_Mat3& theMat) const { return IsEqual(theMat); }
+    bool operator==(const NCollection_Mat3& theMat) const {
+        return IsEqual(theMat);
+    }
 
     //! Check this vector with another vector for non-equality (without tolerance!).
-    bool operator!= (const NCollection_Mat3& theOther) const { return !IsEqual(theOther); }
+    bool operator!=(const NCollection_Mat3& theOther) const {
+        return !IsEqual(theOther);
+    }
 
     //! Raw access to the data (for OpenGL exchange).
     //! the data is returned in column-major order.
-    const Element_t* GetData()    const { return myMat; }
-    Element_t* ChangeData() { return myMat; }
+    const Element_t* GetData() const {
+        return myMat;
+    }
+    Element_t* ChangeData() {
+        return myMat;
+    }
 
     //! Multiply by the vector (M * V).
     //! @param theVec [in] the vector to multiply.
-    NCollection_Vec3<Element_t> operator* (const NCollection_Vec3<Element_t>& theVec) const
-    {
+    NCollection_Vec3<Element_t> operator*(const NCollection_Vec3<Element_t>& theVec) const {
         return NCollection_Vec3<Element_t>(
             GetValue(0, 0) * theVec.x() + GetValue(0, 1) * theVec.y() + GetValue(0, 2) * theVec.z(),
             GetValue(1, 0) * theVec.x() + GetValue(1, 1) * theVec.y() + GetValue(1, 2) * theVec.z(),
@@ -194,19 +180,15 @@ public:
     //! Compute matrix multiplication product: A * B.
     //! @param theMatA [in] the matrix "A".
     //! @param theMatB [in] the matrix "B".
-    static NCollection_Mat3 Multiply(const NCollection_Mat3& theMatA,
-        const NCollection_Mat3& theMatB)
-    {
+    static NCollection_Mat3 Multiply(const NCollection_Mat3& theMatA, const NCollection_Mat3& theMatB) {
         NCollection_Mat3 aMatRes;
 
         size_t aInputElem;
-        for (size_t aResElem = 0; aResElem < 9; ++aResElem)
-        {
+        for (size_t aResElem = 0; aResElem < 9; ++aResElem) {
             aMatRes.myMat[aResElem] = (Element_t)0;
-            for (aInputElem = 0; aInputElem < 3; ++aInputElem)
-            {
-                aMatRes.myMat[aResElem] += theMatA.GetValue(aResElem % 3, aInputElem)
-                    * theMatB.GetValue(aInputElem, aResElem / 3);
+            for (aInputElem = 0; aInputElem < 3; ++aInputElem) {
+                aMatRes.myMat[aResElem] +=
+                    theMatA.GetValue(aResElem % 3, aInputElem) * theMatB.GetValue(aInputElem, aResElem / 3);
             }
         }
 
@@ -215,15 +197,13 @@ public:
 
     //! Compute matrix multiplication.
     //! @param theMat [in] the matrix to multiply.
-    void Multiply(const NCollection_Mat3& theMat)
-    {
+    void Multiply(const NCollection_Mat3& theMat) {
         *this = Multiply(*this, theMat);
     }
 
     //! Multiply by the another matrix.
     //! @param theMat [in] the other matrix.
-    NCollection_Mat3& operator*= (const NCollection_Mat3& theMat)
-    {
+    NCollection_Mat3& operator*=(const NCollection_Mat3& theMat) {
         Multiply(theMat);
         return *this;
     }
@@ -231,16 +211,14 @@ public:
     //! Compute matrix multiplication product.
     //! @param theMat [in] the other matrix.
     //! @return result of multiplication.
-    Standard_NODISCARD NCollection_Mat3 operator* (const NCollection_Mat3& theMat) const
-    {
+    Standard_NODISCARD NCollection_Mat3 operator*(const NCollection_Mat3& theMat) const {
         return Multiplied(theMat);
     }
 
     //! Compute matrix multiplication product.
     //! @param theMat [in] the other matrix.
     //! @return result of multiplication.
-    Standard_NODISCARD NCollection_Mat3 Multiplied(const NCollection_Mat3& theMat) const
-    {
+    Standard_NODISCARD NCollection_Mat3 Multiplied(const NCollection_Mat3& theMat) const {
         NCollection_Mat3 aTempMat(*this);
         aTempMat *= theMat;
         return aTempMat;
@@ -248,18 +226,15 @@ public:
 
     //! Compute per-component multiplication.
     //! @param theFactor [in] the scale factor.
-    void Multiply(const Element_t theFactor)
-    {
-        for (size_t i = 0; i < 9; ++i)
-        {
+    void Multiply(const Element_t theFactor) {
+        for (size_t i = 0; i < 9; ++i) {
             myMat[i] *= theFactor;
         }
     }
 
     //! Compute per-element multiplication.
     //! @param theFactor [in] the scale factor.
-    NCollection_Mat3& operator*= (const Element_t theFactor)
-    {
+    NCollection_Mat3& operator*=(const Element_t theFactor) {
         Multiply(theFactor);
         return *this;
     }
@@ -267,16 +242,14 @@ public:
     //! Compute per-element multiplication.
     //! @param theFactor [in] the scale factor.
     //! @return the result of multiplication.
-    Standard_NODISCARD NCollection_Mat3 operator* (const Element_t theFactor) const
-    {
+    Standard_NODISCARD NCollection_Mat3 operator*(const Element_t theFactor) const {
         return Multiplied(theFactor);
     }
 
     //! Compute per-element multiplication.
     //! @param theFactor [in] the scale factor.
     //! @return the result of multiplication.
-    Standard_NODISCARD NCollection_Mat3 Multiplied(const Element_t theFactor) const
-    {
+    Standard_NODISCARD NCollection_Mat3 Multiplied(const Element_t theFactor) const {
         NCollection_Mat3 aTempMat(*this);
         aTempMat *= theFactor;
         return aTempMat;
@@ -284,117 +257,98 @@ public:
 
     //! Compute per-component division.
     //! @param theFactor [in] the scale factor.
-    void Divide(const Element_t theFactor)
-    {
-        for (size_t i = 0; i < 9; ++i)
-        {
+    void Divide(const Element_t theFactor) {
+        for (size_t i = 0; i < 9; ++i) {
             myMat[i] /= theFactor;
         }
     }
 
     //! Per-component division.
     //! @param theScalar [in] the scale factor.
-    NCollection_Mat3& operator/= (const Element_t theScalar)
-    {
+    NCollection_Mat3& operator/=(const Element_t theScalar) {
         Divide(theScalar);
         return *this;
     }
 
     //! Divides all the coefficients of the matrix by scalar.
-    Standard_NODISCARD NCollection_Mat3 Divided(const Element_t theScalar) const
-    {
+    Standard_NODISCARD NCollection_Mat3 Divided(const Element_t theScalar) const {
         NCollection_Mat3 aTempMat(*this);
         aTempMat /= theScalar;
         return aTempMat;
     }
 
     //! Divides all the coefficients of the matrix by scalar.
-    Standard_NODISCARD NCollection_Mat3 operator/ (const Element_t theScalar) const
-    {
+    Standard_NODISCARD NCollection_Mat3 operator/(const Element_t theScalar) const {
         return Divided(theScalar);
     }
 
     //! Per-component addition of another matrix.
-    void Add(const NCollection_Mat3& theMat)
-    {
-        for (size_t i = 0; i < 9; ++i)
-        {
+    void Add(const NCollection_Mat3& theMat) {
+        for (size_t i = 0; i < 9; ++i) {
             myMat[i] += theMat.myMat[i];
         }
     }
 
     //! Per-component addition of another matrix.
-    NCollection_Mat3& operator+= (const NCollection_Mat3& theMat)
-    {
+    NCollection_Mat3& operator+=(const NCollection_Mat3& theMat) {
         Add(theMat);
         return *this;
     }
 
     //! Per-component subtraction of another matrix.
-    void Subtract(const NCollection_Mat3& theMat)
-    {
-        for (size_t i = 0; i < 9; ++i)
-        {
+    void Subtract(const NCollection_Mat3& theMat) {
+        for (size_t i = 0; i < 9; ++i) {
             myMat[i] -= theMat.myMat[i];
         }
     }
 
     //! Per-component subtraction of another matrix.
-    NCollection_Mat3& operator-= (const NCollection_Mat3& theMat)
-    {
+    NCollection_Mat3& operator-=(const NCollection_Mat3& theMat) {
         Subtract(theMat);
         return *this;
     }
 
     //! Per-component addition of another matrix.
-    Standard_NODISCARD NCollection_Mat3 Added(const NCollection_Mat3& theMat) const
-    {
+    Standard_NODISCARD NCollection_Mat3 Added(const NCollection_Mat3& theMat) const {
         NCollection_Mat3 aMat(*this);
         aMat += theMat;
         return aMat;
     }
 
     //! Per-component addition of another matrix.
-    Standard_NODISCARD NCollection_Mat3 operator+ (const NCollection_Mat3& theMat) const
-    {
+    Standard_NODISCARD NCollection_Mat3 operator+(const NCollection_Mat3& theMat) const {
         return Added(theMat);
     }
 
     //! Per-component subtraction of another matrix.
-    Standard_NODISCARD NCollection_Mat3 Subtracted(const NCollection_Mat3& theMat) const
-    {
+    Standard_NODISCARD NCollection_Mat3 Subtracted(const NCollection_Mat3& theMat) const {
         NCollection_Mat3 aMat(*this);
         aMat -= theMat;
         return aMat;
     }
 
     //! Per-component subtraction of another matrix.
-    Standard_NODISCARD NCollection_Mat3 operator- (const NCollection_Mat3& theMat) const
-    {
+    Standard_NODISCARD NCollection_Mat3 operator-(const NCollection_Mat3& theMat) const {
         return Subtracted(theMat);
     }
 
     //! Returns matrix with all components negated.
-    Standard_NODISCARD NCollection_Mat3 Negated() const
-    {
+    Standard_NODISCARD NCollection_Mat3 Negated() const {
         NCollection_Mat3 aMat;
-        for (size_t i = 0; i < 9; ++i)
-        {
+        for (size_t i = 0; i < 9; ++i) {
             aMat.myMat[i] = -myMat[i];
         }
         return aMat;
     }
 
     //! Returns matrix with all components negated.
-    Standard_NODISCARD NCollection_Mat3 operator-() const
-    {
+    Standard_NODISCARD NCollection_Mat3 operator-() const {
         return Negated();
     }
 
     //! Transpose the matrix.
     //! @return transposed copy of the matrix.
-    Standard_NODISCARD NCollection_Mat3 Transposed() const
-    {
+    Standard_NODISCARD NCollection_Mat3 Transposed() const {
         NCollection_Mat3 aTempMat;
         aTempMat.SetRow(0, GetColumn(0));
         aTempMat.SetRow(1, GetColumn(1));
@@ -403,25 +357,20 @@ public:
     }
 
     //! Transpose the matrix.
-    void Transpose()
-    {
+    void Transpose() {
         *this = Transposed();
     }
 
     //! Return determinant of the matrix.
-    Element_t Determinant() const
-    {
-        return (GetValue(0, 0) * GetValue(1, 1) * GetValue(2, 2)
-            + GetValue(0, 1) * GetValue(1, 2) * GetValue(2, 0)
-            + GetValue(0, 2) * GetValue(1, 0) * GetValue(2, 1))
-            - (GetValue(0, 2) * GetValue(1, 1) * GetValue(2, 0)
-                + GetValue(0, 0) * GetValue(1, 2) * GetValue(2, 1)
-                + GetValue(0, 1) * GetValue(1, 0) * GetValue(2, 2));
+    Element_t Determinant() const {
+        return (GetValue(0, 0) * GetValue(1, 1) * GetValue(2, 2) + GetValue(0, 1) * GetValue(1, 2) * GetValue(2, 0) +
+                GetValue(0, 2) * GetValue(1, 0) * GetValue(2, 1)) -
+               (GetValue(0, 2) * GetValue(1, 1) * GetValue(2, 0) + GetValue(0, 0) * GetValue(1, 2) * GetValue(2, 1) +
+                GetValue(0, 1) * GetValue(1, 0) * GetValue(2, 2));
     }
 
     //! Return adjoint (adjugate matrix, e.g. conjugate transpose).
-    Standard_NODISCARD NCollection_Mat3 Adjoint() const
-    {
+    Standard_NODISCARD NCollection_Mat3 Adjoint() const {
         NCollection_Mat3 aMat;
         aMat.SetRow(0, NCollection_Vec3<Element_t>::Cross(GetRow(1), GetRow(2)));
         aMat.SetRow(1, NCollection_Vec3<Element_t>::Cross(GetRow(2), GetRow(0)));
@@ -433,12 +382,10 @@ public:
     //! @param theOutMx [out] the inverted matrix
     //! @param theDet   [out] determinant of matrix
     //! @return true if reversion success
-    bool Inverted(NCollection_Mat3& theInv, Element_t& theDet) const
-    {
+    bool Inverted(NCollection_Mat3& theInv, Element_t& theDet) const {
         const NCollection_Mat3 aMat = Adjoint();
         theDet = aMat.GetRow(0).Dot(GetRow(0));
-        if (theDet == Element_t(0))
-        {
+        if (theDet == Element_t(0)) {
             return false;
         }
 
@@ -449,84 +396,67 @@ public:
     //! Compute inverted matrix.
     //! @param theOutMx [out] the inverted matrix
     //! @return true if reversion success
-    bool Inverted(NCollection_Mat3& theInv) const
-    {
+    bool Inverted(NCollection_Mat3& theInv) const {
         Element_t aDet;
         return Inverted(theInv, aDet);
     }
 
     //! Return inverted matrix.
-    NCollection_Mat3 Inverted() const
-    {
+    NCollection_Mat3 Inverted() const {
         NCollection_Mat3 anInv;
-        if (!Inverted(anInv))
-        {
+        if (!Inverted(anInv)) {
             throw Standard_ConstructionError("NCollection_Mat3::Inverted() - matrix has zero determinant");
         }
         return anInv;
     }
 
     //! Take values from NCollection_Mat3 with a different element type with type conversion.
-    template <typename Other_t>
-    void ConvertFrom(const NCollection_Mat3<Other_t>& theFrom)
-    {
-        for (int anIdx = 0; anIdx < 9; ++anIdx)
-        {
+    template <typename Other_t> void ConvertFrom(const NCollection_Mat3<Other_t>& theFrom) {
+        for (int anIdx = 0; anIdx < 9; ++anIdx) {
             myMat[anIdx] = static_cast<Element_t>(theFrom.myMat[anIdx]);
         }
     }
 
     //! Maps plain C array to matrix type.
-    static NCollection_Mat3<Element_t>& Map(Element_t* theData)
-    {
+    static NCollection_Mat3<Element_t>& Map(Element_t* theData) {
         return *reinterpret_cast<NCollection_Mat3<Element_t>*>(theData);
     }
 
     //! Maps plain C array to matrix type.
-    static const NCollection_Mat3<Element_t>& Map(const Element_t* theData)
-    {
-        return *reinterpret_cast<const NCollection_Mat3<Element_t>*> (theData);
+    static const NCollection_Mat3<Element_t>& Map(const Element_t* theData) {
+        return *reinterpret_cast<const NCollection_Mat3<Element_t>*>(theData);
     }
 
     //! Dumps the content of me into the stream
-    void DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-    {
-        OCCT_DUMP_FIELD_VALUES_NUMERICAL(theOStream, "NCollection_Mat3", 9,
-            GetValue(0, 0), GetValue(0, 1), GetValue(0, 2),
-            GetValue(1, 0), GetValue(1, 1), GetValue(1, 2),
-            GetValue(2, 0), GetValue(2, 1), GetValue(2, 2))
+    void DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
+        OCCT_DUMP_FIELD_VALUES_NUMERICAL(theOStream, "NCollection_Mat3", 9, GetValue(0, 0), GetValue(0, 1),
+                                         GetValue(0, 2), GetValue(1, 0), GetValue(1, 1), GetValue(1, 2), GetValue(2, 0),
+                                         GetValue(2, 1), GetValue(2, 2))
     }
 
 private:
-
     Element_t myMat[9];
 
 private:
-
     static const Element_t MyZeroArray[9];
     static const Element_t MyIdentityArray[9];
 
     // All instantiations are friend to each other
-    template<class OtherType> friend class NCollection_Mat3;
+    template <class OtherType> friend class NCollection_Mat3;
 };
 
-template<typename Element_t>
-const Element_t NCollection_Mat3<Element_t>::MyZeroArray[] =
-{ 0, 0, 0,
- 0, 0, 0,
- 0, 0, 0 };
+template <typename Element_t> const Element_t NCollection_Mat3<Element_t>::MyZeroArray[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-template<typename Element_t>
-const Element_t NCollection_Mat3<Element_t>::MyIdentityArray[] =
-{ 1, 0, 0,
- 0, 1, 0,
- 0, 0, 1 };
+template <typename Element_t>
+const Element_t NCollection_Mat3<Element_t>::MyIdentityArray[] = {1, 0, 0, 0, 1, 0, 0, 0, 1};
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900)
 #include <type_traits>
 
-static_assert(std::is_trivially_copyable<NCollection_Mat3<float>>::value, "NCollection_Mat3 is not is_trivially_copyable() structure!");
-static_assert(std::is_standard_layout   <NCollection_Mat3<float>>::value, "NCollection_Mat3 is not is_standard_layout() structure!");
+static_assert(std::is_trivially_copyable<NCollection_Mat3<float>>::value,
+              "NCollection_Mat3 is not is_trivially_copyable() structure!");
+static_assert(std::is_standard_layout<NCollection_Mat3<float>>::value,
+              "NCollection_Mat3 is not is_standard_layout() structure!");
 static_assert(sizeof(NCollection_Mat3<float>) == sizeof(float) * 9, "NCollection_Mat3 is not packed/aligned!");
 #endif
 

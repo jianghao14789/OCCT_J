@@ -26,56 +26,32 @@
 class StepShape_BooleanResult;
 class StepShape_CsgPrimitive;
 
-
-
-class StepShape_CsgSelect 
-{
+class StepShape_CsgSelect {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Returns a CsgSelect SelectType
+    Standard_EXPORT StepShape_CsgSelect();
 
-  
-  //! Returns a CsgSelect SelectType
-  Standard_EXPORT StepShape_CsgSelect();
-  
-  Standard_EXPORT void SetTypeOfContent (const Standard_Integer aTypeOfContent);
-  
-  Standard_EXPORT Standard_Integer TypeOfContent() const;
-  
-  //! returns Value as a BooleanResult (Null if another type)
-  Standard_EXPORT Handle(StepShape_BooleanResult) BooleanResult() const;
-  
-  Standard_EXPORT void SetBooleanResult (const Handle(StepShape_BooleanResult)& aBooleanResult);
-  
-  //! returns Value as a CsgPrimitive (Null if another type)
-  Standard_EXPORT StepShape_CsgPrimitive CsgPrimitive() const;
-  
-  Standard_EXPORT void SetCsgPrimitive (const StepShape_CsgPrimitive& aCsgPrimitive);
+    Standard_EXPORT void SetTypeOfContent(const Standard_Integer aTypeOfContent);
 
+    Standard_EXPORT Standard_Integer TypeOfContent() const;
 
+    //! returns Value as a BooleanResult (Null if another type)
+    Standard_EXPORT Handle(StepShape_BooleanResult) BooleanResult() const;
 
+    Standard_EXPORT void SetBooleanResult(const Handle(StepShape_BooleanResult) & aBooleanResult);
+
+    //! returns Value as a CsgPrimitive (Null if another type)
+    Standard_EXPORT StepShape_CsgPrimitive CsgPrimitive() const;
+
+    Standard_EXPORT void SetCsgPrimitive(const StepShape_CsgPrimitive& aCsgPrimitive);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepShape_BooleanResult) theBooleanResult;
-  StepShape_CsgPrimitive theCsgPrimitive;
-  Standard_Integer theTypeOfContent;
-
-
+    Handle(StepShape_BooleanResult) theBooleanResult;
+    StepShape_CsgPrimitive theCsgPrimitive;
+    Standard_Integer theTypeOfContent;
 };
-
-
-
-
-
-
 
 #endif // _StepShape_CsgSelect_HeaderFile

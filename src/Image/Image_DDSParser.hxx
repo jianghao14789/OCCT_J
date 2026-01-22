@@ -20,43 +20,36 @@
 class Image_SupportedFormats;
 
 //! Auxiliary tool for parsing DDS file structure (without decoding).
-class Image_DDSParser
-{
+class Image_DDSParser {
 public:
+    //! Load the face from DDS file.
+    //! @param theSupported [in] list of supported image formats
+    //! @param theFile      [in] file path
+    //! @param theFaceIndex [in] face index, within [0, Image_CompressedPixMap::NbFaces()) range;
+    //!                          use -1 to skip reading the face data
+    //! @param theFileOffset [in] offset to the DDS data
+    //! @return loaded face or NULL if file cannot be read or not valid DDS file
+    Standard_EXPORT static Handle(Image_CompressedPixMap)
+        Load(const Handle(Image_SupportedFormats) & theSupported, const TCollection_AsciiString& theFile,
+             const Standard_Integer theFaceIndex, const int64_t theFileOffset = 0);
 
-  //! Load the face from DDS file.
-  //! @param theSupported [in] list of supported image formats
-  //! @param theFile      [in] file path
-  //! @param theFaceIndex [in] face index, within [0, Image_CompressedPixMap::NbFaces()) range;
-  //!                          use -1 to skip reading the face data
-  //! @param theFileOffset [in] offset to the DDS data
-  //! @return loaded face or NULL if file cannot be read or not valid DDS file
-  Standard_EXPORT static Handle(Image_CompressedPixMap) Load (const Handle(Image_SupportedFormats)& theSupported,
-                                                              const TCollection_AsciiString& theFile,
-                                                              const Standard_Integer theFaceIndex,
-                                                              const int64_t theFileOffset = 0);
-
-  //! Load the face from DDS file.
-  //! @param theSupported [in] list of supported image formats
-  //! @param theBuffer    [in] pre-loaded file data, should be at least of 128 bytes long defining DDS header.
-  //! @param theFaceIndex [in] face index, within [0, Image_CompressedPixMap::NbFaces()) range;
-  //!                          use -1 to skip reading the face data
-  //! @return loaded face or NULL if file cannot be read or not valid DDS file
-  Standard_EXPORT static Handle(Image_CompressedPixMap) Load (const Handle(Image_SupportedFormats)& theSupported,
-                                                              const Handle(NCollection_Buffer)& theBuffer,
-                                                              const Standard_Integer theFaceIndex);
-
-  
-private:
-
-  struct DDSPixelFormat;
-  struct DDSFileHeader;
+    //! Load the face from DDS file.
+    //! @param theSupported [in] list of supported image formats
+    //! @param theBuffer    [in] pre-loaded file data, should be at least of 128 bytes long defining DDS header.
+    //! @param theFaceIndex [in] face index, within [0, Image_CompressedPixMap::NbFaces()) range;
+    //!                          use -1 to skip reading the face data
+    //! @return loaded face or NULL if file cannot be read or not valid DDS file
+    Standard_EXPORT static Handle(Image_CompressedPixMap)
+        Load(const Handle(Image_SupportedFormats) & theSupported, const Handle(NCollection_Buffer) & theBuffer,
+             const Standard_Integer theFaceIndex);
 
 private:
+    struct DDSPixelFormat;
+    struct DDSFileHeader;
 
-  //! Parse DDS header.
-  static Handle(Image_CompressedPixMap) parseHeader (const DDSFileHeader& theHeader);
-
+private:
+    //! Parse DDS header.
+    static Handle(Image_CompressedPixMap) parseHeader(const DDSFileHeader& theHeader);
 };
 
 #endif // _Image_DDSParser_HeaderFile

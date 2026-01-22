@@ -26,10 +26,10 @@ class Geom_UndefinedDerivative;
 DEFINE_STANDARD_HANDLE(Geom_UndefinedDerivative, Standard_DomainError)
 
 #if !defined No_Exception && !defined No_Geom_UndefinedDerivative
-  #define Geom_UndefinedDerivative_Raise_if(CONDITION, MESSAGE) \
-  if (CONDITION) throw Geom_UndefinedDerivative(MESSAGE);
+#define Geom_UndefinedDerivative_Raise_if(CONDITION, MESSAGE)                                                          \
+    if (CONDITION) throw Geom_UndefinedDerivative(MESSAGE);
 #else
-  #define Geom_UndefinedDerivative_Raise_if(CONDITION, MESSAGE)
+#define Geom_UndefinedDerivative_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Geom_UndefinedDerivative, Standard_DomainError)

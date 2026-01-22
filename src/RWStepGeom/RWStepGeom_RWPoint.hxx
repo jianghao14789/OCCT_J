@@ -27,42 +27,20 @@ class Interface_Check;
 class StepGeom_Point;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for Point
-class RWStepGeom_RWPoint 
-{
+class RWStepGeom_RWPoint {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWPoint();
 
-  
-  Standard_EXPORT RWStepGeom_RWPoint();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_Point)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_Point)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_Point) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_Point) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWPoint_HeaderFile

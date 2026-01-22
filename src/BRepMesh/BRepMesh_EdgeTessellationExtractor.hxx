@@ -25,39 +25,33 @@
 
 //! Auxiliary class implements functionality retrieving tessellated
 //! representation of an edge stored in polygon.
-class BRepMesh_EdgeTessellationExtractor : public IMeshTools_CurveTessellator
-{
+class BRepMesh_EdgeTessellationExtractor : public IMeshTools_CurveTessellator {
 public:
+    //! Constructor.
+    Standard_EXPORT BRepMesh_EdgeTessellationExtractor(const IMeshData::IEdgeHandle& theEdge,
+                                                       const IMeshData::IFaceHandle& theFace);
 
-  //! Constructor.
-  Standard_EXPORT BRepMesh_EdgeTessellationExtractor (
-    const IMeshData::IEdgeHandle& theEdge,
-    const IMeshData::IFaceHandle& theFace);
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMesh_EdgeTessellationExtractor();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMesh_EdgeTessellationExtractor ();
+    //! Returns number of tessellation points.
+    Standard_EXPORT virtual Standard_Integer PointsNb() const Standard_OVERRIDE;
 
-  //! Returns number of tessellation points.
-  Standard_EXPORT virtual Standard_Integer PointsNb () const Standard_OVERRIDE;
+    //! Returns parameters of solution with the given index.
+    //! @param theIndex index of tessellation point.
+    //! @param theParameter parameters on PCurve corresponded to the solution.
+    //! @param thePoint tessellation point.
+    //! @return True in case of valid result, false elewhere.
+    Standard_EXPORT virtual Standard_Boolean Value(const Standard_Integer theIndex, gp_Pnt& thePoint,
+                                                   Standard_Real& theParameter) const Standard_OVERRIDE;
 
-  //! Returns parameters of solution with the given index.
-  //! @param theIndex index of tessellation point.
-  //! @param theParameter parameters on PCurve corresponded to the solution.
-  //! @param thePoint tessellation point.
-  //! @return True in case of valid result, false elewhere.
-  Standard_EXPORT virtual Standard_Boolean Value (
-    const Standard_Integer theIndex,
-    gp_Pnt&                thePoint,
-    Standard_Real&         theParameter) const Standard_OVERRIDE;
-
-  DEFINE_STANDARD_RTTIEXT(BRepMesh_EdgeTessellationExtractor, IMeshTools_CurveTessellator)
+    DEFINE_STANDARD_RTTIEXT(BRepMesh_EdgeTessellationExtractor, IMeshTools_CurveTessellator)
 
 private:
-
-  BRepMesh_EdgeParameterProvider<Handle(TColStd_HArray1OfReal)>  myProvider;
-  const Poly_Triangulation*                                      myTriangulation;
-  const TColStd_Array1OfInteger*                                 myIndices;
-  TopLoc_Location                                                myLoc;
+    BRepMesh_EdgeParameterProvider<Handle(TColStd_HArray1OfReal)> myProvider;
+    const Poly_Triangulation* myTriangulation;
+    const TColStd_Array1OfInteger* myIndices;
+    TopLoc_Location myLoc;
 };
 
 #endif

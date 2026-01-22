@@ -26,11 +26,6 @@
 //! simple color
 //! color of surfaces
 //! color of curves
-enum XCAFDoc_ColorType
-{
-XCAFDoc_ColorGen,
-XCAFDoc_ColorSurf,
-XCAFDoc_ColorCurv
-};
+enum XCAFDoc_ColorType { XCAFDoc_ColorGen, XCAFDoc_ColorSurf, XCAFDoc_ColorCurv };
 
 #endif // _XCAFDoc_ColorType_HeaderFile

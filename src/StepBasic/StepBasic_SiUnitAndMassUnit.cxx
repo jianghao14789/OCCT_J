@@ -11,64 +11,52 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_DimensionalExponents.hxx>
 #include <StepBasic_MassUnit.hxx>
 #include <StepBasic_SiUnit.hxx>
 #include <StepBasic_SiUnitAndMassUnit.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_SiUnitAndMassUnit,StepBasic_SiUnit)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_SiUnitAndMassUnit, StepBasic_SiUnit)
 
 //=======================================================================
-//function : StepBasic_SiUnitAndLengthUnit
-//purpose  : 
+// function : StepBasic_SiUnitAndLengthUnit
+// purpose  :
 //=======================================================================
-StepBasic_SiUnitAndMassUnit::StepBasic_SiUnitAndMassUnit ()
-{
+StepBasic_SiUnitAndMassUnit::StepBasic_SiUnitAndMassUnit() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_SiUnitAndMassUnit::Init(const Standard_Boolean hasAprefix, const StepBasic_SiPrefix aPrefix,
+                                       const StepBasic_SiUnitName aName) {
+    // --- classe inherited fields ---
+    // --- ANDOR component fields ---
+    massUnit = new StepBasic_MassUnit();
+    Handle(StepBasic_DimensionalExponents) aDimensions;
+    aDimensions.Nullify();
+    massUnit->Init(aDimensions);
+
+    // --- ANDOR component fields ---
+    StepBasic_SiUnit::Init(hasAprefix, aPrefix, aName);
 }
 
-
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : SetMassUnit
+// purpose  :
 //=======================================================================
 
-void StepBasic_SiUnitAndMassUnit::Init(const Standard_Boolean hasAprefix,
-                                       const StepBasic_SiPrefix aPrefix,
-                                       const StepBasic_SiUnitName aName)
-{
-  // --- classe inherited fields ---
-  // --- ANDOR component fields ---
-  massUnit = new StepBasic_MassUnit();
-  Handle(StepBasic_DimensionalExponents) aDimensions;
-  aDimensions.Nullify();
-  massUnit->Init(aDimensions);
-
-  // --- ANDOR component fields ---
-  StepBasic_SiUnit::Init(hasAprefix, aPrefix, aName);
+void StepBasic_SiUnitAndMassUnit::SetMassUnit(const Handle(StepBasic_MassUnit) & aMassUnit) {
+    massUnit = aMassUnit;
 }
 
-
 //=======================================================================
-//function : SetMassUnit
-//purpose  : 
+// function : MassUnit
+// purpose  :
 //=======================================================================
 
-void StepBasic_SiUnitAndMassUnit::SetMassUnit(const Handle(StepBasic_MassUnit)& aMassUnit)
-{
-  massUnit = aMassUnit;
+Handle(StepBasic_MassUnit) StepBasic_SiUnitAndMassUnit::MassUnit() const {
+    return massUnit;
 }
-
-
-//=======================================================================
-//function : MassUnit
-//purpose  : 
-//=======================================================================
-
-Handle(StepBasic_MassUnit) StepBasic_SiUnitAndMassUnit::MassUnit() const
-{
-  return massUnit;
-}
-
-

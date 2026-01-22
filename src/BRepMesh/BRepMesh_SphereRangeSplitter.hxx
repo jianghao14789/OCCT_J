@@ -21,36 +21,26 @@
 
 //! Auxiliary class extending default range splitter in
 //! order to generate internal nodes for spherical surface.
-class BRepMesh_SphereRangeSplitter : public BRepMesh_DefaultRangeSplitter
-{
+class BRepMesh_SphereRangeSplitter : public BRepMesh_DefaultRangeSplitter {
 public:
+    //! Constructor.
+    BRepMesh_SphereRangeSplitter() {}
 
-  //! Constructor.
-  BRepMesh_SphereRangeSplitter()
-  {
-  }
+    //! Destructor.
+    virtual ~BRepMesh_SphereRangeSplitter() {}
 
-  //! Destructor.
-  virtual ~BRepMesh_SphereRangeSplitter()
-  {
-  }
-
-  //! Returns list of nodes generated using surface data and specified parameters.
-  Standard_EXPORT virtual Handle(IMeshData::ListOfPnt2d) GenerateSurfaceNodes(
-    const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
+    //! Returns list of nodes generated using surface data and specified parameters.
+    Standard_EXPORT virtual Handle(IMeshData::ListOfPnt2d)
+        GenerateSurfaceNodes(const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
 
 private:
-
-  //! Computes step for the given range.
-  void computeStep(
-    const std::pair<Standard_Real, Standard_Real>& theRange,
-    const Standard_Real                            theDefaultStep,
-    std::pair<Standard_Real, Standard_Real>&       theStepAndOffset) const
-  {
-    const Standard_Real aDiff = theRange.second - theRange.first;
-    theStepAndOffset.first  = aDiff / ((Standard_Integer) (aDiff / theDefaultStep) + 1);
-    theStepAndOffset.second = theRange.second - Precision::PConfusion();
-  }
+    //! Computes step for the given range.
+    void computeStep(const std::pair<Standard_Real, Standard_Real>& theRange, const Standard_Real theDefaultStep,
+                     std::pair<Standard_Real, Standard_Real>& theStepAndOffset) const {
+        const Standard_Real aDiff = theRange.second - theRange.first;
+        theStepAndOffset.first = aDiff / ((Standard_Integer)(aDiff / theDefaultStep) + 1);
+        theStepAndOffset.second = theRange.second - Precision::PConfusion();
+    }
 };
 
 #endif

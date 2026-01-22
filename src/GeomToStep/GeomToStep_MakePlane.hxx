@@ -26,46 +26,23 @@ class StepGeom_Plane;
 class gp_Pln;
 class Geom_Plane;
 
-
 //! This class implements the mapping between classes
 //! Plane from Geom and Pln from gp, and the class
 //! Plane from StepGeom which describes a plane from
 //! Prostep.
-class GeomToStep_MakePlane  : public GeomToStep_Root
-{
+class GeomToStep_MakePlane : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakePlane(const gp_Pln& P);
 
-  
-  Standard_EXPORT GeomToStep_MakePlane(const gp_Pln& P);
-  
-  Standard_EXPORT GeomToStep_MakePlane(const Handle(Geom_Plane)& P);
-  
-  Standard_EXPORT const Handle(StepGeom_Plane)& Value() const;
+    Standard_EXPORT GeomToStep_MakePlane(const Handle(Geom_Plane) & P);
 
-
-
+    Standard_EXPORT const Handle(StepGeom_Plane) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_Plane) thePlane;
-
-
+    Handle(StepGeom_Plane) thePlane;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakePlane_HeaderFile

@@ -22,60 +22,49 @@ IMPLEMENT_DERIVED_ATTRIBUTE(XCAFDoc_NoteBalloon, XCAFDoc_NoteComment)
 // function : GetID
 // purpose  :
 // =======================================================================
-const Standard_GUID&
-XCAFDoc_NoteBalloon::GetID()
-{
-  static Standard_GUID s_ID("1127951D-87D5-4ecc-89D5-D1406576C43F");
-  return s_ID;
+const Standard_GUID& XCAFDoc_NoteBalloon::GetID() {
+    static Standard_GUID s_ID("1127951D-87D5-4ecc-89D5-D1406576C43F");
+    return s_ID;
 }
 
 // =======================================================================
 // function : Get
 // purpose  :
 // =======================================================================
-Handle(XCAFDoc_NoteBalloon)
-XCAFDoc_NoteBalloon::Get(const TDF_Label& theLabel)
-{
-  Handle(XCAFDoc_NoteBalloon) aThis;
-  theLabel.FindAttribute(XCAFDoc_NoteBalloon::GetID(), aThis);
-  return aThis;
+Handle(XCAFDoc_NoteBalloon) XCAFDoc_NoteBalloon::Get(const TDF_Label& theLabel) {
+    Handle(XCAFDoc_NoteBalloon) aThis;
+    theLabel.FindAttribute(XCAFDoc_NoteBalloon::GetID(), aThis);
+    return aThis;
 }
 
 // =======================================================================
 // function : Set
 // purpose  :
 // =======================================================================
-Handle(XCAFDoc_NoteBalloon)
-XCAFDoc_NoteBalloon::Set(const TDF_Label&                  theLabel,
-                         const TCollection_ExtendedString& theUserName,
-                         const TCollection_ExtendedString& theTimeStamp,
-                         const TCollection_ExtendedString& theComment)
-{
-  Handle(XCAFDoc_NoteBalloon) aNoteBalloon;
-  if (!theLabel.IsNull() && !theLabel.FindAttribute(XCAFDoc_NoteBalloon::GetID(), aNoteBalloon))
-  {
-    aNoteBalloon = new XCAFDoc_NoteBalloon();
-    aNoteBalloon->XCAFDoc_Note::Set(theUserName, theTimeStamp);
-    aNoteBalloon->XCAFDoc_NoteComment::Set(theComment);
-    theLabel.AddAttribute(aNoteBalloon);
-  }
-  return aNoteBalloon;
+Handle(XCAFDoc_NoteBalloon) XCAFDoc_NoteBalloon::Set(const TDF_Label& theLabel,
+                                                     const TCollection_ExtendedString& theUserName,
+                                                     const TCollection_ExtendedString& theTimeStamp,
+                                                     const TCollection_ExtendedString& theComment) {
+    Handle(XCAFDoc_NoteBalloon) aNoteBalloon;
+    if (!theLabel.IsNull() && !theLabel.FindAttribute(XCAFDoc_NoteBalloon::GetID(), aNoteBalloon)) {
+        aNoteBalloon = new XCAFDoc_NoteBalloon();
+        aNoteBalloon->XCAFDoc_Note::Set(theUserName, theTimeStamp);
+        aNoteBalloon->XCAFDoc_NoteComment::Set(theComment);
+        theLabel.AddAttribute(aNoteBalloon);
+    }
+    return aNoteBalloon;
 }
 
 // =======================================================================
 // function : XCAFDoc_NoteBalloon
 // purpose  :
 // =======================================================================
-XCAFDoc_NoteBalloon::XCAFDoc_NoteBalloon()
-{
-}
+XCAFDoc_NoteBalloon::XCAFDoc_NoteBalloon() {}
 
 // =======================================================================
 // function : ID
 // purpose  :
 // =======================================================================
-const Standard_GUID&
-XCAFDoc_NoteBalloon::ID() const
-{
-  return GetID();
+const Standard_GUID& XCAFDoc_NoteBalloon::ID() const {
+    return GetID();
 }

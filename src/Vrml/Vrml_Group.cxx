@@ -11,26 +11,20 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Vrml_Group.hxx>
 
-Vrml_Group::Vrml_Group()
-{
-  myFlagPrint = 0;
+Vrml_Group::Vrml_Group() {
+    myFlagPrint = 0;
 }
 
-Standard_OStream& Vrml_Group::Print(Standard_OStream& anOStream)
-{
-  if ( myFlagPrint == 0 )
-    {
-      anOStream  << "Group {\n";
-      myFlagPrint = 1;
-    } //End of if
-  else 
-    {
-     anOStream  << "}\n";
-     myFlagPrint = 0;
+Standard_OStream& Vrml_Group::Print(Standard_OStream& anOStream) {
+    if (myFlagPrint == 0) {
+        anOStream << "Group {\n";
+        myFlagPrint = 1;
+    } // End of if
+    else {
+        anOStream << "}\n";
+        myFlagPrint = 0;
     }
- return anOStream;
+    return anOStream;
 }
-

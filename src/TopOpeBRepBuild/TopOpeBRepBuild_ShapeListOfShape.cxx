@@ -14,80 +14,69 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TopoDS_Shape.hxx>
 #include <TopOpeBRepBuild_ShapeListOfShape.hxx>
 #include <TopOpeBRepTool_define.hxx>
 
 //=======================================================================
-//function : TopOpeBRepBuild_ShapeListOfShape
-//purpose  : 
+// function : TopOpeBRepBuild_ShapeListOfShape
+// purpose  :
 //=======================================================================
 
-TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape()
-{
+TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape() {}
+
+//=======================================================================
+// function : TopOpeBRepBuild_ShapeListOfShape
+// purpose  :
+//=======================================================================
+
+TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape(const TopoDS_Shape& S) {
+    myShape = S;
 }
 
 //=======================================================================
-//function : TopOpeBRepBuild_ShapeListOfShape
-//purpose  : 
+// function : TopOpeBRepBuild_ShapeListOfShape
+// purpose  :
 //=======================================================================
 
-TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape
-(const TopoDS_Shape& S)
-{
-  myShape = S;
+TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape(const TopoDS_Shape& S,
+                                                                   const TopTools_ListOfShape& L) {
+    myShape = S;
+    myList = L;
 }
 
 //=======================================================================
-//function : TopOpeBRepBuild_ShapeListOfShape
-//purpose  : 
+// function : List
+// purpose  :
 //=======================================================================
 
-TopOpeBRepBuild_ShapeListOfShape::TopOpeBRepBuild_ShapeListOfShape
-(const TopoDS_Shape& S, const TopTools_ListOfShape& L)
-{
-  myShape = S;
-  myList = L;
+const TopTools_ListOfShape& TopOpeBRepBuild_ShapeListOfShape::List() const {
+    return myList;
 }
 
 //=======================================================================
-//function : List
-//purpose  : 
+// function : ChangeList
+// purpose  :
 //=======================================================================
 
-const TopTools_ListOfShape& TopOpeBRepBuild_ShapeListOfShape::List() const
-{
-  return myList;
+TopTools_ListOfShape& TopOpeBRepBuild_ShapeListOfShape::ChangeList() {
+    return myList;
 }
 
 //=======================================================================
-//function : ChangeList
-//purpose  : 
+// function : Shape
+// purpose  :
 //=======================================================================
 
-TopTools_ListOfShape& TopOpeBRepBuild_ShapeListOfShape::ChangeList()
-{
-  return myList;
+const TopoDS_Shape& TopOpeBRepBuild_ShapeListOfShape::Shape() const {
+    return myShape;
 }
 
 //=======================================================================
-//function : Shape
-//purpose  : 
+// function : ChangeShape
+// purpose  :
 //=======================================================================
 
-const TopoDS_Shape& TopOpeBRepBuild_ShapeListOfShape::Shape() const
-{
-  return myShape;
+TopoDS_Shape& TopOpeBRepBuild_ShapeListOfShape::ChangeShape() {
+    return myShape;
 }
-
-//=======================================================================
-//function : ChangeShape
-//purpose  : 
-//=======================================================================
-
-TopoDS_Shape& TopOpeBRepBuild_ShapeListOfShape::ChangeShape()
-{
-  return myShape;
-}
-

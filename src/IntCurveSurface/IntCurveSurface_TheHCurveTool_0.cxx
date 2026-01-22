@@ -24,11 +24,9 @@
 #include <gp_Vec.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
- 
 
 #define CurveGen Handle(Adaptor3d_Curve)
 #define CurveGen_hxx <Adaptor3d_Curve.hxx>
 #define IntCurveSurface_HCurveTool IntCurveSurface_TheHCurveTool
 #define IntCurveSurface_HCurveTool_hxx <IntCurveSurface_TheHCurveTool.hxx>
 #include <IntCurveSurface_HCurveTool.gxx>
-

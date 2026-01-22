@@ -33,26 +33,20 @@
 #include <Standard_Dump.hxx>
 #include <Standard_OutOfRange.hxx>
 
-Standard_Boolean gp_Vec::IsEqual
-(const gp_Vec& Other,
-    const Standard_Real LinearTolerance,
-    const Standard_Real AngularTolerance) const
-{
-    if (Magnitude() <= LinearTolerance ||
-        Other.Magnitude() <= LinearTolerance) {
+Standard_Boolean gp_Vec::IsEqual(const gp_Vec& Other, const Standard_Real LinearTolerance,
+                                 const Standard_Real AngularTolerance) const {
+    if (Magnitude() <= LinearTolerance || Other.Magnitude() <= LinearTolerance) {
         Standard_Real val = Magnitude() - Other.Magnitude();
         if (val < 0) val = -val;
         return val <= LinearTolerance;
-    }
-    else {
+    } else {
         Standard_Real val = Magnitude() - Other.Magnitude();
         if (val < 0) val = -val;
         return val <= LinearTolerance && Angle(Other) <= AngularTolerance;
     }
 }
 
-void gp_Vec::Mirror(const gp_Vec& V)
-{
+void gp_Vec::Mirror(const gp_Vec& V) {
     Standard_Real D = V.coord.Modulus();
     if (D > gp::Resolution()) {
         const gp_XYZ& XYZ = V.coord;
@@ -71,8 +65,7 @@ void gp_Vec::Mirror(const gp_Vec& V)
     }
 }
 
-void gp_Vec::Mirror(const gp_Ax1& A1)
-{
+void gp_Vec::Mirror(const gp_Ax1& A1) {
     const gp_XYZ& V = A1.Direction().XYZ();
     Standard_Real A = V.X();
     Standard_Real B = V.Y();
@@ -88,41 +81,41 @@ void gp_Vec::Mirror(const gp_Ax1& A1)
     coord.SetZ(M2 * X + M3 * Y + ((2.0 * C * C) - 1.0) * Z);
 }
 
-void gp_Vec::Mirror(const gp_Ax2& A2)
-{
+void gp_Vec::Mirror(const gp_Ax2& A2) {
     gp_XYZ Z = A2.Direction().XYZ();
     gp_XYZ MirXYZ = Z.Crossed(coord);
-    if (MirXYZ.Modulus() <= gp::Resolution()) { coord.Reverse(); }
-    else {
+    if (MirXYZ.Modulus() <= gp::Resolution()) {
+        coord.Reverse();
+    } else {
         Z.Cross(MirXYZ);
         Mirror(Z);
     }
 }
 
-void gp_Vec::Transform(const gp_Trsf& T)
-{
-    if (T.Form() == gp_Identity || T.Form() == gp_Translation) {}
-    else if (T.Form() == gp_PntMirror) { coord.Reverse(); }
-    else if (T.Form() == gp_Scale) { coord.Multiply(T.ScaleFactor()); }
-    else { coord.Multiply(T.VectorialPart()); }
+void gp_Vec::Transform(const gp_Trsf& T) {
+    if (T.Form() == gp_Identity || T.Form() == gp_Translation) {
+    } else if (T.Form() == gp_PntMirror) {
+        coord.Reverse();
+    } else if (T.Form() == gp_Scale) {
+        coord.Multiply(T.ScaleFactor());
+    } else {
+        coord.Multiply(T.VectorialPart());
+    }
 }
 
-gp_Vec gp_Vec::Mirrored(const gp_Vec& V) const
-{
+gp_Vec gp_Vec::Mirrored(const gp_Vec& V) const {
     gp_Vec Vres = *this;
     Vres.Mirror(V);
     return Vres;
 }
 
-gp_Vec gp_Vec::Mirrored(const gp_Ax1& A1) const
-{
+gp_Vec gp_Vec::Mirrored(const gp_Ax1& A1) const {
     gp_Vec Vres = *this;
     Vres.Mirror(A1);
     return Vres;
 }
 
-gp_Vec gp_Vec::Mirrored(const gp_Ax2& A2) const
-{
+gp_Vec gp_Vec::Mirrored(const gp_Ax2& A2) const {
     gp_Vec Vres = *this;
     Vres.Mirror(A2);
     return Vres;
@@ -132,7 +125,6 @@ gp_Vec gp_Vec::Mirrored(const gp_Ax2& A2) const
 // function : DumpJson
 // purpose  :
 // =======================================================================
-void gp_Vec::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-{
+void gp_Vec::DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
     OCCT_DUMP_VECTOR_CLASS(theOStream, "gp_Vec", 3, coord.X(), coord.Y(), coord.Z())
 }

@@ -19,11 +19,6 @@
 
 //! Defines the horizontal position of the text
 //! relative to its anchor.
-enum Graphic3d_HorizontalTextAlignment
-{
-Graphic3d_HTA_LEFT,
-Graphic3d_HTA_CENTER,
-Graphic3d_HTA_RIGHT
-};
+enum Graphic3d_HorizontalTextAlignment { Graphic3d_HTA_LEFT, Graphic3d_HTA_CENTER, Graphic3d_HTA_RIGHT };
 
 #endif // _Graphic3d_HorizontalTextAlignment_HeaderFile

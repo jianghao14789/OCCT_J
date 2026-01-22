@@ -24,7 +24,6 @@
 #include <IGESData_IGESEntity.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class IGESGeom_RuledSurface;
 DEFINE_STANDARD_HANDLE(IGESGeom_RuledSurface, IGESData_IGESEntity)
 
@@ -37,72 +36,54 @@ DEFINE_STANDARD_HANDLE(IGESGeom_RuledSurface, IGESData_IGESEntity)
 //! points, lines, circles, conics, rational B-splines,
 //! parametric splines or any parametric curve defined in
 //! the IGES specification.
-class IGESGeom_RuledSurface : public IGESData_IGESEntity
-{
+class IGESGeom_RuledSurface : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESGeom_RuledSurface();
 
-  
-  Standard_EXPORT IGESGeom_RuledSurface();
-  
-  //! This method is used to set the fields of the class
-  //! RuledSurface
-  //! - aCurve       : First parametric curve
-  //! - anotherCurve : Second parametric curve
-  //! - aDirFlag     : Direction Flag
-  //! 0 = Join first to first, last to last
-  //! 1 = Join first to last, last to first
-  //! - aDevFlag     : Developable Surface Flag
-  //! 1 = Developable
-  //! 0 = Possibly not
-  Standard_EXPORT void Init (const Handle(IGESData_IGESEntity)& aCurve, const Handle(IGESData_IGESEntity)& anotherCurve, const Standard_Integer aDirFlag, const Standard_Integer aDevFlag);
-  
-  //! Sets <me> to be Ruled by Parameter (Form 1) if <mode> is
-  //! True, or Ruled by Length (Form 0) else
-  Standard_EXPORT void SetRuledByParameter (const Standard_Boolean mode);
-  
-  //! Returns True if Form is 1
-  Standard_EXPORT Standard_Boolean IsRuledByParameter() const;
-  
-  //! returns the first curve
-  Standard_EXPORT Handle(IGESData_IGESEntity) FirstCurve() const;
-  
-  //! returns the second curve
-  Standard_EXPORT Handle(IGESData_IGESEntity) SecondCurve() const;
-  
-  //! return the sense of direction
-  //! 0 = Join first to first, last to last
-  //! 1 = Join first to last, last to first
-  Standard_EXPORT Standard_Integer DirectionFlag() const;
-  
-  //! returns True if developable else False
-  Standard_EXPORT Standard_Boolean IsDevelopable() const;
+    //! This method is used to set the fields of the class
+    //! RuledSurface
+    //! - aCurve       : First parametric curve
+    //! - anotherCurve : Second parametric curve
+    //! - aDirFlag     : Direction Flag
+    //! 0 = Join first to first, last to last
+    //! 1 = Join first to last, last to first
+    //! - aDevFlag     : Developable Surface Flag
+    //! 1 = Developable
+    //! 0 = Possibly not
+    Standard_EXPORT void Init(const Handle(IGESData_IGESEntity) & aCurve,
+                              const Handle(IGESData_IGESEntity) & anotherCurve, const Standard_Integer aDirFlag,
+                              const Standard_Integer aDevFlag);
 
+    //! Sets <me> to be Ruled by Parameter (Form 1) if <mode> is
+    //! True, or Ruled by Length (Form 0) else
+    Standard_EXPORT void SetRuledByParameter(const Standard_Boolean mode);
 
+    //! Returns True if Form is 1
+    Standard_EXPORT Standard_Boolean IsRuledByParameter() const;
 
+    //! returns the first curve
+    Standard_EXPORT Handle(IGESData_IGESEntity) FirstCurve() const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESGeom_RuledSurface,IGESData_IGESEntity)
+    //! returns the second curve
+    Standard_EXPORT Handle(IGESData_IGESEntity) SecondCurve() const;
+
+    //! return the sense of direction
+    //! 0 = Join first to first, last to last
+    //! 1 = Join first to last, last to first
+    Standard_EXPORT Standard_Integer DirectionFlag() const;
+
+    //! returns True if developable else False
+    Standard_EXPORT Standard_Boolean IsDevelopable() const;
+
+    DEFINE_STANDARD_RTTIEXT(IGESGeom_RuledSurface, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(IGESData_IGESEntity) theCurve1;
-  Handle(IGESData_IGESEntity) theCurve2;
-  Standard_Integer theDirFlag;
-  Standard_Integer theDevFlag;
-
-
+    Handle(IGESData_IGESEntity) theCurve1;
+    Handle(IGESData_IGESEntity) theCurve2;
+    Standard_Integer theDirFlag;
+    Standard_Integer theDevFlag;
 };
-
-
-
-
-
-
 
 #endif // _IGESGeom_RuledSurface_HeaderFile

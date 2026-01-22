@@ -22,43 +22,33 @@
 class TCollection_AsciiString;
 
 //! Auxiliary tool to control view updates.
-class ViewerTest_AutoUpdater
-{
+class ViewerTest_AutoUpdater {
 public:
-
-  //! Enumeration to control auto-update
-  enum RedrawMode
-  {
-    RedrawMode_Auto = -1,
-    RedrawMode_Forced,
-    RedrawMode_Suppressed
-  };
+    //! Enumeration to control auto-update
+    enum RedrawMode { RedrawMode_Auto = -1, RedrawMode_Forced, RedrawMode_Suppressed };
 
 public:
+    //! Constructor
+    Standard_EXPORT ViewerTest_AutoUpdater(const Handle(AIS_InteractiveContext) & theContext,
+                                           const Handle(V3d_View) & theView);
 
-  //! Constructor
-  Standard_EXPORT ViewerTest_AutoUpdater (const Handle(AIS_InteractiveContext)& theContext,
-                                          const Handle(V3d_View)&               theView);
+    //! Destructor to automatically update view
+    Standard_EXPORT ~ViewerTest_AutoUpdater();
 
-  //! Destructor to automatically update view
-  Standard_EXPORT ~ViewerTest_AutoUpdater();
+    //! Parse redraw mode argument
+    Standard_EXPORT Standard_Boolean parseRedrawMode(const TCollection_AsciiString& theArg);
 
-  //! Parse redraw mode argument
-  Standard_EXPORT Standard_Boolean parseRedrawMode (const TCollection_AsciiString& theArg);
+    //! Disable autoupdate
+    Standard_EXPORT void Invalidate();
 
-  //! Disable autoupdate
-  Standard_EXPORT void Invalidate();
-
-  //! Finally update view
-  Standard_EXPORT void Update();
+    //! Finally update view
+    Standard_EXPORT void Update();
 
 private:
-
-  Handle(AIS_InteractiveContext)     myContext;
-  Handle(V3d_View)                   myView;
-  ViewerTest_AutoUpdater::RedrawMode myToUpdate;
-  Standard_Boolean                   myWasAutoUpdate;
-
+    Handle(AIS_InteractiveContext) myContext;
+    Handle(V3d_View) myView;
+    ViewerTest_AutoUpdater::RedrawMode myToUpdate;
+    Standard_Boolean myWasAutoUpdate;
 };
 
 #endif // _ViewerTest_AutoUpdater_HeaderFile

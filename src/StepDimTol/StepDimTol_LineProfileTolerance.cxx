@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepDimTol_LineProfileTolerance.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_LineProfileTolerance,StepDimTol_GeometricTolerance)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_LineProfileTolerance, StepDimTol_GeometricTolerance)
 
 //=======================================================================
-//function : StepDimTol_LineProfileTolerance
-//purpose  : 
+// function : StepDimTol_LineProfileTolerance
+// purpose  :
 //=======================================================================
-StepDimTol_LineProfileTolerance::StepDimTol_LineProfileTolerance ()
-{
-}
+StepDimTol_LineProfileTolerance::StepDimTol_LineProfileTolerance() {}

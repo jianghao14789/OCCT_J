@@ -15,61 +15,55 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : GetNAUO
-//purpose  : 
+// function : GetNAUO
+// purpose  :
 //=======================================================================
 
-inline Handle(StepRepr_NextAssemblyUsageOccurrence) STEPSelections_AssemblyLink::GetNAUO() const
-{
-  return myNAUO;
+inline Handle(StepRepr_NextAssemblyUsageOccurrence) STEPSelections_AssemblyLink::GetNAUO() const {
+    return myNAUO;
 }
 
 //=======================================================================
-//function : GetSDSR
-//purpose  : 
+// function : GetSDSR
+// purpose  :
 //=======================================================================
 
-inline Handle(Standard_Transient) STEPSelections_AssemblyLink::GetItem() const
-{
-  return myItem;
+inline Handle(Standard_Transient) STEPSelections_AssemblyLink::GetItem() const {
+    return myItem;
 }
 
 //=======================================================================
-//function : GetComponent
-//purpose  : 
+// function : GetComponent
+// purpose  :
 //=======================================================================
 
-inline Handle(STEPSelections_AssemblyComponent) STEPSelections_AssemblyLink::GetComponent() const
-{
-  return myComponent;
+inline Handle(STEPSelections_AssemblyComponent) STEPSelections_AssemblyLink::GetComponent() const {
+    return myComponent;
 }
 
 //=======================================================================
-//function : SetNAUO
-//purpose  : 
+// function : SetNAUO
+// purpose  :
 //=======================================================================
 
-inline void STEPSelections_AssemblyLink::SetNAUO(const Handle(StepRepr_NextAssemblyUsageOccurrence)& nauo)
-{
-  myNAUO = nauo;
+inline void STEPSelections_AssemblyLink::SetNAUO(const Handle(StepRepr_NextAssemblyUsageOccurrence) & nauo) {
+    myNAUO = nauo;
 }
 
 //=======================================================================
-//function : SetCDSR
-//purpose  : 
+// function : SetCDSR
+// purpose  :
 //=======================================================================
 
-inline void STEPSelections_AssemblyLink::SetItem(const Handle(Standard_Transient)& item)
-{
-  myItem = item;
+inline void STEPSelections_AssemblyLink::SetItem(const Handle(Standard_Transient) & item) {
+    myItem = item;
 }
 
 //=======================================================================
-//function : SetComponent
-//purpose  : 
+// function : SetComponent
+// purpose  :
 //=======================================================================
 
-inline void STEPSelections_AssemblyLink::SetComponent(const Handle(STEPSelections_AssemblyComponent)& part)
-{
-  myComponent = part;
+inline void STEPSelections_AssemblyLink::SetComponent(const Handle(STEPSelections_AssemblyComponent) & part) {
+    myComponent = part;
 }

@@ -21,16 +21,13 @@
 // function : HashCode
 // purpose  :
 //============================================================================
-Standard_Integer HashCode(const Standard_ShortReal theShortReal, const Standard_Integer theUpperBound)
-{
-    if (theUpperBound < 1)
-    {
+Standard_Integer HashCode(const Standard_ShortReal theShortReal, const Standard_Integer theUpperBound) {
+    if (theUpperBound < 1) {
         throw Standard_RangeError("Try to apply HashCode method with negative or null argument.");
     }
-    union
-    {
+    union {
         Standard_ShortReal R;
-        Standard_Integer   I;
+        Standard_Integer I;
     } U;
     U.R = theShortReal;
 

@@ -31,113 +31,90 @@
 #include <Message_Messenger.hxx>
 #include <Standard_DomainError.hxx>
 
-IGESBasic_ToolHierarchy::IGESBasic_ToolHierarchy ()    {  }
+IGESBasic_ToolHierarchy::IGESBasic_ToolHierarchy() {}
 
+void IGESBasic_ToolHierarchy::ReadOwnParams(const Handle(IGESBasic_Hierarchy) & ent,
+                                            const Handle(IGESData_IGESReaderData) & /*IR*/,
+                                            IGESData_ParamReader& PR) const {
+    Standard_Integer tempNbPropertyValues;
+    Standard_Integer tempLineFont;
+    Standard_Integer tempView;
+    Standard_Integer tempEntityLevel;
+    Standard_Integer tempBlankStatus;
+    Standard_Integer tempLineWeight;
+    Standard_Integer tempColorNum;
+    // Standard_Boolean st; //szv#4:S4163:12Mar99 not needed
 
-void  IGESBasic_ToolHierarchy::ReadOwnParams
-  (const Handle(IGESBasic_Hierarchy)& ent,
-   const Handle(IGESData_IGESReaderData)& /*IR*/, IGESData_ParamReader& PR) const
-{
-  Standard_Integer tempNbPropertyValues;
-  Standard_Integer tempLineFont;
-  Standard_Integer tempView;
-  Standard_Integer tempEntityLevel;
-  Standard_Integer tempBlankStatus;
-  Standard_Integer tempLineWeight;
-  Standard_Integer tempColorNum;
-  //Standard_Boolean st; //szv#4:S4163:12Mar99 not needed
+    // szv#4:S4163:12Mar99 `st=` not needed
+    PR.ReadInteger(PR.Current(), "No. of Property values", tempNbPropertyValues);
+    PR.ReadInteger(PR.Current(), "LineFont", tempLineFont);
+    PR.ReadInteger(PR.Current(), "View", tempView);
+    PR.ReadInteger(PR.Current(), "Entity level", tempEntityLevel);
+    PR.ReadInteger(PR.Current(), "Blank status", tempBlankStatus);
+    PR.ReadInteger(PR.Current(), "Line weight", tempLineWeight);
+    PR.ReadInteger(PR.Current(), "Color number", tempColorNum);
 
-  //szv#4:S4163:12Mar99 `st=` not needed
-  PR.ReadInteger(PR.Current(),"No. of Property values",tempNbPropertyValues);
-  PR.ReadInteger(PR.Current(),"LineFont",tempLineFont);
-  PR.ReadInteger(PR.Current(),"View",tempView);
-  PR.ReadInteger(PR.Current(),"Entity level",tempEntityLevel);
-  PR.ReadInteger(PR.Current(),"Blank status",tempBlankStatus);
-  PR.ReadInteger(PR.Current(),"Line weight",tempLineWeight);
-  PR.ReadInteger(PR.Current(),"Color number",tempColorNum);
-
-  DirChecker(ent).CheckTypeAndForm(PR.CCheck(),ent);
-  ent->Init(tempNbPropertyValues,tempLineFont,tempView,tempEntityLevel,
-	    tempBlankStatus,tempLineWeight,tempColorNum);
+    DirChecker(ent).CheckTypeAndForm(PR.CCheck(), ent);
+    ent->Init(tempNbPropertyValues, tempLineFont, tempView, tempEntityLevel, tempBlankStatus, tempLineWeight,
+              tempColorNum);
 }
 
-void  IGESBasic_ToolHierarchy::WriteOwnParams
-  (const Handle(IGESBasic_Hierarchy)& ent, IGESData_IGESWriter& IW) const
-{
-  IW.Send(ent->NbPropertyValues());
-  IW.Send(ent->NewLineFont());
-  IW.Send(ent->NewView());
-  IW.Send(ent->NewEntityLevel());
-  IW.Send(ent->NewBlankStatus());
-  IW.Send(ent->NewLineWeight());
-  IW.Send(ent->NewColorNum());
+void IGESBasic_ToolHierarchy::WriteOwnParams(const Handle(IGESBasic_Hierarchy) & ent, IGESData_IGESWriter& IW) const {
+    IW.Send(ent->NbPropertyValues());
+    IW.Send(ent->NewLineFont());
+    IW.Send(ent->NewView());
+    IW.Send(ent->NewEntityLevel());
+    IW.Send(ent->NewBlankStatus());
+    IW.Send(ent->NewLineWeight());
+    IW.Send(ent->NewColorNum());
 }
 
-void  IGESBasic_ToolHierarchy::OwnShared
-  (const Handle(IGESBasic_Hierarchy)& /*ent*/, Interface_EntityIterator& /*iter*/) const
-{
+void IGESBasic_ToolHierarchy::OwnShared(const Handle(IGESBasic_Hierarchy) & /*ent*/,
+                                        Interface_EntityIterator& /*iter*/) const {}
+
+void IGESBasic_ToolHierarchy::OwnCopy(const Handle(IGESBasic_Hierarchy) & another,
+                                      const Handle(IGESBasic_Hierarchy) & ent, Interface_CopyTool& /*TC*/) const {
+    ent->Init(6, another->NewLineFont(), another->NewView(), another->NewEntityLevel(), another->NewBlankStatus(),
+              another->NewLineWeight(), another->NewColorNum());
 }
 
-void  IGESBasic_ToolHierarchy::OwnCopy
-  (const Handle(IGESBasic_Hierarchy)& another,
-   const Handle(IGESBasic_Hierarchy)& ent, Interface_CopyTool& /*TC*/) const
-{
-  ent->Init(6,another->NewLineFont(), another->NewView(),
-	    another->NewEntityLevel(),another->NewBlankStatus(),
-	    another->NewLineWeight(), another->NewColorNum());
+Standard_Boolean IGESBasic_ToolHierarchy::OwnCorrect(const Handle(IGESBasic_Hierarchy) & ent) const {
+    Standard_Boolean res = (ent->NbPropertyValues() != 6);
+    if (res)
+        ent->Init(6, ent->NewLineFont(), ent->NewView(), ent->NewEntityLevel(), ent->NewBlankStatus(),
+                  ent->NewLineWeight(), ent->NewColorNum());
+    return res; // nbpropertyvalues=6
 }
 
-Standard_Boolean  IGESBasic_ToolHierarchy::OwnCorrect
-  (const Handle(IGESBasic_Hierarchy)& ent) const
-{
-  Standard_Boolean res = (ent->NbPropertyValues() != 6);
-  if (res) ent->Init
-    (6,ent->NewLineFont(),ent->NewView(),ent->NewEntityLevel(),
-     ent->NewBlankStatus(),ent->NewLineWeight(),ent->NewColorNum());
-  return res;    // nbpropertyvalues=6
+IGESData_DirChecker IGESBasic_ToolHierarchy::DirChecker(const Handle(IGESBasic_Hierarchy) & /*ent*/) const {
+    IGESData_DirChecker DC(406, 10); // Form no = 10 & Type = 406
+    DC.Structure(IGESData_DefVoid);
+    DC.GraphicsIgnored();
+    DC.BlankStatusIgnored();
+    DC.UseFlagIgnored();
+    DC.HierarchyStatusIgnored();
+    return DC;
 }
 
-IGESData_DirChecker  IGESBasic_ToolHierarchy::DirChecker
-  (const Handle(IGESBasic_Hierarchy)& /*ent*/) const
-{
-  IGESData_DirChecker DC(406,10);  //Form no = 10 & Type = 406
-  DC.Structure(IGESData_DefVoid);
-  DC.GraphicsIgnored();
-  DC.BlankStatusIgnored();
-  DC.UseFlagIgnored();
-  DC.HierarchyStatusIgnored();
-  return DC;
+void IGESBasic_ToolHierarchy::OwnCheck(const Handle(IGESBasic_Hierarchy) & ent, const Interface_ShareTool&,
+                                       Handle(Interface_Check) & ach) const {
+    if (ent->NbPropertyValues() != 6) ach->AddFail("Number of Property Values != 6");
+    if (ent->NewLineFont() != 0 && ent->NewLineFont() != 1) ach->AddFail("InCorrect LineFont");
+    if (ent->NewView() != 0 && ent->NewView() != 1) ach->AddFail("InCorrect View");
+    if (ent->NewEntityLevel() != 0 && ent->NewEntityLevel() != 1) ach->AddFail("InCorrect EntityLevel");
+    if (ent->NewBlankStatus() != 0 && ent->NewBlankStatus() != 1)
+        if (ent->NewLineWeight() != 0 && ent->NewLineWeight() != 1) ach->AddFail("InCorrect LineWeight");
+    if (ent->NewColorNum() != 0 && ent->NewColorNum() != 1) ach->AddFail("InCorrect ColorNum");
 }
 
-void  IGESBasic_ToolHierarchy::OwnCheck
-  (const Handle(IGESBasic_Hierarchy)& ent,
-   const Interface_ShareTool& , Handle(Interface_Check)& ach) const
-{
-  if (ent->NbPropertyValues() != 6)
-    ach->AddFail("Number of Property Values != 6");
-  if (ent->NewLineFont() != 0 && ent->NewLineFont() != 1)
-    ach->AddFail("InCorrect LineFont");
-  if (ent->NewView() != 0 && ent->NewView() != 1)
-    ach->AddFail("InCorrect View");
-  if (ent->NewEntityLevel() != 0 && ent->NewEntityLevel() != 1)
-    ach->AddFail("InCorrect EntityLevel");
-  if (ent->NewBlankStatus() != 0 && ent->NewBlankStatus() != 1)
-    if (ent->NewLineWeight() != 0 && ent->NewLineWeight() != 1)
-      ach->AddFail("InCorrect LineWeight");
-  if (ent->NewColorNum() != 0 && ent->NewColorNum() != 1)
-    ach->AddFail("InCorrect ColorNum");
-}
-
-void  IGESBasic_ToolHierarchy::OwnDump
-  (const Handle(IGESBasic_Hierarchy)& ent, const IGESData_IGESDumper& /*dumper*/,
-   Standard_OStream& S, const Standard_Integer /*level*/) const
-{
-  S << "IGESBasic_Hierarchy\n"
-    << "Number of property values : " << ent->NbPropertyValues() << "\n"
-    << "Line Font    : " << ent->NewLineFont() << "\n"
-    << "View Number  : " << ent->NewView() << "\n"
-    << "Entity level : " << ent->NewEntityLevel() << "\n"
-    << "Blank status : " << ent->NewBlankStatus() << "\n"
-    << "Line weight  : " << ent->NewLineWeight() << "\n"
-    << "Color number : " << ent->NewColorNum() << std::endl;
+void IGESBasic_ToolHierarchy::OwnDump(const Handle(IGESBasic_Hierarchy) & ent, const IGESData_IGESDumper& /*dumper*/,
+                                      Standard_OStream& S, const Standard_Integer /*level*/) const {
+    S << "IGESBasic_Hierarchy\n"
+      << "Number of property values : " << ent->NbPropertyValues() << "\n"
+      << "Line Font    : " << ent->NewLineFont() << "\n"
+      << "View Number  : " << ent->NewView() << "\n"
+      << "Entity level : " << ent->NewEntityLevel() << "\n"
+      << "Blank status : " << ent->NewBlankStatus() << "\n"
+      << "Line weight  : " << ent->NewLineWeight() << "\n"
+      << "Color number : " << ent->NewColorNum() << std::endl;
 }

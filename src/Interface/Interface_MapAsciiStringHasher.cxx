@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Interface_MapAsciiStringHasher.hxx>
 #include <TCollection_AsciiString.hxx>
 
@@ -19,20 +18,18 @@
 // function : HashCode
 // purpose  :
 //=======================================================================
-Standard_Integer Interface_MapAsciiStringHasher::HashCode (const TCollection_AsciiString& theAsciiString,
-                                                           const Standard_Integer         theUpperBound)
-{
-  return ::HashCode (theAsciiString.ToCString(), theAsciiString.Length(), theUpperBound);
+Standard_Integer Interface_MapAsciiStringHasher::HashCode(const TCollection_AsciiString& theAsciiString,
+                                                          const Standard_Integer theUpperBound) {
+    return ::HashCode(theAsciiString.ToCString(), theAsciiString.Length(), theUpperBound);
 }
 
 //=======================================================================
-//function : IsEqual
-//purpose  : 
+// function : IsEqual
+// purpose  :
 //=======================================================================
 
 Standard_Boolean Interface_MapAsciiStringHasher::IsEqual(const TCollection_AsciiString& K1,
-						const TCollection_AsciiString& K2)
-{
-  if(!K1.Length() || !K2.Length()) return Standard_False;
-  return K1.IsEqual(K2);
+                                                         const TCollection_AsciiString& K2) {
+    if (!K1.Length() || !K2.Length()) return Standard_False;
+    return K1.IsEqual(K2);
 }

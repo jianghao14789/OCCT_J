@@ -11,36 +11,36 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <MoniTool_AttrList.hxx>
 #include <MoniTool_Element.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(MoniTool_Element,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(MoniTool_Element, Standard_Transient)
 
-MoniTool_Element::MoniTool_Element()
-: thecode(-1)
-{
+MoniTool_Element::MoniTool_Element() : thecode(-1) {}
+
+void MoniTool_Element::SetHashCode(const Standard_Integer code) {
+    thecode = code;
 }
 
-void  MoniTool_Element::SetHashCode (const Standard_Integer code)
-      {  thecode = code;  }
+Standard_Integer MoniTool_Element::GetHashCode() const {
+    return thecode;
+}
 
-    Standard_Integer  MoniTool_Element::GetHashCode () const
-      {  return thecode;  }
+Handle(Standard_Type) MoniTool_Element::ValueType() const {
+    return DynamicType();
+}
 
-    Handle(Standard_Type)  MoniTool_Element::ValueType () const
-      {  return DynamicType();  }
-
-    Standard_CString  MoniTool_Element::ValueTypeName () const
-      {  return "(finder)";  }
-
+Standard_CString MoniTool_Element::ValueTypeName() const {
+    return "(finder)";
+}
 
 //  ####    ATTRIBUTES    ####
 
+const MoniTool_AttrList& MoniTool_Element::ListAttr() const {
+    return theattrib;
+}
 
-    const MoniTool_AttrList&  MoniTool_Element::ListAttr () const
-      {  return theattrib;  }
-
-    MoniTool_AttrList&  MoniTool_Element::ChangeAttr ()
-      {  return theattrib;  }
+MoniTool_AttrList& MoniTool_Element::ChangeAttr() {
+    return theattrib;
+}

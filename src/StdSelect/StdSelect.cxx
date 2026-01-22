@@ -20,17 +20,16 @@
 #include <StdSelect_BRepOwner.hxx>
 
 //=======================================================================
-//function : SetDrawerForBRepOwner
-//purpose  : 
+// function : SetDrawerForBRepOwner
+// purpose  :
 //=======================================================================
-void StdSelect::SetDrawerForBRepOwner(const Handle(SelectMgr_Selection)& /*Sel*/,
-				     const Handle(Prs3d_Drawer)& /*Drwr*/)
-{
-//  Handle(StdSelect_BRepOwner) BROWN;
+void StdSelect::SetDrawerForBRepOwner(const Handle(SelectMgr_Selection) & /*Sel*/,
+                                      const Handle(Prs3d_Drawer) & /*Drwr*/) {
+    //  Handle(StdSelect_BRepOwner) BROWN;
 
-//   for(Sel->Init();Sel->More();Sel->Next()){
-//     BROWN = Handle(StdSelect_BRepOwner)::DownCast(Sel->Sensitive()->BaseSensitive()->OwnerId());
-//     if(!BROWN.IsNull())
-//       BROWN->SetDrawer(Drwr);
-//   }
+    //   for(Sel->Init();Sel->More();Sel->Next()){
+    //     BROWN = Handle(StdSelect_BRepOwner)::DownCast(Sel->Sensitive()->BaseSensitive()->OwnerId());
+    //     if(!BROWN.IsNull())
+    //       BROWN->SetDrawer(Drwr);
+    //   }
 }

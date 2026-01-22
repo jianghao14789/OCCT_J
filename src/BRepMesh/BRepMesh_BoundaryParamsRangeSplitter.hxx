@@ -20,35 +20,26 @@
 
 //! Auxiliary class extending UV range splitter in order to generate
 //! internal nodes for NURBS surface.
-class BRepMesh_BoundaryParamsRangeSplitter : public BRepMesh_NURBSRangeSplitter
-{
+class BRepMesh_BoundaryParamsRangeSplitter : public BRepMesh_NURBSRangeSplitter {
 public:
+    //! Constructor.
+    BRepMesh_BoundaryParamsRangeSplitter() {}
 
-  //! Constructor.
-  BRepMesh_BoundaryParamsRangeSplitter()
-  {
-  }
+    //! Destructor.
+    virtual ~BRepMesh_BoundaryParamsRangeSplitter() {}
 
-  //! Destructor.
-  virtual ~BRepMesh_BoundaryParamsRangeSplitter()
-  {
-  }
-
-  //! Registers border point.
-  virtual void AddPoint(const gp_Pnt2d& thePoint) Standard_OVERRIDE
-  {
-    BRepMesh_NURBSRangeSplitter::AddPoint(thePoint);
-    GetParametersU().Add(thePoint.X());
-    GetParametersV().Add(thePoint.Y());
-  }
+    //! Registers border point.
+    virtual void AddPoint(const gp_Pnt2d& thePoint) Standard_OVERRIDE {
+        BRepMesh_NURBSRangeSplitter::AddPoint(thePoint);
+        GetParametersU().Add(thePoint.X());
+        GetParametersV().Add(thePoint.Y());
+    }
 
 protected:
-
-  //! Initializes U and V parameters lists using CN continuity intervals.
-  virtual Standard_Boolean initParameters() const Standard_OVERRIDE
-  {
-    return Standard_True;
-  }
+    //! Initializes U and V parameters lists using CN continuity intervals.
+    virtual Standard_Boolean initParameters() const Standard_OVERRIDE {
+        return Standard_True;
+    }
 };
 
 #endif

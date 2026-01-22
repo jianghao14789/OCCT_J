@@ -38,7 +38,6 @@ class math_FunctionWithDerivative;
 //! 需要函数导数信息。
 class math_BissecNewton {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Constructor.
@@ -47,7 +46,6 @@ public:
     //! 构造函数。
     //! @param theXTolerance - 算法公差。
     Standard_EXPORT math_BissecNewton(const Standard_Real theXTolerance);
-
 
     //! A combination of Newton-Raphson and bissection methods is done to find
     //! the root of the function F between the bounds Bound1 and Bound2
@@ -63,8 +61,8 @@ public:
     //! 当满足以下条件时，找到解：
     //! abs(Xi - Xi-1) <= TolX 且 F(Xi) * F(Xi-1) <= 0
     //! 允许的最大迭代次数由 NbIterations 给出。
-    Standard_EXPORT void Perform(math_FunctionWithDerivative& F, const Standard_Real Bound1, const Standard_Real Bound2, const Standard_Integer NbIterations = 100);
-
+    Standard_EXPORT void Perform(math_FunctionWithDerivative& F, const Standard_Real Bound1, const Standard_Real Bound2,
+                                 const Standard_Integer NbIterations = 100);
 
     //! This method is called at the end of each iteration to check if the
     //! solution has been found.
@@ -124,7 +122,6 @@ protected:
 
 private:
     Standard_Boolean Done;
-
 };
 
 #include <math_BissecNewton.lxx>

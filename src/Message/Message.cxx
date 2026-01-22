@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Message.hxx>
 #include <Message_Messenger.hxx>
 #include <Message_Report.hxx>
@@ -23,31 +22,29 @@
 #include <stdio.h>
 #include <string.h>
 
-namespace
-{
-    // 全局静态数组：存储 13 种度量类型的字符串名称
-    // 这个数组用于在度量类型和字符串表示之间进行转换
-    static Standard_CString Message_Table_PrintMetricTypeEnum[13] =
-    {
-      "NONE",                   // 未定义的度量
-      "ThreadCPUUserTime",      // 线程用户 CPU 时间
-      "ThreadCPUSystemTime",    // 线程系统 CPU 时间
-      "ProcessCPUUserTime",     // 进程用户 CPU 时间
-      "ProcessCPUSystemTime",   // 进程系统 CPU 时间
-      "WallClock",              // 实时时钟
-      "MemPrivate",             // 私有内存使用
-      "MemVirtual",             // 虚拟内存使用
-      "MemWorkingSet",          // 工作集内存
-      "MemWorkingSetPeak",      // 工作集峰值
-      "MemSwapUsage",           // 交换内存使用
-      "MemSwapUsagePeak",       // 交换内存峰值
-      "MemHeapUsage"            // 堆内存使用
-    };
-}
+namespace {
+// 全局静态数组：存储 13 种度量类型的字符串名称
+// 这个数组用于在度量类型和字符串表示之间进行转换
+static Standard_CString Message_Table_PrintMetricTypeEnum[13] = {
+    "NONE",                 // 未定义的度量
+    "ThreadCPUUserTime",    // 线程用户 CPU 时间
+    "ThreadCPUSystemTime",  // 线程系统 CPU 时间
+    "ProcessCPUUserTime",   // 进程用户 CPU 时间
+    "ProcessCPUSystemTime", // 进程系统 CPU 时间
+    "WallClock",            // 实时时钟
+    "MemPrivate",           // 私有内存使用
+    "MemVirtual",           // 虚拟内存使用
+    "MemWorkingSet",        // 工作集内存
+    "MemWorkingSetPeak",    // 工作集峰值
+    "MemSwapUsage",         // 交换内存使用
+    "MemSwapUsagePeak",     // 交换内存峰值
+    "MemHeapUsage"          // 堆内存使用
+};
+} // namespace
 
 //=======================================================================
-//function : DefaultMessenger
-//purpose  : 返回全局默认的 Messenger 对象（单例模式）
+// function : DefaultMessenger
+// purpose  : 返回全局默认的 Messenger 对象（单例模式）
 //
 // 说明：
 //   - Messenger 是消息传递系统的核心，用于管理消息打印机
@@ -59,16 +56,15 @@ namespace
 //   - 返回的是对 Message_Messenger 对象的常引用
 //   - Handle<> 类似于 std::shared_ptr，但用于 OCCT 库
 //=======================================================================
-const Handle(Message_Messenger)& Message::DefaultMessenger()
-{
+const Handle(Message_Messenger) & Message::DefaultMessenger() {
     // 声明静态变量，只初始化一次
     static Handle(Message_Messenger) aMessenger = new Message_Messenger;
     return aMessenger;
 }
 
 //=======================================================================
-//function : FillTime
-//purpose  : 将时、分、秒的三个数值格式化为可读的时间字符串
+// function : FillTime
+// purpose  : 将时、分、秒的三个数值格式化为可读的时间字符串
 //
 // 参数说明：
 //   - hour：小时数（>=0）
@@ -88,10 +84,8 @@ const Handle(Message_Messenger)& Message::DefaultMessenger()
 //   - 根据小时和分钟的值选择不同的格式
 //=======================================================================
 
-TCollection_AsciiString Message::FillTime(const Standard_Integer hour,
-    const Standard_Integer minute,
-    const Standard_Real second)
-{
+TCollection_AsciiString Message::FillTime(const Standard_Integer hour, const Standard_Integer minute,
+                                          const Standard_Real second) {
     char t[30];
     if (hour > 0)
         // 如果有小时数，显示 "小时h:分钟m:秒s" 的格式
@@ -107,8 +101,8 @@ TCollection_AsciiString Message::FillTime(const Standard_Integer hour,
 }
 
 //=======================================================================
-//function : DefaultReport
-//purpose  : 返回全局默认的 Report 对象（单例模式，可选创建）
+// function : DefaultReport
+// purpose  : 返回全局默认的 Report 对象（单例模式，可选创建）
 //
 // 参数说明：
 //   - theToCreate：是否在不存在时创建新的 Report
@@ -123,21 +117,19 @@ TCollection_AsciiString Message::FillTime(const Standard_Integer hour,
 //   - Report 用于收集和管理所有的警报和错误信息
 //   - 通常与 Messenger 配合使用
 //=======================================================================
-const Handle(Message_Report)& Message::DefaultReport(const Standard_Boolean theToCreate)
-{
+const Handle(Message_Report) & Message::DefaultReport(const Standard_Boolean theToCreate) {
     // 声明静态变量，保持全局唯一
     static Handle(Message_Report) MyReport;
     // 懒加载：只在需要时创建对象
-    if (MyReport.IsNull() && theToCreate)
-    {
+    if (MyReport.IsNull() && theToCreate) {
         MyReport = new Message_Report();
     }
     return MyReport;
 }
 
 //=======================================================================
-//function : MetricToString
-//purpose  : 将度量类型枚举值转换为对应的字符串名称
+// function : MetricToString
+// purpose  : 将度量类型枚举值转换为对应的字符串名称
 //
 // 参数说明：
 //   - theType：度量类型的枚举值（0-12）
@@ -150,15 +142,14 @@ const Handle(Message_Report)& Message::DefaultReport(const Standard_Boolean theT
 //   - 直接通过数组索引快速查找字符串
 //   - 时间复杂度为 O(1)（常数时间）
 //=======================================================================
-Standard_CString Message::MetricToString(const Message_MetricType theType)
-{
+Standard_CString Message::MetricToString(const Message_MetricType theType) {
     // 数组索引查询，直接返回对应的字符串
     return Message_Table_PrintMetricTypeEnum[theType];
 }
 
 //=======================================================================
-//function : MetricFromString
-//purpose  : 将字符串转换为对应的度量类型枚举值
+// function : MetricFromString
+// purpose  : 将字符串转换为对应的度量类型枚举值
 //
 // 参数说明：
 //   - theString：输入的字符串（例如 "MemPrivate"）
@@ -174,18 +165,14 @@ Standard_CString Message::MetricToString(const Message_MetricType theType)
 //   - 如果找到匹配，立即返回 true，否则返回 false
 //   - 时间复杂度为 O(n)，n 为度量类型的总数（13）
 //=======================================================================
-Standard_Boolean Message::MetricFromString(const Standard_CString theString,
-    Message_MetricType& theGravity)
-{
+Standard_Boolean Message::MetricFromString(const Standard_CString theString, Message_MetricType& theGravity) {
     // 将 C 风格字符串转换为 OCCT 的 ASCII 字符串对象
     TCollection_AsciiString aName(theString);
     // 遍历所有度量类型，查找匹配的字符串
-    for (Standard_Integer aMetricIter = 0; aMetricIter <= Message_MetricType_MemHeapUsage; ++aMetricIter)
-    {
+    for (Standard_Integer aMetricIter = 0; aMetricIter <= Message_MetricType_MemHeapUsage; ++aMetricIter) {
         // 获取当前枚举值对应的字符串
         Standard_CString aMetricName = Message_Table_PrintMetricTypeEnum[aMetricIter];
-        if (aName == aMetricName)
-        {
+        if (aName == aMetricName) {
             // 找到匹配：将枚举值赋给输出参数，返回 true
             theGravity = Message_MetricType(aMetricIter);
             return Standard_True;
@@ -212,41 +199,39 @@ Standard_Boolean Message::MetricFromString(const Standard_CString theString,
 //   - Standard_True：如果度量类型是内存相关的（可以转换）
 //   - Standard_False：如果度量类型无法转换（例如时间相关的度量）
 // =======================================================================
-Standard_Boolean Message::ToOSDMetric(const Message_MetricType theMetric, OSD_MemInfo::Counter& theMemInfo)
-{
-    switch (theMetric)
-    {
-    // 私有内存映射
-    case Message_MetricType_MemPrivate:
-        theMemInfo = OSD_MemInfo::MemPrivate;
-        break;
-    // 虚拟内存映射
-    case Message_MetricType_MemVirtual:
-        theMemInfo = OSD_MemInfo::MemVirtual;
-        break;
-    // 工作集内存映射
-    case Message_MetricType_MemWorkingSet:
-        theMemInfo = OSD_MemInfo::MemWorkingSet;
-        break;
-    // 工作集峰值映射
-    case Message_MetricType_MemWorkingSetPeak:
-        theMemInfo = OSD_MemInfo::MemWorkingSetPeak;
-        break;
-    // 交换内存使用映射
-    case Message_MetricType_MemSwapUsage:
-        theMemInfo = OSD_MemInfo::MemSwapUsage;
-        break;
-    // 交换内存峰值映射
-    case Message_MetricType_MemSwapUsagePeak:
-        theMemInfo = OSD_MemInfo::MemSwapUsagePeak;
-        break;
-    // 堆内存使用映射
-    case Message_MetricType_MemHeapUsage:
-        theMemInfo = OSD_MemInfo::MemHeapUsage;
-        break;
-    // 无法映射的类型（如时间相关的度量）
-    default:
-        return Standard_False;
+Standard_Boolean Message::ToOSDMetric(const Message_MetricType theMetric, OSD_MemInfo::Counter& theMemInfo) {
+    switch (theMetric) {
+        // 私有内存映射
+        case Message_MetricType_MemPrivate:
+            theMemInfo = OSD_MemInfo::MemPrivate;
+            break;
+        // 虚拟内存映射
+        case Message_MetricType_MemVirtual:
+            theMemInfo = OSD_MemInfo::MemVirtual;
+            break;
+        // 工作集内存映射
+        case Message_MetricType_MemWorkingSet:
+            theMemInfo = OSD_MemInfo::MemWorkingSet;
+            break;
+        // 工作集峰值映射
+        case Message_MetricType_MemWorkingSetPeak:
+            theMemInfo = OSD_MemInfo::MemWorkingSetPeak;
+            break;
+        // 交换内存使用映射
+        case Message_MetricType_MemSwapUsage:
+            theMemInfo = OSD_MemInfo::MemSwapUsage;
+            break;
+        // 交换内存峰值映射
+        case Message_MetricType_MemSwapUsagePeak:
+            theMemInfo = OSD_MemInfo::MemSwapUsagePeak;
+            break;
+        // 堆内存使用映射
+        case Message_MetricType_MemHeapUsage:
+            theMemInfo = OSD_MemInfo::MemHeapUsage;
+            break;
+        // 无法映射的类型（如时间相关的度量）
+        default:
+            return Standard_False;
     }
     return Standard_True;
 }
@@ -267,41 +252,39 @@ Standard_Boolean Message::ToOSDMetric(const Message_MetricType theMetric, OSD_Me
 //   - Standard_True：转换成功
 //   - Standard_False：无法转换
 // =======================================================================
-Standard_Boolean Message::ToMessageMetric(const OSD_MemInfo::Counter theMemInfo, Message_MetricType& theMetric)
-{
-    switch (theMemInfo)
-    {
-    // 私有内存反向映射
-    case OSD_MemInfo::MemPrivate:
-        theMetric = Message_MetricType_MemPrivate;
-        break;
-    // 虚拟内存反向映射
-    case OSD_MemInfo::MemVirtual:
-        theMetric = Message_MetricType_MemVirtual;
-        break;
-    // 工作集反向映射
-    case OSD_MemInfo::MemWorkingSet:
-        theMetric = Message_MetricType_MemWorkingSet;
-        break;
-    // 工作集峰值反向映射
-    case OSD_MemInfo::MemWorkingSetPeak:
-        theMetric = Message_MetricType_MemWorkingSetPeak;
-        break;
-    // 交换内存使用反向映射
-    case OSD_MemInfo::MemSwapUsage:
-        theMetric = Message_MetricType_MemSwapUsage;
-        break;
-    // 交换内存峰值反向映射
-    case OSD_MemInfo::MemSwapUsagePeak:
-        theMetric = Message_MetricType_MemSwapUsagePeak;
-        break;
-    // 堆内存使用反向映射
-    case OSD_MemInfo::MemHeapUsage:
-        theMetric = Message_MetricType_MemHeapUsage;
-        break;
-    // 无法映射的类型
-    default:
-        return Standard_False;
+Standard_Boolean Message::ToMessageMetric(const OSD_MemInfo::Counter theMemInfo, Message_MetricType& theMetric) {
+    switch (theMemInfo) {
+        // 私有内存反向映射
+        case OSD_MemInfo::MemPrivate:
+            theMetric = Message_MetricType_MemPrivate;
+            break;
+        // 虚拟内存反向映射
+        case OSD_MemInfo::MemVirtual:
+            theMetric = Message_MetricType_MemVirtual;
+            break;
+        // 工作集反向映射
+        case OSD_MemInfo::MemWorkingSet:
+            theMetric = Message_MetricType_MemWorkingSet;
+            break;
+        // 工作集峰值反向映射
+        case OSD_MemInfo::MemWorkingSetPeak:
+            theMetric = Message_MetricType_MemWorkingSetPeak;
+            break;
+        // 交换内存使用反向映射
+        case OSD_MemInfo::MemSwapUsage:
+            theMetric = Message_MetricType_MemSwapUsage;
+            break;
+        // 交换内存峰值反向映射
+        case OSD_MemInfo::MemSwapUsagePeak:
+            theMetric = Message_MetricType_MemSwapUsagePeak;
+            break;
+        // 堆内存使用反向映射
+        case OSD_MemInfo::MemHeapUsage:
+            theMetric = Message_MetricType_MemHeapUsage;
+            break;
+        // 无法映射的类型
+        default:
+            return Standard_False;
     }
     return Standard_True;
 }

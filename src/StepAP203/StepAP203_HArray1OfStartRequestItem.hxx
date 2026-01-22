@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepAP203_HArray1OfStartRequestItem, StepAP203_Array1OfStartRequestItem)
 
-
 #endif

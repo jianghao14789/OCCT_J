@@ -16,8 +16,7 @@
 
 //! Specifies kind of report information to collect
 //! 指定要收集的报告信息的类型
-enum Message_MetricType
-{
+enum Message_MetricType {
     Message_MetricType_None,                 //!< no computation
                                              //!< 无计算
     Message_MetricType_ThreadCPUUserTime,    //!< OSD_Chronometer::GetThreadCPU user time

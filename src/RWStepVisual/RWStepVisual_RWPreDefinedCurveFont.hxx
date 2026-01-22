@@ -27,42 +27,21 @@ class Interface_Check;
 class StepVisual_PreDefinedCurveFont;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for PreDefinedCurveFont
-class RWStepVisual_RWPreDefinedCurveFont 
-{
+class RWStepVisual_RWPreDefinedCurveFont {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWPreDefinedCurveFont();
 
-  
-  Standard_EXPORT RWStepVisual_RWPreDefinedCurveFont();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_PreDefinedCurveFont)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_PreDefinedCurveFont)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_PreDefinedCurveFont) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_PreDefinedCurveFont) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWPreDefinedCurveFont_HeaderFile

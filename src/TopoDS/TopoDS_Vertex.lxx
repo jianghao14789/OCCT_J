@@ -15,10 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_Vertex
-//purpose  : 
+// function : TopoDS_Vertex
+// purpose  :
 //=======================================================================
 
-inline TopoDS_Vertex::TopoDS_Vertex()
-{
-}
+inline TopoDS_Vertex::TopoDS_Vertex() {}

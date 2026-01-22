@@ -23,41 +23,31 @@
 #include <Standard_OutOfRange.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESSolid_Face,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESSolid_Face, IGESData_IGESEntity)
 
-IGESSolid_Face::IGESSolid_Face ()    {  }
+IGESSolid_Face::IGESSolid_Face() {}
 
-
-    void  IGESSolid_Face::Init
-  (const Handle(IGESData_IGESEntity)&     aSurface,
-   const Standard_Boolean                 OuterLoopFlag,
-   const Handle(IGESSolid_HArray1OfLoop)& Loops)
-{
-  if (Loops->Lower() != 1)
-    throw Standard_DimensionMismatch("IGESSolid_Face : Init");
-  theSurface   = aSurface;
-  hasOuterLoop = OuterLoopFlag;
-  theLoops     = Loops;
-  InitTypeAndForm(510,1);
+void IGESSolid_Face::Init(const Handle(IGESData_IGESEntity) & aSurface, const Standard_Boolean OuterLoopFlag,
+                          const Handle(IGESSolid_HArray1OfLoop) & Loops) {
+    if (Loops->Lower() != 1) throw Standard_DimensionMismatch("IGESSolid_Face : Init");
+    theSurface = aSurface;
+    hasOuterLoop = OuterLoopFlag;
+    theLoops = Loops;
+    InitTypeAndForm(510, 1);
 }
 
-    Handle(IGESData_IGESEntity)  IGESSolid_Face::Surface () const
-{
-  return theSurface;
+Handle(IGESData_IGESEntity) IGESSolid_Face::Surface() const {
+    return theSurface;
 }
 
-    Standard_Integer  IGESSolid_Face::NbLoops () const
-{
-  return theLoops->Length();
+Standard_Integer IGESSolid_Face::NbLoops() const {
+    return theLoops->Length();
 }
 
-    Standard_Boolean  IGESSolid_Face::HasOuterLoop () const
-{
-  return hasOuterLoop;
+Standard_Boolean IGESSolid_Face::HasOuterLoop() const {
+    return hasOuterLoop;
 }
 
-    Handle(IGESSolid_Loop)  IGESSolid_Face::Loop (const Standard_Integer Index) const
-{
-  return theLoops->Value(Index);
+Handle(IGESSolid_Loop) IGESSolid_Face::Loop(const Standard_Integer Index) const {
+    return theLoops->Value(Index);
 }
-

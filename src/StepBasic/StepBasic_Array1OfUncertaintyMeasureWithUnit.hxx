@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<Handle(StepBasic_UncertaintyMeasureWithUnit)> StepBasic_Array1OfUncertaintyMeasureWithUnit;
 
-
 #endif

@@ -22,112 +22,104 @@
 #include <StepRepr_SpecifiedHigherUsageOccurrence.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_SpecifiedHigherUsageOccurrence,StepRepr_AssemblyComponentUsage)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_SpecifiedHigherUsageOccurrence, StepRepr_AssemblyComponentUsage)
 
 //=======================================================================
-//function : StepRepr_SpecifiedHigherUsageOccurrence
-//purpose  : 
+// function : StepRepr_SpecifiedHigherUsageOccurrence
+// purpose  :
 //=======================================================================
-StepRepr_SpecifiedHigherUsageOccurrence::StepRepr_SpecifiedHigherUsageOccurrence ()
-{
+StepRepr_SpecifiedHigherUsageOccurrence::StepRepr_SpecifiedHigherUsageOccurrence() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepRepr_SpecifiedHigherUsageOccurrence::Init(
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Id,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Name,
+    const Standard_Boolean hasProductDefinitionRelationship_Description,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Description,
+    const Handle(StepBasic_ProductDefinition) & aProductDefinitionRelationship_RelatingProductDefinition,
+    const Handle(StepBasic_ProductDefinition) & aProductDefinitionRelationship_RelatedProductDefinition,
+    const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(TCollection_HAsciiString) & aAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(StepRepr_AssemblyComponentUsage) & aUpperUsage,
+    const Handle(StepRepr_NextAssemblyUsageOccurrence) & aNextUsage) {
+    StepRepr_AssemblyComponentUsage::Init(
+        aProductDefinitionRelationship_Id, aProductDefinitionRelationship_Name,
+        hasProductDefinitionRelationship_Description, aProductDefinitionRelationship_Description,
+        aProductDefinitionRelationship_RelatingProductDefinition,
+        aProductDefinitionRelationship_RelatedProductDefinition, hasAssemblyComponentUsage_ReferenceDesignator,
+        aAssemblyComponentUsage_ReferenceDesignator);
+
+    theUpperUsage = aUpperUsage;
+
+    theNextUsage = aNextUsage;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void StepRepr_SpecifiedHigherUsageOccurrence::Init (const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Id,
-                                                    const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Name,
-                                                    const Standard_Boolean hasProductDefinitionRelationship_Description,
-                                                    const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Description,
-                                                    const Handle(StepBasic_ProductDefinition) &aProductDefinitionRelationship_RelatingProductDefinition,
-                                                    const Handle(StepBasic_ProductDefinition) &aProductDefinitionRelationship_RelatedProductDefinition,
-                                                    const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
-                                                    const Handle(TCollection_HAsciiString) &aAssemblyComponentUsage_ReferenceDesignator,
-                                                    const Handle(StepRepr_AssemblyComponentUsage) &aUpperUsage,
-                                                    const Handle(StepRepr_NextAssemblyUsageOccurrence) &aNextUsage)
-{
-  StepRepr_AssemblyComponentUsage::Init(aProductDefinitionRelationship_Id,
-                                        aProductDefinitionRelationship_Name,
-                                        hasProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_RelatingProductDefinition,
-                                        aProductDefinitionRelationship_RelatedProductDefinition,
-                                        hasAssemblyComponentUsage_ReferenceDesignator,
-                                        aAssemblyComponentUsage_ReferenceDesignator);
+void StepRepr_SpecifiedHigherUsageOccurrence::Init(
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Id,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Name,
+    const Standard_Boolean hasProductDefinitionRelationship_Description,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Description,
+    const StepBasic_ProductDefinitionOrReference& aProductDefinitionRelationship_RelatingProductDefinition,
+    const StepBasic_ProductDefinitionOrReference& aProductDefinitionRelationship_RelatedProductDefinition,
+    const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(TCollection_HAsciiString) & aAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(StepRepr_AssemblyComponentUsage) & aUpperUsage,
+    const Handle(StepRepr_NextAssemblyUsageOccurrence) & aNextUsage) {
+    StepRepr_AssemblyComponentUsage::Init(
+        aProductDefinitionRelationship_Id, aProductDefinitionRelationship_Name,
+        hasProductDefinitionRelationship_Description, aProductDefinitionRelationship_Description,
+        aProductDefinitionRelationship_RelatingProductDefinition,
+        aProductDefinitionRelationship_RelatedProductDefinition, hasAssemblyComponentUsage_ReferenceDesignator,
+        aAssemblyComponentUsage_ReferenceDesignator);
 
-  theUpperUsage = aUpperUsage;
+    theUpperUsage = aUpperUsage;
 
-  theNextUsage = aNextUsage;
+    theNextUsage = aNextUsage;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : UpperUsage
+// purpose  :
 //=======================================================================
 
-void StepRepr_SpecifiedHigherUsageOccurrence::Init (const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Id,
-                                                    const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Name,
-                                                    const Standard_Boolean hasProductDefinitionRelationship_Description,
-                                                    const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Description,
-                                                    const StepBasic_ProductDefinitionOrReference &aProductDefinitionRelationship_RelatingProductDefinition,
-                                                    const StepBasic_ProductDefinitionOrReference &aProductDefinitionRelationship_RelatedProductDefinition,
-                                                    const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
-                                                    const Handle(TCollection_HAsciiString) &aAssemblyComponentUsage_ReferenceDesignator,
-                                                    const Handle(StepRepr_AssemblyComponentUsage) &aUpperUsage,
-                                                    const Handle(StepRepr_NextAssemblyUsageOccurrence) &aNextUsage)
-{
-  StepRepr_AssemblyComponentUsage::Init(aProductDefinitionRelationship_Id,
-                                        aProductDefinitionRelationship_Name,
-                                        hasProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_RelatingProductDefinition,
-                                        aProductDefinitionRelationship_RelatedProductDefinition,
-                                        hasAssemblyComponentUsage_ReferenceDesignator,
-                                        aAssemblyComponentUsage_ReferenceDesignator);
-
-  theUpperUsage = aUpperUsage;
-
-  theNextUsage = aNextUsage;
+Handle(StepRepr_AssemblyComponentUsage) StepRepr_SpecifiedHigherUsageOccurrence::UpperUsage() const {
+    return theUpperUsage;
 }
 
 //=======================================================================
-//function : UpperUsage
-//purpose  : 
+// function : SetUpperUsage
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_AssemblyComponentUsage) StepRepr_SpecifiedHigherUsageOccurrence::UpperUsage () const
-{
-  return theUpperUsage;
+void StepRepr_SpecifiedHigherUsageOccurrence::SetUpperUsage(const Handle(StepRepr_AssemblyComponentUsage) &
+                                                            aUpperUsage) {
+    theUpperUsage = aUpperUsage;
 }
 
 //=======================================================================
-//function : SetUpperUsage
-//purpose  : 
+// function : NextUsage
+// purpose  :
 //=======================================================================
 
-void StepRepr_SpecifiedHigherUsageOccurrence::SetUpperUsage (const Handle(StepRepr_AssemblyComponentUsage) &aUpperUsage)
-{
-  theUpperUsage = aUpperUsage;
+Handle(StepRepr_NextAssemblyUsageOccurrence) StepRepr_SpecifiedHigherUsageOccurrence::NextUsage() const {
+    return theNextUsage;
 }
 
 //=======================================================================
-//function : NextUsage
-//purpose  : 
+// function : SetNextUsage
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_NextAssemblyUsageOccurrence) StepRepr_SpecifiedHigherUsageOccurrence::NextUsage () const
-{
-  return theNextUsage;
-}
-
-//=======================================================================
-//function : SetNextUsage
-//purpose  : 
-//=======================================================================
-
-void StepRepr_SpecifiedHigherUsageOccurrence::SetNextUsage (const Handle(StepRepr_NextAssemblyUsageOccurrence) &aNextUsage)
-{
-  theNextUsage = aNextUsage;
+void StepRepr_SpecifiedHigherUsageOccurrence::SetNextUsage(const Handle(StepRepr_NextAssemblyUsageOccurrence) &
+                                                           aNextUsage) {
+    theNextUsage = aNextUsage;
 }

@@ -29,14 +29,14 @@
 #include <math_Vector.hxx>
 class StdFail_NotDone;
 
-
 //! This class finds eigen values and vectors of
 //! real symmetric tridiagonal matrix
 class math_EigenValuesSearcher {
 public:
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT math_EigenValuesSearcher(const TColStd_Array1OfReal& Diagonal, const TColStd_Array1OfReal& Subdiagonal);
+    Standard_EXPORT math_EigenValuesSearcher(const TColStd_Array1OfReal& Diagonal,
+                                             const TColStd_Array1OfReal& Subdiagonal);
 
     //! Returns Standard_True if computation is performed
     //! successfully.
@@ -54,7 +54,6 @@ public:
     Standard_EXPORT math_Vector EigenVector(const Standard_Integer Index) const;
 
 protected:
-
 private:
     Handle(TColStd_HArray1OfReal) myDiagonal;
     Handle(TColStd_HArray1OfReal) mySubdiagonal;

@@ -17,7 +17,6 @@
 #ifndef _Convert_ParameterisationType_HeaderFile
 #define _Convert_ParameterisationType_HeaderFile
 
-
 //! Identifies a type of parameterization of a circle or ellipse represented as a BSpline curve.
 //! For a circle with a center C and a radius R (for example a Geom2d_Circle or a Geom_Circle),
 //! the natural parameterization is angular. It uses the angle Theta made by the vector CM with
@@ -81,8 +80,7 @@
 //! parameterization of the resulting BSpline curve with 8 poles (i.e. a polynomial degree equal to 7).
 //! However, the result is an approximation of the circle or ellipse (i.e. computing the point of
 //! parameter t on the BSpline curve does not give an exact point on the circle or the ellipse).
-enum Convert_ParameterisationType
-{
+enum Convert_ParameterisationType {
     Convert_TgtThetaOver2,
     Convert_TgtThetaOver2_1,
     Convert_TgtThetaOver2_2,

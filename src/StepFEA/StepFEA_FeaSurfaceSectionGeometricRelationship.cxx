@@ -20,66 +20,62 @@
 #include <StepElement_SurfaceSection.hxx>
 #include <StepFEA_FeaSurfaceSectionGeometricRelationship.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaSurfaceSectionGeometricRelationship,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaSurfaceSectionGeometricRelationship, Standard_Transient)
 
 //=======================================================================
-//function : StepFEA_FeaSurfaceSectionGeometricRelationship
-//purpose  : 
+// function : StepFEA_FeaSurfaceSectionGeometricRelationship
+// purpose  :
 //=======================================================================
-StepFEA_FeaSurfaceSectionGeometricRelationship::StepFEA_FeaSurfaceSectionGeometricRelationship ()
-{
+StepFEA_FeaSurfaceSectionGeometricRelationship::StepFEA_FeaSurfaceSectionGeometricRelationship() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_FeaSurfaceSectionGeometricRelationship::Init(const Handle(StepElement_SurfaceSection) & aSectionRef,
+                                                          const Handle(StepElement_AnalysisItemWithinRepresentation) &
+                                                              aItem) {
+
+    theSectionRef = aSectionRef;
+
+    theItem = aItem;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : SectionRef
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaSurfaceSectionGeometricRelationship::Init (const Handle(StepElement_SurfaceSection) &aSectionRef,
-                                                           const Handle(StepElement_AnalysisItemWithinRepresentation) &aItem)
-{
-
-  theSectionRef = aSectionRef;
-
-  theItem = aItem;
+Handle(StepElement_SurfaceSection) StepFEA_FeaSurfaceSectionGeometricRelationship::SectionRef() const {
+    return theSectionRef;
 }
 
 //=======================================================================
-//function : SectionRef
-//purpose  : 
+// function : SetSectionRef
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_SurfaceSection) StepFEA_FeaSurfaceSectionGeometricRelationship::SectionRef () const
-{
-  return theSectionRef;
+void StepFEA_FeaSurfaceSectionGeometricRelationship::SetSectionRef(const Handle(StepElement_SurfaceSection) &
+                                                                   aSectionRef) {
+    theSectionRef = aSectionRef;
 }
 
 //=======================================================================
-//function : SetSectionRef
-//purpose  : 
+// function : Item
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaSurfaceSectionGeometricRelationship::SetSectionRef (const Handle(StepElement_SurfaceSection) &aSectionRef)
-{
-  theSectionRef = aSectionRef;
+Handle(StepElement_AnalysisItemWithinRepresentation) StepFEA_FeaSurfaceSectionGeometricRelationship::Item() const {
+    return theItem;
 }
 
 //=======================================================================
-//function : Item
-//purpose  : 
+// function : SetItem
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_AnalysisItemWithinRepresentation) StepFEA_FeaSurfaceSectionGeometricRelationship::Item () const
-{
-  return theItem;
-}
-
-//=======================================================================
-//function : SetItem
-//purpose  : 
-//=======================================================================
-
-void StepFEA_FeaSurfaceSectionGeometricRelationship::SetItem (const Handle(StepElement_AnalysisItemWithinRepresentation) &aItem)
-{
-  theItem = aItem;
+void StepFEA_FeaSurfaceSectionGeometricRelationship::SetItem(
+    const Handle(StepElement_AnalysisItemWithinRepresentation) & aItem) {
+    theItem = aItem;
 }

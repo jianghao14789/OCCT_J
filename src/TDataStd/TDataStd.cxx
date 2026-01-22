@@ -36,48 +36,43 @@
 #include <TDF_Tool.hxx>
 
 //=======================================================================
-//function : IDList
-//purpose  : 
+// function : IDList
+// purpose  :
 //=======================================================================
-void TDataStd::IDList(TDF_IDList& anIDList)
-{  
-  anIDList.Append(TDF_TagSource::GetID());  
-  anIDList.Append(TDF_Reference::GetID());
-  anIDList.Append(TDataStd_Integer::GetID()); 
-  anIDList.Append(TDataStd_Name::GetID());  
-  anIDList.Append(TDataStd_Real::GetID());  
-  anIDList.Append(TDataStd_IntegerArray::GetID());
-  anIDList.Append(TDataStd_RealArray::GetID());
-  anIDList.Append(TDataStd_ExtStringArray::GetID());
-  
+void TDataStd::IDList(TDF_IDList& anIDList) {
+    anIDList.Append(TDF_TagSource::GetID());
+    anIDList.Append(TDF_Reference::GetID());
+    anIDList.Append(TDataStd_Integer::GetID());
+    anIDList.Append(TDataStd_Name::GetID());
+    anIDList.Append(TDataStd_Real::GetID());
+    anIDList.Append(TDataStd_IntegerArray::GetID());
+    anIDList.Append(TDataStd_RealArray::GetID());
+    anIDList.Append(TDataStd_ExtStringArray::GetID());
 }
 
-
 //=======================================================================
-//function : 
-//purpose  : print the name of the real dimension
+// function :
+// purpose  : print the name of the real dimension
 //=======================================================================
 
-Standard_OStream& TDataStd::Print(const TDataStd_RealEnum C,  Standard_OStream& s)
-{
-  switch (C) {
-  case TDataStd_SCALAR :
-    {
-      s << "SCALAR";  break;
+Standard_OStream& TDataStd::Print(const TDataStd_RealEnum C, Standard_OStream& s) {
+    switch (C) {
+        case TDataStd_SCALAR: {
+            s << "SCALAR";
+            break;
+        }
+        case TDataStd_LENGTH: {
+            s << "LENGTH";
+            break;
+        }
+        case TDataStd_ANGULAR: {
+            s << "ANGULAR";
+            break;
+        }
+        default: {
+            s << "UNKNOWN";
+            break;
+        }
     }
-  case  TDataStd_LENGTH :
-    {  
-      s << "LENGTH"; break;
-    }  
-  case TDataStd_ANGULAR :
-    { 
-      s << "ANGULAR"; break;
-    }
-    default :
-      {
-	s << "UNKNOWN"; break;
-      }
-  }
-  return s;
+    return s;
 }
-

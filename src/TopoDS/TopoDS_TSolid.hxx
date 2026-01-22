@@ -24,7 +24,6 @@
 #include <TopAbs_ShapeEnum.hxx>
 class TopoDS_TShape;
 
-
 class TopoDS_TSolid;
 DEFINE_STANDARD_HANDLE(TopoDS_TSolid, TopoDS_TShape)
 
@@ -32,7 +31,6 @@ DEFINE_STANDARD_HANDLE(TopoDS_TSolid, TopoDS_TShape)
 //! edges and vertices.
 class TopoDS_TSolid : public TopoDS_TShape {
 public:
-
     //! Creates an empty TSolid.
     TopoDS_TSolid();
 
@@ -45,9 +43,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(TopoDS_TSolid, TopoDS_TShape)
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_TSolid.lxx>

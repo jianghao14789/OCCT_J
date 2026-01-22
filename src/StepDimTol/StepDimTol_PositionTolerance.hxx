@@ -21,41 +21,20 @@
 
 #include <StepDimTol_GeometricTolerance.hxx>
 
-
 class StepDimTol_PositionTolerance;
 DEFINE_STANDARD_HANDLE(StepDimTol_PositionTolerance, StepDimTol_GeometricTolerance)
 
 //! Representation of STEP entity PositionTolerance
-class StepDimTol_PositionTolerance : public StepDimTol_GeometricTolerance
-{
+class StepDimTol_PositionTolerance : public StepDimTol_GeometricTolerance {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepDimTol_PositionTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepDimTol_PositionTolerance();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_PositionTolerance,StepDimTol_GeometricTolerance)
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_PositionTolerance, StepDimTol_GeometricTolerance)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepDimTol_PositionTolerance_HeaderFile

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_Absolute.hxx>
 #include <Expr_GeneralExpression.hxx>
@@ -31,13 +30,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Absolute, Expr_UnaryExpression)
 
-Expr_Absolute::Expr_Absolute(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_Absolute::Expr_Absolute(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_Absolute::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Absolute::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) op = Operand();
     if (op->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) valop = Handle(Expr_NumericValue)::DownCast(op);
@@ -50,13 +47,11 @@ Handle(Expr_GeneralExpression) Expr_Absolute::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_Absolute::Copy() const
-{
-    return  new Expr_Absolute(Expr::CopyShare(Operand()));
+Handle(Expr_GeneralExpression) Expr_Absolute::Copy() const {
+    return new Expr_Absolute(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_Absolute::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Absolute::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_Absolute))) {
         return Standard_False;
     }
@@ -64,13 +59,11 @@ Standard_Boolean Expr_Absolute::IsIdentical(const Handle(Expr_GeneralExpression)
     return op->IsIdentical(Other->SubExpression(1));
 }
 
-Standard_Boolean Expr_Absolute::IsLinear() const
-{
+Standard_Boolean Expr_Absolute::IsLinear() const {
     return !ContainsUnknowns();
 }
 
-Handle(Expr_GeneralExpression) Expr_Absolute::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Absolute::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     Handle(Expr_GeneralExpression) op = Operand();
     Handle(Expr_GeneralExpression) derop = op->Derivative(X);
     Handle(Expr_Sign) myder = new Expr_Sign(Expr::CopyShare(op));
@@ -78,14 +71,11 @@ Handle(Expr_GeneralExpression) Expr_Absolute::Derivative(const Handle(Expr_Named
     return resul->ShallowSimplified();
 }
 
-
-Standard_Real Expr_Absolute::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Absolute::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     return ::Abs(Operand()->Evaluate(vars, vals));
 }
 
-TCollection_AsciiString Expr_Absolute::String() const
-{
+TCollection_AsciiString Expr_Absolute::String() const {
     TCollection_AsciiString str("Abs(");
     str += Operand()->String();
     str += ")";

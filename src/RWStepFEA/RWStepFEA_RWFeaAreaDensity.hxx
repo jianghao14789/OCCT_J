@@ -27,48 +27,26 @@ class StepFEA_FeaAreaDensity;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaAreaDensity
-class RWStepFEA_RWFeaAreaDensity 
-{
+class RWStepFEA_RWFeaAreaDensity {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaAreaDensity();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaAreaDensity();
-  
-  //! Reads FeaAreaDensity
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaAreaDensity)& ent) const;
-  
-  //! Writes FeaAreaDensity
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaAreaDensity)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaAreaDensity)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaAreaDensity
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_FeaAreaDensity) & ent) const;
 
+    //! Writes FeaAreaDensity
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_FeaAreaDensity) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaAreaDensity) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaAreaDensity_HeaderFile

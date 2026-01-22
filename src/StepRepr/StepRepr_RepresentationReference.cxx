@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:14 2020 
+// Created on : Sat May 02 12:41:14 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,64 +19,58 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepRepr_RepresentationReference, Standard_Transient)
 
 //=======================================================================
-//function : StepRepr_RepresentationReference
-//purpose  : 
+// function : StepRepr_RepresentationReference
+// purpose  :
 //=======================================================================
 
-StepRepr_RepresentationReference::StepRepr_RepresentationReference ()
-{
+StepRepr_RepresentationReference::StepRepr_RepresentationReference() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepRepr_RepresentationReference::Init(const Handle(TCollection_HAsciiString) & theId,
+                                            const Handle(StepRepr_RepresentationContextReference) & theContextOfItems) {
+
+    myId = theId;
+
+    myContextOfItems = theContextOfItems;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Id
+// purpose  :
 //=======================================================================
 
-void StepRepr_RepresentationReference::Init (const Handle(TCollection_HAsciiString)& theId,
-                                             const Handle(StepRepr_RepresentationContextReference)& theContextOfItems)
-{
-
-  myId = theId;
-
-  myContextOfItems = theContextOfItems;
+Handle(TCollection_HAsciiString) StepRepr_RepresentationReference::Id() const {
+    return myId;
 }
 
 //=======================================================================
-//function : Id
-//purpose  : 
+// function : SetId
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepRepr_RepresentationReference::Id () const
-{
-  return myId;
+void StepRepr_RepresentationReference::SetId(const Handle(TCollection_HAsciiString) & theId) {
+    myId = theId;
 }
 
 //=======================================================================
-//function : SetId
-//purpose  : 
+// function : ContextOfItems
+// purpose  :
 //=======================================================================
 
-void StepRepr_RepresentationReference::SetId (const Handle(TCollection_HAsciiString)& theId)
-{
-  myId = theId;
+Handle(StepRepr_RepresentationContextReference) StepRepr_RepresentationReference::ContextOfItems() const {
+    return myContextOfItems;
 }
 
 //=======================================================================
-//function : ContextOfItems
-//purpose  : 
+// function : SetContextOfItems
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_RepresentationContextReference) StepRepr_RepresentationReference::ContextOfItems () const
-{
-  return myContextOfItems;
-}
-
-//=======================================================================
-//function : SetContextOfItems
-//purpose  : 
-//=======================================================================
-
-void StepRepr_RepresentationReference::SetContextOfItems (const Handle(StepRepr_RepresentationContextReference)& theContextOfItems)
-{
-  myContextOfItems = theContextOfItems;
+void StepRepr_RepresentationReference::SetContextOfItems(const Handle(StepRepr_RepresentationContextReference) &
+                                                         theContextOfItems) {
+    myContextOfItems = theContextOfItems;
 }

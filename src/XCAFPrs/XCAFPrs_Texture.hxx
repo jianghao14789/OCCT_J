@@ -21,28 +21,27 @@
 #include <Image_Texture.hxx>
 
 //! Texture holder.
-class XCAFPrs_Texture : public Graphic3d_Texture2Dmanual
-{
-  DEFINE_STANDARD_RTTIEXT(XCAFPrs_Texture, Graphic3d_Texture2Dmanual)
+class XCAFPrs_Texture : public Graphic3d_Texture2Dmanual {
+    DEFINE_STANDARD_RTTIEXT(XCAFPrs_Texture, Graphic3d_Texture2Dmanual)
 public:
+    //! Constructor.
+    Standard_EXPORT explicit XCAFPrs_Texture(const Image_Texture& theImageSource, const Graphic3d_TextureUnit theUnit);
 
-  //! Constructor.
-  Standard_EXPORT explicit XCAFPrs_Texture (const Image_Texture& theImageSource,
-                                            const Graphic3d_TextureUnit theUnit);
+    //! Image reader.
+    Standard_EXPORT virtual Handle(Image_CompressedPixMap)
+        GetCompressedImage(const Handle(Image_SupportedFormats) & theSupported) Standard_OVERRIDE;
 
-  //! Image reader.
-  Standard_EXPORT virtual Handle(Image_CompressedPixMap) GetCompressedImage (const Handle(Image_SupportedFormats)& theSupported) Standard_OVERRIDE;
+    //! Image reader.
+    Standard_EXPORT virtual Handle(Image_PixMap)
+        GetImage(const Handle(Image_SupportedFormats) & theSupported) Standard_OVERRIDE;
 
-  //! Image reader.
-  Standard_EXPORT virtual Handle(Image_PixMap) GetImage (const Handle(Image_SupportedFormats)& theSupported) Standard_OVERRIDE;
-
-  //! Return image source.
-  const Image_Texture& GetImageSource() const { return myImageSource; }
+    //! Return image source.
+    const Image_Texture& GetImageSource() const {
+        return myImageSource;
+    }
 
 protected:
-
-  Image_Texture myImageSource;
-
+    Image_Texture myImageSource;
 };
 
 #endif // _XCAFPrs_Texture_HeaderFile

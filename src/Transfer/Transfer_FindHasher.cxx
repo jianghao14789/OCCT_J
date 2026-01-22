@@ -11,24 +11,19 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Transfer_Finder.hxx>
 #include <Transfer_FindHasher.hxx>
-
 
 //============================================================================
 // function : HashCode
 // purpose  :
 //============================================================================
-Standard_Integer Transfer_FindHasher::HashCode (const Handle (Transfer_Finder) & theFinder,
-                                                const Standard_Integer           theUpperBound)
-{
-  return ::HashCode (theFinder->GetHashCode() - 1, theUpperBound);
+Standard_Integer Transfer_FindHasher::HashCode(const Handle(Transfer_Finder) & theFinder,
+                                               const Standard_Integer theUpperBound) {
+    return ::HashCode(theFinder->GetHashCode() - 1, theUpperBound);
 }
 
-    Standard_Boolean  Transfer_FindHasher::IsEqual
-  (const Handle(Transfer_Finder)& K1, const Handle(Transfer_Finder)& K2)
-{
-  if (K1.IsNull()) return Standard_False;
-  return K1->Equates(K2);
+Standard_Boolean Transfer_FindHasher::IsEqual(const Handle(Transfer_Finder) & K1, const Handle(Transfer_Finder) & K2) {
+    if (K1.IsNull()) return Standard_False;
+    return K1->Equates(K2);
 }

@@ -44,13 +44,14 @@ class math_Matrix;
 
 class GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox : public math_MultipleVarFunctionWithGradient {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! initializes the fields of the function. The approximating
     //! curve has <NbPol> control points.
-    Standard_EXPORT GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox(const GeomInt_TheMultiLineOfWLApprox& SSP, const Standard_Integer FirstPoint, const Standard_Integer LastPoint, const Handle(AppParCurves_HArray1OfConstraintCouple)& TheConstraints, const math_Vector& Parameters, const TColStd_Array1OfReal& Knots, const TColStd_Array1OfInteger& Mults, const Standard_Integer NbPol);
+    Standard_EXPORT GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox(
+        const GeomInt_TheMultiLineOfWLApprox& SSP, const Standard_Integer FirstPoint, const Standard_Integer LastPoint,
+        const Handle(AppParCurves_HArray1OfConstraintCouple) & TheConstraints, const math_Vector& Parameters,
+        const TColStd_Array1OfReal& Knots, const TColStd_Array1OfInteger& Mults, const Standard_Integer NbPol);
 
     //! returns the number of variables of the function. It
     //! corresponds to the number of MultiPoints.
@@ -103,31 +104,24 @@ public:
     //! to Index(ieme point) + degree +1.
     Standard_EXPORT const math_IntegerVector& Index() const;
 
-    Standard_EXPORT AppParCurves_Constraint FirstConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple)& TheConstraints, const Standard_Integer FirstPoint) const;
+    Standard_EXPORT AppParCurves_Constraint FirstConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple) &
+                                                                TheConstraints,
+                                                            const Standard_Integer FirstPoint) const;
 
-    Standard_EXPORT AppParCurves_Constraint LastConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple)& TheConstraints, const Standard_Integer LastPoint) const;
+    Standard_EXPORT AppParCurves_Constraint LastConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple) &
+                                                               TheConstraints,
+                                                           const Standard_Integer LastPoint) const;
 
     Standard_EXPORT void SetFirstLambda(const Standard_Real l1);
 
     Standard_EXPORT void SetLastLambda(const Standard_Real l2);
 
-
-
-
 protected:
-
-
     //! this method is used each time Value or Gradient is
     //! needed.
     Standard_EXPORT void Perform(const math_Vector& X);
 
-
-
-
 private:
-
-
-
     Standard_Boolean Done;
     GeomInt_TheMultiLineOfWLApprox MyMultiLine;
     AppParCurves_MultiBSpCurve MyMultiBSpCurve;
@@ -155,14 +149,6 @@ private:
     Handle(AppParCurves_HArray1OfConstraintCouple) myConstraints;
     Standard_Real mylambda1;
     Standard_Real mylambda2;
-
-
 };
-
-
-
-
-
-
 
 #endif // _GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox_HeaderFile

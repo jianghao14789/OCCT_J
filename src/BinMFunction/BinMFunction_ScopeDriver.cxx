@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BinMDF_ADriver.hxx>
 #include <BinMFunction_ScopeDriver.hxx>
 #include <BinObjMgt_Persistent.hxx>
@@ -28,117 +27,100 @@
 #include <TFunction_DoubleMapIteratorOfDoubleMapOfIntegerLabel.hxx>
 #include <TFunction_Scope.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BinMFunction_ScopeDriver,BinMDF_ADriver)
+IMPLEMENT_STANDARD_RTTIEXT(BinMFunction_ScopeDriver, BinMDF_ADriver)
 
 //=======================================================================
-//function : BinMFunction_GraphNodeDriver
-//purpose  : 
+// function : BinMFunction_GraphNodeDriver
+// purpose  :
 //=======================================================================
-BinMFunction_ScopeDriver::BinMFunction_ScopeDriver(const Handle(Message_Messenger)& theMsgDriver)
-: BinMDF_ADriver (theMsgDriver, STANDARD_TYPE(TFunction_Scope)->Name())
-{
+BinMFunction_ScopeDriver::BinMFunction_ScopeDriver(const Handle(Message_Messenger) & theMsgDriver)
+    : BinMDF_ADriver(theMsgDriver, STANDARD_TYPE(TFunction_Scope)->Name()) {}
+
+//=======================================================================
+// function : NewEmpty
+// purpose  :
+//=======================================================================
+
+Handle(TDF_Attribute) BinMFunction_ScopeDriver::NewEmpty() const {
+    return new TFunction_Scope();
 }
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : 
+// function : Paste
+// purpose  : persistent -> transient (retrieve)
 //=======================================================================
 
-Handle(TDF_Attribute) BinMFunction_ScopeDriver::NewEmpty() const
-{
-  return new TFunction_Scope();
-}
+Standard_Boolean BinMFunction_ScopeDriver::Paste(const BinObjMgt_Persistent& theSource,
+                                                 const Handle(TDF_Attribute) & theTarget,
+                                                 BinObjMgt_RRelocationTable&) const {
+    Handle(TFunction_Scope) S = Handle(TFunction_Scope)::DownCast(theTarget);
 
-//=======================================================================
-//function : Paste
-//purpose  : persistent -> transient (retrieve)
-//=======================================================================
+    Standard_Integer nb;
+    if (!(theSource >> nb)) return Standard_False;
+    if (!nb) return Standard_True;
 
-Standard_Boolean BinMFunction_ScopeDriver::Paste(const BinObjMgt_Persistent&  theSource,
-						 const Handle(TDF_Attribute)& theTarget,
-						 BinObjMgt_RRelocationTable&  ) const
-{
-  Handle(TFunction_Scope) S = Handle(TFunction_Scope)::DownCast(theTarget);
+    TFunction_DoubleMapOfIntegerLabel& map = S->ChangeFunctions();
 
-  Standard_Integer nb;
-  if ( !(theSource >> nb) )
-    return Standard_False;
-  if (!nb)
+    // IDs
+    TColStd_Array1OfInteger IDs(1, nb);
+    theSource.GetIntArray(&IDs(1), nb);
+
+    // Labels
+    Standard_Integer freeID = 0;
+    for (Standard_Integer i = 1; i <= nb; i++) {
+        TCollection_AsciiString entry;
+        if (!(theSource >> entry)) return Standard_False;
+        TDF_Label L;
+        TDF_Tool::Label(S->Label().Data(), entry, L, Standard_True);
+        if (!L.IsNull()) {
+            map.Bind(IDs.Value(i), L);
+            if (IDs.Value(i) > freeID) freeID = IDs.Value(i);
+        }
+    }
+
+    // Free ID
+    freeID++;
+    S->SetFreeID(freeID);
+
     return Standard_True;
-
-  TFunction_DoubleMapOfIntegerLabel& map = S->ChangeFunctions();
-
-  // IDs
-  TColStd_Array1OfInteger IDs(1, nb);
-  theSource.GetIntArray (&IDs(1), nb);
-
-  // Labels
-  Standard_Integer freeID = 0;
-  for (Standard_Integer i = 1; i <= nb; i++)
-  {
-    TCollection_AsciiString entry;
-    if ( !(theSource >> entry) )
-      return Standard_False;
-    TDF_Label L;
-    TDF_Tool::Label(S->Label().Data(), entry, L, Standard_True);
-    if (!L.IsNull())
-    {
-      map.Bind(IDs.Value(i), L);
-      if (IDs.Value(i) > freeID)
-	freeID = IDs.Value(i);
-    }
-  }
-
-  // Free ID
-  freeID++;
-  S->SetFreeID(freeID);
-
-  return Standard_True;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : transient -> persistent (store)
+// function : Paste
+// purpose  : transient -> persistent (store)
 //=======================================================================
 
-void BinMFunction_ScopeDriver::Paste (const Handle(TDF_Attribute)& theSource,
-				      BinObjMgt_Persistent&        theTarget,
-				      BinObjMgt_SRelocationTable&  ) const
-{
-  Handle(TFunction_Scope) S = Handle(TFunction_Scope)::DownCast(theSource);
-  const TFunction_DoubleMapOfIntegerLabel& map = S->GetFunctions();
-  const Standard_Integer nb = map.Extent();
+void BinMFunction_ScopeDriver::Paste(const Handle(TDF_Attribute) & theSource, BinObjMgt_Persistent& theTarget,
+                                     BinObjMgt_SRelocationTable&) const {
+    Handle(TFunction_Scope) S = Handle(TFunction_Scope)::DownCast(theSource);
+    const TFunction_DoubleMapOfIntegerLabel& map = S->GetFunctions();
+    const Standard_Integer nb = map.Extent();
 
-  // Number of functions
-  theTarget << nb;
-  if (!nb)
-    return;
+    // Number of functions
+    theTarget << nb;
+    if (!nb) return;
 
-  // IDs
-  {
-    TColStd_Array1OfInteger aSourceArray(1, nb);
-    TFunction_DoubleMapIteratorOfDoubleMapOfIntegerLabel itr(map);
-    for (Standard_Integer i = 1; itr.More(); itr.Next(), i++)
+    // IDs
     {
-      aSourceArray.SetValue(i, itr.Key1());
+        TColStd_Array1OfInteger aSourceArray(1, nb);
+        TFunction_DoubleMapIteratorOfDoubleMapOfIntegerLabel itr(map);
+        for (Standard_Integer i = 1; itr.More(); itr.Next(), i++) {
+            aSourceArray.SetValue(i, itr.Key1());
+        }
+        Standard_Integer* aPtr = (Standard_Integer*)&aSourceArray(1);
+        theTarget.PutIntArray(aPtr, nb);
     }
-    Standard_Integer *aPtr = (Standard_Integer *) &aSourceArray(1);
-    theTarget.PutIntArray(aPtr, nb);
-  }
 
-  // Labels
-  {
-    TFunction_DoubleMapIteratorOfDoubleMapOfIntegerLabel itr(map);
-    for (; itr.More(); itr.Next())
+    // Labels
     {
-      TDF_Label L = itr.Key2();
-      if (!L.IsNull())
-      {
-	TCollection_AsciiString entry;
-	TDF_Tool::Entry(L, entry);
-	theTarget << entry;
-      }
+        TFunction_DoubleMapIteratorOfDoubleMapOfIntegerLabel itr(map);
+        for (; itr.More(); itr.Next()) {
+            TDF_Label L = itr.Key2();
+            if (!L.IsNull()) {
+                TCollection_AsciiString entry;
+                TDF_Tool::Entry(L, entry);
+                theTarget << entry;
+            }
+        }
     }
-  }
 }
-

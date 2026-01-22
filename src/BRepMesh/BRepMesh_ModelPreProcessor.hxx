@@ -23,25 +23,21 @@
 //! Class implements functionality of model pre-processing tool.
 //! Nullifies existing polygonal data in case if model elements
 //! have IMeshData_Outdated status.
-class BRepMesh_ModelPreProcessor : public IMeshTools_ModelAlgo
-{
+class BRepMesh_ModelPreProcessor : public IMeshTools_ModelAlgo {
 public:
+    //! Constructor.
+    Standard_EXPORT BRepMesh_ModelPreProcessor();
 
-  //! Constructor.
-  Standard_EXPORT BRepMesh_ModelPreProcessor();
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMesh_ModelPreProcessor();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMesh_ModelPreProcessor();
-
-  DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelPreProcessor, IMeshTools_ModelAlgo)
+    DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelPreProcessor, IMeshTools_ModelAlgo)
 
 protected:
-
-  //! Performs processing of edges of the given model.
-  Standard_EXPORT virtual Standard_Boolean performInternal (
-    const Handle(IMeshData_Model)& theModel,
-    const IMeshTools_Parameters&   theParameters,
-    const Message_ProgressRange&   theRange) Standard_OVERRIDE;
+    //! Performs processing of edges of the given model.
+    Standard_EXPORT virtual Standard_Boolean performInternal(const Handle(IMeshData_Model) & theModel,
+                                                             const IMeshTools_Parameters& theParameters,
+                                                             const Message_ProgressRange& theRange) Standard_OVERRIDE;
 };
 
 #endif

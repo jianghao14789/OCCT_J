@@ -22,7 +22,6 @@
 
 #include <IGESBasic_Group.hxx>
 
-
 class IGESBasic_GroupWithoutBackP;
 DEFINE_STANDARD_HANDLE(IGESBasic_GroupWithoutBackP, IGESBasic_Group)
 
@@ -31,35 +30,15 @@ DEFINE_STANDARD_HANDLE(IGESBasic_GroupWithoutBackP, IGESBasic_Group)
 //! this class defines a Group without back pointers
 //!
 //! It inherits from Group
-class IGESBasic_GroupWithoutBackP : public IGESBasic_Group
-{
+class IGESBasic_GroupWithoutBackP : public IGESBasic_Group {
 
 public:
+    Standard_EXPORT IGESBasic_GroupWithoutBackP();
 
-  
-  Standard_EXPORT IGESBasic_GroupWithoutBackP();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESBasic_GroupWithoutBackP,IGESBasic_Group)
+    DEFINE_STANDARD_RTTIEXT(IGESBasic_GroupWithoutBackP, IGESBasic_Group)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESBasic_GroupWithoutBackP_HeaderFile

@@ -28,44 +28,23 @@ class StepShape_OrientedClosedShell;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for OrientedClosedShell
-class RWStepShape_RWOrientedClosedShell 
-{
+class RWStepShape_RWOrientedClosedShell {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWOrientedClosedShell();
 
-  
-  Standard_EXPORT RWStepShape_RWOrientedClosedShell();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_OrientedClosedShell)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_OrientedClosedShell)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_OrientedClosedShell)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_OrientedClosedShell) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_OrientedClosedShell) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_OrientedClosedShell) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWOrientedClosedShell_HeaderFile

@@ -35,7 +35,6 @@ class gp_Trsf;
 class gp_GTrsf2d;
 class Geom_Geometry;
 
-
 class Geom_OffsetSurface;
 DEFINE_STANDARD_HANDLE(Geom_OffsetSurface, Geom_Surface)
 
@@ -63,7 +62,6 @@ DEFINE_STANDARD_HANDLE(Geom_OffsetSurface, Geom_Surface)
 //! directions (for example, the top of a conical surface).
 class Geom_OffsetSurface : public Geom_Surface {
 public:
-
     //! Constructs a surface offset from the basis surface
     //! S, where Offset is the distance between the offset
     //! surface and the basis surface at any point.
@@ -88,7 +86,8 @@ public:
     //! Warnings :
     //! No check is done to verify that a unique normal direction is
     //! defined at any point of the basis surface S.
-    Standard_EXPORT Geom_OffsetSurface(const Handle(Geom_Surface)& S, const Standard_Real Offset, const Standard_Boolean isNotCheckC0 = Standard_False);
+    Standard_EXPORT Geom_OffsetSurface(const Handle(Geom_Surface) & S, const Standard_Real Offset,
+                                       const Standard_Boolean isNotCheckC0 = Standard_False);
 
     //! Raised if S is not at least C1.
     //! Warnings :
@@ -99,27 +98,25 @@ public:
     //! Exceptions
     //! Standard_ConstructionError if the surface S is not
     //! at least "C1" continuous.
-    Standard_EXPORT void SetBasisSurface(const Handle(Geom_Surface)& S, const Standard_Boolean isNotCheckC0 = Standard_False);
+    Standard_EXPORT void SetBasisSurface(const Handle(Geom_Surface) & S,
+                                         const Standard_Boolean isNotCheckC0 = Standard_False);
 
     //! Changes this offset surface by assigning D as the offset value.
     Standard_EXPORT void SetOffsetValue(const Standard_Real D);
 
     //! Returns the offset value of this offset surface.
-    inline Standard_Real Offset() const
-    {
+    inline Standard_Real Offset() const {
         return offsetValue;
     }
 
     //! Returns the basis surface of this offset surface.
     //! Note: The basis surface can be an offset surface.
-    inline const Handle(Geom_Surface)& BasisSurface() const
-    {
+    inline const Handle(Geom_Surface) & BasisSurface() const {
         return basisSurf;
     }
 
     //! Returns osculating surface if base surface is B-spline or Bezier
-    inline const Handle(Geom_OsculatingSurface)& OsculatingSurface() const
-    {
+    inline const Handle(Geom_OsculatingSurface) & OsculatingSurface() const {
         return myOscSurf;
     }
 
@@ -149,7 +146,8 @@ public:
     //! If the surface is infinite, this function can return:
     //! - Standard_Real::RealFirst(), or
     //! - Standard_Real::RealLast().
-    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1, Standard_Real& V2) const Standard_OVERRIDE;
+    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1,
+                                Standard_Real& V2) const Standard_OVERRIDE;
 
     //! This method returns the continuity of the basis surface - 1.
     //! Continuity of the Offset surface :
@@ -259,13 +257,17 @@ public:
     Standard_EXPORT void D0(const Standard_Real U, const Standard_Real V, gp_Pnt& P) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the basis surface is not C2.
-    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const Standard_OVERRIDE;
+    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U,
+                            gp_Vec& D1V) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the basis surface is not C3.
-    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
+    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the basis surface is not C4.
-    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV,
+                            gp_Vec& D3UVV) const Standard_OVERRIDE;
 
     //! Computes the derivative of order Nu in the direction u and Nv in the direction v.
     //!
@@ -282,7 +284,8 @@ public:
     //! Warnings:
     //! The exception UndefinedValue or UndefinedDerivative is
     //! raised if it is not possible to compute a unique offset direction.
-    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const Standard_Integer Nv) const Standard_OVERRIDE;
+    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu,
+                              const Standard_Integer Nv) const Standard_OVERRIDE;
 
     //! Applies the transformation T to this offset surface.
     //! Note: the basis surface is also modified.
@@ -302,7 +305,8 @@ public:
     //! me->TransformParameters(U,V,T)
     //! @endcode
     //! This method calls the basis surface method.
-    Standard_EXPORT virtual void TransformParameters(Standard_Real& U, Standard_Real& V, const gp_Trsf& T) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void TransformParameters(Standard_Real& U, Standard_Real& V,
+                                                     const gp_Trsf& T) const Standard_OVERRIDE;
 
     //! Returns a 2d transformation used to find the new
     //! parameters of a point on the transformed surface.
@@ -333,28 +337,31 @@ public:
     //! along U at  the point U,V.   It means that  DL/DU is
     //! collinear to DS/DU .  If IsOpposite == Standard_True
     //! these vectors have opposite direction.
-    Standard_EXPORT Standard_Boolean UOsculatingSurface(const Standard_Real U, const Standard_Real V, Standard_Boolean& IsOpposite, Handle(Geom_BSplineSurface)& UOsculSurf) const;
+    Standard_EXPORT Standard_Boolean UOsculatingSurface(const Standard_Real U, const Standard_Real V,
+                                                        Standard_Boolean& IsOpposite,
+                                                        Handle(Geom_BSplineSurface) & UOsculSurf) const;
 
     //! if Standard_True, L is the local osculating surface
     //! along V at the point U,V.
     //! It means that  DL/DV is
     //! collinear to DS/DV .  If IsOpposite == Standard_True
     //! these vectors have opposite direction.
-    Standard_EXPORT Standard_Boolean VOsculatingSurface(const Standard_Real U, const Standard_Real V, Standard_Boolean& IsOpposite, Handle(Geom_BSplineSurface)& VOsculSurf) const;
+    Standard_EXPORT Standard_Boolean VOsculatingSurface(const Standard_Real U, const Standard_Real V,
+                                                        Standard_Boolean& IsOpposite,
+                                                        Handle(Geom_BSplineSurface) & VOsculSurf) const;
 
     //! Returns continuity of the basis surface.
-    inline GeomAbs_Shape GetBasisSurfContinuity() const
-    {
+    inline GeomAbs_Shape GetBasisSurfContinuity() const {
         return myBasisSurfContinuity;
     }
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_OffsetSurface, Geom_Surface)
 
 private:
-
     Handle(Geom_Surface) basisSurf;
     Handle(Geom_Surface) equivSurf;
     Standard_Real offsetValue;

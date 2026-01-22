@@ -27,14 +27,9 @@ class BRepAdaptor_Curve;
 class gp_Pnt;
 class gp_Vec;
 
-
-
-class BRepLProp_CurveTool
-{
+class BRepLProp_CurveTool {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Computes the point <P> of parameter <U> on the curve <C>.
     Standard_EXPORT static void Value(const BRepAdaptor_Curve& C, const Standard_Real U, gp_Pnt& P);
@@ -45,12 +40,14 @@ public:
 
     //! Computes the point <P>, the first derivative <V1> and second
     //! derivative <V2> of parameter <U> on the curve <C>.
-    Standard_EXPORT static void D2(const BRepAdaptor_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2);
+    Standard_EXPORT static void D2(const BRepAdaptor_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V1,
+                                   gp_Vec& V2);
 
     //! Computes the point <P>, the first derivative <V1>, the
     //! second derivative <V2> and third derivative <V3> of
     //! parameter <U> on the curve <C>.
-    Standard_EXPORT static void D3(const BRepAdaptor_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3);
+    Standard_EXPORT static void D3(const BRepAdaptor_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                                   gp_Vec& V3);
 
     //! returns the order of continuity of the curve <C>.
     //! returns 1 : first derivative only is computable
@@ -65,27 +62,8 @@ public:
     //! FirstParameter must be less than LastParamenter.
     Standard_EXPORT static Standard_Real LastParameter(const BRepAdaptor_Curve& C);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepLProp_CurveTool_HeaderFile

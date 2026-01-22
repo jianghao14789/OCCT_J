@@ -26,13 +26,12 @@
 //! must be removed from 2nd level BVH and added after recomputation.
 //! - Invalidate : the 2nd level BVH needs to be rebuilt;
 //! - None       : entities of the selection are up to date.
-enum SelectMgr_TypeOfBVHUpdate
-{
-SelectMgr_TBU_Add,
-SelectMgr_TBU_Remove,
-SelectMgr_TBU_Renew,
-SelectMgr_TBU_Invalidate,
-SelectMgr_TBU_None
+enum SelectMgr_TypeOfBVHUpdate {
+    SelectMgr_TBU_Add,
+    SelectMgr_TBU_Remove,
+    SelectMgr_TBU_Renew,
+    SelectMgr_TBU_Invalidate,
+    SelectMgr_TBU_None
 };
 
 #endif // _SelectMgr_TypeOfBVHUpdate_HeaderFile

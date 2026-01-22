@@ -24,59 +24,53 @@
 #include <StepFEA_FeaParametricPoint.hxx>
 
 //=======================================================================
-//function : RWStepFEA_RWCurveElementLocation
-//purpose  : 
+// function : RWStepFEA_RWCurveElementLocation
+// purpose  :
 //=======================================================================
-RWStepFEA_RWCurveElementLocation::RWStepFEA_RWCurveElementLocation ()
-{
+RWStepFEA_RWCurveElementLocation::RWStepFEA_RWCurveElementLocation() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepFEA_RWCurveElementLocation::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                const Handle(StepFEA_CurveElementLocation) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 1, ach, "curve_element_location")) return;
+
+    // Own fields of CurveElementLocation
+
+    Handle(StepFEA_FeaParametricPoint) aCoordinate;
+    data->ReadEntity(num, 1, "coordinate", ach, STANDARD_TYPE(StepFEA_FeaParametricPoint), aCoordinate);
+
+    // Initialize entity
+    ent->Init(aCoordinate);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepFEA_RWCurveElementLocation::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                 const Standard_Integer num,
-                                                 Handle(Interface_Check)& ach,
-                                                 const Handle(StepFEA_CurveElementLocation) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,1,ach,"curve_element_location") ) return;
+void RWStepFEA_RWCurveElementLocation::WriteStep(StepData_StepWriter& SW,
+                                                 const Handle(StepFEA_CurveElementLocation) & ent) const {
 
-  // Own fields of CurveElementLocation
+    // Own fields of CurveElementLocation
 
-  Handle(StepFEA_FeaParametricPoint) aCoordinate;
-  data->ReadEntity (num, 1, "coordinate", ach, STANDARD_TYPE(StepFEA_FeaParametricPoint), aCoordinate);
-
-  // Initialize entity
-  ent->Init(aCoordinate);
+    SW.Send(ent->Coordinate());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepFEA_RWCurveElementLocation::WriteStep (StepData_StepWriter& SW,
-                                                  const Handle(StepFEA_CurveElementLocation) &ent) const
-{
+void RWStepFEA_RWCurveElementLocation::Share(const Handle(StepFEA_CurveElementLocation) & ent,
+                                             Interface_EntityIterator& iter) const {
 
-  // Own fields of CurveElementLocation
+    // Own fields of CurveElementLocation
 
-  SW.Send (ent->Coordinate());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepFEA_RWCurveElementLocation::Share (const Handle(StepFEA_CurveElementLocation) &ent,
-                                              Interface_EntityIterator& iter) const
-{
-
-  // Own fields of CurveElementLocation
-
-  iter.AddItem (ent->Coordinate());
+    iter.AddItem(ent->Coordinate());
 }

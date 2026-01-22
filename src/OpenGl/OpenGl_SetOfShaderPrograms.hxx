@@ -23,53 +23,48 @@
 class OpenGl_ShaderProgram;
 
 //! Alias to programs array of predefined length
-class OpenGl_SetOfPrograms : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTI_INLINE(OpenGl_SetOfPrograms, Standard_Transient)
+class OpenGl_SetOfPrograms : public Standard_Transient {
+    DEFINE_STANDARD_RTTI_INLINE(OpenGl_SetOfPrograms, Standard_Transient)
 public:
+    //! Empty constructor
+    OpenGl_SetOfPrograms() {}
 
-  //! Empty constructor
-  OpenGl_SetOfPrograms() {}
-
-  //! Access program by index
-  Handle(OpenGl_ShaderProgram)& ChangeValue (Standard_Integer theProgramBits) { return myPrograms[theProgramBits]; }
+    //! Access program by index
+    Handle(OpenGl_ShaderProgram) & ChangeValue(Standard_Integer theProgramBits) {
+        return myPrograms[theProgramBits];
+    }
 
 protected:
-  Handle(OpenGl_ShaderProgram) myPrograms[Graphic3d_ShaderFlags_NB]; //!< programs array
+    Handle(OpenGl_ShaderProgram) myPrograms[Graphic3d_ShaderFlags_NB]; //!< programs array
 };
 
 //! Alias to 2D programs array of predefined length
-class OpenGl_SetOfShaderPrograms : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTI_INLINE(OpenGl_SetOfShaderPrograms, Standard_Transient)
+class OpenGl_SetOfShaderPrograms : public Standard_Transient {
+    DEFINE_STANDARD_RTTI_INLINE(OpenGl_SetOfShaderPrograms, Standard_Transient)
 public:
+    //! Empty constructor
+    OpenGl_SetOfShaderPrograms() {}
 
-  //! Empty constructor
-  OpenGl_SetOfShaderPrograms() {}
-
-  //! Constructor
-  OpenGl_SetOfShaderPrograms (const Handle(OpenGl_SetOfPrograms)& thePrograms)
-  {
-    for (Standard_Integer aSetIter = 0; aSetIter < Graphic3d_TypeOfShadingModel_NB - 1; ++aSetIter)
-    {
-      myPrograms[aSetIter] = thePrograms;
+    //! Constructor
+    OpenGl_SetOfShaderPrograms(const Handle(OpenGl_SetOfPrograms) & thePrograms) {
+        for (Standard_Integer aSetIter = 0; aSetIter < Graphic3d_TypeOfShadingModel_NB - 1; ++aSetIter) {
+            myPrograms[aSetIter] = thePrograms;
+        }
     }
-  }
 
-  //! Access program by index
-  Handle(OpenGl_ShaderProgram)& ChangeValue (Graphic3d_TypeOfShadingModel theShadingModel,
-                                             Standard_Integer theProgramBits)
-  {
-    Handle(OpenGl_SetOfPrograms)& aSet = myPrograms[theShadingModel - 1];
-    if (aSet.IsNull())
-    {
-      aSet = new OpenGl_SetOfPrograms();
+    //! Access program by index
+    Handle(OpenGl_ShaderProgram) &
+        ChangeValue(Graphic3d_TypeOfShadingModel theShadingModel, Standard_Integer theProgramBits) {
+        Handle(OpenGl_SetOfPrograms) & aSet = myPrograms[theShadingModel - 1];
+        if (aSet.IsNull()) {
+            aSet = new OpenGl_SetOfPrograms();
+        }
+        return aSet->ChangeValue(theProgramBits);
     }
-    return aSet->ChangeValue (theProgramBits);
-  }
 
 protected:
-  Handle(OpenGl_SetOfPrograms) myPrograms[Graphic3d_TypeOfShadingModel_NB - 1]; //!< programs array, excluding Graphic3d_TypeOfShadingModel_Unlit
+    Handle(OpenGl_SetOfPrograms) myPrograms[Graphic3d_TypeOfShadingModel_NB -
+                                            1]; //!< programs array, excluding Graphic3d_TypeOfShadingModel_Unlit
 };
 
 typedef NCollection_DataMap<TCollection_AsciiString, Handle(OpenGl_SetOfShaderPrograms)> OpenGl_MapOfShaderPrograms;

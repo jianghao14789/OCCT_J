@@ -42,31 +42,30 @@
 //! - PCDM_RS_ReaderException: no shape section in the document file (binary file format);
 //! - PCDM_RS_NoModel: NOT USED;
 //! - PCDM_RS_UserBreak: user stopped reading of the document;
-enum PCDM_ReaderStatus
-{
-PCDM_RS_OK,                          //!< Success
-PCDM_RS_NoDriver,                    //!< No driver for file format
-PCDM_RS_UnknownFileDriver,           //!< File is bad
-PCDM_RS_OpenError,                   //!< Can't open file
-PCDM_RS_NoVersion,                   //!< Unknown document version
-PCDM_RS_NoSchema,                    //!< NOT USED
-PCDM_RS_NoDocument,                  //!< Document is empty
-PCDM_RS_ExtensionFailure,            //!< NOT USED
-PCDM_RS_WrongStreamMode,             //!< Open mode is mistaken
-PCDM_RS_FormatFailure,               //!< Document data structure is wrong
-PCDM_RS_TypeFailure,                 //!< Data type is unknown
-PCDM_RS_TypeNotFoundInSchema,        //!< Data type is not found in schema
-PCDM_RS_UnrecognizedFileFormat,      //!< Document data structure is wrong
-PCDM_RS_MakeFailure,                 //!< Conversion of data failed
-PCDM_RS_PermissionDenied,            //!< Permission denied to open file
-PCDM_RS_DriverFailure,               //!< General mistake of reading
-PCDM_RS_AlreadyRetrievedAndModified, //!< Document is already retrieved and modified
-PCDM_RS_AlreadyRetrieved,            //!< Document is already retrieved
-PCDM_RS_UnknownDocument,             //!< File doesn't exist
-PCDM_RS_WrongResource,               //!< Wrong resource file
-PCDM_RS_ReaderException,             //!< Wrong data structure
-PCDM_RS_NoModel,                     //!< NOT USED
-PCDM_RS_UserBreak                    //!< User interrupted reading
+enum PCDM_ReaderStatus {
+    PCDM_RS_OK,                          //!< Success
+    PCDM_RS_NoDriver,                    //!< No driver for file format
+    PCDM_RS_UnknownFileDriver,           //!< File is bad
+    PCDM_RS_OpenError,                   //!< Can't open file
+    PCDM_RS_NoVersion,                   //!< Unknown document version
+    PCDM_RS_NoSchema,                    //!< NOT USED
+    PCDM_RS_NoDocument,                  //!< Document is empty
+    PCDM_RS_ExtensionFailure,            //!< NOT USED
+    PCDM_RS_WrongStreamMode,             //!< Open mode is mistaken
+    PCDM_RS_FormatFailure,               //!< Document data structure is wrong
+    PCDM_RS_TypeFailure,                 //!< Data type is unknown
+    PCDM_RS_TypeNotFoundInSchema,        //!< Data type is not found in schema
+    PCDM_RS_UnrecognizedFileFormat,      //!< Document data structure is wrong
+    PCDM_RS_MakeFailure,                 //!< Conversion of data failed
+    PCDM_RS_PermissionDenied,            //!< Permission denied to open file
+    PCDM_RS_DriverFailure,               //!< General mistake of reading
+    PCDM_RS_AlreadyRetrievedAndModified, //!< Document is already retrieved and modified
+    PCDM_RS_AlreadyRetrieved,            //!< Document is already retrieved
+    PCDM_RS_UnknownDocument,             //!< File doesn't exist
+    PCDM_RS_WrongResource,               //!< Wrong resource file
+    PCDM_RS_ReaderException,             //!< Wrong data structure
+    PCDM_RS_NoModel,                     //!< NOT USED
+    PCDM_RS_UserBreak                    //!< User interrupted reading
 };
 
 #endif // _PCDM_ReaderStatus_HeaderFile

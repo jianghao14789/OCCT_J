@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepKinematics_RackAndPinionPairWithRange;
 
 //! Read & Write tool for RackAndPinionPairWithRange
-class RWStepKinematics_RWRackAndPinionPairWithRange
-{
+class RWStepKinematics_RWRackAndPinionPairWithRange {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWRackAndPinionPairWithRange();
 
-  Standard_EXPORT RWStepKinematics_RWRackAndPinionPairWithRange();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_RackAndPinionPairWithRange) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_RackAndPinionPairWithRange)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_RackAndPinionPairWithRange) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepKinematics_RackAndPinionPairWithRange)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepKinematics_RackAndPinionPairWithRange)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepKinematics_RackAndPinionPairWithRange) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepKinematics_RWRackAndPinionPairWithRange_HeaderFile_

@@ -14,110 +14,88 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <ChFiDS_Regul.hxx>
 
 //=======================================================================
-//function : ChFiDS_Regul
-//purpose  : 
+// function : ChFiDS_Regul
+// purpose  :
 //=======================================================================
-ChFiDS_Regul::ChFiDS_Regul()
-: icurv (0),
-  is1 (0),
-  is2 (0)
-{
+ChFiDS_Regul::ChFiDS_Regul() : icurv(0), is1(0), is2(0) {}
+
+//=======================================================================
+// function : SetCurve
+// purpose  :
+//=======================================================================
+
+void ChFiDS_Regul::SetCurve(const Standard_Integer IC) {
+    icurv = Abs(IC);
 }
 
-
 //=======================================================================
-//function : SetCurve
-//purpose  : 
+// function : SetS1
+// purpose  :
 //=======================================================================
 
-void ChFiDS_Regul::SetCurve(const Standard_Integer IC)
-{
-  icurv = Abs(IC);
+void ChFiDS_Regul::SetS1(const Standard_Integer IS1, const Standard_Boolean IsFace) {
+    if (IsFace)
+        is1 = Abs(IS1);
+    else
+        is1 = -Abs(IS1);
 }
 
-
 //=======================================================================
-//function : SetS1
-//purpose  : 
+// function : SetS2
+// purpose  :
 //=======================================================================
 
-void ChFiDS_Regul::SetS1(const Standard_Integer IS1, 
-			const Standard_Boolean IsFace)
-{
-  if(IsFace) is1 = Abs(IS1);
-  else is1 = -Abs(IS1);
+void ChFiDS_Regul::SetS2(const Standard_Integer IS2, const Standard_Boolean IsFace) {
+    if (IsFace)
+        is2 = Abs(IS2);
+    else
+        is2 = -Abs(IS2);
 }
 
-
 //=======================================================================
-//function : SetS2
-//purpose  : 
+// function : IsSurface1
+// purpose  :
 //=======================================================================
 
-void ChFiDS_Regul::SetS2(const Standard_Integer IS2, 
-			const Standard_Boolean IsFace)
-{
-  if(IsFace) is2 = Abs(IS2);
-  else is2 = -Abs(IS2);
+Standard_Boolean ChFiDS_Regul::IsSurface1() const {
+    return (is1 < 0);
 }
 
-
 //=======================================================================
-//function : IsSurface1
-//purpose  : 
+// function : IsSurface2
+// purpose  :
 //=======================================================================
 
-Standard_Boolean ChFiDS_Regul::IsSurface1() const 
-{
-  return (is1<0);
+Standard_Boolean ChFiDS_Regul::IsSurface2() const {
+    return (is2 < 0);
 }
 
-
 //=======================================================================
-//function : IsSurface2
-//purpose  : 
+// function : Curve
+// purpose  :
 //=======================================================================
 
-Standard_Boolean ChFiDS_Regul::IsSurface2() const 
-{
-  return (is2<0);
+Standard_Integer ChFiDS_Regul::Curve() const {
+    return icurv;
 }
 
-
 //=======================================================================
-//function : Curve
-//purpose  : 
+// function : S1
+// purpose  :
 //=======================================================================
 
-Standard_Integer ChFiDS_Regul::Curve() const 
-{
-  return icurv;
+Standard_Integer ChFiDS_Regul::S1() const {
+    return Abs(is1);
 }
 
-
 //=======================================================================
-//function : S1
-//purpose  : 
+// function : S2
+// purpose  :
 //=======================================================================
 
-Standard_Integer ChFiDS_Regul::S1() const 
-{
-  return Abs(is1);
+Standard_Integer ChFiDS_Regul::S2() const {
+    return Abs(is2);
 }
-
-
-//=======================================================================
-//function : S2
-//purpose  : 
-//=======================================================================
-
-Standard_Integer ChFiDS_Regul::S2() const 
-{
-  return Abs(is2);
-}
-
-

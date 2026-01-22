@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY1(StepElement_HArray1OfCurveElementEndReleasePacket, StepElement_Array1OfCurveElementEndReleasePacket)
 
-
 #endif

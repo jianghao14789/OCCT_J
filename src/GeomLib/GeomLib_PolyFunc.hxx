@@ -26,11 +26,9 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Real.hxx>
 
-
 //! Polynomial  Function
 class GeomLib_PolyFunc : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT GeomLib_PolyFunc(const math_Vector& Coeffs);
@@ -50,10 +48,10 @@ public:
     //! function for the variable <X>.
     //! Returns True if the calculation were successfully done,
     //! False otherwise.
-    Standard_EXPORT virtual Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& D) Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Boolean Values(const Standard_Real X, Standard_Real& F,
+                                                    Standard_Real& D) Standard_OVERRIDE;
 
 protected:
-
 private:
     math_Vector myCoeffs;
 };

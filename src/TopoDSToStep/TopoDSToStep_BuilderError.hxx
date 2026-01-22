@@ -17,12 +17,6 @@
 #ifndef _TopoDSToStep_BuilderError_HeaderFile
 #define _TopoDSToStep_BuilderError_HeaderFile
 
-
-enum TopoDSToStep_BuilderError
-{
-TopoDSToStep_BuilderDone,
-TopoDSToStep_NoFaceMapped,
-TopoDSToStep_BuilderOther
-};
+enum TopoDSToStep_BuilderError { TopoDSToStep_BuilderDone, TopoDSToStep_NoFaceMapped, TopoDSToStep_BuilderOther };
 
 #endif // _TopoDSToStep_BuilderError_HeaderFile

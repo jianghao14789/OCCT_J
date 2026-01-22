@@ -28,48 +28,28 @@ class StepBasic_VersionedActionRequest;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for VersionedActionRequest
-class RWStepBasic_RWVersionedActionRequest 
-{
+class RWStepBasic_RWVersionedActionRequest {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWVersionedActionRequest();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWVersionedActionRequest();
-  
-  //! Reads VersionedActionRequest
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_VersionedActionRequest)& ent) const;
-  
-  //! Writes VersionedActionRequest
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_VersionedActionRequest)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_VersionedActionRequest)& ent, Interface_EntityIterator& iter) const;
+    //! Reads VersionedActionRequest
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_VersionedActionRequest) & ent) const;
 
+    //! Writes VersionedActionRequest
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_VersionedActionRequest) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_VersionedActionRequest) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWVersionedActionRequest_HeaderFile

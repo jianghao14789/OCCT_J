@@ -12,12 +12,12 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math_FunctionSetWithDerivatives.hxx>
 #include <math_Matrix.hxx>
@@ -27,81 +27,55 @@
 #include <StdFail_NotDone.hxx>
 
 //=======================================================================
-//function : math_NewtonFunctionSetRoot
-//purpose  : Constructor
+// function : math_NewtonFunctionSetRoot
+// purpose  : Constructor
 //=======================================================================
-math_NewtonFunctionSetRoot::math_NewtonFunctionSetRoot(
-    math_FunctionSetWithDerivatives& theFunction,
-    const math_Vector& theXTolerance,
-    const Standard_Real              theFTolerance,
-    const Standard_Integer           theNbIterations)
+math_NewtonFunctionSetRoot::math_NewtonFunctionSetRoot(math_FunctionSetWithDerivatives& theFunction,
+                                                       const math_Vector& theXTolerance,
+                                                       const Standard_Real theFTolerance,
+                                                       const Standard_Integer theNbIterations)
 
-    : TolX(1, theFunction.NbVariables()),
-    TolF(theFTolerance),
-    Indx(1, theFunction.NbVariables()),
-    Scratch(1, theFunction.NbVariables()),
-    Sol(1, theFunction.NbVariables()),
-    DeltaX(1, theFunction.NbVariables()),
-    FValues(1, theFunction.NbVariables()),
-    Jacobian(1, theFunction.NbVariables(), 1, theFunction.NbVariables()),
-    Done(Standard_False),
-    State(0),
-    Iter(0),
-    Itermax(theNbIterations)
-{
+    : TolX(1, theFunction.NbVariables()), TolF(theFTolerance), Indx(1, theFunction.NbVariables()),
+      Scratch(1, theFunction.NbVariables()), Sol(1, theFunction.NbVariables()), DeltaX(1, theFunction.NbVariables()),
+      FValues(1, theFunction.NbVariables()), Jacobian(1, theFunction.NbVariables(), 1, theFunction.NbVariables()),
+      Done(Standard_False), State(0), Iter(0), Itermax(theNbIterations) {
     SetTolerance(theXTolerance);
 }
 
 //=======================================================================
-//function : math_NewtonFunctionSetRoot
-//purpose  : Constructor
+// function : math_NewtonFunctionSetRoot
+// purpose  : Constructor
 //=======================================================================
-math_NewtonFunctionSetRoot::math_NewtonFunctionSetRoot(
-    math_FunctionSetWithDerivatives& theFunction,
-    const Standard_Real              theFTolerance,
-    const Standard_Integer           theNbIterations)
+math_NewtonFunctionSetRoot::math_NewtonFunctionSetRoot(math_FunctionSetWithDerivatives& theFunction,
+                                                       const Standard_Real theFTolerance,
+                                                       const Standard_Integer theNbIterations)
 
-    : TolX(1, theFunction.NbVariables()),
-    TolF(theFTolerance),
-    Indx(1, theFunction.NbVariables()),
-    Scratch(1, theFunction.NbVariables()),
-    Sol(1, theFunction.NbVariables()),
-    DeltaX(1, theFunction.NbVariables()),
-    FValues(1, theFunction.NbVariables()),
-    Jacobian(1, theFunction.NbVariables(), 1, theFunction.NbVariables()),
-    Done(Standard_False),
-    State(0),
-    Iter(0),
-    Itermax(theNbIterations)
-{
-}
+    : TolX(1, theFunction.NbVariables()), TolF(theFTolerance), Indx(1, theFunction.NbVariables()),
+      Scratch(1, theFunction.NbVariables()), Sol(1, theFunction.NbVariables()), DeltaX(1, theFunction.NbVariables()),
+      FValues(1, theFunction.NbVariables()), Jacobian(1, theFunction.NbVariables(), 1, theFunction.NbVariables()),
+      Done(Standard_False), State(0), Iter(0), Itermax(theNbIterations) {}
 
 //=======================================================================
-//function : ~math_NewtonFunctionSetRoot
-//purpose  : Destructor
+// function : ~math_NewtonFunctionSetRoot
+// purpose  : Destructor
 //=======================================================================
-math_NewtonFunctionSetRoot::~math_NewtonFunctionSetRoot()
-{
-}
+math_NewtonFunctionSetRoot::~math_NewtonFunctionSetRoot() {}
 
 //=======================================================================
-//function : SetTolerance
-//purpose  : 
+// function : SetTolerance
+// purpose  :
 //=======================================================================
-void math_NewtonFunctionSetRoot::SetTolerance(const math_Vector& theXTolerance)
-{
+void math_NewtonFunctionSetRoot::SetTolerance(const math_Vector& theXTolerance) {
     for (Standard_Integer i = 1; i <= TolX.Length(); ++i)
         TolX(i) = theXTolerance(i);
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
-void math_NewtonFunctionSetRoot::Perform(
-    math_FunctionSetWithDerivatives& theFunction,
-    const math_Vector& theStartingPoint)
-{
+void math_NewtonFunctionSetRoot::Perform(math_FunctionSetWithDerivatives& theFunction,
+                                         const math_Vector& theStartingPoint) {
     const math_Vector anInf(1, theFunction.NbVariables(), RealFirst());
     const math_Vector aSup(1, theFunction.NbVariables(), RealLast());
 
@@ -109,15 +83,11 @@ void math_NewtonFunctionSetRoot::Perform(
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
-void math_NewtonFunctionSetRoot::Perform(
-    math_FunctionSetWithDerivatives& F,
-    const math_Vector& StartingPoint,
-    const math_Vector& InfBound,
-    const math_Vector& SupBound)
-{
+void math_NewtonFunctionSetRoot::Perform(math_FunctionSetWithDerivatives& F, const math_Vector& StartingPoint,
+                                         const math_Vector& InfBound, const math_Vector& SupBound) {
 
     Standard_Real d;
     Standard_Boolean OK;
@@ -140,7 +110,6 @@ void math_NewtonFunctionSetRoot::Perform(
             // Limitation de Sol dans les bornes [InfBound, SupBound] :
             if (Sol(i) <= InfBound(i)) Sol(i) = InfBound(i);
             if (Sol(i) >= SupBound(i)) Sol(i) = SupBound(i);
-
         }
         OK = F.Values(Sol, FValues, Jacobian);
         if (!OK) return;
@@ -153,11 +122,10 @@ void math_NewtonFunctionSetRoot::Perform(
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
-void math_NewtonFunctionSetRoot::Dump(Standard_OStream& o) const
-{
+void math_NewtonFunctionSetRoot::Dump(Standard_OStream& o) const {
     o << "math_NewtonFunctionSetRoot ";
     if (Done) {
         o << " Status = Done \n";
@@ -165,8 +133,7 @@ void math_NewtonFunctionSetRoot::Dump(Standard_OStream& o) const
         o << " Value of the function at this solution = \n";
         o << FValues << "\n";
         o << " Number of iterations = " << Iter << "\n";
-    }
-    else {
+    } else {
         o << "Status = not Done \n";
     }
 }

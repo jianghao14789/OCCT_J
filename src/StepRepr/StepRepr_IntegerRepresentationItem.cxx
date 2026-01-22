@@ -17,14 +17,12 @@
 #include <StepRepr_IntegerRepresentationItem.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_IntegerRepresentationItem,StepRepr_RepresentationItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_IntegerRepresentationItem, StepRepr_RepresentationItem)
 
-StepRepr_IntegerRepresentationItem::StepRepr_IntegerRepresentationItem ()  {}
+StepRepr_IntegerRepresentationItem::StepRepr_IntegerRepresentationItem() {}
 
-void StepRepr_IntegerRepresentationItem::Init(
-  const Handle(TCollection_HAsciiString)& theName,
-  const Standard_Integer theValue)
-{
-  value = theValue;
-  StepRepr_RepresentationItem::Init(theName);
+void StepRepr_IntegerRepresentationItem::Init(const Handle(TCollection_HAsciiString) & theName,
+                                              const Standard_Integer theValue) {
+    value = theValue;
+    StepRepr_RepresentationItem::Init(theName);
 }

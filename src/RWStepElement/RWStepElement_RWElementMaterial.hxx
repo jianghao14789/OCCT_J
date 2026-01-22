@@ -27,48 +27,26 @@ class StepElement_ElementMaterial;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ElementMaterial
-class RWStepElement_RWElementMaterial 
-{
+class RWStepElement_RWElementMaterial {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWElementMaterial();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWElementMaterial();
-  
-  //! Reads ElementMaterial
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_ElementMaterial)& ent) const;
-  
-  //! Writes ElementMaterial
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_ElementMaterial)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_ElementMaterial)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ElementMaterial
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepElement_ElementMaterial) & ent) const;
 
+    //! Writes ElementMaterial
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepElement_ElementMaterial) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_ElementMaterial) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWElementMaterial_HeaderFile

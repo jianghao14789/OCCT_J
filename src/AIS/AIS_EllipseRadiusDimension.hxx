@@ -16,7 +16,6 @@
 
 #include <PrsDim_EllipseRadiusDimension.hxx>
 
-Standard_DEPRECATED("Alias to moved class")
-typedef PrsDim_EllipseRadiusDimension AIS_EllipseRadiusDimension;
+Standard_DEPRECATED("Alias to moved class") typedef PrsDim_EllipseRadiusDimension AIS_EllipseRadiusDimension;
 
 #endif // _AIS_EllipseRadiusDimension_HeaderFile

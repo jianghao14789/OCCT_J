@@ -22,24 +22,22 @@
 #include <StepVisual_TessellatedItem.hxx>
 class Standard_Transient;
 
-DEFINE_STANDARD_HANDLE(StepVisual_CoordinatesList,StepVisual_TessellatedItem)
-class StepVisual_CoordinatesList  : public StepVisual_TessellatedItem
-{
+DEFINE_STANDARD_HANDLE(StepVisual_CoordinatesList, StepVisual_TessellatedItem)
+class StepVisual_CoordinatesList : public StepVisual_TessellatedItem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  //! Returns a coordinate list
-  Standard_EXPORT StepVisual_CoordinatesList();
+    //! Returns a coordinate list
+    Standard_EXPORT StepVisual_CoordinatesList();
 
-  Standard_EXPORT void Init(const Handle(TCollection_HAsciiString)& theName, const Handle(TColgp_HArray1OfXYZ)& thePoints);
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theName,
+                              const Handle(TColgp_HArray1OfXYZ) & thePoints);
 
-  Standard_EXPORT Handle(TColgp_HArray1OfXYZ) Points() const;
-  
-  DEFINE_STANDARD_RTTIEXT(StepVisual_CoordinatesList,StepVisual_TessellatedItem)
+    Standard_EXPORT Handle(TColgp_HArray1OfXYZ) Points() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepVisual_CoordinatesList, StepVisual_TessellatedItem)
 
 private:
-
-  Handle(TColgp_HArray1OfXYZ) myPoints;
+    Handle(TColgp_HArray1OfXYZ) myPoints;
 };
 #endif // StepVisual_CoordinatesList

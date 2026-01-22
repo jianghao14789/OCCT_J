@@ -21,5 +21,4 @@
 typedef NCollection_List<Standard_Real> TColStd_ListOfReal;
 typedef NCollection_List<Standard_Real>::Iterator TColStd_ListIteratorOfListOfReal;
 
-
 #endif

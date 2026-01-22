@@ -16,8 +16,7 @@
 
 //! Color definition for console/terminal output (limited palette).
 //! 控制台/终端输出的颜色定义（有限的调色板）
-enum Message_ConsoleColor
-{
+enum Message_ConsoleColor {
     Message_ConsoleColor_Default, //!< default (white) color
                                   //!< 默认（白色）颜色
     Message_ConsoleColor_Black,   //!< black   color

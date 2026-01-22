@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Message_Messenger.hxx>
 #include <Plugin_Macro.hxx>
 #include <Standard_GUID.hxx>
@@ -31,67 +30,58 @@
 
 #include <locale.h>
 #include <time.h>
-static Standard_GUID XmlStorageDriver  ("03a56820-8269-11d5-aab2-0050044b1af1");
+static Standard_GUID XmlStorageDriver("03a56820-8269-11d5-aab2-0050044b1af1");
 static Standard_GUID XmlRetrievalDriver("03a56822-8269-11d5-aab2-0050044b1af1");
 
 //=======================================================================
-//function : Factory
-//purpose  : PLUGIN FACTORY
+// function : Factory
+// purpose  : PLUGIN FACTORY
 //=======================================================================
-const Handle(Standard_Transient)& XmlDrivers::Factory(const Standard_GUID& theGUID)
-{
-  if (theGUID == XmlStorageDriver)
-  {
+const Handle(Standard_Transient) & XmlDrivers::Factory(const Standard_GUID& theGUID) {
+    if (theGUID == XmlStorageDriver) {
 #ifdef OCCT_DEBUG
-    std::cout << "XmlDrivers : Storage Plugin" << std::endl;
+        std::cout << "XmlDrivers : Storage Plugin" << std::endl;
 #endif
-    static Handle(Standard_Transient) model_sd =
-      new XmlDrivers_DocumentStorageDriver
-        ("Copyright: Open Cascade, 2001-2002"); // default copyright
-    return model_sd;
-  }
+        static Handle(Standard_Transient) model_sd =
+            new XmlDrivers_DocumentStorageDriver("Copyright: Open Cascade, 2001-2002"); // default copyright
+        return model_sd;
+    }
 
-  if (theGUID == XmlRetrievalDriver)
-  {
+    if (theGUID == XmlRetrievalDriver) {
 #ifdef OCCT_DEBUG
-    std::cout << "XmlDrivers : Retrieval Plugin" << std::endl;
+        std::cout << "XmlDrivers : Retrieval Plugin" << std::endl;
 #endif
-    static Handle (Standard_Transient) model_rd =
-      new XmlDrivers_DocumentRetrievalDriver ();
-    return model_rd;
-  }
- 
-  throw Standard_Failure("XmlDrivers : unknown GUID");
+        static Handle(Standard_Transient) model_rd = new XmlDrivers_DocumentRetrievalDriver();
+        return model_rd;
+    }
+
+    throw Standard_Failure("XmlDrivers : unknown GUID");
 }
 
 //=======================================================================
-//function : DefineFormat
-//purpose  : 
+// function : DefineFormat
+// purpose  :
 //=======================================================================
-void XmlDrivers::DefineFormat (const Handle(TDocStd_Application)& theApp)
-{
-  theApp->DefineFormat ("XmlOcaf", "Xml OCAF Document", "xml",
-                        new XmlDrivers_DocumentRetrievalDriver, 
-                        new XmlDrivers_DocumentStorageDriver ("Copyright: Open Cascade, 2001-2002"));
+void XmlDrivers::DefineFormat(const Handle(TDocStd_Application) & theApp) {
+    theApp->DefineFormat("XmlOcaf", "Xml OCAF Document", "xml", new XmlDrivers_DocumentRetrievalDriver,
+                         new XmlDrivers_DocumentStorageDriver("Copyright: Open Cascade, 2001-2002"));
 }
 
 //=======================================================================
-//function : AttributeDrivers
-//purpose  : 
+// function : AttributeDrivers
+// purpose  :
 //=======================================================================
-Handle(XmlMDF_ADriverTable) XmlDrivers::AttributeDrivers
-                (const Handle(Message_Messenger)& theMessageDriver)
-{
-  Handle(XmlMDF_ADriverTable) aTable = new XmlMDF_ADriverTable();
-  //
-  XmlMDF        ::AddDrivers (aTable, theMessageDriver);
-  XmlMDataStd   ::AddDrivers (aTable, theMessageDriver);
-  XmlMDataXtd   ::AddDrivers (aTable, theMessageDriver);  
-  XmlMNaming    ::AddDrivers (aTable, theMessageDriver);
-  XmlMFunction  ::AddDrivers (aTable, theMessageDriver); 
-  XmlMDocStd    ::AddDrivers (aTable, theMessageDriver); 
-  //
-  return aTable;
+Handle(XmlMDF_ADriverTable) XmlDrivers::AttributeDrivers(const Handle(Message_Messenger) & theMessageDriver) {
+    Handle(XmlMDF_ADriverTable) aTable = new XmlMDF_ADriverTable();
+    //
+    XmlMDF ::AddDrivers(aTable, theMessageDriver);
+    XmlMDataStd ::AddDrivers(aTable, theMessageDriver);
+    XmlMDataXtd ::AddDrivers(aTable, theMessageDriver);
+    XmlMNaming ::AddDrivers(aTable, theMessageDriver);
+    XmlMFunction ::AddDrivers(aTable, theMessageDriver);
+    XmlMDocStd ::AddDrivers(aTable, theMessageDriver);
+    //
+    return aTable;
 }
 
 // Declare entry point PLUGINFACTORY

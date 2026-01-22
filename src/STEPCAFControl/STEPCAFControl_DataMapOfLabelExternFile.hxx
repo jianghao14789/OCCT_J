@@ -21,8 +21,9 @@
 #include <TDF_LabelMapHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TDF_Label,Handle(STEPCAFControl_ExternFile),TDF_LabelMapHasher> STEPCAFControl_DataMapOfLabelExternFile;
-typedef NCollection_DataMap<TDF_Label,Handle(STEPCAFControl_ExternFile),TDF_LabelMapHasher>::Iterator STEPCAFControl_DataMapIteratorOfDataMapOfLabelExternFile;
-
+typedef NCollection_DataMap<TDF_Label, Handle(STEPCAFControl_ExternFile), TDF_LabelMapHasher>
+    STEPCAFControl_DataMapOfLabelExternFile;
+typedef NCollection_DataMap<TDF_Label, Handle(STEPCAFControl_ExternFile), TDF_LabelMapHasher>::Iterator
+    STEPCAFControl_DataMapIteratorOfDataMapOfLabelExternFile;
 
 #endif

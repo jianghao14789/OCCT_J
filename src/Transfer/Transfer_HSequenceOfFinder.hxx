@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(Transfer_HSequenceOfFinder, Transfer_SequenceOfFinder)
 
-
 #endif

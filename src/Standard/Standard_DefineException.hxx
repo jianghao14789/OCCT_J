@@ -26,29 +26,35 @@
     DEFINE_STANDARD_HANDLE(C1,C2) before it.
 */
 
-#define DEFINE_STANDARD_EXCEPTION(C1,C2) \
- \
-class C1 : public C2 { \
-  void Throw () const Standard_OVERRIDE { throw *this; } \
-public: \
-  C1() : C2() {} \
-  C1(Standard_CString theMessage) : C2(theMessage) {} \
-  C1(Standard_CString theMessage, Standard_CString theStackTrace) \
-  : C2 (theMessage, theStackTrace) {} \
-  static void Raise(const Standard_CString theMessage = "") { \
-    Handle(C1) _E = new C1; \
-    _E->Reraise(theMessage); \
-  } \
-  static void Raise(Standard_SStream& theMessage) { \
-    Handle(C1) _E = new C1; \
-    _E->Reraise (theMessage); \
-  } \
-  static Handle(C1) NewInstance(Standard_CString theMessage = "") { return new C1(theMessage); } \
-  static Handle(C1) NewInstance(Standard_CString theMessage, Standard_CString theStackTrace) { return new C1(theMessage, theStackTrace); } \
-  DEFINE_STANDARD_RTTI_INLINE(C1,C2) \
-};
+#define DEFINE_STANDARD_EXCEPTION(C1, C2)                                                                              \
+                                                                                                                       \
+    class C1 : public C2 {                                                                                             \
+        void Throw() const Standard_OVERRIDE {                                                                         \
+            throw *this;                                                                                               \
+        }                                                                                                              \
+                                                                                                                       \
+    public:                                                                                                            \
+        C1() : C2() {}                                                                                                 \
+        C1(Standard_CString theMessage) : C2(theMessage) {}                                                            \
+        C1(Standard_CString theMessage, Standard_CString theStackTrace) : C2(theMessage, theStackTrace) {}             \
+        static void Raise(const Standard_CString theMessage = "") {                                                    \
+            Handle(C1) _E = new C1;                                                                                    \
+            _E->Reraise(theMessage);                                                                                   \
+        }                                                                                                              \
+        static void Raise(Standard_SStream& theMessage) {                                                              \
+            Handle(C1) _E = new C1;                                                                                    \
+            _E->Reraise(theMessage);                                                                                   \
+        }                                                                                                              \
+        static Handle(C1) NewInstance(Standard_CString theMessage = "") {                                              \
+            return new C1(theMessage);                                                                                 \
+        }                                                                                                              \
+        static Handle(C1) NewInstance(Standard_CString theMessage, Standard_CString theStackTrace) {                   \
+            return new C1(theMessage, theStackTrace);                                                                  \
+        }                                                                                                              \
+        DEFINE_STANDARD_RTTI_INLINE(C1, C2)                                                                            \
+    };
 
 //! Obsolete macro, kept for compatibility with old code
-#define IMPLEMENT_STANDARD_EXCEPTION(C1) 
+#define IMPLEMENT_STANDARD_EXCEPTION(C1)
 
 #endif

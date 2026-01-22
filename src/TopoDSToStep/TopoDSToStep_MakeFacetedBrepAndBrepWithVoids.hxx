@@ -34,41 +34,19 @@ class Transfer_FinderProcess;
 //! StepShape. All the topology and geometry comprised
 //! into the shell or the solid are taken into account and
 //! translated.
-class TopoDSToStep_MakeFacetedBrepAndBrepWithVoids  : public TopoDSToStep_Root
-{
+class TopoDSToStep_MakeFacetedBrepAndBrepWithVoids : public TopoDSToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT
+    TopoDSToStep_MakeFacetedBrepAndBrepWithVoids(const TopoDS_Solid& S, const Handle(Transfer_FinderProcess) & FP,
+                                                 const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-  
-  Standard_EXPORT TopoDSToStep_MakeFacetedBrepAndBrepWithVoids(const TopoDS_Solid& S,
-                                                               const Handle(Transfer_FinderProcess)& FP,
-                                       const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT const Handle(StepShape_FacetedBrepAndBrepWithVoids)& Value() const;
-
-
-
+    Standard_EXPORT const Handle(StepShape_FacetedBrepAndBrepWithVoids) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepShape_FacetedBrepAndBrepWithVoids) theFacetedBrepAndBrepWithVoids;
-
-
+    Handle(StepShape_FacetedBrepAndBrepWithVoids) theFacetedBrepAndBrepWithVoids;
 };
-
-
-
-
-
-
 
 #endif // _TopoDSToStep_MakeFacetedBrepAndBrepWithVoids_HeaderFile

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepBuilderAPI.hxx>
 #include <BRepPrim_Cone.hxx>
 #include <BRepPrimAPI_MakeCone.hxx>
@@ -24,83 +23,58 @@
 #include <Standard_DomainError.hxx>
 
 //=======================================================================
-//function : BRepPrimAPI_MakeCone
-//purpose  : 
+// function : BRepPrimAPI_MakeCone
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const Standard_Real R1,
-				   const Standard_Real R2, 
-				   const Standard_Real H) :
-       myCone(gp::XOY(),R1, R2, H)
-{
+BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const Standard_Real R1, const Standard_Real R2, const Standard_Real H)
+    : myCone(gp::XOY(), R1, R2, H) {}
+
+//=======================================================================
+// function : BRepPrimAPI_MakeCone
+// purpose  :
+//=======================================================================
+
+BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const Standard_Real R1, const Standard_Real R2, const Standard_Real H,
+                                           const Standard_Real angle)
+    : myCone(R1, R2, H) {
+    myCone.Angle(angle);
 }
 
+//=======================================================================
+// function : BRepPrimAPI_MakeCone
+// purpose  :
+//=======================================================================
+
+BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const gp_Ax2& Axes, const Standard_Real R1, const Standard_Real R2,
+                                           const Standard_Real H)
+    : myCone(Axes, R1, R2, H) {}
 
 //=======================================================================
-//function : BRepPrimAPI_MakeCone
-//purpose  : 
+// function : BRepPrimAPI_MakeCone
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const Standard_Real R1,
-				   const Standard_Real R2,
-				   const Standard_Real H,
-				   const Standard_Real angle) :
-       myCone( R1, R2, H)
-{
-  myCone.Angle(angle);
+BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const gp_Ax2& Axes, const Standard_Real R1, const Standard_Real R2,
+                                           const Standard_Real H, const Standard_Real angle)
+    : myCone(Axes, R1, R2, H) {
+    myCone.Angle(angle);
 }
 
-
 //=======================================================================
-//function : BRepPrimAPI_MakeCone
-//purpose  : 
+// function : OneAxis
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const gp_Ax2& Axes,
-				   const Standard_Real R1, 
-				   const Standard_Real R2,
-				   const Standard_Real H) :
-       myCone( Axes, R1, R2, H)
-{
+Standard_Address BRepPrimAPI_MakeCone::OneAxis() {
+    return &myCone;
 }
 
-
 //=======================================================================
-//function : BRepPrimAPI_MakeCone
-//purpose  : 
+// function : Cone
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCone::BRepPrimAPI_MakeCone(const gp_Ax2& Axes,
-				   const Standard_Real R1,
-				   const Standard_Real R2,
-				   const Standard_Real H,
-				   const Standard_Real angle) :
-       myCone( Axes, R1, R2, H)
-{
-  myCone.Angle(angle);
+BRepPrim_Cone& BRepPrimAPI_MakeCone::Cone() {
+    return myCone;
 }
-
-
-//=======================================================================
-//function : OneAxis
-//purpose  : 
-//=======================================================================
-
-Standard_Address  BRepPrimAPI_MakeCone::OneAxis()
-{
-  return &myCone;
-}
-
-
-//=======================================================================
-//function : Cone
-//purpose  : 
-//=======================================================================
-
-BRepPrim_Cone&  BRepPrimAPI_MakeCone::Cone()
-{
-  return myCone;
-}
-
-
-

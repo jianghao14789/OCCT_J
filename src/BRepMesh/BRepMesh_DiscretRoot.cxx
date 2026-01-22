@@ -15,30 +15,22 @@
 
 #include <BRepMesh_DiscretRoot.hxx>
 
-
-IMPLEMENT_STANDARD_RTTIEXT(BRepMesh_DiscretRoot,Standard_Transient)
-
-//=======================================================================
-//function : BRepMesh_DiscretRoot
-//purpose  :
-//=======================================================================
-BRepMesh_DiscretRoot::BRepMesh_DiscretRoot()
-: myIsDone     (Standard_False)
-{
-}
+IMPLEMENT_STANDARD_RTTIEXT(BRepMesh_DiscretRoot, Standard_Transient)
 
 //=======================================================================
-//function : ~
-//purpose  :
+// function : BRepMesh_DiscretRoot
+// purpose  :
 //=======================================================================
-BRepMesh_DiscretRoot::~BRepMesh_DiscretRoot()
-{
-}
+BRepMesh_DiscretRoot::BRepMesh_DiscretRoot() : myIsDone(Standard_False) {}
 
 //=======================================================================
-//function : init
-//purpose  :
+// function : ~
+// purpose  :
 //=======================================================================
-void BRepMesh_DiscretRoot::init()
-{
-}
+BRepMesh_DiscretRoot::~BRepMesh_DiscretRoot() {}
+
+//=======================================================================
+// function : init
+// purpose  :
+//=======================================================================
+void BRepMesh_DiscretRoot::init() {}

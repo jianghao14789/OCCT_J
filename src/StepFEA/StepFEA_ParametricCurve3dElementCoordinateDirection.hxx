@@ -23,51 +23,31 @@
 class StepGeom_Direction;
 class TCollection_HAsciiString;
 
-
 class StepFEA_ParametricCurve3dElementCoordinateDirection;
 DEFINE_STANDARD_HANDLE(StepFEA_ParametricCurve3dElementCoordinateDirection, StepFEA_FeaRepresentationItem)
 
 //! Representation of STEP entity ParametricCurve3dElementCoordinateDirection
-class StepFEA_ParametricCurve3dElementCoordinateDirection : public StepFEA_FeaRepresentationItem
-{
+class StepFEA_ParametricCurve3dElementCoordinateDirection : public StepFEA_FeaRepresentationItem {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepFEA_ParametricCurve3dElementCoordinateDirection();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepFEA_ParametricCurve3dElementCoordinateDirection();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aRepresentationItem_Name, const Handle(StepGeom_Direction)& aOrientation);
-  
-  //! Returns field Orientation
-  Standard_EXPORT Handle(StepGeom_Direction) Orientation() const;
-  
-  //! Set field Orientation
-  Standard_EXPORT void SetOrientation (const Handle(StepGeom_Direction)& Orientation);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aRepresentationItem_Name,
+                              const Handle(StepGeom_Direction) & aOrientation);
 
+    //! Returns field Orientation
+    Standard_EXPORT Handle(StepGeom_Direction) Orientation() const;
 
+    //! Set field Orientation
+    Standard_EXPORT void SetOrientation(const Handle(StepGeom_Direction) & Orientation);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepFEA_ParametricCurve3dElementCoordinateDirection,StepFEA_FeaRepresentationItem)
+    DEFINE_STANDARD_RTTIEXT(StepFEA_ParametricCurve3dElementCoordinateDirection, StepFEA_FeaRepresentationItem)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepGeom_Direction) theOrientation;
-
-
+    Handle(StepGeom_Direction) theOrientation;
 };
-
-
-
-
-
-
 
 #endif // _StepFEA_ParametricCurve3dElementCoordinateDirection_HeaderFile

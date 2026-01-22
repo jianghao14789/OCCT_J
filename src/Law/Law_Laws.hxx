@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(Law_Function)> Law_Laws;
 typedef NCollection_List<Handle(Law_Function)>::Iterator Law_ListIteratorOfLaws;
 
-
 #endif

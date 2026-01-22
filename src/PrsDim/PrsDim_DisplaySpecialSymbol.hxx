@@ -18,11 +18,10 @@
 #define _PrsDim_DisplaySpecialSymbol_HeaderFile
 
 //! Specifies dimension special symbol display options
-enum PrsDim_DisplaySpecialSymbol
-{
-  PrsDim_DisplaySpecialSymbol_No,
-  PrsDim_DisplaySpecialSymbol_Before,
-  PrsDim_DisplaySpecialSymbol_After
+enum PrsDim_DisplaySpecialSymbol {
+    PrsDim_DisplaySpecialSymbol_No,
+    PrsDim_DisplaySpecialSymbol_Before,
+    PrsDim_DisplaySpecialSymbol_After
 };
 
 #endif // _PrsDim_DisplaySpecialSymbol_HeaderFile

@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -17,11 +17,10 @@
 #ifndef _StepKinematics_ActuatedDirection_HeaderFile
 #define _StepKinematics_ActuatedDirection_HeaderFile
 
-enum StepKinematics_ActuatedDirection
-{
-  StepKinematics_adBidirectional,
-  StepKinematics_adPositiveOnly,
-  StepKinematics_adNegativeOnly,
-  StepKinematics_adNotActuated
+enum StepKinematics_ActuatedDirection {
+    StepKinematics_adBidirectional,
+    StepKinematics_adPositiveOnly,
+    StepKinematics_adNegativeOnly,
+    StepKinematics_adNotActuated
 };
 #endif // _StepKinematics_ActuatedDirection_HeaderFile

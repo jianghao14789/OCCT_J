@@ -18,11 +18,10 @@
 #define _PrsDim_DimensionSelectionMode_HeaderFile
 
 //! Specifies dimension selection modes.
-enum PrsDim_DimensionSelectionMode
-{
-  PrsDim_DimensionSelectionMode_All,
-  PrsDim_DimensionSelectionMode_Line,
-  PrsDim_DimensionSelectionMode_Text
+enum PrsDim_DimensionSelectionMode {
+    PrsDim_DimensionSelectionMode_All,
+    PrsDim_DimensionSelectionMode_Line,
+    PrsDim_DimensionSelectionMode_Text
 };
 
 #endif // _PrsDim_DimensionSelectionMode_HeaderFile

@@ -19,7 +19,6 @@
 #define No_Standard_OutOfRange
 #endif
 
-
 #include <Expr.hxx>
 #include <Expr_Array1OfGeneralExpression.hxx>
 #include <Expr_Array1OfNamedUnknown.hxx>
@@ -39,8 +38,8 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_UnaryFunction, Expr_UnaryExpression)
 
-Expr_UnaryFunction::Expr_UnaryFunction(const Handle(Expr_GeneralFunction)& func, const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_UnaryFunction::Expr_UnaryFunction(const Handle(Expr_GeneralFunction) & func,
+                                       const Handle(Expr_GeneralExpression) & exp) {
     if (func->NbOfVariables() != 1) {
         throw Expr_InvalidFunction();
     }
@@ -48,13 +47,11 @@ Expr_UnaryFunction::Expr_UnaryFunction(const Handle(Expr_GeneralFunction)& func,
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralFunction) Expr_UnaryFunction::Function() const
-{
+Handle(Expr_GeneralFunction) Expr_UnaryFunction::Function() const {
     return myFunction;
 }
 
-Handle(Expr_GeneralExpression) Expr_UnaryFunction::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_UnaryFunction::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) op = Operand();
     if (op->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) nval = Handle(Expr_NumericValue)::DownCast(op);
@@ -69,13 +66,11 @@ Handle(Expr_GeneralExpression) Expr_UnaryFunction::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_UnaryFunction::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_UnaryFunction::Copy() const {
     return new Expr_UnaryFunction(myFunction, Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_UnaryFunction::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_UnaryFunction::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_UnaryFunction))) {
         return Standard_False;
     }
@@ -89,8 +84,7 @@ Standard_Boolean Expr_UnaryFunction::IsIdentical(const Handle(Expr_GeneralExpres
     return Standard_False;
 }
 
-Standard_Boolean Expr_UnaryFunction::IsLinear() const
-{
+Standard_Boolean Expr_UnaryFunction::IsLinear() const {
     if (!ContainsUnknowns()) {
         return Standard_True;
     }
@@ -100,8 +94,7 @@ Standard_Boolean Expr_UnaryFunction::IsLinear() const
     return myFunction->IsLinearOnVariable(1);
 }
 
-Handle(Expr_GeneralExpression) Expr_UnaryFunction::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_UnaryFunction::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     Handle(Expr_NamedUnknown) myvar = myFunction->Variable(1);
     Handle(Expr_GeneralExpression) myop = Operand();
     Handle(Expr_GeneralExpression) myexpder = myop->Derivative(X);
@@ -111,8 +104,8 @@ Handle(Expr_GeneralExpression) Expr_UnaryFunction::Derivative(const Handle(Expr_
     return resu->ShallowSimplified();
 }
 
-Standard_Real Expr_UnaryFunction::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_UnaryFunction::Evaluate(const Expr_Array1OfNamedUnknown& vars,
+                                           const TColStd_Array1OfReal& vals) const {
     Expr_Array1OfNamedUnknown varsfunc(1, 1);
     varsfunc(1) = myFunction->Variable(1);
     TColStd_Array1OfReal valsfunc(1, 1);
@@ -120,8 +113,7 @@ Standard_Real Expr_UnaryFunction::Evaluate(const Expr_Array1OfNamedUnknown& vars
     return myFunction->Evaluate(varsfunc, valsfunc);
 }
 
-TCollection_AsciiString Expr_UnaryFunction::String() const
-{
+TCollection_AsciiString Expr_UnaryFunction::String() const {
     TCollection_AsciiString res = myFunction->GetStringName();
     res += "(";
     res += Operand()->String();

@@ -19,7 +19,6 @@
 #define No_Standard_OutOfRange
 #endif
 
-
 #include <Expr.hxx>
 #include <Expr_Array1OfNamedUnknown.hxx>
 #include <Expr_FunctionDerivative.hxx>
@@ -40,21 +39,19 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_PolyFunction, Expr_PolyExpression)
 
-Expr_PolyFunction::Expr_PolyFunction(const Handle(Expr_GeneralFunction)& func, const Expr_Array1OfGeneralExpression& exps)
-{
+Expr_PolyFunction::Expr_PolyFunction(const Handle(Expr_GeneralFunction) & func,
+                                     const Expr_Array1OfGeneralExpression& exps) {
     for (Standard_Integer i = exps.Lower(); i <= exps.Upper(); i++) {
         AddOperand(exps(i));
     }
     myFunction = func;
 }
 
-Handle(Expr_GeneralFunction) Expr_PolyFunction::Function() const
-{
+Handle(Expr_GeneralFunction) Expr_PolyFunction::Function() const {
     return myFunction;
 }
 
-Handle(Expr_GeneralExpression) Expr_PolyFunction::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_PolyFunction::ShallowSimplified() const {
     Standard_Boolean allval = Standard_True;
     Standard_Integer max = NbSubExpressions();
     Standard_Integer i;
@@ -75,8 +72,7 @@ Handle(Expr_GeneralExpression) Expr_PolyFunction::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_PolyFunction::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_PolyFunction::Copy() const {
     Standard_Integer max = NbSubExpressions();
     Expr_Array1OfGeneralExpression vars(1, max);
     for (Standard_Integer i = 1; i <= max; i++) {
@@ -85,8 +81,7 @@ Handle(Expr_GeneralExpression) Expr_PolyFunction::Copy() const
     return new Expr_PolyFunction(myFunction, vars);
 }
 
-Standard_Boolean Expr_PolyFunction::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_PolyFunction::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_PolyFunction))) {
         return Standard_False;
     }
@@ -109,8 +104,7 @@ Standard_Boolean Expr_PolyFunction::IsIdentical(const Handle(Expr_GeneralExpress
     return Standard_True;
 }
 
-Standard_Boolean Expr_PolyFunction::IsLinear() const
-{
+Standard_Boolean Expr_PolyFunction::IsLinear() const {
     if (!ContainsUnknowns()) {
         return Standard_True;
     }
@@ -125,8 +119,7 @@ Standard_Boolean Expr_PolyFunction::IsLinear() const
     return Standard_True;
 }
 
-Handle(Expr_GeneralExpression) Expr_PolyFunction::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_PolyFunction::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     Handle(Expr_GeneralExpression) myop;
     Handle(Expr_NamedUnknown) thevar;
     Handle(Expr_GeneralFunction) partderfunc;
@@ -150,9 +143,8 @@ Handle(Expr_GeneralExpression) Expr_PolyFunction::Derivative(const Handle(Expr_N
     return res->ShallowSimplified();
 }
 
-
-Standard_Real Expr_PolyFunction::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_PolyFunction::Evaluate(const Expr_Array1OfNamedUnknown& vars,
+                                          const TColStd_Array1OfReal& vals) const {
     Standard_Integer max = NbSubExpressions();
     Expr_Array1OfNamedUnknown varsfunc(1, max);
     TColStd_Array1OfReal valsfunc(1, max);
@@ -163,8 +155,7 @@ Standard_Real Expr_PolyFunction::Evaluate(const Expr_Array1OfNamedUnknown& vars,
     return myFunction->Evaluate(varsfunc, valsfunc);
 }
 
-TCollection_AsciiString Expr_PolyFunction::String() const
-{
+TCollection_AsciiString Expr_PolyFunction::String() const {
     TCollection_AsciiString res = myFunction->GetStringName();
     res += "(";
     Standard_Integer max = NbOperands();

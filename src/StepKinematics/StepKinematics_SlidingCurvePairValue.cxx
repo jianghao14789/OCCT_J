@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,62 +19,56 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_SlidingCurvePairValue, StepKinematics_PairValue)
 
 //=======================================================================
-//function : StepKinematics_SlidingCurvePairValue
-//purpose  :
+// function : StepKinematics_SlidingCurvePairValue
+// purpose  :
 //=======================================================================
-StepKinematics_SlidingCurvePairValue::StepKinematics_SlidingCurvePairValue ()
-{
+StepKinematics_SlidingCurvePairValue::StepKinematics_SlidingCurvePairValue() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_SlidingCurvePairValue::Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                                                const Handle(StepKinematics_KinematicPair) & thePairValue_AppliesToPair,
+                                                const Handle(StepGeom_PointOnCurve) & theActualPointOnCurve1,
+                                                const Handle(StepGeom_PointOnCurve) & theActualPointOnCurve2) {
+    StepKinematics_PairValue::Init(theRepresentationItem_Name, thePairValue_AppliesToPair);
+
+    myActualPointOnCurve1 = theActualPointOnCurve1;
+
+    myActualPointOnCurve2 = theActualPointOnCurve2;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : ActualPointOnCurve1
+// purpose  :
 //=======================================================================
-void StepKinematics_SlidingCurvePairValue::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                                 const Handle(StepKinematics_KinematicPair)& thePairValue_AppliesToPair,
-                                                 const Handle(StepGeom_PointOnCurve)& theActualPointOnCurve1,
-                                                 const Handle(StepGeom_PointOnCurve)& theActualPointOnCurve2)
-{
-  StepKinematics_PairValue::Init(theRepresentationItem_Name,
-                                 thePairValue_AppliesToPair);
-
-  myActualPointOnCurve1 = theActualPointOnCurve1;
-
-  myActualPointOnCurve2 = theActualPointOnCurve2;
+Handle(StepGeom_PointOnCurve) StepKinematics_SlidingCurvePairValue::ActualPointOnCurve1() const {
+    return myActualPointOnCurve1;
 }
 
 //=======================================================================
-//function : ActualPointOnCurve1
-//purpose  :
+// function : SetActualPointOnCurve1
+// purpose  :
 //=======================================================================
-Handle(StepGeom_PointOnCurve) StepKinematics_SlidingCurvePairValue::ActualPointOnCurve1 () const
-{
-  return myActualPointOnCurve1;
+void StepKinematics_SlidingCurvePairValue::SetActualPointOnCurve1(const Handle(StepGeom_PointOnCurve) &
+                                                                  theActualPointOnCurve1) {
+    myActualPointOnCurve1 = theActualPointOnCurve1;
 }
 
 //=======================================================================
-//function : SetActualPointOnCurve1
-//purpose  :
+// function : ActualPointOnCurve2
+// purpose  :
 //=======================================================================
-void StepKinematics_SlidingCurvePairValue::SetActualPointOnCurve1 (const Handle(StepGeom_PointOnCurve)& theActualPointOnCurve1)
-{
-  myActualPointOnCurve1 = theActualPointOnCurve1;
+Handle(StepGeom_PointOnCurve) StepKinematics_SlidingCurvePairValue::ActualPointOnCurve2() const {
+    return myActualPointOnCurve2;
 }
 
 //=======================================================================
-//function : ActualPointOnCurve2
-//purpose  :
+// function : SetActualPointOnCurve2
+// purpose  :
 //=======================================================================
-Handle(StepGeom_PointOnCurve) StepKinematics_SlidingCurvePairValue::ActualPointOnCurve2 () const
-{
-  return myActualPointOnCurve2;
-}
-
-//=======================================================================
-//function : SetActualPointOnCurve2
-//purpose  :
-//=======================================================================
-void StepKinematics_SlidingCurvePairValue::SetActualPointOnCurve2 (const Handle(StepGeom_PointOnCurve)& theActualPointOnCurve2)
-{
-  myActualPointOnCurve2 = theActualPointOnCurve2;
+void StepKinematics_SlidingCurvePairValue::SetActualPointOnCurve2(const Handle(StepGeom_PointOnCurve) &
+                                                                  theActualPointOnCurve2) {
+    myActualPointOnCurve2 = theActualPointOnCurve2;
 }

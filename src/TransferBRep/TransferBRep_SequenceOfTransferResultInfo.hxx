@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<Handle(TransferBRep_TransferResultInfo)> TransferBRep_SequenceOfTransferResultInfo;
 
-
 #endif

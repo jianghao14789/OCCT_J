@@ -23,8 +23,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_Messenger, Standard_Transient)
 
 //=======================================================================
-//function : Message_Messenger
-//purpose  : 默认构造函数，创建 Messenger 并自动添加一个标准输出流打印机
+// function : Message_Messenger
+// purpose  : 默认构造函数，创建 Messenger 并自动添加一个标准输出流打印机
 //
 // 说明：
 //   - Messenger 是消息路由的核心组件
@@ -41,16 +41,15 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_Messenger, Standard_Transient)
 //   - 决定消息的格式（纯文本、彩色文本、JSON 等）
 //   - 决定消息的过滤（不同的严重级别可能有不同的处理）
 //=======================================================================
-Message_Messenger::Message_Messenger()
-{
+Message_Messenger::Message_Messenger() {
     // 调用 AddPrinter 方法添加一个标准的输出流打印机
     // Message_PrinterOStream 是一个将消息输出到 C++ 输出流的打印机
     AddPrinter(new Message_PrinterOStream);
 }
 
 //=======================================================================
-//function : Message_Messenger
-//purpose  : 带参数的构造函数，创建 Messenger 并添加指定的打印机
+// function : Message_Messenger
+// purpose  : 带参数的构造函数，创建 Messenger 并添加指定的打印机
 //
 // 参数说明：
 //   - thePrinter：要添加的打印机对象
@@ -60,21 +59,20 @@ Message_Messenger::Message_Messenger()
 //   - 例如，创建输出到文件的 Messenger
 //
 // 示例：
-//   Handle(Message_PrinterOStream) aFilePrinter = 
+//   Handle(Message_PrinterOStream) aFilePrinter =
 //       new Message_PrinterOStream("output.log");
-//   Handle(Message_Messenger) aMsg = 
+//   Handle(Message_Messenger) aMsg =
 //       new Message_Messenger(aFilePrinter);
 //=======================================================================
 
-Message_Messenger::Message_Messenger(const Handle(Message_Printer)& thePrinter)
-{
+Message_Messenger::Message_Messenger(const Handle(Message_Printer) & thePrinter) {
     // 添加传入的打印机
     AddPrinter(thePrinter);
 }
 
 //=======================================================================
-//function : AddPrinter
-//purpose  : 向 Messenger 添加一个新的打印机
+// function : AddPrinter
+// purpose  : 向 Messenger 添加一个新的打印机
 //
 // 参数说明：
 //   - thePrinter：要添加的打印机对象
@@ -95,16 +93,13 @@ Message_Messenger::Message_Messenger(const Handle(Message_Printer)& thePrinter)
 //   - 否则将新打印机添加到列表末尾
 //=======================================================================
 
-Standard_Boolean Message_Messenger::AddPrinter(const Handle(Message_Printer)& thePrinter)
-{
+Standard_Boolean Message_Messenger::AddPrinter(const Handle(Message_Printer) & thePrinter) {
     // 检查打印机是否已在列表中
     // check whether printer is already in the list
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
         // 如果找到相同的打印机，表示已存在
-        if (aPrinter == thePrinter)
-        {
+        if (aPrinter == thePrinter) {
             // 返回 false 表示未添加
             return Standard_False;
         }
@@ -116,8 +111,8 @@ Standard_Boolean Message_Messenger::AddPrinter(const Handle(Message_Printer)& th
 }
 
 //=======================================================================
-//function : RemovePrinter
-//purpose  : 从 Messenger 中移除指定的打印机
+// function : RemovePrinter
+// purpose  : 从 Messenger 中移除指定的打印机
 //
 // 参数说明：
 //   - thePrinter：要移除的打印机对象
@@ -136,15 +131,12 @@ Standard_Boolean Message_Messenger::AddPrinter(const Handle(Message_Printer)& th
 //   - 未找到则返回 false
 //=======================================================================
 
-Standard_Boolean Message_Messenger::RemovePrinter(const Handle(Message_Printer)& thePrinter)
-{
+Standard_Boolean Message_Messenger::RemovePrinter(const Handle(Message_Printer) & thePrinter) {
     // 在列表中查找打印机
     // find printer in the list
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-        if (aPrinter == thePrinter)
-        {
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
+        if (aPrinter == thePrinter) {
             // 找到了，从列表中移除
             myPrinters.Remove(aPrinterIter);
             return Standard_True;
@@ -155,8 +147,8 @@ Standard_Boolean Message_Messenger::RemovePrinter(const Handle(Message_Printer)&
 }
 
 //=======================================================================
-//function : RemovePrinters
-//purpose  : 从 Messenger 中移除所有指定类型的打印机
+// function : RemovePrinters
+// purpose  : 从 Messenger 中移除所有指定类型的打印机
 //
 // 参数说明：
 //   - theType：要移除的打印机类型（例如 Message_PrinterOStream）
@@ -174,23 +166,18 @@ Standard_Boolean Message_Messenger::RemovePrinter(const Handle(Message_Printer)&
 //   - 遍历列表时需要小心，因为列表大小可能改变
 //=======================================================================
 
-Standard_Integer Message_Messenger::RemovePrinters(const Handle(Standard_Type)& theType)
-{
+Standard_Integer Message_Messenger::RemovePrinters(const Handle(Standard_Type) & theType) {
     // 用于计数被移除的打印机数量
     // remove printers from the list
     Standard_Integer nb = 0;
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More();)
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More();) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
         // IsKind() 检查打印机是否是指定类型或其派生类
-        if (!aPrinter.IsNull() && aPrinter->IsKind(theType))
-        {
+        if (!aPrinter.IsNull() && aPrinter->IsKind(theType)) {
             // 移除当前迭代器指向的打印机
             myPrinters.Remove(aPrinterIter);
             nb++;
-        }
-        else
-        {
+        } else {
             // 如果不移除，则向前移动迭代器
             aPrinterIter.Next();
         }
@@ -199,8 +186,8 @@ Standard_Integer Message_Messenger::RemovePrinters(const Handle(Standard_Type)& 
 }
 
 //=======================================================================
-//function : Send
-//purpose  : 向所有打印机发送 C 字符串消息
+// function : Send
+// purpose  : 向所有打印机发送 C 字符串消息
 //
 // 参数说明：
 //   - theString：消息文本（C 风格的字符串）
@@ -223,16 +210,12 @@ Standard_Integer Message_Messenger::RemovePrinters(const Handle(Standard_Type)& 
 //   - 调用每个打印机的 Send 方法
 //=======================================================================
 
-void Message_Messenger::Send(const Standard_CString theString,
-    const Message_Gravity theGravity) const
-{
+void Message_Messenger::Send(const Standard_CString theString, const Message_Gravity theGravity) const {
     // 遍历所有打印机
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
         // 确保打印机不为空
-        if (!aPrinter.IsNull())
-        {
+        if (!aPrinter.IsNull()) {
             // 调用打印机的 Send 方法
             aPrinter->Send(theString, theGravity);
         }
@@ -240,8 +223,8 @@ void Message_Messenger::Send(const Standard_CString theString,
 }
 
 //=======================================================================
-//function : Send
-//purpose  : 向所有打印机发送流消息
+// function : Send
+// purpose  : 向所有打印机发送流消息
 //
 // 参数说明：
 //   - theStream：包含消息的字符串流对象
@@ -252,14 +235,10 @@ void Message_Messenger::Send(const Standard_CString theString,
 //   - 流对象包含多行或结构化的消息
 //   - 比 C 字符串更灵活，支持格式化输出
 //=======================================================================
-void Message_Messenger::Send(const Standard_SStream& theStream,
-    const Message_Gravity theGravity) const
-{
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-        if (!aPrinter.IsNull())
-        {
+void Message_Messenger::Send(const Standard_SStream& theStream, const Message_Gravity theGravity) const {
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull()) {
             // 调用打印机的 SendStringStream 方法处理流消息
             aPrinter->SendStringStream(theStream, theGravity);
         }
@@ -267,51 +246,43 @@ void Message_Messenger::Send(const Standard_SStream& theStream,
 }
 
 //=======================================================================
-//function : Send
-//purpose  : 向所有打印机发送 ASCII 字符串消息
+// function : Send
+// purpose  : 向所有打印机发送 ASCII 字符串消息
 //
 // 说明：
 //   - ASCII 字符串是 OCCT 库内部常用的字符串格式
 //   - 与 C 字符串相比，提供了更多的字符串操作方法
 //=======================================================================
-void Message_Messenger::Send(const TCollection_AsciiString& theString,
-    const Message_Gravity theGravity) const
-{
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-        if (!aPrinter.IsNull())
-        {
+void Message_Messenger::Send(const TCollection_AsciiString& theString, const Message_Gravity theGravity) const {
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull()) {
             aPrinter->Send(theString, theGravity);
         }
     }
 }
 
 //=======================================================================
-//function : Send
-//purpose  : 向所有打印机发送扩展字符串消息（支持 Unicode）
+// function : Send
+// purpose  : 向所有打印机发送扩展字符串消息（支持 Unicode）
 //
 // 说明：
 //   - ExtendedString 支持 Unicode 字符
 //   - 用于需要多语言支持的应用
 //=======================================================================
 
-void Message_Messenger::Send(const TCollection_ExtendedString& theString,
-    const Message_Gravity theGravity) const
-{
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-        if (!aPrinter.IsNull())
-        {
+void Message_Messenger::Send(const TCollection_ExtendedString& theString, const Message_Gravity theGravity) const {
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull()) {
             aPrinter->Send(theString, theGravity);
         }
     }
 }
 
 //=======================================================================
-//function : Send
-//purpose  : 向所有打印机发送对象消息
+// function : Send
+// purpose  : 向所有打印机发送对象消息
 //
 // 参数说明：
 //   - theObject：要发送的对象（任何 OCCT 对象）
@@ -320,14 +291,10 @@ void Message_Messenger::Send(const TCollection_ExtendedString& theString,
 //   - 这个版本允许发送对象本身而不仅仅是文本
 //   - 打印机可以决定如何序列化对象（例如转换为 JSON）
 //=======================================================================
-void Message_Messenger::Send(const Handle(Standard_Transient)& theObject,
-    const Message_Gravity theGravity) const
-{
-    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next())
-    {
-        const Handle(Message_Printer)& aPrinter = aPrinterIter.Value();
-        if (!aPrinter.IsNull())
-        {
+void Message_Messenger::Send(const Handle(Standard_Transient) & theObject, const Message_Gravity theGravity) const {
+    for (Message_SequenceOfPrinters::Iterator aPrinterIter(myPrinters); aPrinterIter.More(); aPrinterIter.Next()) {
+        const Handle(Message_Printer) & aPrinter = aPrinterIter.Value();
+        if (!aPrinter.IsNull()) {
             // 调用打印机的 SendObject 方法
             aPrinter->SendObject(theObject, theGravity);
         }
@@ -335,17 +302,16 @@ void Message_Messenger::Send(const Handle(Standard_Transient)& theObject,
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将 Messenger 的状态以 JSON 格式输出
+// function : DumpJson
+// purpose  : 将 Messenger 的状态以 JSON 格式输出
 //
 // 说明：
 //   - 输出 Messenger 中所有已注册的打印机信息
 //   - 用于调试和监控 Messenger 的配置
 //=======================================================================
-void Message_Messenger::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-{
+void Message_Messenger::DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-        // 输出打印机列表的大小
-        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myPrinters.Size())
+    // 输出打印机列表的大小
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myPrinters.Size())
 }

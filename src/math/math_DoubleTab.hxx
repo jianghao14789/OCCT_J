@@ -31,9 +31,12 @@ class math_DoubleTab {
 public:
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT math_DoubleTab(const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
+    Standard_EXPORT math_DoubleTab(const Standard_Integer LowerRow, const Standard_Integer UpperRow,
+                                   const Standard_Integer LowerCol, const Standard_Integer UpperCol);
 
-    Standard_EXPORT math_DoubleTab(const Standard_Address Tab, const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
+    Standard_EXPORT math_DoubleTab(const Standard_Address Tab, const Standard_Integer LowerRow,
+                                   const Standard_Integer UpperRow, const Standard_Integer LowerCol,
+                                   const Standard_Integer UpperCol);
 
     Standard_EXPORT void Init(const Standard_Real InitValue);
 
@@ -46,19 +49,16 @@ public:
     Standard_EXPORT void SetLowerCol(const Standard_Integer LowerCol);
 
     Standard_Real& Value(const Standard_Integer RowIndex, const Standard_Integer ColIndex) const;
-    Standard_Real& operator() (const Standard_Integer RowIndex, const Standard_Integer ColIndex) const
-    {
+    Standard_Real& operator()(const Standard_Integer RowIndex, const Standard_Integer ColIndex) const {
         return Value(RowIndex, ColIndex);
     }
 
     Standard_EXPORT void Free();
-    ~math_DoubleTab()
-    {
+    ~math_DoubleTab() {
         Free();
     }
 
 protected:
-
 private:
     Standard_EXPORT void Allocate();
 
@@ -70,7 +70,6 @@ private:
     Standard_Integer LowC;
     Standard_Integer UppC;
 };
-
 
 #include <math_DoubleTab.lxx>
 

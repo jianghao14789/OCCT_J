@@ -27,48 +27,29 @@ class StepFEA_FeaSurfaceSectionGeometricRelationship;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaSurfaceSectionGeometricRelationship
-class RWStepFEA_RWFeaSurfaceSectionGeometricRelationship 
-{
+class RWStepFEA_RWFeaSurfaceSectionGeometricRelationship {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaSurfaceSectionGeometricRelationship();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaSurfaceSectionGeometricRelationship();
-  
-  //! Reads FeaSurfaceSectionGeometricRelationship
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaSurfaceSectionGeometricRelationship)& ent) const;
-  
-  //! Writes FeaSurfaceSectionGeometricRelationship
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaSurfaceSectionGeometricRelationship)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaSurfaceSectionGeometricRelationship)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaSurfaceSectionGeometricRelationship
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_FeaSurfaceSectionGeometricRelationship) & ent) const;
 
+    //! Writes FeaSurfaceSectionGeometricRelationship
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_FeaSurfaceSectionGeometricRelationship) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaSurfaceSectionGeometricRelationship) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaSurfaceSectionGeometricRelationship_HeaderFile

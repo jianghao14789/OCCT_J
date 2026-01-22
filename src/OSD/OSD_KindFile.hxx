@@ -16,13 +16,6 @@
 #define _OSD_KindFile_HeaderFile
 
 //! Specifies the type of files.
-enum OSD_KindFile
-{
-    OSD_FILE,
-    OSD_DIRECTORY,
-    OSD_LINK,
-    OSD_SOCKET,
-    OSD_UNKNOWN
-};
+enum OSD_KindFile { OSD_FILE, OSD_DIRECTORY, OSD_LINK, OSD_SOCKET, OSD_UNKNOWN };
 
 #endif // _OSD_KindFile_HeaderFile

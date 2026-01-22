@@ -25,41 +25,36 @@
 #include <ShapeUpgrade_SplitCurve2d.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class ShapeUpgrade_ConvertCurve2dToBezier;
 DEFINE_STANDARD_HANDLE(ShapeUpgrade_ConvertCurve2dToBezier, ShapeUpgrade_SplitCurve2d)
 
 //! converts/splits a 2d curve to a list of beziers
-class ShapeUpgrade_ConvertCurve2dToBezier : public ShapeUpgrade_SplitCurve2d
-{
+class ShapeUpgrade_ConvertCurve2dToBezier : public ShapeUpgrade_SplitCurve2d {
 
 public:
+    //! Empty constructor.
+    Standard_EXPORT ShapeUpgrade_ConvertCurve2dToBezier();
 
-  //! Empty constructor.
-  Standard_EXPORT ShapeUpgrade_ConvertCurve2dToBezier();
+    //! Converts curve into a list of beziers, and stores the
+    //! splitting parameters on original curve.
+    Standard_EXPORT virtual void Compute() Standard_OVERRIDE;
 
-  //! Converts curve into a list of beziers, and stores the
-  //! splitting parameters on original curve.
-  Standard_EXPORT virtual void Compute() Standard_OVERRIDE;
+    //! Splits a list of beziers computed by Compute method according
+    //! the split values and splitting parameters.
+    Standard_EXPORT virtual void Build(const Standard_Boolean Segment) Standard_OVERRIDE;
 
-  //! Splits a list of beziers computed by Compute method according
-  //! the split values and splitting parameters.
-  Standard_EXPORT virtual void Build (const Standard_Boolean Segment) Standard_OVERRIDE;
+    //! Returns the list of split parameters in original curve parametrisation.
+    Standard_EXPORT Handle(TColStd_HSequenceOfReal) SplitParams() const;
 
-  //! Returns the list of split parameters in original curve parametrisation.
-  Standard_EXPORT Handle(TColStd_HSequenceOfReal) SplitParams() const;
-
-  DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_ConvertCurve2dToBezier,ShapeUpgrade_SplitCurve2d)
+    DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_ConvertCurve2dToBezier, ShapeUpgrade_SplitCurve2d)
 
 private:
+    //! Returns the list of bezier curves correspondent to original
+    //! curve.
+    Standard_EXPORT Handle(TColGeom2d_HSequenceOfCurve) Segments() const;
 
-  //! Returns the list of bezier curves correspondent to original
-  //! curve.
-  Standard_EXPORT Handle(TColGeom2d_HSequenceOfCurve) Segments() const;
-
-  Handle(TColGeom2d_HSequenceOfCurve) mySegments;
-  Handle(TColStd_HSequenceOfReal) mySplitParams;
-
+    Handle(TColGeom2d_HSequenceOfCurve) mySegments;
+    Handle(TColStd_HSequenceOfReal) mySplitParams;
 };
 
 #endif // _ShapeUpgrade_ConvertCurve2dToBezier_HeaderFile

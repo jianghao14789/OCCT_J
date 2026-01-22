@@ -21,5 +21,4 @@
 typedef NCollection_List<Handle(Standard_Transient)> TColStd_ListOfTransient;
 typedef NCollection_List<Handle(Standard_Transient)>::Iterator TColStd_ListIteratorOfListOfTransient;
 
-
 #endif

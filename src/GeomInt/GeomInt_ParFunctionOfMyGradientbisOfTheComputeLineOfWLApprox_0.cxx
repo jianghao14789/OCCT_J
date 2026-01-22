@@ -21,7 +21,6 @@
 #include <GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox.hxx>
 #include <GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox.hxx>
 #include <AppParCurves_MultiCurve.hxx>
- 
 
 #define MultiLine GeomInt_TheMultiLineOfWLApprox
 #define MultiLine_hxx <GeomInt_TheMultiLineOfWLApprox.hxx>
@@ -34,4 +33,3 @@
 #define AppParCurves_Function GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox
 #define AppParCurves_Function_hxx <GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox.hxx>
 #include <AppParCurves_Function.gxx>
-

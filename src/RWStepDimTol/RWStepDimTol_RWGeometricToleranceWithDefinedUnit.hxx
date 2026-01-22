@@ -28,25 +28,25 @@ class StepDimTol_GeometricToleranceWithDefinedUnit;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GeometricToleranceWithDefinedUnit
-class RWStepDimTol_RWGeometricToleranceWithDefinedUnit 
-{
+class RWStepDimTol_RWGeometricToleranceWithDefinedUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWGeometricToleranceWithDefinedUnit();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWGeometricToleranceWithDefinedUnit();
-  
-  //! Reads GeometricToleranceWithDefinedUnit
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_GeometricToleranceWithDefinedUnit)& ent)  const;
-  
-  //! Writes GeometricToleranceWithDefinedUnit
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_GeometricToleranceWithDefinedUnit)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_GeometricToleranceWithDefinedUnit)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads GeometricToleranceWithDefinedUnit
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_GeometricToleranceWithDefinedUnit) & ent) const;
+
+    //! Writes GeometricToleranceWithDefinedUnit
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_GeometricToleranceWithDefinedUnit) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_GeometricToleranceWithDefinedUnit) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWGeometricToleranceWithDefinedUnit_HeaderFile

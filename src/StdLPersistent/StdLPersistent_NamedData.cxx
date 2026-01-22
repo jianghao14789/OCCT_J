@@ -20,104 +20,80 @@
 #include <TDataStd_DataMapOfStringHArray1OfInteger.hxx>
 #include <TDataStd_DataMapOfStringHArray1OfReal.hxx>
 
+static const TCollection_ExtendedString& String(Handle(StdObjMgt_Persistent) theValue) {
+    if (theValue) return theValue->ExtString()->String();
 
-static const TCollection_ExtendedString&
-  String (Handle(StdObjMgt_Persistent) theValue)
-{
-  if (theValue)
-    return theValue->ExtString()->String();
-
-  static TCollection_ExtendedString anEmptyString;
-  return anEmptyString;
+    static TCollection_ExtendedString anEmptyString;
+    return anEmptyString;
 }
 
-template <class HArray>
-static typename HArray::ArrayHandle
-  Array (Handle(StdObjMgt_Persistent) theValue)
-{
-  Handle(HArray) anArray = Handle(HArray)::DownCast (theValue);
-  return anArray ? anArray->Array() : NULL;
+template <class HArray> static typename HArray::ArrayHandle Array(Handle(StdObjMgt_Persistent) theValue) {
+    Handle(HArray) anArray = Handle(HArray)::DownCast(theValue);
+    return anArray ? anArray->Array() : NULL;
 }
 
 //=======================================================================
-//function : Import
-//purpose  : Import transient attribute from the persistent data
+// function : Import
+// purpose  : Import transient attribute from the persistent data
 //=======================================================================
-void StdLPersistent_NamedData::Import
-  (const Handle(TDataStd_NamedData)& theAttribute) const
-{
-  if (myDimensions.IsNull())
-    return;
+void StdLPersistent_NamedData::Import(const Handle(TDataStd_NamedData) & theAttribute) const {
+    if (myDimensions.IsNull()) return;
 
-  if (myInts)
-  {
-    TColStd_DataMapOfStringInteger aMap;
-    for (Standard_Integer i = lower(0); i <= upper(0); i++)
-      aMap.Bind (myInts.Key(i), myInts.Value(i));
+    if (myInts) {
+        TColStd_DataMapOfStringInteger aMap;
+        for (Standard_Integer i = lower(0); i <= upper(0); i++)
+            aMap.Bind(myInts.Key(i), myInts.Value(i));
 
-    theAttribute->ChangeIntegers (aMap);
-  }
+        theAttribute->ChangeIntegers(aMap);
+    }
 
-  if (myReals)
-  {
-    TDataStd_DataMapOfStringReal aMap;
-    for (Standard_Integer i = lower(1); i <= upper(1); i++)
-      aMap.Bind (myReals.Key(i), myReals.Value(i));
+    if (myReals) {
+        TDataStd_DataMapOfStringReal aMap;
+        for (Standard_Integer i = lower(1); i <= upper(1); i++)
+            aMap.Bind(myReals.Key(i), myReals.Value(i));
 
-    theAttribute->ChangeReals (aMap);
-  }
+        theAttribute->ChangeReals(aMap);
+    }
 
-  if (myStrings)
-  {
-    TDataStd_DataMapOfStringString aMap;
-    for (Standard_Integer i = lower(2); i <= upper(2); i++)
-      aMap.Bind (myStrings.Key(i), String (myStrings.Value(i)));
+    if (myStrings) {
+        TDataStd_DataMapOfStringString aMap;
+        for (Standard_Integer i = lower(2); i <= upper(2); i++)
+            aMap.Bind(myStrings.Key(i), String(myStrings.Value(i)));
 
-    theAttribute->ChangeStrings (aMap);
-  }
+        theAttribute->ChangeStrings(aMap);
+    }
 
-  if (myBytes)
-  {
-    TDataStd_DataMapOfStringByte aMap;
-    for (Standard_Integer i = lower(3); i <= upper(3); i++)
-      aMap.Bind (myBytes.Key(i), myBytes.Value(i));
+    if (myBytes) {
+        TDataStd_DataMapOfStringByte aMap;
+        for (Standard_Integer i = lower(3); i <= upper(3); i++)
+            aMap.Bind(myBytes.Key(i), myBytes.Value(i));
 
-    theAttribute->ChangeBytes (aMap);
-  }
+        theAttribute->ChangeBytes(aMap);
+    }
 
-  if (myIntArrays)
-  {
-    TDataStd_DataMapOfStringHArray1OfInteger aMap;
-    for (Standard_Integer i = lower(4); i <= upper(4); i++)
-      aMap.Bind (myIntArrays.Key(i),
-                 Array<StdLPersistent_HArray1::Integer> (myIntArrays.Value(i)));
+    if (myIntArrays) {
+        TDataStd_DataMapOfStringHArray1OfInteger aMap;
+        for (Standard_Integer i = lower(4); i <= upper(4); i++)
+            aMap.Bind(myIntArrays.Key(i), Array<StdLPersistent_HArray1::Integer>(myIntArrays.Value(i)));
 
-    theAttribute->ChangeArraysOfIntegers (aMap);
-  }
+        theAttribute->ChangeArraysOfIntegers(aMap);
+    }
 
-  if (myRealArrays)
-  {
-    TDataStd_DataMapOfStringHArray1OfReal aMap;
-    for (Standard_Integer i = lower(5); i <= upper(5); i++)
-      aMap.Bind (myRealArrays.Key(i),
-                 Array<StdLPersistent_HArray1::Real> (myRealArrays.Value(i)));
+    if (myRealArrays) {
+        TDataStd_DataMapOfStringHArray1OfReal aMap;
+        for (Standard_Integer i = lower(5); i <= upper(5); i++)
+            aMap.Bind(myRealArrays.Key(i), Array<StdLPersistent_HArray1::Real>(myRealArrays.Value(i)));
 
-    theAttribute->ChangeArraysOfReals (aMap);
-  }
+        theAttribute->ChangeArraysOfReals(aMap);
+    }
 }
 
-Standard_Integer
-  StdLPersistent_NamedData::lower (Standard_Integer theIndex) const
-{
-  const Handle(TColStd_HArray2OfInteger)& aDimensions = myDimensions->Array();
-  return aDimensions->Value (aDimensions->LowerRow() + theIndex,
-                             aDimensions->LowerCol());
+Standard_Integer StdLPersistent_NamedData::lower(Standard_Integer theIndex) const {
+    const Handle(TColStd_HArray2OfInteger) & aDimensions = myDimensions->Array();
+    return aDimensions->Value(aDimensions->LowerRow() + theIndex, aDimensions->LowerCol());
 }
 
-Standard_Integer
-  StdLPersistent_NamedData::upper (Standard_Integer theIndex) const
-{
-  const Handle(TColStd_HArray2OfInteger)& aDimensions = myDimensions->Array();
-  return aDimensions->Value (aDimensions->LowerRow() + theIndex,
-                             aDimensions->UpperCol());
+Standard_Integer StdLPersistent_NamedData::upper(Standard_Integer theIndex) const {
+    const Handle(TColStd_HArray2OfInteger) & aDimensions = myDimensions->Array();
+    return aDimensions->Value(aDimensions->LowerRow() + theIndex, aDimensions->UpperCol());
 }

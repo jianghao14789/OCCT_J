@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepFeat_Gluer.hxx>
 #include <TopoDS.hxx>
 #include <TopoDS_Edge.hxx>
@@ -23,50 +22,40 @@
 #include <TopTools_ListOfShape.hxx>
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
-void BRepFeat_Gluer::Build(const Message_ProgressRange& /*theRange*/)
-{
-  myGluer.Perform();
-  if (myGluer.IsDone()) {
-    Done();
-    myShape = myGluer.ResultingShape();
-  }
-  else {
-    NotDone();
-  }
-}
-
-
-
-//=======================================================================
-//function : isdeleted
-//purpose  : 
-//=======================================================================
-
-Standard_Boolean BRepFeat_Gluer::IsDeleted
-   (const TopoDS_Shape& F) 
-{
-  return (myGluer.DescendantFaces(TopoDS::Face(F)).IsEmpty());
-}
-
-//=======================================================================
-//function : Modified
-//purpose  : 
-//=======================================================================
-
-const TopTools_ListOfShape& BRepFeat_Gluer::Modified
-   (const TopoDS_Shape& F)
-{
-  if (F.ShapeType() == TopAbs_FACE) {
-    const TopTools_ListOfShape& LS = myGluer.DescendantFaces(TopoDS::Face(F));
-    if (!LS.IsEmpty()) {
-      if (!LS.First().IsSame(F))
-	return myGluer.DescendantFaces(TopoDS::Face(F));
+void BRepFeat_Gluer::Build(const Message_ProgressRange& /*theRange*/) {
+    myGluer.Perform();
+    if (myGluer.IsDone()) {
+        Done();
+        myShape = myGluer.ResultingShape();
+    } else {
+        NotDone();
     }
-  }
-  static TopTools_ListOfShape LIM;
-  return  LIM;
 }
 
+//=======================================================================
+// function : isdeleted
+// purpose  :
+//=======================================================================
+
+Standard_Boolean BRepFeat_Gluer::IsDeleted(const TopoDS_Shape& F) {
+    return (myGluer.DescendantFaces(TopoDS::Face(F)).IsEmpty());
+}
+
+//=======================================================================
+// function : Modified
+// purpose  :
+//=======================================================================
+
+const TopTools_ListOfShape& BRepFeat_Gluer::Modified(const TopoDS_Shape& F) {
+    if (F.ShapeType() == TopAbs_FACE) {
+        const TopTools_ListOfShape& LS = myGluer.DescendantFaces(TopoDS::Face(F));
+        if (!LS.IsEmpty()) {
+            if (!LS.First().IsSame(F)) return myGluer.DescendantFaces(TopoDS::Face(F));
+        }
+    }
+    static TopTools_ListOfShape LIM;
+    return LIM;
+}

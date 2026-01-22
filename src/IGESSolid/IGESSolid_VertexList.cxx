@@ -22,26 +22,20 @@
 #include <Standard_OutOfRange.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESSolid_VertexList,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESSolid_VertexList, IGESData_IGESEntity)
 
-IGESSolid_VertexList::IGESSolid_VertexList ()    {  }
+IGESSolid_VertexList::IGESSolid_VertexList() {}
 
-
-    void  IGESSolid_VertexList::Init
-  (const Handle(TColgp_HArray1OfXYZ)& Vertices)
-{
-  if (Vertices.IsNull() || Vertices->Lower() != 1)
-    throw Standard_DimensionMismatch("IGESSolid_VertexList : Init");
-  theVertices = Vertices;
-  InitTypeAndForm(502,1);
+void IGESSolid_VertexList::Init(const Handle(TColgp_HArray1OfXYZ) & Vertices) {
+    if (Vertices.IsNull() || Vertices->Lower() != 1) throw Standard_DimensionMismatch("IGESSolid_VertexList : Init");
+    theVertices = Vertices;
+    InitTypeAndForm(502, 1);
 }
 
-    Standard_Integer  IGESSolid_VertexList::NbVertices () const
-{
-  return (theVertices.IsNull() ? 0 : theVertices->Length());
+Standard_Integer IGESSolid_VertexList::NbVertices() const {
+    return (theVertices.IsNull() ? 0 : theVertices->Length());
 }
 
-    gp_Pnt  IGESSolid_VertexList::Vertex (const Standard_Integer Index) const
-{
-  return gp_Pnt(theVertices->Value(Index));
+gp_Pnt IGESSolid_VertexList::Vertex(const Standard_Integer Index) const {
+    return gp_Pnt(theVertices->Value(Index));
 }

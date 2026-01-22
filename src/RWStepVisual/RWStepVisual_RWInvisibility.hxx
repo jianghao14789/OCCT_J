@@ -28,44 +28,22 @@ class StepVisual_Invisibility;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for Invisibility
-class RWStepVisual_RWInvisibility 
-{
+class RWStepVisual_RWInvisibility {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWInvisibility();
 
-  
-  Standard_EXPORT RWStepVisual_RWInvisibility();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_Invisibility)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_Invisibility)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_Invisibility)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_Invisibility) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_Invisibility) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepVisual_Invisibility) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWInvisibility_HeaderFile

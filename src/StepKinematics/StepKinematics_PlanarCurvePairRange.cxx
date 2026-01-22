@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,78 +19,65 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_PlanarCurvePairRange, StepKinematics_PlanarCurvePair)
 
 //=======================================================================
-//function : StepKinematics_PlanarCurvePairRange
-//purpose  :
+// function : StepKinematics_PlanarCurvePairRange
+// purpose  :
 //=======================================================================
-StepKinematics_PlanarCurvePairRange::StepKinematics_PlanarCurvePairRange ()
-{
+StepKinematics_PlanarCurvePairRange::StepKinematics_PlanarCurvePairRange() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_PlanarCurvePairRange::Init(
+    const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+    const Handle(TCollection_HAsciiString) & theItemDefinedTransformation_Name,
+    const Standard_Boolean hasItemDefinedTransformation_Description,
+    const Handle(TCollection_HAsciiString) & theItemDefinedTransformation_Description,
+    const Handle(StepRepr_RepresentationItem) & theItemDefinedTransformation_TransformItem1,
+    const Handle(StepRepr_RepresentationItem) & theItemDefinedTransformation_TransformItem2,
+    const Handle(StepKinematics_KinematicJoint) & theKinematicPair_Joint,
+    const Handle(StepGeom_Curve) & thePlanarCurvePair_Curve1, const Handle(StepGeom_Curve) & thePlanarCurvePair_Curve2,
+    const Standard_Boolean thePlanarCurvePair_Orientation, const Handle(StepGeom_TrimmedCurve) & theRangeOnCurve1,
+    const Handle(StepGeom_TrimmedCurve) & theRangeOnCurve2) {
+    StepKinematics_PlanarCurvePair::Init(
+        theRepresentationItem_Name, theItemDefinedTransformation_Name, hasItemDefinedTransformation_Description,
+        theItemDefinedTransformation_Description, theItemDefinedTransformation_TransformItem1,
+        theItemDefinedTransformation_TransformItem2, theKinematicPair_Joint, thePlanarCurvePair_Curve1,
+        thePlanarCurvePair_Curve2, thePlanarCurvePair_Orientation);
+
+    myRangeOnCurve1 = theRangeOnCurve1;
+
+    myRangeOnCurve2 = theRangeOnCurve2;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : RangeOnCurve1
+// purpose  :
 //=======================================================================
-void StepKinematics_PlanarCurvePairRange::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                                const Handle(TCollection_HAsciiString)& theItemDefinedTransformation_Name,
-                                                const Standard_Boolean hasItemDefinedTransformation_Description,
-                                                const Handle(TCollection_HAsciiString)& theItemDefinedTransformation_Description,
-                                                const Handle(StepRepr_RepresentationItem)& theItemDefinedTransformation_TransformItem1,
-                                                const Handle(StepRepr_RepresentationItem)& theItemDefinedTransformation_TransformItem2,
-                                                const Handle(StepKinematics_KinematicJoint)& theKinematicPair_Joint,
-                                                const Handle(StepGeom_Curve)& thePlanarCurvePair_Curve1,
-                                                const Handle(StepGeom_Curve)& thePlanarCurvePair_Curve2,
-                                                const Standard_Boolean thePlanarCurvePair_Orientation,
-                                                const Handle(StepGeom_TrimmedCurve)& theRangeOnCurve1,
-                                                const Handle(StepGeom_TrimmedCurve)& theRangeOnCurve2)
-{
-  StepKinematics_PlanarCurvePair::Init(theRepresentationItem_Name,
-                                       theItemDefinedTransformation_Name,
-                                       hasItemDefinedTransformation_Description,
-                                       theItemDefinedTransformation_Description,
-                                       theItemDefinedTransformation_TransformItem1,
-                                       theItemDefinedTransformation_TransformItem2,
-                                       theKinematicPair_Joint,
-                                       thePlanarCurvePair_Curve1,
-                                       thePlanarCurvePair_Curve2,
-                                       thePlanarCurvePair_Orientation);
-
-  myRangeOnCurve1 = theRangeOnCurve1;
-
-  myRangeOnCurve2 = theRangeOnCurve2;
+Handle(StepGeom_TrimmedCurve) StepKinematics_PlanarCurvePairRange::RangeOnCurve1() const {
+    return myRangeOnCurve1;
 }
 
 //=======================================================================
-//function : RangeOnCurve1
-//purpose  :
+// function : SetRangeOnCurve1
+// purpose  :
 //=======================================================================
-Handle(StepGeom_TrimmedCurve) StepKinematics_PlanarCurvePairRange::RangeOnCurve1 () const
-{
-  return myRangeOnCurve1;
+void StepKinematics_PlanarCurvePairRange::SetRangeOnCurve1(const Handle(StepGeom_TrimmedCurve) & theRangeOnCurve1) {
+    myRangeOnCurve1 = theRangeOnCurve1;
 }
 
 //=======================================================================
-//function : SetRangeOnCurve1
-//purpose  :
+// function : RangeOnCurve2
+// purpose  :
 //=======================================================================
-void StepKinematics_PlanarCurvePairRange::SetRangeOnCurve1 (const Handle(StepGeom_TrimmedCurve)& theRangeOnCurve1)
-{
-  myRangeOnCurve1 = theRangeOnCurve1;
+Handle(StepGeom_TrimmedCurve) StepKinematics_PlanarCurvePairRange::RangeOnCurve2() const {
+    return myRangeOnCurve2;
 }
 
 //=======================================================================
-//function : RangeOnCurve2
-//purpose  :
+// function : SetRangeOnCurve2
+// purpose  :
 //=======================================================================
-Handle(StepGeom_TrimmedCurve) StepKinematics_PlanarCurvePairRange::RangeOnCurve2 () const
-{
-  return myRangeOnCurve2;
-}
-
-//=======================================================================
-//function : SetRangeOnCurve2
-//purpose  :
-//=======================================================================
-void StepKinematics_PlanarCurvePairRange::SetRangeOnCurve2 (const Handle(StepGeom_TrimmedCurve)& theRangeOnCurve2)
-{
-  myRangeOnCurve2 = theRangeOnCurve2;
+void StepKinematics_PlanarCurvePairRange::SetRangeOnCurve2(const Handle(StepGeom_TrimmedCurve) & theRangeOnCurve2) {
+    myRangeOnCurve2 = theRangeOnCurve2;
 }

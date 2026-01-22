@@ -45,61 +45,41 @@ class XmlMDataStd_NamedDataDriver;
 class XmlMDataStd_AsciiStringDriver;
 class XmlMDataStd_IntPackedMapDriver;
 
-
 //! Storage and Retrieval drivers for modelling attributes.
 //! Transient attributes are defined in package TDataStd.
-class XmlMDataStd 
-{
+class XmlMDataStd {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Adds the attribute drivers to <aDriverTable>.
-  Standard_EXPORT static void AddDrivers (const Handle(XmlMDF_ADriverTable)& aDriverTable, const Handle(Message_Messenger)& anMsgDrv);
-
+    //! Adds the attribute drivers to <aDriverTable>.
+    Standard_EXPORT static void AddDrivers(const Handle(XmlMDF_ADriverTable) & aDriverTable,
+                                           const Handle(Message_Messenger) & anMsgDrv);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class XmlMDataStd_GenericExtStringDriver;
-friend class XmlMDataStd_IntegerDriver;
-friend class XmlMDataStd_RealDriver;
-friend class XmlMDataStd_IntegerArrayDriver;
-friend class XmlMDataStd_RealArrayDriver;
-friend class XmlMDataStd_ExtStringArrayDriver;
-friend class XmlMDataStd_UAttributeDriver;
-friend class XmlMDataStd_VariableDriver;
-friend class XmlMDataStd_ExpressionDriver;
-friend class XmlMDataStd_RelationDriver;
-friend class XmlMDataStd_TreeNodeDriver;
-friend class XmlMDataStd_GenericEmptyDriver;
-friend class XmlMDataStd_IntegerListDriver;
-friend class XmlMDataStd_RealListDriver;
-friend class XmlMDataStd_ExtStringListDriver;
-friend class XmlMDataStd_BooleanListDriver;
-friend class XmlMDataStd_ReferenceListDriver;
-friend class XmlMDataStd_BooleanArrayDriver;
-friend class XmlMDataStd_ReferenceArrayDriver;
-friend class XmlMDataStd_ByteArrayDriver;
-friend class XmlMDataStd_NamedDataDriver;
-friend class XmlMDataStd_AsciiStringDriver;
-friend class XmlMDataStd_IntPackedMapDriver;
-
+    friend class XmlMDataStd_GenericExtStringDriver;
+    friend class XmlMDataStd_IntegerDriver;
+    friend class XmlMDataStd_RealDriver;
+    friend class XmlMDataStd_IntegerArrayDriver;
+    friend class XmlMDataStd_RealArrayDriver;
+    friend class XmlMDataStd_ExtStringArrayDriver;
+    friend class XmlMDataStd_UAttributeDriver;
+    friend class XmlMDataStd_VariableDriver;
+    friend class XmlMDataStd_ExpressionDriver;
+    friend class XmlMDataStd_RelationDriver;
+    friend class XmlMDataStd_TreeNodeDriver;
+    friend class XmlMDataStd_GenericEmptyDriver;
+    friend class XmlMDataStd_IntegerListDriver;
+    friend class XmlMDataStd_RealListDriver;
+    friend class XmlMDataStd_ExtStringListDriver;
+    friend class XmlMDataStd_BooleanListDriver;
+    friend class XmlMDataStd_ReferenceListDriver;
+    friend class XmlMDataStd_BooleanArrayDriver;
+    friend class XmlMDataStd_ReferenceArrayDriver;
+    friend class XmlMDataStd_ByteArrayDriver;
+    friend class XmlMDataStd_NamedDataDriver;
+    friend class XmlMDataStd_AsciiStringDriver;
+    friend class XmlMDataStd_IntPackedMapDriver;
 };
-
-
-
-
-
-
 
 #endif // _XmlMDataStd_HeaderFile

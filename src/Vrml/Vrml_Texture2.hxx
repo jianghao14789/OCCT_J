@@ -27,7 +27,6 @@
 class Vrml_SFImage;
 class TCollection_AsciiString;
 
-
 //! defines a Texture2 node of VRML specifying properties of geometry
 //! and its appearance.
 //! This  property  node  defines  a  texture  map  and  parameters  for  that  map
@@ -40,60 +39,39 @@ class TCollection_AsciiString;
 //! myImage (0 0 0)
 //! myWrapS (Vrml_REPEAT)
 //! myWrapT (Vrml_REPEAT)
-class Vrml_Texture2 
-{
+class Vrml_Texture2 {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT Vrml_Texture2();
 
-  
-  Standard_EXPORT Vrml_Texture2();
-  
-  Standard_EXPORT Vrml_Texture2(const TCollection_AsciiString& aFilename, const Handle(Vrml_SFImage)& aImage, const Vrml_Texture2Wrap aWrapS, const Vrml_Texture2Wrap aWrapT);
-  
-  Standard_EXPORT void SetFilename (const TCollection_AsciiString& aFilename);
-  
-  Standard_EXPORT TCollection_AsciiString Filename() const;
-  
-  Standard_EXPORT void SetImage (const Handle(Vrml_SFImage)& aImage);
-  
-  Standard_EXPORT Handle(Vrml_SFImage) Image() const;
-  
-  Standard_EXPORT void SetWrapS (const Vrml_Texture2Wrap aWrapS);
-  
-  Standard_EXPORT Vrml_Texture2Wrap WrapS() const;
-  
-  Standard_EXPORT void SetWrapT (const Vrml_Texture2Wrap aWrapT);
-  
-  Standard_EXPORT Vrml_Texture2Wrap WrapT() const;
-  
-  Standard_EXPORT Standard_OStream& Print (Standard_OStream& anOStream) const;
+    Standard_EXPORT Vrml_Texture2(const TCollection_AsciiString& aFilename, const Handle(Vrml_SFImage) & aImage,
+                                  const Vrml_Texture2Wrap aWrapS, const Vrml_Texture2Wrap aWrapT);
 
+    Standard_EXPORT void SetFilename(const TCollection_AsciiString& aFilename);
 
+    Standard_EXPORT TCollection_AsciiString Filename() const;
 
+    Standard_EXPORT void SetImage(const Handle(Vrml_SFImage) & aImage);
+
+    Standard_EXPORT Handle(Vrml_SFImage) Image() const;
+
+    Standard_EXPORT void SetWrapS(const Vrml_Texture2Wrap aWrapS);
+
+    Standard_EXPORT Vrml_Texture2Wrap WrapS() const;
+
+    Standard_EXPORT void SetWrapT(const Vrml_Texture2Wrap aWrapT);
+
+    Standard_EXPORT Vrml_Texture2Wrap WrapT() const;
+
+    Standard_EXPORT Standard_OStream& Print(Standard_OStream& anOStream) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  TCollection_AsciiString myFilename;
-  Handle(Vrml_SFImage) myImage;
-  Vrml_Texture2Wrap myWrapS;
-  Vrml_Texture2Wrap myWrapT;
-
-
+    TCollection_AsciiString myFilename;
+    Handle(Vrml_SFImage) myImage;
+    Vrml_Texture2Wrap myWrapS;
+    Vrml_Texture2Wrap myWrapT;
 };
-
-
-
-
-
-
 
 #endif // _Vrml_Texture2_HeaderFile

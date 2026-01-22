@@ -21,47 +21,32 @@
 #include <TopoDS_Shape.hxx>
 
 //! Interface class representing shaped model with deflection.
-class IMeshData_TessellatedShape : public IMeshData_Shape
-{
+class IMeshData_TessellatedShape : public IMeshData_Shape {
 public:
+    //! Destructor.
+    virtual ~IMeshData_TessellatedShape() {}
 
-  //! Destructor.
-  virtual ~IMeshData_TessellatedShape()
-  {
-  }
+    //! Gets deflection value for the discrete model.
+    Standard_Real GetDeflection() const {
+        return myDeflection;
+    }
 
-  //! Gets deflection value for the discrete model.
-  Standard_Real GetDeflection () const
-  {
-    return myDeflection;
-  }
+    //! Sets deflection value for the discrete model.
+    void SetDeflection(const Standard_Real theValue) {
+        myDeflection = theValue;
+    }
 
-  //! Sets deflection value for the discrete model.
-  void SetDeflection (const Standard_Real theValue)
-  {
-    myDeflection = theValue;
-  }
-
-  DEFINE_STANDARD_RTTIEXT(IMeshData_TessellatedShape, IMeshData_Shape)
+    DEFINE_STANDARD_RTTIEXT(IMeshData_TessellatedShape, IMeshData_Shape)
 
 protected:
+    //! Constructor.
+    IMeshData_TessellatedShape() : myDeflection(RealLast()) {}
 
-  //! Constructor.
-  IMeshData_TessellatedShape ()
-    : myDeflection(RealLast())
-  {
-  }
-
-  //! Constructor.
-  IMeshData_TessellatedShape (const TopoDS_Shape& theShape)
-    : IMeshData_Shape(theShape),
-      myDeflection(RealLast())
-  {
-  }
+    //! Constructor.
+    IMeshData_TessellatedShape(const TopoDS_Shape& theShape) : IMeshData_Shape(theShape), myDeflection(RealLast()) {}
 
 private:
-
-  Standard_Real myDeflection;
+    Standard_Real myDeflection;
 };
 
 #endif

@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepRepr_HArray1OfMaterialPropertyRepresentation, StepRepr_Array1OfMaterialPropertyRepresentation)
 
-
 #endif

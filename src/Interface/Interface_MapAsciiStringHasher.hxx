@@ -24,44 +24,22 @@
 #include <Standard_Boolean.hxx>
 class TCollection_AsciiString;
 
-
-
-class Interface_MapAsciiStringHasher 
-{
+class Interface_MapAsciiStringHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes a hash code for the given ASCII string, in the range [1, theUpperBound]
+    //! @param theAsciiString the ASCII string which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    Standard_EXPORT static Standard_Integer HashCode(const TCollection_AsciiString& theAsciiString,
+                                                     Standard_Integer theUpperBound);
 
-  //! Computes a hash code for the given ASCII string, in the range [1, theUpperBound]
-  //! @param theAsciiString the ASCII string which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  Standard_EXPORT static Standard_Integer HashCode (const TCollection_AsciiString& theAsciiString,
-                                                    Standard_Integer               theUpperBound);
-
-  Standard_EXPORT static Standard_Boolean IsEqual (const TCollection_AsciiString& K1, const TCollection_AsciiString& K2);
-
-
-
+    Standard_EXPORT static Standard_Boolean IsEqual(const TCollection_AsciiString& K1,
+                                                    const TCollection_AsciiString& K2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Interface_MapAsciiStringHasher_HeaderFile

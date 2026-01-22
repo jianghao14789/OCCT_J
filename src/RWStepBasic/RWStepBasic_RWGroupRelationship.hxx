@@ -27,48 +27,26 @@ class StepBasic_GroupRelationship;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GroupRelationship
-class RWStepBasic_RWGroupRelationship 
-{
+class RWStepBasic_RWGroupRelationship {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWGroupRelationship();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWGroupRelationship();
-  
-  //! Reads GroupRelationship
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_GroupRelationship)& ent) const;
-  
-  //! Writes GroupRelationship
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_GroupRelationship)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_GroupRelationship)& ent, Interface_EntityIterator& iter) const;
+    //! Reads GroupRelationship
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_GroupRelationship) & ent) const;
 
+    //! Writes GroupRelationship
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_GroupRelationship) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_GroupRelationship) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWGroupRelationship_HeaderFile

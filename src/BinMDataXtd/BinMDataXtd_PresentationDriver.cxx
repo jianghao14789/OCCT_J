@@ -20,154 +20,139 @@
 #include <Message_Messenger.hxx>
 #include <Quantity_Color.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BinMDataXtd_PresentationDriver,BinMDF_ADriver)
+IMPLEMENT_STANDARD_RTTIEXT(BinMDataXtd_PresentationDriver, BinMDF_ADriver)
 
-  //=======================================================================
-//function : BinMDataStd_AISPresentationDriver
-//purpose  : Constructor
 //=======================================================================
-BinMDataXtd_PresentationDriver::BinMDataXtd_PresentationDriver
-                          (const Handle(Message_Messenger)& theMsgDriver)
-: BinMDF_ADriver(theMsgDriver, STANDARD_TYPE(TDataXtd_Presentation)->Name())
-{
+// function : BinMDataStd_AISPresentationDriver
+// purpose  : Constructor
+//=======================================================================
+BinMDataXtd_PresentationDriver::BinMDataXtd_PresentationDriver(const Handle(Message_Messenger) & theMsgDriver)
+    : BinMDF_ADriver(theMsgDriver, STANDARD_TYPE(TDataXtd_Presentation)->Name()) {}
+
+//=======================================================================
+// function : NewEmpty
+// purpose  :
+//=======================================================================
+
+Handle(TDF_Attribute) BinMDataXtd_PresentationDriver::NewEmpty() const {
+    return new TDataXtd_Presentation();
 }
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : 
+// function : Paste
+// purpose  : persistent -> transient (retrieve)
 //=======================================================================
 
-Handle(TDF_Attribute) BinMDataXtd_PresentationDriver::NewEmpty() const
-{
-  return new TDataXtd_Presentation();
-}
+Standard_Boolean BinMDataXtd_PresentationDriver::Paste(const BinObjMgt_Persistent& theSource,
+                                                       const Handle(TDF_Attribute) & theTarget,
+                                                       BinObjMgt_RRelocationTable& /*theRT*/) const {
+    Standard_Boolean ok = Standard_False;
+    Handle(TDataXtd_Presentation) anAttribute = Handle(TDataXtd_Presentation)::DownCast(theTarget);
 
-//=======================================================================
-//function : Paste
-//purpose  : persistent -> transient (retrieve)
-//=======================================================================
+    // Display status
+    Standard_Integer aValue;
+    ok = theSource >> aValue;
+    if (!ok) return ok;
+    anAttribute->SetDisplayed(aValue != 0);
 
-Standard_Boolean BinMDataXtd_PresentationDriver::Paste
-                                  (const BinObjMgt_Persistent&  theSource,
-                                   const Handle(TDF_Attribute)& theTarget,
-                                   BinObjMgt_RRelocationTable&  /*theRT*/) const
-{
-  Standard_Boolean ok = Standard_False;
-  Handle(TDataXtd_Presentation) anAttribute = Handle(TDataXtd_Presentation)::DownCast(theTarget);
+    // GUID
+    Standard_GUID aGUID;
+    ok = theSource >> aGUID;
+    if (!ok) return ok;
+    anAttribute->SetDriverGUID(aGUID);
 
-  // Display status
-  Standard_Integer aValue;
-  ok = theSource >> aValue;
-  if (!ok) return ok;
-  anAttribute->SetDisplayed (aValue != 0);
-
-  // GUID
-  Standard_GUID aGUID;
-  ok = theSource >> aGUID;
-  if (!ok) return ok;
-  anAttribute->SetDriverGUID(aGUID);
-
-  // Color
-  ok = theSource >> aValue;
-  if (!ok) return ok;
-  if ( aValue != -1 )
-  {
-    Quantity_NameOfColor aNameOfColor = TDataXtd_Presentation::getColorNameFromOldEnum (aValue);
-    if (aNameOfColor <= Quantity_NOC_WHITE)
-    {
-      anAttribute->SetColor (aNameOfColor);
+    // Color
+    ok = theSource >> aValue;
+    if (!ok) return ok;
+    if (aValue != -1) {
+        Quantity_NameOfColor aNameOfColor = TDataXtd_Presentation::getColorNameFromOldEnum(aValue);
+        if (aNameOfColor <= Quantity_NOC_WHITE) {
+            anAttribute->SetColor(aNameOfColor);
+        }
+    } else {
+        anAttribute->UnsetColor();
     }
-  }
-  else
-  {
-    anAttribute->UnsetColor();
-  }
 
-  // Material
-  ok = theSource >> aValue;
-  if ( !ok ) return ok;
-  if (aValue != -1)
-    anAttribute->SetMaterialIndex(aValue);
-  else
-    anAttribute->UnsetMaterial();
+    // Material
+    ok = theSource >> aValue;
+    if (!ok) return ok;
+    if (aValue != -1)
+        anAttribute->SetMaterialIndex(aValue);
+    else
+        anAttribute->UnsetMaterial();
 
-  // Transparency
-  Standard_Real aRValue;
-  ok = theSource >> aRValue;
-  if ( !ok ) return ok;
-  if ( aRValue != -1. )
-    anAttribute->SetTransparency(aRValue);
-  else
-    anAttribute->UnsetTransparency();
+    // Transparency
+    Standard_Real aRValue;
+    ok = theSource >> aRValue;
+    if (!ok) return ok;
+    if (aRValue != -1.)
+        anAttribute->SetTransparency(aRValue);
+    else
+        anAttribute->UnsetTransparency();
 
-  // Width
-  ok = theSource >> aRValue;
-  if ( !ok ) return ok;
-  if ( aRValue != -1. )
-    anAttribute->SetWidth(aRValue);
-  else
-    anAttribute->UnsetWidth();
+    // Width
+    ok = theSource >> aRValue;
+    if (!ok) return ok;
+    if (aRValue != -1.)
+        anAttribute->SetWidth(aRValue);
+    else
+        anAttribute->UnsetWidth();
 
-  // Mode
-  ok = theSource >> aValue;
-  if ( !ok ) return ok;
-  if ( aValue != -1 )
-    anAttribute->SetMode(aValue);
-  else
-    anAttribute->UnsetMode();
+    // Mode
+    ok = theSource >> aValue;
+    if (!ok) return ok;
+    if (aValue != -1)
+        anAttribute->SetMode(aValue);
+    else
+        anAttribute->UnsetMode();
 
-  return true;
+    return true;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : transient -> persistent (store)
+// function : Paste
+// purpose  : transient -> persistent (store)
 //=======================================================================
 
-void BinMDataXtd_PresentationDriver::Paste(const Handle(TDF_Attribute)& theSource,
-                                           BinObjMgt_Persistent&        theTarget,
-                                           BinObjMgt_SRelocationTable&  /*theSRT*/) const
-{
-  Handle(TDataXtd_Presentation) anAttribute = Handle(TDataXtd_Presentation)::DownCast(theSource);
+void BinMDataXtd_PresentationDriver::Paste(const Handle(TDF_Attribute) & theSource, BinObjMgt_Persistent& theTarget,
+                                           BinObjMgt_SRelocationTable& /*theSRT*/) const {
+    Handle(TDataXtd_Presentation) anAttribute = Handle(TDataXtd_Presentation)::DownCast(theSource);
 
-  // Display status
-  theTarget.PutBoolean(anAttribute->IsDisplayed());
+    // Display status
+    theTarget.PutBoolean(anAttribute->IsDisplayed());
 
-  // GUID
-  theTarget.PutGUID(anAttribute->GetDriverGUID());
+    // GUID
+    theTarget.PutGUID(anAttribute->GetDriverGUID());
 
-  // Color
-  if (anAttribute->HasOwnColor())
-  {
-    const Standard_Integer anOldEnum = TDataXtd_Presentation::getOldColorNameFromNewEnum (anAttribute->Color());
-    theTarget.PutInteger (anOldEnum);
-  }
-  else
-  {
-    theTarget.PutInteger(-1);
-  }
+    // Color
+    if (anAttribute->HasOwnColor()) {
+        const Standard_Integer anOldEnum = TDataXtd_Presentation::getOldColorNameFromNewEnum(anAttribute->Color());
+        theTarget.PutInteger(anOldEnum);
+    } else {
+        theTarget.PutInteger(-1);
+    }
 
-  // Material
-  if (anAttribute->HasOwnMaterial())
-    theTarget.PutInteger(anAttribute->MaterialIndex());
-  else
-    theTarget.PutInteger(-1);
+    // Material
+    if (anAttribute->HasOwnMaterial())
+        theTarget.PutInteger(anAttribute->MaterialIndex());
+    else
+        theTarget.PutInteger(-1);
 
-  // Transparency
-  if (anAttribute->HasOwnTransparency())
-    theTarget.PutReal(anAttribute->Transparency());
-  else
-    theTarget.PutReal(-1.);
+    // Transparency
+    if (anAttribute->HasOwnTransparency())
+        theTarget.PutReal(anAttribute->Transparency());
+    else
+        theTarget.PutReal(-1.);
 
-  // Width
-  if (anAttribute->HasOwnWidth())
-    theTarget.PutReal(anAttribute->Width());
-  else
-    theTarget.PutReal(-1.);
+    // Width
+    if (anAttribute->HasOwnWidth())
+        theTarget.PutReal(anAttribute->Width());
+    else
+        theTarget.PutReal(-1.);
 
-  // Mode
-  if (anAttribute->HasOwnMode())
-    theTarget.PutInteger(anAttribute->Mode());
-  else
-    theTarget.PutInteger(-1);
+    // Mode
+    if (anAttribute->HasOwnMode())
+        theTarget.PutInteger(anAttribute->Mode());
+    else
+        theTarget.PutInteger(-1);
 }

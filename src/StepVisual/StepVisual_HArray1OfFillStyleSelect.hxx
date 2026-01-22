@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepVisual_HArray1OfFillStyleSelect, StepVisual_Array1OfFillStyleSelect)
 
-
 #endif

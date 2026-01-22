@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepVisual_SurfaceStyleRenderingWithProperties;
 
 //! Read & Write tool for SurfaceStyleRenderingWithProperties
-class RWStepVisual_RWSurfaceStyleRenderingWithProperties
-{
+class RWStepVisual_RWSurfaceStyleRenderingWithProperties {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWSurfaceStyleRenderingWithProperties();
 
-  Standard_EXPORT RWStepVisual_RWSurfaceStyleRenderingWithProperties();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_SurfaceStyleRenderingWithProperties) & ent) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_SurfaceStyleRenderingWithProperties)& ent) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepVisual_SurfaceStyleRenderingWithProperties) & ent) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_SurfaceStyleRenderingWithProperties)& ent) const;
-
-  Standard_EXPORT void Share(const Handle(StepVisual_SurfaceStyleRenderingWithProperties)& ent, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepVisual_SurfaceStyleRenderingWithProperties) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWSurfaceStyleRenderingWithProperties_HeaderFile_

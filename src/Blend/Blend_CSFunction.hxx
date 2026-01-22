@@ -39,7 +39,6 @@ class gp_Vec;
 class gp_Vec2d;
 class Blend_Point;
 
-
 //! Deferred class for a function used to compute a blending
 //! surface between a surface and a curve, using a guide line.
 //! The vector <X> used in Value, Values and Derivatives methods
@@ -48,9 +47,7 @@ class Blend_Point;
 //! the curve.
 class Blend_CSFunction : public Blend_AppFunction {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns 3 (default value). Can be redefined.
     Standard_EXPORT virtual Standard_Integer NbVariables() const Standard_OVERRIDE;
@@ -74,7 +71,8 @@ public:
     //! <D> for the variable <X>.
     //! Returns True if the computation was done successfully,
     //! False otherwise.
-    Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D) Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, math_Vector& F,
+                                                    math_Matrix& D) Standard_OVERRIDE = 0;
 
     //! Sets the value of the parameter along the guide line.
     //! This determines the plane in which the solution has
@@ -90,7 +88,8 @@ public:
     //! Returns in the vector Tolerance the parametric tolerance
     //! for each of the 3 variables;
     //! Tol is the tolerance used in 3d space.
-    Standard_EXPORT virtual void GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual void GetTolerance(math_Vector& Tolerance,
+                                              const Standard_Real Tol) const Standard_OVERRIDE = 0;
 
     //! Returns in the vector InfBound the lowest values allowed
     //! for each of the 3 variables.
@@ -102,7 +101,8 @@ public:
     //! Tol is the tolerance used in 3d space.
     //! The computation is made at the current value of
     //! the parameter on the guide line.
-    Standard_EXPORT virtual Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual Standard_Boolean IsSolution(const math_Vector& Sol,
+                                                        const Standard_Real Tol) Standard_OVERRIDE = 0;
 
     //! Returns   the    minimal  Distance  between   two
     //! extremities of calculated sections.
@@ -144,16 +144,20 @@ public:
     //! at the beginning and the end of the section, and
     //! returns the normal (of the surfaces) at
     //! these points.
-    Standard_EXPORT virtual void Tangent(const Standard_Real U, const Standard_Real V, gp_Vec& TgS, gp_Vec& NormS) const = 0;
+    Standard_EXPORT virtual void Tangent(const Standard_Real U, const Standard_Real V, gp_Vec& TgS,
+                                         gp_Vec& NormS) const = 0;
 
-    Standard_EXPORT virtual void GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots, Standard_Integer& Degree, Standard_Integer& NbPoles2d) Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual void GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots,
+                                          Standard_Integer& Degree, Standard_Integer& NbPoles2d) Standard_OVERRIDE = 0;
 
     //! Returns the tolerance to reach in approximation
     //! to respecte
     //! BoundTol error at the Boundary
     //! AngleTol tangent error at the Boundary
     //! SurfTol error inside the surface.
-    Standard_EXPORT virtual void GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol, const Standard_Real AngleTol, math_Vector& Tol3d, math_Vector& Tol1D) const Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual void GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol,
+                                              const Standard_Real AngleTol, math_Vector& Tol3d,
+                                              math_Vector& Tol1D) const Standard_OVERRIDE = 0;
 
     Standard_EXPORT virtual void Knots(TColStd_Array1OfReal& TKnots) Standard_OVERRIDE = 0;
 
@@ -162,36 +166,26 @@ public:
     //! Used for the first and last section
     //! The method returns Standard_True if the derivatives
     //! are computed, otherwise it returns Standard_False.
-    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths) Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                                     TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d,
+                                                     TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths,
+                                                     TColStd_Array1OfReal& DWeigths) Standard_OVERRIDE = 0;
 
-    Standard_EXPORT virtual void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d, TColStd_Array1OfReal& Weigths) Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d,
+                                         TColStd_Array1OfReal& Weigths) Standard_OVERRIDE = 0;
 
     //! Used for the first and last section
     //! The method returns Standard_True if the derivatives
     //! are computed, otherwise it returns Standard_False.
-    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles, TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColgp_Array1OfVec2d& D2Poles2d, TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths, TColStd_Array1OfReal& D2Weigths) Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                                     TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles,
+                                                     TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d,
+                                                     TColgp_Array1OfVec2d& D2Poles2d, TColStd_Array1OfReal& Weigths,
+                                                     TColStd_Array1OfReal& DWeigths,
+                                                     TColStd_Array1OfReal& D2Weigths) Standard_OVERRIDE;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Blend_CSFunction_HeaderFile

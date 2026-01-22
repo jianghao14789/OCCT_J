@@ -32,7 +32,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_Hyperbola;
 DEFINE_STANDARD_HANDLE(Geom_Hyperbola, Geom_Conic)
 
@@ -88,7 +87,6 @@ DEFINE_STANDARD_HANDLE(Geom_Hyperbola, Geom_Conic)
 //! be less than the value of the minor radius (on the minor axis).
 class Geom_Hyperbola : public Geom_Conic {
 public:
-
     //! Constructs a hyperbola by conversion of the gp_Hypr hyperbola H.
     Standard_EXPORT Geom_Hyperbola(const gp_Hypr& H);
 
@@ -220,7 +218,6 @@ public:
     //! relation to this branch of the hyperbola.
     Standard_EXPORT gp_Hypr OtherBranch() const;
 
-
     //! Returns p = (e * e - 1) * MajorRadius where e is the
     //! eccentricity of the hyperbola.
     //! raised if MajorRadius = 0.0
@@ -233,20 +230,17 @@ public:
     //! YDir the YDirection of the hyperbola's local coordinate system.
     Standard_EXPORT void D0(const Standard_Real U, gp_Pnt& P) const Standard_OVERRIDE;
 
-
     //! Returns the point P of parameter U and the first derivative V1.
     Standard_EXPORT void D1(const Standard_Real U, gp_Pnt& P, gp_Vec& V1) const Standard_OVERRIDE;
-
 
     //! Returns the point P of parameter U, the first and second
     //! derivatives V1 and V2.
     Standard_EXPORT void D2(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2) const Standard_OVERRIDE;
 
-
     //! Returns the point P of parameter U, the first second and
     //! third derivatives V1 V2 and V3.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
-
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! The returned vector gives the value of the derivative for the
     //! order of derivation N.
@@ -260,12 +254,12 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Hyperbola, Geom_Conic)
 
 protected:
-
 private:
     Standard_Real majorRadius;
     Standard_Real minorRadius;

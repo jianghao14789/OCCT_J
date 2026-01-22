@@ -30,7 +30,6 @@
 #include <Standard_Real.hxx>
 class gp_Pnt;
 
-
 //! Root class for algorithms which convert an elementary
 //! surface (cylinder, cone, sphere or torus) into a BSpline
 //! surface (CylinderToBSplineSurface, ConeToBSplineSurface,
@@ -60,12 +59,9 @@ class gp_Pnt;
 //! its weights, its knots and their multiplicity.
 //! KeyWords :
 //! Convert, ElementarySurface, BSplineSurface.
-class Convert_ElementarySurfaceToBSplineSurface
-{
+class Convert_ElementarySurfaceToBSplineSurface {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT Standard_Integer UDegree() const;
 
@@ -129,14 +125,13 @@ public:
     //! Raised if VIndex < 1 or VIndex > NbVKnots.
     Standard_EXPORT Standard_Integer VMultiplicity(const Standard_Integer VIndex) const;
 
-
-
-
 protected:
-
-
-    Standard_EXPORT Convert_ElementarySurfaceToBSplineSurface(const Standard_Integer NumberOfUPoles, const Standard_Integer NumberOfVPoles, const Standard_Integer NumberOfUKnots, const Standard_Integer NumberOfVKnots, const Standard_Integer UDegree, const Standard_Integer VDegree);
-
+    Standard_EXPORT Convert_ElementarySurfaceToBSplineSurface(const Standard_Integer NumberOfUPoles,
+                                                              const Standard_Integer NumberOfVPoles,
+                                                              const Standard_Integer NumberOfUKnots,
+                                                              const Standard_Integer NumberOfVKnots,
+                                                              const Standard_Integer UDegree,
+                                                              const Standard_Integer VDegree);
 
     TColgp_Array2OfPnt poles;
     TColStd_Array2OfReal weights;
@@ -153,19 +148,7 @@ protected:
     Standard_Boolean isuperiodic;
     Standard_Boolean isvperiodic;
 
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Convert_ElementarySurfaceToBSplineSurface_HeaderFile

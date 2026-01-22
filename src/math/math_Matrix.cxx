@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <math_Gauss.hxx>
 #include <math_Matrix.hxx>
 #include <math_NotSquare.hxx>
@@ -38,98 +37,63 @@ void math_Matrix::SetLowerCol(const Standard_Integer LowerCol) {
     UpperColIndex = LowerColIndex + Cols - 1;
 }
 
-math_Matrix::math_Matrix(const Standard_Integer LowerRow,
-    const Standard_Integer UpperRow,
-    const Standard_Integer LowerCol,
-    const Standard_Integer UpperCol) :
+math_Matrix::math_Matrix(const Standard_Integer LowerRow, const Standard_Integer UpperRow,
+                         const Standard_Integer LowerCol, const Standard_Integer UpperCol)
+    :
 
-    LowerRowIndex(LowerRow),
-    UpperRowIndex(UpperRow),
-    LowerColIndex(LowerCol),
-    UpperColIndex(UpperCol),
-    Array(LowerRow, UpperRow,
-        LowerCol, UpperCol)
-{
-    Standard_RangeError_Raise_if((LowerRow > UpperRow)
-        || (LowerCol > UpperCol), "math_Matrix() - invalid dimensions");
+      LowerRowIndex(LowerRow), UpperRowIndex(UpperRow), LowerColIndex(LowerCol), UpperColIndex(UpperCol),
+      Array(LowerRow, UpperRow, LowerCol, UpperCol) {
+    Standard_RangeError_Raise_if((LowerRow > UpperRow) || (LowerCol > UpperCol), "math_Matrix() - invalid dimensions");
 }
 
-math_Matrix::math_Matrix(const Standard_Integer LowerRow,
-    const Standard_Integer UpperRow,
-    const Standard_Integer LowerCol,
-    const Standard_Integer UpperCol,
-    const Standard_Real InitialValue) :
+math_Matrix::math_Matrix(const Standard_Integer LowerRow, const Standard_Integer UpperRow,
+                         const Standard_Integer LowerCol, const Standard_Integer UpperCol,
+                         const Standard_Real InitialValue)
+    :
 
-    LowerRowIndex(LowerRow),
-    UpperRowIndex(UpperRow),
-    LowerColIndex(LowerCol),
-    UpperColIndex(UpperCol),
-    Array(LowerRow, UpperRow,
-        LowerCol, UpperCol)
-{
-    Standard_RangeError_Raise_if((LowerRow > UpperRow)
-        || (LowerCol > UpperCol), "math_Matrix() - invalid dimensions");
+      LowerRowIndex(LowerRow), UpperRowIndex(UpperRow), LowerColIndex(LowerCol), UpperColIndex(UpperCol),
+      Array(LowerRow, UpperRow, LowerCol, UpperCol) {
+    Standard_RangeError_Raise_if((LowerRow > UpperRow) || (LowerCol > UpperCol), "math_Matrix() - invalid dimensions");
     Array.Init(InitialValue);
 }
 
-math_Matrix::math_Matrix(const Standard_Address Tab,
-    const Standard_Integer LowerRow,
-    const Standard_Integer UpperRow,
-    const Standard_Integer LowerCol,
-    const Standard_Integer UpperCol) :
+math_Matrix::math_Matrix(const Standard_Address Tab, const Standard_Integer LowerRow, const Standard_Integer UpperRow,
+                         const Standard_Integer LowerCol, const Standard_Integer UpperCol)
+    :
 
-    LowerRowIndex(LowerRow),
-    UpperRowIndex(UpperRow),
-    LowerColIndex(LowerCol),
-    UpperColIndex(UpperCol),
-    Array(Tab, LowerRow, UpperRow, LowerCol, UpperCol)
-{
-    Standard_RangeError_Raise_if((LowerRow > UpperRow)
-        || (LowerCol > UpperCol), "math_Matrix() - invalid dimensions");
+      LowerRowIndex(LowerRow), UpperRowIndex(UpperRow), LowerColIndex(LowerCol), UpperColIndex(UpperCol),
+      Array(Tab, LowerRow, UpperRow, LowerCol, UpperCol) {
+    Standard_RangeError_Raise_if((LowerRow > UpperRow) || (LowerCol > UpperCol), "math_Matrix() - invalid dimensions");
 }
 
-void math_Matrix::Init(const Standard_Real InitialValue)
-{
+void math_Matrix::Init(const Standard_Real InitialValue) {
     Array.Init(InitialValue);
 }
 
-math_Matrix::math_Matrix(const math_Matrix& Other) :
+math_Matrix::math_Matrix(const math_Matrix& Other)
+    :
 
-    LowerRowIndex(Other.LowerRow()),
-    UpperRowIndex(Other.UpperRow()),
-    LowerColIndex(Other.LowerCol()),
-    UpperColIndex(Other.UpperCol()),
-    Array(Other.Array)
-{
-}
+      LowerRowIndex(Other.LowerRow()), UpperRowIndex(Other.UpperRow()), LowerColIndex(Other.LowerCol()),
+      UpperColIndex(Other.UpperCol()), Array(Other.Array) {}
 
-
-
-math_Matrix math_Matrix::Divided(const Standard_Real Right) const
-{
-    Standard_DivideByZero_Raise_if(Abs(Right) <= RealEpsilon(),
-        "math_Matrix::Divided() - zero divisor");
+math_Matrix math_Matrix::Divided(const Standard_Real Right) const {
+    Standard_DivideByZero_Raise_if(Abs(Right) <= RealEpsilon(), "math_Matrix::Divided() - zero divisor");
     math_Matrix temp = Multiplied(1. / Right);
     return temp;
 }
 
-
-Standard_Real math_Matrix::Determinant() const
-{
+Standard_Real math_Matrix::Determinant() const {
     math_Gauss Sol(*this);
 
     if (Sol.IsDone()) {
         return Sol.Determinant();
-    }
-    else {
+    } else {
         return 0.0;
     }
 }
 
-void math_Matrix::Transpose()
-{
-    math_NotSquare_Raise_if(RowNumber() != ColNumber(),
-        "math_Matrix::Transpose() - matrix is not square");
+void math_Matrix::Transpose() {
+    math_NotSquare_Raise_if(RowNumber() != ColNumber(), "math_Matrix::Transpose() - matrix is not square");
 
     Standard_Integer Row = LowerRowIndex;
     Standard_Integer Col = LowerColIndex;
@@ -146,10 +110,8 @@ void math_Matrix::Transpose()
     SetLowerCol(Row);
 }
 
-math_Matrix math_Matrix::Transposed() const
-{
-    math_Matrix Result(LowerColIndex, UpperColIndex,
-        LowerRowIndex, UpperRowIndex);
+math_Matrix math_Matrix::Transposed() const {
+    math_Matrix Result(LowerColIndex, UpperColIndex, LowerRowIndex, UpperRowIndex);
 
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
@@ -159,30 +121,25 @@ math_Matrix math_Matrix::Transposed() const
     return Result;
 }
 
-void math_Matrix::Invert()
-{
-    math_NotSquare_Raise_if(RowNumber() != ColNumber(),
-        "math_Matrix::Transpose() - matrix is not square");
+void math_Matrix::Invert() {
+    math_NotSquare_Raise_if(RowNumber() != ColNumber(), "math_Matrix::Transpose() - matrix is not square");
 
     math_Gauss Sol(*this);
     if (Sol.IsDone()) {
         Sol.Invert(*this);
-    }
-    else {
+    } else {
         throw math_SingularMatrix(); // SingularMatrix Exception;
     }
 }
 
-math_Matrix math_Matrix::Inverse() const
-{
+math_Matrix math_Matrix::Inverse() const {
 
     math_Matrix Result = *this;
     Result.Invert();
     return Result;
 }
 
-void math_Matrix::Multiply(const Standard_Real Right)
-{
+void math_Matrix::Multiply(const Standard_Real Right) {
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
             Array(I, J) = Array(I, J) * Right;
@@ -190,10 +147,8 @@ void math_Matrix::Multiply(const Standard_Real Right)
     }
 }
 
-math_Matrix math_Matrix::Multiplied(const Standard_Real Right) const
-{
-    math_Matrix Result(LowerRowIndex, UpperRowIndex,
-        LowerColIndex, UpperColIndex);
+math_Matrix math_Matrix::Multiplied(const Standard_Real Right) const {
+    math_Matrix Result(LowerRowIndex, UpperRowIndex, LowerColIndex, UpperColIndex);
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
             Result.Array(I, J) = Array(I, J) * Right;
@@ -202,10 +157,8 @@ math_Matrix math_Matrix::Multiplied(const Standard_Real Right) const
     return Result;
 }
 
-math_Matrix math_Matrix::TMultiplied(const Standard_Real Right) const
-{
-    math_Matrix Result(LowerRowIndex, UpperRowIndex,
-        LowerColIndex, UpperColIndex);
+math_Matrix math_Matrix::TMultiplied(const Standard_Real Right) const {
+    math_Matrix Result(LowerRowIndex, UpperRowIndex, LowerColIndex, UpperColIndex);
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
             Result.Array(I, J) = Array(I, J) * Right;
@@ -214,12 +167,8 @@ math_Matrix math_Matrix::TMultiplied(const Standard_Real Right) const
     return Result;
 }
 
-
-
-void math_Matrix::Divide(const Standard_Real Right)
-{
-    Standard_DivideByZero_Raise_if(Abs(Right) <= RealEpsilon(),
-        "math_Matrix::Divide() - zero divisor");
+void math_Matrix::Divide(const Standard_Real Right) {
+    Standard_DivideByZero_Raise_if(Abs(Right) <= RealEpsilon(), "math_Matrix::Divide() - zero divisor");
 
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
@@ -228,11 +177,9 @@ void math_Matrix::Divide(const Standard_Real Right)
     }
 }
 
-void math_Matrix::Add(const math_Matrix& Right)
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber())
-        || (ColNumber() != Right.ColNumber()),
-        "math_Matrix::Add() - input matrix has different dimensions");
+void math_Matrix::Add(const math_Matrix& Right) {
+    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber()) || (ColNumber() != Right.ColNumber()),
+                                     "math_Matrix::Add() - input matrix has different dimensions");
 
     Standard_Integer I2 = Right.LowerRowIndex;
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
@@ -245,11 +192,9 @@ void math_Matrix::Add(const math_Matrix& Right)
     }
 }
 
-void math_Matrix::Subtract(const math_Matrix& Right)
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber())
-        || (ColNumber() != Right.ColNumber()),
-        "math_Matrix::Subtract() - input matrix has different dimensions");
+void math_Matrix::Subtract(const math_Matrix& Right) {
+    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber()) || (ColNumber() != Right.ColNumber()),
+                                     "math_Matrix::Subtract() - input matrix has different dimensions");
 
     Standard_Integer I2 = Right.LowerRowIndex;
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
@@ -262,19 +207,13 @@ void math_Matrix::Subtract(const math_Matrix& Right)
     }
 }
 
-void math_Matrix::Set(const Standard_Integer I1, const Standard_Integer I2,
-    const Standard_Integer J1, const Standard_Integer J2,
-    const math_Matrix& M)
-{
+void math_Matrix::Set(const Standard_Integer I1, const Standard_Integer I2, const Standard_Integer J1,
+                      const Standard_Integer J2, const math_Matrix& M) {
 
-    Standard_DimensionError_Raise_if((I1 < LowerRowIndex) ||
-        (I2 > UpperRowIndex) ||
-        (J1 < LowerColIndex) ||
-        (J2 > UpperColIndex) ||
-        (I1 > I2) || (J1 > J2) ||
-        (I2 - I1 + 1 != M.RowNumber()) ||
-        (J2 - J1 + 1 != M.ColNumber()),
-        "math_Matrix::Set() - invalid indices");
+    Standard_DimensionError_Raise_if((I1 < LowerRowIndex) || (I2 > UpperRowIndex) || (J1 < LowerColIndex) ||
+                                         (J2 > UpperColIndex) || (I1 > I2) || (J1 > J2) ||
+                                         (I2 - I1 + 1 != M.RowNumber()) || (J2 - J1 + 1 != M.ColNumber()),
+                                     "math_Matrix::Set() - invalid indices");
 
     Standard_Integer II = M.LowerRow();
     for (Standard_Integer I = I1; I <= I2; I++) {
@@ -287,15 +226,12 @@ void math_Matrix::Set(const Standard_Integer I1, const Standard_Integer I2,
     }
 }
 
-void math_Matrix::SetRow(const Standard_Integer Row,
-    const math_Vector& V)
-{
-    Standard_RangeError_Raise_if((Row < LowerRowIndex)
-        || (Row > UpperRowIndex),
-        "math_Matrix::SetRow() - invalid index");
+void math_Matrix::SetRow(const Standard_Integer Row, const math_Vector& V) {
+    Standard_RangeError_Raise_if((Row < LowerRowIndex) || (Row > UpperRowIndex),
+                                 "math_Matrix::SetRow() - invalid index");
 
     Standard_DimensionError_Raise_if(ColNumber() != V.Length(),
-        "math_Matrix::SetRow() - input vector has wrong dimensions");
+                                     "math_Matrix::SetRow() - input vector has wrong dimensions");
 
     Standard_Integer I = V.Lower();
     for (Standard_Integer Index = LowerColIndex; Index <= UpperColIndex; Index++) {
@@ -304,15 +240,12 @@ void math_Matrix::SetRow(const Standard_Integer Row,
     }
 }
 
-void math_Matrix::SetCol(const Standard_Integer Col,
-    const math_Vector& V)
-{
-    Standard_RangeError_Raise_if((Col < LowerColIndex)
-        || (Col > UpperColIndex),
-        "math_Matrix::SetCol() - invalid index");
+void math_Matrix::SetCol(const Standard_Integer Col, const math_Vector& V) {
+    Standard_RangeError_Raise_if((Col < LowerColIndex) || (Col > UpperColIndex),
+                                 "math_Matrix::SetCol() - invalid index");
 
     Standard_DimensionError_Raise_if(RowNumber() != V.Length(),
-        "math_Matrix::SetCol() - input vector has wrong dimensions");
+                                     "math_Matrix::SetCol() - input vector has wrong dimensions");
 
     Standard_Integer I = V.Lower();
     for (Standard_Integer Index = LowerRowIndex; Index <= UpperRowIndex; Index++) {
@@ -321,17 +254,14 @@ void math_Matrix::SetCol(const Standard_Integer Col,
     }
 }
 
-void math_Matrix::SetDiag(const Standard_Real Value)
-{
-    math_NotSquare_Raise_if(RowNumber() != ColNumber(),
-        "math_Matrix::SetDiag() - matrix is not square");
+void math_Matrix::SetDiag(const Standard_Real Value) {
+    math_NotSquare_Raise_if(RowNumber() != ColNumber(), "math_Matrix::SetDiag() - matrix is not square");
 
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         Array(I, I) = Value;
     }
 }
-math_Vector math_Matrix::Row(const Standard_Integer Row)  const
-{
+math_Vector math_Matrix::Row(const Standard_Integer Row) const {
 
     math_Vector Result(LowerColIndex, UpperColIndex);
 
@@ -341,8 +271,7 @@ math_Vector math_Matrix::Row(const Standard_Integer Row)  const
     return Result;
 }
 
-math_Vector math_Matrix::Col(const Standard_Integer Col) const
-{
+math_Vector math_Matrix::Col(const Standard_Integer Col) const {
 
     math_Vector Result(LowerRowIndex, UpperRowIndex);
 
@@ -352,14 +281,10 @@ math_Vector math_Matrix::Col(const Standard_Integer Col) const
     return Result;
 }
 
-void math_Matrix::SwapRow(const Standard_Integer Row1,
-    const Standard_Integer Row2)
-{
-    Standard_RangeError_Raise_if((Row1 < LowerRowIndex)
-        || (Row1 > UpperRowIndex)
-        || (Row2 < LowerRowIndex)
-        || (Row2 > UpperRowIndex),
-        "math_Matrix::SetCol() - invalid indices");
+void math_Matrix::SwapRow(const Standard_Integer Row1, const Standard_Integer Row2) {
+    Standard_RangeError_Raise_if((Row1 < LowerRowIndex) || (Row1 > UpperRowIndex) || (Row2 < LowerRowIndex) ||
+                                     (Row2 > UpperRowIndex),
+                                 "math_Matrix::SetCol() - invalid indices");
 
     math_Vector V1 = Row(Row1);
     math_Vector V2 = Row(Row2);
@@ -367,14 +292,10 @@ void math_Matrix::SwapRow(const Standard_Integer Row1,
     SetRow(Row2, V1);
 }
 
-void math_Matrix::SwapCol(const Standard_Integer Col1,
-    const Standard_Integer Col2)
-{
-    Standard_RangeError_Raise_if((Col1 < LowerColIndex)
-        || (Col1 > UpperColIndex)
-        || (Col2 < LowerColIndex)
-        || (Col2 > UpperColIndex),
-        "math_Matrix::SetCol() - invalid indices");
+void math_Matrix::SwapCol(const Standard_Integer Col1, const Standard_Integer Col2) {
+    Standard_RangeError_Raise_if((Col1 < LowerColIndex) || (Col1 > UpperColIndex) || (Col2 < LowerColIndex) ||
+                                     (Col2 > UpperColIndex),
+                                 "math_Matrix::SetCol() - invalid indices");
 
     math_Vector V1 = Col(Col1);
     math_Vector V2 = Col(Col2);
@@ -382,15 +303,11 @@ void math_Matrix::SwapCol(const Standard_Integer Col1,
     SetCol(Col2, V1);
 }
 
-
-
-math_Matrix  math_Matrix::Multiplied(const math_Matrix& Right) const
-{
+math_Matrix math_Matrix::Multiplied(const math_Matrix& Right) const {
     Standard_DimensionError_Raise_if(ColNumber() != Right.RowNumber(),
-        "math_Matrix::Multiplied() - matrices have incompatible dimensions");
+                                     "math_Matrix::Multiplied() - matrices have incompatible dimensions");
 
-    math_Matrix Result(LowerRowIndex, UpperRowIndex,
-        Right.LowerColIndex, Right.UpperColIndex);
+    math_Matrix Result(LowerRowIndex, UpperRowIndex, Right.LowerColIndex, Right.UpperColIndex);
 
     Standard_Real Som;
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
@@ -407,13 +324,11 @@ math_Matrix  math_Matrix::Multiplied(const math_Matrix& Right) const
     return Result;
 }
 
-math_Matrix  math_Matrix::TMultiply(const math_Matrix& Right) const
-{
+math_Matrix math_Matrix::TMultiply(const math_Matrix& Right) const {
     Standard_DimensionError_Raise_if(RowNumber() != Right.RowNumber(),
-        "math_Matrix::TMultiply() - matrices have incompatible dimensions");
+                                     "math_Matrix::TMultiply() - matrices have incompatible dimensions");
 
-    math_Matrix Result(LowerColIndex, UpperColIndex,
-        Right.LowerColIndex, Right.UpperColIndex);
+    math_Matrix Result(LowerColIndex, UpperColIndex, Right.LowerColIndex, Right.UpperColIndex);
 
     Standard_Real Som;
     for (Standard_Integer I = LowerColIndex; I <= UpperColIndex; I++) {
@@ -430,14 +345,11 @@ math_Matrix  math_Matrix::TMultiply(const math_Matrix& Right) const
     return Result;
 }
 
-math_Matrix  math_Matrix::Added(const math_Matrix& Right) const
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber())
-        || (ColNumber() != Right.ColNumber()),
-        "math_Matrix::Added() - input matrix has different dimensions");
+math_Matrix math_Matrix::Added(const math_Matrix& Right) const {
+    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber()) || (ColNumber() != Right.ColNumber()),
+                                     "math_Matrix::Added() - input matrix has different dimensions");
 
-    math_Matrix Result(LowerRowIndex, UpperRowIndex,
-        LowerColIndex, UpperColIndex);
+    math_Matrix Result(LowerRowIndex, UpperRowIndex, LowerColIndex, UpperColIndex);
 
     Standard_Integer I2 = Right.LowerRowIndex;
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
@@ -451,11 +363,9 @@ math_Matrix  math_Matrix::Added(const math_Matrix& Right) const
     return Result;
 }
 
-math_Matrix  math_Matrix::Opposite()
-{
+math_Matrix math_Matrix::Opposite() {
 
-    math_Matrix Result(LowerRowIndex, UpperRowIndex,
-        LowerColIndex, UpperColIndex);
+    math_Matrix Result(LowerRowIndex, UpperRowIndex, LowerColIndex, UpperColIndex);
 
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
@@ -465,14 +375,11 @@ math_Matrix  math_Matrix::Opposite()
     return Result;
 }
 
-math_Matrix  math_Matrix::Subtracted(const math_Matrix& Right) const
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber())
-        || (ColNumber() != Right.ColNumber()),
-        "math_Matrix::Subtracted() - input matrix has different dimensions");
+math_Matrix math_Matrix::Subtracted(const math_Matrix& Right) const {
+    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber()) || (ColNumber() != Right.ColNumber()),
+                                     "math_Matrix::Subtracted() - input matrix has different dimensions");
 
-    math_Matrix Result(LowerRowIndex, UpperRowIndex,
-        LowerColIndex, UpperColIndex);
+    math_Matrix Result(LowerRowIndex, UpperRowIndex, LowerColIndex, UpperColIndex);
 
     Standard_Integer I2 = Right.LowerRowIndex;
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
@@ -486,12 +393,9 @@ math_Matrix  math_Matrix::Subtracted(const math_Matrix& Right) const
     return Result;
 }
 
-void  math_Matrix::Multiply(const math_Vector& Left,
-    const math_Vector& Right)
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Left.Length())
-        || (ColNumber() != Right.Length()),
-        "math_Matrix::Multiply() - input vectors have incompatible dimensions");
+void math_Matrix::Multiply(const math_Vector& Left, const math_Vector& Right) {
+    Standard_DimensionError_Raise_if((RowNumber() != Left.Length()) || (ColNumber() != Right.Length()),
+                                     "math_Matrix::Multiply() - input vectors have incompatible dimensions");
 
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
         for (Standard_Integer J = LowerColIndex; J <= UpperColIndex; J++) {
@@ -500,13 +404,10 @@ void  math_Matrix::Multiply(const math_Vector& Left,
     }
 }
 
-void  math_Matrix::Multiply(const math_Matrix& Left,
-    const math_Matrix& Right)
-{
-    Standard_DimensionError_Raise_if((Left.ColNumber() != Right.RowNumber())
-        || (RowNumber() != Left.RowNumber())
-        || (ColNumber() != Right.ColNumber()),
-        "math_Matrix::Multiply() - matrices have incompatible dimensions");
+void math_Matrix::Multiply(const math_Matrix& Left, const math_Matrix& Right) {
+    Standard_DimensionError_Raise_if((Left.ColNumber() != Right.RowNumber()) || (RowNumber() != Left.RowNumber()) ||
+                                         (ColNumber() != Right.ColNumber()),
+                                     "math_Matrix::Multiply() - matrices have incompatible dimensions");
 
     Standard_Real Som;
     Standard_Integer I1 = Left.LowerRowIndex;
@@ -528,13 +429,10 @@ void  math_Matrix::Multiply(const math_Matrix& Left,
     }
 }
 
-void math_Matrix::TMultiply(const math_Matrix& TLeft,
-    const math_Matrix& Right)
-{
-    Standard_DimensionError_Raise_if((TLeft.RowNumber() != Right.RowNumber())
-        || (RowNumber() != TLeft.ColNumber())
-        || (ColNumber() != Right.ColNumber()),
-        "math_Matrix::TMultiply() - matrices have incompatible dimensions");
+void math_Matrix::TMultiply(const math_Matrix& TLeft, const math_Matrix& Right) {
+    Standard_DimensionError_Raise_if((TLeft.RowNumber() != Right.RowNumber()) || (RowNumber() != TLeft.ColNumber()) ||
+                                         (ColNumber() != Right.ColNumber()),
+                                     "math_Matrix::TMultiply() - matrices have incompatible dimensions");
 
     Standard_Real Som;
     Standard_Integer I1 = TLeft.LowerColIndex;
@@ -556,14 +454,11 @@ void math_Matrix::TMultiply(const math_Matrix& TLeft,
     }
 }
 
-void  math_Matrix::Add(const math_Matrix& Left,
-    const math_Matrix& Right)
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber())
-        || (ColNumber() != Right.ColNumber())
-        || (Right.RowNumber() != Left.RowNumber())
-        || (Right.ColNumber() != Left.ColNumber()),
-        "math_Matrix::Add() - matrices have incompatible dimensions");
+void math_Matrix::Add(const math_Matrix& Left, const math_Matrix& Right) {
+    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber()) || (ColNumber() != Right.ColNumber()) ||
+                                         (Right.RowNumber() != Left.RowNumber()) ||
+                                         (Right.ColNumber() != Left.ColNumber()),
+                                     "math_Matrix::Add() - matrices have incompatible dimensions");
 
     Standard_Integer I1 = Left.LowerRowIndex;
     Standard_Integer I2 = Right.LowerRowIndex;
@@ -580,14 +475,11 @@ void  math_Matrix::Add(const math_Matrix& Left,
     }
 }
 
-void  math_Matrix::Subtract(const math_Matrix& Left,
-    const math_Matrix& Right)
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber())
-        || (ColNumber() != Right.ColNumber())
-        || (Right.RowNumber() != Left.RowNumber())
-        || (Right.ColNumber() != Left.ColNumber()),
-        "math_Matrix::Subtract() - matrices have incompatible dimensions");
+void math_Matrix::Subtract(const math_Matrix& Left, const math_Matrix& Right) {
+    Standard_DimensionError_Raise_if((RowNumber() != Right.RowNumber()) || (ColNumber() != Right.ColNumber()) ||
+                                         (Right.RowNumber() != Left.RowNumber()) ||
+                                         (Right.ColNumber() != Left.ColNumber()),
+                                     "math_Matrix::Subtract() - matrices have incompatible dimensions");
 
     Standard_Integer I1 = Left.LowerRowIndex;
     Standard_Integer I2 = Right.LowerRowIndex;
@@ -604,11 +496,9 @@ void  math_Matrix::Subtract(const math_Matrix& Left,
     }
 }
 
-
-void math_Matrix::Multiply(const math_Matrix& Right)
-{
+void math_Matrix::Multiply(const math_Matrix& Right) {
     Standard_DimensionError_Raise_if(ColNumber() != Right.RowNumber(),
-        "math_Matrix::Multiply() - input matrix has incompatible dimensions");
+                                     "math_Matrix::Multiply() - input matrix has incompatible dimensions");
 
     Standard_Real Som;
     for (Standard_Integer I = LowerRowIndex; I <= UpperRowIndex; I++) {
@@ -624,12 +514,9 @@ void math_Matrix::Multiply(const math_Matrix& Right)
     }
 }
 
-
-
-math_Vector math_Matrix::Multiplied(const math_Vector& Right)const
-{
+math_Vector math_Matrix::Multiplied(const math_Vector& Right) const {
     Standard_DimensionError_Raise_if(ColNumber() != Right.Length(),
-        "math_Matrix::Multiplied() - input vector has incompatible dimensions");
+                                     "math_Matrix::Multiplied() - input vector has incompatible dimensions");
 
     math_Vector Result(LowerRowIndex, UpperRowIndex);
 
@@ -644,20 +531,15 @@ math_Vector math_Matrix::Multiplied(const math_Vector& Right)const
     return Result;
 }
 
-math_Matrix& math_Matrix::Initialized(const math_Matrix& Other)
-{
-    Standard_DimensionError_Raise_if((RowNumber() != Other.RowNumber())
-        || (ColNumber() != Other.ColNumber()),
-        "math_Matrix::Initialized() - input matrix has different dimensions");
+math_Matrix& math_Matrix::Initialized(const math_Matrix& Other) {
+    Standard_DimensionError_Raise_if((RowNumber() != Other.RowNumber()) || (ColNumber() != Other.ColNumber()),
+                                     "math_Matrix::Initialized() - input matrix has different dimensions");
 
     (Other.Array).Copy(Array);
     return *this;
 }
 
-
-
-
-void math_Matrix::Dump(Standard_OStream& o)const
+void math_Matrix::Dump(Standard_OStream& o) const
 
 {
     o << "math_Matrix of RowNumber = " << RowNumber();
@@ -670,4 +552,3 @@ void math_Matrix::Dump(Standard_OStream& o)const
         }
     }
 }
-

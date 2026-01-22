@@ -20,32 +20,32 @@
 
 //  Class LDOM_Text
 
-class LDOM_Text : public LDOM_CharacterData
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class LDOM_Text : public LDOM_CharacterData {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  LDOM_Text () {}
-  // Empty constructor
+    LDOM_Text() {}
+    // Empty constructor
 
-  LDOM_Text (const LDOM_Text& anOther) : LDOM_CharacterData (anOther) {}
-  // Copy constructor
+    LDOM_Text(const LDOM_Text& anOther) : LDOM_CharacterData(anOther) {}
+    // Copy constructor
 
-  LDOM_Text&            operator =      (const LDOM_NullPtr * theNull)
-                { return (LDOM_Text&) LDOM_CharacterData::operator= (theNull); }
-  // Nullify
+    LDOM_Text& operator=(const LDOM_NullPtr* theNull) {
+        return (LDOM_Text&)LDOM_CharacterData::operator=(theNull);
+    }
+    // Nullify
 
-  LDOM_Text&            operator =      (const LDOM_Text& theOther)
-                { return (LDOM_Text&) LDOM_CharacterData::operator= (theOther);}
-  // Assignment
+    LDOM_Text& operator=(const LDOM_Text& theOther) {
+        return (LDOM_Text&)LDOM_CharacterData::operator=(theOther);
+    }
+    // Assignment
 
- protected:
-  friend class LDOM_Document;
-  // ---------- PROTECTED METHODS ----------
+protected:
+    friend class LDOM_Document;
+    // ---------- PROTECTED METHODS ----------
 
-  LDOM_Text                             (const LDOM_BasicText&          theText,
-                                         const Handle(LDOM_MemManager)& theDoc)
-                                : LDOM_CharacterData (theText, theDoc) {}
+    LDOM_Text(const LDOM_BasicText& theText, const Handle(LDOM_MemManager) & theDoc)
+        : LDOM_CharacterData(theText, theDoc) {}
 };
 
 #endif

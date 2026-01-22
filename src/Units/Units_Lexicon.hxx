@@ -29,7 +29,6 @@
 class TCollection_HAsciiString;
 class TCollection_AsciiString;
 
-
 class Units_Lexicon;
 DEFINE_STANDARD_HANDLE(Units_Lexicon, Standard_Transient)
 
@@ -37,12 +36,9 @@ DEFINE_STANDARD_HANDLE(Units_Lexicon, Standard_Transient)
 //! recognize the  different key words  included  in a
 //! sentence.  The lexicon is stored  in a sequence of
 //! tokens.
-class Units_Lexicon : public Standard_Transient
-{
+class Units_Lexicon : public Standard_Transient {
 
 public:
-
-
     //! Creates an empty instance of Lexicon.
     Standard_EXPORT Units_Lexicon();
 
@@ -57,33 +53,19 @@ public:
     //! <avalue>  as  arguments.  If there is  already a token
     //! with   the  field  <theword>  equal    to <aword>, the
     //! existing token is updated.
-    Standard_EXPORT void AddToken(const Standard_CString aword, const Standard_CString amean, const Standard_Real avalue);
+    Standard_EXPORT void AddToken(const Standard_CString aword, const Standard_CString amean,
+                                  const Standard_Real avalue);
 
     //! Useful for debugging.
     virtual void Dump() const;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Units_Lexicon, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
     Handle(Units_TokensSequence) thesequenceoftokens;
-
-
 };
 
-
 #include <Units_Lexicon.lxx>
-
-
-
-
 
 #endif // _Units_Lexicon_HeaderFile

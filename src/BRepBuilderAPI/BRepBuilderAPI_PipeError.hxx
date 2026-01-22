@@ -18,12 +18,11 @@
 #define _BRepBuilderAPI_PipeError_HeaderFile
 
 //! Errors that can occur at (shell)pipe construction.
-enum BRepBuilderAPI_PipeError
-{
-BRepBuilderAPI_PipeDone,
-BRepBuilderAPI_PipeNotDone,
-BRepBuilderAPI_PlaneNotIntersectGuide,
-BRepBuilderAPI_ImpossibleContact
+enum BRepBuilderAPI_PipeError {
+    BRepBuilderAPI_PipeDone,
+    BRepBuilderAPI_PipeNotDone,
+    BRepBuilderAPI_PlaneNotIntersectGuide,
+    BRepBuilderAPI_ImpossibleContact
 };
 
 #endif // _BRepBuilderAPI_PipeError_HeaderFile

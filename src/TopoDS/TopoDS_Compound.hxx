@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes a compound which
 //! - references an underlying compound with the
 //! potential to be given a location and an orientation
@@ -33,38 +32,17 @@
 //! terms of its geometry (as opposed to orientation in
 //! relation to other shapes).
 //! Casts shape S to the more specialized return type, Compound.
-class TopoDS_Compound : public TopoDS_Shape
-{
+class TopoDS_Compound : public TopoDS_Shape {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs an Undefined Compound.
     TopoDS_Compound();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <TopoDS_Compound.lxx>
-
-
-
-
 
 #endif // _TopoDS_Compound_HeaderFile

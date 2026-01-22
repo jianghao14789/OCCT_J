@@ -60,63 +60,58 @@ DEFINE_STANDARD_HANDLE(IFSelect_GeneralModifier, Standard_Transient)
 //! their kind of action, which can be applied at a precise step
 //! of the production of a File : see Modifier, and in the
 //! package IFAdapt, EntityModifier and EntityCopier
-class IFSelect_GeneralModifier : public Standard_Transient
-{
+class IFSelect_GeneralModifier : public Standard_Transient {
 
 public:
+    //! Returns True if this modifier may change the graph of
+    //! dependences (aknowledged at creation time)
+    Standard_EXPORT Standard_Boolean MayChangeGraph() const;
 
-  //! Returns True if this modifier may change the graph of
-  //! dependences (aknowledged at creation time)
-  Standard_EXPORT Standard_Boolean MayChangeGraph() const;
-  
-  //! Attaches to a Dispatch. If <disp> is Null, Resets it
-  //! (to apply the Modifier on every Dispatch)
-  Standard_EXPORT void SetDispatch (const Handle(IFSelect_Dispatch)& disp);
-  
-  //! Returns the Dispatch to be matched, Null if not set
-  Standard_EXPORT Handle(IFSelect_Dispatch) Dispatch() const;
-  
-  //! Returns True if a Model obtained from the Dispatch <disp>
-  //! is to be treated (apart from the Selection criterium)
-  //! If Dispatch(me) is Null, returns True. Else, checks <disp>
-  Standard_EXPORT Standard_Boolean Applies (const Handle(IFSelect_Dispatch)& disp) const;
-  
-  //! Sets a Selection : a Model is treated if it contains one or
-  //! more Entities designated by the Selection
-  Standard_EXPORT void SetSelection (const Handle(IFSelect_Selection)& sel);
-  
-  //! Resets the Selection : this criterium is not longer active
-  Standard_EXPORT void ResetSelection();
-  
-  //! Returns True if a Selection is set as an additional criterium
-  Standard_EXPORT Standard_Boolean HasSelection() const;
-  
-  //! Returns the Selection, or a Null Handle if not set
-  Standard_EXPORT Handle(IFSelect_Selection) Selection() const;
-  
-  //! Returns a short text which defines the operation performed
-  Standard_EXPORT virtual TCollection_AsciiString Label() const = 0;
+    //! Attaches to a Dispatch. If <disp> is Null, Resets it
+    //! (to apply the Modifier on every Dispatch)
+    Standard_EXPORT void SetDispatch(const Handle(IFSelect_Dispatch) & disp);
 
-  DEFINE_STANDARD_RTTIEXT(IFSelect_GeneralModifier,Standard_Transient)
+    //! Returns the Dispatch to be matched, Null if not set
+    Standard_EXPORT Handle(IFSelect_Dispatch) Dispatch() const;
+
+    //! Returns True if a Model obtained from the Dispatch <disp>
+    //! is to be treated (apart from the Selection criterium)
+    //! If Dispatch(me) is Null, returns True. Else, checks <disp>
+    Standard_EXPORT Standard_Boolean Applies(const Handle(IFSelect_Dispatch) & disp) const;
+
+    //! Sets a Selection : a Model is treated if it contains one or
+    //! more Entities designated by the Selection
+    Standard_EXPORT void SetSelection(const Handle(IFSelect_Selection) & sel);
+
+    //! Resets the Selection : this criterium is not longer active
+    Standard_EXPORT void ResetSelection();
+
+    //! Returns True if a Selection is set as an additional criterium
+    Standard_EXPORT Standard_Boolean HasSelection() const;
+
+    //! Returns the Selection, or a Null Handle if not set
+    Standard_EXPORT Handle(IFSelect_Selection) Selection() const;
+
+    //! Returns a short text which defines the operation performed
+    Standard_EXPORT virtual TCollection_AsciiString Label() const = 0;
+
+    DEFINE_STANDARD_RTTIEXT(IFSelect_GeneralModifier, Standard_Transient)
 
 protected:
-
-  //! Sets the Modifier criteria to default Values
-  //! (i.e. "always applies")
-  //! <maychangegraph> must be provided at creation time, to :
-  //! - False if this GeneralModifier surely lets the graph of
-  //! dependencies unchanged (NO edition of any reference, BUT
-  //! also NO entity added or replaced or removed)
-  //! - True if there is a possibility of changing the graph of
-  //! dependencies when this modifier is applied
-  Standard_EXPORT IFSelect_GeneralModifier(const Standard_Boolean maychangegraph);
+    //! Sets the Modifier criteria to default Values
+    //! (i.e. "always applies")
+    //! <maychangegraph> must be provided at creation time, to :
+    //! - False if this GeneralModifier surely lets the graph of
+    //! dependencies unchanged (NO edition of any reference, BUT
+    //! also NO entity added or replaced or removed)
+    //! - True if there is a possibility of changing the graph of
+    //! dependencies when this modifier is applied
+    Standard_EXPORT IFSelect_GeneralModifier(const Standard_Boolean maychangegraph);
 
 private:
-
-  Handle(IFSelect_Selection) thesel;
-  Handle(IFSelect_Dispatch) thedisp;
-  Standard_Boolean thechgr;
-
+    Handle(IFSelect_Selection) thesel;
+    Handle(IFSelect_Dispatch) thedisp;
+    Standard_Boolean thechgr;
 };
 
 #endif // _IFSelect_GeneralModifier_HeaderFile

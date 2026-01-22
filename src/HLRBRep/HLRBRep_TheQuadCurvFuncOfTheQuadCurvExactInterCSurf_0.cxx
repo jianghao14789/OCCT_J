@@ -19,7 +19,6 @@
 #include <IntSurf_Quadric.hxx>
 #include <gp_Lin.hxx>
 #include <HLRBRep_LineTool.hxx>
- 
 
 #define TheQuadric IntSurf_Quadric
 #define TheQuadric_hxx <IntSurf_Quadric.hxx>
@@ -30,4 +29,3 @@
 #define IntCurveSurface_QuadricCurveFunc HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf
 #define IntCurveSurface_QuadricCurveFunc_hxx <HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx>
 #include <IntCurveSurface_QuadricCurveFunc.gxx>
-

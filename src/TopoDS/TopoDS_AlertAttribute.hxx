@@ -26,34 +26,31 @@
 class Message_Messenger;
 
 //! Alert attribute object storing TopoDS shape in its field
-class TopoDS_AlertAttribute : public Message_AttributeStream
-{
+class TopoDS_AlertAttribute : public Message_AttributeStream {
     DEFINE_STANDARD_RTTIEXT(TopoDS_AlertAttribute, Message_AttributeStream)
 public:
     //! Constructor with shape argument
     Standard_EXPORT TopoDS_AlertAttribute(const TopoDS_Shape& theShape,
-        const TCollection_AsciiString& theName = TCollection_AsciiString());
+                                          const TCollection_AsciiString& theName = TCollection_AsciiString());
 
     //! Returns contained shape
-    const TopoDS_Shape& GetShape() const { return myShape; }
+    const TopoDS_Shape& GetShape() const {
+        return myShape;
+    }
 
 public:
-
     //! Push shape information into messenger
-    Standard_EXPORT static void Send(const Handle(Message_Messenger)& theMessenger,
-        const TopoDS_Shape& theShape);
+    Standard_EXPORT static void Send(const Handle(Message_Messenger) & theMessenger, const TopoDS_Shape& theShape);
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT void DumpJson(Standard_OStream& theOStream,
-        Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 private:
     TopoDS_Shape myShape;
 };
 
-inline const Handle(Message_Messenger)& operator<< (const Handle(Message_Messenger)& theMessenger,
-    const TopoDS_Shape& theShape)
-{
+inline const Handle(Message_Messenger) & operator<<(const Handle(Message_Messenger) & theMessenger,
+                                                    const TopoDS_Shape& theShape) {
     TopoDS_AlertAttribute::Send(theMessenger, theShape);
     return theMessenger;
 }

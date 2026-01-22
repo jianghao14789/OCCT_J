@@ -32,10 +32,10 @@ class math_Matrix;
 
 class Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter(const Adaptor2d_Curve2d& curve1, const Adaptor2d_Curve2d& curve2);
+    Standard_EXPORT Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter(const Adaptor2d_Curve2d& curve1,
+                                                                                const Adaptor2d_Curve2d& curve2);
 
     //! returns 2.
     Standard_EXPORT Standard_Integer NbVariables() const;
@@ -62,7 +62,6 @@ public:
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
 
 protected:
-
 private:
     Standard_Address thecurve1;
     Standard_Address thecurve2;

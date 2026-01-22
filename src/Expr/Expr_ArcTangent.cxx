@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArcTangent.hxx>
 #include <Expr_Division.hxx>
@@ -32,13 +31,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_ArcTangent, Expr_UnaryExpression)
 
-Expr_ArcTangent::Expr_ArcTangent(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_ArcTangent::Expr_ArcTangent(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_ArcTangent::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_ArcTangent::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) op = Operand();
     if (op->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) valop = Handle(Expr_NumericValue)::DownCast(op);
@@ -51,13 +48,11 @@ Handle(Expr_GeneralExpression) Expr_ArcTangent::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArcTangent::Copy() const
-{
-    return  new Expr_ArcTangent(Expr::CopyShare(Operand()));
+Handle(Expr_GeneralExpression) Expr_ArcTangent::Copy() const {
+    return new Expr_ArcTangent(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_ArcTangent::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_ArcTangent::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_ArcTangent))) {
         return Standard_False;
     }
@@ -65,16 +60,14 @@ Standard_Boolean Expr_ArcTangent::IsIdentical(const Handle(Expr_GeneralExpressio
     return op->IsIdentical(Other->SubExpression(1));
 }
 
-Standard_Boolean Expr_ArcTangent::IsLinear() const
-{
+Standard_Boolean Expr_ArcTangent::IsLinear() const {
     if (ContainsUnknowns()) {
         return Standard_False;
     }
     return Standard_True;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArcTangent::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_ArcTangent::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -85,19 +78,17 @@ Handle(Expr_GeneralExpression) Expr_ArcTangent::Derivative(const Handle(Expr_Nam
     // 1 + X2
     Handle(Expr_Sum) thesum = 1.0 + sq->ShallowSimplified();
 
-    // ArcTangent'(F(X)) = F'(X)/(1+F(X)2) 
+    // ArcTangent'(F(X)) = F'(X)/(1+F(X)2)
     Handle(Expr_Division) thediv = derop / thesum->ShallowSimplified();
 
     return thediv->ShallowSimplified();
 }
 
-Standard_Real Expr_ArcTangent::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_ArcTangent::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     return ::ATan(Operand()->Evaluate(vars, vals));
 }
 
-TCollection_AsciiString Expr_ArcTangent::String() const
-{
+TCollection_AsciiString Expr_ArcTangent::String() const {
     TCollection_AsciiString str("ATan(");
     str += Operand()->String();
     str += ")";

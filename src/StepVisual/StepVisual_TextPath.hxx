@@ -17,13 +17,6 @@
 #ifndef _StepVisual_TextPath_HeaderFile
 #define _StepVisual_TextPath_HeaderFile
 
-
-enum StepVisual_TextPath
-{
-StepVisual_tpUp,
-StepVisual_tpRight,
-StepVisual_tpDown,
-StepVisual_tpLeft
-};
+enum StepVisual_TextPath { StepVisual_tpUp, StepVisual_tpRight, StepVisual_tpDown, StepVisual_tpLeft };
 
 #endif // _StepVisual_TextPath_HeaderFile

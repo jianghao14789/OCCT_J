@@ -28,48 +28,29 @@ class StepAP203_CcDesignDateAndTimeAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CcDesignDateAndTimeAssignment
-class RWStepAP203_RWCcDesignDateAndTimeAssignment 
-{
+class RWStepAP203_RWCcDesignDateAndTimeAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP203_RWCcDesignDateAndTimeAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP203_RWCcDesignDateAndTimeAssignment();
-  
-  //! Reads CcDesignDateAndTimeAssignment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP203_CcDesignDateAndTimeAssignment)& ent) const;
-  
-  //! Writes CcDesignDateAndTimeAssignment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP203_CcDesignDateAndTimeAssignment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP203_CcDesignDateAndTimeAssignment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CcDesignDateAndTimeAssignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP203_CcDesignDateAndTimeAssignment) & ent) const;
 
+    //! Writes CcDesignDateAndTimeAssignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP203_CcDesignDateAndTimeAssignment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP203_CcDesignDateAndTimeAssignment) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP203_RWCcDesignDateAndTimeAssignment_HeaderFile

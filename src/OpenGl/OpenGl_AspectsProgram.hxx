@@ -21,43 +21,39 @@ class OpenGl_Context;
 class OpenGl_ShaderProgram;
 
 //! OpenGl resources for custom shading program.
-class OpenGl_AspectsProgram
-{
+class OpenGl_AspectsProgram {
 public:
-  DEFINE_STANDARD_ALLOC;
-public:
-  //! Empty constructor.
-  OpenGl_AspectsProgram() : myIsShaderReady (false) {}
+    DEFINE_STANDARD_ALLOC;
 
-  //! Return shading program.
-  const Handle(OpenGl_ShaderProgram)& ShaderProgram (const Handle(OpenGl_Context)& theCtx,
-                                                     const Handle(Graphic3d_ShaderProgram)& theShader)
-  {
-    if (!myIsShaderReady)
-    {
-      build (theCtx, theShader);
-      myIsShaderReady = true;
+public:
+    //! Empty constructor.
+    OpenGl_AspectsProgram() : myIsShaderReady(false) {}
+
+    //! Return shading program.
+    const Handle(OpenGl_ShaderProgram) &
+        ShaderProgram(const Handle(OpenGl_Context) & theCtx, const Handle(Graphic3d_ShaderProgram) & theShader) {
+        if (!myIsShaderReady) {
+            build(theCtx, theShader);
+            myIsShaderReady = true;
+        }
+        return myShaderProgram;
     }
-    return myShaderProgram;
-  }
 
-  //! Update shader resource up-to-date state.
-  Standard_EXPORT void UpdateRediness (const Handle(Graphic3d_Aspects)& theAspect);
+    //! Update shader resource up-to-date state.
+    Standard_EXPORT void UpdateRediness(const Handle(Graphic3d_Aspects) & theAspect);
 
-  //! Release resource.
-  Standard_EXPORT void Release (OpenGl_Context* theCtx);
+    //! Release resource.
+    Standard_EXPORT void Release(OpenGl_Context* theCtx);
 
 private:
-
-  //! Build shader resource.
-  Standard_EXPORT void build (const Handle(OpenGl_Context)& theCtx,
-                              const Handle(Graphic3d_ShaderProgram)& theShader);
+    //! Build shader resource.
+    Standard_EXPORT void build(const Handle(OpenGl_Context) & theCtx,
+                               const Handle(Graphic3d_ShaderProgram) & theShader);
 
 private:
-
-  Handle(OpenGl_ShaderProgram) myShaderProgram;
-  TCollection_AsciiString      myShaderProgramId;
-  Standard_Boolean             myIsShaderReady;
+    Handle(OpenGl_ShaderProgram) myShaderProgram;
+    TCollection_AsciiString myShaderProgramId;
+    Standard_Boolean myIsShaderReady;
 };
 
 #endif // _OpenGl_Aspects_Header

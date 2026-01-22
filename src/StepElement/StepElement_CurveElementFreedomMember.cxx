@@ -19,85 +19,81 @@
 #include <StepElement_CurveElementFreedomMember.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepElement_CurveElementFreedomMember,StepData_SelectNamed)
+IMPLEMENT_STANDARD_RTTIEXT(StepElement_CurveElementFreedomMember, StepData_SelectNamed)
 
 static Standard_CString ECEF = "ENUMERATED_CURVE_ELEMENT_FREEDOM";
 static Standard_CString ADDF = "APPLICATION_DEFINED_DEGREE_OF_FREEDOM";
 
 //=======================================================================
-//function : StepElement_CurveElementFreedomMember
-//purpose  : 
+// function : StepElement_CurveElementFreedomMember
+// purpose  :
 //=======================================================================
 
-StepElement_CurveElementFreedomMember::StepElement_CurveElementFreedomMember () : mycase(0) 
-{
+StepElement_CurveElementFreedomMember::StepElement_CurveElementFreedomMember() : mycase(0) {}
+
+//=======================================================================
+// function : HasName
+// purpose  :
+//=======================================================================
+
+Standard_Boolean StepElement_CurveElementFreedomMember::HasName() const {
+    return mycase > 0;
 }
 
 //=======================================================================
-//function : HasName
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-Standard_Boolean StepElement_CurveElementFreedomMember::HasName() const
-{
- return mycase >0;
+Standard_CString StepElement_CurveElementFreedomMember::Name() const {
+    switch (mycase) {
+        case 1:
+            return ECEF;
+        case 2:
+            return ADDF;
+        default:
+            break;
+    }
+    return "";
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : CompareNames
+// purpose  :
 //=======================================================================
 
-Standard_CString StepElement_CurveElementFreedomMember::Name() const
-{
-  switch(mycase)  {
-    case 1  : return ECEF;
-    case 2  : return ADDF;
-    default : break;
-  }
-  return "";
+static Standard_Integer CompareNames(const Standard_CString name, Standard_Integer& /*numen*/) {
+    Standard_Integer thecase = 0;
+    if (!name || name[0] == '\0')
+        thecase = 0;
+
+    else if (!strcmp(name, ECEF)) {
+        thecase = 1;
+    } else if (!strcmp(name, ADDF)) {
+        thecase = 2;
+    }
+    return thecase;
 }
 
 //=======================================================================
-//function : CompareNames
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-static Standard_Integer CompareNames(const Standard_CString name,Standard_Integer &/*numen*/) 
-{
-  Standard_Integer thecase =0;
-  if (!name || name[0] == '\0') thecase = 0;
-  
-  else if(!strcmp (name,ECEF)){
-    thecase = 1;
-  }
-  else if(!strcmp (name,ADDF)){
-    thecase = 2;
-  }
-  return thecase;
+Standard_Boolean StepElement_CurveElementFreedomMember::SetName(const Standard_CString name) {
+    Standard_Integer numit = 0;
+    mycase = CompareNames(name, numit);
+    if (numit) SetInteger(numit);
+    return (mycase > 0);
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Matches
+// purpose  :
 //=======================================================================
 
-Standard_Boolean StepElement_CurveElementFreedomMember::SetName(const Standard_CString name) 
-{
-  Standard_Integer numit =0;
-  mycase = CompareNames(name,numit);
-  if(numit) SetInteger(numit);
-  return (mycase >0);
-}
-
-//=======================================================================
-//function : Matches
-//purpose  : 
-//=======================================================================
-
-Standard_Boolean StepElement_CurveElementFreedomMember::Matches(const Standard_CString name) const
-{
-  Standard_Integer numit =0;
-  Standard_Integer thecase = CompareNames(name,numit);
-  return (mycase==thecase);
+Standard_Boolean StepElement_CurveElementFreedomMember::Matches(const Standard_CString name) const {
+    Standard_Integer numit = 0;
+    Standard_Integer thecase = CompareNames(name, numit);
+    return (mycase == thecase);
 }

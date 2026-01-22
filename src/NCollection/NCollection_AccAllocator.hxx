@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef NCollection_AccAllocator_HeaderFile
 #define NCollection_AccAllocator_HeaderFile
 
@@ -26,28 +25,27 @@
 //! space.  The  allocation  units  are  grouped  in blocks requested from the
 //! system  as  required.  This  memory  is  returned  to  the system when all
 //! allocations in a block are freed.
-//! 
+//!
 //! By comparison with  the standard new() and malloc()  calls, this method is
 //! faster and consumes very small additional memory to maintain the heap.
-//! 
+//!
 //! By comparison with NCollection_IncAllocator,  this class requires some more
 //! additional memory  and a little more time for allocation and deallocation.
 //! Memory overhead for NCollection_IncAllocator is 12 bytes per block;
 //! average memory overhead for NCollection_AccAllocator is 28 bytes per block.
-//! 
+//!
 //! All pointers  returned by Allocate() are aligned to 4 byte boundaries.
 //! To  define  the size  of  memory  blocks  requested  from the OS,  use the
 //! parameter of the constructor (measured in bytes).
 
-class NCollection_AccAllocator : public NCollection_BaseAllocator
-{
+class NCollection_AccAllocator : public NCollection_BaseAllocator {
     // --------- PUBLIC CONSTANTS ---------
 public:
     //! Alignment of all allocated objects: 4 bytes
-    static const Standard_Size    Align = 4;
+    static const Standard_Size Align = 4;
 
     //! Default block size
-    static const Standard_Size    DefaultBlockSize = 24600;
+    static const Standard_Size DefaultBlockSize = 24600;
 
     //! Number of last blocks to check for free space
     static const Standard_Integer MaxLookupBlocks = 16;
@@ -55,8 +53,7 @@ public:
     // ---------- PUBLIC METHODS ----------
 public:
     //! Constructor
-    Standard_EXPORT NCollection_AccAllocator(const size_t
-        theBlockSize = DefaultBlockSize);
+    Standard_EXPORT NCollection_AccAllocator(const size_t theBlockSize = DefaultBlockSize);
 
     //! Destructor
     Standard_EXPORT ~NCollection_AccAllocator();
@@ -66,111 +63,101 @@ public:
 
     //! Free a previously allocated memory;
     //! memory is returned to the OS when all allocations in some block are freed
-    Standard_EXPORT virtual void  Free(void* theAddress) Standard_OVERRIDE;
+    Standard_EXPORT virtual void Free(void* theAddress) Standard_OVERRIDE;
 
     // --------- PROTECTED TYPES ---------
 protected:
     //! Size value aligned to a 4 byte boundary
-    class AlignedSize
-    {
+    class AlignedSize {
         Standard_Size myValue;
+
     public:
         AlignedSize() : myValue(0) {}
-        AlignedSize(const Standard_Size theValue)
-            : myValue((theValue + Align - 1) & ~(Align - 1)) {
+        AlignedSize(const Standard_Size theValue) : myValue((theValue + Align - 1) & ~(Align - 1)) {}
+        operator Standard_Size() const {
+            return myValue;
         }
-        operator Standard_Size() const { return myValue; }
     };
 
     //! A pointer aligned to a 4 byte boundary
-    class AlignedPtr
-    {
+    class AlignedPtr {
         Standard_Byte* myValue;
+
     public:
         AlignedPtr() : myValue(0) {}
         AlignedPtr(const Standard_Address theValue)
-            : myValue((Standard_Byte*)((Standard_Size)theValue & ~(Align - 1))) {
+            : myValue((Standard_Byte*)((Standard_Size)theValue & ~(Align - 1))) {}
+        operator Standard_Address() const {
+            return myValue;
         }
-        operator Standard_Address       () const { return myValue; }
-        operator Standard_Byte* () const { return myValue; }
-        AlignedPtr operator -(const AlignedSize theValue) const
-        {
+        operator Standard_Byte*() const {
+            return myValue;
+        }
+        AlignedPtr operator-(const AlignedSize theValue) const {
             return myValue - theValue;
         }
-        AlignedPtr operator +(const AlignedSize theValue) const
-        {
+        AlignedPtr operator+(const AlignedSize theValue) const {
             return myValue + theValue;
         }
-        AlignedPtr operator -=(const AlignedSize theValue)
-        {
+        AlignedPtr operator-=(const AlignedSize theValue) {
             return myValue -= theValue;
         }
-        AlignedPtr operator +=(const AlignedSize theValue)
-        {
+        AlignedPtr operator+=(const AlignedSize theValue) {
             return myValue += theValue;
         }
     };
 
     //! A key for the map of blocks
-    struct Key { Standard_Size Value; };
+    struct Key {
+        Standard_Size Value;
+    };
 
     //! Key hasher
-    class Hasher
-    {
+    class Hasher {
     public:
         //! Returns hash code for the given key, in the range [1, theUpperBound]
         //! @param theKey the key which hash code is to be computed
         //! @param theUpperBound the upper bound of the range a computing hash code must be within
         //! @return a computed hash code, in the range [1, theUpperBound]
-        static Standard_Integer HashCode(const Key theKey, const Standard_Integer theUpperBound)
-        {
+        static Standard_Integer HashCode(const Key theKey, const Standard_Integer theUpperBound) {
             return ::HashCode(theKey.Value, theUpperBound);
         }
 
-        static Standard_Boolean IsEqual(const Key theOne, const Key theTwo)
-        {
+        static Standard_Boolean IsEqual(const Key theOne, const Key theTwo) {
             return theOne.Value == theTwo.Value;
         }
     };
 
     //! Descriptor of a block
-    struct Block
-    {
+    struct Block {
         Standard_Address address;
-        AlignedPtr       allocStart;
+        AlignedPtr allocStart;
         Block* prevBlock;
         Standard_Integer allocCount;
 
-        Block(const Standard_Address theAddress,
-            const Standard_Size    theSize,
-            Block* thePrevBlock = 0L)
-            : address(theAddress), prevBlock(thePrevBlock), allocCount(0)
-        {
+        Block(const Standard_Address theAddress, const Standard_Size theSize, Block* thePrevBlock = 0L)
+            : address(theAddress), prevBlock(thePrevBlock), allocCount(0) {
             SetFreeSize(theSize);
         }
 
-        void SetFreeSize(const Standard_Size theSize)
-        {
+        void SetFreeSize(const Standard_Size theSize) {
             allocStart = (Standard_Byte*)address + theSize;
         }
 
-        Standard_Size FreeSize() const
-        {
+        Standard_Size FreeSize() const {
             return (Standard_Byte*)allocStart - (Standard_Byte*)address;
         }
 
-        AlignedPtr Allocate(const AlignedSize theSize)
-        {
-            allocCount++; return allocStart -= theSize;
+        AlignedPtr Allocate(const AlignedSize theSize) {
+            allocCount++;
+            return allocStart -= theSize;
         }
 
-        void Free()
-        {
+        void Free() {
             allocCount--;
         }
 
-        Standard_Boolean IsEmpty() const
-        {
+        Standard_Boolean IsEmpty() const {
             return allocCount == 0;
         }
     };
@@ -178,9 +165,8 @@ protected:
     // --------- PROTECTED METHODS ---------
 protected:
     //! Calculate a key for the data map basing on the given address
-    inline Key getKey(const Standard_Address theAddress) const
-    {
-        Key aKey = { (Standard_Size)theAddress / myBlockSize };
+    inline Key getKey(const Standard_Address theAddress) const {
+        Key aKey = {(Standard_Size)theAddress / myBlockSize};
         return aKey;
     }
 
@@ -193,7 +179,7 @@ protected:
     // --------- PROHIBITED METHODS ---------
 private:
     NCollection_AccAllocator(const NCollection_AccAllocator&);
-    NCollection_AccAllocator& operator = (const NCollection_AccAllocator&);
+    NCollection_AccAllocator& operator=(const NCollection_AccAllocator&);
 
     // --------- PROTECTED DATA ---------
 protected:
@@ -208,6 +194,5 @@ public:
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
 DEFINE_STANDARD_HANDLE(NCollection_AccAllocator, NCollection_BaseAllocator)
-
 
 #endif

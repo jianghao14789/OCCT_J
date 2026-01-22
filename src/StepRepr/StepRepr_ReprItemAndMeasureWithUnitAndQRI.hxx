@@ -27,23 +27,22 @@ DEFINE_STANDARD_HANDLE(StepRepr_ReprItemAndMeasureWithUnitAndQRI, StepRepr_ReprI
 
 //! Base class for complex types (MEASURE_REPRESENTATION_ITEM, MEASURE_WITH_UNIT, QUALIFIED_REPRESENTATION_ITEM
 //! REPRESENTATION_ITEM, LENGTH_MEASURE_WITH_UNIT/PLANE_ANGLE_MEASURE_WITH_UNIT).
-class StepRepr_ReprItemAndMeasureWithUnitAndQRI : public StepRepr_ReprItemAndMeasureWithUnit
-{
+class StepRepr_ReprItemAndMeasureWithUnitAndQRI : public StepRepr_ReprItemAndMeasureWithUnit {
 
 public:
+    Standard_EXPORT StepRepr_ReprItemAndMeasureWithUnitAndQRI();
 
-  
-  Standard_EXPORT StepRepr_ReprItemAndMeasureWithUnitAndQRI();
+    Standard_EXPORT void Init(const Handle(StepBasic_MeasureWithUnit) & aMWU,
+                              const Handle(StepRepr_RepresentationItem) & aRI,
+                              const Handle(StepShape_QualifiedRepresentationItem) aQRI);
 
-  Standard_EXPORT void Init (const Handle(StepBasic_MeasureWithUnit)& aMWU, const Handle(StepRepr_RepresentationItem)& aRI, const Handle(StepShape_QualifiedRepresentationItem) aQRI);
-  
-  Standard_EXPORT void SetQualifiedRepresentationItem (const Handle(StepShape_QualifiedRepresentationItem)& aQRI);
-  
-  Standard_EXPORT Handle(StepShape_QualifiedRepresentationItem) GetQualifiedRepresentationItem() const;
+    Standard_EXPORT void SetQualifiedRepresentationItem(const Handle(StepShape_QualifiedRepresentationItem) & aQRI);
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ReprItemAndMeasureWithUnitAndQRI,StepRepr_ReprItemAndMeasureWithUnit)
+    Standard_EXPORT Handle(StepShape_QualifiedRepresentationItem) GetQualifiedRepresentationItem() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ReprItemAndMeasureWithUnitAndQRI, StepRepr_ReprItemAndMeasureWithUnit)
 
 private:
-  Handle(StepShape_QualifiedRepresentationItem) myQualifiedRepresentationItem;
+    Handle(StepShape_QualifiedRepresentationItem) myQualifiedRepresentationItem;
 };
 #endif // _StepRepr_ReprItemAndMeasureWithUnitAndQRI_HeaderFile

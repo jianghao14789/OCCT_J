@@ -24,52 +24,32 @@
 #include <Standard_Boolean.hxx>
 class TopoDS_Face;
 
-
 class ShapeUpgrade_FaceDivideArea;
 DEFINE_STANDARD_HANDLE(ShapeUpgrade_FaceDivideArea, ShapeUpgrade_FaceDivide)
 
 //! Divides face by max area criterium.
-class ShapeUpgrade_FaceDivideArea : public ShapeUpgrade_FaceDivide
-{
+class ShapeUpgrade_FaceDivideArea : public ShapeUpgrade_FaceDivide {
 
 public:
+    //! Creates empty  constructor.
+    Standard_EXPORT ShapeUpgrade_FaceDivideArea();
 
-  
-  //! Creates empty  constructor.
-  Standard_EXPORT ShapeUpgrade_FaceDivideArea();
-  
-  Standard_EXPORT ShapeUpgrade_FaceDivideArea(const TopoDS_Face& F);
-  
-  //! Performs splitting and computes the resulting shell
-  //! The context is used to keep track of former splittings
-  Standard_EXPORT virtual Standard_Boolean Perform() Standard_OVERRIDE;
-  
-  //! Set max area allowed for faces
+    Standard_EXPORT ShapeUpgrade_FaceDivideArea(const TopoDS_Face& F);
+
+    //! Performs splitting and computes the resulting shell
+    //! The context is used to keep track of former splittings
+    Standard_EXPORT virtual Standard_Boolean Perform() Standard_OVERRIDE;
+
+    //! Set max area allowed for faces
     Standard_Real& MaxArea();
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_FaceDivideArea,ShapeUpgrade_FaceDivide)
+    DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_FaceDivideArea, ShapeUpgrade_FaceDivide)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Real myMaxArea;
-
-
+    Standard_Real myMaxArea;
 };
 
-
 #include <ShapeUpgrade_FaceDivideArea.lxx>
-
-
-
-
 
 #endif // _ShapeUpgrade_FaceDivideArea_HeaderFile

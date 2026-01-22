@@ -28,10 +28,8 @@ class Poly_Triangulation;
 
 //! Reads topology from IStream in binary format without grouping of objects by types
 //! and using relative positions in a file as references.
-class BinTools_ShapeReader : public BinTools_ShapeSetBase
-{
+class BinTools_ShapeReader : public BinTools_ShapeSetBase {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Initializes a shape reader.

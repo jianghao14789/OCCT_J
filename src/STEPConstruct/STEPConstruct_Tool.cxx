@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Interface_Graph.hxx>
 #include <Interface_HGraph.hxx>
 #include <Interface_InterfaceModel.hxx>
@@ -25,45 +24,41 @@
 #include <XSControl_WorkSession.hxx>
 
 //=======================================================================
-//function : STEPConstruct_Tool
-//purpose  : 
+// function : STEPConstruct_Tool
+// purpose  :
 //=======================================================================
-STEPConstruct_Tool::STEPConstruct_Tool () 
-{
+STEPConstruct_Tool::STEPConstruct_Tool() {}
+
+//=======================================================================
+// function : STEPConstruct_Tool
+// purpose  :
+//=======================================================================
+
+STEPConstruct_Tool::STEPConstruct_Tool(const Handle(XSControl_WorkSession) & WS) {
+    SetWS(WS);
 }
 
 //=======================================================================
-//function : STEPConstruct_Tool
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-STEPConstruct_Tool::STEPConstruct_Tool (const Handle(XSControl_WorkSession) &WS) 
-{
-  SetWS ( WS );
-}
+Standard_Boolean STEPConstruct_Tool::SetWS(const Handle(XSControl_WorkSession) & WS) {
+    myWS.Nullify();
+    myTransientProcess.Nullify();
+    myFinderProcess.Nullify();
 
-//=======================================================================
-//function : Init
-//purpose  : 
-//=======================================================================
+    if (WS.IsNull()) return Standard_False;
+    myWS = WS;
+    myHGraph = myWS->HGraph();
 
-Standard_Boolean STEPConstruct_Tool::SetWS (const Handle(XSControl_WorkSession) &WS)
-{
-  myWS.Nullify();
-  myTransientProcess.Nullify();
-  myFinderProcess.Nullify();
-  
-  if ( WS.IsNull() ) return Standard_False;
-  myWS = WS;
-  myHGraph = myWS->HGraph();
-  
-  // collect data on reading process
-  const Handle(XSControl_TransferReader) &TR = WS->TransferReader();
-  if ( ! TR.IsNull() ) myTransientProcess = TR->TransientProcess();
+    // collect data on reading process
+    const Handle(XSControl_TransferReader) & TR = WS->TransferReader();
+    if (!TR.IsNull()) myTransientProcess = TR->TransientProcess();
 
-  // collect data on writing process
-  const Handle(XSControl_TransferWriter) &TW = myWS->TransferWriter();
-  if ( ! TW.IsNull() ) myFinderProcess = TW->FinderProcess();
+    // collect data on writing process
+    const Handle(XSControl_TransferWriter) & TW = myWS->TransferWriter();
+    if (!TW.IsNull()) myFinderProcess = TW->FinderProcess();
 
-  return ! myTransientProcess.IsNull() && ! myFinderProcess.IsNull();
+    return !myTransientProcess.IsNull() && !myFinderProcess.IsNull();
 }

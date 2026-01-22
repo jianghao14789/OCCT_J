@@ -17,22 +17,19 @@
 #include <LDOM_BasicAttribute.hxx>
 
 //=======================================================================
-//function : LDOM_Attr
-//purpose  : Constructor
+// function : LDOM_Attr
+// purpose  : Constructor
 //=======================================================================
 
-LDOM_Attr::LDOM_Attr (const LDOM_BasicAttribute& anAttr,
-                      const Handle(LDOM_MemManager)& aDoc)
-     : LDOM_Node (anAttr, aDoc) {}
+LDOM_Attr::LDOM_Attr(const LDOM_BasicAttribute& anAttr, const Handle(LDOM_MemManager) & aDoc)
+    : LDOM_Node(anAttr, aDoc) {}
 
 //=======================================================================
-//function : setValue
-//purpose  : 
+// function : setValue
+// purpose  :
 //=======================================================================
 
-void LDOM_Attr::setValue (const LDOMString& aValue)
-{
-  LDOM_BasicAttribute& anAttr = (LDOM_BasicAttribute&) Origin ();
-  anAttr.SetValue (aValue, myDocument);
+void LDOM_Attr::setValue(const LDOMString& aValue) {
+    LDOM_BasicAttribute& anAttr = (LDOM_BasicAttribute&)Origin();
+    anAttr.SetValue(aValue, myDocument);
 }
-

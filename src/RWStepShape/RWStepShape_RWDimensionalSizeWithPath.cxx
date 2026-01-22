@@ -24,79 +24,72 @@
 #include <StepShape_DimensionalSizeWithPath.hxx>
 
 //=======================================================================
-//function : RWStepShape_RWDimensionalSizeWithPath
-//purpose  : 
+// function : RWStepShape_RWDimensionalSizeWithPath
+// purpose  :
 //=======================================================================
-RWStepShape_RWDimensionalSizeWithPath::RWStepShape_RWDimensionalSizeWithPath ()
-{
+RWStepShape_RWDimensionalSizeWithPath::RWStepShape_RWDimensionalSizeWithPath() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepShape_RWDimensionalSizeWithPath::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                     const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                     const Handle(StepShape_DimensionalSizeWithPath) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 3, ach, "dimensional_size_with_path")) return;
+
+    // Inherited fields of DimensionalSize
+
+    Handle(StepRepr_ShapeAspect) aDimensionalSize_AppliesTo;
+    data->ReadEntity(num, 1, "dimensional_size.applies_to", ach, STANDARD_TYPE(StepRepr_ShapeAspect),
+                     aDimensionalSize_AppliesTo);
+
+    Handle(TCollection_HAsciiString) aDimensionalSize_Name;
+    data->ReadString(num, 2, "dimensional_size.name", ach, aDimensionalSize_Name);
+
+    // Own fields of DimensionalSizeWithPath
+
+    Handle(StepRepr_ShapeAspect) aPath;
+    data->ReadEntity(num, 3, "path", ach, STANDARD_TYPE(StepRepr_ShapeAspect), aPath);
+
+    // Initialize entity
+    ent->Init(aDimensionalSize_AppliesTo, aDimensionalSize_Name, aPath);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepShape_RWDimensionalSizeWithPath::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                      const Standard_Integer num,
-                                                      Handle(Interface_Check)& ach,
-                                                      const Handle(StepShape_DimensionalSizeWithPath) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,3,ach,"dimensional_size_with_path") ) return;
+void RWStepShape_RWDimensionalSizeWithPath::WriteStep(StepData_StepWriter& SW,
+                                                      const Handle(StepShape_DimensionalSizeWithPath) & ent) const {
 
-  // Inherited fields of DimensionalSize
+    // Inherited fields of DimensionalSize
 
-  Handle(StepRepr_ShapeAspect) aDimensionalSize_AppliesTo;
-  data->ReadEntity (num, 1, "dimensional_size.applies_to", ach, STANDARD_TYPE(StepRepr_ShapeAspect), aDimensionalSize_AppliesTo);
+    SW.Send(ent->StepShape_DimensionalSize::AppliesTo());
 
-  Handle(TCollection_HAsciiString) aDimensionalSize_Name;
-  data->ReadString (num, 2, "dimensional_size.name", ach, aDimensionalSize_Name);
+    SW.Send(ent->StepShape_DimensionalSize::Name());
 
-  // Own fields of DimensionalSizeWithPath
+    // Own fields of DimensionalSizeWithPath
 
-  Handle(StepRepr_ShapeAspect) aPath;
-  data->ReadEntity (num, 3, "path", ach, STANDARD_TYPE(StepRepr_ShapeAspect), aPath);
-
-  // Initialize entity
-  ent->Init(aDimensionalSize_AppliesTo,
-            aDimensionalSize_Name,
-            aPath);
+    SW.Send(ent->Path());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepShape_RWDimensionalSizeWithPath::WriteStep (StepData_StepWriter& SW,
-                                                       const Handle(StepShape_DimensionalSizeWithPath) &ent) const
-{
+void RWStepShape_RWDimensionalSizeWithPath::Share(const Handle(StepShape_DimensionalSizeWithPath) & ent,
+                                                  Interface_EntityIterator& iter) const {
 
-  // Inherited fields of DimensionalSize
+    // Inherited fields of DimensionalSize
 
-  SW.Send (ent->StepShape_DimensionalSize::AppliesTo());
+    iter.AddItem(ent->StepShape_DimensionalSize::AppliesTo());
 
-  SW.Send (ent->StepShape_DimensionalSize::Name());
+    // Own fields of DimensionalSizeWithPath
 
-  // Own fields of DimensionalSizeWithPath
-
-  SW.Send (ent->Path());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepShape_RWDimensionalSizeWithPath::Share (const Handle(StepShape_DimensionalSizeWithPath) &ent,
-                                                   Interface_EntityIterator& iter) const
-{
-
-  // Inherited fields of DimensionalSize
-
-  iter.AddItem (ent->StepShape_DimensionalSize::AppliesTo());
-
-  // Own fields of DimensionalSizeWithPath
-
-  iter.AddItem (ent->Path());
+    iter.AddItem(ent->Path());
 }

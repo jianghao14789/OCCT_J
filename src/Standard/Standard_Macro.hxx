@@ -14,24 +14,24 @@
 
 //! @file
 //! This file is intended to be the first file included to any
-//! Open CASCADE source. It defines platform-specific pre-processor 
+//! Open CASCADE source. It defines platform-specific pre-processor
 //! macros necessary for correct compilation of Open CASCADE code.
 
 #ifndef _Standard_Macro_HeaderFile
-# define _Standard_Macro_HeaderFile
+#define _Standard_Macro_HeaderFile
 
 //! @def Standard_OVERRIDE
 //! Should be used in declarations of virtual methods overridden in the
-//! derived classes, to cause compilation error in the case if that virtual 
+//! derived classes, to cause compilation error in the case if that virtual
 //! function disappears or changes its signature in the base class.
 //!
 //! Expands to C++11 keyword "override" on compilers that are known to
 //! suppot it; empty in other cases.
 #if defined(__cplusplus) && (__cplusplus >= 201100L)
-  // part of C++11 standard
+// part of C++11 standard
 #define Standard_OVERRIDE override
 #elif defined(_MSC_VER) && (_MSC_VER >= 1700)
-  // MSVC extension since VS2012
+// MSVC extension since VS2012
 #define Standard_OVERRIDE override
 #else
 #define Standard_OVERRIDE
@@ -40,11 +40,11 @@
 //! @def Standard_DELETE
 //! Alias for C++11 keyword "=delete" marking methods to be deleted.
 #if defined(__cplusplus) && (__cplusplus >= 201100L)
-  // part of C++11 standard
-#define Standard_DELETE =delete
+// part of C++11 standard
+#define Standard_DELETE = delete
 #elif defined(_MSC_VER) && (_MSC_VER >= 1800)
-  // implemented since VS2013
-#define Standard_DELETE =delete
+// implemented since VS2013
+#define Standard_DELETE = delete
 #else
 #define Standard_DELETE
 #endif
@@ -52,18 +52,18 @@
 //! @def Standard_FALLTHROUGH
 //! Should be used in a switch statement immediately before a case label,
 //! if code associated with the previous case label may fall through to that
-//! next label (i.e. does not end with "break" or "return" etc.). 
-//! This macro indicates that the fall through is intentional and should not be 
+//! next label (i.e. does not end with "break" or "return" etc.).
+//! This macro indicates that the fall through is intentional and should not be
 //! diagnosed by a compiler that warns on fallthrough.
 //!
-//! Expands to C++17 attribute statement "[[fallthrough]];" on compilers that 
-//! declare support of C++17, or to "__attribute__((fallthrough));" on 
+//! Expands to C++17 attribute statement "[[fallthrough]];" on compilers that
+//! declare support of C++17, or to "__attribute__((fallthrough));" on
 //! GCC 7+.
 #if defined(__cplusplus) && (__cplusplus >= 201703L)
-  // part of C++17 standard
+// part of C++17 standard
 #define Standard_FALLTHROUGH [[fallthrough]];
 #elif defined(__GNUC__) && (__GNUC__ >= 7)
-  // gcc 7+
+// gcc 7+
 #define Standard_FALLTHROUGH __attribute__((fallthrough));
 #else
 #define Standard_FALLTHROUGH
@@ -82,11 +82,11 @@
 #else
 #define Standard_NODISCARD
 #endif
-#elif defined(__GNUC__) && ! defined(INTEL_COMPILER)
-  // According to available documentation, GCC-style __attribute__ ((warn_unused_result))
-  // should be available in GCC since version 3.4, and in CLang since 3.9;
-  // Intel compiler does not seem to support this
-#define Standard_NODISCARD __attribute__ ((warn_unused_result))
+#elif defined(__GNUC__) && !defined(INTEL_COMPILER)
+// According to available documentation, GCC-style __attribute__ ((warn_unused_result))
+// should be available in GCC since version 3.4, and in CLang since 3.9;
+// Intel compiler does not seem to support this
+#define Standard_NODISCARD __attribute__((warn_unused_result))
 #else
 #define Standard_NODISCARD
 #endif
@@ -116,23 +116,23 @@
 //! @def Standard_THREADLOCAL
 //! Define Standard_THREADLOCAL modifier as C++11 thread_local keyword where it is available.
 #if defined(__clang__)
-  // CLang version: standard CLang > 3.3 or XCode >= 8 (but excluding 32-bit ARM)
-  // Note: this has to be in separate #if to avoid failure of preprocessor on other platforms
+// CLang version: standard CLang > 3.3 or XCode >= 8 (but excluding 32-bit ARM)
+// Note: this has to be in separate #if to avoid failure of preprocessor on other platforms
 #if __has_feature(cxx_thread_local)
 #define Standard_THREADLOCAL thread_local
 #endif
 #elif defined(__INTEL_COMPILER)
 #if (defined(_MSC_VER) && _MSC_VER >= 1900 && __INTEL_COMPILER > 1400)
-  // requires msvcrt vc14+ (Visual Studio 2015+)
+// requires msvcrt vc14+ (Visual Studio 2015+)
 #define Standard_THREADLOCAL thread_local
 #elif (!defined(_MSC_VER) && __INTEL_COMPILER > 1500)
 #define Standard_THREADLOCAL thread_local
 #endif
 #elif (defined(_MSC_VER) && _MSC_VER >= 1900)
-  // msvcrt coming with vc14+ (VS2015+)
+// msvcrt coming with vc14+ (VS2015+)
 #define Standard_THREADLOCAL thread_local
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)))
-  // GCC >= 4.8
+// GCC >= 4.8
 #define Standard_THREADLOCAL thread_local
 #endif
 
@@ -142,7 +142,7 @@
 
 //! @def Standard_DEPRECATED("message")
 //! Can be used in declaration of a method or a class to mark it as deprecated.
-//! Use of such method or class will cause compiler warning (if supported by 
+//! Use of such method or class will cause compiler warning (if supported by
 //! compiler and unless disabled).
 //! If macro OCCT_NO_DEPRECATED is defined, Standard_DEPRECATED is defined empty.
 #ifdef OCCT_NO_DEPRECATED
@@ -167,17 +167,17 @@
 //! @def Standard_ENABLE_DEPRECATION_WARNINGS
 //! Enables warnings on use of deprecated features previously disabled by
 //! Standard_DISABLE_DEPRECATION_WARNINGS.
-#if defined(__ICL) || defined (__INTEL_COMPILER)
-#define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable:1478))
-#define Standard_ENABLE_DEPRECATION_WARNINGS  __pragma(warning(pop))
+#if defined(__ICL) || defined(__INTEL_COMPILER)
+#define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable : 1478))
+#define Standard_ENABLE_DEPRECATION_WARNINGS __pragma(warning(pop))
 #elif (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))) || defined(__clang__)
-  // available since at least gcc 4.2 (maybe earlier), however only gcc 4.6+ supports this pragma inside the function body
-  // CLang also supports this gcc syntax (in addition to "clang diagnostic ignored")
+// available since at least gcc 4.2 (maybe earlier), however only gcc 4.6+ supports this pragma inside the function body
+// CLang also supports this gcc syntax (in addition to "clang diagnostic ignored")
 #define Standard_DISABLE_DEPRECATION_WARNINGS _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"")
-#define Standard_ENABLE_DEPRECATION_WARNINGS  _Pragma("GCC diagnostic warning \"-Wdeprecated-declarations\"")
+#define Standard_ENABLE_DEPRECATION_WARNINGS _Pragma("GCC diagnostic warning \"-Wdeprecated-declarations\"")
 #elif defined(_MSC_VER)
-#define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable:4996))
-#define Standard_ENABLE_DEPRECATION_WARNINGS  __pragma(warning(pop))
+#define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable : 4996))
+#define Standard_ENABLE_DEPRECATION_WARNINGS __pragma(warning(pop))
 #else
 #define Standard_DISABLE_DEPRECATION_WARNINGS
 #define Standard_ENABLE_DEPRECATION_WARNINGS
@@ -190,10 +190,10 @@
 #define OCCT_NO_RVALUE_REFERENCE
 #endif
 
-# ifdef _WIN32
+#ifdef _WIN32
 
 // We must be careful including windows.h: it is really poisonous stuff!
-// The most annoying are #defines of many identifiers that you could use in 
+// The most annoying are #defines of many identifiers that you could use in
 // normal code without knowing that Windows has its own knowledge of them...
 // So lets protect ourselves by switching OFF as much as possible of this in advance.
 // If someone needs more from windows.h, he is encouraged to #undef these symbols
@@ -201,25 +201,25 @@
 // Note that we define each symbol to itself, so that it still can be used
 // e.g. as name of variable, method etc.
 #ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN   /* exclude extra Windows stuff */
+#define WIN32_LEAN_AND_MEAN /* exclude extra Windows stuff */
 #endif
 #ifndef NOMINMAX
-#define NOMINMAX NOMINMAX     /* avoid #define min() and max() */
+#define NOMINMAX NOMINMAX /* avoid #define min() and max() */
 #endif
 #ifndef NOMSG
-#define NOMSG NOMSG           /* avoid #define SendMessage etc. */
+#define NOMSG NOMSG /* avoid #define SendMessage etc. */
 #endif
 #ifndef NODRAWTEXT
 #define NODRAWTEXT NODRAWTEXT /* avoid #define DrawText etc. */
 #endif
 #ifndef NONLS
-#define NONLS NONLS           /* avoid #define CompareString etc. */
+#define NONLS NONLS /* avoid #define CompareString etc. */
 #endif
 #ifndef NOGDI
-#define NOGDI NOGDI           /* avoid #define SetPrinter (winspool.h) etc. */
+#define NOGDI NOGDI /* avoid #define SetPrinter (winspool.h) etc. */
 #endif
 #ifndef NOSERVICE
-#define NOSERVICE NOSERVICE   
+#define NOSERVICE NOSERVICE
 #endif
 #ifndef NOKERNEL
 #define NOKERNEL NOKERNEL
@@ -237,48 +237,48 @@
 #endif
 
 //! @def Standard_EXPORT
-//! This macro should be used in declarations of public methods 
+//! This macro should be used in declarations of public methods
 //! to ensure that they are exported from DLL on Windows and thus
 //! can be called from other (dependent) libraries or applications.
 //!
 //! If macro OCCT_STATIC_BUILD is defined, then Standard_EXPORT
-//! is set to empty. 
+//! is set to empty.
 
-# if defined(_WIN32) && !defined(OCCT_STATIC_BUILD) && !defined(HAVE_NO_DLL)
+#if defined(_WIN32) && !defined(OCCT_STATIC_BUILD) && !defined(HAVE_NO_DLL)
 
 //======================================================
 // Windows-specific definitions
 //======================================================
 
-#  ifndef Standard_EXPORT
-#   define Standard_EXPORT __declspec( dllexport )
+#ifndef Standard_EXPORT
+#define Standard_EXPORT __declspec(dllexport)
 // For global variables :
-#   define Standard_EXPORTEXTERN __declspec( dllexport ) extern
-#   define Standard_EXPORTEXTERNC extern "C" __declspec( dllexport )
-#  endif  /* Standard_EXPORT */
+#define Standard_EXPORTEXTERN __declspec(dllexport) extern
+#define Standard_EXPORTEXTERNC extern "C" __declspec(dllexport)
+#endif /* Standard_EXPORT */
 
-#  ifndef Standard_IMPORT
-#   define Standard_IMPORT __declspec( dllimport ) extern
-#   define Standard_IMPORTC extern "C" __declspec( dllimport )
-#  endif  /* Standard_IMPORT */
+#ifndef Standard_IMPORT
+#define Standard_IMPORT __declspec(dllimport) extern
+#define Standard_IMPORTC extern "C" __declspec(dllimport)
+#endif /* Standard_IMPORT */
 
-# else  /* UNIX */
+#else /* UNIX */
 
 //======================================================
 // UNIX / static library definitions
 //======================================================
 
-#  ifndef Standard_EXPORT
-#   define Standard_EXPORT
+#ifndef Standard_EXPORT
+#define Standard_EXPORT
 // For global variables :
-#   define Standard_EXPORTEXTERN extern
-#   define Standard_EXPORTEXTERNC extern "C"
-#  endif  /* Standard_EXPORT */
+#define Standard_EXPORTEXTERN extern
+#define Standard_EXPORTEXTERNC extern "C"
+#endif /* Standard_EXPORT */
 
-#  ifndef Standard_IMPORT
-#   define Standard_IMPORT extern
-#   define Standard_IMPORTC extern "C"
-#  endif  /* Standard_IMPORT */
+#ifndef Standard_IMPORT
+#define Standard_IMPORT extern
+#define Standard_IMPORTC extern "C"
+#endif /* Standard_IMPORT */
 
 // Compatibility with old SUN compilers
 
@@ -288,10 +288,10 @@
 // with an incompatible extern "C" definition of memchr
 // October 18, 2000  <rboehne@ricardo-us.com>
 #if __SUNPRO_CC_COMPAT == 5
-#define	_MEMORY_H
+#define _MEMORY_H
 #endif
 
-# endif  /* _WIN32 */
+#endif /* _WIN32 */
 
 //! @def OCCT_UWP
 //! This macro is defined on Windows platform in the case if the code
@@ -310,13 +310,12 @@
 //! #ifdef Standard_HASATOMIC
 //!   #include <atomic>
 //! #endif
-#if (defined(__cplusplus) && __cplusplus >= 201100L) || (defined(_MSC_VER) && _MSC_VER >= 1800) || \
+#if (defined(__cplusplus) && __cplusplus >= 201100L) || (defined(_MSC_VER) && _MSC_VER >= 1800) ||                     \
     (defined(__GNUC__) && ((__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7)))
 #define Standard_HASATOMIC
-#define Standard_ATOMIC(theType) std::atomic<theType> 
+#define Standard_ATOMIC(theType) std::atomic<theType>
 #else
 #define Standard_ATOMIC(theType) theType
 #endif
-
 
 #endif

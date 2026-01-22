@@ -24,8 +24,8 @@
 // ============================================================================
 
 StepToTopoDS_NMTool::StepToTopoDS_NMTool() {
-  myIDEASCase = Standard_False;
-  myActiveFlag = Standard_False;
+    myIDEASCase = Standard_False;
+    myActiveFlag = Standard_False;
 }
 
 // ============================================================================
@@ -33,11 +33,11 @@ StepToTopoDS_NMTool::StepToTopoDS_NMTool() {
 // Purpose : Constructor with a Map for Representation Items and their names
 // ============================================================================
 
-StepToTopoDS_NMTool::StepToTopoDS_NMTool(const StepToTopoDS_DataMapOfRI& MapOfRI, 
+StepToTopoDS_NMTool::StepToTopoDS_NMTool(const StepToTopoDS_DataMapOfRI& MapOfRI,
                                          const StepToTopoDS_DataMapOfRINames& MapOfRINames) {
-  myIDEASCase = Standard_False;
-  myActiveFlag = Standard_False;
-  Init(MapOfRI, MapOfRINames);
+    myIDEASCase = Standard_False;
+    myActiveFlag = Standard_False;
+    Init(MapOfRI, MapOfRINames);
 }
 
 // ============================================================================
@@ -45,10 +45,10 @@ StepToTopoDS_NMTool::StepToTopoDS_NMTool(const StepToTopoDS_DataMapOfRI& MapOfRI
 // Purpose : Initializes internal maps of the tool with the passed ones
 // ============================================================================
 
-void StepToTopoDS_NMTool::Init(const StepToTopoDS_DataMapOfRI& MapOfRI, 
-                               const StepToTopoDS_DataMapOfRINames& MapOfRINames) { 
-  myRIMap = MapOfRI;
-  myRINamesMap = MapOfRINames;
+void StepToTopoDS_NMTool::Init(const StepToTopoDS_DataMapOfRI& MapOfRI,
+                               const StepToTopoDS_DataMapOfRINames& MapOfRINames) {
+    myRIMap = MapOfRI;
+    myRINamesMap = MapOfRINames;
 }
 
 // ============================================================================
@@ -57,7 +57,7 @@ void StepToTopoDS_NMTool::Init(const StepToTopoDS_DataMapOfRI& MapOfRI,
 // ============================================================================
 
 void StepToTopoDS_NMTool::SetActive(const Standard_Boolean isActive) {
-  myActiveFlag = isActive;
+    myActiveFlag = isActive;
 }
 
 // ============================================================================
@@ -66,7 +66,7 @@ void StepToTopoDS_NMTool::SetActive(const Standard_Boolean isActive) {
 // ============================================================================
 
 Standard_Boolean StepToTopoDS_NMTool::IsActive() {
-  return myActiveFlag;
+    return myActiveFlag;
 }
 
 // ============================================================================
@@ -74,9 +74,9 @@ Standard_Boolean StepToTopoDS_NMTool::IsActive() {
 // Purpose : Clears all internal containers
 // ============================================================================
 
-void StepToTopoDS_NMTool::CleanUp() { 
-  myRIMap.Clear();
-  myRINamesMap.Clear();
+void StepToTopoDS_NMTool::CleanUp() {
+    myRIMap.Clear();
+    myRINamesMap.Clear();
 }
 
 // ============================================================================
@@ -84,8 +84,8 @@ void StepToTopoDS_NMTool::CleanUp() {
 // Purpose : Indicates weither a RI is bound or not in the Map
 // ============================================================================
 
-Standard_Boolean StepToTopoDS_NMTool::IsBound(const Handle(StepRepr_RepresentationItem)& RI) {
-  return myRIMap.IsBound(RI);
+Standard_Boolean StepToTopoDS_NMTool::IsBound(const Handle(StepRepr_RepresentationItem) & RI) {
+    return myRIMap.IsBound(RI);
 }
 
 // ============================================================================
@@ -94,7 +94,7 @@ Standard_Boolean StepToTopoDS_NMTool::IsBound(const Handle(StepRepr_Representati
 // ============================================================================
 
 Standard_Boolean StepToTopoDS_NMTool::IsBound(const TCollection_AsciiString& RIName) {
-  return myRINamesMap.IsBound(RIName);
+    return myRINamesMap.IsBound(RIName);
 }
 
 // ============================================================================
@@ -102,8 +102,8 @@ Standard_Boolean StepToTopoDS_NMTool::IsBound(const TCollection_AsciiString& RIN
 // Purpose : Binds a RI with a Shape in the Map
 // ============================================================================
 
-void StepToTopoDS_NMTool::Bind(const Handle(StepRepr_RepresentationItem)& RI, const TopoDS_Shape& S) {
-  myRIMap.Bind(RI, S);
+void StepToTopoDS_NMTool::Bind(const Handle(StepRepr_RepresentationItem) & RI, const TopoDS_Shape& S) {
+    myRIMap.Bind(RI, S);
 }
 
 // ============================================================================
@@ -112,7 +112,7 @@ void StepToTopoDS_NMTool::Bind(const Handle(StepRepr_RepresentationItem)& RI, co
 // ============================================================================
 
 void StepToTopoDS_NMTool::Bind(const TCollection_AsciiString& RIName, const TopoDS_Shape& S) {
-  myRINamesMap.Bind(RIName, S);
+    myRINamesMap.Bind(RIName, S);
 }
 
 // ============================================================================
@@ -120,8 +120,8 @@ void StepToTopoDS_NMTool::Bind(const TCollection_AsciiString& RIName, const Topo
 // Purpose : Returns the Shape corresponding to the bounded RI
 // ============================================================================
 
-const TopoDS_Shape& StepToTopoDS_NMTool::Find(const Handle(StepRepr_RepresentationItem)& RI) {
-  return myRIMap.Find(RI);
+const TopoDS_Shape& StepToTopoDS_NMTool::Find(const Handle(StepRepr_RepresentationItem) & RI) {
+    return myRIMap.Find(RI);
 }
 
 // ============================================================================
@@ -130,7 +130,7 @@ const TopoDS_Shape& StepToTopoDS_NMTool::Find(const Handle(StepRepr_Representati
 // ============================================================================
 
 const TopoDS_Shape& StepToTopoDS_NMTool::Find(const TCollection_AsciiString& RIName) {
-  return myRINamesMap.Find(RIName);
+    return myRINamesMap.Find(RIName);
 }
 
 // ============================================================================
@@ -140,8 +140,7 @@ const TopoDS_Shape& StepToTopoDS_NMTool::Find(const TCollection_AsciiString& RIN
 // ============================================================================
 
 void StepToTopoDS_NMTool::RegisterNMEdge(const TopoDS_Shape& Edge) {
-  if ( !this->isEdgeRegisteredAsNM(Edge) )
-    myNMEdges.Append(Edge);
+    if (!this->isEdgeRegisteredAsNM(Edge)) myNMEdges.Append(Edge);
 }
 
 // ============================================================================
@@ -152,9 +151,7 @@ void StepToTopoDS_NMTool::RegisterNMEdge(const TopoDS_Shape& Edge) {
 
 Standard_Boolean StepToTopoDS_NMTool::IsSuspectedAsClosing(const TopoDS_Shape& BaseShell,
                                                            const TopoDS_Shape& SuspectedShell) {
-  return this->IsPureNMShell(SuspectedShell) &&
-         this->isAdjacentShell(BaseShell, SuspectedShell);
-
+    return this->IsPureNMShell(SuspectedShell) && this->isAdjacentShell(BaseShell, SuspectedShell);
 }
 
 // ============================================================================
@@ -163,7 +160,7 @@ Standard_Boolean StepToTopoDS_NMTool::IsSuspectedAsClosing(const TopoDS_Shape& B
 // ============================================================================
 
 void StepToTopoDS_NMTool::SetIDEASCase(const Standard_Boolean IDEASCase) {
-  myIDEASCase = IDEASCase;
+    myIDEASCase = IDEASCase;
 }
 
 // ============================================================================
@@ -172,7 +169,7 @@ void StepToTopoDS_NMTool::SetIDEASCase(const Standard_Boolean IDEASCase) {
 // ============================================================================
 
 Standard_Boolean StepToTopoDS_NMTool::IsIDEASCase() {
-  return myIDEASCase;
+    return myIDEASCase;
 }
 
 // ============================================================================
@@ -181,16 +178,16 @@ Standard_Boolean StepToTopoDS_NMTool::IsIDEASCase() {
 // ============================================================================
 
 Standard_Boolean StepToTopoDS_NMTool::IsPureNMShell(const TopoDS_Shape& Shell) {
-  Standard_Boolean result = Standard_True;
-  TopExp_Explorer edgeExp(Shell, TopAbs_EDGE);
-  for ( ; edgeExp.More(); edgeExp.Next() ) {
-    TopoDS_Shape currentEdge = edgeExp.Current();
-    if ( !this->isEdgeRegisteredAsNM(currentEdge) ) {
-      result = Standard_False;
-      break;
-    }    
-  }
-  return result;
+    Standard_Boolean result = Standard_True;
+    TopExp_Explorer edgeExp(Shell, TopAbs_EDGE);
+    for (; edgeExp.More(); edgeExp.Next()) {
+        TopoDS_Shape currentEdge = edgeExp.Current();
+        if (!this->isEdgeRegisteredAsNM(currentEdge)) {
+            result = Standard_False;
+            break;
+        }
+    }
+    return result;
 }
 
 // ============================================================================
@@ -199,16 +196,16 @@ Standard_Boolean StepToTopoDS_NMTool::IsPureNMShell(const TopoDS_Shape& Shell) {
 // ============================================================================
 
 Standard_Boolean StepToTopoDS_NMTool::isEdgeRegisteredAsNM(const TopoDS_Shape& Edge) {
-  Standard_Boolean result = Standard_False;
-  TopTools_ListIteratorOfListOfShape it(myNMEdges);
-  for ( ; it.More(); it.Next() ) {
-    TopoDS_Shape currentShape = it.Value();
-    if ( currentShape.IsSame(Edge) ) {
-      result =  Standard_True;
-      break;
+    Standard_Boolean result = Standard_False;
+    TopTools_ListIteratorOfListOfShape it(myNMEdges);
+    for (; it.More(); it.Next()) {
+        TopoDS_Shape currentShape = it.Value();
+        if (currentShape.IsSame(Edge)) {
+            result = Standard_True;
+            break;
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 // ============================================================================
@@ -216,21 +213,18 @@ Standard_Boolean StepToTopoDS_NMTool::isEdgeRegisteredAsNM(const TopoDS_Shape& E
 // Purpose : Checks if the ShellA is adjacent to the ShellB
 // ============================================================================
 
-Standard_Boolean StepToTopoDS_NMTool::isAdjacentShell(const TopoDS_Shape& ShellA,
-                                                      const TopoDS_Shape& ShellB) {
-  if ( ShellA.IsSame(ShellB) )
+Standard_Boolean StepToTopoDS_NMTool::isAdjacentShell(const TopoDS_Shape& ShellA, const TopoDS_Shape& ShellB) {
+    if (ShellA.IsSame(ShellB)) return Standard_False;
+
+    TopExp_Explorer edgeExpA(ShellA, TopAbs_EDGE);
+    for (; edgeExpA.More(); edgeExpA.Next()) {
+        TopoDS_Shape currentEdgeA = edgeExpA.Current();
+        TopExp_Explorer edgeExpB(ShellB, TopAbs_EDGE);
+        for (; edgeExpB.More(); edgeExpB.Next()) {
+            TopoDS_Shape currentEdgeB = edgeExpB.Current();
+            if (currentEdgeA.IsSame(currentEdgeB)) return Standard_True;
+        }
+    }
+
     return Standard_False;
-
-  TopExp_Explorer edgeExpA(ShellA, TopAbs_EDGE);
-  for ( ; edgeExpA.More(); edgeExpA.Next() ) {
-    TopoDS_Shape currentEdgeA = edgeExpA.Current();
-    TopExp_Explorer edgeExpB(ShellB, TopAbs_EDGE);
-    for ( ; edgeExpB.More(); edgeExpB.Next() ) {
-      TopoDS_Shape currentEdgeB = edgeExpB.Current();
-      if ( currentEdgeA.IsSame(currentEdgeB) )
-        return Standard_True;
-    }  
-  }
-
-  return Standard_False;
 }

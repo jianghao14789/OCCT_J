@@ -25,44 +25,21 @@
 class StepGeom_SurfaceOfLinearExtrusion;
 class Geom_SurfaceOfLinearExtrusion;
 
-
 //! This class implements the mapping between class
 //! SurfaceOfLinearExtrusion from Geom and the class
 //! SurfaceOfLinearExtrusion from StepGeom which describes a
 //! surface_of_linear_extrusion from Prostep
-class GeomToStep_MakeSurfaceOfLinearExtrusion  : public GeomToStep_Root
-{
+class GeomToStep_MakeSurfaceOfLinearExtrusion : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeSurfaceOfLinearExtrusion(const Handle(Geom_SurfaceOfLinearExtrusion) & CSurf);
 
-  
-  Standard_EXPORT GeomToStep_MakeSurfaceOfLinearExtrusion(const Handle(Geom_SurfaceOfLinearExtrusion)& CSurf);
-  
-  Standard_EXPORT const Handle(StepGeom_SurfaceOfLinearExtrusion)& Value() const;
-
-
-
+    Standard_EXPORT const Handle(StepGeom_SurfaceOfLinearExtrusion) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_SurfaceOfLinearExtrusion) theSurfaceOfLinearExtrusion;
-
-
+    Handle(StepGeom_SurfaceOfLinearExtrusion) theSurfaceOfLinearExtrusion;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeSurfaceOfLinearExtrusion_HeaderFile

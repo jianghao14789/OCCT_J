@@ -19,18 +19,18 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
-    int ExprIntrpparse();
-    void ExprIntrperror(char* msg);
+int ExprIntrpparse();
+void ExprIntrperror(char* msg);
 
-    void ExprIntrp_start_string(const char* str);
-    void ExprIntrp_stop_string();
+void ExprIntrp_start_string(const char* str);
+void ExprIntrp_stop_string();
 
-    void ExprIntrp_SetResult();
-    void ExprIntrp_SetDegree();
+void ExprIntrp_SetResult();
+void ExprIntrp_SetDegree();
 
-    int ExprIntrplex(void);
+int ExprIntrplex(void);
 
 #ifdef __cplusplus
 }

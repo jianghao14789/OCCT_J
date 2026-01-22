@@ -17,10 +17,6 @@
 #define _Aspect_GridType_HeaderFile
 
 //! Defines the grid type : Rectangular or Circular.
-enum Aspect_GridType
-{
-Aspect_GT_Rectangular,
-Aspect_GT_Circular
-};
+enum Aspect_GridType { Aspect_GT_Rectangular, Aspect_GT_Circular };
 
 #endif // _Aspect_GridType_HeaderFile

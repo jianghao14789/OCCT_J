@@ -16,7 +16,6 @@
 
 #include <PrsDim_EqualDistanceRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_EqualDistanceRelation AIS_EqualDistanceRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_EqualDistanceRelation AIS_EqualDistanceRelation;
 
 #endif // _AIS_EqualDistanceRelation_HeaderFile

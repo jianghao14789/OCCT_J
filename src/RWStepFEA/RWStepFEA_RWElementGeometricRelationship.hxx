@@ -27,48 +27,29 @@ class StepFEA_ElementGeometricRelationship;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ElementGeometricRelationship
-class RWStepFEA_RWElementGeometricRelationship 
-{
+class RWStepFEA_RWElementGeometricRelationship {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWElementGeometricRelationship();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWElementGeometricRelationship();
-  
-  //! Reads ElementGeometricRelationship
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_ElementGeometricRelationship)& ent) const;
-  
-  //! Writes ElementGeometricRelationship
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_ElementGeometricRelationship)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_ElementGeometricRelationship)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ElementGeometricRelationship
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_ElementGeometricRelationship) & ent) const;
 
+    //! Writes ElementGeometricRelationship
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_ElementGeometricRelationship) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_ElementGeometricRelationship) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWElementGeometricRelationship_HeaderFile

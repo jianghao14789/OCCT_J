@@ -20,23 +20,20 @@
 #include <Prs3d_Root.hxx>
 
 //! A framework for displaying an XYZ trihedron.
-class DsgPrs_DatumPrs : public Prs3d_Root
-{
+class DsgPrs_DatumPrs : public Prs3d_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  //! Draw XYZ axes at specified location with attributes defined by the attribute manager theDrawer:
-  //! - Prs3d_DatumAspect defines arrow, line and length trihedron axis parameters,
-  //! - Prs3d_TextAspect defines displayed text.
-  //! The thihedron origin and axis directions are defined by theDatum coordinate system.
-  //! DsgPrs_XYZAxisPresentation framework is used to create graphical primitives for each axis.
-  //! Axes are marked with "X", "Y", "Z" text.
-  //! @param thePresentation [out] the modified presentation
-  //! @param theDatum [in] the source of trihedron position
-  //! @param theDrawer [in] the provider of display attributes
-  Standard_EXPORT static void Add (const Handle(Prs3d_Presentation)& thePresentation, const gp_Ax2& theDatum,
-                                   const Handle(Prs3d_Drawer)& theDrawer);
-
+    //! Draw XYZ axes at specified location with attributes defined by the attribute manager theDrawer:
+    //! - Prs3d_DatumAspect defines arrow, line and length trihedron axis parameters,
+    //! - Prs3d_TextAspect defines displayed text.
+    //! The thihedron origin and axis directions are defined by theDatum coordinate system.
+    //! DsgPrs_XYZAxisPresentation framework is used to create graphical primitives for each axis.
+    //! Axes are marked with "X", "Y", "Z" text.
+    //! @param thePresentation [out] the modified presentation
+    //! @param theDatum [in] the source of trihedron position
+    //! @param theDrawer [in] the provider of display attributes
+    Standard_EXPORT static void Add(const Handle(Prs3d_Presentation) & thePresentation, const gp_Ax2& theDatum,
+                                    const Handle(Prs3d_Drawer) & theDrawer);
 };
 #endif

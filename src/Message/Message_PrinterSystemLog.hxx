@@ -24,40 +24,35 @@ DEFINE_STANDARD_HANDLE(Message_PrinterSystemLog, Message_Printer)
 //! - Windows, through ReportEventW().
 //! - Android, through __android_log_write().
 //! - UNIX/Linux, through syslog().
-//! 
+//!
 //! 与系统日志关联的消息打印器的实现。
 //! 为以下系统实现：
 //! - Windows，通过 ReportEventW()。
 //! - Android，通过 __android_log_write()。
 //! - UNIX/Linux，通过 syslog()。
-class Message_PrinterSystemLog : public Message_Printer
-{
+class Message_PrinterSystemLog : public Message_Printer {
     DEFINE_STANDARD_RTTIEXT(Message_PrinterSystemLog, Message_Printer)
 public:
-
     //! Main constructor.
     //! 主构造函数
     Standard_EXPORT Message_PrinterSystemLog(const TCollection_AsciiString& theEventSourceName,
-        const Message_Gravity theTraceLevel = Message_Info);
+                                             const Message_Gravity theTraceLevel = Message_Info);
 
     //! Destructor.
     //! 析构函数
     Standard_EXPORT virtual ~Message_PrinterSystemLog();
 
 protected:
-
     //! Puts a message to the system log.
     //! 将消息放入系统日志
     Standard_EXPORT virtual void send(const TCollection_AsciiString& theString,
-        const Message_Gravity theGravity) const Standard_OVERRIDE;
+                                      const Message_Gravity theGravity) const Standard_OVERRIDE;
 
 private:
-
     TCollection_AsciiString myEventSourceName; // 事件源名称
 #ifdef _WIN32
-    Standard_Address myEventSource;            // Windows 事件源句柄
+    Standard_Address myEventSource; // Windows 事件源句柄
 #endif
-
 };
 
 #endif // _Message_PrinterSystemLog_HeaderFile

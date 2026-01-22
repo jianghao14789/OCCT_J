@@ -49,66 +49,43 @@ class TopOpeBRep_EdgesFiller;
 class TopOpeBRep_FaceEdgeFiller;
 class TopOpeBRep_DSFiller;
 
-
 //! This package provides  the topological  operations
 //! on the BRep data structure.
-class TopOpeBRep 
-{
+class TopOpeBRep {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Prints the name  of  <TLC>  as  a String  on the
-  //! Stream <S> and returns <S>.
-  Standard_EXPORT static Standard_OStream& Print (const TopOpeBRep_TypeLineCurve TLC, Standard_OStream& OS);
-
-
-
+    //! Prints the name  of  <TLC>  as  a String  on the
+    //! Stream <S> and returns <S>.
+    Standard_EXPORT static Standard_OStream& Print(const TopOpeBRep_TypeLineCurve TLC, Standard_OStream& OS);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class TopOpeBRep_VPointInter;
-friend class TopOpeBRep_VPointInterIterator;
-friend class TopOpeBRep_WPointInter;
-friend class TopOpeBRep_WPointInterIterator;
-friend class TopOpeBRep_LineInter;
-friend class TopOpeBRep_Hctxff2d;
-friend class TopOpeBRep_Hctxee2d;
-friend class TopOpeBRep_Point2d;
-friend class TopOpeBRep_PointClassifier;
-friend class TopOpeBRep_VPointInterClassifier;
-friend class TopOpeBRep_GeomTool;
-friend class TopOpeBRep_FacesIntersector;
-friend class TopOpeBRep_EdgesIntersector;
-friend class TopOpeBRep_FaceEdgeIntersector;
-friend class TopOpeBRep_ShapeScanner;
-friend class TopOpeBRep_ShapeIntersector;
-friend class TopOpeBRep_ShapeIntersector2d;
-friend class TopOpeBRep_PointGeomTool;
-friend class TopOpeBRep_FFTransitionTool;
-friend class TopOpeBRep_Bipoint;
-friend class TopOpeBRep_FacesFiller;
-friend class TopOpeBRep_FFDumper;
-friend class TopOpeBRep_EdgesFiller;
-friend class TopOpeBRep_FaceEdgeFiller;
-friend class TopOpeBRep_DSFiller;
-
+    friend class TopOpeBRep_VPointInter;
+    friend class TopOpeBRep_VPointInterIterator;
+    friend class TopOpeBRep_WPointInter;
+    friend class TopOpeBRep_WPointInterIterator;
+    friend class TopOpeBRep_LineInter;
+    friend class TopOpeBRep_Hctxff2d;
+    friend class TopOpeBRep_Hctxee2d;
+    friend class TopOpeBRep_Point2d;
+    friend class TopOpeBRep_PointClassifier;
+    friend class TopOpeBRep_VPointInterClassifier;
+    friend class TopOpeBRep_GeomTool;
+    friend class TopOpeBRep_FacesIntersector;
+    friend class TopOpeBRep_EdgesIntersector;
+    friend class TopOpeBRep_FaceEdgeIntersector;
+    friend class TopOpeBRep_ShapeScanner;
+    friend class TopOpeBRep_ShapeIntersector;
+    friend class TopOpeBRep_ShapeIntersector2d;
+    friend class TopOpeBRep_PointGeomTool;
+    friend class TopOpeBRep_FFTransitionTool;
+    friend class TopOpeBRep_Bipoint;
+    friend class TopOpeBRep_FacesFiller;
+    friend class TopOpeBRep_FFDumper;
+    friend class TopOpeBRep_EdgesFiller;
+    friend class TopOpeBRep_FaceEdgeFiller;
+    friend class TopOpeBRep_DSFiller;
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRep_HeaderFile

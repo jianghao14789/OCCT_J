@@ -23,46 +23,25 @@
 #include <IGESData_IGESEntity.hxx>
 class gp_GTrsf;
 
-
 class IGESData_TransfEntity;
 DEFINE_STANDARD_HANDLE(IGESData_TransfEntity, IGESData_IGESEntity)
 
 //! defines required type for Transf in directory part
 //! an effective Transf entity must inherits it
-class IGESData_TransfEntity : public IGESData_IGESEntity
-{
+class IGESData_TransfEntity : public IGESData_IGESEntity {
 
 public:
+    //! gives value of the transformation, as a GTrsf
+    //! To be defined by an effective class of Transformation Entity
+    //! Warning : Must take in account Composition : if a TransfEntity has in
+    //! its Directory Part, a Transf, this means that it is Compound,
+    //! Value must return the global result
+    Standard_EXPORT virtual gp_GTrsf Value() const = 0;
 
-  
-  //! gives value of the transformation, as a GTrsf
-  //! To be defined by an effective class of Transformation Entity
-  //! Warning : Must take in account Composition : if a TransfEntity has in
-  //! its Directory Part, a Transf, this means that it is Compound,
-  //! Value must return the global result
-  Standard_EXPORT virtual gp_GTrsf Value() const = 0;
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESData_TransfEntity,IGESData_IGESEntity)
+    DEFINE_STANDARD_RTTIEXT(IGESData_TransfEntity, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESData_TransfEntity_HeaderFile

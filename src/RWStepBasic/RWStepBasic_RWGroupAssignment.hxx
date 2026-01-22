@@ -27,48 +27,26 @@ class StepBasic_GroupAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GroupAssignment
-class RWStepBasic_RWGroupAssignment 
-{
+class RWStepBasic_RWGroupAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWGroupAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWGroupAssignment();
-  
-  //! Reads GroupAssignment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_GroupAssignment)& ent) const;
-  
-  //! Writes GroupAssignment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_GroupAssignment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_GroupAssignment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads GroupAssignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_GroupAssignment) & ent) const;
 
+    //! Writes GroupAssignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_GroupAssignment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_GroupAssignment) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWGroupAssignment_HeaderFile

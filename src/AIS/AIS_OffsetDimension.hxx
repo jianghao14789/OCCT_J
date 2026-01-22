@@ -16,7 +16,6 @@
 
 #include <PrsDim_OffsetDimension.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_OffsetDimension AIS_OffsetDimension;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_OffsetDimension AIS_OffsetDimension;
 
 #endif // _AIS_OffsetDimension_HeaderFile

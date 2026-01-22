@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom2d_BSplineCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <GeomAbs_BSplKnotDistribution.hxx>
@@ -36,23 +35,20 @@
 // prostep a partir d' une BSplineCurve de Geom
 //=============================================================================
 GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::
-  GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve( const
-    Handle(Geom_BSplineCurve)& BS )
-								      
-{
+    GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve(const Handle(Geom_BSplineCurve) & BS)
+
+        {
 #define Array1OfPnt_gen TColgp_Array1OfPnt
 #include "GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_gen.pxx"
 #undef Array1OfPnt_gen
-}
-//=============================================================================
-// Creation d' une bspline_curve_with_knots_and_rational_bspline_curve de
-// prostep a partir d' une BSplineCurve de Geom2d
-//=============================================================================
+        } //=============================================================================
+          // Creation d' une bspline_curve_with_knots_and_rational_bspline_curve de
+          // prostep a partir d' une BSplineCurve de Geom2d
+          //=============================================================================
 
 GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::
-  GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve( const
-    Handle(Geom2d_BSplineCurve)& BS )
-								      
+    GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve(const Handle(Geom2d_BSplineCurve) & BS)
+
 {
 #define Array1OfPnt_gen TColgp_Array1OfPnt2d
 #include "GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_gen.pxx"
@@ -64,8 +60,7 @@ GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::
 //=============================================================================
 
 const Handle(StepGeom_BSplineCurveWithKnotsAndRationalBSplineCurve) &
-      GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::Value() const
-{
-  StdFail_NotDone_Raise_if (!done, "GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::Value() - no result");
-  return theBSplineCurveWithKnotsAndRationalBSplineCurve;
+    GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::Value() const {
+    StdFail_NotDone_Raise_if(!done, "GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve::Value() - no result");
+    return theBSplineCurveWithKnotsAndRationalBSplineCurve;
 }

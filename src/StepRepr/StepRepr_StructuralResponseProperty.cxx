@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepRepr_StructuralResponseProperty.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_StructuralResponseProperty,StepRepr_PropertyDefinition)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_StructuralResponseProperty, StepRepr_PropertyDefinition)
 
 //=======================================================================
-//function : StepRepr_StructuralResponseProperty
-//purpose  : 
+// function : StepRepr_StructuralResponseProperty
+// purpose  :
 //=======================================================================
-StepRepr_StructuralResponseProperty::StepRepr_StructuralResponseProperty ()
-{
-}
+StepRepr_StructuralResponseProperty::StepRepr_StructuralResponseProperty() {}

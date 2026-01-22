@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepDimTol_FlatnessTolerance.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_FlatnessTolerance,StepDimTol_GeometricTolerance)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_FlatnessTolerance, StepDimTol_GeometricTolerance)
 
 //=======================================================================
-//function : StepDimTol_FlatnessTolerance
-//purpose  : 
+// function : StepDimTol_FlatnessTolerance
+// purpose  :
 //=======================================================================
-StepDimTol_FlatnessTolerance::StepDimTol_FlatnessTolerance ()
-{
-}
+StepDimTol_FlatnessTolerance::StepDimTol_FlatnessTolerance() {}

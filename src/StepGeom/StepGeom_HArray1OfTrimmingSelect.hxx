@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepGeom_HArray1OfTrimmingSelect, StepGeom_Array1OfTrimmingSelect)
 
-
 #endif

@@ -15,8 +15,7 @@
 #define _UnitsMethods_LengthUnit_HeaderFile
 
 //! The Enumeration describes possible values for length units
-enum UnitsMethods_LengthUnit
-{
+enum UnitsMethods_LengthUnit {
     UnitsMethods_LengthUnit_Undefined = 0,   // 1.
     UnitsMethods_LengthUnit_Inch = 1,        // 25.4
     UnitsMethods_LengthUnit_Millimeter = 2,  // 1.

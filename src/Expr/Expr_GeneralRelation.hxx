@@ -27,18 +27,14 @@ class Expr_GeneralExpression;
 class Expr_NamedUnknown;
 class TCollection_AsciiString;
 
-
 class Expr_GeneralRelation;
 DEFINE_STANDARD_HANDLE(Expr_GeneralRelation, Standard_Transient)
 
 //! Defines the general purposes of any relation between
 //! expressions.
-class Expr_GeneralRelation : public Standard_Transient
-{
+class Expr_GeneralRelation : public Standard_Transient {
 
 public:
-
-
     //! Returns the current status of the relation
     Standard_EXPORT virtual Standard_Boolean IsSatisfied() const = 0;
 
@@ -70,35 +66,19 @@ public:
     Standard_EXPORT virtual Handle(Expr_GeneralRelation) SubRelation(const Standard_Integer index) const = 0;
 
     //! Tests if <exp> contains <var>.
-    Standard_EXPORT virtual Standard_Boolean Contains(const Handle(Expr_GeneralExpression)& exp) const = 0;
+    Standard_EXPORT virtual Standard_Boolean Contains(const Handle(Expr_GeneralExpression) & exp) const = 0;
 
     //! Replaces all occurrences of <var> with <with> in <me>.
-    Standard_EXPORT virtual void Replace(const Handle(Expr_NamedUnknown)& var, const Handle(Expr_GeneralExpression)& with) = 0;
+    Standard_EXPORT virtual void Replace(const Handle(Expr_NamedUnknown) & var,
+                                         const Handle(Expr_GeneralExpression) & with) = 0;
 
     //! returns a string representing <me> in a readable way.
     Standard_EXPORT virtual TCollection_AsciiString String() const = 0;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Expr_GeneralRelation, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Expr_GeneralRelation_HeaderFile

@@ -20,49 +20,42 @@
 #include <StepFEA_FeaModel.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_ElementGroup,StepFEA_FeaGroup)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_ElementGroup, StepFEA_FeaGroup)
 
 //=======================================================================
-//function : StepFEA_ElementGroup
-//purpose  : 
+// function : StepFEA_ElementGroup
+// purpose  :
 //=======================================================================
-StepFEA_ElementGroup::StepFEA_ElementGroup ()
-{
+StepFEA_ElementGroup::StepFEA_ElementGroup() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_ElementGroup::Init(const Handle(TCollection_HAsciiString) & aGroup_Name,
+                                const Handle(TCollection_HAsciiString) & aGroup_Description,
+                                const Handle(StepFEA_FeaModel) & aFeaGroup_ModelRef,
+                                const Handle(StepFEA_HArray1OfElementRepresentation) & aElements) {
+    StepFEA_FeaGroup::Init(aGroup_Name, aGroup_Description, aFeaGroup_ModelRef);
+
+    theElements = aElements;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Elements
+// purpose  :
 //=======================================================================
 
-void StepFEA_ElementGroup::Init (const Handle(TCollection_HAsciiString) &aGroup_Name,
-                                 const Handle(TCollection_HAsciiString) &aGroup_Description,
-                                 const Handle(StepFEA_FeaModel) &aFeaGroup_ModelRef,
-                                 const Handle(StepFEA_HArray1OfElementRepresentation) &aElements)
-{
-  StepFEA_FeaGroup::Init(aGroup_Name,
-                         aGroup_Description,
-                         aFeaGroup_ModelRef);
-
-  theElements = aElements;
+Handle(StepFEA_HArray1OfElementRepresentation) StepFEA_ElementGroup::Elements() const {
+    return theElements;
 }
 
 //=======================================================================
-//function : Elements
-//purpose  : 
+// function : SetElements
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_HArray1OfElementRepresentation) StepFEA_ElementGroup::Elements () const
-{
-  return theElements;
-}
-
-//=======================================================================
-//function : SetElements
-//purpose  : 
-//=======================================================================
-
-void StepFEA_ElementGroup::SetElements (const Handle(StepFEA_HArray1OfElementRepresentation) &aElements)
-{
-  theElements = aElements;
+void StepFEA_ElementGroup::SetElements(const Handle(StepFEA_HArray1OfElementRepresentation) & aElements) {
+    theElements = aElements;
 }

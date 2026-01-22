@@ -62,7 +62,6 @@ class TNaming_ShapesSet;
 class TNaming_IteratorOnShapesSet;
 class TNaming_NamingTool;
 
-
 //! A topological attribute can be seen as a hook
 //! into the topological structure. To this hook,
 //! data can be attached and references defined.
@@ -119,134 +118,116 @@ class TNaming_NamingTool;
 //! all topological entities they create, but all
 //! topological entities can be turned into hooks
 //! when necessary. This is where topological naming is necessary.
-class TNaming 
-{
+class TNaming {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Subtituter les  shapes  sur les structures de   source
+    //! vers cible
+    Standard_EXPORT static void Substitute(const TDF_Label& labelsource, const TDF_Label& labelcible,
+                                           TopTools_DataMapOfShapeShape& mapOldNew);
 
-  
-  //! Subtituter les  shapes  sur les structures de   source
-  //! vers cible
-  Standard_EXPORT static void Substitute (const TDF_Label& labelsource, const TDF_Label& labelcible, TopTools_DataMapOfShapeShape& mapOldNew);
-  
-  //! Mise a jour des shapes du label  et de ses fils en
-  //! tenant compte des  substitutions decrite par
-  //! mapOldNew.
-  //!
-  //! Warning: le  remplacement du shape est  fait    dans tous
-  //! les    attributs  qui  le contiennent meme si ceux
-  //! ci ne sont pas associees a des sous-labels de <Label>.
-  Standard_EXPORT static void Update (const TDF_Label& label, TopTools_DataMapOfShapeShape& mapOldNew);
-  
-  //! Application de la Location sur les shapes du label
-  //! et  de   ses   sous   labels.
-  Standard_EXPORT static void Displace (const TDF_Label& label, const TopLoc_Location& aLocation, const Standard_Boolean WithOld = Standard_True);
-  
-  //! Remplace  les  shapes du label et  des sous-labels
-  //! par des copies.
-  Standard_EXPORT static void ChangeShapes (const TDF_Label& label, TopTools_DataMapOfShapeShape& M);
-  
-  //! Application de la transformation sur les shapes du
-  //! label et de ses sous labels.
-  //! Warning: le  remplacement du shape est  fait    dans tous
-  //! les    attributs  qui  le contiennent meme si ceux
-  //! ci ne sont pas associees a des sous-labels de <Label>.
-  Standard_EXPORT static void Transform (const TDF_Label& label, const gp_Trsf& aTransformation);
-  
-  //! Replicates the named shape with the transformation <T>
-  //! on the label <L> (and sub-labels if necessary)
-  //! (TNaming_GENERATED is set)
-  Standard_EXPORT static void Replicate (const Handle(TNaming_NamedShape)& NS, const gp_Trsf& T, const TDF_Label& L);
-  
-  //! Replicates the shape with the transformation <T>
-  //! on the label <L> (and sub-labels if necessary)
-  //! (TNaming_GENERATED is set)
-  Standard_EXPORT static void Replicate (const TopoDS_Shape& SH, const gp_Trsf& T, const TDF_Label& L);
-  
-  //! Builds shape from map content
-  Standard_EXPORT static TopoDS_Shape MakeShape (const TopTools_MapOfShape& MS);
-  
-  //! Find unique context of shape <S>
-  Standard_EXPORT static TopoDS_Shape FindUniqueContext (const TopoDS_Shape& S, const TopoDS_Shape& Context);
-  
-  //! Find unique context of shape <S>,which is pure concatenation
-  //! of atomic shapes (Compound). The result is concatenation of
-  //! single contexts
-  Standard_EXPORT static TopoDS_Shape FindUniqueContextSet (const TopoDS_Shape& S, const TopoDS_Shape& Context, Handle(TopTools_HArray1OfShape)& Arr);
-  
-  //! Substitutes shape in source structure
-  Standard_EXPORT static Standard_Boolean SubstituteSShape (const TDF_Label& accesslabel, const TopoDS_Shape& From, TopoDS_Shape& To);
-  
-  //! Returns True if outer wire is found and the found wire in <theWire>.
-  Standard_EXPORT static Standard_Boolean OuterWire (const TopoDS_Face& theFace, TopoDS_Wire& theWire);
-  
-  //! Returns True if outer Shell is found and the found shell in <theShell>.
-  //! Print of TNaming enumeration
-  //! =============================
-  Standard_EXPORT static Standard_Boolean OuterShell (const TopoDS_Solid& theSolid, TopoDS_Shell& theShell);
-  
-  //! Appends to <anIDList> the list of the attributes
-  //! IDs of this package. CAUTION: <anIDList> is NOT
-  //! cleared before use.
-  Standard_EXPORT static void IDList (TDF_IDList& anIDList);
-  
-  //! Prints the  evolution  <EVOL> as  a String on  the
-  //! Stream <S> and returns <S>.
-  Standard_EXPORT static Standard_OStream& Print (const TNaming_Evolution EVOL, Standard_OStream& S);
-  
-  //! Prints the name of name type <NAME> as a String on
-  //! the Stream <S> and returns <S>.
-  Standard_EXPORT static Standard_OStream& Print (const TNaming_NameType NAME, Standard_OStream& S);
-  
-  //! Prints the content of UsedShapes private  attribute as a String Table on
-  //! the Stream <S> and returns <S>.
-  Standard_EXPORT static Standard_OStream& Print (const TDF_Label& ACCESS, Standard_OStream& S);
+    //! Mise a jour des shapes du label  et de ses fils en
+    //! tenant compte des  substitutions decrite par
+    //! mapOldNew.
+    //!
+    //! Warning: le  remplacement du shape est  fait    dans tous
+    //! les    attributs  qui  le contiennent meme si ceux
+    //! ci ne sont pas associees a des sous-labels de <Label>.
+    Standard_EXPORT static void Update(const TDF_Label& label, TopTools_DataMapOfShapeShape& mapOldNew);
 
+    //! Application de la Location sur les shapes du label
+    //! et  de   ses   sous   labels.
+    Standard_EXPORT static void Displace(const TDF_Label& label, const TopLoc_Location& aLocation,
+                                         const Standard_Boolean WithOld = Standard_True);
 
+    //! Remplace  les  shapes du label et  des sous-labels
+    //! par des copies.
+    Standard_EXPORT static void ChangeShapes(const TDF_Label& label, TopTools_DataMapOfShapeShape& M);
 
+    //! Application de la transformation sur les shapes du
+    //! label et de ses sous labels.
+    //! Warning: le  remplacement du shape est  fait    dans tous
+    //! les    attributs  qui  le contiennent meme si ceux
+    //! ci ne sont pas associees a des sous-labels de <Label>.
+    Standard_EXPORT static void Transform(const TDF_Label& label, const gp_Trsf& aTransformation);
+
+    //! Replicates the named shape with the transformation <T>
+    //! on the label <L> (and sub-labels if necessary)
+    //! (TNaming_GENERATED is set)
+    Standard_EXPORT static void Replicate(const Handle(TNaming_NamedShape) & NS, const gp_Trsf& T, const TDF_Label& L);
+
+    //! Replicates the shape with the transformation <T>
+    //! on the label <L> (and sub-labels if necessary)
+    //! (TNaming_GENERATED is set)
+    Standard_EXPORT static void Replicate(const TopoDS_Shape& SH, const gp_Trsf& T, const TDF_Label& L);
+
+    //! Builds shape from map content
+    Standard_EXPORT static TopoDS_Shape MakeShape(const TopTools_MapOfShape& MS);
+
+    //! Find unique context of shape <S>
+    Standard_EXPORT static TopoDS_Shape FindUniqueContext(const TopoDS_Shape& S, const TopoDS_Shape& Context);
+
+    //! Find unique context of shape <S>,which is pure concatenation
+    //! of atomic shapes (Compound). The result is concatenation of
+    //! single contexts
+    Standard_EXPORT static TopoDS_Shape FindUniqueContextSet(const TopoDS_Shape& S, const TopoDS_Shape& Context,
+                                                             Handle(TopTools_HArray1OfShape) & Arr);
+
+    //! Substitutes shape in source structure
+    Standard_EXPORT static Standard_Boolean SubstituteSShape(const TDF_Label& accesslabel, const TopoDS_Shape& From,
+                                                             TopoDS_Shape& To);
+
+    //! Returns True if outer wire is found and the found wire in <theWire>.
+    Standard_EXPORT static Standard_Boolean OuterWire(const TopoDS_Face& theFace, TopoDS_Wire& theWire);
+
+    //! Returns True if outer Shell is found and the found shell in <theShell>.
+    //! Print of TNaming enumeration
+    //! =============================
+    Standard_EXPORT static Standard_Boolean OuterShell(const TopoDS_Solid& theSolid, TopoDS_Shell& theShell);
+
+    //! Appends to <anIDList> the list of the attributes
+    //! IDs of this package. CAUTION: <anIDList> is NOT
+    //! cleared before use.
+    Standard_EXPORT static void IDList(TDF_IDList& anIDList);
+
+    //! Prints the  evolution  <EVOL> as  a String on  the
+    //! Stream <S> and returns <S>.
+    Standard_EXPORT static Standard_OStream& Print(const TNaming_Evolution EVOL, Standard_OStream& S);
+
+    //! Prints the name of name type <NAME> as a String on
+    //! the Stream <S> and returns <S>.
+    Standard_EXPORT static Standard_OStream& Print(const TNaming_NameType NAME, Standard_OStream& S);
+
+    //! Prints the content of UsedShapes private  attribute as a String Table on
+    //! the Stream <S> and returns <S>.
+    Standard_EXPORT static Standard_OStream& Print(const TDF_Label& ACCESS, Standard_OStream& S);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class TNaming_CopyShape;
-friend class TNaming_TranslateTool;
-friend class TNaming_Translator;
-friend class TNaming_NamedShape;
-friend class TNaming_UsedShapes;
-friend class TNaming_Builder;
-friend class TNaming_Tool;
-friend class TNaming_Iterator;
-friend class TNaming_NewShapeIterator;
-friend class TNaming_OldShapeIterator;
-friend class TNaming_SameShapeIterator;
-friend class TNaming_Name;
-friend class TNaming_Naming;
-friend class TNaming_Selector;
-friend class TNaming_DeltaOnRemoval;
-friend class TNaming_DeltaOnModification;
-friend class TNaming_RefShape;
-friend class TNaming_Scope;
-friend class TNaming_Identifier;
-friend class TNaming_Localizer;
-friend class TNaming_ShapesSet;
-friend class TNaming_IteratorOnShapesSet;
-friend class TNaming_NamingTool;
-
+    friend class TNaming_CopyShape;
+    friend class TNaming_TranslateTool;
+    friend class TNaming_Translator;
+    friend class TNaming_NamedShape;
+    friend class TNaming_UsedShapes;
+    friend class TNaming_Builder;
+    friend class TNaming_Tool;
+    friend class TNaming_Iterator;
+    friend class TNaming_NewShapeIterator;
+    friend class TNaming_OldShapeIterator;
+    friend class TNaming_SameShapeIterator;
+    friend class TNaming_Name;
+    friend class TNaming_Naming;
+    friend class TNaming_Selector;
+    friend class TNaming_DeltaOnRemoval;
+    friend class TNaming_DeltaOnModification;
+    friend class TNaming_RefShape;
+    friend class TNaming_Scope;
+    friend class TNaming_Identifier;
+    friend class TNaming_Localizer;
+    friend class TNaming_ShapesSet;
+    friend class TNaming_IteratorOnShapesSet;
+    friend class TNaming_NamingTool;
 };
-
-
-
-
-
-
 
 #endif // _TNaming_HeaderFile

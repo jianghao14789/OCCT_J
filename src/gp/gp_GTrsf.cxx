@@ -25,38 +25,34 @@
 #include <Standard_Dump.hxx>
 #include <Standard_OutOfRange.hxx>
 
-void gp_GTrsf::SetTranslationPart(const gp_XYZ& Coord)
-{
+void gp_GTrsf::SetTranslationPart(const gp_XYZ& Coord) {
     loc = Coord;
-    if (Form() == gp_CompoundTrsf || Form() == gp_Other ||
-        Form() == gp_Translation) {
+    if (Form() == gp_CompoundTrsf || Form() == gp_Other || Form() == gp_Translation) {
+    } else if (Form() == gp_Identity) {
+        shape = gp_Translation;
+    } else {
+        shape = gp_CompoundTrsf;
     }
-    else if (Form() == gp_Identity) { shape = gp_Translation; }
-    else { shape = gp_CompoundTrsf; }
 }
 
-void gp_GTrsf::Invert()
-{
+void gp_GTrsf::Invert() {
     if (shape == gp_Other) {
         matrix.Invert();
         loc.Multiply(matrix);
         loc.Reverse();
-    }
-    else {
+    } else {
         gp_Trsf T = Trsf();
         T.Invert();
         SetTrsf(T);
     }
 }
 
-void gp_GTrsf::Multiply(const gp_GTrsf& T)
-{
+void gp_GTrsf::Multiply(const gp_GTrsf& T) {
     if (Form() == gp_Other || T.Form() == gp_Other) {
         shape = gp_Other;
         loc.Add(T.loc.Multiplied(matrix));
         matrix.Multiply(T.matrix);
-    }
-    else {
+    } else {
         gp_Trsf T1 = Trsf();
         gp_Trsf T2 = T.Trsf();
         T1.Multiply(T2);
@@ -67,17 +63,16 @@ void gp_GTrsf::Multiply(const gp_GTrsf& T)
     }
 }
 
-void gp_GTrsf::Power(const Standard_Integer N)
-{
+void gp_GTrsf::Power(const Standard_Integer N) {
     if (N == 0) {
         scale = 1.;
         shape = gp_Identity;
         matrix.SetIdentity();
         loc = gp_XYZ(0., 0., 0.);
-    }
-    else if (N == 1) {}
-    else if (N == -1) { Invert(); }
-    else {
+    } else if (N == 1) {
+    } else if (N == -1) {
+        Invert();
+    } else {
         if (shape == gp_Other) {
             Standard_Integer Npower = N;
             if (Npower < 0) Npower = -Npower;
@@ -90,13 +85,14 @@ void gp_GTrsf::Power(const Standard_Integer N)
                     loc.Add(Temploc.Multiplied(matrix));
                     matrix.Multiply(Tempmatrix);
                 }
-                if (Npower == 1) { break; }
+                if (Npower == 1) {
+                    break;
+                }
                 Temploc.Add(Temploc.Multiplied(Tempmatrix));
                 Tempmatrix.Multiply(Tempmatrix);
                 Npower = Npower / 2;
             }
-        }
-        else {
+        } else {
             gp_Trsf T = Trsf();
             T.Power(N);
             SetTrsf(T);
@@ -104,15 +100,13 @@ void gp_GTrsf::Power(const Standard_Integer N)
     }
 }
 
-void gp_GTrsf::PreMultiply(const gp_GTrsf& T)
-{
+void gp_GTrsf::PreMultiply(const gp_GTrsf& T) {
     if (Form() == gp_Other || T.Form() == gp_Other) {
         shape = gp_Other;
         loc.Multiply(T.matrix);
         loc.Add(T.loc);
         matrix.PreMultiply(T.matrix);
-    }
-    else {
+    } else {
         gp_Trsf T1 = Trsf();
         gp_Trsf T2 = T.Trsf();
         T1.PreMultiply(T2);
@@ -123,8 +117,7 @@ void gp_GTrsf::PreMultiply(const gp_GTrsf& T)
     }
 }
 
-void gp_GTrsf::SetForm()
-{
+void gp_GTrsf::SetForm() {
     Standard_Real tol = 1.e-12; // Precision::Angular();
     //
     // don t trust the initial values !
@@ -132,8 +125,7 @@ void gp_GTrsf::SetForm()
     gp_Mat M(matrix);
     Standard_Real s = M.Determinant();
 
-    if (Abs(s) < gp::Resolution())
-        throw Standard_ConstructionError("gp_GTrsf::SetForm, null determinant");
+    if (Abs(s) < gp::Resolution()) throw Standard_ConstructionError("gp_GTrsf::SetForm, null determinant");
 
     if (s > 0)
         s = Pow(s, 1. / 3.);
@@ -153,24 +145,22 @@ void gp_GTrsf::SetForm()
 
     for (Standard_Integer i = 1; i <= 3; i++)
         for (Standard_Integer j = 1; j <= 3; j++)
-            if (Abs(TM.Value(i, j)) > tol)
-            {
+            if (Abs(TM.Value(i, j)) > tol) {
                 shape = gp_Other;
                 return;
             }
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void gp_GTrsf::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
+void gp_GTrsf::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     OCCT_DUMP_CLASS_BEGIN(theOStream, gp_GTrsf)
 
-        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &matrix)
-        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &loc)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &matrix)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &loc)
 
-        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, shape)
-        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, scale)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, shape)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, scale)
 }

@@ -19,32 +19,33 @@
 #include <Prs3d_Presentation.hxx>
 
 //! Defines a "shadow" of existing presentation object with custom aspects.
-class Prs3d_PresentationShadow : public Graphic3d_Structure
-{
-  DEFINE_STANDARD_RTTIEXT(Prs3d_PresentationShadow, Graphic3d_Structure)
+class Prs3d_PresentationShadow : public Graphic3d_Structure {
+    DEFINE_STANDARD_RTTIEXT(Prs3d_PresentationShadow, Graphic3d_Structure)
 public:
+    //! Constructs a shadow of existing presentation object.
+    Standard_EXPORT Prs3d_PresentationShadow(const Handle(Graphic3d_StructureManager) & theViewer,
+                                             const Handle(Graphic3d_Structure) & thePrs);
 
-  //! Constructs a shadow of existing presentation object.
-  Standard_EXPORT Prs3d_PresentationShadow (const Handle(Graphic3d_StructureManager)& theViewer,
-                                            const Handle(Graphic3d_Structure)&        thePrs);
+    //! Returns the id of the parent presentation
+    inline Standard_Integer ParentId() const {
+        return myParentStructId;
+    }
 
-  //! Returns the id of the parent presentation
-  inline Standard_Integer ParentId() const { return myParentStructId; }
+    //! Returns view affinity of the parent presentation
+    inline const Handle(Graphic3d_ViewAffinity) & ParentAffinity() const {
+        return myParentAffinity;
+    }
 
-  //! Returns view affinity of the parent presentation
-  inline const Handle(Graphic3d_ViewAffinity)& ParentAffinity() const { return myParentAffinity; }
+    //! Do nothing - axis-aligned bounding box should be initialized from parent structure.
+    Standard_EXPORT virtual void CalculateBoundBox() Standard_OVERRIDE;
 
-  //! Do nothing - axis-aligned bounding box should be initialized from parent structure.
-  Standard_EXPORT virtual void CalculateBoundBox() Standard_OVERRIDE;
-
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 private:
-
-  Handle(Graphic3d_ViewAffinity) myParentAffinity;
-  Standard_Integer               myParentStructId;
-
+    Handle(Graphic3d_ViewAffinity) myParentAffinity;
+    Standard_Integer myParentStructId;
 };
 
 DEFINE_STANDARD_HANDLE(Prs3d_PresentationShadow, Graphic3d_Structure)

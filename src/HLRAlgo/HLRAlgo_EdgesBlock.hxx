@@ -27,7 +27,6 @@
 #include <TopAbs_Orientation.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class HLRAlgo_EdgesBlock;
 DEFINE_STANDARD_HANDLE(HLRAlgo_EdgesBlock, Standard_Transient)
 
@@ -43,127 +42,122 @@ DEFINE_STANDARD_HANDLE(HLRAlgo_EdgesBlock, Standard_Transient)
 //! Internal
 //! Double
 //! IsoLine)
-class HLRAlgo_EdgesBlock : public Standard_Transient
-{
+class HLRAlgo_EdgesBlock : public Standard_Transient {
 
 public:
-  struct MinMaxIndices
-  {
-    Standard_Integer Min[8], Max[8];
+    struct MinMaxIndices {
+        Standard_Integer Min[8], Max[8];
 
-    MinMaxIndices& Minimize(const MinMaxIndices& theMinMaxIndices)
-    {
-      for (Standard_Integer aI = 0; aI < 8; ++aI)
-      {
-        if (Min[aI] > theMinMaxIndices.Min[aI])
-        {
-          Min[aI] = theMinMaxIndices.Min[aI];
+        MinMaxIndices& Minimize(const MinMaxIndices& theMinMaxIndices) {
+            for (Standard_Integer aI = 0; aI < 8; ++aI) {
+                if (Min[aI] > theMinMaxIndices.Min[aI]) {
+                    Min[aI] = theMinMaxIndices.Min[aI];
+                }
+                if (Max[aI] > theMinMaxIndices.Max[aI]) {
+                    Max[aI] = theMinMaxIndices.Max[aI];
+                }
+            }
+            return *this;
         }
-        if (Max[aI] > theMinMaxIndices.Max[aI])
-        {
-          Max[aI] = theMinMaxIndices.Max[aI];
+
+        MinMaxIndices& Maximize(const MinMaxIndices& theMinMaxIndices) {
+            for (Standard_Integer aI = 0; aI < 8; ++aI) {
+                if (Min[aI] < theMinMaxIndices.Min[aI]) {
+                    Min[aI] = theMinMaxIndices.Min[aI];
+                }
+                if (Max[aI] < theMinMaxIndices.Max[aI]) {
+                    Max[aI] = theMinMaxIndices.Max[aI];
+                }
+            }
+            return *this;
         }
-      }
-      return *this;
+    };
+
+    //! Create a Block of Edges for a wire.
+    Standard_EXPORT HLRAlgo_EdgesBlock(const Standard_Integer NbEdges);
+
+    Standard_Integer NbEdges() const {
+        return myEdges.Upper();
     }
 
-    MinMaxIndices& Maximize(const MinMaxIndices& theMinMaxIndices)
-    {
-      for (Standard_Integer aI = 0; aI < 8; ++aI)
-      {
-        if (Min[aI] < theMinMaxIndices.Min[aI])
-        {
-          Min[aI] = theMinMaxIndices.Min[aI];
-        }
-        if (Max[aI] < theMinMaxIndices.Max[aI])
-        {
-          Max[aI] = theMinMaxIndices.Max[aI];
-        }
-      }
-      return *this;
+    void Edge(const Standard_Integer I, const Standard_Integer EI) {
+        myEdges(I) = EI;
     }
-  };
 
-  //! Create a Block of Edges for a wire.
-  Standard_EXPORT HLRAlgo_EdgesBlock(const Standard_Integer NbEdges);
+    Standard_Integer Edge(const Standard_Integer I) const {
+        return myEdges(I);
+    }
 
-  Standard_Integer NbEdges() const { return myEdges.Upper(); }
+    void Orientation(const Standard_Integer I, const TopAbs_Orientation Or) {
+        myFlags(I) &= ~EMaskOrient;
+        myFlags(I) |= (Or & EMaskOrient);
+    }
 
-  void Edge (const Standard_Integer I, const Standard_Integer EI) { myEdges(I) = EI; }
+    TopAbs_Orientation Orientation(const Standard_Integer I) const {
+        return ((TopAbs_Orientation)(myFlags(I) & EMaskOrient));
+    }
 
-  Standard_Integer Edge (const Standard_Integer I) const { return myEdges(I); }
+    Standard_Boolean OutLine(const Standard_Integer I) const {
+        return (myFlags(I) & EMaskOutLine) != 0;
+    }
 
-  void Orientation (const Standard_Integer I, const TopAbs_Orientation Or)
-  {
-    myFlags(I) &= ~EMaskOrient;
-    myFlags(I) |= (Or & EMaskOrient);
-  }
+    void OutLine(const Standard_Integer I, const Standard_Boolean B) {
+        if (B)
+            myFlags(I) |= EMaskOutLine;
+        else
+            myFlags(I) &= ~EMaskOutLine;
+    }
 
-  TopAbs_Orientation Orientation (const Standard_Integer I) const
-  {
-    return ((TopAbs_Orientation)(myFlags(I) & EMaskOrient));
-  }
+    Standard_Boolean Internal(const Standard_Integer I) const {
+        return (myFlags(I) & EMaskInternal) != 0;
+    }
 
-  Standard_Boolean OutLine (const Standard_Integer I) const { return (myFlags(I) & EMaskOutLine) != 0; }
+    void Internal(const Standard_Integer I, const Standard_Boolean B) {
+        if (B)
+            myFlags(I) |= EMaskInternal;
+        else
+            myFlags(I) &= ~EMaskInternal;
+    }
 
-  void OutLine (const Standard_Integer I, const Standard_Boolean B)
-  {
-    if (B) myFlags(I) |=  EMaskOutLine;
-    else   myFlags(I) &= ~EMaskOutLine;
-  }
+    Standard_Boolean Double(const Standard_Integer I) const {
+        return (myFlags(I) & EMaskDouble) != 0;
+    }
 
-  Standard_Boolean Internal (const Standard_Integer I) const { return (myFlags(I) & EMaskInternal) != 0; }
+    void Double(const Standard_Integer I, const Standard_Boolean B) {
+        if (B)
+            myFlags(I) |= EMaskDouble;
+        else
+            myFlags(I) &= ~EMaskDouble;
+    }
 
-  void Internal (const Standard_Integer I, const Standard_Boolean B)
-  {
-    if (B) myFlags(I) |=  EMaskInternal;
-    else   myFlags(I) &= ~EMaskInternal;
-  }
+    Standard_Boolean IsoLine(const Standard_Integer I) const {
+        return (myFlags(I) & EMaskIsoLine) != 0;
+    }
 
-  Standard_Boolean Double (const Standard_Integer I) const { return (myFlags(I) & EMaskDouble) != 0; }
+    void IsoLine(const Standard_Integer I, const Standard_Boolean B) {
+        if (B)
+            myFlags(I) |= EMaskIsoLine;
+        else
+            myFlags(I) &= ~EMaskIsoLine;
+    }
 
-  void Double (const Standard_Integer I, const Standard_Boolean B)
-  {
-    if (B) myFlags(I) |=  EMaskDouble;
-    else   myFlags(I) &= ~EMaskDouble;
-  }
+    void UpdateMinMax(const MinMaxIndices& TotMinMax) {
+        myMinMax = TotMinMax;
+    }
 
-  Standard_Boolean IsoLine (const Standard_Integer I) const { return (myFlags(I) & EMaskIsoLine) != 0; }
+    MinMaxIndices& MinMax() {
+        return myMinMax;
+    }
 
-  void IsoLine (const Standard_Integer I, const Standard_Boolean B)
-  {
-    if (B) myFlags(I) |=  EMaskIsoLine;
-    else   myFlags(I) &= ~EMaskIsoLine;
-  }
-
-  void UpdateMinMax(const MinMaxIndices& TotMinMax)
-  {
-    myMinMax = TotMinMax;
-  }
-
-  MinMaxIndices& MinMax()
-  {
-    return myMinMax;
-  }
-
-  DEFINE_STANDARD_RTTIEXT(HLRAlgo_EdgesBlock,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(HLRAlgo_EdgesBlock, Standard_Transient)
 
 protected:
-
-  enum EMskFlags
-  {
-    EMaskOrient   = 15,
-    EMaskOutLine  = 16,
-    EMaskInternal = 32,
-    EMaskDouble   = 64,
-    EMaskIsoLine  = 128
-  };
+    enum EMskFlags { EMaskOrient = 15, EMaskOutLine = 16, EMaskInternal = 32, EMaskDouble = 64, EMaskIsoLine = 128 };
 
 private:
-
-  TColStd_Array1OfInteger myEdges;
-  TColStd_Array1OfInteger myFlags;
-  MinMaxIndices myMinMax;
+    TColStd_Array1OfInteger myEdges;
+    TColStd_Array1OfInteger myFlags;
+    MinMaxIndices myMinMax;
 };
 
 #endif // _HLRAlgo_EdgesBlock_HeaderFile

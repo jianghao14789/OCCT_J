@@ -45,86 +45,69 @@
 //! @code
 //! for (i = A.Lower(); i <= A.Upper(); i++)
 //! @endcode
-template <class TheItemType>
-class NCollection_Array1
-{
+template <class TheItemType> class NCollection_Array1 {
 public:
     //! STL-compliant typedef for value type
     typedef TheItemType value_type;
 
 public:
     //! Implementation of the Iterator interface.
-    class Iterator
-    {
+    class Iterator {
     public:
-
         //! Empty constructor - for later Init
-        Iterator(void) :
-            myPtrCur(NULL),
-            myPtrEnd(NULL)
-        {
+        Iterator(void) : myPtrCur(NULL), myPtrEnd(NULL) {
             //
         }
 
         //! Constructor with initialization
-        Iterator(const NCollection_Array1& theArray, Standard_Boolean theToEnd = Standard_False) :
-            myPtrEnd(const_cast<TheItemType*> (&theArray.Last() + 1))
-        {
-            myPtrCur = theToEnd ? myPtrEnd : const_cast<TheItemType*> (&theArray.First());
+        Iterator(const NCollection_Array1& theArray, Standard_Boolean theToEnd = Standard_False)
+            : myPtrEnd(const_cast<TheItemType*>(&theArray.Last() + 1)) {
+            myPtrCur = theToEnd ? myPtrEnd : const_cast<TheItemType*>(&theArray.First());
         }
 
         //! Initialisation
-        void Init(const NCollection_Array1& theArray)
-        {
-            myPtrCur = const_cast<TheItemType*> (&theArray.First());
-            myPtrEnd = const_cast<TheItemType*> (&theArray.Last() + 1);
+        void Init(const NCollection_Array1& theArray) {
+            myPtrCur = const_cast<TheItemType*>(&theArray.First());
+            myPtrEnd = const_cast<TheItemType*>(&theArray.Last() + 1);
         }
 
         //! Check end
-        Standard_Boolean More(void) const
-        {
+        Standard_Boolean More(void) const {
             return myPtrCur < myPtrEnd;
         }
 
         //! Increment operator
-        void Next(void)
-        {
+        void Next(void) {
             ++myPtrCur;
         }
 
         //! Decrement operator
-        void Previous()
-        {
+        void Previous() {
             --myPtrCur;
         }
 
         //! Offset operator.
-        void Offset(ptrdiff_t theOffset)
-        {
+        void Offset(ptrdiff_t theOffset) {
             myPtrCur += theOffset;
         }
 
         //! Difference operator.
-        ptrdiff_t Differ(const Iterator& theOther) const
-        {
+        ptrdiff_t Differ(const Iterator& theOther) const {
             return myPtrCur - theOther.myPtrCur;
         }
 
         //! Constant value access
-        const TheItemType& Value(void) const
-        {
+        const TheItemType& Value(void) const {
             return *myPtrCur;
         }
 
         //! Variable value access
-        TheItemType& ChangeValue(void) const
-        {
+        TheItemType& ChangeValue(void) const {
             return *myPtrCur;
         }
 
         //! Performs comparison of two iterators
-        Standard_Boolean IsEqual(const Iterator& theOther) const
-        {
+        Standard_Boolean IsEqual(const Iterator& theOther) const {
             return myPtrCur == theOther.myPtrCur;
         }
 
@@ -140,38 +123,37 @@ public:
     typedef NCollection_StlIterator<std::random_access_iterator_tag, Iterator, TheItemType, true> const_iterator;
 
     //! Returns an iterator pointing to the first element in the array.
-    iterator begin() const { return Iterator(*this, false); }
+    iterator begin() const {
+        return Iterator(*this, false);
+    }
 
     //! Returns an iterator referring to the past-the-end element in the array.
-    iterator end() const { return Iterator(*this, true); }
+    iterator end() const {
+        return Iterator(*this, true);
+    }
 
     //! Returns a const iterator pointing to the first element in the array.
-    const_iterator cbegin() const { return Iterator(*this, false); }
+    const_iterator cbegin() const {
+        return Iterator(*this, false);
+    }
 
     //! Returns a const iterator referring to the past-the-end element in the array.
-    const_iterator cend() const { return Iterator(*this, true); }
+    const_iterator cend() const {
+        return Iterator(*this, true);
+    }
 
 public:
     // ---------- PUBLIC METHODS ------------
 
     //! Empty constructor; should be used with caution.
     //! @sa methods Resize() and Move().
-    NCollection_Array1()
-        : myLowerBound(1),
-        myUpperBound(0),
-        myDeletable(Standard_False),
-        myData(NULL)
-    {
+    NCollection_Array1() : myLowerBound(1), myUpperBound(0), myDeletable(Standard_False), myData(NULL) {
         //
     }
 
     //! Constructor
-    NCollection_Array1(const Standard_Integer theLower,
-        const Standard_Integer theUpper) :
-        myLowerBound(theLower),
-        myUpperBound(theUpper),
-        myDeletable(Standard_True)
-    {
+    NCollection_Array1(const Standard_Integer theLower, const Standard_Integer theUpper)
+        : myLowerBound(theLower), myUpperBound(theUpper), myDeletable(Standard_True) {
         Standard_RangeError_Raise_if(theUpper < theLower, "NCollection_Array1::Create");
         TheItemType* pBegin = new TheItemType[Length()];
         Standard_OutOfMemory_Raise_if(!pBegin, "NCollection_Array1 : Allocation failed");
@@ -179,12 +161,9 @@ public:
         myData = pBegin - theLower;
     }
 
-    //! Copy constructor 
-    NCollection_Array1(const NCollection_Array1& theOther) :
-        myLowerBound(theOther.Lower()),
-        myUpperBound(theOther.Upper()),
-        myDeletable(Standard_True)
-    {
+    //! Copy constructor
+    NCollection_Array1(const NCollection_Array1& theOther)
+        : myLowerBound(theOther.Lower()), myUpperBound(theOther.Upper()), myDeletable(Standard_True) {
         TheItemType* pBegin = new TheItemType[Length()];
         Standard_OutOfMemory_Raise_if(!pBegin, "NCollection_Array1 : Allocation failed");
         myData = pBegin - myLowerBound;
@@ -195,11 +174,8 @@ public:
 #ifndef OCCT_NO_RVALUE_REFERENCE
     //! Move constructor
     NCollection_Array1(NCollection_Array1&& theOther)
-        : myLowerBound(theOther.myLowerBound),
-        myUpperBound(theOther.myUpperBound),
-        myDeletable(theOther.myDeletable),
-        myData(theOther.myData)
-    {
+        : myLowerBound(theOther.myLowerBound), myUpperBound(theOther.myUpperBound), myDeletable(theOther.myDeletable),
+          myData(theOther.myData) {
         theOther.myDeletable = false;
     }
 #endif
@@ -219,13 +195,8 @@ public:
     //! The same happens if array is copied using Move() function
     //! or move constructor and target object's lifespan is longer
     //! than that of the buffer.
-    NCollection_Array1(const TheItemType& theBegin,
-        const Standard_Integer theLower,
-        const Standard_Integer theUpper) :
-        myLowerBound(theLower),
-        myUpperBound(theUpper),
-        myDeletable(Standard_False)
-    {
+    NCollection_Array1(const TheItemType& theBegin, const Standard_Integer theLower, const Standard_Integer theUpper)
+        : myLowerBound(theLower), myUpperBound(theUpper), myDeletable(Standard_False) {
         Standard_RangeError_Raise_if(theUpper < theLower, "NCollection_Array1::Create");
 #if (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)))
         // gcc emits -Warray-bounds warning when NCollection_Array1 is initialized
@@ -242,68 +213,61 @@ public:
     }
 
     //! Initialise the items with theValue
-    void Init(const TheItemType& theValue)
-    {
-        TheItemType* pCur = &myData[myLowerBound], * pEnd = &myData[myUpperBound];
+    void Init(const TheItemType& theValue) {
+        TheItemType *pCur = &myData[myLowerBound], *pEnd = &myData[myUpperBound];
         for (; pCur <= pEnd; pCur++)
             *pCur = (TheItemType&)theValue;
     }
 
     //! Size query
-    Standard_Integer Size(void) const
-    {
+    Standard_Integer Size(void) const {
         return Length();
     }
     //! Length query (the same)
-    Standard_Integer Length(void) const
-    {
+    Standard_Integer Length(void) const {
         return (myUpperBound - myLowerBound + 1);
     }
 
     //! Return TRUE if array has zero length.
-    Standard_Boolean IsEmpty() const { return myUpperBound < myLowerBound; }
+    Standard_Boolean IsEmpty() const {
+        return myUpperBound < myLowerBound;
+    }
 
     //! Lower bound
-    Standard_Integer Lower(void) const
-    {
+    Standard_Integer Lower(void) const {
         return myLowerBound;
     }
     //! Upper bound
-    Standard_Integer Upper(void) const
-    {
+    Standard_Integer Upper(void) const {
         return myUpperBound;
     }
 
     //! myDeletable flag
-    Standard_Boolean IsDeletable(void) const
-    {
+    Standard_Boolean IsDeletable(void) const {
         return myDeletable;
     }
 
     //! IsAllocated flag - for naming compatibility
-    Standard_Boolean IsAllocated(void) const
-    {
+    Standard_Boolean IsAllocated(void) const {
         return myDeletable;
     }
 
     //! Copies data of theOther array to this.
     //! This array should be pre-allocated and have the same length as theOther;
     //! otherwise exception Standard_DimensionMismatch is thrown.
-    NCollection_Array1& Assign(const NCollection_Array1& theOther)
-    {
-        if (&theOther == this)
-            return *this;
+    NCollection_Array1& Assign(const NCollection_Array1& theOther) {
+        if (&theOther == this) return *this;
 
         Standard_DimensionMismatch_Raise_if(Length() != theOther.Length(), "NCollection_Array1::operator=");
-        if (myData == NULL)
-        {
+        if (myData == NULL) {
             return *this;
         }
 
         TheItemType* pMyItem = &myData[myLowerBound];
         TheItemType* const pEndItem = &(theOther.myData)[theOther.myUpperBound];
         TheItemType* pItem = &(theOther.myData)[theOther.myLowerBound];
-        while (pItem <= pEndItem) *pMyItem++ = *pItem++;
+        while (pItem <= pEndItem)
+            *pMyItem++ = *pItem++;
         return *this;
     }
 
@@ -311,16 +275,13 @@ public:
     //! This array will borrow all the data from theOther.
     //! The moved object will keep pointer to the memory buffer and
     //! range, but it will not free the buffer on destruction.
-    NCollection_Array1& Move(NCollection_Array1& theOther)
-    {
-        if (&theOther == this)
-        {
+    NCollection_Array1& Move(NCollection_Array1& theOther) {
+        if (&theOther == this) {
             return *this;
         }
 
-        if (myDeletable)
-        {
-            delete[] & myData[myLowerBound];
+        if (myDeletable) {
+            delete[] &myData[myLowerBound];
         }
 
         myLowerBound = theOther.myLowerBound;
@@ -334,80 +295,74 @@ public:
     }
 
     //! Assignment operator; @sa Assign()
-    NCollection_Array1& operator= (const NCollection_Array1& theOther)
-    {
+    NCollection_Array1& operator=(const NCollection_Array1& theOther) {
         return Assign(theOther);
     }
 
 #ifndef OCCT_NO_RVALUE_REFERENCE
     //! Move assignment operator; @sa Move()
-    NCollection_Array1& operator= (NCollection_Array1&& theOther)
-    {
+    NCollection_Array1& operator=(NCollection_Array1&& theOther) {
         return Move(theOther);
     }
 #endif
 
     //! @return first element
-    const TheItemType& First() const
-    {
+    const TheItemType& First() const {
         return myData[myLowerBound];
     }
 
     //! @return first element
-    TheItemType& ChangeFirst()
-    {
+    TheItemType& ChangeFirst() {
         return myData[myLowerBound];
     }
 
     //! @return last element
-    const TheItemType& Last() const
-    {
+    const TheItemType& Last() const {
         return myData[myUpperBound];
     }
 
     //! @return last element
-    TheItemType& ChangeLast()
-    {
+    TheItemType& ChangeLast() {
         return myData[myUpperBound];
     }
 
     //! Constant value access
-    const TheItemType& Value(const Standard_Integer theIndex) const
-    {
+    const TheItemType& Value(const Standard_Integer theIndex) const {
         Standard_OutOfRange_Raise_if(theIndex < myLowerBound || theIndex > myUpperBound, "NCollection_Array1::Value");
         return myData[theIndex];
     }
 
     //! operator() - alias to Value
-    const TheItemType& operator() (const Standard_Integer theIndex) const
-    {
+    const TheItemType& operator()(const Standard_Integer theIndex) const {
         return Value(theIndex);
     }
 
     //! operator[] - alias to Value
-    const TheItemType& operator[] (Standard_Integer theIndex) const { return Value(theIndex); }
+    const TheItemType& operator[](Standard_Integer theIndex) const {
+        return Value(theIndex);
+    }
 
     //! Variable value access
-    TheItemType& ChangeValue(const Standard_Integer theIndex)
-    {
-        Standard_OutOfRange_Raise_if(theIndex < myLowerBound || theIndex > myUpperBound, "NCollection_Array1::ChangeValue");
+    TheItemType& ChangeValue(const Standard_Integer theIndex) {
+        Standard_OutOfRange_Raise_if(theIndex < myLowerBound || theIndex > myUpperBound,
+                                     "NCollection_Array1::ChangeValue");
         return myData[theIndex];
     }
 
     //! operator() - alias to ChangeValue
-    TheItemType& operator() (const Standard_Integer theIndex)
-    {
+    TheItemType& operator()(const Standard_Integer theIndex) {
         return ChangeValue(theIndex);
     }
 
     //! operator[] - alias to ChangeValue
-    TheItemType& operator[] (Standard_Integer theIndex) { return ChangeValue(theIndex); }
+    TheItemType& operator[](Standard_Integer theIndex) {
+        return ChangeValue(theIndex);
+    }
 
-    //! Set value 
-    void SetValue(const Standard_Integer theIndex,
-        const TheItemType& theItem)
-    {
-        Standard_OutOfRange_Raise_if(theIndex < myLowerBound || theIndex > myUpperBound, "NCollection_Array1::SetValue");
+    //! Set value
+    void SetValue(const Standard_Integer theIndex, const TheItemType& theItem) {
+        Standard_OutOfRange_Raise_if(theIndex < myLowerBound || theIndex > myUpperBound,
+                                     "NCollection_Array1::SetValue");
         myData[theIndex] = theItem;
     }
 
@@ -417,10 +372,8 @@ public:
     //! @param theLower new lower bound of array
     //! @param theUpper new upper bound of array
     //! @param theToCopyData flag to copy existing data into new array
-    void Resize(const Standard_Integer theLower,
-        const Standard_Integer theUpper,
-        const Standard_Boolean theToCopyData)
-    {
+    void Resize(const Standard_Integer theLower, const Standard_Integer theUpper,
+                const Standard_Boolean theToCopyData) {
         Standard_RangeError_Raise_if(theUpper < theLower, "NCollection_Array1::Resize");
         const Standard_Integer anOldLen = Length();
         const Standard_Integer aNewLen = theUpper - theLower + 1;
@@ -428,50 +381,43 @@ public:
         TheItemType* aBeginOld = myData != NULL ? &myData[myLowerBound] : NULL;
         myLowerBound = theLower;
         myUpperBound = theUpper;
-        if (aNewLen == anOldLen)
-        {
+        if (aNewLen == anOldLen) {
             myData = aBeginOld - theLower;
             return;
         }
 
-        if (!theToCopyData && myDeletable)
-        {
+        if (!theToCopyData && myDeletable) {
             delete[] aBeginOld;
         }
         TheItemType* aBeginNew = new TheItemType[aNewLen];
         Standard_OutOfMemory_Raise_if(aBeginNew == NULL, "NCollection_Array1 : Allocation failed");
         myData = aBeginNew - theLower;
-        if (!theToCopyData)
-        {
+        if (!theToCopyData) {
             myDeletable = Standard_True;
             return;
         }
 
         const Standard_Integer aLenCopy = Min(anOldLen, aNewLen);
-        for (Standard_Integer anIter = 0; anIter < aLenCopy; ++anIter)
-        {
+        for (Standard_Integer anIter = 0; anIter < aLenCopy; ++anIter) {
             aBeginNew[anIter] = aBeginOld[anIter];
         }
-        if (myDeletable)
-        {
+        if (myDeletable) {
             delete[] aBeginOld;
         }
         myDeletable = Standard_True;
     }
 
     //! Destructor - releases the memory
-    ~NCollection_Array1(void)
-    {
-        if (myDeletable)
-            delete[] & (myData[myLowerBound]);
+    ~NCollection_Array1(void) {
+        if (myDeletable) delete[] &(myData[myLowerBound]);
     }
 
 protected:
     // ---------- PROTECTED FIELDS -----------
-    Standard_Integer     myLowerBound;
-    Standard_Integer     myUpperBound;
-    Standard_Boolean     myDeletable; //!< Flag showing who allocated the array
-    TheItemType* myData;      //!< Pointer to '0'th array item
+    Standard_Integer myLowerBound;
+    Standard_Integer myUpperBound;
+    Standard_Boolean myDeletable; //!< Flag showing who allocated the array
+    TheItemType* myData;          //!< Pointer to '0'th array item
 };
 
 #endif

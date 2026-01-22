@@ -24,7 +24,6 @@
 #include <TopAbs_ShapeEnum.hxx>
 class TopoDS_TShape;
 
-
 class TopoDS_TCompSolid;
 DEFINE_STANDARD_HANDLE(TopoDS_TCompSolid, TopoDS_TShape)
 
@@ -43,9 +42,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(TopoDS_TCompSolid, TopoDS_TShape)
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_TCompSolid.lxx>

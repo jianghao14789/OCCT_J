@@ -14,13 +14,11 @@
 #ifndef _StepElement_Volume3dElementShape_HeaderFile
 #define _StepElement_Volume3dElementShape_HeaderFile
 
-
-enum StepElement_Volume3dElementShape
-{
-StepElement_Hexahedron,
-StepElement_Wedge,
-StepElement_Tetrahedron,
-StepElement_Pyramid
+enum StepElement_Volume3dElementShape {
+    StepElement_Hexahedron,
+    StepElement_Wedge,
+    StepElement_Tetrahedron,
+    StepElement_Pyramid
 };
 
 #endif // _StepElement_Volume3dElementShape_HeaderFile

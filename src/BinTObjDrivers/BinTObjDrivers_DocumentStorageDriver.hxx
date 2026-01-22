@@ -22,30 +22,26 @@
 #include <BinLDrivers_DocumentStorageDriver.hxx>
 #include <BinMDF_ADriverTable.hxx>
 
-
 //  Block of comments describing class BinTObjDrivers_DocumentStorageDriver
 //
 
-class BinTObjDrivers_DocumentStorageDriver :
-  public BinLDrivers_DocumentStorageDriver
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class BinTObjDrivers_DocumentStorageDriver : public BinLDrivers_DocumentStorageDriver {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  Standard_EXPORT BinTObjDrivers_DocumentStorageDriver();
-  // Constructor
+    Standard_EXPORT BinTObjDrivers_DocumentStorageDriver();
+    // Constructor
 
-  Standard_EXPORT virtual Handle(BinMDF_ADriverTable) AttributeDrivers
-                        (const Handle(Message_Messenger)& theMsgDriver) Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(BinMDF_ADriverTable)
+        AttributeDrivers(const Handle(Message_Messenger) & theMsgDriver) Standard_OVERRIDE;
 
- public:
-  // Declaration of CASCADE RTTI
-  DEFINE_STANDARD_RTTIEXT(BinTObjDrivers_DocumentStorageDriver,BinLDrivers_DocumentStorageDriver)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(BinTObjDrivers_DocumentStorageDriver, BinLDrivers_DocumentStorageDriver)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (BinTObjDrivers_DocumentStorageDriver,
-                        BinLDrivers_DocumentStorageDriver)
+DEFINE_STANDARD_HANDLE(BinTObjDrivers_DocumentStorageDriver, BinLDrivers_DocumentStorageDriver)
 
 #endif
 

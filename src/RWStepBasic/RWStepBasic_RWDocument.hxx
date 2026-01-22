@@ -27,48 +27,26 @@ class StepBasic_Document;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Document
-class RWStepBasic_RWDocument 
-{
+class RWStepBasic_RWDocument {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWDocument();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWDocument();
-  
-  //! Reads Document
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_Document)& ent) const;
-  
-  //! Writes Document
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_Document)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_Document)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Document
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_Document) & ent) const;
 
+    //! Writes Document
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_Document) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_Document) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWDocument_HeaderFile

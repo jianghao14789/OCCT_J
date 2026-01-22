@@ -24,42 +24,22 @@ class TCollection_ExtendedString;
 class XmlMDF_ADriverTable;
 class Message_Messenger;
 
-
 class XmlXCAFDrivers_DocumentStorageDriver;
 DEFINE_STANDARD_HANDLE(XmlXCAFDrivers_DocumentStorageDriver, XmlDrivers_DocumentStorageDriver)
 
 //! storage driver of a  XS document
-class XmlXCAFDrivers_DocumentStorageDriver : public XmlDrivers_DocumentStorageDriver
-{
+class XmlXCAFDrivers_DocumentStorageDriver : public XmlDrivers_DocumentStorageDriver {
 
 public:
+    Standard_EXPORT XmlXCAFDrivers_DocumentStorageDriver(const TCollection_ExtendedString& theCopyright);
 
-  
-  Standard_EXPORT XmlXCAFDrivers_DocumentStorageDriver(const TCollection_ExtendedString& theCopyright);
-  
-  Standard_EXPORT virtual Handle(XmlMDF_ADriverTable) AttributeDrivers (const Handle(Message_Messenger)& theMsgDriver) Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(XmlMDF_ADriverTable)
+        AttributeDrivers(const Handle(Message_Messenger) & theMsgDriver) Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(XmlXCAFDrivers_DocumentStorageDriver,XmlDrivers_DocumentStorageDriver)
+    DEFINE_STANDARD_RTTIEXT(XmlXCAFDrivers_DocumentStorageDriver, XmlDrivers_DocumentStorageDriver)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _XmlXCAFDrivers_DocumentStorageDriver_HeaderFile

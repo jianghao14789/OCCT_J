@@ -23,43 +23,19 @@
 
 #include <Draw_ColorKind.hxx>
 
-
-
-class Draw_Color 
-{
+class Draw_Color {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT Draw_Color();
 
-  
-  Standard_EXPORT Draw_Color();
-  
-  Standard_EXPORT Draw_Color(const Draw_ColorKind c);
-  
-  Standard_EXPORT Draw_ColorKind ID() const;
+    Standard_EXPORT Draw_Color(const Draw_ColorKind c);
 
-
-
+    Standard_EXPORT Draw_ColorKind ID() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Draw_ColorKind myKind;
-
-
+    Draw_ColorKind myKind;
 };
-
-
-
-
-
-
 
 #endif // _Draw_Color_HeaderFile

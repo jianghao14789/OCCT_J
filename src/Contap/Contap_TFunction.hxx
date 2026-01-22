@@ -17,13 +17,6 @@
 #ifndef _Contap_TFunction_HeaderFile
 #define _Contap_TFunction_HeaderFile
 
-
-enum Contap_TFunction
-{
-Contap_ContourStd,
-Contap_ContourPrs,
-Contap_DraftStd,
-Contap_DraftPrs
-};
+enum Contap_TFunction { Contap_ContourStd, Contap_ContourPrs, Contap_DraftStd, Contap_DraftPrs };
 
 #endif // _Contap_TFunction_HeaderFile

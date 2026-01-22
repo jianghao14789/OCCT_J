@@ -27,21 +27,22 @@ class StepBasic_ProductDefinitionReferenceWithLocalRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ProductDefinitionReferenceWithLocalRepresentation
-class RWStepBasic_RWProductDefinitionReferenceWithLocalRepresentation
-{
+class RWStepBasic_RWProductDefinitionReferenceWithLocalRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWProductDefinitionReferenceWithLocalRepresentation();
 
-  
-  Standard_EXPORT RWStepBasic_RWProductDefinitionReferenceWithLocalRepresentation();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ProductDefinitionReferenceWithLocalRepresentation)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ProductDefinitionReferenceWithLocalRepresentation)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepBasic_ProductDefinitionReferenceWithLocalRepresentation)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void
+    ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num, Handle(Interface_Check) & ach,
+             const Handle(StepBasic_ProductDefinitionReferenceWithLocalRepresentation) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_ProductDefinitionReferenceWithLocalRepresentation) &
+                                       ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepBasic_ProductDefinitionReferenceWithLocalRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepBasic_RWProductDefinitionReferenceWithLocalRepresentation_HeaderFile

@@ -33,73 +33,58 @@ class TopoDS_Wire;
 class GeomFill_SectionLaw;
 class TopoDS_Edge;
 
-
 class BRepFill_ShapeLaw;
 DEFINE_STANDARD_HANDLE(BRepFill_ShapeLaw, BRepFill_SectionLaw)
 
 //! Build Section Law, with an Vertex, or an Wire
-class BRepFill_ShapeLaw : public BRepFill_SectionLaw
-{
+class BRepFill_ShapeLaw : public BRepFill_SectionLaw {
 
 public:
+    //! Construct an constant Law
+    Standard_EXPORT BRepFill_ShapeLaw(const TopoDS_Vertex& V, const Standard_Boolean Build = Standard_True);
 
-  
-  //! Construct an constant Law
-  Standard_EXPORT BRepFill_ShapeLaw(const TopoDS_Vertex& V, const Standard_Boolean Build = Standard_True);
-  
-  //! Construct an constant Law
-  Standard_EXPORT BRepFill_ShapeLaw(const TopoDS_Wire& W, const Standard_Boolean Build = Standard_True);
-  
-  //! Construct an evolutive Law
-  Standard_EXPORT BRepFill_ShapeLaw(const TopoDS_Wire& W, const Handle(Law_Function)& L, const Standard_Boolean Build = Standard_True);
-  
-  //! Say if the input shape is a  vertex.
-  Standard_EXPORT virtual Standard_Boolean IsVertex() const Standard_OVERRIDE;
-  
-  //! Say if the Law is  Constant.
-  Standard_EXPORT virtual Standard_Boolean IsConstant() const Standard_OVERRIDE;
-  
-  //! Give the law build on a concatenated section
-  Standard_EXPORT virtual Handle(GeomFill_SectionLaw) ConcatenedLaw() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual GeomAbs_Shape Continuity (const Standard_Integer Index, const Standard_Real TolAngular) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Real VertexTol (const Standard_Integer Index, const Standard_Real Param) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual TopoDS_Vertex Vertex (const Standard_Integer Index, const Standard_Real Param) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void D0 (const Standard_Real Param, TopoDS_Shape& S) Standard_OVERRIDE;
-  
-    const TopoDS_Edge& Edge (const Standard_Integer Index) const;
+    //! Construct an constant Law
+    Standard_EXPORT BRepFill_ShapeLaw(const TopoDS_Wire& W, const Standard_Boolean Build = Standard_True);
 
+    //! Construct an evolutive Law
+    Standard_EXPORT BRepFill_ShapeLaw(const TopoDS_Wire& W, const Handle(Law_Function) & L,
+                                      const Standard_Boolean Build = Standard_True);
 
+    //! Say if the input shape is a  vertex.
+    Standard_EXPORT virtual Standard_Boolean IsVertex() const Standard_OVERRIDE;
 
+    //! Say if the Law is  Constant.
+    Standard_EXPORT virtual Standard_Boolean IsConstant() const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(BRepFill_ShapeLaw,BRepFill_SectionLaw)
+    //! Give the law build on a concatenated section
+    Standard_EXPORT virtual Handle(GeomFill_SectionLaw) ConcatenedLaw() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual GeomAbs_Shape Continuity(const Standard_Integer Index,
+                                                     const Standard_Real TolAngular) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual Standard_Real VertexTol(const Standard_Integer Index,
+                                                    const Standard_Real Param) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual TopoDS_Vertex Vertex(const Standard_Integer Index,
+                                                 const Standard_Real Param) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void D0(const Standard_Real Param, TopoDS_Shape& S) Standard_OVERRIDE;
+
+    const TopoDS_Edge& Edge(const Standard_Integer Index) const;
+
+    DEFINE_STANDARD_RTTIEXT(BRepFill_ShapeLaw, BRepFill_SectionLaw)
 
 protected:
-
-
-  Standard_Boolean vertex;
-
+    Standard_Boolean vertex;
 
 private:
+    Standard_EXPORT void Init(const Standard_Boolean B);
 
-  
-  Standard_EXPORT void Init (const Standard_Boolean B);
-
-  TopoDS_Shape myShape;
-  Handle(TopTools_HArray1OfShape) myEdges;
-  Handle(Law_Function) TheLaw;
-
-
+    TopoDS_Shape myShape;
+    Handle(TopTools_HArray1OfShape) myEdges;
+    Handle(Law_Function) TheLaw;
 };
 
-
 #include <BRepFill_ShapeLaw.lxx>
-
-
-
-
 
 #endif // _BRepFill_ShapeLaw_HeaderFile

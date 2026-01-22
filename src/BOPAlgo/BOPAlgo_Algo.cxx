@@ -15,114 +15,89 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BOPAlgo_Algo.hxx>
 
 #include <TColStd_MapOfInteger.hxx>
 
 //=======================================================================
-// function: 
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
-BOPAlgo_Algo::BOPAlgo_Algo()
-:
-  BOPAlgo_Options(NCollection_BaseAllocator::CommonBaseAllocator())
-{}
+BOPAlgo_Algo::BOPAlgo_Algo() : BOPAlgo_Options(NCollection_BaseAllocator::CommonBaseAllocator()) {}
 //=======================================================================
-// function: 
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
-BOPAlgo_Algo::BOPAlgo_Algo
-  (const Handle(NCollection_BaseAllocator)& theAllocator)
-:
-  BOPAlgo_Options(theAllocator)
-{}
+BOPAlgo_Algo::BOPAlgo_Algo(const Handle(NCollection_BaseAllocator) & theAllocator) : BOPAlgo_Options(theAllocator) {}
 
 //=======================================================================
 // function: ~
-// purpose: 
+// purpose:
 //=======================================================================
-BOPAlgo_Algo::~BOPAlgo_Algo()
-{
-}
+BOPAlgo_Algo::~BOPAlgo_Algo() {}
 
 //=======================================================================
 // function: CheckData
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPAlgo_Algo::CheckData()
-{
-  GetReport()->Clear(Message_Fail);
+void BOPAlgo_Algo::CheckData() {
+    GetReport()->Clear(Message_Fail);
 }
 //=======================================================================
 // function: CheckResult
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPAlgo_Algo::CheckResult()
-{
-  GetReport()->Clear(Message_Fail);
+void BOPAlgo_Algo::CheckResult() {
+    GetReport()->Clear(Message_Fail);
 }
 
 //=======================================================================
 // function: analyzeProgress
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPAlgo_Algo::analyzeProgress(const Standard_Real theWhole,
-                                   BOPAlgo_PISteps& theSteps) const
-{
-  Standard_Real aWhole = theWhole;
+void BOPAlgo_Algo::analyzeProgress(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const {
+    Standard_Real aWhole = theWhole;
 
-  // Fill progress steps for constant operations
-  fillPIConstants(theWhole, theSteps);
+    // Fill progress steps for constant operations
+    fillPIConstants(theWhole, theSteps);
 
-  TColStd_Array1OfReal& aSteps = theSteps.ChangeSteps();
-  TColStd_MapOfInteger aMIConst;
-  for (Standard_Integer i = aSteps.Lower(); i <= aSteps.Upper(); ++i)
-  {
-    if (aSteps(i) > 0.)
-    {
-      aMIConst.Add(i);
-      aWhole -= aSteps(i);
+    TColStd_Array1OfReal& aSteps = theSteps.ChangeSteps();
+    TColStd_MapOfInteger aMIConst;
+    for (Standard_Integer i = aSteps.Lower(); i <= aSteps.Upper(); ++i) {
+        if (aSteps(i) > 0.) {
+            aMIConst.Add(i);
+            aWhole -= aSteps(i);
+        }
     }
-  }
 
-  // Fill progress steps for other operations
-  fillPISteps(theSteps);
+    // Fill progress steps for other operations
+    fillPISteps(theSteps);
 
-  Standard_Real aSum = 0.;
-  for (Standard_Integer i = aSteps.Lower(); i <= aSteps.Upper(); ++i)
-  {
-    if (!aMIConst.Contains(i))
-    {
-      aSum += aSteps(i);
+    Standard_Real aSum = 0.;
+    for (Standard_Integer i = aSteps.Lower(); i <= aSteps.Upper(); ++i) {
+        if (!aMIConst.Contains(i)) {
+            aSum += aSteps(i);
+        }
     }
-  }
 
-  // Normalize steps
-  if (aSum > 0.)
-  {
-    for (Standard_Integer i = aSteps.Lower(); i <= aSteps.Upper(); ++i)
-    {
-      if (!aMIConst.Contains(i))
-      {
-        aSteps(i) = aWhole * aSteps(i) / aSum;
-      }
+    // Normalize steps
+    if (aSum > 0.) {
+        for (Standard_Integer i = aSteps.Lower(); i <= aSteps.Upper(); ++i) {
+            if (!aMIConst.Contains(i)) {
+                aSteps(i) = aWhole * aSteps(i) / aSum;
+            }
+        }
     }
-  }
 }
 
 //=======================================================================
 // function: fillPIConstants
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPAlgo_Algo::fillPIConstants (const Standard_Real, BOPAlgo_PISteps&) const
-{
-}
+void BOPAlgo_Algo::fillPIConstants(const Standard_Real, BOPAlgo_PISteps&) const {}
 
 //=======================================================================
 // function: fillPISteps
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPAlgo_Algo::fillPISteps(BOPAlgo_PISteps&) const
-{
-}
+void BOPAlgo_Algo::fillPISteps(BOPAlgo_PISteps&) const {}

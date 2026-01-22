@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepVisual_HArray1OfSurfaceStyleElementSelect, StepVisual_Array1OfSurfaceStyleElementSelect)
 
-
 #endif

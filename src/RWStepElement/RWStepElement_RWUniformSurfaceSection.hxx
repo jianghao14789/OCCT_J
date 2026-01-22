@@ -27,48 +27,29 @@ class StepElement_UniformSurfaceSection;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for UniformSurfaceSection
-class RWStepElement_RWUniformSurfaceSection 
-{
+class RWStepElement_RWUniformSurfaceSection {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWUniformSurfaceSection();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWUniformSurfaceSection();
-  
-  //! Reads UniformSurfaceSection
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_UniformSurfaceSection)& ent) const;
-  
-  //! Writes UniformSurfaceSection
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_UniformSurfaceSection)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_UniformSurfaceSection)& ent, Interface_EntityIterator& iter) const;
+    //! Reads UniformSurfaceSection
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepElement_UniformSurfaceSection) & ent) const;
 
+    //! Writes UniformSurfaceSection
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepElement_UniformSurfaceSection) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_UniformSurfaceSection) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWUniformSurfaceSection_HeaderFile

@@ -30,10 +30,8 @@ class OSD_Protection;
 //! Basic tools to manage files
 //! Warning: 'ProgramError' is raised when somebody wants to use the methods
 //! Read, Write, Seek, Close when File is not open.
-class OSD_File : public OSD_FileNode
-{
+class OSD_File : public OSD_FileNode {
 public:
-
     //! Creates File object.
     Standard_EXPORT OSD_File();
 
@@ -78,7 +76,8 @@ public:
     //! Upon successful completion, Read returns the number of
     //! bytes actually read into <NByteRead> and placed into the
     //! Buffer <Buffer>.
-    Standard_EXPORT void ReadLine(TCollection_AsciiString& Buffer, const Standard_Integer NByte, Standard_Integer& NbyteRead);
+    Standard_EXPORT void ReadLine(TCollection_AsciiString& Buffer, const Standard_Integer NByte,
+                                  Standard_Integer& NbyteRead);
 
     //! Reads bytes from the data pointed to by the object file
     //! into the buffer <Buffer>.
@@ -88,14 +87,11 @@ public:
     //! encountered.
     //! Upon successful completion, Read returns the number of
     //! bytes actually read and placed into the Buffer <Buffer>.
-    inline Standard_Integer ReadLine(
-        TCollection_AsciiString& Buffer, const Standard_Integer NByte)
-    {
+    inline Standard_Integer ReadLine(TCollection_AsciiString& Buffer, const Standard_Integer NByte) {
         Standard_Integer NbyteRead;
         ReadLine(Buffer, NByte, NbyteRead);
         return NbyteRead;
     }
-
 
     //! Attempts to read Nbyte bytes from the files associated with
     //! the object File.
@@ -107,8 +103,7 @@ public:
     Standard_EXPORT void Read(const Standard_Address Buffer, const Standard_Integer Nbyte, Standard_Integer& Readbyte);
 
     //! Attempts to write theNbBytes bytes from the AsciiString to the file.
-    void Write(const TCollection_AsciiString& theBuffer, const Standard_Integer theNbBytes)
-    {
+    void Write(const TCollection_AsciiString& theBuffer, const Standard_Integer theNbBytes) {
         Write((Standard_Address)theBuffer.ToCString(), theNbBytes);
     }
 
@@ -140,11 +135,12 @@ public:
     Standard_EXPORT void UnLock();
 
     //! Returns the current lock state
-    OSD_LockType GetLock() const { return myLock; }
+    OSD_LockType GetLock() const {
+        return myLock;
+    }
 
     //! Returns TRUE if this file is locked.
-    Standard_Boolean IsLocked() const
-    {
+    Standard_Boolean IsLocked() const {
 #ifdef _WIN32
         return ImperativeFlag;
 #else
@@ -174,7 +170,8 @@ public:
     //! waiting aDelay seconds between each read.
     //! If meanwhile the file increases returns the next line, otherwise
     //! returns FALSE.
-    Standard_EXPORT Standard_Boolean ReadLastLine(TCollection_AsciiString& aLine, const Standard_Integer aDelay, const Standard_Integer aNbTries);
+    Standard_EXPORT Standard_Boolean ReadLastLine(TCollection_AsciiString& aLine, const Standard_Integer aDelay,
+                                                  const Standard_Integer aNbTries);
 
     //! find an editor on the system and edit the given file
     Standard_EXPORT Standard_Boolean Edit();
@@ -183,7 +180,6 @@ public:
     Standard_EXPORT void Rewind();
 
 protected:
-
 #ifdef _WIN32
     Standard_Address myFileHandle;
 #else
@@ -193,11 +189,9 @@ protected:
     Standard_Integer myIO;
 
 private:
-
     OSD_LockType myLock;
     OSD_OpenMode myMode;
     Standard_Boolean ImperativeFlag;
-
 };
 
 #endif // _OSD_File_HeaderFile

@@ -28,44 +28,25 @@ class StepBasic_ApplicationProtocolDefinition;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ApplicationProtocolDefinition
-class RWStepBasic_RWApplicationProtocolDefinition 
-{
+class RWStepBasic_RWApplicationProtocolDefinition {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWApplicationProtocolDefinition();
 
-  
-  Standard_EXPORT RWStepBasic_RWApplicationProtocolDefinition();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ApplicationProtocolDefinition)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ApplicationProtocolDefinition)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepBasic_ApplicationProtocolDefinition)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_ApplicationProtocolDefinition) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_ApplicationProtocolDefinition) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepBasic_ApplicationProtocolDefinition) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWApplicationProtocolDefinition_HeaderFile

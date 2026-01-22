@@ -28,44 +28,22 @@ class StepVisual_FillAreaStyle;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for FillAreaStyle
-class RWStepVisual_RWFillAreaStyle 
-{
+class RWStepVisual_RWFillAreaStyle {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWFillAreaStyle();
 
-  
-  Standard_EXPORT RWStepVisual_RWFillAreaStyle();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_FillAreaStyle)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_FillAreaStyle)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_FillAreaStyle)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_FillAreaStyle) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_FillAreaStyle) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepVisual_FillAreaStyle) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWFillAreaStyle_HeaderFile

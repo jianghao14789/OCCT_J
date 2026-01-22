@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(Interface_HSequenceOfCheck, Interface_SequenceOfCheck)
 
-
 #endif

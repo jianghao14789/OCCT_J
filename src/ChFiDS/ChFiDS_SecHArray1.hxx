@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(ChFiDS_SecHArray1, ChFiDS_SecArray1)
 
-
 #endif

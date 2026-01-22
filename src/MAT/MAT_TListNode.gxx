@@ -15,8 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Dummy
-//purpose  : 
+// function : Dummy
+// purpose  :
 //=======================================================================
 
-void MAT_TListNode::Dummy()const {}
+void MAT_TListNode::Dummy() const {}

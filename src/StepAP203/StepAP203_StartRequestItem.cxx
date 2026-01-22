@@ -21,31 +21,27 @@
 #include <StepBasic_ProductDefinitionFormation.hxx>
 
 //=======================================================================
-//function : StepAP203_StartRequestItem
-//purpose  : 
+// function : StepAP203_StartRequestItem
+// purpose  :
 //=======================================================================
-StepAP203_StartRequestItem::StepAP203_StartRequestItem ()
-{
+StepAP203_StartRequestItem::StepAP203_StartRequestItem() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepAP203_StartRequestItem::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepBasic_ProductDefinitionFormation))) return 1;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  : 
+// function : ProductDefinitionFormation
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepAP203_StartRequestItem::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepBasic_ProductDefinitionFormation))) return 1;
-  return 0;
-}
-
-//=======================================================================
-//function : ProductDefinitionFormation
-//purpose  : 
-//=======================================================================
-
-Handle(StepBasic_ProductDefinitionFormation) StepAP203_StartRequestItem::ProductDefinitionFormation () const
-{
-  return Handle(StepBasic_ProductDefinitionFormation)::DownCast(Value());
+Handle(StepBasic_ProductDefinitionFormation) StepAP203_StartRequestItem::ProductDefinitionFormation() const {
+    return Handle(StepBasic_ProductDefinitionFormation)::DownCast(Value());
 }

@@ -25,7 +25,6 @@
 class Law_Function;
 class math_Matrix;
 
-
 //! Function of reframing between a point and a surface.
 //! This function  is used  to find a  solution on  a done
 //! point   of   the curve when   using  SurfRstConsRad or
@@ -37,10 +36,10 @@ class math_Matrix;
 //! point on the partner surface.
 class BRepBlend_SurfPointEvolRadInv : public Blend_SurfPointFuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BRepBlend_SurfPointEvolRadInv(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C, const Handle(Law_Function)& Evol);
+    Standard_EXPORT BRepBlend_SurfPointEvolRadInv(const Handle(Adaptor3d_Surface) & S,
+                                                  const Handle(Adaptor3d_Curve) & C, const Handle(Law_Function) & Evol);
 
     Standard_EXPORT void Set(const Standard_Integer Choix);
 
@@ -84,7 +83,6 @@ public:
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol);
 
 protected:
-
 private:
     Handle(Adaptor3d_Surface) surf;
     Handle(Adaptor3d_Curve) curv;

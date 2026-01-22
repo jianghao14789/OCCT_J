@@ -22,7 +22,8 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 
-typedef NCollection_IndexedDataMap<Handle(SelectMgr_EntityOwner),Handle(Prs3d_Presentation),TColStd_MapTransientHasher> AIS_IndexedDataMapOfOwnerPrs;
-
+typedef NCollection_IndexedDataMap<Handle(SelectMgr_EntityOwner), Handle(Prs3d_Presentation),
+                                   TColStd_MapTransientHasher>
+    AIS_IndexedDataMapOfOwnerPrs;
 
 #endif

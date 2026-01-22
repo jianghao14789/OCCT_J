@@ -20,8 +20,7 @@
 //! On UNIX, the right to Delete is combined with Write access.
 //! So if "W"rite is not set and "D"elete is, "W"rite will be set
 //! and if "W" is set, "D" will be too.
-enum OSD_SingleProtection
-{
+enum OSD_SingleProtection {
     OSD_None,
     OSD_R,
     OSD_W,

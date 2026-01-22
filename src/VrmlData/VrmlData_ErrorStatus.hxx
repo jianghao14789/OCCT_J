@@ -17,9 +17,9 @@
 #define VrmlData_ErrorStatus_HeaderFile
 
 /**
-   * Status of read/write or other operation.
-   */
-  enum VrmlData_ErrorStatus {
+ * Status of read/write or other operation.
+ */
+enum VrmlData_ErrorStatus {
     VrmlData_StatusOK = 0,
     VrmlData_EmptyData,
     VrmlData_UnrecoverableError,
@@ -38,6 +38,6 @@
     VrmlData_NonSupportedFeature,
     VrmlData_OutputStreamUndefined,
     VrmlData_NotImplemented
-  };
+};
 
 #endif

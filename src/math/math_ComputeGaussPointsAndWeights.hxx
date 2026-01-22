@@ -38,7 +38,6 @@ public:
     Standard_EXPORT math_Vector Weights() const;
 
 protected:
-
 private:
     Handle(TColStd_HArray1OfReal) myPoints;
     Handle(TColStd_HArray1OfReal) myWeights;

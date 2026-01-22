@@ -20,112 +20,104 @@
 #include <StepDimTol_GeometricToleranceRelationship.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_GeometricToleranceRelationship,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_GeometricToleranceRelationship, Standard_Transient)
 
 //=======================================================================
-//function : StepDimTol_GeometricToleranceRelationship
-//purpose  : 
+// function : StepDimTol_GeometricToleranceRelationship
+// purpose  :
 //=======================================================================
-StepDimTol_GeometricToleranceRelationship::StepDimTol_GeometricToleranceRelationship ()
-{
+StepDimTol_GeometricToleranceRelationship::StepDimTol_GeometricToleranceRelationship() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepDimTol_GeometricToleranceRelationship::Init(
+    const Handle(TCollection_HAsciiString) & theName, const Handle(TCollection_HAsciiString) & theDescription,
+    const Handle(StepDimTol_GeometricTolerance) & theRelatingGeometricTolerance,
+    const Handle(StepDimTol_GeometricTolerance) & theRelatedGeometricTolerance) {
+
+    myName = theName;
+
+    myDescription = theDescription;
+
+    myRelatingGeometricTolerance = theRelatingGeometricTolerance;
+
+    myRelatedGeometricTolerance = theRelatedGeometricTolerance;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepDimTol_GeometricToleranceRelationship::Init (const Handle(TCollection_HAsciiString) &theName,
-                                                      const Handle(TCollection_HAsciiString) &theDescription,
-                                                      const Handle(StepDimTol_GeometricTolerance) &theRelatingGeometricTolerance,
-                                                      const Handle(StepDimTol_GeometricTolerance) &theRelatedGeometricTolerance)
-{
-
-  myName = theName;
-
-  myDescription = theDescription;
-
-  myRelatingGeometricTolerance = theRelatingGeometricTolerance;
-
-  myRelatedGeometricTolerance = theRelatedGeometricTolerance;
+Handle(TCollection_HAsciiString) StepDimTol_GeometricToleranceRelationship::Name() const {
+    return myName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepDimTol_GeometricToleranceRelationship::Name () const
-{
-  return myName;
+void StepDimTol_GeometricToleranceRelationship::SetName(const Handle(TCollection_HAsciiString) & theName) {
+    myName = theName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepDimTol_GeometricToleranceRelationship::SetName (const Handle(TCollection_HAsciiString) &theName)
-{
-  myName = theName;
+Handle(TCollection_HAsciiString) StepDimTol_GeometricToleranceRelationship::Description() const {
+    return myDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepDimTol_GeometricToleranceRelationship::Description () const
-{
-  return myDescription;
+void StepDimTol_GeometricToleranceRelationship::SetDescription(const Handle(TCollection_HAsciiString) &
+                                                               theDescription) {
+    myDescription = theDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : RelatingGeometricTolerance
+// purpose  :
 //=======================================================================
 
-void StepDimTol_GeometricToleranceRelationship::SetDescription (const Handle(TCollection_HAsciiString) &theDescription)
-{
-  myDescription = theDescription;
+Handle(StepDimTol_GeometricTolerance) StepDimTol_GeometricToleranceRelationship::RelatingGeometricTolerance() const {
+    return myRelatingGeometricTolerance;
 }
 
 //=======================================================================
-//function : RelatingGeometricTolerance
-//purpose  : 
+// function : SetRelatingGeometricTolerance
+// purpose  :
 //=======================================================================
 
-Handle(StepDimTol_GeometricTolerance) StepDimTol_GeometricToleranceRelationship::RelatingGeometricTolerance () const
-{
-  return myRelatingGeometricTolerance;
+void StepDimTol_GeometricToleranceRelationship::SetRelatingGeometricTolerance(
+    const Handle(StepDimTol_GeometricTolerance) & theRelatingGeometricTolerance) {
+    myRelatingGeometricTolerance = theRelatingGeometricTolerance;
 }
 
 //=======================================================================
-//function : SetRelatingGeometricTolerance
-//purpose  : 
+// function : RelatedGeometricTolerance
+// purpose  :
 //=======================================================================
 
-void StepDimTol_GeometricToleranceRelationship::SetRelatingGeometricTolerance (const Handle(StepDimTol_GeometricTolerance) &theRelatingGeometricTolerance)
-{
-  myRelatingGeometricTolerance = theRelatingGeometricTolerance;
+Handle(StepDimTol_GeometricTolerance) StepDimTol_GeometricToleranceRelationship::RelatedGeometricTolerance() const {
+    return myRelatedGeometricTolerance;
 }
 
 //=======================================================================
-//function : RelatedGeometricTolerance
-//purpose  : 
+// function : SetRelatedGeometricTolerance
+// purpose  :
 //=======================================================================
 
-Handle(StepDimTol_GeometricTolerance) StepDimTol_GeometricToleranceRelationship::RelatedGeometricTolerance () const
-{
-  return myRelatedGeometricTolerance;
-}
-
-//=======================================================================
-//function : SetRelatedGeometricTolerance
-//purpose  : 
-//=======================================================================
-
-void StepDimTol_GeometricToleranceRelationship::SetRelatedGeometricTolerance (const Handle(StepDimTol_GeometricTolerance) &theRelatedGeometricTolerance)
-{
-  myRelatedGeometricTolerance = theRelatedGeometricTolerance;
+void StepDimTol_GeometricToleranceRelationship::SetRelatedGeometricTolerance(
+    const Handle(StepDimTol_GeometricTolerance) & theRelatedGeometricTolerance) {
+    myRelatedGeometricTolerance = theRelatedGeometricTolerance;
 }

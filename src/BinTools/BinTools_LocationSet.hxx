@@ -27,7 +27,7 @@
 class TopLoc_Location;
 
 //! Operator for writing transformation into the stream
-Standard_OStream& operator << (Standard_OStream& OS, const gp_Trsf& T);
+Standard_OStream& operator<<(Standard_OStream& OS, const gp_Trsf& T);
 
 //! The class LocationSet stores a set of location in
 //! a relocatable state.
@@ -35,12 +35,9 @@ Standard_OStream& operator << (Standard_OStream& OS, const gp_Trsf& T);
 //! It can be created from Locations.
 //!
 //! It can create Locations.
-class BinTools_LocationSet
-{
+class BinTools_LocationSet {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns an empty set of locations.
     Standard_EXPORT BinTools_LocationSet();
@@ -70,24 +67,8 @@ public:
     Standard_EXPORT void Read(Standard_IStream& IS);
 
 protected:
-
-
-
-
-
 private:
-
-
-
     TopLoc_IndexedMapOfLocation myMap;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BinTools_LocationSet_HeaderFile

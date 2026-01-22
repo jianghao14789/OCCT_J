@@ -20,5 +20,4 @@
 typedef NCollection_List<TopTools_ListOfShape> TopTools_ListOfListOfShape;
 typedef TopTools_ListOfListOfShape::Iterator TopTools_ListIteratorOfListOfListOfShape;
 
-
 #endif

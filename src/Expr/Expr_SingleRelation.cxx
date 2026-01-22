@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_GeneralRelation.hxx>
 #include <Expr_NamedUnknown.hxx>
@@ -24,28 +23,23 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_SingleRelation, Expr_GeneralRelation)
 
-void Expr_SingleRelation::SetFirstMember(const Handle(Expr_GeneralExpression)& exp)
-{
+void Expr_SingleRelation::SetFirstMember(const Handle(Expr_GeneralExpression) & exp) {
     myFirstMember = exp;
 }
 
-void Expr_SingleRelation::SetSecondMember(const Handle(Expr_GeneralExpression)& exp)
-{
+void Expr_SingleRelation::SetSecondMember(const Handle(Expr_GeneralExpression) & exp) {
     mySecondMember = exp;
 }
 
-Handle(Expr_GeneralExpression) Expr_SingleRelation::FirstMember() const
-{
+Handle(Expr_GeneralExpression) Expr_SingleRelation::FirstMember() const {
     return myFirstMember;
 }
 
-Handle(Expr_GeneralExpression) Expr_SingleRelation::SecondMember() const
-{
+Handle(Expr_GeneralExpression) Expr_SingleRelation::SecondMember() const {
     return mySecondMember;
 }
 
-Standard_Boolean Expr_SingleRelation::IsLinear() const
-{
+Standard_Boolean Expr_SingleRelation::IsLinear() const {
     if (!myFirstMember->IsLinear()) {
         return Standard_False;
     }
@@ -55,8 +49,7 @@ Standard_Boolean Expr_SingleRelation::IsLinear() const
     return Standard_True;
 }
 
-Standard_Boolean Expr_SingleRelation::Contains(const Handle(Expr_GeneralExpression)& exp) const
-{
+Standard_Boolean Expr_SingleRelation::Contains(const Handle(Expr_GeneralExpression) & exp) const {
     if (myFirstMember == exp) {
         return Standard_True;
     }
@@ -69,37 +62,31 @@ Standard_Boolean Expr_SingleRelation::Contains(const Handle(Expr_GeneralExpressi
     return mySecondMember->Contains(exp);
 }
 
-void Expr_SingleRelation::Replace(const Handle(Expr_NamedUnknown)& var, const Handle(Expr_GeneralExpression)& with)
-{
+void Expr_SingleRelation::Replace(const Handle(Expr_NamedUnknown) & var, const Handle(Expr_GeneralExpression) & with) {
     if (myFirstMember == var) {
         SetFirstMember(with);
-    }
-    else {
+    } else {
         if (myFirstMember->Contains(var)) {
             myFirstMember->Replace(var, with);
         }
     }
     if (mySecondMember == var) {
         SetSecondMember(with);
-    }
-    else {
+    } else {
         if (mySecondMember->Contains(var)) {
             mySecondMember->Replace(var, with);
         }
     }
 }
 
-Standard_Integer Expr_SingleRelation::NbOfSubRelations() const
-{
+Standard_Integer Expr_SingleRelation::NbOfSubRelations() const {
     return 0;
 }
 
-Handle(Expr_GeneralRelation) Expr_SingleRelation::SubRelation(const Standard_Integer) const
-{
+Handle(Expr_GeneralRelation) Expr_SingleRelation::SubRelation(const Standard_Integer) const {
     throw Standard_OutOfRange();
 }
 
-Standard_Integer Expr_SingleRelation::NbOfSingleRelations() const
-{
+Standard_Integer Expr_SingleRelation::NbOfSingleRelations() const {
     return 1;
 }

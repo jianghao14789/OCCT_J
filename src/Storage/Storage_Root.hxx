@@ -27,10 +27,8 @@ class Standard_Persistent;
 class Storage_Schema;
 class TCollection_AsciiString;
 
-
 class Storage_Root;
 DEFINE_STANDARD_HANDLE(Storage_Root, Standard_Transient)
-
 
 //! A root object extracted from a Storage_Data object.
 //! A Storage_Root encapsulates a persistent
@@ -45,23 +43,17 @@ DEFINE_STANDARD_HANDLE(Storage_Root, Standard_Transient)
 //! You do not create explicit roots: when inserting
 //! data in a Storage_Data object, you just provide
 //! the persistent object and optionally its name to the function AddRoot.
-class Storage_Root : public Standard_Transient
-{
+class Storage_Root : public Standard_Transient {
 
 public:
-
-
     Standard_EXPORT Storage_Root();
 
-    Standard_EXPORT Storage_Root(const TCollection_AsciiString& theName,
-        const Handle(Standard_Persistent)& theObject);
+    Standard_EXPORT Storage_Root(const TCollection_AsciiString& theName, const Handle(Standard_Persistent) & theObject);
 
-    Standard_EXPORT Storage_Root(const TCollection_AsciiString& theName,
-        const Standard_Integer         theRef,
-        const TCollection_AsciiString& theType);
+    Standard_EXPORT Storage_Root(const TCollection_AsciiString& theName, const Standard_Integer theRef,
+                                 const TCollection_AsciiString& theType);
 
     Standard_EXPORT void SetName(const TCollection_AsciiString& theName);
-
 
     //! Returns the name of this root object.
     //! The name may have been given explicitly when
@@ -79,8 +71,7 @@ public:
     //! into the container.
     Standard_EXPORT TCollection_AsciiString Name() const;
 
-    Standard_EXPORT void SetObject(const Handle(Standard_Persistent)& anObject);
-
+    Standard_EXPORT void SetObject(const Handle(Standard_Persistent) & anObject);
 
     //! Returns the persistent object encapsulated by this root.
     Standard_EXPORT Handle(Standard_Persistent) Object() const;
@@ -94,33 +85,16 @@ public:
 
     Standard_EXPORT void SetType(const TCollection_AsciiString& aType);
 
-
     friend class Storage_Schema;
-
 
     DEFINE_STANDARD_RTTIEXT(Storage_Root, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-
     TCollection_AsciiString myName;
     TCollection_AsciiString myType;
     Handle(Standard_Persistent) myObject;
     Standard_Integer myRef;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Storage_Root_HeaderFile

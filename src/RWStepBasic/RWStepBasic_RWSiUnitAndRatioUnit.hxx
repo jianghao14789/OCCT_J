@@ -27,42 +27,21 @@ class Interface_Check;
 class StepBasic_SiUnitAndRatioUnit;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for SiUnitAndRatioUnit
-class RWStepBasic_RWSiUnitAndRatioUnit 
-{
+class RWStepBasic_RWSiUnitAndRatioUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWSiUnitAndRatioUnit();
 
-  
-  Standard_EXPORT RWStepBasic_RWSiUnitAndRatioUnit();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_SiUnitAndRatioUnit)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_SiUnitAndRatioUnit)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_SiUnitAndRatioUnit) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_SiUnitAndRatioUnit) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWSiUnitAndRatioUnit_HeaderFile

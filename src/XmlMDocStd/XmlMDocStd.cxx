@@ -13,18 +13,16 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Message_Messenger.hxx>
 #include <XmlMDF_ADriverTable.hxx>
 #include <XmlMDocStd.hxx>
 #include <XmlMDocStd_XLinkDriver.hxx>
 
 //=======================================================================
-//function : AddDrivers
-//purpose  : 
+// function : AddDrivers
+// purpose  :
 //=======================================================================
-void XmlMDocStd::AddDrivers (const Handle(XmlMDF_ADriverTable)& aDriverTable,
-                             const Handle(Message_Messenger)&   aMessageDriver)
-{
-  aDriverTable->AddDriver (new XmlMDocStd_XLinkDriver(aMessageDriver)); 
+void XmlMDocStd::AddDrivers(const Handle(XmlMDF_ADriverTable) & aDriverTable,
+                            const Handle(Message_Messenger) & aMessageDriver) {
+    aDriverTable->AddDriver(new XmlMDocStd_XLinkDriver(aMessageDriver));
 }

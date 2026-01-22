@@ -16,11 +16,10 @@
 #define _RWGltf_GltfBufferViewTarget_HeaderFile
 
 //! Low-level glTF enumeration defining BufferView target.
-enum RWGltf_GltfBufferViewTarget
-{
-  RWGltf_GltfBufferViewTarget_UNKNOWN,                      //!< unknown or invalid type
-  RWGltf_GltfBufferViewTarget_ARRAY_BUFFER         = 34962, //!< GL_ARRAY_BUFFER
-  RWGltf_GltfBufferViewTarget_ELEMENT_ARRAY_BUFFER = 34963, //!< GL_ELEMENT_ARRAY_BUFFER
+enum RWGltf_GltfBufferViewTarget {
+    RWGltf_GltfBufferViewTarget_UNKNOWN,                      //!< unknown or invalid type
+    RWGltf_GltfBufferViewTarget_ARRAY_BUFFER = 34962,         //!< GL_ARRAY_BUFFER
+    RWGltf_GltfBufferViewTarget_ELEMENT_ARRAY_BUFFER = 34963, //!< GL_ELEMENT_ARRAY_BUFFER
 };
 
 #endif // _RWGltf_GltfBufferViewTarget_HeaderFile

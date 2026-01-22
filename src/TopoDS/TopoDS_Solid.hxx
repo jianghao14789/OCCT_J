@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes a solid shape which
 //! - references an underlying solid shape with the
 //! potential to be given a location and an orientation
@@ -32,38 +31,17 @@
 //! - has an orientation for the underlying shape, in
 //! terms of its geometry (as opposed to orientation in
 //! relation to other shapes).
-class TopoDS_Solid  : public TopoDS_Shape
-{
+class TopoDS_Solid : public TopoDS_Shape {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Constructs an Undefined Solid.
+    //! Constructs an Undefined Solid.
     TopoDS_Solid();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <TopoDS_Solid.lxx>
-
-
-
-
 
 #endif // _TopoDS_Solid_HeaderFile

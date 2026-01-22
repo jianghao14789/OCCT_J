@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BOPAlgo_Options.hxx>
 #include <Message_MsgFile.hxx>
 #include <Message_ProgressScope.hxx>
@@ -23,118 +22,92 @@
 #include <Standard_ProgramError.hxx>
 #include <BOPAlgo_Alerts.hxx>
 
-namespace
-{
-  Standard_Boolean myGlobalRunParallel = Standard_False;
+namespace {
+Standard_Boolean myGlobalRunParallel = Standard_False;
 
-  // Initialize textual messages for errors and warnings defined in BOPAlgo
-  #include "BOPAlgo_BOPAlgo_msg.pxx"
-  bool BOPAlgo_InitMessages = false;
-  void BOPAlgo_LoadMessages ()
-  {
-    if (BOPAlgo_InitMessages)
-      return;
+// Initialize textual messages for errors and warnings defined in BOPAlgo
+#include "BOPAlgo_BOPAlgo_msg.pxx"
+bool BOPAlgo_InitMessages = false;
+void BOPAlgo_LoadMessages() {
+    if (BOPAlgo_InitMessages) return;
     BOPAlgo_InitMessages = true;
 
-    if (! Message_MsgFile::HasMsg ("BOPAlgo_LOAD_CHECKER"))
-    {
-      Message_MsgFile::LoadFromString (BOPAlgo_BOPAlgo_msg);
+    if (!Message_MsgFile::HasMsg("BOPAlgo_LOAD_CHECKER")) {
+        Message_MsgFile::LoadFromString(BOPAlgo_BOPAlgo_msg);
     }
-  }
 }
+} // namespace
 
 //=======================================================================
-// function: 
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
 BOPAlgo_Options::BOPAlgo_Options()
-:
-  myAllocator(NCollection_BaseAllocator::CommonBaseAllocator()),
-  myReport(new Message_Report),
-  myRunParallel(myGlobalRunParallel),
-  myFuzzyValue(Precision::Confusion()),
-  myUseOBB(Standard_False)
-{
-  BOPAlgo_LoadMessages();
+    : myAllocator(NCollection_BaseAllocator::CommonBaseAllocator()), myReport(new Message_Report),
+      myRunParallel(myGlobalRunParallel), myFuzzyValue(Precision::Confusion()), myUseOBB(Standard_False) {
+    BOPAlgo_LoadMessages();
 }
 
 //=======================================================================
-// function: 
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
-BOPAlgo_Options::BOPAlgo_Options
-  (const Handle(NCollection_BaseAllocator)& theAllocator)
-:
-  myAllocator(theAllocator),
-  myReport(new Message_Report),
-  myRunParallel(myGlobalRunParallel),
-  myFuzzyValue(Precision::Confusion()),
-  myUseOBB(Standard_False)
-{
-  BOPAlgo_LoadMessages();
+BOPAlgo_Options::BOPAlgo_Options(const Handle(NCollection_BaseAllocator) & theAllocator)
+    : myAllocator(theAllocator), myReport(new Message_Report), myRunParallel(myGlobalRunParallel),
+      myFuzzyValue(Precision::Confusion()), myUseOBB(Standard_False) {
+    BOPAlgo_LoadMessages();
 }
 
 //=======================================================================
 // function: ~
-// purpose: 
+// purpose:
 //=======================================================================
-BOPAlgo_Options::~BOPAlgo_Options()
-{
+BOPAlgo_Options::~BOPAlgo_Options() {}
+
+//=======================================================================
+// function : DumpErrors
+// purpose  :
+//=======================================================================
+void BOPAlgo_Options::DumpErrors(Standard_OStream& theOS) const {
+    myReport->Dump(theOS, Message_Fail);
 }
 
 //=======================================================================
-//function : DumpErrors
-//purpose  : 
+// function : DumpWarnings
+// purpose  :
 //=======================================================================
-void BOPAlgo_Options::DumpErrors(Standard_OStream& theOS) const
-{
-  myReport->Dump (theOS, Message_Fail);
+void BOPAlgo_Options::DumpWarnings(Standard_OStream& theOS) const {
+    myReport->Dump(theOS, Message_Warning);
 }
 
 //=======================================================================
-//function : DumpWarnings
-//purpose  : 
+// function:
+// purpose:
 //=======================================================================
-void BOPAlgo_Options::DumpWarnings(Standard_OStream& theOS) const
-{
-  myReport->Dump (theOS, Message_Warning);
+void BOPAlgo_Options::SetParallelMode(Standard_Boolean theNewMode) {
+    myGlobalRunParallel = theNewMode;
 }
 
 //=======================================================================
-// function: 
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
-void BOPAlgo_Options::SetParallelMode(Standard_Boolean theNewMode)
-{
-  myGlobalRunParallel = theNewMode;
+Standard_Boolean BOPAlgo_Options::GetParallelMode() {
+    return myGlobalRunParallel;
 }
 
 //=======================================================================
-// function: 
-// purpose: 
+// function : SetFuzzyValue
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPAlgo_Options::GetParallelMode()
-{
-  return myGlobalRunParallel;
+void BOPAlgo_Options::SetFuzzyValue(const Standard_Real theFuzz) {
+    myFuzzyValue = Max(theFuzz, Precision::Confusion());
 }
 
-
-//=======================================================================
-//function : SetFuzzyValue
-//purpose  : 
-//=======================================================================
-void BOPAlgo_Options::SetFuzzyValue(const Standard_Real theFuzz)
-{
-  myFuzzyValue = Max(theFuzz, Precision::Confusion());
+Standard_Boolean BOPAlgo_Options::UserBreak(const Message_ProgressScope& thePS) {
+    if (thePS.UserBreak()) {
+        AddError(new BOPAlgo_AlertUserBreak);
+        return Standard_True;
+    }
+    return Standard_False;
 }
-
-Standard_Boolean BOPAlgo_Options::UserBreak(const Message_ProgressScope& thePS)
-{
-  if (thePS.UserBreak())
-  {
-    AddError(new BOPAlgo_AlertUserBreak);
-    return Standard_True;
-  }
-  return Standard_False;
-}
-

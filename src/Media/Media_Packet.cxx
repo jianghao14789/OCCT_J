@@ -14,16 +14,15 @@
 
 // activate some C99 macros like UINT64_C in "stdint.h" which used by FFmpeg
 #ifndef __STDC_CONSTANT_MACROS
-  #define __STDC_CONSTANT_MACROS
+#define __STDC_CONSTANT_MACROS
 #endif
 
 #include <Media_Packet.hxx>
 
 #ifdef HAVE_FFMPEG
 #include <Standard_WarningsDisable.hxx>
-extern "C"
-{
-  #include <libavcodec/avcodec.h>
+extern "C" {
+#include <libavcodec/avcodec.h>
 };
 #include <Standard_WarningsRestore.hxx>
 #endif
@@ -34,11 +33,9 @@ IMPLEMENT_STANDARD_RTTIEXT(Media_Packet, Standard_Transient)
 // function : Media_Packet
 // purpose  :
 // =======================================================================
-Media_Packet::Media_Packet()
-: myPacket (NULL)
-{
+Media_Packet::Media_Packet() : myPacket(NULL) {
 #ifdef HAVE_FFMPEG
-  myPacket = av_packet_alloc();
+    myPacket = av_packet_alloc();
 #endif
 }
 
@@ -46,10 +43,9 @@ Media_Packet::Media_Packet()
 // function : ~Media_Packet
 // purpose  :
 // =======================================================================
-Media_Packet::~Media_Packet()
-{
+Media_Packet::~Media_Packet() {
 #ifdef HAVE_FFMPEG
-  av_packet_free (&myPacket);
+    av_packet_free(&myPacket);
 #endif
 }
 
@@ -57,10 +53,9 @@ Media_Packet::~Media_Packet()
 // function : Unref
 // purpose  :
 // =======================================================================
-void Media_Packet::Unref()
-{
+void Media_Packet::Unref() {
 #ifdef HAVE_FFMPEG
-  av_packet_unref (myPacket);
+    av_packet_unref(myPacket);
 #endif
 }
 
@@ -68,12 +63,11 @@ void Media_Packet::Unref()
 // function : Data
 // purpose  :
 // =======================================================================
-const uint8_t* Media_Packet::Data() const
-{
+const uint8_t* Media_Packet::Data() const {
 #ifdef HAVE_FFMPEG
-  return myPacket->data;
+    return myPacket->data;
 #else
-  return NULL;
+    return NULL;
 #endif
 }
 
@@ -81,12 +75,11 @@ const uint8_t* Media_Packet::Data() const
 // function : ChangeData
 // purpose  :
 // =======================================================================
-uint8_t* Media_Packet::ChangeData()
-{
+uint8_t* Media_Packet::ChangeData() {
 #ifdef HAVE_FFMPEG
-  return myPacket->data;
+    return myPacket->data;
 #else
-  return NULL;
+    return NULL;
 #endif
 }
 
@@ -94,12 +87,11 @@ uint8_t* Media_Packet::ChangeData()
 // function : Size
 // purpose  :
 // =======================================================================
-int Media_Packet::Size() const
-{
+int Media_Packet::Size() const {
 #ifdef HAVE_FFMPEG
-  return myPacket->size;
+    return myPacket->size;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -107,12 +99,11 @@ int Media_Packet::Size() const
 // function : Pts
 // purpose  :
 // =======================================================================
-int64_t Media_Packet::Pts() const
-{
+int64_t Media_Packet::Pts() const {
 #ifdef HAVE_FFMPEG
-  return myPacket->pts;
+    return myPacket->pts;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -120,12 +111,11 @@ int64_t Media_Packet::Pts() const
 // function : Dts
 // purpose  :
 // =======================================================================
-int64_t Media_Packet::Dts() const
-{
+int64_t Media_Packet::Dts() const {
 #ifdef HAVE_FFMPEG
-  return myPacket->dts;
+    return myPacket->dts;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -133,12 +123,11 @@ int64_t Media_Packet::Dts() const
 // function : Duration
 // purpose  :
 // =======================================================================
-int64_t Media_Packet::Duration() const
-{
+int64_t Media_Packet::Duration() const {
 #ifdef HAVE_FFMPEG
-  return myPacket->duration;
+    return myPacket->duration;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -146,12 +135,11 @@ int64_t Media_Packet::Duration() const
 // function : StreamIndex
 // purpose  :
 // =======================================================================
-int Media_Packet::StreamIndex() const
-{
+int Media_Packet::StreamIndex() const {
 #ifdef HAVE_FFMPEG
-  return myPacket->stream_index;
+    return myPacket->stream_index;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -159,12 +147,11 @@ int Media_Packet::StreamIndex() const
 // function : IsKeyFrame
 // purpose  :
 // =======================================================================
-bool Media_Packet::IsKeyFrame() const
-{
+bool Media_Packet::IsKeyFrame() const {
 #ifdef HAVE_FFMPEG
-  return (myPacket->flags & AV_PKT_FLAG_KEY) != 0;
+    return (myPacket->flags & AV_PKT_FLAG_KEY) != 0;
 #else
-  return false;
+    return false;
 #endif
 }
 
@@ -172,9 +159,8 @@ bool Media_Packet::IsKeyFrame() const
 // function : SetKeyFrame
 // purpose  :
 // =======================================================================
-void Media_Packet::SetKeyFrame()
-{
+void Media_Packet::SetKeyFrame() {
 #ifdef HAVE_FFMPEG
-  myPacket->flags |= AV_PKT_FLAG_KEY;
+    myPacket->flags |= AV_PKT_FLAG_KEY;
 #endif
 }

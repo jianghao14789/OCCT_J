@@ -27,7 +27,6 @@ class gp_Pnt;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_Axis2Placement;
 DEFINE_STANDARD_HANDLE(Geom_Axis2Placement, Geom_AxisPlacement)
 
@@ -121,18 +120,11 @@ public:
     DEFINE_STANDARD_RTTIEXT(Geom_Axis2Placement, Geom_AxisPlacement)
 
 protected:
-
 private:
     Standard_EXPORT Geom_Axis2Placement(const gp_Pnt& P, const gp_Dir& Vz, const gp_Dir& Vx, const gp_Dir& Vy);
 
     gp_Dir vxdir;
     gp_Dir vydir;
 };
-
-
-
-
-
-
 
 #endif // _Geom_Axis2Placement_HeaderFile

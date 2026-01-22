@@ -16,7 +16,6 @@
 
 #include <PrsDim_MinRadiusDimension.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_MinRadiusDimension AIS_MinRadiusDimension;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_MinRadiusDimension AIS_MinRadiusDimension;
 
 #endif // _AIS_MinRadiusDimension_HeaderFile

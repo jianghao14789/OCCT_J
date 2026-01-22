@@ -16,7 +16,6 @@
 
 #include <PrsDim_AngleDimension.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_AngleDimension AIS_AngleDimension;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_AngleDimension AIS_AngleDimension;
 
 #endif // _AIS_AngleDimension_HeaderFile

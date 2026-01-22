@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(Expr_GeneralExpression)> ExprIntrp_StackOfGeneralExpression;
 typedef NCollection_List<Handle(Expr_GeneralExpression)>::Iterator ExprIntrp_ListIteratorOfStackOfGeneralExpression;
 
-
 #endif

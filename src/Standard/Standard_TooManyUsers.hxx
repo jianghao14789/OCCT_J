@@ -26,8 +26,8 @@ class Standard_TooManyUsers;
 DEFINE_STANDARD_HANDLE(Standard_TooManyUsers, Standard_LicenseError)
 
 #if !defined No_Exception && !defined No_Standard_TooManyUsers
-#define Standard_TooManyUsers_Raise_if(CONDITION, MESSAGE) \
-  if (CONDITION) throw Standard_TooManyUsers(MESSAGE);
+#define Standard_TooManyUsers_Raise_if(CONDITION, MESSAGE)                                                             \
+    if (CONDITION) throw Standard_TooManyUsers(MESSAGE);
 #else
 #define Standard_TooManyUsers_Raise_if(CONDITION, MESSAGE)
 #endif

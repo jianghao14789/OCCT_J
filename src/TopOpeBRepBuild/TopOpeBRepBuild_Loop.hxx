@@ -27,56 +27,35 @@
 class TopoDS_Shape;
 class TopOpeBRepBuild_BlockIterator;
 
-
 class TopOpeBRepBuild_Loop;
 DEFINE_STANDARD_HANDLE(TopOpeBRepBuild_Loop, Standard_Transient)
-
 
 //! a Loop is an existing shape (Shell,Wire) or a set
 //! of shapes (Faces,Edges) which are connex.
 //! a set of connex shape is represented by a BlockIterator
-class TopOpeBRepBuild_Loop : public Standard_Transient
-{
+class TopOpeBRepBuild_Loop : public Standard_Transient {
 
 public:
+    Standard_EXPORT TopOpeBRepBuild_Loop(const TopoDS_Shape& S);
 
-  
-  Standard_EXPORT TopOpeBRepBuild_Loop(const TopoDS_Shape& S);
-  
-  Standard_EXPORT TopOpeBRepBuild_Loop(const TopOpeBRepBuild_BlockIterator& BI);
-  
-  Standard_EXPORT virtual Standard_Boolean IsShape() const;
-  
-  Standard_EXPORT virtual const TopoDS_Shape& Shape() const;
-  
-  Standard_EXPORT const TopOpeBRepBuild_BlockIterator& BlockIterator() const;
-  
-  Standard_EXPORT virtual void Dump() const;
+    Standard_EXPORT TopOpeBRepBuild_Loop(const TopOpeBRepBuild_BlockIterator& BI);
 
+    Standard_EXPORT virtual Standard_Boolean IsShape() const;
 
+    Standard_EXPORT virtual const TopoDS_Shape& Shape() const;
 
+    Standard_EXPORT const TopOpeBRepBuild_BlockIterator& BlockIterator() const;
 
-  DEFINE_STANDARD_RTTIEXT(TopOpeBRepBuild_Loop,Standard_Transient)
+    Standard_EXPORT virtual void Dump() const;
+
+    DEFINE_STANDARD_RTTIEXT(TopOpeBRepBuild_Loop, Standard_Transient)
 
 protected:
-
-
-  Standard_Boolean myIsShape;
-  TopoDS_Shape myShape;
-  TopOpeBRepBuild_BlockIterator myBlockIterator;
-
+    Standard_Boolean myIsShape;
+    TopoDS_Shape myShape;
+    TopOpeBRepBuild_BlockIterator myBlockIterator;
 
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRepBuild_Loop_HeaderFile

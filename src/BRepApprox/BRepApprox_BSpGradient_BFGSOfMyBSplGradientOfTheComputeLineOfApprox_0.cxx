@@ -22,7 +22,6 @@
 #include <BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox.hxx>
 #include <BRepApprox_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfApprox.hxx>
 #include <math_MultipleVarFunctionWithGradient.hxx>
- 
 
 #define MultiLine BRepApprox_TheMultiLineOfApprox
 #define MultiLine_hxx <BRepApprox_TheMultiLineOfApprox.hxx>
@@ -37,4 +36,3 @@
 #define AppParCurves_BSpGradient BRepApprox_MyBSplGradientOfTheComputeLineOfApprox
 #define AppParCurves_BSpGradient_hxx <BRepApprox_MyBSplGradientOfTheComputeLineOfApprox.hxx>
 #include <AppParCurves_BSpGradient_BFGS.gxx>
-

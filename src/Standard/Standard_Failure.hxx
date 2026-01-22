@@ -27,7 +27,7 @@
 DEFINE_STANDARD_HANDLE(Standard_Failure, Standard_Transient)
 
 //! Forms the root of the entire exception hierarchy.
-//! 
+//!
 //! 形成整个异常层次结构的根
 //! 所有 OCCT 异常都继承自此类，包括：
 //! - Standard_OutOfRange（索引超出范围）
@@ -35,10 +35,8 @@ DEFINE_STANDARD_HANDLE(Standard_Failure, Standard_Transient)
 //! - Standard_DivideByZero（除数为零）
 //! - Standard_OutOfMemory（内存不足）
 //! - 等等
-class Standard_Failure : public Standard_Transient
-{
+class Standard_Failure : public Standard_Transient {
 public:
-
     //! Creates a status object of type "Failure".
     //! 创建一个"失败"类型的状态对象
     Standard_EXPORT Standard_Failure();
@@ -59,12 +57,11 @@ public:
     //! 创建一个带有堆栈跟踪的"失败"类型的状态对象
     //! @param theDesc [输入] 异常描述信息
     //! @param theStackTrace [输入] 关联的堆栈跟踪
-    Standard_EXPORT Standard_Failure(const Standard_CString theDesc,
-        const Standard_CString theStackTrace);
+    Standard_EXPORT Standard_Failure(const Standard_CString theDesc, const Standard_CString theStackTrace);
 
     //! Assignment operator
     //! 赋值运算符
-    Standard_EXPORT Standard_Failure& operator= (const Standard_Failure& f);
+    Standard_EXPORT Standard_Failure& operator=(const Standard_Failure& f);
 
     //! Destructor
     //! 析构函数
@@ -108,7 +105,6 @@ public:
     Standard_EXPORT void Reraise(const Standard_SStream& aReason);
 
 public:
-
     //! Raises an exception of type "Failure" and associates
     //! an error message to it. The message can be printed
     //! in an exception handler.
@@ -133,8 +129,8 @@ public:
 
     //! Used to construct an instance of the exception object as a handle.
     //! 用于构造异常对象实例作为 Handle（带堆栈跟踪）
-    Standard_EXPORT static Handle(Standard_Failure) NewInstance(Standard_CString theMessage,
-        Standard_CString theStackTrace);
+    Standard_EXPORT static Handle(Standard_Failure)
+        NewInstance(Standard_CString theMessage, Standard_CString theStackTrace);
 
     //! Returns the default length of stack trace to be captured by Standard_Failure constructor;
     //! 0 by default meaning no stack trace.
@@ -149,7 +145,6 @@ public:
     Standard_EXPORT static void SetDefaultStackTraceLength(Standard_Integer theNbStackTraces);
 
 public:
-
     //! Used to throw CASCADE exception from C signal handler.
     //! On platforms that do not allow throwing C++ exceptions
     //! from this handler (e.g. Linux), uses longjump to get to
@@ -164,7 +159,6 @@ public:
     DEFINE_STANDARD_RTTIEXT(Standard_Failure, Standard_Transient)
 
 protected:
-
     //! Used only if standard C++ exceptions are used.
     //! Throws exception of the same type as this by C++ throw,
     //! and stores current object as last thrown exception,
@@ -176,22 +170,22 @@ protected:
     Standard_EXPORT virtual void Throw() const;
 
 private:
-
     //! Reference-counted string,
     //! Memory block is allocated with an extra 4-byte header (int representing number of references)
     //! using low-level malloc() to avoid exceptions.
-    //! 
+    //!
     //! 引用计数字符串
     //! 内存块通过 4 字节头部（int 表示引用数量）分配
     //! 使用低级 malloc() 以避免异常
-    struct StringRef
-    {
-        Standard_Integer   Counter;  //!< 引用计数
-        Standard_Character Message[1];  //!< 消息字符串（实际大小由分配函数确定）
+    struct StringRef {
+        Standard_Integer Counter;      //!< 引用计数
+        Standard_Character Message[1]; //!< 消息字符串（实际大小由分配函数确定）
 
         //! Return message string.
         //! 返回消息字符串
-        Standard_CString GetMessage() const { return (Standard_CString)&Message[0]; }
+        Standard_CString GetMessage() const {
+            return (Standard_CString)&Message[0];
+        }
 
         //! Allocate reference-counted message string.
         //! 分配引用计数消息字符串
@@ -207,32 +201,26 @@ private:
     };
 
 private:
-
     StringRef* myMessage;    //!< 错误消息（引用计数）
     StringRef* myStackTrace; //!< 堆栈跟踪（引用计数）
-
 };
 
 // =======================================================================
 // function : operator<<
-// purpose  : 
+// purpose  :
 // 用于打印 Handle(Standard_Failure) 异常到流
 // =======================================================================
-inline Standard_OStream& operator<< (Standard_OStream& theStream,
-    const Handle(Standard_Failure)& theFailure)
-{
+inline Standard_OStream& operator<<(Standard_OStream& theStream, const Handle(Standard_Failure) & theFailure) {
     theFailure->Print(theStream);
     return theStream;
 }
 
 // =======================================================================
 // function : operator<<
-// purpose  : 
+// purpose  :
 // 用于打印 Standard_Failure 异常到流
 // =======================================================================
-inline Standard_OStream& operator<< (Standard_OStream& theStream,
-    const Standard_Failure& theFailure)
-{
+inline Standard_OStream& operator<<(Standard_OStream& theStream, const Standard_Failure& theFailure) {
     theFailure.Print(theStream);
     return theStream;
 }

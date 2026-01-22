@@ -29,127 +29,121 @@ DEFINE_STANDARD_HANDLE(ViewerTest_EventManager, Standard_Transient)
 
 //! used to manage mouse event (move,select)
 //! By default the events are transmitted to interactive context.
-class ViewerTest_EventManager : public Standard_Transient, public AIS_ViewController
-{
-  DEFINE_STANDARD_RTTIEXT(ViewerTest_EventManager, Standard_Transient)
+class ViewerTest_EventManager : public Standard_Transient, public AIS_ViewController {
+    DEFINE_STANDARD_RTTIEXT(ViewerTest_EventManager, Standard_Transient)
 public:
+    //! Return TRUE if View should be closed on escape.
+    static Standard_Boolean& ToCloseViewOnEscape() {
+        static Standard_Boolean Draw_ToCloseViewOnEsc = Standard_False;
+        return Draw_ToCloseViewOnEsc;
+    }
 
-  //! Return TRUE if View should be closed on escape.
-  static Standard_Boolean& ToCloseViewOnEscape()
-  {
-    static Standard_Boolean Draw_ToCloseViewOnEsc = Standard_False;
-    return Draw_ToCloseViewOnEsc;
-  }
+    //! Return TRUE if Draw Harness should exit on closing View.
+    static Standard_Boolean& ToExitOnCloseView() {
+        static Standard_Boolean Draw_ToExitOnCloseView = Standard_False;
+        return Draw_ToExitOnCloseView;
+    }
 
-  //! Return TRUE if Draw Harness should exit on closing View.
-  static Standard_Boolean& ToExitOnCloseView()
-  {
-    static Standard_Boolean Draw_ToExitOnCloseView = Standard_False;
-    return Draw_ToExitOnCloseView;
-  }
-
-  //! Use global camera animation object shared across all Views in ViewerTest.
-  Standard_EXPORT static const Handle(AIS_AnimationCamera)& GlobalViewAnimation();
+    //! Use global camera animation object shared across all Views in ViewerTest.
+    Standard_EXPORT static const Handle(AIS_AnimationCamera) & GlobalViewAnimation();
 
 public:
+    //! Main constructor.
+    Standard_EXPORT ViewerTest_EventManager(const Handle(V3d_View) & aView,
+                                            const Handle(AIS_InteractiveContext) & aCtx);
 
-  //! Main constructor.
-  Standard_EXPORT ViewerTest_EventManager(const Handle(V3d_View)& aView, const Handle(AIS_InteractiveContext)& aCtx);
+    //! Destructor.
+    Standard_EXPORT virtual ~ViewerTest_EventManager();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~ViewerTest_EventManager();
+    //! Setup or adjust window callbacks.
+    Standard_EXPORT static void SetupWindowCallbacks(const Handle(Aspect_Window) & theWin);
 
-  //! Setup or adjust window callbacks.
-  Standard_EXPORT static void SetupWindowCallbacks (const Handle(Aspect_Window)& theWin);
+    //! Return interactive context.
+    const Handle(AIS_InteractiveContext) & Context() const {
+        return myCtx;
+    }
 
-  //! Return interactive context.
-  const Handle(AIS_InteractiveContext)& Context() const { return myCtx; }
+    //! Returns TRUE if picking point mode has been enabled (for VPick command).
+    Standard_Boolean ToPickPoint() const {
+        return myToPickPnt;
+    }
 
-  //! Returns TRUE if picking point mode has been enabled (for VPick command).
-  Standard_Boolean ToPickPoint() const { return myToPickPnt; }
+    //! Start picking point for VPick command.
+    void StartPickPoint(const char* theArgX, const char* theArgY, const char* theArgZ) {
+        myToPickPnt = Standard_True;
+        myPickPntArgVec[0] = theArgX;
+        myPickPntArgVec[1] = theArgY;
+        myPickPntArgVec[2] = theArgZ;
+    }
 
-  //! Start picking point for VPick command.
-  void StartPickPoint (const char* theArgX,
-                       const char* theArgY,
-                       const char* theArgZ)
-  {
-    myToPickPnt = Standard_True;
-    myPickPntArgVec[0] = theArgX;
-    myPickPntArgVec[1] = theArgY;
-    myPickPntArgVec[2] = theArgZ;
-  }
-
-  //! Handle mouse button click event.
-  Standard_EXPORT virtual bool UpdateMouseClick (const Graphic3d_Vec2i& thePoint,
-                                                  Aspect_VKeyMouse theButton,
+    //! Handle mouse button click event.
+    Standard_EXPORT virtual bool UpdateMouseClick(const Graphic3d_Vec2i& thePoint, Aspect_VKeyMouse theButton,
                                                   Aspect_VKeyFlags theModifiers,
                                                   bool theIsDoubleClick) Standard_OVERRIDE;
 
-  //! Handle mouse button press/release event.
-  Standard_EXPORT virtual bool UpdateMouseButtons (const Graphic3d_Vec2i& thePoint,
-                                                   Aspect_VKeyMouse theButtons,
-                                                   Aspect_VKeyFlags theModifiers,
-                                                   bool theIsEmulated) Standard_OVERRIDE;
+    //! Handle mouse button press/release event.
+    Standard_EXPORT virtual bool UpdateMouseButtons(const Graphic3d_Vec2i& thePoint, Aspect_VKeyMouse theButtons,
+                                                    Aspect_VKeyFlags theModifiers,
+                                                    bool theIsEmulated) Standard_OVERRIDE;
 
-  //! Release key.
-  Standard_EXPORT virtual void KeyDown (Aspect_VKey theKey,
-                                        double theTime,
-                                        double thePressure = 1.0) Standard_OVERRIDE;
+    //! Release key.
+    Standard_EXPORT virtual void KeyDown(Aspect_VKey theKey, double theTime,
+                                         double thePressure = 1.0) Standard_OVERRIDE;
 
-  //! Release key.
-  Standard_EXPORT virtual void KeyUp (Aspect_VKey theKey,
-                                      double theTime) Standard_OVERRIDE;
+    //! Release key.
+    Standard_EXPORT virtual void KeyUp(Aspect_VKey theKey, double theTime) Standard_OVERRIDE;
 
-  //! Redraw the View on an Expose Event
-  Standard_EXPORT virtual void ProcessExpose() Standard_OVERRIDE;
+    //! Redraw the View on an Expose Event
+    Standard_EXPORT virtual void ProcessExpose() Standard_OVERRIDE;
 
-  //! Handle redraw.
-  Standard_EXPORT virtual void handleViewRedraw (const Handle(AIS_InteractiveContext)& theCtx,
-                                                 const Handle(V3d_View)& theView) Standard_OVERRIDE;
+    //! Handle redraw.
+    Standard_EXPORT virtual void handleViewRedraw(const Handle(AIS_InteractiveContext) & theCtx,
+                                                  const Handle(V3d_View) & theView) Standard_OVERRIDE;
 
-  //! Resize View.
-  Standard_EXPORT virtual void ProcessConfigure (bool theIsResized = true) Standard_OVERRIDE;
+    //! Resize View.
+    Standard_EXPORT virtual void ProcessConfigure(bool theIsResized = true) Standard_OVERRIDE;
 
-  //! Handle window input event immediately (flush input buffer).
-  Standard_EXPORT virtual void ProcessInput() Standard_OVERRIDE;
+    //! Handle window input event immediately (flush input buffer).
+    Standard_EXPORT virtual void ProcessInput() Standard_OVERRIDE;
 
-  //! Handle KeyPress event.
-  Standard_EXPORT void ProcessKeyPress (Aspect_VKey theKey);
+    //! Handle KeyPress event.
+    Standard_EXPORT void ProcessKeyPress(Aspect_VKey theKey);
 
 protected:
+    //! Register hot-keys for specified Action.
+    void addActionHotKeys(Aspect_VKey theAction, unsigned int theHotKey1 = 0, unsigned int theHotKey2 = 0,
+                          unsigned int theHotKey3 = 0, unsigned int theHotKey4 = 0, unsigned int theHotKey5 = 0) {
+        if (theHotKey1 != 0) {
+            myNavKeyMap.Bind(theHotKey1, theAction);
+        }
+        if (theHotKey2 != 0) {
+            myNavKeyMap.Bind(theHotKey2, theAction);
+        }
+        if (theHotKey3 != 0) {
+            myNavKeyMap.Bind(theHotKey3, theAction);
+        }
+        if (theHotKey4 != 0) {
+            myNavKeyMap.Bind(theHotKey4, theAction);
+        }
+        if (theHotKey5 != 0) {
+            myNavKeyMap.Bind(theHotKey5, theAction);
+        }
+    }
 
-  //! Register hot-keys for specified Action.
-  void addActionHotKeys (Aspect_VKey theAction,
-                         unsigned int theHotKey1 = 0,
-                         unsigned int theHotKey2 = 0,
-                         unsigned int theHotKey3 = 0,
-                         unsigned int theHotKey4 = 0,
-                         unsigned int theHotKey5 = 0)
-  {
-    if (theHotKey1 != 0) { myNavKeyMap.Bind (theHotKey1, theAction); }
-    if (theHotKey2 != 0) { myNavKeyMap.Bind (theHotKey2, theAction); }
-    if (theHotKey3 != 0) { myNavKeyMap.Bind (theHotKey3, theAction); }
-    if (theHotKey4 != 0) { myNavKeyMap.Bind (theHotKey4, theAction); }
-    if (theHotKey5 != 0) { myNavKeyMap.Bind (theHotKey5, theAction); }
-  }
-
-  //! Handle modifier key changes.
-  Standard_EXPORT bool navigationKeyModifierSwitch (unsigned int theModifOld,
-                                                    unsigned int theModifNew,
-                                                    double       theTimeStamp);
+    //! Handle modifier key changes.
+    Standard_EXPORT bool navigationKeyModifierSwitch(unsigned int theModifOld, unsigned int theModifNew,
+                                                     double theTimeStamp);
 
 private:
+    Handle(AIS_InteractiveContext) myCtx;
+    Handle(V3d_View) myView;
+    NCollection_DataMap<unsigned int, Aspect_VKey> myNavKeyMap; //!< map of Hot-Key (key+modifiers) to Action
 
-  Handle(AIS_InteractiveContext) myCtx;
-  Handle(V3d_View) myView;
-  NCollection_DataMap<unsigned int, Aspect_VKey> myNavKeyMap; //!< map of Hot-Key (key+modifiers) to Action
+    TCollection_AsciiString myPickPntArgVec[3];
+    Standard_Boolean myToPickPnt;
+    Standard_Boolean myIsTmpContRedraw;
 
-  TCollection_AsciiString myPickPntArgVec[3];
-  Standard_Boolean myToPickPnt;
-  Standard_Boolean myIsTmpContRedraw;
-
-  unsigned int     myUpdateRequests; //!< counter for unhandled update requests
-
+    unsigned int myUpdateRequests; //!< counter for unhandled update requests
 };
 
 #endif // _ViewerTest_EventManager_HeaderFile

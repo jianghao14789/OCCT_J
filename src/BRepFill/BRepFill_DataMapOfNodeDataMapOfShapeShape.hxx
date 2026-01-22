@@ -22,8 +22,9 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(MAT_Node),TopTools_DataMapOfShapeShape,TColStd_MapTransientHasher> BRepFill_DataMapOfNodeDataMapOfShapeShape;
-typedef NCollection_DataMap<Handle(MAT_Node),TopTools_DataMapOfShapeShape,TColStd_MapTransientHasher>::Iterator BRepFill_DataMapIteratorOfDataMapOfNodeDataMapOfShapeShape;
-
+typedef NCollection_DataMap<Handle(MAT_Node), TopTools_DataMapOfShapeShape, TColStd_MapTransientHasher>
+    BRepFill_DataMapOfNodeDataMapOfShapeShape;
+typedef NCollection_DataMap<Handle(MAT_Node), TopTools_DataMapOfShapeShape, TColStd_MapTransientHasher>::Iterator
+    BRepFill_DataMapIteratorOfDataMapOfNodeDataMapOfShapeShape;
 
 #endif

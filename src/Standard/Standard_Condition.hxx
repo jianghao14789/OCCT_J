@@ -26,10 +26,8 @@
 //! and another thread either waits this event or checks periodically its state to perform job.
 //!
 //! This class provides interface similar to WinAPI Event objects.
-class Standard_Condition
-{
+class Standard_Condition {
 public:
-
     //! Default constructor.
     //! @param theIsSet Initial flag state
     Standard_EXPORT Standard_Condition(bool theIsSet);
@@ -62,25 +60,25 @@ public:
 
 #ifdef _WIN32
     //! Access native HANDLE to Event object.
-    void* getHandle() const { return myEvent; }
+    void* getHandle() const {
+        return myEvent;
+    }
 #endif
 
 private:
     //! This method should not be called (prohibited).
     Standard_Condition(const Standard_Condition& theCopy);
     //! This method should not be called (prohibited).
-    Standard_Condition& operator= (const Standard_Condition& theCopy);
+    Standard_Condition& operator=(const Standard_Condition& theCopy);
 
 private:
-
 #ifdef _WIN32
     void* myEvent;
 #else
     pthread_mutex_t myMutex;
-    pthread_cond_t  myCond;
-    bool            myFlag;
+    pthread_cond_t myCond;
+    bool myFlag;
 #endif
-
 };
 
 #endif // _Standard_Condition_HeaderFile

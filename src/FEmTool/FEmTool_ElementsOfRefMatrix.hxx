@@ -27,7 +27,6 @@
 #include <math_Vector.hxx>
 class PLib_Base;
 
-
 //! this  class  describes  the  functions  needed  for
 //! calculating  matrix  elements  of  RefMatrix  for  linear
 //! criteriums  (Tension,  Flexsion  and  Jerk) by  Gauss  integration.
@@ -37,10 +36,9 @@ class PLib_Base;
 //! (')  means  derivative.
 class FEmTool_ElementsOfRefMatrix : public math_FunctionSet {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT FEmTool_ElementsOfRefMatrix(const Handle(PLib_Base)& TheBase, const Standard_Integer DerOrder);
+    Standard_EXPORT FEmTool_ElementsOfRefMatrix(const Handle(PLib_Base) & TheBase, const Standard_Integer DerOrder);
 
     //! returns the number of variables of the function.
     //! It  is  supposed  that  NbVariables  =  1.
@@ -59,13 +57,10 @@ public:
     Standard_EXPORT Standard_Boolean Value(const math_Vector& X, math_Vector& F);
 
 protected:
-
 private:
-
     Handle(PLib_Base) myBase;
     Standard_Integer myDerOrder;
     Standard_Integer myNbEquations;
-
 };
 
 #endif // _FEmTool_ElementsOfRefMatrix_HeaderFile

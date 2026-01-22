@@ -32,8 +32,8 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_PrinterOStream, Message_Printer)
 #endif
 
 //=======================================================================
-//function : Constructor
-//purpose  : 空构造函数，默认输出到标准输出流（通常是控制台）
+// function : Constructor
+// purpose  : 空构造函数，默认输出到标准输出流（通常是控制台）
 //
 // 参数说明：
 //   - theTraceLevel：消息的过滤级别（默认为 Message_Info）
@@ -60,16 +60,13 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_PrinterOStream, Message_Printer)
 //   - std::cout 是一个特殊的流，连接到标准输出设备
 //=======================================================================
 Message_PrinterOStream::Message_PrinterOStream(const Message_Gravity theTraceLevel)
-    : myStream(&std::cout),
-    myIsFile(Standard_False),
-    myToColorize(Standard_True)
-{
+    : myStream(&std::cout), myIsFile(Standard_False), myToColorize(Standard_True) {
     myTraceLevel = theTraceLevel;
 }
 
 //=======================================================================
-//function : Constructor
-//purpose  : 打开文件作为输出流，或创建标准流
+// function : Constructor
+// purpose  : 打开文件作为输出流，或创建标准流
 //
 // 参数说明：
 //   - theFileName：文件名或特殊流名
@@ -95,33 +92,27 @@ Message_PrinterOStream::Message_PrinterOStream(const Message_Gravity theTraceLev
 // 示例：
 //   // 输出到控制台
 //   Message_PrinterOStream printer1("cout");
-//   
+//
 //   // 输出到错误流
 //   Message_PrinterOStream printer2("cerr");
-//   
+//
 //   // 输出到文件（覆盖模式）
 //   Message_PrinterOStream printer3("output.log", Standard_False);
-//   
+//
 //   // 输出到文件（追加模式）
 //   Message_PrinterOStream printer4("output.log", Standard_True);
 //=======================================================================
-Message_PrinterOStream::Message_PrinterOStream(const Standard_CString theFileName,
-    const Standard_Boolean theToAppend,
-    const Message_Gravity  theTraceLevel)
-    : myStream(&std::cout),
-    myIsFile(Standard_False),
-    myToColorize(Standard_True)
-{
+Message_PrinterOStream::Message_PrinterOStream(const Standard_CString theFileName, const Standard_Boolean theToAppend,
+                                               const Message_Gravity theTraceLevel)
+    : myStream(&std::cout), myIsFile(Standard_False), myToColorize(Standard_True) {
     myTraceLevel = theTraceLevel;
     // 检查是否要输出到错误流
-    if (strcasecmp(theFileName, "cerr") == 0)
-    {
+    if (strcasecmp(theFileName, "cerr") == 0) {
         myStream = &std::cerr;
         return;
     }
     // 检查是否要输出到标准输出
-    else if (strcasecmp(theFileName, "cout") == 0)
-    {
+    else if (strcasecmp(theFileName, "cout") == 0) {
         myStream = &std::cout;
         return;
     }
@@ -137,20 +128,16 @@ Message_PrinterOStream::Message_PrinterOStream(const Standard_CString theFileNam
     // 创建新的文件流对象
     std::ofstream* aFile = new std::ofstream();
     // 打开文件，选择模式：追加或覆盖
-    OSD_OpenStream(*aFile, aFileName.ToCString(), 
-                   (theToAppend ? (std::ios_base::app | std::ios_base::out) 
-                               : std::ios_base::out));
-    
+    OSD_OpenStream(*aFile, aFileName.ToCString(),
+                   (theToAppend ? (std::ios_base::app | std::ios_base::out) : std::ios_base::out));
+
     // 检查文件是否成功打开
-    if (aFile->is_open())
-    {
+    if (aFile->is_open()) {
         // 成功打开：使用文件流
         myStream = (Standard_OStream*)aFile;
         myIsFile = Standard_True;
-        myToColorize = Standard_False;  // 文件不支持彩色
-    }
-    else
-    {
+        myToColorize = Standard_False; // 文件不支持彩色
+    } else {
         // 打开失败：清理资源，回退到标准输出
         delete aFile;
         myStream = &std::cout;
@@ -162,8 +149,8 @@ Message_PrinterOStream::Message_PrinterOStream(const Standard_CString theFileNam
 }
 
 //=======================================================================
-//function : Close
-//purpose  : 关闭输出流（如果是文件则关闭文件）
+// function : Close
+// purpose  : 关闭输出流（如果是文件则关闭文件）
 //
 // 说明：
 //   - 当不再需要输出时应该调用此方法
@@ -182,8 +169,7 @@ Message_PrinterOStream::Message_PrinterOStream(const Standard_CString theFileNam
 //   - 不应该手动调用（通常由析构函数调用）
 //=======================================================================
 
-void Message_PrinterOStream::Close()
-{
+void Message_PrinterOStream::Close() {
     // 检查流是否有效
     if (!myStream) return;
     Standard_OStream* ostr = (Standard_OStream*)myStream;
@@ -192,10 +178,9 @@ void Message_PrinterOStream::Close()
     // 刷新缓冲区：确保所有数据都被写出
     // flush() 强制将缓冲区数据写入底层设备
     ostr->flush();
-    
+
     // 如果这是一个文件流，需要显式关闭
-    if (myIsFile)
-    {
+    if (myIsFile) {
         // 将通用流指针转换回文件流指针
         std::ofstream* ofile = (std::ofstream*)ostr;
         // 关闭文件
@@ -207,8 +192,8 @@ void Message_PrinterOStream::Close()
 }
 
 //=======================================================================
-//function : send
-//purpose  : 将消息发送到输出流，支持彩色文本（虚函数的实现）
+// function : send
+// purpose  : 将消息发送到输出流，支持彩色文本（虚函数的实现）
 //
 // 参数说明：
 //   - theString：要输出的消息文本
@@ -238,13 +223,9 @@ void Message_PrinterOStream::Close()
 //   - myToColorize = false 时
 //   - 某些终端环境下
 //=======================================================================
-void Message_PrinterOStream::send(const TCollection_AsciiString& theString,
-    const Message_Gravity theGravity) const
-{
+void Message_PrinterOStream::send(const TCollection_AsciiString& theString, const Message_Gravity theGravity) const {
     // 双重检查：消息级别充分 && 流有效
-    if (theGravity < myTraceLevel
-        || myStream == NULL)
-    {
+    if (theGravity < myTraceLevel || myStream == NULL) {
         return;
     }
 
@@ -252,50 +233,45 @@ void Message_PrinterOStream::send(const TCollection_AsciiString& theString,
     Message_ConsoleColor aColor = Message_ConsoleColor_Default;
     bool toIntense = false;
     // 只有在启用彩色且不是文件时才应用颜色
-    if (myToColorize && !myIsFile)
-    {
-        switch (theGravity)
-        {
-        case Message_Trace:
-            // 跟踪消息：正常黄色
-            aColor = Message_ConsoleColor_Yellow;
-            break;
-        case Message_Info:
-            // 信息消息：亮绿色
-            aColor = Message_ConsoleColor_Green;
-            toIntense = true;
-            break;
-        case Message_Warning:
-            // 警告消息：亮黄色
-            aColor = Message_ConsoleColor_Yellow;
-            toIntense = true;
-            break;
-        case Message_Alarm:
-            // 报警消息：亮红色
-            aColor = Message_ConsoleColor_Red;
-            toIntense = true;
-            break;
-        case Message_Fail:
-            // 失败消息：亮红色
-            aColor = Message_ConsoleColor_Red;
-            toIntense = true;
-            break;
+    if (myToColorize && !myIsFile) {
+        switch (theGravity) {
+            case Message_Trace:
+                // 跟踪消息：正常黄色
+                aColor = Message_ConsoleColor_Yellow;
+                break;
+            case Message_Info:
+                // 信息消息：亮绿色
+                aColor = Message_ConsoleColor_Green;
+                toIntense = true;
+                break;
+            case Message_Warning:
+                // 警告消息：亮黄色
+                aColor = Message_ConsoleColor_Yellow;
+                toIntense = true;
+                break;
+            case Message_Alarm:
+                // 报警消息：亮红色
+                aColor = Message_ConsoleColor_Red;
+                toIntense = true;
+                break;
+            case Message_Fail:
+                // 失败消息：亮红色
+                aColor = Message_ConsoleColor_Red;
+                toIntense = true;
+                break;
         }
     }
 
     Standard_OStream* aStream = (Standard_OStream*)myStream;
     // 如果需要颜色（亮度或非默认颜色）
-    if (toIntense || aColor != Message_ConsoleColor_Default)
-    {
+    if (toIntense || aColor != Message_ConsoleColor_Default) {
         // 设置颜色
         SetConsoleTextColor(aStream, aColor, toIntense);
         // 输出消息
         *aStream << theString;
         // 恢复默认颜色
         SetConsoleTextColor(aStream, Message_ConsoleColor_Default, false);
-    }
-    else
-    {
+    } else {
         // 无需颜色，直接输出
         *aStream << theString;
     }
@@ -304,8 +280,8 @@ void Message_PrinterOStream::send(const TCollection_AsciiString& theString,
 }
 
 //=======================================================================
-//function : SetConsoleTextColor
-//purpose  : 设置控制台文本颜色（跨平台实现）
+// function : SetConsoleTextColor
+// purpose  : 设置控制台文本颜色（跨平台实现）
 //
 // 参数说明：
 //   - theOStream：输出流
@@ -323,7 +299,7 @@ void Message_PrinterOStream::send(const TCollection_AsciiString& theString,
 //   - "30-37"：前景色代码（30=黑色，31=红色，等）
 //   - "1"：粗体/高亮
 //   - "m"：命令结束
-//   
+//
 // 示例：
 //   - "\e[31m"：红色
 //   - "\e[32m"：绿色
@@ -331,56 +307,51 @@ void Message_PrinterOStream::send(const TCollection_AsciiString& theString,
 //   - "\e[31;1m"：亮红色
 //   - "\e[0m"：重置为默认
 //=======================================================================
-void Message_PrinterOStream::SetConsoleTextColor(Standard_OStream* theOStream,
-    Message_ConsoleColor theTextColor,
-    bool theIsIntenseText)
-{
+void Message_PrinterOStream::SetConsoleTextColor(Standard_OStream* theOStream, Message_ConsoleColor theTextColor,
+                                                 bool theIsIntenseText) {
 #ifdef _WIN32
     // Windows 实现：使用 Windows API 设置控制台属性
     // there is no difference between STD_OUTPUT_HANDLE/STD_ERROR_HANDLE for std::cout/std::cerr
-    (void)theOStream;  // 此参数在 Windows 实现中未使用
-    
+    (void)theOStream; // 此参数在 Windows 实现中未使用
+
     // 获取标准输出的句柄（控制台设备）
-    if (HANDLE anStdOut = GetStdHandle(STD_OUTPUT_HANDLE))
-    {
-        WORD aFlags = 0;  // 颜色标志
+    if (HANDLE anStdOut = GetStdHandle(STD_OUTPUT_HANDLE)) {
+        WORD aFlags = 0; // 颜色标志
         // 如果需要高亮，添加强度位
-        if (theIsIntenseText)
-        {
+        if (theIsIntenseText) {
             aFlags |= FOREGROUND_INTENSITY;
         }
         // 根据颜色设置相应的颜色位
-        switch (theTextColor)
-        {
-        case Message_ConsoleColor_Default:
-        case Message_ConsoleColor_White:
-            // 白色 = 红 + 绿 + 蓝
-            aFlags |= FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-            break;
-        case Message_ConsoleColor_Black:
-            // 黑色 = 无颜色
-            break;
-        case Message_ConsoleColor_Red:
-            aFlags |= FOREGROUND_RED;
-            break;
-        case Message_ConsoleColor_Green:
-            aFlags |= FOREGROUND_GREEN;
-            break;
-        case Message_ConsoleColor_Blue:
-            aFlags |= FOREGROUND_BLUE;
-            break;
-        case Message_ConsoleColor_Yellow:
-            // 黄色 = 红 + 绿
-            aFlags |= FOREGROUND_RED | FOREGROUND_GREEN;
-            break;
-        case Message_ConsoleColor_Cyan:
-            // 青色 = 绿 + 蓝
-            aFlags |= FOREGROUND_GREEN | FOREGROUND_BLUE;
-            break;
-        case Message_ConsoleColor_Magenta:
-            // 洋红色 = 红 + 蓝
-            aFlags |= FOREGROUND_RED | FOREGROUND_BLUE;
-            break;
+        switch (theTextColor) {
+            case Message_ConsoleColor_Default:
+            case Message_ConsoleColor_White:
+                // 白色 = 红 + 绿 + 蓝
+                aFlags |= FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+                break;
+            case Message_ConsoleColor_Black:
+                // 黑色 = 无颜色
+                break;
+            case Message_ConsoleColor_Red:
+                aFlags |= FOREGROUND_RED;
+                break;
+            case Message_ConsoleColor_Green:
+                aFlags |= FOREGROUND_GREEN;
+                break;
+            case Message_ConsoleColor_Blue:
+                aFlags |= FOREGROUND_BLUE;
+                break;
+            case Message_ConsoleColor_Yellow:
+                // 黄色 = 红 + 绿
+                aFlags |= FOREGROUND_RED | FOREGROUND_GREEN;
+                break;
+            case Message_ConsoleColor_Cyan:
+                // 青色 = 绿 + 蓝
+                aFlags |= FOREGROUND_GREEN | FOREGROUND_BLUE;
+                break;
+            case Message_ConsoleColor_Magenta:
+                // 洋红色 = 红 + 蓝
+                aFlags |= FOREGROUND_RED | FOREGROUND_BLUE;
+                break;
         }
         // 应用颜色属性
         SetConsoleTextAttribute(anStdOut, aFlags);
@@ -394,43 +365,41 @@ void Message_PrinterOStream::SetConsoleTextColor(Standard_OStream* theOStream,
     (void)theIsIntenseText;
 #else
     // Linux/Unix/Mac 实现：使用 ANSI 转义序列
-    if (theOStream == NULL)
-    {
+    if (theOStream == NULL) {
         return;
     }
 
     // ANSI 颜色代码用于 Unix/Linux 终端
-    const char* aCode = "\e[0m";  // 默认：重置颜色
-    switch (theTextColor)
-    {
-    case Message_ConsoleColor_Default:
-        // 默认颜色：不加粗返回 \e[0m，加粗返回 \e[0;1m
-        aCode = theIsIntenseText ? "\e[0;1m" : "\e[0m";
-        break;
-    case Message_ConsoleColor_Black:
-        aCode = theIsIntenseText ? "\e[30;1m" : "\e[30m";
-        break;
-    case Message_ConsoleColor_Red:
-        aCode = theIsIntenseText ? "\e[31;1m" : "\e[31m";
-        break;
-    case Message_ConsoleColor_Green:
-        aCode = theIsIntenseText ? "\e[32;1m" : "\e[32m";
-        break;
-    case Message_ConsoleColor_Yellow:
-        aCode = theIsIntenseText ? "\e[33;1m" : "\e[33m";
-        break;
-    case Message_ConsoleColor_Blue:
-        aCode = theIsIntenseText ? "\e[34;1m" : "\e[34m";
-        break;
-    case Message_ConsoleColor_Magenta:
-        aCode = theIsIntenseText ? "\e[35;1m" : "\e[35m";
-        break;
-    case Message_ConsoleColor_Cyan:
-        aCode = theIsIntenseText ? "\e[36;1m" : "\e[36m";
-        break;
-    case Message_ConsoleColor_White:
-        aCode = theIsIntenseText ? "\e[37;1m" : "\e[37m";
-        break;
+    const char* aCode = "\e[0m"; // 默认：重置颜色
+    switch (theTextColor) {
+        case Message_ConsoleColor_Default:
+            // 默认颜色：不加粗返回 \e[0m，加粗返回 \e[0;1m
+            aCode = theIsIntenseText ? "\e[0;1m" : "\e[0m";
+            break;
+        case Message_ConsoleColor_Black:
+            aCode = theIsIntenseText ? "\e[30;1m" : "\e[30m";
+            break;
+        case Message_ConsoleColor_Red:
+            aCode = theIsIntenseText ? "\e[31;1m" : "\e[31m";
+            break;
+        case Message_ConsoleColor_Green:
+            aCode = theIsIntenseText ? "\e[32;1m" : "\e[32m";
+            break;
+        case Message_ConsoleColor_Yellow:
+            aCode = theIsIntenseText ? "\e[33;1m" : "\e[33m";
+            break;
+        case Message_ConsoleColor_Blue:
+            aCode = theIsIntenseText ? "\e[34;1m" : "\e[34m";
+            break;
+        case Message_ConsoleColor_Magenta:
+            aCode = theIsIntenseText ? "\e[35;1m" : "\e[35m";
+            break;
+        case Message_ConsoleColor_Cyan:
+            aCode = theIsIntenseText ? "\e[36;1m" : "\e[36m";
+            break;
+        case Message_ConsoleColor_White:
+            aCode = theIsIntenseText ? "\e[37;1m" : "\e[37m";
+            break;
     }
     // 输出 ANSI 转义序列到流
     *theOStream << aCode;

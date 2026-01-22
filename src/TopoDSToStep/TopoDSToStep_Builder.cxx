@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Message_ProgressScope.hxx>
 #include <StdFail_NotDone.hxx>
 #include <StepShape_ClosedShell.hxx>
@@ -41,10 +40,8 @@
 // Method  : TopoDSToStep_Builder::TopoDSToStep_Builder
 // Purpose :
 // ============================================================================
-TopoDSToStep_Builder::TopoDSToStep_Builder()
-: myError(TopoDSToStep_BuilderOther)
-{
-  done = Standard_False;
+TopoDSToStep_Builder::TopoDSToStep_Builder() : myError(TopoDSToStep_BuilderOther) {
+    done = Standard_False;
 }
 
 // ============================================================================
@@ -52,14 +49,11 @@ TopoDSToStep_Builder::TopoDSToStep_Builder()
 // Purpose :
 // ============================================================================
 
-TopoDSToStep_Builder::TopoDSToStep_Builder
-(const TopoDS_Shape& aShape,
- TopoDSToStep_Tool& aTool,
- const Handle(Transfer_FinderProcess)& FP,
- const Message_ProgressRange& theProgress)
-{
-  done = Standard_False;
-  Init(aShape, aTool, FP, theProgress);
+TopoDSToStep_Builder::TopoDSToStep_Builder(const TopoDS_Shape& aShape, TopoDSToStep_Tool& aTool,
+                                           const Handle(Transfer_FinderProcess) & FP,
+                                           const Message_ProgressRange& theProgress) {
+    done = Standard_False;
+    Init(aShape, aTool, FP, theProgress);
 }
 
 // ============================================================================
@@ -67,138 +61,124 @@ TopoDSToStep_Builder::TopoDSToStep_Builder
 // Purpose :
 // ============================================================================
 
-void TopoDSToStep_Builder::Init(const TopoDS_Shape& aShape,
-                                TopoDSToStep_Tool& myTool,
-                                const Handle(Transfer_FinderProcess)& FP,
-                                const Message_ProgressRange& theProgress)
-{
-  
-   if (myTool.IsBound(aShape)) {
-    myError  = TopoDSToStep_BuilderDone;
-    done     = Standard_True;
-    myResult = myTool.Find(aShape);
-    return;
-  }
+void TopoDSToStep_Builder::Init(const TopoDS_Shape& aShape, TopoDSToStep_Tool& myTool,
+                                const Handle(Transfer_FinderProcess) & FP, const Message_ProgressRange& theProgress) {
 
-  switch (aShape.ShapeType()) 
-    {      
-    case TopAbs_SHELL: 
-      {	
-	TopoDS_Shell myShell = TopoDS::Shell(aShape);	  
-	myTool.SetCurrentShell(myShell);
-	
-	Handle(StepShape_FaceSurface)                   FS;
-	Handle(StepShape_TopologicalRepresentationItem) Fpms;
-	TColStd_SequenceOfTransient                 mySeq;
-	
-//	const TopoDS_Shell ForwardShell = 
-//	  TopoDS::Shell(myShell.Oriented(TopAbs_FORWARD));
+    if (myTool.IsBound(aShape)) {
+        myError = TopoDSToStep_BuilderDone;
+        done = Standard_True;
+        myResult = myTool.Find(aShape);
+        return;
+    }
 
-//	TopExp_Explorer myExp(ForwardShell, TopAbs_FACE);
-//  CKY  9-DEC-1997 (PRO9824 et consorts)
-//   Pour passer les orientations : ELLES SONT DONNEES EN RELATIF
-//   Donc, pour SHELL, on doit l ecrire en direct en STEP (pas le choix)
-//   -> il faut repercuter en dessous, donc explorer le Shell TEL QUEL
-//   Pour FACE WIRE, d une part on ECRIT SON ORIENTATION relative au contenant
-//     (puisqu on peut), d autre part on EXPLORE EN FORWARD : ainsi les
-//     orientations des sous-shapes sont relatives a leur contenant immediat
-//     et la recombinaison en lecture est sans malice
-//  Il reste ici et la du code relatif a "en Faceted on combine differemment"
-//  -> reste encore du menage a faire
+    switch (aShape.ShapeType()) {
+        case TopAbs_SHELL: {
+            TopoDS_Shell myShell = TopoDS::Shell(aShape);
+            myTool.SetCurrentShell(myShell);
 
+            Handle(StepShape_FaceSurface) FS;
+            Handle(StepShape_TopologicalRepresentationItem) Fpms;
+            TColStd_SequenceOfTransient mySeq;
 
+            //	const TopoDS_Shell ForwardShell =
+            //	  TopoDS::Shell(myShell.Oriented(TopAbs_FORWARD));
 
-	TopExp_Explorer anExp;
+            //	TopExp_Explorer myExp(ForwardShell, TopAbs_FACE);
+            //  CKY  9-DEC-1997 (PRO9824 et consorts)
+            //   Pour passer les orientations : ELLES SONT DONNEES EN RELATIF
+            //   Donc, pour SHELL, on doit l ecrire en direct en STEP (pas le choix)
+            //   -> il faut repercuter en dessous, donc explorer le Shell TEL QUEL
+            //   Pour FACE WIRE, d une part on ECRIT SON ORIENTATION relative au contenant
+            //     (puisqu on peut), d autre part on EXPLORE EN FORWARD : ainsi les
+            //     orientations des sous-shapes sont relatives a leur contenant immediat
+            //     et la recombinaison en lecture est sans malice
+            //  Il reste ici et la du code relatif a "en Faceted on combine differemment"
+            //  -> reste encore du menage a faire
 
-	TopoDSToStep_MakeStepFace MkFace;
+            TopExp_Explorer anExp;
 
-        Standard_Integer nbshapes = 0;
-        for (anExp.Init(myShell, TopAbs_FACE); anExp.More(); anExp.Next())
-          nbshapes++;
-        Message_ProgressScope aPS(theProgress, NULL, nbshapes);
-        for (anExp.Init(myShell, TopAbs_FACE); anExp.More() && aPS.More(); anExp.Next(), aPS.Next())
-        {
-	  const TopoDS_Face Face = TopoDS::Face(anExp.Current());
-    
-          MkFace.Init(Face, myTool, FP);
+            TopoDSToStep_MakeStepFace MkFace;
 
-	  if (MkFace.IsDone()) {
-	    FS = Handle(StepShape_FaceSurface)::DownCast(MkFace.Value());
-	    Fpms = FS;
-	    mySeq.Append(Fpms);
-	  }
-	  else {
-	    // MakeFace Error Handling : warning only
-//	    std::cout << "Warning : one Face has not been mapped" << std::endl;
-//	  Handle(TransferBRep_ShapeMapper) errShape =
-//	    new TransferBRep_ShapeMapper(Face);
-//	    FP->AddWarning(errShape, " a Face from a Shell has not been mapped");
-	  }
-	}
-        if (!aPS.More())
-          return;
+            Standard_Integer nbshapes = 0;
+            for (anExp.Init(myShell, TopAbs_FACE); anExp.More(); anExp.Next())
+                nbshapes++;
+            Message_ProgressScope aPS(theProgress, NULL, nbshapes);
+            for (anExp.Init(myShell, TopAbs_FACE); anExp.More() && aPS.More(); anExp.Next(), aPS.Next()) {
+                const TopoDS_Face Face = TopoDS::Face(anExp.Current());
 
-	Standard_Integer nbFaces = mySeq.Length();
-	if ( nbFaces >= 1) {
-	  Handle(StepShape_HArray1OfFace) aSet = 
-	    new StepShape_HArray1OfFace(1,nbFaces);
-	  for (Standard_Integer i=1; i<=nbFaces; i++ ) {
-	    aSet->SetValue(i, Handle(StepShape_Face)::DownCast(mySeq.Value(i)));
-	  }
-	  Handle(StepShape_ConnectedFaceSet) CFSpms;
-	  if (myShell.Closed())
-	    CFSpms = new StepShape_ClosedShell();
-	  else
-	    CFSpms = new StepShape_OpenShell();
-	  Handle(TCollection_HAsciiString) aName = 
-	    new TCollection_HAsciiString("");
-	  CFSpms->Init(aName, aSet);
+                MkFace.Init(Face, myTool, FP);
 
-	  // --------------------------------------------------------------
-	  // To add later : if not facetted context & shell is reversed
-	  //                then shall create an oriented_shell with
-	  //                orientation flag to false.
-	  // --------------------------------------------------------------
+                if (MkFace.IsDone()) {
+                    FS = Handle(StepShape_FaceSurface)::DownCast(MkFace.Value());
+                    Fpms = FS;
+                    mySeq.Append(Fpms);
+                } else {
+                    // MakeFace Error Handling : warning only
+                    //	    std::cout << "Warning : one Face has not been mapped" << std::endl;
+                    //	  Handle(TransferBRep_ShapeMapper) errShape =
+                    //	    new TransferBRep_ShapeMapper(Face);
+                    //	    FP->AddWarning(errShape, " a Face from a Shell has not been mapped");
+                }
+            }
+            if (!aPS.More()) return;
 
-	  myTool.Bind(aShape, CFSpms);
-	  myResult = CFSpms;
-	  done     = Standard_True;
-	}
-	else {
-	  // Builder Error handling;
-	  myError = TopoDSToStep_NoFaceMapped;
-	  done    = Standard_False;
-	}
-	break;
-      }
-      
-    case TopAbs_FACE:
-      {
-	const TopoDS_Face Face = TopoDS::Face(aShape);	  
+            Standard_Integer nbFaces = mySeq.Length();
+            if (nbFaces >= 1) {
+                Handle(StepShape_HArray1OfFace) aSet = new StepShape_HArray1OfFace(1, nbFaces);
+                for (Standard_Integer i = 1; i <= nbFaces; i++) {
+                    aSet->SetValue(i, Handle(StepShape_Face)::DownCast(mySeq.Value(i)));
+                }
+                Handle(StepShape_ConnectedFaceSet) CFSpms;
+                if (myShell.Closed())
+                    CFSpms = new StepShape_ClosedShell();
+                else
+                    CFSpms = new StepShape_OpenShell();
+                Handle(TCollection_HAsciiString) aName = new TCollection_HAsciiString("");
+                CFSpms->Init(aName, aSet);
 
-	Handle(StepShape_FaceSurface)                   FS;
-	Handle(StepShape_TopologicalRepresentationItem) Fpms;
+                // --------------------------------------------------------------
+                // To add later : if not facetted context & shell is reversed
+                //                then shall create an oriented_shell with
+                //                orientation flag to false.
+                // --------------------------------------------------------------
 
-	TopoDSToStep_MakeStepFace MkFace(Face, myTool, FP);
+                myTool.Bind(aShape, CFSpms);
+                myResult = CFSpms;
+                done = Standard_True;
+            } else {
+                // Builder Error handling;
+                myError = TopoDSToStep_NoFaceMapped;
+                done = Standard_False;
+            }
+            break;
+        }
 
-	if (MkFace.IsDone()) {
-	  FS = Handle(StepShape_FaceSurface)::DownCast(MkFace.Value());
-	  Fpms = FS;
-	  myResult = Fpms;
-	  myError = TopoDSToStep_BuilderDone;
-	  done = Standard_True;
-	}
-	else {
-	  // MakeFace Error Handling : Face not Mapped
-	  myError = TopoDSToStep_BuilderOther;
-//	  Handle(TransferBRep_ShapeMapper) errShape =
-//	    new TransferBRep_ShapeMapper(Face);
-//	  FP->AddWarning(errShape, " the Face has not been mapped");
-	  done = Standard_False;
-	}
-	break;
-      }
-    default: break;
+        case TopAbs_FACE: {
+            const TopoDS_Face Face = TopoDS::Face(aShape);
+
+            Handle(StepShape_FaceSurface) FS;
+            Handle(StepShape_TopologicalRepresentationItem) Fpms;
+
+            TopoDSToStep_MakeStepFace MkFace(Face, myTool, FP);
+
+            if (MkFace.IsDone()) {
+                FS = Handle(StepShape_FaceSurface)::DownCast(MkFace.Value());
+                Fpms = FS;
+                myResult = Fpms;
+                myError = TopoDSToStep_BuilderDone;
+                done = Standard_True;
+            } else {
+                // MakeFace Error Handling : Face not Mapped
+                myError = TopoDSToStep_BuilderOther;
+                //	  Handle(TransferBRep_ShapeMapper) errShape =
+                //	    new TransferBRep_ShapeMapper(Face);
+                //	  FP->AddWarning(errShape, " the Face has not been mapped");
+                done = Standard_False;
+            }
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -207,11 +187,9 @@ void TopoDSToStep_Builder::Init(const TopoDS_Shape& aShape,
 // Purpose :
 // ============================================================================
 
-const Handle(StepShape_TopologicalRepresentationItem)& 
-TopoDSToStep_Builder::Value() const 
-{
-  StdFail_NotDone_Raise_if (!done, "TopoDSToStep_Builder::Value() - no result");
-  return myResult;
+const Handle(StepShape_TopologicalRepresentationItem) & TopoDSToStep_Builder::Value() const {
+    StdFail_NotDone_Raise_if(!done, "TopoDSToStep_Builder::Value() - no result");
+    return myResult;
 }
 
 // ============================================================================
@@ -219,8 +197,6 @@ TopoDSToStep_Builder::Value() const
 // Purpose :
 // ============================================================================
 
-TopoDSToStep_BuilderError TopoDSToStep_Builder::Error() const 
-{
-  return myError;
+TopoDSToStep_BuilderError TopoDSToStep_Builder::Error() const {
+    return myError;
 }
-

@@ -30,63 +30,52 @@ class Interface_Check;
 class Interface_CopyTool;
 class TCollection_HAsciiString;
 
-
 class RWStepAP214_GeneralModule;
 DEFINE_STANDARD_HANDLE(RWStepAP214_GeneralModule, StepData_GeneralModule)
 
 //! Defines General Services for StepAP214 Entities
 //! (Share,Check,Copy; Trace already inherited)
 //! Depends (for case numbers) of Protocol from StepAP214
-class RWStepAP214_GeneralModule : public StepData_GeneralModule
-{
+class RWStepAP214_GeneralModule : public StepData_GeneralModule {
 
 public:
+    //! Creates a GeneralModule
+    Standard_EXPORT RWStepAP214_GeneralModule();
 
-  
-  //! Creates a GeneralModule
-  Standard_EXPORT RWStepAP214_GeneralModule();
-  
-  //! Specific filling of the list of Entities shared by an Entity
-  //! <ent>, according to a Case Number <CN> (provided by StepAP214
-  //! Protocol).
-  Standard_EXPORT void FillSharedCase (const Standard_Integer CN, const Handle(Standard_Transient)& ent, Interface_EntityIterator& iter) const Standard_OVERRIDE;
-  
-  //! Specific Checking of an Entity <ent>
-  Standard_EXPORT void CheckCase (const Standard_Integer CN, const Handle(Standard_Transient)& ent, const Interface_ShareTool& shares, Handle(Interface_Check)& ach) const Standard_OVERRIDE;
-  
-  //! Specific Copy ("Deep") from <entfrom> to <entto> (same type)
-  //! by using a CopyTool which provides its working Map.
-  //! Use method Transferred from CopyTool to work
-  Standard_EXPORT void CopyCase (const Standard_Integer CN, const Handle(Standard_Transient)& entfrom, const Handle(Standard_Transient)& entto, Interface_CopyTool& TC) const Standard_OVERRIDE;
-  
-  Standard_EXPORT Standard_Boolean NewVoid (const Standard_Integer CN, Handle(Standard_Transient)& ent) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Integer CategoryNumber (const Standard_Integer CN, const Handle(Standard_Transient)& ent, const Interface_ShareTool& shares) const Standard_OVERRIDE;
-  
-  //! Returns the name of a STEP Entity according to its type
-  Standard_EXPORT virtual Handle(TCollection_HAsciiString) Name (const Standard_Integer CN, const Handle(Standard_Transient)& ent, const Interface_ShareTool& shares) const Standard_OVERRIDE;
+    //! Specific filling of the list of Entities shared by an Entity
+    //! <ent>, according to a Case Number <CN> (provided by StepAP214
+    //! Protocol).
+    Standard_EXPORT void FillSharedCase(const Standard_Integer CN, const Handle(Standard_Transient) & ent,
+                                        Interface_EntityIterator& iter) const Standard_OVERRIDE;
 
+    //! Specific Checking of an Entity <ent>
+    Standard_EXPORT void CheckCase(const Standard_Integer CN, const Handle(Standard_Transient) & ent,
+                                   const Interface_ShareTool& shares,
+                                   Handle(Interface_Check) & ach) const Standard_OVERRIDE;
 
+    //! Specific Copy ("Deep") from <entfrom> to <entto> (same type)
+    //! by using a CopyTool which provides its working Map.
+    //! Use method Transferred from CopyTool to work
+    Standard_EXPORT void CopyCase(const Standard_Integer CN, const Handle(Standard_Transient) & entfrom,
+                                  const Handle(Standard_Transient) & entto,
+                                  Interface_CopyTool& TC) const Standard_OVERRIDE;
 
+    Standard_EXPORT Standard_Boolean NewVoid(const Standard_Integer CN,
+                                             Handle(Standard_Transient) & ent) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(RWStepAP214_GeneralModule,StepData_GeneralModule)
+    Standard_EXPORT virtual Standard_Integer CategoryNumber(const Standard_Integer CN,
+                                                            const Handle(Standard_Transient) & ent,
+                                                            const Interface_ShareTool& shares) const Standard_OVERRIDE;
+
+    //! Returns the name of a STEP Entity according to its type
+    Standard_EXPORT virtual Handle(TCollection_HAsciiString)
+        Name(const Standard_Integer CN, const Handle(Standard_Transient) & ent,
+             const Interface_ShareTool& shares) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(RWStepAP214_GeneralModule, StepData_GeneralModule)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_GeneralModule_HeaderFile

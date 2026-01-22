@@ -15,9 +15,7 @@
 #ifndef _BOPAlgo_CheckStatus_HeaderFile
 #define _BOPAlgo_CheckStatus_HeaderFile
 
-
-enum BOPAlgo_CheckStatus
-{
+enum BOPAlgo_CheckStatus {
     BOPAlgo_CheckUnknown,
     BOPAlgo_BadType,
     BOPAlgo_SelfIntersect,

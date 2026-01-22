@@ -19,43 +19,38 @@
 #include <StepFEA_CurveElementLocation.hxx>
 #include <StepFEA_FeaParametricPoint.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_CurveElementLocation,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_CurveElementLocation, Standard_Transient)
 
 //=======================================================================
-//function : StepFEA_CurveElementLocation
-//purpose  : 
+// function : StepFEA_CurveElementLocation
+// purpose  :
 //=======================================================================
-StepFEA_CurveElementLocation::StepFEA_CurveElementLocation ()
-{
+StepFEA_CurveElementLocation::StepFEA_CurveElementLocation() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_CurveElementLocation::Init(const Handle(StepFEA_FeaParametricPoint) & aCoordinate) {
+
+    theCoordinate = aCoordinate;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Coordinate
+// purpose  :
 //=======================================================================
 
-void StepFEA_CurveElementLocation::Init (const Handle(StepFEA_FeaParametricPoint) &aCoordinate)
-{
-
-  theCoordinate = aCoordinate;
+Handle(StepFEA_FeaParametricPoint) StepFEA_CurveElementLocation::Coordinate() const {
+    return theCoordinate;
 }
 
 //=======================================================================
-//function : Coordinate
-//purpose  : 
+// function : SetCoordinate
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_FeaParametricPoint) StepFEA_CurveElementLocation::Coordinate () const
-{
-  return theCoordinate;
-}
-
-//=======================================================================
-//function : SetCoordinate
-//purpose  : 
-//=======================================================================
-
-void StepFEA_CurveElementLocation::SetCoordinate (const Handle(StepFEA_FeaParametricPoint) &aCoordinate)
-{
-  theCoordinate = aCoordinate;
+void StepFEA_CurveElementLocation::SetCoordinate(const Handle(StepFEA_FeaParametricPoint) & aCoordinate) {
+    theCoordinate = aCoordinate;
 }

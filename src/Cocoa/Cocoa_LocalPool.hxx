@@ -16,7 +16,7 @@
 
 #if defined(__clang__) && (__clang_major__ >= 4)
 #if __has_feature(objc_arc)
-  #define HAVE_OBJC_ARC
+#define HAVE_OBJC_ARC
 #endif
 #endif
 
@@ -27,24 +27,20 @@
 #else
 
 #ifdef __OBJC__
-  @class NSAutoreleasePool;
+@class NSAutoreleasePool;
 #else
-  struct NSAutoreleasePool;
+struct NSAutoreleasePool;
 #endif
 
 //! Auxiliary class to create local pool.
-class Cocoa_LocalPool
-{
+class Cocoa_LocalPool {
 
 public:
-
-  Cocoa_LocalPool();
-  ~Cocoa_LocalPool();
+    Cocoa_LocalPool();
+    ~Cocoa_LocalPool();
 
 private:
-
-  NSAutoreleasePool* myPoolObj;
-
+    NSAutoreleasePool* myPoolObj;
 };
 
 #endif // ARC

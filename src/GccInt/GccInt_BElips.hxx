@@ -24,50 +24,28 @@
 #include <GccInt_Bisec.hxx>
 #include <GccInt_IType.hxx>
 
-
 class GccInt_BElips;
 DEFINE_STANDARD_HANDLE(GccInt_BElips, GccInt_Bisec)
 
 //! Describes an ellipse as a bisecting curve between two
 //! 2D geometric objects (such as circles or points).
-class GccInt_BElips : public GccInt_Bisec
-{
+class GccInt_BElips : public GccInt_Bisec {
 
 public:
+    //! Constructs a bisecting curve whose geometry is the 2D ellipse Ellipse.
+    Standard_EXPORT GccInt_BElips(const gp_Elips2d& Ellipse);
 
-  
+    //! Returns a 2D ellipse which is the geometry of this bisecting curve.
+    Standard_EXPORT virtual gp_Elips2d Ellipse() const Standard_OVERRIDE;
 
-  //! Constructs a bisecting curve whose geometry is the 2D ellipse Ellipse.
-  Standard_EXPORT GccInt_BElips(const gp_Elips2d& Ellipse);
-  
-  //! Returns a 2D ellipse which is the geometry of this bisecting curve.
-  Standard_EXPORT virtual gp_Elips2d Ellipse() const Standard_OVERRIDE;
-  
-  //! Returns GccInt_Ell, which is the type of any GccInt_BElips bisecting curve.
-  Standard_EXPORT GccInt_IType ArcType() const Standard_OVERRIDE;
+    //! Returns GccInt_Ell, which is the type of any GccInt_BElips bisecting curve.
+    Standard_EXPORT GccInt_IType ArcType() const Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(GccInt_BElips,GccInt_Bisec)
+    DEFINE_STANDARD_RTTIEXT(GccInt_BElips, GccInt_Bisec)
 
 protected:
-
-
-
-
 private:
-
-
-  gp_Elips2d eli;
-
-
+    gp_Elips2d eli;
 };
-
-
-
-
-
-
 
 #endif // _GccInt_BElips_HeaderFile

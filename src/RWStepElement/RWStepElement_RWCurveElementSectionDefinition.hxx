@@ -27,48 +27,29 @@ class StepElement_CurveElementSectionDefinition;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CurveElementSectionDefinition
-class RWStepElement_RWCurveElementSectionDefinition 
-{
+class RWStepElement_RWCurveElementSectionDefinition {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWCurveElementSectionDefinition();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWCurveElementSectionDefinition();
-  
-  //! Reads CurveElementSectionDefinition
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_CurveElementSectionDefinition)& ent) const;
-  
-  //! Writes CurveElementSectionDefinition
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_CurveElementSectionDefinition)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_CurveElementSectionDefinition)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CurveElementSectionDefinition
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepElement_CurveElementSectionDefinition) & ent) const;
 
+    //! Writes CurveElementSectionDefinition
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepElement_CurveElementSectionDefinition) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_CurveElementSectionDefinition) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWCurveElementSectionDefinition_HeaderFile

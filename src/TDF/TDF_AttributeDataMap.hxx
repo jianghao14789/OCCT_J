@@ -21,8 +21,9 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(TDF_Attribute),Handle(TDF_Attribute),TColStd_MapTransientHasher> TDF_AttributeDataMap;
-typedef NCollection_DataMap<Handle(TDF_Attribute),Handle(TDF_Attribute),TColStd_MapTransientHasher>::Iterator TDF_DataMapIteratorOfAttributeDataMap;
-
+typedef NCollection_DataMap<Handle(TDF_Attribute), Handle(TDF_Attribute), TColStd_MapTransientHasher>
+    TDF_AttributeDataMap;
+typedef NCollection_DataMap<Handle(TDF_Attribute), Handle(TDF_Attribute), TColStd_MapTransientHasher>::Iterator
+    TDF_DataMapIteratorOfAttributeDataMap;
 
 #endif

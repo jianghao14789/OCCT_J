@@ -28,12 +28,9 @@
 #include <Standard_OStream.hxx>
 #include <Standard_IStream.hxx>
 
-
 //! Writes topology in OStream in binary format
-class BinTools_ShapeSet : public BinTools_ShapeSetBase
-{
+class BinTools_ShapeSet : public BinTools_ShapeSetBase {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Builds an empty ShapeSet.
@@ -74,9 +71,8 @@ public:
     //! Write the type.
     //! calls WriteGeometry(S).
     //! Write the flags, the subshapes.
-    Standard_EXPORT virtual void Write
-    (Standard_OStream& OS,
-        const Message_ProgressRange& theRange = Message_ProgressRange());
+    Standard_EXPORT virtual void Write(Standard_OStream& OS,
+                                       const Message_ProgressRange& theRange = Message_ProgressRange());
 
     //! Reads the content of me from the binary stream  <IS>. me
     //! is first cleared.
@@ -90,9 +86,8 @@ public:
     //! Reads the type.
     //! calls ReadGeometry(T,S).
     //! Reads the flag, the subshapes.
-    Standard_EXPORT virtual void Read
-    (Standard_IStream& IS,
-        const Message_ProgressRange& theRange = Message_ProgressRange());
+    Standard_EXPORT virtual void Read(Standard_IStream& IS,
+                                      const Message_ProgressRange& theRange = Message_ProgressRange());
 
     //! Writes   on  <OS>   the shape   <S>.    Writes the
     //! orientation, the index of the TShape and the index
@@ -101,24 +96,20 @@ public:
 
     //! Writes the geometry of  me  on the stream <OS> in a
     //! binary format that can be read back by Read.
-    Standard_EXPORT virtual void WriteGeometry
-    (Standard_OStream& OS,
-        const Message_ProgressRange& theRange = Message_ProgressRange()) const;
+    Standard_EXPORT virtual void WriteGeometry(Standard_OStream& OS,
+                                               const Message_ProgressRange& theRange = Message_ProgressRange()) const;
 
     //! Reads the geometry of me from the  stream  <IS>.
-    Standard_EXPORT virtual void ReadGeometry
-    (Standard_IStream& IS,
-        const Message_ProgressRange& theRange = Message_ProgressRange());
+    Standard_EXPORT virtual void ReadGeometry(Standard_IStream& IS,
+                                              const Message_ProgressRange& theRange = Message_ProgressRange());
 
     //! Reads from <IS> a shape flags and sub-shapes and modifies S.
-    Standard_EXPORT virtual void ReadFlagsAndSubs
-    (TopoDS_Shape& S, const TopAbs_ShapeEnum T,
-        Standard_IStream& IS, const Standard_Integer NbShapes);
+    Standard_EXPORT virtual void ReadFlagsAndSubs(TopoDS_Shape& S, const TopAbs_ShapeEnum T, Standard_IStream& IS,
+                                                  const Standard_Integer NbShapes);
 
     //! Reads from <IS> a shape and returns it in S.
     //! <NbShapes> is the number of tshapes in the set.
-    Standard_EXPORT virtual void ReadSubs
-    (TopoDS_Shape& S, Standard_IStream& IS, const Standard_Integer NbShapes);
+    Standard_EXPORT virtual void ReadSubs(TopoDS_Shape& S, Standard_IStream& IS, const Standard_Integer NbShapes);
 
     //! An empty virtual method for redefinition in shape-reader.
     Standard_EXPORT virtual void Read(Standard_IStream& /*theStream*/, TopoDS_Shape& /*theShape*/) {};
@@ -138,45 +129,39 @@ public:
 
     //! Reads the 3d polygons  of me
     //! from the  stream  <IS>.
-    Standard_EXPORT void ReadPolygon3D
-    (Standard_IStream& IS,
-        const Message_ProgressRange& theRange = Message_ProgressRange());
+    Standard_EXPORT void ReadPolygon3D(Standard_IStream& IS,
+                                       const Message_ProgressRange& theRange = Message_ProgressRange());
 
     //! Writes the 3d polygons
     //! on the stream <OS> in a format that can
     //! be read back by Read.
-    Standard_EXPORT void WritePolygon3D
-    (Standard_OStream& OS,
-        const Message_ProgressRange& theRange = Message_ProgressRange()) const;
+    Standard_EXPORT void WritePolygon3D(Standard_OStream& OS,
+                                        const Message_ProgressRange& theRange = Message_ProgressRange()) const;
 
     //! Reads the triangulation of me
     //! from the  stream  <IS>.
-    Standard_EXPORT void ReadTriangulation
-    (Standard_IStream& IS,
-        const Message_ProgressRange& theRange = Message_ProgressRange());
+    Standard_EXPORT void ReadTriangulation(Standard_IStream& IS,
+                                           const Message_ProgressRange& theRange = Message_ProgressRange());
 
     //! Writes the triangulation
     //! on the stream <OS> in a format that can
     //! be read back by Read.
-    Standard_EXPORT void WriteTriangulation
-    (Standard_OStream& OS,
-        const Message_ProgressRange& theRange = Message_ProgressRange()) const;
+    Standard_EXPORT void WriteTriangulation(Standard_OStream& OS,
+                                            const Message_ProgressRange& theRange = Message_ProgressRange()) const;
 
     //! Reads the polygons on triangulation of me
     //! from the  stream  <IS>.
-    Standard_EXPORT void ReadPolygonOnTriangulation
-    (Standard_IStream& IS,
-        const Message_ProgressRange& theRange = Message_ProgressRange());
+    Standard_EXPORT void ReadPolygonOnTriangulation(Standard_IStream& IS,
+                                                    const Message_ProgressRange& theRange = Message_ProgressRange());
 
     //! Writes the polygons on triangulation
     //! on the stream <OS> in a format that can
     //! be read back by Read.
-    Standard_EXPORT void WritePolygonOnTriangulation
-    (Standard_OStream& OS,
-        const Message_ProgressRange& theRange = Message_ProgressRange()) const;
+    Standard_EXPORT void
+    WritePolygonOnTriangulation(Standard_OStream& OS,
+                                const Message_ProgressRange& theRange = Message_ProgressRange()) const;
 
 private:
-
     TopTools_IndexedMapOfShape myShapes; ///< index and its shape (started from 1)
     BinTools_LocationSet myLocations;
     BRep_Builder myBuilder;
@@ -186,7 +171,8 @@ private:
     NCollection_IndexedMap<Handle(Poly_Polygon2D), TColStd_MapTransientHasher> myPolygons2D;
     NCollection_IndexedMap<Handle(Poly_Polygon3D), TColStd_MapTransientHasher> myPolygons3D;
     NCollection_IndexedDataMap<Handle(Poly_Triangulation),
-        Standard_Boolean> myTriangulations; //!< Contains a boolean flag with information
+                               Standard_Boolean>
+        myTriangulations; //!< Contains a boolean flag with information
     //!  to save normals for triangulation
     NCollection_IndexedMap<Handle(Poly_PolygonOnTriangulation), TColStd_MapTransientHasher> myNodes;
 };

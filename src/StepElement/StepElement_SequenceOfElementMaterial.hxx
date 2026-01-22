@@ -19,5 +19,4 @@
 
 typedef NCollection_Sequence<Handle(StepElement_ElementMaterial)> StepElement_SequenceOfElementMaterial;
 
-
 #endif

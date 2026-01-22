@@ -30,14 +30,12 @@
 #include <Standard_Address.hxx>
 class gp_Pnt;
 
-
 //! This class represents the integrand function for the outer
 //! integral computation. The returned value represents the
 //! integral of UFunction. It depends on the value type and the
 //! flag IsByPoint.
 class BRepGProp_TFunction : public math_Function {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Constructor. Initializes the function with the face, the
@@ -55,12 +53,9 @@ public:
     //! If IsByPoint is equal to Standard_False, the number of the
     //! coefficients is 4 and they represent the combination of
     //! plane parameters and shift values.
-    Standard_EXPORT BRepGProp_TFunction(const BRepGProp_Face& theSurface,
-        const gp_Pnt& theVertex,
-        const Standard_Boolean IsByPoint,
-        const Standard_Real* theCoeffs,
-        const Standard_Real theUMin,
-        const Standard_Real theTolerance);
+    Standard_EXPORT BRepGProp_TFunction(const BRepGProp_Face& theSurface, const gp_Pnt& theVertex,
+                                        const Standard_Boolean IsByPoint, const Standard_Real* theCoeffs,
+                                        const Standard_Real theUMin, const Standard_Real theTolerance);
 
     Standard_EXPORT void Init();
 
@@ -105,7 +100,6 @@ public:
     Standard_EXPORT virtual Standard_Integer GetStateNumber() Standard_OVERRIDE;
 
 protected:
-
 private:
     BRepGProp_Face mySurface;
     BRepGProp_UFunction myUFunction;
@@ -119,11 +113,6 @@ private:
     Standard_Integer myNbPntOuter;
 };
 
-
 #include <BRepGProp_TFunction.lxx>
-
-
-
-
 
 #endif // _BRepGProp_TFunction_HeaderFile

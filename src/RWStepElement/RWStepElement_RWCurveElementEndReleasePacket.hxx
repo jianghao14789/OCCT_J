@@ -27,48 +27,29 @@ class StepElement_CurveElementEndReleasePacket;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CurveElementEndReleasePacket
-class RWStepElement_RWCurveElementEndReleasePacket 
-{
+class RWStepElement_RWCurveElementEndReleasePacket {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWCurveElementEndReleasePacket();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWCurveElementEndReleasePacket();
-  
-  //! Reads CurveElementEndReleasePacket
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_CurveElementEndReleasePacket)& ent) const;
-  
-  //! Writes CurveElementEndReleasePacket
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_CurveElementEndReleasePacket)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_CurveElementEndReleasePacket)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CurveElementEndReleasePacket
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepElement_CurveElementEndReleasePacket) & ent) const;
 
+    //! Writes CurveElementEndReleasePacket
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepElement_CurveElementEndReleasePacket) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_CurveElementEndReleasePacket) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWCurveElementEndReleasePacket_HeaderFile

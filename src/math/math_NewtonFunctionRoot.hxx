@@ -33,7 +33,6 @@ class math_FunctionWithDerivative;
 //! Newton algorithm. Knowledge of the derivative is required.
 class math_NewtonFunctionRoot {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! The Newton method is done to find the root of the function F
@@ -42,7 +41,9 @@ public:
     //! The solution is found when :
     //! abs(Xi - Xi-1) <= EpsX and abs(F(Xi))<= EpsF
     //! The maximum number of iterations allowed is given by NbIterations.
-    Standard_EXPORT math_NewtonFunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess, const Standard_Real EpsX, const Standard_Real EpsF, const Standard_Integer NbIterations = 100);
+    Standard_EXPORT math_NewtonFunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess,
+                                            const Standard_Real EpsX, const Standard_Real EpsF,
+                                            const Standard_Integer NbIterations = 100);
 
     //! The Newton method is done to find the root of the function F
     //! from the initial guess Guess.
@@ -51,11 +52,14 @@ public:
     //! The solution is found when :
     //! abs(Xi - Xi-1) <= EpsX and abs(F(Xi))<= EpsF
     //! The maximum number of iterations allowed is given by NbIterations.
-    Standard_EXPORT math_NewtonFunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess, const Standard_Real EpsX, const Standard_Real EpsF, const Standard_Real A, const Standard_Real B, const Standard_Integer NbIterations = 100);
+    Standard_EXPORT math_NewtonFunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess,
+                                            const Standard_Real EpsX, const Standard_Real EpsF, const Standard_Real A,
+                                            const Standard_Real B, const Standard_Integer NbIterations = 100);
 
     //! is used in a sub-class to initialize correctly all the fields
     //! of this class.
-    Standard_EXPORT math_NewtonFunctionRoot(const Standard_Real A, const Standard_Real B, const Standard_Real EpsX, const Standard_Real EpsF, const Standard_Integer NbIterations = 100);
+    Standard_EXPORT math_NewtonFunctionRoot(const Standard_Real A, const Standard_Real B, const Standard_Real EpsX,
+                                            const Standard_Real EpsF, const Standard_Integer NbIterations = 100);
 
     //! is used internally by the constructors.
     Standard_EXPORT void Perform(math_FunctionWithDerivative& F, const Standard_Real Guess);
@@ -84,9 +88,7 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
-
     Standard_Boolean Done;
     Standard_Real X;
     Standard_Real Fx;
@@ -97,7 +99,6 @@ private:
     Standard_Integer Itermax;
     Standard_Real Binf;
     Standard_Real Bsup;
-
 };
 
 #include <math_NewtonFunctionRoot.lxx>

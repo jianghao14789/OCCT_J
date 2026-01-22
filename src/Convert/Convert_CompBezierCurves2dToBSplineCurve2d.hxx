@@ -32,17 +32,13 @@
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 
-
 //! Converts a list  of connecting Bezier Curves 2d to  a
 //! BSplineCurve 2d.
 //! if possible, the continuity of the BSpline will be
 //! increased to more than C0.
-class Convert_CompBezierCurves2dToBSplineCurve2d
-{
+class Convert_CompBezierCurves2dToBSplineCurve2d {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs a framework for converting a sequence of
     //! adjacent non-rational Bezier curves into a BSpline curve.
@@ -171,19 +167,8 @@ public:
     //! these conditions are not checked, and an error may occur.
     Standard_EXPORT void KnotsAndMults(TColStd_Array1OfReal& Knots, TColStd_Array1OfInteger& Mults) const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Convert_SequenceOfArray1OfPoles2d mySequence;
     TColgp_SequenceOfPnt2d CurvePoles;
     TColStd_SequenceOfReal CurveKnots;
@@ -191,14 +176,6 @@ private:
     Standard_Integer myDegree;
     Standard_Real myAngular;
     Standard_Boolean myDone;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Convert_CompBezierCurves2dToBSplineCurve2d_HeaderFile

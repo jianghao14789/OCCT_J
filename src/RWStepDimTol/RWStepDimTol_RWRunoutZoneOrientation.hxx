@@ -27,23 +27,20 @@ class Interface_Check;
 class StepDimTol_RunoutZoneOrientation;
 class StepData_StepWriter;
 
-
 //! Read & Write tool for RunoutZoneOrientation
-class RWStepDimTol_RWRunoutZoneOrientation 
-{
+class RWStepDimTol_RWRunoutZoneOrientation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWRunoutZoneOrientation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWRunoutZoneOrientation();
-  
-  //! Reads RunoutZoneOrientation
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_RunoutZoneOrientation)& ent)  const;
-  
-  //! Writes RunoutZoneOrientation
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_RunoutZoneOrientation)& ent)  const;
-  
+    //! Reads RunoutZoneOrientation
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_RunoutZoneOrientation) & ent) const;
+
+    //! Writes RunoutZoneOrientation
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_RunoutZoneOrientation) & ent) const;
 };
 #endif // _RWStepDimTol_RWRunoutZoneOrientation_HeaderFile

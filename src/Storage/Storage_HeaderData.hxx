@@ -32,20 +32,15 @@ class Storage_BaseDriver;
 class TCollection_AsciiString;
 class TCollection_ExtendedString;
 
-
 class Storage_HeaderData;
 DEFINE_STANDARD_HANDLE(Storage_HeaderData, Standard_Transient)
 
-
-class Storage_HeaderData : public Standard_Transient
-{
+class Storage_HeaderData : public Standard_Transient {
 
 public:
-
-
     Standard_EXPORT Storage_HeaderData();
 
-    Standard_EXPORT Standard_Boolean Read(const Handle(Storage_BaseDriver)& theDriver);
+    Standard_EXPORT Standard_Boolean Read(const Handle(Storage_BaseDriver) & theDriver);
 
     //! return the creation date
     Standard_EXPORT TCollection_AsciiString CreationDate() const;
@@ -100,20 +95,16 @@ public:
 
     Standard_EXPORT void ClearErrorStatus();
 
-
     friend class Storage_Schema;
-
 
     DEFINE_STANDARD_RTTIEXT(Storage_HeaderData, Standard_Transient)
 
 public:
-
     Standard_EXPORT void SetNumberOfObjects(const Standard_Integer anObjectNumber);
 
     Standard_EXPORT void SetStorageVersion(const TCollection_AsciiString& aVersion);
 
-    void SetStorageVersion(const Standard_Integer theVersion)
-    {
+    void SetStorageVersion(const Standard_Integer theVersion) {
         SetStorageVersion(TCollection_AsciiString(theVersion));
     }
 
@@ -124,7 +115,6 @@ public:
     Standard_EXPORT void SetSchemaName(const TCollection_AsciiString& aName);
 
 private:
-
     Standard_EXPORT void SetErrorStatus(const Storage_Error anError);
 
     Standard_EXPORT void SetErrorStatusExtension(const TCollection_AsciiString& anErrorExt);
@@ -141,14 +131,6 @@ private:
     TColStd_SequenceOfExtendedString myComments;
     Storage_Error myErrorStatus;
     TCollection_AsciiString myErrorStatusExt;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Storage_HeaderData_HeaderFile

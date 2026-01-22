@@ -19,58 +19,51 @@
 #include <TopLoc_Location.hxx>
 #include <Precision.hxx>
 
-
-IMPLEMENT_STANDARD_RTTIEXT(Select3D_SensitiveSegment,Select3D_SensitiveEntity)
+IMPLEMENT_STANDARD_RTTIEXT(Select3D_SensitiveSegment, Select3D_SensitiveEntity)
 
 //=====================================================
 // Function : Create
 // Purpose  : Constructor
 //=====================================================
-Select3D_SensitiveSegment::Select3D_SensitiveSegment (const Handle(SelectMgr_EntityOwner)& theOwnerId,
-                                                      const gp_Pnt& theFirstPnt,
-                                                      const gp_Pnt& theLastPnt)
-: Select3D_SensitiveEntity (theOwnerId)
-{
-  mySFactor = 3;
-  myStart = theFirstPnt;
-  myEnd = theLastPnt;
+Select3D_SensitiveSegment::Select3D_SensitiveSegment(const Handle(SelectMgr_EntityOwner) & theOwnerId,
+                                                     const gp_Pnt& theFirstPnt, const gp_Pnt& theLastPnt)
+    : Select3D_SensitiveEntity(theOwnerId) {
+    mySFactor = 3;
+    myStart = theFirstPnt;
+    myEnd = theLastPnt;
 }
 
 // =======================================================================
 // function : Matches
 // purpose  : Checks whether the segment overlaps current selecting volume
 // =======================================================================
-Standard_Boolean Select3D_SensitiveSegment::Matches (SelectBasics_SelectingVolumeManager& theMgr,
-                                                     SelectBasics_PickResult& thePickResult)
-{
-  if (!theMgr.IsOverlapAllowed()) // check for inclusion
-  {
-    if (theMgr.GetActiveSelectionType() == SelectMgr_SelectionType_Polyline)
+Standard_Boolean Select3D_SensitiveSegment::Matches(SelectBasics_SelectingVolumeManager& theMgr,
+                                                    SelectBasics_PickResult& thePickResult) {
+    if (!theMgr.IsOverlapAllowed()) // check for inclusion
     {
-      return theMgr.OverlapsSegment (myStart, myEnd, thePickResult);
+        if (theMgr.GetActiveSelectionType() == SelectMgr_SelectionType_Polyline) {
+            return theMgr.OverlapsSegment(myStart, myEnd, thePickResult);
+        }
+        return theMgr.OverlapsPoint(myStart, thePickResult) && theMgr.OverlapsPoint(myEnd, thePickResult);
     }
-    return theMgr.OverlapsPoint (myStart, thePickResult) && theMgr.OverlapsPoint (myEnd, thePickResult);
-  }
 
-  if (!theMgr.OverlapsSegment (myStart, myEnd, thePickResult)) // check for overlap
-  {
-    return Standard_False;
-  }
+    if (!theMgr.OverlapsSegment(myStart, myEnd, thePickResult)) // check for overlap
+    {
+        return Standard_False;
+    }
 
-  thePickResult.SetDistToGeomCenter (theMgr.DistToGeometryCenter(CenterOfGeometry()));
-  return Standard_True;
+    thePickResult.SetDistToGeomCenter(theMgr.DistToGeometryCenter(CenterOfGeometry()));
+    return Standard_True;
 }
 
 //=======================================================================
-//function : GetConnected
-//purpose  :
+// function : GetConnected
+// purpose  :
 //=======================================================================
-Handle(Select3D_SensitiveEntity) Select3D_SensitiveSegment::GetConnected()
-{
-  Handle(Select3D_SensitiveSegment) aNewEntity =
-    new Select3D_SensitiveSegment (myOwnerId, myStart, myEnd);
+Handle(Select3D_SensitiveEntity) Select3D_SensitiveSegment::GetConnected() {
+    Handle(Select3D_SensitiveSegment) aNewEntity = new Select3D_SensitiveSegment(myOwnerId, myStart, myEnd);
 
-  return aNewEntity;
+    return aNewEntity;
 }
 
 //=======================================================================
@@ -78,9 +71,8 @@ Handle(Select3D_SensitiveEntity) Select3D_SensitiveSegment::GetConnected()
 // purpose  : Returns center of the segment. If location transformation
 //            is set, it will be applied
 //=======================================================================
-gp_Pnt Select3D_SensitiveSegment::CenterOfGeometry() const
-{
-  return (myStart.XYZ() + myEnd.XYZ()) * 0.5;
+gp_Pnt Select3D_SensitiveSegment::CenterOfGeometry() const {
+    return (myStart.XYZ() + myEnd.XYZ()) * 0.5;
 }
 
 //=======================================================================
@@ -88,38 +80,31 @@ gp_Pnt Select3D_SensitiveSegment::CenterOfGeometry() const
 // purpose  : Returns bounding box of the segment. If location
 //            transformation is set, it will be applied
 //=======================================================================
-Select3D_BndBox3d Select3D_SensitiveSegment::BoundingBox()
-{
-  const SelectMgr_Vec3 aMinPnt (Min (myStart.X(), myEnd.X()),
-                                Min (myStart.Y(), myEnd.Y()),
-                                Min (myStart.Z(), myEnd.Z()));
-  const SelectMgr_Vec3 aMaxPnt (Max (myStart.X(), myEnd.X()),
-                                Max (myStart.Y(), myEnd.Y()),
-                                Max (myStart.Z(), myEnd.Z()));
-  return Select3D_BndBox3d (aMinPnt, aMaxPnt);
+Select3D_BndBox3d Select3D_SensitiveSegment::BoundingBox() {
+    const SelectMgr_Vec3 aMinPnt(Min(myStart.X(), myEnd.X()), Min(myStart.Y(), myEnd.Y()), Min(myStart.Z(), myEnd.Z()));
+    const SelectMgr_Vec3 aMaxPnt(Max(myStart.X(), myEnd.X()), Max(myStart.Y(), myEnd.Y()), Max(myStart.Z(), myEnd.Z()));
+    return Select3D_BndBox3d(aMinPnt, aMaxPnt);
 }
 
 //=======================================================================
 // function : NbSubElements
 // purpose  : Returns the amount of points
 //=======================================================================
-Standard_Integer Select3D_SensitiveSegment::NbSubElements() const
-{
-  return 2;
+Standard_Integer Select3D_SensitiveSegment::NbSubElements() const {
+    return 2;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  :
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void Select3D_SensitiveSegment::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, Select3D_SensitiveEntity)
+void Select3D_SensitiveSegment::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Select3D_SensitiveEntity)
 
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myStart)
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myEnd)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myStart)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myEnd)
 
-  Select3D_BndBox3d aBoundingBox = ((Select3D_SensitiveSegment*)this)->BoundingBox();
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &aBoundingBox)
+    Select3D_BndBox3d aBoundingBox = ((Select3D_SensitiveSegment*)this)->BoundingBox();
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &aBoundingBox)
 }

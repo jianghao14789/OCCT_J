@@ -19,135 +19,124 @@
 #include <StepFEA_Curve3dElementProperty.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_Curve3dElementProperty,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_Curve3dElementProperty, Standard_Transient)
 
 //=======================================================================
-//function : StepFEA_Curve3dElementProperty
-//purpose  : 
+// function : StepFEA_Curve3dElementProperty
+// purpose  :
 //=======================================================================
-StepFEA_Curve3dElementProperty::StepFEA_Curve3dElementProperty ()
-{
+StepFEA_Curve3dElementProperty::StepFEA_Curve3dElementProperty() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_Curve3dElementProperty::Init(const Handle(TCollection_HAsciiString) & aPropertyId,
+                                          const Handle(TCollection_HAsciiString) & aDescription,
+                                          const Handle(StepFEA_HArray1OfCurveElementInterval) & aIntervalDefinitions,
+                                          const Handle(StepFEA_HArray1OfCurveElementEndOffset) & aEndOffsets,
+                                          const Handle(StepFEA_HArray1OfCurveElementEndRelease) & aEndReleases) {
+
+    thePropertyId = aPropertyId;
+
+    theDescription = aDescription;
+
+    theIntervalDefinitions = aIntervalDefinitions;
+
+    theEndOffsets = aEndOffsets;
+
+    theEndReleases = aEndReleases;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : PropertyId
+// purpose  :
 //=======================================================================
 
-void StepFEA_Curve3dElementProperty::Init (const Handle(TCollection_HAsciiString) &aPropertyId,
-                                           const Handle(TCollection_HAsciiString) &aDescription,
-                                           const Handle(StepFEA_HArray1OfCurveElementInterval) &aIntervalDefinitions,
-                                           const Handle(StepFEA_HArray1OfCurveElementEndOffset) &aEndOffsets,
-                                           const Handle(StepFEA_HArray1OfCurveElementEndRelease) &aEndReleases)
-{
-
-  thePropertyId = aPropertyId;
-
-  theDescription = aDescription;
-
-  theIntervalDefinitions = aIntervalDefinitions;
-
-  theEndOffsets = aEndOffsets;
-
-  theEndReleases = aEndReleases;
+Handle(TCollection_HAsciiString) StepFEA_Curve3dElementProperty::PropertyId() const {
+    return thePropertyId;
 }
 
 //=======================================================================
-//function : PropertyId
-//purpose  : 
+// function : SetPropertyId
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepFEA_Curve3dElementProperty::PropertyId () const
-{
-  return thePropertyId;
+void StepFEA_Curve3dElementProperty::SetPropertyId(const Handle(TCollection_HAsciiString) & aPropertyId) {
+    thePropertyId = aPropertyId;
 }
 
 //=======================================================================
-//function : SetPropertyId
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepFEA_Curve3dElementProperty::SetPropertyId (const Handle(TCollection_HAsciiString) &aPropertyId)
-{
-  thePropertyId = aPropertyId;
+Handle(TCollection_HAsciiString) StepFEA_Curve3dElementProperty::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepFEA_Curve3dElementProperty::Description () const
-{
-  return theDescription;
+void StepFEA_Curve3dElementProperty::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : IntervalDefinitions
+// purpose  :
 //=======================================================================
 
-void StepFEA_Curve3dElementProperty::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(StepFEA_HArray1OfCurveElementInterval) StepFEA_Curve3dElementProperty::IntervalDefinitions() const {
+    return theIntervalDefinitions;
 }
 
 //=======================================================================
-//function : IntervalDefinitions
-//purpose  : 
+// function : SetIntervalDefinitions
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_HArray1OfCurveElementInterval) StepFEA_Curve3dElementProperty::IntervalDefinitions () const
-{
-  return theIntervalDefinitions;
+void StepFEA_Curve3dElementProperty::SetIntervalDefinitions(const Handle(StepFEA_HArray1OfCurveElementInterval) &
+                                                            aIntervalDefinitions) {
+    theIntervalDefinitions = aIntervalDefinitions;
 }
 
 //=======================================================================
-//function : SetIntervalDefinitions
-//purpose  : 
+// function : EndOffsets
+// purpose  :
 //=======================================================================
 
-void StepFEA_Curve3dElementProperty::SetIntervalDefinitions (const Handle(StepFEA_HArray1OfCurveElementInterval) &aIntervalDefinitions)
-{
-  theIntervalDefinitions = aIntervalDefinitions;
+Handle(StepFEA_HArray1OfCurveElementEndOffset) StepFEA_Curve3dElementProperty::EndOffsets() const {
+    return theEndOffsets;
 }
 
 //=======================================================================
-//function : EndOffsets
-//purpose  : 
+// function : SetEndOffsets
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_HArray1OfCurveElementEndOffset) StepFEA_Curve3dElementProperty::EndOffsets () const
-{
-  return theEndOffsets;
+void StepFEA_Curve3dElementProperty::SetEndOffsets(const Handle(StepFEA_HArray1OfCurveElementEndOffset) & aEndOffsets) {
+    theEndOffsets = aEndOffsets;
 }
 
 //=======================================================================
-//function : SetEndOffsets
-//purpose  : 
+// function : EndReleases
+// purpose  :
 //=======================================================================
 
-void StepFEA_Curve3dElementProperty::SetEndOffsets (const Handle(StepFEA_HArray1OfCurveElementEndOffset) &aEndOffsets)
-{
-  theEndOffsets = aEndOffsets;
+Handle(StepFEA_HArray1OfCurveElementEndRelease) StepFEA_Curve3dElementProperty::EndReleases() const {
+    return theEndReleases;
 }
 
 //=======================================================================
-//function : EndReleases
-//purpose  : 
+// function : SetEndReleases
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_HArray1OfCurveElementEndRelease) StepFEA_Curve3dElementProperty::EndReleases () const
-{
-  return theEndReleases;
-}
-
-//=======================================================================
-//function : SetEndReleases
-//purpose  : 
-//=======================================================================
-
-void StepFEA_Curve3dElementProperty::SetEndReleases (const Handle(StepFEA_HArray1OfCurveElementEndRelease) &aEndReleases)
-{
-  theEndReleases = aEndReleases;
+void StepFEA_Curve3dElementProperty::SetEndReleases(const Handle(StepFEA_HArray1OfCurveElementEndRelease) &
+                                                    aEndReleases) {
+    theEndReleases = aEndReleases;
 }

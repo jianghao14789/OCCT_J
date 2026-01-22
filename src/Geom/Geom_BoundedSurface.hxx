@@ -22,7 +22,6 @@
 
 #include <Geom_Surface.hxx>
 
-
 class Geom_BoundedSurface;
 DEFINE_STANDARD_HANDLE(Geom_BoundedSurface, Geom_Surface)
 
@@ -56,9 +55,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(Geom_BoundedSurface, Geom_Surface)
 
 protected:
-
 private:
-
 };
 
 #endif // _Geom_BoundedSurface_HeaderFile

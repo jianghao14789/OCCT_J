@@ -23,8 +23,7 @@
 #include <TCollection_AsciiString.hxx>
 #include <OSD_SysType.hxx>
 
-class OSD_Path
-{
+class OSD_Path {
 public:
     DEFINE_STANDARD_ALLOC;
 
@@ -64,13 +63,22 @@ public:
     //!
     //! "subdir|" - On UNIX -> "subdir/"
     //! - On VMS  -> "[.subdir.]"
-    Standard_EXPORT OSD_Path(const TCollection_AsciiString& aNode, const TCollection_AsciiString& aUsername, const TCollection_AsciiString& aPassword, const TCollection_AsciiString& aDisk, const TCollection_AsciiString& aTrek, const TCollection_AsciiString& aName, const TCollection_AsciiString& anExtension);
+    Standard_EXPORT OSD_Path(const TCollection_AsciiString& aNode, const TCollection_AsciiString& aUsername,
+                             const TCollection_AsciiString& aPassword, const TCollection_AsciiString& aDisk,
+                             const TCollection_AsciiString& aTrek, const TCollection_AsciiString& aName,
+                             const TCollection_AsciiString& anExtension);
 
     //! Gets each component of a path.
-    Standard_EXPORT void Values(TCollection_AsciiString& aNode, TCollection_AsciiString& aUsername, TCollection_AsciiString& aPassword, TCollection_AsciiString& aDisk, TCollection_AsciiString& aTrek, TCollection_AsciiString& aName, TCollection_AsciiString& anExtension) const;
+    Standard_EXPORT void Values(TCollection_AsciiString& aNode, TCollection_AsciiString& aUsername,
+                                TCollection_AsciiString& aPassword, TCollection_AsciiString& aDisk,
+                                TCollection_AsciiString& aTrek, TCollection_AsciiString& aName,
+                                TCollection_AsciiString& anExtension) const;
 
     //! Sets each component of a path.
-    Standard_EXPORT void SetValues(const TCollection_AsciiString& aNode, const TCollection_AsciiString& aUsername, const TCollection_AsciiString& aPassword, const TCollection_AsciiString& aDisk, const TCollection_AsciiString& aTrek, const TCollection_AsciiString& aName, const TCollection_AsciiString& anExtension);
+    Standard_EXPORT void SetValues(const TCollection_AsciiString& aNode, const TCollection_AsciiString& aUsername,
+                                   const TCollection_AsciiString& aPassword, const TCollection_AsciiString& aDisk,
+                                   const TCollection_AsciiString& aTrek, const TCollection_AsciiString& aName,
+                                   const TCollection_AsciiString& anExtension);
 
     //! Returns system dependent path
     //! <aType> is one among Unix,VMS ...
@@ -93,7 +101,8 @@ public:
     Standard_EXPORT void ExpandedName(TCollection_AsciiString& aName);
 
     //! Returns TRUE if <theDependentName> is valid for this SysType.
-    Standard_EXPORT static Standard_Boolean IsValid(const TCollection_AsciiString& theDependentName, const OSD_SysType theSysType = OSD_Default);
+    Standard_EXPORT static Standard_Boolean IsValid(const TCollection_AsciiString& theDependentName,
+                                                    const OSD_SysType theSysType = OSD_Default);
 
     //! This removes the last directory name in <aTrek>
     //! and returns result.
@@ -188,21 +197,22 @@ public:
     Standard_EXPORT Standard_Boolean LocateExecFile(OSD_Path& aPath);
 
 public:
-
     //! Returns the relative file path between the absolute directory
     //! path <DirPath>  and the absolute file path <AbsFilePath>.
     //! If <DirPath> starts with "/", paths are handled as
     //! on Unix, if it starts with a letter followed by ":", as on
     //! WNT. In particular on WNT directory names are not key sensitive.
     //! If handling fails, an empty string is returned.
-    Standard_EXPORT static TCollection_AsciiString RelativePath(const TCollection_AsciiString& DirPath, const TCollection_AsciiString& AbsFilePath);
+    Standard_EXPORT static TCollection_AsciiString RelativePath(const TCollection_AsciiString& DirPath,
+                                                                const TCollection_AsciiString& AbsFilePath);
 
     //! Returns the absolute file path from the absolute directory path
     //! <DirPath> and the relative file path returned by RelativePath().
     //! If the RelFilePath is an absolute path, it is returned and the
     //! directory path is ignored.
     //! If handling fails, an empty string is returned.
-    Standard_EXPORT static TCollection_AsciiString AbsolutePath(const TCollection_AsciiString& DirPath, const TCollection_AsciiString& RelFilePath);
+    Standard_EXPORT static TCollection_AsciiString AbsolutePath(const TCollection_AsciiString& DirPath,
+                                                                const TCollection_AsciiString& RelFilePath);
 
     //! Split absolute filepath into folder path and file name.
     //! Example: IN  theFilePath ='/media/cdrom/image.jpg'
@@ -212,8 +222,8 @@ public:
     //! @param theFolder   [out] folder path (with trailing separator)
     //! @param theFileName [out] file name
     Standard_EXPORT static void FolderAndFileFromPath(const TCollection_AsciiString& theFilePath,
-        TCollection_AsciiString& theFolder,
-        TCollection_AsciiString& theFileName);
+                                                      TCollection_AsciiString& theFolder,
+                                                      TCollection_AsciiString& theFileName);
 
     //! Return file extension from the name in lower case.
     //! Extension is expected to be within 20-symbols length, and determined as file name tail after last dot.
@@ -224,24 +234,26 @@ public:
     //! @param theName      [out] file name without extension
     //! @param theExtension [out] file extension in lower case and without dot
     Standard_EXPORT static void FileNameAndExtension(const TCollection_AsciiString& theFilePath,
-        TCollection_AsciiString& theName,
-        TCollection_AsciiString& theExtension);
+                                                     TCollection_AsciiString& theName,
+                                                     TCollection_AsciiString& theExtension);
 
     //! Detect absolute DOS-path also used in Windows.
     //! The total path length is limited to 256 characters.
     //! Sample path:
     //!   C:\folder\file
     //! @return true if DOS path syntax detected.
-    static Standard_Boolean IsDosPath(const char* thePath) { return thePath[0] != '\0' && thePath[1] == ':'; }
+    static Standard_Boolean IsDosPath(const char* thePath) {
+        return thePath[0] != '\0' && thePath[1] == ':';
+    }
 
     //! Detect extended-length NT path (can be only absolute).
     //! Approximate maximum path is 32767 characters.
     //! Sample path:
     //!   \\?\D:\very long path
-    //! File I/O functions in the Windows API convert "/" to "\" as part of converting the name to an NT-style name, except when using the "\\?\" prefix.
+    //! File I/O functions in the Windows API convert "/" to "\" as part of converting the name to an NT-style name,
+    //! except when using the "\\?\" prefix.
     //! @return true if extended-length NT path syntax detected.
-    static Standard_Boolean IsNtExtendedPath(const char* thePath)
-    {
+    static Standard_Boolean IsNtExtendedPath(const char* thePath) {
         return ::strncmp(thePath, "\\\\?\\", 4) == 0;
     }
 
@@ -249,12 +261,9 @@ public:
     //! Sample path:
     //!   \\server\share\file
     //! @return true if UNC path syntax detected.
-    static Standard_Boolean IsUncPath(const char* thePath)
-    {
-        if (::strncmp(thePath, "\\\\", 2) == 0)
-        {
-            return thePath[2] != '?'
-                || IsUncExtendedPath(thePath);
+    static Standard_Boolean IsUncPath(const char* thePath) {
+        if (::strncmp(thePath, "\\\\", 2) == 0) {
+            return thePath[2] != '?' || IsUncExtendedPath(thePath);
         }
         return ::strncmp(thePath, "//", 2) == 0;
     }
@@ -263,8 +272,7 @@ public:
     //! Sample path:
     //!   \\?\UNC\server\share
     //! @return true if extended-length UNC path syntax detected.
-    static Standard_Boolean IsUncExtendedPath(const char* thePath)
-    {
+    static Standard_Boolean IsUncExtendedPath(const char* thePath) {
         return ::strncmp(thePath, "\\\\?\\UNC\\", 8) == 0;
     }
 
@@ -272,8 +280,7 @@ public:
     //! Sample path:
     //!   /media/cdrom/file
     //! @return true if UNIX path syntax detected.
-    static Standard_Boolean IsUnixPath(const char* thePath)
-    {
+    static Standard_Boolean IsUnixPath(const char* thePath) {
         return thePath[0] == '/' && thePath[1] != '/';
     }
 
@@ -281,8 +288,7 @@ public:
     //! Sample path:
     //!   content://filename
     //! @return true if content path syntax detected
-    static Standard_Boolean IsContentProtocolPath(const char* thePath)
-    {
+    static Standard_Boolean IsContentProtocolPath(const char* thePath) {
         return ::strncmp(thePath, "content://", 10) == 0;
     }
 
@@ -291,19 +297,14 @@ public:
     //! Sample path:
     //!   http://domain/path/file
     //! @return true if remote protocol path syntax detected.
-    static Standard_Boolean IsRemoteProtocolPath(const char* thePath)
-    {
+    static Standard_Boolean IsRemoteProtocolPath(const char* thePath) {
         const char* anIter = thePath;
-        if (*anIter == ':')
-        {
+        if (*anIter == ':') {
             return false;
         }
-        for (; *anIter != '\0'; ++anIter)
-        {
-            if (*anIter == ':')
-            {
-                return *(++anIter) == '/'
-                    && *(++anIter) == '/';
+        for (; *anIter != '\0'; ++anIter) {
+            if (*anIter == ':') {
+                return *(++anIter) == '/' && *(++anIter) == '/';
             }
         }
         return false;
@@ -312,25 +313,19 @@ public:
     //! Method to recognize path is absolute or not.
     //! Detection is based on path syntax - no any filesystem / network access performed.
     //! @return true if path is incomplete (relative).
-    static Standard_Boolean IsRelativePath(const char* thePath)
-    {
-        return !IsUncPath(thePath)
-            && !IsDosPath(thePath)
-            && !IsNtExtendedPath(thePath)
-            && !IsUnixPath(thePath)
-            && !IsRemoteProtocolPath(thePath);
+    static Standard_Boolean IsRelativePath(const char* thePath) {
+        return !IsUncPath(thePath) && !IsDosPath(thePath) && !IsNtExtendedPath(thePath) && !IsUnixPath(thePath) &&
+               !IsRemoteProtocolPath(thePath);
     }
 
     //! Method to recognize path is absolute or not.
     //! Detection is based on path syntax - no any filesystem / network access performed.
     //! @return true if path is complete (absolute)
-    static Standard_Boolean IsAbsolutePath(const char* thePath)
-    {
+    static Standard_Boolean IsAbsolutePath(const char* thePath) {
         return !IsRelativePath(thePath);
     }
 
 private:
-
     TCollection_AsciiString myNode;
     TCollection_AsciiString myUserName;
     TCollection_AsciiString myPassword;
@@ -340,7 +335,6 @@ private:
     TCollection_AsciiString myExtension;
     Standard_Boolean myUNCFlag;
     OSD_SysType mySysDep;
-
 };
 
 #endif // _OSD_Path_HeaderFile

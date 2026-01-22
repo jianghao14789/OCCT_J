@@ -15,7 +15,6 @@
 
 // The original implementation Copyright: (C) RINA S.p.A
 
-
 #include <XmlTObjDrivers_XYZDriver.hxx>
 
 #include <Message_Messenger.hxx>
@@ -27,108 +26,97 @@
 
 #include <TObj_TXYZ.hxx>
 
-
-IMPLEMENT_STANDARD_RTTIEXT(XmlTObjDrivers_XYZDriver,XmlMDF_ADriver)
-IMPLEMENT_DOMSTRING (CoordX,             "X")
-IMPLEMENT_DOMSTRING (CoordY,             "Y")
-IMPLEMENT_DOMSTRING (CoordZ,             "Z")
+IMPLEMENT_STANDARD_RTTIEXT(XmlTObjDrivers_XYZDriver, XmlMDF_ADriver)
+IMPLEMENT_DOMSTRING(CoordX, "X")
+IMPLEMENT_DOMSTRING(CoordY, "Y")
+IMPLEMENT_DOMSTRING(CoordZ, "Z")
 
 //=======================================================================
-//function : XmlTObjDrivers_XYZDriver
-//purpose  : constructor
+// function : XmlTObjDrivers_XYZDriver
+// purpose  : constructor
 //=======================================================================
 
-XmlTObjDrivers_XYZDriver::XmlTObjDrivers_XYZDriver
-                         (const Handle(Message_Messenger)& theMessageDriver)
-: XmlMDF_ADriver( theMessageDriver, NULL)
-{
+XmlTObjDrivers_XYZDriver::XmlTObjDrivers_XYZDriver(const Handle(Message_Messenger) & theMessageDriver)
+    : XmlMDF_ADriver(theMessageDriver, NULL) {}
+
+//=======================================================================
+// function : NewEmpty
+// purpose  : Creates a new attribute
+//=======================================================================
+
+Handle(TDF_Attribute) XmlTObjDrivers_XYZDriver::NewEmpty() const {
+    return new TObj_TXYZ;
 }
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : Creates a new attribute
-//=======================================================================
-
-Handle(TDF_Attribute) XmlTObjDrivers_XYZDriver::NewEmpty() const
-{
-  return new TObj_TXYZ;
-}
-
-//=======================================================================
-//function : Paste
-//purpose  : Translate the contents of <aSource> and put it
+// function : Paste
+// purpose  : Translate the contents of <aSource> and put it
 //           into <aTarget>, using the relocation table
 //           <aRelocTable> to keep the sharings.
 //=======================================================================
 
-Standard_Boolean XmlTObjDrivers_XYZDriver::Paste
-                         (const XmlObjMgt_Persistent&  Source,
-                          const Handle(TDF_Attribute)& Target,
-                          XmlObjMgt_RRelocationTable&  /*RelocTable*/) const
-{
-  const XmlObjMgt_Element& anElement = Source;
-  
-  // get coordinates
-  TCollection_AsciiString CoordX = anElement.getAttribute(::CoordX());
-  TCollection_AsciiString CoordY = anElement.getAttribute(::CoordY());
-  TCollection_AsciiString CoordZ = anElement.getAttribute(::CoordZ());
+Standard_Boolean XmlTObjDrivers_XYZDriver::Paste(const XmlObjMgt_Persistent& Source,
+                                                 const Handle(TDF_Attribute) & Target,
+                                                 XmlObjMgt_RRelocationTable& /*RelocTable*/) const {
+    const XmlObjMgt_Element& anElement = Source;
 
-  // creating gp_XYZ
-  gp_XYZ aXYZ;
-  Standard_CString aStr;
-  Standard_Real aCoord;
+    // get coordinates
+    TCollection_AsciiString CoordX = anElement.getAttribute(::CoordX());
+    TCollection_AsciiString CoordY = anElement.getAttribute(::CoordY());
+    TCollection_AsciiString CoordZ = anElement.getAttribute(::CoordZ());
 
-  aStr = CoordX.ToCString();
-  if(!XmlObjMgt::GetReal( aStr, aCoord )) return Standard_False;
-  aXYZ.SetX(aCoord);
+    // creating gp_XYZ
+    gp_XYZ aXYZ;
+    Standard_CString aStr;
+    Standard_Real aCoord;
 
-  aStr = CoordY.ToCString();
-  if(!XmlObjMgt::GetReal( aStr, aCoord )) return Standard_False;
-  aXYZ.SetY(aCoord);
+    aStr = CoordX.ToCString();
+    if (!XmlObjMgt::GetReal(aStr, aCoord)) return Standard_False;
+    aXYZ.SetX(aCoord);
 
-  aStr = CoordZ.ToCString();
-  if(!XmlObjMgt::GetReal( aStr, aCoord )) return Standard_False;
-  aXYZ.SetZ(aCoord);
+    aStr = CoordY.ToCString();
+    if (!XmlObjMgt::GetReal(aStr, aCoord)) return Standard_False;
+    aXYZ.SetY(aCoord);
 
-  // setting gp_XYZ
-  Handle(TObj_TXYZ) aTarget = Handle(TObj_TXYZ)::DownCast (Target);
-  aTarget->Set ( aXYZ );
+    aStr = CoordZ.ToCString();
+    if (!XmlObjMgt::GetReal(aStr, aCoord)) return Standard_False;
+    aXYZ.SetZ(aCoord);
 
-  return Standard_True;
+    // setting gp_XYZ
+    Handle(TObj_TXYZ) aTarget = Handle(TObj_TXYZ)::DownCast(Target);
+    aTarget->Set(aXYZ);
+
+    return Standard_True;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : Translate the contents of <aSource> and put it
+// function : Paste
+// purpose  : Translate the contents of <aSource> and put it
 //           into <aTarget>, using the relocation table
 //           <aRelocTable> to keep the sharings.
 //           Store master and referred labels as entry, the other model referred
 //           as entry in model-container
 //=======================================================================
 
-void XmlTObjDrivers_XYZDriver::Paste
-                         (const Handle(TDF_Attribute)& Source,
-                          XmlObjMgt_Persistent&        Target,
-                          XmlObjMgt_SRelocationTable&  /*RelocTable*/) const
-{
-  Handle(TObj_TXYZ) aSource =
-    Handle(TObj_TXYZ)::DownCast (Source);
+void XmlTObjDrivers_XYZDriver::Paste(const Handle(TDF_Attribute) & Source, XmlObjMgt_Persistent& Target,
+                                     XmlObjMgt_SRelocationTable& /*RelocTable*/) const {
+    Handle(TObj_TXYZ) aSource = Handle(TObj_TXYZ)::DownCast(Source);
 
-  if(aSource.IsNull()) return;
+    if (aSource.IsNull()) return;
 
-  gp_XYZ aXYZ = aSource->Get();
+    gp_XYZ aXYZ = aSource->Get();
 
-  TCollection_AsciiString aCoord;
+    TCollection_AsciiString aCoord;
 
-  // coordinate X
-  aCoord = TCollection_AsciiString( aXYZ.X() );
-  Target.Element().setAttribute(::CoordX(), aCoord.ToCString());
+    // coordinate X
+    aCoord = TCollection_AsciiString(aXYZ.X());
+    Target.Element().setAttribute(::CoordX(), aCoord.ToCString());
 
-  // coordinate Y
-  aCoord = TCollection_AsciiString( aXYZ.Y() );
-  Target.Element().setAttribute(::CoordY(), aCoord.ToCString());
+    // coordinate Y
+    aCoord = TCollection_AsciiString(aXYZ.Y());
+    Target.Element().setAttribute(::CoordY(), aCoord.ToCString());
 
-  // coordinate Z
-  aCoord = TCollection_AsciiString( aXYZ.Z() );
-  Target.Element().setAttribute(::CoordZ(), aCoord.ToCString());
+    // coordinate Z
+    aCoord = TCollection_AsciiString(aXYZ.Z());
+    Target.Element().setAttribute(::CoordZ(), aCoord.ToCString());
 }

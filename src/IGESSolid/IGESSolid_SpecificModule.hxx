@@ -29,39 +29,21 @@ class IGESSolid_SpecificModule;
 DEFINE_STANDARD_HANDLE(IGESSolid_SpecificModule, IGESData_SpecificModule)
 
 //! Defines Services attached to IGES Entities : Dump, for IGESSolid
-class IGESSolid_SpecificModule : public IGESData_SpecificModule
-{
+class IGESSolid_SpecificModule : public IGESData_SpecificModule {
 
 public:
+    //! Creates a SpecificModule from IGESSolid & puts it into SpecificLib
+    Standard_EXPORT IGESSolid_SpecificModule();
 
-  
-  //! Creates a SpecificModule from IGESSolid & puts it into SpecificLib
-  Standard_EXPORT IGESSolid_SpecificModule();
-  
-  //! Specific Dump (own parameters) for IGESSolid
-  Standard_EXPORT void OwnDump (const Standard_Integer CN, const Handle(IGESData_IGESEntity)& ent, const IGESData_IGESDumper& dumper, Standard_OStream& S, const Standard_Integer own) const Standard_OVERRIDE;
+    //! Specific Dump (own parameters) for IGESSolid
+    Standard_EXPORT void OwnDump(const Standard_Integer CN, const Handle(IGESData_IGESEntity) & ent,
+                                 const IGESData_IGESDumper& dumper, Standard_OStream& S,
+                                 const Standard_Integer own) const Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESSolid_SpecificModule,IGESData_SpecificModule)
+    DEFINE_STANDARD_RTTIEXT(IGESSolid_SpecificModule, IGESData_SpecificModule)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESSolid_SpecificModule_HeaderFile

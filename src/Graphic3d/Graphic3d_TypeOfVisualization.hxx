@@ -21,10 +21,6 @@
 //!
 //! TOV_WIREFRAME   wireframe visualisation
 //! TOV_SHADING     shaded visualisation
-enum Graphic3d_TypeOfVisualization
-{
-  Graphic3d_TOV_WIREFRAME,
-  Graphic3d_TOV_SHADING
-};
+enum Graphic3d_TypeOfVisualization { Graphic3d_TOV_WIREFRAME, Graphic3d_TOV_SHADING };
 
 #endif // _Graphic3d_TypeOfVisualization_HeaderFile

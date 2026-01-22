@@ -33,42 +33,21 @@ class AppDef_BSpParLeastSquareOfMyBSplGradientOfBSplineCompute;
 class AppDef_BSpParFunctionOfMyBSplGradientOfBSplineCompute;
 class math_MultipleVarFunctionWithGradient;
 
-
-
-class AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute  : public math_BFGS
-{
+class AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute : public math_BFGS {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute(
+        math_MultipleVarFunctionWithGradient& F, const math_Vector& StartingPoint, const Standard_Real Tolerance3d,
+        const Standard_Real Tolerance2d, const Standard_Real Eps, const Standard_Integer NbIterations = 200);
 
-  
-  Standard_EXPORT AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute(math_MultipleVarFunctionWithGradient& F, const math_Vector& StartingPoint, const Standard_Real Tolerance3d, const Standard_Real Tolerance2d, const Standard_Real Eps, const Standard_Integer NbIterations = 200);
-  
-  Standard_EXPORT virtual Standard_Boolean IsSolutionReached (math_MultipleVarFunctionWithGradient& F) const Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT virtual Standard_Boolean
+    IsSolutionReached(math_MultipleVarFunctionWithGradient& F) const Standard_OVERRIDE;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Real myTol3d;
-  Standard_Real myTol2d;
-
-
+    Standard_Real myTol3d;
+    Standard_Real myTol2d;
 };
-
-
-
-
-
-
 
 #endif // _AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute_HeaderFile

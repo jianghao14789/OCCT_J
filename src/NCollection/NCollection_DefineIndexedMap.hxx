@@ -29,7 +29,7 @@
 
 // *********************************************** Class IndexedMap ***********
 
-#define DEFINE_INDEXEDMAP(_ClassName_, _BaseCollection_, TheKeyType)           \
-typedef NCollection_IndexedMap <TheKeyType > _ClassName_;
+#define DEFINE_INDEXEDMAP(_ClassName_, _BaseCollection_, TheKeyType)                                                   \
+    typedef NCollection_IndexedMap<TheKeyType> _ClassName_;
 
 #endif

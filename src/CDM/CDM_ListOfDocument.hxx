@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(CDM_Document)> CDM_ListOfDocument;
 typedef NCollection_List<Handle(CDM_Document)>::Iterator CDM_ListIteratorOfListOfDocument;
 
-
 #endif

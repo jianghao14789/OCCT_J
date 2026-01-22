@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepVisual_SurfaceStyleReflectanceAmbient;
 
 //! Read & Write tool for SurfaceStyleReflectanceAmbient
-class RWStepVisual_RWSurfaceStyleReflectanceAmbient
-{
+class RWStepVisual_RWSurfaceStyleReflectanceAmbient {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWSurfaceStyleReflectanceAmbient();
 
-  Standard_EXPORT RWStepVisual_RWSurfaceStyleReflectanceAmbient();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_SurfaceStyleReflectanceAmbient) & ent) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_SurfaceStyleReflectanceAmbient)& ent) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepVisual_SurfaceStyleReflectanceAmbient) & ent) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_SurfaceStyleReflectanceAmbient)& ent) const;
-
-  Standard_EXPORT void Share(const Handle(StepVisual_SurfaceStyleReflectanceAmbient)& ent, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepVisual_SurfaceStyleReflectanceAmbient) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWSurfaceStyleReflectanceAmbient_HeaderFile_

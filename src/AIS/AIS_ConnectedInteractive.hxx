@@ -33,105 +33,112 @@
 //! all standard modes if its reference based on AIS_Shape.
 //! Descendants may redefine ComputeSelection() though.
 //! Also ConnectedInteractive will handle HLR if its reference based on AIS_Shape.
-class AIS_ConnectedInteractive : public AIS_InteractiveObject
-{
-  DEFINE_STANDARD_RTTIEXT(AIS_ConnectedInteractive, AIS_InteractiveObject)
+class AIS_ConnectedInteractive : public AIS_InteractiveObject {
+    DEFINE_STANDARD_RTTIEXT(AIS_ConnectedInteractive, AIS_InteractiveObject)
 public:
+    //! Disconnects the previous view and sets highlight
+    //! mode to 0. This highlights the wireframe presentation
+    //! aTypeOfPresentation3d.
+    //! Top_AllView deactivates hidden line removal.
+    Standard_EXPORT
+    AIS_ConnectedInteractive(const PrsMgr_TypeOfPresentation3d aTypeOfPresentation3d = PrsMgr_TOP_AllView);
 
-  //! Disconnects the previous view and sets highlight
-  //! mode to 0. This highlights the wireframe presentation
-  //! aTypeOfPresentation3d.
-  //! Top_AllView deactivates hidden line removal.
-  Standard_EXPORT AIS_ConnectedInteractive(const PrsMgr_TypeOfPresentation3d aTypeOfPresentation3d = PrsMgr_TOP_AllView);
-  
-  //! Returns KOI_Object
-  virtual AIS_KindOfInteractive Type() const Standard_OVERRIDE { return AIS_KindOfInteractive_Object; }
+    //! Returns KOI_Object
+    virtual AIS_KindOfInteractive Type() const Standard_OVERRIDE {
+        return AIS_KindOfInteractive_Object;
+    }
 
-  //! Returns 0
-  virtual Standard_Integer Signature() const Standard_OVERRIDE { return 0; }
-  
-  //! Establishes the connection between the Connected
-  //! Interactive Object, anotherIobj, and its reference.
-  void Connect (const Handle(AIS_InteractiveObject)& theAnotherObj) { connect (theAnotherObj, Handle(TopLoc_Datum3D)()); }
+    //! Returns 0
+    virtual Standard_Integer Signature() const Standard_OVERRIDE {
+        return 0;
+    }
 
-  //! Establishes the connection between the Connected
-  //! Interactive Object, anotherIobj, and its reference.
-  //! Locates instance in aLocation.
-  void Connect (const Handle(AIS_InteractiveObject)& theAnotherObj,
-                const gp_Trsf& theLocation)  { connect (theAnotherObj, new TopLoc_Datum3D (theLocation)); }
+    //! Establishes the connection between the Connected
+    //! Interactive Object, anotherIobj, and its reference.
+    void Connect(const Handle(AIS_InteractiveObject) & theAnotherObj) {
+        connect(theAnotherObj, Handle(TopLoc_Datum3D)());
+    }
 
-  //! Establishes the connection between the Connected
-  //! Interactive Object, anotherIobj, and its reference.
-  //! Locates instance in aLocation.
-  void Connect (const Handle(AIS_InteractiveObject)& theAnotherObj,
-                const Handle(TopLoc_Datum3D)& theLocation) { connect (theAnotherObj, theLocation); }
+    //! Establishes the connection between the Connected
+    //! Interactive Object, anotherIobj, and its reference.
+    //! Locates instance in aLocation.
+    void Connect(const Handle(AIS_InteractiveObject) & theAnotherObj, const gp_Trsf& theLocation) {
+        connect(theAnotherObj, new TopLoc_Datum3D(theLocation));
+    }
 
-  //! Returns true if there is a connection established
-  //! between the presentation and its source reference.
-  Standard_Boolean HasConnection() const { return !myReference.IsNull(); }
+    //! Establishes the connection between the Connected
+    //! Interactive Object, anotherIobj, and its reference.
+    //! Locates instance in aLocation.
+    void Connect(const Handle(AIS_InteractiveObject) & theAnotherObj, const Handle(TopLoc_Datum3D) & theLocation) {
+        connect(theAnotherObj, theLocation);
+    }
 
-  //! Returns the connection with the reference Interactive Object.
-  const Handle(AIS_InteractiveObject)& ConnectedTo() const { return myReference; }
+    //! Returns true if there is a connection established
+    //! between the presentation and its source reference.
+    Standard_Boolean HasConnection() const {
+        return !myReference.IsNull();
+    }
 
-  //! Clears the connection with a source reference. The
-  //! presentation will no longer be displayed.
-  //! Warning Must be done before deleting the presentation.
-  Standard_EXPORT void Disconnect();
+    //! Returns the connection with the reference Interactive Object.
+    const Handle(AIS_InteractiveObject) & ConnectedTo() const {
+        return myReference;
+    }
 
-  //! Informs the graphic context that the interactive Object
-  //! may be decomposed into sub-shapes for dynamic selection.
-  virtual Standard_Boolean AcceptShapeDecomposition() const Standard_OVERRIDE
-  {
-    return !myReference.IsNull() && myReference->AcceptShapeDecomposition();
-  }
+    //! Clears the connection with a source reference. The
+    //! presentation will no longer be displayed.
+    //! Warning Must be done before deleting the presentation.
+    Standard_EXPORT void Disconnect();
 
-  //! Return true if reference presentation accepts specified display mode.
-  virtual Standard_Boolean AcceptDisplayMode (const Standard_Integer theMode) const Standard_OVERRIDE
-  {
-    return myReference.IsNull()
-        || myReference->AcceptDisplayMode (theMode);
-  }
+    //! Informs the graphic context that the interactive Object
+    //! may be decomposed into sub-shapes for dynamic selection.
+    virtual Standard_Boolean AcceptShapeDecomposition() const Standard_OVERRIDE {
+        return !myReference.IsNull() && myReference->AcceptShapeDecomposition();
+    }
 
-protected:
-
-  //! Calculates the view aPresentation and its updates.
-  //! The latter are managed by aPresentationManager.
-  //! The display mode aMode is 0 by default.
-  //! this method is redefined virtual;
-  //! when the instance is connected to another
-  //! InteractiveObject,this method doesn't
-  //! compute anything, but just uses the
-  //! presentation of this last object, with
-  //! a transformation if there's one stored.
-  Standard_EXPORT virtual void Compute (const Handle(PrsMgr_PresentationManager)& thePrsMgr,
-                                        const Handle(Prs3d_Presentation)& theprs,
-                                        const Standard_Integer theMode) Standard_OVERRIDE;
-
-  //! Computes the presentation according to a point of view.
-  Standard_EXPORT virtual void computeHLR (const Handle(Graphic3d_Camera)& theProjector,
-                                           const Handle(TopLoc_Datum3D)& theTrsf,
-                                           const Handle(Prs3d_Presentation)& thePrs) Standard_OVERRIDE;
-
-  //! Generates sensitive entities by copying
-  //! them from myReference selection, creates and sets an entity
-  //! owner for this entities and adds them to theSelection
-  Standard_EXPORT virtual void ComputeSelection (const Handle(SelectMgr_Selection)& theSelection, const Standard_Integer theMode) Standard_OVERRIDE;
-
-  //! Generates sensitive entities by copying
-  //! them from myReference sub shapes selection, creates and sets an entity
-  //! owner for this entities and adds them to theSelection
-  Standard_EXPORT void computeSubShapeSelection (const Handle(SelectMgr_Selection)& theSelection, const Standard_Integer theMode);
-
-  Standard_EXPORT void updateShape (const Standard_Boolean WithLocation = Standard_True);
-
-  Standard_EXPORT void connect (const Handle(AIS_InteractiveObject)& theAnotherObj,
-                                const Handle(TopLoc_Datum3D)& theLocation);
+    //! Return true if reference presentation accepts specified display mode.
+    virtual Standard_Boolean AcceptDisplayMode(const Standard_Integer theMode) const Standard_OVERRIDE {
+        return myReference.IsNull() || myReference->AcceptDisplayMode(theMode);
+    }
 
 protected:
+    //! Calculates the view aPresentation and its updates.
+    //! The latter are managed by aPresentationManager.
+    //! The display mode aMode is 0 by default.
+    //! this method is redefined virtual;
+    //! when the instance is connected to another
+    //! InteractiveObject,this method doesn't
+    //! compute anything, but just uses the
+    //! presentation of this last object, with
+    //! a transformation if there's one stored.
+    Standard_EXPORT virtual void Compute(const Handle(PrsMgr_PresentationManager) & thePrsMgr,
+                                         const Handle(Prs3d_Presentation) & theprs,
+                                         const Standard_Integer theMode) Standard_OVERRIDE;
 
-  Handle(AIS_InteractiveObject) myReference;
-  TopoDS_Shape myShape;
+    //! Computes the presentation according to a point of view.
+    Standard_EXPORT virtual void computeHLR(const Handle(Graphic3d_Camera) & theProjector,
+                                            const Handle(TopLoc_Datum3D) & theTrsf,
+                                            const Handle(Prs3d_Presentation) & thePrs) Standard_OVERRIDE;
 
+    //! Generates sensitive entities by copying
+    //! them from myReference selection, creates and sets an entity
+    //! owner for this entities and adds them to theSelection
+    Standard_EXPORT virtual void ComputeSelection(const Handle(SelectMgr_Selection) & theSelection,
+                                                  const Standard_Integer theMode) Standard_OVERRIDE;
+
+    //! Generates sensitive entities by copying
+    //! them from myReference sub shapes selection, creates and sets an entity
+    //! owner for this entities and adds them to theSelection
+    Standard_EXPORT void computeSubShapeSelection(const Handle(SelectMgr_Selection) & theSelection,
+                                                  const Standard_Integer theMode);
+
+    Standard_EXPORT void updateShape(const Standard_Boolean WithLocation = Standard_True);
+
+    Standard_EXPORT void connect(const Handle(AIS_InteractiveObject) & theAnotherObj,
+                                 const Handle(TopLoc_Datum3D) & theLocation);
+
+protected:
+    Handle(AIS_InteractiveObject) myReference;
+    TopoDS_Shape myShape;
 };
 
 DEFINE_STANDARD_HANDLE(AIS_ConnectedInteractive, AIS_InteractiveObject)

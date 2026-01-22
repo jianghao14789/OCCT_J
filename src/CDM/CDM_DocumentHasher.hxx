@@ -22,5 +22,4 @@
 
 typedef NCollection_DefaultHasher<Handle(CDM_Document)> CDM_DocumentHasher;
 
-
 #endif

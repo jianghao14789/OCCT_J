@@ -23,7 +23,7 @@
 #include <NCollection_DefineAlloc.hxx>
 
 #ifdef Standard_HASATOMIC
-  #include <atomic>
+#include <atomic>
 #endif
 
 class TDF_Attribute;
@@ -35,147 +35,147 @@ class TDF_Label;
 #define KEEP_LOCAL_ROOT
 
 enum {
-  TDF_LabelNodeImportMsk = (int) 0x80000000, // Because the sign bit (HP).
-  TDF_LabelNodeAttModMsk = 0x40000000,
-  TDF_LabelNodeMayModMsk = 0x20000000,
-  TDF_LabelNodeFlagsMsk = (TDF_LabelNodeImportMsk \
-                         | TDF_LabelNodeAttModMsk \
-                         | TDF_LabelNodeMayModMsk)
+    TDF_LabelNodeImportMsk = (int)0x80000000, // Because the sign bit (HP).
+    TDF_LabelNodeAttModMsk = 0x40000000,
+    TDF_LabelNodeMayModMsk = 0x20000000,
+    TDF_LabelNodeFlagsMsk = (TDF_LabelNodeImportMsk | TDF_LabelNodeAttModMsk | TDF_LabelNodeMayModMsk)
 };
 
 //=======================================================================
-//class: TDF_LabelNode
+// class: TDF_LabelNode
 //=======================================================================
 
 class TDF_LabelNode {
 
-  public :
+public:
+    // Public Methods
+    // --------------------------------------------------------------------------
 
-  // Public Methods
-  // --------------------------------------------------------------------------
-
-  // Father access
-  inline TDF_LabelNode* Father() const
-    { return myFather; }
-
-  // Brother access
-  inline TDF_LabelNode* Brother() const
-    { return myBrother; }
-
-  // Child access
-  inline TDF_LabelNode* FirstChild() const
-    { return myFirstChild; }
-
-    // Attribute access
-  inline const Handle(TDF_Attribute)& FirstAttribute() const
-    { return myFirstAttribute; }
-
-  // Tag access
-  inline Standard_Integer Tag() const
-    { return myTag; }
-
-  // Depth access
-  inline Standard_Integer Depth() const
-    { return (myFlags & ~TDF_LabelNodeFlagsMsk); }
-
-  // IsRoot
-  inline Standard_Boolean IsRoot() const
-    { return myFather == NULL; }
-
-  // Data
-  Standard_EXPORT TDF_Data * Data() const;
-
-  // Flag AttributesModified access
-  inline void AttributesModified(const Standard_Boolean aStatus)
-    {
-      myFlags = (aStatus) ?
-        (myFlags | TDF_LabelNodeAttModMsk) :
-          (myFlags & ~TDF_LabelNodeAttModMsk);
-      if (aStatus) AllMayBeModified();
+    // Father access
+    inline TDF_LabelNode* Father() const {
+        return myFather;
     }
 
-  inline Standard_Boolean AttributesModified() const
-    { return ((myFlags & TDF_LabelNodeAttModMsk) != 0); }
+    // Brother access
+    inline TDF_LabelNode* Brother() const {
+        return myBrother;
+    }
 
-  // Flag MayBeModified access
-  inline void MayBeModified(const Standard_Boolean aStatus)
-    { myFlags = (aStatus) ?
-        (myFlags | TDF_LabelNodeMayModMsk) :
-          (myFlags & ~TDF_LabelNodeMayModMsk); }
+    // Child access
+    inline TDF_LabelNode* FirstChild() const {
+        return myFirstChild;
+    }
 
-  inline Standard_Boolean MayBeModified() const
-    { return ((myFlags & TDF_LabelNodeMayModMsk) != 0); }
+    // Attribute access
+    inline const Handle(TDF_Attribute) & FirstAttribute() const {
+        return myFirstAttribute;
+    }
 
-  private :
+    // Tag access
+    inline Standard_Integer Tag() const {
+        return myTag;
+    }
 
-  // Memory management
-  DEFINE_NCOLLECTION_ALLOC
+    // Depth access
+    inline Standard_Integer Depth() const {
+        return (myFlags & ~TDF_LabelNodeFlagsMsk);
+    }
 
-  // Constructor
-  TDF_LabelNode(TDF_Data* Data);
-  
-  // Destructor and deallocator
-  void Destroy (const TDF_HAllocator& theAllocator);
+    // IsRoot
+    inline Standard_Boolean IsRoot() const {
+        return myFather == NULL;
+    }
 
-  // Public Friends
-  // --------------------------------------------------------------------------
+    // Data
+    Standard_EXPORT TDF_Data* Data() const;
 
-  friend class TDF_Data;
-  friend class TDF_Label;
+    // Flag AttributesModified access
+    inline void AttributesModified(const Standard_Boolean aStatus) {
+        myFlags = (aStatus) ? (myFlags | TDF_LabelNodeAttModMsk) : (myFlags & ~TDF_LabelNodeAttModMsk);
+        if (aStatus) AllMayBeModified();
+    }
 
-  private :
+    inline Standard_Boolean AttributesModified() const {
+        return ((myFlags & TDF_LabelNodeAttModMsk) != 0);
+    }
 
-  // Private Methods
-  // --------------------------------------------------------------------------
+    // Flag MayBeModified access
+    inline void MayBeModified(const Standard_Boolean aStatus) {
+        myFlags = (aStatus) ? (myFlags | TDF_LabelNodeMayModMsk) : (myFlags & ~TDF_LabelNodeMayModMsk);
+    }
 
-  // Constructor
-  TDF_LabelNode(const Standard_Integer Tag, TDF_LabelNode* Father);
+    inline Standard_Boolean MayBeModified() const {
+        return ((myFlags & TDF_LabelNodeMayModMsk) != 0);
+    }
 
-  // Others
-  void AddAttribute(const Handle(TDF_Attribute)& afterAtt,
-                    const Handle(TDF_Attribute)& newAtt);
+private:
+    // Memory management
+    DEFINE_NCOLLECTION_ALLOC
 
-  void RemoveAttribute(const Handle(TDF_Attribute)& afterAtt,
-                       const Handle(TDF_Attribute)& oldAtt);
+    // Constructor
+    TDF_LabelNode(TDF_Data* Data);
 
-  TDF_LabelNode* RootNode ();
+    // Destructor and deallocator
+    void Destroy(const TDF_HAllocator& theAllocator);
 
-  const TDF_LabelNode* RootNode () const;
+    // Public Friends
+    // --------------------------------------------------------------------------
 
-  Standard_EXPORT void AllMayBeModified();
+    friend class TDF_Data;
+    friend class TDF_Label;
 
-  // Tag modification
-  inline void Tag(const Standard_Integer aTag)
-    { myTag = aTag; }
+private:
+    // Private Methods
+    // --------------------------------------------------------------------------
 
-  // Depth modification
-  inline void Depth(const Standard_Integer aDepth)
-    { myFlags = ((myFlags & TDF_LabelNodeFlagsMsk) | aDepth); }
+    // Constructor
+    TDF_LabelNode(const Standard_Integer Tag, TDF_LabelNode* Father);
 
-  // Flag Imported access
-  inline void Imported(const Standard_Boolean aStatus)
-    { myFlags = (aStatus) ?
-        (myFlags | TDF_LabelNodeImportMsk) :
-          (myFlags & ~TDF_LabelNodeImportMsk); }
+    // Others
+    void AddAttribute(const Handle(TDF_Attribute) & afterAtt, const Handle(TDF_Attribute) & newAtt);
 
-  inline Standard_Boolean IsImported() const
-    { return ((myFlags & TDF_LabelNodeImportMsk) != 0); }
+    void RemoveAttribute(const Handle(TDF_Attribute) & afterAtt, const Handle(TDF_Attribute) & oldAtt);
 
-  // Private Fields
-  // --------------------------------------------------------------------------
+    TDF_LabelNode* RootNode();
 
-  TDF_LabelNodePtr      myFather; 
-  TDF_LabelNodePtr      myBrother; 
-  TDF_LabelNodePtr      myFirstChild;
-  Standard_ATOMIC(TDF_LabelNodePtr) myLastFoundChild; //jfa 10.01.2003
-  Standard_Integer      myTag;
-  Standard_Integer      myFlags; // Flags & Depth
-  Handle(TDF_Attribute) myFirstAttribute;
+    const TDF_LabelNode* RootNode() const;
+
+    Standard_EXPORT void AllMayBeModified();
+
+    // Tag modification
+    inline void Tag(const Standard_Integer aTag) {
+        myTag = aTag;
+    }
+
+    // Depth modification
+    inline void Depth(const Standard_Integer aDepth) {
+        myFlags = ((myFlags & TDF_LabelNodeFlagsMsk) | aDepth);
+    }
+
+    // Flag Imported access
+    inline void Imported(const Standard_Boolean aStatus) {
+        myFlags = (aStatus) ? (myFlags | TDF_LabelNodeImportMsk) : (myFlags & ~TDF_LabelNodeImportMsk);
+    }
+
+    inline Standard_Boolean IsImported() const {
+        return ((myFlags & TDF_LabelNodeImportMsk) != 0);
+    }
+
+    // Private Fields
+    // --------------------------------------------------------------------------
+
+    TDF_LabelNodePtr myFather;
+    TDF_LabelNodePtr myBrother;
+    TDF_LabelNodePtr myFirstChild;
+    Standard_ATOMIC(TDF_LabelNodePtr) myLastFoundChild; // jfa 10.01.2003
+    Standard_Integer myTag;
+    Standard_Integer myFlags; // Flags & Depth
+    Handle(TDF_Attribute) myFirstAttribute;
 #ifdef KEEP_LOCAL_ROOT
-  TDF_Data *            myData;
+    TDF_Data* myData;
 #endif
 #ifdef OCCT_DEBUG
-  TCollection_AsciiString myDebugEntry;
+    TCollection_AsciiString myDebugEntry;
 #endif
 };
 

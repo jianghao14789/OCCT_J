@@ -21,5 +21,4 @@
 
 typedef NCollection_IndexedMap<Handle(Standard_Transient), TColStd_MapTransientHasher> TColStd_IndexedMapOfTransient;
 
-
 #endif

@@ -18,54 +18,46 @@
 #include <TopLoc_ItemLocation.hxx>
 
 //=======================================================================
-//function : IsIdentity
-//purpose  : 
+// function : IsIdentity
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean TopLoc_Location::IsIdentity() const
-{
+inline Standard_Boolean TopLoc_Location::IsIdentity() const {
     return myItems.IsEmpty();
 }
 
 //=======================================================================
-//function : Identity
-//purpose  : 
+// function : Identity
+// purpose  :
 //=======================================================================
 
-inline void TopLoc_Location::Identity()
-{
+inline void TopLoc_Location::Identity() {
     myItems.Clear();
 }
 
 //=======================================================================
-//function : FirstDatum
-//purpose  : 
+// function : FirstDatum
+// purpose  :
 //=======================================================================
 
-inline const Handle(TopLoc_Datum3D)& TopLoc_Location::FirstDatum()const
-{
+inline const Handle(TopLoc_Datum3D) & TopLoc_Location::FirstDatum() const {
     return myItems.Value().myDatum;
 }
 
 //=======================================================================
-//function : FirstPower
-//purpose  : 
+// function : FirstPower
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer  TopLoc_Location::FirstPower()const
-{
+inline Standard_Integer TopLoc_Location::FirstPower() const {
     return myItems.Value().myPower;
 }
 
-
 //=======================================================================
-//function : NextLocation
-//purpose  : 
+// function : NextLocation
+// purpose  :
 //=======================================================================
 
-inline const TopLoc_Location& TopLoc_Location::NextLocation()const
-{
+inline const TopLoc_Location& TopLoc_Location::NextLocation() const {
     return (*(TopLoc_Location*)&(myItems.Tail()));
 }
-
-

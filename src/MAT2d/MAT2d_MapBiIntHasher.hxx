@@ -25,44 +25,22 @@
 #include <Standard_Boolean.hxx>
 class MAT2d_BiInt;
 
-
-
-class MAT2d_MapBiIntHasher 
-{
+class MAT2d_MapBiIntHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-    
-  //! Computes a hash code for the given key, in the range [1, theUpperBound]
-  //! @param theKey the key which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const MAT2d_BiInt& theKey, const Standard_Integer theUpperBound);
+    //! Computes a hash code for the given key, in the range [1, theUpperBound]
+    //! @param theKey the key which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const MAT2d_BiInt& theKey, const Standard_Integer theUpperBound);
 
-  static Standard_Boolean IsEqual (const MAT2d_BiInt& Key1, const MAT2d_BiInt& Key2);
-
-
-
+    static Standard_Boolean IsEqual(const MAT2d_BiInt& Key1, const MAT2d_BiInt& Key2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <MAT2d_MapBiIntHasher.lxx>
-
-
-
-
 
 #endif // _MAT2d_MapBiIntHasher_HeaderFile

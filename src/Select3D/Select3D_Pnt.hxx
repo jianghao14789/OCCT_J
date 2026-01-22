@@ -16,21 +16,23 @@
 
 #include <gp_Pnt.hxx>
 
-struct Select3D_Pnt
-{
-  Standard_ShortReal x, y, z;
+struct Select3D_Pnt {
+    Standard_ShortReal x, y, z;
 
-  operator gp_Pnt() const { return gp_Pnt(x, y, z); }
+    operator gp_Pnt() const {
+        return gp_Pnt(x, y, z);
+    }
 
-  operator gp_XYZ() const { return gp_XYZ(x, y, z); }
+    operator gp_XYZ() const {
+        return gp_XYZ(x, y, z);
+    }
 
-  gp_Pnt operator= (const gp_Pnt& thePnt)
-  {
-    x = RealToShortReal (thePnt.X());
-    y = RealToShortReal (thePnt.Y());
-    z = RealToShortReal (thePnt.Z());
-    return *this;
-  }
+    gp_Pnt operator=(const gp_Pnt& thePnt) {
+        x = RealToShortReal(thePnt.X());
+        y = RealToShortReal(thePnt.Y());
+        z = RealToShortReal(thePnt.Z());
+        return *this;
+    }
 };
 
 #endif

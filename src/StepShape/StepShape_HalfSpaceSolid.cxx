@@ -11,45 +11,37 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepGeom_Surface.hxx>
 #include <StepShape_HalfSpaceSolid.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_HalfSpaceSolid,StepGeom_GeometricRepresentationItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_HalfSpaceSolid, StepGeom_GeometricRepresentationItem)
 
-StepShape_HalfSpaceSolid::StepShape_HalfSpaceSolid ()  {}
+StepShape_HalfSpaceSolid::StepShape_HalfSpaceSolid() {}
 
-void StepShape_HalfSpaceSolid::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepGeom_Surface)& aBaseSurface,
-	const Standard_Boolean aAgreementFlag)
-{
-	// --- classe own fields ---
-	baseSurface = aBaseSurface;
-	agreementFlag = aAgreementFlag;
-	// --- classe inherited fields ---
-	StepRepr_RepresentationItem::Init(aName);
+void StepShape_HalfSpaceSolid::Init(const Handle(TCollection_HAsciiString) & aName,
+                                    const Handle(StepGeom_Surface) & aBaseSurface,
+                                    const Standard_Boolean aAgreementFlag) {
+    // --- classe own fields ---
+    baseSurface = aBaseSurface;
+    agreementFlag = aAgreementFlag;
+    // --- classe inherited fields ---
+    StepRepr_RepresentationItem::Init(aName);
 }
 
-
-void StepShape_HalfSpaceSolid::SetBaseSurface(const Handle(StepGeom_Surface)& aBaseSurface)
-{
-	baseSurface = aBaseSurface;
+void StepShape_HalfSpaceSolid::SetBaseSurface(const Handle(StepGeom_Surface) & aBaseSurface) {
+    baseSurface = aBaseSurface;
 }
 
-Handle(StepGeom_Surface) StepShape_HalfSpaceSolid::BaseSurface() const
-{
-	return baseSurface;
+Handle(StepGeom_Surface) StepShape_HalfSpaceSolid::BaseSurface() const {
+    return baseSurface;
 }
 
-void StepShape_HalfSpaceSolid::SetAgreementFlag(const Standard_Boolean aAgreementFlag)
-{
-	agreementFlag = aAgreementFlag;
+void StepShape_HalfSpaceSolid::SetAgreementFlag(const Standard_Boolean aAgreementFlag) {
+    agreementFlag = aAgreementFlag;
 }
 
-Standard_Boolean StepShape_HalfSpaceSolid::AgreementFlag() const
-{
-	return agreementFlag;
+Standard_Boolean StepShape_HalfSpaceSolid::AgreementFlag() const {
+    return agreementFlag;
 }

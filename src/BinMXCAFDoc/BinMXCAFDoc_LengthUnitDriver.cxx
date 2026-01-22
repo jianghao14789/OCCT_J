@@ -21,49 +21,45 @@
 IMPLEMENT_STANDARD_RTTIEXT(BinMXCAFDoc_LengthUnitDriver, BinMDF_ADriver)
 
 //=======================================================================
-//function : BinMXCAFDoc_LengthUnitDriver
-//purpose  : Constructor
+// function : BinMXCAFDoc_LengthUnitDriver
+// purpose  : Constructor
 //=======================================================================
-BinMXCAFDoc_LengthUnitDriver::BinMXCAFDoc_LengthUnitDriver(const Handle(Message_Messenger)& theMsgDriver)
-     : BinMDF_ADriver(theMsgDriver, STANDARD_TYPE(XCAFDoc_LengthUnit)->Name()) {
-}
+BinMXCAFDoc_LengthUnitDriver::BinMXCAFDoc_LengthUnitDriver(const Handle(Message_Messenger) & theMsgDriver)
+    : BinMDF_ADriver(theMsgDriver, STANDARD_TYPE(XCAFDoc_LengthUnit)->Name()) {}
 
 //=======================================================================
-//function : NewEmpty
-//purpose  :
+// function : NewEmpty
+// purpose  :
 //=======================================================================
 Handle(TDF_Attribute) BinMXCAFDoc_LengthUnitDriver::NewEmpty() const {
-  return new XCAFDoc_LengthUnit();
+    return new XCAFDoc_LengthUnit();
 }
 
 //=======================================================================
-//function : Paste
-//purpose  :
+// function : Paste
+// purpose  :
 //=======================================================================
 Standard_Boolean BinMXCAFDoc_LengthUnitDriver::Paste(const BinObjMgt_Persistent& theSource,
-                                                     const Handle(TDF_Attribute)& theTarget,
-                                                     BinObjMgt_RRelocationTable& theRelocTable) const 
-{
-  (void)theRelocTable;
-  Handle(XCAFDoc_LengthUnit) anAtt = Handle(XCAFDoc_LengthUnit)::DownCast(theTarget);
-  TCollection_AsciiString aName;
-  Standard_Real aScaleFactor = 1.;
-  Standard_Boolean isOk = theSource >> aName >> aScaleFactor;
-  if(isOk) {
-    anAtt->Set(aName, aScaleFactor);
-  }
-  return isOk;
+                                                     const Handle(TDF_Attribute) & theTarget,
+                                                     BinObjMgt_RRelocationTable& theRelocTable) const {
+    (void)theRelocTable;
+    Handle(XCAFDoc_LengthUnit) anAtt = Handle(XCAFDoc_LengthUnit)::DownCast(theTarget);
+    TCollection_AsciiString aName;
+    Standard_Real aScaleFactor = 1.;
+    Standard_Boolean isOk = theSource >> aName >> aScaleFactor;
+    if (isOk) {
+        anAtt->Set(aName, aScaleFactor);
+    }
+    return isOk;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  :
+// function : Paste
+// purpose  :
 //=======================================================================
-void BinMXCAFDoc_LengthUnitDriver::Paste(const Handle(TDF_Attribute)& theSource,
-                                         BinObjMgt_Persistent& theTarget,
-                                         BinObjMgt_SRelocationTable& theRelocTable) const
-{
-  (void)theRelocTable;
-  Handle(XCAFDoc_LengthUnit) anAtt = Handle(XCAFDoc_LengthUnit)::DownCast(theSource);
-  theTarget << anAtt->GetUnitName() << anAtt->GetUnitValue();
+void BinMXCAFDoc_LengthUnitDriver::Paste(const Handle(TDF_Attribute) & theSource, BinObjMgt_Persistent& theTarget,
+                                         BinObjMgt_SRelocationTable& theRelocTable) const {
+    (void)theRelocTable;
+    Handle(XCAFDoc_LengthUnit) anAtt = Handle(XCAFDoc_LengthUnit)::DownCast(theSource);
+    theTarget << anAtt->GetUnitName() << anAtt->GetUnitValue();
 }

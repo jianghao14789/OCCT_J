@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BSplCLib.hxx>
 #include <BSplSLib.hxx>
 #include <Geom_BSplineCurve.hxx>
@@ -43,32 +42,28 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Geom_SurfaceOfRevolution, Geom_SweptSurface)
 
-#define  POLES    (poles->Array2())
-#define  WEIGHTS  (weights->Array2())
-#define  UKNOTS   (uknots->Array1())
-#define  VKNOTS   (vknots->Array1())
-#define  UFKNOTS  (ufknots->Array1())
-#define  VFKNOTS  (vfknots->Array1())
-#define  FMULTS   (BSplCLib::NoMults())
+#define POLES (poles->Array2())
+#define WEIGHTS (weights->Array2())
+#define UKNOTS (uknots->Array1())
+#define VKNOTS (vknots->Array1())
+#define UFKNOTS (ufknots->Array1())
+#define VFKNOTS (vfknots->Array1())
+#define FMULTS (BSplCLib::NoMults())
 
-typedef Geom_SurfaceOfRevolution         SurfaceOfRevolution;
-typedef Geom_Curve                       Curve;
-typedef gp_Ax1  Ax1;
-typedef gp_Ax2  Ax2;
-typedef gp_Dir  Dir;
-typedef gp_Lin  Lin;
-typedef gp_Pnt  Pnt;
+typedef Geom_SurfaceOfRevolution SurfaceOfRevolution;
+typedef Geom_Curve Curve;
+typedef gp_Ax1 Ax1;
+typedef gp_Ax2 Ax2;
+typedef gp_Dir Dir;
+typedef gp_Lin Lin;
+typedef gp_Pnt Pnt;
 typedef gp_Trsf Trsf;
-typedef gp_Vec  Vec;
-typedef gp_XYZ  XYZ;
-
-
-
-
+typedef gp_Vec Vec;
+typedef gp_XYZ XYZ;
 
 //=======================================================================
-//function : Copy
-//purpose  : 
+// function : Copy
+// purpose  :
 //=======================================================================
 
 Handle(Geom_Geometry) Geom_SurfaceOfRevolution::Copy() const {
@@ -76,24 +71,20 @@ Handle(Geom_Geometry) Geom_SurfaceOfRevolution::Copy() const {
     return new Geom_SurfaceOfRevolution(basisCurve, Axis());
 }
 
-
 //=======================================================================
-//function : Geom_SurfaceOfRevolution
-//purpose  : 
+// function : Geom_SurfaceOfRevolution
+// purpose  :
 //=======================================================================
 
-Geom_SurfaceOfRevolution::Geom_SurfaceOfRevolution
-(const Handle(Geom_Curve)& C,
-    const Ax1& A1) : loc(A1.Location()) {
+Geom_SurfaceOfRevolution::Geom_SurfaceOfRevolution(const Handle(Geom_Curve) & C, const Ax1& A1) : loc(A1.Location()) {
 
     direction = A1.Direction();
     SetBasisCurve(C);
 }
 
-
 //=======================================================================
-//function : UReverse
-//purpose  : 
+// function : UReverse
+// purpose  :
 //=======================================================================
 
 void Geom_SurfaceOfRevolution::UReverse() {
@@ -102,10 +93,9 @@ void Geom_SurfaceOfRevolution::UReverse() {
     myEvaluator->SetDirection(direction);
 }
 
-
 //=======================================================================
-//function : UReversedParameter
-//purpose  : 
+// function : UReversedParameter
+// purpose  :
 //=======================================================================
 
 Standard_Real Geom_SurfaceOfRevolution::UReversedParameter(const Standard_Real U) const {
@@ -113,10 +103,9 @@ Standard_Real Geom_SurfaceOfRevolution::UReversedParameter(const Standard_Real U
     return (2. * M_PI - U);
 }
 
-
 //=======================================================================
-//function : VReverse
-//purpose  : 
+// function : VReverse
+// purpose  :
 //=======================================================================
 
 void Geom_SurfaceOfRevolution::VReverse() {
@@ -124,10 +113,9 @@ void Geom_SurfaceOfRevolution::VReverse() {
     basisCurve->Reverse();
 }
 
-
 //=======================================================================
-//function : VReversedParameter
-//purpose  : 
+// function : VReversedParameter
+// purpose  :
 //=======================================================================
 
 Standard_Real Geom_SurfaceOfRevolution::VReversedParameter(const Standard_Real V) const {
@@ -135,10 +123,9 @@ Standard_Real Geom_SurfaceOfRevolution::VReversedParameter(const Standard_Real V
     return basisCurve->ReversedParameter(V);
 }
 
-
 //=======================================================================
-//function : Location
-//purpose  : 
+// function : Location
+// purpose  :
 //=======================================================================
 
 const gp_Pnt& Geom_SurfaceOfRevolution::Location() const {
@@ -147,8 +134,8 @@ const gp_Pnt& Geom_SurfaceOfRevolution::Location() const {
 }
 
 //=======================================================================
-//function : IsUPeriodic
-//purpose  : 
+// function : IsUPeriodic
+// purpose  :
 //=======================================================================
 
 Standard_Boolean Geom_SurfaceOfRevolution::IsUPeriodic() const {
@@ -157,8 +144,8 @@ Standard_Boolean Geom_SurfaceOfRevolution::IsUPeriodic() const {
 }
 
 //=======================================================================
-//function : IsCNu
-//purpose  : 
+// function : IsCNu
+// purpose  :
 //=======================================================================
 
 Standard_Boolean Geom_SurfaceOfRevolution::IsCNu(const Standard_Integer) const {
@@ -167,8 +154,8 @@ Standard_Boolean Geom_SurfaceOfRevolution::IsCNu(const Standard_Integer) const {
 }
 
 //=======================================================================
-//function : Axis
-//purpose  : 
+// function : Axis
+// purpose  :
 //=======================================================================
 
 Ax1 Geom_SurfaceOfRevolution::Axis() const {
@@ -177,8 +164,8 @@ Ax1 Geom_SurfaceOfRevolution::Axis() const {
 }
 
 //=======================================================================
-//function : IsCNv
-//purpose  : 
+// function : IsCNv
+// purpose  :
 //=======================================================================
 
 Standard_Boolean Geom_SurfaceOfRevolution::IsCNv(const Standard_Integer N) const {
@@ -187,10 +174,9 @@ Standard_Boolean Geom_SurfaceOfRevolution::IsCNv(const Standard_Integer N) const
     return basisCurve->IsCN(N);
 }
 
-
 //=======================================================================
-//function : IsUClosed
-//purpose  : 
+// function : IsUClosed
+// purpose  :
 //=======================================================================
 
 Standard_Boolean Geom_SurfaceOfRevolution::IsUClosed() const {
@@ -199,19 +185,17 @@ Standard_Boolean Geom_SurfaceOfRevolution::IsUClosed() const {
 }
 
 //=======================================================================
-//function : IsVClosed
-//purpose  : 
+// function : IsVClosed
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Geom_SurfaceOfRevolution::IsVClosed() const
-{
+Standard_Boolean Geom_SurfaceOfRevolution::IsVClosed() const {
     return basisCurve->IsClosed();
 }
 
-
 //=======================================================================
-//function : IsVPeriodic
-//purpose  : 
+// function : IsVPeriodic
+// purpose  :
 //=======================================================================
 
 Standard_Boolean Geom_SurfaceOfRevolution::IsVPeriodic() const {
@@ -219,10 +203,9 @@ Standard_Boolean Geom_SurfaceOfRevolution::IsVPeriodic() const {
     return basisCurve->IsPeriodic();
 }
 
-
 //=======================================================================
-//function : SetAxis
-//purpose  : 
+// function : SetAxis
+// purpose  :
 //=======================================================================
 
 void Geom_SurfaceOfRevolution::SetAxis(const Ax1& A1) {
@@ -232,10 +215,9 @@ void Geom_SurfaceOfRevolution::SetAxis(const Ax1& A1) {
     myEvaluator->SetAxis(A1);
 }
 
-
 //=======================================================================
-//function : SetDirection
-//purpose  : 
+// function : SetDirection
+// purpose  :
 //=======================================================================
 
 void Geom_SurfaceOfRevolution::SetDirection(const Dir& V) {
@@ -244,23 +226,21 @@ void Geom_SurfaceOfRevolution::SetDirection(const Dir& V) {
     myEvaluator->SetDirection(direction);
 }
 
-
 //=======================================================================
-//function : SetBasisCurve
-//purpose  : 
+// function : SetBasisCurve
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::SetBasisCurve(const Handle(Geom_Curve)& C) {
+void Geom_SurfaceOfRevolution::SetBasisCurve(const Handle(Geom_Curve) & C) {
 
     basisCurve = Handle(Geom_Curve)::DownCast(C->Copy());
     smooth = C->Continuity();
     myEvaluator = new GeomEvaluator_SurfaceOfRevolution(basisCurve, direction, loc);
 }
 
-
 //=======================================================================
-//function : SetLocation
-//purpose  : 
+// function : SetLocation
+// purpose  :
 //=======================================================================
 
 void Geom_SurfaceOfRevolution::SetLocation(const Pnt& P) {
@@ -269,16 +249,13 @@ void Geom_SurfaceOfRevolution::SetLocation(const Pnt& P) {
     myEvaluator->SetLocation(loc);
 }
 
-
 //=======================================================================
-//function : Bounds
-//purpose  : 
+// function : Bounds
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::Bounds(Standard_Real& U1,
-    Standard_Real& U2,
-    Standard_Real& V1,
-    Standard_Real& V2) const {
+void Geom_SurfaceOfRevolution::Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1,
+                                      Standard_Real& V2) const {
 
     U1 = 0.0;
     U2 = 2.0 * M_PI;
@@ -286,79 +263,57 @@ void Geom_SurfaceOfRevolution::Bounds(Standard_Real& U1,
     V2 = basisCurve->LastParameter();
 }
 
-
 //=======================================================================
-//function : D0
-//purpose  : 
+// function : D0
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::D0
-(const Standard_Real U, const Standard_Real V, Pnt& P) const
-{
+void Geom_SurfaceOfRevolution::D0(const Standard_Real U, const Standard_Real V, Pnt& P) const {
     myEvaluator->D0(U, V, P);
 }
 
-
 //=======================================================================
-//function : D1
-//purpose  : 
+// function : D1
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::D1
-(const Standard_Real U, const Standard_Real V,
-    Pnt& P,
-    Vec& D1U, Vec& D1V) const
-{
+void Geom_SurfaceOfRevolution::D1(const Standard_Real U, const Standard_Real V, Pnt& P, Vec& D1U, Vec& D1V) const {
     myEvaluator->D1(U, V, P, D1U, D1V);
 }
 
 //=======================================================================
-//function : D2
-//purpose  : 
+// function : D2
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::D2
-(const Standard_Real   U, const Standard_Real V,
-    Pnt& P,
-    Vec& D1U, Vec& D1V,
-    Vec& D2U, Vec& D2V, Vec& D2UV) const
-{
+void Geom_SurfaceOfRevolution::D2(const Standard_Real U, const Standard_Real V, Pnt& P, Vec& D1U, Vec& D1V, Vec& D2U,
+                                  Vec& D2V, Vec& D2UV) const {
     myEvaluator->D2(U, V, P, D1U, D1V, D2U, D2V, D2UV);
 }
 
-
-
 //=======================================================================
-//function : D3
-//purpose  : 
+// function : D3
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::D3
-(const Standard_Real U, const Standard_Real V,
-    Pnt& P,
-    Vec& D1U, Vec& D1V,
-    Vec& D2U, Vec& D2V, Vec& D2UV,
-    Vec& D3U, Vec& D3V, Vec& D3UUV, Vec& D3UVV) const
-{
+void Geom_SurfaceOfRevolution::D3(const Standard_Real U, const Standard_Real V, Pnt& P, Vec& D1U, Vec& D1V, Vec& D2U,
+                                  Vec& D2V, Vec& D2UV, Vec& D3U, Vec& D3V, Vec& D3UUV, Vec& D3UVV) const {
     myEvaluator->D3(U, V, P, D1U, D1V, D2U, D2V, D2UV, D3U, D3V, D3UUV, D3UVV);
 }
 
-
 //=======================================================================
-//function : DN
-//purpose  : 
+// function : DN
+// purpose  :
 //=======================================================================
 
-Vec Geom_SurfaceOfRevolution::DN(const Standard_Real    U, const Standard_Real    V,
-    const Standard_Integer Nu, const Standard_Integer Nv) const
-{
+Vec Geom_SurfaceOfRevolution::DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu,
+                                 const Standard_Integer Nv) const {
     return myEvaluator->DN(U, V, Nu, Nv);
 }
 
-
 //=======================================================================
-//function : ReferencePlane
-//purpose  : 
+// function : ReferencePlane
+// purpose  :
 //=======================================================================
 
 Ax2 Geom_SurfaceOfRevolution::ReferencePlane() const {
@@ -366,10 +321,9 @@ Ax2 Geom_SurfaceOfRevolution::ReferencePlane() const {
     throw Standard_NotImplemented();
 }
 
-
 //=======================================================================
-//function : UIso
-//purpose  : 
+// function : UIso
+// purpose  :
 //=======================================================================
 
 Handle(Geom_Curve) Geom_SurfaceOfRevolution::UIso(const Standard_Real U) const {
@@ -380,10 +334,9 @@ Handle(Geom_Curve) Geom_SurfaceOfRevolution::UIso(const Standard_Real U) const {
     return C;
 }
 
-
 //=======================================================================
-//function : VIso
-//purpose  : 
+// function : VIso
+// purpose  :
 //=======================================================================
 
 Handle(Geom_Curve) Geom_SurfaceOfRevolution::VIso(const Standard_Real V) const {
@@ -397,27 +350,23 @@ Handle(Geom_Curve) Geom_SurfaceOfRevolution::VIso(const Standard_Real V) const {
     if (Rad > gp::Resolution()) {
         XYZ P = Pc.XYZ();
         XYZ C;
-        C.SetLinearForm((P - loc.XYZ()).Dot(direction.XYZ()),
-            direction.XYZ(), loc.XYZ());
+        C.SetLinearForm((P - loc.XYZ()).Dot(direction.XYZ()), direction.XYZ(), loc.XYZ());
         P = P - C;
         if (P.Modulus() > gp::Resolution()) {
             gp_Dir D = P.Normalized();
             Rep = gp_Ax2(C, direction, D);
-        }
-        else
+        } else
             Rep = gp_Ax2(C, direction);
-    }
-    else
+    } else
         Rep = gp_Ax2(Pc, direction);
 
     Circ = new Geom_Circle(Rep, Rad);
     return Circ;
 }
 
-
 //=======================================================================
-//function : Transform
-//purpose  : 
+// function : Transform
+// purpose  :
 //=======================================================================
 
 void Geom_SurfaceOfRevolution::Transform(const Trsf& T) {
@@ -431,26 +380,20 @@ void Geom_SurfaceOfRevolution::Transform(const Trsf& T) {
 }
 
 //=======================================================================
-//function : TransformParameters
-//purpose  : 
+// function : TransformParameters
+// purpose  :
 //=======================================================================
 
-void Geom_SurfaceOfRevolution::TransformParameters(Standard_Real&,
-    Standard_Real& V,
-    const gp_Trsf& T)
-    const
-{
+void Geom_SurfaceOfRevolution::TransformParameters(Standard_Real&, Standard_Real& V, const gp_Trsf& T) const {
     V = basisCurve->TransformedParameter(V, T);
 }
 
 //=======================================================================
-//function : ParametricTransformation
-//purpose  : 
+// function : ParametricTransformation
+// purpose  :
 //=======================================================================
 
-gp_GTrsf2d Geom_SurfaceOfRevolution::ParametricTransformation
-(const gp_Trsf& T) const
-{
+gp_GTrsf2d Geom_SurfaceOfRevolution::ParametricTransformation(const gp_Trsf& T) const {
     gp_GTrsf2d T2;
     gp_Ax2d Axis(gp::Origin2d(), gp::DX2d());
     T2.SetAffinity(Axis, basisCurve->ParametricTransformation(T));
@@ -458,13 +401,12 @@ gp_GTrsf2d Geom_SurfaceOfRevolution::ParametricTransformation
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void Geom_SurfaceOfRevolution::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
+void Geom_SurfaceOfRevolution::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
-        OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Geom_SweptSurface)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Geom_SweptSurface)
 
-        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &loc)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &loc)
 }

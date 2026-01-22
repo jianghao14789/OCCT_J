@@ -31,7 +31,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_TrimmedCurve;
 DEFINE_STANDARD_HANDLE(Geom_TrimmedCurve, Geom_BoundedCurve)
 
@@ -80,7 +79,9 @@ public:
     //! - C is not periodic and U1 or U2 is outside the
     //! bounds of C, or
     //! - U1 is equal to U2.
-    Standard_EXPORT Geom_TrimmedCurve(const Handle(Geom_Curve)& C, const Standard_Real U1, const Standard_Real U2, const Standard_Boolean Sense = Standard_True, const Standard_Boolean theAdjustPeriodic = Standard_True);
+    Standard_EXPORT Geom_TrimmedCurve(const Handle(Geom_Curve) & C, const Standard_Real U1, const Standard_Real U2,
+                                      const Standard_Boolean Sense = Standard_True,
+                                      const Standard_Boolean theAdjustPeriodic = Standard_True);
 
     //! Changes the orientation of this trimmed curve.
     //! As a result:
@@ -120,7 +121,9 @@ public:
     //! - the basis curve is not periodic, and either U1 or U2
     //! are outside the bounds of the basis curve, or
     //! - U1 is equal to U2.
-    Standard_EXPORT void SetTrim(const Standard_Real U1, const Standard_Real U2, const Standard_Boolean Sense = Standard_True, const Standard_Boolean theAdjustPeriodic = Standard_True);
+    Standard_EXPORT void SetTrim(const Standard_Real U1, const Standard_Real U2,
+                                 const Standard_Boolean Sense = Standard_True,
+                                 const Standard_Boolean theAdjustPeriodic = Standard_True);
 
     //! Returns the basis curve.
     //! Warning
@@ -128,7 +131,6 @@ public:
     //! Consequently, any modification of the returned value
     //! directly modifies the trimmed curve.
     Standard_EXPORT Handle(Geom_Curve) BasisCurve() const;
-
 
     //! Returns the continuity of the curve :
     //! C0 : only geometric continuity,
@@ -156,7 +158,6 @@ public:
     //! The first parameter is the parameter of the "StartPoint"
     //! of the trimmed curve.
     Standard_EXPORT Standard_Real FirstParameter() const Standard_OVERRIDE;
-
 
     //! Returns True if the distance between the StartPoint and
     //! the EndPoint is lower or equal to Resolution from package gp.
@@ -199,7 +200,8 @@ public:
     Standard_EXPORT void D2(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the curve is not C3.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! N is the order of derivation.
     //! Raised if the continuity of the curve is not CN.
@@ -221,7 +223,8 @@ public:
     //! me->Value(U).Transformed(T)
     //!
     //! This methods calls the basis curve method.
-    Standard_EXPORT virtual Standard_Real TransformedParameter(const Standard_Real U, const gp_Trsf& T) const Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Real TransformedParameter(const Standard_Real U,
+                                                               const gp_Trsf& T) const Standard_OVERRIDE;
 
     //! Returns a  coefficient to compute the parameter on
     //! the transformed  curve  for  the transform  of the
@@ -240,12 +243,12 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_TrimmedCurve, Geom_BoundedCurve)
 
 protected:
-
 private:
     Handle(Geom_Curve) basisCurve;
     Standard_Real uTrim1;

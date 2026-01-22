@@ -15,13 +15,12 @@
 #define _Aspect_XRActionType_HeaderFile
 
 //! XR action type.
-enum Aspect_XRActionType
-{
-  Aspect_XRActionType_InputDigital,  //!< boolean input (like button)
-  Aspect_XRActionType_InputAnalog,   //!< analog input (1/2/3 axes)
-  Aspect_XRActionType_InputPose,     //!< positional input
-  Aspect_XRActionType_InputSkeletal, //!< skeletal input
-  Aspect_XRActionType_OutputHaptic   //!< haptic output (vibration)
+enum Aspect_XRActionType {
+    Aspect_XRActionType_InputDigital,  //!< boolean input (like button)
+    Aspect_XRActionType_InputAnalog,   //!< analog input (1/2/3 axes)
+    Aspect_XRActionType_InputPose,     //!< positional input
+    Aspect_XRActionType_InputSkeletal, //!< skeletal input
+    Aspect_XRActionType_OutputHaptic   //!< haptic output (vibration)
 };
 
 #endif // _Aspect_XRActionType_HeaderFile

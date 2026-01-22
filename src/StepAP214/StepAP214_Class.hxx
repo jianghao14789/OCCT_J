@@ -21,41 +21,20 @@
 
 #include <StepBasic_Group.hxx>
 
-
 class StepAP214_Class;
 DEFINE_STANDARD_HANDLE(StepAP214_Class, StepBasic_Group)
 
 //! Representation of STEP entity Class
-class StepAP214_Class : public StepBasic_Group
-{
+class StepAP214_Class : public StepBasic_Group {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepAP214_Class();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepAP214_Class();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepAP214_Class,StepBasic_Group)
+    DEFINE_STANDARD_RTTIEXT(StepAP214_Class, StepBasic_Group)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepAP214_Class_HeaderFile

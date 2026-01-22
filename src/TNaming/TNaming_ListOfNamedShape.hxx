@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(TNaming_NamedShape)> TNaming_ListOfNamedShape;
 typedef NCollection_List<Handle(TNaming_NamedShape)>::Iterator TNaming_ListIteratorOfListOfNamedShape;
 
-
 #endif

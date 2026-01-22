@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<Handle(IGESGeom_TransformationMatrix)> IGESGeom_Array1OfTransformationMatrix;
 
-
 #endif

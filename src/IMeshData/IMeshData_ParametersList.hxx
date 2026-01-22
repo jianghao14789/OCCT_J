@@ -20,35 +20,28 @@
 #include <Standard_Type.hxx>
 
 //! Interface class representing list of parameters on curve.
-class IMeshData_ParametersList : public Standard_Transient
-{
+class IMeshData_ParametersList : public Standard_Transient {
 public:
+    //! Destructor.
+    virtual ~IMeshData_ParametersList() {}
 
-  //! Destructor.
-  virtual ~IMeshData_ParametersList()
-  {
-  }
+    //! Returns parameter with the given index.
+    Standard_EXPORT virtual Standard_Real& GetParameter(const Standard_Integer theIndex) = 0;
 
-  //! Returns parameter with the given index.
-  Standard_EXPORT virtual Standard_Real& GetParameter (const Standard_Integer theIndex) = 0;
+    //! Returns number of parameters.
+    Standard_EXPORT virtual Standard_Integer ParametersNb() const = 0;
 
-  //! Returns number of parameters.
-  Standard_EXPORT virtual Standard_Integer ParametersNb() const = 0;
+    //! Clears parameters list.
+    Standard_EXPORT virtual void Clear(const Standard_Boolean isKeepEndPoints) = 0;
 
-  //! Clears parameters list.
-  Standard_EXPORT virtual void Clear(const Standard_Boolean isKeepEndPoints) = 0;
-
-  DEFINE_STANDARD_RTTIEXT(IMeshData_ParametersList, Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(IMeshData_ParametersList, Standard_Transient)
 
 protected:
+    //! Constructor.
+    IMeshData_ParametersList() {}
 
-  //! Constructor.
-  IMeshData_ParametersList()
-  {
-  }
-
-  //! Removes parameter with the given index.
-  Standard_EXPORT virtual void removeParameter (const Standard_Integer theIndex) = 0;
+    //! Removes parameter with the given index.
+    Standard_EXPORT virtual void removeParameter(const Standard_Integer theIndex) = 0;
 };
 
 #endif

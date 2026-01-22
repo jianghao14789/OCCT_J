@@ -22,44 +22,20 @@
 
 #include <Draw_Interpretor.hxx>
 
-
-
-class QADraw 
-{
+class QADraw {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Define specicial commands for AIS.
+    Standard_EXPORT static void CommonCommands(Draw_Interpretor& DI);
 
-  
-  //! Define specicial commands for AIS.
-  Standard_EXPORT static void CommonCommands (Draw_Interpretor& DI);
-  
-  Standard_EXPORT static void AdditionalCommands (Draw_Interpretor& DI);
-  
-  //! Loads all QA Draw commands. Used for plugin.
-  Standard_EXPORT static void Factory (Draw_Interpretor& DI);
+    Standard_EXPORT static void AdditionalCommands(Draw_Interpretor& DI);
 
-
-
+    //! Loads all QA Draw commands. Used for plugin.
+    Standard_EXPORT static void Factory(Draw_Interpretor& DI);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _QADraw_HeaderFile

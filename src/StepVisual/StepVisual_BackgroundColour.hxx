@@ -24,48 +24,26 @@
 #include <StepVisual_Colour.hxx>
 class StepVisual_AreaOrView;
 
-
 class StepVisual_BackgroundColour;
 DEFINE_STANDARD_HANDLE(StepVisual_BackgroundColour, StepVisual_Colour)
 
-
-class StepVisual_BackgroundColour : public StepVisual_Colour
-{
+class StepVisual_BackgroundColour : public StepVisual_Colour {
 
 public:
+    //! Returns a BackgroundColour
+    Standard_EXPORT StepVisual_BackgroundColour();
 
-  
-  //! Returns a BackgroundColour
-  Standard_EXPORT StepVisual_BackgroundColour();
-  
-  Standard_EXPORT void Init (const StepVisual_AreaOrView& aPresentation);
-  
-  Standard_EXPORT void SetPresentation (const StepVisual_AreaOrView& aPresentation);
-  
-  Standard_EXPORT StepVisual_AreaOrView Presentation() const;
+    Standard_EXPORT void Init(const StepVisual_AreaOrView& aPresentation);
 
+    Standard_EXPORT void SetPresentation(const StepVisual_AreaOrView& aPresentation);
 
+    Standard_EXPORT StepVisual_AreaOrView Presentation() const;
 
-
-  DEFINE_STANDARD_RTTIEXT(StepVisual_BackgroundColour,StepVisual_Colour)
+    DEFINE_STANDARD_RTTIEXT(StepVisual_BackgroundColour, StepVisual_Colour)
 
 protected:
-
-
-
-
 private:
-
-
-  StepVisual_AreaOrView presentation;
-
-
+    StepVisual_AreaOrView presentation;
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_BackgroundColour_HeaderFile

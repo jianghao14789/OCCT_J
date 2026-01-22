@@ -27,48 +27,29 @@ class StepDimTol_ConcentricityTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ConcentricityTolerance
-class RWStepDimTol_RWConcentricityTolerance 
-{
+class RWStepDimTol_RWConcentricityTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWConcentricityTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWConcentricityTolerance();
-  
-  //! Reads ConcentricityTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_ConcentricityTolerance)& ent) const;
-  
-  //! Writes ConcentricityTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_ConcentricityTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_ConcentricityTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ConcentricityTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_ConcentricityTolerance) & ent) const;
 
+    //! Writes ConcentricityTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_ConcentricityTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_ConcentricityTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWConcentricityTolerance_HeaderFile

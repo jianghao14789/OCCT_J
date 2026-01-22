@@ -22,134 +22,109 @@
 //! Notice that all functions within this structure are actually exported by system GL library.
 //! The main purpose for these hint - to control visibility of functions per GL version
 //! (global functions should not be used directly to achieve this effect!).
-struct OpenGl_GlCore11Fwd : protected OpenGl_GlFunctions
-{
+struct OpenGl_GlCore11Fwd : protected OpenGl_GlFunctions {
 
 public: //! @name Miscellaneous
-
-    inline void glClearColor(GLclampf theRed, GLclampf theGreen, GLclampf theBlue, GLclampf theAlpha)
-    {
+    inline void glClearColor(GLclampf theRed, GLclampf theGreen, GLclampf theBlue, GLclampf theAlpha) {
         ::glClearColor(theRed, theGreen, theBlue, theAlpha);
         OpenGl_TRACE(glClearColor)
     }
 
-    inline void glClear(GLbitfield theMask)
-    {
+    inline void glClear(GLbitfield theMask) {
         ::glClear(theMask);
         OpenGl_TRACE(glClear)
     }
 
-    inline void glColorMask(GLboolean theRed, GLboolean theGreen, GLboolean theBlue, GLboolean theAlpha)
-    {
+    inline void glColorMask(GLboolean theRed, GLboolean theGreen, GLboolean theBlue, GLboolean theAlpha) {
         ::glColorMask(theRed, theGreen, theBlue, theAlpha);
         OpenGl_TRACE(glColorMask)
     }
 
-    inline void glBlendFunc(GLenum sfactor, GLenum dfactor)
-    {
+    inline void glBlendFunc(GLenum sfactor, GLenum dfactor) {
         ::glBlendFunc(sfactor, dfactor);
         OpenGl_TRACE(glBlendFunc)
     }
 
-    inline void glCullFace(GLenum theMode)
-    {
+    inline void glCullFace(GLenum theMode) {
         ::glCullFace(theMode);
         OpenGl_TRACE(glCullFace)
     }
 
-    inline void glFrontFace(GLenum theMode)
-    {
+    inline void glFrontFace(GLenum theMode) {
         ::glFrontFace(theMode);
         OpenGl_TRACE(glFrontFace)
     }
 
-    inline void glLineWidth(GLfloat theWidth)
-    {
+    inline void glLineWidth(GLfloat theWidth) {
         ::glLineWidth(theWidth);
         OpenGl_TRACE(glLineWidth)
     }
 
-    inline void glPolygonOffset(GLfloat theFactor, GLfloat theUnits)
-    {
+    inline void glPolygonOffset(GLfloat theFactor, GLfloat theUnits) {
         ::glPolygonOffset(theFactor, theUnits);
         OpenGl_TRACE(glPolygonOffset)
     }
 
-    inline void glScissor(GLint theX, GLint theY, GLsizei theWidth, GLsizei theHeight)
-    {
+    inline void glScissor(GLint theX, GLint theY, GLsizei theWidth, GLsizei theHeight) {
         ::glScissor(theX, theY, theWidth, theHeight);
         OpenGl_TRACE(glScissor)
     }
 
-    inline void glEnable(GLenum theCap)
-    {
+    inline void glEnable(GLenum theCap) {
         ::glEnable(theCap);
         OpenGl_TRACE(glEnable)
     }
 
-    inline void glDisable(GLenum theCap)
-    {
+    inline void glDisable(GLenum theCap) {
         ::glDisable(theCap);
         OpenGl_TRACE(glDisable)
     }
 
-    inline GLboolean glIsEnabled(GLenum theCap)
-    {
+    inline GLboolean glIsEnabled(GLenum theCap) {
         return ::glIsEnabled(theCap);
     }
 
-    inline void glGetBooleanv(GLenum theParamName, GLboolean* theValues)
-    {
+    inline void glGetBooleanv(GLenum theParamName, GLboolean* theValues) {
         ::glGetBooleanv(theParamName, theValues);
         OpenGl_TRACE(glGetBooleanv)
     }
 
-    inline void glGetFloatv(GLenum theParamName, GLfloat* theValues)
-    {
+    inline void glGetFloatv(GLenum theParamName, GLfloat* theValues) {
         ::glGetFloatv(theParamName, theValues);
         OpenGl_TRACE(glGetFloatv)
     }
 
-    inline void glGetIntegerv(GLenum theParamName, GLint* theValues)
-    {
+    inline void glGetIntegerv(GLenum theParamName, GLint* theValues) {
         ::glGetIntegerv(theParamName, theValues);
         OpenGl_TRACE(glGetIntegerv)
     }
 
-    inline GLenum glGetError()
-    {
+    inline GLenum glGetError() {
         return ::glGetError();
     }
 
-    inline const GLubyte* glGetString(GLenum theName)
-    {
+    inline const GLubyte* glGetString(GLenum theName) {
         const GLubyte* aRes = ::glGetString(theName);
-        OpenGl_TRACE(glGetString)
-            return aRes;
+        OpenGl_TRACE(glGetString) return aRes;
     }
 
-    inline void glFinish()
-    {
+    inline void glFinish() {
         ::glFinish();
         OpenGl_TRACE(glFinish)
     }
 
-    inline void glFlush()
-    {
+    inline void glFlush() {
         ::glFlush();
         OpenGl_TRACE(glFlush)
     }
 
-    inline void glHint(GLenum theTarget, GLenum theMode)
-    {
+    inline void glHint(GLenum theTarget, GLenum theMode) {
         ::glHint(theTarget, theMode);
         OpenGl_TRACE(glHint)
     }
 
 public: //! @name Depth Buffer
-
-    inline void glClearDepth(GLclampd theDepth)
-    {
+    inline void glClearDepth(GLclampd theDepth) {
 #if defined(GL_ES_VERSION_2_0)
         ::glClearDepthf((GLfloat)theDepth);
 #else
@@ -158,8 +133,7 @@ public: //! @name Depth Buffer
         OpenGl_TRACE(glClearDepth)
     }
 
-    inline void glClearDepthf(GLfloat theDepth)
-    {
+    inline void glClearDepthf(GLfloat theDepth) {
 #if defined(GL_ES_VERSION_2_0)
         ::glClearDepthf(theDepth);
 #else
@@ -168,21 +142,17 @@ public: //! @name Depth Buffer
         OpenGl_TRACE(glClearDepthf)
     }
 
-    inline void glDepthFunc(GLenum theFunc)
-    {
+    inline void glDepthFunc(GLenum theFunc) {
         ::glDepthFunc(theFunc);
         OpenGl_TRACE(glDepthFunc)
     }
 
-    inline void glDepthMask(GLboolean theFlag)
-    {
+    inline void glDepthMask(GLboolean theFlag) {
         ::glDepthMask(theFlag);
         OpenGl_TRACE(glDepthMask)
     }
 
-    inline void glDepthRange(GLclampd theNearValue,
-        GLclampd theFarValue)
-    {
+    inline void glDepthRange(GLclampd theNearValue, GLclampd theFarValue) {
 #if defined(GL_ES_VERSION_2_0)
         ::glDepthRangef((GLfloat)theNearValue, (GLfloat)theFarValue);
 #else
@@ -191,9 +161,7 @@ public: //! @name Depth Buffer
         OpenGl_TRACE(glDepthRange)
     }
 
-    inline void glDepthRangef(GLfloat theNearValue,
-        GLfloat theFarValue)
-    {
+    inline void glDepthRangef(GLfloat theNearValue, GLfloat theFarValue) {
 #if defined(GL_ES_VERSION_2_0)
         ::glDepthRangef(theNearValue, theFarValue);
 #else
@@ -203,213 +171,155 @@ public: //! @name Depth Buffer
     }
 
 public: //! @name Transformation
-
-    inline void glViewport(GLint theX, GLint theY, GLsizei theWidth, GLsizei theHeight)
-    {
+    inline void glViewport(GLint theX, GLint theY, GLsizei theWidth, GLsizei theHeight) {
         ::glViewport(theX, theY, theWidth, theHeight);
         OpenGl_TRACE(glViewport)
     }
 
 public: //! @name Vertex Arrays
-
-    inline void glDrawArrays(GLenum theMode, GLint theFirst, GLsizei theCount)
-    {
+    inline void glDrawArrays(GLenum theMode, GLint theFirst, GLsizei theCount) {
         ::glDrawArrays(theMode, theFirst, theCount);
         OpenGl_TRACE(glDrawArrays)
     }
 
-    inline void glDrawElements(GLenum theMode, GLsizei theCount, GLenum theType, const GLvoid* theIndices)
-    {
+    inline void glDrawElements(GLenum theMode, GLsizei theCount, GLenum theType, const GLvoid* theIndices) {
         ::glDrawElements(theMode, theCount, theType, theIndices);
         OpenGl_TRACE(glDrawElements)
     }
 
 public: //! @name Raster functions
-
-    inline void glPixelStorei(GLenum theParamName, GLint   theParam)
-    {
+    inline void glPixelStorei(GLenum theParamName, GLint theParam) {
         ::glPixelStorei(theParamName, theParam);
         OpenGl_TRACE(glPixelStorei)
     }
 
-    inline void glReadPixels(GLint x, GLint y,
-        GLsizei width, GLsizei height,
-        GLenum format, GLenum type,
-        GLvoid* pixels)
-    {
+    inline void glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type,
+                             GLvoid* pixels) {
         ::glReadPixels(x, y, width, height, format, type, pixels);
         OpenGl_TRACE(glReadPixels)
     }
 
 public: //! @name Stenciling
-
-    inline void glStencilFunc(GLenum func, GLint ref, GLuint mask)
-    {
+    inline void glStencilFunc(GLenum func, GLint ref, GLuint mask) {
         ::glStencilFunc(func, ref, mask);
         OpenGl_TRACE(glStencilFunc)
     }
 
-    inline void glStencilMask(GLuint mask)
-    {
+    inline void glStencilMask(GLuint mask) {
         ::glStencilMask(mask);
         OpenGl_TRACE(glStencilMask)
     }
 
-    inline void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass)
-    {
+    inline void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass) {
         ::glStencilOp(fail, zfail, zpass);
         OpenGl_TRACE(glStencilOp)
     }
 
-    inline void glClearStencil(GLint s)
-    {
+    inline void glClearStencil(GLint s) {
         ::glClearStencil(s);
         OpenGl_TRACE(glClearStencil)
     }
 
 public: //! @name Texture mapping
-
-    inline void glTexParameterf(GLenum target, GLenum pname, GLfloat param)
-    {
+    inline void glTexParameterf(GLenum target, GLenum pname, GLfloat param) {
         ::glTexParameterf(target, pname, param);
         OpenGl_TRACE(glTexParameterf)
     }
 
-    inline void glTexParameteri(GLenum target, GLenum pname, GLint param)
-    {
+    inline void glTexParameteri(GLenum target, GLenum pname, GLint param) {
         ::glTexParameteri(target, pname, param);
         OpenGl_TRACE(glTexParameteri)
     }
 
-    inline void glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params)
-    {
+    inline void glTexParameterfv(GLenum target, GLenum pname, const GLfloat* params) {
         ::glTexParameterfv(target, pname, params);
         OpenGl_TRACE(glTexParameterfv)
     }
 
-    inline void glTexParameteriv(GLenum target, GLenum pname, const GLint* params)
-    {
+    inline void glTexParameteriv(GLenum target, GLenum pname, const GLint* params) {
         ::glTexParameteriv(target, pname, params);
         OpenGl_TRACE(glTexParameteriv)
     }
 
-    inline void glGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params)
-    {
+    inline void glGetTexParameterfv(GLenum target, GLenum pname, GLfloat* params) {
         ::glGetTexParameterfv(target, pname, params);
         OpenGl_TRACE(glGetTexParameterfv)
     }
 
-    inline void glGetTexParameteriv(GLenum target, GLenum pname, GLint* params)
-    {
+    inline void glGetTexParameteriv(GLenum target, GLenum pname, GLint* params) {
         ::glGetTexParameteriv(target, pname, params);
         OpenGl_TRACE(glGetTexParameteriv)
     }
 
-    inline void glTexImage2D(GLenum target, GLint level,
-        GLint internalFormat,
-        GLsizei width, GLsizei height,
-        GLint border, GLenum format, GLenum type,
-        const GLvoid* pixels)
-    {
+    inline void glTexImage2D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height,
+                             GLint border, GLenum format, GLenum type, const GLvoid* pixels) {
         ::glTexImage2D(target, level, internalFormat, width, height, border, format, type, pixels);
         OpenGl_TRACE(glTexImage2D)
     }
 
-    inline void glGenTextures(GLsizei n, GLuint* textures)
-    {
+    inline void glGenTextures(GLsizei n, GLuint* textures) {
         ::glGenTextures(n, textures);
         OpenGl_TRACE(glGenTextures)
     }
 
-    inline void glDeleteTextures(GLsizei n, const GLuint* textures)
-    {
+    inline void glDeleteTextures(GLsizei n, const GLuint* textures) {
         ::glDeleteTextures(n, textures);
         OpenGl_TRACE(glDeleteTextures)
     }
 
-    inline void glBindTexture(GLenum target, GLuint texture)
-    {
+    inline void glBindTexture(GLenum target, GLuint texture) {
         ::glBindTexture(target, texture);
         OpenGl_TRACE(glBindTexture)
     }
 
-    inline GLboolean glIsTexture(GLuint texture)
-    {
+    inline GLboolean glIsTexture(GLuint texture) {
         const GLboolean aRes = ::glIsTexture(texture);
-        OpenGl_TRACE(glIsTexture)
-            return aRes;
+        OpenGl_TRACE(glIsTexture) return aRes;
     }
 
-    inline void glTexSubImage2D(GLenum target, GLint level,
-        GLint xoffset, GLint yoffset,
-        GLsizei width, GLsizei height,
-        GLenum format, GLenum type,
-        const GLvoid* pixels)
-    {
+    inline void glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height,
+                                GLenum format, GLenum type, const GLvoid* pixels) {
         ::glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
         OpenGl_TRACE(glTexSubImage2D)
     }
 
-    inline void glCopyTexImage2D(GLenum target, GLint level,
-        GLenum internalformat,
-        GLint x, GLint y,
-        GLsizei width, GLsizei height,
-        GLint border)
-    {
+    inline void glCopyTexImage2D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width,
+                                 GLsizei height, GLint border) {
         ::glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
         OpenGl_TRACE(glCopyTexImage2D)
     }
 
-    inline void glCopyTexSubImage2D(GLenum target, GLint level,
-        GLint xoffset, GLint yoffset,
-        GLint x, GLint y,
-        GLsizei width, GLsizei height)
-    {
+    inline void glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y,
+                                    GLsizei width, GLsizei height) {
         ::glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
         OpenGl_TRACE(glCopyTexSubImage2D)
     }
 
 #if !defined(GL_ES_VERSION_2_0)
-    inline void glTexImage1D(GLenum target, GLint level,
-        GLint internalFormat,
-        GLsizei width, GLint border,
-        GLenum format, GLenum type,
-        const GLvoid* pixels)
-    {
+    inline void glTexImage1D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLint border,
+                             GLenum format, GLenum type, const GLvoid* pixels) {
         ::glTexImage1D(target, level, internalFormat, width, border, format, type, pixels);
         OpenGl_TRACE(glTexImage1D)
     }
 
-    inline void glTexSubImage1D(GLenum target, GLint level,
-        GLint xoffset,
-        GLsizei width, GLenum format,
-        GLenum type, const GLvoid* pixels)
-    {
+    inline void glTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type,
+                                const GLvoid* pixels) {
         ::glTexSubImage1D(target, level, xoffset, width, format, type, pixels);
         OpenGl_TRACE(glTexSubImage1D)
     }
 
-    inline void glCopyTexImage1D(GLenum target, GLint level,
-        GLenum internalformat,
-        GLint x, GLint y,
-        GLsizei width, GLint border)
-    {
+    inline void glCopyTexImage1D(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width,
+                                 GLint border) {
         ::glCopyTexImage1D(target, level, internalformat, x, y, width, border);
         OpenGl_TRACE(glCopyTexImage1D)
     }
 
-    inline void glCopyTexSubImage1D(GLenum target, GLint level,
-        GLint xoffset, GLint x, GLint y,
-        GLsizei width)
-    {
+    inline void glCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) {
         ::glCopyTexSubImage1D(target, level, xoffset, x, y, width);
         OpenGl_TRACE(glCopyTexSubImage1D)
     }
 
-    inline void glGetTexImage(GLenum target, GLint level,
-        GLenum format, GLenum type,
-        GLvoid* pixels)
-    {
+    inline void glGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLvoid* pixels) {
         ::glGetTexImage(target, level, format, type, pixels);
         OpenGl_TRACE(glGetTexImage)
     }
@@ -417,14 +327,12 @@ public: //! @name Texture mapping
 
 #if !defined(GL_ES_VERSION_2_0)
 
-    inline void glAlphaFunc(GLenum theFunc, GLclampf theRef)
-    {
+    inline void glAlphaFunc(GLenum theFunc, GLclampf theRef) {
         ::glAlphaFunc(theFunc, theRef);
         OpenGl_TRACE(glAlphaFunc)
     }
 
-    inline void glPointSize(GLfloat theSize)
-    {
+    inline void glPointSize(GLfloat theSize) {
         ::glPointSize(theSize);
         OpenGl_TRACE(glPointSize)
     }
@@ -563,7 +471,6 @@ public: //! @name Texture mapping
         ::glGetPixelMapusv (map, values);
       }
     #endif*/
-
 };
 
 #endif // _OpenGl_GlCore11Fwd_Header

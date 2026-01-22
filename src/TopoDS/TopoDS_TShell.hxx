@@ -24,14 +24,12 @@
 #include <TopAbs_ShapeEnum.hxx>
 class TopoDS_TShape;
 
-
 class TopoDS_TShell;
 DEFINE_STANDARD_HANDLE(TopoDS_TShell, TopoDS_TShape)
 
 //! A set of faces connected by their edges.
 class TopoDS_TShell : public TopoDS_TShape {
 public:
-
     //! Creates an empty TShell.
     TopoDS_TShell();
 
@@ -44,9 +42,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(TopoDS_TShell, TopoDS_TShape)
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_TShell.lxx>

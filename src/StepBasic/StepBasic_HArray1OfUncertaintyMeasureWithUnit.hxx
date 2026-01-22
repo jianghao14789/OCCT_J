@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepBasic_HArray1OfUncertaintyMeasureWithUnit, StepBasic_Array1OfUncertaintyMeasureWithUnit)
 
-
 #endif

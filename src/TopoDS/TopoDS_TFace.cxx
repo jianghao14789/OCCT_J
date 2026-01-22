@@ -14,29 +14,26 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <TopAbs.hxx>
 #include <TopoDS_TFace.hxx>
 #include <TopoDS_Shape.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(TopoDS_TFace,TopoDS_TShape)
+IMPLEMENT_STANDARD_RTTIEXT(TopoDS_TFace, TopoDS_TShape)
 
 //=======================================================================
-//function : ShapeType
-//purpose  : 
+// function : ShapeType
+// purpose  :
 //=======================================================================
-TopAbs_ShapeEnum TopoDS_TFace::ShapeType() const
-{
-  return TopAbs_FACE;
+TopAbs_ShapeEnum TopoDS_TFace::ShapeType() const {
+    return TopAbs_FACE;
 }
 
 //=======================================================================
-//function : EmptyCopy
-//purpose  : 
+// function : EmptyCopy
+// purpose  :
 //=======================================================================
 
-Handle(TopoDS_TShape) TopoDS_TFace::EmptyCopy() const
-{
-  return Handle(TopoDS_TFace)(new TopoDS_TFace());
+Handle(TopoDS_TShape) TopoDS_TFace::EmptyCopy() const {
+    return Handle(TopoDS_TFace)(new TopoDS_TFace());
 }

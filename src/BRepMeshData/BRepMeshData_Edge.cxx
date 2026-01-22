@@ -23,82 +23,64 @@ IMPLEMENT_STANDARD_RTTIEXT(BRepMeshData_Edge, IMeshData_Edge)
 
 //=======================================================================
 // Function: Constructor
-// Purpose : 
+// Purpose :
 //=======================================================================
-BRepMeshData_Edge::BRepMeshData_Edge (
-  const TopoDS_Edge&                       theEdge,
-  const Handle (NCollection_IncAllocator)& theAllocator)
-  : IMeshData_Edge (theEdge),
-    myAllocator (theAllocator),
-    myPCurves (256, myAllocator),
-    myPCurvesMap(1, myAllocator)
-{
-  SetCurve (IMeshData::ICurveHandle (new (myAllocator) BRepMeshData_Curve (myAllocator)));
+BRepMeshData_Edge::BRepMeshData_Edge(const TopoDS_Edge& theEdge, const Handle(NCollection_IncAllocator) & theAllocator)
+    : IMeshData_Edge(theEdge), myAllocator(theAllocator), myPCurves(256, myAllocator), myPCurvesMap(1, myAllocator) {
+    SetCurve(IMeshData::ICurveHandle(new (myAllocator) BRepMeshData_Curve(myAllocator)));
 }
 
 //=======================================================================
 // Function: Destructor
-// Purpose : 
+// Purpose :
 //=======================================================================
-BRepMeshData_Edge::~BRepMeshData_Edge ()
-{
+BRepMeshData_Edge::~BRepMeshData_Edge() {}
+
+//=======================================================================
+// Function: AddPCurve
+// Purpose :
+//=======================================================================
+Standard_Integer BRepMeshData_Edge::PCurvesNb() const {
+    return myPCurves.Size();
 }
 
 //=======================================================================
 // Function: AddPCurve
-// Purpose : 
+// Purpose :
 //=======================================================================
-Standard_Integer BRepMeshData_Edge::PCurvesNb () const
-{
-  return myPCurves.Size ();
-}
+const IMeshData::IPCurveHandle& BRepMeshData_Edge::AddPCurve(const IMeshData::IFacePtr& theDFace,
+                                                             const TopAbs_Orientation theOrientation) {
+    const Standard_Integer aPCurveIndex = PCurvesNb();
+    // Add pcurve to list of pcurves
+    IMeshData::IPCurveHandle aPCurve(new (myAllocator) BRepMeshData_PCurve(theDFace, theOrientation, myAllocator));
+    myPCurves.Append(aPCurve);
 
-//=======================================================================
-// Function: AddPCurve
-// Purpose : 
-//=======================================================================
-const IMeshData::IPCurveHandle& BRepMeshData_Edge::AddPCurve (
-  const IMeshData::IFacePtr& theDFace,
-  const TopAbs_Orientation   theOrientation)
-{
-  const Standard_Integer aPCurveIndex = PCurvesNb ();
-  // Add pcurve to list of pcurves
-  IMeshData::IPCurveHandle aPCurve (new (myAllocator) BRepMeshData_PCurve (theDFace, theOrientation, myAllocator));
-  myPCurves.Append (aPCurve);
+    // Map pcurve to faces.
+    if (!myPCurvesMap.IsBound(theDFace)) {
+        myPCurvesMap.Bind(theDFace, IMeshData::ListOfInteger(myAllocator));
+    }
 
-  // Map pcurve to faces.
-  if (!myPCurvesMap.IsBound(theDFace))
-  {
-    myPCurvesMap.Bind(theDFace, IMeshData::ListOfInteger(myAllocator));
-  }
+    IMeshData::ListOfInteger& aListOfPCurves = myPCurvesMap.ChangeFind(theDFace);
+    aListOfPCurves.Append(aPCurveIndex);
 
-  IMeshData::ListOfInteger& aListOfPCurves = myPCurvesMap.ChangeFind(theDFace);
-  aListOfPCurves.Append (aPCurveIndex);
-
-  return GetPCurve (aPCurveIndex);
+    return GetPCurve(aPCurveIndex);
 }
 
 //=======================================================================
 // Function: GetPCurve
-// Purpose : 
+// Purpose :
 //=======================================================================
-const IMeshData::IPCurveHandle& BRepMeshData_Edge::GetPCurve (
-  const IMeshData::IFacePtr& theDFace,
-  const TopAbs_Orientation   theOrientation) const
-{
-  const IMeshData::ListOfInteger& aListOfPCurves = myPCurvesMap.Find (theDFace);
-  const IMeshData::IPCurveHandle& aPCurve1 = myPCurves (aListOfPCurves.First ());
-  return (aPCurve1->GetOrientation () == theOrientation) ?
-    aPCurve1 :
-    myPCurves (aListOfPCurves.Last ());
+const IMeshData::IPCurveHandle& BRepMeshData_Edge::GetPCurve(const IMeshData::IFacePtr& theDFace,
+                                                             const TopAbs_Orientation theOrientation) const {
+    const IMeshData::ListOfInteger& aListOfPCurves = myPCurvesMap.Find(theDFace);
+    const IMeshData::IPCurveHandle& aPCurve1 = myPCurves(aListOfPCurves.First());
+    return (aPCurve1->GetOrientation() == theOrientation) ? aPCurve1 : myPCurves(aListOfPCurves.Last());
 }
 
 //=======================================================================
 // Function: GetPCurve
-// Purpose : 
+// Purpose :
 //=======================================================================
-const IMeshData::IPCurveHandle& BRepMeshData_Edge::GetPCurve (
-  const Standard_Integer theIndex) const
-{
-  return myPCurves (theIndex);
+const IMeshData::IPCurveHandle& BRepMeshData_Edge::GetPCurve(const Standard_Integer theIndex) const {
+    return myPCurves(theIndex);
 }

@@ -22,22 +22,17 @@
  * the information about two pave blocks
  * and some satellite information
  *
-*/
+ */
 //=======================================================================
-//class : BOPDS_CoupleOfPaveBlocks
-//purpose  : 
+// class : BOPDS_CoupleOfPaveBlocks
+// purpose  :
 //=======================================================================
 class BOPDS_CoupleOfPaveBlocks {
 public:
     /**
      * Constructor
      */
-    BOPDS_CoupleOfPaveBlocks() :
-        myIndexInterf(-1),
-        myIndex(-1),
-        myTolerance(0)
-    {
-    }
+    BOPDS_CoupleOfPaveBlocks() : myIndexInterf(-1), myIndex(-1), myTolerance(0) {}
     //
     /**
      * Constructor
@@ -46,20 +41,15 @@ public:
      * @param thePB2
      *  secondt pave block
      */
-    BOPDS_CoupleOfPaveBlocks(const Handle(BOPDS_PaveBlock)& thePB1,
-        const Handle(BOPDS_PaveBlock)& thePB2) :
-        myIndexInterf(-1),
-        myIndex(-1),
-        myTolerance(0)
-    {
+    BOPDS_CoupleOfPaveBlocks(const Handle(BOPDS_PaveBlock) & thePB1, const Handle(BOPDS_PaveBlock) & thePB2)
+        : myIndexInterf(-1), myIndex(-1), myTolerance(0) {
         SetPaveBlocks(thePB1, thePB2);
     }
     //
     /**
      * Destructor
      */
-    ~BOPDS_CoupleOfPaveBlocks() {
-    }
+    ~BOPDS_CoupleOfPaveBlocks() {}
     //
     /**
      * Sets an index
@@ -75,10 +65,10 @@ public:
      * @return
      *   index
      */
-    Standard_Integer Index()const {
+    Standard_Integer Index() const {
         return myIndex;
     }
-    // 
+    //
     /**
      * Sets an index of an interference
      * @param theIndex
@@ -93,10 +83,10 @@ public:
      * @return
      *   index of an interference
      */
-    Standard_Integer IndexInterf()const {
+    Standard_Integer IndexInterf() const {
         return myIndexInterf;
     }
-    // 
+    //
     /**
      * Sets pave blocks
      * @param thePB1
@@ -104,12 +94,11 @@ public:
      * @param thePB2
      *  secondt pave block
      */
-    void SetPaveBlocks(const Handle(BOPDS_PaveBlock)& thePB1,
-        const Handle(BOPDS_PaveBlock)& thePB2) {
+    void SetPaveBlocks(const Handle(BOPDS_PaveBlock) & thePB1, const Handle(BOPDS_PaveBlock) & thePB2) {
         myPB[0] = thePB1;
         myPB[1] = thePB2;
     }
-    // 
+    //
     /**
      * Returns pave blocks
      * @param thePB1
@@ -117,18 +106,17 @@ public:
      * @param thePB2
      *  the second pave block
      */
-    void PaveBlocks(Handle(BOPDS_PaveBlock)& thePB1,
-        Handle(BOPDS_PaveBlock)& thePB2) const {
+    void PaveBlocks(Handle(BOPDS_PaveBlock) & thePB1, Handle(BOPDS_PaveBlock) & thePB2) const {
         thePB1 = myPB[0];
         thePB2 = myPB[1];
     }
-    // 
+    //
     /**
      * Sets the first pave block
      * @param thePB
      *  the first pave block
      */
-    void SetPaveBlock1(const Handle(BOPDS_PaveBlock)& thePB) {
+    void SetPaveBlock1(const Handle(BOPDS_PaveBlock) & thePB) {
         myPB[0] = thePB;
     }
     /**
@@ -136,7 +124,7 @@ public:
      * @return
      * the first pave block
      */
-    const Handle(BOPDS_PaveBlock)& PaveBlock1()const {
+    const Handle(BOPDS_PaveBlock) & PaveBlock1() const {
         return myPB[0];
     }
     //
@@ -145,7 +133,7 @@ public:
      * @param thePB
      *  the second pave block
      */
-    void SetPaveBlock2(const Handle(BOPDS_PaveBlock)& thePB) {
+    void SetPaveBlock2(const Handle(BOPDS_PaveBlock) & thePB) {
         myPB[1] = thePB;
     }
     //
@@ -154,21 +142,21 @@ public:
      * @return
      * the second pave block
      */
-    const Handle(BOPDS_PaveBlock)& PaveBlock2()const {
+    const Handle(BOPDS_PaveBlock) & PaveBlock2() const {
         return myPB[1];
     }
 
     /**
-    * Sets the tolerance associated with this couple
-    */
+     * Sets the tolerance associated with this couple
+     */
     void SetTolerance(const Standard_Real theTol) {
         myTolerance = theTol;
     }
     //
     /**
-    * Returns the tolerance associated with this couple
-    */
-    Standard_Real Tolerance()const {
+     * Returns the tolerance associated with this couple
+     */
+    Standard_Real Tolerance() const {
         return myTolerance;
     }
 
@@ -176,7 +164,7 @@ protected:
     Standard_Integer myIndexInterf;
     Standard_Integer myIndex;
     Handle(BOPDS_PaveBlock) myPB[2];
-    Standard_Real    myTolerance;
+    Standard_Real myTolerance;
 };
 //
 #endif

@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<Handle(StepGeom_CompositeCurveSegment)> StepGeom_Array1OfCompositeCurveSegment;
 
-
 #endif

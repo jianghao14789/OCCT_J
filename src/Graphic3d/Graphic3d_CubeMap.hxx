@@ -20,95 +20,85 @@
 
 //! Base class for cubemaps.
 //! It is iterator over cubemap sides.
-class Graphic3d_CubeMap : public Graphic3d_TextureMap
-{
-  DEFINE_STANDARD_RTTIEXT(Graphic3d_CubeMap, Graphic3d_TextureMap)
+class Graphic3d_CubeMap : public Graphic3d_TextureMap {
+    DEFINE_STANDARD_RTTIEXT(Graphic3d_CubeMap, Graphic3d_TextureMap)
 public:
+    //! Constructor defining loading cubemap from file.
+    Graphic3d_CubeMap(const TCollection_AsciiString& theFileName,
+                      Standard_Boolean theToGenerateMipmaps = Standard_False)
+        : Graphic3d_TextureMap(theFileName, Graphic3d_TOT_CUBEMAP), myCurrentSide(Graphic3d_CMS_POS_X),
+          myEndIsReached(false), myZIsInverted(false), myHasMipmaps(theToGenerateMipmaps) {}
 
-  //! Constructor defining loading cubemap from file.
-  Graphic3d_CubeMap (const TCollection_AsciiString& theFileName,
-                     Standard_Boolean               theToGenerateMipmaps = Standard_False) :
-    Graphic3d_TextureMap (theFileName, Graphic3d_TOT_CUBEMAP),
-    myCurrentSide  (Graphic3d_CMS_POS_X),
-    myEndIsReached (false),
-    myZIsInverted  (false),
-    myHasMipmaps   (theToGenerateMipmaps)
-  {}
+    //! Constructor defining direct cubemap initialization from PixMap.
+    Graphic3d_CubeMap(const Handle(Image_PixMap) & thePixmap = Handle(Image_PixMap)(),
+                      Standard_Boolean theToGenerateMipmaps = Standard_False)
+        : Graphic3d_TextureMap(thePixmap, Graphic3d_TOT_CUBEMAP), myCurrentSide(Graphic3d_CMS_POS_X),
+          myEndIsReached(false), myZIsInverted(false), myHasMipmaps(theToGenerateMipmaps) {}
 
-  //! Constructor defining direct cubemap initialization from PixMap.
-  Graphic3d_CubeMap (const Handle(Image_PixMap)& thePixmap = Handle(Image_PixMap)(),
-                     Standard_Boolean            theToGenerateMipmaps = Standard_False) :
-    Graphic3d_TextureMap (thePixmap, Graphic3d_TOT_CUBEMAP),
-    myCurrentSide  (Graphic3d_CMS_POS_X),
-    myEndIsReached (false),
-    myZIsInverted  (false),
-    myHasMipmaps   (theToGenerateMipmaps)
-  {}
-
-  //! Returns whether the iterator has reached the end (true if it hasn't). 
-  Standard_Boolean More() const { return !myEndIsReached; }
-
-  //! Returns current cubemap side (iterator state).
-  Graphic3d_CubeMapSide CurrentSide() const { return myCurrentSide; }
-
-  //! Moves iterator to the next cubemap side.
-  //! Uses OpenGL cubemap sides order +X -> -X -> +Y -> -Y -> +Z -> -Z.
-  void Next()
-  {
-    if (!myEndIsReached && myCurrentSide == Graphic3d_CMS_NEG_Z)
-    {
-      myEndIsReached = true;
+    //! Returns whether the iterator has reached the end (true if it hasn't).
+    Standard_Boolean More() const {
+        return !myEndIsReached;
     }
-    else
-    {
-      myCurrentSide = Graphic3d_CubeMapSide (myCurrentSide + 1);
+
+    //! Returns current cubemap side (iterator state).
+    Graphic3d_CubeMapSide CurrentSide() const {
+        return myCurrentSide;
     }
-  }
 
-  //! Sets Z axis inversion (vertical flipping).
-  void SetZInversion (Standard_Boolean theZIsInverted)
-  {
-    myZIsInverted = theZIsInverted;
-  }
+    //! Moves iterator to the next cubemap side.
+    //! Uses OpenGL cubemap sides order +X -> -X -> +Y -> -Y -> +Z -> -Z.
+    void Next() {
+        if (!myEndIsReached && myCurrentSide == Graphic3d_CMS_NEG_Z) {
+            myEndIsReached = true;
+        } else {
+            myCurrentSide = Graphic3d_CubeMapSide(myCurrentSide + 1);
+        }
+    }
 
-  //! Returns whether Z axis is inverted.
-  Standard_Boolean ZIsInverted() const
-  {
-    return myZIsInverted;
-  }
+    //! Sets Z axis inversion (vertical flipping).
+    void SetZInversion(Standard_Boolean theZIsInverted) {
+        myZIsInverted = theZIsInverted;
+    }
 
-  //! Returns whether mipmaps of cubemap will be generated or not.
-  Standard_Boolean HasMipmaps() const { return myHasMipmaps; }
+    //! Returns whether Z axis is inverted.
+    Standard_Boolean ZIsInverted() const {
+        return myZIsInverted;
+    }
 
-  //! Sets whether to generate mipmaps of cubemap or not.
-  void SetMipmapsGeneration (Standard_Boolean theToGenerateMipmaps) { myHasMipmaps = theToGenerateMipmaps; }
+    //! Returns whether mipmaps of cubemap will be generated or not.
+    Standard_Boolean HasMipmaps() const {
+        return myHasMipmaps;
+    }
 
-  //! Returns current cubemap side as compressed PixMap.
-  //! Returns null handle if current side is invalid or if image is not in supported compressed format.
-  virtual Handle(Image_CompressedPixMap) CompressedValue (const Handle(Image_SupportedFormats)& theSupported) = 0;
+    //! Sets whether to generate mipmaps of cubemap or not.
+    void SetMipmapsGeneration(Standard_Boolean theToGenerateMipmaps) {
+        myHasMipmaps = theToGenerateMipmaps;
+    }
 
-  //! Returns PixMap containing current side of cubemap.
-  //! Returns null handle if current side is invalid.
-  virtual Handle(Image_PixMap) Value (const Handle(Image_SupportedFormats)& theSupported) = 0;
+    //! Returns current cubemap side as compressed PixMap.
+    //! Returns null handle if current side is invalid or if image is not in supported compressed format.
+    virtual Handle(Image_CompressedPixMap) CompressedValue(const Handle(Image_SupportedFormats) & theSupported) = 0;
 
-  //! Sets iterator state to +X cubemap side.
-  Graphic3d_CubeMap& Reset()
-  { 
-    myCurrentSide = Graphic3d_CMS_POS_X;
-    myEndIsReached = false;
-    return *this;
-  }
+    //! Returns PixMap containing current side of cubemap.
+    //! Returns null handle if current side is invalid.
+    virtual Handle(Image_PixMap) Value(const Handle(Image_SupportedFormats) & theSupported) = 0;
 
-  //! Empty destructor.
-  ~Graphic3d_CubeMap() {}
+    //! Sets iterator state to +X cubemap side.
+    Graphic3d_CubeMap& Reset() {
+        myCurrentSide = Graphic3d_CMS_POS_X;
+        myEndIsReached = false;
+        return *this;
+    }
+
+    //! Empty destructor.
+    ~Graphic3d_CubeMap() {}
 
 protected:
-
-  Graphic3d_CubeMapSide myCurrentSide;  //!< Iterator state
-  Standard_Boolean      myEndIsReached; //!< Indicates whether end of iteration has been reached or hasn't
-  Standard_Boolean      myZIsInverted;  //!< Indicates whether Z axis is inverted that allows to synchronize vertical flip of cubemap
-  Standard_Boolean      myHasMipmaps;   //!< Indicates whether mipmaps of cubemap will be generated or not
-
+    Graphic3d_CubeMapSide myCurrentSide; //!< Iterator state
+    Standard_Boolean myEndIsReached;     //!< Indicates whether end of iteration has been reached or hasn't
+    Standard_Boolean
+        myZIsInverted; //!< Indicates whether Z axis is inverted that allows to synchronize vertical flip of cubemap
+    Standard_Boolean myHasMipmaps; //!< Indicates whether mipmaps of cubemap will be generated or not
 };
 
 DEFINE_STANDARD_HANDLE(Graphic3d_CubeMap, Graphic3d_TextureMap)

@@ -21,112 +21,102 @@
 #include <StepRepr_RepresentationItem.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepElement_AnalysisItemWithinRepresentation,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepElement_AnalysisItemWithinRepresentation, Standard_Transient)
 
 //=======================================================================
-//function : StepElement_AnalysisItemWithinRepresentation
-//purpose  : 
+// function : StepElement_AnalysisItemWithinRepresentation
+// purpose  :
 //=======================================================================
-StepElement_AnalysisItemWithinRepresentation::StepElement_AnalysisItemWithinRepresentation ()
-{
+StepElement_AnalysisItemWithinRepresentation::StepElement_AnalysisItemWithinRepresentation() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepElement_AnalysisItemWithinRepresentation::Init(const Handle(TCollection_HAsciiString) & aName,
+                                                        const Handle(TCollection_HAsciiString) & aDescription,
+                                                        const Handle(StepRepr_RepresentationItem) & aItem,
+                                                        const Handle(StepRepr_Representation) & aRep) {
+
+    theName = aName;
+
+    theDescription = aDescription;
+
+    theItem = aItem;
+
+    theRep = aRep;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepElement_AnalysisItemWithinRepresentation::Init (const Handle(TCollection_HAsciiString) &aName,
-                                                         const Handle(TCollection_HAsciiString) &aDescription,
-                                                         const Handle(StepRepr_RepresentationItem) &aItem,
-                                                         const Handle(StepRepr_Representation) &aRep)
-{
-
-  theName = aName;
-
-  theDescription = aDescription;
-
-  theItem = aItem;
-
-  theRep = aRep;
+Handle(TCollection_HAsciiString) StepElement_AnalysisItemWithinRepresentation::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepElement_AnalysisItemWithinRepresentation::Name () const
-{
-  return theName;
+void StepElement_AnalysisItemWithinRepresentation::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepElement_AnalysisItemWithinRepresentation::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+Handle(TCollection_HAsciiString) StepElement_AnalysisItemWithinRepresentation::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepElement_AnalysisItemWithinRepresentation::Description () const
-{
-  return theDescription;
+void StepElement_AnalysisItemWithinRepresentation::SetDescription(const Handle(TCollection_HAsciiString) &
+                                                                  aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : Item
+// purpose  :
 //=======================================================================
 
-void StepElement_AnalysisItemWithinRepresentation::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(StepRepr_RepresentationItem) StepElement_AnalysisItemWithinRepresentation::Item() const {
+    return theItem;
 }
 
 //=======================================================================
-//function : Item
-//purpose  : 
+// function : SetItem
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_RepresentationItem) StepElement_AnalysisItemWithinRepresentation::Item () const
-{
-  return theItem;
+void StepElement_AnalysisItemWithinRepresentation::SetItem(const Handle(StepRepr_RepresentationItem) & aItem) {
+    theItem = aItem;
 }
 
 //=======================================================================
-//function : SetItem
-//purpose  : 
+// function : Rep
+// purpose  :
 //=======================================================================
 
-void StepElement_AnalysisItemWithinRepresentation::SetItem (const Handle(StepRepr_RepresentationItem) &aItem)
-{
-  theItem = aItem;
+Handle(StepRepr_Representation) StepElement_AnalysisItemWithinRepresentation::Rep() const {
+    return theRep;
 }
 
 //=======================================================================
-//function : Rep
-//purpose  : 
+// function : SetRep
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_Representation) StepElement_AnalysisItemWithinRepresentation::Rep () const
-{
-  return theRep;
-}
-
-//=======================================================================
-//function : SetRep
-//purpose  : 
-//=======================================================================
-
-void StepElement_AnalysisItemWithinRepresentation::SetRep (const Handle(StepRepr_Representation) &aRep)
-{
-  theRep = aRep;
+void StepElement_AnalysisItemWithinRepresentation::SetRep(const Handle(StepRepr_Representation) & aRep) {
+    theRep = aRep;
 }

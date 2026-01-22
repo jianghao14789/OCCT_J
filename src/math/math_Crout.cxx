@@ -14,12 +14,12 @@
 
 // lpa le 20/08/91
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math_Crout.hxx>
 #include <math_Matrix.hxx>
@@ -28,9 +28,7 @@
 #include <Standard_DimensionError.hxx>
 #include <StdFail_NotDone.hxx>
 
-math_Crout::math_Crout(const math_Matrix& A, const Standard_Real MinPivot) :
-    InvA(1, A.RowNumber(), 1, A.ColNumber())
-{
+math_Crout::math_Crout(const math_Matrix& A, const Standard_Real MinPivot) : InvA(1, A.RowNumber(), 1, A.ColNumber()) {
     Standard_Integer i, j, k;
     Standard_Integer Nctl = A.RowNumber();
     Standard_Integer lowr = A.LowerRow(), lowc = A.LowerCol();
@@ -38,8 +36,6 @@ math_Crout::math_Crout(const math_Matrix& A, const Standard_Real MinPivot) :
 
     math_Matrix L(1, Nctl, 1, Nctl);
     math_Vector Diag(1, Nctl);
-
-
 
     math_NotSquare_Raise_if(Nctl != A.ColNumber(), " ");
 
@@ -100,13 +96,9 @@ math_Crout::math_Crout(const math_Matrix& A, const Standard_Real MinPivot) :
     Done = Standard_True;
 }
 
-
-
-void math_Crout::Solve(const math_Vector& B, math_Vector& X) const
-{
+void math_Crout::Solve(const math_Vector& B, math_Vector& X) const {
     StdFail_NotDone_Raise_if(!Done, " ");
-    Standard_DimensionError_Raise_if((B.Length() != InvA.RowNumber()) ||
-        (X.Length() != B.Length()), " ");
+    Standard_DimensionError_Raise_if((B.Length() != InvA.RowNumber()) || (X.Length() != B.Length()), " ");
 
     Standard_Integer n = InvA.RowNumber();
     Standard_Integer lowb = B.Lower(), lowx = X.Lower();
@@ -123,20 +115,11 @@ void math_Crout::Solve(const math_Vector& B, math_Vector& X) const
     }
 }
 
-void math_Crout::Dump(Standard_OStream& o) const
-{
+void math_Crout::Dump(Standard_OStream& o) const {
     o << "math_Crout ";
     if (Done) {
         o << " Status = Done \n";
-    }
-    else {
+    } else {
         o << " Status = not Done \n";
     }
 }
-
-
-
-
-
-
-

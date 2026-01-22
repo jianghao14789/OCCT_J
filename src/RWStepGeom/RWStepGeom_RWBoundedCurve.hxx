@@ -27,42 +27,20 @@ class Interface_Check;
 class StepGeom_BoundedCurve;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for BoundedCurve
-class RWStepGeom_RWBoundedCurve 
-{
+class RWStepGeom_RWBoundedCurve {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWBoundedCurve();
 
-  
-  Standard_EXPORT RWStepGeom_RWBoundedCurve();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_BoundedCurve)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_BoundedCurve)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_BoundedCurve) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_BoundedCurve) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWBoundedCurve_HeaderFile

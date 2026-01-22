@@ -27,48 +27,26 @@ class StepBasic_EulerAngles;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for EulerAngles
-class RWStepBasic_RWEulerAngles 
-{
+class RWStepBasic_RWEulerAngles {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWEulerAngles();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWEulerAngles();
-  
-  //! Reads EulerAngles
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_EulerAngles)& ent) const;
-  
-  //! Writes EulerAngles
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_EulerAngles)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_EulerAngles)& ent, Interface_EntityIterator& iter) const;
+    //! Reads EulerAngles
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_EulerAngles) & ent) const;
 
+    //! Writes EulerAngles
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_EulerAngles) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_EulerAngles) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWEulerAngles_HeaderFile

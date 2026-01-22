@@ -21,83 +21,69 @@ IMPLEMENT_STANDARD_RTTIEXT(Graphic3d_AspectMarker3d, Graphic3d_Aspects)
 // function : Graphic3d_AspectMarker3d
 // purpose  :
 // =======================================================================
-Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d()
-{
-  myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
-  myInteriorColor.SetRGB (Quantity_NOC_YELLOW);
-  myMarkerType = Aspect_TOM_X;
-  myMarkerScale = 1.0f;
+Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d() {
+    myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
+    myInteriorColor.SetRGB(Quantity_NOC_YELLOW);
+    myMarkerType = Aspect_TOM_X;
+    myMarkerScale = 1.0f;
 }
 
 // =======================================================================
 // function : Graphic3d_AspectMarker3d
 // purpose  :
 // =======================================================================
-Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d (const Aspect_TypeOfMarker theType,
-                                                    const Quantity_Color&     theColor,
-                                                    const Standard_Real       theScale)
-{
-  myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
-  myInteriorColor.SetRGB (theColor);
-  myMarkerType = theType;
-  SetMarkerScale ((float )theScale);
+Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d(const Aspect_TypeOfMarker theType, const Quantity_Color& theColor,
+                                                   const Standard_Real theScale) {
+    myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
+    myInteriorColor.SetRGB(theColor);
+    myMarkerType = theType;
+    SetMarkerScale((float)theScale);
 }
 
 // =======================================================================
 // function : Graphic3d_AspectMarker3d
 // purpose  :
 // =======================================================================
-Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d (const Quantity_Color&  theColor,
-                                                    const Standard_Integer theWidth,
-                                                    const Standard_Integer theHeight,
-                                                    const Handle(TColStd_HArray1OfByte)& theTextureBitMap)
-{
-  myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
-  myMarkerImage = new Graphic3d_MarkerImage(theTextureBitMap, theWidth, theHeight);
-  myInteriorColor.SetRGB (theColor),
-  myMarkerType = Aspect_TOM_USERDEFINED;
-  myMarkerScale = 1.0f;
+Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d(const Quantity_Color& theColor, const Standard_Integer theWidth,
+                                                   const Standard_Integer theHeight,
+                                                   const Handle(TColStd_HArray1OfByte) & theTextureBitMap) {
+    myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
+    myMarkerImage = new Graphic3d_MarkerImage(theTextureBitMap, theWidth, theHeight);
+    myInteriorColor.SetRGB(theColor), myMarkerType = Aspect_TOM_USERDEFINED;
+    myMarkerScale = 1.0f;
 }
 
 // =======================================================================
 // function : Graphic3d_AspectMarker3d
 // purpose  :
 // =======================================================================
-Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d (const Handle(Image_PixMap)& theTextureImage)
-{
-  myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
-  myMarkerImage = new Graphic3d_MarkerImage (theTextureImage);
-  myInteriorColor.SetRGB (Quantity_NOC_YELLOW);
-  myMarkerType = Aspect_TOM_USERDEFINED;
-  myMarkerScale = 1.0f;
+Graphic3d_AspectMarker3d::Graphic3d_AspectMarker3d(const Handle(Image_PixMap) & theTextureImage) {
+    myShadingModel = Graphic3d_TypeOfShadingModel_Unlit;
+    myMarkerImage = new Graphic3d_MarkerImage(theTextureImage);
+    myInteriorColor.SetRGB(Quantity_NOC_YELLOW);
+    myMarkerType = Aspect_TOM_USERDEFINED;
+    myMarkerScale = 1.0f;
 }
 
 // =======================================================================
 // function : GetTextureSize
 // purpose  :
 // =======================================================================
-void Graphic3d_AspectMarker3d::GetTextureSize (Standard_Integer& theWidth,
-                                               Standard_Integer& theHeight) const
-{
-  if (!myMarkerImage.IsNull())
-  {
-    myMarkerImage->GetTextureSize (theWidth, theHeight);
-  }
-  else
-  {
-    theWidth  = 0;
-    theHeight = 0;
-  }
+void Graphic3d_AspectMarker3d::GetTextureSize(Standard_Integer& theWidth, Standard_Integer& theHeight) const {
+    if (!myMarkerImage.IsNull()) {
+        myMarkerImage->GetTextureSize(theWidth, theHeight);
+    } else {
+        theWidth = 0;
+        theHeight = 0;
+    }
 }
 
 // =======================================================================
 // function : SetBitMap
 // purpose  :
 // =======================================================================
-void Graphic3d_AspectMarker3d::SetBitMap (const Standard_Integer theWidth,
-                                          const Standard_Integer theHeight,
-                                          const Handle(TColStd_HArray1OfByte)& theTextureBitMap)
-{
-  myMarkerImage.Nullify();
-  myMarkerImage = new Graphic3d_MarkerImage (theTextureBitMap, theWidth, theHeight);
+void Graphic3d_AspectMarker3d::SetBitMap(const Standard_Integer theWidth, const Standard_Integer theHeight,
+                                         const Handle(TColStd_HArray1OfByte) & theTextureBitMap) {
+    myMarkerImage.Nullify();
+    myMarkerImage = new Graphic3d_MarkerImage(theTextureBitMap, theWidth, theHeight);
 }

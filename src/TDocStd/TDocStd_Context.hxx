@@ -23,43 +23,19 @@
 
 #include <Standard_Boolean.hxx>
 
-
-
-class TDocStd_Context 
-{
+class TDocStd_Context {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TDocStd_Context();
 
-  
-  Standard_EXPORT TDocStd_Context();
-  
-  Standard_EXPORT void SetModifiedReferences (const Standard_Boolean Mod);
-  
-  Standard_EXPORT Standard_Boolean ModifiedReferences() const;
+    Standard_EXPORT void SetModifiedReferences(const Standard_Boolean Mod);
 
-
-
+    Standard_EXPORT Standard_Boolean ModifiedReferences() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Boolean modifiedRef;
-
-
+    Standard_Boolean modifiedRef;
 };
-
-
-
-
-
-
 
 #endif // _TDocStd_Context_HeaderFile

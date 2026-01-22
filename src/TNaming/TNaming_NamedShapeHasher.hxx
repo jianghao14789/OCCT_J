@@ -22,5 +22,4 @@
 
 typedef NCollection_DefaultHasher<Handle(TNaming_NamedShape)> TNaming_NamedShapeHasher;
 
-
 #endif

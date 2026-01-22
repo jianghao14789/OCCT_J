@@ -19,89 +19,81 @@
 #include <StepRepr_DataEnvironment.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_DataEnvironment,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_DataEnvironment, Standard_Transient)
 
 //=======================================================================
-//function : StepRepr_DataEnvironment
-//purpose  : 
+// function : StepRepr_DataEnvironment
+// purpose  :
 //=======================================================================
-StepRepr_DataEnvironment::StepRepr_DataEnvironment ()
-{
+StepRepr_DataEnvironment::StepRepr_DataEnvironment() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepRepr_DataEnvironment::Init(const Handle(TCollection_HAsciiString) & aName,
+                                    const Handle(TCollection_HAsciiString) & aDescription,
+                                    const Handle(StepRepr_HArray1OfPropertyDefinitionRepresentation) & aElements) {
+
+    theName = aName;
+
+    theDescription = aDescription;
+
+    theElements = aElements;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepRepr_DataEnvironment::Init (const Handle(TCollection_HAsciiString) &aName,
-                                     const Handle(TCollection_HAsciiString) &aDescription,
-                                     const Handle(StepRepr_HArray1OfPropertyDefinitionRepresentation) &aElements)
-{
-
-  theName = aName;
-
-  theDescription = aDescription;
-
-  theElements = aElements;
+Handle(TCollection_HAsciiString) StepRepr_DataEnvironment::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepRepr_DataEnvironment::Name () const
-{
-  return theName;
+void StepRepr_DataEnvironment::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepRepr_DataEnvironment::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+Handle(TCollection_HAsciiString) StepRepr_DataEnvironment::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepRepr_DataEnvironment::Description () const
-{
-  return theDescription;
+void StepRepr_DataEnvironment::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : Elements
+// purpose  :
 //=======================================================================
 
-void StepRepr_DataEnvironment::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(StepRepr_HArray1OfPropertyDefinitionRepresentation) StepRepr_DataEnvironment::Elements() const {
+    return theElements;
 }
 
 //=======================================================================
-//function : Elements
-//purpose  : 
+// function : SetElements
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_HArray1OfPropertyDefinitionRepresentation) StepRepr_DataEnvironment::Elements () const
-{
-  return theElements;
-}
-
-//=======================================================================
-//function : SetElements
-//purpose  : 
-//=======================================================================
-
-void StepRepr_DataEnvironment::SetElements (const Handle(StepRepr_HArray1OfPropertyDefinitionRepresentation) &aElements)
-{
-  theElements = aElements;
+void StepRepr_DataEnvironment::SetElements(const Handle(StepRepr_HArray1OfPropertyDefinitionRepresentation) &
+                                           aElements) {
+    theElements = aElements;
 }

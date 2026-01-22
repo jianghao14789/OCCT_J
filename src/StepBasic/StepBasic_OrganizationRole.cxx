@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_OrganizationRole.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_OrganizationRole,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_OrganizationRole, Standard_Transient)
 
-StepBasic_OrganizationRole::StepBasic_OrganizationRole ()  {}
+StepBasic_OrganizationRole::StepBasic_OrganizationRole() {}
 
-void StepBasic_OrganizationRole::Init(
-	const Handle(TCollection_HAsciiString)& aName)
-{
-	// --- classe own fields ---
-	name = aName;
+void StepBasic_OrganizationRole::Init(const Handle(TCollection_HAsciiString) & aName) {
+    // --- classe own fields ---
+    name = aName;
 }
 
-
-void StepBasic_OrganizationRole::SetName(const Handle(TCollection_HAsciiString)& aName)
-{
-	name = aName;
+void StepBasic_OrganizationRole::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    name = aName;
 }
 
-Handle(TCollection_HAsciiString) StepBasic_OrganizationRole::Name() const
-{
-	return name;
+Handle(TCollection_HAsciiString) StepBasic_OrganizationRole::Name() const {
+    return name;
 }

@@ -24,7 +24,6 @@
 #include <Geom2dInt_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfGInter.hxx>
 #include <IntRes2d_Domain.hxx>
 #include <gp_Pnt2d.hxx>
- 
 
 #define ImpTool IntCurve_IConicTool
 #define ImpTool_hxx <IntCurve_IConicTool.hxx>
@@ -39,4 +38,3 @@
 #define IntImpParGen_Intersector Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter
 #define IntImpParGen_Intersector_hxx <Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter.hxx>
 #include <IntImpParGen_Intersector.gxx>
-

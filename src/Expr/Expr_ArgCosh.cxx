@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArgCosh.hxx>
 #include <Expr_Cosh.hxx>
@@ -33,13 +32,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_ArgCosh, Expr_UnaryExpression)
 
-Expr_ArgCosh::Expr_ArgCosh(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_ArgCosh::Expr_ArgCosh(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgCosh::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_ArgCosh::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) op = Operand();
     if (op->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) valop = Handle(Expr_NumericValue)::DownCast(op);
@@ -52,13 +49,11 @@ Handle(Expr_GeneralExpression) Expr_ArgCosh::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgCosh::Copy() const
-{
-    return  new Expr_ArgCosh(Expr::CopyShare(Operand()));
+Handle(Expr_GeneralExpression) Expr_ArgCosh::Copy() const {
+    return new Expr_ArgCosh(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_ArgCosh::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_ArgCosh::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_ArgCosh))) {
         return Standard_False;
     }
@@ -66,16 +61,14 @@ Standard_Boolean Expr_ArgCosh::IsIdentical(const Handle(Expr_GeneralExpression)&
     return op->IsIdentical(Other->SubExpression(1));
 }
 
-Standard_Boolean Expr_ArgCosh::IsLinear() const
-{
+Standard_Boolean Expr_ArgCosh::IsLinear() const {
     if (ContainsUnknowns()) {
         return Standard_False;
     }
     return Standard_True;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgCosh::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_ArgCosh::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -89,20 +82,18 @@ Handle(Expr_GeneralExpression) Expr_ArgCosh::Derivative(const Handle(Expr_NamedU
     // sqrt(X2 - 1)
     Handle(Expr_SquareRoot) theroot = new Expr_SquareRoot(thedif->ShallowSimplified());
 
-    // ArgCosh'(F(X)) = F'(X)/sqrt(F(X)2-1) 
+    // ArgCosh'(F(X)) = F'(X)/sqrt(F(X)2-1)
     Handle(Expr_Division) thediv = derop / theroot->ShallowSimplified();
 
     return thediv->ShallowSimplified();
 }
 
-Standard_Real Expr_ArgCosh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_ArgCosh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Real val = Operand()->Evaluate(vars, vals);
     return ::Log(val + ::Sqrt(::Square(val) - 1.0));
 }
 
-TCollection_AsciiString Expr_ArgCosh::String() const
-{
+TCollection_AsciiString Expr_ArgCosh::String() const {
     TCollection_AsciiString str("ACosh(");
     str += Operand()->String();
     str += ")";

@@ -22,14 +22,12 @@ IMPLEMENT_STANDARD_RTTIEXT(OpenGl_UniformBuffer, OpenGl_Buffer)
 // function : OpenGl_UniformBuffer
 // purpose  :
 // =======================================================================
-OpenGl_UniformBuffer::OpenGl_UniformBuffer()
-: OpenGl_Buffer() {}
+OpenGl_UniformBuffer::OpenGl_UniformBuffer() : OpenGl_Buffer() {}
 
 // =======================================================================
 // function : GetTarget
 // purpose  :
 // =======================================================================
-unsigned int OpenGl_UniformBuffer::GetTarget() const
-{
-  return GL_UNIFORM_BUFFER;
+unsigned int OpenGl_UniformBuffer::GetTarget() const {
+    return GL_UNIFORM_BUFFER;
 }

@@ -18,46 +18,39 @@
 #include <Units_Token.hxx>
 
 //=======================================================================
-//function : Sequence
-//purpose  : 
+// function : Sequence
+// purpose  :
 //=======================================================================
 
-inline Handle(Units_TokensSequence) Units_Sentence::Sequence() const
-{
+inline Handle(Units_TokensSequence) Units_Sentence::Sequence() const {
     return thesequenceoftokens;
 }
 
 //=======================================================================
-//function : Sequence
+// function : Sequence
 
-//purpose  : 
+// purpose  :
 //=======================================================================
 
-inline void Units_Sentence::Sequence
-(const Handle(Units_TokensSequence)& asequenceoftokens)
-{
+inline void Units_Sentence::Sequence(const Handle(Units_TokensSequence) & asequenceoftokens) {
     thesequenceoftokens = asequenceoftokens;
 }
 
-
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsDone
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean Units_Sentence::IsDone() const
-{
+inline Standard_Boolean Units_Sentence::IsDone() const {
     return thesequenceoftokens->Length() > 0;
 }
 
-
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-inline void Units_Sentence::Dump() const
-{
+inline void Units_Sentence::Dump() const {
     Standard_Integer index;
     std::cout << " UNIT SENTENCE with : " << std::endl;
     for (index = 1; index <= thesequenceoftokens->Length(); index++)

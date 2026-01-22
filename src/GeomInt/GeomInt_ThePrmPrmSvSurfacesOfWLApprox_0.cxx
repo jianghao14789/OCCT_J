@@ -24,7 +24,6 @@
 #include <gp_Pnt.hxx>
 #include <gp_Vec.hxx>
 #include <gp_Vec2d.hxx>
- 
 
 #define ThePSurface Handle(Adaptor3d_Surface)
 #define ThePSurface_hxx <Adaptor3d_Surface.hxx>
@@ -42,4 +41,3 @@
 #define ApproxInt_PrmPrmSvSurfaces GeomInt_ThePrmPrmSvSurfacesOfWLApprox
 #define ApproxInt_PrmPrmSvSurfaces_hxx <GeomInt_ThePrmPrmSvSurfacesOfWLApprox.hxx>
 #include <ApproxInt_PrmPrmSvSurfaces.gxx>
-

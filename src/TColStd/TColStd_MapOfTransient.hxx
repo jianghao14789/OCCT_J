@@ -20,7 +20,7 @@
 #include <NCollection_Map.hxx>
 
 typedef NCollection_Map<Handle(Standard_Transient), TColStd_MapTransientHasher> TColStd_MapOfTransient;
-typedef NCollection_Map<Handle(Standard_Transient), TColStd_MapTransientHasher>::Iterator TColStd_MapIteratorOfMapOfTransient;
-
+typedef NCollection_Map<Handle(Standard_Transient), TColStd_MapTransientHasher>::Iterator
+    TColStd_MapIteratorOfMapOfTransient;
 
 #endif

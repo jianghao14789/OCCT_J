@@ -18,33 +18,29 @@
 #include <TColStd_IndexedMapOfInteger.hxx>
 
 //=======================================================================
-//function : AdjustPeriodic
-//purpose  : 
+// function : AdjustPeriodic
+// purpose  :
 //=======================================================================
-Standard_Boolean GeomInt::AdjustPeriodic(const Standard_Real thePar,
-                                         const Standard_Real theParMin,
-                                         const Standard_Real theParMax,
-                                         const Standard_Real thePeriod,
-                                         Standard_Real &theNewPar,
-                                         Standard_Real &theOffset,
-                                         const Standard_Real theEps)
-{
-  Standard_Boolean bMin, bMax;
-  //
-  theOffset = 0.;
-  theNewPar = thePar;
-  bMin = theParMin - thePar > theEps;
-  bMax = thePar - theParMax > theEps;
-  //
-  if (bMin || bMax) {
-    Standard_Real dp, aNbPer;
+Standard_Boolean GeomInt::AdjustPeriodic(const Standard_Real thePar, const Standard_Real theParMin,
+                                         const Standard_Real theParMax, const Standard_Real thePeriod,
+                                         Standard_Real& theNewPar, Standard_Real& theOffset,
+                                         const Standard_Real theEps) {
+    Standard_Boolean bMin, bMax;
     //
-    dp = (bMin) ? (theParMax - thePar) : (theParMin - thePar);
-    modf(dp / thePeriod, &aNbPer);
+    theOffset = 0.;
+    theNewPar = thePar;
+    bMin = theParMin - thePar > theEps;
+    bMax = thePar - theParMax > theEps;
     //
-    theOffset = aNbPer * thePeriod;
-    theNewPar += theOffset;
-  }
-  //
-  return (theOffset > 0.);
+    if (bMin || bMax) {
+        Standard_Real dp, aNbPer;
+        //
+        dp = (bMin) ? (theParMax - thePar) : (theParMin - thePar);
+        modf(dp / thePeriod, &aNbPer);
+        //
+        theOffset = aNbPer * thePeriod;
+        theNewPar += theOffset;
+    }
+    //
+    return (theOffset > 0.);
 }

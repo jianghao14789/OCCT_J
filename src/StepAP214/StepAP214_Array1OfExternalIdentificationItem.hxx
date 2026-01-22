@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepAP214_ExternalIdentificationItem> StepAP214_Array1OfExternalIdentificationItem;
 
-
 #endif

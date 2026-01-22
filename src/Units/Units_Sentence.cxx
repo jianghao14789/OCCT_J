@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Units_Lexicon.hxx>
 #include <Units_NoSuchType.hxx>
 #include <Units_Operators.hxx>
@@ -23,36 +22,29 @@
 #include <Units_Token.hxx>
 #include <Units_TokensSequence.hxx>
 
-static Handle(Units_Token) CreateTokenForNumber(const Standard_CString str)
-{
+static Handle(Units_Token) CreateTokenForNumber(const Standard_CString str) {
     TCollection_AsciiString tstr = str[0];
     Standard_Boolean IsPoint = Standard_False;
     Standard_Size len = strlen(str);
     for (Standard_Size in = 1; in < len; in++) {
-        if (str[in] == '0' || str[in] == '1' || str[in] == '2' || str[in] == '3' ||
-            str[in] == '4' || str[in] == '5' || str[in] == '6' || str[in] == '7' ||
-            str[in] == '8' || str[in] == '9') {
+        if (str[in] == '0' || str[in] == '1' || str[in] == '2' || str[in] == '3' || str[in] == '4' || str[in] == '5' ||
+            str[in] == '6' || str[in] == '7' || str[in] == '8' || str[in] == '9') {
             tstr.AssignCat(str[in]);
-        }
-        else if (str[in] == '.' && !IsPoint) {
+        } else if (str[in] == '.' && !IsPoint) {
             tstr.AssignCat(str[in]);
             IsPoint = Standard_True;
-        }
-        else
+        } else
             break;
     }
     return new Units_Token(tstr.ToCString(), "0");
 }
 
-
 //=======================================================================
-//function : Units_Sentence
-//purpose  : 
+// function : Units_Sentence
+// purpose  :
 //=======================================================================
 
-Units_Sentence::Units_Sentence(const Handle(Units_Lexicon)& alexicon,
-    const Standard_CString astring)
-{
+Units_Sentence::Units_Sentence(const Handle(Units_Lexicon) & alexicon, const Standard_CString astring) {
     Standard_Integer index;
     Standard_Size i, limchain;
     Handle(Units_Token) token;
@@ -60,13 +52,12 @@ Units_Sentence::Units_Sentence(const Handle(Units_Lexicon)& alexicon,
 
     thesequenceoftokens = new Units_TokensSequence();
     Handle(Units_TokensSequence) lstlexicon = alexicon->Sequence();
-    if (lstlexicon.IsNull())
-        throw Units_NoSuchType("BAD LEXICON descriptor");
+    if (lstlexicon.IsNull()) throw Units_NoSuchType("BAD LEXICON descriptor");
     limchain = strlen(astring);
     i = 0;
 
     TCollection_AsciiString tmpstr = astring;
-    //Handle(Units_Token) tmptoken;
+    // Handle(Units_Token) tmptoken;
     TCollection_AsciiString PrevMean;
     TCollection_AsciiString PrevWord;
     while (i < limchain) {
@@ -92,8 +83,7 @@ Units_Sentence::Units_Sentence(const Handle(Units_Lexicon)& alexicon,
                 std::cout << "Warning: can not create correct sentence from string: " << astring << std::endl;
 #endif
                 return;
-            }
-            else {
+            } else {
                 // create token for number
                 token = CreateTokenForNumber(tmpstr.ToCString());
                 LastWord = token->Word();
@@ -123,14 +113,12 @@ Units_Sentence::Units_Sentence(const Handle(Units_Lexicon)& alexicon,
     }
 }
 
-
 //=======================================================================
-//function : SetConstants
-//purpose  : 
+// function : SetConstants
+// purpose  :
 //=======================================================================
 
-void Units_Sentence::SetConstants()
-{
+void Units_Sentence::SetConstants() {
     Standard_Integer index;
     Standard_Real value;
     Handle(Units_Token) token;
@@ -149,19 +137,17 @@ void Units_Sentence::SetConstants()
     }
 }
 
-
 //=======================================================================
-//function : CalculateLocal
-//purpose  : auxiliary
+// function : CalculateLocal
+// purpose  : auxiliary
 //=======================================================================
-static Handle(Units_Token) CalculateLocal(const Handle(Units_TokensSequence)& aSeq)
-{
-    //std::cout<<std::endl;
-    //for(int index=1; index<=aSeq->Length(); index++) {
-    //  Handle(Units_Token) tok = aSeq->Value(index);
-    //  std::cout<<tok->Word()<<" ";
-    //}
-    //std::cout<<std::endl;
+static Handle(Units_Token) CalculateLocal(const Handle(Units_TokensSequence) & aSeq) {
+    // std::cout<<std::endl;
+    // for(int index=1; index<=aSeq->Length(); index++) {
+    //   Handle(Units_Token) tok = aSeq->Value(index);
+    //   std::cout<<tok->Word()<<" ";
+    // }
+    // std::cout<<std::endl;
     Handle(Units_Token) tok1, tok2;
     Standard_Integer i, j;
 
@@ -171,14 +157,13 @@ static Handle(Units_Token) CalculateLocal(const Handle(Units_TokensSequence)& aS
 
     // case of unar sign
     if (aSeq->Length() == 2) {
-        if (aSeq->Value(1)->Word() == "+")
-            aSeq->Remove(1);
+        if (aSeq->Value(1)->Word() == "+") aSeq->Remove(1);
         if (aSeq->Value(1)->Word() == "-") {
             tok2 = aSeq->Value(2);
             TCollection_AsciiString aword = "-";
             aword.AssignCat(tok2->Word());
-            tok1 = new Units_Token(aword.ToCString(), tok2->Mean().ToCString(),
-                tok2->Value() * (-1.0), tok2->Dimensions());
+            tok1 = new Units_Token(aword.ToCString(), tok2->Mean().ToCString(), tok2->Value() * (-1.0),
+                                   tok2->Dimensions());
             aSeq->Remove(1);
             aSeq->SetValue(1, tok1);
         }
@@ -192,10 +177,8 @@ static Handle(Units_Token) CalculateLocal(const Handle(Units_TokensSequence)& aS
                 Handle(Units_TokensSequence) TmpSeq = new Units_TokensSequence;
                 Standard_Integer NbBrackets = 1;
                 for (j = i + 1; j <= aSeq->Length(); j++) {
-                    if (aSeq->Value(j)->Word() == ")")
-                        NbBrackets--;
-                    if (aSeq->Value(j)->Word() == "(")
-                        NbBrackets++;
+                    if (aSeq->Value(j)->Word() == ")") NbBrackets--;
+                    if (aSeq->Value(j)->Word() == "(") NbBrackets++;
                     if (NbBrackets > 0)
                         TmpSeq->Append(aSeq->Value(j));
                     else
@@ -243,17 +226,14 @@ static Handle(Units_Token) CalculateLocal(const Handle(Units_TokensSequence)& aS
     return tok1;
 }
 
-
 //=======================================================================
-//function : Evaluate
-//purpose  : 
+// function : Evaluate
+// purpose  :
 //=======================================================================
 
-Handle(Units_Token) Units_Sentence::Evaluate()
-{
+Handle(Units_Token) Units_Sentence::Evaluate() {
     Handle(Units_Token) rtoken, ktoken;
-    if (thesequenceoftokens->Length() == 0)
-        return rtoken;
+    if (thesequenceoftokens->Length() == 0) return rtoken;
 
     /* old variant
       Standard_Integer index;
@@ -371,7 +351,7 @@ Handle(Units_Token) Units_Sentence::Evaluate()
     // variant skl 15.09.2005
     rtoken = CalculateLocal(thesequenceoftokens);
 
-    //rtoken->Dump(0,1);
+    // rtoken->Dump(0,1);
 
     return rtoken;
 }

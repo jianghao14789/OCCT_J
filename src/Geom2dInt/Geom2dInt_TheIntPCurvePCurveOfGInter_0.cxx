@@ -23,7 +23,6 @@
 #include <Geom2dInt_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfGInter.hxx>
 #include <Geom2dInt_ExactIntersectionPointOfTheIntPCurvePCurveOfGInter.hxx>
 #include <IntRes2d_Domain.hxx>
- 
 
 #define TheCurve Adaptor2d_Curve2d
 #define TheCurve_hxx <Adaptor2d_Curve2d.hxx>
@@ -40,4 +39,3 @@
 #define IntCurve_IntPolyPolyGen Geom2dInt_TheIntPCurvePCurveOfGInter
 #define IntCurve_IntPolyPolyGen_hxx <Geom2dInt_TheIntPCurvePCurveOfGInter.hxx>
 #include <IntCurve_IntPolyPolyGen.gxx>
-

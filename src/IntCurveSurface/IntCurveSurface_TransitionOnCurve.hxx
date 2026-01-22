@@ -17,7 +17,6 @@
 #ifndef _IntCurveSurface_TransitionOnCurve_HeaderFile
 #define _IntCurveSurface_TransitionOnCurve_HeaderFile
 
-
 //! \ Uo     ^        \ U1     ^
 //! \       | n       \       | n
 //! Surf  ====\======|===   ====\======|===
@@ -35,11 +34,6 @@
 //!
 //! ( Tangent )
 //! Crb and Surf are  C1
-enum IntCurveSurface_TransitionOnCurve
-{
-IntCurveSurface_Tangent,
-IntCurveSurface_In,
-IntCurveSurface_Out
-};
+enum IntCurveSurface_TransitionOnCurve { IntCurveSurface_Tangent, IntCurveSurface_In, IntCurveSurface_Out };
 
 #endif // _IntCurveSurface_TransitionOnCurve_HeaderFile

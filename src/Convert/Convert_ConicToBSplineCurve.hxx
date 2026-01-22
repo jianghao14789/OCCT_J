@@ -30,7 +30,6 @@
 #include <Convert_ParameterisationType.hxx>
 class gp_Pnt2d;
 
-
 //! Root class for algorithms which convert a conic curve into
 //! a BSpline curve (CircleToBSplineCurve, EllipseToBSplineCurve,
 //! HyperbolaToBSplineCurve, ParabolaToBSplineCurve).
@@ -54,12 +53,9 @@ class gp_Pnt2d;
 //! space.
 //! KeyWords :
 //! Convert, Conic, BSplineCurve, 2D.
-class Convert_ConicToBSplineCurve
-{
+class Convert_ConicToBSplineCurve {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns the degree of the BSpline curve whose data is
     //! computed in this framework.
@@ -105,18 +101,23 @@ public:
     //! the knots table of the BSpline curve whose data is computed in this framework.
     Standard_EXPORT Standard_Integer Multiplicity(const Standard_Integer Index) const;
 
-    Standard_EXPORT void BuildCosAndSin(const Convert_ParameterisationType Parametrisation, Handle(TColStd_HArray1OfReal)& CosNumerator, Handle(TColStd_HArray1OfReal)& SinNumerator, Handle(TColStd_HArray1OfReal)& Denominator, Standard_Integer& Degree, Handle(TColStd_HArray1OfReal)& Knots, Handle(TColStd_HArray1OfInteger)& Mults) const;
+    Standard_EXPORT void BuildCosAndSin(const Convert_ParameterisationType Parametrisation,
+                                        Handle(TColStd_HArray1OfReal) & CosNumerator,
+                                        Handle(TColStd_HArray1OfReal) & SinNumerator,
+                                        Handle(TColStd_HArray1OfReal) & Denominator, Standard_Integer& Degree,
+                                        Handle(TColStd_HArray1OfReal) & Knots,
+                                        Handle(TColStd_HArray1OfInteger) & Mults) const;
 
-    Standard_EXPORT void BuildCosAndSin(const Convert_ParameterisationType Parametrisation, const Standard_Real UFirst, const Standard_Real ULast, Handle(TColStd_HArray1OfReal)& CosNumerator, Handle(TColStd_HArray1OfReal)& SinNumerator, Handle(TColStd_HArray1OfReal)& Denominator, Standard_Integer& Degree, Handle(TColStd_HArray1OfReal)& Knots, Handle(TColStd_HArray1OfInteger)& Mults) const;
-
-
-
+    Standard_EXPORT void BuildCosAndSin(const Convert_ParameterisationType Parametrisation, const Standard_Real UFirst,
+                                        const Standard_Real ULast, Handle(TColStd_HArray1OfReal) & CosNumerator,
+                                        Handle(TColStd_HArray1OfReal) & SinNumerator,
+                                        Handle(TColStd_HArray1OfReal) & Denominator, Standard_Integer& Degree,
+                                        Handle(TColStd_HArray1OfReal) & Knots,
+                                        Handle(TColStd_HArray1OfInteger) & Mults) const;
 
 protected:
-
-
-    Standard_EXPORT Convert_ConicToBSplineCurve(const Standard_Integer NumberOfPoles, const Standard_Integer NumberOfKnots, const Standard_Integer Degree);
-
+    Standard_EXPORT Convert_ConicToBSplineCurve(const Standard_Integer NumberOfPoles,
+                                                const Standard_Integer NumberOfKnots, const Standard_Integer Degree);
 
     Handle(TColgp_HArray1OfPnt2d) poles;
     Handle(TColStd_HArray1OfReal) weights;
@@ -127,19 +128,7 @@ protected:
     Standard_Integer nbKnots;
     Standard_Boolean isperiodic;
 
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Convert_ConicToBSplineCurve_HeaderFile

@@ -18,63 +18,56 @@
 
 //=======================================================================
 // Function: GetSplitSteps
-// Purpose : 
+// Purpose :
 //=======================================================================
-std::pair<Standard_Real, Standard_Real> BRepMesh_ConeRangeSplitter::GetSplitSteps(
-  const IMeshTools_Parameters&                   theParameters,    
-  std::pair<Standard_Integer, Standard_Integer>& theStepsNb) const
-{
-  const std::pair<Standard_Real, Standard_Real>& aRangeU = GetRangeU();
-  const std::pair<Standard_Real, Standard_Real>& aRangeV = GetRangeV();
+std::pair<Standard_Real, Standard_Real>
+BRepMesh_ConeRangeSplitter::GetSplitSteps(const IMeshTools_Parameters& theParameters,
+                                          std::pair<Standard_Integer, Standard_Integer>& theStepsNb) const {
+    const std::pair<Standard_Real, Standard_Real>& aRangeU = GetRangeU();
+    const std::pair<Standard_Real, Standard_Real>& aRangeV = GetRangeV();
 
-  gp_Cone aCone = GetDFace()->GetSurface()->Cone();
-  Standard_Real aRefR = aCone.RefRadius();
-  Standard_Real aSAng = aCone.SemiAngle();
-  Standard_Real aRadius = Max(Abs(aRefR + aRangeV.first  * Sin(aSAng)),
-                              Abs(aRefR + aRangeV.second * Sin(aSAng)));
+    gp_Cone aCone = GetDFace()->GetSurface()->Cone();
+    Standard_Real aRefR = aCone.RefRadius();
+    Standard_Real aSAng = aCone.SemiAngle();
+    Standard_Real aRadius = Max(Abs(aRefR + aRangeV.first * Sin(aSAng)), Abs(aRefR + aRangeV.second * Sin(aSAng)));
 
-  Standard_Real Dv, Du = GCPnts_TangentialDeflection::ArcAngularStep(
-    aRadius, GetDFace()->GetDeflection(),
-    theParameters.Angle, theParameters.MinSize);
+    Standard_Real Dv, Du = GCPnts_TangentialDeflection::ArcAngularStep(aRadius, GetDFace()->GetDeflection(),
+                                                                       theParameters.Angle, theParameters.MinSize);
 
-  const Standard_Real aDiffU = aRangeU.second - aRangeU.first;
-  const Standard_Real aDiffV = aRangeV.second - aRangeV.first;
-  Standard_Integer nbU = (Standard_Integer) (aDiffU / Du);
-  Standard_Integer nbV = (Standard_Integer) (nbU * (aDiffV) / (aDiffU * aRadius));
-  Du = aDiffU / (nbU + 1);
-  Dv = aDiffV / (nbV + 1);
+    const Standard_Real aDiffU = aRangeU.second - aRangeU.first;
+    const Standard_Real aDiffV = aRangeV.second - aRangeV.first;
+    Standard_Integer nbU = (Standard_Integer)(aDiffU / Du);
+    Standard_Integer nbV = (Standard_Integer)(nbU * (aDiffV) / (aDiffU * aRadius));
+    Du = aDiffU / (nbU + 1);
+    Dv = aDiffV / (nbV + 1);
 
-  theStepsNb.first  = nbU;
-  theStepsNb.second = nbV;
-  return std::make_pair (Du, Dv);
+    theStepsNb.first = nbU;
+    theStepsNb.second = nbV;
+    return std::make_pair(Du, Dv);
 }
 
 //=======================================================================
 // Function: GenerateSurfaceNodes
-// Purpose : 
+// Purpose :
 //=======================================================================
-Handle(IMeshData::ListOfPnt2d) BRepMesh_ConeRangeSplitter::GenerateSurfaceNodes(
-  const IMeshTools_Parameters& theParameters) const
-{
-  const std::pair<Standard_Real, Standard_Real>& aRangeU = GetRangeU();
-  const std::pair<Standard_Real, Standard_Real>& aRangeV = GetRangeV();
+Handle(IMeshData::ListOfPnt2d)
+    BRepMesh_ConeRangeSplitter::GenerateSurfaceNodes(const IMeshTools_Parameters& theParameters) const {
+    const std::pair<Standard_Real, Standard_Real>& aRangeU = GetRangeU();
+    const std::pair<Standard_Real, Standard_Real>& aRangeV = GetRangeV();
 
-  std::pair<Standard_Integer, Standard_Integer> aStepsNb;
-  std::pair<Standard_Real, Standard_Real> aSteps = GetSplitSteps (theParameters, aStepsNb);
+    std::pair<Standard_Integer, Standard_Integer> aStepsNb;
+    std::pair<Standard_Real, Standard_Real> aSteps = GetSplitSteps(theParameters, aStepsNb);
 
-  const Handle(NCollection_IncAllocator) aTmpAlloc =
-    new NCollection_IncAllocator(IMeshData::MEMORY_BLOCK_SIZE_HUGE);
-  Handle(IMeshData::ListOfPnt2d) aNodes = new IMeshData::ListOfPnt2d(aTmpAlloc);
+    const Handle(NCollection_IncAllocator) aTmpAlloc = new NCollection_IncAllocator(IMeshData::MEMORY_BLOCK_SIZE_HUGE);
+    Handle(IMeshData::ListOfPnt2d) aNodes = new IMeshData::ListOfPnt2d(aTmpAlloc);
 
-  const Standard_Real aPasMaxV = aRangeV.second - aSteps.second*0.5;
-  const Standard_Real aPasMaxU = aRangeU.second - aSteps.first *0.5;
-  for (Standard_Real aPasV = aRangeV.first + aSteps.second; aPasV < aPasMaxV; aPasV += aSteps.second)
-  {
-    for (Standard_Real aPasU = aRangeU.first + aSteps.first; aPasU < aPasMaxU; aPasU += aSteps.first)
-    {
-      aNodes->Append(gp_Pnt2d(aPasU, aPasV));
+    const Standard_Real aPasMaxV = aRangeV.second - aSteps.second * 0.5;
+    const Standard_Real aPasMaxU = aRangeU.second - aSteps.first * 0.5;
+    for (Standard_Real aPasV = aRangeV.first + aSteps.second; aPasV < aPasMaxV; aPasV += aSteps.second) {
+        for (Standard_Real aPasU = aRangeU.first + aSteps.first; aPasU < aPasMaxU; aPasU += aSteps.first) {
+            aNodes->Append(gp_Pnt2d(aPasU, aPasV));
+        }
     }
-  }
 
-  return aNodes;
+    return aNodes;
 }

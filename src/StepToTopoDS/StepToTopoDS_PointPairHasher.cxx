@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <StepGeom_CartesianPoint.hxx>
 #include <StepToTopoDS_PointPair.hxx>
 #include <StepToTopoDS_PointPairHasher.hxx>
@@ -23,22 +22,18 @@
 // function : HashCode
 // purpose  :
 //=======================================================================
-Standard_Integer StepToTopoDS_PointPairHasher::HashCode (const StepToTopoDS_PointPair& thePointPair,
-                                                         const Standard_Integer        theUpperBound)
-{
-  return ::HashCode (::HashCode (thePointPair.myP1, theUpperBound) + ::HashCode (thePointPair.myP2, theUpperBound),
-                     theUpperBound);
+Standard_Integer StepToTopoDS_PointPairHasher::HashCode(const StepToTopoDS_PointPair& thePointPair,
+                                                        const Standard_Integer theUpperBound) {
+    return ::HashCode(::HashCode(thePointPair.myP1, theUpperBound) + ::HashCode(thePointPair.myP2, theUpperBound),
+                      theUpperBound);
 }
 
 //=======================================================================
-//function : IsEqual
-//purpose  : 
+// function : IsEqual
+// purpose  :
 //=======================================================================
 
-Standard_Boolean StepToTopoDS_PointPairHasher::IsEqual
-  (const StepToTopoDS_PointPair& P1,
-   const StepToTopoDS_PointPair& P2)
-{
-  return (((P1.myP1 == P2.myP1) && (P1.myP2 == P2.myP2)) ||
-	  ((P1.myP1 == P2.myP2) && (P1.myP2 == P2.myP1)));
+Standard_Boolean StepToTopoDS_PointPairHasher::IsEqual(const StepToTopoDS_PointPair& P1,
+                                                       const StepToTopoDS_PointPair& P2) {
+    return (((P1.myP1 == P2.myP1) && (P1.myP2 == P2.myP2)) || ((P1.myP1 == P2.myP2) && (P1.myP2 == P2.myP1)));
 }

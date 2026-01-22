@@ -30,32 +30,34 @@ class StepDimTol_HArray1OfGeometricToleranceModifier;
 class StepDimTol_GeometricToleranceWithMaximumTolerance;
 DEFINE_STANDARD_HANDLE(StepDimTol_GeometricToleranceWithMaximumTolerance, StepDimTol_GeometricToleranceWithModifiers)
 //! Representation of STEP entity GeometricToleranceWithMaximumTolerance
-class StepDimTol_GeometricToleranceWithMaximumTolerance : public StepDimTol_GeometricToleranceWithModifiers
-{
+class StepDimTol_GeometricToleranceWithMaximumTolerance : public StepDimTol_GeometricToleranceWithModifiers {
 
 public:
-  
-  //! Empty constructor
-  Standard_EXPORT StepDimTol_GeometricToleranceWithMaximumTolerance();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT   void Init (const Handle(TCollection_HAsciiString)& theName, const Handle(TCollection_HAsciiString)& theDescription, const Handle(StepBasic_MeasureWithUnit)& theMagnitude, const StepDimTol_GeometricToleranceTarget& theTolerancedShapeAspect, const Handle(StepDimTol_HArray1OfGeometricToleranceModifier)& theModifiers, const Handle(StepBasic_LengthMeasureWithUnit)& theUnitSize) ;
-  
-  //! Returns field MaximumUpperTolerance
-  inline Handle(StepBasic_LengthMeasureWithUnit) MaximumUpperTolerance () const
-  {
-    return myMaximumUpperTolerance;
-  }
-  
-  //! Set field MaximumUpperTolerance
-  inline void SetMaximumUpperTolerance (const Handle(StepBasic_LengthMeasureWithUnit) &theMaximumUpperTolerance)
-  {
-    myMaximumUpperTolerance = theMaximumUpperTolerance;
-  }
+    //! Empty constructor
+    Standard_EXPORT StepDimTol_GeometricToleranceWithMaximumTolerance();
 
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_GeometricToleranceWithMaximumTolerance,StepDimTol_GeometricToleranceWithModifiers)
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theName,
+                              const Handle(TCollection_HAsciiString) & theDescription,
+                              const Handle(StepBasic_MeasureWithUnit) & theMagnitude,
+                              const StepDimTol_GeometricToleranceTarget& theTolerancedShapeAspect,
+                              const Handle(StepDimTol_HArray1OfGeometricToleranceModifier) & theModifiers,
+                              const Handle(StepBasic_LengthMeasureWithUnit) & theUnitSize);
+
+    //! Returns field MaximumUpperTolerance
+    inline Handle(StepBasic_LengthMeasureWithUnit) MaximumUpperTolerance() const {
+        return myMaximumUpperTolerance;
+    }
+
+    //! Set field MaximumUpperTolerance
+    inline void SetMaximumUpperTolerance(const Handle(StepBasic_LengthMeasureWithUnit) & theMaximumUpperTolerance) {
+        myMaximumUpperTolerance = theMaximumUpperTolerance;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_GeometricToleranceWithMaximumTolerance,
+                            StepDimTol_GeometricToleranceWithModifiers)
 
 private:
-  Handle(StepBasic_LengthMeasureWithUnit) myMaximumUpperTolerance;
+    Handle(StepBasic_LengthMeasureWithUnit) myMaximumUpperTolerance;
 };
 #endif // _StepDimTol_GeometricToleranceWithMaximumTolerance_HeaderFile

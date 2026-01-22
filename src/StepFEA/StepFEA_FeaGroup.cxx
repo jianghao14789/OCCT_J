@@ -20,48 +20,41 @@
 #include <StepFEA_FeaModel.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaGroup,StepBasic_Group)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaGroup, StepBasic_Group)
 
 //=======================================================================
-//function : StepFEA_FeaGroup
-//purpose  : 
+// function : StepFEA_FeaGroup
+// purpose  :
 //=======================================================================
-StepFEA_FeaGroup::StepFEA_FeaGroup ()
-{
+StepFEA_FeaGroup::StepFEA_FeaGroup() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_FeaGroup::Init(const Handle(TCollection_HAsciiString) & aGroup_Name,
+                            const Handle(TCollection_HAsciiString) & aGroup_Description,
+                            const Handle(StepFEA_FeaModel) & aModelRef) {
+    StepBasic_Group::Init(aGroup_Name, Standard_True, aGroup_Description);
+
+    theModelRef = aModelRef;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : ModelRef
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaGroup::Init (const Handle(TCollection_HAsciiString) &aGroup_Name,
-                             const Handle(TCollection_HAsciiString) &aGroup_Description,
-                             const Handle(StepFEA_FeaModel) &aModelRef)
-{
-  StepBasic_Group::Init(aGroup_Name,
-                        Standard_True,
-                        aGroup_Description);
-
-  theModelRef = aModelRef;
+Handle(StepFEA_FeaModel) StepFEA_FeaGroup::ModelRef() const {
+    return theModelRef;
 }
 
 //=======================================================================
-//function : ModelRef
-//purpose  : 
+// function : SetModelRef
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_FeaModel) StepFEA_FeaGroup::ModelRef () const
-{
-  return theModelRef;
-}
-
-//=======================================================================
-//function : SetModelRef
-//purpose  : 
-//=======================================================================
-
-void StepFEA_FeaGroup::SetModelRef (const Handle(StepFEA_FeaModel) &aModelRef)
-{
-  theModelRef = aModelRef;
+void StepFEA_FeaGroup::SetModelRef(const Handle(StepFEA_FeaModel) & aModelRef) {
+    theModelRef = aModelRef;
 }

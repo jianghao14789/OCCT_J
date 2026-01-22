@@ -22,8 +22,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,AIS_ListOfInteractive,TColStd_MapIntegerHasher> AIS_DataMapofIntegerListOfinteractive;
-typedef NCollection_DataMap<Standard_Integer,AIS_ListOfInteractive,TColStd_MapIntegerHasher>::Iterator AIS_DataMapIteratorOfDataMapofIntegerListOfinteractive;
-
+typedef NCollection_DataMap<Standard_Integer, AIS_ListOfInteractive, TColStd_MapIntegerHasher>
+    AIS_DataMapofIntegerListOfinteractive;
+typedef NCollection_DataMap<Standard_Integer, AIS_ListOfInteractive, TColStd_MapIntegerHasher>::Iterator
+    AIS_DataMapIteratorOfDataMapofIntegerListOfinteractive;
 
 #endif

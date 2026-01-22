@@ -23,53 +23,32 @@
 #include <Standard_Transient.hxx>
 class TCollection_HAsciiString;
 
-
 class StepRepr_RepresentationContext;
 DEFINE_STANDARD_HANDLE(StepRepr_RepresentationContext, Standard_Transient)
 
-
-class StepRepr_RepresentationContext : public Standard_Transient
-{
+class StepRepr_RepresentationContext : public Standard_Transient {
 
 public:
+    //! Returns a RepresentationContext
+    Standard_EXPORT StepRepr_RepresentationContext();
 
-  
-  //! Returns a RepresentationContext
-  Standard_EXPORT StepRepr_RepresentationContext();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aContextIdentifier, const Handle(TCollection_HAsciiString)& aContextType);
-  
-  Standard_EXPORT void SetContextIdentifier (const Handle(TCollection_HAsciiString)& aContextIdentifier);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) ContextIdentifier() const;
-  
-  Standard_EXPORT void SetContextType (const Handle(TCollection_HAsciiString)& aContextType);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) ContextType() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aContextIdentifier,
+                              const Handle(TCollection_HAsciiString) & aContextType);
 
+    Standard_EXPORT void SetContextIdentifier(const Handle(TCollection_HAsciiString) & aContextIdentifier);
 
+    Standard_EXPORT Handle(TCollection_HAsciiString) ContextIdentifier() const;
 
+    Standard_EXPORT void SetContextType(const Handle(TCollection_HAsciiString) & aContextType);
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_RepresentationContext,Standard_Transient)
+    Standard_EXPORT Handle(TCollection_HAsciiString) ContextType() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_RepresentationContext, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) contextIdentifier;
-  Handle(TCollection_HAsciiString) contextType;
-
-
+    Handle(TCollection_HAsciiString) contextIdentifier;
+    Handle(TCollection_HAsciiString) contextType;
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_RepresentationContext_HeaderFile

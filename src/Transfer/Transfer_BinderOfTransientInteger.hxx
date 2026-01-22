@@ -23,7 +23,6 @@
 #include <Standard_Integer.hxx>
 #include <Transfer_SimpleBinderOfTransient.hxx>
 
-
 class Transfer_BinderOfTransientInteger;
 DEFINE_STANDARD_HANDLE(Transfer_BinderOfTransientInteger, Transfer_SimpleBinderOfTransient)
 
@@ -33,44 +32,24 @@ DEFINE_STANDARD_HANDLE(Transfer_BinderOfTransientInteger, Transfer_SimpleBinderO
 //!
 //! This Binder is otherwise a kind of SimpleBinderOfTransient,
 //! i.e. its basic result (for iterators, etc) is the Transient
-class Transfer_BinderOfTransientInteger : public Transfer_SimpleBinderOfTransient
-{
+class Transfer_BinderOfTransientInteger : public Transfer_SimpleBinderOfTransient {
 
 public:
+    //! Creates an empty BinderOfTransientInteger; Default value for
+    //! the integer part is zero
+    Standard_EXPORT Transfer_BinderOfTransientInteger();
 
-  
-  //! Creates an empty BinderOfTransientInteger; Default value for
-  //! the integer part is zero
-  Standard_EXPORT Transfer_BinderOfTransientInteger();
-  
-  //! Sets a value for the integer part
-  Standard_EXPORT void SetInteger (const Standard_Integer value);
-  
-  //! Returns the value set for the integer part
-  Standard_EXPORT Standard_Integer Integer() const;
+    //! Sets a value for the integer part
+    Standard_EXPORT void SetInteger(const Standard_Integer value);
 
+    //! Returns the value set for the integer part
+    Standard_EXPORT Standard_Integer Integer() const;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(Transfer_BinderOfTransientInteger,Transfer_SimpleBinderOfTransient)
+    DEFINE_STANDARD_RTTIEXT(Transfer_BinderOfTransientInteger, Transfer_SimpleBinderOfTransient)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer theintval;
-
-
+    Standard_Integer theintval;
 };
-
-
-
-
-
-
 
 #endif // _Transfer_BinderOfTransientInteger_HeaderFile

@@ -10,7 +10,7 @@
 // distribution for complete text of the license and disclaimer of any warranty.
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
-// commercial license or contractual agreement. 
+// commercial license or contractual agreement.
 
 #ifndef _BOPAlgo_BOP_HeaderFile
 #define _BOPAlgo_BOP_HeaderFile
@@ -63,18 +63,15 @@ class BOPAlgo_PaveFiller;
 //! - *BOPAlgo_AlertSolidBuilderFailed* - in case the BuilderSolid algorithm failed to
 //!                          produce the Fused solid.
 //!
-class BOPAlgo_BOP : public BOPAlgo_ToolsProvider
-{
+class BOPAlgo_BOP : public BOPAlgo_ToolsProvider {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Empty constructor
     Standard_EXPORT BOPAlgo_BOP();
     Standard_EXPORT virtual ~BOPAlgo_BOP();
 
-    Standard_EXPORT BOPAlgo_BOP(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_BOP(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     //! Clears internal fields and arguments
     Standard_EXPORT virtual void Clear() Standard_OVERRIDE;
@@ -83,16 +80,16 @@ public:
 
     Standard_EXPORT BOPAlgo_Operation Operation() const;
 
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
 protected:
-
     Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
 
     //! Performs calculations using prepared Filler
     //! object <thePF>
     Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF,
-        const Message_ProgressRange& theRange) Standard_OVERRIDE;
+                                                  const Message_ProgressRange& theRange) Standard_OVERRIDE;
 
     Standard_EXPORT virtual void BuildResult(const TopAbs_ShapeEnum theType) Standard_OVERRIDE;
 
@@ -114,22 +111,17 @@ protected:
     Standard_EXPORT virtual Standard_Boolean CheckArgsForOpenSolid();
 
 protected:
-
     //! Extend list of operations to be supported by the Progress Indicator
-    enum BOPAlgo_PIOperation
-    {
-        PIOperation_BuildShape = BOPAlgo_ToolsProvider::PIOperation_Last,
-        PIOperation_Last
-    };
+    enum BOPAlgo_PIOperation { PIOperation_BuildShape = BOPAlgo_ToolsProvider::PIOperation_Last, PIOperation_Last };
 
     //! Fill PI steps
-    Standard_EXPORT virtual void fillPIConstants(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void fillPIConstants(const Standard_Real theWhole,
+                                                 BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
 
 protected:
-
     BOPAlgo_Operation myOperation;
-    Standard_Integer  myDims[2];
-    TopoDS_Shape      myRC;
+    Standard_Integer myDims[2];
+    TopoDS_Shape myRC;
 };
 
 #endif // _BOPAlgo_BOP_HeaderFile

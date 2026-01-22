@@ -35,7 +35,6 @@ class gp_GTrsf2d;
 class gp_Vec;
 class Geom_Geometry;
 
-
 class Geom_SurfaceOfRevolution;
 DEFINE_STANDARD_HANDLE(Geom_SurfaceOfRevolution, Geom_SweptSurface)
 
@@ -96,7 +95,7 @@ public:
     //! surface axis is in the plane of the curve.
     //! It is not checked that the revolved curve C doesn't
     //! self-intersects.
-    Standard_EXPORT Geom_SurfaceOfRevolution(const Handle(Geom_Curve)& C, const gp_Ax1& A1);
+    Standard_EXPORT Geom_SurfaceOfRevolution(const Handle(Geom_Curve) & C, const gp_Ax1& A1);
 
     //! Changes the axis of revolution.
     //! Warnings :
@@ -116,7 +115,7 @@ public:
     //! surface axis is in the plane of the curve.
     //! It is not checked that the revolved curve C doesn't
     //! self-intersects.
-    Standard_EXPORT void SetBasisCurve(const Handle(Geom_Curve)& C);
+    Standard_EXPORT void SetBasisCurve(const Handle(Geom_Curve) & C);
 
     //! Changes the location point of the revolution axis.
     //! Warnings :
@@ -127,10 +126,8 @@ public:
     //! Returns the revolution axis of the surface.
     Standard_EXPORT gp_Ax1 Axis() const;
 
-
     //! Returns the location point of the axis of revolution.
     Standard_EXPORT const gp_Pnt& Location() const;
-
 
     //! Computes the position of the reference plane of the surface
     //! defined by the basis curve and the symmetry axis.
@@ -194,7 +191,8 @@ public:
     //!   me->TransformParameters(U,V,T)
     //! @endcode
     //! This method multiplies V by BasisCurve()->ParametricTransformation(T)
-    Standard_EXPORT virtual void TransformParameters(Standard_Real& U, Standard_Real& V, const gp_Trsf& T) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void TransformParameters(Standard_Real& U, Standard_Real& V,
+                                                     const gp_Trsf& T) const Standard_OVERRIDE;
 
     //! Returns a 2d transformation  used to find the  new
     //! parameters of a point on the transformed surface.
@@ -216,7 +214,8 @@ public:
 
     //! Returns the parametric bounds U1, U2 , V1 and V2 of this surface.
     //! A surface of revolution is always complete, so U1 = 0, U2 = 2*PI.
-    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1, Standard_Real& V2) const Standard_OVERRIDE;
+    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1,
+                                Standard_Real& V2) const Standard_OVERRIDE;
 
     //! IsUClosed always returns true.
     Standard_EXPORT Standard_Boolean IsUClosed() const Standard_OVERRIDE;
@@ -259,17 +258,21 @@ public:
     //! Computes the current point and the first derivatives
     //! in the directions U and V.
     //! Raised if the continuity of the surface is not C1.
-    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const Standard_OVERRIDE;
+    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U,
+                            gp_Vec& D1V) const Standard_OVERRIDE;
 
     //! Computes the current point, the first and the second derivatives
     //! in the directions U and V.
     //! Raised if the continuity of the surface is not C2.
-    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
+    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
 
     //! Computes the current point, the first,the second and the third
     //! derivatives in the directions U and V.
     //! Raised if the continuity of the surface is not C3.
-    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV,
+                            gp_Vec& D3UVV) const Standard_OVERRIDE;
 
     //! Computes the derivative of order Nu in the direction u and
     //! Nv in the direction v.
@@ -285,7 +288,8 @@ public:
     //! else  P  is betveen discontinuities
     //! can be evaluated using methods  of
     //! global evaluations    P  =  S( U ,V )
-    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const Standard_Integer Nv) const Standard_OVERRIDE;
+    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu,
+                              const Standard_Integer Nv) const Standard_OVERRIDE;
 
     //! Applies the transformation T to this surface of revolution.
     Standard_EXPORT void Transform(const gp_Trsf& T) Standard_OVERRIDE;
@@ -294,8 +298,8 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
-
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_SurfaceOfRevolution, Geom_SweptSurface)
 

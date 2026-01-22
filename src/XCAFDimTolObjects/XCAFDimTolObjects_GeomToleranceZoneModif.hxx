@@ -17,12 +17,11 @@
 #define _XCAFDimTolObjects_GeomToleranceZoneModif_HeaderFile
 
 //! Defines types of zone
-enum XCAFDimTolObjects_GeomToleranceZoneModif
-{
-XCAFDimTolObjects_GeomToleranceZoneModif_None,
-XCAFDimTolObjects_GeomToleranceZoneModif_Projected,
-XCAFDimTolObjects_GeomToleranceZoneModif_Runout,
-XCAFDimTolObjects_GeomToleranceZoneModif_NonUniform
+enum XCAFDimTolObjects_GeomToleranceZoneModif {
+    XCAFDimTolObjects_GeomToleranceZoneModif_None,
+    XCAFDimTolObjects_GeomToleranceZoneModif_Projected,
+    XCAFDimTolObjects_GeomToleranceZoneModif_Runout,
+    XCAFDimTolObjects_GeomToleranceZoneModif_NonUniform
 };
 
 #endif // _XCAFDimTolObjects_GeomToleranceZoneModif_HeaderFile

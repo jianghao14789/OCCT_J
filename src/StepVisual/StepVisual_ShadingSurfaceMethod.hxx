@@ -17,11 +17,10 @@
 #ifndef _StepVisual_ShadingSurfaceMethod_HeaderFile
 #define _StepVisual_ShadingSurfaceMethod_HeaderFile
 
-enum StepVisual_ShadingSurfaceMethod
-{
-  StepVisual_ssmConstantShading,
-  StepVisual_ssmColourShading,
-  StepVisual_ssmDotShading,
-  StepVisual_ssmNormalShading
+enum StepVisual_ShadingSurfaceMethod {
+    StepVisual_ssmConstantShading,
+    StepVisual_ssmColourShading,
+    StepVisual_ssmDotShading,
+    StepVisual_ssmNormalShading
 };
 #endif // _StepVisual_ShadingSurfaceMethod_HeaderFile

@@ -19,5 +19,4 @@
 
 typedef NCollection_Array1<StepElement_MeasureOrUnspecifiedValue> StepElement_Array1OfMeasureOrUnspecifiedValue;
 
-
 #endif

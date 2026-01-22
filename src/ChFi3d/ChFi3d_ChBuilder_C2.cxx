@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor3d_TopolTool.hxx>
 #include <BRepAdaptor_Curve2d.hxx>
 #include <BRepAdaptor_Surface.hxx>
@@ -31,10 +30,9 @@
 #include <TopoDS_Vertex.hxx>
 
 //=======================================================================
-//function : PerformTwoCorner
-//purpose  :
+// function : PerformTwoCorner
+// purpose  :
 //=======================================================================
-void ChFi3d_ChBuilder::PerformTwoCorner(const Standard_Integer Index)
-{
-   PerformTwoCornerbyInter(Index);
+void ChFi3d_ChBuilder::PerformTwoCorner(const Standard_Integer Index) {
+    PerformTwoCornerbyInter(Index);
 }

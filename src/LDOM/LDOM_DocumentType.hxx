@@ -18,14 +18,12 @@
 
 //  Block of comments describing class LDOM_DocumentType
 
-class LDOM_DocumentType 
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class LDOM_DocumentType {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  LDOM_DocumentType () {}
-  // Empty constructor
-
+    LDOM_DocumentType() {}
+    // Empty constructor
 };
 
 #endif

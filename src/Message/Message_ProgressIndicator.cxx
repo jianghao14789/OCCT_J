@@ -16,22 +16,18 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_ProgressIndicator, Standard_Transient)
 
 //=======================================================================
-//function : Message_ProgressIndicator
-//purpose  : 构造函数，初始化进度指示器
+// function : Message_ProgressIndicator
+// purpose  : 构造函数，初始化进度指示器
 //=======================================================================
-Message_ProgressIndicator::Message_ProgressIndicator()
-    : myPosition(0.),
-    myRootScope(NULL)
-{
+Message_ProgressIndicator::Message_ProgressIndicator() : myPosition(0.), myRootScope(NULL) {
     myRootScope = new Message_ProgressScope(this);
 }
 
 //=======================================================================
-//function : ~Message_ProgressIndicator
-//purpose  : 析构函数
+// function : ~Message_ProgressIndicator
+// purpose  : 析构函数
 //=======================================================================
-Message_ProgressIndicator::~Message_ProgressIndicator()
-{
+Message_ProgressIndicator::~Message_ProgressIndicator() {
     // 避免从 myRootScope.Close() 调用 Increment()
     // Avoid calling Increment() from myRootScope.Close()
     myRootScope->myProgress = 0;
@@ -40,11 +36,10 @@ Message_ProgressIndicator::~Message_ProgressIndicator()
 }
 
 //=======================================================================
-//function : Start()
-//purpose  : 启动进度指示
+// function : Start()
+// purpose  : 启动进度指示
 //=======================================================================
-Message_ProgressRange Message_ProgressIndicator::Start()
-{
+Message_ProgressRange Message_ProgressIndicator::Start() {
     myPosition = 0.;
     myRootScope->myValue = 0.;
     Reset();
@@ -53,11 +48,9 @@ Message_ProgressRange Message_ProgressIndicator::Start()
 }
 
 //=======================================================================
-//function : Start()
-//purpose  : 从给定的进度指示器启动进度
+// function : Start()
+// purpose  : 从给定的进度指示器启动进度
 //=======================================================================
-Message_ProgressRange Message_ProgressIndicator::Start
-(const Handle(Message_ProgressIndicator)& theProgress)
-{
+Message_ProgressRange Message_ProgressIndicator::Start(const Handle(Message_ProgressIndicator) & theProgress) {
     return theProgress.IsNull() ? Message_ProgressRange() : theProgress->Start();
 }

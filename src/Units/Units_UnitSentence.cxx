@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TCollection_AsciiString.hxx>
 #include <Units.hxx>
 #include <Units_Operators.hxx>
@@ -28,44 +27,36 @@
 #include <Units_UnitsSequence.hxx>
 
 //=======================================================================
-//function : Units_UnitSentence
-//purpose  : 
+// function : Units_UnitSentence
+// purpose  :
 //=======================================================================
 Units_UnitSentence::Units_UnitSentence(const Standard_CString astring)
-    : Units_Sentence(Units::LexiconUnits(), astring)
-{
+    : Units_Sentence(Units::LexiconUnits(), astring) {
     Analyse();
     SetConstants();
     SetUnits(Units::DictionaryOfUnits()->Sequence());
-
 }
 
-
 //=======================================================================
-//function : Units_UnitSentence
-//purpose  : 
+// function : Units_UnitSentence
+// purpose  :
 //=======================================================================
 
-Units_UnitSentence::Units_UnitSentence
-(const Standard_CString astring,
-    const Handle(Units_QuantitiesSequence)& aquantitiessequence)
-    : Units_Sentence(Units::LexiconUnits(Standard_False), astring)
-{
+Units_UnitSentence::Units_UnitSentence(const Standard_CString astring,
+                                       const Handle(Units_QuantitiesSequence) & aquantitiessequence)
+    : Units_Sentence(Units::LexiconUnits(Standard_False), astring) {
     Analyse();
     SetConstants();
     SetUnits(aquantitiessequence);
 }
 
-
 //=======================================================================
-//function : Analyse
-//purpose  : 
+// function : Analyse
+// purpose  :
 //=======================================================================
 
-void Units_UnitSentence::Analyse()
-{
-    if (Sequence()->Length() == 0)
-        return;
+void Units_UnitSentence::Analyse() {
+    if (Sequence()->Length() == 0) return;
 
     Standard_Integer index;
     TCollection_AsciiString s;
@@ -78,17 +69,17 @@ void Units_UnitSentence::Analyse()
 
     currenttoken = sequence->Value(1);
 
-    //std::cout<<std::endl;
-    //for(int ind=1; ind<=sequence->Length(); ind++) {
-    //  Handle(Units_Token) tok = sequence->Value(ind);
-    //  std::cout<<tok->Word()<<" ";
-    //}
-    //std::cout<<std::endl;
-    //for(ind=1; ind<=sequence->Length(); ind++) {
-    //  Handle(Units_Token) tok = sequence->Value(ind);
-    //  std::cout<<tok->Mean()<<" ";
-    //}
-    //std::cout<<std::endl;
+    // std::cout<<std::endl;
+    // for(int ind=1; ind<=sequence->Length(); ind++) {
+    //   Handle(Units_Token) tok = sequence->Value(ind);
+    //   std::cout<<tok->Word()<<" ";
+    // }
+    // std::cout<<std::endl;
+    // for(ind=1; ind<=sequence->Length(); ind++) {
+    //   Handle(Units_Token) tok = sequence->Value(ind);
+    //   std::cout<<tok->Mean()<<" ";
+    // }
+    // std::cout<<std::endl;
 
     for (index = 2; index <= sequence->Length(); index++) {
         previoustoken = currenttoken;
@@ -157,8 +148,7 @@ void Units_UnitSentence::Analyse()
                 sequence->InsertBefore(index, token);
                 index++;
             }
-        }
-        else if (previoustoken->Word() == ")") {
+        } else if (previoustoken->Word() == ")") {
             if (!(currenttoken->Mean() == "O" || currenttoken->Word() == ")")) {
                 token = new Units_Token("*", "O");
                 sequence->InsertBefore(index, token);
@@ -167,18 +157,14 @@ void Units_UnitSentence::Analyse()
         }
         index++;
     }
-
 }
 
-
 //=======================================================================
-//function : SetUnits
-//purpose  : 
+// function : SetUnits
+// purpose  :
 //=======================================================================
 
-void Units_UnitSentence::SetUnits
-(const Handle(Units_QuantitiesSequence)& aquantitiessequence)
-{
+void Units_UnitSentence::SetUnits(const Handle(Units_QuantitiesSequence) & aquantitiessequence) {
     Standard_Integer index, jindex, kindex;
     Standard_Boolean istheend = 0;
     Handle(Units_Quantity) quantity;
@@ -209,10 +195,8 @@ void Units_UnitSentence::SetUnits
                     }
                 }
             }
-            if (istheend)
-                break;
+            if (istheend) break;
         }
-        if (istheend)
-            break;
+        if (istheend) break;
     }
 }

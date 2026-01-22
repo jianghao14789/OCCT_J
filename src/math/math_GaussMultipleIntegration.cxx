@@ -33,12 +33,12 @@ de Gauss.
 
 */
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math.hxx>
 #include <math_GaussMultipleIntegration.hxx>
@@ -50,8 +50,8 @@ de Gauss.
 
 class IntegrationFunction {
 
-    // Cette classe sert a conserver dans les champs les valeurs de tests de 
-    // la fonction recursive.(En particulier le pointeur sur la fonction F, 
+    // Cette classe sert a conserver dans les champs les valeurs de tests de
+    // la fonction recursive.(En particulier le pointeur sur la fonction F,
     // heritant d'une classe abstraite, non traite en cdl.)
 
     math_MultipleVarFunction* Fsav;
@@ -65,27 +65,18 @@ class IntegrationFunction {
     Standard_Boolean Done;
 
 public:
-    IntegrationFunction(math_MultipleVarFunction& F,
-        const Standard_Integer maxsav, const Standard_Integer NVar,
-        const math_IntegerVector& Ord,
-        const math_Vector& Lowsav,
-        const math_Vector& Uppsav);
+    IntegrationFunction(math_MultipleVarFunction& F, const Standard_Integer maxsav, const Standard_Integer NVar,
+                        const math_IntegerVector& Ord, const math_Vector& Lowsav, const math_Vector& Uppsav);
 
     Standard_Real Value();
     Standard_Boolean IsDone() const;
     Standard_Boolean recursive_iteration(Standard_Integer& n, math_IntegerVector& inc);
 };
 
-IntegrationFunction::IntegrationFunction(math_MultipleVarFunction& F,
-    const Standard_Integer maxsav, const Standard_Integer NVar,
-    const math_IntegerVector& Ord,
-    const math_Vector& Lowsav, const  math_Vector& Uppsav) :
-    Ordsav(1, NVar),
-    xr(1, NVar),
-    xm(1, NVar),
-    GaussPoint(1, NVar, 1, maxsav),
-    GaussWeight(1, NVar, 1, maxsav)
-{
+IntegrationFunction::IntegrationFunction(math_MultipleVarFunction& F, const Standard_Integer maxsav,
+                                         const Standard_Integer NVar, const math_IntegerVector& Ord,
+                                         const math_Vector& Lowsav, const math_Vector& Uppsav)
+    : Ordsav(1, NVar), xr(1, NVar), xm(1, NVar), GaussPoint(1, NVar, 1, maxsav), GaussWeight(1, NVar, 1, maxsav) {
 
     Standard_Integer i, k;
     math_IntegerVector inc(1, NVar);
@@ -95,7 +86,7 @@ IntegrationFunction::IntegrationFunction(math_MultipleVarFunction& F,
     Ordsav = Ord;
     Done = Standard_False;
 
-    //Recuperation des points et poids de Gauss dans le fichier GaussPoints 
+    // Recuperation des points et poids de Gauss dans le fichier GaussPoints
     for (i = 1; i <= NVarsav; i++) {
         xm(i) = 0.5 * (Lowsav(i) + Uppsav(i));
         xr(i) = 0.5 * (Uppsav(i) - Lowsav(i));
@@ -103,15 +94,15 @@ IntegrationFunction::IntegrationFunction(math_MultipleVarFunction& F,
         math::GaussPoints(Ordsav(i), GP);
         math::GaussWeights(Ordsav(i), GW);
         for (k = 1; k <= Ordsav(i); k++) {
-            GaussPoint(i, k) = GP(k);  //kieme point et poids de  
-            GaussWeight(i, k) = GW(k);//Gauss de la variable i.
+            GaussPoint(i, k) = GP(k);  // kieme point et poids de
+            GaussWeight(i, k) = GW(k); // Gauss de la variable i.
         }
     }
     Val = 0.0;
     Standard_Integer Iterdeb = 1;
     Standard_Boolean recur = recursive_iteration(Iterdeb, inc);
     if (recur) {
-        //On ramene l'integration a la bonne echelle.
+        // On ramene l'integration a la bonne echelle.
         for (i = 1; i <= NVarsav; i++) {
             Val *= xr(i);
         }
@@ -127,8 +118,7 @@ Standard_Boolean IntegrationFunction::IsDone() const {
     return Done;
 }
 
-Standard_Boolean IntegrationFunction::recursive_iteration(Standard_Integer& n,
-    math_IntegerVector& inc) {
+Standard_Boolean IntegrationFunction::recursive_iteration(Standard_Integer& n, math_IntegerVector& inc) {
 
     // Termination criterium :
     // Calcul de la valeur de la fonction aux points de Gauss fixes:
@@ -141,7 +131,9 @@ Standard_Boolean IntegrationFunction::recursive_iteration(Standard_Integer& n,
         }
         Standard_Real F1;
         Standard_Boolean Ok = Fsav->Value(xm + dx, F1);
-        if (!Ok) { return Standard_False; };
+        if (!Ok) {
+            return Standard_False;
+        };
         Standard_Real Interm = 1;
         for (j = 1; j <= NVarsav; j++) {
             Interm *= GaussWeight(j, inc(j));
@@ -161,12 +153,9 @@ Standard_Boolean IntegrationFunction::recursive_iteration(Standard_Integer& n,
     return OK;
 }
 
-math_GaussMultipleIntegration::
-math_GaussMultipleIntegration(math_MultipleVarFunction& F,
-    const math_Vector& Lower,
-    const math_Vector& Upper,
-    const math_IntegerVector& Order)
-{
+math_GaussMultipleIntegration::math_GaussMultipleIntegration(math_MultipleVarFunction& F, const math_Vector& Lower,
+                                                             const math_Vector& Upper,
+                                                             const math_IntegerVector& Order) {
     Standard_Integer MaxOrder = math::GaussPointsMax();
 
     Standard_Integer i, max = 0;
@@ -181,15 +170,16 @@ math_GaussMultipleIntegration(math_MultipleVarFunction& F,
     for (i = 1; i <= NVar; i++) {
         if (Order(i) > MaxOrder) {
             Ord(i) = MaxOrder;
-        }
-        else {
+        } else {
             Ord(i) = Order(i);
         }
-        if (Ord(i) >= max) { max = Ord(i); }
+        if (Ord(i) >= max) {
+            max = Ord(i);
+        }
     }
 
-    //Calcul de l'integrale aux points de Gauss.
-    // Il s agit d une somme multiple sur le domaine [Lower, Upper].
+    // Calcul de l'integrale aux points de Gauss.
+    //  Il s agit d une somme multiple sur le domaine [Lower, Upper].
 
     IntegrationFunction Func(F, max, NVar, Ord, Lowsav, Uppsav);
     if (Func.IsDone()) {
@@ -204,11 +194,7 @@ void math_GaussMultipleIntegration::Dump(Standard_OStream& o) const {
     if (Done) {
         o << " Status = Done \n";
         o << " Integration value = " << Val << "\n";
-    }
-    else {
+    } else {
         o << "Status = not Done \n";
     }
 }
-
-
-

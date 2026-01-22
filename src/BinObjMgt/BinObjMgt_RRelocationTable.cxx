@@ -16,34 +16,30 @@
 #include <BinObjMgt_RRelocationTable.hxx>
 
 //=======================================================================
-//function : GetHeaderData
-//purpose  : getter for the file header data
+// function : GetHeaderData
+// purpose  : getter for the file header data
 //=======================================================================
 
-const Handle(Storage_HeaderData)& BinObjMgt_RRelocationTable::GetHeaderData() const
-{
-  return myHeaderData;
+const Handle(Storage_HeaderData) & BinObjMgt_RRelocationTable::GetHeaderData() const {
+    return myHeaderData;
 }
 
 //=======================================================================
-//function : SetHeaderData
-//purpose  : setter for the file header data
+// function : SetHeaderData
+// purpose  : setter for the file header data
 //=======================================================================
 
-void BinObjMgt_RRelocationTable::SetHeaderData(
-  const Handle(Storage_HeaderData)& theHeaderData)
-{
-  myHeaderData = theHeaderData;
+void BinObjMgt_RRelocationTable::SetHeaderData(const Handle(Storage_HeaderData) & theHeaderData) {
+    myHeaderData = theHeaderData;
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : The relocation table is cleared before/after reading in a document.
+// function : Clear
+// purpose  : The relocation table is cleared before/after reading in a document.
 //         : In this case the reference to the file header data should also be
 //         : cleared, because it is specific to the document.
 //=======================================================================
-void BinObjMgt_RRelocationTable::Clear(const Standard_Boolean doReleaseMemory)
-{
-  myHeaderData.Nullify();
-  TColStd_DataMapOfIntegerTransient::Clear(doReleaseMemory);
+void BinObjMgt_RRelocationTable::Clear(const Standard_Boolean doReleaseMemory) {
+    myHeaderData.Nullify();
+    TColStd_DataMapOfIntegerTransient::Clear(doReleaseMemory);
 }

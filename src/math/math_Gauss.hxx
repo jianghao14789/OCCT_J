@@ -51,12 +51,13 @@ public:
     //! If the largest pivot found is less than MinPivot the matrix A is
     //! considered as singular.
     //! Exception NotSquare is raised if A is not a square matrix.
-    Standard_EXPORT math_Gauss(const math_Matrix& A,
-        const Standard_Real MinPivot = 1.0e-20,
-        const Message_ProgressRange& theProgress = Message_ProgressRange());
+    Standard_EXPORT math_Gauss(const math_Matrix& A, const Standard_Real MinPivot = 1.0e-20,
+                               const Message_ProgressRange& theProgress = Message_ProgressRange());
 
     //! Returns true if the computations are successful, otherwise returns false
-    Standard_Boolean IsDone() const { return Done; }
+    Standard_Boolean IsDone() const {
+        return Done;
+    }
 
     //! Given the input Vector B this routine returns the solution X of the set
     //! of linear equations A . X = B.
@@ -92,16 +93,13 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
     math_Matrix LU;
     math_IntegerVector Index;
     Standard_Real D;
     Standard_Boolean Done;
-
 };
 
-inline Standard_OStream& operator<<(Standard_OStream& o, const math_Gauss& mG)
-{
+inline Standard_OStream& operator<<(Standard_OStream& o, const math_Gauss& mG) {
     mG.Dump(o);
     return o;
 }

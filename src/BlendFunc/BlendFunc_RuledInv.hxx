@@ -25,12 +25,13 @@ class math_Matrix;
 
 class BlendFunc_RuledInv : public Blend_FuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_RuledInv(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Handle(Adaptor3d_Curve)& C);
+    Standard_EXPORT BlendFunc_RuledInv(const Handle(Adaptor3d_Surface) & S1, const Handle(Adaptor3d_Surface) & S2,
+                                       const Handle(Adaptor3d_Curve) & C);
 
-    Standard_EXPORT void Set(const Standard_Boolean OnFirst, const Handle(Adaptor2d_Curve2d)& COnSurf) Standard_OVERRIDE;
+    Standard_EXPORT void Set(const Standard_Boolean OnFirst,
+                             const Handle(Adaptor2d_Curve2d) & COnSurf) Standard_OVERRIDE;
 
     Standard_EXPORT void GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const Standard_OVERRIDE;
 
@@ -60,7 +61,6 @@ public:
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D) Standard_OVERRIDE;
 
 protected:
-
 private:
     Handle(Adaptor3d_Surface) surf1;
     Handle(Adaptor3d_Surface) surf2;

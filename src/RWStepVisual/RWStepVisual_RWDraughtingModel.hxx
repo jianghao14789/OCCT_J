@@ -27,48 +27,26 @@ class StepVisual_DraughtingModel;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DraughtingModel
-class RWStepVisual_RWDraughtingModel 
-{
+class RWStepVisual_RWDraughtingModel {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepVisual_RWDraughtingModel();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepVisual_RWDraughtingModel();
-  
-  //! Reads DraughtingModel
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_DraughtingModel)& ent) const;
-  
-  //! Writes DraughtingModel
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_DraughtingModel)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepVisual_DraughtingModel)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DraughtingModel
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_DraughtingModel) & ent) const;
 
+    //! Writes DraughtingModel
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_DraughtingModel) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepVisual_DraughtingModel) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWDraughtingModel_HeaderFile

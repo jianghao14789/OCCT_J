@@ -22,6 +22,7 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 
-typedef NCollection_IndexedDataMap<Handle(SelectMgr_EntityOwner), SelectMgr_SortCriterion, TColStd_MapTransientHasher> SelectMgr_IndexedDataMapOfOwnerCriterion;
+typedef NCollection_IndexedDataMap<Handle(SelectMgr_EntityOwner), SelectMgr_SortCriterion, TColStd_MapTransientHasher>
+    SelectMgr_IndexedDataMapOfOwnerCriterion;
 
 #endif

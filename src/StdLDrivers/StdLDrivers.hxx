@@ -21,19 +21,18 @@ class Standard_GUID;
 class StdObjMgt_MapOfInstantiators;
 class TDocStd_Application;
 
-class StdLDrivers
-{
+class StdLDrivers {
 public:
-  //! Depending from the ID, returns a list of storage
-  //! or retrieval attribute drivers. Used for plugin
-  Standard_EXPORT static Handle(Standard_Transient) Factory (const Standard_GUID& aGUID);
+    //! Depending from the ID, returns a list of storage
+    //! or retrieval attribute drivers. Used for plugin
+    Standard_EXPORT static Handle(Standard_Transient) Factory(const Standard_GUID& aGUID);
 
-  //! Defines format "OCC-StdLite" and registers its retrieval driver
-  //! in the specified application
-  Standard_EXPORT static void DefineFormat (const Handle(TDocStd_Application)& theApp);
+    //! Defines format "OCC-StdLite" and registers its retrieval driver
+    //! in the specified application
+    Standard_EXPORT static void DefineFormat(const Handle(TDocStd_Application) & theApp);
 
-  //! Register types.
-  Standard_EXPORT static void BindTypes (StdObjMgt_MapOfInstantiators& theMap);
+    //! Register types.
+    Standard_EXPORT static void BindTypes(StdObjMgt_MapOfInstantiators& theMap);
 };
 
 #endif // _StdLDrivers_HeaderFile

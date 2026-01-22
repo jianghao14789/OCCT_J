@@ -27,152 +27,162 @@
 #include <gp_XYZ.hxx>
 #include <gp_XY.hxx>
 
-
-
-class HLRAlgo_BiPoint
-{
+class HLRAlgo_BiPoint {
 public:
-  struct IndicesT
-  {
-    IndicesT()
-    : ShapeIndex(-1),
-      FaceConex1(0),
-      Face1Pt1(0),
-      Face1Pt2(0),
-      FaceConex2(0),
-      Face2Pt1(0),
-      Face2Pt2(0),
-      MinSeg(0),
-      MaxSeg(0),
-      SegFlags(0)
-    {
+    struct IndicesT {
+        IndicesT()
+            : ShapeIndex(-1), FaceConex1(0), Face1Pt1(0), Face1Pt2(0), FaceConex2(0), Face2Pt1(0), Face2Pt2(0),
+              MinSeg(0), MaxSeg(0), SegFlags(0) {}
+        Standard_Integer ShapeIndex;
+        Standard_Integer FaceConex1;
+        Standard_Integer Face1Pt1;
+        Standard_Integer Face1Pt2;
+        Standard_Integer FaceConex2;
+        Standard_Integer Face2Pt1;
+        Standard_Integer Face2Pt2;
+        Standard_Integer MinSeg;
+        Standard_Integer MaxSeg;
+        Standard_Integer SegFlags;
+    };
+
+    struct PointsT {
+        gp_XYZ Pnt1;
+        gp_XYZ Pnt2;
+        gp_XYZ PntP1;
+        gp_XYZ PntP2;
+
+        gp_XY PntP12D() const {
+            return gp_XY(PntP1.X(), PntP1.Y());
+        }
+
+        gp_XY PntP22D() const {
+            return gp_XY(PntP2.X(), PntP2.Y());
+        }
+    };
+
+    DEFINE_STANDARD_ALLOC;
+
+    HLRAlgo_BiPoint() {}
+
+    Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1,
+                                    const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2,
+                                    const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1,
+                                    const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2,
+                                    const Standard_Integer Index, const Standard_Boolean reg1,
+                                    const Standard_Boolean regn, const Standard_Boolean outl,
+                                    const Standard_Boolean intl);
+
+    Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1,
+                                    const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2,
+                                    const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1,
+                                    const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2,
+                                    const Standard_Integer Index, const Standard_Integer flag);
+
+    Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1,
+                                    const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2,
+                                    const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1,
+                                    const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2,
+                                    const Standard_Integer Index, const Standard_Integer i1,
+                                    const Standard_Integer i1p1, const Standard_Integer i1p2,
+                                    const Standard_Boolean reg1, const Standard_Boolean regn,
+                                    const Standard_Boolean outl, const Standard_Boolean intl);
+
+    Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1,
+                                    const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2,
+                                    const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1,
+                                    const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2,
+                                    const Standard_Integer Index, const Standard_Integer i1,
+                                    const Standard_Integer i1p1, const Standard_Integer i1p2,
+                                    const Standard_Integer flag);
+
+    Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1,
+                                    const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2,
+                                    const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1,
+                                    const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2,
+                                    const Standard_Integer Index, const Standard_Integer i1,
+                                    const Standard_Integer i1p1, const Standard_Integer i1p2, const Standard_Integer i2,
+                                    const Standard_Integer i2p1, const Standard_Integer i2p2,
+                                    const Standard_Boolean reg1, const Standard_Boolean regn,
+                                    const Standard_Boolean outl, const Standard_Boolean intl);
+
+    Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1,
+                                    const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2,
+                                    const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1,
+                                    const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2,
+                                    const Standard_Integer Index, const Standard_Integer i1,
+                                    const Standard_Integer i1p1, const Standard_Integer i1p2, const Standard_Integer i2,
+                                    const Standard_Integer i2p1, const Standard_Integer i2p2,
+                                    const Standard_Integer flag);
+
+    Standard_Boolean Rg1Line() const {
+        return (myIndices.SegFlags & EMskRg1Line) != 0;
     }
-    Standard_Integer ShapeIndex;
-    Standard_Integer FaceConex1;
-    Standard_Integer Face1Pt1;
-    Standard_Integer Face1Pt2;
-    Standard_Integer FaceConex2;
-    Standard_Integer Face2Pt1;
-    Standard_Integer Face2Pt2;
-    Standard_Integer MinSeg;
-    Standard_Integer MaxSeg;
-    Standard_Integer SegFlags;
-  };
 
-  struct PointsT
-  {
-    gp_XYZ Pnt1;
-    gp_XYZ Pnt2;
-    gp_XYZ PntP1;
-    gp_XYZ PntP2;
-
-    gp_XY PntP12D() const
-    {
-      return gp_XY(PntP1.X(), PntP1.Y());
+    void Rg1Line(const Standard_Boolean B) {
+        if (B)
+            myIndices.SegFlags |= EMskRg1Line;
+        else
+            myIndices.SegFlags &= ~EMskRg1Line;
     }
 
-    gp_XY PntP22D() const
-    {
-      return gp_XY(PntP2.X(), PntP2.Y());
+    Standard_Boolean RgNLine() const {
+        return (myIndices.SegFlags & EMskRgNLine) != 0;
     }
-  };
 
-  DEFINE_STANDARD_ALLOC;
+    void RgNLine(const Standard_Boolean B) {
+        if (B)
+            myIndices.SegFlags |= EMskRgNLine;
+        else
+            myIndices.SegFlags &= ~EMskRgNLine;
+    }
 
-  HLRAlgo_BiPoint() {}
+    Standard_Boolean OutLine() const {
+        return (myIndices.SegFlags & EMskOutLine) != 0;
+    }
 
-  Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1, const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2, const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1, const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2, const Standard_Integer Index, const Standard_Boolean reg1, const Standard_Boolean regn, const Standard_Boolean outl, const Standard_Boolean intl);
-  
-  Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1, const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2, const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1, const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2, const Standard_Integer Index, const Standard_Integer flag);
-  
-  Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1, const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2, const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1, const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2, const Standard_Integer Index, const Standard_Integer i1, const Standard_Integer i1p1, const Standard_Integer i1p2, const Standard_Boolean reg1, const Standard_Boolean regn, const Standard_Boolean outl, const Standard_Boolean intl);
-  
-  Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1, const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2, const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1, const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2, const Standard_Integer Index, const Standard_Integer i1, const Standard_Integer i1p1, const Standard_Integer i1p2, const Standard_Integer flag);
-  
-  Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1, const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2, const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1, const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2, const Standard_Integer Index, const Standard_Integer i1, const Standard_Integer i1p1, const Standard_Integer i1p2, const Standard_Integer i2, const Standard_Integer i2p1, const Standard_Integer i2p2, const Standard_Boolean reg1, const Standard_Boolean regn, const Standard_Boolean outl, const Standard_Boolean intl);
-  
-  Standard_EXPORT HLRAlgo_BiPoint(const Standard_Real X1, const Standard_Real Y1, const Standard_Real Z1, const Standard_Real X2, const Standard_Real Y2, const Standard_Real Z2, const Standard_Real XT1, const Standard_Real YT1, const Standard_Real ZT1, const Standard_Real XT2, const Standard_Real YT2, const Standard_Real ZT2, const Standard_Integer Index, const Standard_Integer i1, const Standard_Integer i1p1, const Standard_Integer i1p2, const Standard_Integer i2, const Standard_Integer i2p1, const Standard_Integer i2p2, const Standard_Integer flag);
+    void OutLine(const Standard_Boolean B) {
+        if (B)
+            myIndices.SegFlags |= EMskOutLine;
+        else
+            myIndices.SegFlags &= ~EMskOutLine;
+    }
 
-  Standard_Boolean Rg1Line() const
-  {
-    return (myIndices.SegFlags & EMskRg1Line) != 0;
-  }
+    Standard_Boolean IntLine() const {
+        return (myIndices.SegFlags & EMskIntLine) != 0;
+    }
 
-  void Rg1Line (const Standard_Boolean B)
-  {
-    if (B) myIndices.SegFlags |=  EMskRg1Line;
-    else   myIndices.SegFlags &= ~EMskRg1Line;
-  }
+    void IntLine(const Standard_Boolean B) {
+        if (B)
+            myIndices.SegFlags |= EMskIntLine;
+        else
+            myIndices.SegFlags &= ~EMskIntLine;
+    }
 
-  Standard_Boolean RgNLine() const
-  {
-    return (myIndices.SegFlags & EMskRgNLine) != 0;
-  }
+    Standard_Boolean Hidden() const {
+        return (myIndices.SegFlags & EMskHidden) != 0;
+    }
 
-  void RgNLine (const Standard_Boolean B)
-  {
-    if (B) myIndices.SegFlags |=  EMskRgNLine;
-    else   myIndices.SegFlags &= ~EMskRgNLine;
-  }
+    void Hidden(const Standard_Boolean B) {
+        if (B)
+            myIndices.SegFlags |= EMskHidden;
+        else
+            myIndices.SegFlags &= ~EMskHidden;
+    }
 
-  Standard_Boolean OutLine() const
-  {
-    return (myIndices.SegFlags & EMskOutLine) != 0;
-  }
+    IndicesT& Indices() {
+        return myIndices;
+    }
 
-  void OutLine (const Standard_Boolean B)
-  {
-    if (B) myIndices.SegFlags |=  EMskOutLine;
-    else   myIndices.SegFlags &= ~EMskOutLine;
-  }
-
-  Standard_Boolean IntLine() const
-  {
-    return (myIndices.SegFlags & EMskIntLine) != 0;
-  }
-
-  void IntLine (const Standard_Boolean B)
-  {
-    if (B) myIndices.SegFlags |=  EMskIntLine;
-    else   myIndices.SegFlags &= ~EMskIntLine;
-  }
-
-  Standard_Boolean Hidden() const
-  {
-    return (myIndices.SegFlags & EMskHidden) != 0;
-  }
-
-  void Hidden (const Standard_Boolean B)
-  {
-    if (B) myIndices.SegFlags |=  EMskHidden;
-    else   myIndices.SegFlags &= ~EMskHidden;
-  }
-
-  IndicesT& Indices()
-  {
-    return myIndices;
-  }
-
-  PointsT& Points()
-  {
-    return myPoints;
-  }
+    PointsT& Points() {
+        return myPoints;
+    }
 
 protected:
-
-  enum EMskFlags
-  {
-    EMskRg1Line = 1,
-    EMskRgNLine = 2,
-    EMskOutLine = 4,
-    EMskIntLine = 8,
-    EMskHidden  = 16
-  };
+    enum EMskFlags { EMskRg1Line = 1, EMskRgNLine = 2, EMskOutLine = 4, EMskIntLine = 8, EMskHidden = 16 };
 
 private:
-  IndicesT myIndices;
-  PointsT myPoints;
-
+    IndicesT myIndices;
+    PointsT myPoints;
 };
 
 #endif // _HLRAlgo_BiPoint_HeaderFile

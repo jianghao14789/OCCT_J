@@ -21,31 +21,27 @@
 #include <StepRepr_SuppliedPartRelationship.hxx>
 
 //=======================================================================
-//function : StepAP203_CertifiedItem
-//purpose  : 
+// function : StepAP203_CertifiedItem
+// purpose  :
 //=======================================================================
-StepAP203_CertifiedItem::StepAP203_CertifiedItem ()
-{
+StepAP203_CertifiedItem::StepAP203_CertifiedItem() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepAP203_CertifiedItem::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_SuppliedPartRelationship))) return 1;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  : 
+// function : SuppliedPartRelationship
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepAP203_CertifiedItem::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepRepr_SuppliedPartRelationship))) return 1;
-  return 0;
-}
-
-//=======================================================================
-//function : SuppliedPartRelationship
-//purpose  : 
-//=======================================================================
-
-Handle(StepRepr_SuppliedPartRelationship) StepAP203_CertifiedItem::SuppliedPartRelationship () const
-{
-  return Handle(StepRepr_SuppliedPartRelationship)::DownCast(Value());
+Handle(StepRepr_SuppliedPartRelationship) StepAP203_CertifiedItem::SuppliedPartRelationship() const {
+    return Handle(StepRepr_SuppliedPartRelationship)::DownCast(Value());
 }

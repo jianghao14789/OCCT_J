@@ -19,47 +19,34 @@
 #include <Prs3d_Drawer.hxx>
 #include <Prs3d_PointAspect.hxx>
 
-template <class AnyPoint, class PointTool>
-class Prs3d_Point
-{
+template <class AnyPoint, class PointTool> class Prs3d_Point {
 public:
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
 private:
-  Standard_EXPORT static void DrawPoint
-                 (const AnyPoint& thePoint,
-                  const Handle(Graphic3d_Group) theGroup)
-  {
-    Standard_Real aX,aY,aZ;
-    PointTool::Coord(thePoint,aX,aY,aZ);
-    Handle(Graphic3d_ArrayOfPoints) anArrayOfPoints = new Graphic3d_ArrayOfPoints (1);
-    anArrayOfPoints->AddVertex (aX, aY, aZ);
-    theGroup->AddPrimitiveArray (anArrayOfPoints);
-  }
+    Standard_EXPORT static void DrawPoint(const AnyPoint& thePoint, const Handle(Graphic3d_Group) theGroup) {
+        Standard_Real aX, aY, aZ;
+        PointTool::Coord(thePoint, aX, aY, aZ);
+        Handle(Graphic3d_ArrayOfPoints) anArrayOfPoints = new Graphic3d_ArrayOfPoints(1);
+        anArrayOfPoints->AddVertex(aX, aY, aZ);
+        theGroup->AddPrimitiveArray(anArrayOfPoints);
+    }
 
 public:
-  Standard_EXPORT static void Add
-                 (const Handle (Prs3d_Presentation)& thePrs,
-                  const AnyPoint& thePoint,
-                  const Handle (Prs3d_Drawer)& theDrawer)
-  {
-    Handle(Graphic3d_Group) aGroup = thePrs->CurrentGroup();
-    aGroup->SetPrimitivesAspect(theDrawer->PointAspect()->Aspect());
-    DrawPoint(thePoint, aGroup);
-  }
+    Standard_EXPORT static void Add(const Handle(Prs3d_Presentation) & thePrs, const AnyPoint& thePoint,
+                                    const Handle(Prs3d_Drawer) & theDrawer) {
+        Handle(Graphic3d_Group) aGroup = thePrs->CurrentGroup();
+        aGroup->SetPrimitivesAspect(theDrawer->PointAspect()->Aspect());
+        DrawPoint(thePoint, aGroup);
+    }
 
-  Standard_EXPORT static Standard_Boolean Match
-                  (const AnyPoint& thePoint,
-                  const Standard_Real theX,
-                  const Standard_Real theY,
-                  const Standard_Real theZ,
-                  const Standard_Real theDistance)
-  {
-    Standard_Real aX,aY,aZ;
-    PointTool::Coord(thePoint, aX, aY, aZ);
-    return Sqrt((theX - aX)*(theX - aX) + (theY - aY)*(theY - aY)
-                 + (theZ - aZ)*(theZ - aZ)) <= theDistance;
-  }
+    Standard_EXPORT static Standard_Boolean Match(const AnyPoint& thePoint, const Standard_Real theX,
+                                                  const Standard_Real theY, const Standard_Real theZ,
+                                                  const Standard_Real theDistance) {
+        Standard_Real aX, aY, aZ;
+        PointTool::Coord(thePoint, aX, aY, aZ);
+        return Sqrt((theX - aX) * (theX - aX) + (theY - aY) * (theY - aY) + (theZ - aZ) * (theZ - aZ)) <= theDistance;
+    }
 };
 
 #endif

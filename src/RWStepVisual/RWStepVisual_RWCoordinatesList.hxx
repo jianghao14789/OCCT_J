@@ -23,24 +23,20 @@
 #include <Standard_Integer.hxx>
 #include <StepData_StepReaderData.hxx>
 class Interface_Check;
-class  StepVisual_CoordinatesList;
+class StepVisual_CoordinatesList;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
 //! Read & Write Module for AnnotationOccurrence
-class RWStepVisual_RWCoordinatesList 
-{
+class RWStepVisual_RWCoordinatesList {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  Standard_EXPORT RWStepVisual_RWCoordinatesList();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data,
-	 const Standard_Integer num,
-	 Handle(Interface_Check)& ach,
-	 const Handle(StepVisual_CoordinatesList)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const  Handle(StepVisual_CoordinatesList)& ent) const;
+    Standard_EXPORT RWStepVisual_RWCoordinatesList();
+
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_CoordinatesList) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_CoordinatesList) & ent) const;
 };
 #endif // _RWStepVisual_RWCoordinatesList_HeaderFile

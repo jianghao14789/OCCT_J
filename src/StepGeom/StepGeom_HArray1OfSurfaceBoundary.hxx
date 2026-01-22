@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepGeom_HArray1OfSurfaceBoundary, StepGeom_Array1OfSurfaceBoundary)
 
-
 #endif

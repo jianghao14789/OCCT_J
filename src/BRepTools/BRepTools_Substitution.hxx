@@ -26,7 +26,6 @@
 #include <Standard_Boolean.hxx>
 class TopoDS_Shape;
 
-
 //! A tool to substitute subshapes by other shapes.
 //!
 //! The user use the method Substitute to define the
@@ -37,12 +36,9 @@ class TopoDS_Shape;
 //! The method Build reconstructs a new Shape with the
 //! modifications.The Shape and the new shape are
 //! registered.
-class BRepTools_Substitution
-{
+class BRepTools_Substitution {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT BRepTools_Substitution();
 
@@ -71,28 +67,9 @@ public:
     //! Returns the set of shapes substituted to <S>.
     Standard_EXPORT const TopTools_ListOfShape& Copy(const TopoDS_Shape& S) const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TopTools_DataMapOfShapeListOfShape myMap;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepTools_Substitution_HeaderFile

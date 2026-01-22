@@ -17,7 +17,7 @@
 
 #include <OpenGl_TextureBuffer.hxx>
 
-Standard_DEPRECATED("Obsolete alias - OpenGl_TextureBuffer should be used instead")
-typedef OpenGl_TextureBuffer OpenGl_TextureBufferArb;
+Standard_DEPRECATED("Obsolete alias - OpenGl_TextureBuffer should be used instead") typedef OpenGl_TextureBuffer
+    OpenGl_TextureBufferArb;
 
 #endif // _OpenGl_TextureBufferArb_H__

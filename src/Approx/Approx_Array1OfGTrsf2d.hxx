@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<gp_GTrsf2d> Approx_Array1OfGTrsf2d;
 
-
 #endif

@@ -19,5 +19,4 @@
 
 typedef NCollection_Array2<StepElement_SurfaceElementPurpose> StepElement_Array2OfSurfaceElementPurpose;
 
-
 #endif

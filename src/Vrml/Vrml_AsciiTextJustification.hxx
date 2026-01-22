@@ -17,12 +17,6 @@
 #ifndef _Vrml_AsciiTextJustification_HeaderFile
 #define _Vrml_AsciiTextJustification_HeaderFile
 
-
-enum Vrml_AsciiTextJustification
-{
-Vrml_LEFT,
-Vrml_CENTER,
-Vrml_RIGHT
-};
+enum Vrml_AsciiTextJustification { Vrml_LEFT, Vrml_CENTER, Vrml_RIGHT };
 
 #endif // _Vrml_AsciiTextJustification_HeaderFile

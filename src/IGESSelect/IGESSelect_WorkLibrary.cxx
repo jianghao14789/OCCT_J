@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <IFSelect_ContextWrite.hxx>
 #include <IFSelect_GeneralModifier.hxx>
 #include <IGESAppli.hxx>
@@ -44,156 +43,150 @@
 #include <TColStd_HSequenceOfInteger.hxx>
 
 #include <errno.h>
-IMPLEMENT_STANDARD_RTTIEXT(IGESSelect_WorkLibrary,IFSelect_WorkLibrary)
+IMPLEMENT_STANDARD_RTTIEXT(IGESSelect_WorkLibrary, IFSelect_WorkLibrary)
 
 static int deja = 0;
-static  Handle(IGESData_FileProtocol) IGESProto;
+static Handle(IGESData_FileProtocol) IGESProto;
 
+IGESSelect_WorkLibrary::IGESSelect_WorkLibrary(const Standard_Boolean modefnes) : themodefnes(modefnes) {
+    IGESSolid::Init();
+    IGESAppli::Init();
+    IGESDefs::Init();
 
-     IGESSelect_WorkLibrary::IGESSelect_WorkLibrary
-  (const Standard_Boolean modefnes)
-  : themodefnes (modefnes)
-{
-  IGESSolid::Init();
-  IGESAppli::Init();
-  IGESDefs::Init();
-
-  if (!deja) {
-    Handle(IGESSelect_Dumper) sesdump = new IGESSelect_Dumper;  // ainsi,cestfait
-    deja = 1;
-  }
-  SetDumpLevels (4,6);
-  SetDumpHelp (0,"Only DNum");
-  SetDumpHelp (1,"DNum, IGES Type & Form");
-  SetDumpHelp (2,"Main Directory Information");
-  SetDumpHelp (3,"Complete Directory Part");
-  SetDumpHelp (4,"Directory + Fields (except list contents)");
-  SetDumpHelp (5,"Complete (with list contents)");
-  SetDumpHelp (6,"Complete + Transformed data");
+    if (!deja) {
+        Handle(IGESSelect_Dumper) sesdump = new IGESSelect_Dumper; // ainsi,cestfait
+        deja = 1;
+    }
+    SetDumpLevels(4, 6);
+    SetDumpHelp(0, "Only DNum");
+    SetDumpHelp(1, "DNum, IGES Type & Form");
+    SetDumpHelp(2, "Main Directory Information");
+    SetDumpHelp(3, "Complete Directory Part");
+    SetDumpHelp(4, "Directory + Fields (except list contents)");
+    SetDumpHelp(5, "Complete (with list contents)");
+    SetDumpHelp(6, "Complete + Transformed data");
 }
 
-    Standard_Integer  IGESSelect_WorkLibrary::ReadFile
-  (const Standard_CString name,
-   Handle(Interface_InterfaceModel)& model,
-   const Handle(Interface_Protocol)& protocol) const
-{
-  Message_Messenger::StreamBuffer sout = Message::SendInfo();
-  Handle(IGESData_IGESModel) igesmod = new IGESData_IGESModel;
-  DeclareAndCast(IGESData_Protocol,prot,protocol);
+Standard_Integer IGESSelect_WorkLibrary::ReadFile(const Standard_CString name, Handle(Interface_InterfaceModel) & model,
+                                                  const Handle(Interface_Protocol) & protocol) const {
+    Message_Messenger::StreamBuffer sout = Message::SendInfo();
+    Handle(IGESData_IGESModel) igesmod = new IGESData_IGESModel;
+    DeclareAndCast(IGESData_Protocol, prot, protocol);
 
-  char* pname=(char*) name;
-  Standard_Integer status = IGESFile_Read (pname,igesmod,prot);
+    char* pname = (char*)name;
+    Standard_Integer status = IGESFile_Read(pname, igesmod, prot);
 
-  if (status < 0) sout<<"File not found : "<<name<<std::endl;
-  if (status > 0) sout<<"Error when reading file : "<<name<<std::endl;
-  if (status == 0) model = igesmod;
-  else             model.Nullify();
-  return status;
+    if (status < 0) sout << "File not found : " << name << std::endl;
+    if (status > 0) sout << "Error when reading file : " << name << std::endl;
+    if (status == 0)
+        model = igesmod;
+    else
+        model.Nullify();
+    return status;
 }
 
+Standard_Boolean IGESSelect_WorkLibrary::WriteFile(IFSelect_ContextWrite& ctx) const {
+    Message_Messenger::StreamBuffer sout = Message::SendInfo();
+    //  Preparation
+    DeclareAndCast(IGESData_IGESModel, igesmod, ctx.Model());
+    DeclareAndCast(IGESData_Protocol, prot, ctx.Protocol());
 
-    Standard_Boolean  IGESSelect_WorkLibrary::WriteFile
-  (IFSelect_ContextWrite& ctx) const
-{
-  Message_Messenger::StreamBuffer sout = Message::SendInfo();
-//  Preparation
-  DeclareAndCast(IGESData_IGESModel,igesmod,ctx.Model());
-  DeclareAndCast(IGESData_Protocol,prot,ctx.Protocol());
+    if (igesmod.IsNull() || prot.IsNull()) return Standard_False;
+    const Handle(OSD_FileSystem) & aFileSystem = OSD_FileSystem::DefaultFileSystem();
+    opencascade::std::shared_ptr<std::ostream> aStream = aFileSystem->OpenOStream(ctx.FileName(), std::ios::out);
+    if (aStream.get() == NULL) {
+        ctx.CCheck(0)->AddFail("IGES File could not be created");
+        sout << " - IGES File could not be created : " << ctx.FileName() << std::endl;
+        return 0;
+    }
+    sout << " IGES File Name : " << ctx.FileName();
+    IGESData_IGESWriter VW(igesmod);
+    sout << "(" << igesmod->NbEntities() << " ents) ";
 
-  if (igesmod.IsNull() || prot.IsNull()) return Standard_False;
-  const Handle(OSD_FileSystem)& aFileSystem = OSD_FileSystem::DefaultFileSystem();
-  opencascade::std::shared_ptr<std::ostream> aStream = aFileSystem->OpenOStream (ctx.FileName(), std::ios::out);
-  if (aStream.get() == NULL)
-  {
-    ctx.CCheck(0)->AddFail("IGES File could not be created");
-    sout<<" - IGES File could not be created : " << ctx.FileName() << std::endl; return 0;
-  }
-  sout<<" IGES File Name : "<<ctx.FileName();
-  IGESData_IGESWriter VW(igesmod);  
-  sout<<"("<<igesmod->NbEntities()<<" ents) ";
+    //  File Modifiers
+    Standard_Integer nbmod = ctx.NbModifiers();
+    for (Standard_Integer numod = 1; numod <= nbmod; numod++) {
+        ctx.SetModifier(numod);
+        DeclareAndCast(IGESSelect_FileModifier, filemod, ctx.FileModifier());
+        if (!filemod.IsNull()) filemod->Perform(ctx, VW);
+        //   (impressions de mise au point)
+        sout << " .. FileMod." << numod << " " << filemod->Label();
+        if (ctx.IsForAll())
+            sout << " (all model)";
+        else
+            sout << " (" << ctx.NbEntities() << " entities)";
+        //    sout << std::flush;
+    }
 
-//  File Modifiers
-  Standard_Integer nbmod = ctx.NbModifiers();
-  for (Standard_Integer numod = 1; numod <= nbmod; numod ++) {
-    ctx.SetModifier (numod);
-    DeclareAndCast(IGESSelect_FileModifier,filemod,ctx.FileModifier());
-    if (!filemod.IsNull()) filemod->Perform(ctx,VW);
-//   (impressions de mise au point)
-    sout << " .. FileMod." << numod <<" "<< filemod->Label();
-    if (ctx.IsForAll()) sout << " (all model)";
-    else  sout << " (" << ctx.NbEntities() << " entities)";
-//    sout << std::flush;
-  }
+    //  Envoi
+    VW.SendModel(prot);
+    sout << " Write ";
+    if (themodefnes) VW.WriteMode() = 10;
+    Standard_Boolean status = VW.Print(*aStream);
+    sout << " Done" << std::endl;
 
-//  Envoi
-  VW.SendModel(prot);            
-  sout<<" Write ";
-  if (themodefnes) VW.WriteMode() = 10;
-  Standard_Boolean status = VW.Print (*aStream);                sout<<" Done"<<std::endl;
+    errno = 0;
+    aStream->flush();
+    status = aStream->good() && status && !errno;
+    aStream.reset();
+    if (errno) sout << strerror(errno) << std::endl;
 
-  errno = 0;
-  aStream->flush();
-  status = aStream->good() && status && !errno;
-  aStream.reset();
-  if(errno)
-    sout << strerror(errno) << std::endl;
-
-  return status;
+    return status;
 }
 
-    Handle(IGESData_Protocol)  IGESSelect_WorkLibrary::DefineProtocol ()
-{
-  if (!IGESProto.IsNull()) return IGESProto;
-  Handle(IGESData_Protocol)     IGESProto1 = IGESSolid::Protocol();
-  Handle(IGESData_Protocol)     IGESProto2 = IGESAppli::Protocol();
-//  Handle(IGESData_FileProtocol) IGESProto  = new IGESData_FileProtocol;
-  IGESProto  = new IGESData_FileProtocol;
-  IGESProto->Add(IGESProto1);
-  IGESProto->Add(IGESProto2);
-  return IGESProto;
+Handle(IGESData_Protocol) IGESSelect_WorkLibrary::DefineProtocol() {
+    if (!IGESProto.IsNull()) return IGESProto;
+    Handle(IGESData_Protocol) IGESProto1 = IGESSolid::Protocol();
+    Handle(IGESData_Protocol) IGESProto2 = IGESAppli::Protocol();
+    //  Handle(IGESData_FileProtocol) IGESProto  = new IGESData_FileProtocol;
+    IGESProto = new IGESData_FileProtocol;
+    IGESProto->Add(IGESProto1);
+    IGESProto->Add(IGESProto2);
+    return IGESProto;
 }
 
+void IGESSelect_WorkLibrary::DumpEntity(const Handle(Interface_InterfaceModel) & model,
+                                        const Handle(Interface_Protocol) & protocol,
+                                        const Handle(Standard_Transient) & entity, Standard_OStream& S,
+                                        const Standard_Integer level) const {
+    DeclareAndCast(IGESData_IGESModel, igesmod, model);
+    DeclareAndCast(IGESData_Protocol, igespro, protocol);
+    DeclareAndCast(IGESData_IGESEntity, igesent, entity);
+    if (igesmod.IsNull() || igespro.IsNull() || igesent.IsNull()) return;
+    Standard_Integer num = igesmod->Number(igesent);
+    if (num == 0) return;
 
-    void  IGESSelect_WorkLibrary::DumpEntity
-  (const Handle(Interface_InterfaceModel)& model, 
-   const Handle(Interface_Protocol)& protocol,
-   const Handle(Standard_Transient)& entity,
-   Standard_OStream& S, const Standard_Integer level) const
-{
-  DeclareAndCast(IGESData_IGESModel,igesmod,model);
-  DeclareAndCast(IGESData_Protocol,igespro,protocol);
-  DeclareAndCast(IGESData_IGESEntity,igesent,entity);
-  if (igesmod.IsNull() || igespro.IsNull() || igesent.IsNull()) return;
-  Standard_Integer num = igesmod->Number(igesent);
-  if (num == 0) return;
+    S << " --- Entity " << num;
+    Standard_Boolean iserr = model->IsRedefinedContent(num);
+    Handle(Standard_Transient) con;
+    if (iserr) con = model->ReportEntity(num)->Content();
+    if (entity.IsNull()) {
+        S << " Null" << std::endl;
+        return;
+    }
 
-  S <<" --- Entity "<<num;
-  Standard_Boolean iserr = model->IsRedefinedContent(num);
-  Handle(Standard_Transient) con;
-  if (iserr) con = model->ReportEntity(num)->Content();
-  if (entity.IsNull()) { S <<" Null"<<std::endl; return ;  }
+    //  On attaque le dump : d abord cas de l Erreur
+    if (iserr) {
+        S << " ERRONEOUS, Content, Type cdl : ";
+        if (!con.IsNull())
+            S << con->DynamicType()->Name();
+        else
+            S << "(undefined)" << std::endl;
+        igesent = GetCasted(IGESData_IGESEntity, con);
+        con.Nullify();
+        Handle(Interface_Check) check = model->ReportEntity(num)->Check();
+        Interface_CheckIterator chlist;
+        chlist.Add(check, num);
+        chlist.Print(S, igesmod, Standard_False);
+        if (igesent.IsNull()) return;
+    } else
+        S << " Type cdl : " << igesent->DynamicType()->Name();
 
-//  On attaque le dump : d abord cas de l Erreur
-  if (iserr) {
-    S << " ERRONEOUS, Content, Type cdl : ";
-    if (!con.IsNull()) S << con->DynamicType()->Name();
-    else S << "(undefined)" << std::endl;
-    igesent = GetCasted(IGESData_IGESEntity,con);
-    con.Nullify();
-    Handle(Interface_Check) check = model->ReportEntity(num)->Check();
-    Interface_CheckIterator chlist;
-    chlist.Add (check,num);
-    chlist.Print (S,igesmod,Standard_False);
-    if (igesent.IsNull()) return;
-  }
-  else S << " Type cdl : " << igesent->DynamicType()->Name();
-
-  IGESData_IGESDumper dump(igesmod,igespro);
-  try {
-    OCC_CATCH_SIGNALS
-    dump.Dump(igesent,S,level,(level-1)/3);
-  }
-  catch (Standard_Failure const&) {
-    S << " **  Dump Interrupt **" << std::endl;
-  }
+    IGESData_IGESDumper dump(igesmod, igespro);
+    try {
+        OCC_CATCH_SIGNALS
+        dump.Dump(igesent, S, level, (level - 1) / 3);
+    } catch (Standard_Failure const&) {
+        S << " **  Dump Interrupt **" << std::endl;
+    }
 }

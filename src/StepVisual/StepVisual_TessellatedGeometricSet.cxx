@@ -11,23 +11,19 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_TessellatedGeometricSet.hxx>
 
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_TessellatedGeometricSet, StepGeom_TessellatedItem)
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_TessellatedGeometricSet,StepGeom_TessellatedItem)
+StepVisual_TessellatedGeometricSet::StepVisual_TessellatedGeometricSet() {}
 
-
-StepVisual_TessellatedGeometricSet::StepVisual_TessellatedGeometricSet ()  {}
-
-void StepVisual_TessellatedGeometricSet::Init(const Handle(TCollection_HAsciiString)& theName, const NCollection_Handle<StepVisual_Array1OfTessellatedItem>& theItems)
-{
-  StepRepr_RepresentationItem::Init(theName);
-  myItems = theItems;
+void StepVisual_TessellatedGeometricSet::Init(const Handle(TCollection_HAsciiString) & theName,
+                                              const NCollection_Handle<StepVisual_Array1OfTessellatedItem>& theItems) {
+    StepRepr_RepresentationItem::Init(theName);
+    myItems = theItems;
 }
 
-NCollection_Handle<StepVisual_Array1OfTessellatedItem> StepVisual_TessellatedGeometricSet::Items() const
-{
-  return myItems;
+NCollection_Handle<StepVisual_Array1OfTessellatedItem> StepVisual_TessellatedGeometricSet::Items() const {
+    return myItems;
 }

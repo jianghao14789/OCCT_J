@@ -22,40 +22,45 @@
 
 //! The purpose of this class is to mark sensitive entities selectable or not
 //! depending on current active selection of parent object for proper BVH traverse
-class SelectMgr_SensitiveEntity : public Standard_Transient
-{
+class SelectMgr_SensitiveEntity : public Standard_Transient {
 public:
+    //! Creates new inactive for selection object with base entity theEntity
+    Standard_EXPORT SelectMgr_SensitiveEntity(const Handle(Select3D_SensitiveEntity) & theEntity);
 
-  //! Creates new inactive for selection object with base entity theEntity
-  Standard_EXPORT SelectMgr_SensitiveEntity (const Handle(Select3D_SensitiveEntity)& theEntity);
+    ~SelectMgr_SensitiveEntity() {}
 
-  ~SelectMgr_SensitiveEntity() {}
+    //! Clears up all resources and memory
+    Standard_EXPORT void Clear();
 
-  //! Clears up all resources and memory
-  Standard_EXPORT void Clear();
+    //! Returns related instance of SelectBasics class
+    const Handle(Select3D_SensitiveEntity) & BaseSensitive() const {
+        return mySensitive;
+    }
 
-  //! Returns related instance of SelectBasics class
-  const Handle(Select3D_SensitiveEntity)& BaseSensitive() const { return mySensitive; }
+    //! Returns true if this entity belongs to the active selection
+    //! mode of parent object
+    Standard_Boolean IsActiveForSelection() const {
+        return myIsActiveForSelection;
+    }
 
-  //! Returns true if this entity belongs to the active selection
-  //! mode of parent object
-  Standard_Boolean IsActiveForSelection() const { return myIsActiveForSelection; }
+    //! Marks entity as inactive for selection
+    void ResetSelectionActiveStatus() const {
+        myIsActiveForSelection = Standard_False;
+    }
 
-  //! Marks entity as inactive for selection
-  void ResetSelectionActiveStatus() const { myIsActiveForSelection = Standard_False; }
+    //! Marks entity as active for selection
+    void SetActiveForSelection() const {
+        myIsActiveForSelection = Standard_True;
+    }
 
-  //! Marks entity as active for selection
-  void SetActiveForSelection() const { myIsActiveForSelection = Standard_True; }
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
-
-  DEFINE_STANDARD_RTTIEXT(SelectMgr_SensitiveEntity,Standard_Transient) // Type definition
+    DEFINE_STANDARD_RTTIEXT(SelectMgr_SensitiveEntity, Standard_Transient) // Type definition
 
 private:
-
-  Handle(Select3D_SensitiveEntity) mySensitive;      //!< Related SelectBasics entity
-  mutable Standard_Boolean         myIsActiveForSelection;       //!< Selection activity status
+    Handle(Select3D_SensitiveEntity) mySensitive;    //!< Related SelectBasics entity
+    mutable Standard_Boolean myIsActiveForSelection; //!< Selection activity status
 };
 
 DEFINE_STANDARD_HANDLE(SelectMgr_SensitiveEntity, Standard_Transient)

@@ -47,17 +47,14 @@
 //! - OSD_ThreadPool::Launcher locks thread one-by-one from thread pool in a thread-safe way.
 //! - Each working thread catches exceptions occurred during job execution, and Launcher will
 //!   throw Standard_Failure in a caller thread on completed execution.
-class OSD_ThreadPool : public Standard_Transient
-{
+class OSD_ThreadPool : public Standard_Transient {
     DEFINE_STANDARD_RTTIEXT(OSD_ThreadPool, Standard_Transient)
 public:
-
     //! Return (or create) a default thread pool.
     //! Number of threads argument will be considered only when called first time.
-    Standard_EXPORT static const Handle(OSD_ThreadPool)& DefaultPool(int theNbThreads = -1);
+    Standard_EXPORT static const Handle(OSD_ThreadPool) & DefaultPool(int theNbThreads = -1);
 
 public:
-
     //! Main constructor.
     //! Application may consider specifying more threads than actually
     //! available (OSD_Parallel::NbLogicalProcessors()) and set up NbDefaultThreadsToLaunch() to a smaller value
@@ -70,24 +67,36 @@ public:
     Standard_EXPORT virtual ~OSD_ThreadPool();
 
     //! Return TRUE if at least 2 threads are available (including self-thread).
-    bool HasThreads() const { return NbThreads() >= 2; }
+    bool HasThreads() const {
+        return NbThreads() >= 2;
+    }
 
     //! Return the lower thread index.
-    int LowerThreadIndex() const { return 0; }
+    int LowerThreadIndex() const {
+        return 0;
+    }
 
     //! Return the upper thread index (last index is reserved for self-thread).
-    int UpperThreadIndex() const { return LowerThreadIndex() + myThreads.Size(); }
+    int UpperThreadIndex() const {
+        return LowerThreadIndex() + myThreads.Size();
+    }
 
     //! Return the number of threads; >= 1.
-    int NbThreads() const { return myThreads.Size() + 1; }
+    int NbThreads() const {
+        return myThreads.Size() + 1;
+    }
 
     //! Return maximum number of threads to be locked by a single Launcher object by default;
     //! the entire thread pool size is returned by default.
-    int NbDefaultThreadsToLaunch() const { return myNbDefThreads; }
+    int NbDefaultThreadsToLaunch() const {
+        return myNbDefThreads;
+    }
 
     //! Set maximum number of threads to be locked by a single Launcher object by default.
     //! Should be set BEFORE first usage.
-    void SetNbDefaultThreadsToLaunch(int theNbThreads) { myNbDefThreads = theNbThreads; }
+    void SetNbDefaultThreadsToLaunch(int theNbThreads) {
+        myNbDefThreads = theNbThreads;
+    }
 
     //! Checks if thread pools has active consumers.
     Standard_EXPORT bool IsInUse();
@@ -97,26 +106,21 @@ public:
     Standard_EXPORT void Init(int theNbThreads);
 
 protected:
-
     //! Thread function interface.
-    class JobInterface
-    {
+    class JobInterface {
     public:
         virtual void Perform(int theThreadIndex) = 0;
     };
 
     //! Thread with back reference to thread pool and thread index in it.
-    class EnumeratedThread : public OSD_Thread
-    {
+    class EnumeratedThread : public OSD_Thread {
         friend class OSD_ThreadPool;
+
     public:
         //! Main constructor.
         EnumeratedThread(bool theIsSelfThread = false)
-            : myPool(NULL), myJob(NULL), myWakeEvent(false),
-            myIdleEvent(false), myThreadIndex(0), myUsageCounter(0),
-            myIsStarted(false), myToCatchFpe(false),
-            myIsSelfThread(theIsSelfThread) {
-        }
+            : myPool(NULL), myJob(NULL), myWakeEvent(false), myIdleEvent(false), myThreadIndex(0), myUsageCounter(0),
+              myIsStarted(false), myToCatchFpe(false), myIsSelfThread(theIsSelfThread) {}
 
         //! Occupy this thread for thread pool launcher.
         //! @return TRUE on success, or FALSE if thread has been already occupied
@@ -132,27 +136,21 @@ protected:
         Standard_EXPORT void WaitIdle();
 
     public:
-
         //! Copy constructor.
         EnumeratedThread(const EnumeratedThread& theCopy)
-            : OSD_Thread(),
-            myPool(NULL), myJob(NULL), myWakeEvent(false),
-            myIdleEvent(false), myThreadIndex(0), myUsageCounter(0),
-            myIsStarted(false), myToCatchFpe(false),
-            myIsSelfThread(false) {
+            : OSD_Thread(), myPool(NULL), myJob(NULL), myWakeEvent(false), myIdleEvent(false), myThreadIndex(0),
+              myUsageCounter(0), myIsStarted(false), myToCatchFpe(false), myIsSelfThread(false) {
             Assign(theCopy);
         }
 
         //! Assignment operator.
-        EnumeratedThread& operator= (const EnumeratedThread& theCopy)
-        {
+        EnumeratedThread& operator=(const EnumeratedThread& theCopy) {
             Assign(theCopy);
             return *this;
         }
 
         //! Assignment operator.
-        void Assign(const EnumeratedThread& theCopy)
-        {
+        void Assign(const EnumeratedThread& theCopy) {
             OSD_Thread::Assign(theCopy);
             myPool = theCopy.myPool;
             myJob = theCopy.myJob;
@@ -162,7 +160,6 @@ protected:
         }
 
     private:
-
         //! Method is executed in the context of thread.
         void performThread();
 
@@ -183,11 +180,9 @@ protected:
     };
 
 public:
-
     //! Launcher object locking a subset of threads (or all threads)
     //! in a thread pool to perform parallel execution of the job.
-    class Launcher
-    {
+    class Launcher {
     public:
         //! Lock specified number of threads from the thread pool.
         //! If thread pool is already locked by another user,
@@ -200,20 +195,30 @@ public:
         Standard_EXPORT Launcher(OSD_ThreadPool& thePool, int theMaxThreads = -1);
 
         //! Release threads.
-        ~Launcher() { Release(); }
+        ~Launcher() {
+            Release();
+        }
 
         //! Return TRUE if at least 2 threads have been locked for parallel execution (including self-thread);
         //! otherwise, the functor will be executed within the caller thread.
-        bool HasThreads() const { return myNbThreads >= 2; }
+        bool HasThreads() const {
+            return myNbThreads >= 2;
+        }
 
         //! Return amount of locked threads; >= 1.
-        int NbThreads() const { return myNbThreads; }
+        int NbThreads() const {
+            return myNbThreads;
+        }
 
         //! Return the lower thread index.
-        int LowerThreadIndex() const { return 0; }
+        int LowerThreadIndex() const {
+            return 0;
+        }
 
         //! Return the upper thread index (last index is reserved for the self-thread).
-        int UpperThreadIndex() const { return LowerThreadIndex() + myNbThreads - 1; }
+        int UpperThreadIndex() const {
+            return LowerThreadIndex() + myNbThreads - 1;
+        }
 
         //! Simple primitive for parallelization of "for" loops, e.g.:
         //! @code
@@ -222,10 +227,9 @@ public:
         //! @param theBegin   the first data index (inclusive)
         //! @param theEnd     the last  data index (exclusive)
         //! @param theFunctor functor providing an interface
-        //!                   "void operator(int theThreadIndex, int theDataIndex){}" performing task for specified index
-        template<typename Functor>
-        void Perform(int theBegin, int theEnd, const Functor& theFunctor)
-        {
+        //!                   "void operator(int theThreadIndex, int theDataIndex){}" performing task for specified
+        //!                   index
+        template <typename Functor> void Perform(int theBegin, int theEnd, const Functor& theFunctor) {
             JobRange aData(theBegin, theEnd);
             Job<Functor> aJob(theFunctor, aData);
             perform(aJob);
@@ -235,7 +239,6 @@ public:
         Standard_EXPORT void Release();
 
     protected:
-
         //! Execute job.
         Standard_EXPORT void perform(JobInterface& theJob);
 
@@ -256,50 +259,47 @@ public:
     };
 
 protected:
-
     //! Auxiliary class which ensures exclusive access to iterators of processed data pool.
-    class JobRange
-    {
+    class JobRange {
     public:
-
         //! Constructor
         JobRange(const int& theBegin, const int& theEnd) : myBegin(theBegin), myEnd(theEnd), myIt(theBegin) {}
 
         //! Returns const link on the first element.
-        const int& Begin() const { return myBegin; }
+        const int& Begin() const {
+            return myBegin;
+        }
 
         //! Returns const link on the last element.
-        const int& End() const { return myEnd; }
+        const int& End() const {
+            return myEnd;
+        }
 
         //! Returns first non processed element or end.
         //! Thread-safe method.
-        int It() const { return Standard_Atomic_Increment(reinterpret_cast<volatile int*>(&myIt)) - 1; }
+        int It() const {
+            return Standard_Atomic_Increment(reinterpret_cast<volatile int*>(&myIt)) - 1;
+        }
 
     private:
         JobRange(const JobRange& theCopy);
         JobRange& operator=(const JobRange& theCopy);
 
     private:
-        const   int& myBegin; //!< First element of range
-        const   int& myEnd;   //!< Last  element of range
-        mutable int  myIt;    //!< First non processed element of range
+        const int& myBegin; //!< First element of range
+        const int& myEnd;   //!< Last  element of range
+        mutable int myIt;   //!< First non processed element of range
     };
 
     //! Auxiliary wrapper class for thread function.
-    template<typename FunctorT> class Job : public JobInterface
-    {
+    template <typename FunctorT> class Job : public JobInterface {
     public:
-
         //! Constructor.
-        Job(const FunctorT& thePerformer, JobRange& theRange)
-            : myPerformer(thePerformer), myRange(theRange) {
-        }
+        Job(const FunctorT& thePerformer, JobRange& theRange) : myPerformer(thePerformer), myRange(theRange) {}
 
         //! Method is executed in the context of thread.
-        virtual void Perform(int theThreadIndex) Standard_OVERRIDE
-        {
-            for (Standard_Integer anIter = myRange.It(); anIter < myRange.End(); anIter = myRange.It())
-            {
+        virtual void Perform(int theThreadIndex) Standard_OVERRIDE {
+            for (Standard_Integer anIter = myRange.It(); anIter < myRange.End(); anIter = myRange.It()) {
                 myPerformer(theThreadIndex, anIter);
             }
         }
@@ -308,7 +308,7 @@ protected:
         Job(const Job& theCopy);
         Job& operator=(const Job& theCopy);
 
-    private: //! @name private fields
+    private:                         //! @name private fields
         const FunctorT& myPerformer; //!< Link on functor
         const JobRange& myRange;     //!< Link on processed data block
     };
@@ -317,22 +317,19 @@ protected:
     void release();
 
     //! Perform the job and catch exceptions.
-    static void performJob(Handle(Standard_Failure)& theFailure,
-        OSD_ThreadPool::JobInterface* theJob,
-        int theThreadIndex);
+    static void performJob(Handle(Standard_Failure) & theFailure, OSD_ThreadPool::JobInterface* theJob,
+                           int theThreadIndex);
 
 private:
     //! This method should not be called (prohibited).
     OSD_ThreadPool(const OSD_ThreadPool& theCopy);
     //! This method should not be called (prohibited).
-    OSD_ThreadPool& operator= (const OSD_ThreadPool& theCopy);
+    OSD_ThreadPool& operator=(const OSD_ThreadPool& theCopy);
 
 private:
-
     NCollection_Array1<EnumeratedThread> myThreads; //!< array of defined threads (excluding self-thread)
-    int  myNbDefThreads; //!< maximum number of threads to be locked by a single Launcher by default
-    bool myShutDown;     //!< flag to shut down (destroy) the thread pool
-
+    int myNbDefThreads; //!< maximum number of threads to be locked by a single Launcher by default
+    bool myShutDown;    //!< flag to shut down (destroy) the thread pool
 };
 
 #endif // _OSD_ThreadPool_HeaderFile

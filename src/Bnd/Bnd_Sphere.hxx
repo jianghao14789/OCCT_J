@@ -25,21 +25,18 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Integer.hxx>
 
-
 //! This class represents a bounding sphere of a geometric entity
 //! (triangle, segment of line or whatever else).
-class Bnd_Sphere
-{
+class Bnd_Sphere {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Empty constructor
     Standard_EXPORT Bnd_Sphere();
 
     //! Constructor of a definite sphere
-    Standard_EXPORT Bnd_Sphere(const gp_XYZ& theCntr, const Standard_Real theRad, const Standard_Integer theU, const Standard_Integer theV);
+    Standard_EXPORT Bnd_Sphere(const gp_XYZ& theCntr, const Standard_Real theRad, const Standard_Integer theU,
+                               const Standard_Integer theV);
 
     //! Returns the U parameter on shape
     Standard_Integer U() const;
@@ -71,7 +68,8 @@ public:
 
     //! Projects a point on entity.
     //! Returns true if success
-    Standard_EXPORT Standard_Boolean Project(const gp_XYZ& theNode, gp_XYZ& theProjNode, Standard_Real& theDist, Standard_Boolean& theInside) const;
+    Standard_EXPORT Standard_Boolean Project(const gp_XYZ& theNode, gp_XYZ& theProjNode, Standard_Real& theDist,
+                                             Standard_Boolean& theInside) const;
 
     Standard_EXPORT Standard_Real Distance(const gp_XYZ& theNode) const;
 
@@ -85,33 +83,15 @@ public:
 
     Standard_EXPORT Standard_Real SquareExtent() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     gp_XYZ myCenter;
     Standard_Real myRadius;
     Standard_Boolean myIsValid;
     Standard_Integer myU;
     Standard_Integer myV;
-
-
 };
 
-
 #include <Bnd_Sphere.lxx>
-
-
-
-
 
 #endif // _Bnd_Sphere_HeaderFile

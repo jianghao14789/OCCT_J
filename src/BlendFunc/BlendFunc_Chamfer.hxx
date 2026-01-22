@@ -38,10 +38,10 @@ class gp_Vec2d;
 //! when distances from spine to surfaces are constant
 class BlendFunc_Chamfer : public BlendFunc_GenChamfer {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_Chamfer(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Handle(Adaptor3d_Curve)& CG);
+    Standard_EXPORT BlendFunc_Chamfer(const Handle(Adaptor3d_Surface) & S1, const Handle(Adaptor3d_Surface) & S2,
+                                      const Handle(Adaptor3d_Curve) & CG);
 
     //! computes the values <F> of the Functions for the
     //! variable <X>.
@@ -77,16 +77,18 @@ public:
     //! at the beginning and the end of the section, and
     //! returns the normal (of the surfaces) at
     //! these points.
-    Standard_EXPORT void Tangent(const Standard_Real U1, const Standard_Real V1, const Standard_Real U2, const Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst, gp_Vec& NormLast) const Standard_OVERRIDE;
+    Standard_EXPORT void Tangent(const Standard_Real U1, const Standard_Real V1, const Standard_Real U2,
+                                 const Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst,
+                                 gp_Vec& NormLast) const Standard_OVERRIDE;
 
     //! Sets the distances and the "quadrant".
-    Standard_EXPORT void Set(const Standard_Real Dist1, const Standard_Real Dist2, const Standard_Integer Choix) Standard_OVERRIDE;
+    Standard_EXPORT void Set(const Standard_Real Dist1, const Standard_Real Dist2,
+                             const Standard_Integer Choix) Standard_OVERRIDE;
 
     //! Returns the length of the maximum section
     Standard_EXPORT Standard_Real GetSectionSize() const Standard_OVERRIDE;
 
 protected:
-
 private:
     BlendFunc_Corde corde1;
     BlendFunc_Corde corde2;

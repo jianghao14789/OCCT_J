@@ -30,38 +30,35 @@ class IGESData_NodeOfSpecificLib;
 class IGESData_GlobalNodeOfSpecificLib;
 DEFINE_STANDARD_HANDLE(IGESData_GlobalNodeOfSpecificLib, Standard_Transient)
 
-class IGESData_GlobalNodeOfSpecificLib : public Standard_Transient
-{
+class IGESData_GlobalNodeOfSpecificLib : public Standard_Transient {
 
 public:
+    //! Creates an empty GlobalNode, with no Next
+    Standard_EXPORT IGESData_GlobalNodeOfSpecificLib();
 
-  //! Creates an empty GlobalNode, with no Next
-  Standard_EXPORT IGESData_GlobalNodeOfSpecificLib();
+    //! Adds a Module bound with a Protocol to the list : does
+    //! nothing if already in the list, THAT IS, Same Type (exact
+    //! match) and Same State (that is, IsEqual is not required)
+    //! Once added, stores its attached Protocol in correspondence
+    Standard_EXPORT void Add(const Handle(IGESData_SpecificModule) & amodule,
+                             const Handle(IGESData_Protocol) & aprotocol);
 
-  //! Adds a Module bound with a Protocol to the list : does
-  //! nothing if already in the list, THAT IS, Same Type (exact
-  //! match) and Same State (that is, IsEqual is not required)
-  //! Once added, stores its attached Protocol in correspondence
-  Standard_EXPORT void Add (const Handle(IGESData_SpecificModule)& amodule, const Handle(IGESData_Protocol)& aprotocol);
+    //! Returns the Module stored in a given GlobalNode
+    Standard_EXPORT const Handle(IGESData_SpecificModule) & Module() const;
 
-  //! Returns the Module stored in a given GlobalNode
-  Standard_EXPORT const Handle(IGESData_SpecificModule)& Module() const;
-  
-  //! Returns the attached Protocol stored in a given GlobalNode
-  Standard_EXPORT const Handle(IGESData_Protocol)& Protocol() const;
-  
-  //! Returns the Next GlobalNode. If none is defined, returned
-  //! value is a Null Handle
-  Standard_EXPORT const Handle(IGESData_GlobalNodeOfSpecificLib)& Next() const;
+    //! Returns the attached Protocol stored in a given GlobalNode
+    Standard_EXPORT const Handle(IGESData_Protocol) & Protocol() const;
 
-  DEFINE_STANDARD_RTTI_INLINE(IGESData_GlobalNodeOfSpecificLib,Standard_Transient)
+    //! Returns the Next GlobalNode. If none is defined, returned
+    //! value is a Null Handle
+    Standard_EXPORT const Handle(IGESData_GlobalNodeOfSpecificLib) & Next() const;
+
+    DEFINE_STANDARD_RTTI_INLINE(IGESData_GlobalNodeOfSpecificLib, Standard_Transient)
 
 private:
-
-  Handle(IGESData_SpecificModule) themod;
-  Handle(IGESData_Protocol) theprot;
-  Handle(IGESData_GlobalNodeOfSpecificLib) thenext;
-
+    Handle(IGESData_SpecificModule) themod;
+    Handle(IGESData_Protocol) theprot;
+    Handle(IGESData_GlobalNodeOfSpecificLib) thenext;
 };
 
 #endif // _IGESData_GlobalNodeOfSpecificLib_HeaderFile

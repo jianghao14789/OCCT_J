@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(AIS_InteractiveObject)> AIS_ListOfInteractive;
 typedef NCollection_List<Handle(AIS_InteractiveObject)>::Iterator AIS_ListIteratorOfListOfInteractive;
 
-
 #endif

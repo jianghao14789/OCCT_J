@@ -26,7 +26,6 @@ class IGESData_IGESModel;
 class Interface_CopyTool;
 class TCollection_AsciiString;
 
-
 class IGESSelect_UpdateFileName;
 DEFINE_STANDARD_HANDLE(IGESSelect_UpdateFileName, IGESSelect_ModelModifier)
 
@@ -37,44 +36,25 @@ DEFINE_STANDARD_HANDLE(IGESSelect_UpdateFileName, IGESSelect_ModelModifier)
 //! is done
 //! The Selection of the Modifier is not used : it simply acts as
 //! a criterium to select IGES Files to touch up
-class IGESSelect_UpdateFileName : public IGESSelect_ModelModifier
-{
+class IGESSelect_UpdateFileName : public IGESSelect_ModelModifier {
 
 public:
+    //! Creates an UpdateFileName, which uses the system Date
+    Standard_EXPORT IGESSelect_UpdateFileName();
 
-  
-  //! Creates an UpdateFileName, which uses the system Date
-  Standard_EXPORT IGESSelect_UpdateFileName();
-  
-  //! Specific action : only <target> is used : the system Date
-  //! is set to Global Section Item n0 18.
-  Standard_EXPORT void Performing (IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel)& target, Interface_CopyTool& TC) const Standard_OVERRIDE;
-  
-  //! Returns a text which is
-  //! "Updates IGES File Name to new current one"
-  Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
+    //! Specific action : only <target> is used : the system Date
+    //! is set to Global Section Item n0 18.
+    Standard_EXPORT void Performing(IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel) & target,
+                                    Interface_CopyTool& TC) const Standard_OVERRIDE;
 
+    //! Returns a text which is
+    //! "Updates IGES File Name to new current one"
+    Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_UpdateFileName,IGESSelect_ModelModifier)
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_UpdateFileName, IGESSelect_ModelModifier)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_UpdateFileName_HeaderFile

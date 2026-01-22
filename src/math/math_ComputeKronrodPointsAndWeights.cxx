@@ -13,15 +13,13 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <math_Array1OfValueAndWeight.hxx>
 #include <math_ComputeKronrodPointsAndWeights.hxx>
 #include <math_EigenValuesSearcher.hxx>
 #include <Standard_ErrorHandler.hxx>
 
 #include <algorithm>
-math_ComputeKronrodPointsAndWeights::math_ComputeKronrodPointsAndWeights(const Standard_Integer Number)
-{
+math_ComputeKronrodPointsAndWeights::math_ComputeKronrodPointsAndWeights(const Standard_Integer Number) {
     myIsDone = Standard_False;
 
     try {
@@ -55,7 +53,7 @@ math_ComputeKronrodPointsAndWeights::math_ComputeKronrodPointsAndWeights(const S
         }
 
         // Initialization of temporary data structures.
-        Standard_Integer  aNd2 = Number / 2;
+        Standard_Integer aNd2 = Number / 2;
         Standard_Real* s = new Standard_Real[aNd2 + 2];
         Standard_Real* t = new Standard_Real[aNd2 + 2];
         Standard_Real* ss = s++;
@@ -74,10 +72,10 @@ math_ComputeKronrodPointsAndWeights::math_ComputeKronrodPointsAndWeights(const S
             bb[i] = aSubDiag(i);
         }
         Standard_Real* ptrtmp;
-        Standard_Real     u;
-        Standard_Integer  m;
-        Standard_Integer  k;
-        Standard_Integer  l;
+        Standard_Real u;
+        Standard_Integer m;
+        Standard_Integer k;
+        Standard_Integer l;
 
         Standard_Real* a = aa + 1;
         Standard_Real* b = bb + 1;
@@ -116,8 +114,7 @@ math_ComputeKronrodPointsAndWeights::math_ComputeKronrodPointsAndWeights(const S
             if (m % 2 == 0) {
                 k = m / 2;
                 a[k + n + 1] = a[k] + (s[j] - b[k + n + 1] * s[j + 1]) / t[j + 1];
-            }
-            else {
+            } else {
                 k = (m + 1) / 2;
                 b[k + n + 1] = s[j] / s[j + 1];
             }
@@ -163,18 +160,15 @@ math_ComputeKronrodPointsAndWeights::math_ComputeKronrodPointsAndWeights(const S
             }
             myIsDone = Standard_True;
         }
-    }
-    catch (Standard_Failure const&) {
+    } catch (Standard_Failure const&) {
     }
 }
 
-Standard_Boolean math_ComputeKronrodPointsAndWeights::IsDone() const
-{
+Standard_Boolean math_ComputeKronrodPointsAndWeights::IsDone() const {
     return myIsDone;
 }
 
-math_Vector math_ComputeKronrodPointsAndWeights::Points() const
-{
+math_Vector math_ComputeKronrodPointsAndWeights::Points() const {
     Standard_Integer Number = myPoints->Length();
     math_Vector thePoints(1, Number);
     for (Standard_Integer i = 1; i <= Number; i++)
@@ -183,8 +177,7 @@ math_Vector math_ComputeKronrodPointsAndWeights::Points() const
     return thePoints;
 }
 
-math_Vector math_ComputeKronrodPointsAndWeights::Weights() const
-{
+math_Vector math_ComputeKronrodPointsAndWeights::Weights() const {
     Standard_Integer Number = myWeights->Length();
     math_Vector theWeights(1, Number);
     for (Standard_Integer i = 1; i <= Number; i++)

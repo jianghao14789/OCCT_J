@@ -17,80 +17,68 @@
 #include <TCollection_HExtendedString.hxx>
 
 //=======================================================================
-//function : SetStatus
-//purpose  : 使用 C 字符串参数设置状态
+// function : SetStatus
+// purpose  : 使用 C 字符串参数设置状态
 //=======================================================================
 
-inline void Message_Algorithm::SetStatus(const Message_Status& theStat,
-    const Standard_CString theStr,
-    const Standard_Boolean noRepetitions)
-{
+inline void Message_Algorithm::SetStatus(const Message_Status& theStat, const Standard_CString theStr,
+                                         const Standard_Boolean noRepetitions) {
     SetStatus(theStat, new TCollection_HExtendedString(theStr), noRepetitions);
 }
 
 //=======================================================================
-//function : SetStatus
-//purpose  : 使用 AsciiString 参数设置状态
+// function : SetStatus
+// purpose  : 使用 AsciiString 参数设置状态
 //=======================================================================
 
-inline void Message_Algorithm::SetStatus(const Message_Status& theStat,
-    const TCollection_AsciiString& theStr,
-    const Standard_Boolean noRepetitions)
-{
+inline void Message_Algorithm::SetStatus(const Message_Status& theStat, const TCollection_AsciiString& theStr,
+                                         const Standard_Boolean noRepetitions) {
     SetStatus(theStat, new TCollection_HExtendedString(theStr), noRepetitions);
 }
 
 //=======================================================================
-//function : SetStatus
-//purpose  : 使用 HAsciiString Handle 参数设置状态
+// function : SetStatus
+// purpose  : 使用 HAsciiString Handle 参数设置状态
 //=======================================================================
 
-inline void Message_Algorithm::SetStatus(const Message_Status& theStat,
-    const Handle(TCollection_HAsciiString)& theStr,
-    const Standard_Boolean noRepetitions)
-{
+inline void Message_Algorithm::SetStatus(const Message_Status& theStat, const Handle(TCollection_HAsciiString) & theStr,
+                                         const Standard_Boolean noRepetitions) {
     SetStatus(theStat, new TCollection_HExtendedString(theStr), noRepetitions);
 }
 
 //=======================================================================
-//function : SetStatus
-//purpose  : 使用 ExtendedString 参数设置状态
+// function : SetStatus
+// purpose  : 使用 ExtendedString 参数设置状态
 //=======================================================================
 
-inline void Message_Algorithm::SetStatus(const Message_Status& theStat,
-    const TCollection_ExtendedString& theStr,
-    const Standard_Boolean noRepetitions)
-{
+inline void Message_Algorithm::SetStatus(const Message_Status& theStat, const TCollection_ExtendedString& theStr,
+                                         const Standard_Boolean noRepetitions) {
     SetStatus(theStat, new TCollection_HExtendedString(theStr), noRepetitions);
 }
 
 //=======================================================================
-//function : GetStatus
-//purpose  : 返回算法的执行状态
+// function : GetStatus
+// purpose  : 返回算法的执行状态
 //=======================================================================
 
-inline const Message_ExecStatus& Message_Algorithm::GetStatus() const
-{
+inline const Message_ExecStatus& Message_Algorithm::GetStatus() const {
     return myStatus;
 }
 
 //=======================================================================
-//function : ChangeStatus
-//purpose  : 返回对算法执行状态的可修改引用
+// function : ChangeStatus
+// purpose  : 返回对算法执行状态的可修改引用
 //=======================================================================
 
-inline Message_ExecStatus& Message_Algorithm::ChangeStatus()
-{
+inline Message_ExecStatus& Message_Algorithm::ChangeStatus() {
     return myStatus;
 }
 
 //=======================================================================
-//function : GetMessenger
-//purpose  : 获取当前的消息传递器
+// function : GetMessenger
+// purpose  : 获取当前的消息传递器
 //=======================================================================
 
-inline Handle(Message_Messenger) Message_Algorithm::GetMessenger() const
-{
+inline Handle(Message_Messenger) Message_Algorithm::GetMessenger() const {
     return myMessenger;
 }
-

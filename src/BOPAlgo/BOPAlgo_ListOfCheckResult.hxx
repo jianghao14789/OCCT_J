@@ -14,8 +14,8 @@
 #ifndef BOPAlgo_ListOfCheckResult_HeaderFile
 #define BOPAlgo_ListOfCheckResult_HeaderFile
 
-#include <NCollection_List.hxx>   
-#include <BOPAlgo_CheckResult.hxx>   
+#include <NCollection_List.hxx>
+#include <BOPAlgo_CheckResult.hxx>
 
 typedef NCollection_List<BOPAlgo_CheckResult> BOPAlgo_ListOfCheckResult;
 typedef BOPAlgo_ListOfCheckResult::Iterator BOPAlgo_ListIteratorOfListOfCheckResult;

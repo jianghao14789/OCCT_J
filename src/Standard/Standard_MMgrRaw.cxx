@@ -18,57 +18,49 @@
 #include <stdlib.h>
 
 //=======================================================================
-//function : Standard_MMgrRaw
-//purpose  : 
+// function : Standard_MMgrRaw
+// purpose  :
 //=======================================================================
 
-Standard_MMgrRaw::Standard_MMgrRaw(const Standard_Boolean aClear)
-{
+Standard_MMgrRaw::Standard_MMgrRaw(const Standard_Boolean aClear) {
     myClear = aClear;
 }
 
 //=======================================================================
-//function : Allocate
-//purpose  : 
+// function : Allocate
+// purpose  :
 //=======================================================================
 
-Standard_Address Standard_MMgrRaw::Allocate(const Standard_Size aSize)
-{
+Standard_Address Standard_MMgrRaw::Allocate(const Standard_Size aSize) {
     // the size is rounded up to 4 since some OCC classes
     // (e.g. TCollection_AsciiString) assume memory to be double word-aligned
     const Standard_Size aRoundSize = (aSize + 3) & ~0x3;
     // we use ?: operator instead of if() since it is faster :-)
-    Standard_Address aPtr = (myClear ? calloc(aRoundSize, sizeof(char)) :
-        malloc(aRoundSize));
-    if (!aPtr)
-        throw Standard_OutOfMemory("Standard_MMgrRaw::Allocate(): malloc failed");
+    Standard_Address aPtr = (myClear ? calloc(aRoundSize, sizeof(char)) : malloc(aRoundSize));
+    if (!aPtr) throw Standard_OutOfMemory("Standard_MMgrRaw::Allocate(): malloc failed");
     return aPtr;
 }
 
 //=======================================================================
-//function : Free
-//purpose  : 
+// function : Free
+// purpose  :
 //=======================================================================
 
-void Standard_MMgrRaw::Free(Standard_Address theStorage)
-{
+void Standard_MMgrRaw::Free(Standard_Address theStorage) {
     free(theStorage);
 }
 
 //=======================================================================
-//function : Reallocate
-//purpose  : 
+// function : Reallocate
+// purpose  :
 //=======================================================================
 
-Standard_Address Standard_MMgrRaw::Reallocate(Standard_Address theStorage,
-    const Standard_Size theSize)
-{
+Standard_Address Standard_MMgrRaw::Reallocate(Standard_Address theStorage, const Standard_Size theSize) {
     // the size is rounded up to 4 since some OCC classes
     // (e.g. TCollection_AsciiString) assume memory to be double word-aligned
     const Standard_Size aRoundSize = (theSize + 3) & ~0x3;
     Standard_Address newStorage = (Standard_Address)realloc(theStorage, aRoundSize);
-    if (!newStorage)
-        throw Standard_OutOfMemory("Standard_MMgrRaw::Reallocate(): realloc failed");
+    if (!newStorage) throw Standard_OutOfMemory("Standard_MMgrRaw::Reallocate(): realloc failed");
     // Note that it is not possible to ensure that additional memory
     // allocated by realloc will be cleared (so as to satisfy myClear mode);
     // in order to do that we would need using memset...

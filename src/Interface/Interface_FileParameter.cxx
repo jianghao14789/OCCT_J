@@ -11,88 +11,75 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Interface_FileParameter.hxx>
 #include <TCollection_AsciiString.hxx>
 
 //=======================================================================
-//function : Interface_FileParameter
-//purpose  : 
+// function : Interface_FileParameter
+// purpose  :
 //=======================================================================
-Interface_FileParameter::Interface_FileParameter ()
-{  
-thetype = Interface_ParamMisc;  thenum = 0;  
+Interface_FileParameter::Interface_FileParameter() {
+    thetype = Interface_ParamMisc;
+    thenum = 0;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-void Interface_FileParameter::Init(const TCollection_AsciiString& val, 
-				   const Interface_ParamType typ)
-{
-  theval  = new char[val.Length()+1];
-  strcpy(theval,val.ToCString());
-  thetype = typ;
-  thenum  = 0;
+void Interface_FileParameter::Init(const TCollection_AsciiString& val, const Interface_ParamType typ) {
+    theval = new char[val.Length() + 1];
+    strcpy(theval, val.ToCString());
+    thetype = typ;
+    thenum = 0;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-void Interface_FileParameter::Init (const Standard_CString val, 
-				    const Interface_ParamType typ)
-{
-  theval  = (Standard_PCharacter)val;  // Principe : Allocation geree par contenant (ParamSet)
-  thetype = typ;
-  thenum  = 0;
+void Interface_FileParameter::Init(const Standard_CString val, const Interface_ParamType typ) {
+    theval = (Standard_PCharacter)val; // Principe : Allocation geree par contenant (ParamSet)
+    thetype = typ;
+    thenum = 0;
 }
 //=======================================================================
-//function : CValue
-//purpose  : 
+// function : CValue
+// purpose  :
 //=======================================================================
-Standard_CString  Interface_FileParameter::CValue () const
-{
-  return theval;  
+Standard_CString Interface_FileParameter::CValue() const {
+    return theval;
 }
 //=======================================================================
-//function : ParamType
-//purpose  : 
+// function : ParamType
+// purpose  :
 //=======================================================================
-Interface_ParamType Interface_FileParameter::ParamType () const
-{
-  return thetype;  
+Interface_ParamType Interface_FileParameter::ParamType() const {
+    return thetype;
 }
 //=======================================================================
-//function : SetEntityNumber
-//purpose  : 
+// function : SetEntityNumber
+// purpose  :
 //=======================================================================
-void Interface_FileParameter::SetEntityNumber (const Standard_Integer num)
-{
-  thenum = num;  
+void Interface_FileParameter::SetEntityNumber(const Standard_Integer num) {
+    thenum = num;
 }
 //=======================================================================
-//function : EntityNumber
-//purpose  : 
+// function : EntityNumber
+// purpose  :
 //=======================================================================
-Standard_Integer Interface_FileParameter::EntityNumber () const
-{
-  return thenum;  
+Standard_Integer Interface_FileParameter::EntityNumber() const {
+    return thenum;
 }
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-void Interface_FileParameter::Clear ()
-{
-  theval = NULL; 
-}  // delete theval;  pas si gere par ParamSet
+void Interface_FileParameter::Clear() {
+    theval = NULL;
+} // delete theval;  pas si gere par ParamSet
 //=======================================================================
-//function : Destroy
-//purpose  : 
+// function : Destroy
+// purpose  :
 //=======================================================================
-void Interface_FileParameter::Destroy ()  
-{
-}
-
+void Interface_FileParameter::Destroy() {}

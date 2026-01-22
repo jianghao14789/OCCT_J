@@ -20,5 +20,4 @@
 
 typedef NCollection_Sequence<Standard_Boolean> TColStd_SequenceOfBoolean;
 
-
 #endif

@@ -24,25 +24,20 @@ static int ExprIntrp_degree;
 extern char* ExprIntrptext;
 #else
 extern "C" char* ExprIntrptext;
-#endif  // _WIN32
+#endif // _WIN32
 
-
-extern "C" void ExprIntrp_SetResult()
-{
+extern "C" void ExprIntrp_SetResult() {
     ExprIntrp_curres = ExprIntrptext;
 }
 
-extern "C" void ExprIntrp_SetDegree()
-{
+extern "C" void ExprIntrp_SetDegree() {
     ExprIntrp_degree = (int)strlen(ExprIntrptext);
 }
 
-int ExprIntrp_GetDegree()
-{
+int ExprIntrp_GetDegree() {
     return ExprIntrp_degree;
 }
 
-const TCollection_AsciiString& ExprIntrp_GetResult()
-{
+const TCollection_AsciiString& ExprIntrp_GetResult() {
     return ExprIntrp_curres;
 }

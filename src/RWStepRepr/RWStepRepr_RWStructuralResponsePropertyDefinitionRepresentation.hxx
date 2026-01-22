@@ -27,48 +27,30 @@ class StepRepr_StructuralResponsePropertyDefinitionRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for StructuralResponsePropertyDefinitionRepresentation
-class RWStepRepr_RWStructuralResponsePropertyDefinitionRepresentation 
-{
+class RWStepRepr_RWStructuralResponsePropertyDefinitionRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWStructuralResponsePropertyDefinitionRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWStructuralResponsePropertyDefinitionRepresentation();
-  
-  //! Reads StructuralResponsePropertyDefinitionRepresentation
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_StructuralResponsePropertyDefinitionRepresentation)& ent) const;
-  
-  //! Writes StructuralResponsePropertyDefinitionRepresentation
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_StructuralResponsePropertyDefinitionRepresentation)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_StructuralResponsePropertyDefinitionRepresentation)& ent, Interface_EntityIterator& iter) const;
+    //! Reads StructuralResponsePropertyDefinitionRepresentation
+    Standard_EXPORT void
+    ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num, Handle(Interface_Check) & ach,
+             const Handle(StepRepr_StructuralResponsePropertyDefinitionRepresentation) & ent) const;
 
+    //! Writes StructuralResponsePropertyDefinitionRepresentation
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_StructuralResponsePropertyDefinitionRepresentation) &
+                                       ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_StructuralResponsePropertyDefinitionRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWStructuralResponsePropertyDefinitionRepresentation_HeaderFile

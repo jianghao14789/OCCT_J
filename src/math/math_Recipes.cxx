@@ -12,11 +12,11 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
-//#endif
+// #endif
 
 #include <cmath>
 
@@ -31,28 +31,26 @@
 #include <Message_ProgressScope.hxx>
 
 namespace {
-    static inline Standard_Real PYTHAG(const Standard_Real a, const Standard_Real b)
-    {
-        Standard_Real at = fabs(a), bt = fabs(b), ct = 0.;
-        if (at > bt) {
-            ct = bt / at;
-            ct = at * sqrt(1.0 + ct * ct);
-        }
-        else if (bt) {
-            ct = at / bt;
-            ct = bt * sqrt(1.0 + ct * ct);
-        }
-        return ct;
+static inline Standard_Real PYTHAG(const Standard_Real a, const Standard_Real b) {
+    Standard_Real at = fabs(a), bt = fabs(b), ct = 0.;
+    if (at > bt) {
+        ct = bt / at;
+        ct = at * sqrt(1.0 + ct * ct);
+    } else if (bt) {
+        ct = at / bt;
+        ct = bt * sqrt(1.0 + ct * ct);
     }
+    return ct;
 }
+} // namespace
 
-#define SIGN(a,b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
+#define SIGN(a, b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
 
-
-#define ROTATE(a,i,j,k,l) g=a(i,j);\
-                          h=a(k,l);\
-                          a(i,j)=g-s*(h+g*tau);\
-                          a(k,l)=h+s*(g-h*tau);
+#define ROTATE(a, i, j, k, l)                                                                                          \
+    g = a(i, j);                                                                                                       \
+    h = a(k, l);                                                                                                       \
+    a(i, j) = g - s * (h + g * tau);                                                                                   \
+    a(k, l) = h + s * (g - h * tau);
 
 #define M 714025
 #define IA 1366
@@ -110,16 +108,14 @@ Standard_Integer Jacobi(math_Matrix& a, math_Vector& d, math_Matrix& v, Standard
         }
         if (i < 4) {
             tresh = 0.2 * sm / (n * n);
-        }
-        else {
+        } else {
             tresh = 0.0;
         }
         for (ip = 1; ip < n; ip++) {
             for (iq = ip + 1; iq <= n; iq++) {
                 g = 100.0 * fabs(a(ip, iq));
-                if (i > 4 &&
-                    fabs(d(ip)) + g == fabs(d(ip)) &&
-                    fabs(d(iq)) + g == fabs(d(iq))) a(ip, iq) = 0.0;
+                if (i > 4 && fabs(d(ip)) + g == fabs(d(ip)) && fabs(d(iq)) + g == fabs(d(iq)))
+                    a(ip, iq) = 0.0;
                 else if (fabs(a(ip, iq)) > tresh) {
                     h = d(iq) - d(ip);
                     if (fabs(h) + g == fabs(h))
@@ -164,12 +160,8 @@ Standard_Integer Jacobi(math_Matrix& a, math_Vector& d, math_Matrix& v, Standard
     return math_Status_NoConvergence;
 }
 
-Standard_Integer LU_Decompose(math_Matrix& a,
-    math_IntegerVector& indx,
-    Standard_Real& d,
-    math_Vector& vv,
-    Standard_Real    TINY,
-    const Message_ProgressRange& theProgress) {
+Standard_Integer LU_Decompose(math_Matrix& a, math_IntegerVector& indx, Standard_Real& d, math_Vector& vv,
+                              Standard_Real TINY, const Message_ProgressRange& theProgress) {
 
     Standard_Integer i, imax = 0, j, k;
     Standard_Real big, dum, sum, temp;
@@ -203,8 +195,7 @@ Standard_Integer LU_Decompose(math_Matrix& a,
                 sum -= a(i, k) * a(k, j);
             a(i, j) = sum;
             // Note that comparison is made so as to have imax updated even if argument is NAN, Inf or IND, see #25559
-            if ((dum = vv(i) * fabs(sum)) < big)
-            {
+            if ((dum = vv(i) * fabs(sum)) < big) {
                 continue;
             }
             big = dum;
@@ -230,27 +221,21 @@ Standard_Integer LU_Decompose(math_Matrix& a,
         }
     }
 
-    if (j <= n)
-    {
+    if (j <= n) {
         return math_Status_UserAborted;
     }
 
     return math_Status_OK;
 }
 
-Standard_Integer LU_Decompose(math_Matrix& a,
-    math_IntegerVector& indx,
-    Standard_Real& d,
-    Standard_Real    TINY,
-    const Message_ProgressRange& theProgress) {
+Standard_Integer LU_Decompose(math_Matrix& a, math_IntegerVector& indx, Standard_Real& d, Standard_Real TINY,
+                              const Message_ProgressRange& theProgress) {
 
     math_Vector vv(1, a.RowNumber());
     return LU_Decompose(a, indx, d, vv, TINY, theProgress);
 }
 
-void LU_Solve(const math_Matrix& a,
-    const math_IntegerVector& indx,
-    math_Vector& b) {
+void LU_Solve(const math_Matrix& a, const math_IntegerVector& indx, math_Vector& b) {
 
     Standard_Integer i, ii = 0, ip, j;
     Standard_Real sum;
@@ -264,7 +249,8 @@ void LU_Solve(const math_Matrix& a,
         if (ii)
             for (j = ii; j < i; j++)
                 sum -= a(i, j) * b(j + nblow);
-        else if (sum) ii = i;
+        else if (sum)
+            ii = i;
         b(i + nblow) = sum;
     }
     for (i = n; i >= 1; i--) {
@@ -304,19 +290,13 @@ Standard_Integer LU_Invert(math_Matrix& a) {
     return Error;
 }
 
-Standard_Integer SVD_Decompose(math_Matrix& a,
-    math_Vector& w,
-    math_Matrix& v) {
+Standard_Integer SVD_Decompose(math_Matrix& a, math_Vector& w, math_Matrix& v) {
 
     math_Vector rv1(1, a.ColNumber());
     return SVD_Decompose(a, w, v, rv1);
 }
 
-
-Standard_Integer SVD_Decompose(math_Matrix& a,
-    math_Vector& w,
-    math_Matrix& v,
-    math_Vector& rv1) {
+Standard_Integer SVD_Decompose(math_Matrix& a, math_Vector& w, math_Matrix& v, math_Vector& rv1) {
 
     Standard_Integer flag, i, its, j, jj, k, l = 0, nm = 0;
     Standard_Real ar, aw, aik, aki, c, f, h, s, x, y, z;
@@ -331,8 +311,10 @@ Standard_Integer SVD_Decompose(math_Matrix& a,
         if (i <= m) {
             for (k = i; k <= m; k++) {
                 aki = a(k, i);
-                if (aki > 0) scale += aki;
-                else         scale -= aki;
+                if (aki > 0)
+                    scale += aki;
+                else
+                    scale -= aki;
             }
             if (scale) {
                 for (k = i; k <= m; k++) {
@@ -361,8 +343,10 @@ Standard_Integer SVD_Decompose(math_Matrix& a,
         if (i <= m && i != n) {
             for (k = l; k <= n; k++) {
                 aik = a(i, k);
-                if (aik > 0) scale += aik;
-                else         scale -= aik;
+                if (aik > 0)
+                    scale += aik;
+                else
+                    scale -= aik;
             }
             if (scale) {
                 for (k = l; k <= n; k++) {
@@ -390,8 +374,10 @@ Standard_Integer SVD_Decompose(math_Matrix& a,
         aw = w(i);
         if (aw < 0) aw = -aw;
         ar = rv1(i);
-        if (ar > 0) ar = aw + ar;
-        else        ar = aw - ar;
+        if (ar > 0)
+            ar = aw + ar;
+        else
+            ar = aw - ar;
         if (anorm < ar) anorm = ar;
     }
     for (i = n; i >= 1; i--) {
@@ -416,8 +402,9 @@ Standard_Integer SVD_Decompose(math_Matrix& a,
     for (i = n; i >= 1; i--) {
         l = i + 1;
         g = w(i);
-        if (i < n) for (j = l; j <= n; j++)
-            a(i, j) = 0.0;
+        if (i < n)
+            for (j = l; j <= n; j++)
+                a(i, j) = 0.0;
         if (g) {
             g = 1.0 / g;
             if (i != n) {
@@ -431,8 +418,7 @@ Standard_Integer SVD_Decompose(math_Matrix& a,
             }
             for (j = i; j <= m; j++)
                 a(j, i) *= g;
-        }
-        else {
+        } else {
             for (j = i; j <= m; j++)
                 a(j, i) = 0.0;
         }
@@ -536,11 +522,7 @@ Standard_Integer SVD_Decompose(math_Matrix& a,
     return math_Status_OK;
 }
 
-void SVD_Solve(const math_Matrix& u,
-    const math_Vector& w,
-    const math_Matrix& v,
-    const math_Vector& b,
-    math_Vector& x) {
+void SVD_Solve(const math_Matrix& u, const math_Vector& w, const math_Matrix& v, const math_Vector& b, math_Vector& x) {
 
     Standard_Integer jj, j, i;
     Standard_Real s;
@@ -566,9 +548,7 @@ void SVD_Solve(const math_Matrix& u,
     }
 }
 
-Standard_Integer DACTCL_Decompose(math_Vector& a,
-    const math_IntegerVector& indx,
-    const Standard_Real MinPivot) {
+Standard_Integer DACTCL_Decompose(math_Vector& a, const math_IntegerVector& indx, const Standard_Real MinPivot) {
 
     Standard_Integer i, j, Neq = indx.Length();
     Standard_Integer jr, jd, jh, is, ie, k, ir, id, ih, mh;
@@ -619,24 +599,19 @@ Standard_Integer DACTCL_Decompose(math_Vector& a,
                 id = indx(k + i);
                 aa = a(id);
                 if (aa < 0) aa = -aa;
-                if (aa <= MinPivot)
-                    return math_Status_SingularMatrix;
+                if (aa <= MinPivot) return math_Status_SingularMatrix;
                 d = a(i);
                 a(i) = d / a(id);
                 a(jd) = a(jd) - d * a(i);
             }
-
         }
         jr = jd;
     }
     return math_Status_OK;
 }
 
-
-Standard_Integer DACTCL_Solve(const math_Vector& a,
-    math_Vector& b,
-    const math_IntegerVector& indx,
-    const Standard_Real MinPivot) {
+Standard_Integer DACTCL_Solve(const math_Vector& a, math_Vector& b, const math_IntegerVector& indx,
+                              const Standard_Real MinPivot) {
 
     Standard_Integer i, j, Neq = indx.Length();
     Standard_Integer jr, jd, jh, is, k, id;
@@ -669,11 +644,9 @@ Standard_Integer DACTCL_Solve(const math_Vector& a,
         id = indx(i);
         aa = a(id);
         if (aa < 0) aa = -aa;
-        if (aa <= MinPivot)
-            return math_Status_SingularMatrix;
+        if (aa <= MinPivot) return math_Status_SingularMatrix;
         b(i) = b(i) / a(id);
     }
-
 
     // Substitution arriere:
     // =====================
@@ -691,6 +664,4 @@ Standard_Integer DACTCL_Solve(const math_Vector& a,
         jd = jr;
     }
     return math_Status_OK;
-
 }
-

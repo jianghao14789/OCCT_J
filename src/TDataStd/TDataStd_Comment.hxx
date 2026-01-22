@@ -24,41 +24,38 @@ DEFINE_STANDARD_HANDLE(TDataStd_Comment, TDataStd_GenericExtString)
 
 //! Comment attribute. may be  associated to any label
 //! to store user comment.
-class TDataStd_Comment : public TDataStd_GenericExtString
-{
+class TDataStd_Comment : public TDataStd_GenericExtString {
 
 public:
+    //! class methods
+    //! =============
+    //! Returns the GUID for comments.
+    Standard_EXPORT static const Standard_GUID& GetID();
 
-  
-  //! class methods
-  //! =============
-  //! Returns the GUID for comments.
-  Standard_EXPORT static const Standard_GUID& GetID();
-  
-  //! Find, or create  a   Comment attribute.  the  Comment
-  //! attribute is returned.
-  Standard_EXPORT static Handle(TDataStd_Comment) Set (const TDF_Label& label);
-  
-  //! Finds, or creates a Comment attribute and sets the string.
-  //! the Comment attribute is returned.
-  //! Comment methods
-  //! ============
-  Standard_EXPORT static Handle(TDataStd_Comment) Set (const TDF_Label& label, const TCollection_ExtendedString& string);
-  
-  Standard_EXPORT TDataStd_Comment();
+    //! Find, or create  a   Comment attribute.  the  Comment
+    //! attribute is returned.
+    Standard_EXPORT static Handle(TDataStd_Comment) Set(const TDF_Label& label);
 
-  Standard_EXPORT void Set (const TCollection_ExtendedString& S) Standard_OVERRIDE;
+    //! Finds, or creates a Comment attribute and sets the string.
+    //! the Comment attribute is returned.
+    //! Comment methods
+    //! ============
+    Standard_EXPORT static Handle(TDataStd_Comment)
+        Set(const TDF_Label& label, const TCollection_ExtendedString& string);
 
-  //! Sets the explicit user defined GUID  to the attribute.
-  Standard_EXPORT void SetID (const Standard_GUID& guid) Standard_OVERRIDE;
+    Standard_EXPORT TDataStd_Comment();
 
-  //! Sets default GUID for the attribute.
-  Standard_EXPORT void SetID() Standard_OVERRIDE;
+    Standard_EXPORT void Set(const TCollection_ExtendedString& S) Standard_OVERRIDE;
 
-  Standard_EXPORT virtual Standard_OStream& Dump (Standard_OStream& anOS) const Standard_OVERRIDE;
-  
-  DEFINE_DERIVED_ATTRIBUTE(TDataStd_Comment, TDataStd_GenericExtString)
+    //! Sets the explicit user defined GUID  to the attribute.
+    Standard_EXPORT void SetID(const Standard_GUID& guid) Standard_OVERRIDE;
 
+    //! Sets default GUID for the attribute.
+    Standard_EXPORT void SetID() Standard_OVERRIDE;
+
+    Standard_EXPORT virtual Standard_OStream& Dump(Standard_OStream& anOS) const Standard_OVERRIDE;
+
+    DEFINE_DERIVED_ATTRIBUTE(TDataStd_Comment, TDataStd_GenericExtString)
 };
 
 #endif // _TDataStd_Comment_HeaderFile

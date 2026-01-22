@@ -101,47 +101,27 @@
 #include <TopTools_MapIteratorOfMapOfShape.hxx>
 #include <TopTools_MapOfShape.hxx>
 
-static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo&,
-    Draft_IndexedDataMapOfEdgeEdgeInfo&,
-    const TopoDS_Vertex&,
-    Draft_VertexInfo&,
-    GeomAdaptor_Curve&,
-    GeomAdaptor_Surface&);
+static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo&, Draft_IndexedDataMapOfEdgeEdgeInfo&,
+                               const TopoDS_Vertex&, Draft_VertexInfo&, GeomAdaptor_Curve&, GeomAdaptor_Surface&);
 
-static Standard_Real Parameter(const Handle(Geom_Curve)&,
-    const gp_Pnt&,
-    Standard_Integer&);
+static Standard_Real Parameter(const Handle(Geom_Curve) &, const gp_Pnt&, Standard_Integer&);
 
-static Standard_Real SmartParameter(Draft_EdgeInfo&,
-    const Standard_Real EdgeTol,
-    const gp_Pnt&,
-    const Standard_Integer,
-    const Handle(Geom_Surface)&,
-    const Handle(Geom_Surface)&);
+static Standard_Real SmartParameter(Draft_EdgeInfo&, const Standard_Real EdgeTol, const gp_Pnt&, const Standard_Integer,
+                                    const Handle(Geom_Surface) &, const Handle(Geom_Surface) &);
 
-static TopAbs_Orientation Orientation(const TopoDS_Shape&,
-    const TopoDS_Face&);
+static TopAbs_Orientation Orientation(const TopoDS_Shape&, const TopoDS_Face&);
 
-static Standard_Boolean FindRotation(const gp_Pln&,
-    const TopAbs_Orientation,
-    const gp_Dir&,
-    const Standard_Real,
-    const gp_Pln&,
-    gp_Ax1&,
-    Standard_Real&);
-
+static Standard_Boolean FindRotation(const gp_Pln&, const TopAbs_Orientation, const gp_Dir&, const Standard_Real,
+                                     const gp_Pln&, gp_Ax1&, Standard_Real&);
 
 //=======================================================================
-//function : InternalAdd
-//purpose  : 
+// function : InternalAdd
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
-    const gp_Dir& Direction,
-    const Standard_Real Angle,
-    const gp_Pln& NeutralPlane,
-    const Standard_Boolean Flag)
-{
+Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F, const gp_Dir& Direction,
+                                                 const Standard_Real Angle, const gp_Pln& NeutralPlane,
+                                                 const Standard_Boolean Flag) {
 
     if (myFMap.Contains(F)) {
         return (badShape.IsNull());
@@ -149,8 +129,8 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
 
     TopAbs_Orientation oris = Orientation(myShape, F);
     TopLoc_Location Lo;
-    //gp_Dir NewDirection = Direction;
-    //Standard_Real NewAngle = Angle;
+    // gp_Dir NewDirection = Direction;
+    // Standard_Real NewAngle = Angle;
     Handle(Geom_Surface) S = BRep_Tool::Surface(F, Lo);
     S = Handle(Geom_Surface)::DownCast(S->Transformed(Lo.Transformation()));
     if (S->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
@@ -162,22 +142,17 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
     Standard_Boolean postponed = (Flag == Standard_False);
     if (postponed) {
         Handle(Standard_Type) typS = S->DynamicType();
-        if (typS == STANDARD_TYPE(Geom_CylindricalSurface) ||
-            typS == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
+        if (typS == STANDARD_TYPE(Geom_CylindricalSurface) || typS == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
             gp_Circ Cir;
             if (typS == STANDARD_TYPE(Geom_CylindricalSurface)) {
-                gp_Cylinder cyl =
-                    Handle(Geom_CylindricalSurface)::DownCast(S)->Cylinder();
+                gp_Cylinder cyl = Handle(Geom_CylindricalSurface)::DownCast(S)->Cylinder();
                 gp_Ax1 axcyl = cyl.Axis();
                 Cir = ElSLib::CylinderVIso(cyl.Position(), cyl.Radius(), 0.);
                 gp_Vec VV(cyl.Location(), NeutralPlane.Location());
                 Cir.Translate(VV.Dot(axcyl.Direction()) * axcyl.Direction());
-            }
-            else {
-                Handle(Geom_Curve) Cbas =
-                    Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S)->BasisCurve();
-                gp_Dir theDirextr =
-                    Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S)->Direction();
+            } else {
+                Handle(Geom_Curve) Cbas = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S)->BasisCurve();
+                gp_Dir theDirextr = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S)->Direction();
 
                 if (Cbas->IsKind(STANDARD_TYPE(Geom_TrimmedCurve))) {
                     Cbas = Handle(Geom_TrimmedCurve)::DownCast(Cbas)->BasisCurve();
@@ -190,17 +165,14 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
                         errStat = Draft_FaceRecomputation;
                         return Standard_False;
                     }
-                }
-                else {
+                } else {
                     badShape = F;
                     errStat = Draft_FaceRecomputation;
                     return Standard_False;
                 }
 
                 gp_Ax3 Axis = NeutralPlane.Position();
-                Standard_Real L =
-                    gp_Vec(Cir.Location(), Axis.Location()).
-                    Dot(Axis.Direction());
+                Standard_Real L = gp_Vec(Cir.Location(), Axis.Location()).Dot(Axis.Direction());
                 Standard_Real Cos = theDirextr.Dot(Axis.Direction());
                 gp_Vec VV = (L / Cos) * theDirextr;
                 Cir.Translate(VV);
@@ -208,12 +180,10 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
 
             theCircle = new Geom_Circle(Cir);
 
-        }
-        else {
+        } else {
             postponed = Standard_False;
         }
     }
-
 
     if (!postponed) {
         NewS = NewSurface(S, oris, Direction, Angle, NeutralPlane);
@@ -223,19 +193,16 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
             return Standard_False;
         }
         // To avoid some problems with infinite restrictions
-        const Handle(Standard_Type)& typs = NewS->DynamicType();
-        if (typs == STANDARD_TYPE(Geom_CylindricalSurface) ||
-            typs == STANDARD_TYPE(Geom_ConicalSurface)) {
+        const Handle(Standard_Type) & typs = NewS->DynamicType();
+        if (typs == STANDARD_TYPE(Geom_CylindricalSurface) || typs == STANDARD_TYPE(Geom_ConicalSurface)) {
             Standard_Real umin, umax, vmin, vmax;
             BRepTools::UVBounds(F, umin, umax, vmin, vmax);
-            if (!Precision::IsNegativeInfinite(vmin) &&
-                !Precision::IsPositiveInfinite(vmax)) {
+            if (!Precision::IsNegativeInfinite(vmin) && !Precision::IsPositiveInfinite(vmax)) {
                 Standard_Real deltav = 10. * (vmax - vmin);
                 if (typs == STANDARD_TYPE(Geom_CylindricalSurface)) {
                     vmin = vmin - deltav;
                     vmax = vmax + deltav;
-                }
-                else {
+                } else {
                     gp_Cone Co = Handle(Geom_ConicalSurface)::DownCast(NewS)->Cone();
                     Standard_Real Vapex = -Co.RefRadius() / Sin(Co.SemiAngle());
                     if (vmin < Vapex) { // vmax should not exceed Vapex
@@ -244,20 +211,17 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
                             vmin = vmin - 10. * (vmax - vmin);
                             // JAG debug to avoid apex
                             vmax = vmax - Precision::Confusion();
-                        }
-                        else {
+                        } else {
                             vmin = vmin - deltav;
                             vmax = vmax + deltav;
                         }
-                    }
-                    else { // Vapex <= vmin < vmax
+                    } else { // Vapex <= vmin < vmax
                         if (vmin - deltav < Vapex) {
                             vmin = Vapex;
                             vmax = vmax + 10. * (vmax - vmin);
                             // JAG debug to avoid apex
                             vmin = vmin + Precision::Confusion();
-                        }
-                        else {
+                        } else {
                             vmin = vmin - deltav;
                             vmax = vmax + deltav;
                         }
@@ -285,12 +249,11 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
             Standard_Boolean addedg = Standard_False;
             Standard_Boolean addface = Standard_False;
             TopoDS_Face OtherF;
-            //if (BRep_Tool::IsClosed(edg,F)) {
+            // if (BRep_Tool::IsClosed(edg,F)) {
             if (BRepTools::IsReallyClosed(edg, F)) {
                 addedg = Standard_True;
                 addface = Standard_False;
-            }
-            else {
+            } else {
                 // Find the other face containing the edge.
                 TopTools_ListIteratorOfListOfShape it;
                 it.Initialize(myEFMap.FindFromKey(edg));
@@ -307,13 +270,10 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
                 if (nbother >= 2) {
                     badShape = edg;
                     errStat = Draft_EdgeRecomputation;
-                }
-                else if (!OtherF.IsNull() &&
-                    BRep_Tool::Continuity(edg, F, OtherF) >= GeomAbs_G1) {
+                } else if (!OtherF.IsNull() && BRep_Tool::Continuity(edg, F, OtherF) >= GeomAbs_G1) {
                     addface = Standard_True;
                     addedg = Standard_True;
-                }
-                else if (nbother == 0) {
+                } else if (nbother == 0) {
                     //	    badShape = F;
                 }
             }
@@ -334,25 +294,22 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
                     EInf.Add(F);
                     EInf.Add(OtherF);
 
-                    // find fixed point 
+                    // find fixed point
                     Handle(Geom_Line) aLocalGeom = Handle(Geom_Line)::DownCast(C);
                     if (aLocalGeom.IsNull()) {
                         badShape = edg;
                         errStat = Draft_EdgeRecomputation;
-                    }
-                    else {
+                    } else {
                         gp_Lin lin = aLocalGeom->Lin();
                         IntAna_IntConicQuad ilipl(lin, NeutralPlane, Precision::Angular());
                         if (ilipl.IsDone() && ilipl.NbPoints() != 0) {
                             EInf.Tangent(ilipl.Point(1));
-                        }
-                        else {
+                        } else {
                             badShape = edg;
                             errStat = Draft_EdgeRecomputation;
                         }
                     }
-                }
-                else {
+                } else {
                     NewC = NewCurve(C, S, oris, Direction, Angle, NeutralPlane, Flag);
                     if (NewC.IsNull()) {
                         badShape = edg;
@@ -370,10 +327,8 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
                 if (addface) {
                     Standard_Boolean Fl = Flag;
                     Handle(Geom_Surface) alocalSurface = BRep_Tool::Surface(OtherF, Lo);
-                    if (alocalSurface->DynamicType() ==
-                        STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                        alocalSurface = Handle(Geom_RectangularTrimmedSurface)::
-                            DownCast(alocalSurface)->BasisSurface();
+                    if (alocalSurface->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
+                        alocalSurface = Handle(Geom_RectangularTrimmedSurface)::DownCast(alocalSurface)->BasisSurface();
                     }
                     Handle(Standard_Type) typS = alocalSurface->DynamicType();
                     if (typS == STANDARD_TYPE(Geom_CylindricalSurface) ||
@@ -382,8 +337,7 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
                             if (Flag == Standard_False && !postponed) {
                                 myFMap.RemoveKey(F);
                                 TopTools_MapIteratorOfMapOfShape itm(MapOfE);
-                                for (; itm.More(); itm.Next())
-                                {
+                                for (; itm.More(); itm.Next()) {
                                     myEMap.RemoveKey(TopoDS::Edge(itm.Key()));
                                 }
                             }
@@ -398,14 +352,12 @@ Standard_Boolean Draft_Modification::InternalAdd(const TopoDS_Face& F,
     return (badShape.IsNull());
 }
 
-
 //=======================================================================
-//function : Propagate
-//purpose  : 
+// function : Propagate
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Draft_Modification::Propagate()
-{
+Standard_Boolean Draft_Modification::Propagate() {
 
     if (!badShape.IsNull()) return Standard_False;
 
@@ -416,8 +368,7 @@ Standard_Boolean Draft_Modification::Propagate()
     TopExp_Explorer editer;
     TopExp_Explorer vtiter;
 
-    for (Standard_Integer i = 1; i <= myFMap.Extent(); i++)
-    {
+    for (Standard_Integer i = 1; i <= myFMap.Extent(); i++) {
         const TopoDS_Face& Fc = myFMap.FindKey(i);
 
         // Exploration of the edges of the face
@@ -448,14 +399,12 @@ Standard_Boolean Draft_Modification::Propagate()
         }
     }
 
-
     TopExp_Explorer anc;
     Standard_Boolean found;
 
     // Set edges containing modified vertices.
 
-    for (Standard_Integer i = 1; i <= myVMap.Extent(); i++)
-    {
+    for (Standard_Integer i = 1; i <= myVMap.Extent(); i++) {
         const TopoDS_Vertex& Vt = myVMap.FindKey(i);
 
         // Exploration of the ancestors of the vertex
@@ -484,10 +433,8 @@ Standard_Boolean Draft_Modification::Propagate()
         }
     }
 
-
     // Set faces containing modified edges
-    for (Standard_Integer i = 1; i <= myEMap.Extent(); i++)
-    {
+    for (Standard_Integer i = 1; i <= myEMap.Extent(); i++) {
         const TopoDS_Edge& Ed = myEMap.FindKey(i);
         TopTools_ListIteratorOfListOfShape it;
         for (it.Initialize(myEFMap.FindFromKey(Ed)); it.More(); it.Next()) {
@@ -495,16 +442,13 @@ Standard_Boolean Draft_Modification::Propagate()
             if (!myFMap.Contains(F)) {
                 TopLoc_Location L;
                 Handle(Geom_Surface) S = BRep_Tool::Surface(F, L);
-                Handle(Geom_Surface) NewS =
-                    Handle(Geom_Surface)::DownCast(S->Transformed(L.Transformation()));
+                Handle(Geom_Surface) NewS = Handle(Geom_Surface)::DownCast(S->Transformed(L.Transformation()));
 
-                const Handle(Standard_Type)& typs = S->DynamicType();
-                if (typs == STANDARD_TYPE(Geom_CylindricalSurface) ||
-                    typs == STANDARD_TYPE(Geom_ConicalSurface)) {
+                const Handle(Standard_Type) & typs = S->DynamicType();
+                if (typs == STANDARD_TYPE(Geom_CylindricalSurface) || typs == STANDARD_TYPE(Geom_ConicalSurface)) {
                     Standard_Real umin, umax, vmin, vmax;
                     BRepTools::UVBounds(F, umin, umax, vmin, vmax);
-                    if (!Precision::IsNegativeInfinite(vmin) &&
-                        !Precision::IsPositiveInfinite(vmax)) {
+                    if (!Precision::IsNegativeInfinite(vmin) && !Precision::IsPositiveInfinite(vmax)) {
                         Standard_Real deltav = 10. * (vmax - vmin);
                         vmin = vmin - deltav;
                         vmax = vmax + deltav;
@@ -521,17 +465,13 @@ Standard_Boolean Draft_Modification::Propagate()
 
     //  Try to add faces for free borders...
     // JAG 09.11.95
-    for (Standard_Integer i = 1; i <= myEMap.Extent(); i++)
-    {
+    for (Standard_Integer i = 1; i <= myEMap.Extent(); i++) {
         Draft_EdgeInfo& Einf = myEMap.ChangeFromIndex(i);
-        if (Einf.NewGeometry() &&
-            Einf.Geometry().IsNull() &&
-            Einf.SecondFace().IsNull()) {
+        if (Einf.NewGeometry() && Einf.Geometry().IsNull() && Einf.SecondFace().IsNull()) {
 
             TopLoc_Location Loc;
             Handle(Geom_Surface) S1 = BRep_Tool::Surface(Einf.FirstFace(), Loc);
-            S1 = Handle(Geom_Surface)::
-                DownCast(S1->Transformed(Loc.Transformation()));
+            S1 = Handle(Geom_Surface)::DownCast(S1->Transformed(Loc.Transformation()));
             Handle(Geom_Surface) S2;
 
             Standard_Real f, l;
@@ -545,31 +485,26 @@ Standard_Boolean Draft_Modification::Propagate()
                 if (C->IsKind(STANDARD_TYPE(Geom_Conic))) {
                     gp_Ax3 thePl(Handle(Geom_Conic)::DownCast(C)->Position());
                     S2 = new Geom_Plane(thePl);
-                }
-                else if (C->DynamicType() == STANDARD_TYPE(Geom_Line)) {
+                } else if (C->DynamicType() == STANDARD_TYPE(Geom_Line)) {
                     gp_Ax1 axis;
                     if (S1->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                        axis = Handle(Geom_ElementarySurface)::DownCast
-                        (Handle(Geom_RectangularTrimmedSurface)::DownCast(S1)->
-                            BasisSurface())->Axis();
-                    }
-                    else {
+                        axis = Handle(Geom_ElementarySurface)::DownCast(
+                                   Handle(Geom_RectangularTrimmedSurface)::DownCast(S1)->BasisSurface())
+                                   ->Axis();
+                    } else {
                         axis = Handle(Geom_ElementarySurface)::DownCast(S1)->Axis();
                     }
                     gp_Vec they(axis.Location(), C->Value(0.));
                     gp_Dir axz(axis.Direction().Crossed(they));
                     S2 = new Geom_Plane(gp_Ax3(axis.Location(), axz, axis.Direction()));
 
-                }
-                else {
+                } else {
                     badShape = EK;
                     errStat = Draft_EdgeRecomputation;
                     break; // leave from for
                 }
-            }
-            else { // on the plane
-                for (Standard_Integer j = 1; j <= myVMap.Extent(); j++)
-                {
+            } else { // on the plane
+                for (Standard_Integer j = 1; j <= myVMap.Extent(); j++) {
                     Draft_VertexInfo& Vinf = myVMap.ChangeFromIndex(j);
                     for (Vinf.InitEdgeIterator(); Vinf.MoreEdge(); Vinf.NextEdge()) {
                         if (Vinf.Edge().IsSame(EK)) {
@@ -582,8 +517,7 @@ Standard_Boolean Draft_Modification::Propagate()
                             if (!edg.IsSame(EK)) {
                                 const Draft_EdgeInfo& EI = myEMap.FindFromKey(edg);
                                 if (!EI.FirstFace().IsSame(Einf.FirstFace()) &&
-                                    (EI.SecondFace().IsNull() ||
-                                        !EI.SecondFace().IsSame(Einf.FirstFace()))) {
+                                    (EI.SecondFace().IsNull() || !EI.SecondFace().IsSame(Einf.FirstFace()))) {
                                     break;
                                 }
                             }
@@ -592,8 +526,7 @@ Standard_Boolean Draft_Modification::Propagate()
                             Handle(Geom_Curve) C2 = BRep_Tool::Curve(Vinf.Edge(), Loc, f, l);
                             Handle(GeomAdaptor_Curve) HCur;
                             gp_Vec Direc;
-                            C2 = Handle(Geom_Curve)::DownCast
-                            (C2->Transformed(Loc.Transformation()));
+                            C2 = Handle(Geom_Curve)::DownCast(C2->Transformed(Loc.Transformation()));
                             if (C2->DynamicType() == STANDARD_TYPE(Geom_TrimmedCurve)) {
                                 C2 = Handle(Geom_TrimmedCurve)::DownCast(C2)->BasisCurve();
                             }
@@ -601,12 +534,10 @@ Standard_Boolean Draft_Modification::Propagate()
                                 Direc = Handle(Geom_Line)::DownCast(C)->Lin().Direction();
                                 HCur = new GeomAdaptor_Curve(C2);
 
-                            }
-                            else if (C2->DynamicType() == STANDARD_TYPE(Geom_Line)) {
+                            } else if (C2->DynamicType() == STANDARD_TYPE(Geom_Line)) {
                                 Direc = Handle(Geom_Line)::DownCast(C2)->Lin().Direction();
                                 HCur = new GeomAdaptor_Curve(C);
-                            }
-                            else {
+                            } else {
                                 badShape = EK;
                                 errStat = Draft_EdgeRecomputation;
                                 break; // leave from while
@@ -614,32 +545,25 @@ Standard_Boolean Draft_Modification::Propagate()
                             GeomAdaptor_SurfaceOfLinearExtrusion SLE(HCur, Direc);
                             switch (SLE.GetType()) {
 
-                            case GeomAbs_Plane:
-                            {
-                                S2 = new Geom_Plane(SLE.Plane());
-                            }
-                            break;
-                            case GeomAbs_Cylinder:
-                            {
-                                S2 = new Geom_CylindricalSurface(SLE.Cylinder());
-                            }
-                            break;
-                            default:
-                            {
-                                S2 = new Geom_SurfaceOfLinearExtrusion(HCur->Curve(), Direc);
-                            }
-                            break;
+                                case GeomAbs_Plane: {
+                                    S2 = new Geom_Plane(SLE.Plane());
+                                } break;
+                                case GeomAbs_Cylinder: {
+                                    S2 = new Geom_CylindricalSurface(SLE.Cylinder());
+                                } break;
+                                default: {
+                                    S2 = new Geom_SurfaceOfLinearExtrusion(HCur->Curve(), Direc);
+                                } break;
                             }
 
-                        }
-                        else {
+                        } else {
                             badShape = EK;
                             errStat = Draft_EdgeRecomputation;
                             break; // leave from while
                         }
                         break;
                     }
-                    //j++;
+                    // j++;
                 }
             }
 
@@ -650,8 +574,7 @@ Standard_Boolean Draft_Modification::Propagate()
                 Einf.Add(TheNewFace);
                 Draft_FaceInfo FI(S2, Standard_False);
                 myFMap.Add(TheNewFace, FI);
-            }
-            else {
+            } else {
                 break; // leave from for
             }
             // Fin JAG 09.11.95
@@ -660,17 +583,13 @@ Standard_Boolean Draft_Modification::Propagate()
     return (badShape.IsNull());
 }
 
-
-
-
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void Draft_Modification::Perform()
-{
-    if (!badShape.IsNull())  throw Standard_ConstructionError();
+void Draft_Modification::Perform() {
+    if (!badShape.IsNull()) throw Standard_ConstructionError();
 
     if (!myComp) {
         myComp = Standard_True;
@@ -680,8 +599,7 @@ void Draft_Modification::Perform()
 
         // Calculate eventual faces
 
-        for (Standard_Integer i = 1; i <= myFMap.Extent(); i++)
-        {
+        for (Standard_Integer i = 1; i <= myFMap.Extent(); i++) {
             const TopoDS_Face& FK = myFMap.FindKey(i);
             Draft_FaceInfo& Finf = myFMap.ChangeFromIndex(i);
             if (Finf.NewGeometry() && Finf.Geometry().IsNull()) {
@@ -701,12 +619,10 @@ void Draft_Modification::Perform()
                     return;
                 }
                 if (S1->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                    S1 = Handle(Geom_RectangularTrimmedSurface)::
-                        DownCast(S1)->BasisSurface();
+                    S1 = Handle(Geom_RectangularTrimmedSurface)::DownCast(S1)->BasisSurface();
                 }
                 if (S2->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                    S2 = Handle(Geom_RectangularTrimmedSurface)::
-                        DownCast(S2)->BasisSurface();
+                    S2 = Handle(Geom_RectangularTrimmedSurface)::DownCast(S2)->BasisSurface();
                 }
                 Handle(Geom_Plane) P1 = Handle(Geom_Plane)::DownCast(S1);
                 Handle(Geom_Plane) P2 = Handle(Geom_Plane)::DownCast(S2);
@@ -717,8 +633,7 @@ void Draft_Modification::Perform()
                 }
                 gp_Pln pp1 = P1->Pln();
                 gp_Pln pp2 = P2->Pln();
-                IntAna_QuadQuadGeo i2p(pp1, pp2,
-                    Precision::Angular(), Precision::Confusion());
+                IntAna_QuadQuadGeo i2p(pp1, pp2, Precision::Angular(), Precision::Confusion());
                 if (!i2p.IsDone() || i2p.TypeInter() != IntAna_Line) {
                     errStat = Draft_FaceRecomputation;
                     badShape = FK;
@@ -728,25 +643,17 @@ void Draft_Modification::Perform()
                 gp_Dir extrdir = i2p.Line(1).Direction();
 
                 // Preserve the same direction as the base face
-                Handle(Geom_Surface) RefSurf =
-                    BRep_Tool::Surface(FK);
+                Handle(Geom_Surface) RefSurf = BRep_Tool::Surface(FK);
                 if (RefSurf->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                    RefSurf =
-                        Handle(Geom_RectangularTrimmedSurface)::DownCast(RefSurf)
-                        ->BasisSurface();
+                    RefSurf = Handle(Geom_RectangularTrimmedSurface)::DownCast(RefSurf)->BasisSurface();
                 }
                 gp_Dir DirRef;
 
                 if (RefSurf->DynamicType() == STANDARD_TYPE(Geom_CylindricalSurface)) {
-                    gp_Ax3 AxeRef =
-                        Handle(Geom_CylindricalSurface)::DownCast(RefSurf)
-                        ->Cylinder().Position();
+                    gp_Ax3 AxeRef = Handle(Geom_CylindricalSurface)::DownCast(RefSurf)->Cylinder().Position();
                     DirRef = AxeRef.Direction();
-                }
-                else if (RefSurf->DynamicType() ==
-                    STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
-                    DirRef =
-                        Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(RefSurf)->Direction();
+                } else if (RefSurf->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
+                    DirRef = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(RefSurf)->Direction();
                 }
 
                 if (extrdir.Dot(DirRef) < 0.) extrdir.Reverse();
@@ -754,15 +661,12 @@ void Draft_Modification::Perform()
                 // it is possible to accelerate speed by storing the info during
                 // InternalAdd --> modification of FaceInfo to preserve the circle
 
-                Handle(Geom_Circle) CCir =
-                    Handle(Geom_Circle)::DownCast(Finf.Curve());
-                Handle(Geom_Surface) NewS =
-                    new Geom_SurfaceOfLinearExtrusion(CCir, extrdir);
+                Handle(Geom_Circle) CCir = Handle(Geom_Circle)::DownCast(Finf.Curve());
+                Handle(Geom_Surface) NewS = new Geom_SurfaceOfLinearExtrusion(CCir, extrdir);
 
                 Standard_Real umin, umax, vmin, vmax;
                 BRepTools::UVBounds(FK, umin, umax, vmin, vmax);
-                if (!Precision::IsNegativeInfinite(vmin) &&
-                    !Precision::IsPositiveInfinite(vmax)) {
+                if (!Precision::IsNegativeInfinite(vmin) && !Precision::IsPositiveInfinite(vmax)) {
                     Standard_Real deltav = 2. * (vmax - vmin);
                     vmin = vmin - deltav;
                     vmax = vmax + deltav;
@@ -780,8 +684,7 @@ void Draft_Modification::Perform()
         }
 
         // Calculate new edges.
-        for (Standard_Integer ii = 1; ii <= myEMap.Extent(); ii++)
-        {
+        for (Standard_Integer ii = 1; ii <= myEMap.Extent(); ii++) {
             Draft_EdgeInfo& Einf = myEMap.ChangeFromIndex(ii);
 
             const TopoDS_Edge& theEdge = TopoDS::Edge(myEMap.FindKey(ii));
@@ -818,7 +721,7 @@ void Draft_Modification::Perform()
                     Standard_Real TolF1 = BRep_Tool::Tolerance(FirstFace);
                     Standard_Real TolF2 = BRep_Tool::Tolerance(SecondFace);
 
-                    //Pass the tolerance of the face to project
+                    // Pass the tolerance of the face to project
                     GeomAPI_ProjectPointOnSurf proj1(pfv, S1, TolF1);
                     GeomAPI_ProjectPointOnSurf proj2(plv, S1, TolF1);
                     GeomAPI_ProjectPointOnSurf proj3(pfv, S2, TolF2);
@@ -844,12 +747,10 @@ void Draft_Modification::Perform()
                     Standard_Boolean KPart = Standard_False;
 
                     if (S1->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                        S1 = Handle(Geom_RectangularTrimmedSurface)::
-                            DownCast(S1)->BasisSurface();
+                        S1 = Handle(Geom_RectangularTrimmedSurface)::DownCast(S1)->BasisSurface();
                     }
                     if (S2->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                        S2 = Handle(Geom_RectangularTrimmedSurface)::
-                            DownCast(S2)->BasisSurface();
+                        S2 = Handle(Geom_RectangularTrimmedSurface)::DownCast(S2)->BasisSurface();
                     }
 
                     Standard_Boolean PC1 = Standard_True; // KPart on S1
@@ -857,28 +758,22 @@ void Draft_Modification::Perform()
                         S2->DynamicType() == STANDARD_TYPE(Geom_Plane)) {
                         KPart = Standard_True;
                         Axis = Handle(Geom_Plane)::DownCast(S2)->Position();
-                        TheNewCurve = Handle(Geom_SurfaceOfLinearExtrusion)::
-                            DownCast(S1)->BasisCurve();
-                        TheDirExtr = Handle(Geom_SurfaceOfLinearExtrusion)::
-                            DownCast(S1)->Direction();
-                    }
-                    else if (S2->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion) &&
-                        S1->DynamicType() == STANDARD_TYPE(Geom_Plane)) {
+                        TheNewCurve = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S1)->BasisCurve();
+                        TheDirExtr = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S1)->Direction();
+                    } else if (S2->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion) &&
+                               S1->DynamicType() == STANDARD_TYPE(Geom_Plane)) {
                         KPart = Standard_True;
                         PC1 = Standard_False;
                         Axis = Handle(Geom_Plane)::DownCast(S1)->Position();
-                        TheNewCurve = Handle(Geom_SurfaceOfLinearExtrusion)::
-                            DownCast(S2)->BasisCurve();
-                        TheDirExtr = Handle(Geom_SurfaceOfLinearExtrusion)::
-                            DownCast(S2)->Direction();
+                        TheNewCurve = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S2)->BasisCurve();
+                        TheDirExtr = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S2)->Direction();
                     }
                     Handle(Geom_Circle) aCirc;
-                    if (KPart) {  // very temporary on circles !!!
+                    if (KPart) { // very temporary on circles !!!
                         aCirc = Handle(Geom_Circle)::DownCast(TheNewCurve);
                         if (aCirc.IsNull())
                             KPart = Standard_False;
-                        else
-                        {
+                        else {
                             gp_Dir AxofCirc = aCirc->Position().Direction();
                             if (AxofCirc.IsParallel(Axis.Direction(), Precision::Angular()))
                                 KPart = Standard_True;
@@ -892,32 +787,26 @@ void Draft_Modification::Perform()
                     if (KPart) {
                         // direct calculation of NewC
                         Standard_Real aLocalReal =
-                            gp_Vec(aCirc->Circ().Location(), Axis.Location()).
-                            Dot(Axis.Direction());
+                            gp_Vec(aCirc->Circ().Location(), Axis.Location()).Dot(Axis.Direction());
                         Standard_Real Cos = TheDirExtr.Dot(Axis.Direction());
                         gp_Vec VV = (aLocalReal / Cos) * TheDirExtr;
                         newC = Handle(Geom_Curve)::DownCast(TheNewCurve->Translated(VV));
                         // it is possible to calculate PCurve
-                        Handle(Geom2d_Line) L2d
-                            = new Geom2d_Line(gp_Pnt2d(0., aLocalReal / Cos),
-                                gp::DX2d());
+                        Handle(Geom2d_Line) L2d = new Geom2d_Line(gp_Pnt2d(0., aLocalReal / Cos), gp::DX2d());
 
                         if (PC1)
                             Einf.ChangeFirstPC() = L2d;
                         else
                             Einf.ChangeSecondPC() = L2d;
-                    }
-                    else {
+                    } else {
                         S1 = myFMap.FindFromKey(Einf.FirstFace()).Geometry();
                         S2 = myFMap.FindFromKey(Einf.SecondFace()).Geometry();
 
-
                         // PCurves are not calculated immediately for 2 reasons:
-                        // 1 - If ProjLib should make an Approx, it is stupid to approximate the 
+                        // 1 - If ProjLib should make an Approx, it is stupid to approximate the
                         //     entire intersection curve.
                         // 2 - Additionally, if YaRev, there is a risk to not be SameRange.
-                        i2s.Perform(S1, S2, Precision::Confusion(),
-                            Standard_True, Standard_False, Standard_False);
+                        i2s.Perform(S1, S2, Precision::Confusion(), Standard_True, Standard_False, Standard_False);
 
                         if (!i2s.IsDone() || i2s.NbLines() <= 0) {
                             errStat = Draft_EdgeRecomputation;
@@ -930,8 +819,7 @@ void Draft_Modification::Perform()
 
                         Standard_Integer i, j; //,jmin;
 
-                        if (i2s.Line(1)->DynamicType() != STANDARD_TYPE(Geom_BSplineCurve))
-                        {
+                        if (i2s.Line(1)->DynamicType() != STANDARD_TYPE(Geom_BSplineCurve)) {
                             Standard_Real Dist2Min = RealLast();
                             imin = 0;
                             for (i = 1; i <= i2s.NbLines(); i++) {
@@ -945,19 +833,17 @@ void Draft_Modification::Perform()
                                         locpmin = myExtPC.Point(1).Parameter();
                                     }
                                     if (myExtPC.NbExt() == 2 && Dist2Min > Precision::SquareConfusion()) {
-                                        //to avoid incorrectly choosing the image 
-                                        //of the first vertex of the initial edge
+                                        // to avoid incorrectly choosing the image
+                                        // of the first vertex of the initial edge
                                         Standard_Real d1_2 = myExtPC.SquareDistance(1);
                                         Standard_Real d2_2 = myExtPC.SquareDistance(2);
                                         if (d1_2 > 1.21 * d2_2) {
                                             Dist2Min = myExtPC.SquareDistance(2);
                                             locpmin = myExtPC.Point(2).Parameter();
-                                        }
-                                        else if (d2_2 > 1.21 * d1_2) {
+                                        } else if (d2_2 > 1.21 * d1_2) {
                                             Dist2Min = myExtPC.SquareDistance(1);
                                             locpmin = myExtPC.Point(1).Parameter();
-                                        }
-                                        else {
+                                        } else {
                                             Standard_Real pfvpar = myExtPC.Point(1).Parameter();
                                             Standard_Real plvpar = myExtPC.Point(2).Parameter();
                                             newC = i2s.Line(i);
@@ -969,18 +855,15 @@ void Draft_Modification::Perform()
 
                                             Handle(Geom_Surface) theSurf;
                                             if (detrompeur == 1) {
-                                                if (S1->DynamicType() ==
-                                                    STANDARD_TYPE(Geom_RectangularTrimmedSurface))
-                                                    S1 = Handle(Geom_RectangularTrimmedSurface)::
-                                                    DownCast(S1)->BasisSurface();
+                                                if (S1->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface))
+                                                    S1 = Handle(Geom_RectangularTrimmedSurface)::DownCast(S1)
+                                                             ->BasisSurface();
                                                 theSurf = S1;
 
-                                            }
-                                            else if (detrompeur == 2) {
-                                                if (S2->DynamicType() ==
-                                                    STANDARD_TYPE(Geom_RectangularTrimmedSurface))
-                                                    S2 = Handle(Geom_RectangularTrimmedSurface)::
-                                                    DownCast(S2)->BasisSurface();
+                                            } else if (detrompeur == 2) {
+                                                if (S2->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface))
+                                                    S2 = Handle(Geom_RectangularTrimmedSurface)::DownCast(S2)
+                                                             ->BasisSurface();
                                                 theSurf = S2;
                                             }
                                             if (detrompeur != 0 && detrompeur != 4) {
@@ -993,17 +876,16 @@ void Draft_Modification::Perform()
                                                     ElSLib::Parameters(pl, pfv, uf, vf);
                                                     ElSLib::Parameters(pl, plvprim, ulprim, vlprim);
                                                     ElSLib::Parameters(pl, pfvprim, ufprim, vfprim);
-                                                }
-                                                else if (theSurf->DynamicType() ==
-                                                    STANDARD_TYPE(Geom_CylindricalSurface)) {
-                                                    gp_Cylinder cy = Handle(Geom_CylindricalSurface)
-                                                        ::DownCast(S2)->Cylinder();
+                                                } else if (theSurf->DynamicType() ==
+                                                           STANDARD_TYPE(Geom_CylindricalSurface)) {
+                                                    gp_Cylinder cy =
+                                                        Handle(Geom_CylindricalSurface)::DownCast(S2)->Cylinder();
                                                     ElSLib::Parameters(cy, plv, ul, vl);
                                                     ElSLib::Parameters(cy, pfv, uf, vf);
                                                     ElSLib::Parameters(cy, plvprim, ulprim, vlprim);
                                                     ElSLib::Parameters(cy, pfvprim, ufprim, vfprim);
-                                                }
-                                                else detrompeur = 4;
+                                                } else
+                                                    detrompeur = 4;
 
                                                 if (detrompeur == 1 || detrompeur == 2) {
                                                     gp_Vec2d v1((ul - ufprim), (vl - vfprim));
@@ -1027,16 +909,14 @@ void Draft_Modification::Perform()
                                                 locpmin = myExtPC.Point(j).Parameter();
                                             }
                                         }
-                                    }
-                                    else if (myExtPC.NbExt() < 1) {
+                                    } else if (myExtPC.NbExt() < 1) {
                                         Standard_Real dist1_2, dist2_2;
                                         gp_Pnt p1b, p2b;
                                         myExtPC.TrimmedSquareDistances(dist1_2, dist2_2, p1b, p2b);
                                         if (dist1_2 < dist2_2) {
                                             Dist2Min = dist1_2;
                                             locpmin = TheCurve.FirstParameter();
-                                        }
-                                        else {
+                                        } else {
                                             Dist2Min = dist2_2;
                                             locpmin = TheCurve.LastParameter();
                                         }
@@ -1060,112 +940,95 @@ void Draft_Modification::Perform()
                             newC->D1(pmin, pfv, newd1);
                             Standard_Boolean YaRev = d1fv.Dot(newd1) < 0.;
 
-                            if (YaRev)
-                                newC->Reverse();
+                            if (YaRev) newC->Reverse();
 
                             if (i2s.HasLineOnS1(imin)) {
                                 Einf.ChangeFirstPC() = i2s.LineOnS1(imin);
-                                if (YaRev)
-                                    Einf.ChangeFirstPC()->Reverse();
+                                if (YaRev) Einf.ChangeFirstPC()->Reverse();
                             }
 
                             if (i2s.HasLineOnS2(imin)) {
                                 Einf.ChangeSecondPC() = i2s.LineOnS2(imin);
-                                if (YaRev)
-                                    Einf.ChangeSecondPC()->Reverse();
+                                if (YaRev) Einf.ChangeSecondPC()->Reverse();
                             }
                         } // if (i2s.Line(1)->DynamicType() != STANDARD_TYPE(Geom_BSplineCurve))
                         else // i2s.Line(1) is BSplineCurve
                         {
-                            //Find the first curve to glue
+                            // Find the first curve to glue
                             TColGeom_SequenceOfCurve Candidates;
                             if (S1->DynamicType() == STANDARD_TYPE(Geom_CylindricalSurface) ||
-                                S1->DynamicType() == STANDARD_TYPE(Geom_ConicalSurface))
-                            {
-                                for (i = 1; i <= i2s.NbLines(); i++)
-                                {
+                                S1->DynamicType() == STANDARD_TYPE(Geom_ConicalSurface)) {
+                                for (i = 1; i <= i2s.NbLines(); i++) {
                                     Handle(Geom_Curve) aCurve = i2s.Line(i);
                                     gp_Pnt Pnt = aCurve->Value(aCurve->FirstParameter());
                                     GeomAPI_ProjectPointOnSurf projector(Pnt, S1, Precision::Confusion());
                                     Standard_Real U, V;
                                     projector.LowerDistanceParameters(U, V);
-                                    if (Abs(U) <= Precision::Confusion() || Abs(U - 2. * M_PI) <= Precision::Confusion())
+                                    if (Abs(U) <= Precision::Confusion() ||
+                                        Abs(U - 2. * M_PI) <= Precision::Confusion())
                                         Candidates.Append(aCurve);
-                                    else
-                                    {
+                                    else {
                                         Pnt = aCurve->Value(aCurve->LastParameter());
                                         projector.Init(Pnt, S1, Precision::Confusion());
                                         projector.LowerDistanceParameters(U, V);
-                                        if (Abs(U) <= Precision::Confusion() || Abs(U - 2. * M_PI) <= Precision::Confusion())
-                                        {
+                                        if (Abs(U) <= Precision::Confusion() ||
+                                            Abs(U - 2. * M_PI) <= Precision::Confusion()) {
                                             aCurve->Reverse();
                                             Candidates.Append(aCurve);
                                         }
                                     }
                                 }
 
-                                if (Candidates.Length() == 0)
-                                {
-                                    //errStat = Draft_EdgeRecomputation;
-                                    //badShape = TopoDS::Edge(ite.Key());
-                                    //return;
+                                if (Candidates.Length() == 0) {
+                                    // errStat = Draft_EdgeRecomputation;
+                                    // badShape = TopoDS::Edge(ite.Key());
+                                    // return;
                                     for (i = 1; i <= i2s.NbLines(); i++)
                                         Candidates.Append(i2s.Line(i));
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 for (i = 1; i <= i2s.NbLines(); i++)
                                     Candidates.Append(i2s.Line(i));
                             }
 
                             Handle(Geom_Curve) FirstCurve;
-                            if (Candidates.Length() > 1)
-                            {
+                            if (Candidates.Length() > 1) {
                                 Standard_Real DistMin = Precision::Infinite();
-                                for (i = 1; i <= Candidates.Length(); i++)
-                                {
+                                for (i = 1; i <= Candidates.Length(); i++) {
                                     Handle(Geom_Curve) aCurve = Candidates(i);
                                     gp_Pnt Pnt = aCurve->Value(aCurve->FirstParameter());
                                     const Standard_Real Dist = Pnt.Distance(pfv);
-                                    if (Dist - DistMin < -Precision::Confusion())
-                                    {
+                                    if (Dist - DistMin < -Precision::Confusion()) {
                                         DistMin = Dist;
                                         FirstCurve = aCurve;
                                     }
                                 }
-                            }
-                            else
+                            } else
                                 FirstCurve = Candidates(1);
 
-                            //Glueing
+                            // Glueing
                             TColGeom_SequenceOfCurve Curves;
                             for (i = 1; i <= i2s.NbLines(); i++)
-                                if (FirstCurve != i2s.Line(i))
-                                    Curves.Append(i2s.Line(i));
+                                if (FirstCurve != i2s.Line(i)) Curves.Append(i2s.Line(i));
 
                             TColGeom_SequenceOfCurve ToGlue;
                             gp_Pnt EndPoint = FirstCurve->Value(FirstCurve->LastParameter());
                             Standard_Boolean added = Standard_True;
-                            while (added)
-                            {
+                            while (added) {
                                 added = Standard_False;
-                                for (i = 1; i <= Curves.Length(); i++)
-                                {
+                                for (i = 1; i <= Curves.Length(); i++) {
                                     Handle(Geom_Curve) aCurve = Curves(i);
                                     gp_Pnt pfirst, plast;
                                     pfirst = aCurve->Value(aCurve->FirstParameter());
                                     plast = aCurve->Value(aCurve->LastParameter());
-                                    if (pfirst.Distance(EndPoint) <= Precision::Confusion())
-                                    {
+                                    if (pfirst.Distance(EndPoint) <= Precision::Confusion()) {
                                         ToGlue.Append(aCurve);
                                         EndPoint = plast;
                                         Curves.Remove(i);
                                         added = Standard_True;
                                         break;
                                     }
-                                    if (plast.Distance(EndPoint) <= Precision::Confusion())
-                                    {
+                                    if (plast.Distance(EndPoint) <= Precision::Confusion()) {
                                         aCurve->Reverse();
                                         ToGlue.Append(aCurve);
                                         EndPoint = pfirst;
@@ -1184,20 +1047,18 @@ void Draft_Modification::Perform()
 
                             GeomConvert_CompCurveToBSplineCurve Concat(Handle(Geom_BSplineCurve)::DownCast(FirstCurve));
                             for (i = 1; i <= ToGlue.Length(); i++)
-                                Concat.Add(Handle(Geom_BSplineCurve)::DownCast(ToGlue(i)), Precision::Confusion(), Standard_True);
+                                Concat.Add(Handle(Geom_BSplineCurve)::DownCast(ToGlue(i)), Precision::Confusion(),
+                                           Standard_True);
 
                             newC = Concat.BSplineCurve();
 
                             TheCurve.Load(newC);
                             Extrema_ExtPC myExtPC(pfv, TheCurve);
                             Standard_Real Dist2Min = RealLast();
-                            for (i = 1; i <= myExtPC.NbExt(); i++)
-                            {
-                                if (myExtPC.IsMin(i))
-                                {
+                            for (i = 1; i <= myExtPC.NbExt(); i++) {
+                                if (myExtPC.IsMin(i)) {
                                     const Standard_Real Dist2 = myExtPC.SquareDistance(i);
-                                    if (Dist2 < Dist2Min)
-                                    {
+                                    if (Dist2 < Dist2Min) {
                                         Dist2Min = Dist2;
                                         pmin = myExtPC.Point(i).Parameter();
                                     }
@@ -1206,8 +1067,7 @@ void Draft_Modification::Perform()
                             newC->D1(pmin, pfv, newd1);
                             Standard_Boolean YaRev = d1fv.Dot(newd1) < 0.;
 
-                            if (YaRev)
-                                newC->Reverse();
+                            if (YaRev) newC->Reverse();
                             /*
                             if (i2s.HasLineOnS1(imin)) {
                             Einf.ChangeFirstPC() = i2s.LineOnS1(imin);
@@ -1224,9 +1084,8 @@ void Draft_Modification::Perform()
                         } // else: i2s.NbLines() > 2 && S1 is Cylinder or Cone
 
                         Einf.Tolerance(Max(Einf.Tolerance(), i2s.TolReached3d()));
-                    }  // End step KPart
-                }
-                else { // case of tangency
+                    } // End step KPart
+                } else { // case of tangency
                     const TopoDS_Face& F1 = Einf.FirstFace();
                     const TopoDS_Face& F2 = Einf.SecondFace();
 
@@ -1238,66 +1097,54 @@ void Draft_Modification::Perform()
                         return;
                     }
                     if (aLocalS1->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                        aLocalS1 = Handle(Geom_RectangularTrimmedSurface)::
-                            DownCast(aLocalS1)->BasisSurface();
+                        aLocalS1 = Handle(Geom_RectangularTrimmedSurface)::DownCast(aLocalS1)->BasisSurface();
                     }
                     if (aLocalS2->DynamicType() == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
-                        aLocalS2 = Handle(Geom_RectangularTrimmedSurface)::
-                            DownCast(aLocalS2)->BasisSurface();
+                        aLocalS2 = Handle(Geom_RectangularTrimmedSurface)::DownCast(aLocalS2)->BasisSurface();
                     }
 
                     gp_Dir dirextr;
-                    //Standard_Boolean dirfound = Standard_False;
+                    // Standard_Boolean dirfound = Standard_False;
                     if (aLocalS1->DynamicType() == STANDARD_TYPE(Geom_CylindricalSurface)) {
-                        gp_Cylinder cyl =
-                            Handle(Geom_CylindricalSurface)::DownCast(aLocalS1)->Cylinder();
+                        gp_Cylinder cyl = Handle(Geom_CylindricalSurface)::DownCast(aLocalS1)->Cylinder();
                         dirextr = cyl.Axis().Direction();
-                        //dirfound = Standard_True;
-                        // see direction...
+                        // dirfound = Standard_True;
+                        //  see direction...
 
-                    }
-                    else if (aLocalS1->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
-                        dirextr = Handle(Geom_SurfaceOfLinearExtrusion)::
-                            DownCast(aLocalS1)->Direction();
-                        //dirfound = Standard_True;
-                        // see direction...
+                    } else if (aLocalS1->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
+                        dirextr = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(aLocalS1)->Direction();
+                        // dirfound = Standard_True;
+                        //  see direction...
 
                         // Here it is possible to calculate PCurve.
                         Handle(Geom_SurfaceOfLinearExtrusion) SEL =
                             Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(aLocalS1);
-                        Handle(Geom_Circle) GCir =
-                            Handle(Geom_Circle)::DownCast(SEL->BasisCurve());
+                        Handle(Geom_Circle) GCir = Handle(Geom_Circle)::DownCast(SEL->BasisCurve());
                         if (!GCir.IsNull()) {
                             Standard_Real U = ElCLib::Parameter(GCir->Circ(), ptfixe);
-                            Handle(Geom2d_Line) PC1 =
-                                new Geom2d_Line(gp_Pnt2d(U, 0.), gp::DY2d());
+                            Handle(Geom2d_Line) PC1 = new Geom2d_Line(gp_Pnt2d(U, 0.), gp::DY2d());
                             Einf.ChangeFirstPC() = PC1;
                         }
                     }
 
                     else if (aLocalS2->DynamicType() == STANDARD_TYPE(Geom_CylindricalSurface)) {
-                        gp_Cylinder cyl =
-                            Handle(Geom_CylindricalSurface)::DownCast(aLocalS2)->Cylinder();
+                        gp_Cylinder cyl = Handle(Geom_CylindricalSurface)::DownCast(aLocalS2)->Cylinder();
                         dirextr = cyl.Axis().Direction();
                         // dirfound = Standard_True;
                         // see direction...
 
-                    }
-                    else if (aLocalS2->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
-                        dirextr = Handle(Geom_SurfaceOfLinearExtrusion)::
-                            DownCast(aLocalS2)->Direction();
+                    } else if (aLocalS2->DynamicType() == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
+                        dirextr = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(aLocalS2)->Direction();
                         // dirfound = Standard_True;
                         // see direction...
 
                         // Here it is possible to calculate PCurve.
                         Handle(Geom_SurfaceOfLinearExtrusion) SEL =
                             Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(aLocalS2);
-                        Handle(Geom_Circle) GCir =
-                            Handle(Geom_Circle)::DownCast(SEL->BasisCurve());
+                        Handle(Geom_Circle) GCir = Handle(Geom_Circle)::DownCast(SEL->BasisCurve());
                         if (!GCir.IsNull()) {
                             Standard_Real U = ElCLib::Parameter(GCir->Circ(), ptfixe);
-                            Handle(Geom2d_Line) PC2 =
-                                new Geom2d_Line(gp_Pnt2d(U, 0.), gp::DY2d());
+                            Handle(Geom2d_Line) PC2 = new Geom2d_Line(gp_Pnt2d(U, 0.), gp::DY2d());
                             Einf.ChangeSecondPC() = PC2;
                         }
                     }
@@ -1322,8 +1169,7 @@ void Draft_Modification::Perform()
                 Handle(Geom_TrimmedCurve) T = Handle(Geom_TrimmedCurve)::DownCast(newC);
                 if (!T.IsNull()) newC = T->BasisCurve();
                 Einf.ChangeGeometry() = newC;
-            }
-            else if (!Einf.NewGeometry()) {
+            } else if (!Einf.NewGeometry()) {
                 // set existing curve 3D
                 Handle(Geom_TrimmedCurve) T = Handle(Geom_TrimmedCurve)::DownCast(C);
                 if (!T.IsNull()) C = T->BasisCurve();
@@ -1333,11 +1179,10 @@ void Draft_Modification::Perform()
 
         // Calculate new vertices.
 
-        Handle(GeomAdaptor_Curve)   HAC = new GeomAdaptor_Curve;
+        Handle(GeomAdaptor_Curve) HAC = new GeomAdaptor_Curve;
         Handle(GeomAdaptor_Surface) HAS = new GeomAdaptor_Surface;
 
-        for (Standard_Integer ii = 1; ii <= myVMap.Extent(); ii++)
-        {
+        for (Standard_Integer ii = 1; ii <= myVMap.Extent(); ii++) {
             GeomAdaptor_Curve& AC = *HAC;
             GeomAdaptor_Surface& AS = *HAS;
 
@@ -1351,11 +1196,11 @@ void Draft_Modification::Perform()
                 Vinf.InitEdgeIterator();
                 if (Vinf.MoreEdge()) {
                     const TopoDS_Edge& Edg1 = Vinf.Edge();
-                    //const Draft_EdgeInfo& Einf1 = myEMap(Edg1);
+                    // const Draft_EdgeInfo& Einf1 = myEMap(Edg1);
                     Draft_EdgeInfo& Einf1 = myEMap.ChangeFromKey(Edg1);
                     gp_Pnt vtori = BRep_Tool::Pnt(TVV);
-                    //Einf1.Geometry()->D0(Vinf.Parameter(Edg1), pvt);
-                    GeomAPI_ProjectPointOnCurve Projector(vtori, Einf1.Geometry()); //patch
+                    // Einf1.Geometry()->D0(Vinf.Parameter(Edg1), pvt);
+                    GeomAPI_ProjectPointOnCurve Projector(vtori, Einf1.Geometry()); // patch
                     pvt = Projector.NearestPoint();
 
 #ifdef OCCT_DEBUG
@@ -1371,7 +1216,7 @@ void Draft_Modification::Perform()
                     Vinf.NextEdge();
                     if (Vinf.MoreEdge()) {
                         const TopoDS_Edge& Edg2 = Vinf.Edge();
-                        //const Draft_EdgeInfo& Einf2 = myEMap(Edg2);
+                        // const Draft_EdgeInfo& Einf2 = myEMap(Edg2);
                         Draft_EdgeInfo& Einf2 = myEMap.ChangeFromKey(Edg2);
                         //	    Standard_Real f;
                         gp_Pnt opvt;
@@ -1387,34 +1232,31 @@ void Draft_Modification::Perform()
                         if (opvt.SquareDistance(vtori) < dion) {
                             pvt = opvt;
                         }
-                        //Vinf.ChangeParameter(Edg2) = Parameter(Einf2.Geometry(), pvt);
+                        // Vinf.ChangeParameter(Edg2) = Parameter(Einf2.Geometry(), pvt);
                         Standard_Integer done;
                         Standard_Real param = Parameter(Einf2.Geometry(), pvt, done);
-                        if (done != 0)
-                        {
+                        if (done != 0) {
                             Handle(Geom_Surface) S1 = myFMap.FindFromKey(Einf2.FirstFace()).Geometry();
                             Handle(Geom_Surface) S2 = myFMap.FindFromKey(Einf2.SecondFace()).Geometry();
-                            Vinf.ChangeParameter(Edg2) = SmartParameter(Einf2, BRep_Tool::Tolerance(Edg2), pvt, done, S1, S2);
-                        }
-                        else
+                            Vinf.ChangeParameter(Edg2) =
+                                SmartParameter(Einf2, BRep_Tool::Tolerance(Edg2), pvt, done, S1, S2);
+                        } else
                             Vinf.ChangeParameter(Edg2) = param;
                     }
 
                     Vinf.ChangeGeometry() = pvt;
-                    //Vinf.ChangeParameter(Edg1) = Parameter(Einf1.Geometry(), pvt);
+                    // Vinf.ChangeParameter(Edg1) = Parameter(Einf1.Geometry(), pvt);
                     Standard_Integer done;
                     Standard_Real param = Parameter(Einf1.Geometry(), pvt, done);
-                    if (done != 0)
-                    {
+                    if (done != 0) {
                         Handle(Geom_Surface) S1 = myFMap.FindFromKey(Einf1.FirstFace()).Geometry();
                         Handle(Geom_Surface) S2 = myFMap.FindFromKey(Einf1.SecondFace()).Geometry();
-                        Vinf.ChangeParameter(Edg1) = SmartParameter(Einf1, BRep_Tool::Tolerance(Edg1), pvt, done, S1, S2);
-                    }
-                    else
+                        Vinf.ChangeParameter(Edg1) =
+                            SmartParameter(Einf1, BRep_Tool::Tolerance(Edg1), pvt, done, S1, S2);
+                    } else
                         Vinf.ChangeParameter(Edg1) = param;
                     continue;
                 }
-
 
                 errStat = Draft_VertexRecomputation;
                 badShape = TVV;
@@ -1433,8 +1275,7 @@ void Draft_Modification::Perform()
             gp_Pnt pvt;
 
             Standard_Integer nbsol = myintcs.NbPoints();
-            if (nbsol <= 0)
-            {
+            if (nbsol <= 0) {
                 Extrema_ExtCS extr(AC, AS, Precision::PConfusion(), Precision::PConfusion());
 
                 if (!extr.IsDone() || extr.NbExt() == 0) {
@@ -1443,33 +1284,26 @@ void Draft_Modification::Perform()
                     return;
                 }
 
-
                 Standard_Real disref = RealLast();
                 Standard_Integer iref = 0;
                 Extrema_POnCurv Pc;
                 Extrema_POnSurf Ps;
-                for (Standard_Integer i = 1; i <= extr.NbExt(); i++)
-                {
+                for (Standard_Integer i = 1; i <= extr.NbExt(); i++) {
                     extr.Points(i, Pc, Ps);
                     Standard_Real distemp = Pc.Value().SquareDistance(vtori);
-                    if (distemp < disref)
-                    {
+                    if (distemp < disref) {
                         disref = distemp;
                         iref = i;
                     }
                 }
                 extr.Points(iref, Pc, Ps);
                 pvt = Pc.Value();
-            }
-            else
-            {
+            } else {
                 Standard_Real disref = RealLast();
                 Standard_Integer iref = 0;
-                for (Standard_Integer i = 1; i <= nbsol; i++)
-                {
+                for (Standard_Integer i = 1; i <= nbsol; i++) {
                     Standard_Real distemp = myintcs.Point(i).Pnt().SquareDistance(vtori);
-                    if (distemp < disref)
-                    {
+                    if (distemp < disref) {
                         disref = distemp;
                         iref = i;
                     }
@@ -1482,26 +1316,21 @@ void Draft_Modification::Perform()
             for (Vinf.InitEdgeIterator(); Vinf.MoreEdge(); Vinf.NextEdge()) {
                 const TopoDS_Edge& Edg = Vinf.Edge();
                 Standard_Real initpar = Vinf.Parameter(Edg);
-                //const Draft_EdgeInfo& Einf = myEMap(Edg);
+                // const Draft_EdgeInfo& Einf = myEMap(Edg);
                 Draft_EdgeInfo& Einf = myEMap.ChangeFromKey(Edg);
-                //Vinf.ChangeParameter(Edg) = Parameter(Einf.Geometry(),pvt);
+                // Vinf.ChangeParameter(Edg) = Parameter(Einf.Geometry(),pvt);
                 Standard_Integer done;
                 Standard_Real param = Parameter(Einf.Geometry(), pvt, done);
-                if (done != 0)
-                {
+                if (done != 0) {
                     Handle(Geom_Surface) S1 = myFMap.FindFromKey(Einf.FirstFace()).Geometry();
                     Handle(Geom_Surface) S2 = myFMap.FindFromKey(Einf.SecondFace()).Geometry();
                     Vinf.ChangeParameter(Edg) = SmartParameter(Einf, BRep_Tool::Tolerance(Edg), pvt, done, S1, S2);
-                }
-                else
-                {
-                    if (Abs(initpar - param) > Precision::PConfusion())
-                    {
+                } else {
+                    if (Abs(initpar - param) > Precision::PConfusion()) {
                         Standard_Real f, l;
                         TopLoc_Location Loc;
-                        const Handle(Geom_Curve)& aC = BRep_Tool::Curve(Edg, Loc, f, l);
-                        if (aC->DynamicType() == STANDARD_TYPE(Geom_TrimmedCurve))
-                        {
+                        const Handle(Geom_Curve) & aC = BRep_Tool::Curve(Edg, Loc, f, l);
+                        if (aC->DynamicType() == STANDARD_TYPE(Geom_TrimmedCurve)) {
                             Einf.SetNewGeometry(Standard_True);
                         }
                     }
@@ -1513,8 +1342,7 @@ void Draft_Modification::Perform()
 
     // small loop of validation/protection
 
-    for (Standard_Integer i = 1; i <= myEMap.Extent(); i++)
-    {
+    for (Standard_Integer i = 1; i <= myEMap.Extent(); i++) {
         const TopoDS_Edge& edg = TopoDS::Edge(myEMap.FindKey(i));
 
         TopoDS_Vertex Vf, Vl;
@@ -1524,18 +1352,16 @@ void Draft_Modification::Perform()
             Vl.Reverse();
         }
 
-        if (myVMap.Contains(Vf) && myVMap.Contains(Vl))
-        {
-            //Here, we compare directions of the source edge (from input shape)
-            //and corresponding selected part of the intersection edge.
-            //If these directions are opposite then we reverse intersection edge
-            //and recompute corresponding vertex-parameters.
+        if (myVMap.Contains(Vf) && myVMap.Contains(Vl)) {
+            // Here, we compare directions of the source edge (from input shape)
+            // and corresponding selected part of the intersection edge.
+            // If these directions are opposite then we reverse intersection edge
+            // and recompute corresponding vertex-parameters.
 
             Standard_Real aParF = myVMap.ChangeFromKey(Vf).Parameter(edg);
             Standard_Real aParL = myVMap.ChangeFromKey(Vl).Parameter(edg);
 
-            if (aParL < aParF)
-            {
+            if (aParL < aParF) {
                 Draft_EdgeInfo& aEinf = myEMap.ChangeFromKey(edg);
                 TopLoc_Location aLoc;
                 Standard_Real aF = 0.0, aL = 0.0;
@@ -1550,37 +1376,30 @@ void Draft_Modification::Perform()
 
                 Standard_Real aSqMagn = aDirNF.SquareMagnitude();
 
-                if (aSqMagn > Precision::SquareConfusion())
-                    aDirNF.Divide(sqrt(aSqMagn));
+                if (aSqMagn > Precision::SquareConfusion()) aDirNF.Divide(sqrt(aSqMagn));
 
                 aSqMagn = aDirNL.SquareMagnitude();
-                if (aSqMagn > Precision::SquareConfusion())
-                    aDirNL.Divide(sqrt(aSqMagn));
+                if (aSqMagn > Precision::SquareConfusion()) aDirNL.Divide(sqrt(aSqMagn));
 
                 aSqMagn = aDirOF.SquareMagnitude();
-                if (aSqMagn > Precision::SquareConfusion())
-                    aDirOF.Divide(sqrt(aSqMagn));
+                if (aSqMagn > Precision::SquareConfusion()) aDirOF.Divide(sqrt(aSqMagn));
 
                 aSqMagn = aDirOL.SquareMagnitude();
-                if (aSqMagn > Precision::SquareConfusion())
-                    aDirOL.Divide(sqrt(aSqMagn));
+                if (aSqMagn > Precision::SquareConfusion()) aDirOL.Divide(sqrt(aSqMagn));
 
                 const Standard_Real aCosF = aDirNF.Dot(aDirOF), aCosL = aDirNL.Dot(aDirOL);
                 const Standard_Real aCosMax = Abs(aCosF) > Abs(aCosL) ? aCosF : aCosL;
 
-                if (aCosMax < 0.0)
-                {
+                if (aCosMax < 0.0) {
                     Standard_Integer anErr = 0;
                     anIntCurv->Reverse();
                     aEinf.ChangeGeometry() = anIntCurv;
                     Standard_Real aPar = Parameter(aEinf.Geometry(), aPf, anErr);
-                    if (anErr == 0)
-                    {
+                    if (anErr == 0) {
                         myVMap.ChangeFromKey(Vf).ChangeParameter(edg) = aPar;
                     }
                     aPar = Parameter(aEinf.Geometry(), aPl, anErr);
-                    if (anErr == 0)
-                    {
+                    if (anErr == 0) {
                         myVMap.ChangeFromKey(Vl).ChangeParameter(edg) = aPar;
                     }
                 }
@@ -1601,8 +1420,7 @@ void Draft_Modification::Perform()
             //	pf = gc->FirstParameter();
             //      }
             Handle(Geom_Curve) theCurve = myEMap.FindFromKey(edg).Geometry();
-            if (theCurve->IsClosed())
-            {
+            if (theCurve->IsClosed()) {
                 // pf >= pl
                 Standard_Real FirstPar = theCurve->FirstParameter(), LastPar = theCurve->LastParameter();
                 Standard_Real pconf = Precision::PConfusion();
@@ -1614,7 +1432,6 @@ void Draft_Modification::Perform()
                 if (pl <= pf) {
                     pl += (LastPar - FirstPar);
                 }
-
             }
             if (pl <= pf) {
                 errStat = Draft_EdgeRecomputation;
@@ -1622,27 +1439,19 @@ void Draft_Modification::Perform()
                 return;
             }
         }
-        if (myVMap.Contains(Vf))
-            myVMap.ChangeFromKey(Vf).ChangeParameter(edg) = pf;
-        if (myVMap.Contains(Vl))
-            myVMap.ChangeFromKey(Vl).ChangeParameter(edg) = pl;
+        if (myVMap.Contains(Vf)) myVMap.ChangeFromKey(Vf).ChangeParameter(edg) = pf;
+        if (myVMap.Contains(Vl)) myVMap.ChangeFromKey(Vl).ChangeParameter(edg) = pl;
     }
 }
 
-
-
 //=======================================================================
-//function : NewSurface
-//purpose  : 
+// function : NewSurface
+// purpose  :
 //=======================================================================
 
-Handle(Geom_Surface) Draft_Modification::NewSurface
-(const Handle(Geom_Surface)& S,
-    const TopAbs_Orientation Oris,
-    const gp_Dir& Direction,
-    const Standard_Real Angle,
-    const gp_Pln& NeutralPlane)
-{
+Handle(Geom_Surface) Draft_Modification::NewSurface(const Handle(Geom_Surface) & S, const TopAbs_Orientation Oris,
+                                                    const gp_Dir& Direction, const Standard_Real Angle,
+                                                    const gp_Pln& NeutralPlane) {
     Handle(Geom_Surface) NewS;
 
     Handle(Standard_Type) TypeS = S->DynamicType();
@@ -1654,13 +1463,11 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
         if (FindRotation(Pl, Oris, Direction, Angle, NeutralPlane, Axe, Theta)) {
             if (Abs(Theta) > Precision::Angular()) {
                 NewS = Handle(Geom_Surface)::DownCast(S->Rotated(Axe, Theta));
-            }
-            else {
+            } else {
                 NewS = S;
             }
         }
-    }
-    else if (TypeS == STANDARD_TYPE(Geom_CylindricalSurface)) {
+    } else if (TypeS == STANDARD_TYPE(Geom_CylindricalSurface)) {
         Standard_Real testdir = Direction.Dot(NeutralPlane.Axis().Direction());
         if (Abs(testdir) <= 1. - Precision::Angular()) {
 #ifdef OCCT_DEBUG
@@ -1676,14 +1483,12 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
 #endif
             return NewS;
         }
-        if (Abs(Angle) > Precision::Angular())
-        {
+        if (Abs(Angle) > Precision::Angular()) {
             IntAna_QuadQuadGeo i2s;
             i2s.Perform(NeutralPlane, Cy, Precision::Angular(), Precision::Confusion());
             Standard_Boolean isIntDone = i2s.IsDone();
 
-            if (i2s.TypeInter() == IntAna_Ellipse)
-            {
+            if (i2s.TypeInter() == IntAna_Ellipse) {
                 const gp_Elips anEl = i2s.Ellipse(1);
                 const Standard_Real aMajorR = anEl.MajorRadius();
                 const Standard_Real aMinorR = anEl.MinorRadius();
@@ -1700,8 +1505,7 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
             // Pb : Where is the material???
             Standard_Real alpha = Angle;
             Standard_Boolean direct(axcone.Direct());
-            if ((direct && Oris == TopAbs_REVERSED) ||
-                (!direct && Oris == TopAbs_FORWARD)) {
+            if ((direct && Oris == TopAbs_REVERSED) || (!direct && Oris == TopAbs_FORWARD)) {
                 alpha = -alpha;
             }
 
@@ -1713,18 +1517,15 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
             Standard_Real Rad = Cy.Radius() + Z * Tan(alpha);
             if (Rad < 0.) {
                 Rad = -Rad;
-            }
-            else {
+            } else {
                 alpha = -alpha;
             }
             gp_Cone co(axcone, alpha, Rad);
             NewS = new Geom_ConicalSurface(co);
-        }
-        else {
+        } else {
             NewS = S;
         }
-    }
-    else if (TypeS == STANDARD_TYPE(Geom_ConicalSurface)) {
+    } else if (TypeS == STANDARD_TYPE(Geom_ConicalSurface)) {
 
         Standard_Real testdir = Direction.Dot(NeutralPlane.Axis().Direction());
         if (Abs(testdir) <= 1. - Precision::Angular()) {
@@ -1744,7 +1545,6 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
             return NewS;
         }
 
-
         IntAna_QuadQuadGeo i2s;
         i2s.Perform(NeutralPlane, Co1, Precision::Angular(), Precision::Confusion());
         if (!i2s.IsDone() || i2s.TypeInter() != IntAna_Circle) {
@@ -1757,8 +1557,7 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
         // Pb : Where is the material???
         Standard_Real alpha = Angle;
         Standard_Boolean direct(axcone.Direct());
-        if ((direct && Oris == TopAbs_REVERSED) ||
-            (!direct && Oris == TopAbs_FORWARD)) {
+        if ((direct && Oris == TopAbs_REVERSED) || (!direct && Oris == TopAbs_FORWARD)) {
             alpha = -alpha;
         }
 
@@ -1771,24 +1570,19 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
             Standard_Real Rad = i2s.Circle(1).Radius() + Z * Tan(alpha);
             if (Rad < 0.) {
                 Rad = -Rad;
-            }
-            else {
+            } else {
                 alpha = -alpha;
             }
             if (Abs(alpha - Co1.SemiAngle()) < Precision::Angular()) {
                 NewS = S;
-            }
-            else {
+            } else {
                 gp_Cone co(axcone, alpha, Rad);
                 NewS = new Geom_ConicalSurface(co);
             }
+        } else {
+            NewS = new Geom_CylindricalSurface(gp_Cylinder(axcone, i2s.Circle(1).Radius()));
         }
-        else {
-            NewS = new
-                Geom_CylindricalSurface(gp_Cylinder(axcone, i2s.Circle(1).Radius()));
-        }
-    }
-    else {
+    } else {
 #ifdef OCCT_DEBUG
         std::cout << "NewSurface:Draft_SurfNotYetImplemented" << std::endl;
 #endif
@@ -1796,20 +1590,15 @@ Handle(Geom_Surface) Draft_Modification::NewSurface
     return NewS;
 }
 
-
 //=======================================================================
-//function : NewCurve
-//purpose  : 
+// function : NewCurve
+// purpose  :
 //=======================================================================
 
-Handle(Geom_Curve) Draft_Modification::NewCurve
-(const Handle(Geom_Curve)& C,
-    const Handle(Geom_Surface)& S,
-    const TopAbs_Orientation Oris,
-    const gp_Dir& Direction,
-    const Standard_Real Angle,
-    const gp_Pln& NeutralPlane,
-    const Standard_Boolean)
+Handle(Geom_Curve) Draft_Modification::NewCurve(const Handle(Geom_Curve) & C, const Handle(Geom_Surface) & S,
+                                                const TopAbs_Orientation Oris, const gp_Dir& Direction,
+                                                const Standard_Real Angle, const gp_Pln& NeutralPlane,
+                                                const Standard_Boolean)
 
 {
     Handle(Geom_Curve) NewC;
@@ -1823,19 +1612,16 @@ Handle(Geom_Curve) Draft_Modification::NewCurve
         if (FindRotation(Pl, Oris, Direction, Angle, NeutralPlane, Axe, Theta)) {
             if (Abs(Theta) > Precision::Angular()) {
                 NewC = Handle(Geom_Curve)::DownCast(C->Rotated(Axe, Theta));
-            }
-            else {
+            } else {
                 NewC = C;
             }
         }
         return NewC;
     }
 
-
     if (C->DynamicType() != STANDARD_TYPE(Geom_Line)) {
         return NewC;
     }
-
 
     gp_Lin lin = Handle(Geom_Line)::DownCast(C)->Lin();
     //  Standard_Real testdir = Direction.Dot(lin.Direction());
@@ -1851,8 +1637,7 @@ Handle(Geom_Curve) Draft_Modification::NewCurve
         ElSLib::Parameters(Cy, lin.Location(), U, V);
         ElSLib::D1(U, V, Cy, pbid, d1u, d1v);
         Norm = d1u.Crossed(d1v);
-    }
-    else if (TypeS == STANDARD_TYPE(Geom_ConicalSurface)) {
+    } else if (TypeS == STANDARD_TYPE(Geom_ConicalSurface)) {
         Standard_Real U, V;
         gp_Vec d1u, d1v;
         gp_Pnt pbid;
@@ -1868,8 +1653,7 @@ Handle(Geom_Curve) Draft_Modification::NewCurve
             Norm.Reverse();
         }
         gp_Ax1 axrot(ilipl.Point(1), Norm.Crossed(Direction));
-        gp_Lin lires = gp_Lin(gp_Ax1(ilipl.Point(1), Direction)).
-            Rotated(axrot, Angle);
+        gp_Lin lires = gp_Lin(gp_Ax1(ilipl.Point(1), Direction)).Rotated(axrot, Angle);
         if (lires.Direction().Dot(lin.Direction()) < 0.) {
             lires.Reverse();
         }
@@ -1878,19 +1662,14 @@ Handle(Geom_Curve) Draft_Modification::NewCurve
     return NewC;
 }
 
-
 //=======================================================================
-//function : Choose
-//purpose  : 
+// function : Choose
+// purpose  :
 //=======================================================================
 
 static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo& theFMap,
-    Draft_IndexedDataMapOfEdgeEdgeInfo& theEMap,
-    const TopoDS_Vertex& Vtx,
-    Draft_VertexInfo& Vinf,
-    GeomAdaptor_Curve& AC,
-    GeomAdaptor_Surface& AS)
-{
+                               Draft_IndexedDataMapOfEdgeEdgeInfo& theEMap, const TopoDS_Vertex& Vtx,
+                               Draft_VertexInfo& Vinf, GeomAdaptor_Curve& AC, GeomAdaptor_Surface& AS) {
     gp_Vec tgref;
     Vinf.InitEdgeIterator();
 
@@ -1900,10 +1679,8 @@ static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo& theFMap
         const Draft_EdgeInfo& Einf1 = theEMap.FindFromKey(E1);
         if (Einf1.SecondFace().IsNull()) {
             break;
-        }
-        else {
-            GeomAbs_Shape te = BRep_Tool::Continuity(E1, Einf1.FirstFace(),
-                Einf1.SecondFace());
+        } else {
+            GeomAbs_Shape te = BRep_Tool::Continuity(E1, Einf1.FirstFace(), Einf1.SecondFace());
             if (te >= GeomAbs_G1) {
                 break;
             }
@@ -1915,7 +1692,7 @@ static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo& theFMap
     }
 
     const TopoDS_Edge& Eref = Vinf.Edge();
-    //const Draft_EdgeInfo& Einf = theEMap(Eref);
+    // const Draft_EdgeInfo& Einf = theEMap(Eref);
     Draft_EdgeInfo& Einf = theEMap.ChangeFromKey(Eref);
 
     AC.Load(Einf.Geometry());
@@ -1925,42 +1702,36 @@ static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo& theFMap
     Handle(Geom_Curve) C = BRep_Tool::Curve(Eref, Loc, f, l);
     C = Handle(Geom_Curve)::DownCast(C->Transformed(Loc.Transformation()));
     gp_Pnt ptbid;
-    //prm = Parameter(C,BRep_Tool::Pnt(Vtx));
+    // prm = Parameter(C,BRep_Tool::Pnt(Vtx));
     Standard_Integer done;
     Standard_Real param = Parameter(C, BRep_Tool::Pnt(Vtx), done);
-    if (done != 0)
-    {
+    if (done != 0) {
         Handle(Geom_Surface) S1 = theFMap.FindFromKey(Einf.FirstFace()).Geometry();
         Handle(Geom_Surface) S2 = theFMap.FindFromKey(Einf.SecondFace()).Geometry();
         prm = SmartParameter(Einf, BRep_Tool::Tolerance(Eref), BRep_Tool::Pnt(Vtx), done, S1, S2);
-    }
-    else
+    } else
         prm = param;
     C->D1(prm, ptbid, tgref);
-
 
     Vinf.InitEdgeIterator();
     while (Vinf.MoreEdge()) {
         // Find a non tangent edge
         const TopoDS_Edge& Edg = Vinf.Edge();
         if (!Edg.IsSame(Eref)) {
-            //const Draft_EdgeInfo& Einfo = theEMap(Edg);
+            // const Draft_EdgeInfo& Einfo = theEMap(Edg);
             Draft_EdgeInfo& Einfo = theEMap.ChangeFromKey(Edg);
             if (!Einfo.SecondFace().IsNull() &&
-                BRep_Tool::Continuity(Edg, Einfo.FirstFace(), Einfo.SecondFace())
-                <= GeomAbs_C0) {
+                BRep_Tool::Continuity(Edg, Einfo.FirstFace(), Einfo.SecondFace()) <= GeomAbs_C0) {
                 C = BRep_Tool::Curve(Edg, Loc, f, l);
                 C = Handle(Geom_Curve)::DownCast(C->Transformed(Loc.Transformation()));
-                //prm = Parameter(C,BRep_Tool::Pnt(Vtx));
+                // prm = Parameter(C,BRep_Tool::Pnt(Vtx));
                 Standard_Integer anewdone;
                 Standard_Real anewparam = Parameter(C, BRep_Tool::Pnt(Vtx), anewdone);
-                if (anewdone != 0)
-                {
+                if (anewdone != 0) {
                     Handle(Geom_Surface) S1 = theFMap.FindFromKey(Einfo.FirstFace()).Geometry();
                     Handle(Geom_Surface) S2 = theFMap.FindFromKey(Einfo.SecondFace()).Geometry();
                     prm = SmartParameter(Einfo, BRep_Tool::Tolerance(Edg), BRep_Tool::Pnt(Vtx), anewdone, S1, S2);
-                }
-                else
+                } else
                     prm = anewparam;
                 gp_Vec tg;
                 C->D1(prm, ptbid, tg);
@@ -1978,35 +1749,27 @@ static Standard_Boolean Choose(const Draft_IndexedDataMapOfFaceFaceInfo& theFMap
     const Draft_EdgeInfo& Einf2 = theEMap.FindFromKey(Vinf.Edge());
     if (!Einf.SecondFace().IsNull()) {
 
-        if (Einf2.FirstFace().IsSame(Einf.FirstFace()) ||
-            Einf2.FirstFace().IsSame(Einf.SecondFace())) {
+        if (Einf2.FirstFace().IsSame(Einf.FirstFace()) || Einf2.FirstFace().IsSame(Einf.SecondFace())) {
             AS.Load(theFMap.FindFromKey(Einf2.SecondFace()).Geometry());
-        }
-        else {
+        } else {
             AS.Load(theFMap.FindFromKey(Einf2.FirstFace()).Geometry());
         }
-    }
-    else {
+    } else {
         if (Einf2.FirstFace().IsSame(Einf.FirstFace())) {
             AS.Load(theFMap.FindFromKey(Einf2.SecondFace()).Geometry());
-        }
-        else {
+        } else {
             AS.Load(theFMap.FindFromKey(Einf2.FirstFace()).Geometry());
         }
     }
     return Standard_True;
 }
 
-
 //=======================================================================
-//function : Parameter
-//purpose  : 
+// function : Parameter
+// purpose  :
 //=======================================================================
 
-static Standard_Real Parameter(const Handle(Geom_Curve)& C,
-    const gp_Pnt& P,
-    Standard_Integer& done)
-{
+static Standard_Real Parameter(const Handle(Geom_Curve) & C, const gp_Pnt& P, Standard_Integer& done) {
     done = 0;
     Handle(Geom_Curve) cbase = C;
     Handle(Standard_Type) ctyp = C->DynamicType();
@@ -2017,26 +1780,21 @@ static Standard_Real Parameter(const Handle(Geom_Curve)& C,
     Standard_Real param;
     if (ctyp == STANDARD_TYPE(Geom_Line)) {
         param = ElCLib::Parameter(Handle(Geom_Line)::DownCast(cbase)->Lin(), P);
-    }
-    else if (ctyp == STANDARD_TYPE(Geom_Circle)) {
+    } else if (ctyp == STANDARD_TYPE(Geom_Circle)) {
         param = ElCLib::Parameter(Handle(Geom_Circle)::DownCast(cbase)->Circ(), P);
         if (Abs(2. * M_PI - param) <= Epsilon(2. * M_PI)) {
             param = 0.;
         }
-    }
-    else if (ctyp == STANDARD_TYPE(Geom_Ellipse)) {
+    } else if (ctyp == STANDARD_TYPE(Geom_Ellipse)) {
         param = ElCLib::Parameter(Handle(Geom_Ellipse)::DownCast(cbase)->Elips(), P);
         if (Abs(2. * M_PI - param) <= Epsilon(2. * M_PI)) {
             param = 0.;
         }
-    }
-    else if (ctyp == STANDARD_TYPE(Geom_Parabola)) {
+    } else if (ctyp == STANDARD_TYPE(Geom_Parabola)) {
         param = ElCLib::Parameter(Handle(Geom_Parabola)::DownCast(cbase)->Parab(), P);
-    }
-    else if (ctyp == STANDARD_TYPE(Geom_Hyperbola)) {
+    } else if (ctyp == STANDARD_TYPE(Geom_Hyperbola)) {
         param = ElCLib::Parameter(Handle(Geom_Hyperbola)::DownCast(cbase)->Hypr(), P);
-    }
-    else {
+    } else {
         GeomAdaptor_Curve TheCurve(C);
         Extrema_ExtPC myExtPC(P, TheCurve);
         if (!myExtPC.IsDone()) {
@@ -2053,16 +1811,14 @@ static Standard_Real Parameter(const Handle(Geom_Curve)& C,
                 }
             }
             param = myExtPC.Point(jmin).Parameter();
-        }
-        else {
+        } else {
             Standard_Real dist1_2, dist2_2;
             gp_Pnt p1b, p2b;
             myExtPC.TrimmedSquareDistances(dist1_2, dist2_2, p1b, p2b);
             if (dist1_2 < dist2_2) {
                 done = -1;
                 param = TheCurve.FirstParameter();
-            }
-            else {
+            } else {
                 done = 1;
                 param = TheCurve.LastParameter();
             }
@@ -2080,17 +1836,13 @@ static Standard_Real Parameter(const Handle(Geom_Curve)& C,
 }
 
 //=======================================================================
-//function : SmartParameter
-//purpose  : 
+// function : SmartParameter
+// purpose  :
 //=======================================================================
 
-static Standard_Real SmartParameter(Draft_EdgeInfo& Einf,
-    const Standard_Real EdgeTol,
-    const gp_Pnt& Pnt,
-    const Standard_Integer sign,
-    const Handle(Geom_Surface)& S1,
-    const Handle(Geom_Surface)& S2)
-{
+static Standard_Real SmartParameter(Draft_EdgeInfo& Einf, const Standard_Real EdgeTol, const gp_Pnt& Pnt,
+                                    const Standard_Integer sign, const Handle(Geom_Surface) & S1,
+                                    const Handle(Geom_Surface) & S2) {
     Handle(Geom2d_Curve) NewC2d;
     Standard_Real Tol = Precision::Confusion();
     Standard_Real Etol = EdgeTol;
@@ -2098,14 +1850,12 @@ static Standard_Real SmartParameter(Draft_EdgeInfo& Einf,
     Handle(Geom2d_Curve) pcu1 = Einf.FirstPC();
     Handle(Geom2d_Curve) pcu2 = Einf.SecondPC();
 
-    if (pcu1.IsNull())
-    {
+    if (pcu1.IsNull()) {
         Handle(Geom_Curve) theCurve = Einf.Geometry();
         pcu1 = GeomProjLib::Curve2d(theCurve, theCurve->FirstParameter(), theCurve->LastParameter(), S1, Etol);
         Einf.ChangeFirstPC() = pcu1;
     }
-    if (pcu2.IsNull())
-    {
+    if (pcu2.IsNull()) {
         Handle(Geom_Curve) theCurve = Einf.Geometry();
         pcu2 = GeomProjLib::Curve2d(theCurve, theCurve->FirstParameter(), theCurve->LastParameter(), S2, Etol);
         Einf.ChangeSecondPC() = pcu2;
@@ -2121,15 +1871,13 @@ static Standard_Real SmartParameter(Draft_EdgeInfo& Einf,
 
     gp_Pnt2d P2d(U, V);
     Geom2dAPI_ProjectPointOnCurve Projector2d(P2d, NewC2d);
-    if (Projector2d.NbPoints() == 0 || Projector2d.LowerDistance() > Tol)
-    {
+    if (Projector2d.NbPoints() == 0 || Projector2d.LowerDistance() > Tol) {
         Handle(Geom2d_BSplineCurve) BCurve;
         if (NewC2d->DynamicType() != STANDARD_TYPE(Geom2d_BSplineCurve))
             BCurve = Geom2dConvert::CurveToBSplineCurve(NewC2d);
         else
             BCurve = Handle(Geom2d_BSplineCurve)::DownCast(NewC2d);
-        if (sign == -1)
-        {
+        if (sign == -1) {
             TColgp_Array1OfPnt2d PntArray(1, 2);
             PntArray(1) = P2d;
             PntArray(2) = BCurve->Pole(1);
@@ -2137,9 +1885,7 @@ static Standard_Real SmartParameter(Draft_EdgeInfo& Einf,
             Geom2dConvert_CompCurveToBSplineCurve Concat(BCurve, Convert_QuasiAngular);
             Concat.Add(Patch, Tol, Standard_False);
             BCurve = Concat.BSplineCurve();
-        }
-        else
-        {
+        } else {
             TColgp_Array1OfPnt2d PntArray(1, 2);
             PntArray(1) = BCurve->Pole(BCurve->NbPoles());
             PntArray(2) = P2d;
@@ -2170,23 +1916,19 @@ static Standard_Real SmartParameter(Draft_EdgeInfo& Einf,
         return Einf.Geometry()->FirstParameter();
     else
         return Einf.Geometry()->LastParameter();
-
 }
 
 //=======================================================================
-//function : Orientation
-//purpose  : 
+// function : Orientation
+// purpose  :
 //=======================================================================
 
-static TopAbs_Orientation Orientation(const TopoDS_Shape& S,
-    const TopoDS_Face& F)
-{
+static TopAbs_Orientation Orientation(const TopoDS_Shape& S, const TopoDS_Face& F) {
     //
     // change porting NT
     //
     TopExp_Explorer expl;
-    expl.Init(S,
-        TopAbs_FACE);
+    expl.Init(S, TopAbs_FACE);
     while (expl.More()) {
         if (TopoDS::Face(expl.Current()).IsSame(F)) {
             return expl.Current().Orientation();
@@ -2196,22 +1938,15 @@ static TopAbs_Orientation Orientation(const TopoDS_Shape& S,
     return TopAbs_FORWARD;
 }
 
-
 //=======================================================================
-//function : FindRotation
-//purpose  : 
+// function : FindRotation
+// purpose  :
 //=======================================================================
 
-static Standard_Boolean FindRotation(const gp_Pln& Pl,
-    const TopAbs_Orientation Oris,
-    const gp_Dir& Direction,
-    const Standard_Real Angle,
-    const gp_Pln& NeutralPlane,
-    gp_Ax1& Axe,
-    Standard_Real& theta)
-{
-    IntAna_QuadQuadGeo i2pl(Pl, NeutralPlane,
-        Precision::Angular(), Precision::Confusion());
+static Standard_Boolean FindRotation(const gp_Pln& Pl, const TopAbs_Orientation Oris, const gp_Dir& Direction,
+                                     const Standard_Real Angle, const gp_Pln& NeutralPlane, gp_Ax1& Axe,
+                                     Standard_Real& theta) {
+    IntAna_QuadQuadGeo i2pl(Pl, NeutralPlane, Precision::Angular(), Precision::Confusion());
 
     if (i2pl.IsDone() && i2pl.TypeInter() == IntAna_Line) {
         gp_Lin li = i2pl.Line(1);
@@ -2223,8 +1958,7 @@ static Standard_Boolean FindRotation(const gp_Pln& Pl,
             Standard_Real b = Direction.Dot(ny);
             Standard_Real c = Direction.Dot(Pl.Axis().Direction());
             Standard_Boolean direct(Pl.Position().Direct());
-            if ((direct && Oris == TopAbs_REVERSED) ||
-                (!direct && Oris == TopAbs_FORWARD)) {
+            if ((direct && Oris == TopAbs_REVERSED) || (!direct && Oris == TopAbs_FORWARD)) {
                 b = -b;
                 c = -c;
             }
@@ -2249,4 +1983,3 @@ static Standard_Boolean FindRotation(const gp_Pln& Pl,
     }
     return Standard_False;
 }
-

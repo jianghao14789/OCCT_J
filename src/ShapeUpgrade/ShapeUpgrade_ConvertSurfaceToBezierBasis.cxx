@@ -46,8 +46,7 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(ShapeUpgrade_ConvertSurfaceToBezierBasis, ShapeUpgrade_SplitSurface)
 
-ShapeUpgrade_ConvertSurfaceToBezierBasis::ShapeUpgrade_ConvertSurfaceToBezierBasis()
-{
+ShapeUpgrade_ConvertSurfaceToBezierBasis::ShapeUpgrade_ConvertSurfaceToBezierBasis() {
     myPlaneMode = Standard_True;
     myRevolutionMode = Standard_True;
     myExtrusionMode = Standard_True;
@@ -55,12 +54,11 @@ ShapeUpgrade_ConvertSurfaceToBezierBasis::ShapeUpgrade_ConvertSurfaceToBezierBas
 }
 
 //=======================================================================
-//function : Compute
-//purpose  : 
+// function : Compute
+// purpose  :
 //=======================================================================
 
-void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Segment)
-{
+void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Segment) {
     if (!Segment) {
         Standard_Real UF, UL, VF, VL;
         mySurface->Bounds(UF, UL, VF, VL);
@@ -89,8 +87,7 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
         myStatus |= converter.myStatus;
         mySegments = converter.Segments();
         return;
-    }
-    else if (mySurface->IsKind(STANDARD_TYPE(Geom_OffsetSurface))) {
+    } else if (mySurface->IsKind(STANDARD_TYPE(Geom_OffsetSurface))) {
         Handle(Geom_OffsetSurface) Offset = Handle(Geom_OffsetSurface)::DownCast(mySurface);
         Handle(Geom_Surface) BasSurf = Offset->BasisSurface();
         ShapeUpgrade_ConvertSurfaceToBezierBasis converter;
@@ -103,44 +100,46 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
         myStatus |= converter.myStatus;
         mySegments = converter.Segments();
         return;
-    }
-    else if (mySurface->IsKind(STANDARD_TYPE(Geom_Plane)) && myPlaneMode) {
+    } else if (mySurface->IsKind(STANDARD_TYPE(Geom_Plane)) && myPlaneMode) {
         Handle(Geom_Plane) pln = Handle(Geom_Plane)::DownCast(mySurface);
         TColgp_Array2OfPnt poles(1, 2, 1, 2);
         gp_Pnt dp;
-        poles(1, 1) = dp = pln->Value(UFirst, VFirst); poles(1, 2) = dp = pln->Value(UFirst, VLast);
-        poles(2, 1) = dp = pln->Value(ULast, VFirst);  poles(2, 2) = dp = pln->Value(ULast, VLast);
+        poles(1, 1) = dp = pln->Value(UFirst, VFirst);
+        poles(1, 2) = dp = pln->Value(UFirst, VLast);
+        poles(2, 1) = dp = pln->Value(ULast, VFirst);
+        poles(2, 2) = dp = pln->Value(ULast, VLast);
         Handle(Geom_BezierSurface) bezier = new Geom_BezierSurface(poles);
         TColStd_Array1OfReal UJoints(1, 2);
-        UJoints(1) = UFirst; UJoints(2) = ULast;
+        UJoints(1) = UFirst;
+        UJoints(2) = ULast;
         TColStd_Array1OfReal VJoints(1, 2);
-        VJoints(1) = VFirst; VJoints(2) = VLast;
+        VJoints(1) = VFirst;
+        VJoints(2) = VLast;
         Handle(TColGeom_HArray2OfSurface) surf = new TColGeom_HArray2OfSurface(1, 1, 1, 1);
         surf->SetValue(1, 1, bezier);
         mySegments = new ShapeExtend_CompositeSurface(surf, UJoints, VJoints);
         myStatus = ShapeExtend::EncodeStatus(ShapeExtend_DONE1);
         return;
-    }
-    else if (mySurface->IsKind(STANDARD_TYPE(Geom_BezierSurface))) {
+    } else if (mySurface->IsKind(STANDARD_TYPE(Geom_BezierSurface))) {
         Handle(Geom_BezierSurface) bezier = Handle(Geom_BezierSurface)::DownCast(mySurface);
         Handle(TColGeom_HArray2OfSurface) surf = new TColGeom_HArray2OfSurface(1, 1, 1, 1);
         TColStd_Array1OfReal UJoints(1, 2);
-        UJoints(1) = UFirst; UJoints(2) = ULast;
+        UJoints(1) = UFirst;
+        UJoints(2) = ULast;
         TColStd_Array1OfReal VJoints(1, 2);
-        VJoints(1) = VFirst; VJoints(2) = VLast;
-        if (UFirst < precision && ULast > 1 - precision &&
-            VFirst < precision && VLast > 1 - precision) {
+        VJoints(1) = VFirst;
+        VJoints(2) = VLast;
+        if (UFirst < precision && ULast > 1 - precision && VFirst < precision && VLast > 1 - precision) {
             surf->SetValue(1, 1, bezier);
             myStatus = ShapeExtend::EncodeStatus(ShapeExtend_OK);
-        }
-        else {
+        } else {
             Handle(Geom_BezierSurface) besNew = Handle(Geom_BezierSurface)::DownCast(bezier->Copy());
-            //pdn K4L+ (work around)
-            // Standard_Real u1 = 2*UFirst - 1;
-            // Standard_Real u2 = 2*ULast - 1;
-            // Standard_Real v1 = 2*VFirst - 1;
-            // Standard_Real v2 = 2*VLast - 1;
-            //rln C30 (direct use)
+            // pdn K4L+ (work around)
+            //  Standard_Real u1 = 2*UFirst - 1;
+            //  Standard_Real u2 = 2*ULast - 1;
+            //  Standard_Real v1 = 2*VFirst - 1;
+            //  Standard_Real v2 = 2*VLast - 1;
+            // rln C30 (direct use)
             Standard_Real u1 = UFirst;
             Standard_Real u2 = ULast;
             Standard_Real v1 = VFirst;
@@ -151,13 +150,12 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
         }
         mySegments = new ShapeExtend_CompositeSurface(surf, UJoints, VJoints);
         return;
-    }
-    else if (mySurface->IsKind(STANDARD_TYPE(Geom_BSplineSurface)) && myBSplineMode) {
+    } else if (mySurface->IsKind(STANDARD_TYPE(Geom_BSplineSurface)) && myBSplineMode) {
         Handle(Geom_BSplineSurface) bspline = Handle(Geom_BSplineSurface)::DownCast(mySurface);
-        //pdn
+        // pdn
         Standard_Real u1, u2, v1, v2;
         bspline->Bounds(u1, u2, v1, v2);
-        GeomConvert_BSplineSurfaceToBezierSurface converter(bspline);//,UFirst,ULast,VFirst,VLast,precision;
+        GeomConvert_BSplineSurfaceToBezierSurface converter(bspline); //,UFirst,ULast,VFirst,VLast,precision;
         Standard_Integer nbUPatches = converter.NbUPatches();
         Standard_Integer nbVPatches = converter.NbVPatches();
         TColStd_Array1OfReal UJoints(1, nbUPatches + 1);
@@ -177,8 +175,7 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
             if (UJoints(i) - UJoints(i - 1) < precision) {
                 NbUFiltered++;
                 UReject(i - 1) = Standard_True;
-            }
-            else
+            } else
                 UFilteredJoints.Append(UJoints(i));
 
         converter.VKnots(VJoints);
@@ -188,8 +185,7 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
             if (VJoints(i) - VJoints(i - 1) < precision) {
                 NbVFiltered++;
                 VReject(i - 1) = Standard_True;
-            }
-            else
+            } else
                 VFilteredJoints.Append(VJoints(i));
 
 #ifdef OCCT_DEBUG
@@ -246,8 +242,7 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
         }
         myStatus = ShapeExtend::EncodeStatus(ShapeExtend_DONE1);
         return;
-    }
-    else if (mySurface->IsKind(STANDARD_TYPE(Geom_SurfaceOfRevolution)) && myRevolutionMode) {
+    } else if (mySurface->IsKind(STANDARD_TYPE(Geom_SurfaceOfRevolution)) && myRevolutionMode) {
         Handle(Geom_SurfaceOfRevolution) revol = Handle(Geom_SurfaceOfRevolution)::DownCast(mySurface);
         Handle(Geom_Curve) basis = revol->BasisCurve();
         if (basis->IsKind(STANDARD_TYPE(Geom_TrimmedCurve))) {
@@ -279,8 +274,7 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
                 Handle(Geom_OffsetCurve) offCur = new Geom_OffsetCurve(curves->Value(i), value, direction);
                 curves->SetValue(i, offCur);
             }
-        }
-        else {
+        } else {
             ShapeUpgrade_ConvertCurve3dToBezier converter;
             converter.Init(basis, VFirst, VLast);
             converter.Perform(Standard_True);
@@ -302,17 +296,18 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
         Standard_Integer i; // svv #1
         for (i = 1; i <= nbCurves; i++) {
             Handle(Geom_SurfaceOfRevolution) rev = new Geom_SurfaceOfRevolution(curves->Value(i), axis);
-            if (UFirst - Umin < Precision::PConfusion() &&
-                Umax - ULast < Precision::PConfusion())
+            if (UFirst - Umin < Precision::PConfusion() && Umax - ULast < Precision::PConfusion())
                 surf->SetValue(1, i, rev);
             else {
-                Handle(Geom_RectangularTrimmedSurface) rect = new Geom_RectangularTrimmedSurface(rev, UFirst, ULast, Standard_True);
+                Handle(Geom_RectangularTrimmedSurface) rect =
+                    new Geom_RectangularTrimmedSurface(rev, UFirst, ULast, Standard_True);
                 surf->SetValue(1, i, rect);
             }
         }
         TColStd_Array1OfReal UJoints(1, 2);
         TColStd_Array1OfReal VJoints(1, nbCurves + 1);
-        UJoints(1) = UFirst;  UJoints(2) = ULast;
+        UJoints(1) = UFirst;
+        UJoints(2) = ULast;
         for (i = 1; i <= nbCurves + 1; i++)
             VJoints(i) = vPar->Value(i);
 
@@ -329,11 +324,10 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
             VFirst = VLast;
         }
         return;
-    }
-    else if (mySurface->IsKind(STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) && myExtrusionMode) {
+    } else if (mySurface->IsKind(STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) && myExtrusionMode) {
         Handle(Geom_SurfaceOfLinearExtrusion) extr = Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(mySurface);
         Handle(Geom_Curve) basis = extr->BasisCurve();
-        //gp_Dir direction = extr->Direction(); // direction not used (skl)
+        // gp_Dir direction = extr->Direction(); // direction not used (skl)
 
         Handle(TColGeom_HArray1OfCurve) curves;
         Standard_Integer nbCurves;
@@ -369,7 +363,8 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
 
         TColStd_Array1OfReal UJoints(1, nbCurves + 1);
         TColStd_Array1OfReal VJoints(1, 2);
-        VJoints(1) = VFirst;  VJoints(2) = VLast;
+        VJoints(1) = VFirst;
+        VJoints(2) = VLast;
         for (i = 1; i <= nbCurves + 1; i++)
             UJoints(i) = uPar->Value(i);
 
@@ -387,21 +382,22 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
         }
         myStatus = ShapeExtend::EncodeStatus(ShapeExtend_DONE1);
         return;
-    }
-    else {
+    } else {
         TColStd_Array1OfReal UJoints(1, 2);
-        UJoints(1) = UFirst; UJoints(2) = ULast;
+        UJoints(1) = UFirst;
+        UJoints(2) = ULast;
         TColStd_Array1OfReal VJoints(1, 2);
-        VJoints(1) = VFirst; VJoints(2) = VLast;
+        VJoints(1) = VFirst;
+        VJoints(2) = VLast;
         Handle(TColGeom_HArray2OfSurface) surf = new TColGeom_HArray2OfSurface(1, 1, 1, 1);
         Standard_Real U1, U2, V1, V2;
         mySurface->Bounds(U1, U2, V1, V2);
         Handle(Geom_Surface) S;
-        if (U1 - UFirst < precision && ULast - U2 < precision &&
-            V2 - VFirst < precision && VLast - V2 < precision)
+        if (U1 - UFirst < precision && ULast - U2 < precision && V2 - VFirst < precision && VLast - V2 < precision)
             S = mySurface;
         else {
-            Handle(Geom_RectangularTrimmedSurface) rts = new Geom_RectangularTrimmedSurface(mySurface, UFirst, ULast, VFirst, VLast);
+            Handle(Geom_RectangularTrimmedSurface) rts =
+                new Geom_RectangularTrimmedSurface(mySurface, UFirst, ULast, VFirst, VLast);
             S = rts;
         }
         surf->SetValue(1, 1, S);
@@ -412,27 +408,22 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Compute(const Standard_Boolean Se
 }
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
 
-static Handle(Geom_Surface) GetSegment(const Handle(Geom_Surface) surf,
-    const Standard_Real U1,
-    const Standard_Real U2,
-    const Standard_Real V1,
-    const Standard_Real V2)
-{
+static Handle(Geom_Surface) GetSegment(const Handle(Geom_Surface) surf, const Standard_Real U1, const Standard_Real U2,
+                                       const Standard_Real V1, const Standard_Real V2) {
     if (surf->IsKind(STANDARD_TYPE(Geom_BezierSurface))) {
         Handle(Geom_BezierSurface) bezier = Handle(Geom_BezierSurface)::DownCast(surf->Copy());
         Standard_Real prec = Precision::PConfusion();
-        if (U1 < prec && U2 > 1 - prec && V1 < prec && V2 > 1 - prec)
-            return bezier;
-        //pdn K4L+ (work around)
-        // Standard_Real u1 = 2*U1 - 1;
-        // Standard_Real u2 = 2*U2 - 1;
-        // Standard_Real v1 = 2*V1 - 1;
-        // Standard_Real v2 = 2*V2 - 1; 
-        //rln C30 (direct use)
+        if (U1 < prec && U2 > 1 - prec && V1 < prec && V2 > 1 - prec) return bezier;
+        // pdn K4L+ (work around)
+        //  Standard_Real u1 = 2*U1 - 1;
+        //  Standard_Real u2 = 2*U2 - 1;
+        //  Standard_Real v1 = 2*V1 - 1;
+        //  Standard_Real v2 = 2*V2 - 1;
+        // rln C30 (direct use)
         Standard_Real u1 = U1;
         Standard_Real u2 = U2;
         Standard_Real v1 = V1;
@@ -445,8 +436,7 @@ static Handle(Geom_Surface) GetSegment(const Handle(Geom_Surface) surf,
     if (surf->IsKind(STANDARD_TYPE(Geom_RectangularTrimmedSurface))) {
         Handle(Geom_RectangularTrimmedSurface) rect = Handle(Geom_RectangularTrimmedSurface)::DownCast(surf);
         S = rect->BasisSurface();
-    }
-    else
+    } else
         S = surf;
 
     if (S->IsKind(STANDARD_TYPE(Geom_SurfaceOfRevolution))) {
@@ -461,26 +451,20 @@ static Handle(Geom_Surface) GetSegment(const Handle(Geom_Surface) surf,
         if (basis->IsKind(STANDARD_TYPE(Geom_BezierCurve))) {
             Handle(Geom_BezierCurve) bezier = Handle(Geom_BezierCurve)::DownCast(basis);
             bezier->Segment(V1, V2);
-        }
-        else {
+        } else {
 #ifdef OCCT_DEBUG
             std::cout << "Warning: Resulting path is not surface of revolution basis on bezier curve" << std::endl;
 #endif
         }
-        if (Abs(U1 - Umin) < Precision::PConfusion() &&
-            Abs(U2 - Umax) < Precision::PConfusion())
-            return revol;
+        if (Abs(U1 - Umin) < Precision::PConfusion() && Abs(U2 - Umax) < Precision::PConfusion()) return revol;
 
         Handle(Geom_RectangularTrimmedSurface) res = new Geom_RectangularTrimmedSurface(revol, U1, U2, Standard_True);
         return res;
-    }
-    else {
+    } else {
         Standard_Real Umin, Umax, Vmin, Vmax;
         surf->Bounds(Umin, Umax, Vmin, Vmax);
-        if (U1 - Umin < Precision::PConfusion() &&
-            Umax - U2 < Precision::PConfusion() &&
-            V1 - Vmin < Precision::PConfusion() &&
-            Vmax - V2 < Precision::PConfusion())
+        if (U1 - Umin < Precision::PConfusion() && Umax - U2 < Precision::PConfusion() &&
+            V1 - Vmin < Precision::PConfusion() && Vmax - V2 < Precision::PConfusion())
             return surf;
 
         Handle(Geom_RectangularTrimmedSurface) res = new Geom_RectangularTrimmedSurface(surf, U1, U2, V1, V2);
@@ -489,20 +473,18 @@ static Handle(Geom_Surface) GetSegment(const Handle(Geom_Surface) surf,
 }
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
 
-void ShapeUpgrade_ConvertSurfaceToBezierBasis::Build(const Standard_Boolean /*Segment*/)
-{
+void ShapeUpgrade_ConvertSurfaceToBezierBasis::Build(const Standard_Boolean /*Segment*/) {
     Standard_Boolean isOffset = Standard_False;
     Standard_Real offsetValue = 0;
     Handle(Geom_Surface) S;
     if (mySurface->IsKind(STANDARD_TYPE(Geom_RectangularTrimmedSurface))) {
         Handle(Geom_RectangularTrimmedSurface) Surface = Handle(Geom_RectangularTrimmedSurface)::DownCast(mySurface);
         S = Surface->BasisSurface();
-    }
-    else
+    } else
         S = mySurface;
     if (S->IsKind(STANDARD_TYPE(Geom_OffsetSurface))) {
         Handle(Geom_OffsetSurface) offSur = Handle(Geom_OffsetSurface)::DownCast(S);
@@ -522,21 +504,19 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Build(const Standard_Boolean /*Se
         Standard_Real parU = myUSplitValues->Value(i1);
         for (; j1 <= myUSplitParams->Length(); j1++) {
             Standard_Real param = myUSplitParams->Value(j1);
-            if (parU - param < prec)
-                break;
+            if (parU - param < prec) break;
         }
 
         Standard_Integer j2 = 2;
         for (Standard_Integer i2 = 2; i2 <= nbV; i2++) {
             Standard_Real parV = myVSplitValues->Value(i2);
             for (; j2 <= myVSplitParams->Length(); j2++)
-                if (parV - myVSplitParams->Value(j2) < prec)
-                    break;
+                if (parV - myVSplitParams->Value(j2) < prec) break;
 
             Handle(Geom_Surface) patch = mySegments->Patch(j1 - 1, j2 - 1);
             Standard_Real U1, U2, V1, V2;
             patch->Bounds(U1, U2, V1, V2);
-            //linear recomputation of part:
+            // linear recomputation of part:
             Standard_Real uFirst = myUSplitParams->Value(j1 - 1);
             Standard_Real uLast = myUSplitParams->Value(j1);
             Standard_Real vFirst = myVSplitParams->Value(j2 - 1);
@@ -545,7 +525,7 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Build(const Standard_Boolean /*Se
             Standard_Real vFact = (V2 - V1) / (vLast - vFirst);
             Standard_Real ppU = myUSplitValues->Value(i1 - 1);
             Standard_Real ppV = myVSplitValues->Value(i2 - 1);
-            //defining a part
+            // defining a part
             Standard_Real uL1 = U1 + (ppU - uFirst) * uFact;
             Standard_Real uL2 = U1 + (parU - uFirst) * uFact;
             Standard_Real vL1 = V1 + (ppV - vFirst) * vFact;
@@ -572,11 +552,10 @@ void ShapeUpgrade_ConvertSurfaceToBezierBasis::Build(const Standard_Boolean /*Se
 }
 
 //=======================================================================
-//function : Segments
-//purpose  : 
+// function : Segments
+// purpose  :
 //=======================================================================
 
-Handle(ShapeExtend_CompositeSurface) ShapeUpgrade_ConvertSurfaceToBezierBasis::Segments() const
-{
+Handle(ShapeExtend_CompositeSurface) ShapeUpgrade_ConvertSurfaceToBezierBasis::Segments() const {
     return mySegments;
 }

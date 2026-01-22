@@ -49,14 +49,13 @@
 //! pairs with the same new shape.
 //! Finally, an example of delete would be a face
 //! removed by a Boolean operation.
-enum TNaming_Evolution
-{
-TNaming_PRIMITIVE,
-TNaming_GENERATED,
-TNaming_MODIFY,
-TNaming_DELETE,
-TNaming_REPLACE,
-TNaming_SELECTED
+enum TNaming_Evolution {
+    TNaming_PRIMITIVE,
+    TNaming_GENERATED,
+    TNaming_MODIFY,
+    TNaming_DELETE,
+    TNaming_REPLACE,
+    TNaming_SELECTED
 };
 
 #endif // _TNaming_Evolution_HeaderFile

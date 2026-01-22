@@ -27,42 +27,20 @@ class Interface_Check;
 class StepVisual_PresentationSet;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for PresentationSet
-class RWStepVisual_RWPresentationSet 
-{
+class RWStepVisual_RWPresentationSet {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWPresentationSet();
 
-  
-  Standard_EXPORT RWStepVisual_RWPresentationSet();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_PresentationSet)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_PresentationSet)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_PresentationSet) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_PresentationSet) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWPresentationSet_HeaderFile

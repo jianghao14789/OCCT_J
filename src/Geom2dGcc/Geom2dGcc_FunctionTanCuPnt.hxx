@@ -27,13 +27,11 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Real.hxx>
 
-
 //! This abstract class describes a Function of 1 Variable
 //! used to find a line tangent to a curve and passing
 //! through a point.
 class Geom2dGcc_FunctionTanCuPnt : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Geom2dGcc_FunctionTanCuPnt(const Geom2dAdaptor_Curve& C, const gp_Pnt2d& Point);
@@ -55,12 +53,9 @@ public:
     Standard_EXPORT Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& Deriv);
 
 protected:
-
 private:
-
     Geom2dAdaptor_Curve TheCurv;
     gp_Pnt2d ThePoint;
-
 };
 
 #endif // _Geom2dGcc_FunctionTanCuPnt_HeaderFile

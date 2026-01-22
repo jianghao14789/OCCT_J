@@ -20,45 +20,40 @@
 #include <StepFEA_SymmetricTensor23d.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaMoistureAbsorption,StepFEA_FeaMaterialPropertyRepresentationItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaMoistureAbsorption, StepFEA_FeaMaterialPropertyRepresentationItem)
 
 //=======================================================================
-//function : StepFEA_FeaMoistureAbsorption
-//purpose  : 
+// function : StepFEA_FeaMoistureAbsorption
+// purpose  :
 //=======================================================================
-StepFEA_FeaMoistureAbsorption::StepFEA_FeaMoistureAbsorption ()
-{
+StepFEA_FeaMoistureAbsorption::StepFEA_FeaMoistureAbsorption() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_FeaMoistureAbsorption::Init(const Handle(TCollection_HAsciiString) & aRepresentationItem_Name,
+                                         const StepFEA_SymmetricTensor23d& aFeaConstants) {
+    StepFEA_FeaMaterialPropertyRepresentationItem::Init(aRepresentationItem_Name);
+
+    theFeaConstants = aFeaConstants;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : FeaConstants
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaMoistureAbsorption::Init (const Handle(TCollection_HAsciiString) &aRepresentationItem_Name,
-                                          const StepFEA_SymmetricTensor23d &aFeaConstants)
-{
-  StepFEA_FeaMaterialPropertyRepresentationItem::Init(aRepresentationItem_Name);
-
-  theFeaConstants = aFeaConstants;
+StepFEA_SymmetricTensor23d StepFEA_FeaMoistureAbsorption::FeaConstants() const {
+    return theFeaConstants;
 }
 
 //=======================================================================
-//function : FeaConstants
-//purpose  : 
+// function : SetFeaConstants
+// purpose  :
 //=======================================================================
 
-StepFEA_SymmetricTensor23d StepFEA_FeaMoistureAbsorption::FeaConstants () const
-{
-  return theFeaConstants;
-}
-
-//=======================================================================
-//function : SetFeaConstants
-//purpose  : 
-//=======================================================================
-
-void StepFEA_FeaMoistureAbsorption::SetFeaConstants (const StepFEA_SymmetricTensor23d &aFeaConstants)
-{
-  theFeaConstants = aFeaConstants;
+void StepFEA_FeaMoistureAbsorption::SetFeaConstants(const StepFEA_SymmetricTensor23d& aFeaConstants) {
+    theFeaConstants = aFeaConstants;
 }

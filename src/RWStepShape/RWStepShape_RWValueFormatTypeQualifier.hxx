@@ -28,21 +28,20 @@ class StepShape_ValueFormatTypeQualifier;
 class StepData_StepWriter;
 
 //! Read & Write tool for ValueFormatTypeQualifier
-class RWStepShape_RWValueFormatTypeQualifier 
-{
+class RWStepShape_RWValueFormatTypeQualifier {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWValueFormatTypeQualifier();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWValueFormatTypeQualifier();
-  
-  //! Reads ValueFormatTypeQualifier
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ValueFormatTypeQualifier)& ent)  const;
-  
-  //! Writes ValueFormatTypeQualifier
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ValueFormatTypeQualifier)& ent)  const;
-  
+    //! Reads ValueFormatTypeQualifier
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_ValueFormatTypeQualifier) & ent) const;
+
+    //! Writes ValueFormatTypeQualifier
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepShape_ValueFormatTypeQualifier) & ent) const;
 };
 #endif // _RWStepShape_RWValueFormatTypeQualifier_HeaderFile

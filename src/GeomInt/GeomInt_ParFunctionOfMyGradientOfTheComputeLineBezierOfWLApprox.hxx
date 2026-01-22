@@ -45,7 +45,10 @@ public:
 
     //! initializes the fields of the function. The approximating
     //! curve has the desired degree Deg.
-    Standard_EXPORT GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox(const GeomInt_TheMultiLineOfWLApprox& SSP, const Standard_Integer FirstPoint, const Standard_Integer LastPoint, const Handle(AppParCurves_HArray1OfConstraintCouple)& TheConstraints, const math_Vector& Parameters, const Standard_Integer Deg);
+    Standard_EXPORT GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox(
+        const GeomInt_TheMultiLineOfWLApprox& SSP, const Standard_Integer FirstPoint, const Standard_Integer LastPoint,
+        const Handle(AppParCurves_HArray1OfConstraintCouple) & TheConstraints, const math_Vector& Parameters,
+        const Standard_Integer Deg);
 
     //! returns the number of variables of the function. It
     //! corresponds to the number of MultiPoints.
@@ -84,9 +87,13 @@ public:
     //! and the MultiCurve.
     Standard_EXPORT Standard_Real MaxError2d() const;
 
-    Standard_EXPORT AppParCurves_Constraint FirstConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple)& TheConstraints, const Standard_Integer FirstPoint) const;
+    Standard_EXPORT AppParCurves_Constraint FirstConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple) &
+                                                                TheConstraints,
+                                                            const Standard_Integer FirstPoint) const;
 
-    Standard_EXPORT AppParCurves_Constraint LastConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple)& TheConstraints, const Standard_Integer LastPoint) const;
+    Standard_EXPORT AppParCurves_Constraint LastConstraint(const Handle(AppParCurves_HArray1OfConstraintCouple) &
+                                                               TheConstraints,
+                                                           const Standard_Integer LastPoint) const;
 
 protected:
     //! this method is used each time Value or Gradient is

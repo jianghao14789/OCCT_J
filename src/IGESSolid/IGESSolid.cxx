@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <IGESData_SpecificLib.hxx>
 #include <IGESData_WriterLib.hxx>
 #include <IGESGeom.hxx>
@@ -27,21 +26,17 @@
 //  (Modules are created and loaded in appropriate libraries, once by Init)
 static Handle(IGESSolid_Protocol) protocol;
 
-
-
-    void  IGESSolid::Init ()
-{
-  IGESGeom::Init();
-  if (protocol.IsNull()) {
-    protocol = new IGESSolid_Protocol;
-    Interface_GeneralLib::SetGlobal (new IGESSolid_GeneralModule,  protocol);
-    Interface_ReaderLib::SetGlobal  (new IGESSolid_ReadWriteModule,protocol);
-    IGESData_WriterLib::SetGlobal   (new IGESSolid_ReadWriteModule,protocol);
-    IGESData_SpecificLib::SetGlobal (new IGESSolid_SpecificModule, protocol);
-  }
+void IGESSolid::Init() {
+    IGESGeom::Init();
+    if (protocol.IsNull()) {
+        protocol = new IGESSolid_Protocol;
+        Interface_GeneralLib::SetGlobal(new IGESSolid_GeneralModule, protocol);
+        Interface_ReaderLib::SetGlobal(new IGESSolid_ReadWriteModule, protocol);
+        IGESData_WriterLib::SetGlobal(new IGESSolid_ReadWriteModule, protocol);
+        IGESData_SpecificLib::SetGlobal(new IGESSolid_SpecificModule, protocol);
+    }
 }
 
-    Handle(IGESSolid_Protocol)  IGESSolid::Protocol ()
-{
-  return protocol;
+Handle(IGESSolid_Protocol) IGESSolid::Protocol() {
+    return protocol;
 }

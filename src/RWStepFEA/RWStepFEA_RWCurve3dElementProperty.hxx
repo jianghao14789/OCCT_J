@@ -27,48 +27,28 @@ class StepFEA_Curve3dElementProperty;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Curve3dElementProperty
-class RWStepFEA_RWCurve3dElementProperty 
-{
+class RWStepFEA_RWCurve3dElementProperty {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWCurve3dElementProperty();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWCurve3dElementProperty();
-  
-  //! Reads Curve3dElementProperty
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_Curve3dElementProperty)& ent) const;
-  
-  //! Writes Curve3dElementProperty
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_Curve3dElementProperty)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_Curve3dElementProperty)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Curve3dElementProperty
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_Curve3dElementProperty) & ent) const;
 
+    //! Writes Curve3dElementProperty
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_Curve3dElementProperty) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_Curve3dElementProperty) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWCurve3dElementProperty_HeaderFile

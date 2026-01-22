@@ -42,13 +42,19 @@ public:
     Standard_EXPORT TopLoc_Datum3D(const gp_Trsf& T);
 
     //! Returns a gp_Trsf which, when applied to this datum, produces the default datum.
-    const gp_Trsf& Transformation() const { return myTrsf; }
+    const gp_Trsf& Transformation() const {
+        return myTrsf;
+    }
 
     //! Returns a gp_Trsf which, when applied to this datum, produces the default datum.
-    const gp_Trsf& Trsf() const { return myTrsf; }
+    const gp_Trsf& Trsf() const {
+        return myTrsf;
+    }
 
     //! Return transformation form.
-    gp_TrsfForm Form() const { return myTrsf.Form(); }
+    gp_TrsfForm Form() const {
+        return myTrsf.Form();
+    }
 
     //! Dumps the content of me into the stream
     Standard_EXPORT void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
@@ -60,10 +66,9 @@ public:
 
 private:
     gp_Trsf myTrsf;
-
 };
 
-inline void ShallowDump(const Handle(TopLoc_Datum3D)& me, Standard_OStream& S) {
+inline void ShallowDump(const Handle(TopLoc_Datum3D) & me, Standard_OStream& S) {
     me->ShallowDump(S);
 }
 

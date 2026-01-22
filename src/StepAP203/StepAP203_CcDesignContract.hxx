@@ -24,51 +24,31 @@
 #include <StepBasic_ContractAssignment.hxx>
 class StepBasic_Contract;
 
-
 class StepAP203_CcDesignContract;
 DEFINE_STANDARD_HANDLE(StepAP203_CcDesignContract, StepBasic_ContractAssignment)
 
 //! Representation of STEP entity CcDesignContract
-class StepAP203_CcDesignContract : public StepBasic_ContractAssignment
-{
+class StepAP203_CcDesignContract : public StepBasic_ContractAssignment {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepAP203_CcDesignContract();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepAP203_CcDesignContract();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(StepBasic_Contract)& aContractAssignment_AssignedContract, const Handle(StepAP203_HArray1OfContractedItem)& aItems);
-  
-  //! Returns field Items
-  Standard_EXPORT Handle(StepAP203_HArray1OfContractedItem) Items() const;
-  
-  //! Set field Items
-  Standard_EXPORT void SetItems (const Handle(StepAP203_HArray1OfContractedItem)& Items);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(StepBasic_Contract) & aContractAssignment_AssignedContract,
+                              const Handle(StepAP203_HArray1OfContractedItem) & aItems);
 
+    //! Returns field Items
+    Standard_EXPORT Handle(StepAP203_HArray1OfContractedItem) Items() const;
 
+    //! Set field Items
+    Standard_EXPORT void SetItems(const Handle(StepAP203_HArray1OfContractedItem) & Items);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepAP203_CcDesignContract,StepBasic_ContractAssignment)
+    DEFINE_STANDARD_RTTIEXT(StepAP203_CcDesignContract, StepBasic_ContractAssignment)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepAP203_HArray1OfContractedItem) theItems;
-
-
+    Handle(StepAP203_HArray1OfContractedItem) theItems;
 };
-
-
-
-
-
-
 
 #endif // _StepAP203_CcDesignContract_HeaderFile

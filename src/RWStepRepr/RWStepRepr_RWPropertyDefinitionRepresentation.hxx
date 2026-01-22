@@ -27,48 +27,29 @@ class StepRepr_PropertyDefinitionRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for PropertyDefinitionRepresentation
-class RWStepRepr_RWPropertyDefinitionRepresentation 
-{
+class RWStepRepr_RWPropertyDefinitionRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWPropertyDefinitionRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWPropertyDefinitionRepresentation();
-  
-  //! Reads PropertyDefinitionRepresentation
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_PropertyDefinitionRepresentation)& ent) const;
-  
-  //! Writes PropertyDefinitionRepresentation
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_PropertyDefinitionRepresentation)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_PropertyDefinitionRepresentation)& ent, Interface_EntityIterator& iter) const;
+    //! Reads PropertyDefinitionRepresentation
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_PropertyDefinitionRepresentation) & ent) const;
 
+    //! Writes PropertyDefinitionRepresentation
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_PropertyDefinitionRepresentation) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_PropertyDefinitionRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWPropertyDefinitionRepresentation_HeaderFile

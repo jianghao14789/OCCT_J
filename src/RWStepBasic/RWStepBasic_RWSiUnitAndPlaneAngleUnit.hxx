@@ -27,42 +27,22 @@ class Interface_Check;
 class StepBasic_SiUnitAndPlaneAngleUnit;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for SiUnitAndPlaneAngleUnit
-class RWStepBasic_RWSiUnitAndPlaneAngleUnit 
-{
+class RWStepBasic_RWSiUnitAndPlaneAngleUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWSiUnitAndPlaneAngleUnit();
 
-  
-  Standard_EXPORT RWStepBasic_RWSiUnitAndPlaneAngleUnit();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_SiUnitAndPlaneAngleUnit)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_SiUnitAndPlaneAngleUnit)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_SiUnitAndPlaneAngleUnit) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_SiUnitAndPlaneAngleUnit) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWSiUnitAndPlaneAngleUnit_HeaderFile

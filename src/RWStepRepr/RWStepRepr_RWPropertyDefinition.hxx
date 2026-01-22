@@ -27,48 +27,26 @@ class StepRepr_PropertyDefinition;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for PropertyDefinition
-class RWStepRepr_RWPropertyDefinition 
-{
+class RWStepRepr_RWPropertyDefinition {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWPropertyDefinition();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWPropertyDefinition();
-  
-  //! Reads PropertyDefinition
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_PropertyDefinition)& ent) const;
-  
-  //! Writes PropertyDefinition
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_PropertyDefinition)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_PropertyDefinition)& ent, Interface_EntityIterator& iter) const;
+    //! Reads PropertyDefinition
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_PropertyDefinition) & ent) const;
 
+    //! Writes PropertyDefinition
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_PropertyDefinition) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_PropertyDefinition) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWPropertyDefinition_HeaderFile

@@ -27,48 +27,26 @@ class StepAP214_RepItemGroup;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for RepItemGroup
-class RWStepAP214_RWRepItemGroup 
-{
+class RWStepAP214_RWRepItemGroup {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP214_RWRepItemGroup();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP214_RWRepItemGroup();
-  
-  //! Reads RepItemGroup
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP214_RepItemGroup)& ent) const;
-  
-  //! Writes RepItemGroup
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP214_RepItemGroup)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP214_RepItemGroup)& ent, Interface_EntityIterator& iter) const;
+    //! Reads RepItemGroup
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepAP214_RepItemGroup) & ent) const;
 
+    //! Writes RepItemGroup
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepAP214_RepItemGroup) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP214_RepItemGroup) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_RWRepItemGroup_HeaderFile

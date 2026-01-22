@@ -29,15 +29,15 @@ public:
 
     math_ValueAndWeight() : myValue(0.), myWeight(0.) {}
 
-    math_ValueAndWeight(Standard_Real theValue, Standard_Real theWeight)
-        : myValue(theValue), myWeight(theWeight)
-    {
+    math_ValueAndWeight(Standard_Real theValue, Standard_Real theWeight) : myValue(theValue), myWeight(theWeight) {}
+
+    Standard_Real Value() const {
+        return myValue;
     }
 
-    Standard_Real Value() const { return myValue; }
-
-    Standard_Real Weight() const { return myWeight; }
-
+    Standard_Real Weight() const {
+        return myWeight;
+    }
 
 private:
     Standard_Real myValue;
@@ -45,9 +45,7 @@ private:
 };
 
 //! Comparison operator for math_ValueAndWeight, needed for sorting algorithms
-inline bool operator < (const math_ValueAndWeight& theLeft,
-    const math_ValueAndWeight& theRight)
-{
+inline bool operator<(const math_ValueAndWeight& theLeft, const math_ValueAndWeight& theRight) {
     return theLeft.Value() < theRight.Value();
 }
 

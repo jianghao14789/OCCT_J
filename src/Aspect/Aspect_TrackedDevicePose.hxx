@@ -18,16 +18,15 @@
 #include <NCollection_Array1.hxx>
 
 //! Describes a single pose for a tracked object (for XR).
-struct Aspect_TrackedDevicePose
-{
-  gp_Trsf Orientation;       //!< device to absolute transformation
-  gp_Vec  Velocity;          //!< velocity in tracker space in m/s
-  gp_Vec  AngularVelocity;   //!< angular velocity in radians/s
-  bool    IsValidPose;       //!< indicates valid pose
-  bool    IsConnectedDevice; //!< indicates connected state
+struct Aspect_TrackedDevicePose {
+    gp_Trsf Orientation;    //!< device to absolute transformation
+    gp_Vec Velocity;        //!< velocity in tracker space in m/s
+    gp_Vec AngularVelocity; //!< angular velocity in radians/s
+    bool IsValidPose;       //!< indicates valid pose
+    bool IsConnectedDevice; //!< indicates connected state
 
-  //! Empty constructor.
-  Aspect_TrackedDevicePose() : IsValidPose (false), IsConnectedDevice (false) {}
+    //! Empty constructor.
+    Aspect_TrackedDevicePose() : IsValidPose(false), IsConnectedDevice(false) {}
 };
 
 //! Array of tracked poses.

@@ -21,41 +21,20 @@
 
 #include <StepBasic_ExternallyDefinedItem.hxx>
 
-
 class StepVisual_ExternallyDefinedTextFont;
 DEFINE_STANDARD_HANDLE(StepVisual_ExternallyDefinedTextFont, StepBasic_ExternallyDefinedItem)
 
 //! Representation of STEP entity ExternallyDefinedTextFont
-class StepVisual_ExternallyDefinedTextFont : public StepBasic_ExternallyDefinedItem
-{
+class StepVisual_ExternallyDefinedTextFont : public StepBasic_ExternallyDefinedItem {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepVisual_ExternallyDefinedTextFont();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepVisual_ExternallyDefinedTextFont();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepVisual_ExternallyDefinedTextFont,StepBasic_ExternallyDefinedItem)
+    DEFINE_STANDARD_RTTIEXT(StepVisual_ExternallyDefinedTextFont, StepBasic_ExternallyDefinedItem)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_ExternallyDefinedTextFont_HeaderFile

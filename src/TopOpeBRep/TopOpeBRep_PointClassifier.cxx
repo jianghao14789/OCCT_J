@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepAdaptor_Surface.hxx>
 #include <BRepTopAdaptor_TopolTool.hxx>
 #include <gp_Pnt2d.hxx>
@@ -22,68 +21,58 @@
 #include <TopOpeBRep_PointClassifier.hxx>
 
 //=======================================================================
-//function : TopOpeBRep_PointClassifier
-//purpose  : 
+// function : TopOpeBRep_PointClassifier
+// purpose  :
 //=======================================================================
-TopOpeBRep_PointClassifier::TopOpeBRep_PointClassifier()
-{
-  myHSurface = new BRepAdaptor_Surface();
-  Init();
+TopOpeBRep_PointClassifier::TopOpeBRep_PointClassifier() {
+    myHSurface = new BRepAdaptor_Surface();
+    Init();
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void TopOpeBRep_PointClassifier::Init() 
-{
-  myTopolToolMap.Clear();
-  myState = TopAbs_UNKNOWN;
+void TopOpeBRep_PointClassifier::Init() {
+    myTopolToolMap.Clear();
+    myState = TopAbs_UNKNOWN;
 }
 
 //=======================================================================
-//function : Load
-//purpose  : 
+// function : Load
+// purpose  :
 //=======================================================================
 
-void TopOpeBRep_PointClassifier::Load(const TopoDS_Face& F) 
-{
-  Standard_Boolean found = myTopolToolMap.IsBound(F);
-  if ( ! found ) {
-    myHSurface->Initialize(F);
-    myTopolTool = new BRepTopAdaptor_TopolTool(myHSurface);
-    myTopolToolMap.Bind(F,myTopolTool);
-  }
-  else {
-    myTopolTool = myTopolToolMap.Find(F);
-  }
+void TopOpeBRep_PointClassifier::Load(const TopoDS_Face& F) {
+    Standard_Boolean found = myTopolToolMap.IsBound(F);
+    if (!found) {
+        myHSurface->Initialize(F);
+        myTopolTool = new BRepTopAdaptor_TopolTool(myHSurface);
+        myTopolToolMap.Bind(F, myTopolTool);
+    } else {
+        myTopolTool = myTopolToolMap.Find(F);
+    }
 }
 
 //=======================================================================
-//function : Classify
-//purpose  : 
+// function : Classify
+// purpose  :
 //=======================================================================
 
-TopAbs_State TopOpeBRep_PointClassifier::Classify
-  (const TopoDS_Face& F, 
-   const gp_Pnt2d& P2d, 
-   const Standard_Real Tol)
-{
-  myState = TopAbs_UNKNOWN;
-  Load(F);
-  myState = myTopolTool->Classify(P2d,Tol);
+TopAbs_State TopOpeBRep_PointClassifier::Classify(const TopoDS_Face& F, const gp_Pnt2d& P2d, const Standard_Real Tol) {
+    myState = TopAbs_UNKNOWN;
+    Load(F);
+    myState = myTopolTool->Classify(P2d, Tol);
 
-  return myState;
+    return myState;
 }
 
-
 //=======================================================================
-//function : State
-//purpose  : 
+// function : State
+// purpose  :
 //=======================================================================
 
-TopAbs_State TopOpeBRep_PointClassifier::State() const
-{
-  return myState;
+TopAbs_State TopOpeBRep_PointClassifier::State() const {
+    return myState;
 }

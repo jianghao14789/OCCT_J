@@ -21,7 +21,7 @@
 #include <NCollection_DataMap.hxx>
 
 typedef NCollection_DataMap<Standard_Integer, Standard_Real, TColStd_MapIntegerHasher> TColStd_DataMapOfIntegerReal;
-typedef NCollection_DataMap<Standard_Integer, Standard_Real, TColStd_MapIntegerHasher>::Iterator TColStd_DataMapIteratorOfDataMapOfIntegerReal;
-
+typedef NCollection_DataMap<Standard_Integer, Standard_Real, TColStd_MapIntegerHasher>::Iterator
+    TColStd_DataMapIteratorOfDataMapOfIntegerReal;
 
 #endif

@@ -17,58 +17,52 @@
 IMPLEMENT_STANDARD_RTTIEXT(Media_Timer, Standard_Transient)
 
 //=============================================================================
-//function : Pause
-//purpose  :
+// function : Pause
+// purpose  :
 //=============================================================================
-void Media_Timer::Pause()
-{
-  myTimer.Stop();
-  myTimerFrom += myTimer.ElapsedTime() * myTimerSpeed;
-  myTimer.Reset();
+void Media_Timer::Pause() {
+    myTimer.Stop();
+    myTimerFrom += myTimer.ElapsedTime() * myTimerSpeed;
+    myTimer.Reset();
 }
 
 //=============================================================================
-//function : Stop
-//purpose  :
+// function : Stop
+// purpose  :
 //=============================================================================
-void Media_Timer::Stop()
-{
-  myTimer.Stop();
-  myTimer.Reset();
-  myTimerFrom = 0.0;
+void Media_Timer::Stop() {
+    myTimer.Stop();
+    myTimer.Reset();
+    myTimerFrom = 0.0;
 }
 
 //=============================================================================
-//function : SetPlaybackSpeed
-//purpose  :
+// function : SetPlaybackSpeed
+// purpose  :
 //=============================================================================
-void Media_Timer::SetPlaybackSpeed (const Standard_Real theSpeed)
-{
-  if (!myTimer.IsStarted())
-  {
+void Media_Timer::SetPlaybackSpeed(const Standard_Real theSpeed) {
+    if (!myTimer.IsStarted()) {
+        myTimerSpeed = theSpeed;
+        return;
+    }
+
+    myTimer.Stop();
+    myTimerFrom += myTimer.ElapsedTime() * myTimerSpeed;
+    myTimer.Reset();
     myTimerSpeed = theSpeed;
-    return;
-  }
-
-  myTimer.Stop();
-  myTimerFrom += myTimer.ElapsedTime() * myTimerSpeed;
-  myTimer.Reset();
-  myTimerSpeed = theSpeed;
-  myTimer.Start();
+    myTimer.Start();
 }
 
 //=============================================================================
-//function : SetPlaybackSpeed
-//purpose  :
+// function : SetPlaybackSpeed
+// purpose  :
 //=============================================================================
-void Media_Timer::Seek (const Standard_Real theTime)
-{
-  const Standard_Boolean isStarted = myTimer.IsStarted();
-  myTimer.Stop();
-  myTimer.Reset();
-  myTimerFrom = theTime;
-  if (isStarted)
-  {
-    myTimer.Start();
-  }
+void Media_Timer::Seek(const Standard_Real theTime) {
+    const Standard_Boolean isStarted = myTimer.IsStarted();
+    myTimer.Stop();
+    myTimer.Reset();
+    myTimerFrom = theTime;
+    if (isStarted) {
+        myTimer.Start();
+    }
 }

@@ -22,5 +22,4 @@
 typedef NCollection_Map<Standard_Integer, TColStd_MapIntegerHasher> TColStd_MapOfInteger;
 typedef NCollection_Map<Standard_Integer, TColStd_MapIntegerHasher>::Iterator TColStd_MapIteratorOfMapOfInteger;
 
-
 #endif

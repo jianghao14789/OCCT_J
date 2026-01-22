@@ -18,16 +18,13 @@
 #define No_Exception
 #endif
 
-
 #include <HLRAlgo_EdgesBlock.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(HLRAlgo_EdgesBlock,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(HLRAlgo_EdgesBlock, Standard_Transient)
 
 //=======================================================================
-//function : HLRAlgo_EdgesBlock
-//purpose  : 
+// function : HLRAlgo_EdgesBlock
+// purpose  :
 //=======================================================================
-HLRAlgo_EdgesBlock::HLRAlgo_EdgesBlock (const Standard_Integer NbEdges) :
-  myEdges(1,NbEdges), myFlags(1,NbEdges)
-{}
+HLRAlgo_EdgesBlock::HLRAlgo_EdgesBlock(const Standard_Integer NbEdges) : myEdges(1, NbEdges), myFlags(1, NbEdges) {}

@@ -31,7 +31,6 @@ class math_NotSquare;
 class Standard_DimensionError;
 class math_Matrix;
 
-
 //! This class implements the Crout algorithm used to solve a
 //! system A*X = B where A is a symmetric matrix. It can be used to
 //! invert a symmetric matrix.
@@ -84,7 +83,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
     math_Matrix InvA;
     Standard_Boolean Done;

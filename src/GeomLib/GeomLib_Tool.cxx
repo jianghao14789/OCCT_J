@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <ElCLib.hxx>
 #include <ElSLib.hxx>
 #include <Extrema_ExtPC.hxx>
@@ -83,145 +82,118 @@
 static const Standard_Real PARTOLERANCE = 1.e-9;
 
 //=======================================================================
-//function : Parameter
-//purpose  : Get parameter on curve of given point
+// function : Parameter
+// purpose  : Get parameter on curve of given point
 //           return FALSE if point is far from curve than MaxDist
 //           or computation fails
 //=======================================================================
 
-Standard_Boolean GeomLib_Tool::Parameter(const Handle(Geom_Curve)& Curve,
-                                         const gp_Pnt&             Point,
-                                         const Standard_Real       MaxDist,
-                                               Standard_Real&            U)
-{
-  if( Curve.IsNull() ) return Standard_False;
-  //
-  U = 0.;
-  Standard_Real aTol = MaxDist * MaxDist;
-  //
-  GeomAdaptor_Curve aGAC(Curve);
-  Extrema_ExtPC extrema(Point,aGAC);
-  //
-  if( !extrema.IsDone() ) return Standard_False;
-  //
-  Standard_Integer n = extrema.NbExt();
-  if( n <= 0 ) return Standard_False;
-  //
-  Standard_Integer i = 0, iMin = 0;
-  Standard_Real Dist2Min = RealLast();
-  for( i = 1; i <= n; i++ )
-  {
-    if (extrema.SquareDistance(i) < Dist2Min)
-    {
-      iMin = i;
-      Dist2Min = extrema.SquareDistance(i);
+Standard_Boolean GeomLib_Tool::Parameter(const Handle(Geom_Curve) & Curve, const gp_Pnt& Point,
+                                         const Standard_Real MaxDist, Standard_Real& U) {
+    if (Curve.IsNull()) return Standard_False;
+    //
+    U = 0.;
+    Standard_Real aTol = MaxDist * MaxDist;
+    //
+    GeomAdaptor_Curve aGAC(Curve);
+    Extrema_ExtPC extrema(Point, aGAC);
+    //
+    if (!extrema.IsDone()) return Standard_False;
+    //
+    Standard_Integer n = extrema.NbExt();
+    if (n <= 0) return Standard_False;
+    //
+    Standard_Integer i = 0, iMin = 0;
+    Standard_Real Dist2Min = RealLast();
+    for (i = 1; i <= n; i++) {
+        if (extrema.SquareDistance(i) < Dist2Min) {
+            iMin = i;
+            Dist2Min = extrema.SquareDistance(i);
+        }
     }
-  }
-  if( iMin != 0 && Dist2Min <= aTol ) 
-  {
-    U = (extrema.Point(iMin)).Parameter();
-  }
-  else 
-  {
-    return Standard_False;
-  }
- 
-  return Standard_True;
+    if (iMin != 0 && Dist2Min <= aTol) {
+        U = (extrema.Point(iMin)).Parameter();
+    } else {
+        return Standard_False;
+    }
 
+    return Standard_True;
 }
 
 //=======================================================================
-//function : Parameters
-//purpose  : Get parameters on surface of given point
+// function : Parameters
+// purpose  : Get parameters on surface of given point
 //           return FALSE if point is far from surface than MaxDist
 //           or computation fails
 //=======================================================================
 
-Standard_Boolean GeomLib_Tool::Parameters(const Handle(Geom_Surface)& Surface,
-                                          const gp_Pnt&               Point,
-                                          const Standard_Real         MaxDist,
-                                                Standard_Real&              U,
-                                                Standard_Real&              V)
-{
-  if( Surface.IsNull() ) return Standard_False;
-  //
-  U = 0.;
-  V = 0.;
-  Standard_Real aTol = MaxDist * MaxDist;
-  //
-  GeomAdaptor_Surface aGAS(Surface);
-  Standard_Real aTolU = PARTOLERANCE, aTolV = PARTOLERANCE;
-  //
-  Extrema_ExtPS extrema(Point,aGAS,aTolU,aTolV);
-  //
-  if( !extrema.IsDone() ) return Standard_False;
-  //
-  Standard_Integer n = extrema.NbExt();
-  if( n <= 0 ) return Standard_False;
-  //
-  Standard_Real Dist2Min = RealLast();
-  Standard_Integer i = 0, iMin = 0;
-  for( i = 1; i <= n; i++ )
-  {
-    if( extrema.SquareDistance(i) < Dist2Min )
-    {
-      Dist2Min = extrema.SquareDistance(i);
-      iMin = i;
+Standard_Boolean GeomLib_Tool::Parameters(const Handle(Geom_Surface) & Surface, const gp_Pnt& Point,
+                                          const Standard_Real MaxDist, Standard_Real& U, Standard_Real& V) {
+    if (Surface.IsNull()) return Standard_False;
+    //
+    U = 0.;
+    V = 0.;
+    Standard_Real aTol = MaxDist * MaxDist;
+    //
+    GeomAdaptor_Surface aGAS(Surface);
+    Standard_Real aTolU = PARTOLERANCE, aTolV = PARTOLERANCE;
+    //
+    Extrema_ExtPS extrema(Point, aGAS, aTolU, aTolV);
+    //
+    if (!extrema.IsDone()) return Standard_False;
+    //
+    Standard_Integer n = extrema.NbExt();
+    if (n <= 0) return Standard_False;
+    //
+    Standard_Real Dist2Min = RealLast();
+    Standard_Integer i = 0, iMin = 0;
+    for (i = 1; i <= n; i++) {
+        if (extrema.SquareDistance(i) < Dist2Min) {
+            Dist2Min = extrema.SquareDistance(i);
+            iMin = i;
+        }
     }
-  }
-  if( iMin != 0 && Dist2Min <= aTol)
-  {
-    extrema.Point(iMin).Parameter(U,V);
-  }
-  else
-  {
-    return Standard_False;
-  }
+    if (iMin != 0 && Dist2Min <= aTol) {
+        extrema.Point(iMin).Parameter(U, V);
+    } else {
+        return Standard_False;
+    }
 
-  return Standard_True;
-
+    return Standard_True;
 }
 
 //=======================================================================
-//function : Parameter
-//purpose  : Get parameter on curve of given point
+// function : Parameter
+// purpose  : Get parameter on curve of given point
 //           return FALSE if point is far from curve than MaxDist
 //           or computation fails
 //=======================================================================
 
-Standard_Boolean GeomLib_Tool::Parameter(const Handle(Geom2d_Curve)& Curve,
-                                         const gp_Pnt2d&             Point,
-                                         const Standard_Real         MaxDist,
-                                               Standard_Real&              U)
-{
-  if( Curve.IsNull() ) return Standard_False;
-  //
-  U = 0.;
-  Standard_Real aTol = MaxDist * MaxDist;
-  //
-  Geom2dAdaptor_Curve aGAC(Curve);
-  Extrema_ExtPC2d extrema(Point,aGAC);
-  if( !extrema.IsDone() ) return Standard_False;
-  Standard_Integer n = extrema.NbExt();
-  if( n <= 0 ) return Standard_False;
-  Standard_Integer i = 0, iMin = 0;
-  Standard_Real Dist2Min = RealLast();
-  for ( i = 1; i <= n; i++ )
-  {
-    if( extrema.SquareDistance(i) < Dist2Min )
-    {
-      Dist2Min = extrema.SquareDistance(i);
-      iMin = i;
+Standard_Boolean GeomLib_Tool::Parameter(const Handle(Geom2d_Curve) & Curve, const gp_Pnt2d& Point,
+                                         const Standard_Real MaxDist, Standard_Real& U) {
+    if (Curve.IsNull()) return Standard_False;
+    //
+    U = 0.;
+    Standard_Real aTol = MaxDist * MaxDist;
+    //
+    Geom2dAdaptor_Curve aGAC(Curve);
+    Extrema_ExtPC2d extrema(Point, aGAC);
+    if (!extrema.IsDone()) return Standard_False;
+    Standard_Integer n = extrema.NbExt();
+    if (n <= 0) return Standard_False;
+    Standard_Integer i = 0, iMin = 0;
+    Standard_Real Dist2Min = RealLast();
+    for (i = 1; i <= n; i++) {
+        if (extrema.SquareDistance(i) < Dist2Min) {
+            Dist2Min = extrema.SquareDistance(i);
+            iMin = i;
+        }
     }
-  }
-  if( iMin != 0 && Dist2Min <= aTol )
-  {
-    U = (extrema.Point(iMin)).Parameter();
-  }
-  else
-  {
-    return Standard_False;
-  }
+    if (iMin != 0 && Dist2Min <= aTol) {
+        U = (extrema.Point(iMin)).Parameter();
+    } else {
+        return Standard_False;
+    }
 
-  return Standard_True;
+    return Standard_True;
 }

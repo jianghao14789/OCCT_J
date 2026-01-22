@@ -22,7 +22,6 @@
 
 #include <IGESBasic_Group.hxx>
 
-
 class IGESBasic_OrderedGroupWithoutBackP;
 DEFINE_STANDARD_HANDLE(IGESBasic_OrderedGroupWithoutBackP, IGESBasic_Group)
 
@@ -32,35 +31,15 @@ DEFINE_STANDARD_HANDLE(IGESBasic_OrderedGroupWithoutBackP, IGESBasic_Group)
 //! maintained as a single entity, but the group is
 //! ordered and there are no back pointers.
 //! It inherits from Group
-class IGESBasic_OrderedGroupWithoutBackP : public IGESBasic_Group
-{
+class IGESBasic_OrderedGroupWithoutBackP : public IGESBasic_Group {
 
 public:
+    Standard_EXPORT IGESBasic_OrderedGroupWithoutBackP();
 
-  
-  Standard_EXPORT IGESBasic_OrderedGroupWithoutBackP();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESBasic_OrderedGroupWithoutBackP,IGESBasic_Group)
+    DEFINE_STANDARD_RTTIEXT(IGESBasic_OrderedGroupWithoutBackP, IGESBasic_Group)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESBasic_OrderedGroupWithoutBackP_HeaderFile

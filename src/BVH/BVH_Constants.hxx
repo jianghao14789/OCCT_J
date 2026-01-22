@@ -14,10 +14,10 @@
 #ifndef _BVH_Constants_Header
 #define _BVH_Constants_Header
 
-enum
-{
+enum {
     //! The optimal tree depth.
-    //! Should be in sync with maximum stack size while traversing the tree - don't pass the trees of greater depth to OCCT algorithms!
+    //! Should be in sync with maximum stack size while traversing the tree - don't pass the trees of greater depth to
+    //! OCCT algorithms!
     BVH_Constants_MaxTreeDepth = 32,
 
     //! Leaf node size optimal for complex nodes,
@@ -32,14 +32,14 @@ enum
 
     //! The optimal number of bins for binned builder.
     BVH_Constants_NbBinsOptimal = 32,
-    //! The maximum number of bins for binned builder (giving the best traversal time at cost of longer tree construction time).
+    //! The maximum number of bins for binned builder (giving the best traversal time at cost of longer tree
+    //! construction time).
     BVH_Constants_NbBinsBest = 48,
 };
 
-namespace BVH
-{
-    //! Minimum node size to split.
-    const double THE_NODE_MIN_SIZE = 1e-5;
-}
+namespace BVH {
+//! Minimum node size to split.
+const double THE_NODE_MIN_SIZE = 1e-5;
+} // namespace BVH
 
 #endif // _BVH_Constants_Header

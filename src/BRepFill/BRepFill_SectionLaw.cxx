@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRep_Tool.hxx>
 #include <BRepAdaptor_Curve.hxx>
 #include <BRepFill_SectionLaw.hxx>
@@ -38,97 +37,86 @@
 #include <TopoDS_Vertex.hxx>
 #include <TopoDS_Wire.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BRepFill_SectionLaw,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(BRepFill_SectionLaw, Standard_Transient)
 
 //=======================================================================
-//function : NbLaw
-//purpose  : Gives the number of elementary (or Geometric) law
+// function : NbLaw
+// purpose  : Gives the number of elementary (or Geometric) law
 //=======================================================================
-Standard_Integer BRepFill_SectionLaw::NbLaw() const
-{
-  return myLaws->Length();
-}
-
-
-//=======================================================================
-//function : Law
-//purpose  : 
-//=======================================================================
- const Handle(GeomFill_SectionLaw)& 
- BRepFill_SectionLaw::Law(const Standard_Integer Index) const
-{
-  return myLaws->Value(Index);
+Standard_Integer BRepFill_SectionLaw::NbLaw() const {
+    return myLaws->Length();
 }
 
 //=======================================================================
-//function : Indices
-//purpose  :
+// function : Law
+// purpose  :
 //=======================================================================
-Standard_Integer BRepFill_SectionLaw::IndexOfEdge(const TopoDS_Shape& anEdge) const
-{
-  return myIndices(anEdge);
+const Handle(GeomFill_SectionLaw) & BRepFill_SectionLaw::Law(const Standard_Integer Index) const {
+    return myLaws->Value(Index);
 }
 
 //=======================================================================
-//function : IsUClosed
-//purpose  : 
+// function : Indices
+// purpose  :
 //=======================================================================
- Standard_Boolean BRepFill_SectionLaw::IsUClosed() const
-{
-  return uclosed;
+Standard_Integer BRepFill_SectionLaw::IndexOfEdge(const TopoDS_Shape& anEdge) const {
+    return myIndices(anEdge);
 }
 
 //=======================================================================
-//function : IsVClosed
-//purpose  : 
+// function : IsUClosed
+// purpose  :
 //=======================================================================
- Standard_Boolean BRepFill_SectionLaw::IsVClosed() const
-{
-  return vclosed;
+Standard_Boolean BRepFill_SectionLaw::IsUClosed() const {
+    return uclosed;
 }
 
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsVClosed
+// purpose  :
 //=======================================================================
- Standard_Boolean BRepFill_SectionLaw::IsDone() const
-{
-  return myDone;
+Standard_Boolean BRepFill_SectionLaw::IsVClosed() const {
+    return vclosed;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : Prepare the parsing of a wire
+// function : IsDone
+// purpose  :
 //=======================================================================
- void BRepFill_SectionLaw::Init(const TopoDS_Wire& W)
-{
-  myIterator.Init(W);
+Standard_Boolean BRepFill_SectionLaw::IsDone() const {
+    return myDone;
 }
 
 //=======================================================================
-//function : 
-//purpose  : Parses the wire omitting the degenerated Edges
+// function : Init
+// purpose  : Prepare the parsing of a wire
 //=======================================================================
- TopoDS_Edge BRepFill_SectionLaw::CurrentEdge() 
-{
-  TopoDS_Edge E;
-// Class BRep_Tool without fields and without Constructor :
-//  BRep_Tool B;
-  Standard_Boolean Suivant = Standard_False;
-  if (myIterator.More()) {
-    E =  myIterator.Current();
-//    Next = (B.Degenerated(E));
-    Suivant = (BRep_Tool::Degenerated(E));
-  }
-
-  while (Suivant) {
-     myIterator.Next();
-     E = myIterator.Current();
-//    Next = (B.Degenerated(E) && myIterator.More());
-     Suivant = (BRep_Tool::Degenerated(E) && myIterator.More());
-   }
-
-  if (myIterator.More()) myIterator.Next();
-  return E;
+void BRepFill_SectionLaw::Init(const TopoDS_Wire& W) {
+    myIterator.Init(W);
 }
 
+//=======================================================================
+// function :
+// purpose  : Parses the wire omitting the degenerated Edges
+//=======================================================================
+TopoDS_Edge BRepFill_SectionLaw::CurrentEdge() {
+    TopoDS_Edge E;
+    // Class BRep_Tool without fields and without Constructor :
+    //  BRep_Tool B;
+    Standard_Boolean Suivant = Standard_False;
+    if (myIterator.More()) {
+        E = myIterator.Current();
+        //    Next = (B.Degenerated(E));
+        Suivant = (BRep_Tool::Degenerated(E));
+    }
+
+    while (Suivant) {
+        myIterator.Next();
+        E = myIterator.Current();
+        //    Next = (B.Degenerated(E) && myIterator.More());
+        Suivant = (BRep_Tool::Degenerated(E) && myIterator.More());
+    }
+
+    if (myIterator.More()) myIterator.Next();
+    return E;
+}

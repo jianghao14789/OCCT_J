@@ -18,14 +18,13 @@
 #include <Standard_TypeDef.hxx>
 
 //! Pose input XR action data.
-struct Aspect_XRPoseActionData
-{
-  Aspect_TrackedDevicePose Pose;         //!< pose state
-  uint64_t                 ActiveOrigin; //!< The origin that caused this action's current state
-  bool                     IsActive;     //!< whether or not this action is currently available to be bound in the active action set
+struct Aspect_XRPoseActionData {
+    Aspect_TrackedDevicePose Pose; //!< pose state
+    uint64_t ActiveOrigin;         //!< The origin that caused this action's current state
+    bool IsActive; //!< whether or not this action is currently available to be bound in the active action set
 
-  //! Empty constructor.
-  Aspect_XRPoseActionData() : ActiveOrigin (0), IsActive (false) {}
+    //! Empty constructor.
+    Aspect_XRPoseActionData() : ActiveOrigin(0), IsActive(false) {}
 };
 
 #endif // _Aspect_XRPoseActionData_HeaderFile

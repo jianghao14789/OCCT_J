@@ -16,67 +16,61 @@
 
 #include <Geom_Conic.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Geom_Conic,Geom_Curve)
+IMPLEMENT_STANDARD_RTTIEXT(Geom_Conic, Geom_Curve)
 
 //=======================================================================
-//function : UReverse
-//purpose  : 
+// function : UReverse
+// purpose  :
 //=======================================================================
 
-void Geom_Conic::Reverse ()
-{
-  gp_Dir Vz = pos.Direction ();
-  Vz.Reverse();
-  pos.SetDirection (Vz);
+void Geom_Conic::Reverse() {
+    gp_Dir Vz = pos.Direction();
+    Vz.Reverse();
+    pos.SetDirection(Vz);
 }
 
 //=======================================================================
-//function : UReverse
-//purpose  : 
+// function : UReverse
+// purpose  :
 //=======================================================================
 
-GeomAbs_Shape Geom_Conic::Continuity () const
-{
-  return GeomAbs_CN;
+GeomAbs_Shape Geom_Conic::Continuity() const {
+    return GeomAbs_CN;
 }
 
 //=======================================================================
-//function : UReverse
-//purpose  : 
+// function : UReverse
+// purpose  :
 //=======================================================================
 
-gp_Ax1 Geom_Conic::XAxis () const
-{
-  return gp_Ax1 (pos.Location(), pos.XDirection());
+gp_Ax1 Geom_Conic::XAxis() const {
+    return gp_Ax1(pos.Location(), pos.XDirection());
 }
 
 //=======================================================================
-//function : UReverse
-//purpose  : 
+// function : UReverse
+// purpose  :
 //=======================================================================
 
-gp_Ax1 Geom_Conic::YAxis () const
-{
-  return gp_Ax1 (pos.Location(), pos.YDirection());
+gp_Ax1 Geom_Conic::YAxis() const {
+    return gp_Ax1(pos.Location(), pos.YDirection());
 }
 
 //=======================================================================
-//function : UReverse
-//purpose  : 
+// function : UReverse
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Geom_Conic::IsCN (const Standard_Integer ) const
-{
-  return Standard_True;
+Standard_Boolean Geom_Conic::IsCN(const Standard_Integer) const {
+    return Standard_True;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void Geom_Conic::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, Geom_Curve)
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &pos)
+void Geom_Conic::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Geom_Curve)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &pos)
 }

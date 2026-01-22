@@ -11,48 +11,38 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepGeom_Curve.hxx>
 #include <StepShape_EdgeCurve.hxx>
 #include <StepShape_Vertex.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_EdgeCurve,StepShape_Edge)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_EdgeCurve, StepShape_Edge)
 
-StepShape_EdgeCurve::StepShape_EdgeCurve ()  {}
+StepShape_EdgeCurve::StepShape_EdgeCurve() {}
 
-void StepShape_EdgeCurve::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepShape_Vertex)& aEdgeStart,
-	const Handle(StepShape_Vertex)& aEdgeEnd,
-	const Handle(StepGeom_Curve)& aEdgeGeometry,
-	const Standard_Boolean aSameSense)
-{
-	// --- classe own fields ---
-	edgeGeometry = aEdgeGeometry;
-	sameSense = aSameSense;
-	// --- classe inherited fields ---
-	StepShape_Edge::Init(aName, aEdgeStart, aEdgeEnd);
+void StepShape_EdgeCurve::Init(const Handle(TCollection_HAsciiString) & aName,
+                               const Handle(StepShape_Vertex) & aEdgeStart, const Handle(StepShape_Vertex) & aEdgeEnd,
+                               const Handle(StepGeom_Curve) & aEdgeGeometry, const Standard_Boolean aSameSense) {
+    // --- classe own fields ---
+    edgeGeometry = aEdgeGeometry;
+    sameSense = aSameSense;
+    // --- classe inherited fields ---
+    StepShape_Edge::Init(aName, aEdgeStart, aEdgeEnd);
 }
 
-
-void StepShape_EdgeCurve::SetEdgeGeometry(const Handle(StepGeom_Curve)& aEdgeGeometry)
-{
-	edgeGeometry = aEdgeGeometry;
+void StepShape_EdgeCurve::SetEdgeGeometry(const Handle(StepGeom_Curve) & aEdgeGeometry) {
+    edgeGeometry = aEdgeGeometry;
 }
 
-Handle(StepGeom_Curve) StepShape_EdgeCurve::EdgeGeometry() const
-{
-	return edgeGeometry;
+Handle(StepGeom_Curve) StepShape_EdgeCurve::EdgeGeometry() const {
+    return edgeGeometry;
 }
 
-void StepShape_EdgeCurve::SetSameSense(const Standard_Boolean aSameSense)
-{
-	sameSense = aSameSense;
+void StepShape_EdgeCurve::SetSameSense(const Standard_Boolean aSameSense) {
+    sameSense = aSameSense;
 }
 
-Standard_Boolean StepShape_EdgeCurve::SameSense() const
-{
-	return sameSense;
+Standard_Boolean StepShape_EdgeCurve::SameSense() const {
+    return sameSense;
 }

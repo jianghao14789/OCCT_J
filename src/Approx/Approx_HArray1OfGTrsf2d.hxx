@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(Approx_HArray1OfGTrsf2d, Approx_Array1OfGTrsf2d)
 
-
 #endif

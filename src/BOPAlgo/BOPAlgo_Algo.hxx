@@ -29,10 +29,8 @@
 class BOPAlgo_PISteps;
 
 //! The class provides the root interface for the algorithms in Boolean Component.<br>
-class BOPAlgo_Algo : public BOPAlgo_Options
-{
+class BOPAlgo_Algo : public BOPAlgo_Options {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! The main method to implement the operation
@@ -40,12 +38,11 @@ public:
     Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) = 0;
 
 protected:
-
     //! Default constructor
     Standard_EXPORT BOPAlgo_Algo();
     Standard_EXPORT virtual ~BOPAlgo_Algo();
 
-    Standard_EXPORT BOPAlgo_Algo(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_Algo(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     //! Checks input data
     Standard_EXPORT virtual void CheckData();
@@ -54,7 +51,6 @@ protected:
     Standard_EXPORT virtual void CheckResult();
 
 protected: //! @name Analyzing operations to fill progress indicator
-
     //! Analyze progress steps of the whole operation.
     //! @param theWhole - sum of progress of all operations.
     //! @oaram theSteps - steps of the operations supported by PI
@@ -62,14 +58,12 @@ protected: //! @name Analyzing operations to fill progress indicator
     //! To use this method, one has to override the following methods:
     //! * fillPIConstants - method filling values for constant operations.
     //! * fillPISteps - method filling steps for the rest of operations.
-    Standard_EXPORT void analyzeProgress(const Standard_Real theWhole,
-        BOPAlgo_PISteps& theSteps) const;
+    Standard_EXPORT void analyzeProgress(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const;
 
     //! Fills the values for constant operations - the operations having constant relative running time.
     //! @param theWhole - sum of all operations supported by PI, i.e. the value to normalize the steps to, if necessary.
     //! @param theSteps - steps of the operations supported by PI
-    Standard_EXPORT virtual void fillPIConstants(const Standard_Real theWhole,
-        BOPAlgo_PISteps& theSteps) const;
+    Standard_EXPORT virtual void fillPIConstants(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const;
 
     //! Fills the values for the operations dependent on the inputs.
     //! Filled values may not be normalized to represent percentage of total running time.
@@ -85,8 +79,7 @@ protected: //! @name Analyzing operations to fill progress indicator
 //! Additional root class to provide interface to be launched from parallel vector.
 //! It already has the range as a field, and has to be used with caution to create
 //! scope from the range only once.
-class BOPAlgo_ParallelAlgo : public BOPAlgo_Algo
-{
+class BOPAlgo_ParallelAlgo : public BOPAlgo_Algo {
 public:
     DEFINE_STANDARD_ALLOC;
 
@@ -95,14 +88,13 @@ public:
 
 public:
     //! Sets the range for a single run
-    void SetProgressRange(const Message_ProgressRange& theRange)
-    {
+    void SetProgressRange(const Message_ProgressRange& theRange) {
         myProgressRange = theRange;
     }
 
 private:
     //! Disable the range enabled method
-    virtual void Perform(const Message_ProgressRange & /*theRange*/ = Message_ProgressRange()) {};
+    virtual void Perform(const Message_ProgressRange& /*theRange*/ = Message_ProgressRange()) {};
 
 protected:
     Message_ProgressRange myProgressRange;
@@ -110,35 +102,32 @@ protected:
 
 //! Class for representing the relative contribution of each step of
 //! the operation to the whole progress
-class BOPAlgo_PISteps
-{
+class BOPAlgo_PISteps {
 public:
     //! Constructor
-    BOPAlgo_PISteps(const Standard_Integer theNbOp)
-        : mySteps(0, theNbOp - 1)
-    {
+    BOPAlgo_PISteps(const Standard_Integer theNbOp) : mySteps(0, theNbOp - 1) {
         mySteps.Init(0);
     }
 
     //! Returns the steps
-    const TColStd_Array1OfReal& Steps() const { return mySteps; }
+    const TColStd_Array1OfReal& Steps() const {
+        return mySteps;
+    }
     //! Returns modifiable steps
-    TColStd_Array1OfReal& ChangeSteps() { return mySteps; }
+    TColStd_Array1OfReal& ChangeSteps() {
+        return mySteps;
+    }
 
     //! Assign the value theStep to theOperation
-    void SetStep(const Standard_Integer theOperation, const Standard_Real theStep)
-    {
-        if (theOperation >= mySteps.Lower() && theOperation <= mySteps.Upper())
-        {
+    void SetStep(const Standard_Integer theOperation, const Standard_Real theStep) {
+        if (theOperation >= mySteps.Lower() && theOperation <= mySteps.Upper()) {
             mySteps(theOperation) = theStep;
         }
     }
 
     //! Returns the step assigned to the operation
-    Standard_Real GetStep(const Standard_Integer theOperation)
-    {
-        if (theOperation < mySteps.Lower() || theOperation > mySteps.Upper())
-        {
+    Standard_Real GetStep(const Standard_Integer theOperation) {
+        if (theOperation < mySteps.Lower() || theOperation > mySteps.Upper()) {
             return 0.;
         }
         return mySteps(theOperation);

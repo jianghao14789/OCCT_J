@@ -26,7 +26,6 @@
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_CartesianPoint;
 DEFINE_STANDARD_HANDLE(Geom_CartesianPoint, Geom_Point)
 
@@ -59,7 +58,6 @@ public:
     //! Returns the coordinates of <me>.
     Standard_EXPORT void Coord(Standard_Real& X, Standard_Real& Y, Standard_Real& Z) const Standard_OVERRIDE;
 
-
     //! Returns a non transient cartesian point with
     //! the same coordinates as <me>.
     Standard_EXPORT gp_Pnt Pnt() const Standard_OVERRIDE;
@@ -82,11 +80,8 @@ public:
     DEFINE_STANDARD_RTTIEXT(Geom_CartesianPoint, Geom_Point)
 
 protected:
-
 private:
-
     gp_Pnt gpPnt;
-
 };
 
 #endif // _Geom_CartesianPoint_HeaderFile

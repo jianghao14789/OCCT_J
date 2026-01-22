@@ -22,38 +22,14 @@
 
 #include <Draw_Interpretor.hxx>
 
-
-
-class XDEDRAW_Common 
-{
+class XDEDRAW_Common {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  Standard_EXPORT static void InitCommands (Draw_Interpretor& theCommands);
-
-
-
+    Standard_EXPORT static void InitCommands(Draw_Interpretor& theCommands);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _XDEDRAW_Common_HeaderFile

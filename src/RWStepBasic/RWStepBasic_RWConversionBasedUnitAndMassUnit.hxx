@@ -27,44 +27,25 @@ class StepBasic_ConversionBasedUnitAndMassUnit;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ConversionBasedUnitAndMassUnit
-class RWStepBasic_RWConversionBasedUnitAndMassUnit 
-{
+class RWStepBasic_RWConversionBasedUnitAndMassUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWConversionBasedUnitAndMassUnit();
 
-  
-  Standard_EXPORT RWStepBasic_RWConversionBasedUnitAndMassUnit();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ConversionBasedUnitAndMassUnit)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ConversionBasedUnitAndMassUnit)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepBasic_ConversionBasedUnitAndMassUnit)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_ConversionBasedUnitAndMassUnit) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_ConversionBasedUnitAndMassUnit) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepBasic_ConversionBasedUnitAndMassUnit) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWConversionBasedUnitAndMassUnit_HeaderFile

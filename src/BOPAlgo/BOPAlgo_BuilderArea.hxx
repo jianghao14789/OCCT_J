@@ -28,17 +28,14 @@
 #include <TopTools_IndexedMapOfOrientedShape.hxx>
 class IntTools_Context;
 
-
 //! The root class for algorithms to build
 //! faces/solids from set of edges/faces
-class BOPAlgo_BuilderArea : public BOPAlgo_Algo
-{
+class BOPAlgo_BuilderArea : public BOPAlgo_Algo {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Sets the context for the algorithms
-    void SetContext(const Handle(IntTools_Context)& theContext) {
+    void SetContext(const Handle(IntTools_Context) & theContext) {
         myContext = theContext;
     }
 
@@ -74,11 +71,10 @@ public:
     }
 
 protected:
-
     Standard_EXPORT BOPAlgo_BuilderArea();
     Standard_EXPORT virtual ~BOPAlgo_BuilderArea();
 
-    Standard_EXPORT BOPAlgo_BuilderArea(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_BuilderArea(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     virtual void PerformShapesToAvoid(const Message_ProgressRange& theRange) = 0;
 
@@ -87,7 +83,6 @@ protected:
     virtual void PerformAreas(const Message_ProgressRange& theRange) = 0;
 
     virtual void PerformInternalShapes(const Message_ProgressRange& theRange) = 0;
-
 
     Handle(IntTools_Context) myContext;
     TopTools_ListOfShape myShapes;
@@ -98,7 +93,6 @@ protected:
     Standard_Boolean myAvoidInternalShapes;
 
 private:
-
 };
 
 #endif // _BOPAlgo_BuilderArea_HeaderFile

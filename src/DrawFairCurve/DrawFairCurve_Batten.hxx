@@ -27,64 +27,44 @@
 #include <Standard_OStream.hxx>
 class gp_Pnt2d;
 
-
 class DrawFairCurve_Batten;
 DEFINE_STANDARD_HANDLE(DrawFairCurve_Batten, DrawTrSurf_BSplineCurve2d)
 
 //! Interactive Draw object of type "Batten"
-class DrawFairCurve_Batten : public DrawTrSurf_BSplineCurve2d
-{
+class DrawFairCurve_Batten : public DrawTrSurf_BSplineCurve2d {
 
 public:
+    Standard_EXPORT DrawFairCurve_Batten(const Standard_Address TheBatten);
 
-  
-  Standard_EXPORT DrawFairCurve_Batten(const Standard_Address TheBatten);
-  
-  Standard_EXPORT void Compute();
-  
-  Standard_EXPORT void SetPoint (const Standard_Integer Side, const gp_Pnt2d& Point);
-  
-  Standard_EXPORT void SetAngle (const Standard_Integer Side, const Standard_Real Angle);
-  
-  Standard_EXPORT void SetSliding (const Standard_Real Length);
-  
-  Standard_EXPORT void SetHeight (const Standard_Real Heigth);
-  
-  Standard_EXPORT void SetSlope (const Standard_Real Slope);
-  
-  Standard_EXPORT Standard_Real GetAngle (const Standard_Integer Side) const;
-  
-  Standard_EXPORT Standard_Real GetSliding() const;
-  
-  Standard_EXPORT void FreeSliding();
-  
-  Standard_EXPORT void FreeAngle (const Standard_Integer Side);
-  
-  //! For variable dump.
-  Standard_EXPORT virtual void Dump (Standard_OStream& S) const Standard_OVERRIDE;
+    Standard_EXPORT void Compute();
 
+    Standard_EXPORT void SetPoint(const Standard_Integer Side, const gp_Pnt2d& Point);
 
+    Standard_EXPORT void SetAngle(const Standard_Integer Side, const Standard_Real Angle);
 
+    Standard_EXPORT void SetSliding(const Standard_Real Length);
 
-  DEFINE_STANDARD_RTTIEXT(DrawFairCurve_Batten,DrawTrSurf_BSplineCurve2d)
+    Standard_EXPORT void SetHeight(const Standard_Real Heigth);
+
+    Standard_EXPORT void SetSlope(const Standard_Real Slope);
+
+    Standard_EXPORT Standard_Real GetAngle(const Standard_Integer Side) const;
+
+    Standard_EXPORT Standard_Real GetSliding() const;
+
+    Standard_EXPORT void FreeSliding();
+
+    Standard_EXPORT void FreeAngle(const Standard_Integer Side);
+
+    //! For variable dump.
+    Standard_EXPORT virtual void Dump(Standard_OStream& S) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(DrawFairCurve_Batten, DrawTrSurf_BSplineCurve2d)
 
 protected:
-
-
-  Standard_Address MyBatten;
-
+    Standard_Address MyBatten;
 
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _DrawFairCurve_Batten_HeaderFile

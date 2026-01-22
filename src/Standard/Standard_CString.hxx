@@ -51,23 +51,21 @@ Standard_EXPORT Standard_Integer HashCode(Standard_CString theString, Standard_I
 //! @return a computed hash code of the given string
 Standard_EXPORT Standard_Integer HashCodes(Standard_CString theString, Standard_Integer theLength);
 
-//! Returns bounded hash code for the first theLength characters in the string theString, in the range [1, theUpperBound]
+//! Returns bounded hash code for the first theLength characters in the string theString, in the range [1,
+//! theUpperBound]
 //! @param theString the string which hash code is to be computed
 //! @param theLength the length of the initial substring of the given string which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code of the given string
-inline Standard_Integer HashCode(const Standard_CString theString,
-    const Standard_Integer theLength,
-    const Standard_Integer theUpperBound)
-{
+inline Standard_Integer HashCode(const Standard_CString theString, const Standard_Integer theLength,
+                                 const Standard_Integer theUpperBound) {
     //  return (Abs( HashCodes( Value , Len ) ) % Upper ) + 1 ;
     return HashCode(HashCodes(theString, theLength), theUpperBound);
 }
 
 //! Returns Standard_True if two strings are equal
 // READ by jh
-inline Standard_Boolean IsEqual(const Standard_CString theOne, const Standard_CString theTwo)
-{
+inline Standard_Boolean IsEqual(const Standard_CString theOne, const Standard_CString theTwo) {
     return strcmp(theOne, theTwo) == 0;
 }
 
@@ -77,29 +75,29 @@ inline Standard_Boolean IsEqual(const Standard_CString theOne, const Standard_CS
 extern "C" {
 #endif /* __cplusplus */
 
-    //! Equivalent of standard C function atof() that always uses C locale
-    Standard_EXPORT double Atof(const char* theStr);
+//! Equivalent of standard C function atof() that always uses C locale
+Standard_EXPORT double Atof(const char* theStr);
 
-    //! Optimized equivalent of standard C function strtod() that always uses C locale
-    Standard_EXPORT double Strtod(const char* theStr, char** theNextPtr);
+//! Optimized equivalent of standard C function strtod() that always uses C locale
+Standard_EXPORT double Strtod(const char* theStr, char** theNextPtr);
 
-    //! Equivalent of standard C function printf() that always uses C locale
-    Standard_EXPORT int Printf(const char* theFormat, ...);
+//! Equivalent of standard C function printf() that always uses C locale
+Standard_EXPORT int Printf(const char* theFormat, ...);
 
-    //! Equivalent of standard C function fprintf() that always uses C locale
-    Standard_EXPORT int Fprintf(FILE* theFile, const char* theFormat, ...);
+//! Equivalent of standard C function fprintf() that always uses C locale
+Standard_EXPORT int Fprintf(FILE* theFile, const char* theFormat, ...);
 
-    //! Equivalent of standard C function sprintf() that always uses C locale
-    Standard_EXPORT int Sprintf(char* theBuffer, const char* theFormat, ...);
+//! Equivalent of standard C function sprintf() that always uses C locale
+Standard_EXPORT int Sprintf(char* theBuffer, const char* theFormat, ...);
 
-    //! Equivalent of standard C function vsprintf() that always uses C locale.
-    //! Note that this function does not check buffer bounds and should be used with precaution measures
-    //! (only with format fitting into the buffer of known size).
-    //! @param theBuffer  [in] [out] string buffer to fill
-    //! @param theFormat  [in] format to apply
-    //! @param theArgList [in] argument list for specified format
-    //! @return the total number of characters written, or a negative number on error
-    Standard_EXPORT int Vsprintf(char* theBuffer, const char* theFormat, va_list theArgList);
+//! Equivalent of standard C function vsprintf() that always uses C locale.
+//! Note that this function does not check buffer bounds and should be used with precaution measures
+//! (only with format fitting into the buffer of known size).
+//! @param theBuffer  [in] [out] string buffer to fill
+//! @param theFormat  [in] format to apply
+//! @param theArgList [in] argument list for specified format
+//! @return the total number of characters written, or a negative number on error
+Standard_EXPORT int Vsprintf(char* theBuffer, const char* theFormat, va_list theArgList);
 
 #ifdef __cplusplus
 }

@@ -19,43 +19,38 @@
 #include <StepBasic_NameAssignment.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_NameAssignment,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_NameAssignment, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_NameAssignment
-//purpose  : 
+// function : StepBasic_NameAssignment
+// purpose  :
 //=======================================================================
-StepBasic_NameAssignment::StepBasic_NameAssignment ()
-{
+StepBasic_NameAssignment::StepBasic_NameAssignment() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_NameAssignment::Init(const Handle(TCollection_HAsciiString) & aAssignedName) {
+
+    theAssignedName = aAssignedName;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AssignedName
+// purpose  :
 //=======================================================================
 
-void StepBasic_NameAssignment::Init (const Handle(TCollection_HAsciiString) &aAssignedName)
-{
-
-  theAssignedName = aAssignedName;
+Handle(TCollection_HAsciiString) StepBasic_NameAssignment::AssignedName() const {
+    return theAssignedName;
 }
 
 //=======================================================================
-//function : AssignedName
-//purpose  : 
+// function : SetAssignedName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_NameAssignment::AssignedName () const
-{
-  return theAssignedName;
-}
-
-//=======================================================================
-//function : SetAssignedName
-//purpose  : 
-//=======================================================================
-
-void StepBasic_NameAssignment::SetAssignedName (const Handle(TCollection_HAsciiString) &aAssignedName)
-{
-  theAssignedName = aAssignedName;
+void StepBasic_NameAssignment::SetAssignedName(const Handle(TCollection_HAsciiString) & aAssignedName) {
+    theAssignedName = aAssignedName;
 }

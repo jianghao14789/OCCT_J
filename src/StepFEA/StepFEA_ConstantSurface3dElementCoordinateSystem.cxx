@@ -19,68 +19,61 @@
 #include <StepFEA_ConstantSurface3dElementCoordinateSystem.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_ConstantSurface3dElementCoordinateSystem,StepFEA_FeaRepresentationItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_ConstantSurface3dElementCoordinateSystem, StepFEA_FeaRepresentationItem)
 
 //=======================================================================
-//function : StepFEA_ConstantSurface3dElementCoordinateSystem
-//purpose  : 
+// function : StepFEA_ConstantSurface3dElementCoordinateSystem
+// purpose  :
 //=======================================================================
-StepFEA_ConstantSurface3dElementCoordinateSystem::StepFEA_ConstantSurface3dElementCoordinateSystem ()
-{
+StepFEA_ConstantSurface3dElementCoordinateSystem::StepFEA_ConstantSurface3dElementCoordinateSystem() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_ConstantSurface3dElementCoordinateSystem::Init(const Handle(TCollection_HAsciiString) &
+                                                                aRepresentationItem_Name,
+                                                            const Standard_Integer aAxis, const Standard_Real aAngle) {
+    StepFEA_FeaRepresentationItem::Init(aRepresentationItem_Name);
+
+    theAxis = aAxis;
+
+    theAngle = aAngle;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Axis
+// purpose  :
 //=======================================================================
 
-void StepFEA_ConstantSurface3dElementCoordinateSystem::Init (const Handle(TCollection_HAsciiString) &aRepresentationItem_Name,
-                                                             const Standard_Integer aAxis,
-                                                             const Standard_Real aAngle)
-{
-  StepFEA_FeaRepresentationItem::Init(aRepresentationItem_Name);
-
-  theAxis = aAxis;
-
-  theAngle = aAngle;
+Standard_Integer StepFEA_ConstantSurface3dElementCoordinateSystem::Axis() const {
+    return theAxis;
 }
 
 //=======================================================================
-//function : Axis
-//purpose  : 
+// function : SetAxis
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepFEA_ConstantSurface3dElementCoordinateSystem::Axis () const
-{
-  return theAxis;
+void StepFEA_ConstantSurface3dElementCoordinateSystem::SetAxis(const Standard_Integer aAxis) {
+    theAxis = aAxis;
 }
 
 //=======================================================================
-//function : SetAxis
-//purpose  : 
+// function : Angle
+// purpose  :
 //=======================================================================
 
-void StepFEA_ConstantSurface3dElementCoordinateSystem::SetAxis (const Standard_Integer aAxis)
-{
-  theAxis = aAxis;
+Standard_Real StepFEA_ConstantSurface3dElementCoordinateSystem::Angle() const {
+    return theAngle;
 }
 
 //=======================================================================
-//function : Angle
-//purpose  : 
+// function : SetAngle
+// purpose  :
 //=======================================================================
 
-Standard_Real StepFEA_ConstantSurface3dElementCoordinateSystem::Angle () const
-{
-  return theAngle;
-}
-
-//=======================================================================
-//function : SetAngle
-//purpose  : 
-//=======================================================================
-
-void StepFEA_ConstantSurface3dElementCoordinateSystem::SetAngle (const Standard_Real aAngle)
-{
-  theAngle = aAngle;
+void StepFEA_ConstantSurface3dElementCoordinateSystem::SetAngle(const Standard_Real aAngle) {
+    theAngle = aAngle;
 }

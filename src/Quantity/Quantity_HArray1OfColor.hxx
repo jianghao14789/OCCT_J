@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(Quantity_HArray1OfColor, Quantity_Array1OfColor)
 
-
 #endif

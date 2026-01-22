@@ -28,62 +28,54 @@
  */
 
 //! define the constant to the size of 10 points
-#define MeshVS_BufSize 10*3*sizeof(double)
+#define MeshVS_BufSize 10 * 3 * sizeof(double)
 
-class MeshVS_Buffer 
-{
+class MeshVS_Buffer {
 public:
-  //! Constructor of the buffer of the requested size
-  MeshVS_Buffer (const Standard_Size theSize)
-    : myDynData (0)
-  {
-    if (theSize > MeshVS_BufSize)
-      myDynData = Standard::Allocate (theSize);
-  }
-
-  //! Destructor
-  ~MeshVS_Buffer()
-  {
-    if (myDynData)
-    {
-      Standard::Free (myDynData);
-      myDynData = 0;
+    //! Constructor of the buffer of the requested size
+    MeshVS_Buffer(const Standard_Size theSize) : myDynData(0) {
+        if (theSize > MeshVS_BufSize) myDynData = Standard::Allocate(theSize);
     }
-  }
 
-  //! Cast the buffer to the void pointer
-  operator void* ()
-  {
-    return myDynData ? myDynData : (void*) myAutoData;
-  }
+    //! Destructor
+    ~MeshVS_Buffer() {
+        if (myDynData) {
+            Standard::Free(myDynData);
+            myDynData = 0;
+        }
+    }
 
-  //! Interpret the buffer as a reference to double
-  operator Standard_Real& ()
-  {
-    return * (myDynData ? (Standard_Real*) myDynData : (Standard_Real*) myAutoData);
-  }
+    //! Cast the buffer to the void pointer
+    operator void*() {
+        return myDynData ? myDynData : (void*)myAutoData;
+    }
 
-  //! Interpret the buffer as a reference to int
-  operator Standard_Integer& ()
-  {
-    return * (myDynData ? (Standard_Integer*) myDynData : (Standard_Integer*) myAutoData);
-  }
+    //! Interpret the buffer as a reference to double
+    operator Standard_Real&() {
+        return *(myDynData ? (Standard_Real*)myDynData : (Standard_Real*)myAutoData);
+    }
 
-  //! Interpret the buffer as a reference to gp_Pnt
-  operator gp_Pnt& ()
-  {
-    return * (myDynData ? (gp_Pnt*) myDynData : (gp_Pnt*) myAutoData);
-  }
+    //! Interpret the buffer as a reference to int
+    operator Standard_Integer&() {
+        return *(myDynData ? (Standard_Integer*)myDynData : (Standard_Integer*)myAutoData);
+    }
+
+    //! Interpret the buffer as a reference to gp_Pnt
+    operator gp_Pnt&() {
+        return *(myDynData ? (gp_Pnt*)myDynData : (gp_Pnt*)myAutoData);
+    }
 
 private:
-  //! Deprecate copy constructor
-  MeshVS_Buffer(const MeshVS_Buffer&) {}
+    //! Deprecate copy constructor
+    MeshVS_Buffer(const MeshVS_Buffer&) {}
 
-  //! Deprecate copy operation
-  MeshVS_Buffer& operator=(const MeshVS_Buffer&) {return *this;}
+    //! Deprecate copy operation
+    MeshVS_Buffer& operator=(const MeshVS_Buffer&) {
+        return *this;
+    }
 
-  char  myAutoData[ MeshVS_BufSize ];
-  void* myDynData;
+    char myAutoData[MeshVS_BufSize];
+    void* myDynData;
 };
 
 #endif

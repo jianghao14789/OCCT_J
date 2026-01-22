@@ -18,48 +18,46 @@
 #include <Standard_Integer.hxx>
 
 //! Range of values defined as Start + Length pair.
-struct Graphic3d_BufferRange
-{
-  Standard_Integer Start;  //!< first element within the range
-  Standard_Integer Length; //!< number of elements within the range
+struct Graphic3d_BufferRange {
+    Standard_Integer Start;  //!< first element within the range
+    Standard_Integer Length; //!< number of elements within the range
 
-  //! Empty constructor.
-  Graphic3d_BufferRange() : Start (0), Length (0) {}
+    //! Empty constructor.
+    Graphic3d_BufferRange() : Start(0), Length(0) {}
 
-  //! Constructor.
-  Graphic3d_BufferRange (Standard_Integer theStart, Standard_Integer theLength) : Start (theStart), Length (theLength) {}
+    //! Constructor.
+    Graphic3d_BufferRange(Standard_Integer theStart, Standard_Integer theLength) : Start(theStart), Length(theLength) {}
 
-  //! Return TRUE if range is empty.
-  Standard_Boolean IsEmpty() const { return Length == 0; }
-
-  //! Return the Upper element within the range
-  Standard_Integer Upper() const { return Start + Length - 1; }
-
-  //! Clear the range.
-  void Clear()
-  {
-    Start  = 0;
-    Length = 0;
-  }
-
-  //! Add another range to this one.
-  void Unite (const Graphic3d_BufferRange& theRange)
-  {
-    if (IsEmpty())
-    {
-      *this = theRange;
-      return;
-    }
-    else if (theRange.IsEmpty())
-    {
-      return;
+    //! Return TRUE if range is empty.
+    Standard_Boolean IsEmpty() const {
+        return Length == 0;
     }
 
-    const Standard_Integer aStart = Min (Start,   theRange.Start);
-    const Standard_Integer aLast  = Max (Upper(), theRange.Upper());
-    Start  = aStart;
-    Length = aLast - aStart + 1;
-  }
+    //! Return the Upper element within the range
+    Standard_Integer Upper() const {
+        return Start + Length - 1;
+    }
+
+    //! Clear the range.
+    void Clear() {
+        Start = 0;
+        Length = 0;
+    }
+
+    //! Add another range to this one.
+    void Unite(const Graphic3d_BufferRange& theRange) {
+        if (IsEmpty()) {
+            *this = theRange;
+            return;
+        } else if (theRange.IsEmpty()) {
+            return;
+        }
+
+        const Standard_Integer aStart = Min(Start, theRange.Start);
+        const Standard_Integer aLast = Max(Upper(), theRange.Upper());
+        Start = aStart;
+        Length = aLast - aStart + 1;
+    }
 };
 
 #endif // _Graphic3d_BufferRange_HeaderFile

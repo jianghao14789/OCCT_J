@@ -18,7 +18,7 @@
 
 #include <TColStd_Array1OfReal.hxx>
 
-Standard_DEPRECATED("Deprecated alias - TColStd_Array1OfReal should be used instead")
-typedef TColStd_Array1OfReal IntTools_CArray1OfReal;
+Standard_DEPRECATED("Deprecated alias - TColStd_Array1OfReal should be used instead") typedef TColStd_Array1OfReal
+    IntTools_CArray1OfReal;
 
 #endif // _IntTools_CArray1OfReal_HeaderFile

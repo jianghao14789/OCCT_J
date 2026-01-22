@@ -14,15 +14,14 @@
 
 #include <StdFail_NotDone.hxx>
 
-inline Standard_Boolean math_Crout::IsDone() const { return Done; }
+inline Standard_Boolean math_Crout::IsDone() const {
+    return Done;
+}
 
-inline Standard_OStream& operator<< (Standard_OStream& o,
-    const math_Crout& C)
-{
+inline Standard_OStream& operator<<(Standard_OStream& o, const math_Crout& C) {
     C.Dump(o);
     return o;
 }
-
 
 inline Standard_Real math_Crout::Determinant() const {
     StdFail_NotDone_Raise_if(!Done, " ");
@@ -38,6 +37,3 @@ inline void math_Crout::Invert(math_Matrix& Inv) const {
     StdFail_NotDone_Raise_if(!Done, " ");
     Inv = InvA;
 }
-
-
-

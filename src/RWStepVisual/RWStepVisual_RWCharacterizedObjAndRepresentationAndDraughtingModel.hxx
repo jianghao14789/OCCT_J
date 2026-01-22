@@ -27,25 +27,23 @@ class StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
-//! Read & Write Module for complex STEP entity Characterized_Object & Characterized_Representation & Draughting_Model & Representation
-class RWStepVisual_RWCharacterizedObjAndRepresentationAndDraughtingModel
-{
+//! Read & Write Module for complex STEP entity Characterized_Object & Characterized_Representation & Draughting_Model &
+//! Representation
+class RWStepVisual_RWCharacterizedObjAndRepresentationAndDraughtingModel {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
     Standard_EXPORT RWStepVisual_RWCharacterizedObjAndRepresentationAndDraughtingModel();
-  
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& data,
-                                const Standard_Integer num, Handle(Interface_Check)& ach,
-                                const Handle(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel)& ent) const;
-  
-  Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
-                                 const Handle(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel)& ent) const;
-  
-  Standard_EXPORT void Share(const Handle(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel)& ent,
-                             Interface_EntityIterator& iter) const;
+
+    Standard_EXPORT void
+    ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num, Handle(Interface_Check) & ach,
+             const Handle(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel) &
+                                       ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWCharacterizedObjAndRepresentationAndDraughtingModel_HeaderFile

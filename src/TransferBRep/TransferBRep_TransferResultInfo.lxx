@@ -15,82 +15,73 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Result
-//purpose  : 
+// function : Result
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::Result()
-{
-  return myR;
+inline Standard_Integer& TransferBRep_TransferResultInfo::Result() {
+    return myR;
 }
 
 //=======================================================================
-//function : ResultWarning
-//purpose  : 
+// function : ResultWarning
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::ResultWarning()
-{
-  return myRW;
+inline Standard_Integer& TransferBRep_TransferResultInfo::ResultWarning() {
+    return myRW;
 }
 
 //=======================================================================
-//function : ResultFail
-//purpose  : 
+// function : ResultFail
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::ResultFail()
-{
-  return myRF;
+inline Standard_Integer& TransferBRep_TransferResultInfo::ResultFail() {
+    return myRF;
 }
 
 //=======================================================================
-//function : ResultWarningFail
-//purpose  : 
+// function : ResultWarningFail
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::ResultWarningFail()
-{
-  return myRWF;
+inline Standard_Integer& TransferBRep_TransferResultInfo::ResultWarningFail() {
+    return myRWF;
 }
 
 //=======================================================================
-//function : NoResult
-//purpose  : 
+// function : NoResult
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::NoResult()
-{
-  return myNR;
+inline Standard_Integer& TransferBRep_TransferResultInfo::NoResult() {
+    return myNR;
 }
 
 //=======================================================================
-//function : NoResultWarning
-//purpose  : 
+// function : NoResultWarning
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::NoResultWarning()
-{
-  return myNRW;
+inline Standard_Integer& TransferBRep_TransferResultInfo::NoResultWarning() {
+    return myNRW;
 }
 
 //=======================================================================
-//function : NoResultFail
-//purpose  : 
+// function : NoResultFail
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::NoResultFail()
-{
-  return myNRF;
+inline Standard_Integer& TransferBRep_TransferResultInfo::NoResultFail() {
+    return myNRF;
 }
 
 //=======================================================================
-//function : NoResultWarningFail
-//purpose  : 
+// function : NoResultWarningFail
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& TransferBRep_TransferResultInfo::NoResultWarningFail()
-{
-  return myNRWF;
+inline Standard_Integer& TransferBRep_TransferResultInfo::NoResultWarningFail() {
+    return myNRWF;
 }
-

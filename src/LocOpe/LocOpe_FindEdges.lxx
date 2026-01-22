@@ -17,77 +17,64 @@
 #include <TopoDS.hxx>
 
 //=======================================================================
-//function : LocOpe_FindEdges
-//purpose  : 
+// function : LocOpe_FindEdges
+// purpose  :
 //=======================================================================
 
-inline LocOpe_FindEdges::LocOpe_FindEdges()
-{}
+inline LocOpe_FindEdges::LocOpe_FindEdges() {}
 
 //=======================================================================
-//function : LocOpe_FindEdges
-//purpose  : 
+// function : LocOpe_FindEdges
+// purpose  :
 //=======================================================================
 
-inline LocOpe_FindEdges::LocOpe_FindEdges(const TopoDS_Shape& FFrom,
-					  const TopoDS_Shape& FTo)
-{
-  Set(FFrom,FTo);
+inline LocOpe_FindEdges::LocOpe_FindEdges(const TopoDS_Shape& FFrom, const TopoDS_Shape& FTo) {
+    Set(FFrom, FTo);
 }
 
-
 //=======================================================================
-//function : InitIterator
-//purpose  : 
+// function : InitIterator
+// purpose  :
 //=======================================================================
 
-inline void LocOpe_FindEdges::InitIterator ()
-{
-  myItFrom.Initialize(myLFrom);
-  myItTo.Initialize(myLTo);
+inline void LocOpe_FindEdges::InitIterator() {
+    myItFrom.Initialize(myLFrom);
+    myItTo.Initialize(myLTo);
 }
 
-
 //=======================================================================
-//function : More
-//purpose  : 
+// function : More
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean LocOpe_FindEdges::More() const
-{
-  return myItFrom.More();
+inline Standard_Boolean LocOpe_FindEdges::More() const {
+    return myItFrom.More();
 }
 
-
 //=======================================================================
-//function : EdgeFrom
-//purpose  : 
+// function : EdgeFrom
+// purpose  :
 //=======================================================================
 
-inline const TopoDS_Edge& LocOpe_FindEdges::EdgeFrom() const
-{
-  return TopoDS::Edge(myItFrom.Value());
+inline const TopoDS_Edge& LocOpe_FindEdges::EdgeFrom() const {
+    return TopoDS::Edge(myItFrom.Value());
 }
 
-
 //=======================================================================
-//function : EdgeTo
-//purpose  : 
+// function : EdgeTo
+// purpose  :
 //=======================================================================
 
-inline const TopoDS_Edge& LocOpe_FindEdges::EdgeTo() const
-{
-  return TopoDS::Edge(myItTo.Value());
+inline const TopoDS_Edge& LocOpe_FindEdges::EdgeTo() const {
+    return TopoDS::Edge(myItTo.Value());
 }
 
-
 //=======================================================================
-//function : Next
-//purpose  : 
+// function : Next
+// purpose  :
 //=======================================================================
 
-inline void LocOpe_FindEdges::Next()
-{
-  myItFrom.Next();
-  myItTo.Next();
+inline void LocOpe_FindEdges::Next() {
+    myItFrom.Next();
+    myItTo.Next();
 }

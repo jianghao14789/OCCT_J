@@ -21,14 +21,12 @@
 
 // Defines a dynamic vector of work data.
 
-struct IntWalk_WalkingData
-{
-    Standard_Real    ustart;
-    Standard_Real    vstart;
+struct IntWalk_WalkingData {
+    Standard_Real ustart;
+    Standard_Real vstart;
     Standard_Integer etat;
 };
 
-typedef std::vector<IntWalk_WalkingData, NCollection_StdAllocator<IntWalk_WalkingData> >
-    IntWalk_VectorOfWalkingData;
+typedef std::vector<IntWalk_WalkingData, NCollection_StdAllocator<IntWalk_WalkingData>> IntWalk_VectorOfWalkingData;
 
 #endif

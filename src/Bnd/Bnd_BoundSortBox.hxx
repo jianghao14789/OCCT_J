@@ -30,7 +30,6 @@
 #include <Standard_Address.hxx>
 class gp_Pln;
 
-
 //! A tool to compare a bounding box or a plane with a set of
 //! bounding boxes. It sorts the set of bounding boxes to give
 //! the list of boxes which intersect the element being compared.
@@ -38,12 +37,9 @@ class gp_Pln;
 //! while the box being compared bounds a shape to be
 //! compared. The resulting list of intersecting boxes therefore
 //! gives the list of items which potentially intersect the shape to be compared.
-class Bnd_BoundSortBox
-{
+class Bnd_BoundSortBox {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs an empty comparison algorithm for bounding boxes.
     //! The bounding boxes are then defined using the Initialize function.
@@ -51,12 +47,12 @@ public:
 
     //! Initializes this comparison algorithm with
     //! -   the set of bounding boxes SetOfBox.
-    Standard_EXPORT void Initialize(const Bnd_Box& CompleteBox, const Handle(Bnd_HArray1OfBox)& SetOfBox);
+    Standard_EXPORT void Initialize(const Bnd_Box& CompleteBox, const Handle(Bnd_HArray1OfBox) & SetOfBox);
 
     //! Initializes this comparison algorithm with
     //! -   the set of bounding boxes SetOfBox, where
     //! CompleteBox is given as the global bounding box of SetOfBox.
-    Standard_EXPORT void Initialize(const Handle(Bnd_HArray1OfBox)& SetOfBox);
+    Standard_EXPORT void Initialize(const Handle(Bnd_HArray1OfBox) & SetOfBox);
 
     //! Initializes this comparison algorithm, giving it only
     //! -   the maximum number nbComponents
@@ -99,27 +95,15 @@ public:
     Standard_EXPORT void Dump() const;
 
     Standard_EXPORT void Destroy();
-    ~Bnd_BoundSortBox()
-    {
+    ~Bnd_BoundSortBox() {
         Destroy();
     }
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
     //! Prepares  BoundSortBox and  sorts   the  boxes of
     //! <SetOfBox> .
     Standard_EXPORT void SortBoxes();
-
 
     Bnd_Box myBox;
     Handle(Bnd_HArray1OfBox) myBndComponents;
@@ -136,14 +120,6 @@ private:
     TColStd_DataMapOfIntegerInteger Crible;
     TColStd_ListOfInteger lastResult;
     Standard_Address TabBits;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Bnd_BoundSortBox_HeaderFile

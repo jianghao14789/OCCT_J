@@ -23,51 +23,31 @@
 #include <Standard_Transient.hxx>
 class StepBasic_VersionedActionRequest;
 
-
 class StepBasic_ActionRequestAssignment;
 DEFINE_STANDARD_HANDLE(StepBasic_ActionRequestAssignment, Standard_Transient)
 
 //! Representation of STEP entity ActionRequestAssignment
-class StepBasic_ActionRequestAssignment : public Standard_Transient
-{
+class StepBasic_ActionRequestAssignment : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_ActionRequestAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_ActionRequestAssignment();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(StepBasic_VersionedActionRequest)& aAssignedActionRequest);
-  
-  //! Returns field AssignedActionRequest
-  Standard_EXPORT Handle(StepBasic_VersionedActionRequest) AssignedActionRequest() const;
-  
-  //! Set field AssignedActionRequest
-  Standard_EXPORT void SetAssignedActionRequest (const Handle(StepBasic_VersionedActionRequest)& AssignedActionRequest);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(StepBasic_VersionedActionRequest) & aAssignedActionRequest);
 
+    //! Returns field AssignedActionRequest
+    Standard_EXPORT Handle(StepBasic_VersionedActionRequest) AssignedActionRequest() const;
 
+    //! Set field AssignedActionRequest
+    Standard_EXPORT void SetAssignedActionRequest(const Handle(StepBasic_VersionedActionRequest) &
+                                                  AssignedActionRequest);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepBasic_ActionRequestAssignment,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(StepBasic_ActionRequestAssignment, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepBasic_VersionedActionRequest) theAssignedActionRequest;
-
-
+    Handle(StepBasic_VersionedActionRequest) theAssignedActionRequest;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_ActionRequestAssignment_HeaderFile

@@ -19,45 +19,39 @@
 #include <BRep_Tool.hxx>
 #include <BRepAdaptor_Curve.hxx>
 
-
 //=======================================================================
-//function : BRepExtrema_ExtPC
-//purpose  : 
+// function : BRepExtrema_ExtPC
+// purpose  :
 //=======================================================================
 
-BRepExtrema_ExtPC::BRepExtrema_ExtPC(const TopoDS_Vertex& V, const TopoDS_Edge& E)
-{
-  Initialize(E);
-  Perform(V);
+BRepExtrema_ExtPC::BRepExtrema_ExtPC(const TopoDS_Vertex& V, const TopoDS_Edge& E) {
+    Initialize(E);
+    Perform(V);
 }
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void BRepExtrema_ExtPC::Initialize(const TopoDS_Edge& E)
-{
-  if (!BRep_Tool::IsGeometric(E))
-    return;  // protect against non-geometric type (e.g. polygon)
-  Standard_Real U1, U2;
-  myHC = new BRepAdaptor_Curve(E);
-  Standard_Real Tol = Min(BRep_Tool::Tolerance(E), Precision::Confusion());
-  Tol = Max(myHC->Resolution(Tol), Precision::PConfusion());
-  BRep_Tool::Range(E,U1,U2);
-  myExtPC.Initialize (*myHC, U1, U2, Tol);
+void BRepExtrema_ExtPC::Initialize(const TopoDS_Edge& E) {
+    if (!BRep_Tool::IsGeometric(E)) return; // protect against non-geometric type (e.g. polygon)
+    Standard_Real U1, U2;
+    myHC = new BRepAdaptor_Curve(E);
+    Standard_Real Tol = Min(BRep_Tool::Tolerance(E), Precision::Confusion());
+    Tol = Max(myHC->Resolution(Tol), Precision::PConfusion());
+    BRep_Tool::Range(E, U1, U2);
+    myExtPC.Initialize(*myHC, U1, U2, Tol);
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void BRepExtrema_ExtPC::Perform(const TopoDS_Vertex& V)
-{
-  if (!myHC.IsNull())
-  {
-    gp_Pnt P = BRep_Tool::Pnt(V);
-    myExtPC.Perform(P);
-  }
+void BRepExtrema_ExtPC::Perform(const TopoDS_Vertex& V) {
+    if (!myHC.IsNull()) {
+        gp_Pnt P = BRep_Tool::Pnt(V);
+        myExtPC.Perform(P);
+    }
 }

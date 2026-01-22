@@ -22,44 +22,38 @@
 #include <IMeshData_Types.hxx>
 
 //! Default implementation of edge data model entity.
-class BRepMeshData_Edge : public IMeshData_Edge
-{
+class BRepMeshData_Edge : public IMeshData_Edge {
 public:
+    DEFINE_INC_ALLOC
 
-  DEFINE_INC_ALLOC
+    //! Constructor.
+    Standard_EXPORT BRepMeshData_Edge(const TopoDS_Edge& theEdge,
+                                      const Handle(NCollection_IncAllocator) & theAllocator);
 
-  //! Constructor.
-  Standard_EXPORT BRepMeshData_Edge (
-    const TopoDS_Edge&                       theEdge,
-    const Handle (NCollection_IncAllocator)& theAllocator);
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMeshData_Edge();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMeshData_Edge ();
+    //! Returns number of pcurves assigned to current edge.
+    Standard_EXPORT virtual Standard_Integer PCurvesNb() const Standard_OVERRIDE;
 
-  //! Returns number of pcurves assigned to current edge.
-  Standard_EXPORT virtual Standard_Integer PCurvesNb () const Standard_OVERRIDE;
+    //! Adds discrete pcurve for the specified discrete face.
+    Standard_EXPORT virtual const IMeshData::IPCurveHandle&
+    AddPCurve(const IMeshData::IFacePtr& theDFace, const TopAbs_Orientation theOrientation) Standard_OVERRIDE;
 
-  //! Adds discrete pcurve for the specified discrete face.
-  Standard_EXPORT virtual const IMeshData::IPCurveHandle& AddPCurve (
-    const IMeshData::IFacePtr& theDFace,
-    const TopAbs_Orientation   theOrientation) Standard_OVERRIDE;
+    //! Returns pcurve for the specified discrete face.
+    Standard_EXPORT virtual const IMeshData::IPCurveHandle&
+    GetPCurve(const IMeshData::IFacePtr& theDFace, const TopAbs_Orientation theOrientation) const Standard_OVERRIDE;
 
-  //! Returns pcurve for the specified discrete face.
-  Standard_EXPORT virtual const IMeshData::IPCurveHandle& GetPCurve (
-    const IMeshData::IFacePtr& theDFace,
-    const TopAbs_Orientation   theOrientation) const Standard_OVERRIDE;
+    //! Returns pcurve with the given index.
+    Standard_EXPORT virtual const IMeshData::IPCurveHandle&
+    GetPCurve(const Standard_Integer theIndex) const Standard_OVERRIDE;
 
-  //! Returns pcurve with the given index.
-  Standard_EXPORT virtual const IMeshData::IPCurveHandle& GetPCurve (
-    const Standard_Integer theIndex) const Standard_OVERRIDE;
-
-  DEFINE_STANDARD_RTTIEXT(BRepMeshData_Edge, IMeshData_Edge)
+    DEFINE_STANDARD_RTTIEXT(BRepMeshData_Edge, IMeshData_Edge)
 
 private:
-
-  Handle (NCollection_IncAllocator)       myAllocator;
-  IMeshData::VectorOfIPCurveHandles       myPCurves;
-  IMeshData::DMapOfIFacePtrsListOfInteger myPCurvesMap;
+    Handle(NCollection_IncAllocator) myAllocator;
+    IMeshData::VectorOfIPCurveHandles myPCurves;
+    IMeshData::DMapOfIFacePtrsListOfInteger myPCurvesMap;
 };
 
 #endif

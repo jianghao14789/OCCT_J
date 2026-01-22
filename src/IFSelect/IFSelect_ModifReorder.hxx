@@ -28,7 +28,6 @@ class Interface_Protocol;
 class Interface_CopyTool;
 class TCollection_AsciiString;
 
-
 class IFSelect_ModifReorder;
 DEFINE_STANDARD_HANDLE(IFSelect_ModifReorder, IFSelect_Modifier)
 
@@ -37,47 +36,29 @@ DEFINE_STANDARD_HANDLE(IFSelect_ModifReorder, IFSelect_Modifier)
 //! roots, then it orders all its shared entities at any level,
 //! the result begins by the lower level entities ... ends by
 //! the roots.
-class IFSelect_ModifReorder : public IFSelect_Modifier
-{
+class IFSelect_ModifReorder : public IFSelect_Modifier {
 
 public:
+    //! Creates a ModifReorder. It may change the graph (it does !)
+    //! If <rootlast> is True (D), roots are set at the end of packets
+    //! Else, they are set at beginning (as done by AddWithRefs)
+    Standard_EXPORT IFSelect_ModifReorder(const Standard_Boolean rootlast = Standard_True);
 
-  
-  //! Creates a ModifReorder. It may change the graph (it does !)
-  //! If <rootlast> is True (D), roots are set at the end of packets
-  //! Else, they are set at beginning (as done by AddWithRefs)
-  Standard_EXPORT IFSelect_ModifReorder(const Standard_Boolean rootlast = Standard_True);
-  
-  //! Acts by computing orders (by method All from ShareTool) then
-  //! forcing them in the model. Remark that selection is ignored :
-  //! ALL the model is processed in once
-  Standard_EXPORT void Perform (IFSelect_ContextModif& ctx, const Handle(Interface_InterfaceModel)& target, const Handle(Interface_Protocol)& protocol, Interface_CopyTool& TC) const Standard_OVERRIDE;
-  
-  //! Returns Label as "Reorder, Roots (last or first)"
-  Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
+    //! Acts by computing orders (by method All from ShareTool) then
+    //! forcing them in the model. Remark that selection is ignored :
+    //! ALL the model is processed in once
+    Standard_EXPORT void Perform(IFSelect_ContextModif& ctx, const Handle(Interface_InterfaceModel) & target,
+                                 const Handle(Interface_Protocol) & protocol,
+                                 Interface_CopyTool& TC) const Standard_OVERRIDE;
 
+    //! Returns Label as "Reorder, Roots (last or first)"
+    Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IFSelect_ModifReorder,IFSelect_Modifier)
+    DEFINE_STANDARD_RTTIEXT(IFSelect_ModifReorder, IFSelect_Modifier)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Boolean thertl;
-
-
+    Standard_Boolean thertl;
 };
-
-
-
-
-
-
 
 #endif // _IFSelect_ModifReorder_HeaderFile

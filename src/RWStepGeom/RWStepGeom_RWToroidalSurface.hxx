@@ -29,47 +29,26 @@ class StepData_StepWriter;
 class Interface_EntityIterator;
 class Interface_ShareTool;
 
-
 //! Read & Write Module for ToroidalSurface
 //! Check added by CKY , 7-OCT-1996
-class RWStepGeom_RWToroidalSurface 
-{
+class RWStepGeom_RWToroidalSurface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWToroidalSurface();
 
-  
-  Standard_EXPORT RWStepGeom_RWToroidalSurface();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_ToroidalSurface)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_ToroidalSurface)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_ToroidalSurface)& ent, Interface_EntityIterator& iter) const;
-  
-  Standard_EXPORT void Check (const Handle(StepGeom_ToroidalSurface)& ent, const Interface_ShareTool& shares, Handle(Interface_Check)& ach) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_ToroidalSurface) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_ToroidalSurface) & ent) const;
 
+    Standard_EXPORT void Share(const Handle(StepGeom_ToroidalSurface) & ent, Interface_EntityIterator& iter) const;
 
+    Standard_EXPORT void Check(const Handle(StepGeom_ToroidalSurface) & ent, const Interface_ShareTool& shares,
+                               Handle(Interface_Check) & ach) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWToroidalSurface_HeaderFile

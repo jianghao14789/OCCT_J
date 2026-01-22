@@ -29,106 +29,100 @@ class TCollection_ExtendedString;
 //  Block of comments describing class LDOMBasicString
 //
 
-class LDOMBasicString 
-{
-  friend class LDOM_MemManager;
-  friend class LDOM_Node;
- public:
-  enum StringType {
-    LDOM_NULL = 0,
-    LDOM_Integer,
-//    LDOM_Real,
-    LDOM_AsciiFree,             // String not connected to any container
-    LDOM_AsciiDoc,              // String connected to LDOM_Document (container)
-    LDOM_AsciiDocClear,         // --"--"--, consists of only XML-valid chars
-    LDOM_AsciiHashed            // String connected to hash table
-  };
+class LDOMBasicString {
+    friend class LDOM_MemManager;
+    friend class LDOM_Node;
 
-  Standard_EXPORT ~LDOMBasicString ();
+public:
+    enum StringType {
+        LDOM_NULL = 0,
+        LDOM_Integer,
+        //    LDOM_Real,
+        LDOM_AsciiFree,     // String not connected to any container
+        LDOM_AsciiDoc,      // String connected to LDOM_Document (container)
+        LDOM_AsciiDocClear, // --"--"--, consists of only XML-valid chars
+        LDOM_AsciiHashed    // String connected to hash table
+    };
 
-  StringType Type       () const              { return myType; }
+    Standard_EXPORT ~LDOMBasicString();
 
-  Standard_EXPORT Standard_Boolean
-        GetInteger      (Standard_Integer& aResult) const;
-  //    Conversion to Integer (only for LDOM_Integer)
+    StringType Type() const {
+        return myType;
+    }
 
-  const char *
-        GetString       () const        { return myType == LDOM_Integer ||
-                                                 myType == LDOM_NULL ?
-                                            "" : (const char *) myVal.ptr; }
-  //    Conversion to char * (only for LDOM_Ascii*)
+    Standard_EXPORT Standard_Boolean GetInteger(Standard_Integer& aResult) const;
+    //    Conversion to Integer (only for LDOM_Integer)
 
-  Standard_EXPORT Standard_Boolean
-        equals          (const LDOMBasicString& anOther) const;
-  //    Compare two strings by content
+    const char* GetString() const {
+        return myType == LDOM_Integer || myType == LDOM_NULL ? "" : (const char*)myVal.ptr;
+    }
+    //    Conversion to char * (only for LDOM_Ascii*)
 
-  Standard_EXPORT LDOMBasicString&
-        operator =      (const LDOM_NullPtr *);
+    Standard_EXPORT Standard_Boolean equals(const LDOMBasicString& anOther) const;
+    //    Compare two strings by content
 
-  Standard_EXPORT LDOMBasicString&
-        operator =      (const LDOMBasicString& anOther);
+    Standard_EXPORT LDOMBasicString& operator=(const LDOM_NullPtr*);
 
-  Standard_Boolean
-        operator ==     (const LDOM_NullPtr *) const
-                                                { return myType==LDOM_NULL; }
-  Standard_Boolean
-        operator !=     (const LDOM_NullPtr *) const
-                                                { return myType!=LDOM_NULL; }
+    Standard_EXPORT LDOMBasicString& operator=(const LDOMBasicString& anOther);
 
-  Standard_Boolean
-        operator ==     (const LDOMBasicString& anOther) const
-        {
-          return myType==anOther.myType && myVal.i==anOther.myVal.i;
-        }
+    Standard_Boolean operator==(const LDOM_NullPtr*) const {
+        return myType == LDOM_NULL;
+    }
+    Standard_Boolean operator!=(const LDOM_NullPtr*) const {
+        return myType != LDOM_NULL;
+    }
 
-  Standard_Boolean
-        operator !=     (const LDOMBasicString& anOther) const
-        {
-          return myType!=anOther.myType || myVal.i!=anOther.myVal.i;
-        }
+    Standard_Boolean operator==(const LDOMBasicString& anOther) const {
+        return myType == anOther.myType && myVal.i == anOther.myVal.i;
+    }
 
-//      AGV auxiliary API
-  Standard_EXPORT operator TCollection_AsciiString      () const;
+    Standard_Boolean operator!=(const LDOMBasicString& anOther) const {
+        return myType != anOther.myType || myVal.i != anOther.myVal.i;
+    }
 
-  Standard_EXPORT operator TCollection_ExtendedString   () const;
+    //      AGV auxiliary API
+    Standard_EXPORT operator TCollection_AsciiString() const;
 
-  LDOMBasicString                 ()
-    : myType (LDOM_NULL)             { myVal.ptr = NULL; }
-  // Empty constructor
+    Standard_EXPORT operator TCollection_ExtendedString() const;
 
-  Standard_EXPORT LDOMBasicString (const LDOMBasicString& anOther);
-  // Copy constructor
+    LDOMBasicString() : myType(LDOM_NULL) {
+        myVal.ptr = NULL;
+    }
+    // Empty constructor
 
-  LDOMBasicString                 (const Standard_Integer aValue)
-    : myType (LDOM_Integer)             { myVal.i = aValue; }
+    Standard_EXPORT LDOMBasicString(const LDOMBasicString& anOther);
+    // Copy constructor
 
-  Standard_EXPORT LDOMBasicString (const char           * aValue);
-  //    Create LDOM_AsciiFree
+    LDOMBasicString(const Standard_Integer aValue) : myType(LDOM_Integer) {
+        myVal.i = aValue;
+    }
 
-  Standard_EXPORT LDOMBasicString (const char           * aValue,
-                                   const Handle(LDOM_MemManager)& aDoc);
-  //    Create LDOM_AsciiDoc
+    Standard_EXPORT LDOMBasicString(const char* aValue);
+    //    Create LDOM_AsciiFree
 
-  Standard_EXPORT LDOMBasicString (const char             * aValue,
-                                   const Standard_Integer aLen,
-                                   const Handle(LDOM_MemManager)&   aDoc);
-  //    Create LDOM_AsciiDoc
+    Standard_EXPORT LDOMBasicString(const char* aValue, const Handle(LDOM_MemManager) & aDoc);
+    //    Create LDOM_AsciiDoc
 
- protected:
-  // ---------- PROTECTED METHODS ----------
-  void            SetDirect       (const StringType aType, const char * aValue)
-    { myType = aType; myVal.ptr = (void *) aValue; }
-    
+    Standard_EXPORT LDOMBasicString(const char* aValue, const Standard_Integer aLen,
+                                    const Handle(LDOM_MemManager) & aDoc);
+    //    Create LDOM_AsciiDoc
 
- protected:
-  // ---------- PROTECTED FIELDS ----------
+protected:
+    // ---------- PROTECTED METHODS ----------
+    void SetDirect(const StringType aType, const char* aValue) {
+        myType = aType;
+        myVal.ptr = (void*)aValue;
+    }
 
-  StringType            myType;
-  union {
-    int         i;
-    void        * ptr;
-  }                     myVal;
-  friend char * db_pretty_print (const LDOMBasicString *, int, char *);
+protected:
+    // ---------- PROTECTED FIELDS ----------
+
+    StringType myType;
+    union {
+        int i;
+        void* ptr;
+    } myVal;
+    friend char* db_pretty_print(const LDOMBasicString*, int, char*);
 };
 
 #endif

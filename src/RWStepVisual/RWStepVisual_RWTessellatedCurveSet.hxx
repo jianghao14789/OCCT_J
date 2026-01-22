@@ -24,26 +24,24 @@
 #include <StepVisual_TessellatedCurveSet.hxx>
 class StepData_StepReaderData;
 class Interface_Check;
-//class StepVisual_TessellatedCurveSet;
+// class StepVisual_TessellatedCurveSet;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
 //! Read & Write Module for AnnotationOccurrence
-class RWStepVisual_RWTessellatedCurveSet 
-{
+class RWStepVisual_RWTessellatedCurveSet {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  Standard_EXPORT RWStepVisual_RWTessellatedCurveSet();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data,
-	 const Standard_Integer num,
-	 Handle(Interface_Check)& ach,
-	 const Handle(StepVisual_TessellatedCurveSet)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const  Handle(StepVisual_TessellatedCurveSet)& ent) const;
+    Standard_EXPORT RWStepVisual_RWTessellatedCurveSet();
 
-  Standard_EXPORT void Share (const Handle(StepVisual_TessellatedCurveSet) &ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_TessellatedCurveSet) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_TessellatedCurveSet) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepVisual_TessellatedCurveSet) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWTessellatedItem_HeaderFile

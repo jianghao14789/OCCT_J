@@ -19,5 +19,4 @@
 
 typedef NCollection_Array1<Handle(StepFEA_CurveElementInterval)> StepFEA_Array1OfCurveElementInterval;
 
-
 #endif

@@ -23,12 +23,6 @@
 //! DTHP_Center - value label located at center of dimension line.
 //! DTHP_Fit    - value label located automatically at left side if does not fits
 //! the dimension space, otherwise the value label is placed at center.
-enum Prs3d_DimensionTextHorizontalPosition
-{
-Prs3d_DTHP_Left,
-Prs3d_DTHP_Right,
-Prs3d_DTHP_Center,
-Prs3d_DTHP_Fit
-};
+enum Prs3d_DimensionTextHorizontalPosition { Prs3d_DTHP_Left, Prs3d_DTHP_Right, Prs3d_DTHP_Center, Prs3d_DTHP_Fit };
 
 #endif // _Prs3d_DimensionTextHorizontalPosition_HeaderFile

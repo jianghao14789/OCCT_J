@@ -27,48 +27,29 @@ class StepElement_Volume3dElementDescriptor;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Volume3dElementDescriptor
-class RWStepElement_RWVolume3dElementDescriptor 
-{
+class RWStepElement_RWVolume3dElementDescriptor {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWVolume3dElementDescriptor();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWVolume3dElementDescriptor();
-  
-  //! Reads Volume3dElementDescriptor
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_Volume3dElementDescriptor)& ent) const;
-  
-  //! Writes Volume3dElementDescriptor
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_Volume3dElementDescriptor)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_Volume3dElementDescriptor)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Volume3dElementDescriptor
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepElement_Volume3dElementDescriptor) & ent) const;
 
+    //! Writes Volume3dElementDescriptor
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepElement_Volume3dElementDescriptor) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_Volume3dElementDescriptor) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWVolume3dElementDescriptor_HeaderFile

@@ -27,48 +27,29 @@ class StepElement_CurveElementSectionDerivedDefinitions;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CurveElementSectionDerivedDefinitions
-class RWStepElement_RWCurveElementSectionDerivedDefinitions 
-{
+class RWStepElement_RWCurveElementSectionDerivedDefinitions {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWCurveElementSectionDerivedDefinitions();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWCurveElementSectionDerivedDefinitions();
-  
-  //! Reads CurveElementSectionDerivedDefinitions
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_CurveElementSectionDerivedDefinitions)& ent) const;
-  
-  //! Writes CurveElementSectionDerivedDefinitions
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_CurveElementSectionDerivedDefinitions)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_CurveElementSectionDerivedDefinitions)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CurveElementSectionDerivedDefinitions
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepElement_CurveElementSectionDerivedDefinitions) & ent) const;
 
+    //! Writes CurveElementSectionDerivedDefinitions
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepElement_CurveElementSectionDerivedDefinitions) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_CurveElementSectionDerivedDefinitions) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWCurveElementSectionDerivedDefinitions_HeaderFile

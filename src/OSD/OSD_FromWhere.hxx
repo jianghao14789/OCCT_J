@@ -16,11 +16,6 @@
 #define _OSD_FromWhere_HeaderFile
 
 //! Used by OSD_File in the method Seek.
-enum OSD_FromWhere
-{
-    OSD_FromBeginning,
-    OSD_FromHere,
-    OSD_FromEnd
-};
+enum OSD_FromWhere { OSD_FromBeginning, OSD_FromHere, OSD_FromEnd };
 
 #endif // _OSD_FromWhere_HeaderFile

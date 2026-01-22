@@ -30,7 +30,6 @@ class TCollection_ExtendedString;
 class TDF_Attribute;
 class TDF_RelocationTable;
 
-
 class TDataStd_Expression;
 DEFINE_STANDARD_HANDLE(TDataStd_Expression, TDF_Attribute)
 
@@ -42,58 +41,49 @@ DEFINE_STANDARD_HANDLE(TDataStd_Expression, TDF_Attribute)
 //!
 //! Warning:  To be consistent,  each  Variable  referenced by  the
 //! expression must have its equivalent in the string
-class TDataStd_Expression : public TDF_Attribute
-{
+class TDataStd_Expression : public TDF_Attribute {
 
 public:
+    //! class methods
+    //! =============
+    Standard_EXPORT static const Standard_GUID& GetID();
 
-  
-  //! class methods
-  //! =============
-  Standard_EXPORT static const Standard_GUID& GetID();
-  
-  //! Find, or create, an Expression attribute.
-  //! Expressionmethods
-  //! ============
-  Standard_EXPORT static Handle(TDataStd_Expression) Set (const TDF_Label& label);
-  
-  Standard_EXPORT TDataStd_Expression();
-  
-  //! build and return the expression name
-  Standard_EXPORT TCollection_ExtendedString Name() const;
-  
-  Standard_EXPORT void SetExpression (const TCollection_ExtendedString& E);
-  
-  Standard_EXPORT const TCollection_ExtendedString& GetExpression() const;
-  
-  Standard_EXPORT TDF_AttributeList& GetVariables();
-  
-  Standard_EXPORT const Standard_GUID& ID() const Standard_OVERRIDE;
-  
-  Standard_EXPORT void Restore (const Handle(TDF_Attribute)& With) Standard_OVERRIDE;
-  
-  Standard_EXPORT Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
-  
-  Standard_EXPORT void Paste (const Handle(TDF_Attribute)& Into, const Handle(TDF_RelocationTable)& RT) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_OStream& Dump (Standard_OStream& anOS) const Standard_OVERRIDE;
-  
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Find, or create, an Expression attribute.
+    //! Expressionmethods
+    //! ============
+    Standard_EXPORT static Handle(TDataStd_Expression) Set(const TDF_Label& label);
 
+    Standard_EXPORT TDataStd_Expression();
 
-  DEFINE_STANDARD_RTTIEXT(TDataStd_Expression,TDF_Attribute)
+    //! build and return the expression name
+    Standard_EXPORT TCollection_ExtendedString Name() const;
+
+    Standard_EXPORT void SetExpression(const TCollection_ExtendedString& E);
+
+    Standard_EXPORT const TCollection_ExtendedString& GetExpression() const;
+
+    Standard_EXPORT TDF_AttributeList& GetVariables();
+
+    Standard_EXPORT const Standard_GUID& ID() const Standard_OVERRIDE;
+
+    Standard_EXPORT void Restore(const Handle(TDF_Attribute) & With) Standard_OVERRIDE;
+
+    Standard_EXPORT Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
+
+    Standard_EXPORT void Paste(const Handle(TDF_Attribute) & Into,
+                               const Handle(TDF_RelocationTable) & RT) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual Standard_OStream& Dump(Standard_OStream& anOS) const Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(TDataStd_Expression, TDF_Attribute)
 
 protected:
-
-  TCollection_ExtendedString myExpression;
-  TDF_AttributeList myVariables;
+    TCollection_ExtendedString myExpression;
+    TDF_AttributeList myVariables;
 };
-
-
-
-
-
-
 
 #endif // _TDataStd_Expression_HeaderFile

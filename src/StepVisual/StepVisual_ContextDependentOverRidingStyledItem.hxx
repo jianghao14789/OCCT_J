@@ -29,52 +29,34 @@ class StepRepr_RepresentationItem;
 class StepVisual_StyledItem;
 class StepVisual_StyleContextSelect;
 
-
 class StepVisual_ContextDependentOverRidingStyledItem;
 DEFINE_STANDARD_HANDLE(StepVisual_ContextDependentOverRidingStyledItem, StepVisual_OverRidingStyledItem)
 
-
-class StepVisual_ContextDependentOverRidingStyledItem : public StepVisual_OverRidingStyledItem
-{
+class StepVisual_ContextDependentOverRidingStyledItem : public StepVisual_OverRidingStyledItem {
 
 public:
+    //! Returns a ContextDependentOverRidingStyledItem
+    Standard_EXPORT StepVisual_ContextDependentOverRidingStyledItem();
 
-  
-  //! Returns a ContextDependentOverRidingStyledItem
-  Standard_EXPORT StepVisual_ContextDependentOverRidingStyledItem();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const Handle(StepVisual_HArray1OfPresentationStyleAssignment)& aStyles, const Handle(Standard_Transient)& aItem, const Handle(StepVisual_StyledItem)& aOverRiddenStyle, const Handle(StepVisual_HArray1OfStyleContextSelect)& aStyleContext);
-  
-  Standard_EXPORT void SetStyleContext (const Handle(StepVisual_HArray1OfStyleContextSelect)& aStyleContext);
-  
-  Standard_EXPORT Handle(StepVisual_HArray1OfStyleContextSelect) StyleContext() const;
-  
-  Standard_EXPORT StepVisual_StyleContextSelect StyleContextValue (const Standard_Integer num) const;
-  
-  Standard_EXPORT Standard_Integer NbStyleContext() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName,
+                              const Handle(StepVisual_HArray1OfPresentationStyleAssignment) & aStyles,
+                              const Handle(Standard_Transient) & aItem,
+                              const Handle(StepVisual_StyledItem) & aOverRiddenStyle,
+                              const Handle(StepVisual_HArray1OfStyleContextSelect) & aStyleContext);
 
+    Standard_EXPORT void SetStyleContext(const Handle(StepVisual_HArray1OfStyleContextSelect) & aStyleContext);
 
+    Standard_EXPORT Handle(StepVisual_HArray1OfStyleContextSelect) StyleContext() const;
 
+    Standard_EXPORT StepVisual_StyleContextSelect StyleContextValue(const Standard_Integer num) const;
 
-  DEFINE_STANDARD_RTTIEXT(StepVisual_ContextDependentOverRidingStyledItem,StepVisual_OverRidingStyledItem)
+    Standard_EXPORT Standard_Integer NbStyleContext() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepVisual_ContextDependentOverRidingStyledItem, StepVisual_OverRidingStyledItem)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepVisual_HArray1OfStyleContextSelect) styleContext;
-
-
+    Handle(StepVisual_HArray1OfStyleContextSelect) styleContext;
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_ContextDependentOverRidingStyledItem_HeaderFile

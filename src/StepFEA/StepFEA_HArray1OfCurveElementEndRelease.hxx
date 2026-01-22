@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY1(StepFEA_HArray1OfCurveElementEndRelease, StepFEA_Array1OfCurveElementEndRelease)
 
-
 #endif

@@ -22,5 +22,4 @@
 
 typedef NCollection_DefaultHasher<TopLoc_Location> TopLoc_MapLocationHasher;
 
-
 #endif

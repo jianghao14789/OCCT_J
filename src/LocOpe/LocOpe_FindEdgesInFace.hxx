@@ -33,55 +33,32 @@ class TopoDS_Shape;
 class TopoDS_Face;
 class TopoDS_Edge;
 
-
-
-class LocOpe_FindEdgesInFace 
-{
+class LocOpe_FindEdgesInFace {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
     LocOpe_FindEdgesInFace();
-  
+
     LocOpe_FindEdgesInFace(const TopoDS_Shape& S, const TopoDS_Face& F);
-  
-  Standard_EXPORT void Set (const TopoDS_Shape& S, const TopoDS_Face& F);
-  
+
+    Standard_EXPORT void Set(const TopoDS_Shape& S, const TopoDS_Face& F);
+
     void Init();
-  
+
     Standard_Boolean More() const;
-  
+
     const TopoDS_Edge& Edge() const;
-  
+
     void Next();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-  TopoDS_Shape myShape;
-  TopoDS_Face myFace;
-  TopTools_ListOfShape myList;
-  TopTools_ListIteratorOfListOfShape myIt;
-
-
+    TopoDS_Shape myShape;
+    TopoDS_Face myFace;
+    TopTools_ListOfShape myList;
+    TopTools_ListIteratorOfListOfShape myIt;
 };
 
-
 #include <LocOpe_FindEdgesInFace.lxx>
-
-
-
-
 
 #endif // _LocOpe_FindEdgesInFace_HeaderFile

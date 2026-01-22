@@ -1,0 +1,53 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+
+# --------------------
+# 安全设置 (已禁用高风险项)
+# --------------------
+SortIncludes: Never         # 禁止重排头文件，防止破坏隐式依赖
+InsertBraces: false         # 禁止自动插入大括号，防止破坏宏逻辑
+
+# --------------------
+# 基础缩进与排版
+# --------------------
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+LineEnding: LF
+
+# --------------------
+# 大括号与控制流
+# --------------------
+BreakBeforeBraces: Attach
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+
+# --------------------
+# 缩进细节
+# --------------------
+IndentCaseLabels: true
+AccessModifierOffset: -4
+NamespaceIndentation: None
+ConstructorInitializerIndentWidth: 4
+
+# --------------------
+# 指针与引用
+# --------------------
+PointerAlignment: Left
+
+# --------------------
+# 注释清理
+# --------------------
+FixNamespaceComments: true
+AlignTrailingComments: true
+ReflowComments: true
+
+# --------------------
+# 对齐策略
+# --------------------
+AlignAfterOpenBracket: Align
+AlignOperands: Align

@@ -20,5 +20,4 @@
 
 typedef NCollection_Array2<Standard_Character> TColStd_Array2OfCharacter;
 
-
 #endif

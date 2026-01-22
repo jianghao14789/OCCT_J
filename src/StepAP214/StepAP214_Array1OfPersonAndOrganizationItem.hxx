@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepAP214_PersonAndOrganizationItem> StepAP214_Array1OfPersonAndOrganizationItem;
 
-
 #endif

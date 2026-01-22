@@ -17,21 +17,18 @@
 #include <OpenGl_Buffer.hxx>
 
 //! Uniform buffer object.
-class OpenGl_UniformBuffer : public OpenGl_Buffer
-{
-  DEFINE_STANDARD_RTTIEXT(OpenGl_UniformBuffer, OpenGl_Buffer)
+class OpenGl_UniformBuffer : public OpenGl_Buffer {
+    DEFINE_STANDARD_RTTIEXT(OpenGl_UniformBuffer, OpenGl_Buffer)
 public:
+    //! Empty constructor.
+    Standard_EXPORT OpenGl_UniformBuffer();
 
-  //! Empty constructor.
-  Standard_EXPORT OpenGl_UniformBuffer();
+    //! Return buffer object target (GL_UNIFORM_BUFFER).
+    Standard_EXPORT virtual unsigned int GetTarget() const Standard_OVERRIDE;
 
-  //! Return buffer object target (GL_UNIFORM_BUFFER).
-  Standard_EXPORT virtual unsigned int GetTarget() const Standard_OVERRIDE;
-
-  using OpenGl_Buffer::BindBufferBase;
-  using OpenGl_Buffer::UnbindBufferBase;
-  using OpenGl_Buffer::BindBufferRange;
-
+    using OpenGl_Buffer::BindBufferBase;
+    using OpenGl_Buffer::BindBufferRange;
+    using OpenGl_Buffer::UnbindBufferBase;
 };
 
 #endif // _OpenGl_UniformBuffer_H__

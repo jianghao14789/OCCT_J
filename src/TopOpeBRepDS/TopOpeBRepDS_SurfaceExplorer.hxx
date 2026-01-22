@@ -28,66 +28,44 @@
 class TopOpeBRepDS_DataStructure;
 class TopOpeBRepDS_Surface;
 
-
-
-class TopOpeBRepDS_SurfaceExplorer 
-{
+class TopOpeBRepDS_SurfaceExplorer {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopOpeBRepDS_SurfaceExplorer();
 
-  
-  Standard_EXPORT TopOpeBRepDS_SurfaceExplorer();
-  
-  Standard_EXPORT TopOpeBRepDS_SurfaceExplorer(const TopOpeBRepDS_DataStructure& DS, const Standard_Boolean FindOnlyKeep = Standard_True);
-  
-  Standard_EXPORT void Init (const TopOpeBRepDS_DataStructure& DS, const Standard_Boolean FindOnlyKeep = Standard_True);
-  
-  Standard_EXPORT Standard_Boolean More() const;
-  
-  Standard_EXPORT void Next();
-  
-  Standard_EXPORT const TopOpeBRepDS_Surface& Surface() const;
-  
-  Standard_EXPORT Standard_Boolean IsSurface (const Standard_Integer I) const;
-  
-  Standard_EXPORT Standard_Boolean IsSurfaceKeep (const Standard_Integer I) const;
-  
-  Standard_EXPORT const TopOpeBRepDS_Surface& Surface (const Standard_Integer I) const;
-  
-  Standard_EXPORT Standard_Integer NbSurface();
-  
-  Standard_EXPORT Standard_Integer Index() const;
+    Standard_EXPORT TopOpeBRepDS_SurfaceExplorer(const TopOpeBRepDS_DataStructure& DS,
+                                                 const Standard_Boolean FindOnlyKeep = Standard_True);
 
+    Standard_EXPORT void Init(const TopOpeBRepDS_DataStructure& DS,
+                              const Standard_Boolean FindOnlyKeep = Standard_True);
 
+    Standard_EXPORT Standard_Boolean More() const;
 
+    Standard_EXPORT void Next();
+
+    Standard_EXPORT const TopOpeBRepDS_Surface& Surface() const;
+
+    Standard_EXPORT Standard_Boolean IsSurface(const Standard_Integer I) const;
+
+    Standard_EXPORT Standard_Boolean IsSurfaceKeep(const Standard_Integer I) const;
+
+    Standard_EXPORT const TopOpeBRepDS_Surface& Surface(const Standard_Integer I) const;
+
+    Standard_EXPORT Standard_Integer NbSurface();
+
+    Standard_EXPORT Standard_Integer Index() const;
 
 protected:
-
-
-
-
-
 private:
+    Standard_EXPORT void Find();
 
-  
-  Standard_EXPORT void Find();
-
-
-  Standard_Integer myIndex;
-  Standard_Integer myMax;
-  Standard_Address myDS;
-  Standard_Boolean myFound;
-  TopOpeBRepDS_Surface myEmpty;
-  Standard_Boolean myFindKeep;
-
-
+    Standard_Integer myIndex;
+    Standard_Integer myMax;
+    Standard_Address myDS;
+    Standard_Boolean myFound;
+    TopOpeBRepDS_Surface myEmpty;
+    Standard_Boolean myFindKeep;
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRepDS_SurfaceExplorer_HeaderFile

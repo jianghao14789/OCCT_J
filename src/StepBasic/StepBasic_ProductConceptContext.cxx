@@ -21,47 +21,44 @@
 #include <StepBasic_ProductConceptContext.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ProductConceptContext,StepBasic_ApplicationContextElement)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ProductConceptContext, StepBasic_ApplicationContextElement)
 
 //=======================================================================
-//function : StepBasic_ProductConceptContext
-//purpose  : 
+// function : StepBasic_ProductConceptContext
+// purpose  :
 //=======================================================================
-StepBasic_ProductConceptContext::StepBasic_ProductConceptContext ()
-{
+StepBasic_ProductConceptContext::StepBasic_ProductConceptContext() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_ProductConceptContext::Init(const Handle(TCollection_HAsciiString) & aApplicationContextElement_Name,
+                                           const Handle(StepBasic_ApplicationContext) &
+                                               aApplicationContextElement_FrameOfReference,
+                                           const Handle(TCollection_HAsciiString) & aMarketSegmentType) {
+    StepBasic_ApplicationContextElement::Init(aApplicationContextElement_Name,
+                                              aApplicationContextElement_FrameOfReference);
+
+    theMarketSegmentType = aMarketSegmentType;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : MarketSegmentType
+// purpose  :
 //=======================================================================
 
-void StepBasic_ProductConceptContext::Init (const Handle(TCollection_HAsciiString) &aApplicationContextElement_Name,
-                                            const Handle(StepBasic_ApplicationContext) &aApplicationContextElement_FrameOfReference,
-                                            const Handle(TCollection_HAsciiString) &aMarketSegmentType)
-{
-  StepBasic_ApplicationContextElement::Init(aApplicationContextElement_Name,
-                                            aApplicationContextElement_FrameOfReference);
-
-  theMarketSegmentType = aMarketSegmentType;
+Handle(TCollection_HAsciiString) StepBasic_ProductConceptContext::MarketSegmentType() const {
+    return theMarketSegmentType;
 }
 
 //=======================================================================
-//function : MarketSegmentType
-//purpose  : 
+// function : SetMarketSegmentType
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_ProductConceptContext::MarketSegmentType () const
-{
-  return theMarketSegmentType;
-}
-
-//=======================================================================
-//function : SetMarketSegmentType
-//purpose  : 
-//=======================================================================
-
-void StepBasic_ProductConceptContext::SetMarketSegmentType (const Handle(TCollection_HAsciiString) &aMarketSegmentType)
-{
-  theMarketSegmentType = aMarketSegmentType;
+void StepBasic_ProductConceptContext::SetMarketSegmentType(const Handle(TCollection_HAsciiString) &
+                                                           aMarketSegmentType) {
+    theMarketSegmentType = aMarketSegmentType;
 }

@@ -25,5 +25,4 @@
  */
 typedef NCollection_Vector<Interface_FileParameter> Interface_VectorOfFileParameter;
 
-                                         
 #endif

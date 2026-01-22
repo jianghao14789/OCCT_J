@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESGraph_HArray1OfTextFontDef, IGESGraph_Array1OfTextFontDef)
 
-
 #endif

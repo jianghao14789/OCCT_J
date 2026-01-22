@@ -1,4 +1,4 @@
-// Created on : Fri May 08 19:02:07 2020 
+// Created on : Fri May 08 19:02:07 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepKinematics_LinearFlexibleAndPlanarCurvePair;
 
 //! Read & Write tool for LinearFlexibleAndPlanarCurvePair
-class RWStepKinematics_RWLinearFlexibleAndPlanarCurvePair
-{
+class RWStepKinematics_RWLinearFlexibleAndPlanarCurvePair {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWLinearFlexibleAndPlanarCurvePair();
 
-  Standard_EXPORT RWStepKinematics_RWLinearFlexibleAndPlanarCurvePair();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_LinearFlexibleAndPlanarCurvePair) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_LinearFlexibleAndPlanarCurvePair)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_LinearFlexibleAndPlanarCurvePair) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepKinematics_LinearFlexibleAndPlanarCurvePair)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepKinematics_LinearFlexibleAndPlanarCurvePair)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepKinematics_LinearFlexibleAndPlanarCurvePair) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepKinematics_RWLinearFlexibleAndPlanarCurvePair_HeaderFile_

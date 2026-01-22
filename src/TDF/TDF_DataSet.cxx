@@ -15,7 +15,7 @@
 
 //      	---------------
 // Version:	0.0
-//Version	Date		Purpose
+// Version	Date		Purpose
 //		0.0	Mar 11 1997	Creation
 
 #include <Standard_Type.hxx>
@@ -26,57 +26,49 @@
 #include <TDF_MapIteratorOfAttributeMap.hxx>
 #include <TDF_MapIteratorOfLabelMap.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(TDF_DataSet,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(TDF_DataSet, Standard_Transient)
 
 //=======================================================================
-//function : TDF_DataSet
-//purpose  : Creates a DataSet.
+// function : TDF_DataSet
+// purpose  : Creates a DataSet.
 //=======================================================================
-TDF_DataSet::TDF_DataSet()
-{}
-
+TDF_DataSet::TDF_DataSet() {}
 
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
 
-void TDF_DataSet::Clear()
-{
-  myRootLabels.Clear();
-  myLabelMap.Clear();
-  myAttributeMap.Clear();
+void TDF_DataSet::Clear() {
+    myRootLabels.Clear();
+    myLabelMap.Clear();
+    myAttributeMap.Clear();
 }
 
-
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-Standard_OStream& TDF_DataSet::Dump(Standard_OStream& anOS) const
-{
-  anOS<<"\t\t=====< TDF_DataSet dump >====="<<std::endl;
-  anOS<<"Root Labels :"<<std::endl<<"============="<<std::endl;
-  for (TDF_ListIteratorOfLabelList itr1(myRootLabels);
-       itr1.More(); itr1.Next()) {
-    itr1.Value().EntryDump(anOS);
-    anOS<<" | ";
-  }
-  anOS<<std::endl<<"Labels :"<<std::endl<<"========"<<std::endl;
-  for (TDF_MapIteratorOfLabelMap itr2(myLabelMap);
-       itr2.More(); itr2.Next()) {
-    itr2.Key().EntryDump(anOS);
-    anOS<<" | ";
-  }
-  anOS<<std::endl<<"Attributes :"<<std::endl<<"============"<<std::endl<<std::endl;
-  for (TDF_MapIteratorOfAttributeMap itr3(myAttributeMap);
-       itr3.More(); itr3.Next()) {
-    itr3.Key()->Label().EntryDump(anOS);
-    anOS<<" \t";
-    itr3.Key()->Dump(anOS);
-    anOS<<std::endl;
-  }
-  anOS<<std::endl;
-  return anOS;
+Standard_OStream& TDF_DataSet::Dump(Standard_OStream& anOS) const {
+    anOS << "\t\t=====< TDF_DataSet dump >=====" << std::endl;
+    anOS << "Root Labels :" << std::endl << "=============" << std::endl;
+    for (TDF_ListIteratorOfLabelList itr1(myRootLabels); itr1.More(); itr1.Next()) {
+        itr1.Value().EntryDump(anOS);
+        anOS << " | ";
+    }
+    anOS << std::endl << "Labels :" << std::endl << "========" << std::endl;
+    for (TDF_MapIteratorOfLabelMap itr2(myLabelMap); itr2.More(); itr2.Next()) {
+        itr2.Key().EntryDump(anOS);
+        anOS << " | ";
+    }
+    anOS << std::endl << "Attributes :" << std::endl << "============" << std::endl << std::endl;
+    for (TDF_MapIteratorOfAttributeMap itr3(myAttributeMap); itr3.More(); itr3.Next()) {
+        itr3.Key()->Label().EntryDump(anOS);
+        anOS << " \t";
+        itr3.Key()->Dump(anOS);
+        anOS << std::endl;
+    }
+    anOS << std::endl;
+    return anOS;
 }

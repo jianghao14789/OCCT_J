@@ -23,7 +23,6 @@
 #include <Transfer_TransferMapOfProcessForFinder.hxx>
 #include <Transfer_ActorOfProcessForFinder.hxx>
 #include <Transfer_Binder.hxx>
- 
 
 #define TheStart Handle(Transfer_Finder)
 #define TheStart_hxx <Transfer_Finder.hxx>
@@ -43,4 +42,3 @@
 #define Transfer_TransferProcess_hxx <Transfer_ProcessForFinder.hxx>
 #define Handle_Transfer_TransferProcess Handle(Transfer_ProcessForFinder)
 #include <Transfer_Iterator.gxx>
-

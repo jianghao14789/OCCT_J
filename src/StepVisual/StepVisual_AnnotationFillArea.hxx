@@ -27,14 +27,12 @@ class TCollection_HAsciiString;
 class StepVisual_AnnotationFillArea;
 DEFINE_STANDARD_HANDLE(StepVisual_AnnotationFillArea, StepShape_GeometricCurveSet)
 
+class StepVisual_AnnotationFillArea : public StepShape_GeometricCurveSet {
 
-class StepVisual_AnnotationFillArea : public StepShape_GeometricCurveSet
-{
+public:
+    //! Returns a AnnotationFillArea
+    Standard_EXPORT StepVisual_AnnotationFillArea();
 
-public:  
-  //! Returns a AnnotationFillArea
-  Standard_EXPORT StepVisual_AnnotationFillArea();
-
-  DEFINE_STANDARD_RTTIEXT(StepVisual_AnnotationFillArea, StepShape_GeometricCurveSet)
+    DEFINE_STANDARD_RTTIEXT(StepVisual_AnnotationFillArea, StepShape_GeometricCurveSet)
 };
 #endif // _StepVisual_AnnotationFillArea_HeaderFile

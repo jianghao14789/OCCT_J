@@ -26,17 +26,13 @@
 //! When you use StdPrs_HLRShape, you obtain an exact result, whereas, when you use StdPrs_HLRPolyShape,
 //! you reduce computation time but obtain polygonal segments.
 //! The polygonal algorithm is used.
-class StdPrs_HLRPolyShape : public StdPrs_HLRShapeI
-{
-  DEFINE_STANDARD_RTTIEXT(StdPrs_HLRPolyShape, StdPrs_HLRShapeI)
+class StdPrs_HLRPolyShape : public StdPrs_HLRShapeI {
+    DEFINE_STANDARD_RTTIEXT(StdPrs_HLRPolyShape, StdPrs_HLRShapeI)
 public:
-  
-  //! Compute presentation for specified shape.
-  Standard_EXPORT virtual void ComputeHLR (const Handle(Prs3d_Presentation)& thePrs,
-                                           const TopoDS_Shape& theShape,
-                                           const Handle(Prs3d_Drawer)& theDrawer,
-                                           const Handle(Graphic3d_Camera)& theProjector) const Standard_OVERRIDE;
-
+    //! Compute presentation for specified shape.
+    Standard_EXPORT virtual void ComputeHLR(const Handle(Prs3d_Presentation) & thePrs, const TopoDS_Shape& theShape,
+                                            const Handle(Prs3d_Drawer) & theDrawer,
+                                            const Handle(Graphic3d_Camera) & theProjector) const Standard_OVERRIDE;
 };
 
 #endif // _StdPrs_HLRPolyShape_HeaderFile

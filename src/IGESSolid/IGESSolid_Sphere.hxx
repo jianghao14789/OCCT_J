@@ -25,59 +25,38 @@
 #include <IGESData_IGESEntity.hxx>
 class gp_Pnt;
 
-
 class IGESSolid_Sphere;
 DEFINE_STANDARD_HANDLE(IGESSolid_Sphere, IGESData_IGESEntity)
 
 //! defines Sphere, Type <158> Form Number <0>
 //! in package IGESSolid
 //! This defines a sphere with a center and radius
-class IGESSolid_Sphere : public IGESData_IGESEntity
-{
+class IGESSolid_Sphere : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESSolid_Sphere();
 
-  
-  Standard_EXPORT IGESSolid_Sphere();
-  
-  //! This method is used to set the fields of the class Sphere
-  //! - aRadius : the radius of the sphere
-  //! - aCenter : the center point coordinates (default (0,0,0))
-  Standard_EXPORT void Init (const Standard_Real aRadius, const gp_XYZ& aCenter);
-  
-  //! returns the radius of the sphere
-  Standard_EXPORT Standard_Real Radius() const;
-  
-  //! returns the center of the sphere
-  Standard_EXPORT gp_Pnt Center() const;
-  
-  //! returns the center of the sphere after applying
-  //! TransformationMatrix
-  Standard_EXPORT gp_Pnt TransformedCenter() const;
+    //! This method is used to set the fields of the class Sphere
+    //! - aRadius : the radius of the sphere
+    //! - aCenter : the center point coordinates (default (0,0,0))
+    Standard_EXPORT void Init(const Standard_Real aRadius, const gp_XYZ& aCenter);
 
+    //! returns the radius of the sphere
+    Standard_EXPORT Standard_Real Radius() const;
 
+    //! returns the center of the sphere
+    Standard_EXPORT gp_Pnt Center() const;
 
+    //! returns the center of the sphere after applying
+    //! TransformationMatrix
+    Standard_EXPORT gp_Pnt TransformedCenter() const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESSolid_Sphere,IGESData_IGESEntity)
+    DEFINE_STANDARD_RTTIEXT(IGESSolid_Sphere, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Real theRadius;
-  gp_XYZ theCenter;
-
-
+    Standard_Real theRadius;
+    gp_XYZ theCenter;
 };
-
-
-
-
-
-
 
 #endif // _IGESSolid_Sphere_HeaderFile

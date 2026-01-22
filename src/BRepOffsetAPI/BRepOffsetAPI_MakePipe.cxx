@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepFill_Pipe.hxx>
 #include <BRepOffsetAPI_MakePipe.hxx>
 #include <TopAbs_ShapeEnum.hxx>
@@ -29,19 +28,17 @@
 #include <TopTools_IndexedMapOfShape.hxx>
 
 //=======================================================================
-//function : BRepOffsetAPI_MakePipe
-//purpose  : constructor
+// function : BRepOffsetAPI_MakePipe
+// purpose  : constructor
 //=======================================================================
-BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire&  Spine ,
-                                               const TopoDS_Shape& Profile)
-     : myPipe(Spine, Profile)
-{
-  Build();
+BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire& Spine, const TopoDS_Shape& Profile)
+    : myPipe(Spine, Profile) {
+    Build();
 }
 
 //=======================================================================
-//function : BRepOffsetAPI_MakePipe
-//purpose  : constructor
+// function : BRepOffsetAPI_MakePipe
+// purpose  : constructor
 //           Set the mode of sweeping
 //           It can be:
 //           - Frenet
@@ -52,101 +49,86 @@ BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire&  Spine ,
 //           to be C0.
 //=======================================================================
 
-BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire&  Spine ,
-                                               const TopoDS_Shape& Profile,
-                                               const GeomFill_Trihedron aMode,
-                                               const Standard_Boolean ForceApproxC1)
-  : myPipe(Spine, Profile, aMode, ForceApproxC1)
-{
-  Build();
+BRepOffsetAPI_MakePipe::BRepOffsetAPI_MakePipe(const TopoDS_Wire& Spine, const TopoDS_Shape& Profile,
+                                               const GeomFill_Trihedron aMode, const Standard_Boolean ForceApproxC1)
+    : myPipe(Spine, Profile, aMode, ForceApproxC1) {
+    Build();
 }
 
 //=======================================================================
-//function : Pipe
-//purpose  : 
+// function : Pipe
+// purpose  :
 //=======================================================================
 
-const BRepFill_Pipe& BRepOffsetAPI_MakePipe::Pipe() const
-{
-  return myPipe;
-}
-
-
-//=======================================================================
-//function : Build
-//purpose  : 
-//=======================================================================
-
-void BRepOffsetAPI_MakePipe::Build(const Message_ProgressRange& /*theRange*/)
-{
-  myShape = myPipe.Shape();
-  //Check for emptiness of result
-  TopTools_IndexedMapOfShape theMap;
-  TopExp::MapShapes(myShape, theMap);
-  if (theMap.Extent() == 1)
-    NotDone();
-  else
-    Done();
-}
-
-
-//=======================================================================
-//function : FirstShape
-//purpose  : 
-//=======================================================================
-
-TopoDS_Shape BRepOffsetAPI_MakePipe::FirstShape()
-{
-  return myPipe.FirstShape();
-}
-
-
-//=======================================================================
-//function : LastShape
-//purpose  : 
-//=======================================================================
-
-TopoDS_Shape BRepOffsetAPI_MakePipe::LastShape()
-{
-  return myPipe.LastShape();
+const BRepFill_Pipe& BRepOffsetAPI_MakePipe::Pipe() const {
+    return myPipe;
 }
 
 //=======================================================================
-//function : Generated
-//purpose  : standard method
+// function : Build
+// purpose  :
 //=======================================================================
-const TopTools_ListOfShape& BRepOffsetAPI_MakePipe::Generated(const TopoDS_Shape& S) 
-{
-  myPipe.Generated(S, myGenerated);
-  return myGenerated;
+
+void BRepOffsetAPI_MakePipe::Build(const Message_ProgressRange& /*theRange*/) {
+    myShape = myPipe.Shape();
+    // Check for emptiness of result
+    TopTools_IndexedMapOfShape theMap;
+    TopExp::MapShapes(myShape, theMap);
+    if (theMap.Extent() == 1)
+        NotDone();
+    else
+        Done();
 }
 
 //=======================================================================
-//function : Generated
-//purpose  : returns generated elementary subshape
+// function : FirstShape
+// purpose  :
 //=======================================================================
 
-TopoDS_Shape BRepOffsetAPI_MakePipe::Generated(const TopoDS_Shape& SSpine,
-                                               const TopoDS_Shape& SProfile)
-{
-  if (SProfile.ShapeType () == TopAbs_EDGE) {
-    return myPipe.Face (TopoDS::Edge (SSpine), TopoDS::Edge (SProfile));
-  }
-  else if (SProfile.ShapeType () == TopAbs_VERTEX) {
-    return myPipe.Edge (TopoDS::Edge (SSpine), TopoDS::Vertex (SProfile));
-  }
-
-//POP pour NT
-  TopoDS_Shape bid;
-  return bid;
+TopoDS_Shape BRepOffsetAPI_MakePipe::FirstShape() {
+    return myPipe.FirstShape();
 }
 
 //=======================================================================
-//function : ErrorOnSurface
-//purpose  : 
+// function : LastShape
+// purpose  :
 //=======================================================================
 
-Standard_Real BRepOffsetAPI_MakePipe::ErrorOnSurface() const
-{
-  return myPipe.ErrorOnSurface();
+TopoDS_Shape BRepOffsetAPI_MakePipe::LastShape() {
+    return myPipe.LastShape();
+}
+
+//=======================================================================
+// function : Generated
+// purpose  : standard method
+//=======================================================================
+const TopTools_ListOfShape& BRepOffsetAPI_MakePipe::Generated(const TopoDS_Shape& S) {
+    myPipe.Generated(S, myGenerated);
+    return myGenerated;
+}
+
+//=======================================================================
+// function : Generated
+// purpose  : returns generated elementary subshape
+//=======================================================================
+
+TopoDS_Shape BRepOffsetAPI_MakePipe::Generated(const TopoDS_Shape& SSpine, const TopoDS_Shape& SProfile) {
+    if (SProfile.ShapeType() == TopAbs_EDGE) {
+        return myPipe.Face(TopoDS::Edge(SSpine), TopoDS::Edge(SProfile));
+    } else if (SProfile.ShapeType() == TopAbs_VERTEX) {
+        return myPipe.Edge(TopoDS::Edge(SSpine), TopoDS::Vertex(SProfile));
+    }
+
+    // POP pour NT
+    TopoDS_Shape bid;
+    return bid;
+}
+
+//=======================================================================
+// function : ErrorOnSurface
+// purpose  :
+//=======================================================================
+
+Standard_Real BRepOffsetAPI_MakePipe::ErrorOnSurface() const {
+    return myPipe.ErrorOnSurface();
 }

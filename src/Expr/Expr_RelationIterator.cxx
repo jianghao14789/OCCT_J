@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr_GeneralRelation.hxx>
 #include <Expr_RelationIterator.hxx>
 #include <Expr_SingleRelation.hxx>
@@ -22,12 +21,11 @@
 #include <Standard_NoMoreObject.hxx>
 #include <Standard_NoSuchObject.hxx>
 
-Expr_RelationIterator::Expr_RelationIterator(const Handle(Expr_GeneralRelation)& rel) :myRelation(1, rel->NbOfSingleRelations())
-{
+Expr_RelationIterator::Expr_RelationIterator(const Handle(Expr_GeneralRelation) & rel)
+    : myRelation(1, rel->NbOfSingleRelations()) {
     if (rel->IsKind(STANDARD_TYPE(Expr_SingleRelation))) {
         myRelation(1) = Handle(Expr_SingleRelation)::DownCast(rel);
-    }
-    else {
+    } else {
         Standard_Integer nbcur = 1;
         Handle(Expr_GeneralRelation) currel;
         for (Standard_Integer i = 1; i <= rel->NbOfSubRelations(); i++) {
@@ -35,8 +33,7 @@ Expr_RelationIterator::Expr_RelationIterator(const Handle(Expr_GeneralRelation)&
             if (currel->IsKind(STANDARD_TYPE(Expr_SingleRelation))) {
                 myRelation(nbcur) = Handle(Expr_SingleRelation)::DownCast(currel);
                 nbcur++;
-            }
-            else {
+            } else {
                 Expr_RelationIterator subit(currel);
                 while (subit.More()) {
                     myRelation(nbcur) = subit.Value();
@@ -49,24 +46,20 @@ Expr_RelationIterator::Expr_RelationIterator(const Handle(Expr_GeneralRelation)&
     current = 1;
 }
 
-Standard_Boolean Expr_RelationIterator::More() const
-{
+Standard_Boolean Expr_RelationIterator::More() const {
     return (current <= myRelation.Length());
 }
 
-void Expr_RelationIterator::Next()
-{
+void Expr_RelationIterator::Next() {
     if (!More()) {
         throw Standard_NoMoreObject();
     }
     current++;
 }
 
-Handle(Expr_SingleRelation) Expr_RelationIterator::Value() const
-{
+Handle(Expr_SingleRelation) Expr_RelationIterator::Value() const {
     if (!More()) {
         throw Standard_NoSuchObject();
     }
     return myRelation(current);
 }
-

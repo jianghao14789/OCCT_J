@@ -24,13 +24,11 @@
 class StepRepr_ConstructiveGeometryRepresentationRelationship;
 DEFINE_STANDARD_HANDLE(StepRepr_ConstructiveGeometryRepresentationRelationship, StepRepr_RepresentationRelationship)
 
-class StepRepr_ConstructiveGeometryRepresentationRelationship : public StepRepr_RepresentationRelationship
-{
+class StepRepr_ConstructiveGeometryRepresentationRelationship : public StepRepr_RepresentationRelationship {
 public:
+    Standard_EXPORT StepRepr_ConstructiveGeometryRepresentationRelationship();
 
-  Standard_EXPORT StepRepr_ConstructiveGeometryRepresentationRelationship();
-
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ConstructiveGeometryRepresentationRelationship, StepRepr_RepresentationRelationship)
-
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ConstructiveGeometryRepresentationRelationship,
+                            StepRepr_RepresentationRelationship)
 };
 #endif // _StepRepr_ConstructiveGeometryRepresentationRelationship_HeaderFile

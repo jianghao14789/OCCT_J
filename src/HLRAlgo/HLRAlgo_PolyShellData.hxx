@@ -27,43 +27,46 @@ class HLRAlgo_PolyShellData;
 DEFINE_STANDARD_HANDLE(HLRAlgo_PolyShellData, Standard_Transient)
 
 //! All the PolyData of a Shell
-class HLRAlgo_PolyShellData : public Standard_Transient
-{
+class HLRAlgo_PolyShellData : public Standard_Transient {
 
 public:
-  struct ShellIndices
-  {
-    Standard_Integer Min, Max;
-  };
+    struct ShellIndices {
+        Standard_Integer Min, Max;
+    };
 
-  Standard_EXPORT HLRAlgo_PolyShellData(const Standard_Integer nbFace);
-  
-  Standard_EXPORT void UpdateGlobalMinMax (HLRAlgo_PolyData::Box& theBox);
-  
-  Standard_EXPORT void UpdateHiding (const Standard_Integer nbHiding);
+    Standard_EXPORT HLRAlgo_PolyShellData(const Standard_Integer nbFace);
 
-  Standard_Boolean Hiding() const { return !myHPolHi.IsEmpty(); }
+    Standard_EXPORT void UpdateGlobalMinMax(HLRAlgo_PolyData::Box& theBox);
 
-  NCollection_Array1<Handle(HLRAlgo_PolyData)>& PolyData() { return myPolyg; }
+    Standard_EXPORT void UpdateHiding(const Standard_Integer nbHiding);
 
-  NCollection_Array1<Handle(HLRAlgo_PolyData)>& HidingPolyData() { return myHPolHi; }
+    Standard_Boolean Hiding() const {
+        return !myHPolHi.IsEmpty();
+    }
 
-  HLRAlgo_ListOfBPoint& Edges() { return mySegList; }
+    NCollection_Array1<Handle(HLRAlgo_PolyData)>& PolyData() {
+        return myPolyg;
+    }
 
-  ShellIndices& Indices()
-  {
-    return myIndices;
-  }
+    NCollection_Array1<Handle(HLRAlgo_PolyData)>& HidingPolyData() {
+        return myHPolHi;
+    }
 
-  DEFINE_STANDARD_RTTIEXT(HLRAlgo_PolyShellData,Standard_Transient)
+    HLRAlgo_ListOfBPoint& Edges() {
+        return mySegList;
+    }
+
+    ShellIndices& Indices() {
+        return myIndices;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(HLRAlgo_PolyShellData, Standard_Transient)
 
 private:
-
-  ShellIndices myIndices;
-  NCollection_Array1<Handle(HLRAlgo_PolyData)> myPolyg;
-  NCollection_Array1<Handle(HLRAlgo_PolyData)> myHPolHi;
-  HLRAlgo_ListOfBPoint mySegList;
-
+    ShellIndices myIndices;
+    NCollection_Array1<Handle(HLRAlgo_PolyData)> myPolyg;
+    NCollection_Array1<Handle(HLRAlgo_PolyData)> myHPolHi;
+    HLRAlgo_ListOfBPoint mySegList;
 };
 
 #endif // _HLRAlgo_PolyShellData_HeaderFile

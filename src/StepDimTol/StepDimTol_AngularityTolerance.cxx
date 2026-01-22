@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepDimTol_AngularityTolerance.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_AngularityTolerance,StepDimTol_GeometricToleranceWithDatumReference)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_AngularityTolerance, StepDimTol_GeometricToleranceWithDatumReference)
 
 //=======================================================================
-//function : StepDimTol_AngularityTolerance
-//purpose  : 
+// function : StepDimTol_AngularityTolerance
+// purpose  :
 //=======================================================================
-StepDimTol_AngularityTolerance::StepDimTol_AngularityTolerance ()
-{
-}
+StepDimTol_AngularityTolerance::StepDimTol_AngularityTolerance() {}

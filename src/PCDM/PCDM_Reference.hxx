@@ -25,49 +25,27 @@
 #include <TCollection_ExtendedString.hxx>
 class TCollection_ExtendedString;
 
-
-
-class PCDM_Reference 
-{
+class PCDM_Reference {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT PCDM_Reference();
 
-  
-  Standard_EXPORT PCDM_Reference();
-  
-  Standard_EXPORT PCDM_Reference(const Standard_Integer aReferenceIdentifier, const TCollection_ExtendedString& aFileName, const Standard_Integer aDocumentVersion);
-  
-  Standard_EXPORT Standard_Integer ReferenceIdentifier() const;
-  
-  Standard_EXPORT TCollection_ExtendedString FileName() const;
-  
-  Standard_EXPORT Standard_Integer DocumentVersion() const;
+    Standard_EXPORT PCDM_Reference(const Standard_Integer aReferenceIdentifier,
+                                   const TCollection_ExtendedString& aFileName,
+                                   const Standard_Integer aDocumentVersion);
 
+    Standard_EXPORT Standard_Integer ReferenceIdentifier() const;
 
+    Standard_EXPORT TCollection_ExtendedString FileName() const;
 
+    Standard_EXPORT Standard_Integer DocumentVersion() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Integer myReferenceIdentifier;
-  TCollection_ExtendedString myFileName;
-  Standard_Integer myDocumentVersion;
-
-
+    Standard_Integer myReferenceIdentifier;
+    TCollection_ExtendedString myFileName;
+    Standard_Integer myDocumentVersion;
 };
-
-
-
-
-
-
 
 #endif // _PCDM_Reference_HeaderFile

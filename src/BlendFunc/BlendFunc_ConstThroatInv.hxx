@@ -24,10 +24,10 @@ class math_Matrix;
 //! Class for a function used to compute a ConstThroat chamfer on a surface's boundary
 class BlendFunc_ConstThroatInv : public BlendFunc_GenChamfInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_ConstThroatInv(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Handle(Adaptor3d_Curve)& C);
+    Standard_EXPORT BlendFunc_ConstThroatInv(const Handle(Adaptor3d_Surface) & S1, const Handle(Adaptor3d_Surface) & S2,
+                                             const Handle(Adaptor3d_Curve) & C);
 
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) Standard_OVERRIDE;
 
@@ -45,10 +45,10 @@ public:
 
     using Blend_FuncInv::Set;
 
-    Standard_EXPORT virtual void Set(const Standard_Real theThroat, const Standard_Real, const Standard_Integer Choix) Standard_OVERRIDE;
+    Standard_EXPORT virtual void Set(const Standard_Real theThroat, const Standard_Real,
+                                     const Standard_Integer Choix) Standard_OVERRIDE;
 
 protected:
-
     Standard_Real Throat;
 
     Standard_Real param;
@@ -69,9 +69,7 @@ protected:
     gp_Vec d1u2;
     gp_Vec d1v2;
 
-
 private:
-
 };
 
 #endif // _BlendFunc_ConstThroatInv_HeaderFile

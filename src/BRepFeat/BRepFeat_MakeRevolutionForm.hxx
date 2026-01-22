@@ -35,7 +35,6 @@ class TopoDS_Edge;
 class TopoDS_Face;
 class gp_Pnt;
 
-
 //! MakeRevolutionForm Generates a surface of
 //! revolution in the feature as it slides along a
 //! revolved face in the basis shape.
@@ -50,79 +49,63 @@ class gp_Pnt;
 //! -   to a limiting face of the basis shape
 //! -   to or from a limiting plane
 //! -   to a height.
-class BRepFeat_MakeRevolutionForm  : public BRepFeat_RibSlot
-{
+class BRepFeat_MakeRevolutionForm : public BRepFeat_RibSlot {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! initializes the linear form class.
+    //! initializes the linear form class.
     BRepFeat_MakeRevolutionForm();
-  
-  //! a contour W, a shape Sbase and a plane P are initialized to serve as
-  //! the basic elements in the construction of the rib or groove. The axis Axis of the
-  //! revolved surface in the basis shape defines the feature's axis of revolution.
-  //! Height1 and Height2 may be used as limits to the construction of the feature.
-  //! Fuse offers a choice between:
-  //! -   removing matter with a Boolean cut using the setting 0 in case of the groove
-  //! -   adding matter with Boolean fusion using the setting 1 in case of the rib.
-    BRepFeat_MakeRevolutionForm(const TopoDS_Shape& Sbase, const TopoDS_Wire& W, const Handle(Geom_Plane)& Plane, const gp_Ax1& Axis, const Standard_Real Height1, const Standard_Real Height2, const Standard_Integer Fuse, Standard_Boolean& Sliding);
-  
-  //! Initializes this construction algorithm
-  //! A contour W, a shape Sbase and a plane P are initialized to serve as the basic elements
-  //! in the construction of the rib or groove. The axis Axis of the revolved surface in the basis
-  //! shape defines the feature's axis of revolution. Height1 and Height2 may be
-  //! used as limits to the construction of the feature.
-  //! Fuse offers a choice between:
-  //! -   removing matter with a Boolean cut using the setting 0 in case of the groove
-  //! -   adding matter with Boolean fusion using the setting 1 in case of the rib.
-  Standard_EXPORT void Init (const TopoDS_Shape& Sbase, const TopoDS_Wire& W, const Handle(Geom_Plane)& Plane, const gp_Ax1& Axis, const Standard_Real Height1, const Standard_Real Height2, const Standard_Integer Fuse, Standard_Boolean& Sliding);
-  
-  //! Indicates that the edge <E> will slide on the face
-  //! <OnFace>. Raises ConstructionError  if the  face does not belong to the
-  //! basis shape, or the edge to the prismed shape.
-  Standard_EXPORT void Add (const TopoDS_Edge& E, const TopoDS_Face& OnFace);
-  
-  //! Performs a prism from the wire to the plane
-  //! along the basis shape S. Reconstructs the feature topologically.
-  Standard_EXPORT void Perform();
-  
-  Standard_EXPORT Standard_Boolean Propagate (TopTools_ListOfShape& L, const TopoDS_Face& F, const gp_Pnt& FPoint, const gp_Pnt& LPoint, Standard_Boolean& falseside);
 
+    //! a contour W, a shape Sbase and a plane P are initialized to serve as
+    //! the basic elements in the construction of the rib or groove. The axis Axis of the
+    //! revolved surface in the basis shape defines the feature's axis of revolution.
+    //! Height1 and Height2 may be used as limits to the construction of the feature.
+    //! Fuse offers a choice between:
+    //! -   removing matter with a Boolean cut using the setting 0 in case of the groove
+    //! -   adding matter with Boolean fusion using the setting 1 in case of the rib.
+    BRepFeat_MakeRevolutionForm(const TopoDS_Shape& Sbase, const TopoDS_Wire& W, const Handle(Geom_Plane) & Plane,
+                                const gp_Ax1& Axis, const Standard_Real Height1, const Standard_Real Height2,
+                                const Standard_Integer Fuse, Standard_Boolean& Sliding);
 
+    //! Initializes this construction algorithm
+    //! A contour W, a shape Sbase and a plane P are initialized to serve as the basic elements
+    //! in the construction of the rib or groove. The axis Axis of the revolved surface in the basis
+    //! shape defines the feature's axis of revolution. Height1 and Height2 may be
+    //! used as limits to the construction of the feature.
+    //! Fuse offers a choice between:
+    //! -   removing matter with a Boolean cut using the setting 0 in case of the groove
+    //! -   adding matter with Boolean fusion using the setting 1 in case of the rib.
+    Standard_EXPORT void Init(const TopoDS_Shape& Sbase, const TopoDS_Wire& W, const Handle(Geom_Plane) & Plane,
+                              const gp_Ax1& Axis, const Standard_Real Height1, const Standard_Real Height2,
+                              const Standard_Integer Fuse, Standard_Boolean& Sliding);
 
+    //! Indicates that the edge <E> will slide on the face
+    //! <OnFace>. Raises ConstructionError  if the  face does not belong to the
+    //! basis shape, or the edge to the prismed shape.
+    Standard_EXPORT void Add(const TopoDS_Edge& E, const TopoDS_Face& OnFace);
+
+    //! Performs a prism from the wire to the plane
+    //! along the basis shape S. Reconstructs the feature topologically.
+    Standard_EXPORT void Perform();
+
+    Standard_EXPORT Standard_Boolean Propagate(TopTools_ListOfShape& L, const TopoDS_Face& F, const gp_Pnt& FPoint,
+                                               const gp_Pnt& LPoint, Standard_Boolean& falseside);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  gp_Ax1 myAxe;
-  Standard_Real myHeight1;
-  Standard_Real myHeight2;
-  Standard_Boolean mySliding;
-  Handle(Geom_Plane) myPln;
-  Standard_Real myBnd;
-  TopTools_DataMapOfShapeListOfShape mySlface;
-  TopTools_ListOfShape myListOfEdges;
-  Standard_Real myTol;
-  Standard_Real myAngle1;
-  Standard_Real myAngle2;
-
-
+    gp_Ax1 myAxe;
+    Standard_Real myHeight1;
+    Standard_Real myHeight2;
+    Standard_Boolean mySliding;
+    Handle(Geom_Plane) myPln;
+    Standard_Real myBnd;
+    TopTools_DataMapOfShapeListOfShape mySlface;
+    TopTools_ListOfShape myListOfEdges;
+    Standard_Real myTol;
+    Standard_Real myAngle1;
+    Standard_Real myAngle2;
 };
 
-
 #include <BRepFeat_MakeRevolutionForm.lxx>
-
-
-
-
 
 #endif // _BRepFeat_MakeRevolutionForm_HeaderFile

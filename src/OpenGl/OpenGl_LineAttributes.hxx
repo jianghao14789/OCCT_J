@@ -29,36 +29,31 @@ DEFINE_STANDARD_HANDLE(OpenGl_LineAttributes, OpenGl_Resource)
 
 //! Utility class to manage OpenGL resources of polygon hatching styles.
 //! @note the implementation is not supported by Core Profile and by ES version.
-class OpenGl_LineAttributes : public OpenGl_Resource
-{
-  DEFINE_STANDARD_RTTIEXT(OpenGl_LineAttributes, OpenGl_Resource)
+class OpenGl_LineAttributes : public OpenGl_Resource {
+    DEFINE_STANDARD_RTTIEXT(OpenGl_LineAttributes, OpenGl_Resource)
 public:
+    //! Default constructor.
+    Standard_EXPORT OpenGl_LineAttributes();
 
-  //! Default constructor.
-  Standard_EXPORT OpenGl_LineAttributes();
+    //! Default destructor.
+    Standard_EXPORT virtual ~OpenGl_LineAttributes();
 
-  //! Default destructor.
-  Standard_EXPORT virtual ~OpenGl_LineAttributes();
+    //! Release GL resources.
+    Standard_EXPORT virtual void Release(OpenGl_Context* theGlCtx) Standard_OVERRIDE;
 
-  //! Release GL resources.
-  Standard_EXPORT virtual void Release (OpenGl_Context* theGlCtx) Standard_OVERRIDE;
+    //! Returns estimated GPU memory usage - not implemented.
+    virtual Standard_Size EstimatedDataSize() const Standard_OVERRIDE {
+        return 0;
+    }
 
-  //! Returns estimated GPU memory usage - not implemented.
-  virtual Standard_Size EstimatedDataSize() const Standard_OVERRIDE { return 0; }
-
-  //! Sets type of the hatch.
-  Standard_EXPORT bool SetTypeOfHatch (const OpenGl_Context*               theGlCtx,
-                                       const Handle(Graphic3d_HatchStyle)& theStyle);
+    //! Sets type of the hatch.
+    Standard_EXPORT bool SetTypeOfHatch(const OpenGl_Context* theGlCtx, const Handle(Graphic3d_HatchStyle) & theStyle);
 
 private:
-
-  unsigned int init (const OpenGl_Context* theGlCtx,
-                     const Handle(Graphic3d_HatchStyle)& theStyle);
+    unsigned int init(const OpenGl_Context* theGlCtx, const Handle(Graphic3d_HatchStyle) & theStyle);
 
 protected:
-
-  OpenGl_MapOfHatchStylesAndIds myStyles; //!< Hatch patterns
-
+    OpenGl_MapOfHatchStylesAndIds myStyles; //!< Hatch patterns
 };
 
 #endif // _OpenGl_LineAttributes_Header

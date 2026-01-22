@@ -26,7 +26,6 @@ class TopLoc_SListNodeOfItemLocation;
 class Standard_NoSuchObject;
 class TopLoc_ItemLocation;
 
-
 //! An SListOfItemLocation is a LISP like list of Items.
 //! An SListOfItemLocation is :
 //! . Empty.
@@ -42,45 +41,36 @@ class TopLoc_ItemLocation;
 //! SListOfItemLocation Iterator;
 //! for (Iterator = S; Iterator.More(); Iterator.Next())
 //! X = Iterator.Value();
-class TopLoc_SListOfItemLocation
-{
+class TopLoc_SListOfItemLocation {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates an empty List.
     TopLoc_SListOfItemLocation() {}
 
     //! Creates a List with <anItem> as value  and <aTail> as tail.
-    Standard_EXPORT TopLoc_SListOfItemLocation(const TopLoc_ItemLocation& anItem, const TopLoc_SListOfItemLocation& aTail);
+    Standard_EXPORT TopLoc_SListOfItemLocation(const TopLoc_ItemLocation& anItem,
+                                               const TopLoc_SListOfItemLocation& aTail);
 
     //! Creates a list from an other one. The lists  are shared.
-    TopLoc_SListOfItemLocation(const TopLoc_SListOfItemLocation& Other)
-        : myNode(Other.myNode)
-    {
-    }
+    TopLoc_SListOfItemLocation(const TopLoc_SListOfItemLocation& Other) : myNode(Other.myNode) {}
 
     //! Sets  a list  from  an  other  one. The  lists are
     //! shared. The list itself is returned.
     Standard_EXPORT TopLoc_SListOfItemLocation& Assign(const TopLoc_SListOfItemLocation& Other);
 
     //! Assignment
-    TopLoc_SListOfItemLocation& operator = (const TopLoc_SListOfItemLocation& Other)
-    {
+    TopLoc_SListOfItemLocation& operator=(const TopLoc_SListOfItemLocation& Other) {
         return Assign(Other);
     }
 
 #ifndef OCCT_NO_RVALUE_REFERENCE
 
     //! Move constructor
-    TopLoc_SListOfItemLocation(TopLoc_SListOfItemLocation&& theOther)
-        : myNode(std::move(theOther.myNode))
-    {
-    }
+    TopLoc_SListOfItemLocation(TopLoc_SListOfItemLocation&& theOther) : myNode(std::move(theOther.myNode)) {}
 
     //! Move operator
-    TopLoc_SListOfItemLocation& operator= (TopLoc_SListOfItemLocation&& theOther)
-    {
+    TopLoc_SListOfItemLocation& operator=(TopLoc_SListOfItemLocation&& theOther) {
         myNode = std::move(theOther.myNode);
         return *this;
     }
@@ -88,20 +78,17 @@ public:
 #endif
 
     //! Returne true if this list is empty
-    Standard_Boolean IsEmpty() const
-    {
+    Standard_Boolean IsEmpty() const {
         return myNode.IsNull();
     }
 
     //! Sets the list to be empty.
-    void Clear()
-    {
+    void Clear() {
         myNode.Nullify();
     }
 
     //! Destructor
-    ~TopLoc_SListOfItemLocation()
-    {
+    ~TopLoc_SListOfItemLocation() {
         Clear();
     }
 
@@ -115,28 +102,24 @@ public:
 
     //! Replaces the list by a list with <anItem> as Value
     //! and the  list <me> as  tail.
-    void Construct(const TopLoc_ItemLocation& anItem)
-    {
+    void Construct(const TopLoc_ItemLocation& anItem) {
         Assign(TopLoc_SListOfItemLocation(anItem, *this));
     }
 
     //! Replaces the list <me> by its tail.
-    void ToTail()
-    {
+    void ToTail() {
         Assign(Tail());
     }
 
     //! Returns True if the iterator  has a current value.
     //! This is !IsEmpty()
-    Standard_Boolean More() const
-    {
+    Standard_Boolean More() const {
         return !IsEmpty();
     }
 
     //! Moves the iterator to the next object in the list.
     //! If the iterator is empty it will  stay empty. This is ToTail()
-    void Next()
-    {
+    void Next() {
         ToTail();
     }
 

@@ -18,12 +18,11 @@
 #include <QADNaming.hxx>
 #include <QANCollection.hxx>
 
-void QADraw::AdditionalCommands(Draw_Interpretor& theCommands)
-{
-  QABugs::Commands(theCommands);
+void QADraw::AdditionalCommands(Draw_Interpretor& theCommands) {
+    QABugs::Commands(theCommands);
 
-  QADNaming::AllCommands(theCommands);
-  QANCollection::Commands(theCommands);
+    QADNaming::AllCommands(theCommands);
+    QANCollection::Commands(theCommands);
 
-  return;
+    return;
 }

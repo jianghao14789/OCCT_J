@@ -37,39 +37,34 @@
 //! Message_Fail6 - fail to discretize faces.
 //! Message_Fail7 - fail to post-process model.
 //! Message_Warn1 - shape contains no objects to mesh.
-class IMeshTools_MeshBuilder : public Message_Algorithm
-{
+class IMeshTools_MeshBuilder : public Message_Algorithm {
 public:
+    //! Constructor.
+    Standard_EXPORT IMeshTools_MeshBuilder();
 
-  //! Constructor.
-  Standard_EXPORT IMeshTools_MeshBuilder();
+    //! Constructor.
+    Standard_EXPORT IMeshTools_MeshBuilder(const Handle(IMeshTools_Context) & theContext);
 
-  //! Constructor.
-  Standard_EXPORT IMeshTools_MeshBuilder (const Handle (IMeshTools_Context)& theContext);
-  
-  //! Destructor.
-  Standard_EXPORT virtual ~IMeshTools_MeshBuilder();
+    //! Destructor.
+    Standard_EXPORT virtual ~IMeshTools_MeshBuilder();
 
-  //! Sets context for algorithm.
-  void SetContext (const Handle (IMeshTools_Context)& theContext)
-  {
-    myContext = theContext;
-  }
+    //! Sets context for algorithm.
+    void SetContext(const Handle(IMeshTools_Context) & theContext) {
+        myContext = theContext;
+    }
 
-  //! Gets context of algorithm.
-  const Handle (IMeshTools_Context)& GetContext () const
-  {
-    return myContext;
-  }
+    //! Gets context of algorithm.
+    const Handle(IMeshTools_Context) & GetContext() const {
+        return myContext;
+    }
 
-  //! Performs meshing to the shape using current context.
-  Standard_EXPORT virtual void Perform (const Message_ProgressRange& theRange);
+    //! Performs meshing to the shape using current context.
+    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange);
 
-  DEFINE_STANDARD_RTTIEXT(IMeshTools_MeshBuilder, Message_Algorithm)
+    DEFINE_STANDARD_RTTIEXT(IMeshTools_MeshBuilder, Message_Algorithm)
 
 private:
-
-  Handle (IMeshTools_Context) myContext;
+    Handle(IMeshTools_Context) myContext;
 };
 
 #endif

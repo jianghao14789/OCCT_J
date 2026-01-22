@@ -25,8 +25,7 @@ class StepData_Protocol;
 //! Prints the error message
 //! @param theErrorMessage - error message for output
 //! @param theFail - if true output as a fail info, else output as a trace info ( log )
-void StepFile_Interrupt(Standard_CString theErrorMessage,
-                        const Standard_Boolean theIsFail = Standard_True);
+void StepFile_Interrupt(Standard_CString theErrorMessage, const Standard_Boolean theIsFail = Standard_True);
 
 //! Working function reading STEP file or stream.
 //! @param theName - name of the file or stream
@@ -34,9 +33,8 @@ void StepFile_Interrupt(Standard_CString theErrorMessage,
 //! @param theModel - STEP model
 //! @param theProtocol - STEP protocol object
 //! @return 0 on success, -1 if stream fails, 1 in case of parsing error
-Standard_EXPORT Standard_Integer StepFile_Read (const char* theName,
-                                                std::istream* theIStream,
-                                                const Handle(StepData_StepModel)& theModel,
-                                                const Handle(StepData_Protocol)& theProtocol);
+Standard_EXPORT Standard_Integer StepFile_Read(const char* theName, std::istream* theIStream,
+                                               const Handle(StepData_StepModel) & theModel,
+                                               const Handle(StepData_Protocol) & theProtocol);
 
 #endif

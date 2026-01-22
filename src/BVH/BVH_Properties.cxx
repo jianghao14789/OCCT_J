@@ -21,7 +21,6 @@ IMPLEMENT_STANDARD_RTTIEXT(BVH_Properties, Standard_Transient)
 // function : ~BVH_Properties
 // purpose  :
 // =======================================================================
-BVH_Properties::~BVH_Properties()
-{
+BVH_Properties::~BVH_Properties() {
     //
 }

@@ -28,48 +28,29 @@ class StepRepr_ConfigurationEffectivity;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ConfigurationEffectivity
-class RWStepRepr_RWConfigurationEffectivity 
-{
+class RWStepRepr_RWConfigurationEffectivity {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWConfigurationEffectivity();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWConfigurationEffectivity();
-  
-  //! Reads ConfigurationEffectivity
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_ConfigurationEffectivity)& ent) const;
-  
-  //! Writes ConfigurationEffectivity
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_ConfigurationEffectivity)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_ConfigurationEffectivity)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ConfigurationEffectivity
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_ConfigurationEffectivity) & ent) const;
 
+    //! Writes ConfigurationEffectivity
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_ConfigurationEffectivity) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_ConfigurationEffectivity) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWConfigurationEffectivity_HeaderFile

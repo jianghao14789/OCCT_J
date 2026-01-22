@@ -22,5 +22,4 @@
 typedef NCollection_Map<Standard_Real, TColStd_MapRealHasher> TColStd_MapOfReal;
 typedef NCollection_Map<Standard_Real, TColStd_MapRealHasher>::Iterator TColStd_MapIteratorOfMapOfReal;
 
-
 #endif

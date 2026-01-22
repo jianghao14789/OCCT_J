@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:14 2020 
+// Created on : Sat May 02 12:41:14 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepRepr_RepresentationReference;
 
 //! Read & Write tool for RepresentationReference
-class RWStepRepr_RWRepresentationReference
-{
+class RWStepRepr_RWRepresentationReference {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepRepr_RWRepresentationReference();
 
-  Standard_EXPORT RWStepRepr_RWRepresentationReference();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theAch,
+                                  const Handle(StepRepr_RepresentationReference) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theAch, const Handle(StepRepr_RepresentationReference)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_RepresentationReference) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_RepresentationReference)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepRepr_RepresentationReference)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepRepr_RepresentationReference) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepRepr_RWRepresentationReference_HeaderFile_

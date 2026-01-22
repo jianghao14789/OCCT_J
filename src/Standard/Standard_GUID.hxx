@@ -32,14 +32,11 @@
 #include <Standard_OStream.hxx>
 
 #define Standard_GUID_SIZE 36
-#define Standard_GUID_SIZE_ALLOC Standard_GUID_SIZE+1
+#define Standard_GUID_SIZE_ALLOC Standard_GUID_SIZE + 1
 
-class Standard_GUID
-{
+class Standard_GUID {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT Standard_GUID();
 
@@ -55,7 +52,10 @@ public:
     //! "00000000-0000-0000-0000-000000000000"
     Standard_EXPORT Standard_GUID(const Standard_ExtString aGuid);
 
-    Standard_EXPORT Standard_GUID(const Standard_Integer a32b, const Standard_ExtCharacter a16b1, const Standard_ExtCharacter a16b2, const Standard_ExtCharacter a16b3, const Standard_Byte a8b1, const Standard_Byte a8b2, const Standard_Byte a8b3, const Standard_Byte a8b4, const Standard_Byte a8b5, const Standard_Byte a8b6);
+    Standard_EXPORT Standard_GUID(const Standard_Integer a32b, const Standard_ExtCharacter a16b1,
+                                  const Standard_ExtCharacter a16b2, const Standard_ExtCharacter a16b3,
+                                  const Standard_Byte a8b1, const Standard_Byte a8b2, const Standard_Byte a8b3,
+                                  const Standard_Byte a8b4, const Standard_Byte a8b5, const Standard_Byte a8b6);
 
     Standard_EXPORT Standard_GUID(const Standard_UUID& aGuid);
 
@@ -78,26 +78,22 @@ public:
     Standard_EXPORT void ToExtString(const Standard_PExtCharacter aStrGuid) const;
 
     Standard_EXPORT Standard_Boolean IsSame(const Standard_GUID& uid) const;
-    Standard_Boolean operator == (const Standard_GUID& uid) const
-    {
+    Standard_Boolean operator==(const Standard_GUID& uid) const {
         return IsSame(uid);
     }
 
     Standard_EXPORT Standard_Boolean IsNotSame(const Standard_GUID& uid) const;
-    Standard_Boolean operator != (const Standard_GUID& uid) const
-    {
+    Standard_Boolean operator!=(const Standard_GUID& uid) const {
         return IsNotSame(uid);
     }
 
     Standard_EXPORT void Assign(const Standard_GUID& uid);
-    void operator = (const Standard_GUID& uid)
-    {
+    void operator=(const Standard_GUID& uid) {
         Assign(uid);
     }
 
     Standard_EXPORT void Assign(const Standard_UUID& uid);
-    void operator = (const Standard_UUID& uid)
-    {
+    void operator=(const Standard_UUID& uid) {
         Assign(uid);
     }
 
@@ -122,19 +118,8 @@ public:
     //! Returns True  when the two GUID are the same.
     Standard_EXPORT static Standard_Boolean IsEqual(const Standard_GUID& string1, const Standard_GUID& string2);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Standard_Integer my32b;
     Standard_ExtCharacter my16b1;
     Standard_ExtCharacter my16b2;
@@ -145,14 +130,6 @@ private:
     Standard_Byte my8b4;
     Standard_Byte my8b5;
     Standard_Byte my8b6;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Standard_GUID_HeaderFile

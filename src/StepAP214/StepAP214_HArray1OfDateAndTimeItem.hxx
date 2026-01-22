@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepAP214_HArray1OfDateAndTimeItem, StepAP214_Array1OfDateAndTimeItem)
 
-
 #endif

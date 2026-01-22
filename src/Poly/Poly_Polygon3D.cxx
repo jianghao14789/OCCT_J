@@ -19,42 +19,33 @@
 IMPLEMENT_STANDARD_RTTIEXT(Poly_Polygon3D, Standard_Transient)
 
 //=======================================================================
-//function : Poly_Polygon3D
-//purpose  :
+// function : Poly_Polygon3D
+// purpose  :
 //=======================================================================
-Poly_Polygon3D::Poly_Polygon3D(const Standard_Integer theNbNodes,
-    const Standard_Boolean theHasParams)
-    : myDeflection(0.0),
-    myNodes(1, theNbNodes)
-{
-    if (theHasParams)
-    {
+Poly_Polygon3D::Poly_Polygon3D(const Standard_Integer theNbNodes, const Standard_Boolean theHasParams)
+    : myDeflection(0.0), myNodes(1, theNbNodes) {
+    if (theHasParams) {
         myParameters = new TColStd_HArray1OfReal(1, theNbNodes);
     }
 }
 
 //=======================================================================
-//function : Poly_Polygon3D
-//purpose  : 
+// function : Poly_Polygon3D
+// purpose  :
 //=======================================================================
-Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes) :
-    myDeflection(0.),
-    myNodes(1, Nodes.Length())
-{
+Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes) : myDeflection(0.), myNodes(1, Nodes.Length()) {
     Standard_Integer i, j = 1;
     for (i = Nodes.Lower(); i <= Nodes.Upper(); i++)
         myNodes(j++) = Nodes(i);
 }
 
 //=======================================================================
-//function : Poly_Polygon3D
-//purpose  : 
+// function : Poly_Polygon3D
+// purpose  :
 //=======================================================================
 
-Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes,
-    const TColStd_Array1OfReal& P) :
-    myDeflection(0.),
-    myNodes(1, Nodes.Length())
+Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes, const TColStd_Array1OfReal& P)
+    : myDeflection(0.), myNodes(1, Nodes.Length())
 
 {
     myParameters = new TColStd_HArray1OfReal(1, P.Length());
@@ -67,12 +58,11 @@ Poly_Polygon3D::Poly_Polygon3D(const TColgp_Array1OfPnt& Nodes,
 }
 
 //=======================================================================
-//function : Copy
-//purpose  : 
+// function : Copy
+// purpose  :
 //=======================================================================
 
-Handle(Poly_Polygon3D) Poly_Polygon3D::Copy() const
-{
+Handle(Poly_Polygon3D) Poly_Polygon3D::Copy() const {
     Handle(Poly_Polygon3D) aCopy;
     if (myParameters.IsNull())
         aCopy = new Poly_Polygon3D(myNodes);
@@ -83,15 +73,13 @@ Handle(Poly_Polygon3D) Poly_Polygon3D::Copy() const
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void Poly_Polygon3D::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-{
+void Poly_Polygon3D::DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDeflection)
-        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myNodes.Size())
-        if (!myParameters.IsNull())
-            OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myParameters->Size())
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDeflection)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myNodes.Size())
+    if (!myParameters.IsNull()) OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myParameters->Size())
 }

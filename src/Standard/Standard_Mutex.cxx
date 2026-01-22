@@ -21,8 +21,7 @@
 // Standard_Mutex::Standard_Mutex
 //=============================================
 
-Standard_Mutex::Standard_Mutex()
-{
+Standard_Mutex::Standard_Mutex() {
 #if (defined(_WIN32) || defined(__WIN32__))
     InitializeCriticalSection(&myMutex);
 #else
@@ -38,8 +37,7 @@ Standard_Mutex::Standard_Mutex()
 // Standard_Mutex::~Standard_Mutex
 //=============================================
 
-Standard_Mutex::~Standard_Mutex()
-{
+Standard_Mutex::~Standard_Mutex() {
 #if (defined(_WIN32) || defined(__WIN32__))
     DeleteCriticalSection(&myMutex);
 #else
@@ -51,8 +49,7 @@ Standard_Mutex::~Standard_Mutex()
 // Standard_Mutex::Lock
 //=============================================
 
-void Standard_Mutex::Lock()
-{
+void Standard_Mutex::Lock() {
 #if (defined(_WIN32) || defined(__WIN32__))
     EnterCriticalSection(&myMutex);
 #else
@@ -64,8 +61,7 @@ void Standard_Mutex::Lock()
 // Standard_Mutex::TryLock
 //=============================================
 
-Standard_Boolean Standard_Mutex::TryLock()
-{
+Standard_Boolean Standard_Mutex::TryLock() {
 #if (defined(_WIN32) || defined(__WIN32__))
     return (TryEnterCriticalSection(&myMutex) != 0);
 #else
@@ -77,8 +73,7 @@ Standard_Boolean Standard_Mutex::TryLock()
 // Standard_Mutex::DestroyCallback
 //=============================================
 
-void Standard_Mutex::DestroyCallback()
-{
+void Standard_Mutex::DestroyCallback() {
     UnregisterCallback();
     Unlock();
 }

@@ -27,48 +27,25 @@ class gp_Elips;
 class Geom_Ellipse;
 class Geom2d_Ellipse;
 
-
 //! This class implements the mapping between classes
 //! Ellipse from Geom, and Circ from gp, and the class
 //! Ellipse from StepGeom which describes a Ellipse from
 //! Prostep.
-class GeomToStep_MakeEllipse  : public GeomToStep_Root
-{
+class GeomToStep_MakeEllipse : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeEllipse(const gp_Elips& C);
 
-  
-  Standard_EXPORT GeomToStep_MakeEllipse(const gp_Elips& C);
-  
-  Standard_EXPORT GeomToStep_MakeEllipse(const Handle(Geom_Ellipse)& C);
-  
-  Standard_EXPORT GeomToStep_MakeEllipse(const Handle(Geom2d_Ellipse)& C);
-  
-  Standard_EXPORT const Handle(StepGeom_Ellipse)& Value() const;
+    Standard_EXPORT GeomToStep_MakeEllipse(const Handle(Geom_Ellipse) & C);
 
+    Standard_EXPORT GeomToStep_MakeEllipse(const Handle(Geom2d_Ellipse) & C);
 
-
+    Standard_EXPORT const Handle(StepGeom_Ellipse) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_Ellipse) theEllipse;
-
-
+    Handle(StepGeom_Ellipse) theEllipse;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeEllipse_HeaderFile

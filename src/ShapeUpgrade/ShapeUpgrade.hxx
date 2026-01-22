@@ -59,7 +59,6 @@ class ShapeUpgrade_RemoveLocations;
 class ShapeUpgrade_RemoveInternalWires;
 class ShapeUpgrade_UnifySameDomain;
 
-
 //! This package provides tools for splitting and converting shapes by some criteria.
 //! It provides modifications of the kind when one topological
 //! object can be converted or split in to several ones.
@@ -67,60 +66,58 @@ class ShapeUpgrade_UnifySameDomain;
 //! converting geometry of shapes up to given continuity,
 //! splitting revolutions by U to segments less than given value,
 //! converting to beziers, splitting closed faces.
-class ShapeUpgrade 
-{
+class ShapeUpgrade {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Unifies same domain faces and edges of specified shape
+    Standard_EXPORT static Standard_Boolean
+    C0BSplineToSequenceOfC1BSplineCurve(const Handle(Geom_BSplineCurve) & BS,
+                                        Handle(TColGeom_HSequenceOfBoundedCurve) & seqBS);
 
-  //! Unifies same domain faces and edges of specified shape
-  Standard_EXPORT static Standard_Boolean C0BSplineToSequenceOfC1BSplineCurve (const Handle(Geom_BSplineCurve)& BS,
-                                                                               Handle(TColGeom_HSequenceOfBoundedCurve)& seqBS);
-
-  //! Converts C0 B-Spline curve into sequence of C1 B-Spline curves.
-  //! This method splits B-Spline at the knots with multiplicities equal to degree,
-  //! i.e. unlike method GeomConvert::C0BSplineToArrayOfC1BSplineCurve
-  //! this one does not use any tolerance and therefore does not change the geometry of B-Spline.
-  //! Returns True if C0 B-Spline was successfully split,
-  //! else returns False (if BS is C1 B-Spline).
-  Standard_EXPORT static Standard_Boolean C0BSplineToSequenceOfC1BSplineCurve (const Handle(Geom2d_BSplineCurve)& BS,
-                                                                               Handle(TColGeom2d_HSequenceOfBoundedCurve)& seqBS);
+    //! Converts C0 B-Spline curve into sequence of C1 B-Spline curves.
+    //! This method splits B-Spline at the knots with multiplicities equal to degree,
+    //! i.e. unlike method GeomConvert::C0BSplineToArrayOfC1BSplineCurve
+    //! this one does not use any tolerance and therefore does not change the geometry of B-Spline.
+    //! Returns True if C0 B-Spline was successfully split,
+    //! else returns False (if BS is C1 B-Spline).
+    Standard_EXPORT static Standard_Boolean
+    C0BSplineToSequenceOfC1BSplineCurve(const Handle(Geom2d_BSplineCurve) & BS,
+                                        Handle(TColGeom2d_HSequenceOfBoundedCurve) & seqBS);
 
 private:
-
-friend class ShapeUpgrade_Tool;
-friend class ShapeUpgrade_EdgeDivide;
-friend class ShapeUpgrade_ClosedEdgeDivide;
-friend class ShapeUpgrade_WireDivide;
-friend class ShapeUpgrade_FaceDivide;
-friend class ShapeUpgrade_ClosedFaceDivide;
-friend class ShapeUpgrade_FaceDivideArea;
-friend class ShapeUpgrade_ShapeDivide;
-friend class ShapeUpgrade_ShapeDivideArea;
-friend class ShapeUpgrade_ShapeDivideContinuity;
-friend class ShapeUpgrade_ShapeDivideAngle;
-friend class ShapeUpgrade_ShapeConvertToBezier;
-friend class ShapeUpgrade_ShapeDivideClosed;
-friend class ShapeUpgrade_ShapeDivideClosedEdges;
-friend class ShapeUpgrade_SplitCurve;
-friend class ShapeUpgrade_SplitCurve2d;
-friend class ShapeUpgrade_SplitCurve2dContinuity;
-friend class ShapeUpgrade_ConvertCurve2dToBezier;
-friend class ShapeUpgrade_SplitCurve3d;
-friend class ShapeUpgrade_SplitCurve3dContinuity;
-friend class ShapeUpgrade_ConvertCurve3dToBezier;
-friend class ShapeUpgrade_SplitSurface;
-friend class ShapeUpgrade_SplitSurfaceContinuity;
-friend class ShapeUpgrade_SplitSurfaceAngle;
-friend class ShapeUpgrade_ConvertSurfaceToBezierBasis;
-friend class ShapeUpgrade_SplitSurfaceArea;
-friend class ShapeUpgrade_ShellSewing;
-friend class ShapeUpgrade_FixSmallCurves;
-friend class ShapeUpgrade_FixSmallBezierCurves;
-friend class ShapeUpgrade_RemoveLocations;
-friend class ShapeUpgrade_RemoveInternalWires;
-friend class ShapeUpgrade_UnifySameDomain;
-
+    friend class ShapeUpgrade_Tool;
+    friend class ShapeUpgrade_EdgeDivide;
+    friend class ShapeUpgrade_ClosedEdgeDivide;
+    friend class ShapeUpgrade_WireDivide;
+    friend class ShapeUpgrade_FaceDivide;
+    friend class ShapeUpgrade_ClosedFaceDivide;
+    friend class ShapeUpgrade_FaceDivideArea;
+    friend class ShapeUpgrade_ShapeDivide;
+    friend class ShapeUpgrade_ShapeDivideArea;
+    friend class ShapeUpgrade_ShapeDivideContinuity;
+    friend class ShapeUpgrade_ShapeDivideAngle;
+    friend class ShapeUpgrade_ShapeConvertToBezier;
+    friend class ShapeUpgrade_ShapeDivideClosed;
+    friend class ShapeUpgrade_ShapeDivideClosedEdges;
+    friend class ShapeUpgrade_SplitCurve;
+    friend class ShapeUpgrade_SplitCurve2d;
+    friend class ShapeUpgrade_SplitCurve2dContinuity;
+    friend class ShapeUpgrade_ConvertCurve2dToBezier;
+    friend class ShapeUpgrade_SplitCurve3d;
+    friend class ShapeUpgrade_SplitCurve3dContinuity;
+    friend class ShapeUpgrade_ConvertCurve3dToBezier;
+    friend class ShapeUpgrade_SplitSurface;
+    friend class ShapeUpgrade_SplitSurfaceContinuity;
+    friend class ShapeUpgrade_SplitSurfaceAngle;
+    friend class ShapeUpgrade_ConvertSurfaceToBezierBasis;
+    friend class ShapeUpgrade_SplitSurfaceArea;
+    friend class ShapeUpgrade_ShellSewing;
+    friend class ShapeUpgrade_FixSmallCurves;
+    friend class ShapeUpgrade_FixSmallBezierCurves;
+    friend class ShapeUpgrade_RemoveLocations;
+    friend class ShapeUpgrade_RemoveInternalWires;
+    friend class ShapeUpgrade_UnifySameDomain;
 };
 
 #endif // _ShapeUpgrade_HeaderFile

@@ -27,24 +27,20 @@
 #include <BOPAlgo_BuilderArea.hxx>
 #include <NCollection_BaseAllocator.hxx>
 
-
 //! The algorithm to build new faces from the given faces and
 //! set of edges lying on this face.
 //!
 //! The algorithm returns the following Error statuses:
 //! - *BOPAlgo_AlertNullInputShapes* - in case the given face is a null shape.
 //!
-class BOPAlgo_BuilderFace : public BOPAlgo_BuilderArea
-{
+class BOPAlgo_BuilderFace : public BOPAlgo_BuilderArea {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT BOPAlgo_BuilderFace();
     Standard_EXPORT virtual ~BOPAlgo_BuilderFace();
 
-    Standard_EXPORT BOPAlgo_BuilderFace(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_BuilderFace(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     //! Sets the face generatix
     Standard_EXPORT void SetFace(const TopoDS_Face& theFace);
@@ -53,12 +49,12 @@ public:
     Standard_EXPORT const TopoDS_Face& Face() const;
 
     //! Performs the algorithm
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
     Standard_EXPORT TopAbs_Orientation Orientation() const;
 
 protected:
-
     //! Collect the edges that
     //! a) are internal
     //! b) are the same and have different orientation
@@ -80,7 +76,6 @@ protected:
     Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
 
 protected:
-
     TopoDS_Face myFace;
     TopAbs_Orientation myOrientation;
 };

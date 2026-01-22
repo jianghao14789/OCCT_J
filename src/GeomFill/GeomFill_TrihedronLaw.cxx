@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor3d_Curve.hxx>
 #include <GeomFill_TrihedronLaw.hxx>
 #include <gp_Vec.hxx>
@@ -22,57 +21,43 @@
 #include <Standard_OutOfRange.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(GeomFill_TrihedronLaw,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(GeomFill_TrihedronLaw, Standard_Transient)
 
-void GeomFill_TrihedronLaw::SetCurve(const Handle(Adaptor3d_Curve)& C) 
-{
-  myCurve = C;
-  myTrimmed = myCurve;
+void GeomFill_TrihedronLaw::SetCurve(const Handle(Adaptor3d_Curve) & C) {
+    myCurve = C;
+    myTrimmed = myCurve;
 }
 
 //==================================================================
-//Function : ErrorStatus
-//Purpose :
+// Function : ErrorStatus
+// Purpose :
 //==================================================================
- GeomFill_PipeError GeomFill_TrihedronLaw::ErrorStatus() const
-{
-  return GeomFill_PipeOk;
+GeomFill_PipeError GeomFill_TrihedronLaw::ErrorStatus() const {
+    return GeomFill_PipeOk;
 }
 
- Standard_Boolean GeomFill_TrihedronLaw::D1(const Standard_Real,
-					    gp_Vec& ,gp_Vec&,gp_Vec&,
-					    gp_Vec&,gp_Vec&,gp_Vec& ) 
-{
-  throw Standard_NotImplemented(" GeomFill_TrihedronLaw::D2");
+Standard_Boolean GeomFill_TrihedronLaw::D1(const Standard_Real, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&) {
+    throw Standard_NotImplemented(" GeomFill_TrihedronLaw::D2");
 }
 
- Standard_Boolean GeomFill_TrihedronLaw::D2(const Standard_Real,
-					    gp_Vec& ,gp_Vec&,gp_Vec&,
-					    gp_Vec& ,gp_Vec&,gp_Vec&,
-					    gp_Vec&,gp_Vec& ,gp_Vec&) 
-{
-  throw Standard_NotImplemented(" GeomFill_TrihedronLaw::D2");
+Standard_Boolean GeomFill_TrihedronLaw::D2(const Standard_Real, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&,
+                                           gp_Vec&, gp_Vec&, gp_Vec&) {
+    throw Standard_NotImplemented(" GeomFill_TrihedronLaw::D2");
 }
 
-void GeomFill_TrihedronLaw::SetInterval(const Standard_Real First,
-					 const Standard_Real Last) 
-{
- myTrimmed = myCurve->Trim(First, Last, 0);  
+void GeomFill_TrihedronLaw::SetInterval(const Standard_Real First, const Standard_Real Last) {
+    myTrimmed = myCurve->Trim(First, Last, 0);
 }
 
- void GeomFill_TrihedronLaw::GetInterval(Standard_Real& First,
-					 Standard_Real& Last) 
-{
-  First =  myTrimmed->FirstParameter();
-  Last  =  myTrimmed->LastParameter();
+void GeomFill_TrihedronLaw::GetInterval(Standard_Real& First, Standard_Real& Last) {
+    First = myTrimmed->FirstParameter();
+    Last = myTrimmed->LastParameter();
 }
 
- Standard_Boolean GeomFill_TrihedronLaw::IsConstant() const
-{
-  return Standard_False;
+Standard_Boolean GeomFill_TrihedronLaw::IsConstant() const {
+    return Standard_False;
 }
 
- Standard_Boolean GeomFill_TrihedronLaw::IsOnlyBy3dCurve() const
-{
-  return Standard_False;
+Standard_Boolean GeomFill_TrihedronLaw::IsOnlyBy3dCurve() const {
+    return Standard_False;
 }

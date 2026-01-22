@@ -12,12 +12,12 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math.hxx>
 #include <math_FunctionSet.hxx>
@@ -26,10 +26,8 @@
 #include <Standard_NotImplemented.hxx>
 #include <StdFail_NotDone.hxx>
 
-math_GaussSetIntegration::math_GaussSetIntegration(math_FunctionSet& F,
-    const math_Vector& Lower,
-    const math_Vector& Upper,
-    const math_IntegerVector& Order)
+math_GaussSetIntegration::math_GaussSetIntegration(math_FunctionSet& F, const math_Vector& Lower,
+                                                   const math_Vector& Upper, const math_IntegerVector& Order)
     : Val(1, F.NbEquations()) {
 
     Standard_Integer NbEqua = F.NbEquations(), NbVar = F.NbVariables();
@@ -37,11 +35,9 @@ math_GaussSetIntegration::math_GaussSetIntegration(math_FunctionSet& F,
     Standard_Boolean IsOk;
     math_Vector FVal1(1, NbEqua), FVal2(1, NbEqua), Tval(1, NbVar);
 
-
     // Verification
-    Standard_NotImplemented_Raise_if(
-        NbVar != 1 || Order.Value(Order.Lower()) > math::GaussPointsMax(),
-        "GaussSetIntegration ");
+    Standard_NotImplemented_Raise_if(NbVar != 1 || Order.Value(Order.Lower()) > math::GaussPointsMax(),
+                                     "GaussSetIntegration ");
 
     // Initialisations
     Done = Standard_False;
@@ -56,7 +52,6 @@ math_GaussSetIntegration::math_GaussSetIntegration(math_FunctionSet& F,
     math::GaussPoints(Ordre, GaussP);
     math::GaussWeights(Ordre, GaussW);
 
-
     // Changement de variable pour la mise a l'echelle [Lower, Upper] :
     Xm = 0.5 * (Xdeb + Xfin);
     Xr = 0.5 * (Xfin - Xdeb);
@@ -67,8 +62,7 @@ math_GaussSetIntegration::math_GaussSetIntegration(math_FunctionSet& F,
         IsOk = F.Value(Tval, Val);
         if (!IsOk) return;
         Val *= GaussW(ind1);
-    }
-    else {
+    } else {
         Val.Init(0);
     }
 
@@ -88,14 +82,12 @@ math_GaussSetIntegration::math_GaussSetIntegration(math_FunctionSet& F,
     Done = Standard_True;
 }
 
-void math_GaussSetIntegration::Dump(Standard_OStream& o) const
-{
+void math_GaussSetIntegration::Dump(Standard_OStream& o) const {
     o << "math_GaussSetIntegration ";
     if (Done) {
         o << " Status = Done \n";
         o << "Integration Value = " << Val << "\n";
-    }
-    else {
+    } else {
         o << "Status = not Done \n";
     }
 }

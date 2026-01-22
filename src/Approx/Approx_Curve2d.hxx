@@ -22,33 +22,31 @@
 #include <Geom2d_BSplineCurve.hxx>
 
 //! Makes  an  approximation  for  HCurve2d  from  Adaptor3d
-class Approx_Curve2d 
-{
+class Approx_Curve2d {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT Approx_Curve2d(const Handle(Adaptor2d_Curve2d) & C2D, const Standard_Real First,
+                                   const Standard_Real Last, const Standard_Real TolU, const Standard_Real TolV,
+                                   const GeomAbs_Shape Continuity, const Standard_Integer MaxDegree,
+                                   const Standard_Integer MaxSegments);
 
-  
-  Standard_EXPORT Approx_Curve2d(const Handle(Adaptor2d_Curve2d)& C2D, const Standard_Real First, const Standard_Real Last, const Standard_Real TolU, const Standard_Real TolV, const GeomAbs_Shape Continuity, const Standard_Integer MaxDegree, const Standard_Integer MaxSegments);
-  
-  Standard_EXPORT Standard_Boolean IsDone() const;
-  
-  Standard_EXPORT Standard_Boolean HasResult() const;
-  
-  Standard_EXPORT Handle(Geom2d_BSplineCurve) Curve() const;
-  
-  Standard_EXPORT Standard_Real MaxError2dU() const;
-  
-  Standard_EXPORT Standard_Real MaxError2dV() const;
+    Standard_EXPORT Standard_Boolean IsDone() const;
+
+    Standard_EXPORT Standard_Boolean HasResult() const;
+
+    Standard_EXPORT Handle(Geom2d_BSplineCurve) Curve() const;
+
+    Standard_EXPORT Standard_Real MaxError2dU() const;
+
+    Standard_EXPORT Standard_Real MaxError2dV() const;
 
 private:
-
-  Handle(Geom2d_BSplineCurve) myCurve;
-  Standard_Boolean myIsDone;
-  Standard_Boolean myHasResult;
-  Standard_Real myMaxError2dU;
-  Standard_Real myMaxError2dV;
-
+    Handle(Geom2d_BSplineCurve) myCurve;
+    Standard_Boolean myIsDone;
+    Standard_Boolean myHasResult;
+    Standard_Real myMaxError2dU;
+    Standard_Real myMaxError2dV;
 };
 
 #endif // _Approx_Curve2d_HeaderFile

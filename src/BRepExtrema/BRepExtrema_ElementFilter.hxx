@@ -20,29 +20,20 @@
 
 //! Filtering tool used to detect if two given mesh elements
 //! should be tested for overlapping/intersection or not.
-struct BRepExtrema_ElementFilter
-{
-  //! Result of filtering function.
-  enum FilterResult
-  {
-    NoCheck,
-    Overlap,
-    DoCheck
-  };
+struct BRepExtrema_ElementFilter {
+    //! Result of filtering function.
+    enum FilterResult { NoCheck, Overlap, DoCheck };
 
-  //! Releases resources of element filter.
-  virtual ~BRepExtrema_ElementFilter()
-  {
-    //
-  }
+    //! Releases resources of element filter.
+    virtual ~BRepExtrema_ElementFilter() {
+        //
+    }
 
-  //! Checks if two mesh elements should be tested for overlapping/intersection
-  //! (used for detection correct/incorrect cases of shared edges and vertices).
-  virtual FilterResult PreCheckElements (const Standard_Integer /*theIndex1*/,
-                                         const Standard_Integer /*theIndex2*/)
-  {
-    return DoCheck;
-  }
+    //! Checks if two mesh elements should be tested for overlapping/intersection
+    //! (used for detection correct/incorrect cases of shared edges and vertices).
+    virtual FilterResult PreCheckElements(const Standard_Integer /*theIndex1*/, const Standard_Integer /*theIndex2*/) {
+        return DoCheck;
+    }
 };
 
 #endif // _BRepExtrema_ElementFilter_HeaderFile

@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(Units_QuantitiesSequence, Units_QtsSequence)
 
-
 #endif

@@ -27,48 +27,28 @@ class StepElement_SurfaceSectionField;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for SurfaceSectionField
-class RWStepElement_RWSurfaceSectionField 
-{
+class RWStepElement_RWSurfaceSectionField {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepElement_RWSurfaceSectionField();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepElement_RWSurfaceSectionField();
-  
-  //! Reads SurfaceSectionField
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepElement_SurfaceSectionField)& ent) const;
-  
-  //! Writes SurfaceSectionField
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepElement_SurfaceSectionField)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepElement_SurfaceSectionField)& ent, Interface_EntityIterator& iter) const;
+    //! Reads SurfaceSectionField
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepElement_SurfaceSectionField) & ent) const;
 
+    //! Writes SurfaceSectionField
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepElement_SurfaceSectionField) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepElement_SurfaceSectionField) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepElement_RWSurfaceSectionField_HeaderFile

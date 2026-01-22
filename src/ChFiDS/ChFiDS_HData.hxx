@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(ChFiDS_HData, ChFiDS_SequenceOfSurfData)
 
-
 #endif

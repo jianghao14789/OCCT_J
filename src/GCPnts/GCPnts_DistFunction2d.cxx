@@ -14,73 +14,56 @@
 #include <GCPnts_DistFunction2d.hxx>
 #include <gp_Pnt2d.hxx>
 
-
 //=======================================================================
-//function : GCPnts_DistFunction2d
-//purpose  : 
+// function : GCPnts_DistFunction2d
+// purpose  :
 //=======================================================================
-GCPnts_DistFunction2d::GCPnts_DistFunction2d(const Adaptor2d_Curve2d& theCurve,
-                                             const Standard_Real U1, const Standard_Real U2)
-: myCurve(theCurve),
-  myU1(U1), myU2(U2)
-{
-  gp_Pnt2d P2d1 = theCurve.Value(U1), P2d2 = theCurve.Value(U2);
-  if (P2d1.SquareDistance(P2d2) > gp::Resolution())
-  {
-    myLin = gp_Lin2d(P2d1, P2d2.XY() - P2d1.XY());
-  }
-  else
-  {
-    //For #28812
-    theCurve.D0(U1 + .01*(U2 - U1), P2d2);
-    myLin = gp_Lin2d(P2d1, P2d2.XY() - P2d1.XY());
-  }
-
+GCPnts_DistFunction2d::GCPnts_DistFunction2d(const Adaptor2d_Curve2d& theCurve, const Standard_Real U1,
+                                             const Standard_Real U2)
+    : myCurve(theCurve), myU1(U1), myU2(U2) {
+    gp_Pnt2d P2d1 = theCurve.Value(U1), P2d2 = theCurve.Value(U2);
+    if (P2d1.SquareDistance(P2d2) > gp::Resolution()) {
+        myLin = gp_Lin2d(P2d1, P2d2.XY() - P2d1.XY());
+    } else {
+        // For #28812
+        theCurve.D0(U1 + .01 * (U2 - U1), P2d2);
+        myLin = gp_Lin2d(P2d1, P2d2.XY() - P2d1.XY());
+    }
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
 
-Standard_Boolean GCPnts_DistFunction2d::Value (const Standard_Real X,
-                                                     Standard_Real& F)
-{
-  if (X < myU1 || X > myU2)
-    return Standard_False;
-  //
-  gp_Pnt2d aP2d = myCurve.Value(X);
-  F = -myLin.SquareDistance(aP2d);
-  return Standard_True;
+Standard_Boolean GCPnts_DistFunction2d::Value(const Standard_Real X, Standard_Real& F) {
+    if (X < myU1 || X > myU2) return Standard_False;
+    //
+    gp_Pnt2d aP2d = myCurve.Value(X);
+    F = -myLin.SquareDistance(aP2d);
+    return Standard_True;
 }
 //
 //=======================================================================
-//function : GCPnts_DistFunction2dMV
-//purpose  : 
+// function : GCPnts_DistFunction2dMV
+// purpose  :
 //=======================================================================
 GCPnts_DistFunction2dMV::GCPnts_DistFunction2dMV(GCPnts_DistFunction2d& theCurvLinDist)
-: myMaxCurvLinDist(theCurvLinDist)
-{
+    : myMaxCurvLinDist(theCurvLinDist) {}
+
+//=======================================================================
+// function : Value
+// purpose  :
+//=======================================================================
+Standard_Boolean GCPnts_DistFunction2dMV::Value(const math_Vector& X, Standard_Real& F) {
+    Standard_Boolean Ok = myMaxCurvLinDist.Value(X(1), F);
+    return Ok;
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : NbVariables
+// purpose  :
 //=======================================================================
-Standard_Boolean GCPnts_DistFunction2dMV::Value (const math_Vector& X,
-                                                       Standard_Real& F)
-{
-  Standard_Boolean Ok = myMaxCurvLinDist.Value(X(1), F);
-  return Ok;
+Standard_Integer GCPnts_DistFunction2dMV::NbVariables() const {
+    return 1;
 }
-
-
-//=======================================================================
-//function : NbVariables
-//purpose  : 
-//=======================================================================
-Standard_Integer GCPnts_DistFunction2dMV::NbVariables() const
-{
-  return 1;
-}
-

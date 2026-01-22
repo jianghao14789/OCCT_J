@@ -23,5 +23,4 @@
 typedef NCollection_List<TopoDS_Shape> TopTools_ListOfShape;
 typedef NCollection_List<TopoDS_Shape>::Iterator TopTools_ListIteratorOfListOfShape;
 
-
 #endif

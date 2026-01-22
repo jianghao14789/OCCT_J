@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <ExprIntrp.hxx>
 #include <ExprIntrp_GenFct.hxx>
 #include <ExprIntrp_yaccanal.hxx>
@@ -24,24 +23,19 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(ExprIntrp_GenFct, ExprIntrp_Generator)
 
-ExprIntrp_GenFct::ExprIntrp_GenFct()
-{
+ExprIntrp_GenFct::ExprIntrp_GenFct() {
     done = Standard_False;
 }
 
-Handle(ExprIntrp_GenFct) ExprIntrp_GenFct::Create()
-{
+Handle(ExprIntrp_GenFct) ExprIntrp_GenFct::Create() {
     return new ExprIntrp_GenFct();
 }
 
-void ExprIntrp_GenFct::Process(const TCollection_AsciiString& str)
-{
+void ExprIntrp_GenFct::Process(const TCollection_AsciiString& str) {
     Handle(ExprIntrp_GenFct) me = this;
     done = ExprIntrp::Parse(me, str);
 }
 
-Standard_Boolean ExprIntrp_GenFct::IsDone() const
-{
+Standard_Boolean ExprIntrp_GenFct::IsDone() const {
     return done;
 }
-

@@ -21,8 +21,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Handle(MeshVS_MeshEntityOwner),TColStd_MapIntegerHasher> MeshVS_DataMapOfIntegerMeshEntityOwner;
-typedef NCollection_DataMap<Standard_Integer,Handle(MeshVS_MeshEntityOwner),TColStd_MapIntegerHasher>::Iterator MeshVS_DataMapIteratorOfDataMapOfIntegerMeshEntityOwner;
-
+typedef NCollection_DataMap<Standard_Integer, Handle(MeshVS_MeshEntityOwner), TColStd_MapIntegerHasher>
+    MeshVS_DataMapOfIntegerMeshEntityOwner;
+typedef NCollection_DataMap<Standard_Integer, Handle(MeshVS_MeshEntityOwner), TColStd_MapIntegerHasher>::Iterator
+    MeshVS_DataMapIteratorOfDataMapOfIntegerMeshEntityOwner;
 
 #endif

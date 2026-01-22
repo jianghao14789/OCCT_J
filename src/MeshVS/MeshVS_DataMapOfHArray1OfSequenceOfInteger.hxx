@@ -21,8 +21,10 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Handle(MeshVS_HArray1OfSequenceOfInteger),TColStd_MapIntegerHasher> MeshVS_DataMapOfHArray1OfSequenceOfInteger;
-typedef NCollection_DataMap<Standard_Integer,Handle(MeshVS_HArray1OfSequenceOfInteger),TColStd_MapIntegerHasher>::Iterator MeshVS_DataMapIteratorOfDataMapOfHArray1OfSequenceOfInteger;
-
+typedef NCollection_DataMap<Standard_Integer, Handle(MeshVS_HArray1OfSequenceOfInteger), TColStd_MapIntegerHasher>
+    MeshVS_DataMapOfHArray1OfSequenceOfInteger;
+typedef NCollection_DataMap<Standard_Integer, Handle(MeshVS_HArray1OfSequenceOfInteger),
+                            TColStd_MapIntegerHasher>::Iterator
+    MeshVS_DataMapIteratorOfDataMapOfHArray1OfSequenceOfInteger;
 
 #endif

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepBuilderAPI_MakeShape.hxx>
 #include <StdFail_NotDone.hxx>
 #include <TopoDS.hxx>
@@ -24,29 +23,24 @@
 #include <TopoDS_Vertex.hxx>
 
 //=======================================================================
-//function : BRepBuilderAPI_MakeShape
-//purpose  : 
+// function : BRepBuilderAPI_MakeShape
+// purpose  :
 //=======================================================================
-BRepBuilderAPI_MakeShape::BRepBuilderAPI_MakeShape()
-{
-}
+BRepBuilderAPI_MakeShape::BRepBuilderAPI_MakeShape() {}
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
 
-void BRepBuilderAPI_MakeShape::Build(const Message_ProgressRange& /*theRange*/)
-{
-}
+void BRepBuilderAPI_MakeShape::Build(const Message_ProgressRange& /*theRange*/) {}
 
 //=======================================================================
-//function : Shape
-//purpose  : 
+// function : Shape
+// purpose  :
 //=======================================================================
 
-const TopoDS_Shape& BRepBuilderAPI_MakeShape::Shape()
-{
+const TopoDS_Shape& BRepBuilderAPI_MakeShape::Shape() {
     if (!IsDone()) {
         // the following is const cast away
         ((BRepBuilderAPI_MakeShape*)(void*)this)->Build();
@@ -55,21 +49,18 @@ const TopoDS_Shape& BRepBuilderAPI_MakeShape::Shape()
     return myShape;
 }
 
-
 //=======================================================================
-//function : operator
-//purpose  : 
+// function : operator
+// purpose  :
 //=======================================================================
 
-BRepBuilderAPI_MakeShape::operator TopoDS_Shape()
-{
+BRepBuilderAPI_MakeShape::operator TopoDS_Shape() {
     return Shape();
 }
 
-
 //=======================================================================
-//function : Generated
-//purpose  : 
+// function : Generated
+// purpose  :
 //=======================================================================
 
 const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Generated(const TopoDS_Shape&)
@@ -79,10 +70,9 @@ const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Generated(const TopoDS_Sha
     return myGenerated;
 }
 
-
 //=======================================================================
-//function : Modified
-//purpose  : 
+// function : Modified
+// purpose  :
 //=======================================================================
 
 const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Modified(const TopoDS_Shape&)
@@ -92,10 +82,9 @@ const TopTools_ListOfShape& BRepBuilderAPI_MakeShape::Modified(const TopoDS_Shap
     return myGenerated;
 }
 
-
 //=======================================================================
-//function : IsDeleted
-//purpose  : 
+// function : IsDeleted
+// purpose  :
 //=======================================================================
 
 Standard_Boolean BRepBuilderAPI_MakeShape::IsDeleted(const TopoDS_Shape&)
@@ -103,7 +92,3 @@ Standard_Boolean BRepBuilderAPI_MakeShape::IsDeleted(const TopoDS_Shape&)
 {
     return Standard_False;
 }
-
-
-
-

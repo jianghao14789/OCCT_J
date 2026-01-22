@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TopoDS_Shape.hxx>
 #include <TopOpeBRepBuild_EdgeBuilder.hxx>
 #include <TopOpeBRepBuild_LoopClassifier.hxx>
@@ -24,121 +23,108 @@
 #include <TopOpeBRepBuild_PaveSet.hxx>
 
 //=======================================================================
-//function : TopOpeBRepBuild_EdgeBuilder
-//purpose  : 
+// function : TopOpeBRepBuild_EdgeBuilder
+// purpose  :
 //=======================================================================
-TopOpeBRepBuild_EdgeBuilder::TopOpeBRepBuild_EdgeBuilder()
-{
+TopOpeBRepBuild_EdgeBuilder::TopOpeBRepBuild_EdgeBuilder() {}
+
+//=======================================================================
+// function : TopOpeBRepBuild_EdgeBuilder
+// purpose  :
+//=======================================================================
+
+TopOpeBRepBuild_EdgeBuilder::TopOpeBRepBuild_EdgeBuilder(TopOpeBRepBuild_PaveSet& LS,
+                                                         TopOpeBRepBuild_PaveClassifier& LC,
+                                                         const Standard_Boolean ForceClass) {
+    InitEdgeBuilder(LS, LC, ForceClass);
 }
 
 //=======================================================================
-//function : TopOpeBRepBuild_EdgeBuilder
-//purpose  : 
+// function : InitEdgeBuilder
+// purpose  :
 //=======================================================================
 
-TopOpeBRepBuild_EdgeBuilder::TopOpeBRepBuild_EdgeBuilder
-(TopOpeBRepBuild_PaveSet& LS, TopOpeBRepBuild_PaveClassifier& LC,
- const Standard_Boolean ForceClass)
-{
-  InitEdgeBuilder(LS,LC,ForceClass);
+void TopOpeBRepBuild_EdgeBuilder::InitEdgeBuilder(TopOpeBRepBuild_LoopSet& LS, TopOpeBRepBuild_LoopClassifier& LC,
+                                                  const Standard_Boolean ForceClass) {
+    InitAreaBuilder(LS, LC, ForceClass);
 }
 
 //=======================================================================
-//function : InitEdgeBuilder
-//purpose  : 
+// function : InitEdge
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_EdgeBuilder::InitEdgeBuilder
-(TopOpeBRepBuild_LoopSet& LS, TopOpeBRepBuild_LoopClassifier& LC,
- const Standard_Boolean ForceClass)
-{
-  InitAreaBuilder(LS,LC,ForceClass);
+void TopOpeBRepBuild_EdgeBuilder::InitEdge() {
+    InitArea();
 }
 
 //=======================================================================
-//function : InitEdge
-//purpose  : 
+// function : MoreEdge
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_EdgeBuilder::InitEdge()
-{
-  InitArea();
+Standard_Boolean TopOpeBRepBuild_EdgeBuilder::MoreEdge() const {
+    Standard_Boolean b = MoreArea();
+    return b;
 }
 
 //=======================================================================
-//function : MoreEdge
-//purpose  : 
+// function : NextEdge
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepBuild_EdgeBuilder::MoreEdge() const
-{
-  Standard_Boolean b = MoreArea();
-  return b;
+void TopOpeBRepBuild_EdgeBuilder::NextEdge() {
+    NextArea();
 }
 
 //=======================================================================
-//function : NextEdge
-//purpose  : 
+// function : InitVertex
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_EdgeBuilder::NextEdge()
-{
-  NextArea();
+void TopOpeBRepBuild_EdgeBuilder::InitVertex() {
+    InitLoop();
 }
 
 //=======================================================================
-//function : InitVertex
-//purpose  : 
+// function : MoreVertex
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_EdgeBuilder::InitVertex()
-{
-  InitLoop();
+Standard_Boolean TopOpeBRepBuild_EdgeBuilder::MoreVertex() const {
+    Standard_Boolean b = MoreLoop();
+    return b;
 }
 
 //=======================================================================
-//function : MoreVertex
-//purpose  : 
+// function : NextVertex
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepBuild_EdgeBuilder::MoreVertex() const
-{
-  Standard_Boolean b = MoreLoop();
-  return b;
+void TopOpeBRepBuild_EdgeBuilder::NextVertex() {
+    NextLoop();
 }
 
 //=======================================================================
-//function : NextVertex
-//purpose  : 
+// function : Vertex
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_EdgeBuilder::NextVertex()
-{
-  NextLoop();
+const TopoDS_Shape& TopOpeBRepBuild_EdgeBuilder::Vertex() const {
+    const Handle(TopOpeBRepBuild_Loop) & L = Loop();
+    Handle(TopOpeBRepBuild_Pave) PV(Handle(TopOpeBRepBuild_Pave)::DownCast(L));
+    const TopoDS_Shape& V = PV->Vertex();
+    return V;
 }
 
 //=======================================================================
-//function : Vertex
-//purpose  : 
+// function : Parameter
+// purpose  :
 //=======================================================================
 
-const TopoDS_Shape& TopOpeBRepBuild_EdgeBuilder::Vertex() const
-{
-  const Handle(TopOpeBRepBuild_Loop)& L = Loop();
-  Handle(TopOpeBRepBuild_Pave) PV (Handle(TopOpeBRepBuild_Pave)::DownCast (L));
-  const TopoDS_Shape& V = PV->Vertex();
-  return V;
-}
-
-//=======================================================================
-//function : Parameter
-//purpose  : 
-//=======================================================================
-
-Standard_Real TopOpeBRepBuild_EdgeBuilder::Parameter() const
-{
-  const Handle(TopOpeBRepBuild_Loop)& L = Loop();
-  Handle(TopOpeBRepBuild_Pave) PV (Handle(TopOpeBRepBuild_Pave)::DownCast (L));
-  Standard_Real parV = PV->Parameter();
-  return parV;
+Standard_Real TopOpeBRepBuild_EdgeBuilder::Parameter() const {
+    const Handle(TopOpeBRepBuild_Loop) & L = Loop();
+    Handle(TopOpeBRepBuild_Pave) PV(Handle(TopOpeBRepBuild_Pave)::DownCast(L));
+    Standard_Real parV = PV->Parameter();
+    return parV;
 }

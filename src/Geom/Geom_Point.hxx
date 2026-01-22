@@ -24,7 +24,6 @@
 #include <Standard_Real.hxx>
 class gp_Pnt;
 
-
 class Geom_Point;
 DEFINE_STANDARD_HANDLE(Geom_Point, Geom_Geometry)
 
@@ -50,17 +49,15 @@ public:
     Standard_EXPORT virtual Standard_Real Z() const = 0;
 
     //! Computes the distance between <me> and <Other>.
-    Standard_EXPORT Standard_Real Distance(const Handle(Geom_Point)& Other) const;
+    Standard_EXPORT Standard_Real Distance(const Handle(Geom_Point) & Other) const;
 
     //! Computes the square distance between <me> and <Other>.
-    Standard_EXPORT Standard_Real SquareDistance(const Handle(Geom_Point)& Other) const;
+    Standard_EXPORT Standard_Real SquareDistance(const Handle(Geom_Point) & Other) const;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Point, Geom_Geometry)
 
 protected:
-
 private:
-
 };
 
 #endif // _Geom_Point_HeaderFile

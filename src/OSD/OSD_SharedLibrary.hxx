@@ -1,5 +1,5 @@
 ﻿// Created on: 1994-08-30
-// Created by: J.P. TIRAULT    
+// Created by: J.P. TIRAULT
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
@@ -28,16 +28,12 @@
 #include <OSD_LoadMode.hxx>
 #include <OSD_Function.hxx>
 
-
 //! Interface to dynamic library loader.
 //! Provides tools to load a shared library
 //! and retrieve the address of an entry point.
-class OSD_SharedLibrary
-{
+class OSD_SharedLibrary {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Creates a SharedLibrary object with name NULL.
     Standard_EXPORT OSD_SharedLibrary();
@@ -94,34 +90,14 @@ public:
 
     //! Frees memory allocated.
     Standard_EXPORT void Destroy();
-    ~OSD_SharedLibrary()
-    {
+    ~OSD_SharedLibrary() {
         Destroy();
     }
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Standard_Address myHandle;
     Standard_PCharacter myName;
-
-
 };
-
-
-
-
-
-
 
 #endif // _OSD_SharedLibrary_HeaderFile

@@ -20,45 +20,40 @@
 #include <StepAP203_CcDesignContract.hxx>
 #include <StepBasic_Contract.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepAP203_CcDesignContract,StepBasic_ContractAssignment)
+IMPLEMENT_STANDARD_RTTIEXT(StepAP203_CcDesignContract, StepBasic_ContractAssignment)
 
 //=======================================================================
-//function : StepAP203_CcDesignContract
-//purpose  : 
+// function : StepAP203_CcDesignContract
+// purpose  :
 //=======================================================================
-StepAP203_CcDesignContract::StepAP203_CcDesignContract ()
-{
+StepAP203_CcDesignContract::StepAP203_CcDesignContract() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepAP203_CcDesignContract::Init(const Handle(StepBasic_Contract) & aContractAssignment_AssignedContract,
+                                      const Handle(StepAP203_HArray1OfContractedItem) & aItems) {
+    StepBasic_ContractAssignment::Init(aContractAssignment_AssignedContract);
+
+    theItems = aItems;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Items
+// purpose  :
 //=======================================================================
 
-void StepAP203_CcDesignContract::Init (const Handle(StepBasic_Contract) &aContractAssignment_AssignedContract,
-                                       const Handle(StepAP203_HArray1OfContractedItem) &aItems)
-{
-  StepBasic_ContractAssignment::Init(aContractAssignment_AssignedContract);
-
-  theItems = aItems;
+Handle(StepAP203_HArray1OfContractedItem) StepAP203_CcDesignContract::Items() const {
+    return theItems;
 }
 
 //=======================================================================
-//function : Items
-//purpose  : 
+// function : SetItems
+// purpose  :
 //=======================================================================
 
-Handle(StepAP203_HArray1OfContractedItem) StepAP203_CcDesignContract::Items () const
-{
-  return theItems;
-}
-
-//=======================================================================
-//function : SetItems
-//purpose  : 
-//=======================================================================
-
-void StepAP203_CcDesignContract::SetItems (const Handle(StepAP203_HArray1OfContractedItem) &aItems)
-{
-  theItems = aItems;
+void StepAP203_CcDesignContract::SetItems(const Handle(StepAP203_HArray1OfContractedItem) & aItems) {
+    theItems = aItems;
 }

@@ -20,125 +20,94 @@
 #include <NCollection_Buffer.hxx>
 
 //! Structure to manage image buffer.
-class Image_PixMapData : public NCollection_Buffer
-{
+class Image_PixMapData : public NCollection_Buffer {
 public:
-
-  //! Empty constructor.
-  Image_PixMapData()
-  : NCollection_Buffer (Handle(NCollection_BaseAllocator)()),
-    myTopRowPtr  (NULL),
-    SizeBPP      (0),
-    SizeX        (0),
-    SizeY        (0),
-    SizeRowBytes (0),
-    TopToDown    (Standard_Size(-1))
-  {
-    //
-  }
-
-  //! Initializer.
-  bool Init (const Handle(NCollection_BaseAllocator)& theAlloc,
-             const Standard_Size                      theSizeBPP,
-             const Standard_Size                      theSizeX,
-             const Standard_Size                      theSizeY,
-             const Standard_Size                      theSizeRowBytes,
-             Standard_Byte*                           theDataPtr)
-  {
-    SetAllocator (theAlloc); // will free old data as well
-
-    myData       = theDataPtr;
-    myTopRowPtr  = NULL;
-    SizeBPP      = theSizeBPP;
-    SizeX        = theSizeX;
-    SizeY        = theSizeY;
-    SizeRowBytes = theSizeRowBytes != 0 ? theSizeRowBytes : (theSizeX * theSizeBPP);
-    mySize       = SizeRowBytes * SizeY;
-    if (myData == NULL)
-    {
-      Allocate (mySize);
+    //! Empty constructor.
+    Image_PixMapData()
+        : NCollection_Buffer(Handle(NCollection_BaseAllocator)()), myTopRowPtr(NULL), SizeBPP(0), SizeX(0), SizeY(0),
+          SizeRowBytes(0), TopToDown(Standard_Size(-1)) {
+        //
     }
-    SetTopDown (TopToDown == 1);
-    return !IsEmpty();
-  }
 
-  //! Reset all values to zeros.
-  void ZeroData()
-  {
-    if (myData != NULL)
-    {
-      memset (myData, 0, mySize);
+    //! Initializer.
+    bool Init(const Handle(NCollection_BaseAllocator) & theAlloc, const Standard_Size theSizeBPP,
+              const Standard_Size theSizeX, const Standard_Size theSizeY, const Standard_Size theSizeRowBytes,
+              Standard_Byte* theDataPtr) {
+        SetAllocator(theAlloc); // will free old data as well
+
+        myData = theDataPtr;
+        myTopRowPtr = NULL;
+        SizeBPP = theSizeBPP;
+        SizeX = theSizeX;
+        SizeY = theSizeY;
+        SizeRowBytes = theSizeRowBytes != 0 ? theSizeRowBytes : (theSizeX * theSizeBPP);
+        mySize = SizeRowBytes * SizeY;
+        if (myData == NULL) {
+            Allocate(mySize);
+        }
+        SetTopDown(TopToDown == 1);
+        return !IsEmpty();
     }
-  }
 
-  //! @return data pointer to requested row (first column).
-  inline const Standard_Byte* Row (const Standard_Size theRow) const
-  {
-    return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown);
-  }
-
-  //! @return data pointer to requested row (first column).
-  inline Standard_Byte* ChangeRow (const Standard_Size theRow)
-  {
-    return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown);
-  }
-
-  //! @return data pointer to requested position.
-  inline const Standard_Byte* Value (const Standard_Size theRow,
-                                     const Standard_Size theCol) const
-  {
-    return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown) + SizeBPP * theCol;
-  }
-
-  //! @return data pointer to requested position.
-  inline Standard_Byte* ChangeValue (const Standard_Size theRow,
-                                     const Standard_Size theCol)
-  {
-    return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown) + SizeBPP * theCol;
-  }
-
-  //! Compute the maximal row alignment for current row size.
-  //! @return maximal row alignment in bytes (up to 16 bytes).
-  inline Standard_Size MaxRowAligmentBytes() const
-  {
-    Standard_Size anAlignment = 2;
-    for (; anAlignment <= 16; anAlignment <<= 1)
-    {
-      if ((SizeRowBytes % anAlignment) != 0 || (Standard_Size(myData) % anAlignment) != 0)
-      {
-        return (anAlignment >> 1);
-      }
+    //! Reset all values to zeros.
+    void ZeroData() {
+        if (myData != NULL) {
+            memset(myData, 0, mySize);
+        }
     }
-    return anAlignment;
-  }
 
-  //! Setup scanlines order in memory - top-down or bottom-up.
-  //! Drawers should explicitly specify this value if current state IsTopDown() was ignored!
-  //! @param theIsTopDown top-down flag
-  inline void SetTopDown (const bool theIsTopDown)
-  {
-    TopToDown   = (theIsTopDown ? 1 : Standard_Size(-1));
-    myTopRowPtr = ((TopToDown == 1 || myData == NULL)
-                ? myData : (myData + SizeRowBytes * (SizeY - 1)));
-  }
+    //! @return data pointer to requested row (first column).
+    inline const Standard_Byte* Row(const Standard_Size theRow) const {
+        return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown);
+    }
+
+    //! @return data pointer to requested row (first column).
+    inline Standard_Byte* ChangeRow(const Standard_Size theRow) {
+        return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown);
+    }
+
+    //! @return data pointer to requested position.
+    inline const Standard_Byte* Value(const Standard_Size theRow, const Standard_Size theCol) const {
+        return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown) + SizeBPP * theCol;
+    }
+
+    //! @return data pointer to requested position.
+    inline Standard_Byte* ChangeValue(const Standard_Size theRow, const Standard_Size theCol) {
+        return myTopRowPtr + ptrdiff_t(SizeRowBytes * theRow * TopToDown) + SizeBPP * theCol;
+    }
+
+    //! Compute the maximal row alignment for current row size.
+    //! @return maximal row alignment in bytes (up to 16 bytes).
+    inline Standard_Size MaxRowAligmentBytes() const {
+        Standard_Size anAlignment = 2;
+        for (; anAlignment <= 16; anAlignment <<= 1) {
+            if ((SizeRowBytes % anAlignment) != 0 || (Standard_Size(myData) % anAlignment) != 0) {
+                return (anAlignment >> 1);
+            }
+        }
+        return anAlignment;
+    }
+
+    //! Setup scanlines order in memory - top-down or bottom-up.
+    //! Drawers should explicitly specify this value if current state IsTopDown() was ignored!
+    //! @param theIsTopDown top-down flag
+    inline void SetTopDown(const bool theIsTopDown) {
+        TopToDown = (theIsTopDown ? 1 : Standard_Size(-1));
+        myTopRowPtr = ((TopToDown == 1 || myData == NULL) ? myData : (myData + SizeRowBytes * (SizeY - 1)));
+    }
 
 protected:
-
-  Standard_Byte* myTopRowPtr;  //!< pointer to the topmost row (depending on scanlines order in memory)
-
-public:
-
-  Standard_Size  SizeBPP;      //!< bytes per pixel
-  Standard_Size  SizeX;        //!< width  in pixels
-  Standard_Size  SizeY;        //!< height in pixels
-  Standard_Size  SizeRowBytes; //!< number of bytes per line (in most cases equal to 3 * sizeX)
-  Standard_Size  TopToDown;    //!< image scanlines direction in memory from Top to the Down
-
+    Standard_Byte* myTopRowPtr; //!< pointer to the topmost row (depending on scanlines order in memory)
 
 public:
+    Standard_Size SizeBPP;      //!< bytes per pixel
+    Standard_Size SizeX;        //!< width  in pixels
+    Standard_Size SizeY;        //!< height in pixels
+    Standard_Size SizeRowBytes; //!< number of bytes per line (in most cases equal to 3 * sizeX)
+    Standard_Size TopToDown;    //!< image scanlines direction in memory from Top to the Down
 
-  DEFINE_STANDARD_RTTI_INLINE(Image_PixMapData,NCollection_Buffer) // Type definition
-
+public:
+    DEFINE_STANDARD_RTTI_INLINE(Image_PixMapData, NCollection_Buffer) // Type definition
 };
 
 DEFINE_STANDARD_HANDLE(Image_PixMapData, NCollection_Buffer)

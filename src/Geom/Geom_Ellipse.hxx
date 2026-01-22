@@ -32,7 +32,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_Ellipse;
 DEFINE_STANDARD_HANDLE(Geom_Ellipse, Geom_Conic)
 
@@ -102,7 +101,6 @@ public:
     //! Assigns a value to the minor radius of this ellipse.
     //! ConstructionError raised if MajorRadius < MinorRadius or if MinorRadius < 0.
     Standard_EXPORT void SetMinorRadius(const Standard_Real MinorRadius);
-
 
     //! returns the non transient ellipse from gp with the same
     Standard_EXPORT gp_Elips Elips() const;
@@ -192,7 +190,8 @@ public:
 
     //! Returns the point P of parameter U, the first second and
     //! third derivatives V1 V2 and V3.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! For the point of parameter U of this ellipse, computes
     //! the vector corresponding to the Nth derivative.
@@ -206,16 +205,15 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Ellipse, Geom_Conic)
 
 protected:
-
 private:
     Standard_Real majorRadius;
     Standard_Real minorRadius;
-
 };
 
 #endif // _Geom_Ellipse_HeaderFile

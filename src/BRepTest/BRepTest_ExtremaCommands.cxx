@@ -36,438 +36,378 @@
 #include <stdio.h>
 
 //=======================================================================
-//function : distance
-//purpose  : 
+// function : distance
+// purpose  :
 //=======================================================================
 
-static Standard_Integer distance (Draw_Interpretor& di,
-				  Standard_Integer n,
-				  const char** a)
-{
-  if (n < 3) return 1;
+static Standard_Integer distance(Draw_Interpretor& di, Standard_Integer n, const char** a) {
+    if (n < 3) return 1;
 
-  const char *name1 = a[1];
-  const char *name2 = a[2];
+    const char* name1 = a[1];
+    const char* name2 = a[2];
 
-  TopoDS_Shape S1 = DBRep::Get(name1);
-  TopoDS_Shape S2 = DBRep::Get(name2);
-  if (S1.IsNull() || S2.IsNull()) return 1;
-  gp_Pnt P1,P2;
-  Standard_Real D;
-  if (!BRepExtrema_Poly::Distance(S1,S2,P1,P2,D)) return 1;
-  //std::cout << " distance : " << D << std::endl;
-  di << " distance : " << D << "\n";
-  TopoDS_Edge E = BRepLib_MakeEdge(P1,P2);
-  DBRep::Set("distance",E);
-  return 0;
+    TopoDS_Shape S1 = DBRep::Get(name1);
+    TopoDS_Shape S2 = DBRep::Get(name2);
+    if (S1.IsNull() || S2.IsNull()) return 1;
+    gp_Pnt P1, P2;
+    Standard_Real D;
+    if (!BRepExtrema_Poly::Distance(S1, S2, P1, P2, D)) return 1;
+    // std::cout << " distance : " << D << std::endl;
+    di << " distance : " << D << "\n";
+    TopoDS_Edge E = BRepLib_MakeEdge(P1, P2);
+    DBRep::Set("distance", E);
+    return 0;
 }
 
-static Standard_Integer distmini(Draw_Interpretor& di, Standard_Integer n, const char** a)
-{
-  if (n < 4 || n > 6)
-  {
-    return 1;
-  }
-
-  const char *ns1 = (a[2]), *ns2 = (a[3]), *ns0 = (a[1]);
-  TopoDS_Shape S1(DBRep::Get(ns1)), S2(DBRep::Get(ns2));
-
-  Standard_Real aDeflection = Precision::Confusion();
-  Standard_Integer anIndex = 4;
-  if (n >= 5 && a[4][0] != '-')
-  {
-    aDeflection = Draw::Atof(a[4]);
-    anIndex++;
-  }
-
-  Standard_Boolean isMultiThread = Standard_False;
-  for (Standard_Integer anI = anIndex; anI < n; anI++)
-  {
-    TCollection_AsciiString anArg(a[anI]);
-    anArg.LowerCase();
-    if (anArg == "-parallel")
-    {
-      isMultiThread = Standard_True;
+static Standard_Integer distmini(Draw_Interpretor& di, Standard_Integer n, const char** a) {
+    if (n < 4 || n > 6) {
+        return 1;
     }
-    else
-    {
-      di << "Syntax error at '" << anArg << "'";
-      return 1;
+
+    const char *ns1 = (a[2]), *ns2 = (a[3]), *ns0 = (a[1]);
+    TopoDS_Shape S1(DBRep::Get(ns1)), S2(DBRep::Get(ns2));
+
+    Standard_Real aDeflection = Precision::Confusion();
+    Standard_Integer anIndex = 4;
+    if (n >= 5 && a[4][0] != '-') {
+        aDeflection = Draw::Atof(a[4]);
+        anIndex++;
     }
-  }
 
-  Handle(Draw_ProgressIndicator) aProgress = new Draw_ProgressIndicator(di, 1);
-  BRepExtrema_DistShapeShape dst;
-  dst.LoadS1(S1);
-  dst.LoadS2(S2);
-  dst.SetDeflection(aDeflection);
-  dst.SetMultiThread(isMultiThread);
-  dst.Perform(aProgress->Start());
+    Standard_Boolean isMultiThread = Standard_False;
+    for (Standard_Integer anI = anIndex; anI < n; anI++) {
+        TCollection_AsciiString anArg(a[anI]);
+        anArg.LowerCase();
+        if (anArg == "-parallel") {
+            isMultiThread = Standard_True;
+        } else {
+            di << "Syntax error at '" << anArg << "'";
+            return 1;
+        }
+    }
 
-  if (dst.IsDone()) 
-  { 
+    Handle(Draw_ProgressIndicator) aProgress = new Draw_ProgressIndicator(di, 1);
+    BRepExtrema_DistShapeShape dst;
+    dst.LoadS1(S1);
+    dst.LoadS2(S2);
+    dst.SetDeflection(aDeflection);
+    dst.SetMultiThread(isMultiThread);
+    dst.Perform(aProgress->Start());
+
+    if (dst.IsDone()) {
 #ifdef OCCT_DEBUG
-    //dst.Dump(std::cout);
-    di << "*** Dump of \"BRepExtrema_DistShapeShape\" in DEBUG mode (begin) *****\n";
-    Standard_SStream aSStream;
-    dst.Dump(aSStream);
-    di << aSStream;
-    di << "*** Dump of \"BRepExtrema_DistShapeShape\" in DEBUG mode (end)   *****\n";
+        // dst.Dump(std::cout);
+        di << "*** Dump of \"BRepExtrema_DistShapeShape\" in DEBUG mode (begin) *****\n";
+        Standard_SStream aSStream;
+        dst.Dump(aSStream);
+        di << aSStream;
+        di << "*** Dump of \"BRepExtrema_DistShapeShape\" in DEBUG mode (end)   *****\n";
 #endif
 
-    di << "\"distmini\" command returns:\n";
+        di << "\"distmini\" command returns:\n";
 
-    char named[100];
-    Sprintf(named, "%s%s" ,ns0,"_val");
-    char* tempd = named;
-    Draw::Set(tempd,dst.Value());
-    di << named << " ";
+        char named[100];
+        Sprintf(named, "%s%s", ns0, "_val");
+        char* tempd = named;
+        Draw::Set(tempd, dst.Value());
+        di << named << " ";
 
-    for (Standard_Integer i1 = 1; i1<= dst.NbSolution(); i1++)
-    {
-      gp_Pnt P1,P2;
-      P1 = (dst.PointOnShape1(i1));
-      P2 = (dst.PointOnShape2(i1));
-      if (dst.Value()<=1.e-9) 
-      {
-        TopoDS_Vertex V =BRepLib_MakeVertex(P1);
-        char namev[100];
-        if (i1==1) 
-          Sprintf(namev, "%s" ,ns0);
-        else
-          Sprintf(namev, "%s%d" ,ns0,i1);
-        char* tempv = namev;
-        DBRep::Set(tempv,V);
-        di << namev << " ";
-      }
-      else
-      {
-        char name[100];
-        TopoDS_Edge E = BRepLib_MakeEdge (P1, P2);
-        if (i1==1)
-        {
-          Sprintf(name,"%s",ns0);
+        for (Standard_Integer i1 = 1; i1 <= dst.NbSolution(); i1++) {
+            gp_Pnt P1, P2;
+            P1 = (dst.PointOnShape1(i1));
+            P2 = (dst.PointOnShape2(i1));
+            if (dst.Value() <= 1.e-9) {
+                TopoDS_Vertex V = BRepLib_MakeVertex(P1);
+                char namev[100];
+                if (i1 == 1)
+                    Sprintf(namev, "%s", ns0);
+                else
+                    Sprintf(namev, "%s%d", ns0, i1);
+                char* tempv = namev;
+                DBRep::Set(tempv, V);
+                di << namev << " ";
+            } else {
+                char name[100];
+                TopoDS_Edge E = BRepLib_MakeEdge(P1, P2);
+                if (i1 == 1) {
+                    Sprintf(name, "%s", ns0);
+                } else {
+                    Sprintf(name, "%s%d", ns0, i1);
+                }
+
+                char* temp = name;
+                DBRep::Set(temp, E);
+                di << name << " ";
+            }
         }
-        else
-        {
-          Sprintf(name,"%s%d",ns0,i1);
-        }
-        
-        char* temp = name;
-        DBRep::Set(temp,E);
-        di << name << " " ;
-      }
+
+        di << "\nOutput is complete.\n";
+
     }
 
-    di << "\nOutput is complete.\n";
-
-  }
-  
-  else di << "problem: no distance is found\n";
-  return 0;
+    else
+        di << "problem: no distance is found\n";
+    return 0;
 }
 
 //==============================================================================
-//function : ShapeProximity
-//purpose  :
+// function : ShapeProximity
+// purpose  :
 //==============================================================================
-static int ShapeProximity (Draw_Interpretor& theDI, Standard_Integer theNbArgs, const char** theArgs)
-{
-  if (theNbArgs < 3 || theNbArgs > 6)
-  {
-    Message::SendFail() << "Usage: " << theArgs[0] << " Shape1 Shape2 [-tol <value>] [-profile]";
-    return 1;
-  }
-
-  TopoDS_Shape aShape1 = DBRep::Get (theArgs[1]);
-  TopoDS_Shape aShape2 = DBRep::Get (theArgs[2]);
-
-  if (aShape1.IsNull() || aShape2.IsNull())
-  {
-    Message::SendFail() << "Error: Failed to find specified shapes";
-    return 1;
-  }
-
-  BRepExtrema_ShapeProximity aTool;
-
-  Standard_Boolean aProfile = Standard_False;
-
-  for (Standard_Integer anArgIdx = 3; anArgIdx < theNbArgs; ++anArgIdx)
-  {
-    TCollection_AsciiString aFlag (theArgs[anArgIdx]);
-    aFlag.LowerCase();
-
-    if (aFlag == "-tol")
-    {
-      if (++anArgIdx >= theNbArgs)
-      {
-        Message::SendFail() << "Error: wrong syntax at argument '" << aFlag;
+static int ShapeProximity(Draw_Interpretor& theDI, Standard_Integer theNbArgs, const char** theArgs) {
+    if (theNbArgs < 3 || theNbArgs > 6) {
+        Message::SendFail() << "Usage: " << theArgs[0] << " Shape1 Shape2 [-tol <value>] [-profile]";
         return 1;
-      }
-
-      const Standard_Real aTolerance = Draw::Atof (theArgs[anArgIdx]);
-      if (aTolerance < 0.0)
-      {
-        Message::SendFail() << "Error: Tolerance value should be non-negative";
-        return 1;
-      }
-      else
-      {
-        aTool.SetTolerance (aTolerance);
-      }
     }
 
-    if (aFlag == "-profile")
-    {
-      aProfile = Standard_True;
+    TopoDS_Shape aShape1 = DBRep::Get(theArgs[1]);
+    TopoDS_Shape aShape2 = DBRep::Get(theArgs[2]);
+
+    if (aShape1.IsNull() || aShape2.IsNull()) {
+        Message::SendFail() << "Error: Failed to find specified shapes";
+        return 1;
     }
-  }
 
-  Standard_Real aInitTime = 0.0;
-  Standard_Real aWorkTime = 0.0;
+    BRepExtrema_ShapeProximity aTool;
 
-  OSD_Timer aTimer;
+    Standard_Boolean aProfile = Standard_False;
 
-  if (aProfile)
-  {
-    aTimer.Start();
-  }
+    for (Standard_Integer anArgIdx = 3; anArgIdx < theNbArgs; ++anArgIdx) {
+        TCollection_AsciiString aFlag(theArgs[anArgIdx]);
+        aFlag.LowerCase();
 
-  aTool.LoadShape1 (aShape1);
-  aTool.LoadShape2 (aShape2);
+        if (aFlag == "-tol") {
+            if (++anArgIdx >= theNbArgs) {
+                Message::SendFail() << "Error: wrong syntax at argument '" << aFlag;
+                return 1;
+            }
 
-  if (aProfile)
-  {
-    aInitTime = aTimer.ElapsedTime();
-    aTimer.Reset();
-    aTimer.Start();
-  }
+            const Standard_Real aTolerance = Draw::Atof(theArgs[anArgIdx]);
+            if (aTolerance < 0.0) {
+                Message::SendFail() << "Error: Tolerance value should be non-negative";
+                return 1;
+            } else {
+                aTool.SetTolerance(aTolerance);
+            }
+        }
 
-  // Perform shape proximity test
-  aTool.Perform();
+        if (aFlag == "-profile") {
+            aProfile = Standard_True;
+        }
+    }
 
-  if (aProfile)
-  {
-    aWorkTime = aTimer.ElapsedTime();
-    aTimer.Stop();
-  }
+    Standard_Real aInitTime = 0.0;
+    Standard_Real aWorkTime = 0.0;
 
-  if (!aTool.IsDone())
-  {
-    Message::SendFail() << "Error: Failed to perform proximity test";
-    return 1;
-  }
+    OSD_Timer aTimer;
 
-  if (aProfile)
-  {
-    theDI << "Number of primitives in shape 1: " << aTool.ElementSet1()->Size() << "\n";
-    theDI << "Number of primitives in shape 2: " << aTool.ElementSet2()->Size() << "\n";
-    theDI << "Building data structures: " << aInitTime << "\n";
-    theDI << "Executing proximity test: " << aWorkTime << "\n";
-  }
+    if (aProfile) {
+        aTimer.Start();
+    }
 
-  TopoDS_Builder aCompBuilder;
+    aTool.LoadShape1(aShape1);
+    aTool.LoadShape2(aShape2);
 
-  TopoDS_Compound aFaceCompound1;
-  aCompBuilder.MakeCompound (aFaceCompound1);
+    if (aProfile) {
+        aInitTime = aTimer.ElapsedTime();
+        aTimer.Reset();
+        aTimer.Start();
+    }
 
-  for (BRepExtrema_MapOfIntegerPackedMapOfInteger::Iterator anIt1 (aTool.OverlapSubShapes1()); anIt1.More(); anIt1.Next())
-  {
-    TCollection_AsciiString aStr = TCollection_AsciiString (theArgs[1]) + "_" + (anIt1.Key() + 1);
+    // Perform shape proximity test
+    aTool.Perform();
 
-    const TopoDS_Face& aFace = aTool.GetSubShape1 (anIt1.Key());
-    aCompBuilder.Add (aFaceCompound1, aFace);
-    DBRep::Set (aStr.ToCString(), aFace);
+    if (aProfile) {
+        aWorkTime = aTimer.ElapsedTime();
+        aTimer.Stop();
+    }
 
-    theDI << aStr << " \n";
-  }
+    if (!aTool.IsDone()) {
+        Message::SendFail() << "Error: Failed to perform proximity test";
+        return 1;
+    }
 
-  TopoDS_Compound aFaceCompound2;
-  aCompBuilder.MakeCompound (aFaceCompound2);
+    if (aProfile) {
+        theDI << "Number of primitives in shape 1: " << aTool.ElementSet1()->Size() << "\n";
+        theDI << "Number of primitives in shape 2: " << aTool.ElementSet2()->Size() << "\n";
+        theDI << "Building data structures: " << aInitTime << "\n";
+        theDI << "Executing proximity test: " << aWorkTime << "\n";
+    }
 
-  for (BRepExtrema_MapOfIntegerPackedMapOfInteger::Iterator anIt2 (aTool.OverlapSubShapes2()); anIt2.More(); anIt2.Next())
-  {
-    TCollection_AsciiString aStr = TCollection_AsciiString (theArgs[2]) + "_" + (anIt2.Key() + 1);
+    TopoDS_Builder aCompBuilder;
 
-    const TopoDS_Face& aFace = aTool.GetSubShape2 (anIt2.Key());
-    aCompBuilder.Add (aFaceCompound2, aFace);
-    DBRep::Set (aStr.ToCString(), aFace);
+    TopoDS_Compound aFaceCompound1;
+    aCompBuilder.MakeCompound(aFaceCompound1);
 
-    theDI << aStr << " \n";
-  }
+    for (BRepExtrema_MapOfIntegerPackedMapOfInteger::Iterator anIt1(aTool.OverlapSubShapes1()); anIt1.More();
+         anIt1.Next()) {
+        TCollection_AsciiString aStr = TCollection_AsciiString(theArgs[1]) + "_" + (anIt1.Key() + 1);
 
-  DBRep::Set ((TCollection_AsciiString (theArgs[1]) + "_" + "overlapped").ToCString(), aFaceCompound1);
-  DBRep::Set ((TCollection_AsciiString (theArgs[2]) + "_" + "overlapped").ToCString(), aFaceCompound2);
+        const TopoDS_Face& aFace = aTool.GetSubShape1(anIt1.Key());
+        aCompBuilder.Add(aFaceCompound1, aFace);
+        DBRep::Set(aStr.ToCString(), aFace);
 
-  return 0;
+        theDI << aStr << " \n";
+    }
+
+    TopoDS_Compound aFaceCompound2;
+    aCompBuilder.MakeCompound(aFaceCompound2);
+
+    for (BRepExtrema_MapOfIntegerPackedMapOfInteger::Iterator anIt2(aTool.OverlapSubShapes2()); anIt2.More();
+         anIt2.Next()) {
+        TCollection_AsciiString aStr = TCollection_AsciiString(theArgs[2]) + "_" + (anIt2.Key() + 1);
+
+        const TopoDS_Face& aFace = aTool.GetSubShape2(anIt2.Key());
+        aCompBuilder.Add(aFaceCompound2, aFace);
+        DBRep::Set(aStr.ToCString(), aFace);
+
+        theDI << aStr << " \n";
+    }
+
+    DBRep::Set((TCollection_AsciiString(theArgs[1]) + "_" + "overlapped").ToCString(), aFaceCompound1);
+    DBRep::Set((TCollection_AsciiString(theArgs[2]) + "_" + "overlapped").ToCString(), aFaceCompound2);
+
+    return 0;
 }
 
 //==============================================================================
-//function : ShapeSelfIntersection
-//purpose  :
+// function : ShapeSelfIntersection
+// purpose  :
 //==============================================================================
-static int ShapeSelfIntersection (Draw_Interpretor& theDI, Standard_Integer theNbArgs, const char** theArgs)
-{
-  if (theNbArgs < 2 || theNbArgs > 5)
-  {
-    Message::SendFail() << "Usage: " << theArgs[0] << " Shape [-tol <value>] [-profile]";
-    return 1;
-  }
-
-  TopoDS_Shape aShape = DBRep::Get (theArgs[1]);
-  if (aShape.IsNull())
-  {
-    Message::SendFail() << "Error: Failed to find specified shape";
-    return 1;
-  }
-
-  Standard_Real    aTolerance = 0.0;
-  Standard_Boolean aToProfile = Standard_False;
-
-  for (Standard_Integer anArgIdx = 2; anArgIdx < theNbArgs; ++anArgIdx)
-  {
-    TCollection_AsciiString aFlag (theArgs[anArgIdx]);
-    aFlag.LowerCase();
-
-    if (aFlag == "-tol")
-    {
-      if (++anArgIdx >= theNbArgs)
-      {
-        Message::SendFail() << "Error: wrong syntax at argument '" << aFlag;
+static int ShapeSelfIntersection(Draw_Interpretor& theDI, Standard_Integer theNbArgs, const char** theArgs) {
+    if (theNbArgs < 2 || theNbArgs > 5) {
+        Message::SendFail() << "Usage: " << theArgs[0] << " Shape [-tol <value>] [-profile]";
         return 1;
-      }
-
-      const Standard_Real aValue = Draw::Atof (theArgs[anArgIdx]);
-      if (aValue < 0.0)
-      {
-        Message::SendFail() << "Error: Tolerance value should be non-negative";
-        return 1;
-      }
-      else
-      {
-        aTolerance = aValue;
-      }
     }
 
-    if (aFlag == "-profile")
-    {
-      aToProfile = Standard_True;
+    TopoDS_Shape aShape = DBRep::Get(theArgs[1]);
+    if (aShape.IsNull()) {
+        Message::SendFail() << "Error: Failed to find specified shape";
+        return 1;
     }
-  }
 
-  OSD_Timer aTimer;
+    Standard_Real aTolerance = 0.0;
+    Standard_Boolean aToProfile = Standard_False;
 
-  Standard_Real aInitTime = 0.0;
-  Standard_Real aWorkTime = 0.0;
+    for (Standard_Integer anArgIdx = 2; anArgIdx < theNbArgs; ++anArgIdx) {
+        TCollection_AsciiString aFlag(theArgs[anArgIdx]);
+        aFlag.LowerCase();
 
-  if (aToProfile)
-  {
-    aTimer.Start();
-  }
+        if (aFlag == "-tol") {
+            if (++anArgIdx >= theNbArgs) {
+                Message::SendFail() << "Error: wrong syntax at argument '" << aFlag;
+                return 1;
+            }
 
-  BRepExtrema_SelfIntersection aTool (aShape, aTolerance);
+            const Standard_Real aValue = Draw::Atof(theArgs[anArgIdx]);
+            if (aValue < 0.0) {
+                Message::SendFail() << "Error: Tolerance value should be non-negative";
+                return 1;
+            } else {
+                aTolerance = aValue;
+            }
+        }
 
-  if (aToProfile)
-  {
-    aInitTime = aTimer.ElapsedTime();
+        if (aFlag == "-profile") {
+            aToProfile = Standard_True;
+        }
+    }
 
-    aTimer.Reset();
-    aTimer.Start();
-  }
+    OSD_Timer aTimer;
 
-  // Perform shape self-intersection test
-  aTool.Perform();
+    Standard_Real aInitTime = 0.0;
+    Standard_Real aWorkTime = 0.0;
 
-  if (!aTool.IsDone())
-  {
-    Message::SendFail() << "Error: Failed to perform proximity test";
-    return 1;
-  }
+    if (aToProfile) {
+        aTimer.Start();
+    }
 
-  if (aToProfile)
-  {
-    aWorkTime = aTimer.ElapsedTime();
-    aTimer.Stop();
+    BRepExtrema_SelfIntersection aTool(aShape, aTolerance);
 
-    theDI << "Building data structure (BVH):    " << aInitTime << "\n";
-    theDI << "Executing self-intersection test: " << aWorkTime << "\n";
-  }
+    if (aToProfile) {
+        aInitTime = aTimer.ElapsedTime();
 
-  // Extract output faces
-  TopoDS_Builder  aCompBuilder;
-  TopoDS_Compound aFaceCompound;
+        aTimer.Reset();
+        aTimer.Start();
+    }
 
-  aCompBuilder.MakeCompound (aFaceCompound);
+    // Perform shape self-intersection test
+    aTool.Perform();
 
-  for (BRepExtrema_MapOfIntegerPackedMapOfInteger::Iterator anIt (aTool.OverlapElements()); anIt.More(); anIt.Next())
-  {
-    TCollection_AsciiString aStr = TCollection_AsciiString (theArgs[1]) + "_" + (anIt.Key() + 1);
+    if (!aTool.IsDone()) {
+        Message::SendFail() << "Error: Failed to perform proximity test";
+        return 1;
+    }
 
-    const TopoDS_Face& aFace = aTool.GetSubShape (anIt.Key());
-    aCompBuilder.Add (aFaceCompound, aFace);
-    DBRep::Set (aStr.ToCString(), aFace);
+    if (aToProfile) {
+        aWorkTime = aTimer.ElapsedTime();
+        aTimer.Stop();
 
-    theDI << aStr << " \n";
-  }
+        theDI << "Building data structure (BVH):    " << aInitTime << "\n";
+        theDI << "Executing self-intersection test: " << aWorkTime << "\n";
+    }
 
-  theDI << "Compound of overlapped sub-faces: " << theArgs[1] << "_overlapped\n";
-  DBRep::Set ((TCollection_AsciiString (theArgs[1]) + "_" + "overlapped").ToCString(), aFaceCompound);
+    // Extract output faces
+    TopoDS_Builder aCompBuilder;
+    TopoDS_Compound aFaceCompound;
 
-  return 0;
+    aCompBuilder.MakeCompound(aFaceCompound);
+
+    for (BRepExtrema_MapOfIntegerPackedMapOfInteger::Iterator anIt(aTool.OverlapElements()); anIt.More(); anIt.Next()) {
+        TCollection_AsciiString aStr = TCollection_AsciiString(theArgs[1]) + "_" + (anIt.Key() + 1);
+
+        const TopoDS_Face& aFace = aTool.GetSubShape(anIt.Key());
+        aCompBuilder.Add(aFaceCompound, aFace);
+        DBRep::Set(aStr.ToCString(), aFace);
+
+        theDI << aStr << " \n";
+    }
+
+    theDI << "Compound of overlapped sub-faces: " << theArgs[1] << "_overlapped\n";
+    DBRep::Set((TCollection_AsciiString(theArgs[1]) + "_" + "overlapped").ToCString(), aFaceCompound);
+
+    return 0;
 }
 
 //=======================================================================
-//function : ExtremaCommands
-//purpose  : 
+// function : ExtremaCommands
+// purpose  :
 //=======================================================================
 
-void BRepTest::ExtremaCommands (Draw_Interpretor& theCommands)
-{
-  static const char*      aGroup = "TOPOLOGY Extrema commands";
-  static Standard_Boolean isDone = Standard_False;
-  if (isDone)
-  {
-    return;
-  }
-  isDone = Standard_True;
+void BRepTest::ExtremaCommands(Draw_Interpretor& theCommands) {
+    static const char* aGroup = "TOPOLOGY Extrema commands";
+    static Standard_Boolean isDone = Standard_False;
+    if (isDone) {
+        return;
+    }
+    isDone = Standard_True;
 
-  theCommands.Add ("dist",
-                   "dist Shape1 Shape2",
-                   __FILE__,
-                   distance,
-                   aGroup);
+    theCommands.Add("dist", "dist Shape1 Shape2", __FILE__, distance, aGroup);
 
-  theCommands.Add ("distmini",
-                   "distmini name Shape1 Shape2 [deflection] [-parallel]",
-                   "\n\t\t: Searches minimal distance between two shapes."
-                   "\n\t\t: The option is:"
-                   "\n\t\t:   -parallel : calculate distance in multithreaded mode"
-                   __FILE__,
-                   distmini,
-                   aGroup);
+    theCommands.Add("distmini", "distmini name Shape1 Shape2 [deflection] [-parallel]",
+                    "\n\t\t: Searches minimal distance between two shapes."
+                    "\n\t\t: The option is:"
+                    "\n\t\t:   -parallel : calculate distance in multithreaded mode" __FILE__,
+                    distmini, aGroup);
 
-  theCommands.Add ("proximity",
-                   "proximity Shape1 Shape2 [-tol <value>] [-profile]"
-                   "\n\t\t: Searches for pairs of overlapping faces of the given shapes."
-                   "\n\t\t: The options are:"
-                   "\n\t\t:   -tol     : non-negative tolerance value used for overlapping"
-                   "\n\t\t:              test (for zero tolerance, the strict intersection"
-                   "\n\t\t:              test will be performed)"
-                   "\n\t\t:   -profile : outputs execution time for main algorithm stages",
-                   __FILE__,
-                   ShapeProximity,
-                   aGroup);
+    theCommands.Add("proximity",
+                    "proximity Shape1 Shape2 [-tol <value>] [-profile]"
+                    "\n\t\t: Searches for pairs of overlapping faces of the given shapes."
+                    "\n\t\t: The options are:"
+                    "\n\t\t:   -tol     : non-negative tolerance value used for overlapping"
+                    "\n\t\t:              test (for zero tolerance, the strict intersection"
+                    "\n\t\t:              test will be performed)"
+                    "\n\t\t:   -profile : outputs execution time for main algorithm stages",
+                    __FILE__, ShapeProximity, aGroup);
 
-  theCommands.Add ("selfintersect",
-                   "selfintersect Shape [-tol <value>] [-profile]"
-                   "\n\t\t: Searches for intersected/overlapped faces in the given shape."
-                   "\n\t\t: The algorithm uses shape tessellation (should be computed in"
-                   "\n\t\t: advance), and provides approximate results. The options are:"
-                   "\n\t\t:   -tol     : non-negative tolerance value used for overlapping"
-                   "\n\t\t:              test (for zero tolerance, the strict intersection"
-                   "\n\t\t:              test will be performed)"
-                   "\n\t\t:   -profile : outputs execution time for main algorithm stages",
-                   __FILE__,
-                   ShapeSelfIntersection,
-                   aGroup);
+    theCommands.Add("selfintersect",
+                    "selfintersect Shape [-tol <value>] [-profile]"
+                    "\n\t\t: Searches for intersected/overlapped faces in the given shape."
+                    "\n\t\t: The algorithm uses shape tessellation (should be computed in"
+                    "\n\t\t: advance), and provides approximate results. The options are:"
+                    "\n\t\t:   -tol     : non-negative tolerance value used for overlapping"
+                    "\n\t\t:              test (for zero tolerance, the strict intersection"
+                    "\n\t\t:              test will be performed)"
+                    "\n\t\t:   -profile : outputs execution time for main algorithm stages",
+                    __FILE__, ShapeSelfIntersection, aGroup);
 }

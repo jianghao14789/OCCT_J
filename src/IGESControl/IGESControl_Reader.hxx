@@ -29,8 +29,6 @@
 class XSControl_WorkSession;
 class IGESData_IGESModel;
 
-
-
 //! Reads IGES files, checks them and translates their contents into Open CASCADE models.
 //! The IGES data can be that of a whole model or that of a specific list of entities in the model.
 //! As in XSControl_Reader, you specify the list using a selection.
@@ -66,60 +64,40 @@ class IGESData_IGESModel;
 //! reader.TransientProcess();
 //! TopoDS_Shape shape =
 //! TransferBRep::ShapeResult(reader.TransientProcess(),ent);
-class IGESControl_Reader  : public XSControl_Reader
-{
+class IGESControl_Reader : public XSControl_Reader {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Creates a Reader from scratch
+    Standard_EXPORT IGESControl_Reader();
 
-  
-  //! Creates a Reader from scratch
-  Standard_EXPORT IGESControl_Reader();
-  
-  //! Creates a Reader from an already existing Session
-  Standard_EXPORT IGESControl_Reader(const Handle(XSControl_WorkSession)& WS, const Standard_Boolean scratch = Standard_True);
-  
-  //! Set the transion of ALL Roots (if theReadOnlyVisible is False)
-  //! or of Visible Roots (if theReadOnlyVisible is True)
-    void SetReadVisible (const Standard_Boolean ReadRoot);
-  
+    //! Creates a Reader from an already existing Session
+    Standard_EXPORT IGESControl_Reader(const Handle(XSControl_WorkSession) & WS,
+                                       const Standard_Boolean scratch = Standard_True);
+
+    //! Set the transion of ALL Roots (if theReadOnlyVisible is False)
+    //! or of Visible Roots (if theReadOnlyVisible is True)
+    void SetReadVisible(const Standard_Boolean ReadRoot);
+
     Standard_Boolean GetReadVisible() const;
-  
-  //! Returns the model as a IGESModel.
-  //! It can then be consulted (header, product)
-  Standard_EXPORT Handle(IGESData_IGESModel) IGESModel() const;
-  
-  //! Determines the list of root entities from Model which are candidate for
-  //! a transfer to a Shape (type of entities is PRODUCT)
-  //! <theReadOnlyVisible> is taken into account to define roots
-  Standard_EXPORT virtual Standard_Integer NbRootsForTransfer() Standard_OVERRIDE;
-  
-  //! Prints Statistics and check list for Transfer
-  Standard_EXPORT void PrintTransferInfo (const IFSelect_PrintFail failwarn, const IFSelect_PrintCount mode) const;
 
+    //! Returns the model as a IGESModel.
+    //! It can then be consulted (header, product)
+    Standard_EXPORT Handle(IGESData_IGESModel) IGESModel() const;
 
+    //! Determines the list of root entities from Model which are candidate for
+    //! a transfer to a Shape (type of entities is PRODUCT)
+    //! <theReadOnlyVisible> is taken into account to define roots
+    Standard_EXPORT virtual Standard_Integer NbRootsForTransfer() Standard_OVERRIDE;
 
+    //! Prints Statistics and check list for Transfer
+    Standard_EXPORT void PrintTransferInfo(const IFSelect_PrintFail failwarn, const IFSelect_PrintCount mode) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Boolean theReadOnlyVisible;
-
-
+    Standard_Boolean theReadOnlyVisible;
 };
 
-
 #include <IGESControl_Reader.lxx>
-
-
-
-
 
 #endif // _IGESControl_Reader_HeaderFile

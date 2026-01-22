@@ -22,5 +22,4 @@
 typedef NCollection_List<gp_Pnt> QANCollection_ListOfPnt;
 typedef NCollection_List<gp_Pnt>::Iterator QANCollection_ListIteratorOfListOfPnt;
 
-
 #endif

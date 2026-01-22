@@ -35,12 +35,9 @@ class TopLoc_Datum3D;
 //! series of elementary reference coordinates, i.e.
 //! objects of type TopLoc_Datum3D, and the powers to
 //! which these objects are raised.
-class TopLoc_Location
-{
+class TopLoc_Location {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs an empty local coordinate system object.
     //! Note: A Location constructed from a default datum is said to be "empty".
@@ -54,7 +51,7 @@ public:
     //! Exceptions
     //! Standard_ConstructionError if the transformation
     //! T does not represent a 3D coordinate system.
-    Standard_EXPORT TopLoc_Location(const Handle(TopLoc_Datum3D)& D);
+    Standard_EXPORT TopLoc_Location(const Handle(TopLoc_Datum3D) & D);
 
     //! Returns true if this location is equal to the Identity transformation.
     Standard_Boolean IsIdentity() const;
@@ -67,7 +64,7 @@ public:
     //! the other data comprising this location.
     //! Exceptions
     //! Standard_NoSuchObject if this location is empty.
-    const Handle(TopLoc_Datum3D)& FirstDatum() const;
+    const Handle(TopLoc_Datum3D) & FirstDatum() const;
 
     //! Returns   the  power  elevation  of    the   first
     //! elementary datum.
@@ -96,15 +93,13 @@ public:
     //! Returns <me> * <Other>, the  elementary datums are
     //! concatenated.
     Standard_NODISCARD Standard_EXPORT TopLoc_Location Multiplied(const TopLoc_Location& Other) const;
-    Standard_NODISCARD TopLoc_Location operator* (const TopLoc_Location& Other) const
-    {
+    Standard_NODISCARD TopLoc_Location operator*(const TopLoc_Location& Other) const {
         return Multiplied(Other);
     }
 
     //! Returns  <me> / <Other>.
     Standard_NODISCARD Standard_EXPORT TopLoc_Location Divided(const TopLoc_Location& Other) const;
-    Standard_NODISCARD TopLoc_Location operator/ (const TopLoc_Location& Other) const
-    {
+    Standard_NODISCARD TopLoc_Location operator/(const TopLoc_Location& Other) const {
         return Divided(Other);
     }
 
@@ -127,8 +122,7 @@ public:
     //! series of TopLoc_Datum3D and respective powers.
     //! This method is an alias for operator ==.
     Standard_EXPORT Standard_Boolean IsEqual(const TopLoc_Location& Other) const;
-    Standard_Boolean operator == (const TopLoc_Location& Other) const
-    {
+    Standard_Boolean operator==(const TopLoc_Location& Other) const {
         return IsEqual(Other);
     }
 
@@ -137,8 +131,7 @@ public:
     //! contain the same series of TopLoc_Datum3D and respective powers.
     //! This method is an alias for operator !=.
     Standard_EXPORT Standard_Boolean IsDifferent(const TopLoc_Location& Other) const;
-    Standard_Boolean operator != (const TopLoc_Location& Other) const
-    {
+    Standard_Boolean operator!=(const TopLoc_Location& Other) const {
         return IsDifferent(Other);
     }
 
@@ -149,49 +142,31 @@ public:
     Standard_EXPORT void ShallowDump(Standard_OStream& S) const;
 
     //! Clear myItems
-    void Clear()
-    {
+    void Clear() {
         myItems.Clear();
     }
 
-
-    static Standard_Real ScalePrec()
-    {
-        return  1.e-14;
+    static Standard_Real ScalePrec() {
+        return 1.e-14;
     }
 
 protected:
-
-
-
-
-
 private:
-
-
-
     TopLoc_SListOfItemLocation myItems;
-
-
 };
 
-
 #include <TopLoc_Location.lxx>
-
 
 //! Computes a hash code for the given location, in the range [1, theUpperBound]
 //! @param theLocation the location which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-inline Standard_Integer HashCode(const TopLoc_Location& theLocation, const Standard_Integer theUpperBound)
-{
+inline Standard_Integer HashCode(const TopLoc_Location& theLocation, const Standard_Integer theUpperBound) {
     return theLocation.HashCode(theUpperBound);
 }
 
 inline void ShallowDump(const TopLoc_Location& me, Standard_OStream& S) {
     me.ShallowDump(S);
 }
-
-
 
 #endif // _TopLoc_Location_HeaderFile

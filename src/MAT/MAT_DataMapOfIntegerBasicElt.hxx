@@ -22,8 +22,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Handle(MAT_BasicElt),TColStd_MapIntegerHasher> MAT_DataMapOfIntegerBasicElt;
-typedef NCollection_DataMap<Standard_Integer,Handle(MAT_BasicElt),TColStd_MapIntegerHasher>::Iterator MAT_DataMapIteratorOfDataMapOfIntegerBasicElt;
-
+typedef NCollection_DataMap<Standard_Integer, Handle(MAT_BasicElt), TColStd_MapIntegerHasher>
+    MAT_DataMapOfIntegerBasicElt;
+typedef NCollection_DataMap<Standard_Integer, Handle(MAT_BasicElt), TColStd_MapIntegerHasher>::Iterator
+    MAT_DataMapIteratorOfDataMapOfIntegerBasicElt;
 
 #endif

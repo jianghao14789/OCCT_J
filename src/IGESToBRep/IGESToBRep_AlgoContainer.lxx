@@ -16,24 +16,19 @@
 #include <IGESToBRep_AlgoContainer.hxx>
 
 //=======================================================================
-//function : SetToolContainer
-//purpose  : 
+// function : SetToolContainer
+// purpose  :
 //=======================================================================
 
-inline  void IGESToBRep_AlgoContainer::SetToolContainer(const Handle(IGESToBRep_ToolContainer)& TC) 
-{
-  myTC = TC;
+inline void IGESToBRep_AlgoContainer::SetToolContainer(const Handle(IGESToBRep_ToolContainer) & TC) {
+    myTC = TC;
 }
 
- 
 //=======================================================================
-//function : ToolContainer
-//purpose  : 
+// function : ToolContainer
+// purpose  :
 //=======================================================================
 
-inline  Handle(IGESToBRep_ToolContainer) IGESToBRep_AlgoContainer::ToolContainer() const
-{
-  return myTC;
+inline Handle(IGESToBRep_ToolContainer) IGESToBRep_AlgoContainer::ToolContainer() const {
+    return myTC;
 }
-
- 

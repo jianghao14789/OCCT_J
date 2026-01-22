@@ -27,48 +27,27 @@ class StepFEA_CurveElementInterval;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CurveElementInterval
-class RWStepFEA_RWCurveElementInterval 
-{
+class RWStepFEA_RWCurveElementInterval {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWCurveElementInterval();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWCurveElementInterval();
-  
-  //! Reads CurveElementInterval
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_CurveElementInterval)& ent) const;
-  
-  //! Writes CurveElementInterval
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_CurveElementInterval)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_CurveElementInterval)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CurveElementInterval
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_CurveElementInterval) & ent) const;
 
+    //! Writes CurveElementInterval
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_CurveElementInterval) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_CurveElementInterval) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWCurveElementInterval_HeaderFile

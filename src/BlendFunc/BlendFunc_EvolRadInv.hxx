@@ -26,12 +26,12 @@ class math_Matrix;
 
 class BlendFunc_EvolRadInv : public Blend_FuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_EvolRadInv(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Handle(Adaptor3d_Curve)& C, const Handle(Law_Function)& Law);
+    Standard_EXPORT BlendFunc_EvolRadInv(const Handle(Adaptor3d_Surface) & S1, const Handle(Adaptor3d_Surface) & S2,
+                                         const Handle(Adaptor3d_Curve) & C, const Handle(Law_Function) & Law);
 
-    Standard_EXPORT void Set(const Standard_Boolean OnFirst, const Handle(Adaptor2d_Curve2d)& COnSurf);
+    Standard_EXPORT void Set(const Standard_Boolean OnFirst, const Handle(Adaptor2d_Curve2d) & COnSurf);
 
     Standard_EXPORT void GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const;
 
@@ -63,7 +63,6 @@ public:
     Standard_EXPORT void Set(const Standard_Integer Choix);
 
 protected:
-
 private:
     Handle(Adaptor3d_Surface) surf1;
     Handle(Adaptor3d_Surface) surf2;

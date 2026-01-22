@@ -23,5 +23,4 @@
 
 typedef NCollection_IndexedMap<Handle(Expr_NamedUnknown), TColStd_MapTransientHasher> Expr_MapOfNamedUnknown;
 
-
 #endif

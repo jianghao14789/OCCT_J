@@ -25,71 +25,60 @@
 #include <StepData_StepWriter.hxx>
 
 //=======================================================================
-//function : RWStepBasic_RWContract
-//purpose  : 
+// function : RWStepBasic_RWContract
+// purpose  :
 //=======================================================================
-RWStepBasic_RWContract::RWStepBasic_RWContract ()
-{
+RWStepBasic_RWContract::RWStepBasic_RWContract() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepBasic_RWContract::ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                      Handle(Interface_Check) & ach, const Handle(StepBasic_Contract) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 3, ach, "contract")) return;
+
+    // Own fields of Contract
+
+    Handle(TCollection_HAsciiString) aName;
+    data->ReadString(num, 1, "name", ach, aName);
+
+    Handle(TCollection_HAsciiString) aPurpose;
+    data->ReadString(num, 2, "purpose", ach, aPurpose);
+
+    Handle(StepBasic_ContractType) aKind;
+    data->ReadEntity(num, 3, "kind", ach, STANDARD_TYPE(StepBasic_ContractType), aKind);
+
+    // Initialize entity
+    ent->Init(aName, aPurpose, aKind);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepBasic_RWContract::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                       const Standard_Integer num,
-                                       Handle(Interface_Check)& ach,
-                                       const Handle(StepBasic_Contract) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,3,ach,"contract") ) return;
+void RWStepBasic_RWContract::WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_Contract) & ent) const {
 
-  // Own fields of Contract
+    // Own fields of Contract
 
-  Handle(TCollection_HAsciiString) aName;
-  data->ReadString (num, 1, "name", ach, aName);
+    SW.Send(ent->Name());
 
-  Handle(TCollection_HAsciiString) aPurpose;
-  data->ReadString (num, 2, "purpose", ach, aPurpose);
+    SW.Send(ent->Purpose());
 
-  Handle(StepBasic_ContractType) aKind;
-  data->ReadEntity (num, 3, "kind", ach, STANDARD_TYPE(StepBasic_ContractType), aKind);
-
-  // Initialize entity
-  ent->Init(aName,
-            aPurpose,
-            aKind);
+    SW.Send(ent->Kind());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepBasic_RWContract::WriteStep (StepData_StepWriter& SW,
-                                        const Handle(StepBasic_Contract) &ent) const
-{
+void RWStepBasic_RWContract::Share(const Handle(StepBasic_Contract) & ent, Interface_EntityIterator& iter) const {
 
-  // Own fields of Contract
+    // Own fields of Contract
 
-  SW.Send (ent->Name());
-
-  SW.Send (ent->Purpose());
-
-  SW.Send (ent->Kind());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepBasic_RWContract::Share (const Handle(StepBasic_Contract) &ent,
-                                    Interface_EntityIterator& iter) const
-{
-
-  // Own fields of Contract
-
-  iter.AddItem (ent->Kind());
+    iter.AddItem(ent->Kind());
 }

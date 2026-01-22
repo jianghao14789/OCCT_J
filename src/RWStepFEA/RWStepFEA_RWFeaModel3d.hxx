@@ -27,48 +27,26 @@ class StepFEA_FeaModel3d;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaModel3d
-class RWStepFEA_RWFeaModel3d 
-{
+class RWStepFEA_RWFeaModel3d {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaModel3d();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaModel3d();
-  
-  //! Reads FeaModel3d
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaModel3d)& ent) const;
-  
-  //! Writes FeaModel3d
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaModel3d)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaModel3d)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaModel3d
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_FeaModel3d) & ent) const;
 
+    //! Writes FeaModel3d
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_FeaModel3d) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaModel3d) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaModel3d_HeaderFile

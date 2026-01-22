@@ -24,54 +24,33 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_CString.hxx>
 
-
 class StepElement_ElementAspectMember;
 DEFINE_STANDARD_HANDLE(StepElement_ElementAspectMember, StepData_SelectNamed)
 
 //! Representation of member for  STEP SELECT type ElementAspect
-class StepElement_ElementAspectMember : public StepData_SelectNamed
-{
+class StepElement_ElementAspectMember : public StepData_SelectNamed {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepElement_ElementAspectMember();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepElement_ElementAspectMember();
-  
-  //! Returns True if has name
-  Standard_EXPORT virtual Standard_Boolean HasName() const Standard_OVERRIDE;
-  
-  //! Returns set name
-  Standard_EXPORT virtual Standard_CString Name() const Standard_OVERRIDE;
-  
-  //! Set name
-  Standard_EXPORT virtual Standard_Boolean SetName (const Standard_CString name) Standard_OVERRIDE;
-  
-  //! Tells if the name of a SelectMember matches a given one;
-  Standard_EXPORT virtual Standard_Boolean Matches (const Standard_CString name) const Standard_OVERRIDE;
+    //! Returns True if has name
+    Standard_EXPORT virtual Standard_Boolean HasName() const Standard_OVERRIDE;
 
+    //! Returns set name
+    Standard_EXPORT virtual Standard_CString Name() const Standard_OVERRIDE;
 
+    //! Set name
+    Standard_EXPORT virtual Standard_Boolean SetName(const Standard_CString name) Standard_OVERRIDE;
 
+    //! Tells if the name of a SelectMember matches a given one;
+    Standard_EXPORT virtual Standard_Boolean Matches(const Standard_CString name) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(StepElement_ElementAspectMember,StepData_SelectNamed)
+    DEFINE_STANDARD_RTTIEXT(StepElement_ElementAspectMember, StepData_SelectNamed)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer mycase;
-
-
+    Standard_Integer mycase;
 };
-
-
-
-
-
-
 
 #endif // _StepElement_ElementAspectMember_HeaderFile

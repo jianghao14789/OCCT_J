@@ -45,97 +45,79 @@ class StepRepr_MeasureRepresentationItem;
 class StepBasic_ProductDefinitionContext;
 class StepRepr_RepresentationItem;
 
-class StepAP214_DocumentReferenceItem  : public StepData_SelectType
-{
+class StepAP214_DocumentReferenceItem : public StepData_SelectType {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Returns a DocumentReferenceItem SelectType
+    Standard_EXPORT StepAP214_DocumentReferenceItem();
 
-  
-  //! Returns a DocumentReferenceItem SelectType
-  Standard_EXPORT StepAP214_DocumentReferenceItem();
-  
-  //! Recognizes a DocumentReferenceItem Kind Entity that is :
-  Standard_EXPORT Standard_Integer CaseNum (const Handle(Standard_Transient)& ent) const;
-  
-  //! returns Value as a Approval (Null if another type)
-  Standard_EXPORT Handle(StepBasic_Approval) Approval() const;
-  
-  //! returns Value as a  (Null if another type)
-  Standard_EXPORT Handle(StepRepr_DescriptiveRepresentationItem) DescriptiveRepresentationItem() const;
-  
-  //! returns Value as a MaterialDesignation (Null if another type)
-  Standard_EXPORT Handle(StepRepr_MaterialDesignation) MaterialDesignation() const;
-  
-  //! returns Value as a ProductDefinition (Null if another type)
-  Standard_EXPORT Handle(StepBasic_ProductDefinition) ProductDefinition() const;
-  
-  //! returns Value as aProductDefinitionRelationship (Null if another type)
-  Standard_EXPORT Handle(StepBasic_ProductDefinitionRelationship) ProductDefinitionRelationship() const;
-  
-  //! returns Value as a PropertyDefinition (Null if another type)
-  Standard_EXPORT Handle(StepRepr_PropertyDefinition) PropertyDefinition() const;
-  
-  //! returns Value as a Representation (Null if another type)
-  Standard_EXPORT Handle(StepRepr_Representation) Representation() const;
-  
-  //! returns Value as a ShapeAspect (Null if another type)
-  Standard_EXPORT Handle(StepRepr_ShapeAspect) ShapeAspect() const;
-  
-  //! returns Value as a ShapeAspectRelationship (Null if another type)
-  Standard_EXPORT Handle(StepRepr_ShapeAspectRelationship) ShapeAspectRelationship() const;
+    //! Recognizes a DocumentReferenceItem Kind Entity that is :
+    Standard_EXPORT Standard_Integer CaseNum(const Handle(Standard_Transient) & ent) const;
 
-  //! returns Value as a AppliedExternalIdentificationAssignment (Null if another type)
-  Standard_EXPORT Handle(StepAP214_AppliedExternalIdentificationAssignment) AppliedExternalIdentificationAssignment() const;
+    //! returns Value as a Approval (Null if another type)
+    Standard_EXPORT Handle(StepBasic_Approval) Approval() const;
 
-  //! returns Value as a AssemblyComponentUsage (Null if another type)
-  Standard_EXPORT Handle(StepRepr_AssemblyComponentUsage) AssemblyComponentUsage() const;
+    //! returns Value as a  (Null if another type)
+    Standard_EXPORT Handle(StepRepr_DescriptiveRepresentationItem) DescriptiveRepresentationItem() const;
 
-  //! returns Value as a CharacterizedObject (Null if another type)
-  Standard_EXPORT Handle(StepBasic_CharacterizedObject) CharacterizedObject() const;
+    //! returns Value as a MaterialDesignation (Null if another type)
+    Standard_EXPORT Handle(StepRepr_MaterialDesignation) MaterialDesignation() const;
 
-  //! returns Value as a DimensionalSize (Null if another type)
-  Standard_EXPORT Handle(StepShape_DimensionalSize) DimensionalSize() const;
+    //! returns Value as a ProductDefinition (Null if another type)
+    Standard_EXPORT Handle(StepBasic_ProductDefinition) ProductDefinition() const;
 
-  //! returns Value as a ExternallyDefinedItem (Null if another type)
-  Standard_EXPORT Handle(StepBasic_ExternallyDefinedItem) ExternallyDefinedItem() const;
+    //! returns Value as aProductDefinitionRelationship (Null if another type)
+    Standard_EXPORT Handle(StepBasic_ProductDefinitionRelationship) ProductDefinitionRelationship() const;
 
-  //! returns Value as a Group (Null if another type)
-  Standard_EXPORT Handle(StepBasic_Group) Group() const;
+    //! returns Value as a PropertyDefinition (Null if another type)
+    Standard_EXPORT Handle(StepRepr_PropertyDefinition) PropertyDefinition() const;
 
-  //! returns Value as a GroupRelationship (Null if another type)
-  Standard_EXPORT Handle(StepBasic_GroupRelationship) GroupRelationship() const;
+    //! returns Value as a Representation (Null if another type)
+    Standard_EXPORT Handle(StepRepr_Representation) Representation() const;
 
-  //! returns Value as a MeasureRepresentationItem (Null if another type)
-  Standard_EXPORT Handle(StepRepr_MeasureRepresentationItem) MeasureRepresentationItem() const;
+    //! returns Value as a ShapeAspect (Null if another type)
+    Standard_EXPORT Handle(StepRepr_ShapeAspect) ShapeAspect() const;
 
-  //! returns Value as a ProductCategory (Null if another type)
-  Standard_EXPORT Handle(StepBasic_ProductCategory) ProductCategory() const;
+    //! returns Value as a ShapeAspectRelationship (Null if another type)
+    Standard_EXPORT Handle(StepRepr_ShapeAspectRelationship) ShapeAspectRelationship() const;
 
-  //! returns Value as a ProductDefinitionContext (Null if another type)
-  Standard_EXPORT Handle(StepBasic_ProductDefinitionContext) ProductDefinitionContext() const;
+    //! returns Value as a AppliedExternalIdentificationAssignment (Null if another type)
+    Standard_EXPORT Handle(StepAP214_AppliedExternalIdentificationAssignment)
+        AppliedExternalIdentificationAssignment() const;
 
-  //! returns Value as a RepresentationItem (Null if another type)
-  Standard_EXPORT Handle(StepRepr_RepresentationItem) RepresentationItem() const;
+    //! returns Value as a AssemblyComponentUsage (Null if another type)
+    Standard_EXPORT Handle(StepRepr_AssemblyComponentUsage) AssemblyComponentUsage() const;
+
+    //! returns Value as a CharacterizedObject (Null if another type)
+    Standard_EXPORT Handle(StepBasic_CharacterizedObject) CharacterizedObject() const;
+
+    //! returns Value as a DimensionalSize (Null if another type)
+    Standard_EXPORT Handle(StepShape_DimensionalSize) DimensionalSize() const;
+
+    //! returns Value as a ExternallyDefinedItem (Null if another type)
+    Standard_EXPORT Handle(StepBasic_ExternallyDefinedItem) ExternallyDefinedItem() const;
+
+    //! returns Value as a Group (Null if another type)
+    Standard_EXPORT Handle(StepBasic_Group) Group() const;
+
+    //! returns Value as a GroupRelationship (Null if another type)
+    Standard_EXPORT Handle(StepBasic_GroupRelationship) GroupRelationship() const;
+
+    //! returns Value as a MeasureRepresentationItem (Null if another type)
+    Standard_EXPORT Handle(StepRepr_MeasureRepresentationItem) MeasureRepresentationItem() const;
+
+    //! returns Value as a ProductCategory (Null if another type)
+    Standard_EXPORT Handle(StepBasic_ProductCategory) ProductCategory() const;
+
+    //! returns Value as a ProductDefinitionContext (Null if another type)
+    Standard_EXPORT Handle(StepBasic_ProductDefinitionContext) ProductDefinitionContext() const;
+
+    //! returns Value as a RepresentationItem (Null if another type)
+    Standard_EXPORT Handle(StepRepr_RepresentationItem) RepresentationItem() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepAP214_DocumentReferenceItem_HeaderFile

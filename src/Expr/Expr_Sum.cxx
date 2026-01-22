@@ -19,7 +19,6 @@
 #define No_Standard_OutOfRange
 #endif
 
-
 #include <Expr.hxx>
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_NamedUnknown.hxx>
@@ -34,8 +33,7 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Sum, Expr_PolyExpression)
 
-Expr_Sum::Expr_Sum(const Expr_SequenceOfGeneralExpression& exps)
-{
+Expr_Sum::Expr_Sum(const Expr_SequenceOfGeneralExpression& exps) {
     Standard_Integer i;
     Standard_Integer max = exps.Length();
     for (i = 1; i <= max; i++) {
@@ -43,14 +41,12 @@ Expr_Sum::Expr_Sum(const Expr_SequenceOfGeneralExpression& exps)
     }
 }
 
-Expr_Sum::Expr_Sum(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
-{
+Expr_Sum::Expr_Sum(const Handle(Expr_GeneralExpression) & exp1, const Handle(Expr_GeneralExpression) & exp2) {
     AddOperand(exp1);
     AddOperand(exp2);
 }
 
-Handle(Expr_GeneralExpression) Expr_Sum::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Sum::Copy() const {
     Expr_SequenceOfGeneralExpression ops;
     Standard_Integer i;
     Standard_Integer max = NbOperands();
@@ -60,8 +56,7 @@ Handle(Expr_GeneralExpression) Expr_Sum::Copy() const
     return new Expr_Sum(ops);
 }
 
-Standard_Boolean Expr_Sum::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Sum::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_Sum))) {
         return Standard_False;
     }
@@ -98,8 +93,7 @@ Standard_Boolean Expr_Sum::IsIdentical(const Handle(Expr_GeneralExpression)& Oth
     return ident;
 }
 
-Standard_Boolean Expr_Sum::IsLinear() const
-{
+Standard_Boolean Expr_Sum::IsLinear() const {
     Standard_Boolean result = Standard_True;
     Standard_Integer i = 1;
     Standard_Integer max = NbOperands();
@@ -110,8 +104,7 @@ Standard_Boolean Expr_Sum::IsLinear() const
     return result;
 }
 
-Handle(Expr_GeneralExpression) Expr_Sum::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Sum::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     Expr_SequenceOfGeneralExpression opsder;
     Standard_Integer i;
     Standard_Integer max = NbOperands();
@@ -122,8 +115,8 @@ Handle(Expr_GeneralExpression) Expr_Sum::Derivative(const Handle(Expr_NamedUnkno
     return deriv->ShallowSimplified();
 }
 
-Handle(Expr_GeneralExpression) Expr_Sum::NDerivative(const Handle(Expr_NamedUnknown)& X, const Standard_Integer N) const
-{
+Handle(Expr_GeneralExpression) Expr_Sum::NDerivative(const Handle(Expr_NamedUnknown) & X,
+                                                     const Standard_Integer N) const {
     if (N <= 0) {
         throw Standard_OutOfRange();
     }
@@ -137,8 +130,7 @@ Handle(Expr_GeneralExpression) Expr_Sum::NDerivative(const Handle(Expr_NamedUnkn
     return deriv->ShallowSimplified();
 }
 
-Handle(Expr_GeneralExpression) Expr_Sum::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Sum::ShallowSimplified() const {
     Standard_Integer i;
     Standard_Integer max = NbOperands();
     Standard_Integer nbvals = 0;
@@ -162,8 +154,7 @@ Handle(Expr_GeneralExpression) Expr_Sum::ShallowSimplified() const
                     other = sumop->Operand(j);
                     newops.Append(other);
                 }
-            }
-            else {
+            } else {
                 newops.Append(op);
             }
         }
@@ -180,18 +171,16 @@ Handle(Expr_GeneralExpression) Expr_Sum::ShallowSimplified() const
                 noone = Standard_False;
                 vals = NVop->GetValue();
                 nbvals = 1;
-            }
-            else {
+            } else {
                 vals = vals + NVop->GetValue();
                 nbvals++;
             }
-        }
-        else {
+        } else {
             newops.Append(op);
         }
     }
     if (!noone) {
-        if (newops.IsEmpty()) {         // result is only numericvalue (even zero)
+        if (newops.IsEmpty()) { // result is only numericvalue (even zero)
             return new Expr_NumericValue(vals);
         }
         if (vals != 0.0) {
@@ -200,7 +189,7 @@ Handle(Expr_GeneralExpression) Expr_Sum::ShallowSimplified() const
                 return me;
             }
             Handle(Expr_NumericValue) thevals = new Expr_NumericValue(vals);
-            newops.Append(thevals);  // non-zero value added
+            newops.Append(thevals); // non-zero value added
             return new Expr_Sum(newops);
         }
         if (newops.Length() == 1) {
@@ -213,8 +202,7 @@ Handle(Expr_GeneralExpression) Expr_Sum::ShallowSimplified() const
     return me;
 }
 
-Standard_Real Expr_Sum::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Sum::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Integer max = NbOperands();
     Standard_Real res = 0.0;
     for (Standard_Integer i = 1; i <= max; i++) {
@@ -223,8 +211,7 @@ Standard_Real Expr_Sum::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TC
     return res;
 }
 
-TCollection_AsciiString Expr_Sum::String() const
-{
+TCollection_AsciiString Expr_Sum::String() const {
     Handle(Expr_GeneralExpression) op;
     Standard_Integer nbop = NbOperands();
     op = Operand(1);
@@ -233,8 +220,7 @@ TCollection_AsciiString Expr_Sum::String() const
         str = "(";
         str += op->String();
         str += ")";
-    }
-    else {
+    } else {
         str = op->String();
     }
     for (Standard_Integer i = 2; i <= nbop; i++) {
@@ -244,8 +230,7 @@ TCollection_AsciiString Expr_Sum::String() const
             str += "(";
             str += op->String();
             str += ")";
-        }
-        else {
+        } else {
             str += op->String();
         }
     }

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Bnd_Array1OfBox.hxx>
 #include <Bnd_BoundSortBox2d.hxx>
 #include <Bnd_Box2d.hxx>
@@ -25,23 +24,17 @@
 #include <TColStd_ListIteratorOfListOfInteger.hxx>
 
 //=======================================================================
-//function : Bnd_BoundSortBox2d
-//purpose  : 
+// function : Bnd_BoundSortBox2d
+// purpose  :
 //=======================================================================
-Bnd_BoundSortBox2d::Bnd_BoundSortBox2d()
-    : discrX(0), discrY(0)
-{
-}
-
+Bnd_BoundSortBox2d::Bnd_BoundSortBox2d() : discrX(0), discrY(0) {}
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox,
-    const Handle(Bnd_HArray1OfBox2d)& SetOfBox)
-{
+void Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox, const Handle(Bnd_HArray1OfBox2d) & SetOfBox) {
     myBox = CompleteBox;
     myBndComponents = SetOfBox;
     discrX = SetOfBox->Length();
@@ -72,8 +65,7 @@ void Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox,
     if (middleX < Epsilon(100.)) {
         discrX = 1;
         deltaX = Xmax - Xmin;
-    }
-    else if (middleX > deltaX) {
+    } else if (middleX > deltaX) {
         discrX = (Standard_Integer)((Xmax - Xmin) / middleX);
         deltaX = middleX;
         discrX++;
@@ -82,8 +74,7 @@ void Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox,
     if (middleY < Epsilon(100.)) {
         discrY = 1;
         deltaY = Ymax - Ymin;
-    }
-    else if (middleY > deltaY) {
+    } else if (middleY > deltaY) {
         discrY = (Standard_Integer)((Ymax - Ymin) / middleY + 0.1);
         deltaY = middleY;
         discrY++;
@@ -93,12 +84,11 @@ void Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox,
 }
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void  Bnd_BoundSortBox2d::Initialize(const Handle(Bnd_HArray1OfBox2d)& SetOfBox)
-{
+void Bnd_BoundSortBox2d::Initialize(const Handle(Bnd_HArray1OfBox2d) & SetOfBox) {
     myBndComponents = SetOfBox;
     discrX = SetOfBox->Length();
     discrY = discrX;
@@ -129,8 +119,7 @@ void  Bnd_BoundSortBox2d::Initialize(const Handle(Bnd_HArray1OfBox2d)& SetOfBox)
     if (middleX < Epsilon(100.)) {
         discrX = 1;
         deltaX = Xmax - Xmin;
-    }
-    else if (middleX > deltaX) {
+    } else if (middleX > deltaX) {
         discrX = (Standard_Integer)((Xmax - Xmin) / middleX);
         deltaX = middleX;
         discrX++;
@@ -139,8 +128,7 @@ void  Bnd_BoundSortBox2d::Initialize(const Handle(Bnd_HArray1OfBox2d)& SetOfBox)
     if (middleY < Epsilon(100.)) {
         discrY = 1;
         deltaY = Ymax - Ymin;
-    }
-    else if (middleY > deltaY) {
+    } else if (middleY > deltaY) {
         discrY = (Standard_Integer)((Ymax - Ymin) / middleY + 0.1);
         deltaY = middleY;
         discrY++;
@@ -149,19 +137,17 @@ void  Bnd_BoundSortBox2d::Initialize(const Handle(Bnd_HArray1OfBox2d)& SetOfBox)
     SortBoxes();
 }
 
-
 //=======================================================================
-//function : SortBoxes
-//purpose  : 
+// function : SortBoxes
+// purpose  :
 //=======================================================================
 
-void  Bnd_BoundSortBox2d::SortBoxes()
-{
+void Bnd_BoundSortBox2d::SortBoxes() {
     Standard_NullValue_Raise_if(discrX + discrY <= 0, "BoundSortBox2d nul!");
 
     Standard_Integer labox, lacase, firstcase, lastcase;
     Standard_Real xmin, ymin, xmax, ymax;
-    const  Bnd_Array1OfBox2d& taBox = myBndComponents->Array1();
+    const Bnd_Array1OfBox2d& taBox = myBndComponents->Array1();
 
     axisX = new TColStd_HArray1OfListOfInteger(1, discrX);
     TColStd_Array1OfListOfInteger& tabListX = axisX->ChangeArray1();
@@ -193,13 +179,11 @@ void  Bnd_BoundSortBox2d::SortBoxes()
 }
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void  Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox,
-    const Standard_Integer nbComponents)
-{
+void Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox, const Standard_Integer nbComponents) {
     Standard_NullValue_Raise_if(nbComponents <= 0, "BoundSortBox nul!");
 
     myBox = CompleteBox;
@@ -220,27 +204,23 @@ void  Bnd_BoundSortBox2d::Initialize(const Bnd_Box2d& CompleteBox,
     if (deltaX < Epsilon(100.)) {
         discrX = 1;
         deltaX = Xmax - Xmin;
-    }
-    else axisX = new TColStd_HArray1OfListOfInteger(1, discrX);
+    } else
+        axisX = new TColStd_HArray1OfListOfInteger(1, discrX);
 
     if (deltaY < Epsilon(100.)) {
         discrY = 1;
         deltaY = Ymax - Ymin;
-    }
-    else axisY = new TColStd_HArray1OfListOfInteger(1, discrY);
+    } else
+        axisY = new TColStd_HArray1OfListOfInteger(1, discrY);
 }
 
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
 
-void  Bnd_BoundSortBox2d::Add(const Bnd_Box2d& theBox,
-    const Standard_Integer boxIndex)
-{
-    Standard_MultiplyDefined_Raise_if
-    (!(myBndComponents->Value(boxIndex).IsVoid()),
-        " This box is already defined !");
+void Bnd_BoundSortBox2d::Add(const Bnd_Box2d& theBox, const Standard_Integer boxIndex) {
+    Standard_MultiplyDefined_Raise_if(!(myBndComponents->Value(boxIndex).IsVoid()), " This box is already defined !");
 
     if (!theBox.IsVoid()) {
         Bnd_Array1OfBox2d& taBox = myBndComponents->ChangeArray1();
@@ -248,8 +228,7 @@ void  Bnd_BoundSortBox2d::Add(const Bnd_Box2d& theBox,
         Standard_Real xmin, ymin, xmax, ymax;
         theBox.Get(xmin, ymin, xmax, ymax);
 
-        if (taBox.Lower() <= boxIndex && boxIndex <= taBox.Upper())
-            taBox(boxIndex).Update(xmin, ymin, xmax, ymax);
+        if (taBox.Lower() <= boxIndex && boxIndex <= taBox.Upper()) taBox(boxIndex).Update(xmin, ymin, xmax, ymax);
 
         TColStd_Array1OfListOfInteger& tabListX = axisX->ChangeArray1();
 
@@ -273,18 +252,13 @@ void  Bnd_BoundSortBox2d::Add(const Bnd_Box2d& theBox,
     }
 }
 
-
 //=======================================================================
-//function : Compare
-//purpose  : 
+// function : Compare
+// purpose  :
 //=======================================================================
 
-
-const TColStd_ListOfInteger& Bnd_BoundSortBox2d::Compare
-(const Bnd_Box2d& theBox)
-{
-    Standard_NullValue_Raise_if(discrX + discrY <= 0,
-        "Compare sur 1 BoundSortBox2d nul!");
+const TColStd_ListOfInteger& Bnd_BoundSortBox2d::Compare(const Bnd_Box2d& theBox) {
+    Standard_NullValue_Raise_if(discrX + discrY <= 0, "Compare sur 1 BoundSortBox2d nul!");
 
     lastResult.Clear();
     if (theBox.IsVoid()) return lastResult;
@@ -311,10 +285,8 @@ const TColStd_ListOfInteger& Bnd_BoundSortBox2d::Compare
             }
         }
         if (cardY == 0) return lastResult;
-    }
-    else {
-        if (ymin > Ymin + deltaY || ymax < Ymin)
-            return lastResult;
+    } else {
+        if (ymin > Ymin + deltaY || ymax < Ymin) return lastResult;
         theFound -= 2;
     }
 
@@ -339,25 +311,21 @@ const TColStd_ListOfInteger& Bnd_BoundSortBox2d::Compare
     }
 
     else {
-        if (xmin > Xmin + deltaX || xmax < Xmin) return lastResult;
-        else if (discrY == 1)
-        {
+        if (xmin > Xmin + deltaX || xmax < Xmin)
+            return lastResult;
+        else if (discrY == 1) {
             lacase = 1;
-            for (Standard_Integer i = taBox.Lower(); i <= taBox.Upper(); i++)
-            {
+            for (Standard_Integer i = taBox.Lower(); i <= taBox.Upper(); i++) {
                 lastResult.Append(i);
             }
-        }
-        else {
+        } else {
 
             TColStd_DataMapIteratorOfDataMapOfIntegerInteger itDM(Crible);
             for (; itDM.More(); itDM.Next()) {
                 if (itDM.Value() == theFound) {
                     if (taBox.Lower() <= itDM.Key() && itDM.Key() <= taBox.Upper()) {
-                        if (!taBox(itDM.Key()).IsOut(theBox))
-                            lastResult.Append(itDM.Key());
-                    }
-                    else {
+                        if (!taBox(itDM.Key()).IsOut(theBox)) lastResult.Append(itDM.Key());
+                    } else {
                         lastResult.Append(itDM.Key());
                     }
                 }
@@ -367,14 +335,12 @@ const TColStd_ListOfInteger& Bnd_BoundSortBox2d::Compare
     return lastResult;
 }
 
-
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Bnd_BoundSortBox2d::Dump() const
-{
+void Bnd_BoundSortBox2d::Dump() const {
     Standard_Integer lacase;
 
     std::cout << "axis X : " << discrX << " intervalles de " << deltaX << std::endl;

@@ -27,48 +27,28 @@ class StepDimTol_CoaxialityTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CoaxialityTolerance
-class RWStepDimTol_RWCoaxialityTolerance 
-{
+class RWStepDimTol_RWCoaxialityTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWCoaxialityTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWCoaxialityTolerance();
-  
-  //! Reads CoaxialityTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_CoaxialityTolerance)& ent) const;
-  
-  //! Writes CoaxialityTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_CoaxialityTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_CoaxialityTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CoaxialityTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_CoaxialityTolerance) & ent) const;
 
+    //! Writes CoaxialityTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_CoaxialityTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_CoaxialityTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWCoaxialityTolerance_HeaderFile

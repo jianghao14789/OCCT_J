@@ -27,44 +27,20 @@ class RWHeaderSection_RWFileName;
 class RWHeaderSection_RWFileDescription;
 class RWHeaderSection_RWFileSchema;
 
-
-
-class RWHeaderSection 
-{
+class RWHeaderSection {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! enforced the initialisation of the  libraries
-  Standard_EXPORT static void Init();
-
-
-
+    //! enforced the initialisation of the  libraries
+    Standard_EXPORT static void Init();
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class RWHeaderSection_ReadWriteModule;
-friend class RWHeaderSection_GeneralModule;
-friend class RWHeaderSection_RWFileName;
-friend class RWHeaderSection_RWFileDescription;
-friend class RWHeaderSection_RWFileSchema;
-
+    friend class RWHeaderSection_ReadWriteModule;
+    friend class RWHeaderSection_GeneralModule;
+    friend class RWHeaderSection_RWFileName;
+    friend class RWHeaderSection_RWFileDescription;
+    friend class RWHeaderSection_RWFileSchema;
 };
-
-
-
-
-
-
 
 #endif // _RWHeaderSection_HeaderFile

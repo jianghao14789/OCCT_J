@@ -22,41 +22,19 @@
 
 #include <StepShape_ConnectedFaceSet.hxx>
 
-
 class StepShape_ClosedShell;
 DEFINE_STANDARD_HANDLE(StepShape_ClosedShell, StepShape_ConnectedFaceSet)
 
-
-class StepShape_ClosedShell : public StepShape_ConnectedFaceSet
-{
+class StepShape_ClosedShell : public StepShape_ConnectedFaceSet {
 
 public:
+    //! Returns a ClosedShell
+    Standard_EXPORT StepShape_ClosedShell();
 
-  
-  //! Returns a ClosedShell
-  Standard_EXPORT StepShape_ClosedShell();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepShape_ClosedShell,StepShape_ConnectedFaceSet)
+    DEFINE_STANDARD_RTTIEXT(StepShape_ClosedShell, StepShape_ConnectedFaceSet)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepShape_ClosedShell_HeaderFile

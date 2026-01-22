@@ -24,64 +24,48 @@
 class TCollection_HAsciiString;
 class StepRepr_RepresentationItem;
 
-
 class StepRepr_ItemDefinedTransformation;
 DEFINE_STANDARD_HANDLE(StepRepr_ItemDefinedTransformation, Standard_Transient)
 
 //! Added from StepRepr Rev2 to Rev4
-class StepRepr_ItemDefinedTransformation : public Standard_Transient
-{
+class StepRepr_ItemDefinedTransformation : public Standard_Transient {
 
 public:
+    Standard_EXPORT StepRepr_ItemDefinedTransformation();
 
-  
-  Standard_EXPORT StepRepr_ItemDefinedTransformation();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const Handle(TCollection_HAsciiString)& aDescription, const Handle(StepRepr_RepresentationItem)& aTransformItem1, const Handle(StepRepr_RepresentationItem)& aTransformItem2);
-  
-  Standard_EXPORT void SetName (const Handle(TCollection_HAsciiString)& aName);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName,
+                              const Handle(TCollection_HAsciiString) & aDescription,
+                              const Handle(StepRepr_RepresentationItem) & aTransformItem1,
+                              const Handle(StepRepr_RepresentationItem) & aTransformItem2);
 
-  Standard_Boolean HasDescription() const { return !theDescription.IsNull(); }
-  
-  Standard_EXPORT void SetDescription (const Handle(TCollection_HAsciiString)& aDescription);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
-  
-  Standard_EXPORT void SetTransformItem1 (const Handle(StepRepr_RepresentationItem)& aItem);
-  
-  Standard_EXPORT Handle(StepRepr_RepresentationItem) TransformItem1() const;
-  
-  Standard_EXPORT void SetTransformItem2 (const Handle(StepRepr_RepresentationItem)& aItem);
-  
-  Standard_EXPORT Handle(StepRepr_RepresentationItem) TransformItem2() const;
+    Standard_EXPORT void SetName(const Handle(TCollection_HAsciiString) & aName);
 
+    Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
 
+    Standard_Boolean HasDescription() const {
+        return !theDescription.IsNull();
+    }
 
+    Standard_EXPORT void SetDescription(const Handle(TCollection_HAsciiString) & aDescription);
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ItemDefinedTransformation,Standard_Transient)
+    Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
+
+    Standard_EXPORT void SetTransformItem1(const Handle(StepRepr_RepresentationItem) & aItem);
+
+    Standard_EXPORT Handle(StepRepr_RepresentationItem) TransformItem1() const;
+
+    Standard_EXPORT void SetTransformItem2(const Handle(StepRepr_RepresentationItem) & aItem);
+
+    Standard_EXPORT Handle(StepRepr_RepresentationItem) TransformItem2() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ItemDefinedTransformation, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) theName;
-  Handle(TCollection_HAsciiString) theDescription;
-  Handle(StepRepr_RepresentationItem) theTransformItem1;
-  Handle(StepRepr_RepresentationItem) theTransformItem2;
-
-
+    Handle(TCollection_HAsciiString) theName;
+    Handle(TCollection_HAsciiString) theDescription;
+    Handle(StepRepr_RepresentationItem) theTransformItem1;
+    Handle(StepRepr_RepresentationItem) theTransformItem2;
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_ItemDefinedTransformation_HeaderFile

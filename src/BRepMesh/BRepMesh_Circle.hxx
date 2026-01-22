@@ -19,59 +19,46 @@
 #include <Standard_Macro.hxx>
 #include <gp_XY.hxx>
 
-//! Describes a 2d circle with a size of only 3 Standard_Real 
+//! Describes a 2d circle with a size of only 3 Standard_Real
 //! numbers instead of gp who needs 7 Standard_Real numbers.
-class BRepMesh_Circle
-{
+class BRepMesh_Circle {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Default constructor.
+    BRepMesh_Circle() : myRadius(0.0) {}
 
-  //! Default constructor.
-  BRepMesh_Circle() : myRadius(0.0)
-  {
-  }
-  
-  //! Constructor.
-  //! @param theLocation location of a circle.
-  //! @param theRadius radius of a circle.
-  BRepMesh_Circle(const gp_XY&        theLocation,
-                  const Standard_Real theRadius)
-  : myLocation(theLocation),
-    myRadius  (theRadius)
-  {
-  }
-  
-  //! Sets location of a circle.
-  //! @param theLocation location of a circle.
-  void SetLocation(const gp_XY& theLocation)
-  {
-    myLocation = theLocation;
-  }
-  
-  //! Sets radius of a circle.
-  //! @param theRadius radius of a circle.
-  void SetRadius(const Standard_Real theRadius)
-  {
-    myRadius = theRadius;
-  }
-  
-  //! Returns location of a circle.
-  const gp_XY& Location() const
-  {
-    return myLocation;
-  }
+    //! Constructor.
+    //! @param theLocation location of a circle.
+    //! @param theRadius radius of a circle.
+    BRepMesh_Circle(const gp_XY& theLocation, const Standard_Real theRadius)
+        : myLocation(theLocation), myRadius(theRadius) {}
 
-  //! Returns radius of a circle.
-  const Standard_Real& Radius() const
-  {
-    return myRadius;
-  }
+    //! Sets location of a circle.
+    //! @param theLocation location of a circle.
+    void SetLocation(const gp_XY& theLocation) {
+        myLocation = theLocation;
+    }
+
+    //! Sets radius of a circle.
+    //! @param theRadius radius of a circle.
+    void SetRadius(const Standard_Real theRadius) {
+        myRadius = theRadius;
+    }
+
+    //! Returns location of a circle.
+    const gp_XY& Location() const {
+        return myLocation;
+    }
+
+    //! Returns radius of a circle.
+    const Standard_Real& Radius() const {
+        return myRadius;
+    }
 
 private:
-
-  gp_XY         myLocation;
-  Standard_Real myRadius;
+    gp_XY myLocation;
+    Standard_Real myRadius;
 };
 
 #endif

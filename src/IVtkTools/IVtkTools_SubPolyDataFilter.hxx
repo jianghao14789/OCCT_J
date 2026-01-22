@@ -1,7 +1,7 @@
 // Created on: 2011-10-27
 // Created by: Roman KOZLOV
-// Copyright (c) 2011-2014 OPEN CASCADE SAS 
-// 
+// Copyright (c) 2011-2014 OPEN CASCADE SAS
+//
 // This file is part of Open CASCADE Technology software library.
 //
 // This library is free software; you can redistribute it and/or modify it under
@@ -24,53 +24,52 @@
 
 #ifdef _MSC_VER
 #pragma warning(push)
-#pragma warning(disable: 4251) // avoid warning C4251: "class needs to have dll-interface..."
+#pragma warning(disable : 4251) // avoid warning C4251: "class needs to have dll-interface..."
 #endif
 
-//! @class IVtkTools_SubPolyDataFilter 
+//! @class IVtkTools_SubPolyDataFilter
 //! @brief Cells filter according to the given set of cells ids.
-class Standard_EXPORT IVtkTools_SubPolyDataFilter : public vtkPolyDataAlgorithm
-{
+class Standard_EXPORT IVtkTools_SubPolyDataFilter : public vtkPolyDataAlgorithm {
 public:
-  vtkTypeMacro(IVtkTools_SubPolyDataFilter,vtkPolyDataAlgorithm)
+    vtkTypeMacro(IVtkTools_SubPolyDataFilter, vtkPolyDataAlgorithm)
 
-  static IVtkTools_SubPolyDataFilter *New();
-  void PrintSelf (std::ostream& theOs, vtkIndent theIndent);
+        static IVtkTools_SubPolyDataFilter* New();
+    void PrintSelf(std::ostream& theOs, vtkIndent theIndent);
 
-  //! Set ids to be passed through this filter.
-  void SetData(const IVtk_IdTypeMap theSet);
+    //! Set ids to be passed through this filter.
+    void SetData(const IVtk_IdTypeMap theSet);
 
-  //! Add ids to be passed through this filter.
-  void AddData(const IVtk_IdTypeMap theSet);
+    //! Add ids to be passed through this filter.
+    void AddData(const IVtk_IdTypeMap theSet);
 
-  //! Set ids to be passed through this filter.
-  void SetData(const IVtk_ShapeIdList theIds);
+    //! Set ids to be passed through this filter.
+    void SetData(const IVtk_ShapeIdList theIds);
 
-  //! Add ids to be passed through this filter.
-  void AddData(const IVtk_ShapeIdList theIds);
+    //! Add ids to be passed through this filter.
+    void AddData(const IVtk_ShapeIdList theIds);
 
-  //! Clear ids set to be passed through this filter.
-  void Clear();
+    //! Clear ids set to be passed through this filter.
+    void Clear();
 
-  //! Set ids array name.
-  void SetIdsArrayName(const char* theArrayName);
+    //! Set ids array name.
+    void SetIdsArrayName(const char* theArrayName);
 
-  void SetDoFiltering (const bool theDoFiltering);
-
-protected:
-  //! @brief Filter cells according to the given set of ids.
-  //! Note: Data arrays are not passed through if filtering is turned on.
-  virtual int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *) Standard_OVERRIDE;
-
-  IVtkTools_SubPolyDataFilter();
-  virtual ~IVtkTools_SubPolyDataFilter();
+    void SetDoFiltering(const bool theDoFiltering);
 
 protected:
-  //! Set of ids to be passed through this filter.
-  IVtk_IdTypeMap myIdsSet;
-  const char*    myIdsArrayName;
-  bool           myDoFiltering;
-  bool           myToCopyNormals;
+    //! @brief Filter cells according to the given set of ids.
+    //! Note: Data arrays are not passed through if filtering is turned on.
+    virtual int RequestData(vtkInformation*, vtkInformationVector**, vtkInformationVector*) Standard_OVERRIDE;
+
+    IVtkTools_SubPolyDataFilter();
+    virtual ~IVtkTools_SubPolyDataFilter();
+
+protected:
+    //! Set of ids to be passed through this filter.
+    IVtk_IdTypeMap myIdsSet;
+    const char* myIdsArrayName;
+    bool myDoFiltering;
+    bool myToCopyNormals;
 };
 
 #ifdef _MSC_VER

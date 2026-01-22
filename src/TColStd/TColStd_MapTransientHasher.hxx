@@ -20,5 +20,4 @@
 
 typedef NCollection_DefaultHasher<Handle(Standard_Transient)> TColStd_MapTransientHasher;
 
-
 #endif

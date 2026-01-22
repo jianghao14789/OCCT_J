@@ -39,25 +39,23 @@
 //  Note that apostrophe (\') is not treated as markup on output (all relevant
 //  markup is produced by quote characters (\")).
 
-class LDOM_CharReference 
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class LDOM_CharReference {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  static char * Decode (char * theSrc, Standard_Integer& theLen);
+    static char* Decode(char* theSrc, Standard_Integer& theLen);
 
-  static char * Encode (const char * theSrc, Standard_Integer& theLen,
-                        const Standard_Boolean isAttribute);
-  // Encodes the string theSrc containing any byte characters 0x00-0xFF
-  // Returns the encoded string. If (return value) != theSrc the returned
-  // string should be deleted in caller routine (via delete[]).
-  // The output parameter theLen gives the length of the encoded string
-  // With isAttribute==True additionally encodes to $quot; for attr values
+    static char* Encode(const char* theSrc, Standard_Integer& theLen, const Standard_Boolean isAttribute);
+    // Encodes the string theSrc containing any byte characters 0x00-0xFF
+    // Returns the encoded string. If (return value) != theSrc the returned
+    // string should be deleted in caller routine (via delete[]).
+    // The output parameter theLen gives the length of the encoded string
+    // With isAttribute==True additionally encodes to $quot; for attr values
 
- private:
-  // ---------- PRIVATE FIELDS ----------
+private:
+    // ---------- PRIVATE FIELDS ----------
 
-  static int myTab [256];
+    static int myTab[256];
 };
 
 #endif

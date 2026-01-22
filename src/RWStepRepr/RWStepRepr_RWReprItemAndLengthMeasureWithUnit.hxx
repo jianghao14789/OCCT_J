@@ -26,42 +26,22 @@ class Interface_Check;
 class StepRepr_ReprItemAndLengthMeasureWithUnit;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for ReprItemAndLengthMeasureWithUni
-class RWStepRepr_RWReprItemAndLengthMeasureWithUnit 
-{
+class RWStepRepr_RWReprItemAndLengthMeasureWithUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepRepr_RWReprItemAndLengthMeasureWithUnit();
 
-  
-  Standard_EXPORT RWStepRepr_RWReprItemAndLengthMeasureWithUnit();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_ReprItemAndLengthMeasureWithUnit)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_ReprItemAndLengthMeasureWithUnit)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_ReprItemAndLengthMeasureWithUnit) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_ReprItemAndLengthMeasureWithUnit) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWReprItemAndLengthMeasureWithUnit_HeaderFile

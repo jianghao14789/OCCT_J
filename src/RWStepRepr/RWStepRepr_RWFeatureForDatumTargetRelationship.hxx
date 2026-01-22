@@ -27,48 +27,29 @@ class StepRepr_FeatureForDatumTargetRelationship;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
-//! Read & Write tool for FeatureForDatumTargetRelationship 
-class RWStepRepr_RWFeatureForDatumTargetRelationship 
-{
+//! Read & Write tool for FeatureForDatumTargetRelationship
+class RWStepRepr_RWFeatureForDatumTargetRelationship {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWFeatureForDatumTargetRelationship();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWFeatureForDatumTargetRelationship();
-  
-  //! Reads ShapeAspectRelationship
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_FeatureForDatumTargetRelationship)& ent) const;
-  
-  //! Writes ShapeAspectRelationship
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_FeatureForDatumTargetRelationship)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_FeatureForDatumTargetRelationship)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ShapeAspectRelationship
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_FeatureForDatumTargetRelationship) & ent) const;
 
+    //! Writes ShapeAspectRelationship
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_FeatureForDatumTargetRelationship) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_FeatureForDatumTargetRelationship) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWFeatureForDatumTargetRelationship_HeaderFile

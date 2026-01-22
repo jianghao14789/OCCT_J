@@ -24,19 +24,16 @@
 #include <Select3D_TypeOfSensitivity.hxx>
 
 //! This class provides custom sensitive face, which will be selected if it center is in rectangle.
-class MeshVS_SensitiveFace : public Select3D_SensitiveFace
-{
+class MeshVS_SensitiveFace : public Select3D_SensitiveFace {
 public:
-  
-  Standard_EXPORT MeshVS_SensitiveFace (const Handle(SelectMgr_EntityOwner)& theOwner,
-                                        const TColgp_Array1OfPnt& thePoints,
-                                        const Select3D_TypeOfSensitivity theSensType = Select3D_TOS_INTERIOR);
+    Standard_EXPORT MeshVS_SensitiveFace(const Handle(SelectMgr_EntityOwner) & theOwner,
+                                         const TColgp_Array1OfPnt& thePoints,
+                                         const Select3D_TypeOfSensitivity theSensType = Select3D_TOS_INTERIOR);
 
-  DEFINE_STANDARD_RTTIEXT(MeshVS_SensitiveFace,Select3D_SensitiveFace)
+    DEFINE_STANDARD_RTTIEXT(MeshVS_SensitiveFace, Select3D_SensitiveFace)
 
 protected:
-
-  gp_Pnt myCenter;
+    gp_Pnt myCenter;
 };
 
 DEFINE_STANDARD_HANDLE(MeshVS_SensitiveFace, Select3D_SensitiveFace)

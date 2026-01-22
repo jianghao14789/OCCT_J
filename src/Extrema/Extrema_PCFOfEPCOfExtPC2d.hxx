@@ -38,12 +38,9 @@ class Extrema_POnCurv2d;
 class gp_Pnt2d;
 class gp_Vec2d;
 
-class Extrema_PCFOfEPCOfExtPC2d : public math_FunctionWithDerivative
-{
+class Extrema_PCFOfEPCOfExtPC2d : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT Extrema_PCFOfEPCOfExtPC2d();
 
@@ -62,7 +59,8 @@ public:
     Standard_EXPORT Standard_Boolean Derivative(const Standard_Real U, Standard_Real& DF) Standard_OVERRIDE;
 
     //! Calculation of F(U) and F'(U).
-    Standard_EXPORT Standard_Boolean Values(const Standard_Real U, Standard_Real& F, Standard_Real& DF) Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean Values(const Standard_Real U, Standard_Real& F,
+                                            Standard_Real& DF) Standard_OVERRIDE;
 
     //! Save the found extremum.
     Standard_EXPORT virtual Standard_Integer GetStateNumber() Standard_OVERRIDE;
@@ -86,19 +84,8 @@ public:
     //! |D1|<Tol, it is considered D1=0.
     Standard_EXPORT Standard_Real SearchOfTolerance();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     gp_Pnt2d myP;
     Standard_Address myC;
     Standard_Real myU;
@@ -114,14 +101,6 @@ private:
     Standard_Integer myMaxDerivOrder;
     Standard_Real myUinfium;
     Standard_Real myUsupremum;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Extrema_PCFOfEPCOfExtPC2d_HeaderFile

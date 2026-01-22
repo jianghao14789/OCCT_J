@@ -28,44 +28,25 @@ class StepVisual_MechanicalDesignGeometricPresentationArea;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for MechanicalDesignGeometricPresentationArea
-class RWStepVisual_RWMechanicalDesignGeometricPresentationArea 
-{
+class RWStepVisual_RWMechanicalDesignGeometricPresentationArea {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWMechanicalDesignGeometricPresentationArea();
 
-  
-  Standard_EXPORT RWStepVisual_RWMechanicalDesignGeometricPresentationArea();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_MechanicalDesignGeometricPresentationArea)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_MechanicalDesignGeometricPresentationArea)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_MechanicalDesignGeometricPresentationArea)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_MechanicalDesignGeometricPresentationArea) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepVisual_MechanicalDesignGeometricPresentationArea) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepVisual_MechanicalDesignGeometricPresentationArea) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWMechanicalDesignGeometricPresentationArea_HeaderFile

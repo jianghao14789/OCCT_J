@@ -1,7 +1,7 @@
-// Created on: 2012-05-28 
-// 
-// Copyright (c) 2012-2014 OPEN CASCADE SAS 
-// 
+// Created on: 2012-05-28
+//
+// Copyright (c) 2012-2014 OPEN CASCADE SAS
+//
 // This file is part of Open CASCADE Technology software library.
 //
 // This library is free software; you can redistribute it and/or modify it under
@@ -30,7 +30,7 @@
 #include <tk.h>
 #endif
 
-// prevent disabling some MSVC warning messages by VTK headers 
+// prevent disabling some MSVC warning messages by VTK headers
 #include <Standard_WarningsDisable.hxx>
 #include <vtkRenderWindowInteractor.h>
 #include <vtkSmartPointer.h>
@@ -43,84 +43,80 @@
 class vtkWin32RenderWindowInteractor;
 typedef vtkSmartPointer<IVtkTools_ShapePicker> PSelector;
 
-class IVtkDraw_Interactor : public vtkRenderWindowInteractor
-{
+class IVtkDraw_Interactor : public vtkRenderWindowInteractor {
 public:
-  static IVtkDraw_Interactor *New();
+    static IVtkDraw_Interactor* New();
 
-  vtkTypeMacro (IVtkDraw_Interactor, vtkRenderWindowInteractor)
+    vtkTypeMacro(IVtkDraw_Interactor, vtkRenderWindowInteractor)
 
-  virtual void Initialize();
-  virtual void Enable();
-  virtual void Start() { }
+        virtual void Initialize();
+    virtual void Enable();
+    virtual void Start() {}
 
-  const PSelector& Selector() const { return mySelector; }
-  void SetShapePicker (const PSelector& theSelector);
-  void SetPipelines (const Handle(ShapePipelineMap)& thePipelines);
-  void SetOCCWindow (const Handle(Aspect_Window)& theWindow);
-  const Handle(Aspect_Window)& GetOCCWindow() const;
+    const PSelector& Selector() const {
+        return mySelector;
+    }
+    void SetShapePicker(const PSelector& theSelector);
+    void SetPipelines(const Handle(ShapePipelineMap) & thePipelines);
+    void SetOCCWindow(const Handle(Aspect_Window) & theWindow);
+    const Handle(Aspect_Window) & GetOCCWindow() const;
 
-  //! Process highlighting
-  void MoveTo (Standard_Integer theX, Standard_Integer theY);
+    //! Process highlighting
+    void MoveTo(Standard_Integer theX, Standard_Integer theY);
 
-  //! Process selection
-  void OnSelection();
+    //! Process selection
+    void OnSelection();
 
-  Standard_Boolean IsEnabled() const;
+    Standard_Boolean IsEnabled() const;
 
 #ifndef _WIN32
-  Display* GetDisplayId() const;
-  Standard_Integer ViewerMainLoop (Standard_Integer theArgNum, const char** theArgs);
+    Display* GetDisplayId() const;
+    Standard_Integer ViewerMainLoop(Standard_Integer theArgNum, const char** theArgs);
 #endif
 
 protected:
-  IVtkDraw_Interactor();
-  ~IVtkDraw_Interactor();
+    IVtkDraw_Interactor();
+    ~IVtkDraw_Interactor();
 
 #ifdef _WIN32
-  friend LRESULT CALLBACK WndProc (HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam);
-  friend LRESULT CALLBACK ViewerWindowProc (HWND hwnd,
-                                            UINT Msg,
-                                            WPARAM wParam,
-                                            LPARAM lParam,
-                                            IVtkDraw_Interactor *theInteractor);
+    friend LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+    friend LRESULT CALLBACK ViewerWindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam,
+                                             IVtkDraw_Interactor* theInteractor);
 
-  void OnMouseMove (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
-  void OnRButtonDown (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y, Standard_Integer repeat=0);
-  void OnRButtonUp (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
-  void OnMButtonDown (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y, Standard_Integer repeat=0);
-  void OnMButtonUp (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
-  void OnLButtonDown (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y, Standard_Integer repeat=0);
-  void OnLButtonUp (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
-  void OnSize (HWND wnd, UINT nType,  Standard_Integer X, Standard_Integer Y);
-  void OnTimer (HWND wnd, UINT nIDEvent);
-  void OnMouseWheelForward (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
-  void OnMouseWheelBackward (HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
+    void OnMouseMove(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
+    void OnRButtonDown(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y, Standard_Integer repeat = 0);
+    void OnRButtonUp(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
+    void OnMButtonDown(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y, Standard_Integer repeat = 0);
+    void OnMButtonUp(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
+    void OnLButtonDown(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y, Standard_Integer repeat = 0);
+    void OnLButtonUp(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
+    void OnSize(HWND wnd, UINT nType, Standard_Integer X, Standard_Integer Y);
+    void OnTimer(HWND wnd, UINT nIDEvent);
+    void OnMouseWheelForward(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
+    void OnMouseWheelBackward(HWND wnd, UINT nFlags, Standard_Integer X, Standard_Integer Y);
 #else
-  static void ProcessEvents (ClientData theData, int);
-  void GetMousePosition (Standard_Integer *theX, Standard_Integer *theY);
+    static void ProcessEvents(ClientData theData, int);
+    void GetMousePosition(Standard_Integer* theX, Standard_Integer* theY);
 #endif
 
 private:
-  // copying is prohibited
-  IVtkDraw_Interactor (const IVtkDraw_Interactor&);
-  void operator = (const IVtkDraw_Interactor&);
+    // copying is prohibited
+    IVtkDraw_Interactor(const IVtkDraw_Interactor&);
+    void operator=(const IVtkDraw_Interactor&);
 
 private:
-
 #ifdef _WIN32
-  HWND                     myWindowId;
-  Standard_Integer         myMouseInWindow;
+    HWND myWindowId;
+    Standard_Integer myMouseInWindow;
 #else
-  Window                   myWindowId;
-  Display                 *myDisplayId;
-  Standard_Boolean         myIsLeftButtonPressed;
+    Window myWindowId;
+    Display* myDisplayId;
+    Standard_Boolean myIsLeftButtonPressed;
 #endif
 
-  PSelector                mySelector;
-  Handle(ShapePipelineMap) myPipelines;
-  Handle(Aspect_Window)    myWindow;
-
+    PSelector mySelector;
+    Handle(ShapePipelineMap) myPipelines;
+    Handle(Aspect_Window) myWindow;
 };
 
 #endif

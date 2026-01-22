@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor3d_Curve.hxx>
 #include <Extrema_LocateExtCC.hxx>
 #include <Extrema_LocECC.hxx>
@@ -23,52 +22,45 @@
 #include <Standard_DomainError.hxx>
 #include <StdFail_NotDone.hxx>
 
-Extrema_LocateExtCC::Extrema_LocateExtCC (const Adaptor3d_Curve& C1,
-                                          const Adaptor3d_Curve& C2,
-                                          const Standard_Real U0,
-                                          const Standard_Real V0)
-: mySqDist(RealLast())
-{
-  Standard_Real TolU = C1.Resolution(Precision::Confusion());
-  Standard_Real TolV = C2.Resolution(Precision::Confusion());
-  Extrema_POnCurv P1, P2;
+Extrema_LocateExtCC::Extrema_LocateExtCC(const Adaptor3d_Curve& C1, const Adaptor3d_Curve& C2, const Standard_Real U0,
+                                         const Standard_Real V0)
+    : mySqDist(RealLast()) {
+    Standard_Real TolU = C1.Resolution(Precision::Confusion());
+    Standard_Real TolV = C2.Resolution(Precision::Confusion());
+    Extrema_POnCurv P1, P2;
 
-  // Non implemente pour l instant: l appel a Extrema_ELCC.
+    // Non implemente pour l instant: l appel a Extrema_ELCC.
 
-  Extrema_LocECC Xtrem(C1, C2,
-    U0, V0, TolU, TolV);	
-  // Exploitation
+    Extrema_LocECC Xtrem(C1, C2, U0, V0, TolU, TolV);
+    // Exploitation
 
-  myDone = Xtrem.IsDone();
-  if (Xtrem.IsDone()) {
-    mySqDist = Xtrem.SquareDistance();
-    Xtrem.Point(P1, P2);
-    myPoint1 = P1;
-    myPoint2 = P2;
-  }
+    myDone = Xtrem.IsDone();
+    if (Xtrem.IsDone()) {
+        mySqDist = Xtrem.SquareDistance();
+        Xtrem.Point(P1, P2);
+        myPoint1 = P1;
+        myPoint2 = P2;
+    }
 }
 
-Standard_Boolean Extrema_LocateExtCC::IsDone () const {
+Standard_Boolean Extrema_LocateExtCC::IsDone() const {
 
-  return myDone;
+    return myDone;
 }
 
 Standard_Real Extrema_LocateExtCC::SquareDistance() const {
 
-  if (!IsDone())
-  {
-    throw StdFail_NotDone();
-  }
-  return mySqDist;
+    if (!IsDone()) {
+        throw StdFail_NotDone();
+    }
+    return mySqDist;
 }
 
-void Extrema_LocateExtCC::Point (Extrema_POnCurv& P1, Extrema_POnCurv& P2) const {
+void Extrema_LocateExtCC::Point(Extrema_POnCurv& P1, Extrema_POnCurv& P2) const {
 
-  if (!IsDone())
-  {
-    throw StdFail_NotDone();
-  }
-  P1 = myPoint1;
-  P2 = myPoint2;
+    if (!IsDone()) {
+        throw StdFail_NotDone();
+    }
+    P1 = myPoint1;
+    P2 = myPoint2;
 }
-

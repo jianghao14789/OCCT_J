@@ -31,10 +31,8 @@
 //! Notice that this also means that existing pointers will be broken
 //! and you shoould control that allocator is alive along all objects
 //! allocated with him.
-class NCollection_WinHeapAllocator : public NCollection_BaseAllocator
-{
+class NCollection_WinHeapAllocator : public NCollection_BaseAllocator {
 public:
-
     //! Main constructor
     Standard_EXPORT NCollection_WinHeapAllocator(const size_t theInitSizeBytes = 0x80000);
 
@@ -45,7 +43,7 @@ public:
     Standard_EXPORT virtual void* Allocate(const Standard_Size theSize) Standard_OVERRIDE;
 
     //! Release memory
-    Standard_EXPORT virtual void  Free(void* theAddress) Standard_OVERRIDE;
+    Standard_EXPORT virtual void Free(void* theAddress) Standard_OVERRIDE;
 
     // Declaration of CASCADE RTTI
     DEFINE_STANDARD_RTTIEXT(NCollection_WinHeapAllocator, NCollection_BaseAllocator)
@@ -55,14 +53,13 @@ private:
     NCollection_WinHeapAllocator(const NCollection_WinHeapAllocator&);
 
 private:
-#if(defined(_WIN32) || defined(__WIN32__))
+#if (defined(_WIN32) || defined(__WIN32__))
     void* myHeapH;
 #endif
     Standard_Boolean myToZeroMemory;
-
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
 DEFINE_STANDARD_HANDLE(NCollection_WinHeapAllocator, NCollection_BaseAllocator)
 
-#endif //NCollection_WinHeapAllocator_HeaderFile
+#endif // NCollection_WinHeapAllocator_HeaderFile

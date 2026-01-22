@@ -11,29 +11,25 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Interface_Macros.hxx>
 #include <Standard_Transient.hxx>
 #include <StepRepr_RepresentationItem.hxx>
 #include <StepVisual_LayeredItem.hxx>
 #include <StepVisual_PresentationRepresentation.hxx>
 
-StepVisual_LayeredItem::StepVisual_LayeredItem () {  }
+StepVisual_LayeredItem::StepVisual_LayeredItem() {}
 
-Standard_Integer StepVisual_LayeredItem::CaseNum(const Handle(Standard_Transient)& ent) const
-{
-	if (ent.IsNull()) return 0;
-	if (ent->IsKind(STANDARD_TYPE(StepVisual_PresentationRepresentation))) return 1;
-	if (ent->IsKind(STANDARD_TYPE(StepRepr_RepresentationItem))) return 2;
-	return 0;
+Standard_Integer StepVisual_LayeredItem::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepVisual_PresentationRepresentation))) return 1;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_RepresentationItem))) return 2;
+    return 0;
 }
 
-Handle(StepVisual_PresentationRepresentation) StepVisual_LayeredItem::PresentationRepresentation () const
-{
-	return GetCasted(StepVisual_PresentationRepresentation,Value());
+Handle(StepVisual_PresentationRepresentation) StepVisual_LayeredItem::PresentationRepresentation() const {
+    return GetCasted(StepVisual_PresentationRepresentation, Value());
 }
 
-Handle(StepRepr_RepresentationItem) StepVisual_LayeredItem::RepresentationItem () const
-{
-	return GetCasted(StepRepr_RepresentationItem,Value());
+Handle(StepRepr_RepresentationItem) StepVisual_LayeredItem::RepresentationItem() const {
+    return GetCasted(StepRepr_RepresentationItem, Value());
 }

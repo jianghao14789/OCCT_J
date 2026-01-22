@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,41 +19,35 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_PrismaticPairValue, StepKinematics_PairValue)
 
 //=======================================================================
-//function : StepKinematics_PrismaticPairValue
-//purpose  :
+// function : StepKinematics_PrismaticPairValue
+// purpose  :
 //=======================================================================
-StepKinematics_PrismaticPairValue::StepKinematics_PrismaticPairValue ()
-{
+StepKinematics_PrismaticPairValue::StepKinematics_PrismaticPairValue() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_PrismaticPairValue::Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                                             const Handle(StepKinematics_KinematicPair) & thePairValue_AppliesToPair,
+                                             const Standard_Real theActualTranslation) {
+    StepKinematics_PairValue::Init(theRepresentationItem_Name, thePairValue_AppliesToPair);
+
+    myActualTranslation = theActualTranslation;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : ActualTranslation
+// purpose  :
 //=======================================================================
-void StepKinematics_PrismaticPairValue::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                              const Handle(StepKinematics_KinematicPair)& thePairValue_AppliesToPair,
-                                              const Standard_Real theActualTranslation)
-{
-  StepKinematics_PairValue::Init(theRepresentationItem_Name,
-                                 thePairValue_AppliesToPair);
-
-  myActualTranslation = theActualTranslation;
+Standard_Real StepKinematics_PrismaticPairValue::ActualTranslation() const {
+    return myActualTranslation;
 }
 
 //=======================================================================
-//function : ActualTranslation
-//purpose  :
+// function : SetActualTranslation
+// purpose  :
 //=======================================================================
-Standard_Real StepKinematics_PrismaticPairValue::ActualTranslation () const
-{
-  return myActualTranslation;
-}
-
-//=======================================================================
-//function : SetActualTranslation
-//purpose  :
-//=======================================================================
-void StepKinematics_PrismaticPairValue::SetActualTranslation (const Standard_Real theActualTranslation)
-{
-  myActualTranslation = theActualTranslation;
+void StepKinematics_PrismaticPairValue::SetActualTranslation(const Standard_Real theActualTranslation) {
+    myActualTranslation = theActualTranslation;
 }

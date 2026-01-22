@@ -18,8 +18,6 @@
 
 #include <Standard_PrimitiveTypes.hxx>
 
-enum StepVisual_NullStyle {
-  StepVisual_Null
-};
+enum StepVisual_NullStyle { StepVisual_Null };
 
 #endif

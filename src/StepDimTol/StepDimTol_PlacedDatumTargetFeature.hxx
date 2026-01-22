@@ -21,41 +21,20 @@
 
 #include <StepDimTol_DatumTarget.hxx>
 
-
 class StepDimTol_PlacedDatumTargetFeature;
 DEFINE_STANDARD_HANDLE(StepDimTol_PlacedDatumTargetFeature, StepDimTol_DatumTarget)
 
 //! Representation of STEP entity PlacedDatumTargetFeature
-class StepDimTol_PlacedDatumTargetFeature : public StepDimTol_DatumTarget
-{
+class StepDimTol_PlacedDatumTargetFeature : public StepDimTol_DatumTarget {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepDimTol_PlacedDatumTargetFeature();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepDimTol_PlacedDatumTargetFeature();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_PlacedDatumTargetFeature,StepDimTol_DatumTarget)
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_PlacedDatumTargetFeature, StepDimTol_DatumTarget)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepDimTol_PlacedDatumTargetFeature_HeaderFile

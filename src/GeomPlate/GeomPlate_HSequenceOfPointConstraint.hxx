@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(GeomPlate_HSequenceOfPointConstraint, GeomPlate_SequenceOfPointConstraint)
 
-
 #endif

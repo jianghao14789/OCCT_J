@@ -37,12 +37,6 @@
 //! region. A change in orientation implies a switch of
 //! default region. This allows you to apply changes of
 //! orientation to the shape as a whole.
-enum TopAbs_Orientation
-{
-TopAbs_FORWARD,
-TopAbs_REVERSED,
-TopAbs_INTERNAL,
-TopAbs_EXTERNAL
-};
+enum TopAbs_Orientation { TopAbs_FORWARD, TopAbs_REVERSED, TopAbs_INTERNAL, TopAbs_EXTERNAL };
 
 #endif // _TopAbs_Orientation_HeaderFile

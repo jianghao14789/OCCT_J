@@ -25,58 +25,41 @@
 class TCollection_HAsciiString;
 class StepFEA_SymmetricTensor23d;
 
-
 class StepFEA_FeaSecantCoefficientOfLinearThermalExpansion;
-DEFINE_STANDARD_HANDLE(StepFEA_FeaSecantCoefficientOfLinearThermalExpansion, StepFEA_FeaMaterialPropertyRepresentationItem)
+DEFINE_STANDARD_HANDLE(StepFEA_FeaSecantCoefficientOfLinearThermalExpansion,
+                       StepFEA_FeaMaterialPropertyRepresentationItem)
 
 //! Representation of STEP entity FeaSecantCoefficientOfLinearThermalExpansion
-class StepFEA_FeaSecantCoefficientOfLinearThermalExpansion : public StepFEA_FeaMaterialPropertyRepresentationItem
-{
+class StepFEA_FeaSecantCoefficientOfLinearThermalExpansion : public StepFEA_FeaMaterialPropertyRepresentationItem {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepFEA_FeaSecantCoefficientOfLinearThermalExpansion();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepFEA_FeaSecantCoefficientOfLinearThermalExpansion();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aRepresentationItem_Name, const StepFEA_SymmetricTensor23d& aFeaConstants, const Standard_Real aReferenceTemperature);
-  
-  //! Returns field FeaConstants
-  Standard_EXPORT StepFEA_SymmetricTensor23d FeaConstants() const;
-  
-  //! Set field FeaConstants
-  Standard_EXPORT void SetFeaConstants (const StepFEA_SymmetricTensor23d& FeaConstants);
-  
-  //! Returns field ReferenceTemperature
-  Standard_EXPORT Standard_Real ReferenceTemperature() const;
-  
-  //! Set field ReferenceTemperature
-  Standard_EXPORT void SetReferenceTemperature (const Standard_Real ReferenceTemperature);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aRepresentationItem_Name,
+                              const StepFEA_SymmetricTensor23d& aFeaConstants,
+                              const Standard_Real aReferenceTemperature);
 
+    //! Returns field FeaConstants
+    Standard_EXPORT StepFEA_SymmetricTensor23d FeaConstants() const;
 
+    //! Set field FeaConstants
+    Standard_EXPORT void SetFeaConstants(const StepFEA_SymmetricTensor23d& FeaConstants);
 
+    //! Returns field ReferenceTemperature
+    Standard_EXPORT Standard_Real ReferenceTemperature() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepFEA_FeaSecantCoefficientOfLinearThermalExpansion,StepFEA_FeaMaterialPropertyRepresentationItem)
+    //! Set field ReferenceTemperature
+    Standard_EXPORT void SetReferenceTemperature(const Standard_Real ReferenceTemperature);
+
+    DEFINE_STANDARD_RTTIEXT(StepFEA_FeaSecantCoefficientOfLinearThermalExpansion,
+                            StepFEA_FeaMaterialPropertyRepresentationItem)
 
 protected:
-
-
-
-
 private:
-
-
-  StepFEA_SymmetricTensor23d theFeaConstants;
-  Standard_Real theReferenceTemperature;
-
-
+    StepFEA_SymmetricTensor23d theFeaConstants;
+    Standard_Real theReferenceTemperature;
 };
-
-
-
-
-
-
 
 #endif // _StepFEA_FeaSecantCoefficientOfLinearThermalExpansion_HeaderFile

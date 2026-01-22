@@ -62,29 +62,40 @@ DEFINE_STANDARD_HANDLE(Geom_ElementarySurface, Geom_Surface)
 //! "main Direction" = - "X Direction" ^ "Y Direction"
 class Geom_ElementarySurface : public Geom_Surface {
 public:
-
     //! Changes the main axis (ZAxis) of the elementary surface.
     //!
     //! Raised if the direction of A1 is parallel to the XAxis of the
     //! coordinate system of the surface.
-    void SetAxis(const gp_Ax1& theA1) { pos.SetAxis(theA1); }
+    void SetAxis(const gp_Ax1& theA1) {
+        pos.SetAxis(theA1);
+    }
 
     //! Changes the location of the local coordinates system of the
     //! surface.
-    void SetLocation(const gp_Pnt& theLoc) { pos.SetLocation(theLoc); }
+    void SetLocation(const gp_Pnt& theLoc) {
+        pos.SetLocation(theLoc);
+    }
 
     //! Changes the local coordinates system of the surface.
-    void SetPosition(const gp_Ax3& theAx3) { pos = theAx3; }
+    void SetPosition(const gp_Ax3& theAx3) {
+        pos = theAx3;
+    }
 
     //! Returns the main axis of the surface (ZAxis).
-    const gp_Ax1& Axis() const { return pos.Axis(); }
+    const gp_Ax1& Axis() const {
+        return pos.Axis();
+    }
 
     //! Returns the location point of the local coordinate system of the
     //! surface.
-    const gp_Pnt& Location() const { return pos.Location(); }
+    const gp_Pnt& Location() const {
+        return pos.Location();
+    }
 
     //! Returns the local coordinates system of the surface.
-    const gp_Ax3& Position() const { return pos; }
+    const gp_Ax3& Position() const {
+        return pos;
+    }
 
     //! Reverses the U parametric direction of the surface.
     Standard_EXPORT virtual void UReverse() Standard_OVERRIDE;
@@ -118,7 +129,8 @@ public:
     Standard_EXPORT Standard_Boolean IsCNv(const Standard_Integer N) const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_ElementarySurface, Geom_Surface)
 

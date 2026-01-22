@@ -25,51 +25,32 @@
 class StepBasic_Document;
 class TCollection_HAsciiString;
 
-
 class StepAP203_CcDesignSpecificationReference;
 DEFINE_STANDARD_HANDLE(StepAP203_CcDesignSpecificationReference, StepBasic_DocumentReference)
 
 //! Representation of STEP entity CcDesignSpecificationReference
-class StepAP203_CcDesignSpecificationReference : public StepBasic_DocumentReference
-{
+class StepAP203_CcDesignSpecificationReference : public StepBasic_DocumentReference {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepAP203_CcDesignSpecificationReference();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepAP203_CcDesignSpecificationReference();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(StepBasic_Document)& aDocumentReference_AssignedDocument, const Handle(TCollection_HAsciiString)& aDocumentReference_Source, const Handle(StepAP203_HArray1OfSpecifiedItem)& aItems);
-  
-  //! Returns field Items
-  Standard_EXPORT Handle(StepAP203_HArray1OfSpecifiedItem) Items() const;
-  
-  //! Set field Items
-  Standard_EXPORT void SetItems (const Handle(StepAP203_HArray1OfSpecifiedItem)& Items);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(StepBasic_Document) & aDocumentReference_AssignedDocument,
+                              const Handle(TCollection_HAsciiString) & aDocumentReference_Source,
+                              const Handle(StepAP203_HArray1OfSpecifiedItem) & aItems);
 
+    //! Returns field Items
+    Standard_EXPORT Handle(StepAP203_HArray1OfSpecifiedItem) Items() const;
 
+    //! Set field Items
+    Standard_EXPORT void SetItems(const Handle(StepAP203_HArray1OfSpecifiedItem) & Items);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepAP203_CcDesignSpecificationReference,StepBasic_DocumentReference)
+    DEFINE_STANDARD_RTTIEXT(StepAP203_CcDesignSpecificationReference, StepBasic_DocumentReference)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepAP203_HArray1OfSpecifiedItem) theItems;
-
-
+    Handle(StepAP203_HArray1OfSpecifiedItem) theItems;
 };
-
-
-
-
-
-
 
 #endif // _StepAP203_CcDesignSpecificationReference_HeaderFile

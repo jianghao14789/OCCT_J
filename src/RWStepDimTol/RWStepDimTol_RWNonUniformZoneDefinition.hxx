@@ -28,25 +28,25 @@ class StepDimTol_NonUniformZoneDefinition;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for NonUniformZoneDefinition
-class RWStepDimTol_RWNonUniformZoneDefinition 
-{
+class RWStepDimTol_RWNonUniformZoneDefinition {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWNonUniformZoneDefinition();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWNonUniformZoneDefinition();
-  
-  //! Reads NonUniformZoneDefinition
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_NonUniformZoneDefinition)& ent)  const;
-  
-  //! Writes NonUniformZoneDefinition
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_NonUniformZoneDefinition)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_NonUniformZoneDefinition)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads NonUniformZoneDefinition
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_NonUniformZoneDefinition) & ent) const;
+
+    //! Writes NonUniformZoneDefinition
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_NonUniformZoneDefinition) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_NonUniformZoneDefinition) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWNonUniformZoneDefinition_HeaderFile

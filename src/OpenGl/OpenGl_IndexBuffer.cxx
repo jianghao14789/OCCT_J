@@ -23,24 +23,21 @@ IMPLEMENT_STANDARD_RTTIEXT(OpenGl_IndexBuffer, OpenGl_Buffer)
 // function : OpenGl_IndexBuffer
 // purpose  :
 // =======================================================================
-OpenGl_IndexBuffer::OpenGl_IndexBuffer()
-: OpenGl_Buffer() {}
+OpenGl_IndexBuffer::OpenGl_IndexBuffer() : OpenGl_Buffer() {}
 
 // =======================================================================
 // function : GetTarget
 // purpose  :
 // =======================================================================
-unsigned int OpenGl_IndexBuffer::GetTarget() const
-{
-  return GL_ELEMENT_ARRAY_BUFFER;
+unsigned int OpenGl_IndexBuffer::GetTarget() const {
+    return GL_ELEMENT_ARRAY_BUFFER;
 }
 
 // =======================================================================
 // function : DumpJson
 // purpose  :
 // =======================================================================
-void OpenGl_IndexBuffer::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, OpenGl_Buffer)
+void OpenGl_IndexBuffer::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, OpenGl_Buffer)
 }

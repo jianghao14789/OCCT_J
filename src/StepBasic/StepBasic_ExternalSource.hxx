@@ -23,51 +23,30 @@
 #include <Standard_Transient.hxx>
 class StepBasic_SourceItem;
 
-
 class StepBasic_ExternalSource;
 DEFINE_STANDARD_HANDLE(StepBasic_ExternalSource, Standard_Transient)
 
 //! Representation of STEP entity ExternalSource
-class StepBasic_ExternalSource : public Standard_Transient
-{
+class StepBasic_ExternalSource : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_ExternalSource();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_ExternalSource();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const StepBasic_SourceItem& aSourceId);
-  
-  //! Returns field SourceId
-  Standard_EXPORT StepBasic_SourceItem SourceId() const;
-  
-  //! Set field SourceId
-  Standard_EXPORT void SetSourceId (const StepBasic_SourceItem& SourceId);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const StepBasic_SourceItem& aSourceId);
 
+    //! Returns field SourceId
+    Standard_EXPORT StepBasic_SourceItem SourceId() const;
 
+    //! Set field SourceId
+    Standard_EXPORT void SetSourceId(const StepBasic_SourceItem& SourceId);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepBasic_ExternalSource,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(StepBasic_ExternalSource, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  StepBasic_SourceItem theSourceId;
-
-
+    StepBasic_SourceItem theSourceId;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_ExternalSource_HeaderFile

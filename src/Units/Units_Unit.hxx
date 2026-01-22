@@ -31,23 +31,20 @@ class TCollection_HAsciiString;
 class Units_Quantity;
 class Units_Token;
 
-
 class Units_Unit;
 DEFINE_STANDARD_HANDLE(Units_Unit, Standard_Transient)
 
 //! This class defines an elementary word contained in
 //! a physical quantity.
-class Units_Unit : public Standard_Transient
-{
+class Units_Unit : public Standard_Transient {
 
 public:
-
-
     //! Creates  and returns a  unit.  <aname> is  the name of
     //! the  unit, <asymbol> is the  usual abbreviation of the
     //! unit,  and  <avalue> is the  value in relation to  the
     //! International System of Units.
-    Standard_EXPORT Units_Unit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue, const Handle(Units_Quantity)& aquantity);
+    Standard_EXPORT Units_Unit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue,
+                               const Handle(Units_Quantity) & aquantity);
 
     //! Creates  and returns a  unit.  <aname> is  the name of
     //! the  unit, <asymbol> is the  usual abbreviation of the
@@ -78,7 +75,7 @@ public:
     void Value(const Standard_Real avalue);
 
     //! Sets the physical Quantity <aquantity> to <me>.
-    void Quantity(const Handle(Units_Quantity)& aquantity);
+    void Quantity(const Handle(Units_Quantity) & aquantity);
 
     //! Starting with <me>, returns a new Token object.
     Standard_EXPORT virtual Handle(Units_Token) Token() const;
@@ -91,32 +88,17 @@ public:
     //! Useful for debugging
     Standard_EXPORT virtual void Dump(const Standard_Integer ashift, const Standard_Integer alevel) const;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Units_Unit, Standard_Transient)
 
 protected:
-
-
     Handle(TColStd_HSequenceOfHAsciiString) thesymbolssequence;
     Standard_Real thevalue;
 
-
 private:
-
-
     Handle(TCollection_HAsciiString) thename;
     Handle(Units_Quantity) thequantity;
-
-
 };
 
-
 #include <Units_Unit.lxx>
-
-
-
-
 
 #endif // _Units_Unit_HeaderFile

@@ -19,120 +19,105 @@
 #include <Standard_GUID.hxx>
 #include <TDF_Label.hxx>
 
-
-IMPLEMENT_STANDARD_RTTIEXT(TObj_TXYZ,TDF_Attribute)
+IMPLEMENT_STANDARD_RTTIEXT(TObj_TXYZ, TDF_Attribute)
 
 //=======================================================================
-//function : TObj_TXYZ
-//purpose  : 
+// function : TObj_TXYZ
+// purpose  :
 //=======================================================================
 
-TObj_TXYZ::TObj_TXYZ()
-{
+TObj_TXYZ::TObj_TXYZ() {}
+
+//=======================================================================
+// function : GetID
+// purpose  :
+//=======================================================================
+
+const Standard_GUID& TObj_TXYZ::GetID() {
+    static Standard_GUID theGUID("3bbefb50-e618-11d4-ba38-0060b0ee18ea");
+    return theGUID;
 }
 
 //=======================================================================
-//function : GetID
-//purpose  : 
+// function : ID
+// purpose  :
 //=======================================================================
 
-const Standard_GUID& TObj_TXYZ::GetID()
-{
-  static Standard_GUID theGUID ("3bbefb50-e618-11d4-ba38-0060b0ee18ea");
-  return theGUID;
+const Standard_GUID& TObj_TXYZ::ID() const {
+    return GetID();
 }
 
 //=======================================================================
-//function : ID
-//purpose  : 
+// function : Set
+// purpose  :
 //=======================================================================
 
-const Standard_GUID& TObj_TXYZ::ID() const
-{
-  return GetID();
+Handle(TObj_TXYZ) TObj_TXYZ::Set(const TDF_Label& theLabel, const gp_XYZ& theXYZ) {
+    Handle(TObj_TXYZ) A;
+    if (!theLabel.FindAttribute(TObj_TXYZ::GetID(), A)) {
+        A = new TObj_TXYZ;
+        theLabel.AddAttribute(A);
+    }
+    A->Set(theXYZ);
+    return A;
 }
 
 //=======================================================================
-//function : Set
-//purpose  : 
+// function : Set
+// purpose  :
 //=======================================================================
 
-Handle(TObj_TXYZ) TObj_TXYZ::Set (const TDF_Label& theLabel,
-                                          const gp_XYZ& theXYZ)
-{
-  Handle(TObj_TXYZ) A;
-  if (!theLabel.FindAttribute(TObj_TXYZ::GetID(), A))
-  {
-    A = new TObj_TXYZ;
-    theLabel.AddAttribute(A);
-  }
-  A->Set(theXYZ);
-  return A;
+void TObj_TXYZ::Set(const gp_XYZ& theXYZ) {
+    Backup();
+    myXYZ = theXYZ;
 }
 
 //=======================================================================
-//function : Set
-//purpose  : 
+// function : Get
+// purpose  :
 //=======================================================================
 
-void TObj_TXYZ::Set (const gp_XYZ& theXYZ)
-{
-  Backup();
-  myXYZ = theXYZ;
+gp_XYZ TObj_TXYZ::Get() const {
+    return myXYZ;
 }
 
 //=======================================================================
-//function : Get
-//purpose  : 
+// function : NewEmpty
+// purpose  :
 //=======================================================================
 
-gp_XYZ TObj_TXYZ::Get () const
-{
-  return myXYZ;
+Handle(TDF_Attribute) TObj_TXYZ::NewEmpty() const {
+    return new TObj_TXYZ();
 }
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : 
+// function : Restore
+// purpose  :
 //=======================================================================
 
-Handle(TDF_Attribute) TObj_TXYZ::NewEmpty () const
-{
-  return new TObj_TXYZ();
+void TObj_TXYZ::Restore(const Handle(TDF_Attribute) & theWith) {
+    Handle(TObj_TXYZ) R = Handle(TObj_TXYZ)::DownCast(theWith);
+    myXYZ = R->Get();
 }
 
 //=======================================================================
-//function : Restore
-//purpose  : 
+// function : Paste
+// purpose  :
 //=======================================================================
 
-void TObj_TXYZ::Restore (const Handle(TDF_Attribute)& theWith)
-{
-  Handle(TObj_TXYZ) R = Handle(TObj_TXYZ)::DownCast(theWith);
-  myXYZ = R->Get();
+void TObj_TXYZ::Paste(const Handle(TDF_Attribute) & theInto, const Handle(TDF_RelocationTable) & /* RT */) const {
+    Handle(TObj_TXYZ) R = Handle(TObj_TXYZ)::DownCast(theInto);
+    R->Set(myXYZ);
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void TObj_TXYZ::Paste (const Handle(TDF_Attribute)& theInto,
-                           const Handle(TDF_RelocationTable)& /* RT */) const
-{ 
-  Handle(TObj_TXYZ) R = Handle(TObj_TXYZ)::DownCast (theInto);
-  R->Set(myXYZ);
-}
-
-//=======================================================================
-//function : Dump
-//purpose  : 
-//=======================================================================
-
-Standard_OStream& TObj_TXYZ::Dump(Standard_OStream& theOS) const
-{
-  gp_XYZ aXYZ = Get();
-  Standard_OStream& anOS = TDF_Attribute::Dump( theOS );
-  anOS << "X: " << aXYZ.X() << "\tY: " << aXYZ.Y() << "\tZ: " << aXYZ.Z();
-  return anOS;
+Standard_OStream& TObj_TXYZ::Dump(Standard_OStream& theOS) const {
+    gp_XYZ aXYZ = Get();
+    Standard_OStream& anOS = TDF_Attribute::Dump(theOS);
+    anOS << "X: " << aXYZ.X() << "\tY: " << aXYZ.Y() << "\tZ: " << aXYZ.Z();
+    return anOS;
 }

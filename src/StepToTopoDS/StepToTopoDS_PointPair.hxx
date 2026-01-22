@@ -24,41 +24,20 @@
 class StepGeom_CartesianPoint;
 class StepToTopoDS_PointPairHasher;
 
-
 //! Stores a pair of Points from step
-class StepToTopoDS_PointPair 
-{
+class StepToTopoDS_PointPair {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT StepToTopoDS_PointPair(const Handle(StepGeom_CartesianPoint) & P1,
+                                           const Handle(StepGeom_CartesianPoint) & P2);
 
-  
-  Standard_EXPORT StepToTopoDS_PointPair(const Handle(StepGeom_CartesianPoint)& P1, const Handle(StepGeom_CartesianPoint)& P2);
-
-
-friend class StepToTopoDS_PointPairHasher;
-
+    friend class StepToTopoDS_PointPairHasher;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_CartesianPoint) myP1;
-  Handle(StepGeom_CartesianPoint) myP2;
-
-
+    Handle(StepGeom_CartesianPoint) myP1;
+    Handle(StepGeom_CartesianPoint) myP2;
 };
-
-
-
-
-
-
 
 #endif // _StepToTopoDS_PointPair_HeaderFile

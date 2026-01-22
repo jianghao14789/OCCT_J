@@ -31,50 +31,27 @@ class Transfer_ActorOfTransientProcess;
 DEFINE_STANDARD_HANDLE(Transfer_ActorOfTransientProcess, Transfer_ActorOfProcessForTransient)
 
 //! The original class was renamed. Compatibility only
-class Transfer_ActorOfTransientProcess : public Transfer_ActorOfProcessForTransient
-{
+class Transfer_ActorOfTransientProcess : public Transfer_ActorOfProcessForTransient {
 
 public:
+    Standard_EXPORT Transfer_ActorOfTransientProcess();
 
-  
-  Standard_EXPORT Transfer_ActorOfTransientProcess();
-  
-  Standard_EXPORT virtual Handle(Transfer_Binder) Transferring
-                         (const Handle(Standard_Transient)& start,
-                          const Handle(Transfer_ProcessForTransient)& TP,
-                          const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Handle(Transfer_Binder) Transfer
-                         (const Handle(Standard_Transient)& start,
-                          const Handle(Transfer_TransientProcess)& TP,
-                          const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT virtual Handle(Standard_Transient) TransferTransient
-                         (const Handle(Standard_Transient)& start,
-                          const Handle(Transfer_TransientProcess)& TP,
+    Standard_EXPORT virtual Handle(Transfer_Binder)
+        Transferring(const Handle(Standard_Transient) & start, const Handle(Transfer_ProcessForTransient) & TP,
+                     const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
+
+    Standard_EXPORT virtual Handle(Transfer_Binder)
+        Transfer(const Handle(Standard_Transient) & start, const Handle(Transfer_TransientProcess) & TP,
+                 const Message_ProgressRange& theProgress = Message_ProgressRange());
+
+    Standard_EXPORT virtual Handle(Standard_Transient)
+        TransferTransient(const Handle(Standard_Transient) & start, const Handle(Transfer_TransientProcess) & TP,
                           const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(Transfer_ActorOfTransientProcess,Transfer_ActorOfProcessForTransient)
+    DEFINE_STANDARD_RTTIEXT(Transfer_ActorOfTransientProcess, Transfer_ActorOfProcessForTransient)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Transfer_ActorOfTransientProcess_HeaderFile

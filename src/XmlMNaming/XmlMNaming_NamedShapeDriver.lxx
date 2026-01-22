@@ -14,11 +14,9 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : GetShapesLocations
-//purpose  : 
+// function : GetShapesLocations
+// purpose  :
 //=======================================================================
-inline TopTools_LocationSet& XmlMNaming_NamedShapeDriver::GetShapesLocations()
-{
-  return myShapeSet.ChangeLocations();
+inline TopTools_LocationSet& XmlMNaming_NamedShapeDriver::GetShapesLocations() {
+    return myShapeSet.ChangeLocations();
 }
-

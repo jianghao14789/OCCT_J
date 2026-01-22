@@ -17,35 +17,31 @@
 
 #include <StepDimTol_HArray1OfDatumReferenceModifier.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_GeneralDatumReference,StepRepr_ShapeAspect)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_GeneralDatumReference, StepRepr_ShapeAspect)
 
 //=======================================================================
-//function : StepDimTol_GeneralDatumReference
-//purpose  : 
+// function : StepDimTol_GeneralDatumReference
+// purpose  :
 //=======================================================================
 
-StepDimTol_GeneralDatumReference::StepDimTol_GeneralDatumReference ()
-{
+StepDimTol_GeneralDatumReference::StepDimTol_GeneralDatumReference() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepDimTol_GeneralDatumReference::Init(const Handle(TCollection_HAsciiString) & theName,
+                                            const Handle(TCollection_HAsciiString) & theDescription,
+                                            const Handle(StepRepr_ProductDefinitionShape) & theOfShape,
+                                            const StepData_Logical theProductDefinitional,
+                                            const StepDimTol_DatumOrCommonDatum& theBase,
+                                            const Standard_Boolean theHasModifiers,
+                                            const Handle(StepDimTol_HArray1OfDatumReferenceModifier) & theModifiers) {
+    StepRepr_ShapeAspect::Init(theName, theDescription, theOfShape, theProductDefinitional);
+    myBase = theBase;
+    if (theHasModifiers)
+        myModifiers = theModifiers;
+    else
+        myModifiers.Nullify();
 }
-
-//=======================================================================
-//function : Init
-//purpose  : 
-//=======================================================================
-
-void StepDimTol_GeneralDatumReference::Init (const Handle(TCollection_HAsciiString)& theName,
-                                             const Handle(TCollection_HAsciiString)& theDescription,
-                                             const Handle(StepRepr_ProductDefinitionShape)& theOfShape,
-                                             const StepData_Logical theProductDefinitional,
-                                             const StepDimTol_DatumOrCommonDatum& theBase,
-                                             const Standard_Boolean theHasModifiers,
-                                             const Handle(StepDimTol_HArray1OfDatumReferenceModifier)& theModifiers)
-{
-  StepRepr_ShapeAspect::Init(theName, theDescription, theOfShape, theProductDefinitional);
-  myBase = theBase;
-  if (theHasModifiers)
-    myModifiers = theModifiers;
-  else
-    myModifiers.Nullify();
-}
-    

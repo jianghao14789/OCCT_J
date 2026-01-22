@@ -25,48 +25,30 @@
 #include <gp_Pnt2d.hxx>
 class gp_Pnt2d;
 
-
-
-class Extrema_POnCurv2d 
-{
+class Extrema_POnCurv2d {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Creation of an indefinite point on curve.
+    Standard_EXPORT Extrema_POnCurv2d();
 
-  
-  //! Creation of an indefinite point on curve.
-  Standard_EXPORT Extrema_POnCurv2d();
-  
-  //! Creation of a point on curve with a parameter
-  //! value on the curve and a Pnt from gp.
-  Standard_EXPORT Extrema_POnCurv2d(const Standard_Real U, const gp_Pnt2d& P);
-  
-  //! sets the point and parameter values.
-  Standard_EXPORT void SetValues (const Standard_Real U, const gp_Pnt2d& P);
-  
-  //! Returns the point.
+    //! Creation of a point on curve with a parameter
+    //! value on the curve and a Pnt from gp.
+    Standard_EXPORT Extrema_POnCurv2d(const Standard_Real U, const gp_Pnt2d& P);
+
+    //! sets the point and parameter values.
+    Standard_EXPORT void SetValues(const Standard_Real U, const gp_Pnt2d& P);
+
+    //! Returns the point.
     const gp_Pnt2d& Value() const;
-  
-  //! Returns the parameter on the curve.
+
+    //! Returns the parameter on the curve.
     Standard_Real Parameter() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Real myU;
-  gp_Pnt2d myP;
-
-
+    Standard_Real myU;
+    gp_Pnt2d myP;
 };
 
 #define Pnt gp_Pnt2d
@@ -80,8 +62,5 @@ private:
 #undef Pnt_hxx
 #undef Extrema_Point
 #undef Extrema_Point_hxx
-
-
-
 
 #endif // _Extrema_POnCurv2d_HeaderFile

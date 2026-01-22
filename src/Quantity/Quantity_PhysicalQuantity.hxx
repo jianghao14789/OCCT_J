@@ -18,8 +18,7 @@
 #define _Quantity_PhysicalQuantity_HeaderFile
 
 //! List of all physical quantities(Afnor)
-enum Quantity_PhysicalQuantity
-{
+enum Quantity_PhysicalQuantity {
     Quantity_MASS,
     Quantity_PLANEANGLE,
     Quantity_SOLIDANGLE,

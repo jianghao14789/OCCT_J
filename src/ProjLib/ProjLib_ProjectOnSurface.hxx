@@ -23,39 +23,37 @@ class Geom_BSplineCurve;
 
 //! Project a curve on a  surface.  The result ( a  3D
 //! Curve)  will be an approximation
-class ProjLib_ProjectOnSurface 
-{
+class ProjLib_ProjectOnSurface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Create an empty projector.
+    Standard_EXPORT ProjLib_ProjectOnSurface();
 
-  //! Create an empty projector.
-  Standard_EXPORT ProjLib_ProjectOnSurface();
+    //! Create a projector normally to the surface <S>.
+    Standard_EXPORT ProjLib_ProjectOnSurface(const Handle(Adaptor3d_Surface) & S);
 
-  //! Create a projector normally to the surface <S>.
-  Standard_EXPORT ProjLib_ProjectOnSurface(const Handle(Adaptor3d_Surface)& S);
+    Standard_EXPORT virtual ~ProjLib_ProjectOnSurface();
 
-  Standard_EXPORT virtual ~ProjLib_ProjectOnSurface();
+    //! Set the Surface to <S>.
+    //! To compute the projection, you have to Load the Curve.
+    Standard_EXPORT void Load(const Handle(Adaptor3d_Surface) & S);
 
-  //! Set the Surface to <S>.
-  //! To compute the projection, you have to Load the Curve.
-  Standard_EXPORT void Load (const Handle(Adaptor3d_Surface)& S);
+    //! Compute the projection of the curve <C> on the Surface.
+    Standard_EXPORT void Load(const Handle(Adaptor3d_Curve) & C, const Standard_Real Tolerance);
 
-  //! Compute the projection of the curve <C> on the Surface.
-  Standard_EXPORT void Load (const Handle(Adaptor3d_Curve)& C, const Standard_Real Tolerance);
+    Standard_Boolean IsDone() const {
+        return myIsDone;
+    }
 
-  Standard_Boolean IsDone() const { return myIsDone; }
-
-  Standard_EXPORT Handle(Geom_BSplineCurve) BSpline() const;
+    Standard_EXPORT Handle(Geom_BSplineCurve) BSpline() const;
 
 private:
-
-  Handle(Adaptor3d_Curve) myCurve;
-  Handle(Adaptor3d_Surface) mySurface;
-  Standard_Real myTolerance;
-  Standard_Boolean myIsDone;
-  Handle(Geom_BSplineCurve) myResult;
-
+    Handle(Adaptor3d_Curve) myCurve;
+    Handle(Adaptor3d_Surface) mySurface;
+    Standard_Real myTolerance;
+    Standard_Boolean myIsDone;
+    Handle(Geom_BSplineCurve) myResult;
 };
 
 #endif // _ProjLib_ProjectOnSurface_HeaderFile

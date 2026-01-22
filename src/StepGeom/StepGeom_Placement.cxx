@@ -11,33 +11,27 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepGeom_CartesianPoint.hxx>
 #include <StepGeom_Placement.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepGeom_Placement,StepGeom_GeometricRepresentationItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepGeom_Placement, StepGeom_GeometricRepresentationItem)
 
-StepGeom_Placement::StepGeom_Placement ()  {}
+StepGeom_Placement::StepGeom_Placement() {}
 
-void StepGeom_Placement::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepGeom_CartesianPoint)& aLocation)
-{
-	// --- classe own fields ---
-	location = aLocation;
-	// --- classe inherited fields ---
-	StepRepr_RepresentationItem::Init(aName);
+void StepGeom_Placement::Init(const Handle(TCollection_HAsciiString) & aName,
+                              const Handle(StepGeom_CartesianPoint) & aLocation) {
+    // --- classe own fields ---
+    location = aLocation;
+    // --- classe inherited fields ---
+    StepRepr_RepresentationItem::Init(aName);
 }
 
-
-void StepGeom_Placement::SetLocation(const Handle(StepGeom_CartesianPoint)& aLocation)
-{
-	location = aLocation;
+void StepGeom_Placement::SetLocation(const Handle(StepGeom_CartesianPoint) & aLocation) {
+    location = aLocation;
 }
 
-Handle(StepGeom_CartesianPoint) StepGeom_Placement::Location() const
-{
-	return location;
+Handle(StepGeom_CartesianPoint) StepGeom_Placement::Location() const {
+    return location;
 }

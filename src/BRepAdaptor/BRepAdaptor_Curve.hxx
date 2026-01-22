@@ -56,11 +56,9 @@ DEFINE_STANDARD_HANDLE(BRepAdaptor_Curve, Adaptor3d_Curve)
 //! surface is used. It is possible to enforce using a
 //! curve on surface by creating  or initialising with
 //! an Edge and a Face.
-class BRepAdaptor_Curve : public Adaptor3d_Curve
-{
+class BRepAdaptor_Curve : public Adaptor3d_Curve {
     DEFINE_STANDARD_RTTIEXT(BRepAdaptor_Curve, Adaptor3d_Curve)
 public:
-
     //! Creates an undefined Curve with no Edge loaded.
     Standard_EXPORT BRepAdaptor_Curve();
 
@@ -136,7 +134,8 @@ public:
     //! parameters <First>  and <Last>. <Tol>  is used  to
     //! test for 3d points confusion.
     //! If <First> >= <Last>
-    Standard_EXPORT Handle(Adaptor3d_Curve) Trim(const Standard_Real First, const Standard_Real Last, const Standard_Real Tol) const Standard_OVERRIDE;
+    Standard_EXPORT Handle(Adaptor3d_Curve)
+        Trim(const Standard_Real First, const Standard_Real Last, const Standard_Real Tol) const Standard_OVERRIDE;
 
     Standard_EXPORT Standard_Boolean IsClosed() const Standard_OVERRIDE;
 
@@ -156,20 +155,18 @@ public:
     //! is not C1.
     Standard_EXPORT void D1(const Standard_Real U, gp_Pnt& P, gp_Vec& V) const Standard_OVERRIDE;
 
-
     //! Returns the point P of parameter U, the first and second
     //! derivatives V1 and V2.
     //! Raised if the continuity of the current interval
     //! is not C2.
     Standard_EXPORT void D2(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2) const Standard_OVERRIDE;
 
-
     //! Returns the point P of parameter U, the first, the second
     //! and the third derivative.
     //! Raised if the continuity of the current interval
     //! is not C3.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
-
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! The returned vector gives the value of the derivative for the
     //! order of derivation N.
@@ -201,12 +198,10 @@ public:
 
     Standard_EXPORT Standard_Integer NbKnots() const Standard_OVERRIDE;
 
-
     //! Warning:
     //! This will make a copy of the Bezier Curve since it applies to it myTsrf.
     //! Be careful when using this method.
     Standard_EXPORT Handle(Geom_BezierCurve) Bezier() const Standard_OVERRIDE;
-
 
     //! Warning:
     //! This will make a copy of the BSpline Curve since it applies to it myTsrf.
@@ -216,12 +211,10 @@ public:
     Standard_EXPORT Handle(Geom_OffsetCurve) OffsetCurve() const Standard_OVERRIDE;
 
 private:
-
     gp_Trsf myTrsf;
     GeomAdaptor_Curve myCurve;
     Handle(Adaptor3d_CurveOnSurface) myConSurf;
     TopoDS_Edge myEdge;
-
 };
 
 #endif // _BRepAdaptor_Curve_HeaderFile

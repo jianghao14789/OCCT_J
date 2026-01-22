@@ -19,7 +19,6 @@
 
 #include <StdPrs_ShapeTool.hxx>
 
-Standard_DEPRECATED("Alias to moved class StdPrs_ShapeTool")
-typedef StdPrs_ShapeTool Prs3d_ShapeTool;
+Standard_DEPRECATED("Alias to moved class StdPrs_ShapeTool") typedef StdPrs_ShapeTool Prs3d_ShapeTool;
 
 #endif // _Prs3d_ShapeTool_HeaderFile

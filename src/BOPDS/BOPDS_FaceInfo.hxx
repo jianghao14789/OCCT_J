@@ -27,153 +27,116 @@
 #include <Standard_Integer.hxx>
 #include <TColStd_MapOfInteger.hxx>
 
-
-
 //! The class BOPDS_FaceInfo is to store
 //! handy information about state of face
-class BOPDS_FaceInfo 
-{
+class BOPDS_FaceInfo {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    BOPDS_FaceInfo();
 
-  
+    virtual ~BOPDS_FaceInfo();
 
-  //! Empty constructor
-  BOPDS_FaceInfo();
+    //! Constructor
+    //! @param theAllocator the allocator to manage the memory
+    BOPDS_FaceInfo(const Handle(NCollection_BaseAllocator) & theAllocator);
 
-  virtual ~BOPDS_FaceInfo();
+    //! Clears the contents
+    void Clear();
 
-  //! Constructor
-  //! @param theAllocator the allocator to manage the memory
-  BOPDS_FaceInfo(const Handle(NCollection_BaseAllocator)& theAllocator);
-  
+    //! Modifier
+    //! Sets the index of the face <theI>
+    void SetIndex(const Standard_Integer theI);
 
-  //! Clears the contents
-  void Clear();
-  
-
-  //! Modifier
-  //! Sets the index of the face <theI>
-    void SetIndex (const Standard_Integer theI);
-  
-
-  //! Selector
-  //! Returns the index of the face
-  //!
-  //! In
+    //! Selector
+    //! Returns the index of the face
+    //!
+    //! In
     Standard_Integer Index() const;
-  
 
-  //! Selector
-  //! Returns the pave blocks of the face
-  //! that  have state In
+    //! Selector
+    //! Returns the pave blocks of the face
+    //! that  have state In
     const BOPDS_IndexedMapOfPaveBlock& PaveBlocksIn() const;
-  
 
-  //! Selector/Modifier
-  //! Returns the pave blocks
-  //! of the face
-  //! that  have state In
+    //! Selector/Modifier
+    //! Returns the pave blocks
+    //! of the face
+    //! that  have state In
     BOPDS_IndexedMapOfPaveBlock& ChangePaveBlocksIn();
-  
 
-  //! Selector
-  //! Returns the list of indices for vertices
-  //! of the face
-  //! that have state In
+    //! Selector
+    //! Returns the list of indices for vertices
+    //! of the face
+    //! that have state In
     const TColStd_MapOfInteger& VerticesIn() const;
-  
 
-  //! Selector/Modifier
-  //! Returns the list of indices for vertices
-  //! of the face
-  //! that have state In
-  //!
-  //! On
+    //! Selector/Modifier
+    //! Returns the list of indices for vertices
+    //! of the face
+    //! that have state In
+    //!
+    //! On
     TColStd_MapOfInteger& ChangeVerticesIn();
-  
 
-  //! Selector
-  //! Returns the pave blocks of the face
-  //! that  have state On
+    //! Selector
+    //! Returns the pave blocks of the face
+    //! that  have state On
     const BOPDS_IndexedMapOfPaveBlock& PaveBlocksOn() const;
-  
 
-  //! Selector/Modifier
-  //! Returns the pave blocks
-  //! of the face
-  //! that  have state On
+    //! Selector/Modifier
+    //! Returns the pave blocks
+    //! of the face
+    //! that  have state On
     BOPDS_IndexedMapOfPaveBlock& ChangePaveBlocksOn();
-  
 
-  //! Selector
-  //! Returns the list of indices for vertices
-  //! of the face
-  //! that have state On
+    //! Selector
+    //! Returns the list of indices for vertices
+    //! of the face
+    //! that have state On
     const TColStd_MapOfInteger& VerticesOn() const;
-  
 
-  //! Selector/Modifier
-  //! Returns the list of indices for vertices
-  //! of the face
-  //! that have state On
-  //!
-  //! Sections
+    //! Selector/Modifier
+    //! Returns the list of indices for vertices
+    //! of the face
+    //! that have state On
+    //!
+    //! Sections
     TColStd_MapOfInteger& ChangeVerticesOn();
-  
 
-  //! Selector
-  //! Returns the pave blocks of the face
-  //! that are  pave blocks of section edges
+    //! Selector
+    //! Returns the pave blocks of the face
+    //! that are  pave blocks of section edges
     const BOPDS_IndexedMapOfPaveBlock& PaveBlocksSc() const;
-  
+
     BOPDS_IndexedMapOfPaveBlock& ChangePaveBlocksSc();
-  
 
-  //! Selector
-  //! Returns the list of indices for section  vertices
-  //! of the face
+    //! Selector
+    //! Returns the list of indices for section  vertices
+    //! of the face
     const TColStd_MapOfInteger& VerticesSc() const;
-  
 
-  //! Selector/Modifier
-  //! Returns the list of indices for section  vertices
-  //! of the face
-  //!
-  //! Others
+    //! Selector/Modifier
+    //! Returns the list of indices for section  vertices
+    //! of the face
+    //!
+    //! Others
     TColStd_MapOfInteger& ChangeVerticesSc();
 
-
-
-
 protected:
-
-
-
-  Handle(NCollection_BaseAllocator) myAllocator;
-  Standard_Integer myIndex;
-  BOPDS_IndexedMapOfPaveBlock myPaveBlocksIn;
-  TColStd_MapOfInteger myVerticesIn;
-  BOPDS_IndexedMapOfPaveBlock myPaveBlocksOn;
-  TColStd_MapOfInteger myVerticesOn;
-  BOPDS_IndexedMapOfPaveBlock myPaveBlocksSc;
-  TColStd_MapOfInteger myVerticesSc;
-
+    Handle(NCollection_BaseAllocator) myAllocator;
+    Standard_Integer myIndex;
+    BOPDS_IndexedMapOfPaveBlock myPaveBlocksIn;
+    TColStd_MapOfInteger myVerticesIn;
+    BOPDS_IndexedMapOfPaveBlock myPaveBlocksOn;
+    TColStd_MapOfInteger myVerticesOn;
+    BOPDS_IndexedMapOfPaveBlock myPaveBlocksSc;
+    TColStd_MapOfInteger myVerticesSc;
 
 private:
-
-
-
-
-
 };
 
-
 #include <BOPDS_FaceInfo.lxx>
-
-
-
-
 
 #endif // _BOPDS_FaceInfo_HeaderFile

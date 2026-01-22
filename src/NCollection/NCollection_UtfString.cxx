@@ -21,22 +21,19 @@
 
 #if !defined(__ANDROID__)
 //=======================================================================
-//function : ~NCollection_UtfStringTool
-//purpose  :
+// function : ~NCollection_UtfStringTool
+// purpose  :
 //=======================================================================
-NCollection_UtfStringTool::~NCollection_UtfStringTool()
-{
+NCollection_UtfStringTool::~NCollection_UtfStringTool() {
     delete[] myWideBuffer;
 }
 
 //=======================================================================
-//function : FromLocale()
-//purpose  :
+// function : FromLocale()
+// purpose  :
 //=======================================================================
-wchar_t* NCollection_UtfStringTool::FromLocale(const char* theString)
-{
-    if (myWideBuffer != NULL)
-    {
+wchar_t* NCollection_UtfStringTool::FromLocale(const char* theString) {
+    if (myWideBuffer != NULL) {
         delete[] myWideBuffer;
         myWideBuffer = NULL;
     }
@@ -44,8 +41,7 @@ wchar_t* NCollection_UtfStringTool::FromLocale(const char* theString)
 #if defined(_WIN32)
     // use WinAPI
     int aWideSize = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, theString, -1, NULL, 0);
-    if (aWideSize <= 0)
-    {
+    if (aWideSize <= 0) {
         return NULL;
     }
 
@@ -56,8 +52,7 @@ wchar_t* NCollection_UtfStringTool::FromLocale(const char* theString)
     // this is size in bytes but should probably be enough to store string in wide chars
     // notice that these functions are sensitive to locale set by application!
     int aMbLen = mblen(theString, MB_CUR_MAX);
-    if (aMbLen <= 0)
-    {
+    if (aMbLen <= 0) {
         return NULL;
     }
 
@@ -69,20 +64,17 @@ wchar_t* NCollection_UtfStringTool::FromLocale(const char* theString)
 }
 
 //=======================================================================
-//function : ToLocale()
-//purpose  :
+// function : ToLocale()
+// purpose  :
 //=======================================================================
-bool NCollection_UtfStringTool::ToLocale(const wchar_t* theWideString,
-    char* theBuffer,
-    const Standard_Integer theSizeBytes)
-{
+bool NCollection_UtfStringTool::ToLocale(const wchar_t* theWideString, char* theBuffer,
+                                         const Standard_Integer theSizeBytes) {
 #if defined(_WIN32)
     int aMbBytes = WideCharToMultiByte(CP_ACP, 0, theWideString, -1, theBuffer, theSizeBytes, NULL, NULL);
 #else
     std::size_t aMbBytes = std::wcstombs(theBuffer, theWideString, theSizeBytes);
 #endif
-    if (aMbBytes <= 0)
-    {
+    if (aMbBytes <= 0) {
         *theBuffer = '\0';
         return false;
     }

@@ -14,59 +14,47 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <SelectMgr_CompositionFilter.hxx>
 #include <SelectMgr_Filter.hxx>
 #include <SelectMgr_ListIteratorOfListOfFilter.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(SelectMgr_CompositionFilter,SelectMgr_Filter)
+IMPLEMENT_STANDARD_RTTIEXT(SelectMgr_CompositionFilter, SelectMgr_Filter)
 
-void SelectMgr_CompositionFilter::Add(const Handle(SelectMgr_Filter)& afilter)
-{
-  myFilters.Append(afilter);
+void SelectMgr_CompositionFilter::Add(const Handle(SelectMgr_Filter) & afilter) {
+    myFilters.Append(afilter);
 }
 
-void SelectMgr_CompositionFilter::Remove(const Handle(SelectMgr_Filter)& afilter)
-{
-  SelectMgr_ListIteratorOfListOfFilter It(myFilters);
-  for(;It.More();It.Next()){
-    if (afilter==It.Value()){ 
-      myFilters.Remove(It);
-      return;
+void SelectMgr_CompositionFilter::Remove(const Handle(SelectMgr_Filter) & afilter) {
+    SelectMgr_ListIteratorOfListOfFilter It(myFilters);
+    for (; It.More(); It.Next()) {
+        if (afilter == It.Value()) {
+            myFilters.Remove(It);
+            return;
+        }
     }
-  }
 }
 
-
-Standard_Boolean SelectMgr_CompositionFilter::IsEmpty() const
-{
-  return myFilters.IsEmpty();
+Standard_Boolean SelectMgr_CompositionFilter::IsEmpty() const {
+    return myFilters.IsEmpty();
 }
 
-Standard_Boolean SelectMgr_CompositionFilter::IsIn(const Handle(SelectMgr_Filter)& afilter) const
-{
-  SelectMgr_ListIteratorOfListOfFilter It(myFilters);
-  for(;It.More();It.Next())
-    if (afilter==It.Value()) 
-      return Standard_True;
-  return Standard_False;
-
+Standard_Boolean SelectMgr_CompositionFilter::IsIn(const Handle(SelectMgr_Filter) & afilter) const {
+    SelectMgr_ListIteratorOfListOfFilter It(myFilters);
+    for (; It.More(); It.Next())
+        if (afilter == It.Value()) return Standard_True;
+    return Standard_False;
 }
 
-void  SelectMgr_CompositionFilter::Clear()
-{
-  myFilters.Clear();
+void SelectMgr_CompositionFilter::Clear() {
+    myFilters.Clear();
 }
 
+Standard_Boolean SelectMgr_CompositionFilter::ActsOn(const TopAbs_ShapeEnum aStandardMode) const {
+    SelectMgr_ListIteratorOfListOfFilter It(myFilters);
+    for (; It.More(); It.Next()) {
+        if (It.Value()->ActsOn(aStandardMode)) return Standard_True;
+    }
 
-Standard_Boolean SelectMgr_CompositionFilter::ActsOn(const TopAbs_ShapeEnum aStandardMode) const
-{
-  SelectMgr_ListIteratorOfListOfFilter It(myFilters);
-  for(;It.More();It.Next()){
-    if (It.Value()->ActsOn(aStandardMode))
-      return Standard_True;
-  }
-  
-  return Standard_False;
+    return Standard_False;
 }

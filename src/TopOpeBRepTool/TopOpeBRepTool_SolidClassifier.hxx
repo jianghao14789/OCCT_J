@@ -32,62 +32,38 @@ class TopoDS_Solid;
 class gp_Pnt;
 class TopoDS_Shell;
 
-
-
-class TopOpeBRepTool_SolidClassifier 
-{
+class TopOpeBRepTool_SolidClassifier {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopOpeBRepTool_SolidClassifier();
 
-  
-  Standard_EXPORT TopOpeBRepTool_SolidClassifier();
-  
-  Standard_EXPORT void Clear();
-  
-  Standard_EXPORT ~TopOpeBRepTool_SolidClassifier();
-  
-  Standard_EXPORT void LoadSolid (const TopoDS_Solid& S);
-  
-  //! compute the position of point <P> regarding with the
-  //! geometric domain of the solid <S>.
-  Standard_EXPORT TopAbs_State Classify (const TopoDS_Solid& S, const gp_Pnt& P, const Standard_Real Tol);
-  
-  Standard_EXPORT void LoadShell (const TopoDS_Shell& S);
-  
-  //! compute the position of point <P> regarding with the
-  //! geometric domain of the shell <S>.
-  Standard_EXPORT TopAbs_State Classify (const TopoDS_Shell& S, const gp_Pnt& P, const Standard_Real Tol);
-  
-  Standard_EXPORT TopAbs_State State() const;
+    Standard_EXPORT void Clear();
 
+    Standard_EXPORT ~TopOpeBRepTool_SolidClassifier();
 
+    Standard_EXPORT void LoadSolid(const TopoDS_Solid& S);
 
+    //! compute the position of point <P> regarding with the
+    //! geometric domain of the solid <S>.
+    Standard_EXPORT TopAbs_State Classify(const TopoDS_Solid& S, const gp_Pnt& P, const Standard_Real Tol);
+
+    Standard_EXPORT void LoadShell(const TopoDS_Shell& S);
+
+    //! compute the position of point <P> regarding with the
+    //! geometric domain of the shell <S>.
+    Standard_EXPORT TopAbs_State Classify(const TopoDS_Shell& S, const gp_Pnt& P, const Standard_Real Tol);
+
+    Standard_EXPORT TopAbs_State State() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  TopOpeBRepTool_PSoClassif myPClassifier;
-  TopTools_IndexedDataMapOfShapeAddress myShapeClassifierMap;
-  TopAbs_State myState;
-  TopoDS_Shell myShell;
-  TopoDS_Solid mySolid;
-  BRep_Builder myBuilder;
-
-
+    TopOpeBRepTool_PSoClassif myPClassifier;
+    TopTools_IndexedDataMapOfShapeAddress myShapeClassifierMap;
+    TopAbs_State myState;
+    TopoDS_Shell myShell;
+    TopoDS_Solid mySolid;
+    BRep_Builder myBuilder;
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRepTool_SolidClassifier_HeaderFile

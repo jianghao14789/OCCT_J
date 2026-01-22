@@ -23,10 +23,6 @@
 //! - IFSelect_FailOnly gives information on failures only
 //! - IFSelect_FailAndWarn gives information on both
 //! failures and warnings. used to pilot PrintCheckList
-enum IFSelect_PrintFail
-{
-IFSelect_FailOnly,
-IFSelect_FailAndWarn
-};
+enum IFSelect_PrintFail { IFSelect_FailOnly, IFSelect_FailAndWarn };
 
 #endif // _IFSelect_PrintFail_HeaderFile

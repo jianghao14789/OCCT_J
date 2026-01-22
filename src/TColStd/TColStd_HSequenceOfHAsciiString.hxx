@@ -21,5 +21,4 @@
 
 DEFINE_HSEQUENCE(TColStd_HSequenceOfHAsciiString, TColStd_SequenceOfHAsciiString)
 
-
 #endif

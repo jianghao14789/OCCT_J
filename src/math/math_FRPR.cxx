@@ -12,12 +12,12 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math_BracketMinimum.hxx>
 #include <math_BrentMinimum.hxx>
@@ -40,21 +40,14 @@ class DirFunctionTer : public math_Function {
     math_MultipleVarFunction* F;
 
 public:
-
-    DirFunctionTer(math_Vector& V1,
-        math_Vector& V2,
-        math_Vector& V3,
-        math_MultipleVarFunction& f);
+    DirFunctionTer(math_Vector& V1, math_Vector& V2, math_Vector& V3, math_MultipleVarFunction& f);
 
     void Initialize(const math_Vector& p0, const math_Vector& dir);
 
     virtual Standard_Boolean Value(const Standard_Real x, Standard_Real& fval);
 };
 
-DirFunctionTer::DirFunctionTer(math_Vector& V1,
-    math_Vector& V2,
-    math_Vector& V3,
-    math_MultipleVarFunction& f) {
+DirFunctionTer::DirFunctionTer(math_Vector& V1, math_Vector& V2, math_Vector& V3, math_MultipleVarFunction& f) {
 
     P0 = &V1;
     Dir = &V2;
@@ -62,8 +55,7 @@ DirFunctionTer::DirFunctionTer(math_Vector& V1,
     F = &f;
 }
 
-void DirFunctionTer::Initialize(const math_Vector& p0,
-    const math_Vector& dir) {
+void DirFunctionTer::Initialize(const math_Vector& p0, const math_Vector& dir) {
 
     *P0 = p0;
     *Dir = dir;
@@ -78,10 +70,7 @@ Standard_Boolean DirFunctionTer::Value(const Standard_Real x, Standard_Real& fva
     return F->Value(*P, fval);
 }
 
-static Standard_Boolean MinimizeDirection(math_Vector& P,
-    math_Vector& Dir,
-    Standard_Real& Result,
-    DirFunctionTer& F) {
+static Standard_Boolean MinimizeDirection(math_Vector& P, math_Vector& Dir, Standard_Real& Result, DirFunctionTer& F) {
 
     Standard_Real ax, xx, bx;
 
@@ -103,44 +92,27 @@ static Standard_Boolean MinimizeDirection(math_Vector& P,
 }
 
 //=======================================================================
-//function : math_FRPR
-//purpose  : Constructor
+// function : math_FRPR
+// purpose  : Constructor
 //=======================================================================
-math_FRPR::math_FRPR(const math_MultipleVarFunctionWithGradient& theFunction,
-    const Standard_Real                         theTolerance,
-    const Standard_Integer                      theNbIterations,
-    const Standard_Real                         theZEPS)
+math_FRPR::math_FRPR(const math_MultipleVarFunctionWithGradient& theFunction, const Standard_Real theTolerance,
+                     const Standard_Integer theNbIterations, const Standard_Real theZEPS)
 
-    : TheLocation(1, theFunction.NbVariables()),
-    TheGradient(1, theFunction.NbVariables()),
-    TheMinimum(0.0),
-    PreviousMinimum(0.0),
-    XTol(theTolerance),
-    EPSZ(theZEPS),
-    Done(Standard_False),
-    Iter(0),
-    State(0),
-    TheStatus(math_NotBracketed),
-    Itermax(theNbIterations)
-{
-}
+    : TheLocation(1, theFunction.NbVariables()), TheGradient(1, theFunction.NbVariables()), TheMinimum(0.0),
+      PreviousMinimum(0.0), XTol(theTolerance), EPSZ(theZEPS), Done(Standard_False), Iter(0), State(0),
+      TheStatus(math_NotBracketed), Itermax(theNbIterations) {}
 
 //=======================================================================
-//function : ~math_FRPR
-//purpose  : Destructor
+// function : ~math_FRPR
+// purpose  : Destructor
 //=======================================================================
-math_FRPR::~math_FRPR()
-{
-}
-
+math_FRPR::~math_FRPR() {}
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
-void  math_FRPR::Perform(math_MultipleVarFunctionWithGradient& F,
-    const math_Vector& StartingPoint)
-{
+void math_FRPR::Perform(math_MultipleVarFunctionWithGradient& F, const math_Vector& StartingPoint) {
     Standard_Boolean Good;
     Standard_Integer n = TheLocation.Length();
     Standard_Integer j, its;
@@ -168,8 +140,7 @@ void  math_FRPR::Perform(math_MultipleVarFunctionWithGradient& F,
     for (its = 1; its <= Itermax; its++) {
         Iter = its;
 
-        Standard_Boolean IsGood = MinimizeDirection(TheLocation,
-            TheGradient, TheMinimum, F_Dir);
+        Standard_Boolean IsGood = MinimizeDirection(TheLocation, TheGradient, TheMinimum, F_Dir);
         if (!IsGood) {
             Done = Standard_False;
             TheStatus = math_DirectionSearchError;
@@ -194,11 +165,11 @@ void  math_FRPR::Perform(math_MultipleVarFunctionWithGradient& F,
         for (j = 1; j <= n; j++) {
             gg += g(j) * g(j);
             //	   dgg += TheGradient(j)*TheGradient(j);  //for Fletcher-Reeves
-            dgg += (TheGradient(j) + g(j)) * TheGradient(j);  //for Polak-Ribiere
+            dgg += (TheGradient(j) + g(j)) * TheGradient(j); // for Polak-Ribiere
         }
 
         if (gg == 0.0) {
-            //Unlikely. If gradient is exactly 0 then we are already done.
+            // Unlikely. If gradient is exactly 0 then we are already done.
             Done = Standard_False;
             TheStatus = math_FunctionError;
             return;
@@ -215,19 +186,17 @@ void  math_FRPR::Perform(math_MultipleVarFunctionWithGradient& F,
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
-void math_FRPR::Dump(Standard_OStream& o) const
-{
+void math_FRPR::Dump(Standard_OStream& o) const {
     o << "math_FRPR ";
     if (Done) {
         o << " Status = Done \n";
         o << " Location Vector = " << TheLocation << "\n";
         o << " Minimum value = " << TheMinimum << "\n";
         o << " Number of iterations = " << Iter << "\n";
-    }
-    else {
+    } else {
         o << " Status = not Done because " << (Standard_Integer)TheStatus << "\n";
     }
 }

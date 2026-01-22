@@ -27,48 +27,27 @@ class StepBasic_CharacterizedObject;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CharacterizedObject
-class RWStepBasic_RWCharacterizedObject 
-{
+class RWStepBasic_RWCharacterizedObject {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWCharacterizedObject();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWCharacterizedObject();
-  
-  //! Reads CharacterizedObject
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_CharacterizedObject)& ent) const;
-  
-  //! Writes CharacterizedObject
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_CharacterizedObject)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_CharacterizedObject)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CharacterizedObject
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_CharacterizedObject) & ent) const;
 
+    //! Writes CharacterizedObject
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_CharacterizedObject) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_CharacterizedObject) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWCharacterizedObject_HeaderFile

@@ -27,48 +27,26 @@ class StepRepr_Extension;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Extension
-class RWStepRepr_RWExtension 
-{
+class RWStepRepr_RWExtension {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWExtension();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWExtension();
-  
-  //! Reads Extension
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_Extension)& ent) const;
-  
-  //! Writes Extension
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_Extension)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_Extension)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Extension
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_Extension) & ent) const;
 
+    //! Writes Extension
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_Extension) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_Extension) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWExtension_HeaderFile

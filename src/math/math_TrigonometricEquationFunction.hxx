@@ -30,15 +30,9 @@ class math_TrigonometricEquationFunction : public math_FunctionWithDerivative {
     Standard_Real myEE;
 
 public:
-
-    math_TrigonometricEquationFunction(const Standard_Real A,
-        const Standard_Real B,
-        const Standard_Real C,
-        const Standard_Real D,
-        const Standard_Real E)
-        : myAA(A), myBB(B), myCC(C), myDD(D), myEE(E)
-    {
-    }
+    math_TrigonometricEquationFunction(const Standard_Real A, const Standard_Real B, const Standard_Real C,
+                                       const Standard_Real D, const Standard_Real E)
+        : myAA(A), myBB(B), myCC(C), myDD(D), myEE(E) {}
 
     Standard_Boolean Value(const Standard_Real X, Standard_Real& F) {
         Standard_Real CN = cos(X), SN = sin(X);

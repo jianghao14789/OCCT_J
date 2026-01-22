@@ -22,8 +22,10 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DoubleMap.hxx>
 
-typedef NCollection_DoubleMap<Handle(Standard_Type),Standard_Integer,TColStd_MapTransientHasher,TColStd_MapIntegerHasher> BinMDF_TypeIdMap;
-typedef NCollection_DoubleMap<Handle(Standard_Type),Standard_Integer,TColStd_MapTransientHasher,TColStd_MapIntegerHasher>::Iterator BinMDF_DoubleMapIteratorOfTypeIdMap;
-
+typedef NCollection_DoubleMap<Handle(Standard_Type), Standard_Integer, TColStd_MapTransientHasher,
+                              TColStd_MapIntegerHasher>
+    BinMDF_TypeIdMap;
+typedef NCollection_DoubleMap<Handle(Standard_Type), Standard_Integer, TColStd_MapTransientHasher,
+                              TColStd_MapIntegerHasher>::Iterator BinMDF_DoubleMapIteratorOfTypeIdMap;
 
 #endif

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <DsgPrs_ShadedPlanePresentation.hxx>
 #include <gp_Pnt.hxx>
 #include <Graphic3d_ArrayOfPolygons.hxx>
@@ -25,23 +24,20 @@
 #include <Prs3d_ShadingAspect.hxx>
 
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
-void DsgPrs_ShadedPlanePresentation::Add(const Handle(Prs3d_Presentation)& aPresentation,
-					 const Handle(Prs3d_Drawer)& aDrawer,	     
-					 const gp_Pnt& aPt1, 
-					 const gp_Pnt& aPt2,
-					 const gp_Pnt& aPt3)
-{
-  Handle(Graphic3d_Group) aGroup = aPresentation->CurrentGroup();
-  aGroup->SetPrimitivesAspect(aDrawer->PlaneAspect()->EdgesAspect()->Aspect());
-  aGroup->SetPrimitivesAspect(aDrawer->ShadingAspect()->Aspect());
+void DsgPrs_ShadedPlanePresentation::Add(const Handle(Prs3d_Presentation) & aPresentation,
+                                         const Handle(Prs3d_Drawer) & aDrawer, const gp_Pnt& aPt1, const gp_Pnt& aPt2,
+                                         const gp_Pnt& aPt3) {
+    Handle(Graphic3d_Group) aGroup = aPresentation->CurrentGroup();
+    aGroup->SetPrimitivesAspect(aDrawer->PlaneAspect()->EdgesAspect()->Aspect());
+    aGroup->SetPrimitivesAspect(aDrawer->ShadingAspect()->Aspect());
 
-  Handle(Graphic3d_ArrayOfPolygons) aPrims = new Graphic3d_ArrayOfPolygons(4);
-  aPrims->AddVertex(aPt1);
-  aPrims->AddVertex(aPt2);
-  aPrims->AddVertex(aPt3);
-  aPrims->AddVertex(aPt1);
-  aGroup->AddPrimitiveArray(aPrims);
+    Handle(Graphic3d_ArrayOfPolygons) aPrims = new Graphic3d_ArrayOfPolygons(4);
+    aPrims->AddVertex(aPt1);
+    aPrims->AddVertex(aPt2);
+    aPrims->AddVertex(aPt3);
+    aPrims->AddVertex(aPt1);
+    aGroup->AddPrimitiveArray(aPrims);
 }

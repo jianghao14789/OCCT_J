@@ -40,34 +40,27 @@ class TopoDS_Shape;
 //! tracking the modification of the input shapes during
 //! the operation. It uses the *BRepTools_History* tool
 //! as a storer for history objects.
-class BOPAlgo_BuilderShape : public BOPAlgo_Algo
-{
+class BOPAlgo_BuilderShape : public BOPAlgo_Algo {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
 public: //! @name Getting the result
-
     //! Returns the result of algorithm
-    const TopoDS_Shape& Shape() const { return myShape; }
-
+    const TopoDS_Shape& Shape() const {
+        return myShape;
+    }
 
 public: //! @name History methods
-
     //! Returns the list of shapes Modified from the shape theS.
-    const TopTools_ListOfShape& Modified(const TopoDS_Shape& theS)
-    {
-        if (myFillHistory && myHistory)
-            return myHistory->Modified(theS);
+    const TopTools_ListOfShape& Modified(const TopoDS_Shape& theS) {
+        if (myFillHistory && myHistory) return myHistory->Modified(theS);
         myHistShapes.Clear();
         return myHistShapes;
     }
 
     //! Returns the list of shapes Generated from the shape theS.
-    const TopTools_ListOfShape& Generated(const TopoDS_Shape& theS)
-    {
-        if (myFillHistory && myHistory)
-            return myHistory->Generated(theS);
+    const TopTools_ListOfShape& Generated(const TopoDS_Shape& theS) {
+        if (myFillHistory && myHistory) return myHistory->Generated(theS);
         myHistShapes.Clear();
         return myHistShapes;
     }
@@ -75,34 +68,28 @@ public: //! @name History methods
     //! Returns true if the shape theS has been deleted.
     //! In this case the shape will have no Modified elements,
     //! but can have Generated elements.
-    Standard_Boolean IsDeleted(const TopoDS_Shape& theS)
-    {
+    Standard_Boolean IsDeleted(const TopoDS_Shape& theS) {
         return (myFillHistory && myHistory ? myHistory->IsRemoved(theS) : Standard_False);
     }
 
     //! Returns true if any of the input shapes has been modified during operation.
-    Standard_Boolean HasModified() const
-    {
+    Standard_Boolean HasModified() const {
         return (myFillHistory && myHistory ? myHistory->HasModified() : Standard_False);
     }
 
     //! Returns true if any of the input shapes has generated shapes during operation.
-    Standard_Boolean HasGenerated() const
-    {
+    Standard_Boolean HasGenerated() const {
         return (myFillHistory && myHistory ? myHistory->HasGenerated() : Standard_False);
     }
 
     //! Returns true if any of the input shapes has been deleted during operation.
-    Standard_Boolean HasDeleted() const
-    {
+    Standard_Boolean HasDeleted() const {
         return (myFillHistory && myHistory ? myHistory->HasRemoved() : Standard_False);
     }
 
     //! History Tool
-    Handle(BRepTools_History) History()
-    {
-        if (myFillHistory)
-        {
+    Handle(BRepTools_History) History() {
+        if (myFillHistory) {
             if (myHistory.IsNull())
                 // It seems the algorithm has exited with error before filling
                 // the history. Initialize the History tool to return the empty
@@ -119,52 +106,40 @@ public: //! @name History methods
     }
 
 public: //! @name Enabling/Disabling the history collection.
-
     //! Allows disabling the history collection
-    void SetToFillHistory(const Standard_Boolean theHistFlag) { myFillHistory = theHistFlag; }
+    void SetToFillHistory(const Standard_Boolean theHistFlag) {
+        myFillHistory = theHistFlag;
+    }
 
     //! Returns flag of history availability
-    Standard_Boolean HasHistory() const { return myFillHistory; }
+    Standard_Boolean HasHistory() const {
+        return myFillHistory;
+    }
 
 protected: //! @name Constructors
-
     //! Empty constructor
-    BOPAlgo_BuilderShape()
-        :
-        BOPAlgo_Algo(),
-        myFillHistory(Standard_True)
-    {
-    }
+    BOPAlgo_BuilderShape() : BOPAlgo_Algo(), myFillHistory(Standard_True) {}
 
     //! Constructor with allocator
-    BOPAlgo_BuilderShape(const Handle(NCollection_BaseAllocator)& theAllocator)
-        :
-        BOPAlgo_Algo(theAllocator),
-        myFillHistory(Standard_True)
-    {
-    }
-
+    BOPAlgo_BuilderShape(const Handle(NCollection_BaseAllocator) & theAllocator)
+        : BOPAlgo_Algo(theAllocator), myFillHistory(Standard_True) {}
 
 protected: //! @name Clearing
-
     //! Clears the content of the algorithm.
-    virtual void Clear() Standard_OVERRIDE
-    {
+    virtual void Clear() Standard_OVERRIDE {
         BOPAlgo_Algo::Clear();
         myHistory.Nullify();
         myMapShape.Clear();
     }
 
-protected: //! @name Fields
-
+protected:                //! @name Fields
     TopoDS_Shape myShape; //!< Result of the operation
 
-    TopTools_ListOfShape myHistShapes;   //!< Storer for the history shapes
-    TopTools_MapOfShape myMapShape;      //!< cached map of all arguments shapes
+    TopTools_ListOfShape myHistShapes; //!< Storer for the history shapes
+    TopTools_MapOfShape myMapShape;    //!< cached map of all arguments shapes
 
     Standard_Boolean myFillHistory;      //!< Controls the history filling
     Handle(BRepTools_History) myHistory; //!< History tool
-
 };
 
 #endif // _BOPAlgo_BuilderShape_HeaderFile

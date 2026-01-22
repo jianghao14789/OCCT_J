@@ -22,15 +22,6 @@
 #include <Transfer_DataInfo.hxx>
 #include <Transfer_Finder.hxx>
 
- 
-
-
-
-
-
-
-
-
 #define TheKey Handle(Standard_Transient)
 #define TheKey_hxx <Standard_Transient.hxx>
 #define TheHasher TColStd_MapTransientHasher
@@ -41,4 +32,3 @@
 #define Transfer_Mapper_hxx <Transfer_TransientMapper.hxx>
 #define Handle_Transfer_Mapper Handle(Transfer_TransientMapper)
 #include <Transfer_Mapper.gxx>
-

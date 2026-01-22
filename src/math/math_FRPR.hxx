@@ -31,8 +31,6 @@ class Standard_DimensionError;
 class StdFail_NotDone;
 class math_MultipleVarFunctionWithGradient;
 
-
-
 //! this class implements the Fletcher-Reeves-Polak_Ribiere minimization
 //! algorithm of a function of multiple variables.
 //! Knowledge of the function's gradient is required.
@@ -42,14 +40,16 @@ public:
 
     //! Initializes the computation of the minimum of F.
     //! Warning: constructor does not perform computations.
-    Standard_EXPORT math_FRPR(const math_MultipleVarFunctionWithGradient& theFunction, const Standard_Real theTolerance, const Standard_Integer theNbIterations = 200, const Standard_Real theZEPS = 1.0e-12);
+    Standard_EXPORT math_FRPR(const math_MultipleVarFunctionWithGradient& theFunction, const Standard_Real theTolerance,
+                              const Standard_Integer theNbIterations = 200, const Standard_Real theZEPS = 1.0e-12);
 
     //! Destructor
     Standard_EXPORT virtual ~math_FRPR();
 
     //! The solution F = Fi is found when
     //! 2.0 * abs(Fi - Fi-1) <= Tolerance * (abs(Fi) + abs(Fi-1) + ZEPS).
-    Standard_EXPORT void Perform(math_MultipleVarFunctionWithGradient& theFunction, const math_Vector& theStartingPoint);
+    Standard_EXPORT void Perform(math_MultipleVarFunctionWithGradient& theFunction,
+                                 const math_Vector& theStartingPoint);
 
     //! The solution F = Fi is found when:
     //! 2.0 * abs(Fi - Fi-1) <= Tolerance * (abs(Fi) + abs(Fi-1)) + ZEPS.

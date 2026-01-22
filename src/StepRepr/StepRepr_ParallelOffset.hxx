@@ -28,31 +28,31 @@ class StepRepr_ProductDefinitionShape;
 class StepRepr_ParallelOffset;
 DEFINE_STANDARD_HANDLE(StepRepr_ParallelOffset, StepRepr_DerivedShapeAspect)
 //! Added for Dimensional Tolerances
-class StepRepr_ParallelOffset : public StepRepr_DerivedShapeAspect
-{
+class StepRepr_ParallelOffset : public StepRepr_DerivedShapeAspect {
 
 public:
-  
-  Standard_EXPORT StepRepr_ParallelOffset();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT   void Init (const Handle(TCollection_HAsciiString)& theName, const Handle(TCollection_HAsciiString)& theDescription, const Handle(StepRepr_ProductDefinitionShape)& theOfShape, const StepData_Logical theProductDefinitional, const Handle(StepBasic_MeasureWithUnit)& theOffset) ;
-  
-  //! Returns field Offset  
-  inline Handle(StepBasic_MeasureWithUnit) Offset () const
-  {
-    return offset;
-  }
-  
-  //! Set field Offset  
-  inline void SetOffset (const Handle(StepBasic_MeasureWithUnit)& theOffset)
-  {
-    offset = theOffset;
-  }
+    Standard_EXPORT StepRepr_ParallelOffset();
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ParallelOffset,StepRepr_DerivedShapeAspect)
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theName,
+                              const Handle(TCollection_HAsciiString) & theDescription,
+                              const Handle(StepRepr_ProductDefinitionShape) & theOfShape,
+                              const StepData_Logical theProductDefinitional,
+                              const Handle(StepBasic_MeasureWithUnit) & theOffset);
+
+    //! Returns field Offset
+    inline Handle(StepBasic_MeasureWithUnit) Offset() const {
+        return offset;
+    }
+
+    //! Set field Offset
+    inline void SetOffset(const Handle(StepBasic_MeasureWithUnit) & theOffset) {
+        offset = theOffset;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ParallelOffset, StepRepr_DerivedShapeAspect)
 
 private:
-  Handle(StepBasic_MeasureWithUnit) offset;
+    Handle(StepBasic_MeasureWithUnit) offset;
 };
 #endif // _StepRepr_ParallelOffset_HeaderFile

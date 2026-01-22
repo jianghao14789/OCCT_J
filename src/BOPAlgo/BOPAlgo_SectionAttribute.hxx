@@ -20,70 +20,51 @@
 
 //! Class is a container of the flags used
 //! by intersection algorithm
-class BOPAlgo_SectionAttribute
-{
+class BOPAlgo_SectionAttribute {
 public:
-
     //! Default constructor
-    BOPAlgo_SectionAttribute()
-        : myApproximation(Standard_True),
-        myPCurve1(Standard_True),
-        myPCurve2(Standard_True) {
-    }
+    BOPAlgo_SectionAttribute() : myApproximation(Standard_True), myPCurve1(Standard_True), myPCurve2(Standard_True) {}
 
     //! Constructor
-    BOPAlgo_SectionAttribute(const Standard_Boolean theAproximation,
-        const Standard_Boolean thePCurveOnS1,
-        const Standard_Boolean thePCurveOnS2)
-        : myApproximation(theAproximation),
-        myPCurve1(thePCurveOnS1),
-        myPCurve2(thePCurveOnS2) {
-    }
+    BOPAlgo_SectionAttribute(const Standard_Boolean theAproximation, const Standard_Boolean thePCurveOnS1,
+                             const Standard_Boolean thePCurveOnS2)
+        : myApproximation(theAproximation), myPCurve1(thePCurveOnS1), myPCurve2(thePCurveOnS2) {}
 
     //! Sets the Approximation flag
-    void Approximation(const Standard_Boolean theApprox)
-    {
+    void Approximation(const Standard_Boolean theApprox) {
         myApproximation = theApprox;
     }
 
     //! Sets the PCurveOnS1 flag
-    void PCurveOnS1(const Standard_Boolean thePCurveOnS1)
-    {
+    void PCurveOnS1(const Standard_Boolean thePCurveOnS1) {
         myPCurve1 = thePCurveOnS1;
     }
 
     //! Sets the PCurveOnS2 flag
-    void PCurveOnS2(const Standard_Boolean thePCurveOnS2)
-    {
+    void PCurveOnS2(const Standard_Boolean thePCurveOnS2) {
         myPCurve2 = thePCurveOnS2;
     }
 
     //! Returns the Approximation flag
-    Standard_Boolean Approximation() const
-    {
+    Standard_Boolean Approximation() const {
         return myApproximation;
     }
 
     //! Returns the PCurveOnS1 flag
-    Standard_Boolean PCurveOnS1() const
-    {
+    Standard_Boolean PCurveOnS1() const {
         return myPCurve1;
     }
 
     //! Returns the PCurveOnS2 flag
-    Standard_Boolean PCurveOnS2() const
-    {
+    Standard_Boolean PCurveOnS2() const {
         return myPCurve2;
     }
 
 protected:
-
 private:
-
     Standard_Boolean myApproximation;
     Standard_Boolean myPCurve1;
     Standard_Boolean myPCurve2;
-
 };
 
 #endif // _BOPAlgo_SectionAttribute_HeaderFile

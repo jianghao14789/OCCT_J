@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepVisual_HArray1OfPresentationStyleAssignment, StepVisual_Array1OfPresentationStyleAssignment)
 
-
 #endif

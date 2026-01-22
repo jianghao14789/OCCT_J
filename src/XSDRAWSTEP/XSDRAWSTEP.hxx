@@ -23,41 +23,18 @@
 
 #include <Draw_Interpretor.hxx>
 
-
 //! XSDRAW for STEP AP214 and AP203
-class XSDRAWSTEP 
-{
+class XSDRAWSTEP {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT static void Init();
 
-  
-  Standard_EXPORT static void Init();
-  
-  //! Inits commands to access product data and to write shapes
-  Standard_EXPORT static void InitCommands (Draw_Interpretor& theCommands);
-
-
-
+    //! Inits commands to access product data and to write shapes
+    Standard_EXPORT static void InitCommands(Draw_Interpretor& theCommands);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _XSDRAWSTEP_HeaderFile

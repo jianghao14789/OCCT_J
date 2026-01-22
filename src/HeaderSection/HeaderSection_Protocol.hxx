@@ -25,46 +25,25 @@
 #include <Standard_Type.hxx>
 #include <Standard_CString.hxx>
 
-
 class HeaderSection_Protocol;
 DEFINE_STANDARD_HANDLE(HeaderSection_Protocol, StepData_Protocol)
 
 //! Protocol for HeaderSection Entities
 //! It requires HeaderSection as a Resource
-class HeaderSection_Protocol : public StepData_Protocol
-{
+class HeaderSection_Protocol : public StepData_Protocol {
 
 public:
+    Standard_EXPORT HeaderSection_Protocol();
 
-  
-  Standard_EXPORT HeaderSection_Protocol();
-  
-  //! Returns a Case Number for each of the HeaderSection Entities
-  Standard_EXPORT virtual Standard_Integer TypeNumber (const Handle(Standard_Type)& atype) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_CString SchemaName() const Standard_OVERRIDE;
+    //! Returns a Case Number for each of the HeaderSection Entities
+    Standard_EXPORT virtual Standard_Integer TypeNumber(const Handle(Standard_Type) & atype) const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Standard_CString SchemaName() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(HeaderSection_Protocol,StepData_Protocol)
+    DEFINE_STANDARD_RTTIEXT(HeaderSection_Protocol, StepData_Protocol)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _HeaderSection_Protocol_HeaderFile

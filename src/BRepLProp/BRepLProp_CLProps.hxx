@@ -39,14 +39,9 @@ class gp_Pnt;
 class gp_Dir;
 class BRepLProp_CurveTool;
 
-
-
-class BRepLProp_CLProps
-{
+class BRepLProp_CLProps {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Initializes the local properties of the curve <C>
     //! The current point and the derivatives are
@@ -57,12 +52,14 @@ public:
     //! only the tangent, N should be equal to 1.
     //! <Resolution> is the linear tolerance (it is used to test
     //! if a vector is null).
-    Standard_EXPORT BRepLProp_CLProps(const BRepAdaptor_Curve& C, const Standard_Integer N, const Standard_Real Resolution);
+    Standard_EXPORT BRepLProp_CLProps(const BRepAdaptor_Curve& C, const Standard_Integer N,
+                                      const Standard_Real Resolution);
 
     //! Same as previous constructor but here the parameter is
     //! set to the value <U>.
     //! All the computations done will be related to <C> and <U>.
-    Standard_EXPORT BRepLProp_CLProps(const BRepAdaptor_Curve& C, const Standard_Real U, const Standard_Integer N, const Standard_Real Resolution);
+    Standard_EXPORT BRepLProp_CLProps(const BRepAdaptor_Curve& C, const Standard_Real U, const Standard_Integer N,
+                                      const Standard_Real Resolution);
 
     //! Same as previous constructor but here the parameter is
     //! set to the value <U> and the curve is set
@@ -112,19 +109,8 @@ public:
     //! Returns the centre of curvature <P>.
     Standard_EXPORT void CentreOfCurvature(gp_Pnt& P);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     BRepAdaptor_Curve myCurve;
     Standard_Real myU;
     Standard_Integer myDerOrder;
@@ -136,14 +122,6 @@ private:
     Standard_Real myCurvature;
     LProp_Status myTangentStatus;
     Standard_Integer mySignificantFirstDerivativeOrder;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepLProp_CLProps_HeaderFile

@@ -19,27 +19,23 @@
 DEFINE_STANDARD_HANDLE(XmlMXCAFDoc_VisMaterialToolDriver, XmlMDF_ADriver)
 
 //! XML persistence driver for XCAFDoc_VisMaterialTool.
-class XmlMXCAFDoc_VisMaterialToolDriver : public XmlMDF_ADriver
-{
-  DEFINE_STANDARD_RTTIEXT(XmlMXCAFDoc_VisMaterialToolDriver, XmlMDF_ADriver)
+class XmlMXCAFDoc_VisMaterialToolDriver : public XmlMDF_ADriver {
+    DEFINE_STANDARD_RTTIEXT(XmlMXCAFDoc_VisMaterialToolDriver, XmlMDF_ADriver)
 public:
+    //! Main constructor.
+    Standard_EXPORT XmlMXCAFDoc_VisMaterialToolDriver(const Handle(Message_Messenger) & theMsgDriver);
 
-  //! Main constructor.
-  Standard_EXPORT XmlMXCAFDoc_VisMaterialToolDriver (const Handle(Message_Messenger)& theMsgDriver);
+    //! Create new instance of XCAFDoc_VisMaterialTool.
+    Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
 
-  //! Create new instance of XCAFDoc_VisMaterialTool.
-  Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
+    //! Paste attribute from persistence into document.
+    Standard_EXPORT virtual Standard_Boolean Paste(const XmlObjMgt_Persistent& theSource,
+                                                   const Handle(TDF_Attribute) & theTarget,
+                                                   XmlObjMgt_RRelocationTable& theRelocTable) const Standard_OVERRIDE;
 
-  //! Paste attribute from persistence into document.
-  Standard_EXPORT virtual Standard_Boolean Paste (const XmlObjMgt_Persistent&  theSource,
-                                                  const Handle(TDF_Attribute)& theTarget,
-                                                  XmlObjMgt_RRelocationTable&  theRelocTable) const Standard_OVERRIDE;
-
-  //! Paste attribute from document into persistence.
-  Standard_EXPORT virtual void Paste (const Handle(TDF_Attribute)& theSource,
-                                      XmlObjMgt_Persistent& theTarget,
-                                      XmlObjMgt_SRelocationTable& theRelocTable) const Standard_OVERRIDE;
-
+    //! Paste attribute from document into persistence.
+    Standard_EXPORT virtual void Paste(const Handle(TDF_Attribute) & theSource, XmlObjMgt_Persistent& theTarget,
+                                       XmlObjMgt_SRelocationTable& theRelocTable) const Standard_OVERRIDE;
 };
 
 #endif // _XmlMXCAFDoc_VisMaterialToolDriver_HeaderFile

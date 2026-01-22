@@ -25,16 +25,12 @@
 #include <Standard_Integer.hxx>
 class Standard_OutOfRange;
 
-
 //! This class gives a default sample (constant difference
 //! of parameter) for a function defined between
 //! two bound A,B.
-class math_FunctionSample
-{
+class math_FunctionSample {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT math_FunctionSample(const Standard_Real A, const Standard_Real B, const Standard_Integer N);
 
@@ -50,19 +46,10 @@ public:
     Standard_EXPORT virtual Standard_Real GetParameter(const Standard_Integer Index) const;
 
 protected:
-
 private:
-
     Standard_Real a;
     Standard_Real b;
     Standard_Integer n;
-
 };
-
-
-
-
-
-
 
 #endif // _math_FunctionSample_HeaderFile

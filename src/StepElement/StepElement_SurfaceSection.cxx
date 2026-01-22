@@ -19,89 +19,81 @@
 #include <StepElement_MeasureOrUnspecifiedValue.hxx>
 #include <StepElement_SurfaceSection.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceSection,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceSection, Standard_Transient)
 
 //=======================================================================
-//function : StepElement_SurfaceSection
-//purpose  : 
+// function : StepElement_SurfaceSection
+// purpose  :
 //=======================================================================
-StepElement_SurfaceSection::StepElement_SurfaceSection ()
-{
+StepElement_SurfaceSection::StepElement_SurfaceSection() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepElement_SurfaceSection::Init(const StepElement_MeasureOrUnspecifiedValue& aOffset,
+                                      const StepElement_MeasureOrUnspecifiedValue& aNonStructuralMass,
+                                      const StepElement_MeasureOrUnspecifiedValue& aNonStructuralMassOffset) {
+
+    theOffset = aOffset;
+
+    theNonStructuralMass = aNonStructuralMass;
+
+    theNonStructuralMassOffset = aNonStructuralMassOffset;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Offset
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceSection::Init (const StepElement_MeasureOrUnspecifiedValue &aOffset,
-                                       const StepElement_MeasureOrUnspecifiedValue &aNonStructuralMass,
-                                       const StepElement_MeasureOrUnspecifiedValue &aNonStructuralMassOffset)
-{
-
-  theOffset = aOffset;
-
-  theNonStructuralMass = aNonStructuralMass;
-
-  theNonStructuralMassOffset = aNonStructuralMassOffset;
+StepElement_MeasureOrUnspecifiedValue StepElement_SurfaceSection::Offset() const {
+    return theOffset;
 }
 
 //=======================================================================
-//function : Offset
-//purpose  : 
+// function : SetOffset
+// purpose  :
 //=======================================================================
 
-StepElement_MeasureOrUnspecifiedValue StepElement_SurfaceSection::Offset () const
-{
-  return theOffset;
+void StepElement_SurfaceSection::SetOffset(const StepElement_MeasureOrUnspecifiedValue& aOffset) {
+    theOffset = aOffset;
 }
 
 //=======================================================================
-//function : SetOffset
-//purpose  : 
+// function : NonStructuralMass
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceSection::SetOffset (const StepElement_MeasureOrUnspecifiedValue &aOffset)
-{
-  theOffset = aOffset;
+StepElement_MeasureOrUnspecifiedValue StepElement_SurfaceSection::NonStructuralMass() const {
+    return theNonStructuralMass;
 }
 
 //=======================================================================
-//function : NonStructuralMass
-//purpose  : 
+// function : SetNonStructuralMass
+// purpose  :
 //=======================================================================
 
-StepElement_MeasureOrUnspecifiedValue StepElement_SurfaceSection::NonStructuralMass () const
-{
-  return theNonStructuralMass;
+void StepElement_SurfaceSection::SetNonStructuralMass(const StepElement_MeasureOrUnspecifiedValue& aNonStructuralMass) {
+    theNonStructuralMass = aNonStructuralMass;
 }
 
 //=======================================================================
-//function : SetNonStructuralMass
-//purpose  : 
+// function : NonStructuralMassOffset
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceSection::SetNonStructuralMass (const StepElement_MeasureOrUnspecifiedValue &aNonStructuralMass)
-{
-  theNonStructuralMass = aNonStructuralMass;
+StepElement_MeasureOrUnspecifiedValue StepElement_SurfaceSection::NonStructuralMassOffset() const {
+    return theNonStructuralMassOffset;
 }
 
 //=======================================================================
-//function : NonStructuralMassOffset
-//purpose  : 
+// function : SetNonStructuralMassOffset
+// purpose  :
 //=======================================================================
 
-StepElement_MeasureOrUnspecifiedValue StepElement_SurfaceSection::NonStructuralMassOffset () const
-{
-  return theNonStructuralMassOffset;
-}
-
-//=======================================================================
-//function : SetNonStructuralMassOffset
-//purpose  : 
-//=======================================================================
-
-void StepElement_SurfaceSection::SetNonStructuralMassOffset (const StepElement_MeasureOrUnspecifiedValue &aNonStructuralMassOffset)
-{
-  theNonStructuralMassOffset = aNonStructuralMassOffset;
+void StepElement_SurfaceSection::SetNonStructuralMassOffset(
+    const StepElement_MeasureOrUnspecifiedValue& aNonStructuralMassOffset) {
+    theNonStructuralMassOffset = aNonStructuralMassOffset;
 }

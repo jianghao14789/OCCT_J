@@ -24,12 +24,13 @@
 
 class BlendFunc_ChAsymInv : public Blend_FuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_ChAsymInv(const Handle(Adaptor3d_Surface)& S1, const Handle(Adaptor3d_Surface)& S2, const Handle(Adaptor3d_Curve)& C);
+    Standard_EXPORT BlendFunc_ChAsymInv(const Handle(Adaptor3d_Surface) & S1, const Handle(Adaptor3d_Surface) & S2,
+                                        const Handle(Adaptor3d_Curve) & C);
 
-    Standard_EXPORT void Set(const Standard_Boolean OnFirst, const Handle(Adaptor2d_Curve2d)& COnSurf) Standard_OVERRIDE;
+    Standard_EXPORT void Set(const Standard_Boolean OnFirst,
+                             const Handle(Adaptor2d_Curve2d) & COnSurf) Standard_OVERRIDE;
 
     Standard_EXPORT void GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const Standard_OVERRIDE;
 
@@ -44,7 +45,8 @@ public:
     //! variable <X> between DegF and DegL.
     //! Returns True if the computation was done successfully,
     //! False otherwise.
-    Standard_EXPORT Standard_Boolean ComputeValues(const math_Vector& X, const Standard_Integer DegF, const Standard_Integer DegL);
+    Standard_EXPORT Standard_Boolean ComputeValues(const math_Vector& X, const Standard_Integer DegF,
+                                                   const Standard_Integer DegL);
 
     //! computes the values <F> of the Functions for the
     //! variable <X>.
@@ -67,9 +69,7 @@ public:
     Standard_EXPORT void Set(const Standard_Real Dist1, const Standard_Real Angle, const Standard_Integer Choix);
 
 protected:
-
 private:
-
     Handle(Adaptor3d_Surface) surf1;
     Handle(Adaptor3d_Surface) surf2;
     Standard_Real dist1;

@@ -28,7 +28,6 @@
 class TDF_Label;
 class TFunction_Logbook;
 
-
 class TFunction_Driver;
 DEFINE_STANDARD_HANDLE(TFunction_Driver, Standard_Transient)
 
@@ -43,73 +42,54 @@ DEFINE_STANDARD_HANDLE(TFunction_Driver, Standard_Transient)
 //! attributes of sub-labels of a model.
 //! A single instance of this class and each of its
 //! subclasses is built for the whole session.
-class TFunction_Driver : public Standard_Transient
-{
+class TFunction_Driver : public Standard_Transient {
 
 public:
+    //! Initializes the label L for this function prior to its  execution.
+    Standard_EXPORT void Init(const TDF_Label& L);
 
-  
-  //! Initializes the label L for this function prior to its  execution.
-  Standard_EXPORT void Init (const TDF_Label& L);
-  
-  //! Returns the label of the driver for this function.
+    //! Returns the label of the driver for this function.
     TDF_Label Label() const;
-  
-  //! Validates labels of a function  in <log>.
-  //! This function is the one initialized in this function driver.
-  //! Warning
-  //! In regeneration mode, the solver must call this
-  //! method even if the function is not executed.
-  //! execution of function
-  //! =====================
-  Standard_EXPORT virtual void Validate (Handle(TFunction_Logbook)& log) const;
-  
-  //! Analyzes the labels in the logbook log.
-  //! Returns true if attributes have been modified.
-  //! If the function label itself has been modified, the function must be executed.
-  Standard_EXPORT virtual Standard_Boolean MustExecute (const Handle(TFunction_Logbook)& log) const;
-  
-  //! Executes the function in this function driver and
-  //! puts the impacted labels in the logbook log.
-  //! arguments & results of functions
-  //! ================================
-  Standard_EXPORT virtual Standard_Integer Execute (Handle(TFunction_Logbook)& log) const = 0;
-  
-  //! The method fills-in the list by labels,
-  //! where the arguments of the function are located.
-  Standard_EXPORT virtual void Arguments (TDF_LabelList& args) const;
-  
-  //! The method fills-in the list by labels,
-  //! where the results of the function are located.
-  Standard_EXPORT virtual void Results (TDF_LabelList& res) const;
 
+    //! Validates labels of a function  in <log>.
+    //! This function is the one initialized in this function driver.
+    //! Warning
+    //! In regeneration mode, the solver must call this
+    //! method even if the function is not executed.
+    //! execution of function
+    //! =====================
+    Standard_EXPORT virtual void Validate(Handle(TFunction_Logbook) & log) const;
 
+    //! Analyzes the labels in the logbook log.
+    //! Returns true if attributes have been modified.
+    //! If the function label itself has been modified, the function must be executed.
+    Standard_EXPORT virtual Standard_Boolean MustExecute(const Handle(TFunction_Logbook) & log) const;
 
+    //! Executes the function in this function driver and
+    //! puts the impacted labels in the logbook log.
+    //! arguments & results of functions
+    //! ================================
+    Standard_EXPORT virtual Standard_Integer Execute(Handle(TFunction_Logbook) & log) const = 0;
 
-  DEFINE_STANDARD_RTTIEXT(TFunction_Driver,Standard_Transient)
+    //! The method fills-in the list by labels,
+    //! where the arguments of the function are located.
+    Standard_EXPORT virtual void Arguments(TDF_LabelList& args) const;
+
+    //! The method fills-in the list by labels,
+    //! where the results of the function are located.
+    Standard_EXPORT virtual void Results(TDF_LabelList& res) const;
+
+    DEFINE_STANDARD_RTTIEXT(TFunction_Driver, Standard_Transient)
 
 protected:
-
-  
-  //! initialisation of the driver
-  //! ============================
-  Standard_EXPORT TFunction_Driver();
-
-
+    //! initialisation of the driver
+    //! ============================
+    Standard_EXPORT TFunction_Driver();
 
 private:
-
-
-  TDF_Label myLabel;
-
-
+    TDF_Label myLabel;
 };
 
-
 #include <TFunction_Driver.lxx>
-
-
-
-
 
 #endif // _TFunction_Driver_HeaderFile

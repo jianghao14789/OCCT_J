@@ -44,14 +44,12 @@ static Standard_ErrorHandler* Top = 0;
 //! an undefined static variables initialization order across compilation units (@sa #0031681 bug).
 //! Note that we should NOT use Sentry while in this class, as Sentry
 //! would register mutex as callback in the current exception handler.
-static Standard_Mutex& GetMutex()
-{
+static Standard_Mutex& GetMutex() {
     static Standard_Mutex theMutex;
     return theMutex;
 }
 
-static inline Standard_ThreadId GetThreadID()
-{
+static inline Standard_ThreadId GetThreadID() {
 #ifndef _WIN32
     return (Standard_ThreadId)pthread_self();
 #else
@@ -60,13 +58,11 @@ static inline Standard_ThreadId GetThreadID()
 }
 
 //============================================================================
-//====  Constructor : Create a ErrorHandler structure. And add it at the 
+//====  Constructor : Create a ErrorHandler structure. And add it at the
 //====                'Top' of "ErrorHandler's stack".
 //============================================================================
 
-Standard_ErrorHandler::Standard_ErrorHandler() :
-    myStatus(Standard_HandlerVoid), myCallbackPtr(0)
-{
+Standard_ErrorHandler::Standard_ErrorHandler() : myStatus(Standard_HandlerVoid), myCallbackPtr(0) {
     myThread = GetThreadID();
     memset(&myLabel, 0, sizeof(myLabel));
 
@@ -76,29 +72,24 @@ Standard_ErrorHandler::Standard_ErrorHandler() :
     GetMutex().Unlock();
 }
 
-
 //============================================================================
 //==== Destructor : Delete the ErrorHandler and Abort if there is a 'Error'.
 //============================================================================
 
-void Standard_ErrorHandler::Destroy()
-{
+void Standard_ErrorHandler::Destroy() {
     Unlink();
-    if (myStatus == Standard_HandlerJumped)
-    {
+    if (myStatus == Standard_HandlerJumped) {
         // jumped, but not caught
         Abort(myCaughtError);
     }
 }
 
-
 //=======================================================================
-//function : Unlink
-//purpose  : 
+// function : Unlink
+// purpose  :
 //=======================================================================
 
-void Standard_ErrorHandler::Unlink()
-{
+void Standard_ErrorHandler::Unlink() {
     // put a lock on the stack
     GetMutex().Lock();
 
@@ -119,8 +110,7 @@ void Standard_ErrorHandler::Unlink()
     if (aPrevious == 0) {
         // a top exception taken
         Top = aCurrent->myPrevious;
-    }
-    else {
+    } else {
         aPrevious->myPrevious = aCurrent->myPrevious;
     }
     myPrevious = 0;
@@ -138,31 +128,27 @@ void Standard_ErrorHandler::Unlink()
 }
 
 //=======================================================================
-//function : IsInTryBlock
-//purpose  :  test if the code is currently running in
+// function : IsInTryBlock
+// purpose  :  test if the code is currently running in
 //=======================================================================
 
-Standard_Boolean Standard_ErrorHandler::IsInTryBlock()
-{
+Standard_Boolean Standard_ErrorHandler::IsInTryBlock() {
     Standard_ErrorHandler* anActive = FindHandler(Standard_HandlerVoid, Standard_False);
     return anActive != NULL;
 }
-
 
 //============================================================================
 //==== Abort: make a longjmp to the saved Context.
 //====    Abort if there is a non null 'Error'
 //============================================================================
 
-void Standard_ErrorHandler::Abort(const Handle(Standard_Failure)& theError)
-{
+void Standard_ErrorHandler::Abort(const Handle(Standard_Failure) & theError) {
     Standard_ErrorHandler* anActive = FindHandler(Standard_HandlerVoid, Standard_True);
 
     //==== Check if can do the "longjmp" =======================================
     if (anActive == NULL) {
         std::cerr << "*** Abort *** an exception was raised, but no catch was found." << std::endl;
-        if (!theError.IsNull())
-            std::cerr << "\t... The exception is:" << theError->GetMessageString() << std::endl;
+        if (!theError.IsNull()) std::cerr << "\t... The exception is:" << theError->GetMessageString() << std::endl;
         exit(1);
     }
 
@@ -170,59 +156,46 @@ void Standard_ErrorHandler::Abort(const Handle(Standard_Failure)& theError)
     longjmp(anActive->myLabel, Standard_True);
 }
 
-
 //============================================================================
-//==== Catches: If there is a 'Error', and it is in good type 
+//==== Catches: If there is a 'Error', and it is in good type
 //====          returns True and clean 'Error', else returns False.
 //============================================================================
 
-Standard_Boolean Standard_ErrorHandler::Catches(const Handle(Standard_Type)& AType)
-{
+Standard_Boolean Standard_ErrorHandler::Catches(const Handle(Standard_Type) & AType) {
     Standard_ErrorHandler* anActive = FindHandler(Standard_HandlerJumped, Standard_False);
-    if (anActive == 0)
-        return Standard_False;
+    if (anActive == 0) return Standard_False;
 
-    if (anActive->myCaughtError.IsNull())
-        return Standard_False;
+    if (anActive->myCaughtError.IsNull()) return Standard_False;
 
     if (anActive->myCaughtError->IsKind(AType)) {
         myStatus = Standard_HandlerProcessed;
         return Standard_True;
-    }
-    else {
+    } else {
         return Standard_False;
     }
 }
 
-Handle(Standard_Failure) Standard_ErrorHandler::LastCaughtError()
-{
+Handle(Standard_Failure) Standard_ErrorHandler::LastCaughtError() {
     Handle(Standard_Failure) aHandle;
     Standard_ErrorHandler* anActive = FindHandler(Standard_HandlerProcessed, Standard_False);
-    if (anActive != 0)
-        aHandle = anActive->myCaughtError;
+    if (anActive != 0) aHandle = anActive->myCaughtError;
 
     return aHandle;
 }
 
-Handle(Standard_Failure) Standard_ErrorHandler::Error() const
-{
+Handle(Standard_Failure) Standard_ErrorHandler::Error() const {
     return myCaughtError;
 }
 
-
-void Standard_ErrorHandler::Error(const Handle(Standard_Failure)& theError)
-{
+void Standard_ErrorHandler::Error(const Handle(Standard_Failure) & theError) {
     Standard_ErrorHandler* anActive = FindHandler(Standard_HandlerVoid, Standard_False);
-    if (anActive == NULL)
-        Abort(theError);
+    if (anActive == NULL) Abort(theError);
 
     anActive->myCaughtError = theError;
 }
 
-
 Standard_ErrorHandler* Standard_ErrorHandler::FindHandler(const Standard_HandlerStatus theStatus,
-    const Standard_Boolean theUnlink)
-{
+                                                          const Standard_Boolean theUnlink) {
     // lock the stack
     GetMutex().Lock();
 
@@ -245,27 +218,24 @@ Standard_ErrorHandler* Standard_ErrorHandler::FindHandler(const Standard_Handler
             if (theStatus != aCurrent->myStatus) {
 
                 if (theUnlink) {
-                    //unlink current
+                    // unlink current
                     if (aPrevious == 0) {
                         // a top exception taken
                         Top = aCurrent->myPrevious;
-                    }
-                    else {
+                    } else {
                         aPrevious->myPrevious = aCurrent->myPrevious;
                     }
                 }
 
-                //shift
+                // shift
                 aCurrent = aCurrent->myPrevious;
-            }
-            else {
-                //found one
+            } else {
+                // found one
                 anActive = aCurrent;
                 aStop = Standard_True;
             }
-        }
-        else {
-            //Current is NULL, means that no handlesr
+        } else {
+            // Current is NULL, means that no handlesr
             aStop = Standard_True;
         }
     }
@@ -276,23 +246,17 @@ Standard_ErrorHandler* Standard_ErrorHandler::FindHandler(const Standard_Handler
 
 #if defined(OCC_CONVERT_SIGNALS)
 
-Standard_ErrorHandler::Callback::Callback()
-    : myHandler(0), myPrev(0), myNext(0)
-{
-}
+Standard_ErrorHandler::Callback::Callback() : myHandler(0), myPrev(0), myNext(0) {}
 
-Standard_ErrorHandler::Callback::~Callback()
-{
+Standard_ErrorHandler::Callback::~Callback() {
     UnregisterCallback();
 }
 
-void Standard_ErrorHandler::Callback::RegisterCallback()
-{
+void Standard_ErrorHandler::Callback::RegisterCallback() {
     if (myHandler) return; // already registered
 
     // find current active exception handler
-    Standard_ErrorHandler* aHandler =
-        Standard_ErrorHandler::FindHandler(Standard_HandlerVoid, Standard_False);
+    Standard_ErrorHandler* aHandler = Standard_ErrorHandler::FindHandler(Standard_HandlerVoid, Standard_False);
 
     // if found, add this callback object first to the list
     if (aHandler) {
@@ -303,11 +267,9 @@ void Standard_ErrorHandler::Callback::RegisterCallback()
     }
 }
 
-void Standard_ErrorHandler::Callback::UnregisterCallback()
-{
+void Standard_ErrorHandler::Callback::UnregisterCallback() {
     if (!myHandler) return;
-    if (myNext)
-        ((Standard_ErrorHandler::Callback*)myNext)->myPrev = myPrev;
+    if (myNext) ((Standard_ErrorHandler::Callback*)myNext)->myPrev = myPrev;
     if (myPrev)
         ((Standard_ErrorHandler::Callback*)myPrev)->myNext = myNext;
     else if (((Standard_ErrorHandler*)myHandler)->myCallbackPtr == this)

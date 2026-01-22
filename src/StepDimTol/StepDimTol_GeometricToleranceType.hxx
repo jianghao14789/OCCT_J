@@ -17,21 +17,21 @@
 #define _StepDimTol_GeometricToleranceType_HeaderFile
 
 enum StepDimTol_GeometricToleranceType {
-  StepDimTol_GTTAngularityTolerance,
-  StepDimTol_GTTCircularRunoutTolerance,
-  StepDimTol_GTTCoaxialityTolerance,
-  StepDimTol_GTTConcentricityTolerance,
-  StepDimTol_GTTCylindricityTolerance,
-  StepDimTol_GTTFlatnessTolerance,
-  StepDimTol_GTTLineProfileTolerance,
-  StepDimTol_GTTParallelismTolerance,
-  StepDimTol_GTTPerpendicularityTolerance,
-  StepDimTol_GTTPositionTolerance,
-  StepDimTol_GTTRoundnessTolerance,
-  StepDimTol_GTTStraightnessTolerance,
-  StepDimTol_GTTSurfaceProfileTolerance,
-  StepDimTol_GTTSymmetryTolerance,
-  StepDimTol_GTTTotalRunoutTolerance
+    StepDimTol_GTTAngularityTolerance,
+    StepDimTol_GTTCircularRunoutTolerance,
+    StepDimTol_GTTCoaxialityTolerance,
+    StepDimTol_GTTConcentricityTolerance,
+    StepDimTol_GTTCylindricityTolerance,
+    StepDimTol_GTTFlatnessTolerance,
+    StepDimTol_GTTLineProfileTolerance,
+    StepDimTol_GTTParallelismTolerance,
+    StepDimTol_GTTPerpendicularityTolerance,
+    StepDimTol_GTTPositionTolerance,
+    StepDimTol_GTTRoundnessTolerance,
+    StepDimTol_GTTStraightnessTolerance,
+    StepDimTol_GTTSurfaceProfileTolerance,
+    StepDimTol_GTTSymmetryTolerance,
+    StepDimTol_GTTTotalRunoutTolerance
 };
 
 #endif // _StepDimTol_GeometricToleranceType_HeaderFile

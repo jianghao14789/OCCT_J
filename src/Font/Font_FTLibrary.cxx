@@ -16,24 +16,21 @@
 #include <Font_FTLibrary.hxx>
 
 #ifdef HAVE_FREETYPE
-  #include <ft2build.h>
-  #include FT_FREETYPE_H
+#include <ft2build.h>
+#include FT_FREETYPE_H
 #endif
 
-IMPLEMENT_STANDARD_RTTIEXT(Font_FTLibrary,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(Font_FTLibrary, Standard_Transient)
 
 // =======================================================================
 // function : Font_FTLibrary
 // purpose  :
 // =======================================================================
-Font_FTLibrary::Font_FTLibrary()
-: myFTLib (NULL)
-{
+Font_FTLibrary::Font_FTLibrary() : myFTLib(NULL) {
 #ifdef HAVE_FREETYPE
-  if (FT_Init_FreeType (&myFTLib) != 0)
-  {
-    myFTLib = NULL;
-  }
+    if (FT_Init_FreeType(&myFTLib) != 0) {
+        myFTLib = NULL;
+    }
 #endif
 }
 
@@ -41,12 +38,10 @@ Font_FTLibrary::Font_FTLibrary()
 // function : ~Font_FTLibrary
 // purpose  :
 // =======================================================================
-Font_FTLibrary::~Font_FTLibrary()
-{
-  if (IsValid())
-  {
-  #ifdef HAVE_FREETYPE
-    FT_Done_FreeType (myFTLib);
-  #endif
-  }
+Font_FTLibrary::~Font_FTLibrary() {
+    if (IsValid()) {
+#ifdef HAVE_FREETYPE
+        FT_Done_FreeType(myFTLib);
+#endif
+    }
 }

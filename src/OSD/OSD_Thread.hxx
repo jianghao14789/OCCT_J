@@ -27,13 +27,10 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Address.hxx>
 
-
 //! A simple platform-intependent interface to execute
 //! and control threads.
-class OSD_Thread
-{
+class OSD_Thread {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Empty constructor
@@ -50,8 +47,7 @@ public:
 
     //! Copy thread handle from other OSD_Thread object.
     Standard_EXPORT void Assign(const OSD_Thread& other);
-    void operator = (const OSD_Thread& other)
-    {
+    void operator=(const OSD_Thread& other) {
         Assign(other);
     }
 
@@ -85,8 +81,7 @@ public:
     Standard_EXPORT void Detach();
 
     //! Waits till the thread finishes execution.
-    Standard_Boolean Wait()
-    {
+    Standard_Boolean Wait() {
         Standard_Address aRes = 0;
         return Wait(aRes);
     }
@@ -115,12 +110,10 @@ public:
     Standard_EXPORT static Standard_ThreadId Current();
 
 private:
-
     OSD_ThreadFunction myFunc;
     OSD_PThread myThread;
     Standard_ThreadId myThreadId;
     Standard_Integer myPriority;
-
 };
 
 #endif // _OSD_Thread_HeaderFile

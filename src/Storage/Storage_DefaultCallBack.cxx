@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Persistent.hxx>
 #include <Standard_Type.hxx>
 #include <Storage_BaseDriver.hxx>
@@ -21,30 +20,20 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Storage_DefaultCallBack, Storage_CallBack)
 
-Storage_DefaultCallBack::Storage_DefaultCallBack()
-{
-}
+Storage_DefaultCallBack::Storage_DefaultCallBack() {}
 
-Handle(Standard_Persistent) Storage_DefaultCallBack::New() const
-{
+Handle(Standard_Persistent) Storage_DefaultCallBack::New() const {
     Handle(Standard_Persistent) res = new Standard_Persistent;
 
     return res;
 }
 
-void Storage_DefaultCallBack::Add(const Handle(Standard_Persistent)&, const Handle(Storage_Schema)&) const
-{
-}
+void Storage_DefaultCallBack::Add(const Handle(Standard_Persistent) &, const Handle(Storage_Schema) &) const {}
 
-void Storage_DefaultCallBack::Write(const Handle(Standard_Persistent)&,
-    const Handle(Storage_BaseDriver)&,
-    const Handle(Storage_Schema)&) const
-{
-}
+void Storage_DefaultCallBack::Write(const Handle(Standard_Persistent) &, const Handle(Storage_BaseDriver) &,
+                                    const Handle(Storage_Schema) &) const {}
 
-void Storage_DefaultCallBack::Read(const Handle(Standard_Persistent)&,
-    const Handle(Storage_BaseDriver)& theDriver,
-    const Handle(Storage_Schema)&) const
-{
+void Storage_DefaultCallBack::Read(const Handle(Standard_Persistent) &, const Handle(Storage_BaseDriver) & theDriver,
+                                   const Handle(Storage_Schema) &) const {
     theDriver->SkipObject();
 }

@@ -50,4 +50,3 @@
 #define Transfer_TransferProcess_hxx <Transfer_ProcessForFinder.hxx>
 #define Handle_Transfer_TransferProcess Handle(Transfer_ProcessForFinder)
 #include <Transfer_TransferProcess.gxx>
-

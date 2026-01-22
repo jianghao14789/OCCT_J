@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<Handle(IGESGraph_TextDisplayTemplate)> IGESGraph_Array1OfTextDisplayTemplate;
 
-
 #endif

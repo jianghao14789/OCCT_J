@@ -25,42 +25,20 @@
 class TopoDS_Shape;
 class VrmlAPI_Writer;
 
-
 //! API for writing to VRML 1.0
-class VrmlAPI 
-{
+class VrmlAPI {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! With help of this class user can change parameters of writing.
-  //! Converts the shape aShape to VRML format of the passed version and writes it
-  //! to the file identified by aFileName using default parameters.
-  Standard_EXPORT static Standard_Boolean Write (const TopoDS_Shape& aShape, const Standard_CString aFileName, const Standard_Integer aVersion = 2);
-
-
-
+    //! With help of this class user can change parameters of writing.
+    //! Converts the shape aShape to VRML format of the passed version and writes it
+    //! to the file identified by aFileName using default parameters.
+    Standard_EXPORT static Standard_Boolean Write(const TopoDS_Shape& aShape, const Standard_CString aFileName,
+                                                  const Standard_Integer aVersion = 2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class VrmlAPI_Writer;
-
+    friend class VrmlAPI_Writer;
 };
-
-
-
-
-
-
 
 #endif // _VrmlAPI_HeaderFile

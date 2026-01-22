@@ -27,48 +27,26 @@ class StepRepr_DerivedShapeAspect;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DerivedShapeAspect
-class RWStepRepr_RWDerivedShapeAspect 
-{
+class RWStepRepr_RWDerivedShapeAspect {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWDerivedShapeAspect();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWDerivedShapeAspect();
-  
-  //! Reads DerivedShapeAspect
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_DerivedShapeAspect)& ent) const;
-  
-  //! Writes DerivedShapeAspect
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_DerivedShapeAspect)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_DerivedShapeAspect)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DerivedShapeAspect
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_DerivedShapeAspect) & ent) const;
 
+    //! Writes DerivedShapeAspect
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_DerivedShapeAspect) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_DerivedShapeAspect) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWDerivedShapeAspect_HeaderFile

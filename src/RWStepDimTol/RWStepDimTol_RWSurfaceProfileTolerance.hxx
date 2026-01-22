@@ -27,48 +27,29 @@ class StepDimTol_SurfaceProfileTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for SurfaceProfileTolerance
-class RWStepDimTol_RWSurfaceProfileTolerance 
-{
+class RWStepDimTol_RWSurfaceProfileTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWSurfaceProfileTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWSurfaceProfileTolerance();
-  
-  //! Reads SurfaceProfileTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_SurfaceProfileTolerance)& ent) const;
-  
-  //! Writes SurfaceProfileTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_SurfaceProfileTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_SurfaceProfileTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads SurfaceProfileTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_SurfaceProfileTolerance) & ent) const;
 
+    //! Writes SurfaceProfileTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_SurfaceProfileTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_SurfaceProfileTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWSurfaceProfileTolerance_HeaderFile

@@ -21,89 +21,80 @@
 #include <StepBasic_CertificationType.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_Certification,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_Certification, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_Certification
-//purpose  : 
+// function : StepBasic_Certification
+// purpose  :
 //=======================================================================
-StepBasic_Certification::StepBasic_Certification ()
-{
+StepBasic_Certification::StepBasic_Certification() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_Certification::Init(const Handle(TCollection_HAsciiString) & aName,
+                                   const Handle(TCollection_HAsciiString) & aPurpose,
+                                   const Handle(StepBasic_CertificationType) & aKind) {
+
+    theName = aName;
+
+    thePurpose = aPurpose;
+
+    theKind = aKind;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepBasic_Certification::Init (const Handle(TCollection_HAsciiString) &aName,
-                                    const Handle(TCollection_HAsciiString) &aPurpose,
-                                    const Handle(StepBasic_CertificationType) &aKind)
-{
-
-  theName = aName;
-
-  thePurpose = aPurpose;
-
-  theKind = aKind;
+Handle(TCollection_HAsciiString) StepBasic_Certification::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_Certification::Name () const
-{
-  return theName;
+void StepBasic_Certification::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Purpose
+// purpose  :
 //=======================================================================
 
-void StepBasic_Certification::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+Handle(TCollection_HAsciiString) StepBasic_Certification::Purpose() const {
+    return thePurpose;
 }
 
 //=======================================================================
-//function : Purpose
-//purpose  : 
+// function : SetPurpose
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_Certification::Purpose () const
-{
-  return thePurpose;
+void StepBasic_Certification::SetPurpose(const Handle(TCollection_HAsciiString) & aPurpose) {
+    thePurpose = aPurpose;
 }
 
 //=======================================================================
-//function : SetPurpose
-//purpose  : 
+// function : Kind
+// purpose  :
 //=======================================================================
 
-void StepBasic_Certification::SetPurpose (const Handle(TCollection_HAsciiString) &aPurpose)
-{
-  thePurpose = aPurpose;
+Handle(StepBasic_CertificationType) StepBasic_Certification::Kind() const {
+    return theKind;
 }
 
 //=======================================================================
-//function : Kind
-//purpose  : 
+// function : SetKind
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_CertificationType) StepBasic_Certification::Kind () const
-{
-  return theKind;
-}
-
-//=======================================================================
-//function : SetKind
-//purpose  : 
-//=======================================================================
-
-void StepBasic_Certification::SetKind (const Handle(StepBasic_CertificationType) &aKind)
-{
-  theKind = aKind;
+void StepBasic_Certification::SetKind(const Handle(StepBasic_CertificationType) & aKind) {
+    theKind = aKind;
 }

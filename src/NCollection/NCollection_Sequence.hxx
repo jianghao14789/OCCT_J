@@ -26,71 +26,62 @@
  * Purpose:     Definition of a sequence of elements indexed by
  *              an Integer in range of 1..n
  */
-template <class TheItemType>
-class NCollection_Sequence : public NCollection_BaseSequence
-{
+template <class TheItemType> class NCollection_Sequence : public NCollection_BaseSequence {
 public:
     //! STL-compliant typedef for value type
     typedef TheItemType value_type;
 
 public:
     //!   Class defining sequence node - for internal use by Sequence
-    class Node : public NCollection_SeqNode
-    {
+    class Node : public NCollection_SeqNode {
     public:
         //! Constructor
-        Node(const TheItemType& theItem) :
-            NCollection_SeqNode()
-        {
+        Node(const TheItemType& theItem) : NCollection_SeqNode() {
             myValue = theItem;
         }
         //! Constant value access
-        const TheItemType& Value() const { return myValue; }
+        const TheItemType& Value() const {
+            return myValue;
+        }
         //! Variable value access
-        TheItemType& ChangeValue() { return myValue; }
+        TheItemType& ChangeValue() {
+            return myValue;
+        }
 
     private:
-        TheItemType    myValue;
+        TheItemType myValue;
     }; // End of nested class Node
 
 public:
     //!   Implementation of the Iterator interface.
-    class Iterator : public NCollection_BaseSequence::Iterator
-    {
+    class Iterator : public NCollection_BaseSequence::Iterator {
     public:
         //! Empty constructor - for later Init
         Iterator(void) {}
         //! Constructor with initialisation
-        Iterator(const NCollection_Sequence& theSeq,
-            const Standard_Boolean      isStart = Standard_True)
+        Iterator(const NCollection_Sequence& theSeq, const Standard_Boolean isStart = Standard_True)
             : NCollection_BaseSequence::Iterator(theSeq, isStart) {}
         //! Check end
-        Standard_Boolean More(void) const
-        {
+        Standard_Boolean More(void) const {
             return (myCurrent != NULL);
         }
         //! Make step
-        void Next(void)
-        {
-            if (myCurrent)
-            {
+        void Next(void) {
+            if (myCurrent) {
                 myPrevious = myCurrent;
                 myCurrent = myCurrent->Next();
             }
         }
         //! Constant value access
-        const TheItemType& Value(void) const
-        {
+        const TheItemType& Value(void) const {
             return ((const Node*)myCurrent)->Value();
         }
         //! Variable value access
-        TheItemType& ChangeValue(void) const
-        {
+        TheItemType& ChangeValue(void) const {
             return ((Node*)myCurrent)->ChangeValue();
         }
         //! Performs comparison of two iterators.
-        Standard_Boolean IsEqual(const Iterator& theOther) const
-        {
+        Standard_Boolean IsEqual(const Iterator& theOther) const {
             return myCurrent == theOther.myCurrent;
         }
     }; // End of nested class Iterator
@@ -102,16 +93,28 @@ public:
     typedef NCollection_StlIterator<std::bidirectional_iterator_tag, Iterator, TheItemType, true> const_iterator;
 
     //! Returns an iterator pointing to the first element in the sequence.
-    iterator begin() const { return Iterator(*this, true); }
+    iterator begin() const {
+        return Iterator(*this, true);
+    }
 
     //! Returns an iterator referring to the past-the-end element in the sequence.
-    iterator end() const { Iterator anIter(*this, false); anIter.Next(); return anIter; }
+    iterator end() const {
+        Iterator anIter(*this, false);
+        anIter.Next();
+        return anIter;
+    }
 
     //! Returns a const iterator pointing to the first element in the sequence.
-    const_iterator cbegin() const { return Iterator(*this, true); }
+    const_iterator cbegin() const {
+        return Iterator(*this, true);
+    }
 
     //! Returns a const iterator referring to the past-the-end element in the sequence.
-    const_iterator cend() const { Iterator anIter(*this, false); anIter.Next(); return anIter; }
+    const_iterator cend() const {
+        Iterator anIter(*this, false);
+        anIter.Next();
+        return anIter;
+    }
 
 public:
     // ---------- PUBLIC METHODS ------------
@@ -120,82 +123,67 @@ public:
     NCollection_Sequence() : NCollection_BaseSequence(Handle(NCollection_BaseAllocator)()) {}
 
     //! Constructor
-    explicit NCollection_Sequence(const Handle(NCollection_BaseAllocator)& theAllocator) : NCollection_BaseSequence(theAllocator) {}
+    explicit NCollection_Sequence(const Handle(NCollection_BaseAllocator) & theAllocator)
+        : NCollection_BaseSequence(theAllocator) {}
 
     //! Copy constructor
-    NCollection_Sequence(const NCollection_Sequence& theOther) :
-        NCollection_BaseSequence(theOther.myAllocator)
-    {
+    NCollection_Sequence(const NCollection_Sequence& theOther) : NCollection_BaseSequence(theOther.myAllocator) {
         Assign(theOther);
     }
 
     //! Number of items
-    Standard_Integer Size(void) const
-    {
+    Standard_Integer Size(void) const {
         return mySize;
     }
 
     //! Number of items
-    Standard_Integer Length(void) const
-    {
+    Standard_Integer Length(void) const {
         return mySize;
     }
 
     //! Method for consistency with other collections.
     //! @return Lower bound (inclusive) for iteration.
-    Standard_Integer Lower() const
-    {
+    Standard_Integer Lower() const {
         return 1;
     }
 
     //! Method for consistency with other collections.
     //! @return Upper bound (inclusive) for iteration.
-    Standard_Integer Upper() const
-    {
+    Standard_Integer Upper() const {
         return mySize;
     }
 
     //! Empty query
-    Standard_Boolean IsEmpty(void) const
-    {
+    Standard_Boolean IsEmpty(void) const {
         return (mySize == 0);
     }
 
     //! Reverse sequence
-    void Reverse(void)
-    {
+    void Reverse(void) {
         PReverse();
     }
 
     //! Exchange two members
-    void Exchange(const Standard_Integer I,
-        const Standard_Integer J)
-    {
+    void Exchange(const Standard_Integer I, const Standard_Integer J) {
         PExchange(I, J);
     }
 
     //! Static deleter to be passed to BaseSequence
-    static void delNode(NCollection_SeqNode* theNode,
-        Handle(NCollection_BaseAllocator)& theAl)
-    {
+    static void delNode(NCollection_SeqNode* theNode, Handle(NCollection_BaseAllocator) & theAl) {
         ((Node*)theNode)->~Node();
         theAl->Free(theNode);
     }
 
     //! Clear the items out, take a new allocator if non null
-    void Clear(const Handle(NCollection_BaseAllocator)& theAllocator = 0L)
-    {
+    void Clear(const Handle(NCollection_BaseAllocator) & theAllocator = 0L) {
         ClearSeq(delNode);
-        if (!theAllocator.IsNull())
-            this->myAllocator = theAllocator;
+        if (!theAllocator.IsNull()) this->myAllocator = theAllocator;
     }
 
     //! Replace this sequence by the items of theOther.
     //! This method does not change the internal allocator.
-    NCollection_Sequence& Assign(const NCollection_Sequence& theOther)
-    {
-        if (this != &theOther)
-        {
+    NCollection_Sequence& Assign(const NCollection_Sequence& theOther) {
+        if (this != &theOther) {
             Clear();
             appendSeq((const Node*)theOther.myFirstItem);
         }
@@ -203,49 +191,38 @@ public:
     }
 
     //! Replacement operator
-    NCollection_Sequence& operator= (const NCollection_Sequence& theOther)
-    {
+    NCollection_Sequence& operator=(const NCollection_Sequence& theOther) {
         return Assign(theOther);
     }
 
     //! Remove one item
-    void Remove(Iterator& thePosition)
-    {
+    void Remove(Iterator& thePosition) {
         RemoveSeq(thePosition, delNode);
     }
 
     //! Remove one item
-    void Remove(const Standard_Integer theIndex)
-    {
+    void Remove(const Standard_Integer theIndex) {
         RemoveSeq(theIndex, delNode);
     }
 
     //! Remove range of items
-    void Remove(const Standard_Integer theFromIndex,
-        const Standard_Integer theToIndex)
-    {
+    void Remove(const Standard_Integer theFromIndex, const Standard_Integer theToIndex) {
         RemoveSeq(theFromIndex, theToIndex, delNode);
     }
 
     //! Append one item
-    void Append(const TheItemType& theItem)
-    {
+    void Append(const TheItemType& theItem) {
         PAppend(new (this->myAllocator) Node(theItem));
     }
 
     //! Append another sequence (making it empty)
-    void Append(NCollection_Sequence& theSeq)
-    {
-        if (this == &theSeq || theSeq.IsEmpty())
-            return;
-        if (this->myAllocator == theSeq.myAllocator)
-        {
-            // Then we take the sequence and glue it to our end - 
+    void Append(NCollection_Sequence& theSeq) {
+        if (this == &theSeq || theSeq.IsEmpty()) return;
+        if (this->myAllocator == theSeq.myAllocator) {
+            // Then we take the sequence and glue it to our end -
             // deallocation will bring no problem
             PAppend(theSeq);
-        }
-        else
-        {
+        } else {
             // No - this sequence has different memory scope
             appendSeq((const Node*)theSeq.myFirstItem);
             theSeq.Clear();
@@ -253,24 +230,18 @@ public:
     }
 
     //! Prepend one item
-    void Prepend(const TheItemType& theItem)
-    {
+    void Prepend(const TheItemType& theItem) {
         PPrepend(new (this->myAllocator) Node(theItem));
     }
 
     //! Prepend another sequence (making it empty)
-    void Prepend(NCollection_Sequence& theSeq)
-    {
-        if (this == &theSeq || theSeq.IsEmpty())
-            return;
-        if (this->myAllocator == theSeq.myAllocator)
-        {
-            // Then we take the sequence and glue it to our head - 
+    void Prepend(NCollection_Sequence& theSeq) {
+        if (this == &theSeq || theSeq.IsEmpty()) return;
+        if (this->myAllocator == theSeq.myAllocator) {
+            // Then we take the sequence and glue it to our head -
             // deallocation will bring no problem
             PPrepend(theSeq);
-        }
-        else
-        {
+        } else {
             // No - this sequence has different memory scope
             prependSeq((const Node*)theSeq.myFirstItem, 1);
             theSeq.Clear();
@@ -278,40 +249,28 @@ public:
     }
 
     //! InsertBefore theIndex theItem
-    void InsertBefore(const Standard_Integer theIndex,
-        const TheItemType& theItem)
-    {
+    void InsertBefore(const Standard_Integer theIndex, const TheItemType& theItem) {
         InsertAfter(theIndex - 1, theItem);
     }
 
     //! InsertBefore theIndex another sequence (making it empty)
-    void InsertBefore(const Standard_Integer theIndex,
-        NCollection_Sequence& theSeq)
-    {
+    void InsertBefore(const Standard_Integer theIndex, NCollection_Sequence& theSeq) {
         InsertAfter(theIndex - 1, theSeq);
     }
 
     //! InsertAfter the position of iterator
-    void InsertAfter(Iterator& thePosition,
-        const TheItemType& theItem)
-    {
+    void InsertAfter(Iterator& thePosition, const TheItemType& theItem) {
         PInsertAfter(thePosition, new (this->myAllocator) Node(theItem));
     }
 
     //! InsertAfter theIndex another sequence (making it empty)
-    void InsertAfter(const Standard_Integer theIndex,
-        NCollection_Sequence& theSeq)
-    {
-        if (this == &theSeq || theSeq.IsEmpty())
-            return;
-        if (this->myAllocator == theSeq.myAllocator)
-        {
-            // Then we take the list and glue it to our head - 
+    void InsertAfter(const Standard_Integer theIndex, NCollection_Sequence& theSeq) {
+        if (this == &theSeq || theSeq.IsEmpty()) return;
+        if (this->myAllocator == theSeq.myAllocator) {
+            // Then we take the list and glue it to our head -
             // deallocation will bring no problem
             PInsertAfter(theIndex, theSeq);
-        }
-        else
-        {
+        } else {
             // No - this sequence has different memory scope
             prependSeq((const Node*)theSeq.myFirstItem, theIndex + 1);
             theSeq.Clear();
@@ -319,51 +278,43 @@ public:
     }
 
     //! InsertAfter theIndex theItem
-    void InsertAfter(const Standard_Integer  theIndex,
-        const TheItemType& theItem)
-    {
+    void InsertAfter(const Standard_Integer theIndex, const TheItemType& theItem) {
         Standard_OutOfRange_Raise_if(theIndex < 0 || theIndex > mySize, "NCollection_Sequence::InsertAfter");
         PInsertAfter(theIndex, new (this->myAllocator) Node(theItem));
     }
 
     //! Split in two sequences
-    void Split(const Standard_Integer theIndex, NCollection_Sequence& theSeq)
-    {
+    void Split(const Standard_Integer theIndex, NCollection_Sequence& theSeq) {
         theSeq.Clear(this->myAllocator);
         PSplit(theIndex, theSeq);
     }
 
     //! First item access
-    const TheItemType& First() const
-    {
+    const TheItemType& First() const {
         Standard_NoSuchObject_Raise_if(mySize == 0, "NCollection_Sequence::First");
         return ((const Node*)myFirstItem)->Value();
     }
 
     //! First item access
-    TheItemType& ChangeFirst()
-    {
+    TheItemType& ChangeFirst() {
         Standard_NoSuchObject_Raise_if(mySize == 0, "NCollection_Sequence::ChangeFirst");
         return ((Node*)myFirstItem)->ChangeValue();
     }
 
     //! Last item access
-    const TheItemType& Last() const
-    {
+    const TheItemType& Last() const {
         Standard_NoSuchObject_Raise_if(mySize == 0, "NCollection_Sequence::Last");
         return ((const Node*)myLastItem)->Value();
     }
 
     //! Last item access
-    TheItemType& ChangeLast()
-    {
+    TheItemType& ChangeLast() {
         Standard_NoSuchObject_Raise_if(mySize == 0, "NCollection_Sequence::ChangeLast");
         return ((Node*)myLastItem)->ChangeValue();
     }
 
     //! Constant item access by theIndex
-    const TheItemType& Value(const Standard_Integer theIndex) const
-    {
+    const TheItemType& Value(const Standard_Integer theIndex) const {
         Standard_OutOfRange_Raise_if(theIndex <= 0 || theIndex > mySize, "NCollection_Sequence::Value");
 
         NCollection_Sequence* const aLocalTHIS = (NCollection_Sequence*)this;
@@ -373,14 +324,12 @@ public:
     }
 
     //! Constant operator()
-    const TheItemType& operator() (const Standard_Integer theIndex) const
-    {
+    const TheItemType& operator()(const Standard_Integer theIndex) const {
         return Value(theIndex);
     }
 
     //! Variable item access by theIndex
-    TheItemType& ChangeValue(const Standard_Integer theIndex)
-    {
+    TheItemType& ChangeValue(const Standard_Integer theIndex) {
         Standard_OutOfRange_Raise_if(theIndex <= 0 || theIndex > mySize, "NCollection_Sequence::ChangeValue");
 
         myCurrentItem = Find(theIndex);
@@ -389,36 +338,29 @@ public:
     }
 
     //! Variable operator()
-    TheItemType& operator() (const Standard_Integer theIndex)
-    {
+    TheItemType& operator()(const Standard_Integer theIndex) {
         return ChangeValue(theIndex);
     }
 
     //! Set item value by theIndex
-    void SetValue(const Standard_Integer theIndex,
-        const TheItemType& theItem)
-    {
+    void SetValue(const Standard_Integer theIndex, const TheItemType& theItem) {
         ChangeValue(theIndex) = theItem;
     }
 
     // ******** Destructor - clears the Sequence
-    virtual ~NCollection_Sequence(void)
-    {
+    virtual ~NCollection_Sequence(void) {
         Clear();
     }
 
 private:
-
     // ---------- FRIEND CLASSES ------------
     friend class Iterator;
 
     // ----------- PRIVATE METHODS -----------
 
     //! append the sequence headed by the given Node
-    void appendSeq(const Node* pCur)
-    {
-        while (pCur)
-        {
+    void appendSeq(const Node* pCur) {
+        while (pCur) {
             Node* pNew = new (this->myAllocator) Node(pCur->Value());
             PAppend(pNew);
             pCur = (const Node*)pCur->Next();
@@ -426,17 +368,14 @@ private:
     }
 
     //! insert the sequence headed by the given Node before the item with the given index
-    void prependSeq(const Node* pCur, Standard_Integer ind)
-    {
+    void prependSeq(const Node* pCur, Standard_Integer ind) {
         ind--;
-        while (pCur)
-        {
+        while (pCur) {
             Node* pNew = new (this->myAllocator) Node(pCur->Value());
             PInsertAfter(ind++, pNew);
             pCur = (const Node*)pCur->Next();
         }
     }
-
 };
 
 #endif

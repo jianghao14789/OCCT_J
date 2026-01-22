@@ -38,8 +38,7 @@
 //! -   Storage_VSInternalError : an internal error has been detected
 //! -   Storage_VSExtCharParityError : an error
 //! has occurred while reading 16 bit character
-enum Storage_Error
-{
+enum Storage_Error {
     Storage_VSOk,
     Storage_VSOpenError,
     Storage_VSModeError,

@@ -22,8 +22,9 @@
 #include <MAT2d_MapBiIntHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<MAT2d_BiInt,TColStd_SequenceOfInteger,MAT2d_MapBiIntHasher> MAT2d_DataMapOfBiIntSequenceOfInteger;
-typedef NCollection_DataMap<MAT2d_BiInt,TColStd_SequenceOfInteger,MAT2d_MapBiIntHasher>::Iterator MAT2d_DataMapIteratorOfDataMapOfBiIntSequenceOfInteger;
-
+typedef NCollection_DataMap<MAT2d_BiInt, TColStd_SequenceOfInteger, MAT2d_MapBiIntHasher>
+    MAT2d_DataMapOfBiIntSequenceOfInteger;
+typedef NCollection_DataMap<MAT2d_BiInt, TColStd_SequenceOfInteger, MAT2d_MapBiIntHasher>::Iterator
+    MAT2d_DataMapIteratorOfDataMapOfBiIntSequenceOfInteger;
 
 #endif

@@ -19,20 +19,18 @@
 #include <Standard_TypeDef.hxx>
 
 //! Low-level glTF data structure defining BufferView.
-struct RWGltf_GltfBufferView
-{
-  static const int INVALID_ID = -1;
+struct RWGltf_GltfBufferView {
+    static const int INVALID_ID = -1;
+
 public:
+    int Id;             //!< index of bufferView in the array of bufferViews
+    int64_t ByteOffset; //!< offset to the beginning of the data in buffer
+    int64_t ByteLength; //!< length of the data
+    int32_t ByteStride; //!< [0, 255]
+    RWGltf_GltfBufferViewTarget Target;
 
-  int                         Id;         //!< index of bufferView in the array of bufferViews
-  int64_t                     ByteOffset; //!< offset to the beginning of the data in buffer
-  int64_t                     ByteLength; //!< length of the data
-  int32_t                     ByteStride; //!< [0, 255]
-  RWGltf_GltfBufferViewTarget Target;
-
-  RWGltf_GltfBufferView()
-  : Id (INVALID_ID), ByteOffset (0), ByteLength (0), ByteStride (0), Target (RWGltf_GltfBufferViewTarget_UNKNOWN) {}
-
+    RWGltf_GltfBufferView()
+        : Id(INVALID_ID), ByteOffset(0), ByteLength(0), ByteStride(0), Target(RWGltf_GltfBufferViewTarget_UNKNOWN) {}
 };
 
 #endif // _RWGltf_GltfBufferView_HeaderFile

@@ -32,13 +32,10 @@ class math_Matrix;
 //! with constant throat that is the height of isosceles triangle in section
 class BlendFunc_ConstThroat : public BlendFunc_GenChamfer {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_ConstThroat(const Handle(Adaptor3d_Surface)& S1,
-        const Handle(Adaptor3d_Surface)& S2,
-        const Handle(Adaptor3d_Curve)& C);
-
+    Standard_EXPORT BlendFunc_ConstThroat(const Handle(Adaptor3d_Surface) & S1, const Handle(Adaptor3d_Surface) & S2,
+                                          const Handle(Adaptor3d_Curve) & C);
 
     //! computes the values <F> of the Functions for the
     //! variable <X>.
@@ -74,16 +71,18 @@ public:
     //! at the beginning and the end of the section, and
     //! returns the normal (of the surfaces) at
     //! these points.
-    Standard_EXPORT void Tangent(const Standard_Real U1, const Standard_Real V1, const Standard_Real U2, const Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst, gp_Vec& NormLast) const Standard_OVERRIDE;
+    Standard_EXPORT void Tangent(const Standard_Real U1, const Standard_Real V1, const Standard_Real U2,
+                                 const Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst,
+                                 gp_Vec& NormLast) const Standard_OVERRIDE;
 
     //! Sets the throat and the "quadrant".
-    Standard_EXPORT void Set(const Standard_Real aThroat, const Standard_Real, const Standard_Integer Choix) Standard_OVERRIDE;
+    Standard_EXPORT void Set(const Standard_Real aThroat, const Standard_Real,
+                             const Standard_Integer Choix) Standard_OVERRIDE;
 
     //! Returns the length of the maximum section
     Standard_EXPORT Standard_Real GetSectionSize() const Standard_OVERRIDE;
 
 protected:
-
     gp_Pnt pts1;
     gp_Pnt pts2;
     gp_Vec d1u1;
@@ -106,7 +105,6 @@ protected:
     gp_Vec d2gui;
 
 private:
-
 };
 
 #endif // _BlendFunc_ConstThroat_HeaderFile

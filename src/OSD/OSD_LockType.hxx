@@ -27,12 +27,6 @@
 //! current user of the file.
 //! So ExclusiveLock means only one user on the file and this
 //! user is the one who puts the lock.
-enum OSD_LockType
-{
-    OSD_NoLock,
-    OSD_ReadLock,
-    OSD_WriteLock,
-    OSD_ExclusiveLock
-};
+enum OSD_LockType { OSD_NoLock, OSD_ReadLock, OSD_WriteLock, OSD_ExclusiveLock };
 
 #endif // _OSD_LockType_HeaderFile

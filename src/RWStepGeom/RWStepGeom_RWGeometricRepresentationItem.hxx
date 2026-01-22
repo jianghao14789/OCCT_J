@@ -27,42 +27,22 @@ class Interface_Check;
 class StepGeom_GeometricRepresentationItem;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for GeometricRepresentationItem
-class RWStepGeom_RWGeometricRepresentationItem 
-{
+class RWStepGeom_RWGeometricRepresentationItem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWGeometricRepresentationItem();
 
-  
-  Standard_EXPORT RWStepGeom_RWGeometricRepresentationItem();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_GeometricRepresentationItem)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_GeometricRepresentationItem)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepGeom_GeometricRepresentationItem) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepGeom_GeometricRepresentationItem) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWGeometricRepresentationItem_HeaderFile

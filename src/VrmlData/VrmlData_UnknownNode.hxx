@@ -24,56 +24,51 @@
  * are not processed now.
  */
 
-class VrmlData_UnknownNode : public VrmlData_Node
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class VrmlData_UnknownNode : public VrmlData_Node {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  /**
-   * Empty Constructor.
-   */
-  inline VrmlData_UnknownNode () {}
+    /**
+     * Empty Constructor.
+     */
+    inline VrmlData_UnknownNode() {}
 
-  /**
-   * Constructor.
-   */
-  inline VrmlData_UnknownNode           (const VrmlData_Scene& theScene,
-                                         const char            * theName = 0L,
-                                         const char            * theTitle= 0L)
-    : VrmlData_Node     (theScene, theName)
-  { if (theTitle) myTitle = (Standard_CString)theTitle; }
+    /**
+     * Constructor.
+     */
+    inline VrmlData_UnknownNode(const VrmlData_Scene& theScene, const char* theName = 0L, const char* theTitle = 0L)
+        : VrmlData_Node(theScene, theName) {
+        if (theTitle) myTitle = (Standard_CString)theTitle;
+    }
 
-  /**
-   * Read the unknown node, till the last closing brace of it.
-   */
-  Standard_EXPORT virtual VrmlData_ErrorStatus
-                        Read            (VrmlData_InBuffer& theBuffer) Standard_OVERRIDE;
+    /**
+     * Read the unknown node, till the last closing brace of it.
+     */
+    Standard_EXPORT virtual VrmlData_ErrorStatus Read(VrmlData_InBuffer& theBuffer) Standard_OVERRIDE;
 
-  /**
-   * Query the title of the unknown node.
-   */
-  inline const TCollection_AsciiString&
-                        GetTitle        () const
-  { return myTitle; }
+    /**
+     * Query the title of the unknown node.
+     */
+    inline const TCollection_AsciiString& GetTitle() const {
+        return myTitle;
+    }
 
-  /**
-   * Check if the Node is non-writeable -- always returns true.
-   */
-  Standard_EXPORT virtual Standard_Boolean
-                        IsDefault       () const Standard_OVERRIDE;
+    /**
+     * Check if the Node is non-writeable -- always returns true.
+     */
+    Standard_EXPORT virtual Standard_Boolean IsDefault() const Standard_OVERRIDE;
 
- private:
-  // ---------- PRIVATE FIELDS ----------
+private:
+    // ---------- PRIVATE FIELDS ----------
 
-  TCollection_AsciiString myTitle;
+    TCollection_AsciiString myTitle;
 
- public:
-// Declaration of CASCADE RTTI
-DEFINE_STANDARD_RTTI_INLINE(VrmlData_UnknownNode,VrmlData_Node)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTI_INLINE(VrmlData_UnknownNode, VrmlData_Node)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (VrmlData_UnknownNode, VrmlData_Node)
-
+DEFINE_STANDARD_HANDLE(VrmlData_UnknownNode, VrmlData_Node)
 
 #endif

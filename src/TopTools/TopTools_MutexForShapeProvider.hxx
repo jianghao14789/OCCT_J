@@ -23,39 +23,36 @@
 class Standard_Mutex;
 class TopoDS_Shape;
 
-//! Class TopTools_MutexForShapeProvider 
+//! Class TopTools_MutexForShapeProvider
 //!   This class is used to create and store mutexes associated with shapes.
-class TopTools_MutexForShapeProvider
-{
+class TopTools_MutexForShapeProvider {
 public:
-  //! Constructor
-  Standard_EXPORT TopTools_MutexForShapeProvider();
+    //! Constructor
+    Standard_EXPORT TopTools_MutexForShapeProvider();
 
-  //! Destructor
-  Standard_EXPORT ~TopTools_MutexForShapeProvider();
+    //! Destructor
+    Standard_EXPORT ~TopTools_MutexForShapeProvider();
 
-  //! Creates and associates mutexes with each sub-shape of type theType in theShape.
-  Standard_EXPORT void CreateMutexesForSubShapes(const TopoDS_Shape& theShape, const TopAbs_ShapeEnum theType);
+    //! Creates and associates mutexes with each sub-shape of type theType in theShape.
+    Standard_EXPORT void CreateMutexesForSubShapes(const TopoDS_Shape& theShape, const TopAbs_ShapeEnum theType);
 
-  //! Creates and associates mutex with theShape
-  Standard_EXPORT void CreateMutexForShape(const TopoDS_Shape& theShape);
+    //! Creates and associates mutex with theShape
+    Standard_EXPORT void CreateMutexForShape(const TopoDS_Shape& theShape);
 
-  //! Returns pointer to mutex associated with theShape.
-  //! In case when mutex not found returns NULL.
-  Standard_EXPORT Standard_Mutex* GetMutex(const TopoDS_Shape& theShape) const;
+    //! Returns pointer to mutex associated with theShape.
+    //! In case when mutex not found returns NULL.
+    Standard_EXPORT Standard_Mutex* GetMutex(const TopoDS_Shape& theShape) const;
 
-  //! Removes all mutexes
-  Standard_EXPORT void RemoveAllMutexes();
+    //! Removes all mutexes
+    Standard_EXPORT void RemoveAllMutexes();
 
 private:
-  //! This method should not be called (prohibited).
-  TopTools_MutexForShapeProvider (const TopTools_MutexForShapeProvider &);
-  //! This method should not be called (prohibited).
-  TopTools_MutexForShapeProvider & operator = (const TopTools_MutexForShapeProvider &);
+    //! This method should not be called (prohibited).
+    TopTools_MutexForShapeProvider(const TopTools_MutexForShapeProvider&);
+    //! This method should not be called (prohibited).
+    TopTools_MutexForShapeProvider& operator=(const TopTools_MutexForShapeProvider&);
 
-
-  NCollection_DataMap<Handle(TopoDS_TShape), Standard_Mutex *> myMap;
-
+    NCollection_DataMap<Handle(TopoDS_TShape), Standard_Mutex*> myMap;
 };
 
 #endif

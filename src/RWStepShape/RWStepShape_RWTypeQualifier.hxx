@@ -27,42 +27,20 @@ class Interface_Check;
 class StepShape_TypeQualifier;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for TypeQualifier
-class RWStepShape_RWTypeQualifier 
-{
+class RWStepShape_RWTypeQualifier {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWTypeQualifier();
 
-  
-  Standard_EXPORT RWStepShape_RWTypeQualifier();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_TypeQualifier)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_TypeQualifier)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_TypeQualifier) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_TypeQualifier) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWTypeQualifier_HeaderFile

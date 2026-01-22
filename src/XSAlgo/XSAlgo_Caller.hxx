@@ -17,11 +17,6 @@
 #define _XSAlgo_Caller_HeaderFile
 
 //! Identifies the caller of the algorithm
-enum XSAlgo_Caller
-{
-XSAlgo_DEFAULT,
-XSAlgo_IGES,
-XSAlgo_STEP
-};
+enum XSAlgo_Caller { XSAlgo_DEFAULT, XSAlgo_IGES, XSAlgo_STEP };
 
 #endif // _XSAlgo_Caller_HeaderFile

@@ -17,13 +17,11 @@
 #ifndef _IntImp_ConstIsoparametric_HeaderFile
 #define _IntImp_ConstIsoparametric_HeaderFile
 
-
-enum IntImp_ConstIsoparametric
-{
-IntImp_UIsoparametricOnCaro1,
-IntImp_VIsoparametricOnCaro1,
-IntImp_UIsoparametricOnCaro2,
-IntImp_VIsoparametricOnCaro2
+enum IntImp_ConstIsoparametric {
+    IntImp_UIsoparametricOnCaro1,
+    IntImp_VIsoparametricOnCaro1,
+    IntImp_UIsoparametricOnCaro2,
+    IntImp_VIsoparametricOnCaro2
 };
 
 #endif // _IntImp_ConstIsoparametric_HeaderFile

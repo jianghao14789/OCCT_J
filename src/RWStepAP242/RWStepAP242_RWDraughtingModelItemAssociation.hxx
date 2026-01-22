@@ -29,18 +29,20 @@ class StepData_StepWriter;
 class Interface_EntityIterator;
 
 //! Read & Write Module for DraughtingModelItemAssociation
-class RWStepAP242_RWDraughtingModelItemAssociation 
-{
+class RWStepAP242_RWDraughtingModelItemAssociation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  Standard_EXPORT RWStepAP242_RWDraughtingModelItemAssociation();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP242_DraughtingModelItemAssociation)& ent)  const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP242_DraughtingModelItemAssociation)& ent)  const;
-  
-  Standard_EXPORT void Share (const Handle(StepAP242_DraughtingModelItemAssociation)& ent, Interface_EntityIterator& iter)  const;
+    Standard_EXPORT RWStepAP242_RWDraughtingModelItemAssociation();
+
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP242_DraughtingModelItemAssociation) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP242_DraughtingModelItemAssociation) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepAP242_DraughtingModelItemAssociation) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepAP242_RWDraughtingModelItemAssociation_HeaderFile

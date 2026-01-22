@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepClass3d.hxx>
 #include <Message_ProgressScope.hxx>
 #include <StdFail_NotDone.hxx>
@@ -34,45 +33,37 @@
 //=============================================================================
 // Create a FacetedBrep of StepShape from a Shell of TopoDS
 //=============================================================================
-TopoDSToStep_MakeFacetedBrep::
-  TopoDSToStep_MakeFacetedBrep(const TopoDS_Shell& aShell,
-                               const Handle(Transfer_FinderProcess)& FP,
-                               const Message_ProgressRange& theProgress)
-{
-  done = Standard_False;
-  if (aShell.Closed()) {
-    Handle(StepShape_TopologicalRepresentationItem) aItem;
-    MoniTool_DataMapOfShapeTransient aMap;
-    
-    TopoDSToStep_Tool    aTool(aMap, Standard_True);
-    TopoDSToStep_Builder StepB(aShell, aTool, FP, theProgress);
-    if (theProgress.UserBreak())
-      return;
-    TopoDSToStep::AddResult ( FP, aTool );
-
-    if (StepB.IsDone()) {
-      aItem = StepB.Value();
-      Handle(StepShape_ClosedShell) aCShell;
-      aCShell = Handle(StepShape_ClosedShell)::DownCast(aItem);
-      theFacetedBrep = new StepShape_FacetedBrep();
-      Handle(TCollection_HAsciiString) aName = 
-	new TCollection_HAsciiString("");
-      theFacetedBrep->Init(aName, aCShell);
-      done = Standard_True;
-    }
-    else {
-      done = Standard_False;
-      Handle(TransferBRep_ShapeMapper) errShape =
-	new TransferBRep_ShapeMapper(aShell);
-      FP->AddWarning(errShape," Closed Shell not mapped to FacetedBrep");
-    }
-  }
-  else {
+TopoDSToStep_MakeFacetedBrep::TopoDSToStep_MakeFacetedBrep(const TopoDS_Shell& aShell,
+                                                           const Handle(Transfer_FinderProcess) & FP,
+                                                           const Message_ProgressRange& theProgress) {
     done = Standard_False;
-    Handle(TransferBRep_ShapeMapper) errShape =
-      new TransferBRep_ShapeMapper(aShell);
-    FP->AddWarning(errShape," Shell not closed; not mapped to FacetedBrep");
-  }
+    if (aShell.Closed()) {
+        Handle(StepShape_TopologicalRepresentationItem) aItem;
+        MoniTool_DataMapOfShapeTransient aMap;
+
+        TopoDSToStep_Tool aTool(aMap, Standard_True);
+        TopoDSToStep_Builder StepB(aShell, aTool, FP, theProgress);
+        if (theProgress.UserBreak()) return;
+        TopoDSToStep::AddResult(FP, aTool);
+
+        if (StepB.IsDone()) {
+            aItem = StepB.Value();
+            Handle(StepShape_ClosedShell) aCShell;
+            aCShell = Handle(StepShape_ClosedShell)::DownCast(aItem);
+            theFacetedBrep = new StepShape_FacetedBrep();
+            Handle(TCollection_HAsciiString) aName = new TCollection_HAsciiString("");
+            theFacetedBrep->Init(aName, aCShell);
+            done = Standard_True;
+        } else {
+            done = Standard_False;
+            Handle(TransferBRep_ShapeMapper) errShape = new TransferBRep_ShapeMapper(aShell);
+            FP->AddWarning(errShape, " Closed Shell not mapped to FacetedBrep");
+        }
+    } else {
+        done = Standard_False;
+        Handle(TransferBRep_ShapeMapper) errShape = new TransferBRep_ShapeMapper(aShell);
+        FP->AddWarning(errShape, " Shell not closed; not mapped to FacetedBrep");
+    }
 }
 
 //=============================================================================
@@ -80,66 +71,54 @@ TopoDSToStep_MakeFacetedBrep::
 // only one closed shell
 //=============================================================================
 
-TopoDSToStep_MakeFacetedBrep::
-  TopoDSToStep_MakeFacetedBrep(const TopoDS_Solid& aSolid,
-                               const Handle(Transfer_FinderProcess)& FP,
-                               const Message_ProgressRange& theProgress)
-{
-  done = Standard_False;
+TopoDSToStep_MakeFacetedBrep::TopoDSToStep_MakeFacetedBrep(const TopoDS_Solid& aSolid,
+                                                           const Handle(Transfer_FinderProcess) & FP,
+                                                           const Message_ProgressRange& theProgress) {
+    done = Standard_False;
 
-  // Looking for the Outer Shell
-  TopoDS_Shell aOuterShell = BRepClass3d::OuterShell(aSolid);
+    // Looking for the Outer Shell
+    TopoDS_Shell aOuterShell = BRepClass3d::OuterShell(aSolid);
 
-  if (!aOuterShell.IsNull()) {
-    if (aOuterShell.Closed()) {
-      Handle(StepShape_TopologicalRepresentationItem) aItem;
-      MoniTool_DataMapOfShapeTransient aMap;
-      
-      TopoDSToStep_Tool    aTool(aMap, Standard_True);
-      TopoDSToStep_Builder StepB(aOuterShell, aTool, FP, theProgress);
-      if (theProgress.UserBreak())
-        return;
-      TopoDSToStep::AddResult ( FP, aTool );
-      
-      if (StepB.IsDone()) {
-	aItem = StepB.Value();
-	Handle(StepShape_ClosedShell) aCShell;
-	aCShell = Handle(StepShape_ClosedShell)::DownCast(aItem);
-	theFacetedBrep = new StepShape_FacetedBrep();
-	Handle(TCollection_HAsciiString) aName = 
-	  new TCollection_HAsciiString("");
-	theFacetedBrep->Init(aName, aCShell);
-	done = Standard_True;
-      }
-      else {
-	done = Standard_False;
-	Handle(TransferBRep_ShapeMapper) errShape =
-	  new TransferBRep_ShapeMapper(aOuterShell);
-	FP->AddWarning(errShape," Closed Outer Shell from Solid not mapped to FacetedBrep");
-      }
+    if (!aOuterShell.IsNull()) {
+        if (aOuterShell.Closed()) {
+            Handle(StepShape_TopologicalRepresentationItem) aItem;
+            MoniTool_DataMapOfShapeTransient aMap;
+
+            TopoDSToStep_Tool aTool(aMap, Standard_True);
+            TopoDSToStep_Builder StepB(aOuterShell, aTool, FP, theProgress);
+            if (theProgress.UserBreak()) return;
+            TopoDSToStep::AddResult(FP, aTool);
+
+            if (StepB.IsDone()) {
+                aItem = StepB.Value();
+                Handle(StepShape_ClosedShell) aCShell;
+                aCShell = Handle(StepShape_ClosedShell)::DownCast(aItem);
+                theFacetedBrep = new StepShape_FacetedBrep();
+                Handle(TCollection_HAsciiString) aName = new TCollection_HAsciiString("");
+                theFacetedBrep->Init(aName, aCShell);
+                done = Standard_True;
+            } else {
+                done = Standard_False;
+                Handle(TransferBRep_ShapeMapper) errShape = new TransferBRep_ShapeMapper(aOuterShell);
+                FP->AddWarning(errShape, " Closed Outer Shell from Solid not mapped to FacetedBrep");
+            }
+        } else {
+            done = Standard_False;
+            Handle(TransferBRep_ShapeMapper) errShape = new TransferBRep_ShapeMapper(aOuterShell);
+            FP->AddWarning(errShape, " Shell not closed; not mapped to FacetedBrep");
+        }
+    } else {
+        done = Standard_False;
+        Handle(TransferBRep_ShapeMapper) errShape = new TransferBRep_ShapeMapper(aOuterShell);
+        FP->AddWarning(errShape, " Solid contains no Outer Shell to be mapped to FacetedBrep");
     }
-    else {
-      done = Standard_False; 
-      Handle(TransferBRep_ShapeMapper) errShape =
-	new TransferBRep_ShapeMapper(aOuterShell);
-      FP->AddWarning(errShape," Shell not closed; not mapped to FacetedBrep");
-    }
-  }
-  else {
-    done = Standard_False; 
-    Handle(TransferBRep_ShapeMapper) errShape =
-      new TransferBRep_ShapeMapper(aOuterShell);
-    FP->AddWarning(errShape," Solid contains no Outer Shell to be mapped to FacetedBrep");
-  }
 }
 
 //=============================================================================
 // renvoi des valeurs
 //=============================================================================
 
-const Handle(StepShape_FacetedBrep) &
-      TopoDSToStep_MakeFacetedBrep::Value() const
-{
-  StdFail_NotDone_Raise_if (!done, "TopoDSToStep_MakeFacetedBrep::Value() - no result");
-  return theFacetedBrep;
+const Handle(StepShape_FacetedBrep) & TopoDSToStep_MakeFacetedBrep::Value() const {
+    StdFail_NotDone_Raise_if(!done, "TopoDSToStep_MakeFacetedBrep::Value() - no result");
+    return theFacetedBrep;
 }

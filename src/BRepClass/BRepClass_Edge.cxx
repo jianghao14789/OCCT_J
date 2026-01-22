@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepClass_Edge.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 #include <Precision.hxx>
@@ -23,55 +22,39 @@
 #include <TopExp.hxx>
 
 //=======================================================================
-//function : BRepClass_Edge
-//purpose  : 
+// function : BRepClass_Edge
+// purpose  :
 //=======================================================================
-BRepClass_Edge::BRepClass_Edge() : myMaxTolerance(Precision::Infinite()), myUseBndBox(Standard_False)
-{
-}
+BRepClass_Edge::BRepClass_Edge() : myMaxTolerance(Precision::Infinite()), myUseBndBox(Standard_False) {}
 
 //=======================================================================
-//function : SetNextEdge
-//purpose  :
+// function : SetNextEdge
+// purpose  :
 //=======================================================================
-void BRepClass_Edge::SetNextEdge(const TopTools_IndexedDataMapOfShapeListOfShape& theMapVE)
-{
-  if (theMapVE.IsEmpty() || myEdge.IsNull())
-  {
-    return;
-  }
-  TopoDS_Vertex aVF, aVL;
-  TopExp::Vertices(myEdge, aVF, aVL, Standard_True);
-
-  if (aVL.IsNull() || aVL.IsSame(aVF))
-  {
-    return;
-  }
-  const TopTools_ListOfShape* aListE = theMapVE.Seek(aVL);
-  if (aListE->Extent() == 2)
-  {
-    for (TopTools_ListIteratorOfListOfShape anIt(*aListE); anIt.More(); anIt.Next())
-    {
-      if ((!anIt.Value().IsNull()) && (!anIt.Value().IsSame(myEdge)))
-      {
-        myNextEdge = TopoDS::Edge(anIt.Value());
-      }
+void BRepClass_Edge::SetNextEdge(const TopTools_IndexedDataMapOfShapeListOfShape& theMapVE) {
+    if (theMapVE.IsEmpty() || myEdge.IsNull()) {
+        return;
     }
-  }
+    TopoDS_Vertex aVF, aVL;
+    TopExp::Vertices(myEdge, aVF, aVL, Standard_True);
+
+    if (aVL.IsNull() || aVL.IsSame(aVF)) {
+        return;
+    }
+    const TopTools_ListOfShape* aListE = theMapVE.Seek(aVL);
+    if (aListE->Extent() == 2) {
+        for (TopTools_ListIteratorOfListOfShape anIt(*aListE); anIt.More(); anIt.Next()) {
+            if ((!anIt.Value().IsNull()) && (!anIt.Value().IsSame(myEdge))) {
+                myNextEdge = TopoDS::Edge(anIt.Value());
+            }
+        }
+    }
 }
 
-
 //=======================================================================
-//function : BRepClass_Edge
-//purpose  : 
+// function : BRepClass_Edge
+// purpose  :
 //=======================================================================
 
-BRepClass_Edge::BRepClass_Edge(const TopoDS_Edge& E,
-			       const TopoDS_Face& F) :
-       myEdge(E),
-       myFace(F),
-       myMaxTolerance(Precision::Infinite()),
-       myUseBndBox(Standard_False)
-{
-}
-
+BRepClass_Edge::BRepClass_Edge(const TopoDS_Edge& E, const TopoDS_Face& F)
+    : myEdge(E), myFace(F), myMaxTolerance(Precision::Infinite()), myUseBndBox(Standard_False) {}

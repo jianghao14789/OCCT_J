@@ -16,19 +16,21 @@
 //      	-------------------
 
 // Version:	0.0
-//Version	Date		Purpose
+// Version	Date		Purpose
 //		0.0	Oct  1 1997	Creation
 
+inline Handle(TDF_Data) TDF_Transaction::Data() const {
+    return myDF;
+}
 
-inline Handle(TDF_Data) TDF_Transaction::Data() const
-{ return myDF; }
+inline Standard_Integer TDF_Transaction::Transaction() const {
+    return myUntilTransaction;
+}
 
-inline Standard_Integer TDF_Transaction::Transaction() const
-{ return myUntilTransaction; }
+inline const TCollection_AsciiString& TDF_Transaction::Name() const {
+    return myName;
+}
 
-inline const TCollection_AsciiString& TDF_Transaction::Name() const
-{ return myName; }
-
-inline Standard_Boolean TDF_Transaction::IsOpen() const
-{ return myUntilTransaction > 0; }
-
+inline Standard_Boolean TDF_Transaction::IsOpen() const {
+    return myUntilTransaction > 0;
+}

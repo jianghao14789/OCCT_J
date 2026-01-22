@@ -28,48 +28,26 @@ class StepAP203_Change;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Change
-class RWStepAP203_RWChange 
-{
+class RWStepAP203_RWChange {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP203_RWChange();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP203_RWChange();
-  
-  //! Reads Change
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP203_Change)& ent) const;
-  
-  //! Writes Change
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP203_Change)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP203_Change)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Change
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepAP203_Change) & ent) const;
 
+    //! Writes Change
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepAP203_Change) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP203_Change) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP203_RWChange_HeaderFile

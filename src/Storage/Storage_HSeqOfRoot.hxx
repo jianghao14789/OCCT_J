@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(Storage_HSeqOfRoot, Storage_SeqOfRoot)
 
-
 #endif

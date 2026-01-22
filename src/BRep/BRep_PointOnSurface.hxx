@@ -26,49 +26,30 @@
 class Geom_Surface;
 class TopLoc_Location;
 
-
 class BRep_PointOnSurface;
 DEFINE_STANDARD_HANDLE(BRep_PointOnSurface, BRep_PointsOnSurface)
 
 //! Representation by two parameters on a surface.
-class BRep_PointOnSurface : public BRep_PointsOnSurface
-{
+class BRep_PointOnSurface : public BRep_PointsOnSurface {
 
 public:
-
-
-    Standard_EXPORT BRep_PointOnSurface(const Standard_Real P1, const Standard_Real P2, const Handle(Geom_Surface)& S, const TopLoc_Location& L);
+    Standard_EXPORT BRep_PointOnSurface(const Standard_Real P1, const Standard_Real P2, const Handle(Geom_Surface) & S,
+                                        const TopLoc_Location& L);
 
     Standard_EXPORT virtual Standard_Boolean IsPointOnSurface() const Standard_OVERRIDE;
 
-    Standard_EXPORT virtual Standard_Boolean IsPointOnSurface(const Handle(Geom_Surface)& S, const TopLoc_Location& L) const Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Boolean IsPointOnSurface(const Handle(Geom_Surface) & S,
+                                                              const TopLoc_Location& L) const Standard_OVERRIDE;
 
     Standard_EXPORT virtual Standard_Real Parameter2() const Standard_OVERRIDE;
 
     Standard_EXPORT virtual void Parameter2(const Standard_Real P) Standard_OVERRIDE;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(BRep_PointOnSurface, BRep_PointsOnSurface)
 
 protected:
-
-
-
-
 private:
-
-
     Standard_Real myParameter2;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRep_PointOnSurface_HeaderFile

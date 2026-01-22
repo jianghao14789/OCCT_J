@@ -24,65 +24,58 @@
 #include <StepShape_DimensionalSize.hxx>
 
 //=======================================================================
-//function : RWStepShape_RWDimensionalSize
-//purpose  : 
+// function : RWStepShape_RWDimensionalSize
+// purpose  :
 //=======================================================================
-RWStepShape_RWDimensionalSize::RWStepShape_RWDimensionalSize ()
-{
+RWStepShape_RWDimensionalSize::RWStepShape_RWDimensionalSize() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepShape_RWDimensionalSize::ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                             Handle(Interface_Check) & ach,
+                                             const Handle(StepShape_DimensionalSize) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 2, ach, "dimensional_size")) return;
+
+    // Own fields of DimensionalSize
+
+    Handle(StepRepr_ShapeAspect) aAppliesTo;
+    data->ReadEntity(num, 1, "applies_to", ach, STANDARD_TYPE(StepRepr_ShapeAspect), aAppliesTo);
+
+    Handle(TCollection_HAsciiString) aName;
+    data->ReadString(num, 2, "name", ach, aName);
+
+    // Initialize entity
+    ent->Init(aAppliesTo, aName);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepShape_RWDimensionalSize::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                              const Standard_Integer num,
-                                              Handle(Interface_Check)& ach,
-                                              const Handle(StepShape_DimensionalSize) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,2,ach,"dimensional_size") ) return;
+void RWStepShape_RWDimensionalSize::WriteStep(StepData_StepWriter& SW,
+                                              const Handle(StepShape_DimensionalSize) & ent) const {
 
-  // Own fields of DimensionalSize
+    // Own fields of DimensionalSize
 
-  Handle(StepRepr_ShapeAspect) aAppliesTo;
-  data->ReadEntity (num, 1, "applies_to", ach, STANDARD_TYPE(StepRepr_ShapeAspect), aAppliesTo);
+    SW.Send(ent->AppliesTo());
 
-  Handle(TCollection_HAsciiString) aName;
-  data->ReadString (num, 2, "name", ach, aName);
-
-  // Initialize entity
-  ent->Init(aAppliesTo,
-            aName);
+    SW.Send(ent->Name());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepShape_RWDimensionalSize::WriteStep (StepData_StepWriter& SW,
-                                               const Handle(StepShape_DimensionalSize) &ent) const
-{
+void RWStepShape_RWDimensionalSize::Share(const Handle(StepShape_DimensionalSize) & ent,
+                                          Interface_EntityIterator& iter) const {
 
-  // Own fields of DimensionalSize
+    // Own fields of DimensionalSize
 
-  SW.Send (ent->AppliesTo());
-
-  SW.Send (ent->Name());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepShape_RWDimensionalSize::Share (const Handle(StepShape_DimensionalSize) &ent,
-                                           Interface_EntityIterator& iter) const
-{
-
-  // Own fields of DimensionalSize
-
-  iter.AddItem (ent->AppliesTo());
+    iter.AddItem(ent->AppliesTo());
 }

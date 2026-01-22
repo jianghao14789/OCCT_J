@@ -28,25 +28,25 @@ class StepDimTol_GeometricToleranceWithMaximumTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GeometricToleranceWithMaximumTolerance
-class RWStepDimTol_RWGeometricToleranceWithMaximumTolerance 
-{
+class RWStepDimTol_RWGeometricToleranceWithMaximumTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWGeometricToleranceWithMaximumTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWGeometricToleranceWithMaximumTolerance();
-  
-  //! Reads GeometricToleranceWithMaximumTolerance
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_GeometricToleranceWithMaximumTolerance)& ent)  const;
-  
-  //! Writes GeometricToleranceWithMaximumTolerance
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_GeometricToleranceWithMaximumTolerance)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_GeometricToleranceWithMaximumTolerance)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads GeometricToleranceWithMaximumTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_GeometricToleranceWithMaximumTolerance) & ent) const;
+
+    //! Writes GeometricToleranceWithMaximumTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_GeometricToleranceWithMaximumTolerance) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_GeometricToleranceWithMaximumTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWGeometricToleranceWithMaximumTolerance_HeaderFile

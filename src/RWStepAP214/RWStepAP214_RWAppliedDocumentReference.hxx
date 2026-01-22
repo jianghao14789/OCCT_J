@@ -28,44 +28,25 @@ class StepAP214_AppliedDocumentReference;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for AppliedDocumentReference
-class RWStepAP214_RWAppliedDocumentReference 
-{
+class RWStepAP214_RWAppliedDocumentReference {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepAP214_RWAppliedDocumentReference();
 
-  
-  Standard_EXPORT RWStepAP214_RWAppliedDocumentReference();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP214_AppliedDocumentReference)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP214_AppliedDocumentReference)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepAP214_AppliedDocumentReference)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP214_AppliedDocumentReference) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP214_AppliedDocumentReference) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepAP214_AppliedDocumentReference) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_RWAppliedDocumentReference_HeaderFile

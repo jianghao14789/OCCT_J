@@ -24,7 +24,6 @@
 #include <gp_Pnt.hxx>
 #include <gp_Vec.hxx>
 #include <gp_Vec2d.hxx>
- 
 
 #define ThePSurface BRepAdaptor_Surface
 #define ThePSurface_hxx <BRepAdaptor_Surface.hxx>
@@ -42,4 +41,3 @@
 #define ApproxInt_PrmPrmSvSurfaces BRepApprox_ThePrmPrmSvSurfacesOfApprox
 #define ApproxInt_PrmPrmSvSurfaces_hxx <BRepApprox_ThePrmPrmSvSurfacesOfApprox.hxx>
 #include <ApproxInt_PrmPrmSvSurfaces.gxx>
-

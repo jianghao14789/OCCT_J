@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepAP203_HArray1OfContractedItem, StepAP203_Array1OfContractedItem)
 
-
 #endif

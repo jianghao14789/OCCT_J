@@ -26,7 +26,6 @@
 #include <IGESData_IGESEntity.hxx>
 class gp_Pnt;
 
-
 class IGESDimen_WitnessLine;
 DEFINE_STANDARD_HANDLE(IGESDimen_WitnessLine, IGESData_IGESEntity)
 
@@ -34,62 +33,43 @@ DEFINE_STANDARD_HANDLE(IGESDimen_WitnessLine, IGESData_IGESEntity)
 //! in package IGESDimen
 //! Contains one or more straight line segments associated
 //! with drafting entities of various types
-class IGESDimen_WitnessLine : public IGESData_IGESEntity
-{
+class IGESDimen_WitnessLine : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESDimen_WitnessLine();
 
-  
-  Standard_EXPORT IGESDimen_WitnessLine();
-  
-  //! This method is used to set the fields of the class
-  //! WitnessLine
-  //! - dataType   : Interpretation Flag, always = 1
-  //! - aDispl     : Common z displacement
-  //! - dataPoints : Data points
-  Standard_EXPORT void Init (const Standard_Integer dataType, const Standard_Real aDisp, const Handle(TColgp_HArray1OfXY)& dataPoints);
-  
-  //! returns Interpretation Flag, always = 1
-  Standard_EXPORT Standard_Integer Datatype() const;
-  
-  //! returns number of Data Points
-  Standard_EXPORT Standard_Integer NbPoints() const;
-  
-  //! returns common Z displacement
-  Standard_EXPORT Standard_Real ZDisplacement() const;
-  
-  //! returns Index'th. data point
-  //! raises exception if Index <= 0 or Index > NbPoints
-  Standard_EXPORT gp_Pnt Point (const Standard_Integer Index) const;
-  
-  //! returns data point after Transformation.
-  //! raises exception if Index <= 0 or Index > NbPoints
-  Standard_EXPORT gp_Pnt TransformedPoint (const Standard_Integer Index) const;
+    //! This method is used to set the fields of the class
+    //! WitnessLine
+    //! - dataType   : Interpretation Flag, always = 1
+    //! - aDispl     : Common z displacement
+    //! - dataPoints : Data points
+    Standard_EXPORT void Init(const Standard_Integer dataType, const Standard_Real aDisp,
+                              const Handle(TColgp_HArray1OfXY) & dataPoints);
 
+    //! returns Interpretation Flag, always = 1
+    Standard_EXPORT Standard_Integer Datatype() const;
 
+    //! returns number of Data Points
+    Standard_EXPORT Standard_Integer NbPoints() const;
 
+    //! returns common Z displacement
+    Standard_EXPORT Standard_Real ZDisplacement() const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESDimen_WitnessLine,IGESData_IGESEntity)
+    //! returns Index'th. data point
+    //! raises exception if Index <= 0 or Index > NbPoints
+    Standard_EXPORT gp_Pnt Point(const Standard_Integer Index) const;
+
+    //! returns data point after Transformation.
+    //! raises exception if Index <= 0 or Index > NbPoints
+    Standard_EXPORT gp_Pnt TransformedPoint(const Standard_Integer Index) const;
+
+    DEFINE_STANDARD_RTTIEXT(IGESDimen_WitnessLine, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer theDatatype;
-  Standard_Real theZDisplacement;
-  Handle(TColgp_HArray1OfXY) theDataPoints;
-
-
+    Standard_Integer theDatatype;
+    Standard_Real theZDisplacement;
+    Handle(TColgp_HArray1OfXY) theDataPoints;
 };
-
-
-
-
-
-
 
 #endif // _IGESDimen_WitnessLine_HeaderFile

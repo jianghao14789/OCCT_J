@@ -27,7 +27,6 @@
 #include <Standard_Boolean.hxx>
 class TopoDS_TShape;
 
-
 class BRep_TEdge;
 DEFINE_STANDARD_HANDLE(BRep_TEdge, TopoDS_TEdge)
 
@@ -78,12 +77,12 @@ public:
     Standard_EXPORT Handle(TopoDS_TShape) EmptyCopy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(BRep_TEdge, TopoDS_TEdge)
 
 protected:
-
 private:
     Standard_Real myTolerance;
     Standard_Integer myFlags;

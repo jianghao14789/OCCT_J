@@ -27,42 +27,20 @@ class Interface_Check;
 class StepBasic_OrganizationRole;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for OrganizationRole
-class RWStepBasic_RWOrganizationRole 
-{
+class RWStepBasic_RWOrganizationRole {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWOrganizationRole();
 
-  
-  Standard_EXPORT RWStepBasic_RWOrganizationRole();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_OrganizationRole)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_OrganizationRole)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_OrganizationRole) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_OrganizationRole) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWOrganizationRole_HeaderFile

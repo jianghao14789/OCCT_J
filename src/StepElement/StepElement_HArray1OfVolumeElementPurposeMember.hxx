@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY1(StepElement_HArray1OfVolumeElementPurposeMember, StepElement_Array1OfVolumeElementPurposeMember)
 
-
 #endif

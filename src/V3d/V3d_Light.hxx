@@ -1,5 +1,5 @@
 // Created on: 1992-01-17
-// Created by: GG 
+// Created by: GG
 // Copyright (c) 1992-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //

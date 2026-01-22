@@ -14,40 +14,31 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepSweep_Iterator.hxx>
 #include <Standard_NoMoreObject.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <TopoDS_Shape.hxx>
 
 //=======================================================================
-//function : BRepSweep_Iterator
-//purpose  : 
+// function : BRepSweep_Iterator
+// purpose  :
 //=======================================================================
-BRepSweep_Iterator::BRepSweep_Iterator()
-{
+BRepSweep_Iterator::BRepSweep_Iterator() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void BRepSweep_Iterator::Init(const TopoDS_Shape& aShape) {
+    myIterator.Initialize(aShape);
 }
 
-
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Next
+// purpose  :
 //=======================================================================
 
-void  BRepSweep_Iterator::Init(const TopoDS_Shape& aShape)
-{
-  myIterator.Initialize(aShape);
+void BRepSweep_Iterator::Next() {
+    myIterator.Next();
 }
-
-
-//=======================================================================
-//function : Next
-//purpose  : 
-//=======================================================================
-
-void  BRepSweep_Iterator::Next()
-{
-  myIterator.Next();
-}
-
-

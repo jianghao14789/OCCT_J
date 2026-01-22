@@ -27,48 +27,26 @@ class StepBasic_GeneralProperty;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GeneralProperty
-class RWStepBasic_RWGeneralProperty 
-{
+class RWStepBasic_RWGeneralProperty {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWGeneralProperty();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWGeneralProperty();
-  
-  //! Reads GeneralProperty
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_GeneralProperty)& ent) const;
-  
-  //! Writes GeneralProperty
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_GeneralProperty)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_GeneralProperty)& ent, Interface_EntityIterator& iter) const;
+    //! Reads GeneralProperty
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_GeneralProperty) & ent) const;
 
+    //! Writes GeneralProperty
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_GeneralProperty) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_GeneralProperty) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWGeneralProperty_HeaderFile

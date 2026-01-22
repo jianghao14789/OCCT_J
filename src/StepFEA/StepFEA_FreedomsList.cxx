@@ -18,43 +18,38 @@
 #include <Standard_Type.hxx>
 #include <StepFEA_FreedomsList.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FreedomsList,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FreedomsList, Standard_Transient)
 
 //=======================================================================
-//function : StepFEA_FreedomsList
-//purpose  : 
+// function : StepFEA_FreedomsList
+// purpose  :
 //=======================================================================
-StepFEA_FreedomsList::StepFEA_FreedomsList ()
-{
+StepFEA_FreedomsList::StepFEA_FreedomsList() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_FreedomsList::Init(const Handle(StepFEA_HArray1OfDegreeOfFreedom) & aFreedoms) {
+
+    theFreedoms = aFreedoms;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Freedoms
+// purpose  :
 //=======================================================================
 
-void StepFEA_FreedomsList::Init (const Handle(StepFEA_HArray1OfDegreeOfFreedom) &aFreedoms)
-{
-
-  theFreedoms = aFreedoms;
+Handle(StepFEA_HArray1OfDegreeOfFreedom) StepFEA_FreedomsList::Freedoms() const {
+    return theFreedoms;
 }
 
 //=======================================================================
-//function : Freedoms
-//purpose  : 
+// function : SetFreedoms
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_HArray1OfDegreeOfFreedom) StepFEA_FreedomsList::Freedoms () const
-{
-  return theFreedoms;
-}
-
-//=======================================================================
-//function : SetFreedoms
-//purpose  : 
-//=======================================================================
-
-void StepFEA_FreedomsList::SetFreedoms (const Handle(StepFEA_HArray1OfDegreeOfFreedom) &aFreedoms)
-{
-  theFreedoms = aFreedoms;
+void StepFEA_FreedomsList::SetFreedoms(const Handle(StepFEA_HArray1OfDegreeOfFreedom) & aFreedoms) {
+    theFreedoms = aFreedoms;
 }

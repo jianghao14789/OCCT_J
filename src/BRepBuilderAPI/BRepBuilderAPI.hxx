@@ -24,7 +24,6 @@
 #include <Standard_Real.hxx>
 class Geom_Plane;
 
-
 //! The  BRepBuilderAPI  package   provides  an   Application
 //! Programming Interface  for the BRep  topology data
 //! structure.
@@ -83,65 +82,43 @@ class Geom_Plane;
 //! In  theory  the  comands can be    called with any
 //! arguments, argument  checking  is performed by the
 //! command.
-class BRepBuilderAPI 
-{
+class BRepBuilderAPI {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Sets    the current plane.
+    Standard_EXPORT static void Plane(const Handle(Geom_Plane) & P);
 
-  
-  //! Sets    the current plane.
-  Standard_EXPORT static void Plane (const Handle(Geom_Plane)& P);
-  
-  //! Returns the current plane.
-  Standard_EXPORT static const Handle(Geom_Plane)& Plane();
-  
-  //! Sets the default precision.  The current Precision
-  //! is returned.
-  Standard_EXPORT static void Precision (const Standard_Real P);
-  
-  //! Returns the default precision.
-  Standard_EXPORT static Standard_Real Precision();
+    //! Returns the current plane.
+    Standard_EXPORT static const Handle(Geom_Plane) & Plane();
 
+    //! Sets the default precision.  The current Precision
+    //! is returned.
+    Standard_EXPORT static void Precision(const Standard_Real P);
 
-
+    //! Returns the default precision.
+    Standard_EXPORT static Standard_Real Precision();
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class BRepBuilderAPI_Command;
-friend class BRepBuilderAPI_MakeShape;
-friend class BRepBuilderAPI_MakeVertex;
-friend class BRepBuilderAPI_MakeEdge;
-friend class BRepBuilderAPI_MakeEdge2d;
-friend class BRepBuilderAPI_MakePolygon;
-friend class BRepBuilderAPI_MakeFace;
-friend class BRepBuilderAPI_FindPlane;
-friend class BRepBuilderAPI_Sewing;
-friend class BRepBuilderAPI_MakeWire;
-friend class BRepBuilderAPI_MakeShell;
-friend class BRepBuilderAPI_MakeSolid;
-friend class BRepBuilderAPI_ModifyShape;
-friend class BRepBuilderAPI_Transform;
-friend class BRepBuilderAPI_NurbsConvert;
-friend class BRepBuilderAPI_GTransform;
-friend class BRepBuilderAPI_Copy;
-friend class BRepBuilderAPI_Collect;
-
+    friend class BRepBuilderAPI_Command;
+    friend class BRepBuilderAPI_MakeShape;
+    friend class BRepBuilderAPI_MakeVertex;
+    friend class BRepBuilderAPI_MakeEdge;
+    friend class BRepBuilderAPI_MakeEdge2d;
+    friend class BRepBuilderAPI_MakePolygon;
+    friend class BRepBuilderAPI_MakeFace;
+    friend class BRepBuilderAPI_FindPlane;
+    friend class BRepBuilderAPI_Sewing;
+    friend class BRepBuilderAPI_MakeWire;
+    friend class BRepBuilderAPI_MakeShell;
+    friend class BRepBuilderAPI_MakeSolid;
+    friend class BRepBuilderAPI_ModifyShape;
+    friend class BRepBuilderAPI_Transform;
+    friend class BRepBuilderAPI_NurbsConvert;
+    friend class BRepBuilderAPI_GTransform;
+    friend class BRepBuilderAPI_Copy;
+    friend class BRepBuilderAPI_Collect;
 };
-
-
-
-
-
-
 
 #endif // _BRepBuilderAPI_HeaderFile

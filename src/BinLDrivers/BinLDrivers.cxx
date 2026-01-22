@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BinLDrivers.hxx>
 #include <BinLDrivers_DocumentRetrievalDriver.hxx>
 #include <BinLDrivers_DocumentStorageDriver.hxx>
@@ -30,66 +29,57 @@
 #include <TCollection_AsciiString.hxx>
 #include <TDocStd_Application.hxx>
 
-//#include <BinMNaming.hxx>
-static Standard_GUID BinLStorageDriver  ("13a56835-8269-11d5-aab2-0050044b1af1");
+// #include <BinMNaming.hxx>
+static Standard_GUID BinLStorageDriver("13a56835-8269-11d5-aab2-0050044b1af1");
 static Standard_GUID BinLRetrievalDriver("13a56836-8269-11d5-aab2-0050044b1af1");
 
 //=======================================================================
-//function : Factory
-//purpose  : PLUGIN FACTORY
+// function : Factory
+// purpose  : PLUGIN FACTORY
 //=======================================================================
-const Handle(Standard_Transient)& BinLDrivers::Factory(const Standard_GUID& theGUID)
-{
-  if (theGUID == BinLStorageDriver)
-  {
+const Handle(Standard_Transient) & BinLDrivers::Factory(const Standard_GUID& theGUID) {
+    if (theGUID == BinLStorageDriver) {
 #ifdef OCCT_DEBUG
-    std::cout << "BinLDrivers : Storage Plugin" << std::endl;
+        std::cout << "BinLDrivers : Storage Plugin" << std::endl;
 #endif
-    static Handle(Standard_Transient) model_sd =
-      new BinLDrivers_DocumentStorageDriver;
-    return model_sd;
-  }
+        static Handle(Standard_Transient) model_sd = new BinLDrivers_DocumentStorageDriver;
+        return model_sd;
+    }
 
-  if (theGUID == BinLRetrievalDriver)
-  {
+    if (theGUID == BinLRetrievalDriver) {
 #ifdef OCCT_DEBUG
-    std::cout << "BinLDrivers : Retrieval Plugin" << std::endl;
+        std::cout << "BinLDrivers : Retrieval Plugin" << std::endl;
 #endif
-    static Handle(Standard_Transient) model_rd =
-      new BinLDrivers_DocumentRetrievalDriver;
-    return model_rd;
-  }
+        static Handle(Standard_Transient) model_rd = new BinLDrivers_DocumentRetrievalDriver;
+        return model_rd;
+    }
 
-  throw Standard_Failure("BinLDrivers : unknown GUID");
+    throw Standard_Failure("BinLDrivers : unknown GUID");
 }
 
 //=======================================================================
-//function : DefineFormat
-//purpose  : 
+// function : DefineFormat
+// purpose  :
 //=======================================================================
-void BinLDrivers::DefineFormat (const Handle(TDocStd_Application)& theApp)
-{
-  theApp->DefineFormat ("BinLOcaf", "Binary Lite OCAF Document", "cbfl",
-                        new BinLDrivers_DocumentRetrievalDriver, 
-                        new BinLDrivers_DocumentStorageDriver);
+void BinLDrivers::DefineFormat(const Handle(TDocStd_Application) & theApp) {
+    theApp->DefineFormat("BinLOcaf", "Binary Lite OCAF Document", "cbfl", new BinLDrivers_DocumentRetrievalDriver,
+                         new BinLDrivers_DocumentStorageDriver);
 }
 
 //=======================================================================
-//function : AttributeDrivers
-//purpose  :
+// function : AttributeDrivers
+// purpose  :
 //=======================================================================
 
-Handle(BinMDF_ADriverTable) BinLDrivers::AttributeDrivers 
-                         (const Handle(Message_Messenger)& aMsgDrv)
-{
-  Handle(BinMDF_ADriverTable) aTable = new BinMDF_ADriverTable;
+Handle(BinMDF_ADriverTable) BinLDrivers::AttributeDrivers(const Handle(Message_Messenger) & aMsgDrv) {
+    Handle(BinMDF_ADriverTable) aTable = new BinMDF_ADriverTable;
 
-  BinMDF        ::AddDrivers (aTable, aMsgDrv);
-  BinMDataStd   ::AddDrivers (aTable, aMsgDrv);
-  BinMFunction  ::AddDrivers (aTable, aMsgDrv);
-  BinMDocStd    ::AddDrivers (aTable, aMsgDrv);
+    BinMDF ::AddDrivers(aTable, aMsgDrv);
+    BinMDataStd ::AddDrivers(aTable, aMsgDrv);
+    BinMFunction ::AddDrivers(aTable, aMsgDrv);
+    BinMDocStd ::AddDrivers(aTable, aMsgDrv);
 
-  return aTable;
+    return aTable;
 }
 
 PLUGIN(BinLDrivers)

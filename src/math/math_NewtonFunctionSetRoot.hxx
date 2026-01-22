@@ -33,29 +33,29 @@ class Standard_DimensionError;
 class math_FunctionSetWithDerivatives;
 class math_Matrix;
 
-
-
 //! This class computes the root of a set of N functions of N variables,
 //! knowing an initial guess at the solution and using the
 //! Newton Raphson algorithm. Knowledge of all the partial
 //! derivatives (Jacobian) is required.
 class math_NewtonFunctionSetRoot {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Initialize correctly all the fields of this class.
     //! The range (1, F.NbVariables()) must be especially respected for
     //! all vectors and matrix declarations.
-    Standard_EXPORT math_NewtonFunctionSetRoot(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theXTolerance, const Standard_Real theFTolerance, const Standard_Integer tehNbIterations = 100);
-
+    Standard_EXPORT math_NewtonFunctionSetRoot(math_FunctionSetWithDerivatives& theFunction,
+                                               const math_Vector& theXTolerance, const Standard_Real theFTolerance,
+                                               const Standard_Integer tehNbIterations = 100);
 
     //! This constructor should be used in a sub-class to initialize
     //! correctly all the fields of this class.
     //! The range (1, F.NbVariables()) must be especially respected for
     //! all vectors and matrix declarations.
     //! The method SetTolerance must be called before performing the algorithm.
-    Standard_EXPORT math_NewtonFunctionSetRoot(math_FunctionSetWithDerivatives& theFunction, const Standard_Real theFTolerance, const Standard_Integer theNbIterations = 100);
+    Standard_EXPORT math_NewtonFunctionSetRoot(math_FunctionSetWithDerivatives& theFunction,
+                                               const Standard_Real theFTolerance,
+                                               const Standard_Integer theNbIterations = 100);
 
     //! Destructor
     Standard_EXPORT virtual ~math_NewtonFunctionSetRoot();
@@ -72,7 +72,8 @@ public:
     //! from the initial guess point. Bounds may be given, to constrain the solution.
     //! The solution is found when:
     //! abs(Xj - Xj-1)(i) <= XTol(i) and abs(Fi) <= FTol for all i;
-    Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint, const math_Vector& theInfBound, const math_Vector& theSupBound);
+    Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint,
+                                 const math_Vector& theInfBound, const math_Vector& theSupBound);
 
     //! This method is called at the end of each iteration to check if the
     //! solution is found.
@@ -132,7 +133,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
     math_Vector TolX;
     Standard_Real TolF;
     math_IntegerVector Indx;
@@ -143,7 +143,6 @@ protected:
     math_Matrix Jacobian;
 
 private:
-
     Standard_Boolean Done;
     Standard_Integer State;
     Standard_Integer Iter;

@@ -22,145 +22,148 @@
 /**
  *  Implementation of the Material node
  */
-class VrmlData_Material : public VrmlData_Node
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class VrmlData_Material : public VrmlData_Node {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  /**
-   * Empty constructor
-   */
-  Standard_EXPORT VrmlData_Material ();
+    /**
+     * Empty constructor
+     */
+    Standard_EXPORT VrmlData_Material();
 
-  /**
-   * Constructor
-   */
-  Standard_EXPORT VrmlData_Material
-                                (const VrmlData_Scene&  theScene,
-                                 const char             * theName,
-                                 const Standard_Real theAmbientIntensity = -1.,
-                                 const Standard_Real theShininess        = -1.,
-                                 const Standard_Real theTransparency     = -1.);
+    /**
+     * Constructor
+     */
+    Standard_EXPORT VrmlData_Material(const VrmlData_Scene& theScene, const char* theName,
+                                      const Standard_Real theAmbientIntensity = -1.,
+                                      const Standard_Real theShininess = -1.,
+                                      const Standard_Real theTransparency = -1.);
 
-  /**
-   * Query the Ambient Intensity value
-   */
-  inline Standard_Real
-                AmbientIntensity() const        { return myAmbientIntensity; }
+    /**
+     * Query the Ambient Intensity value
+     */
+    inline Standard_Real AmbientIntensity() const {
+        return myAmbientIntensity;
+    }
 
-  /**
-   * Query the Shininess value
-   */
-  inline Standard_Real
-                Shininess       () const        { return myShininess; }
+    /**
+     * Query the Shininess value
+     */
+    inline Standard_Real Shininess() const {
+        return myShininess;
+    }
 
-  /**
-   * Query the Transparency value
-   */
-  inline Standard_Real
-                Transparency    () const        { return myTransparency; }
+    /**
+     * Query the Transparency value
+     */
+    inline Standard_Real Transparency() const {
+        return myTransparency;
+    }
 
-  /**
-   * Query the Diffuse color
-   */
-  inline const Quantity_Color&
-                DiffuseColor    () const        { return myDiffuseColor; }
+    /**
+     * Query the Diffuse color
+     */
+    inline const Quantity_Color& DiffuseColor() const {
+        return myDiffuseColor;
+    }
 
-  /**
-   * Query the Emissive color
-   */
-  inline const Quantity_Color&
-                EmissiveColor   () const        { return myEmissiveColor; }
+    /**
+     * Query the Emissive color
+     */
+    inline const Quantity_Color& EmissiveColor() const {
+        return myEmissiveColor;
+    }
 
-  /**
-   * Query the Specular color
-   */
-  inline const Quantity_Color&
-                SpecularColor   () const        { return mySpecularColor; }
+    /**
+     * Query the Specular color
+     */
+    inline const Quantity_Color& SpecularColor() const {
+        return mySpecularColor;
+    }
 
-  /**
-   * Set the Ambient Intensity value
-   */
-  inline void   SetAmbientIntensity
-                                (const Standard_Real theAmbientIntensity)
-  { myAmbientIntensity = theAmbientIntensity; }
+    /**
+     * Set the Ambient Intensity value
+     */
+    inline void SetAmbientIntensity(const Standard_Real theAmbientIntensity) {
+        myAmbientIntensity = theAmbientIntensity;
+    }
 
-  /**
-   * Set the Shininess value
-   */
-  inline void   SetShininess    (const Standard_Real theShininess)
-  { myShininess = theShininess; }
+    /**
+     * Set the Shininess value
+     */
+    inline void SetShininess(const Standard_Real theShininess) {
+        myShininess = theShininess;
+    }
 
-  /**
-   * Set the Transparency value
-   */
-  inline void   SetTransparency (const Standard_Real theTransparency)
-  { myTransparency = theTransparency; }
+    /**
+     * Set the Transparency value
+     */
+    inline void SetTransparency(const Standard_Real theTransparency) {
+        myTransparency = theTransparency;
+    }
 
-  /**
-   * Query the Diffuse color
-   */
-  inline void   SetDiffuseColor (const Quantity_Color& theColor)
-  { myDiffuseColor = theColor; }
+    /**
+     * Query the Diffuse color
+     */
+    inline void SetDiffuseColor(const Quantity_Color& theColor) {
+        myDiffuseColor = theColor;
+    }
 
-  /**
-   * Query the Emissive color
-   */
-  inline void   SetEmissiveColor (const Quantity_Color& theColor)
-  { myEmissiveColor = theColor; }
+    /**
+     * Query the Emissive color
+     */
+    inline void SetEmissiveColor(const Quantity_Color& theColor) {
+        myEmissiveColor = theColor;
+    }
 
-  /**
-   * Query the Specular color
-   */
-  inline void   SetSpecularColor (const Quantity_Color& theColor)
-  { mySpecularColor = theColor; }
+    /**
+     * Query the Specular color
+     */
+    inline void SetSpecularColor(const Quantity_Color& theColor) {
+        mySpecularColor = theColor;
+    }
 
-  /**
-   * Create a copy of this node.
-   * If the parameter is null, a new copied node is created. Otherwise new node
-   * is not created, but rather the given one is modified.
-   */
-  Standard_EXPORT virtual Handle(VrmlData_Node)
-                Clone           (const Handle(VrmlData_Node)& theOther)const Standard_OVERRIDE;
+    /**
+     * Create a copy of this node.
+     * If the parameter is null, a new copied node is created. Otherwise new node
+     * is not created, but rather the given one is modified.
+     */
+    Standard_EXPORT virtual Handle(VrmlData_Node) Clone(const Handle(VrmlData_Node) & theOther) const Standard_OVERRIDE;
 
-  /**
-   * Read the Node from input stream.
-   */
-  Standard_EXPORT virtual VrmlData_ErrorStatus
-                Read            (VrmlData_InBuffer& theBuffer) Standard_OVERRIDE;
+    /**
+     * Read the Node from input stream.
+     */
+    Standard_EXPORT virtual VrmlData_ErrorStatus Read(VrmlData_InBuffer& theBuffer) Standard_OVERRIDE;
 
-  /**
-   * Write the Node to the Scene output.
-   */
-  Standard_EXPORT virtual VrmlData_ErrorStatus
-                Write           (const char * thePrefix) const Standard_OVERRIDE;
+    /**
+     * Write the Node to the Scene output.
+     */
+    Standard_EXPORT virtual VrmlData_ErrorStatus Write(const char* thePrefix) const Standard_OVERRIDE;
 
-  /**
-   * Returns True if the node is default, so that it should not be written.
-   */
-  Standard_EXPORT virtual Standard_Boolean
-                IsDefault       () const Standard_OVERRIDE;
+    /**
+     * Returns True if the node is default, so that it should not be written.
+     */
+    Standard_EXPORT virtual Standard_Boolean IsDefault() const Standard_OVERRIDE;
 
- protected:
-  // ---------- PROTECTED METHODS ----------
+protected:
+    // ---------- PROTECTED METHODS ----------
 
- private:
-  // ---------- PRIVATE FIELDS ----------
+private:
+    // ---------- PRIVATE FIELDS ----------
 
-  Standard_Real         myAmbientIntensity;
-  Standard_Real         myShininess;
-  Standard_Real         myTransparency;
-  Quantity_Color        myDiffuseColor;
-  Quantity_Color        myEmissiveColor;
-  Quantity_Color        mySpecularColor;
+    Standard_Real myAmbientIntensity;
+    Standard_Real myShininess;
+    Standard_Real myTransparency;
+    Quantity_Color myDiffuseColor;
+    Quantity_Color myEmissiveColor;
+    Quantity_Color mySpecularColor;
 
- public:
-// Declaration of CASCADE RTTI
-DEFINE_STANDARD_RTTIEXT(VrmlData_Material,VrmlData_Node)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(VrmlData_Material, VrmlData_Node)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (VrmlData_Material, VrmlData_Node)
-
+DEFINE_STANDARD_HANDLE(VrmlData_Material, VrmlData_Node)
 
 #endif

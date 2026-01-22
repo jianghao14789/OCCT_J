@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BinMDF_ADriverTable.hxx>
 #include <BinMNaming_NamedShapeDriver.hxx>
 #include <BinMXCAFDoc.hxx>
@@ -35,36 +34,33 @@
 #include <TNaming_NamedShape.hxx>
 
 //=======================================================================
-//function :
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BinMXCAFDoc::AddDrivers(const Handle(BinMDF_ADriverTable)& theDriverTable,
-                             const Handle(Message_Messenger)&   theMsgDrv) 
-{
-  theDriverTable->AddDriver( new BinMXCAFDoc_CentroidDriver (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_ColorDriver    (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_GraphNodeDriver(theMsgDrv));
-  
-  //oan: changes for sharing locations map
-  Handle(BinMDF_ADriver) aNSDriver;
-  theDriverTable->GetDriver(STANDARD_TYPE(TNaming_NamedShape), aNSDriver);
-  Handle(BinMNaming_NamedShapeDriver) aNamedShapeDriver =
-    Handle(BinMNaming_NamedShapeDriver)::DownCast (aNSDriver);
-  
-  Handle(BinMXCAFDoc_LocationDriver) aLocationDriver = new BinMXCAFDoc_LocationDriver (theMsgDrv);
-  if (!aNamedShapeDriver.IsNull())
-  {
-    aLocationDriver->SetNSDriver (aNamedShapeDriver);
-  }
-  
-  theDriverTable->AddDriver( aLocationDriver);
-  theDriverTable->AddDriver(new BinMXCAFDoc_LengthUnitDriver   (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_AssemblyItemRefDriver(theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_DatumDriver       (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_DimTolDriver      (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_MaterialDriver    (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_VisMaterialDriver (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_NoteBinDataDriver (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_NoteCommentDriver (theMsgDrv));
-  theDriverTable->AddDriver( new BinMXCAFDoc_VisMaterialToolDriver(theMsgDrv));
+void BinMXCAFDoc::AddDrivers(const Handle(BinMDF_ADriverTable) & theDriverTable,
+                             const Handle(Message_Messenger) & theMsgDrv) {
+    theDriverTable->AddDriver(new BinMXCAFDoc_CentroidDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_ColorDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_GraphNodeDriver(theMsgDrv));
+
+    // oan: changes for sharing locations map
+    Handle(BinMDF_ADriver) aNSDriver;
+    theDriverTable->GetDriver(STANDARD_TYPE(TNaming_NamedShape), aNSDriver);
+    Handle(BinMNaming_NamedShapeDriver) aNamedShapeDriver = Handle(BinMNaming_NamedShapeDriver)::DownCast(aNSDriver);
+
+    Handle(BinMXCAFDoc_LocationDriver) aLocationDriver = new BinMXCAFDoc_LocationDriver(theMsgDrv);
+    if (!aNamedShapeDriver.IsNull()) {
+        aLocationDriver->SetNSDriver(aNamedShapeDriver);
+    }
+
+    theDriverTable->AddDriver(aLocationDriver);
+    theDriverTable->AddDriver(new BinMXCAFDoc_LengthUnitDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_AssemblyItemRefDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_DatumDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_DimTolDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_MaterialDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_VisMaterialDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_NoteBinDataDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_NoteCommentDriver(theMsgDrv));
+    theDriverTable->AddDriver(new BinMXCAFDoc_VisMaterialToolDriver(theMsgDrv));
 }

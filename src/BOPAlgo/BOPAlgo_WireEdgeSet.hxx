@@ -28,19 +28,14 @@
 class TopoDS_Face;
 class TopoDS_Shape;
 
-
-
-class BOPAlgo_WireEdgeSet
-{
+class BOPAlgo_WireEdgeSet {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     BOPAlgo_WireEdgeSet();
     virtual ~BOPAlgo_WireEdgeSet();
 
-    BOPAlgo_WireEdgeSet(const Handle(NCollection_BaseAllocator)& theAllocator);
+    BOPAlgo_WireEdgeSet(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     void Clear();
 
@@ -56,31 +51,14 @@ public:
 
     const TopTools_ListOfShape& Shapes() const;
 
-
-
-
 protected:
-
-
-
     TopoDS_Face myFace;
     TopTools_ListOfShape myStartShapes;
     TopTools_ListOfShape myShapes;
 
-
 private:
-
-
-
-
-
 };
 
-
 #include <BOPAlgo_WireEdgeSet.lxx>
-
-
-
-
 
 #endif // _BOPAlgo_WireEdgeSet_HeaderFile

@@ -23,46 +23,25 @@
 #include <StepGeom_SurfaceCurve.hxx>
 class StepGeom_BoundedCurve;
 
-
 class StepGeom_SurfaceCurveAndBoundedCurve;
 DEFINE_STANDARD_HANDLE(StepGeom_SurfaceCurveAndBoundedCurve, StepGeom_SurfaceCurve)
 
 //! complex type: bounded_curve + surface_curve
 //! needed for curve_bounded_surfaces (S4132)
-class StepGeom_SurfaceCurveAndBoundedCurve : public StepGeom_SurfaceCurve
-{
+class StepGeom_SurfaceCurveAndBoundedCurve : public StepGeom_SurfaceCurve {
 
 public:
+    //! creates empty object
+    Standard_EXPORT StepGeom_SurfaceCurveAndBoundedCurve();
 
-  
-  //! creates empty object
-  Standard_EXPORT StepGeom_SurfaceCurveAndBoundedCurve();
-  
-  //! returns field BoundedCurve
-  Standard_EXPORT Handle(StepGeom_BoundedCurve)& BoundedCurve();
+    //! returns field BoundedCurve
+    Standard_EXPORT Handle(StepGeom_BoundedCurve) & BoundedCurve();
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepGeom_SurfaceCurveAndBoundedCurve,StepGeom_SurfaceCurve)
+    DEFINE_STANDARD_RTTIEXT(StepGeom_SurfaceCurveAndBoundedCurve, StepGeom_SurfaceCurve)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepGeom_BoundedCurve) myBoundedCurve;
-
-
+    Handle(StepGeom_BoundedCurve) myBoundedCurve;
 };
-
-
-
-
-
-
 
 #endif // _StepGeom_SurfaceCurveAndBoundedCurve_HeaderFile

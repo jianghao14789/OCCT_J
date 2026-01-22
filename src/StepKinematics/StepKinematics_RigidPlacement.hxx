@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:14 2020 
+// Created on : Sat May 02 12:41:14 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,26 +28,23 @@ class StepGeom_Axis2Placement3d;
 class StepGeom_SuParameters;
 
 //! Representation of STEP SELECT type RigidPlacement
-class StepKinematics_RigidPlacement : public StepData_SelectType
-{
+class StepKinematics_RigidPlacement : public StepData_SelectType {
 
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT StepKinematics_RigidPlacement();
 
-  //! Empty constructor
-  Standard_EXPORT StepKinematics_RigidPlacement();
+    //! Recognizes a kind of RigidPlacement select type
+    //! -- 1 -> Axis2Placement3d
+    //! -- 2 -> SuParameters
+    Standard_EXPORT Standard_Integer CaseNum(const Handle(Standard_Transient) & ent) const Standard_OVERRIDE;
 
-  //! Recognizes a kind of RigidPlacement select type
-  //! -- 1 -> Axis2Placement3d
-  //! -- 2 -> SuParameters
-  Standard_EXPORT Standard_Integer CaseNum (const Handle(Standard_Transient)& ent) const Standard_OVERRIDE;
+    //! Returns Value as Axis2Placement3d (or Null if another type)
+    Standard_EXPORT Handle(StepGeom_Axis2Placement3d) Axis2Placement3d() const;
 
-  //! Returns Value as Axis2Placement3d (or Null if another type)
-  Standard_EXPORT Handle(StepGeom_Axis2Placement3d) Axis2Placement3d() const;
-
-  //! Returns Value as SuParameters (or Null if another type)
-  Standard_EXPORT Handle(StepGeom_SuParameters) SuParameters() const;
-
+    //! Returns Value as SuParameters (or Null if another type)
+    Standard_EXPORT Handle(StepGeom_SuParameters) SuParameters() const;
 };
 #endif // _StepKinematics_RigidPlacement_HeaderFile

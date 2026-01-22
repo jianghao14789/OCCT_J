@@ -16,9 +16,9 @@
 #include <OpenGl_GraphicDriver.hxx>
 
 #ifdef HAVE_GLES2
-  #define OpenGl_DRIVER_NAME "TKOpenGles"
+#define OpenGl_DRIVER_NAME "TKOpenGles"
 #else
-  #define OpenGl_DRIVER_NAME "TKOpenGl"
+#define OpenGl_DRIVER_NAME "TKOpenGl"
 #endif
 
 IMPLEMENT_STANDARD_RTTIEXT(OpenGl_GraphicDriverFactory, Graphic3d_GraphicDriverFactory)
@@ -28,20 +28,18 @@ IMPLEMENT_STANDARD_RTTIEXT(OpenGl_GraphicDriverFactory, Graphic3d_GraphicDriverF
 // purpose  :
 // =======================================================================
 OpenGl_GraphicDriverFactory::OpenGl_GraphicDriverFactory()
-: Graphic3d_GraphicDriverFactory (OpenGl_DRIVER_NAME),
-  myDefaultCaps (new OpenGl_Caps())
-{
-  //
+    : Graphic3d_GraphicDriverFactory(OpenGl_DRIVER_NAME), myDefaultCaps(new OpenGl_Caps()) {
+    //
 }
 
 // =======================================================================
 // function : CreateDriver
 // purpose  :
 // =======================================================================
-Handle(Graphic3d_GraphicDriver) OpenGl_GraphicDriverFactory::CreateDriver (const Handle(Aspect_DisplayConnection)& theDisp)
-{
-  Handle(OpenGl_GraphicDriver) aDriver = new OpenGl_GraphicDriver (theDisp, false);
-  aDriver->ChangeOptions() = *myDefaultCaps;
-  aDriver->InitContext();
-  return aDriver;
+Handle(Graphic3d_GraphicDriver) OpenGl_GraphicDriverFactory::CreateDriver(const Handle(Aspect_DisplayConnection) &
+                                                                          theDisp) {
+    Handle(OpenGl_GraphicDriver) aDriver = new OpenGl_GraphicDriver(theDisp, false);
+    aDriver->ChangeOptions() = *myDefaultCaps;
+    aDriver->InitContext();
+    return aDriver;
 }

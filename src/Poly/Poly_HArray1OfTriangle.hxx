@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(Poly_HArray1OfTriangle, Poly_Array1OfTriangle)
 
-
 #endif

@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(DBRep_Edge)> DBRep_ListOfEdge;
 typedef NCollection_List<Handle(DBRep_Edge)>::Iterator DBRep_ListIteratorOfListOfEdge;
 
-
 #endif

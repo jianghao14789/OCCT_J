@@ -28,8 +28,6 @@
 #include <TopTools_MapOfShape.hxx>
 class BOPAlgo_PaveFiller;
 
-
-
 //! The algorithm is to build solids from set of shapes.
 //! It uses the BOPAlgo_Builder algorithm to intersect the given shapes
 //! and build the images of faces (if needed) and BOPAlgo_BuilderSolid
@@ -106,10 +104,8 @@ class BOPAlgo_PaveFiller;
 //! }
 //! //
 //! const TopoDS_Shape& aResult = aMV.Shape();  //result of the operation
-class BOPAlgo_MakerVolume : public BOPAlgo_Builder
-{
+class BOPAlgo_MakerVolume : public BOPAlgo_Builder {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Empty constructor.
@@ -117,7 +113,7 @@ public:
     virtual ~BOPAlgo_MakerVolume();
 
     //! Empty constructor.
-    BOPAlgo_MakerVolume(const Handle(NCollection_BaseAllocator)& theAllocator);
+    BOPAlgo_MakerVolume(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     //! Clears the data.
     virtual void Clear() Standard_OVERRIDE;
@@ -148,15 +144,17 @@ public:
     }
 
     //! Performs the operation.
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
 protected:
-
     //! Checks the data.
     Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
 
     //! Performs the operation.
-    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    PerformInternal1(const BOPAlgo_PaveFiller& thePF,
+                     const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
     //! Collects all faces.
     Standard_EXPORT void CollectFaces();
@@ -165,8 +163,7 @@ protected:
     Standard_EXPORT void MakeBox(TopTools_MapOfShape& theBoxFaces);
 
     //! Builds solids.
-    Standard_EXPORT void BuildSolids(TopTools_ListOfShape& theLSR,
-        const Message_ProgressRange& theRange);
+    Standard_EXPORT void BuildSolids(TopTools_ListOfShape& theLSR, const Message_ProgressRange& theRange);
 
     //! Removes the covering box.
     Standard_EXPORT void RemoveBox(TopTools_ListOfShape& theLSR, const TopTools_MapOfShape& theBoxFaces);
@@ -186,17 +183,12 @@ protected:
     //! the values of the enumeration of base class.
     //! Starting the enumeration from the middle of enumeration of base class is
     //! not a good idea as the values in enumeration may be swapped.
-    enum BOPAlgo_PIOperation
-    {
-        PIOperation_BuildSolids = BOPAlgo_Builder::PIOperation_Last,
-        PIOperation_Last
-    };
+    enum BOPAlgo_PIOperation { PIOperation_BuildSolids = BOPAlgo_Builder::PIOperation_Last, PIOperation_Last };
 
     //! Analyze progress steps
     Standard_EXPORT void fillPISteps(BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
 
 protected:
-
     Standard_Boolean myIntersect;
     Bnd_Box myBBox;
     TopoDS_Solid mySBox;
@@ -204,7 +196,6 @@ protected:
     Standard_Boolean myAvoidInternalShapes;
 
 private:
-
 };
 
 #include <BOPAlgo_MakerVolume.lxx>

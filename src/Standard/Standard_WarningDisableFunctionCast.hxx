@@ -25,9 +25,9 @@
 //! suppressing it is the only feasible way to avoid it. As this warning still can point out broken
 //! places, it should be suppressed only locally, where usage of function cast has been verified.
 #if defined(__GNUC__) && !defined(__INTEL_COMPILER) && !defined(__clang__)
-#  if (__GNUC__ > 8) || ((__GNUC__ == 8) && (__GNUC_MINOR__ >= 1))
-#    pragma GCC diagnostic ignored "-Wcast-function-type"
-#  endif
+#if (__GNUC__ > 8) || ((__GNUC__ == 8) && (__GNUC_MINOR__ >= 1))
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+#endif
 #endif
 
 #endif // _Standard_WarningDisableFunctionCast_HeaderFile

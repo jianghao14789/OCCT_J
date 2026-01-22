@@ -12,12 +12,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor2d_Curve2d.hxx>
 #include <Blend_FuncInv.hxx>
 #include <math_Matrix.hxx>
 
-Standard_Integer Blend_FuncInv::NbVariables () const
-{
-  return 4;
+Standard_Integer Blend_FuncInv::NbVariables() const {
+    return 4;
 }

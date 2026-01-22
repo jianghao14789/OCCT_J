@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Message_Gravity.hxx>
 #include <Message_Msg.hxx>
 #include <ShapeCustom_Modification.hxx>
@@ -19,36 +18,31 @@
 #include <Standard_Type.hxx>
 #include <TopoDS_Shape.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(ShapeCustom_Modification,BRepTools_Modification)
+IMPLEMENT_STANDARD_RTTIEXT(ShapeCustom_Modification, BRepTools_Modification)
 
 //=======================================================================
-//function : SetMsgRegistrator
-//purpose  : 
+// function : SetMsgRegistrator
+// purpose  :
 //=======================================================================
-void ShapeCustom_Modification::SetMsgRegistrator(const Handle(ShapeExtend_BasicMsgRegistrator)& msgreg)
-{
-  myMsgReg = msgreg;
+void ShapeCustom_Modification::SetMsgRegistrator(const Handle(ShapeExtend_BasicMsgRegistrator) & msgreg) {
+    myMsgReg = msgreg;
 }
 
 //=======================================================================
-//function : MsgRegistrator
-//purpose  : Returns message registrator
+// function : MsgRegistrator
+// purpose  : Returns message registrator
 //=======================================================================
 
-Handle(ShapeExtend_BasicMsgRegistrator) ShapeCustom_Modification::MsgRegistrator() const
-{
-  return myMsgReg;
+Handle(ShapeExtend_BasicMsgRegistrator) ShapeCustom_Modification::MsgRegistrator() const {
+    return myMsgReg;
 }
 
 //=======================================================================
-//function : SendMsg
-//purpose  :
+// function : SendMsg
+// purpose  :
 //=======================================================================
 
-void ShapeCustom_Modification::SendMsg(const TopoDS_Shape& shape,
-                                       const Message_Msg& message,
-                                       const Message_Gravity gravity) const
-{
-  if ( !myMsgReg.IsNull() )
-    myMsgReg->Send (shape, message, gravity);
+void ShapeCustom_Modification::SendMsg(const TopoDS_Shape& shape, const Message_Msg& message,
+                                       const Message_Gravity gravity) const {
+    if (!myMsgReg.IsNull()) myMsgReg->Send(shape, message, gravity);
 }

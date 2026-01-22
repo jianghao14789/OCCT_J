@@ -32,7 +32,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_SphericalSurface;
 DEFINE_STANDARD_HANDLE(Geom_SphericalSurface, Geom_ElementarySurface)
 
@@ -77,7 +76,6 @@ DEFINE_STANDARD_HANDLE(Geom_SphericalSurface, Geom_ElementarySurface)
 //! - [ - Pi/2., + Pi/2. ] for v.
 class Geom_SphericalSurface : public Geom_ElementarySurface {
 public:
-
     //! A3 is the local coordinate system of the surface.
     //! At the creation the parametrization of the surface is defined
     //! such as the normal Vector (N = D1U ^ D1V) is directed away from
@@ -92,7 +90,6 @@ public:
     //! Radius = 0.0
     //! Raised if Radius < 0.0.
     Standard_EXPORT Geom_SphericalSurface(const gp_Ax3& A3, const Standard_Real Radius);
-
 
     //! Creates a SphericalSurface from a non persistent Sphere from
     //! package gp.
@@ -126,14 +123,17 @@ public:
 
     //! Returns the parametric bounds U1, U2, V1 and V2 of this sphere.
     //! For a sphere: U1 = 0, U2 = 2*PI, V1 = -PI/2, V2 = PI/2.
-    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1, Standard_Real& V2) const Standard_OVERRIDE;
+    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1,
+                                Standard_Real& V2) const Standard_OVERRIDE;
 
     //! Returns the coefficients of the implicit equation of the
     //! quadric in the absolute cartesian coordinates system :
     //! These coefficients are normalized.
     //! A1.X**2 + A2.Y**2 + A3.Z**2 + 2.(B1.X.Y + B2.X.Z + B3.Y.Z) +
     //! 2.(C1.X + C2.Y + C3.Z) + D = 0.0
-    Standard_EXPORT void Coefficients(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3, Standard_Real& B1, Standard_Real& B2, Standard_Real& B3, Standard_Real& C1, Standard_Real& C2, Standard_Real& C3, Standard_Real& D) const;
+    Standard_EXPORT void Coefficients(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3, Standard_Real& B1,
+                                      Standard_Real& B2, Standard_Real& B3, Standard_Real& C1, Standard_Real& C2,
+                                      Standard_Real& C3, Standard_Real& D) const;
 
     //! Computes the coefficients of the implicit equation of
     //! this quadric in the absolute Cartesian coordinate system:
@@ -179,7 +179,6 @@ public:
     //! Warnings : The radius of this circle can be zero.
     Standard_EXPORT Handle(Geom_Curve) VIso(const Standard_Real V) const Standard_OVERRIDE;
 
-
     //! Computes the  point P (U, V) on the surface.
     //! P (U, V) = Loc + Radius * Sin (V) * Zdir +
     //! Radius * Cos (V) * (cos (U) * XDir + sin (U) * YDir)
@@ -188,26 +187,27 @@ public:
     //! the YAxis and ZDir the direction of the ZAxis.
     Standard_EXPORT void D0(const Standard_Real U, const Standard_Real V, gp_Pnt& P) const Standard_OVERRIDE;
 
-
     //! Computes the current point and the first derivatives in the
     //! directions U and V.
-    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const Standard_OVERRIDE;
-
+    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U,
+                            gp_Vec& D1V) const Standard_OVERRIDE;
 
     //! Computes the current point, the first and the second derivatives
     //! in the directions U and V.
-    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
-
+    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
 
     //! Computes the current point, the first,the second and the third
     //! derivatives in the directions U and V.
-    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const Standard_OVERRIDE;
-
+    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV,
+                            gp_Vec& D3UVV) const Standard_OVERRIDE;
 
     //! Computes the derivative of order Nu in the direction u
     //! and Nv in the direction v.
     //! Raised if Nu + Nv < 1 or Nu < 0 or Nv < 0.
-    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const Standard_Integer Nv) const Standard_OVERRIDE;
+    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu,
+                              const Standard_Integer Nv) const Standard_OVERRIDE;
 
     //! Applies the transformation T to this sphere.
     Standard_EXPORT void Transform(const gp_Trsf& T) Standard_OVERRIDE;
@@ -216,30 +216,14 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_SphericalSurface, Geom_ElementarySurface)
 
 protected:
-
-
-
-
 private:
-
-
     Standard_Real radius;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Geom_SphericalSurface_HeaderFile

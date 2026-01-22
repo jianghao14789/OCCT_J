@@ -25,45 +25,23 @@
 #include <Standard_Boolean.hxx>
 class StepGeom_CartesianPoint;
 
-
-
-class StepToTopoDS_CartesianPointHasher 
-{
+class StepToTopoDS_CartesianPointHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes a hash code for the cartesian point, in the range [1, theUpperBound]
+    //! @param theCartesianPoint the cartesian point which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    Standard_EXPORT static Standard_Integer HashCode(const Handle(StepGeom_CartesianPoint) & theCartesianPoint,
+                                                     Standard_Integer theUpperBound);
 
-  //! Computes a hash code for the cartesian point, in the range [1, theUpperBound]
-  //! @param theCartesianPoint the cartesian point which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  Standard_EXPORT static Standard_Integer HashCode (const Handle (StepGeom_CartesianPoint) & theCartesianPoint,
-                                                    Standard_Integer                         theUpperBound);
-
-  //! Returns True  when the two  CartesianPoint are the same
-  Standard_EXPORT static Standard_Boolean IsEqual (const Handle(StepGeom_CartesianPoint)& K1, const Handle(StepGeom_CartesianPoint)& K2);
-
-
-
+    //! Returns True  when the two  CartesianPoint are the same
+    Standard_EXPORT static Standard_Boolean IsEqual(const Handle(StepGeom_CartesianPoint) & K1,
+                                                    const Handle(StepGeom_CartesianPoint) & K2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepToTopoDS_CartesianPointHasher_HeaderFile

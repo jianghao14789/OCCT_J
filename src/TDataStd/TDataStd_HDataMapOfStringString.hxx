@@ -25,23 +25,23 @@
 
 //! Extension of TDataStd_DataMapOfStringString class
 //! to be manipulated by handle.
-class TDataStd_HDataMapOfStringString : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTIEXT(TDataStd_HDataMapOfStringString, Standard_Transient)
+class TDataStd_HDataMapOfStringString : public Standard_Transient {
+    DEFINE_STANDARD_RTTIEXT(TDataStd_HDataMapOfStringString, Standard_Transient)
 public:
+    Standard_EXPORT TDataStd_HDataMapOfStringString(const Standard_Integer NbBuckets = 1);
 
-  Standard_EXPORT TDataStd_HDataMapOfStringString(const Standard_Integer NbBuckets = 1);
+    Standard_EXPORT TDataStd_HDataMapOfStringString(const TDataStd_DataMapOfStringString& theOther);
 
-  Standard_EXPORT TDataStd_HDataMapOfStringString(const TDataStd_DataMapOfStringString& theOther);
+    const TDataStd_DataMapOfStringString& Map() const {
+        return myMap;
+    }
 
-  const TDataStd_DataMapOfStringString& Map() const { return myMap; }
-
-  TDataStd_DataMapOfStringString& ChangeMap() { return myMap; }
+    TDataStd_DataMapOfStringString& ChangeMap() {
+        return myMap;
+    }
 
 private:
-
-  TDataStd_DataMapOfStringString myMap;
-
+    TDataStd_DataMapOfStringString myMap;
 };
 
 DEFINE_STANDARD_HANDLE(TDataStd_HDataMapOfStringString, Standard_Transient)

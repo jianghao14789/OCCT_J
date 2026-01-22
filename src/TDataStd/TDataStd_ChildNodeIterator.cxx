@@ -17,71 +17,67 @@
 
 #include <TDataStd_TreeNode.hxx>
 
-#define ChildNodeIterator_UpToBrother \
-{ \
-    while (!myNode.IsNull() && (myNode->Depth() > myFirstLevel) && myNode->myNext == NULL) \
-      myNode = myNode->myFather; \
-	if (!myNode.IsNull() && (myNode->Depth() > myFirstLevel) && myNode->myFather != NULL) \
-	  myNode = myNode->myNext; \
-	else \
-	  myNode = NULL; \
+#define ChildNodeIterator_UpToBrother                                                                                  \
+    {                                                                                                                  \
+        while (!myNode.IsNull() && (myNode->Depth() > myFirstLevel) && myNode->myNext == NULL)                         \
+            myNode = myNode->myFather;                                                                                 \
+        if (!myNode.IsNull() && (myNode->Depth() > myFirstLevel) && myNode->myFather != NULL)                          \
+            myNode = myNode->myNext;                                                                                   \
+        else                                                                                                           \
+            myNode = NULL;                                                                                             \
+    }
+
+//=======================================================================
+// function : TDataStd_ChildNodeIterator
+// purpose  :
+//=======================================================================
+
+TDataStd_ChildNodeIterator::TDataStd_ChildNodeIterator() : myFirstLevel(0) {}
+
+//=======================================================================
+// function : TDataStd_ChildNodeIterator
+// purpose  :
+//=======================================================================
+
+TDataStd_ChildNodeIterator::TDataStd_ChildNodeIterator(const Handle(TDataStd_TreeNode) & aTreeNode,
+                                                       const Standard_Boolean allLevels)
+    : myNode(aTreeNode->myFirst), myFirstLevel(allLevels ? aTreeNode->Depth() : -1) {}
+
+//=======================================================================
+// function : Initialize
+// purpose  :
+//=======================================================================
+
+void TDataStd_ChildNodeIterator::Initialize(const Handle(TDataStd_TreeNode) & aTreeNode,
+                                            const Standard_Boolean allLevels) {
+    myNode = aTreeNode->myFirst;
+    myFirstLevel = allLevels ? aTreeNode->Depth() : -1;
 }
 
 //=======================================================================
-//function : TDataStd_ChildNodeIterator
-//purpose  : 
+// function : Next
+// purpose  :
 //=======================================================================
 
-TDataStd_ChildNodeIterator::TDataStd_ChildNodeIterator()
-     : myFirstLevel(0)
-{}
-
-//=======================================================================
-//function : TDataStd_ChildNodeIterator
-//purpose  : 
-//=======================================================================
-
-TDataStd_ChildNodeIterator::TDataStd_ChildNodeIterator (const Handle(TDataStd_TreeNode)& aTreeNode,
-							const Standard_Boolean allLevels)
-: myNode(aTreeNode->myFirst),
-  myFirstLevel(allLevels ? aTreeNode->Depth() : -1)
-{}
-
-//=======================================================================
-//function : Initialize
-//purpose  : 
-//=======================================================================
-
-void TDataStd_ChildNodeIterator::Initialize(const Handle(TDataStd_TreeNode)& aTreeNode,
-					    const Standard_Boolean allLevels)
-{
-  myNode = aTreeNode->myFirst;
-  myFirstLevel = allLevels ? aTreeNode->Depth() : -1;
+void TDataStd_ChildNodeIterator::Next() {
+    if (myFirstLevel == -1) {
+        myNode = myNode->myNext;
+    } else {
+        if (myNode->myFirst != NULL)
+            myNode = myNode->myFirst;
+        else
+            ChildNodeIterator_UpToBrother;
+    }
 }
 
 //=======================================================================
-//function : Next
-//purpose  : 
+// function : NextBrother
+// purpose  :
 //=======================================================================
 
-void TDataStd_ChildNodeIterator::Next() 
-{
-  if (myFirstLevel == -1) {
-    myNode = myNode->myNext;
-  }
-  else {
-    if (myNode->myFirst != NULL) myNode = myNode->myFirst;
-    else ChildNodeIterator_UpToBrother;
-  }
-}
-
-//=======================================================================
-//function : NextBrother
-//purpose  : 
-//=======================================================================
-
-void TDataStd_ChildNodeIterator::NextBrother() 
-{
-  if (myNode->myNext != NULL) myNode = myNode->myNext;
-  else ChildNodeIterator_UpToBrother;
+void TDataStd_ChildNodeIterator::NextBrother() {
+    if (myNode->myNext != NULL)
+        myNode = myNode->myNext;
+    else
+        ChildNodeIterator_UpToBrother;
 }

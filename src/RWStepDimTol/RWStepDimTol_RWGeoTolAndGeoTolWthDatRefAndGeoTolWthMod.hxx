@@ -27,21 +27,21 @@ class StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for GeoTolAndGeoTolWthDatRefAndGeoTolWthMod
-class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod
-{
+class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod();
 
-  
-  Standard_EXPORT RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepDimTol_GeoTolAndGeoTolWthDatRefAndGeoTolWthMod) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod_HeaderFile

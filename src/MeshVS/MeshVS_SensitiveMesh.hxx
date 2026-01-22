@@ -27,41 +27,37 @@
 class Select3D_SensitiveEntity;
 
 //! This class provides custom mesh sensitive entity used in advanced mesh selection.
-class MeshVS_SensitiveMesh : public Select3D_SensitiveEntity
-{
+class MeshVS_SensitiveMesh : public Select3D_SensitiveEntity {
 public:
-  
-  Standard_EXPORT MeshVS_SensitiveMesh (const Handle(SelectMgr_EntityOwner)& theOwner,
-                                        const Standard_Integer theMode = 0);
-  
-  Standard_EXPORT Standard_Integer GetMode() const;
-  
-  Standard_EXPORT virtual Handle(Select3D_SensitiveEntity) GetConnected() Standard_OVERRIDE;
+    Standard_EXPORT MeshVS_SensitiveMesh(const Handle(SelectMgr_EntityOwner) & theOwner,
+                                         const Standard_Integer theMode = 0);
 
-  //! Checks whether sensitive overlaps current selecting volume.
-  virtual Standard_Boolean Matches (SelectBasics_SelectingVolumeManager& theMgr,
-                                    SelectBasics_PickResult& thePickResult) Standard_OVERRIDE
-  {
-    (void )theMgr;
-    (void )thePickResult;
-    return Standard_False;
-  }
+    Standard_EXPORT Standard_Integer GetMode() const;
 
-  //! Returns the amount of mesh nodes
-  Standard_EXPORT virtual Standard_Integer NbSubElements() const Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(Select3D_SensitiveEntity) GetConnected() Standard_OVERRIDE;
 
-  //! Returns bounding box of mesh
-  Standard_EXPORT virtual Select3D_BndBox3d BoundingBox() Standard_OVERRIDE;
+    //! Checks whether sensitive overlaps current selecting volume.
+    virtual Standard_Boolean Matches(SelectBasics_SelectingVolumeManager& theMgr,
+                                     SelectBasics_PickResult& thePickResult) Standard_OVERRIDE {
+        (void)theMgr;
+        (void)thePickResult;
+        return Standard_False;
+    }
 
-  //! Returns center of mesh
-  Standard_EXPORT virtual gp_Pnt CenterOfGeometry() const Standard_OVERRIDE;
+    //! Returns the amount of mesh nodes
+    Standard_EXPORT virtual Standard_Integer NbSubElements() const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(MeshVS_SensitiveMesh,Select3D_SensitiveEntity)
+    //! Returns bounding box of mesh
+    Standard_EXPORT virtual Select3D_BndBox3d BoundingBox() Standard_OVERRIDE;
+
+    //! Returns center of mesh
+    Standard_EXPORT virtual gp_Pnt CenterOfGeometry() const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(MeshVS_SensitiveMesh, Select3D_SensitiveEntity)
 
 private:
-
-  Standard_Integer myMode;
-  Select3D_BndBox3d myBndBox;
+    Standard_Integer myMode;
+    Select3D_BndBox3d myBndBox;
 };
 
 DEFINE_STANDARD_HANDLE(MeshVS_SensitiveMesh, Select3D_SensitiveEntity)

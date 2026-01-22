@@ -23,140 +23,134 @@
 
 #include <stdio.h>
 //=======================================================================
-//function : IntPolyh_SectionLine
-//purpose  : 
+// function : IntPolyh_SectionLine
+// purpose  :
 //=======================================================================
-IntPolyh_SectionLine::IntPolyh_SectionLine() /*: n(0),nbstartpoints(0),ptr(0)*/ { }
+IntPolyh_SectionLine::IntPolyh_SectionLine() /*: n(0),nbstartpoints(0),ptr(0)*/ {}
 
 //=======================================================================
-//function : IntPolyh_SectionLine
-//purpose  : 
+// function : IntPolyh_SectionLine
+// purpose  :
 //=======================================================================
 
-IntPolyh_SectionLine::IntPolyh_SectionLine(const Standard_Integer N)/* : nbstartpoints(0)*/{ 
-  Init(N);
+IntPolyh_SectionLine::IntPolyh_SectionLine(const Standard_Integer N) /* : nbstartpoints(0)*/ {
+    Init(N);
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void IntPolyh_SectionLine::Init(const Standard_Integer /*N*/) { 
-//   ptr = (void*) (new IntPolyh_StartPoint [N]);
-//   n=N;
-  if (!mySeqOfSPoints.Length()) IncrementNbStartPoints();
+void IntPolyh_SectionLine::Init(const Standard_Integer /*N*/) {
+    //   ptr = (void*) (new IntPolyh_StartPoint [N]);
+    //   n=N;
+    if (!mySeqOfSPoints.Length()) IncrementNbStartPoints();
 }
 
 //=======================================================================
-//function : GetN
-//purpose  : 
+// function : GetN
+// purpose  :
 //=======================================================================
 
-Standard_Integer IntPolyh_SectionLine::GetN() const { 
-  //return(n);
-  return mySeqOfSPoints.Length();
+Standard_Integer IntPolyh_SectionLine::GetN() const {
+    // return(n);
+    return mySeqOfSPoints.Length();
 }
 
 //=======================================================================
-//function : NbStartPoints
-//purpose  : 
+// function : NbStartPoints
+// purpose  :
 //=======================================================================
 
-Standard_Integer IntPolyh_SectionLine::NbStartPoints() const { 
-//  return(nbstartpoints); 
-  return mySeqOfSPoints.Length() - 1;
+Standard_Integer IntPolyh_SectionLine::NbStartPoints() const {
+    //  return(nbstartpoints);
+    return mySeqOfSPoints.Length() - 1;
 }
 
 //=======================================================================
-//function : IncrementNbStartPoints
-//purpose  : 
+// function : IncrementNbStartPoints
+// purpose  :
 //=======================================================================
 
-void IntPolyh_SectionLine::IncrementNbStartPoints() { 
-//  nbstartpoints++;
-  IntPolyh_StartPoint aSP;
-  mySeqOfSPoints.Append(aSP);
+void IntPolyh_SectionLine::IncrementNbStartPoints() {
+    //  nbstartpoints++;
+    IntPolyh_StartPoint aSP;
+    mySeqOfSPoints.Append(aSP);
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
 
-const IntPolyh_StartPoint& IntPolyh_SectionLine::Value(const Standard_Integer Index) const
-{ 
-  return mySeqOfSPoints(Index+1);
+const IntPolyh_StartPoint& IntPolyh_SectionLine::Value(const Standard_Integer Index) const {
+    return mySeqOfSPoints(Index + 1);
 }
 
 //=======================================================================
-//function : ChangeValue
-//purpose  : 
+// function : ChangeValue
+// purpose  :
 //=======================================================================
 
-IntPolyh_StartPoint& IntPolyh_SectionLine::ChangeValue(const Standard_Integer Index)
-{
-  return mySeqOfSPoints(Index+1);
+IntPolyh_StartPoint& IntPolyh_SectionLine::ChangeValue(const Standard_Integer Index) {
+    return mySeqOfSPoints(Index + 1);
 }
 
 //=======================================================================
-//function : Destroy
-//purpose  : 
+// function : Destroy
+// purpose  :
 //=======================================================================
 
-void IntPolyh_SectionLine::Destroy() { 
-//   if(n) { 
-//     if(ptr) { 
-//       IntPolyh_StartPoint *ptrstpoint = (IntPolyh_StartPoint *)ptr;
-//       delete [] ptrstpoint;
-//       ptr=0;
-//       n=0;
-//     }
-//   }
+void IntPolyh_SectionLine::Destroy() {
+    //   if(n) {
+    //     if(ptr) {
+    //       IntPolyh_StartPoint *ptrstpoint = (IntPolyh_StartPoint *)ptr;
+    //       delete [] ptrstpoint;
+    //       ptr=0;
+    //       n=0;
+    //     }
+    //   }
 }
 
 //=======================================================================
-//function : Copy
-//purpose  : 
+// function : Copy
+// purpose  :
 //=======================================================================
 
-IntPolyh_SectionLine & IntPolyh_SectionLine::Copy(const IntPolyh_SectionLine& Other) { 
-//   if(ptr==Other.ptr) return(*this);
-//   Destroy();
-//   n=Other.n;
-//   ptr = (void *) (new IntPolyh_StartPoint[n]);
-//   for(Standard_Integer i=0;i<=n;i++) { 
-//     (*this)[i]=Other[i];
-//   }
-  mySeqOfSPoints = Other.mySeqOfSPoints;
-  return(*this);
+IntPolyh_SectionLine& IntPolyh_SectionLine::Copy(const IntPolyh_SectionLine& Other) {
+    //   if(ptr==Other.ptr) return(*this);
+    //   Destroy();
+    //   n=Other.n;
+    //   ptr = (void *) (new IntPolyh_StartPoint[n]);
+    //   for(Standard_Integer i=0;i<=n;i++) {
+    //     (*this)[i]=Other[i];
+    //   }
+    mySeqOfSPoints = Other.mySeqOfSPoints;
+    return (*this);
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void IntPolyh_SectionLine::Dump() const{ 
-  printf("\n SectionLine 0-> %d",/*nbstartpoints*/NbStartPoints()-1);
-  for(Standard_Integer i=0;i<NbStartPoints();i++) { 
-    //(*this)[i].Dump(i);
-    Value(i).Dump(i);
-//     const IntPolyh_StartPoint& SP = Value(i);
-//     std::cout << "point P" << i << " " << SP.X() << " " << SP.Y() << " " << SP.Z() << std::endl;
-  }
-  printf("\n");
+void IntPolyh_SectionLine::Dump() const {
+    printf("\n SectionLine 0-> %d", /*nbstartpoints*/ NbStartPoints() - 1);
+    for (Standard_Integer i = 0; i < NbStartPoints(); i++) {
+        //(*this)[i].Dump(i);
+        Value(i).Dump(i);
+        //     const IntPolyh_StartPoint& SP = Value(i);
+        //     std::cout << "point P" << i << " " << SP.X() << " " << SP.Y() << " " << SP.Z() << std::endl;
+    }
+    printf("\n");
 }
 
 //=======================================================================
-//function : Prepend
-//purpose  : 
+// function : Prepend
+// purpose  :
 //=======================================================================
 
-void IntPolyh_SectionLine::Prepend(const IntPolyh_StartPoint& SP)
-{
-  mySeqOfSPoints.Prepend(SP);
+void IntPolyh_SectionLine::Prepend(const IntPolyh_StartPoint& SP) {
+    mySeqOfSPoints.Prepend(SP);
 }
-
-
-

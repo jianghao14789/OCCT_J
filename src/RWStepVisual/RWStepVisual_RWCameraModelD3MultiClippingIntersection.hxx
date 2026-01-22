@@ -28,21 +28,20 @@ class StepData_StepWriter;
 class Interface_EntityIterator;
 
 //! Read & Write Module for CameraModelD3MultiClippingIntersection
-class RWStepVisual_RWCameraModelD3MultiClippingIntersection
-{
+class RWStepVisual_RWCameraModelD3MultiClippingIntersection {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  Standard_EXPORT RWStepVisual_RWCameraModelD3MultiClippingIntersection();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data,
-                                 const Standard_Integer num,
-                                 Handle(Interface_Check)& ach,
-                                 const Handle(StepVisual_CameraModelD3MultiClippingIntersection)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_CameraModelD3MultiClippingIntersection)& ent) const;
-  
-  Standard_EXPORT void Share(const Handle(StepVisual_CameraModelD3MultiClippingIntersection)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT RWStepVisual_RWCameraModelD3MultiClippingIntersection();
+
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_CameraModelD3MultiClippingIntersection) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepVisual_CameraModelD3MultiClippingIntersection) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepVisual_CameraModelD3MultiClippingIntersection) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWCameraModelD3MultiClippingIntersection_HeaderFile

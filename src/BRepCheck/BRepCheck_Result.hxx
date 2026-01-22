@@ -27,80 +27,80 @@
 #include <BRepCheck_DataMapOfShapeListOfStatus.hxx>
 #include <BRepCheck_ListOfStatus.hxx>
 
-
 DEFINE_STANDARD_HANDLE(BRepCheck_Result, Standard_Transient)
 
-
-class BRepCheck_Result : public Standard_Transient
-{
+class BRepCheck_Result : public Standard_Transient {
 
 public:
+    Standard_EXPORT void Init(const TopoDS_Shape& S);
 
-  Standard_EXPORT void Init (const TopoDS_Shape& S);
-  
-  Standard_EXPORT virtual void InContext (const TopoDS_Shape& ContextShape) = 0;
-  
-  Standard_EXPORT virtual void Minimum() = 0;
-  
-  Standard_EXPORT virtual void Blind() = 0;
+    Standard_EXPORT virtual void InContext(const TopoDS_Shape& ContextShape) = 0;
 
-  Standard_EXPORT void SetFailStatus (const TopoDS_Shape& S);
+    Standard_EXPORT virtual void Minimum() = 0;
 
-  const BRepCheck_ListOfStatus& Status() const { return *myMap (myShape); }
+    Standard_EXPORT virtual void Blind() = 0;
 
-  Standard_Boolean IsMinimum() const { return myMin; }
+    Standard_EXPORT void SetFailStatus(const TopoDS_Shape& S);
 
-  Standard_Boolean IsBlind() const { return myBlind; }
+    const BRepCheck_ListOfStatus& Status() const {
+        return *myMap(myShape);
+    }
 
-  Standard_EXPORT void InitContextIterator();
+    Standard_Boolean IsMinimum() const {
+        return myMin;
+    }
 
-  Standard_Boolean MoreShapeInContext() const { return myIter.More(); }
+    Standard_Boolean IsBlind() const {
+        return myBlind;
+    }
 
-  const TopoDS_Shape& ContextualShape() const { return myIter.Key(); }
+    Standard_EXPORT void InitContextIterator();
 
-  const BRepCheck_ListOfStatus& StatusOnShape() const { return *myIter.Value(); }
+    Standard_Boolean MoreShapeInContext() const {
+        return myIter.More();
+    }
 
-  Standard_EXPORT void NextShapeInContext();
+    const TopoDS_Shape& ContextualShape() const {
+        return myIter.Key();
+    }
 
-  Standard_EXPORT void SetParallel (Standard_Boolean theIsParallel);
+    const BRepCheck_ListOfStatus& StatusOnShape() const {
+        return *myIter.Value();
+    }
 
-  Standard_Boolean IsStatusOnShape (const TopoDS_Shape& theShape) const
-  {
-    return myMap.IsBound (theShape);
-  }
+    Standard_EXPORT void NextShapeInContext();
 
-  const BRepCheck_ListOfStatus& StatusOnShape (const TopoDS_Shape& theShape) const
-  {
-    return *myMap.Find (theShape);
-  }
+    Standard_EXPORT void SetParallel(Standard_Boolean theIsParallel);
 
-  friend class BRepCheck_ParallelAnalyzer;
+    Standard_Boolean IsStatusOnShape(const TopoDS_Shape& theShape) const {
+        return myMap.IsBound(theShape);
+    }
 
-  DEFINE_STANDARD_RTTIEXT(BRepCheck_Result,Standard_Transient)
+    const BRepCheck_ListOfStatus& StatusOnShape(const TopoDS_Shape& theShape) const {
+        return *myMap.Find(theShape);
+    }
+
+    friend class BRepCheck_ParallelAnalyzer;
+
+    DEFINE_STANDARD_RTTIEXT(BRepCheck_Result, Standard_Transient)
 
 protected:
-
-  Standard_EXPORT BRepCheck_Result();
+    Standard_EXPORT BRepCheck_Result();
 
 protected:
-
-  TopoDS_Shape myShape;
-  Standard_Boolean myMin;
-  Standard_Boolean myBlind;
-  BRepCheck_DataMapOfShapeListOfStatus myMap;
-  mutable Handle(Standard_HMutex) myMutex;
-
-private:
-
-  Standard_HMutex* GetMutex()
-  {
-    return myMutex.get();
-  }
+    TopoDS_Shape myShape;
+    Standard_Boolean myMin;
+    Standard_Boolean myBlind;
+    BRepCheck_DataMapOfShapeListOfStatus myMap;
+    mutable Handle(Standard_HMutex) myMutex;
 
 private:
+    Standard_HMutex* GetMutex() {
+        return myMutex.get();
+    }
 
-  BRepCheck_DataMapIteratorOfDataMapOfShapeListOfStatus myIter;
-
+private:
+    BRepCheck_DataMapIteratorOfDataMapOfShapeListOfStatus myIter;
 };
 
 #endif // _BRepCheck_Result_HeaderFile

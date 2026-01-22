@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Bisector_Bisec,TColStd_MapIntegerHasher> MAT2d_DataMapOfIntegerBisec;
-typedef NCollection_DataMap<Standard_Integer,Bisector_Bisec,TColStd_MapIntegerHasher>::Iterator MAT2d_DataMapIteratorOfDataMapOfIntegerBisec;
-
+typedef NCollection_DataMap<Standard_Integer, Bisector_Bisec, TColStd_MapIntegerHasher> MAT2d_DataMapOfIntegerBisec;
+typedef NCollection_DataMap<Standard_Integer, Bisector_Bisec, TColStd_MapIntegerHasher>::Iterator
+    MAT2d_DataMapIteratorOfDataMapOfIntegerBisec;
 
 #endif

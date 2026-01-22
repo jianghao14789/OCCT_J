@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <TCollection_HAsciiString.hxx>
 #include <Units_Dimensions.hxx>
@@ -25,40 +24,36 @@
 IMPLEMENT_STANDARD_RTTIEXT(Units_Quantity, Standard_Transient)
 
 //=======================================================================
-//function : IsEqual
-//purpose  : 
+// function : IsEqual
+// purpose  :
 //=======================================================================
-Standard_Boolean Units_Quantity::IsEqual(const Standard_CString astring) const
-{
+Standard_Boolean Units_Quantity::IsEqual(const Standard_CString astring) const {
     return (Name() == astring);
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Units_Quantity::Dump(const Standard_Integer ashift,
-    const Standard_Integer alevel) const
-{
+void Units_Quantity::Dump(const Standard_Integer ashift, const Standard_Integer alevel) const {
     Standard_Integer index;
     std::cout << std::endl;
-    for (int i = 0; i < ashift; i++)std::cout << "  ";
+    for (int i = 0; i < ashift; i++)
+        std::cout << "  ";
     std::cout << Name() << std::endl;
     //  thedimensions->Dump(ashift+1);
-    if (alevel > 0)
-    {
+    if (alevel > 0) {
         for (index = 1; index <= theunitssequence->Length(); index++)
             theunitssequence->Value(index)->Dump(ashift + 1, 0);
     }
 }
 
 //=======================================================================
-//function : operator ==
-//purpose  : 
+// function : operator ==
+// purpose  :
 //=======================================================================
 
-Standard_Boolean operator ==(const Handle(Units_Quantity)& aquantity, const Standard_CString astring)
-{
+Standard_Boolean operator==(const Handle(Units_Quantity) & aquantity, const Standard_CString astring) {
     return aquantity->IsEqual(astring);
 }

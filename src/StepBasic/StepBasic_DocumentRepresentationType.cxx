@@ -20,66 +20,60 @@
 #include <StepBasic_DocumentRepresentationType.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_DocumentRepresentationType,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_DocumentRepresentationType, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_DocumentRepresentationType
-//purpose  : 
+// function : StepBasic_DocumentRepresentationType
+// purpose  :
 //=======================================================================
-StepBasic_DocumentRepresentationType::StepBasic_DocumentRepresentationType ()
-{
+StepBasic_DocumentRepresentationType::StepBasic_DocumentRepresentationType() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_DocumentRepresentationType::Init(const Handle(TCollection_HAsciiString) & aName,
+                                                const Handle(StepBasic_Document) & aRepresentedDocument) {
+
+    theName = aName;
+
+    theRepresentedDocument = aRepresentedDocument;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepBasic_DocumentRepresentationType::Init (const Handle(TCollection_HAsciiString) &aName,
-                                                 const Handle(StepBasic_Document) &aRepresentedDocument)
-{
-
-  theName = aName;
-
-  theRepresentedDocument = aRepresentedDocument;
+Handle(TCollection_HAsciiString) StepBasic_DocumentRepresentationType::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_DocumentRepresentationType::Name () const
-{
-  return theName;
+void StepBasic_DocumentRepresentationType::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : RepresentedDocument
+// purpose  :
 //=======================================================================
 
-void StepBasic_DocumentRepresentationType::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+Handle(StepBasic_Document) StepBasic_DocumentRepresentationType::RepresentedDocument() const {
+    return theRepresentedDocument;
 }
 
 //=======================================================================
-//function : RepresentedDocument
-//purpose  : 
+// function : SetRepresentedDocument
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_Document) StepBasic_DocumentRepresentationType::RepresentedDocument () const
-{
-  return theRepresentedDocument;
-}
-
-//=======================================================================
-//function : SetRepresentedDocument
-//purpose  : 
-//=======================================================================
-
-void StepBasic_DocumentRepresentationType::SetRepresentedDocument (const Handle(StepBasic_Document) &aRepresentedDocument)
-{
-  theRepresentedDocument = aRepresentedDocument;
+void StepBasic_DocumentRepresentationType::SetRepresentedDocument(const Handle(StepBasic_Document) &
+                                                                  aRepresentedDocument) {
+    theRepresentedDocument = aRepresentedDocument;
 }

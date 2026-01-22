@@ -25,80 +25,64 @@
 #include <Extrema_Curve2dTool.hxx>
 #include <Extrema_LocECC2d.hxx>
 
-
 //=======================================================================
-//function : Extrema_LocateExtCC2d
-//purpose  : 
+// function : Extrema_LocateExtCC2d
+// purpose  :
 //=======================================================================
 
-Extrema_LocateExtCC2d::Extrema_LocateExtCC2d (const Adaptor2d_Curve2d&       C1,
-                                              const Adaptor2d_Curve2d&       C2,
-                                              const Standard_Real U0,
-                                              const Standard_Real V0)
-: mySqDist(RealLast())
-{
-  Standard_Real TolU = Extrema_Curve2dTool::Resolution(C1, Precision::Confusion());
-  Standard_Real TolV = Extrema_Curve2dTool::Resolution(C2, Precision::Confusion());
-  Extrema_POnCurv2d P1, P2;
+Extrema_LocateExtCC2d::Extrema_LocateExtCC2d(const Adaptor2d_Curve2d& C1, const Adaptor2d_Curve2d& C2,
+                                             const Standard_Real U0, const Standard_Real V0)
+    : mySqDist(RealLast()) {
+    Standard_Real TolU = Extrema_Curve2dTool::Resolution(C1, Precision::Confusion());
+    Standard_Real TolV = Extrema_Curve2dTool::Resolution(C2, Precision::Confusion());
+    Extrema_POnCurv2d P1, P2;
 
-  // Non implemente pour l instant: l appel a Geom2dExtrema_ExtCC.
+    // Non implemente pour l instant: l appel a Geom2dExtrema_ExtCC.
 
+    Extrema_LocECC2d Xtrem(C1, C2, U0, V0, TolU, TolV);
+    // Exploitation
 
-  Extrema_LocECC2d Xtrem(C1, C2, U0, V0, TolU, TolV);	
-  // Exploitation
-
-  myDone = Xtrem.IsDone();
-  if (Xtrem.IsDone()) {
-    mySqDist = Xtrem.SquareDistance();
-    Xtrem.Point(P1, P2);
-    myPoint1 = P1;
-    myPoint2 = P2;
-  }
-
+    myDone = Xtrem.IsDone();
+    if (Xtrem.IsDone()) {
+        mySqDist = Xtrem.SquareDistance();
+        Xtrem.Point(P1, P2);
+        myPoint1 = P1;
+        myPoint2 = P2;
+    }
 }
 
-
-
-
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsDone
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Extrema_LocateExtCC2d::IsDone () const {
+Standard_Boolean Extrema_LocateExtCC2d::IsDone() const {
 
-  return myDone;
+    return myDone;
 }
 
-
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
 
 Standard_Real Extrema_LocateExtCC2d::SquareDistance() const {
 
-  if (!IsDone())
-  {
-    throw StdFail_NotDone();
-  }
-  return mySqDist;
+    if (!IsDone()) {
+        throw StdFail_NotDone();
+    }
+    return mySqDist;
 }
 
-
-
 //=======================================================================
-//function : Point
-//purpose  : 
+// function : Point
+// purpose  :
 //=======================================================================
 
-void Extrema_LocateExtCC2d::Point (Extrema_POnCurv2d& P1, 
-                                   Extrema_POnCurv2d& P2) const 
-{
-  if (!IsDone())
-  {
-    throw StdFail_NotDone();
-  }
-  P1 = myPoint1;
-  P2 = myPoint2;
+void Extrema_LocateExtCC2d::Point(Extrema_POnCurv2d& P1, Extrema_POnCurv2d& P2) const {
+    if (!IsDone()) {
+        throw StdFail_NotDone();
+    }
+    P1 = myPoint1;
+    P2 = myPoint2;
 }

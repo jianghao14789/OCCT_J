@@ -17,13 +17,6 @@
 #ifndef _Contap_IType_HeaderFile
 #define _Contap_IType_HeaderFile
 
-
-enum Contap_IType
-{
-Contap_Lin,
-Contap_Circle,
-Contap_Walking,
-Contap_Restriction
-};
+enum Contap_IType { Contap_Lin, Contap_Circle, Contap_Walking, Contap_Restriction };
 
 #endif // _Contap_IType_HeaderFile

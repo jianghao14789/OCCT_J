@@ -14,45 +14,41 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepTest.hxx>
 #include <DBRep.hxx>
 
 //=======================================================================
-//function : AllCommands
-//purpose  : 
+// function : AllCommands
+// purpose  :
 //=======================================================================
-void  BRepTest::AllCommands(Draw_Interpretor& theCommands)
-{
-  static Standard_Boolean done = Standard_False;
-  if (done) return;
-  done = Standard_True;
+void BRepTest::AllCommands(Draw_Interpretor& theCommands) {
+    static Standard_Boolean done = Standard_False;
+    if (done) return;
+    done = Standard_True;
 
-  DBRep::BasicCommands(theCommands);
-  BRepTest::BasicCommands(theCommands);
-  BRepTest::CurveCommands(theCommands);
-  BRepTest::Fillet2DCommands(theCommands);
-  BRepTest::SurfaceCommands(theCommands);
-  BRepTest::FillingCommands(theCommands) ;
-  BRepTest::PrimitiveCommands(theCommands);
-  BRepTest::SweepCommands(theCommands);
-  BRepTest::TopologyCommands(theCommands);
-  BRepTest::FilletCommands(theCommands);
-  BRepTest::ChamferCommands(theCommands);
-  BRepTest::GPropCommands(theCommands);
-  BRepTest::MatCommands(theCommands);
-  BRepTest::DraftAngleCommands(theCommands);
-  BRepTest::FeatureCommands(theCommands);
-  BRepTest::OtherCommands(theCommands);
-  BRepTest::ExtremaCommands(theCommands);
-  BRepTest::CheckCommands(theCommands);
-//  BRepTest::PlacementCommands(theCommands) ;
-  BRepTest::ProjectionCommands(theCommands) ;
-  BRepTest::HistoryCommands(theCommands);
+    DBRep::BasicCommands(theCommands);
+    BRepTest::BasicCommands(theCommands);
+    BRepTest::CurveCommands(theCommands);
+    BRepTest::Fillet2DCommands(theCommands);
+    BRepTest::SurfaceCommands(theCommands);
+    BRepTest::FillingCommands(theCommands);
+    BRepTest::PrimitiveCommands(theCommands);
+    BRepTest::SweepCommands(theCommands);
+    BRepTest::TopologyCommands(theCommands);
+    BRepTest::FilletCommands(theCommands);
+    BRepTest::ChamferCommands(theCommands);
+    BRepTest::GPropCommands(theCommands);
+    BRepTest::MatCommands(theCommands);
+    BRepTest::DraftAngleCommands(theCommands);
+    BRepTest::FeatureCommands(theCommands);
+    BRepTest::OtherCommands(theCommands);
+    BRepTest::ExtremaCommands(theCommands);
+    BRepTest::CheckCommands(theCommands);
+    //  BRepTest::PlacementCommands(theCommands) ;
+    BRepTest::ProjectionCommands(theCommands);
+    BRepTest::HistoryCommands(theCommands);
 
-  // define the TCL variable Draw_TOPOLOGY
-  const char* com = "set Draw_TOPOLOGY 1";
-  theCommands.Eval(com);
+    // define the TCL variable Draw_TOPOLOGY
+    const char* com = "set Draw_TOPOLOGY 1";
+    theCommands.Eval(com);
 }
-
-

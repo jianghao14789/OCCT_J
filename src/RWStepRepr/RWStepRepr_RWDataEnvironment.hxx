@@ -27,48 +27,26 @@ class StepRepr_DataEnvironment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DataEnvironment
-class RWStepRepr_RWDataEnvironment 
-{
+class RWStepRepr_RWDataEnvironment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWDataEnvironment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWDataEnvironment();
-  
-  //! Reads DataEnvironment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_DataEnvironment)& ent) const;
-  
-  //! Writes DataEnvironment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_DataEnvironment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_DataEnvironment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DataEnvironment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_DataEnvironment) & ent) const;
 
+    //! Writes DataEnvironment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_DataEnvironment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_DataEnvironment) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWDataEnvironment_HeaderFile

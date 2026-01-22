@@ -38,58 +38,35 @@ class XSControl_FuncShape;
 class XSControl_Utils;
 class XSControl_Vars;
 
-
 //! This package provides complements to IFSelect & Co for
 //! control of a session
-class XSControl 
-{
+class XSControl {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Returns the WorkSession of a SessionPilot, but casts it as
+    //! from XSControl : it then gives access to Control & Transfers
+    Standard_EXPORT static Handle(XSControl_WorkSession) Session(const Handle(IFSelect_SessionPilot) & pilot);
 
-  
-  //! Returns the WorkSession of a SessionPilot, but casts it as
-  //! from XSControl : it then gives access to Control & Transfers
-  Standard_EXPORT static Handle(XSControl_WorkSession) Session (const Handle(IFSelect_SessionPilot)& pilot);
-  
-  //! Returns the Vars of a SessionPilot, it is brought by Session
-  //! it provides access to external variables
-  Standard_EXPORT static Handle(XSControl_Vars) Vars (const Handle(IFSelect_SessionPilot)& pilot);
-
-
-
+    //! Returns the Vars of a SessionPilot, it is brought by Session
+    //! it provides access to external variables
+    Standard_EXPORT static Handle(XSControl_Vars) Vars(const Handle(IFSelect_SessionPilot) & pilot);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class XSControl_Controller;
-friend class XSControl_TransferReader;
-friend class XSControl_TransferWriter;
-friend class XSControl_WorkSession;
-friend class XSControl_SelectForTransfer;
-friend class XSControl_SignTransferStatus;
-friend class XSControl_ConnectedShapes;
-friend class XSControl_Reader;
-friend class XSControl_Writer;
-friend class XSControl_Functions;
-friend class XSControl_FuncShape;
-friend class XSControl_Utils;
-friend class XSControl_Vars;
-
+    friend class XSControl_Controller;
+    friend class XSControl_TransferReader;
+    friend class XSControl_TransferWriter;
+    friend class XSControl_WorkSession;
+    friend class XSControl_SelectForTransfer;
+    friend class XSControl_SignTransferStatus;
+    friend class XSControl_ConnectedShapes;
+    friend class XSControl_Reader;
+    friend class XSControl_Writer;
+    friend class XSControl_Functions;
+    friend class XSControl_FuncShape;
+    friend class XSControl_Utils;
+    friend class XSControl_Vars;
 };
-
-
-
-
-
-
 
 #endif // _XSControl_HeaderFile

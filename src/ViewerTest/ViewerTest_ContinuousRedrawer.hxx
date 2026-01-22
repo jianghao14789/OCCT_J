@@ -23,59 +23,60 @@ class Aspect_Window;
 class V3d_View;
 
 //! Auxiliary tool performing continuous redraws of specified window.
-//! Tool creates an extra working thread pushing content invalidation messages to specific window using Aspect_Window::InvalidateContent() method.
-//! Normally, GUI application should done continuous rendering in simple fashion - just by drawing next frame without waiting for new events from windowing system;
-//! however, implementation of this approach is problematic in context of ViewerTest due to message loop binding mechanism implied by Tcl/Tk.
-class ViewerTest_ContinuousRedrawer
-{
+//! Tool creates an extra working thread pushing content invalidation messages to specific window using
+//! Aspect_Window::InvalidateContent() method. Normally, GUI application should done continuous rendering in simple
+//! fashion - just by drawing next frame without waiting for new events from windowing system; however, implementation
+//! of this approach is problematic in context of ViewerTest due to message loop binding mechanism implied by Tcl/Tk.
+class ViewerTest_ContinuousRedrawer {
 public:
-  //! Return global instance.
-  Standard_EXPORT static ViewerTest_ContinuousRedrawer& Instance();
+    //! Return global instance.
+    Standard_EXPORT static ViewerTest_ContinuousRedrawer& Instance();
+
 public:
+    //! Destructor.
+    Standard_EXPORT ~ViewerTest_ContinuousRedrawer();
 
-  //! Destructor.
-  Standard_EXPORT ~ViewerTest_ContinuousRedrawer();
+    //! Return TRUE if redrawer thread is started.
+    bool IsStarted() const {
+        return myThread.GetId() != 0;
+    }
 
-  //! Return TRUE if redrawer thread is started.
-  bool IsStarted() const { return myThread.GetId() != 0; }
+    //! Start thread.
+    Standard_EXPORT void Start(const Handle(V3d_View) & theView, Standard_Real theTargetFps);
 
-  //! Start thread.
-  Standard_EXPORT void Start (const Handle(V3d_View)& theView,
-                              Standard_Real theTargetFps);
+    //! Stop thread.
+    Standard_EXPORT void Stop(const Handle(V3d_View) & theView = NULL);
 
-  //! Stop thread.
-  Standard_EXPORT void Stop (const Handle(V3d_View)& theView = NULL);
+    //! Return TRUE if redrawer thread is in paused state.
+    bool IsPaused() const {
+        return myToPause;
+    }
 
-  //! Return TRUE if redrawer thread is in paused state.
-  bool IsPaused() const { return myToPause; }
-
-  //! Pause working thread, but does not terminate it.
-  Standard_EXPORT void Pause();
+    //! Pause working thread, but does not terminate it.
+    Standard_EXPORT void Pause();
 
 private:
+    //! Thread loop.
+    void doThreadLoop();
 
-  //! Thread loop.
-  void doThreadLoop();
+    //! Thread creation callback.
+    static Standard_Address doThreadWrapper(Standard_Address theData) {
+        ViewerTest_ContinuousRedrawer* aThis = (ViewerTest_ContinuousRedrawer*)theData;
+        aThis->doThreadLoop();
+        return 0;
+    }
 
-  //! Thread creation callback.
-  static Standard_Address doThreadWrapper (Standard_Address theData)
-  {
-    ViewerTest_ContinuousRedrawer* aThis = (ViewerTest_ContinuousRedrawer* )theData;
-    aThis->doThreadLoop();
-    return 0;
-  }
-
-  //! Empty constructor.
-  ViewerTest_ContinuousRedrawer();
+    //! Empty constructor.
+    ViewerTest_ContinuousRedrawer();
 
 private:
-  Handle(V3d_View)   myView;      //!< view to invalidate
-  OSD_Thread         myThread;    //!< working thread
-  Standard_Mutex     myMutex;     //!< mutex for accessing common variables
-  Standard_Condition myWakeEvent; //!< event to wake up working thread
-  Standard_Real      myTargetFps; //!< desired update framerate
-  volatile bool      myToStop;    //!< flag to stop working thread
-  volatile bool      myToPause;   //!< flag to put  working thread asleep without stopping
+    Handle(V3d_View) myView;        //!< view to invalidate
+    OSD_Thread myThread;            //!< working thread
+    Standard_Mutex myMutex;         //!< mutex for accessing common variables
+    Standard_Condition myWakeEvent; //!< event to wake up working thread
+    Standard_Real myTargetFps;      //!< desired update framerate
+    volatile bool myToStop;         //!< flag to stop working thread
+    volatile bool myToPause;        //!< flag to put  working thread asleep without stopping
 };
 
 #endif // _ViewerTest_ContinuousRedrawer_HeaderFile

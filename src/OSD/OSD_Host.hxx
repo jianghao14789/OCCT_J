@@ -32,15 +32,11 @@ class Standard_NullObject;
 class OSD_OSDError;
 class TCollection_AsciiString;
 
-
 //! Carries information about a Host
 //! System version ,host name, nodename ...
-class OSD_Host
-{
+class OSD_Host {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Initializes current host by default.
     Standard_EXPORT OSD_Host();
@@ -75,29 +71,10 @@ public:
     //! Returns error number if 'Failed' is TRUE.
     Standard_EXPORT Standard_Integer Error() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TCollection_AsciiString myName;
     OSD_Error myError;
-
-
 };
-
-
-
-
-
-
 
 #endif // _OSD_Host_HeaderFile

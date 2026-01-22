@@ -26,73 +26,53 @@
 #include <IGESData_IGESEntity.hxx>
 class gp_Pnt;
 
-
 class IGESDimen_Section;
 DEFINE_STANDARD_HANDLE(IGESDimen_Section, IGESData_IGESEntity)
 
 //! defines Section, Type <106> Form <31-38>
 //! in package IGESDimen
 //! Contains information to display sectioned sides
-class IGESDimen_Section : public IGESData_IGESEntity
-{
+class IGESDimen_Section : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESDimen_Section();
 
-  
-  Standard_EXPORT IGESDimen_Section();
-  
-  //! This method is used to set the fields of the class
-  //! Section
-  //! - dataType   : Interpretation Flag, always = 1
-  //! - aDisp      : Common z displacement
-  //! - dataPoints : Data points
-  Standard_EXPORT void Init (const Standard_Integer dataType, const Standard_Real aDisp, const Handle(TColgp_HArray1OfXY)& dataPoints);
-  
-  //! Changes FormNumber (indicates the Type of the Hatches)
-  //! Error if not in range [31-38]
-  Standard_EXPORT void SetFormNumber (const Standard_Integer form);
-  
-  //! returns Interpretation Flag, always = 1
-  Standard_EXPORT Standard_Integer Datatype() const;
-  
-  //! returns number of Data Points
-  Standard_EXPORT Standard_Integer NbPoints() const;
-  
-  //! returns common Z displacement
-  Standard_EXPORT Standard_Real ZDisplacement() const;
-  
-  //! returns Index'th data point
-  //! raises exception if Index <= 0 or Index > NbPoints()
-  Standard_EXPORT gp_Pnt Point (const Standard_Integer Index) const;
-  
-  //! returns Index'th data point after Transformation
-  //! raises exception if Index <= 0 or Index > NbPoints()
-  Standard_EXPORT gp_Pnt TransformedPoint (const Standard_Integer Index) const;
+    //! This method is used to set the fields of the class
+    //! Section
+    //! - dataType   : Interpretation Flag, always = 1
+    //! - aDisp      : Common z displacement
+    //! - dataPoints : Data points
+    Standard_EXPORT void Init(const Standard_Integer dataType, const Standard_Real aDisp,
+                              const Handle(TColgp_HArray1OfXY) & dataPoints);
 
+    //! Changes FormNumber (indicates the Type of the Hatches)
+    //! Error if not in range [31-38]
+    Standard_EXPORT void SetFormNumber(const Standard_Integer form);
 
+    //! returns Interpretation Flag, always = 1
+    Standard_EXPORT Standard_Integer Datatype() const;
 
+    //! returns number of Data Points
+    Standard_EXPORT Standard_Integer NbPoints() const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESDimen_Section,IGESData_IGESEntity)
+    //! returns common Z displacement
+    Standard_EXPORT Standard_Real ZDisplacement() const;
+
+    //! returns Index'th data point
+    //! raises exception if Index <= 0 or Index > NbPoints()
+    Standard_EXPORT gp_Pnt Point(const Standard_Integer Index) const;
+
+    //! returns Index'th data point after Transformation
+    //! raises exception if Index <= 0 or Index > NbPoints()
+    Standard_EXPORT gp_Pnt TransformedPoint(const Standard_Integer Index) const;
+
+    DEFINE_STANDARD_RTTIEXT(IGESDimen_Section, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer theDatatype;
-  Standard_Real theZDisplacement;
-  Handle(TColgp_HArray1OfXY) theDataPoints;
-
-
+    Standard_Integer theDatatype;
+    Standard_Real theZDisplacement;
+    Handle(TColgp_HArray1OfXY) theDataPoints;
 };
-
-
-
-
-
-
 
 #endif // _IGESDimen_Section_HeaderFile

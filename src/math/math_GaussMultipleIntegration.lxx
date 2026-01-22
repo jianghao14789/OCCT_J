@@ -16,14 +16,11 @@
 
 #include <StdFail_NotDone.hxx>
 
-inline Standard_Boolean math_GaussMultipleIntegration::IsDone() const
-{
+inline Standard_Boolean math_GaussMultipleIntegration::IsDone() const {
     return Done;
 }
 
-inline Standard_OStream& operator<<(Standard_OStream& o,
-    const math_GaussMultipleIntegration& G)
-{
+inline Standard_OStream& operator<<(Standard_OStream& o, const math_GaussMultipleIntegration& G) {
     G.Dump(o);
     return o;
 }

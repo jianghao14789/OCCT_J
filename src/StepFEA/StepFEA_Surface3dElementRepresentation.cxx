@@ -24,120 +24,109 @@
 #include <StepRepr_RepresentationContext.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_Surface3dElementRepresentation,StepFEA_ElementRepresentation)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_Surface3dElementRepresentation, StepFEA_ElementRepresentation)
 
 //=======================================================================
-//function : StepFEA_Surface3dElementRepresentation
-//purpose  : 
+// function : StepFEA_Surface3dElementRepresentation
+// purpose  :
 //=======================================================================
-StepFEA_Surface3dElementRepresentation::StepFEA_Surface3dElementRepresentation ()
-{
+StepFEA_Surface3dElementRepresentation::StepFEA_Surface3dElementRepresentation() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_Surface3dElementRepresentation::Init(
+    const Handle(TCollection_HAsciiString) & aRepresentation_Name,
+    const Handle(StepRepr_HArray1OfRepresentationItem) & aRepresentation_Items,
+    const Handle(StepRepr_RepresentationContext) & aRepresentation_ContextOfItems,
+    const Handle(StepFEA_HArray1OfNodeRepresentation) & aElementRepresentation_NodeList,
+    const Handle(StepFEA_FeaModel3d) & aModelRef,
+    const Handle(StepElement_Surface3dElementDescriptor) & aElementDescriptor,
+    const Handle(StepElement_SurfaceElementProperty) & aProperty,
+    const Handle(StepElement_ElementMaterial) & aMaterial) {
+    StepFEA_ElementRepresentation::Init(aRepresentation_Name, aRepresentation_Items, aRepresentation_ContextOfItems,
+                                        aElementRepresentation_NodeList);
+
+    theModelRef = aModelRef;
+
+    theElementDescriptor = aElementDescriptor;
+
+    theProperty = aProperty;
+
+    theMaterial = aMaterial;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : ModelRef
+// purpose  :
 //=======================================================================
 
-void StepFEA_Surface3dElementRepresentation::Init (const Handle(TCollection_HAsciiString) &aRepresentation_Name,
-                                                   const Handle(StepRepr_HArray1OfRepresentationItem) &aRepresentation_Items,
-                                                   const Handle(StepRepr_RepresentationContext) &aRepresentation_ContextOfItems,
-                                                   const Handle(StepFEA_HArray1OfNodeRepresentation) &aElementRepresentation_NodeList,
-                                                   const Handle(StepFEA_FeaModel3d) &aModelRef,
-                                                   const Handle(StepElement_Surface3dElementDescriptor) &aElementDescriptor,
-                                                   const Handle(StepElement_SurfaceElementProperty) &aProperty,
-                                                   const Handle(StepElement_ElementMaterial) &aMaterial)
-{
-  StepFEA_ElementRepresentation::Init(aRepresentation_Name,
-                                      aRepresentation_Items,
-                                      aRepresentation_ContextOfItems,
-                                      aElementRepresentation_NodeList);
-
-  theModelRef = aModelRef;
-
-  theElementDescriptor = aElementDescriptor;
-
-  theProperty = aProperty;
-
-  theMaterial = aMaterial;
+Handle(StepFEA_FeaModel3d) StepFEA_Surface3dElementRepresentation::ModelRef() const {
+    return theModelRef;
 }
 
 //=======================================================================
-//function : ModelRef
-//purpose  : 
+// function : SetModelRef
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_FeaModel3d) StepFEA_Surface3dElementRepresentation::ModelRef () const
-{
-  return theModelRef;
+void StepFEA_Surface3dElementRepresentation::SetModelRef(const Handle(StepFEA_FeaModel3d) & aModelRef) {
+    theModelRef = aModelRef;
 }
 
 //=======================================================================
-//function : SetModelRef
-//purpose  : 
+// function : ElementDescriptor
+// purpose  :
 //=======================================================================
 
-void StepFEA_Surface3dElementRepresentation::SetModelRef (const Handle(StepFEA_FeaModel3d) &aModelRef)
-{
-  theModelRef = aModelRef;
+Handle(StepElement_Surface3dElementDescriptor) StepFEA_Surface3dElementRepresentation::ElementDescriptor() const {
+    return theElementDescriptor;
 }
 
 //=======================================================================
-//function : ElementDescriptor
-//purpose  : 
+// function : SetElementDescriptor
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_Surface3dElementDescriptor) StepFEA_Surface3dElementRepresentation::ElementDescriptor () const
-{
-  return theElementDescriptor;
+void StepFEA_Surface3dElementRepresentation::SetElementDescriptor(const Handle(StepElement_Surface3dElementDescriptor) &
+                                                                  aElementDescriptor) {
+    theElementDescriptor = aElementDescriptor;
 }
 
 //=======================================================================
-//function : SetElementDescriptor
-//purpose  : 
+// function : Property
+// purpose  :
 //=======================================================================
 
-void StepFEA_Surface3dElementRepresentation::SetElementDescriptor (const Handle(StepElement_Surface3dElementDescriptor) &aElementDescriptor)
-{
-  theElementDescriptor = aElementDescriptor;
+Handle(StepElement_SurfaceElementProperty) StepFEA_Surface3dElementRepresentation::Property() const {
+    return theProperty;
 }
 
 //=======================================================================
-//function : Property
-//purpose  : 
+// function : SetProperty
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_SurfaceElementProperty) StepFEA_Surface3dElementRepresentation::Property () const
-{
-  return theProperty;
+void StepFEA_Surface3dElementRepresentation::SetProperty(const Handle(StepElement_SurfaceElementProperty) & aProperty) {
+    theProperty = aProperty;
 }
 
 //=======================================================================
-//function : SetProperty
-//purpose  : 
+// function : Material
+// purpose  :
 //=======================================================================
 
-void StepFEA_Surface3dElementRepresentation::SetProperty (const Handle(StepElement_SurfaceElementProperty) &aProperty)
-{
-  theProperty = aProperty;
+Handle(StepElement_ElementMaterial) StepFEA_Surface3dElementRepresentation::Material() const {
+    return theMaterial;
 }
 
 //=======================================================================
-//function : Material
-//purpose  : 
+// function : SetMaterial
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_ElementMaterial) StepFEA_Surface3dElementRepresentation::Material () const
-{
-  return theMaterial;
-}
-
-//=======================================================================
-//function : SetMaterial
-//purpose  : 
-//=======================================================================
-
-void StepFEA_Surface3dElementRepresentation::SetMaterial (const Handle(StepElement_ElementMaterial) &aMaterial)
-{
-  theMaterial = aMaterial;
+void StepFEA_Surface3dElementRepresentation::SetMaterial(const Handle(StepElement_ElementMaterial) & aMaterial) {
+    theMaterial = aMaterial;
 }

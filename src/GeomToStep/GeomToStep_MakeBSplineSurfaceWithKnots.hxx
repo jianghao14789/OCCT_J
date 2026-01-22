@@ -25,45 +25,22 @@
 class StepGeom_BSplineSurfaceWithKnots;
 class Geom_BSplineSurface;
 
-
 //! This class implements the mapping between class
 //! BSplineSurface from Geom and the class
 //! BSplineSurfaceWithKnots from
 //! StepGeom which describes a
 //! bspline_Surface_with_knots from Prostep
-class GeomToStep_MakeBSplineSurfaceWithKnots  : public GeomToStep_Root
-{
+class GeomToStep_MakeBSplineSurfaceWithKnots : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeBSplineSurfaceWithKnots(const Handle(Geom_BSplineSurface) & Bsplin);
 
-  
-  Standard_EXPORT GeomToStep_MakeBSplineSurfaceWithKnots(const Handle(Geom_BSplineSurface)& Bsplin);
-  
-  Standard_EXPORT const Handle(StepGeom_BSplineSurfaceWithKnots)& Value() const;
-
-
-
+    Standard_EXPORT const Handle(StepGeom_BSplineSurfaceWithKnots) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_BSplineSurfaceWithKnots) theBSplineSurfaceWithKnots;
-
-
+    Handle(StepGeom_BSplineSurfaceWithKnots) theBSplineSurfaceWithKnots;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeBSplineSurfaceWithKnots_HeaderFile

@@ -21,40 +21,19 @@
 
 #include <StepRepr_DerivedShapeAspect.hxx>
 
-
 class StepRepr_Extension;
 DEFINE_STANDARD_HANDLE(StepRepr_Extension, StepRepr_DerivedShapeAspect)
 
 //! Added for Dimensional Tolerances
-class StepRepr_Extension : public StepRepr_DerivedShapeAspect
-{
+class StepRepr_Extension : public StepRepr_DerivedShapeAspect {
 
 public:
+    Standard_EXPORT StepRepr_Extension();
 
-  
-  Standard_EXPORT StepRepr_Extension();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepRepr_Extension,StepRepr_DerivedShapeAspect)
+    DEFINE_STANDARD_RTTIEXT(StepRepr_Extension, StepRepr_DerivedShapeAspect)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_Extension_HeaderFile

@@ -27,48 +27,26 @@ class StepFEA_NodeSet;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for NodeSet
-class RWStepFEA_RWNodeSet 
-{
+class RWStepFEA_RWNodeSet {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWNodeSet();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWNodeSet();
-  
-  //! Reads NodeSet
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_NodeSet)& ent) const;
-  
-  //! Writes NodeSet
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_NodeSet)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_NodeSet)& ent, Interface_EntityIterator& iter) const;
+    //! Reads NodeSet
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_NodeSet) & ent) const;
 
+    //! Writes NodeSet
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_NodeSet) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_NodeSet) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWNodeSet_HeaderFile

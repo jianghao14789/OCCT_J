@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <CDM_Application.hxx>
 #include <CDM_Document.hxx>
 #include <CDM_MetaData.hxx>
@@ -22,123 +21,118 @@
 #include <Standard_Dump.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(CDM_Reference,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(CDM_Reference, Standard_Transient)
 
-CDM_Reference::CDM_Reference(const Handle(CDM_Document)& aFromDocument, const Handle(CDM_Document)& aToDocument, const Standard_Integer aReferenceIdentifier, const Standard_Integer aToDocumentVersion):
-myToDocument(aToDocument),
-myFromDocument(aFromDocument.operator->()),
-myReferenceIdentifier(aReferenceIdentifier),
-myDocumentVersion(aToDocumentVersion),
-myUseStorageConfiguration(Standard_False)
-{}
+CDM_Reference::CDM_Reference(const Handle(CDM_Document) & aFromDocument, const Handle(CDM_Document) & aToDocument,
+                             const Standard_Integer aReferenceIdentifier, const Standard_Integer aToDocumentVersion)
+    : myToDocument(aToDocument), myFromDocument(aFromDocument.operator->()),
+      myReferenceIdentifier(aReferenceIdentifier), myDocumentVersion(aToDocumentVersion),
+      myUseStorageConfiguration(Standard_False) {}
 
-CDM_Reference::CDM_Reference(const Handle(CDM_Document)& aFromDocument, const Handle(CDM_MetaData)& aToDocument, const Standard_Integer aReferenceIdentifier, const Handle(CDM_Application)& anApplication, const Standard_Integer aToDocumentVersion, const Standard_Boolean UseStorageConfiguration):
-myFromDocument(aFromDocument.operator->()),
-myReferenceIdentifier(aReferenceIdentifier),
-myApplication(anApplication),
-myMetaData(aToDocument),
-myDocumentVersion(aToDocumentVersion),
-myUseStorageConfiguration(UseStorageConfiguration)
-{}
+CDM_Reference::CDM_Reference(const Handle(CDM_Document) & aFromDocument, const Handle(CDM_MetaData) & aToDocument,
+                             const Standard_Integer aReferenceIdentifier, const Handle(CDM_Application) & anApplication,
+                             const Standard_Integer aToDocumentVersion, const Standard_Boolean UseStorageConfiguration)
+    : myFromDocument(aFromDocument.operator->()), myReferenceIdentifier(aReferenceIdentifier),
+      myApplication(anApplication), myMetaData(aToDocument), myDocumentVersion(aToDocumentVersion),
+      myUseStorageConfiguration(UseStorageConfiguration) {}
 
 Handle(CDM_Document) CDM_Reference::FromDocument() {
-  return myFromDocument;
+    return myFromDocument;
 }
 
 Handle(CDM_Document) CDM_Reference::ToDocument() {
-  if(myToDocument.IsNull()) { 
-    myToDocument=myApplication->Retrieve(myMetaData,myUseStorageConfiguration);
-    myApplication.Nullify();
-  }
-  return myToDocument;
+    if (myToDocument.IsNull()) {
+        myToDocument = myApplication->Retrieve(myMetaData, myUseStorageConfiguration);
+        myApplication.Nullify();
+    }
+    return myToDocument;
 }
 Standard_Integer CDM_Reference::ReferenceIdentifier() {
-  return myReferenceIdentifier;
+    return myReferenceIdentifier;
 }
- 
 
-void CDM_Reference::Update(const Handle(CDM_MetaData)& aMetaData) {
-  if(myToDocument.IsNull()) {
-    if(myMetaData == aMetaData) {
-      myToDocument=myMetaData->Document();
-      myToDocument->AddFromReference(this);
-      myApplication.Nullify();
+void CDM_Reference::Update(const Handle(CDM_MetaData) & aMetaData) {
+    if (myToDocument.IsNull()) {
+        if (myMetaData == aMetaData) {
+            myToDocument = myMetaData->Document();
+            myToDocument->AddFromReference(this);
+            myApplication.Nullify();
+        }
     }
-  }
 }
 
 Standard_Boolean CDM_Reference::IsUpToDate() const {
-  Standard_Integer theActualDocumentVersion;
-  if(myToDocument.IsNull())
-    theActualDocumentVersion=myMetaData->DocumentVersion(myApplication);
-  else
-    theActualDocumentVersion=myToDocument->Modifications();
-  
-  return myDocumentVersion==theActualDocumentVersion;
+    Standard_Integer theActualDocumentVersion;
+    if (myToDocument.IsNull())
+        theActualDocumentVersion = myMetaData->DocumentVersion(myApplication);
+    else
+        theActualDocumentVersion = myToDocument->Modifications();
+
+    return myDocumentVersion == theActualDocumentVersion;
 }
 void CDM_Reference::SetIsUpToDate() {
-  
-  Standard_Integer theActualDocumentVersion;
-  if(myToDocument.IsNull())
-    theActualDocumentVersion=myMetaData->DocumentVersion(myApplication);
-  else
-    theActualDocumentVersion=myToDocument->Modifications();
 
-  if(theActualDocumentVersion != -1) myDocumentVersion=theActualDocumentVersion;
+    Standard_Integer theActualDocumentVersion;
+    if (myToDocument.IsNull())
+        theActualDocumentVersion = myMetaData->DocumentVersion(myApplication);
+    else
+        theActualDocumentVersion = myToDocument->Modifications();
+
+    if (theActualDocumentVersion != -1) myDocumentVersion = theActualDocumentVersion;
 }
-void CDM_Reference::UnsetToDocument(const Handle(CDM_MetaData)& aMetaData, const Handle(CDM_Application)& anApplication) {
-  myToDocument.Nullify();
-  myApplication=anApplication;
-  myMetaData=aMetaData;
+void CDM_Reference::UnsetToDocument(const Handle(CDM_MetaData) & aMetaData,
+                                    const Handle(CDM_Application) & anApplication) {
+    myToDocument.Nullify();
+    myApplication = anApplication;
+    myMetaData = aMetaData;
 }
 
 Standard_Integer CDM_Reference::DocumentVersion() const {
-  return myDocumentVersion;
+    return myDocumentVersion;
 }
 Standard_Boolean CDM_Reference::IsOpened() const {
-  if(myToDocument.IsNull()) return Standard_False;
-  return myToDocument->IsOpened();
+    if (myToDocument.IsNull()) return Standard_False;
+    return myToDocument->IsOpened();
 }
 Standard_Boolean CDM_Reference::IsReadOnly() const {
-  if(myToDocument.IsNull()) return myMetaData->IsReadOnly();
-  return myToDocument->IsReadOnly();
+    if (myToDocument.IsNull()) return myMetaData->IsReadOnly();
+    return myToDocument->IsReadOnly();
 }
 Handle(CDM_Document) CDM_Reference::Document() const {
-  return myToDocument;
+    return myToDocument;
 }
 Handle(CDM_MetaData) CDM_Reference::MetaData() const {
-  return myMetaData;
+    return myMetaData;
 }
 Handle(CDM_Application) CDM_Reference::Application() const {
-  return myApplication;
+    return myApplication;
 }
 
 Standard_Boolean CDM_Reference::UseStorageConfiguration() const {
-  return myUseStorageConfiguration;
+    return myUseStorageConfiguration;
 }
 Standard_Boolean CDM_Reference::IsInSession() const {
-  return !myToDocument.IsNull();
+    return !myToDocument.IsNull();
 }
 Standard_Boolean CDM_Reference::IsStored() const {
-  return !myMetaData.IsNull();
+    return !myMetaData.IsNull();
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void CDM_Reference::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+void CDM_Reference::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, myToDocument.get())
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, myFromDocument)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, myToDocument.get())
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, myFromDocument)
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myReferenceIdentifier)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myReferenceIdentifier)
 
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, myApplication.get())
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, myMetaData.get())
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, myApplication.get())
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, myMetaData.get())
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myDocumentVersion)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myUseStorageConfiguration)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDocumentVersion)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myUseStorageConfiguration)
 }

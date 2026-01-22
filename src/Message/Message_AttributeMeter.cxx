@@ -26,8 +26,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeMeter, Message_Attribute)
 
 //=======================================================================
-//function : Constructor
-//purpose  : 构造函数，初始化度量属性
+// function : Constructor
+// purpose  : 构造函数，初始化度量属性
 //
 // 说明：
 //   - Message_AttributeMeter 是用于性能监测的属性类
@@ -50,14 +50,11 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeMeter, Message_Attribute)
 //   // meter 现在可以用来记录图像加载的性能数据
 //   // 如 CPU 时间、内存使用等
 //=======================================================================
-Message_AttributeMeter::Message_AttributeMeter(const TCollection_AsciiString& theName)
-    : Message_Attribute(theName)
-{
-}
+Message_AttributeMeter::Message_AttributeMeter(const TCollection_AsciiString& theName) : Message_Attribute(theName) {}
 
 //=======================================================================
-//function : HasMetric
-//purpose  : 检查是否存在给定的度量类型
+// function : HasMetric
+// purpose  : 检查是否存在给定的度量类型
 //
 // 参数说明：
 //   - theMetric：要检查的度量类型
@@ -79,15 +76,14 @@ Message_AttributeMeter::Message_AttributeMeter(const TCollection_AsciiString& th
 //       double elapsed = meter.StopValue(...) - meter.StartValue(...);
 //   }
 //=======================================================================
-Standard_Boolean Message_AttributeMeter::HasMetric(const Message_MetricType& theMetric) const
-{
+Standard_Boolean Message_AttributeMeter::HasMetric(const Message_MetricType& theMetric) const {
     // 使用容器的 Contains 方法检查键是否存在
     return myMetrics.Contains(theMetric);
 }
 
 //=======================================================================
-//function : IsMetricValid
-//purpose  : 检查度量是否有效（既有起始值也有停止值）
+// function : IsMetricValid
+// purpose  : 检查度量是否有效（既有起始值也有停止值）
 //
 // 参数说明：
 //   - theMetric：要检查的度量类型
@@ -116,17 +112,16 @@ Standard_Boolean Message_AttributeMeter::HasMetric(const Message_MetricType& the
 //       double elapsed = meter.StopValue(...) - meter.StartValue(...);
 //   }
 //=======================================================================
-Standard_Boolean Message_AttributeMeter::IsMetricValid(const Message_MetricType& theMetric) const
-{
+Standard_Boolean Message_AttributeMeter::IsMetricValid(const Message_MetricType& theMetric) const {
     // 检查起始值是否有意义（不是未定义值）
     return Abs(StartValue(theMetric) - UndefinedMetricValue()) > Precision::Confusion() &&
-        // 同时检查停止值是否有意义
-        Abs(StopValue(theMetric) - UndefinedMetricValue()) > Precision::Confusion();
+           // 同时检查停止值是否有意义
+           Abs(StopValue(theMetric) - UndefinedMetricValue()) > Precision::Confusion();
 }
 
 //=======================================================================
-//function : StartValue
-//purpose  : 获取度量的起始值
+// function : StartValue
+// purpose  : 获取度量的起始值
 //
 // 参数说明：
 //   - theMetric：要查询的度量类型
@@ -150,11 +145,9 @@ Standard_Boolean Message_AttributeMeter::IsMetricValid(const Message_MetricType&
 //   double memStop = meter.StopValue(Message_MetricType_MemPrivate);
 //   double memUsed = memStop - memStart;  // 内存增长量
 //=======================================================================
-Standard_Real Message_AttributeMeter::StartValue(const Message_MetricType& theMetric) const
-{
+Standard_Real Message_AttributeMeter::StartValue(const Message_MetricType& theMetric) const {
     // 如果度量不存在，返回未定义值
-    if (!HasMetric(theMetric))
-    {
+    if (!HasMetric(theMetric)) {
         return UndefinedMetricValue();
     }
 
@@ -164,8 +157,8 @@ Standard_Real Message_AttributeMeter::StartValue(const Message_MetricType& theMe
 }
 
 //=======================================================================
-//function : SetStartValue
-//purpose  : 设置度量的起始值
+// function : SetStartValue
+// purpose  : 设置度量的起始值
 //
 // 参数说明：
 //   - theMetric：度量类型
@@ -195,17 +188,13 @@ Standard_Real Message_AttributeMeter::StartValue(const Message_MetricType& theMe
 //   meter.SetStopValue(Message_MetricType_WallClock, OSD_Timer::GetWallClockTime());
 //   meter.SetStopValue(Message_MetricType_MemPrivate, getMemoryUsage());
 //=======================================================================
-void Message_AttributeMeter::SetStartValue(const Message_MetricType& theMetric, const Standard_Real theValue)
-{
+void Message_AttributeMeter::SetStartValue(const Message_MetricType& theMetric, const Standard_Real theValue) {
     // 尝试找到现有的度量条目
     // ChangeSeek() 返回指向值对的可修改指针，如果不存在则返回 nullptr
-    if (StartToStopValue* aValPtr = myMetrics.ChangeSeek(theMetric))
-    {
+    if (StartToStopValue* aValPtr = myMetrics.ChangeSeek(theMetric)) {
         // 如果找到了，修改其起始值
         aValPtr->first = theValue;
-    }
-    else
-    {
+    } else {
         // 如果不存在，创建新条目
         // 起始值设置为 theValue，停止值初始化为未定义
         myMetrics.Add(theMetric, std::make_pair(theValue, UndefinedMetricValue()));
@@ -213,8 +202,8 @@ void Message_AttributeMeter::SetStartValue(const Message_MetricType& theMetric, 
 }
 
 //=======================================================================
-//function : StopValue
-//purpose  : 获取度量的停止值
+// function : StopValue
+// purpose  : 获取度量的停止值
 //
 // 参数说明：
 //   - theMetric：要查询的度量类型
@@ -232,11 +221,9 @@ void Message_AttributeMeter::SetStartValue(const Message_MetricType& theMetric, 
 //   - 逻辑与 StartValue 类似
 //   - 但返回的是值对的 second（停止值）
 //=======================================================================
-Standard_Real Message_AttributeMeter::StopValue(const Message_MetricType& theMetric) const
-{
+Standard_Real Message_AttributeMeter::StopValue(const Message_MetricType& theMetric) const {
     // 如果度量不存在，返回未定义值
-    if (!HasMetric(theMetric))
-    {
+    if (!HasMetric(theMetric)) {
         return UndefinedMetricValue();
     }
     // 返回 second（停止值）
@@ -244,8 +231,8 @@ Standard_Real Message_AttributeMeter::StopValue(const Message_MetricType& theMet
 }
 
 //=======================================================================
-//function : SetStopValue
-//purpose  : 设置度量的停止值
+// function : SetStopValue
+// purpose  : 设置度量的停止值
 //
 // 参数说明：
 //   - theMetric：度量类型
@@ -265,11 +252,9 @@ Standard_Real Message_AttributeMeter::StopValue(const Message_MetricType& theMet
 //   // 在处理结束时
 //   meter.SetStopValue(Message_MetricType_WallClock, OSD_Timer::GetWallClockTime());
 //=======================================================================
-void Message_AttributeMeter::SetStopValue(const Message_MetricType& theMetric, const Standard_Real theValue)
-{
+void Message_AttributeMeter::SetStopValue(const Message_MetricType& theMetric, const Standard_Real theValue) {
     // 尝试找到现有的度量条目
-    if (StartToStopValue* aValPtr = myMetrics.ChangeSeek(theMetric))
-    {
+    if (StartToStopValue* aValPtr = myMetrics.ChangeSeek(theMetric)) {
         // 修改其停止值
         aValPtr->second = theValue;
     }
@@ -277,8 +262,8 @@ void Message_AttributeMeter::SetStopValue(const Message_MetricType& theMetric, c
 }
 
 //=======================================================================
-//function : SetAlertMetrics
-//purpose  : 为警报自动设置度量值（起始或停止）
+// function : SetAlertMetrics
+// purpose  : 为警报自动设置度量值（起始或停止）
 //
 // 参数说明：
 //   - theAlert：要设置度量的警报对象
@@ -306,31 +291,28 @@ void Message_AttributeMeter::SetStopValue(const Message_MetricType& theMetric, c
 // 使用示例：
 //   Handle(Message_AlertExtended) alert = new Message_AlertExtended();
 //   // 设置警报属性...
-//   
+//
 //   // 在操作开始时
 //   Message_AttributeMeter::SetAlertMetrics(alert, Standard_True);
-//   
+//
 //   // ... 执行操作 ...
-//   
+//
 //   // 在操作结束时
 //   Message_AttributeMeter::SetAlertMetrics(alert, Standard_False);
 //
 // 实现细节分析：
 //=======================================================================
-void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)& theAlert,
-    const Standard_Boolean theStartValue)
-{
+void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended) & theAlert,
+                                             const Standard_Boolean theStartValue) {
     // 验证警报不为空
-    if (theAlert.IsNull())
-    {
+    if (theAlert.IsNull()) {
         return;
     }
 
     // 尝试从警报中提取度量属性
     // DownCast 类似于 C++ 的 dynamic_cast，用于安全的类型转换
     Handle(Message_AttributeMeter) aMeterAttribute = Handle(Message_AttributeMeter)::DownCast(theAlert->Attribute());
-    if (aMeterAttribute.IsNull())
-    {
+    if (aMeterAttribute.IsNull()) {
         return;
     }
 
@@ -344,10 +326,9 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
 
     // 1. 实时时钟（WallClock）
     // 实时时钟测量的是墙上时钟的流逝时间，不受 CPU 调度影响
-    if (anActiveMetrics.Contains(Message_MetricType_WallClock))
-    {
+    if (anActiveMetrics.Contains(Message_MetricType_WallClock)) {
         OSD_Timer aTimer;
-        aTimer.Start();  // 启动计时器（虽然这行不做任何事，因为我们直接获取时间）
+        aTimer.Start(); // 启动计时器（虽然这行不做任何事，因为我们直接获取时间）
         // 获取当前的实时时间（秒数）
         Standard_Real aTime = OSD_Timer::GetWallClockTime();
         if (theStartValue)
@@ -364,28 +345,24 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
     if (anActiveMetrics.Contains(Message_MetricType_ProcessCPUUserTime) ||
         anActiveMetrics.Contains(Message_MetricType_ProcessCPUSystemTime) ||
         anActiveMetrics.Contains(Message_MetricType_ThreadCPUUserTime) ||
-        anActiveMetrics.Contains(Message_MetricType_ThreadCPUSystemTime))
-    {
+        anActiveMetrics.Contains(Message_MetricType_ThreadCPUSystemTime)) {
         // 2a. 进程级 CPU 时间
         if (anActiveMetrics.Contains(Message_MetricType_ProcessCPUUserTime) ||
-            anActiveMetrics.Contains(Message_MetricType_ProcessCPUSystemTime))
-        {
+            anActiveMetrics.Contains(Message_MetricType_ProcessCPUSystemTime)) {
             // 获取进程的用户态和系统态 CPU 时间
             Standard_Real aProcessUserTime, aProcessSystemTime;
             OSD_Chronometer::GetProcessCPU(aProcessUserTime, aProcessSystemTime);
-            
+
             // 处理用户态 CPU 时间
-            if (anActiveMetrics.Contains(Message_MetricType_ProcessCPUUserTime))
-            {
+            if (anActiveMetrics.Contains(Message_MetricType_ProcessCPUUserTime)) {
                 if (theStartValue)
                     aMeterAttribute->SetStartValue(Message_MetricType_ProcessCPUUserTime, aProcessUserTime);
                 else
                     aMeterAttribute->SetStopValue(Message_MetricType_ProcessCPUUserTime, aProcessUserTime);
             }
-            
+
             // 处理系统态 CPU 时间
-            if (anActiveMetrics.Contains(Message_MetricType_ProcessCPUSystemTime))
-            {
+            if (anActiveMetrics.Contains(Message_MetricType_ProcessCPUSystemTime)) {
                 if (theStartValue)
                     aMeterAttribute->SetStartValue(Message_MetricType_ProcessCPUSystemTime, aProcessSystemTime);
                 else
@@ -395,24 +372,21 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
 
         // 2b. 线程级 CPU 时间
         if (anActiveMetrics.Contains(Message_MetricType_ThreadCPUUserTime) ||
-            anActiveMetrics.Contains(Message_MetricType_ThreadCPUSystemTime))
-        {
+            anActiveMetrics.Contains(Message_MetricType_ThreadCPUSystemTime)) {
             // 获取当前线程的用户态和系统态 CPU 时间
             Standard_Real aThreadUserTime, aThreadSystemTime;
             OSD_Chronometer::GetThreadCPU(aThreadUserTime, aThreadSystemTime);
-            
+
             // 处理线程用户态 CPU 时间
-            if (anActiveMetrics.Contains(Message_MetricType_ThreadCPUUserTime))
-            {
+            if (anActiveMetrics.Contains(Message_MetricType_ThreadCPUUserTime)) {
                 if (theStartValue)
                     aMeterAttribute->SetStartValue(Message_MetricType_ThreadCPUUserTime, aThreadUserTime);
                 else
                     aMeterAttribute->SetStopValue(Message_MetricType_ThreadCPUUserTime, aThreadUserTime);
             }
-            
+
             // 处理线程系统态 CPU 时间
-            if (anActiveMetrics.Contains(Message_MetricType_ThreadCPUSystemTime))
-            {
+            if (anActiveMetrics.Contains(Message_MetricType_ThreadCPUSystemTime)) {
                 if (theStartValue)
                     aMeterAttribute->SetStartValue(Message_MetricType_ThreadCPUSystemTime, aThreadSystemTime);
                 else
@@ -428,18 +402,17 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
     // OSD_MemInfo 用于查询操作系统的内存使用情况
     // 参数 Standard_False 表示不自动激活任何计数器
     OSD_MemInfo aMemInfo(Standard_False);
-    aMemInfo.SetActive(Standard_False);  // 明确禁用所有活动计数器
-    
+    aMemInfo.SetActive(Standard_False); // 明确禁用所有活动计数器
+
     // 创建一个临时映射来存储要查询的内存计数器
     NCollection_IndexedMap<OSD_MemInfo::Counter> aCounters;
-    
+
     // 遍历所有激活的度量，找出内存相关的度量
-    for (NCollection_IndexedMap<Message_MetricType>::Iterator anIterator(anActiveMetrics); anIterator.More(); anIterator.Next())
-    {
+    for (NCollection_IndexedMap<Message_MetricType>::Iterator anIterator(anActiveMetrics); anIterator.More();
+         anIterator.Next()) {
         // 尝试将 Message 库的度量类型转换为 OSD 库的内存计数器类型
         OSD_MemInfo::Counter anInfoCounter;
-        if (!Message::ToOSDMetric(anIterator.Value(), anInfoCounter))
-        {
+        if (!Message::ToOSDMetric(anIterator.Value(), anInfoCounter)) {
             // 如果无法转换（例如时间度量），继续下一个
             continue;
         }
@@ -448,23 +421,21 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
         aCounters.Add(anInfoCounter);
         aMemInfo.SetActive(anInfoCounter, Standard_True);
     }
-    
+
     // 如果没有内存度量需要收集，直接返回
-    if (aCounters.IsEmpty())
-    {
+    if (aCounters.IsEmpty()) {
         return;
     }
 
     // 执行内存查询（从操作系统获取当前内存使用信息）
     aMemInfo.Update();
-    
+
     // 将 OSD 度量值转换为 Message 度量值并保存
     Message_MetricType aMetricType;
-    for (NCollection_IndexedMap<OSD_MemInfo::Counter>::Iterator anIterator(aCounters); anIterator.More(); anIterator.Next())
-    {
+    for (NCollection_IndexedMap<OSD_MemInfo::Counter>::Iterator anIterator(aCounters); anIterator.More();
+         anIterator.Next()) {
         // 将 OSD 计数器类型转换回 Message 度量类型
-        if (!Message::ToMessageMetric(anIterator.Value(), aMetricType))
-        {
+        if (!Message::ToMessageMetric(anIterator.Value(), aMetricType)) {
             // 转换失败，继续下一个
             continue;
         }
@@ -472,7 +443,7 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
         // 从 OSD_MemInfo 中获取值（以 MiB 为单位的精确值）
         // ValuePreciseMiB() 返回内存大小（单位：MiB = 1024*1024 字节）
         Standard_Real memValue = (Standard_Real)aMemInfo.ValuePreciseMiB(anIterator.Value());
-        
+
         // 设置起始值或停止值
         if (theStartValue)
             aMeterAttribute->SetStartValue(aMetricType, memValue);
@@ -482,8 +453,8 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将对象内容导出为 JSON 格式（用于调试）
+// function : DumpJson
+// purpose  : 将对象内容导出为 JSON 格式（用于调试）
 //
 // 参数说明：
 //   - theOStream：输出流，JSON 将被写入此流
@@ -505,24 +476,21 @@ void Message_AttributeMeter::SetAlertMetrics(const Handle(Message_AlertExtended)
 //     }
 //   }
 //=======================================================================
-void Message_AttributeMeter::DumpJson(Standard_OStream& theOStream,
-    Standard_Integer theDepth) const
-{
+void Message_AttributeMeter::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     // 开始输出对象的 JSON
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
-    
+
     // 输出基类（Message_Attribute）的信息
     OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Message_Attribute)
 
     // 遍历所有记录的度量，输出每个度量的信息
     for (NCollection_IndexedDataMap<Message_MetricType, StartToStopValue>::Iterator anIterator(myMetrics);
-        anIterator.More(); anIterator.Next())
-    {
+         anIterator.More(); anIterator.Next()) {
         // 输出向量形式的数据：度量名称 + [起始值, 停止值]
-        OCCT_DUMP_VECTOR_CLASS(theOStream, 
-            Message::MetricToString(anIterator.Key()),  // 度量名称
-            2,                                           // 向量大小（2个值）
-            anIterator.Value().first,                    // 起始值
-            anIterator.Value().second)                   // 停止值
+        OCCT_DUMP_VECTOR_CLASS(theOStream,
+                               Message::MetricToString(anIterator.Key()), // 度量名称
+                               2,                                         // 向量大小（2个值）
+                               anIterator.Value().first,                  // 起始值
+                               anIterator.Value().second)                 // 停止值
     }
 }

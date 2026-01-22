@@ -31,17 +31,16 @@ class math_Matrix;
 
 class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox();
 
-    Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const Handle(Adaptor3d_Surface)& PS, const IntSurf_Quadric& IS);
+    Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const Handle(Adaptor3d_Surface) & PS,
+                                                                         const IntSurf_Quadric& IS);
 
     Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const IntSurf_Quadric& IS);
 
-    void Set(const Handle(Adaptor3d_Surface)& PS);
+    void Set(const Handle(Adaptor3d_Surface) & PS);
 
     void SetImplicitSurface(const IntSurf_Quadric& IS);
 
@@ -71,14 +70,12 @@ public:
 
     const gp_Dir2d& Direction2d();
 
-    const Handle(Adaptor3d_Surface)& PSurface() const;
+    const Handle(Adaptor3d_Surface) & PSurface() const;
 
     const IntSurf_Quadric& ISurface() const;
 
 protected:
-
 private:
-
     Standard_Address surf;
     Standard_Address func;
     Standard_Real u;

@@ -23,47 +23,24 @@
 #include <Standard_Integer.hxx>
 class Quantity_Color;
 
-
 //! Provides high-level API to translate IGES file
 //! to and from DECAF document
-class IGESCAFControl 
-{
+class IGESCAFControl {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Provides a tool for writing IGES file
+    //! Converts IGES color index to CASCADE color
+    Standard_EXPORT static Quantity_Color DecodeColor(const Standard_Integer col);
 
-  
-  //! Provides a tool for writing IGES file
-  //! Converts IGES color index to CASCADE color
-  Standard_EXPORT static Quantity_Color DecodeColor (const Standard_Integer col);
-  
-  //! Tries to Convert CASCADE color to IGES color index
-  //! If no corresponding color defined in IGES, returns 0
-  Standard_EXPORT static Standard_Integer EncodeColor (const Quantity_Color& col);
-
-
-
+    //! Tries to Convert CASCADE color to IGES color index
+    //! If no corresponding color defined in IGES, returns 0
+    Standard_EXPORT static Standard_Integer EncodeColor(const Quantity_Color& col);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class IGESCAFControl_Reader;
-friend class IGESCAFControl_Writer;
-
+    friend class IGESCAFControl_Reader;
+    friend class IGESCAFControl_Writer;
 };
-
-
-
-
-
-
 
 #endif // _IGESCAFControl_HeaderFile

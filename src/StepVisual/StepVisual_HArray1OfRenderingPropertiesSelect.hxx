@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepVisual_HArray1OfRenderingPropertiesSelect, StepVisual_Array1OfRenderingPropertiesSelect)
 
-
 #endif

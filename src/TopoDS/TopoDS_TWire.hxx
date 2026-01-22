@@ -24,14 +24,12 @@
 #include <TopAbs_ShapeEnum.hxx>
 class TopoDS_TShape;
 
-
 class TopoDS_TWire;
 DEFINE_STANDARD_HANDLE(TopoDS_TWire, TopoDS_TShape)
 
 //! A set of edges connected by their vertices.
 class TopoDS_TWire : public TopoDS_TShape {
 public:
-
     //! Creates an empty TWire.
     TopoDS_TWire();
 
@@ -44,9 +42,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(TopoDS_TWire, TopoDS_TShape)
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_TWire.lxx>

@@ -22,11 +22,6 @@
 //! DAO_External - arrows "outside", pointing inwards.
 //! DAO_Fit      - arrows oriented inside if value label with arrowtips fit the dimension line,
 //! otherwise - externally
-enum Prs3d_DimensionArrowOrientation
-{
-Prs3d_DAO_Internal,
-Prs3d_DAO_External,
-Prs3d_DAO_Fit
-};
+enum Prs3d_DimensionArrowOrientation { Prs3d_DAO_Internal, Prs3d_DAO_External, Prs3d_DAO_Fit };
 
 #endif // _Prs3d_DimensionArrowOrientation_HeaderFile

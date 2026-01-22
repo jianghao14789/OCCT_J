@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepData_HArray1OfField, StepData_Array1OfField)
 
-
 #endif

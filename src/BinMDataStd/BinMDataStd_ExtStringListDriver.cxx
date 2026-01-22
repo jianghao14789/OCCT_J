@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BinMDataStd_ExtStringListDriver.hxx>
 #include <BinMDataStd.hxx>
 #include <BinObjMgt_Persistent.hxx>
@@ -24,81 +23,65 @@
 #include <TDataStd_ListIteratorOfListOfExtendedString.hxx>
 #include <TDF_Attribute.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BinMDataStd_ExtStringListDriver,BinMDF_ADriver)
+IMPLEMENT_STANDARD_RTTIEXT(BinMDataStd_ExtStringListDriver, BinMDF_ADriver)
 
 //=======================================================================
-//function : BinMDataStd_ExtStringListDriver
-//purpose  : Constructor
+// function : BinMDataStd_ExtStringListDriver
+// purpose  : Constructor
 //=======================================================================
-BinMDataStd_ExtStringListDriver::BinMDataStd_ExtStringListDriver(const Handle(Message_Messenger)& theMsgDriver)
-     : BinMDF_ADriver (theMsgDriver, STANDARD_TYPE(TDataStd_ExtStringList)->Name())
-{
+BinMDataStd_ExtStringListDriver::BinMDataStd_ExtStringListDriver(const Handle(Message_Messenger) & theMsgDriver)
+    : BinMDF_ADriver(theMsgDriver, STANDARD_TYPE(TDataStd_ExtStringList)->Name()) {}
 
+//=======================================================================
+// function : NewEmpty
+// purpose  :
+//=======================================================================
+Handle(TDF_Attribute) BinMDataStd_ExtStringListDriver::NewEmpty() const {
+    return new TDataStd_ExtStringList();
 }
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : 
+// function : Paste
+// purpose  : persistent -> transient (retrieve)
 //=======================================================================
-Handle(TDF_Attribute) BinMDataStd_ExtStringListDriver::NewEmpty() const
-{
-  return new TDataStd_ExtStringList();
-}
+Standard_Boolean BinMDataStd_ExtStringListDriver::Paste(const BinObjMgt_Persistent& theSource,
+                                                        const Handle(TDF_Attribute) & theTarget,
+                                                        BinObjMgt_RRelocationTable& theRelocTable) const {
+    Standard_Integer aFirstInd, aLastInd;
+    if (!(theSource >> aFirstInd >> aLastInd)) return Standard_False;
 
-//=======================================================================
-//function : Paste
-//purpose  : persistent -> transient (retrieve)
-//=======================================================================
-Standard_Boolean BinMDataStd_ExtStringListDriver::Paste
-                                (const BinObjMgt_Persistent&  theSource,
-                                 const Handle(TDF_Attribute)& theTarget,
-                                 BinObjMgt_RRelocationTable&  theRelocTable) const
-{
-  Standard_Integer aFirstInd, aLastInd;
-  if (! (theSource >> aFirstInd >> aLastInd))
-    return Standard_False;
-
-  const Handle(TDataStd_ExtStringList) anAtt = Handle(TDataStd_ExtStringList)::DownCast(theTarget);
-  if(aLastInd > 0) {
-    const Standard_Integer aLength = aLastInd - aFirstInd + 1;
-    if (aLength <= 0)
-      return Standard_False;
-    for (Standard_Integer i = aFirstInd; i <= aLastInd; i ++)
-    {
-      TCollection_ExtendedString aStr;
-      if ( !(theSource >> aStr) )
-      {
-        return Standard_False;
-      }
-      anAtt->Append(aStr);
+    const Handle(TDataStd_ExtStringList) anAtt = Handle(TDataStd_ExtStringList)::DownCast(theTarget);
+    if (aLastInd > 0) {
+        const Standard_Integer aLength = aLastInd - aFirstInd + 1;
+        if (aLength <= 0) return Standard_False;
+        for (Standard_Integer i = aFirstInd; i <= aLastInd; i++) {
+            TCollection_ExtendedString aStr;
+            if (!(theSource >> aStr)) {
+                return Standard_False;
+            }
+            anAtt->Append(aStr);
+        }
     }
-  }
 
-  BinMDataStd::SetAttributeID(theSource, anAtt, theRelocTable.GetHeaderData()->StorageVersion().IntegerValue());
-  return Standard_True;
+    BinMDataStd::SetAttributeID(theSource, anAtt, theRelocTable.GetHeaderData()->StorageVersion().IntegerValue());
+    return Standard_True;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : transient -> persistent (store)
+// function : Paste
+// purpose  : transient -> persistent (store)
 //=======================================================================
-void BinMDataStd_ExtStringListDriver::Paste
-                                (const Handle(TDF_Attribute)& theSource,
-                                 BinObjMgt_Persistent&        theTarget,
-                                 BinObjMgt_SRelocationTable&  ) const
-{
-  const Handle(TDataStd_ExtStringList) anAtt =
-    Handle(TDataStd_ExtStringList)::DownCast(theSource);
-  const Standard_Integer aFirstInd = (anAtt->Extent()> 0) ? 1 : 0;
-  const Standard_Integer aLastInd(anAtt->Extent());
-  theTarget << aFirstInd << aLastInd;
-  TDataStd_ListIteratorOfListOfExtendedString itr(anAtt->List());
-  for (; itr.More(); itr.Next())
-  {
-    theTarget << itr.Value();
-  }
+void BinMDataStd_ExtStringListDriver::Paste(const Handle(TDF_Attribute) & theSource, BinObjMgt_Persistent& theTarget,
+                                            BinObjMgt_SRelocationTable&) const {
+    const Handle(TDataStd_ExtStringList) anAtt = Handle(TDataStd_ExtStringList)::DownCast(theSource);
+    const Standard_Integer aFirstInd = (anAtt->Extent() > 0) ? 1 : 0;
+    const Standard_Integer aLastInd(anAtt->Extent());
+    theTarget << aFirstInd << aLastInd;
+    TDataStd_ListIteratorOfListOfExtendedString itr(anAtt->List());
+    for (; itr.More(); itr.Next()) {
+        theTarget << itr.Value();
+    }
 
-  // process user defined guid
-  if(anAtt->ID() != TDataStd_ExtStringList::GetID()) 
-    theTarget << anAtt->ID();
+    // process user defined guid
+    if (anAtt->ID() != TDataStd_ExtStringList::GetID()) theTarget << anAtt->ID();
 }

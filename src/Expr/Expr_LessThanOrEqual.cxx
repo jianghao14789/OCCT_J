@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_GeneralRelation.hxx>
@@ -26,14 +25,13 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_LessThanOrEqual, Expr_SingleRelation)
 
-Expr_LessThanOrEqual::Expr_LessThanOrEqual(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
-{
+Expr_LessThanOrEqual::Expr_LessThanOrEqual(const Handle(Expr_GeneralExpression) & exp1,
+                                           const Handle(Expr_GeneralExpression) & exp2) {
     SetFirstMember(exp1);
     SetSecondMember(exp2);
 }
 
-Standard_Boolean Expr_LessThanOrEqual::IsSatisfied() const
-{
+Standard_Boolean Expr_LessThanOrEqual::IsSatisfied() const {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     fm = fm->Simplified();
@@ -48,28 +46,23 @@ Standard_Boolean Expr_LessThanOrEqual::IsSatisfied() const
     return Standard_False;
 }
 
-Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Simplified() const
-{
+Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Simplified() const {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     return new Expr_LessThanOrEqual(fm->Simplified(), sm->Simplified());
 }
 
-void Expr_LessThanOrEqual::Simplify()
-{
+void Expr_LessThanOrEqual::Simplify() {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     SetFirstMember(fm->Simplified());
     SetSecondMember(sm->Simplified());
 }
 
-Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Copy() const
-{
-    return new Expr_LessThanOrEqual(Expr::CopyShare(FirstMember()),
-        Expr::CopyShare(SecondMember()));
+Handle(Expr_GeneralRelation) Expr_LessThanOrEqual::Copy() const {
+    return new Expr_LessThanOrEqual(Expr::CopyShare(FirstMember()), Expr::CopyShare(SecondMember()));
 }
 
-TCollection_AsciiString Expr_LessThanOrEqual::String() const
-{
+TCollection_AsciiString Expr_LessThanOrEqual::String() const {
     return FirstMember()->String() + " <= " + SecondMember()->String();
 }

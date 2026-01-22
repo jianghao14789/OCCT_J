@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor3d_Surface.hxx>
 #include <Extrema_GenExtSS.hxx>
 #include <Extrema_POnSurf.hxx>
@@ -31,26 +30,19 @@ class Extrema_FuncDistSS : public math_MultipleVarFunctionWithGradient {
 public:
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT Extrema_FuncDistSS(const Adaptor3d_Surface& S1,
-        const Adaptor3d_Surface& S2)
-        : myS1(&S1),
-        myS2(&S2)
-    {
-    }
+    Standard_EXPORT Extrema_FuncDistSS(const Adaptor3d_Surface& S1, const Adaptor3d_Surface& S2)
+        : myS1(&S1), myS2(&S2) {}
 
-    Standard_EXPORT Standard_Integer NbVariables() const
-    {
+    Standard_EXPORT Standard_Integer NbVariables() const {
         return 4;
     }
 
-    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& X, Standard_Real& F)
-    {
+    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& X, Standard_Real& F) {
         F = myS1->Value(X(1), X(2)).SquareDistance(myS2->Value(X(3), X(4)));
         return true;
     }
 
-    Standard_EXPORT Standard_Boolean Gradient(const math_Vector& X, math_Vector& G)
-    {
+    Standard_EXPORT Standard_Boolean Gradient(const math_Vector& X, math_Vector& G) {
         gp_Pnt P1, P2;
         gp_Vec Du1s1, Dv1s1;
         gp_Vec Du2s2, Dv2s2;
@@ -67,8 +59,7 @@ public:
         return true;
     }
 
-    Standard_EXPORT virtual  Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G)
-    {
+    Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G) {
         F = myS1->Value(X(1), X(2)).SquareDistance(myS2->Value(X(3), X(4)));
 
         gp_Pnt P1, P2;
@@ -88,86 +79,56 @@ public:
     }
 
 protected:
-
 private:
-
     const Adaptor3d_Surface* myS1;
     const Adaptor3d_Surface* myS2;
 };
 
 //=======================================================================
-//function : Extrema_GenExtSS
-//purpose  : 
+// function : Extrema_GenExtSS
+// purpose  :
 //=======================================================================
 Extrema_GenExtSS::Extrema_GenExtSS()
-    : myu1min(0.0),
-    myu1sup(0.0),
-    myv1min(0.0),
-    myv1sup(0.0),
-    myu2min(0.0),
-    myu2sup(0.0),
-    myv2min(0.0),
-    myv2sup(0.0),
-    myusample(0),
-    myvsample(0),
-    mytol1(0.0),
-    mytol2(0.0),
-    myS2(NULL)
-{
+    : myu1min(0.0), myu1sup(0.0), myv1min(0.0), myv1sup(0.0), myu2min(0.0), myu2sup(0.0), myv2min(0.0), myv2sup(0.0),
+      myusample(0), myvsample(0), mytol1(0.0), mytol2(0.0), myS2(NULL) {
     myDone = Standard_False;
     myInit = Standard_False;
 }
 
 //=======================================================================
-//function : Extrema_GenExtSS
-//purpose  : 
+// function : Extrema_GenExtSS
+// purpose  :
 //=======================================================================
 
-Extrema_GenExtSS::Extrema_GenExtSS(const Adaptor3d_Surface& S1,
-    const Adaptor3d_Surface& S2,
-    const Standard_Integer NbU,
-    const Standard_Integer NbV,
-    const Standard_Real    Tol1,
-    const Standard_Real    Tol2) : myF(S1, S2)
-{
+Extrema_GenExtSS::Extrema_GenExtSS(const Adaptor3d_Surface& S1, const Adaptor3d_Surface& S2, const Standard_Integer NbU,
+                                   const Standard_Integer NbV, const Standard_Real Tol1, const Standard_Real Tol2)
+    : myF(S1, S2) {
     Initialize(S2, NbU, NbV, Tol2);
     Perform(S1, Tol1);
 }
 
 //=======================================================================
-//function : Extrema_GenExtSS
-//purpose  : 
+// function : Extrema_GenExtSS
+// purpose  :
 //=======================================================================
 
-Extrema_GenExtSS::Extrema_GenExtSS(const Adaptor3d_Surface& S1,
-    const Adaptor3d_Surface& S2,
-    const Standard_Integer NbU,
-    const Standard_Integer NbV,
-    const Standard_Real U1min,
-    const Standard_Real U1sup,
-    const Standard_Real V1min,
-    const Standard_Real V1sup,
-    const Standard_Real U2min,
-    const Standard_Real U2sup,
-    const Standard_Real V2min,
-    const Standard_Real V2sup,
-    const Standard_Real Tol1,
-    const Standard_Real Tol2) : myF(S1, S2)
-{
+Extrema_GenExtSS::Extrema_GenExtSS(const Adaptor3d_Surface& S1, const Adaptor3d_Surface& S2, const Standard_Integer NbU,
+                                   const Standard_Integer NbV, const Standard_Real U1min, const Standard_Real U1sup,
+                                   const Standard_Real V1min, const Standard_Real V1sup, const Standard_Real U2min,
+                                   const Standard_Real U2sup, const Standard_Real V2min, const Standard_Real V2sup,
+                                   const Standard_Real Tol1, const Standard_Real Tol2)
+    : myF(S1, S2) {
     Initialize(S2, NbU, NbV, U2min, U2sup, V2min, V2sup, Tol2);
     Perform(S1, U1min, U1sup, V1min, V1sup, Tol1);
 }
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void Extrema_GenExtSS::Initialize(const Adaptor3d_Surface& S2,
-    const Standard_Integer NbU,
-    const Standard_Integer NbV,
-    const Standard_Real Tol2)
-{
+void Extrema_GenExtSS::Initialize(const Adaptor3d_Surface& S2, const Standard_Integer NbU, const Standard_Integer NbV,
+                                  const Standard_Real Tol2) {
     myu2min = S2.FirstUParameter();
     myu2sup = S2.LastUParameter();
     myv2min = S2.FirstVParameter();
@@ -176,19 +137,13 @@ void Extrema_GenExtSS::Initialize(const Adaptor3d_Surface& S2,
 }
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void Extrema_GenExtSS::Initialize(const Adaptor3d_Surface& S2,
-    const Standard_Integer NbU,
-    const Standard_Integer NbV,
-    const Standard_Real U2min,
-    const Standard_Real U2sup,
-    const Standard_Real V2min,
-    const Standard_Real V2sup,
-    const Standard_Real Tol2)
-{
+void Extrema_GenExtSS::Initialize(const Adaptor3d_Surface& S2, const Standard_Integer NbU, const Standard_Integer NbV,
+                                  const Standard_Real U2min, const Standard_Real U2sup, const Standard_Real V2min,
+                                  const Standard_Real V2sup, const Standard_Real Tol2) {
     myS2 = &S2;
     mypoints1 = new TColgp_HArray2OfPnt(0, NbU + 1, 0, NbV + 1);
     mypoints2 = new TColgp_HArray2OfPnt(0, NbU + 1, 0, NbV + 1);
@@ -225,13 +180,11 @@ void Extrema_GenExtSS::Initialize(const Adaptor3d_Surface& S2,
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
-    const Standard_Real    Tol1)
-{
+void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1, const Standard_Real Tol1) {
     myu1min = S1.FirstUParameter();
     myu1sup = S1.LastUParameter();
     myv1min = S1.FirstVParameter();
@@ -240,17 +193,12 @@ void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
-    const Standard_Real U1min,
-    const Standard_Real U1sup,
-    const Standard_Real V1min,
-    const Standard_Real V1sup,
-    const Standard_Real Tol1)
-{
+void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1, const Standard_Real U1min, const Standard_Real U1sup,
+                               const Standard_Real V1min, const Standard_Real V1sup, const Standard_Real Tol1) {
     myF.Initialize(S1, *myS2);
     myu1min = U1min;
     myu1sup = U1sup;
@@ -312,7 +260,6 @@ void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
     UVsup(3) = myu2sup;
     UVsup(4) = myv2sup;
 
-
     Standard_Real distmin = RealLast(), distmax = 0.0, TheDist;
 
     Standard_Integer N1Umin = 0, N1Vmin = 0, N2Umin = 0, N2Vmin = 0;
@@ -358,16 +305,13 @@ void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
     Extrema_FuncDistSS aGFSS(S1, *myS2);
     math_BFGS aBFGSSolver(4);
     aBFGSSolver.Perform(aGFSS, UV);
-    if (aBFGSSolver.IsDone())
-    {
+    if (aBFGSSolver.IsDone()) {
         aBFGSSolver.Location(UV);
 
         //  Store result in myF.
         myF.Value(UV, UV);
         myF.GetStateNumber();
-    }
-    else
-    {
+    } else {
         // If optimum is not computed successfully then compute by old approach.
 
         // Restore initial point.
@@ -380,8 +324,8 @@ void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
         SR1.Perform(myF, UV, UVinf, UVsup);
     }
 
-    //math_FunctionSetRoot SR1(myF, Tol);
-    //SR1.Perform(myF, UV, UVinf, UVsup);
+    // math_FunctionSetRoot SR1(myF, Tol);
+    // SR1.Perform(myF, UV, UVinf, UVsup);
 
     UV(1) = U10 + (N1Umax - 1) * PasU1;
     UV(2) = V10 + (N1Vmax - 1) * PasV1;
@@ -398,36 +342,33 @@ void Extrema_GenExtSS::Perform(const Adaptor3d_Surface& S1,
 }
 
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsDone
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Extrema_GenExtSS::IsDone() const
-{
+Standard_Boolean Extrema_GenExtSS::IsDone() const {
     return myDone;
 }
 
 //=======================================================================
-//function : NbExt
-//purpose  : 
+// function : NbExt
+// purpose  :
 //=======================================================================
 
-Standard_Integer Extrema_GenExtSS::NbExt() const
-{
-    if (!IsDone()) { throw StdFail_NotDone(); }
+Standard_Integer Extrema_GenExtSS::NbExt() const {
+    if (!IsDone()) {
+        throw StdFail_NotDone();
+    }
     return myF.NbExt();
-
 }
 
 //=======================================================================
-//function : SquareDistance
-//purpose  : 
+// function : SquareDistance
+// purpose  :
 //=======================================================================
 
-Standard_Real Extrema_GenExtSS::SquareDistance(const Standard_Integer N) const
-{
-    if (N < 1 || N > NbExt())
-    {
+Standard_Real Extrema_GenExtSS::SquareDistance(const Standard_Integer N) const {
+    if (N < 1 || N > NbExt()) {
         throw Standard_OutOfRange();
     }
 
@@ -435,14 +376,12 @@ Standard_Real Extrema_GenExtSS::SquareDistance(const Standard_Integer N) const
 }
 
 //=======================================================================
-//function : PointOnS1
-//purpose  : 
+// function : PointOnS1
+// purpose  :
 //=======================================================================
 
-const Extrema_POnSurf& Extrema_GenExtSS::PointOnS1(const Standard_Integer N) const
-{
-    if (N < 1 || N > NbExt())
-    {
+const Extrema_POnSurf& Extrema_GenExtSS::PointOnS1(const Standard_Integer N) const {
+    if (N < 1 || N > NbExt()) {
         throw Standard_OutOfRange();
     }
 
@@ -450,14 +389,12 @@ const Extrema_POnSurf& Extrema_GenExtSS::PointOnS1(const Standard_Integer N) con
 }
 
 //=======================================================================
-//function : PointOnS2
-//purpose  : 
+// function : PointOnS2
+// purpose  :
 //=======================================================================
 
-const Extrema_POnSurf& Extrema_GenExtSS::PointOnS2(const Standard_Integer N) const
-{
-    if (N < 1 || N > NbExt())
-    {
+const Extrema_POnSurf& Extrema_GenExtSS::PointOnS2(const Standard_Integer N) const {
+    if (N < 1 || N > NbExt()) {
         throw Standard_OutOfRange();
     }
 

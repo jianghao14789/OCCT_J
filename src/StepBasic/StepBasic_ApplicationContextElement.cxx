@@ -11,42 +11,35 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_ApplicationContext.hxx>
 #include <StepBasic_ApplicationContextElement.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ApplicationContextElement,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ApplicationContextElement, Standard_Transient)
 
-StepBasic_ApplicationContextElement::StepBasic_ApplicationContextElement ()  {}
+StepBasic_ApplicationContextElement::StepBasic_ApplicationContextElement() {}
 
-void StepBasic_ApplicationContextElement::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepBasic_ApplicationContext)& aFrameOfReference)
-{
-	// --- classe own fields ---
-	name = aName;
-	frameOfReference = aFrameOfReference;
+void StepBasic_ApplicationContextElement::Init(const Handle(TCollection_HAsciiString) & aName,
+                                               const Handle(StepBasic_ApplicationContext) & aFrameOfReference) {
+    // --- classe own fields ---
+    name = aName;
+    frameOfReference = aFrameOfReference;
 }
 
-
-void StepBasic_ApplicationContextElement::SetName(const Handle(TCollection_HAsciiString)& aName)
-{
-	name = aName;
+void StepBasic_ApplicationContextElement::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    name = aName;
 }
 
-Handle(TCollection_HAsciiString) StepBasic_ApplicationContextElement::Name() const
-{
-	return name;
+Handle(TCollection_HAsciiString) StepBasic_ApplicationContextElement::Name() const {
+    return name;
 }
 
-void StepBasic_ApplicationContextElement::SetFrameOfReference(const Handle(StepBasic_ApplicationContext)& aFrameOfReference)
-{
-	frameOfReference = aFrameOfReference;
+void StepBasic_ApplicationContextElement::SetFrameOfReference(const Handle(StepBasic_ApplicationContext) &
+                                                              aFrameOfReference) {
+    frameOfReference = aFrameOfReference;
 }
 
-Handle(StepBasic_ApplicationContext) StepBasic_ApplicationContextElement::FrameOfReference() const
-{
-	return frameOfReference;
+Handle(StepBasic_ApplicationContext) StepBasic_ApplicationContextElement::FrameOfReference() const {
+    return frameOfReference;
 }

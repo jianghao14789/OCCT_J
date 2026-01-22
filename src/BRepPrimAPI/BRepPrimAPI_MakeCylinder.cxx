@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepBuilderAPI.hxx>
 #include <BRepPrim_Cylinder.hxx>
 #include <BRepPrimAPI_MakeCylinder.hxx>
@@ -24,79 +23,57 @@
 #include <Standard_DomainError.hxx>
 
 //=======================================================================
-//function : BRepPrimAPI_MakeCylinder
-//purpose  : 
+// function : BRepPrimAPI_MakeCylinder
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const Standard_Real R,
-					   const Standard_Real H) :
-       myCylinder(gp::XOY(), R , H)
-{
+BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const Standard_Real R, const Standard_Real H)
+    : myCylinder(gp::XOY(), R, H) {}
+
+//=======================================================================
+// function : BRepPrimAPI_MakeCylinder
+// purpose  :
+//=======================================================================
+
+BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const Standard_Real R, const Standard_Real H,
+                                                   const Standard_Real Angle)
+    : myCylinder(R, H) {
+    myCylinder.Angle(Angle);
 }
 
+//=======================================================================
+// function : BRepPrimAPI_MakeCylinder
+// purpose  :
+//=======================================================================
+
+BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const gp_Ax2& Axes, const Standard_Real R, const Standard_Real H)
+    : myCylinder(Axes, R, H) {}
 
 //=======================================================================
-//function : BRepPrimAPI_MakeCylinder
-//purpose  : 
+// function : BRepPrimAPI_MakeCylinder
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const Standard_Real R, 
-					   const Standard_Real H, 
-					   const Standard_Real Angle) :
-       myCylinder( R , H)
-{
-  myCylinder.Angle(Angle);
+BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const gp_Ax2& Axes, const Standard_Real R, const Standard_Real H,
+                                                   const Standard_Real Angle)
+    : myCylinder(Axes, R, H) {
+    myCylinder.Angle(Angle);
 }
 
-
 //=======================================================================
-//function : BRepPrimAPI_MakeCylinder
-//purpose  : 
+// function : OneAxis
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const gp_Ax2& Axes, 
-					   const Standard_Real R, 
-					   const Standard_Real H) :
-       myCylinder( Axes, R , H)
-{
+Standard_Address BRepPrimAPI_MakeCylinder::OneAxis() {
+    return &myCylinder;
 }
 
-
 //=======================================================================
-//function : BRepPrimAPI_MakeCylinder
-//purpose  : 
+// function : Cylinder
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeCylinder::BRepPrimAPI_MakeCylinder(const gp_Ax2& Axes,
-					   const Standard_Real R, 
-					   const Standard_Real H,
-					   const Standard_Real Angle) :
-       myCylinder( Axes, R , H)
-{
-  myCylinder.Angle(Angle);
+BRepPrim_Cylinder& BRepPrimAPI_MakeCylinder::Cylinder() {
+    return myCylinder;
 }
-
-
-//=======================================================================
-//function : OneAxis
-//purpose  : 
-//=======================================================================
-
-Standard_Address  BRepPrimAPI_MakeCylinder::OneAxis()
-{
-  return &myCylinder;
-}
-
-
-//=======================================================================
-//function : Cylinder
-//purpose  : 
-//=======================================================================
-
-BRepPrim_Cylinder&  BRepPrimAPI_MakeCylinder::Cylinder()
-{
-  return myCylinder;
-}
-
-
-

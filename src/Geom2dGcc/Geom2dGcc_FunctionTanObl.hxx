@@ -27,11 +27,9 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Real.hxx>
 
-
 //! This class describe a function of a single variable.
 class Geom2dGcc_FunctionTanObl : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Geom2dGcc_FunctionTanObl(const Geom2dAdaptor_Curve& Curve, const gp_Dir2d& Dir);
@@ -53,12 +51,9 @@ public:
     Standard_EXPORT Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& Deriv);
 
 protected:
-
 private:
-
     Geom2dAdaptor_Curve TheCurv;
     gp_Dir2d TheDirection;
-
 };
 
 #endif // _Geom2dGcc_FunctionTanObl_HeaderFile

@@ -28,44 +28,22 @@ class StepGeom_Plane;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for Plane
-class RWStepGeom_RWPlane 
-{
+class RWStepGeom_RWPlane {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWPlane();
 
-  
-  Standard_EXPORT RWStepGeom_RWPlane();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_Plane)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_Plane)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_Plane)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_Plane) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_Plane) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepGeom_Plane) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWPlane_HeaderFile

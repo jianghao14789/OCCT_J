@@ -61,7 +61,8 @@ public:
 
     //! constructs an IntegerVector in the range [Lower..Upper]
     //! with all the elements set to theInitialValue.
-    Standard_EXPORT math_IntegerVector(const Standard_Integer theFirst, const Standard_Integer theLast, const Standard_Integer theInitialValue);
+    Standard_EXPORT math_IntegerVector(const Standard_Integer theFirst, const Standard_Integer theLast,
+                                       const Standard_Integer theInitialValue);
 
     //! Initialize an IntegerVector with all the elements
     //! set to theInitialValue.
@@ -69,7 +70,8 @@ public:
 
     //! constructs an IntegerVector in the range [Lower..Upper]
     //! which share the "c array" theTab.
-    Standard_EXPORT math_IntegerVector(const Standard_Integer* theTab, const Standard_Integer theFirst, const Standard_Integer theLast);
+    Standard_EXPORT math_IntegerVector(const Standard_Integer* theTab, const Standard_Integer theFirst,
+                                       const Standard_Integer theLast);
 
     //! constructs a copy for initialization.
     //! An exception is raised if the lengths of the IntegerVectors
@@ -110,9 +112,10 @@ public:
     Standard_EXPORT math_IntegerVector Inverse() const;
 
     //! sets an IntegerVector from "theI1" to "theI2" to the IntegerVector "theV";
-    //! An exception is raised if "theI1" is less than "LowerIndex" or "theI2" is greater than "UpperIndex" or "theI1" is greater than "theI2".
-    //! An exception is raised if "theI2-theI1+1" is different from the Length of "theV".
-    Standard_EXPORT void Set(const Standard_Integer theI1, const Standard_Integer theI2, const math_IntegerVector& theV);
+    //! An exception is raised if "theI1" is less than "LowerIndex" or "theI2" is greater than "UpperIndex" or "theI1"
+    //! is greater than "theI2". An exception is raised if "theI2-theI1+1" is different from the Length of "theV".
+    Standard_EXPORT void Set(const Standard_Integer theI1, const Standard_Integer theI2,
+                             const math_IntegerVector& theV);
 
     //! slices the values of the IntegerVector between "theI1" and "theI2":
     //! Example: [2, 1, 2, 3, 4, 5] becomes [2, 4, 3, 2, 1, 5] between 2 and 5.
@@ -122,7 +125,7 @@ public:
     //! returns the product of an IntegerVector by an integer value.
     Standard_EXPORT void Multiply(const Standard_Integer theRight);
 
-    void operator *=(const Standard_Integer theRight) {
+    void operator*=(const Standard_Integer theRight) {
         Multiply(theRight);
     }
 
@@ -136,7 +139,7 @@ public:
     //! returns the product of a vector and a real value.
     Standard_NODISCARD Standard_EXPORT math_IntegerVector TMultiplied(const Standard_Integer theRight) const;
 
-    friend inline math_IntegerVector operator* (const Standard_Integer theLeft, const math_IntegerVector& theRight) {
+    friend inline math_IntegerVector operator*(const Standard_Integer theLeft, const math_IntegerVector& theRight) {
         return theRight.Multiplied(theLeft);
     }
 
@@ -145,7 +148,7 @@ public:
     //! An exception is raised if the lengths are not equal.
     Standard_EXPORT void Add(const math_IntegerVector& theRight);
 
-    void operator +=(const math_IntegerVector& theRight) {
+    void operator+=(const math_IntegerVector& theRight) {
         Add(theRight);
     }
 
@@ -246,4 +249,3 @@ private:
 };
 
 #endif
-

@@ -26,51 +26,27 @@
 class Standard_Transient;
 class StepVisual_FillAreaStyleColour;
 
-
-
-class StepVisual_FillStyleSelect  : public StepData_SelectType
-{
+class StepVisual_FillStyleSelect : public StepData_SelectType {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Returns a FillStyleSelect SelectType
+    Standard_EXPORT StepVisual_FillStyleSelect();
 
-  
-  //! Returns a FillStyleSelect SelectType
-  Standard_EXPORT StepVisual_FillStyleSelect();
-  
-  //! Recognizes a FillStyleSelect Kind Entity that is :
-  //! 1 -> FillAreaStyleColour
-  //! 2 -> ExternallyDefinedTileStyle
-  //! 3 -> FillAreaStyleTiles
-  //! 4 -> ExternallyDefinedHatchStyle
-  //! 5 -> FillAreaStyleHatching
-  //! 0 else
-  Standard_EXPORT Standard_Integer CaseNum (const Handle(Standard_Transient)& ent) const;
-  
-  //! returns Value as a FillAreaStyleColour (Null if another type)
-  Standard_EXPORT Handle(StepVisual_FillAreaStyleColour) FillAreaStyleColour() const;
+    //! Recognizes a FillStyleSelect Kind Entity that is :
+    //! 1 -> FillAreaStyleColour
+    //! 2 -> ExternallyDefinedTileStyle
+    //! 3 -> FillAreaStyleTiles
+    //! 4 -> ExternallyDefinedHatchStyle
+    //! 5 -> FillAreaStyleHatching
+    //! 0 else
+    Standard_EXPORT Standard_Integer CaseNum(const Handle(Standard_Transient) & ent) const;
 
-
-
+    //! returns Value as a FillAreaStyleColour (Null if another type)
+    Standard_EXPORT Handle(StepVisual_FillAreaStyleColour) FillAreaStyleColour() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_FillStyleSelect_HeaderFile

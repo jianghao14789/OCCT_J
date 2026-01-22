@@ -28,33 +28,31 @@ class StepVisual_AnnotationFillAreaOccurrence;
 class StepVisual_AnnotationTextOccurrence;
 class StepVisual_TessellatedAnnotationOccurrence;
 
-class StepVisual_DraughtingCalloutElement  : public StepData_SelectType
-{
+class StepVisual_DraughtingCalloutElement : public StepData_SelectType {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  //! Returns a DraughtingCalloutElement select type
-  Standard_EXPORT StepVisual_DraughtingCalloutElement();
-  
-  //! Recognizes a IdAttributeSelect Kind Entity that is :
-  //! 1 -> AnnotationCurveOccurrence
-  //! 2 -> AnnotationTextOccurrence
-  //! 3 -> TessellatedAnnotationOccurrence
-  //! 4 -> AnnotationFillAreaOccurrence
-  //! 0 else
-  Standard_EXPORT Standard_Integer CaseNum (const Handle(Standard_Transient)& ent)  const;
-  
-  //! returns Value as a AnnotationCurveOccurrence (Null if another type)
-  Standard_EXPORT Handle(StepVisual_AnnotationCurveOccurrence) AnnotationCurveOccurrence()  const;
+    //! Returns a DraughtingCalloutElement select type
+    Standard_EXPORT StepVisual_DraughtingCalloutElement();
 
-  //! returns Value as a AnnotationTextOccurrence
-  Standard_EXPORT Handle(StepVisual_AnnotationTextOccurrence) AnnotationTextOccurrence()  const;
+    //! Recognizes a IdAttributeSelect Kind Entity that is :
+    //! 1 -> AnnotationCurveOccurrence
+    //! 2 -> AnnotationTextOccurrence
+    //! 3 -> TessellatedAnnotationOccurrence
+    //! 4 -> AnnotationFillAreaOccurrence
+    //! 0 else
+    Standard_EXPORT Standard_Integer CaseNum(const Handle(Standard_Transient) & ent) const;
 
-  //! returns Value as a TessellatedAnnotationOccurrence
-  Standard_EXPORT Handle(StepVisual_TessellatedAnnotationOccurrence) TessellatedAnnotationOccurrence()  const;
+    //! returns Value as a AnnotationCurveOccurrence (Null if another type)
+    Standard_EXPORT Handle(StepVisual_AnnotationCurveOccurrence) AnnotationCurveOccurrence() const;
 
-  //! returns Value as a AnnotationFillAreaOccurrence
-  Standard_EXPORT Handle(StepVisual_AnnotationFillAreaOccurrence) AnnotationFillAreaOccurrence()  const;
+    //! returns Value as a AnnotationTextOccurrence
+    Standard_EXPORT Handle(StepVisual_AnnotationTextOccurrence) AnnotationTextOccurrence() const;
+
+    //! returns Value as a TessellatedAnnotationOccurrence
+    Standard_EXPORT Handle(StepVisual_TessellatedAnnotationOccurrence) TessellatedAnnotationOccurrence() const;
+
+    //! returns Value as a AnnotationFillAreaOccurrence
+    Standard_EXPORT Handle(StepVisual_AnnotationFillAreaOccurrence) AnnotationFillAreaOccurrence() const;
 };
 #endif // StepVisual_DraughtingCalloutElement

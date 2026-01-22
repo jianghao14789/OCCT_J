@@ -29,27 +29,23 @@
 // function : gp_Mat2d
 // purpose  :
 // =======================================================================
-gp_Mat2d::gp_Mat2d(const gp_XY& theCol1, const gp_XY& theCol2)
-{
-    myMat[0][0] = theCol1.X(); myMat[1][0] = theCol1.Y();
-    myMat[0][1] = theCol2.X(); myMat[1][1] = theCol2.Y();
+gp_Mat2d::gp_Mat2d(const gp_XY& theCol1, const gp_XY& theCol2) {
+    myMat[0][0] = theCol1.X();
+    myMat[1][0] = theCol1.Y();
+    myMat[0][1] = theCol2.X();
+    myMat[1][1] = theCol2.Y();
 }
 
 // =======================================================================
 // function : SetCol
 // purpose  :
 // =======================================================================
-void gp_Mat2d::SetCol(const Standard_Integer theCol,
-    const gp_XY& theValue)
-{
+void gp_Mat2d::SetCol(const Standard_Integer theCol, const gp_XY& theValue) {
     Standard_OutOfRange_Raise_if(theCol < 1 || theCol > 2, "gp_Mat2d::SetCol() - invalid index");
-    if (theCol == 1)
-    {
+    if (theCol == 1) {
         myMat[0][0] = theValue.X();
         myMat[1][0] = theValue.Y();
-    }
-    else
-    {
+    } else {
         myMat[0][1] = theValue.X();
         myMat[1][1] = theValue.Y();
     }
@@ -59,27 +55,23 @@ void gp_Mat2d::SetCol(const Standard_Integer theCol,
 // function : SetCols
 // purpose  :
 // =======================================================================
-void gp_Mat2d::SetCols(const gp_XY& theCol1,
-    const gp_XY& theCol2)
-{
-    myMat[0][0] = theCol1.X(); myMat[1][0] = theCol1.Y();
-    myMat[0][1] = theCol2.X(); myMat[1][1] = theCol2.Y();
+void gp_Mat2d::SetCols(const gp_XY& theCol1, const gp_XY& theCol2) {
+    myMat[0][0] = theCol1.X();
+    myMat[1][0] = theCol1.Y();
+    myMat[0][1] = theCol2.X();
+    myMat[1][1] = theCol2.Y();
 }
 
 // =======================================================================
 // function : SetRow
 // purpose  :
 // =======================================================================
-void gp_Mat2d::SetRow(const Standard_Integer theRow, const gp_XY& theValue)
-{
+void gp_Mat2d::SetRow(const Standard_Integer theRow, const gp_XY& theValue) {
     Standard_OutOfRange_Raise_if(theRow < 1 || theRow > 2, "gp_Mat2d::SetRow() - invalid index");
-    if (theRow == 1)
-    {
+    if (theRow == 1) {
         myMat[0][0] = theValue.X();
         myMat[0][1] = theValue.Y();
-    }
-    else
-    {
+    } else {
         myMat[1][0] = theValue.X();
         myMat[1][1] = theValue.Y();
     }
@@ -89,21 +81,20 @@ void gp_Mat2d::SetRow(const Standard_Integer theRow, const gp_XY& theValue)
 // function : SetRows
 // purpose  :
 // =======================================================================
-void gp_Mat2d::SetRows(const gp_XY& theRow1, const gp_XY& theRow2)
-{
-    myMat[0][0] = theRow1.X(); myMat[0][1] = theRow1.Y();
-    myMat[1][0] = theRow2.X(); myMat[1][1] = theRow2.Y();
+void gp_Mat2d::SetRows(const gp_XY& theRow1, const gp_XY& theRow2) {
+    myMat[0][0] = theRow1.X();
+    myMat[0][1] = theRow1.Y();
+    myMat[1][0] = theRow2.X();
+    myMat[1][1] = theRow2.Y();
 }
 
 // =======================================================================
 // function : Column
 // purpose  :
 // =======================================================================
-gp_XY gp_Mat2d::Column(const Standard_Integer theCol) const
-{
+gp_XY gp_Mat2d::Column(const Standard_Integer theCol) const {
     Standard_OutOfRange_Raise_if(theCol < 1 || theCol > 2, "gp_Mat2d::Column() - invalid index");
-    if (theCol == 1)
-    {
+    if (theCol == 1) {
         return gp_XY(myMat[0][0], myMat[1][0]);
     }
     return gp_XY(myMat[0][1], myMat[1][1]);
@@ -113,8 +104,7 @@ gp_XY gp_Mat2d::Column(const Standard_Integer theCol) const
 // function : Diagonal
 // purpose  :
 // =======================================================================
-gp_XY gp_Mat2d::Diagonal() const
-{
+gp_XY gp_Mat2d::Diagonal() const {
     return gp_XY(myMat[0][0], myMat[1][1]);
 }
 
@@ -122,11 +112,9 @@ gp_XY gp_Mat2d::Diagonal() const
 // function : Row
 // purpose  :
 // =======================================================================
-gp_XY gp_Mat2d::Row(const Standard_Integer theRow) const
-{
+gp_XY gp_Mat2d::Row(const Standard_Integer theRow) const {
     Standard_OutOfRange_Raise_if(theRow < 1 || theRow > 2, "gp_Mat2d::Row() - invalid index");
-    if (theRow == 1)
-    {
+    if (theRow == 1) {
         return gp_XY(myMat[0][0], myMat[0][1]);
     }
     return gp_XY(myMat[1][0], myMat[1][1]);
@@ -136,8 +124,7 @@ gp_XY gp_Mat2d::Row(const Standard_Integer theRow) const
 // function : Invert
 // purpose  :
 // =======================================================================
-void gp_Mat2d::Invert()
-{
+void gp_Mat2d::Invert() {
     Standard_Real aNewMat[2][2];
     aNewMat[0][0] = myMat[1][1];
     aNewMat[0][1] = -myMat[0][1];
@@ -158,12 +145,13 @@ void gp_Mat2d::Invert()
 // function : Power
 // purpose  :
 // =======================================================================
-void gp_Mat2d::Power(const Standard_Integer theN)
-{
-    if (theN == 1) {}
-    else if (theN == 0) { SetIdentity(); }
-    else if (theN == -1) { Invert(); }
-    else {
+void gp_Mat2d::Power(const Standard_Integer theN) {
+    if (theN == 1) {
+    } else if (theN == 0) {
+        SetIdentity();
+    } else if (theN == -1) {
+        Invert();
+    } else {
         if (theN < 0) Invert();
         Standard_Integer Npower = theN;
         if (Npower < 0) Npower = -Npower;
@@ -171,7 +159,7 @@ void gp_Mat2d::Power(const Standard_Integer theN)
         gp_Mat2d aTemp = *this;
         for (;;) {
             if (IsOdd(Npower)) Multiply(aTemp);
-            if (Npower == 1)   break;
+            if (Npower == 1) break;
             aTemp.Multiply(aTemp);
             Npower = Npower / 2;
         }

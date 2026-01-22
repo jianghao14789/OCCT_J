@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESSolid_HArray1OfShell, IGESSolid_Array1OfShell)
 
-
 #endif

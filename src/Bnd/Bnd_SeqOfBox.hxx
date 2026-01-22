@@ -23,5 +23,4 @@
 //! This sequence used to store the bounding boxes of sub-Shapes.
 typedef NCollection_Sequence<Bnd_Box> Bnd_SeqOfBox;
 
-
 #endif

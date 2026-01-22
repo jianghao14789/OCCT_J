@@ -40,7 +40,6 @@ class math_Matrix;
 //! partner surface.
 class Blend_FuncInv : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Returns 4.
@@ -71,7 +70,7 @@ public:
     //! to be found. If <OnFirst> is set to Standard_True,
     //! the curve will be on the first surface, otherwise the
     //! curve is on the second one.
-    Standard_EXPORT virtual void Set(const Standard_Boolean OnFirst, const Handle(Adaptor2d_Curve2d)& COnSurf) = 0;
+    Standard_EXPORT virtual void Set(const Standard_Boolean OnFirst, const Handle(Adaptor2d_Curve2d) & COnSurf) = 0;
 
     //! Returns in the vector Tolerance the parametric tolerance
     //! for each of the 4 variables;
@@ -89,9 +88,7 @@ public:
     Standard_EXPORT virtual Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) = 0;
 
 protected:
-
 private:
-
 };
 
 #endif // _Blend_FuncInv_HeaderFile

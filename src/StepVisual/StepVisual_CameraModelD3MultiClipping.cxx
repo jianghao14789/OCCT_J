@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepGeom_Axis2Placement3d.hxx>
 #include <StepVisual_CameraModelD3MultiClipping.hxx>
@@ -23,23 +22,21 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepVisual_CameraModelD3MultiClipping, StepVisual_CameraModelD3)
 
 //=======================================================================
-//function : StepVisual_CameraModelD3MultiClipping
-//purpose  : 
+// function : StepVisual_CameraModelD3MultiClipping
+// purpose  :
 //=======================================================================
-StepVisual_CameraModelD3MultiClipping::StepVisual_CameraModelD3MultiClipping()  {}
+StepVisual_CameraModelD3MultiClipping::StepVisual_CameraModelD3MultiClipping() {}
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 void StepVisual_CameraModelD3MultiClipping::Init(
-  const Handle(TCollection_HAsciiString)& theName,
-  const Handle(StepGeom_Axis2Placement3d)& theViewReferenceSystem,
-  const Handle(StepVisual_ViewVolume)& thePerspectiveOfVolume,
-  const Handle(StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect)& theShapeClipping)
-{
-  // Own field
-  myShapeClipping = theShapeClipping;
-  // Inherited fields
-  StepVisual_CameraModelD3::Init(theName, theViewReferenceSystem, thePerspectiveOfVolume);
+    const Handle(TCollection_HAsciiString) & theName, const Handle(StepGeom_Axis2Placement3d) & theViewReferenceSystem,
+    const Handle(StepVisual_ViewVolume) & thePerspectiveOfVolume,
+    const Handle(StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect) & theShapeClipping) {
+    // Own field
+    myShapeClipping = theShapeClipping;
+    // Inherited fields
+    StepVisual_CameraModelD3::Init(theName, theViewReferenceSystem, thePerspectiveOfVolume);
 }

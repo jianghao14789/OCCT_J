@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepAP214_SecurityClassificationItem> StepAP214_Array1OfSecurityClassificationItem;
 
-
 #endif

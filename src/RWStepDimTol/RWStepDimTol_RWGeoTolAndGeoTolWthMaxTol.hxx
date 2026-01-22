@@ -27,21 +27,21 @@ class StepDimTol_GeoTolAndGeoTolWthMaxTol;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for GeoTolAndGeoTolWthMaxTol
-class RWStepDimTol_RWGeoTolAndGeoTolWthMaxTol
-{
+class RWStepDimTol_RWGeoTolAndGeoTolWthMaxTol {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepDimTol_RWGeoTolAndGeoTolWthMaxTol();
 
-  
-  Standard_EXPORT RWStepDimTol_RWGeoTolAndGeoTolWthMaxTol();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_GeoTolAndGeoTolWthMaxTol)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_GeoTolAndGeoTolWthMaxTol)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepDimTol_GeoTolAndGeoTolWthMaxTol)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_GeoTolAndGeoTolWthMaxTol) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_GeoTolAndGeoTolWthMaxTol) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepDimTol_GeoTolAndGeoTolWthMaxTol) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWGeoTolAndGeoTolWthMaxTol_HeaderFile

@@ -24,58 +24,38 @@
 class StepRepr_Representation;
 class StepRepr_RepresentedDefinition;
 
-
 class StepRepr_PropertyDefinitionRepresentation;
 DEFINE_STANDARD_HANDLE(StepRepr_PropertyDefinitionRepresentation, Standard_Transient)
 
 //! Representation of STEP entity PropertyDefinitionRepresentation
-class StepRepr_PropertyDefinitionRepresentation : public Standard_Transient
-{
+class StepRepr_PropertyDefinitionRepresentation : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepRepr_PropertyDefinitionRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepRepr_PropertyDefinitionRepresentation();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const StepRepr_RepresentedDefinition& aDefinition, const Handle(StepRepr_Representation)& aUsedRepresentation);
-  
-  //! Returns field Definition
-  Standard_EXPORT StepRepr_RepresentedDefinition Definition() const;
-  
-  //! Set field Definition
-  Standard_EXPORT void SetDefinition (const StepRepr_RepresentedDefinition& Definition);
-  
-  //! Returns field UsedRepresentation
-  Standard_EXPORT Handle(StepRepr_Representation) UsedRepresentation() const;
-  
-  //! Set field UsedRepresentation
-  Standard_EXPORT void SetUsedRepresentation (const Handle(StepRepr_Representation)& UsedRepresentation);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const StepRepr_RepresentedDefinition& aDefinition,
+                              const Handle(StepRepr_Representation) & aUsedRepresentation);
 
+    //! Returns field Definition
+    Standard_EXPORT StepRepr_RepresentedDefinition Definition() const;
 
+    //! Set field Definition
+    Standard_EXPORT void SetDefinition(const StepRepr_RepresentedDefinition& Definition);
 
+    //! Returns field UsedRepresentation
+    Standard_EXPORT Handle(StepRepr_Representation) UsedRepresentation() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_PropertyDefinitionRepresentation,Standard_Transient)
+    //! Set field UsedRepresentation
+    Standard_EXPORT void SetUsedRepresentation(const Handle(StepRepr_Representation) & UsedRepresentation);
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_PropertyDefinitionRepresentation, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  StepRepr_RepresentedDefinition theDefinition;
-  Handle(StepRepr_Representation) theUsedRepresentation;
-
-
+    StepRepr_RepresentedDefinition theDefinition;
+    Handle(StepRepr_Representation) theUsedRepresentation;
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_PropertyDefinitionRepresentation_HeaderFile

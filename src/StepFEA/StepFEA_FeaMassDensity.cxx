@@ -19,45 +19,40 @@
 #include <StepFEA_FeaMassDensity.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaMassDensity,StepFEA_FeaMaterialPropertyRepresentationItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaMassDensity, StepFEA_FeaMaterialPropertyRepresentationItem)
 
 //=======================================================================
-//function : StepFEA_FeaMassDensity
-//purpose  : 
+// function : StepFEA_FeaMassDensity
+// purpose  :
 //=======================================================================
-StepFEA_FeaMassDensity::StepFEA_FeaMassDensity ()
-{
+StepFEA_FeaMassDensity::StepFEA_FeaMassDensity() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_FeaMassDensity::Init(const Handle(TCollection_HAsciiString) & aRepresentationItem_Name,
+                                  const Standard_Real aFeaConstant) {
+    StepFEA_FeaMaterialPropertyRepresentationItem::Init(aRepresentationItem_Name);
+
+    theFeaConstant = aFeaConstant;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : FeaConstant
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaMassDensity::Init (const Handle(TCollection_HAsciiString) &aRepresentationItem_Name,
-                                   const Standard_Real aFeaConstant)
-{
-  StepFEA_FeaMaterialPropertyRepresentationItem::Init(aRepresentationItem_Name);
-
-  theFeaConstant = aFeaConstant;
+Standard_Real StepFEA_FeaMassDensity::FeaConstant() const {
+    return theFeaConstant;
 }
 
 //=======================================================================
-//function : FeaConstant
-//purpose  : 
+// function : SetFeaConstant
+// purpose  :
 //=======================================================================
 
-Standard_Real StepFEA_FeaMassDensity::FeaConstant () const
-{
-  return theFeaConstant;
-}
-
-//=======================================================================
-//function : SetFeaConstant
-//purpose  : 
-//=======================================================================
-
-void StepFEA_FeaMassDensity::SetFeaConstant (const Standard_Real aFeaConstant)
-{
-  theFeaConstant = aFeaConstant;
+void StepFEA_FeaMassDensity::SetFeaConstant(const Standard_Real aFeaConstant) {
+    theFeaConstant = aFeaConstant;
 }

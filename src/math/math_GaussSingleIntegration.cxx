@@ -37,12 +37,12 @@ Etapes du calcul:
 
 */
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math.hxx>
 #include <math_Function.hxx>
@@ -50,33 +50,23 @@ Etapes du calcul:
 #include <math_Vector.hxx>
 #include <StdFail_NotDone.hxx>
 
-math_GaussSingleIntegration::math_GaussSingleIntegration() : Done(Standard_False)
-{
-}
+math_GaussSingleIntegration::math_GaussSingleIntegration() : Done(Standard_False) {}
 
-math_GaussSingleIntegration::
-math_GaussSingleIntegration(math_Function& F,
-    const Standard_Real Lower,
-    const Standard_Real Upper,
-    const Standard_Integer Order)
-{
+math_GaussSingleIntegration::math_GaussSingleIntegration(math_Function& F, const Standard_Real Lower,
+                                                         const Standard_Real Upper, const Standard_Integer Order) {
     Standard_Integer theOrder = Min(math::GaussPointsMax(), Order);
     Perform(F, Lower, Upper, theOrder);
 }
 
-math_GaussSingleIntegration::
-math_GaussSingleIntegration(math_Function& F,
-    const Standard_Real Lower,
-    const Standard_Real Upper,
-    const Standard_Integer Order,
-    const Standard_Real Tol)
-{
+math_GaussSingleIntegration::math_GaussSingleIntegration(math_Function& F, const Standard_Real Lower,
+                                                         const Standard_Real Upper, const Standard_Integer Order,
+                                                         const Standard_Real Tol) {
     Standard_Integer theOrder = Min(math::GaussPointsMax(), Order);
 
-    const Standard_Integer IterMax = 13;   // Max number of iteration
-    Standard_Integer NIter = 1;            // current number of iteration
-    Standard_Integer NbInterval = 1;       // current number of subintervals
-    Standard_Real    dU, OldLen, Len;
+    const Standard_Integer IterMax = 13; // Max number of iteration
+    Standard_Integer NIter = 1;          // current number of iteration
+    Standard_Integer NbInterval = 1;     // current number of subintervals
+    Standard_Real dU, OldLen, Len;
 
     Perform(F, Lower, Upper, theOrder);
     Len = Val;
@@ -96,11 +86,8 @@ math_GaussSingleIntegration(math_Function& F,
     Val = Len;
 }
 
-void math_GaussSingleIntegration::Perform(math_Function& F,
-    const Standard_Real Lower,
-    const Standard_Real Upper,
-    const Standard_Integer Order)
-{
+void math_GaussSingleIntegration::Perform(math_Function& F, const Standard_Real Lower, const Standard_Real Upper,
+                                          const Standard_Integer Order) {
     Standard_Real xr, xm, dx;
     Standard_Integer j;
     Standard_Real F1, F2;
@@ -109,7 +96,7 @@ void math_GaussSingleIntegration::Perform(math_Function& F,
     math_Vector GaussW(1, Order);
     Done = Standard_False;
 
-    //Recuperation des points de Gauss dans le fichier GaussPoints.
+    // Recuperation des points de Gauss dans le fichier GaussPoints.
     math::GaussPoints(Order, GaussP);
     math::GaussWeights(Order, GaussW);
 
@@ -148,8 +135,7 @@ void math_GaussSingleIntegration::Dump(Standard_OStream& o) const {
     if (Done) {
         o << " Status = Done \n";
         o << "Integration Value = " << Val << "\n";
-    }
-    else {
+    } else {
         o << "Status = not Done \n";
     }
 }

@@ -21,8 +21,7 @@
 #include <TDF_LabelMapHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TDF_Label,TDF_Label,TDF_LabelMapHasher> TDF_LabelDataMap;
-typedef NCollection_DataMap<TDF_Label,TDF_Label,TDF_LabelMapHasher>::Iterator TDF_DataMapIteratorOfLabelDataMap;
-
+typedef NCollection_DataMap<TDF_Label, TDF_Label, TDF_LabelMapHasher> TDF_LabelDataMap;
+typedef NCollection_DataMap<TDF_Label, TDF_Label, TDF_LabelMapHasher>::Iterator TDF_DataMapIteratorOfLabelDataMap;
 
 #endif

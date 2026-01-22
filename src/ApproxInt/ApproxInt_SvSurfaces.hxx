@@ -28,89 +28,58 @@ class gp_Vec;
 class gp_Vec2d;
 class IntSurf_PntOn2S;
 
-//! This class is root class for classes dedicated to calculate 
+//! This class is root class for classes dedicated to calculate
 //! 2d and 3d points and tangents of intersection lines of two surfaces of different types
 //! for given u, v parameters of intersection point on two surfaces.
-//! 
+//!
 //! The field myUseSolver is used to manage type of calculation:
-//! if myUseSolver = true, input parameters u1, v1, u2, v2 are considered as first approximation of 
-//! exact intersection point, then coordinates u1, v1, u2, v2 are refined with help of 
+//! if myUseSolver = true, input parameters u1, v1, u2, v2 are considered as first approximation of
+//! exact intersection point, then coordinates u1, v1, u2, v2 are refined with help of
 //! the solver used in intersection algorithm and required values are calculated.
 //! if myUseSolver = false, u1, v1, u2, v2 are considered as "exact" intersection points on two surfaces
 //! and required values are calculated directly using u1, v1, u2, v2
-//! 
+//!
 
-
-class ApproxInt_SvSurfaces 
-{
+class ApproxInt_SvSurfaces {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! returns True if Tg,Tguv1 Tguv2 can be computed.
+    Standard_EXPORT virtual Standard_Boolean Compute(Standard_Real& u1, Standard_Real& v1, Standard_Real& u2,
+                                                     Standard_Real& v2, gp_Pnt& Pt, gp_Vec& Tg, gp_Vec2d& Tguv1,
+                                                     gp_Vec2d& Tguv2) = 0;
 
-  
-  //! returns True if Tg,Tguv1 Tguv2 can be computed.
-  Standard_EXPORT virtual Standard_Boolean Compute (Standard_Real& u1, Standard_Real& v1,
-                                                    Standard_Real& u2, Standard_Real& v2,
-                                                    gp_Pnt& Pt,
-                                                    gp_Vec& Tg,
-                                                    gp_Vec2d& Tguv1,
-                                                    gp_Vec2d& Tguv2) = 0;
-  
-  Standard_EXPORT virtual void Pnt (const Standard_Real u1, const Standard_Real v1,
-                                    const Standard_Real u2, const Standard_Real v2,
-                                    gp_Pnt& P) = 0;
+    Standard_EXPORT virtual void Pnt(const Standard_Real u1, const Standard_Real v1, const Standard_Real u2,
+                                     const Standard_Real v2, gp_Pnt& P) = 0;
 
-  //! computes point on curve and parameters on the surfaces
-  Standard_EXPORT virtual Standard_Boolean SeekPoint(const Standard_Real u1, const Standard_Real v1,
-                                                     const Standard_Real u2, const Standard_Real v2,
-                                                     IntSurf_PntOn2S& Point) = 0;
-  
-  Standard_EXPORT virtual Standard_Boolean Tangency (const Standard_Real u1, const Standard_Real v1,
-                                                     const Standard_Real u2, const Standard_Real v2,
-                                                     gp_Vec& Tg) = 0;
-  
-  Standard_EXPORT virtual Standard_Boolean TangencyOnSurf1 (const Standard_Real u1,
-                                                            const Standard_Real v1,
-                                                            const Standard_Real u2,
-                                                            const Standard_Real v2,
-                                                            gp_Vec2d& Tg) = 0;
-  
-  Standard_EXPORT virtual Standard_Boolean TangencyOnSurf2 (const Standard_Real u1,
-                                                            const Standard_Real v1,
-                                                            const Standard_Real u2,
-                                                            const Standard_Real v2,
-                                                            gp_Vec2d& Tg) = 0;
-  Standard_EXPORT virtual ~ApproxInt_SvSurfaces();
+    //! computes point on curve and parameters on the surfaces
+    Standard_EXPORT virtual Standard_Boolean SeekPoint(const Standard_Real u1, const Standard_Real v1,
+                                                       const Standard_Real u2, const Standard_Real v2,
+                                                       IntSurf_PntOn2S& Point) = 0;
 
-  Standard_EXPORT virtual void SetUseSolver(const Standard_Boolean theUseSol)
-  {
-    myUseSolver = theUseSol;
-  }
+    Standard_EXPORT virtual Standard_Boolean Tangency(const Standard_Real u1, const Standard_Real v1,
+                                                      const Standard_Real u2, const Standard_Real v2, gp_Vec& Tg) = 0;
 
-  Standard_EXPORT virtual Standard_Boolean GetUseSolver() const
-  {
-    return myUseSolver;
-  }
+    Standard_EXPORT virtual Standard_Boolean TangencyOnSurf1(const Standard_Real u1, const Standard_Real v1,
+                                                             const Standard_Real u2, const Standard_Real v2,
+                                                             gp_Vec2d& Tg) = 0;
 
+    Standard_EXPORT virtual Standard_Boolean TangencyOnSurf2(const Standard_Real u1, const Standard_Real v1,
+                                                             const Standard_Real u2, const Standard_Real v2,
+                                                             gp_Vec2d& Tg) = 0;
+    Standard_EXPORT virtual ~ApproxInt_SvSurfaces();
+
+    Standard_EXPORT virtual void SetUseSolver(const Standard_Boolean theUseSol) {
+        myUseSolver = theUseSol;
+    }
+
+    Standard_EXPORT virtual Standard_Boolean GetUseSolver() const {
+        return myUseSolver;
+    }
 
 protected:
-
-  
-
-
-
 private:
-
-Standard_Boolean myUseSolver;
-
-
-
+    Standard_Boolean myUseSolver;
 };
-
-
-
-
-
-
 
 #endif // _ApproxInt_SvSurfaces_HeaderFile

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <gce_MakeLin.hxx>
 #include <gp.hxx>
 #include <gp_Ax1.hxx>
@@ -26,10 +25,9 @@
 //=========================================================================
 //   Creation d une ligne 3d de gp a partir d un Ax1 de gp.               +
 //=========================================================================
-gce_MakeLin::gce_MakeLin(const gp_Ax1& A1)
-{
-  TheLin = gp_Lin(A1);
-  TheError = gce_Done;
+gce_MakeLin::gce_MakeLin(const gp_Ax1& A1) {
+    TheLin = gp_Lin(A1);
+    TheError = gce_Done;
 }
 
 //=========================================================================
@@ -37,11 +35,9 @@ gce_MakeLin::gce_MakeLin(const gp_Ax1& A1)
 //   et d une direction V (Dir de gp).                                    +
 //=========================================================================
 
-gce_MakeLin::gce_MakeLin(const gp_Pnt& P,
-			 const gp_Dir& V)
-{
-  TheLin = gp_Lin(P,V);
-  TheError = gce_Done;
+gce_MakeLin::gce_MakeLin(const gp_Pnt& P, const gp_Dir& V) {
+    TheLin = gp_Lin(P, V);
+    TheError = gce_Done;
 }
 
 //=========================================================================
@@ -49,14 +45,13 @@ gce_MakeLin::gce_MakeLin(const gp_Pnt& P,
 //   <P2>.                                                                +
 //=========================================================================
 
-gce_MakeLin::gce_MakeLin(const gp_Pnt& P1 ,
-			 const gp_Pnt& P2 ) 
-{
-  if (P1.Distance(P2) >= gp::Resolution()) {
-    TheLin = gp_Lin(P1,gp_Dir(P2.XYZ()-P1.XYZ()));
-    TheError = gce_Done;
-  }
-  else { TheError = gce_ConfusedPoints; }
+gce_MakeLin::gce_MakeLin(const gp_Pnt& P1, const gp_Pnt& P2) {
+    if (P1.Distance(P2) >= gp::Resolution()) {
+        TheLin = gp_Lin(P1, gp_Dir(P2.XYZ() - P1.XYZ()));
+        TheError = gce_Done;
+    } else {
+        TheError = gce_ConfusedPoints;
+    }
 }
 
 //=========================================================================
@@ -64,27 +59,20 @@ gce_MakeLin::gce_MakeLin(const gp_Pnt& P1 ,
 //   par le point <P>.                                                    +
 //=========================================================================
 
-gce_MakeLin::gce_MakeLin(const gp_Lin& Lin ,
-			 const gp_Pnt& P   )
-{
-  TheLin = gp_Lin(P,Lin.Direction());
-  TheError = gce_Done;
+gce_MakeLin::gce_MakeLin(const gp_Lin& Lin, const gp_Pnt& P) {
+    TheLin = gp_Lin(P, Lin.Direction());
+    TheError = gce_Done;
 }
 
-const gp_Lin& gce_MakeLin::Value() const
-{ 
-  StdFail_NotDone_Raise_if (TheError != gce_Done,
-                            "gce_MakeLin::Value() - no result");
-  return TheLin;
+const gp_Lin& gce_MakeLin::Value() const {
+    StdFail_NotDone_Raise_if(TheError != gce_Done, "gce_MakeLin::Value() - no result");
+    return TheLin;
 }
 
-const gp_Lin& gce_MakeLin::Operator() const 
-{
-  return Value();
+const gp_Lin& gce_MakeLin::Operator() const {
+    return Value();
 }
 
-gce_MakeLin::operator gp_Lin() const
-{
-  return Value();
+gce_MakeLin::operator gp_Lin() const {
+    return Value();
 }
-

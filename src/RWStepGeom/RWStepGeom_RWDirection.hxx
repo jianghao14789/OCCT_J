@@ -28,45 +28,24 @@ class StepGeom_Direction;
 class StepData_StepWriter;
 class Interface_ShareTool;
 
-
 //! Read & Write Module for Direction
 //! Check added by CKY , 7-OCT-1996
-class RWStepGeom_RWDirection 
-{
+class RWStepGeom_RWDirection {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWDirection();
 
-  
-  Standard_EXPORT RWStepGeom_RWDirection();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_Direction)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_Direction)& ent) const;
-  
-  Standard_EXPORT void Check (const Handle(StepGeom_Direction)& ent, const Interface_ShareTool& shares, Handle(Interface_Check)& ach) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_Direction) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_Direction) & ent) const;
 
-
+    Standard_EXPORT void Check(const Handle(StepGeom_Direction) & ent, const Interface_ShareTool& shares,
+                               Handle(Interface_Check) & ach) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWDirection_HeaderFile

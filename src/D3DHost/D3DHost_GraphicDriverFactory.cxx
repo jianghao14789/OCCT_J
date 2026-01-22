@@ -21,19 +21,17 @@ IMPLEMENT_STANDARD_RTTIEXT(D3DHost_GraphicDriverFactory, OpenGl_GraphicDriverFac
 // function : D3DHost_GraphicDriverFactory
 // purpose  :
 // =======================================================================
-D3DHost_GraphicDriverFactory::D3DHost_GraphicDriverFactory()
-{
-  myName = "TKD3DHost";
+D3DHost_GraphicDriverFactory::D3DHost_GraphicDriverFactory() {
+    myName = "TKD3DHost";
 }
 
 // =======================================================================
 // function : CreateDriver
 // purpose  :
 // =======================================================================
-Handle(Graphic3d_GraphicDriver) D3DHost_GraphicDriverFactory::CreateDriver (const Handle(Aspect_DisplayConnection)& )
-{
-  Handle(D3DHost_GraphicDriver) aDriver = new D3DHost_GraphicDriver();
-  aDriver->ChangeOptions() = *myDefaultCaps;
-  aDriver->InitContext();
-  return aDriver;
+Handle(Graphic3d_GraphicDriver) D3DHost_GraphicDriverFactory::CreateDriver(const Handle(Aspect_DisplayConnection) &) {
+    Handle(D3DHost_GraphicDriver) aDriver = new D3DHost_GraphicDriver();
+    aDriver->ChangeOptions() = *myDefaultCaps;
+    aDriver->InitContext();
+    return aDriver;
 }

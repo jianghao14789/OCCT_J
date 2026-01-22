@@ -28,14 +28,10 @@
 class OSD_OSDError;
 class TCollection_AsciiString;
 
-
 //! Accurate management of OSD specific errors.
-class OSD_Error
-{
+class OSD_Error {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Initializes Error to be without any Error.
     //! This is only used by OSD, not by programmer.
@@ -47,7 +43,8 @@ public:
     //! Instantiates error
     //! This is only used by OSD methods to instantiates an error code.
     //! No description is done for the programmer.
-    Standard_EXPORT void SetValue(const Standard_Integer Errcode, const Standard_Integer From, const TCollection_AsciiString& Message);
+    Standard_EXPORT void SetValue(const Standard_Integer Errcode, const Standard_Integer From,
+                                  const TCollection_AsciiString& Message);
 
     //! Returns an accurate error code.
     //! To test these values, you must include "OSD_ErrorList.hxx"
@@ -61,31 +58,12 @@ public:
     //! This allows the user to ignore an error (WARNING).
     Standard_EXPORT void Reset();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TCollection_AsciiString myMessage;
     Standard_Integer myErrno;
     OSD_WhoAmI myCode;
     Standard_Integer extCode;
-
-
 };
-
-
-
-
-
-
 
 #endif // _OSD_Error_HeaderFile

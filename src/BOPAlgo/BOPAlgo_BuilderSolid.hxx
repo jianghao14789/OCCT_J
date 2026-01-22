@@ -26,7 +26,6 @@
 #include <NCollection_BaseAllocator.hxx>
 #include <TopTools_DataMapOfShapeBox.hxx>
 
-
 //! Solid Builder is the algorithm for building solids from set of faces.
 //! The given faces should be non-intersecting, i.e. all coinciding parts
 //! of the faces should be shared among them.
@@ -78,37 +77,31 @@
 //! const TopTools_ListOfShape& aSolids = aBS.Areas(); // Obtaining the result solids
 //! ~~~~
 //!
-class BOPAlgo_BuilderSolid : public BOPAlgo_BuilderArea
-{
+class BOPAlgo_BuilderSolid : public BOPAlgo_BuilderArea {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
 public: //! @name Constructors
-
     //! Empty constructor
     Standard_EXPORT BOPAlgo_BuilderSolid();
     Standard_EXPORT virtual ~BOPAlgo_BuilderSolid();
 
     //! Constructor with allocator
-    Standard_EXPORT BOPAlgo_BuilderSolid(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_BuilderSolid(const Handle(NCollection_BaseAllocator) & theAllocator);
 
 public: //! @name Performing the operation
-
     //! Performs the construction of the solids from the given faces
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
 public: //! @name Getting the bounding boxes of the created solids
-
     //! For classification purposes the algorithm builds the bounding boxes
     //! for all created solids. This method returns the data map of solid - box pairs.
-    const TopTools_DataMapOfShapeBox& GetBoxesMap() const
-    {
+    const TopTools_DataMapOfShapeBox& GetBoxesMap() const {
         return myBoxes;
     }
 
 protected: //! @name Protected methods performing the operation
-
     //! Collect the faces:
     //! - with INTERNAL orientation;
     //! - that are alone but given twice with different orientation.
@@ -133,9 +126,7 @@ protected: //! @name Protected methods performing the operation
     Standard_EXPORT virtual void PerformInternalShapes(const Message_ProgressRange& theRange) Standard_OVERRIDE;
 
 private:
-
     TopTools_DataMapOfShapeBox myBoxes; // Boxes of the produced solids
-
 };
 
 #endif // _BOPAlgo_BuilderSolid_HeaderFile

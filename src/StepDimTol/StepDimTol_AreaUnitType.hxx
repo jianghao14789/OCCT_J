@@ -18,10 +18,6 @@
 
 #include <Standard_PrimitiveTypes.hxx>
 
-enum StepDimTol_AreaUnitType {
-  StepDimTol_Circular,
-  StepDimTol_Rectangular,
-  StepDimTol_Square
-};
+enum StepDimTol_AreaUnitType { StepDimTol_Circular, StepDimTol_Rectangular, StepDimTol_Square };
 
 #endif

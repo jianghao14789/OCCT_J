@@ -11,10 +11,9 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepRepr_PromissoryUsageOccurrence.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_PromissoryUsageOccurrence,StepRepr_AssemblyComponentUsage)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_PromissoryUsageOccurrence, StepRepr_AssemblyComponentUsage)
 
-StepRepr_PromissoryUsageOccurrence::StepRepr_PromissoryUsageOccurrence ()    {  }
+StepRepr_PromissoryUsageOccurrence::StepRepr_PromissoryUsageOccurrence() {}

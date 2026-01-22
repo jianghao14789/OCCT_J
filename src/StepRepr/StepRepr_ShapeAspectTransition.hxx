@@ -21,41 +21,20 @@
 
 #include <StepRepr_ShapeAspectRelationship.hxx>
 
-
 class StepRepr_ShapeAspectTransition;
 DEFINE_STANDARD_HANDLE(StepRepr_ShapeAspectTransition, StepRepr_ShapeAspectRelationship)
 
 //! Representation of STEP entity ShapeAspectTransition
-class StepRepr_ShapeAspectTransition : public StepRepr_ShapeAspectRelationship
-{
+class StepRepr_ShapeAspectTransition : public StepRepr_ShapeAspectRelationship {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepRepr_ShapeAspectTransition();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepRepr_ShapeAspectTransition();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ShapeAspectTransition,StepRepr_ShapeAspectRelationship)
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ShapeAspectTransition, StepRepr_ShapeAspectRelationship)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_ShapeAspectTransition_HeaderFile

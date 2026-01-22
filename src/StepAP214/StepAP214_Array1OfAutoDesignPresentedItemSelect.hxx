@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepAP214_AutoDesignPresentedItemSelect> StepAP214_Array1OfAutoDesignPresentedItemSelect;
 
-
 #endif

@@ -15,68 +15,63 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : HLRBRep_ShapeBounds
-//purpose  : 
+// function : HLRBRep_ShapeBounds
+// purpose  :
 //=======================================================================
 
-inline HLRBRep_ShapeBounds::HLRBRep_ShapeBounds ()
-: myNbIso(0),
-  myVertStart(0),
-  myVertEnd(0),
-  myEdgeStart(0),
-  myEdgeEnd(0),
-  myFaceStart(0),
-  myFaceEnd(0)
-{
+inline HLRBRep_ShapeBounds::HLRBRep_ShapeBounds()
+    : myNbIso(0), myVertStart(0), myVertEnd(0), myEdgeStart(0), myEdgeEnd(0), myFaceStart(0), myFaceEnd(0) {}
+
+//=======================================================================
+// function : Shape
+// purpose  :
+//=======================================================================
+
+inline void HLRBRep_ShapeBounds::Shape(const Handle(HLRTopoBRep_OutLiner) & S) {
+    myShape = S;
 }
 
 //=======================================================================
-//function : Shape
-//purpose  : 
+// function : Shape
+// purpose  :
 //=======================================================================
 
-inline void 
-HLRBRep_ShapeBounds::Shape (const Handle(HLRTopoBRep_OutLiner)& S)
-{ myShape = S; }
+inline const Handle(HLRTopoBRep_OutLiner) & HLRBRep_ShapeBounds::Shape() const {
+    return myShape;
+}
 
 //=======================================================================
-//function : Shape
-//purpose  : 
+// function : ShapeData
+// purpose  :
 //=======================================================================
 
-inline const Handle(HLRTopoBRep_OutLiner) &
-HLRBRep_ShapeBounds::Shape () const
-{ return myShape; }
+inline void HLRBRep_ShapeBounds::ShapeData(const Handle(Standard_Transient) & SD) {
+    myShapeData = SD;
+}
 
 //=======================================================================
-//function : ShapeData
-//purpose  : 
+// function : ShapeData
+// purpose  :
 //=======================================================================
 
-inline void HLRBRep_ShapeBounds::
-ShapeData (const Handle(Standard_Transient)& SD)
-{ myShapeData = SD; }
+inline const Handle(Standard_Transient) & HLRBRep_ShapeBounds::ShapeData() const {
+    return myShapeData;
+}
 
 //=======================================================================
-//function : ShapeData
-//purpose  : 
+// function : NbOfIso
+// purpose  :
 //=======================================================================
 
-inline const Handle(Standard_Transient) & HLRBRep_ShapeBounds::ShapeData () const
-{ return myShapeData; }
+inline void HLRBRep_ShapeBounds::NbOfIso(const Standard_Integer nbIso) {
+    myNbIso = nbIso;
+}
 
 //=======================================================================
-//function : NbOfIso
-//purpose  : 
+// function : NbOfIso
+// purpose  :
 //=======================================================================
 
-inline void HLRBRep_ShapeBounds::NbOfIso (const Standard_Integer nbIso)
-{ myNbIso = nbIso; }
-
-//=======================================================================
-//function : NbOfIso
-//purpose  : 
-//=======================================================================
-
-inline Standard_Integer HLRBRep_ShapeBounds::NbOfIso () const
-{ return myNbIso; }
+inline Standard_Integer HLRBRep_ShapeBounds::NbOfIso() const {
+    return myNbIso;
+}

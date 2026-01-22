@@ -28,19 +28,17 @@ class XmlLDrivers_DocumentRetrievalDriver;
 class XmlLDrivers_NamespaceDef;
 class TDocStd_Application;
 
-class XmlLDrivers 
-{
+class XmlLDrivers {
 public:
-  
-  Standard_EXPORT static const Handle(Standard_Transient)& Factory (const Standard_GUID& theGUID);
-  
-  Standard_EXPORT static TCollection_AsciiString CreationDate();
-  
-  //! Defines format "XmlLOcaf" and registers its read and write drivers
-  //! in the specified application
-  Standard_EXPORT static void DefineFormat (const Handle(TDocStd_Application)& theApp);
+    Standard_EXPORT static const Handle(Standard_Transient) & Factory(const Standard_GUID& theGUID);
 
-  Standard_EXPORT static Handle(XmlMDF_ADriverTable) AttributeDrivers (const Handle(Message_Messenger)& theMsgDriver);
+    Standard_EXPORT static TCollection_AsciiString CreationDate();
+
+    //! Defines format "XmlLOcaf" and registers its read and write drivers
+    //! in the specified application
+    Standard_EXPORT static void DefineFormat(const Handle(TDocStd_Application) & theApp);
+
+    Standard_EXPORT static Handle(XmlMDF_ADriverTable) AttributeDrivers(const Handle(Message_Messenger) & theMsgDriver);
 };
 
 #endif // _XmlLDrivers_HeaderFile

@@ -29,20 +29,19 @@ class StdFail_NotDone;
 class Standard_NotImplemented;
 class math_FunctionSet;
 
-
 //! -- This class implements the integration of a set of N
 //! functions of M  variables variables between the
 //! parameter bounds Lower[a..b] and Upper[a..b].
 //! Warning: - The case M>1 is not implemented.
 class math_GaussSetIntegration {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! The Gauss-Legendre integration with Order = points of
     //! integration for each unknown, is done on the function F
     //! between the bounds Lower and Upper.
-    Standard_EXPORT math_GaussSetIntegration(math_FunctionSet& F, const math_Vector& Lower, const math_Vector& Upper, const math_IntegerVector& Order);
+    Standard_EXPORT math_GaussSetIntegration(math_FunctionSet& F, const math_Vector& Lower, const math_Vector& Upper,
+                                             const math_IntegerVector& Order);
 
     //! returns True if all has been correctly done.
     Standard_Boolean IsDone() const;
@@ -54,7 +53,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
     math_Vector Val;
     Standard_Boolean Done;

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepLib_MakeShape.hxx>
 #include <StdFail_NotDone.hxx>
 #include <TopoDS_Edge.hxx>
@@ -22,114 +21,92 @@
 #include <TopoDS_Shape.hxx>
 
 //=======================================================================
-//function : BRepLib_MakeShape
-//purpose  : 
+// function : BRepLib_MakeShape
+// purpose  :
 //=======================================================================
-BRepLib_MakeShape::BRepLib_MakeShape()
-{
+BRepLib_MakeShape::BRepLib_MakeShape() {}
+
+//=======================================================================
+// function : Build
+// purpose  :
+//=======================================================================
+
+void BRepLib_MakeShape::Build() {}
+
+//=======================================================================
+// function : Shape
+// purpose  :
+//=======================================================================
+
+const TopoDS_Shape& BRepLib_MakeShape::Shape() {
+    if (!IsDone()) {
+        // the following is const cast away
+        ((BRepLib_MakeShape*)(void*)this)->Build();
+        Check();
+    }
+    return myShape;
 }
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : operator
+// purpose  :
 //=======================================================================
 
-void BRepLib_MakeShape::Build()
-{
+BRepLib_MakeShape::operator TopoDS_Shape() {
+    return Shape();
 }
 
 //=======================================================================
-//function : Shape
-//purpose  : 
+// function : HasDescendants
+// purpose  :
 //=======================================================================
 
-const TopoDS_Shape&  BRepLib_MakeShape::Shape()
-{
-  if (!IsDone()) {
-    // the following is const cast away
-    ((BRepLib_MakeShape*) (void*) this)->Build();
-    Check();
-  }
-  return myShape;
-}
-
-
-//=======================================================================
-//function : operator
-//purpose  : 
-//=======================================================================
-
-BRepLib_MakeShape::operator TopoDS_Shape()
-{
-  return Shape();
-}
-
-
-
-//=======================================================================
-//function : HasDescendants
-//purpose  : 
-//=======================================================================
-
-Standard_Boolean BRepLib_MakeShape::HasDescendants(const TopoDS_Face&)const
-{
-  return (Standard_True);
-}
-
-
-
-//=======================================================================
-//function : FaceStatus
-//purpose  : 
-//=======================================================================
-
-BRepLib_ShapeModification BRepLib_MakeShape::FaceStatus
-  (const TopoDS_Face&) const
-{
-  BRepLib_ShapeModification myStatus = BRepLib_Trimmed;
-  return myStatus;
-}
-
-
-//=======================================================================
-//function : GeneratedFaces
-//purpose  : 
-//=======================================================================
-
-const TopTools_ListOfShape& BRepLib_MakeShape::DescendantFaces
-  (const TopoDS_Face&)
-{
-  return myGenFaces;
+Standard_Boolean BRepLib_MakeShape::HasDescendants(const TopoDS_Face&) const {
+    return (Standard_True);
 }
 
 //=======================================================================
-//function : NbSurfaces
-//purpose  : 
+// function : FaceStatus
+// purpose  :
 //=======================================================================
 
-Standard_Integer BRepLib_MakeShape::NbSurfaces() const
-{
-  return (0);
+BRepLib_ShapeModification BRepLib_MakeShape::FaceStatus(const TopoDS_Face&) const {
+    BRepLib_ShapeModification myStatus = BRepLib_Trimmed;
+    return myStatus;
 }
 
 //=======================================================================
-//function : NewFaces
-//purpose  : 
+// function : GeneratedFaces
+// purpose  :
 //=======================================================================
 
-const TopTools_ListOfShape& BRepLib_MakeShape::NewFaces(const Standard_Integer)
-{
-  return myNewFaces;
+const TopTools_ListOfShape& BRepLib_MakeShape::DescendantFaces(const TopoDS_Face&) {
+    return myGenFaces;
 }
 
+//=======================================================================
+// function : NbSurfaces
+// purpose  :
+//=======================================================================
+
+Standard_Integer BRepLib_MakeShape::NbSurfaces() const {
+    return (0);
+}
 
 //=======================================================================
-//function : FacesFromEdges
-//purpose  : 
+// function : NewFaces
+// purpose  :
 //=======================================================================
 
-const TopTools_ListOfShape& BRepLib_MakeShape::FacesFromEdges
-  (const TopoDS_Edge&)
-{
-  return myEdgFaces;
+const TopTools_ListOfShape& BRepLib_MakeShape::NewFaces(const Standard_Integer) {
+    return myNewFaces;
+}
+
+//=======================================================================
+// function : FacesFromEdges
+// purpose  :
+//=======================================================================
+
+const TopTools_ListOfShape& BRepLib_MakeShape::FacesFromEdges(const TopoDS_Edge&) {
+    return myEdgFaces;
 }

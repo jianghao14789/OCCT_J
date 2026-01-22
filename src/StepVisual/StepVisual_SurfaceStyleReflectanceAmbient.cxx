@@ -19,41 +19,36 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleReflectanceAmbient, Standard_Transient)
 
 //=======================================================================
-//function : StepVisual_SurfaceStyleReflectanceAmbient
-//purpose  :
+// function : StepVisual_SurfaceStyleReflectanceAmbient
+// purpose  :
 //=======================================================================
 
-StepVisual_SurfaceStyleReflectanceAmbient::StepVisual_SurfaceStyleReflectanceAmbient ()
-{
+StepVisual_SurfaceStyleReflectanceAmbient::StepVisual_SurfaceStyleReflectanceAmbient() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepVisual_SurfaceStyleReflectanceAmbient::Init(const Standard_Real theAmbientReflectance) {
+
+    myAmbientReflectance = theAmbientReflectance;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : AmbientReflectance
+// purpose  :
 //=======================================================================
 
-void StepVisual_SurfaceStyleReflectanceAmbient::Init (const Standard_Real theAmbientReflectance)
-{
-
-  myAmbientReflectance = theAmbientReflectance;
+Standard_Real StepVisual_SurfaceStyleReflectanceAmbient::AmbientReflectance() const {
+    return myAmbientReflectance;
 }
 
 //=======================================================================
-//function : AmbientReflectance
-//purpose  :
+// function : SetAmbientReflectance
+// purpose  :
 //=======================================================================
 
-Standard_Real StepVisual_SurfaceStyleReflectanceAmbient::AmbientReflectance () const
-{
-  return myAmbientReflectance;
-}
-
-//=======================================================================
-//function : SetAmbientReflectance
-//purpose  :
-//=======================================================================
-
-void StepVisual_SurfaceStyleReflectanceAmbient::SetAmbientReflectance (const Standard_Real theAmbientReflectance)
-{
-  myAmbientReflectance = theAmbientReflectance;
+void StepVisual_SurfaceStyleReflectanceAmbient::SetAmbientReflectance(const Standard_Real theAmbientReflectance) {
+    myAmbientReflectance = theAmbientReflectance;
 }

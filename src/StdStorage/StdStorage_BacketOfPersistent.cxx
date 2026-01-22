@@ -14,200 +14,182 @@
 #include <StdStorage_BacketOfPersistent.hxx>
 #include <StdObjMgt_Persistent.hxx>
 
-StdStorage_Bucket::~StdStorage_Bucket()
-{
-  Standard::Free(mySpace);
-  mySpace = 0L;
-  mySpaceSize = 0;
-  Clear();
+StdStorage_Bucket::~StdStorage_Bucket() {
+    Standard::Free(mySpace);
+    mySpace = 0L;
+    mySpaceSize = 0;
+    Clear();
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-void StdStorage_Bucket::Clear()
-{
-  myCurrentSpace = -1;
+void StdStorage_Bucket::Clear() {
+    myCurrentSpace = -1;
 }
 
 //=======================================================================
-//function : Append
-//purpose  : 
+// function : Append
+// purpose  :
 //=======================================================================
-void StdStorage_Bucket::Append(StdObjMgt_Persistent *sp)
-{
-  ++myCurrentSpace;
-  mySpace[myCurrentSpace] = sp;
+void StdStorage_Bucket::Append(StdObjMgt_Persistent* sp) {
+    ++myCurrentSpace;
+    mySpace[myCurrentSpace] = sp;
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
-StdObjMgt_Persistent* StdStorage_Bucket::Value(const Standard_Integer theIndex) const
-{
-  return mySpace[theIndex];
+StdObjMgt_Persistent* StdStorage_Bucket::Value(const Standard_Integer theIndex) const {
+    return mySpace[theIndex];
 }
 
 //=======================================================================
-//function : Storage_BucketOfPersistent
-//purpose  : 
+// function : Storage_BucketOfPersistent
+// purpose  :
 //=======================================================================
-StdStorage_BucketOfPersistent::StdStorage_BucketOfPersistent
-(const Standard_Integer theBucketSize, const Standard_Integer theBucketNumber)
-: myNumberOfBucket(1), myNumberOfBucketAllocated(theBucketNumber)
-, myBucketSize(theBucketSize)
-{
-  myBuckets = (StdStorage_Bucket**)Standard::Allocate
-    (sizeof(StdStorage_Bucket*) * theBucketNumber);
-  myBuckets[0] = new StdStorage_Bucket(myBucketSize);
-  myCurrentBucket = myBuckets[0];
-  myLength = 0;
-  myCurrentBucketNumber = 0;
-}
-
-//=======================================================================
-//function : Clear
-//purpose  : 
-//=======================================================================
-void StdStorage_BucketOfPersistent::Clear()
-{
-  if (myBuckets) {
-    Standard_Integer i;
-
-    for (i = 1; i < myNumberOfBucket; i++) delete myBuckets[i];
-    myNumberOfBucket = 1;
+StdStorage_BucketOfPersistent::StdStorage_BucketOfPersistent(const Standard_Integer theBucketSize,
+                                                             const Standard_Integer theBucketNumber)
+    : myNumberOfBucket(1), myNumberOfBucketAllocated(theBucketNumber), myBucketSize(theBucketSize) {
+    myBuckets = (StdStorage_Bucket**)Standard::Allocate(sizeof(StdStorage_Bucket*) * theBucketNumber);
+    myBuckets[0] = new StdStorage_Bucket(myBucketSize);
     myCurrentBucket = myBuckets[0];
-    myCurrentBucket->Clear();
-    myCurrentBucketNumber = 0;
     myLength = 0;
-  }
-}
-
-StdStorage_BucketOfPersistent::~StdStorage_BucketOfPersistent()
-{
-  Clear();
-  delete myBuckets[0];
-  Standard::Free(myBuckets);
-  myBuckets = 0L;
+    myCurrentBucketNumber = 0;
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-StdObjMgt_Persistent* StdStorage_BucketOfPersistent::Value
-  (const Standard_Integer theIndex)
-{
-  Standard_Integer theInd, theCurrentBucketNumber, tecurrentind = theIndex - 1;
-  theCurrentBucketNumber = tecurrentind / myBucketSize;
-  theInd = tecurrentind - (myBucketSize * theCurrentBucketNumber);
+void StdStorage_BucketOfPersistent::Clear() {
+    if (myBuckets) {
+        Standard_Integer i;
 
-  return myBuckets[theCurrentBucketNumber]->mySpace[theInd];
+        for (i = 1; i < myNumberOfBucket; i++)
+            delete myBuckets[i];
+        myNumberOfBucket = 1;
+        myCurrentBucket = myBuckets[0];
+        myCurrentBucket->Clear();
+        myCurrentBucketNumber = 0;
+        myLength = 0;
+    }
+}
+
+StdStorage_BucketOfPersistent::~StdStorage_BucketOfPersistent() {
+    Clear();
+    delete myBuckets[0];
+    Standard::Free(myBuckets);
+    myBuckets = 0L;
 }
 
 //=======================================================================
-//function : Append
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
-void StdStorage_BucketOfPersistent::Append(const Handle(StdObjMgt_Persistent)& sp)
-{
-  myCurrentBucket->myCurrentSpace++;
+StdObjMgt_Persistent* StdStorage_BucketOfPersistent::Value(const Standard_Integer theIndex) {
+    Standard_Integer theInd, theCurrentBucketNumber, tecurrentind = theIndex - 1;
+    theCurrentBucketNumber = tecurrentind / myBucketSize;
+    theInd = tecurrentind - (myBucketSize * theCurrentBucketNumber);
 
-  if (myCurrentBucket->myCurrentSpace != myBucketSize) {
+    return myBuckets[theCurrentBucketNumber]->mySpace[theInd];
+}
+
+//=======================================================================
+// function : Append
+// purpose  :
+//=======================================================================
+void StdStorage_BucketOfPersistent::Append(const Handle(StdObjMgt_Persistent) & sp) {
+    myCurrentBucket->myCurrentSpace++;
+
+    if (myCurrentBucket->myCurrentSpace != myBucketSize) {
+        myLength++;
+        myCurrentBucket->mySpace[myCurrentBucket->myCurrentSpace] = sp.operator->();
+        return;
+    }
+
+    myCurrentBucket->myCurrentSpace--;
+    myNumberOfBucket++;
+    myCurrentBucketNumber++;
+
+    if (myNumberOfBucket > myNumberOfBucketAllocated) {
+        Standard_Size e = sizeof(StdStorage_Bucket*) * myNumberOfBucketAllocated;
+        myBuckets = (StdStorage_Bucket**)Standard::Reallocate(myBuckets, e * 2);
+        myNumberOfBucketAllocated *= 2;
+    }
+
+    myBuckets[myCurrentBucketNumber] = new StdStorage_Bucket(myBucketSize);
+    myCurrentBucket = myBuckets[myCurrentBucketNumber];
+    myCurrentBucket->myCurrentSpace++;
     myLength++;
     myCurrentBucket->mySpace[myCurrentBucket->myCurrentSpace] = sp.operator->();
-    return;
-  }
-
-  myCurrentBucket->myCurrentSpace--;
-  myNumberOfBucket++;
-  myCurrentBucketNumber++;
-
-  if (myNumberOfBucket > myNumberOfBucketAllocated) {
-    Standard_Size e = sizeof(StdStorage_Bucket*) * myNumberOfBucketAllocated;
-    myBuckets = (StdStorage_Bucket**)Standard::Reallocate(myBuckets, e * 2);
-    myNumberOfBucketAllocated *= 2;
-  }
-
-  myBuckets[myCurrentBucketNumber] = new StdStorage_Bucket(myBucketSize);
-  myCurrentBucket = myBuckets[myCurrentBucketNumber];
-  myCurrentBucket->myCurrentSpace++;
-  myLength++;
-  myCurrentBucket->mySpace[myCurrentBucket->myCurrentSpace] = sp.operator->();
 }
 
 //=======================================================================
-//function : Storage_BucketIterator
-//purpose  : 
+// function : Storage_BucketIterator
+// purpose  :
 //=======================================================================
-StdStorage_BucketIterator::StdStorage_BucketIterator
-  (StdStorage_BucketOfPersistent* aBucketManager)
-{
-  if (aBucketManager) {
-    myBucket = aBucketManager;
-    myCurrentBucket = myBucket->myBuckets[0];
-    myBucketNumber = aBucketManager->myNumberOfBucket;
-    myCurrentBucketIndex = 0;
-    myCurrentIndex = 0;
-    myMoreObject = Standard_True;
-  }
-  else myMoreObject = Standard_False;
+StdStorage_BucketIterator::StdStorage_BucketIterator(StdStorage_BucketOfPersistent* aBucketManager) {
+    if (aBucketManager) {
+        myBucket = aBucketManager;
+        myCurrentBucket = myBucket->myBuckets[0];
+        myBucketNumber = aBucketManager->myNumberOfBucket;
+        myCurrentBucketIndex = 0;
+        myCurrentIndex = 0;
+        myMoreObject = Standard_True;
+    } else
+        myMoreObject = Standard_False;
 }
 
 //=======================================================================
-//function : Reset
-//purpose  : 
+// function : Reset
+// purpose  :
 //=======================================================================
-void StdStorage_BucketIterator::Reset()
-{
-  if (myBucket) {
-    myCurrentBucket = myBucket->myBuckets[0];
-    myBucketNumber = myBucket->myNumberOfBucket;
-    myCurrentIndex = 0;
-    myCurrentBucketIndex = 0;
-    myMoreObject = Standard_True;
-  }
-  else myMoreObject = Standard_False;
+void StdStorage_BucketIterator::Reset() {
+    if (myBucket) {
+        myCurrentBucket = myBucket->myBuckets[0];
+        myBucketNumber = myBucket->myNumberOfBucket;
+        myCurrentIndex = 0;
+        myCurrentBucketIndex = 0;
+        myMoreObject = Standard_True;
+    } else
+        myMoreObject = Standard_False;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-void StdStorage_BucketIterator::Init(StdStorage_BucketOfPersistent* aBucketManager)
-{
-  if (aBucketManager) {
-    myBucket = aBucketManager;
-    myCurrentBucket = myBucket->myBuckets[0];
-    myBucketNumber = aBucketManager->myNumberOfBucket;
-    myCurrentIndex = 0;
-    myCurrentBucketIndex = 0;
-    myMoreObject = Standard_True;
-  }
-  else myMoreObject = Standard_False;
+void StdStorage_BucketIterator::Init(StdStorage_BucketOfPersistent* aBucketManager) {
+    if (aBucketManager) {
+        myBucket = aBucketManager;
+        myCurrentBucket = myBucket->myBuckets[0];
+        myBucketNumber = aBucketManager->myNumberOfBucket;
+        myCurrentIndex = 0;
+        myCurrentBucketIndex = 0;
+        myMoreObject = Standard_True;
+    } else
+        myMoreObject = Standard_False;
 }
 
 //=======================================================================
-//function : Next
-//purpose  : 
+// function : Next
+// purpose  :
 //=======================================================================
-void StdStorage_BucketIterator::Next()
-{
-  if (!myMoreObject) return;
+void StdStorage_BucketIterator::Next() {
+    if (!myMoreObject) return;
 
-  if (myCurrentIndex < myCurrentBucket->myCurrentSpace) {
-    myCurrentIndex++;
-  }
-  else {
-    myCurrentIndex = 0;
-    myCurrentBucketIndex++;
-    if (myCurrentBucketIndex < myBucketNumber) {
-      myCurrentBucket = myBucket->myBuckets[myCurrentBucketIndex];
+    if (myCurrentIndex < myCurrentBucket->myCurrentSpace) {
+        myCurrentIndex++;
+    } else {
+        myCurrentIndex = 0;
+        myCurrentBucketIndex++;
+        if (myCurrentBucketIndex < myBucketNumber) {
+            myCurrentBucket = myBucket->myBuckets[myCurrentBucketIndex];
+        } else {
+            myMoreObject = Standard_False;
+        }
     }
-    else {
-      myMoreObject = Standard_False;
-    }
-  }
 }

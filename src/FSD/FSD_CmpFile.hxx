@@ -40,10 +40,9 @@ DEFINE_STANDARD_HANDLE(FSD_CmpFile, FSD_File)
 //! - 在可读性和文件大小之间找到了平衡
 //! - 文件格式包含压缩指示符和元数据
 //! - 适合中等大小的数据存储场景
-//! 
+//!
 //! 文件结构继承自 FSD_File，但在关键的读写操作中进行了优化和压缩
-class FSD_CmpFile : public FSD_File
-{
+class FSD_CmpFile : public FSD_File {
 public:
     DEFINE_STANDARD_RTTIEXT(FSD_CmpFile, FSD_File)
 
@@ -55,7 +54,8 @@ public:
     //! @param aName 文件路径名
     //! @param aMode 打开模式（读或写）
     //! @return 返回操作状态代码
-    Standard_EXPORT Storage_Error Open(const TCollection_AsciiString& aName, const Storage_OpenMode aMode) Standard_OVERRIDE;
+    Standard_EXPORT Storage_Error Open(const TCollection_AsciiString& aName,
+                                       const Storage_OpenMode aMode) Standard_OVERRIDE;
 
     //! 静态函数：检查指定文件是否为有效的压缩文本格式文件
     //! 通过检查文件的魔数来判断文件类型
@@ -71,7 +71,8 @@ public:
 
     //! 写入持久化对象的头部信息
     //! 压缩格式会对头部信息进行压缩编码
-    Standard_EXPORT void WritePersistentObjectHeader(const Standard_Integer aRef, const Standard_Integer aType) Standard_OVERRIDE;
+    Standard_EXPORT void WritePersistentObjectHeader(const Standard_Integer aRef,
+                                                     const Standard_Integer aType) Standard_OVERRIDE;
 
     //! 开始写入持久化对象的数据
     //! 在压缩格式中启用压缩缓冲
@@ -108,8 +109,7 @@ public:
     //! 销毁对象并释放相关资源（包括压缩缓冲等）
     Standard_EXPORT void Destroy();
 
-    ~FSD_CmpFile()
-    {
+    ~FSD_CmpFile() {
         Destroy();
     }
 
@@ -117,7 +117,6 @@ public:
     Standard_EXPORT static Standard_CString MagicNumber();
 
 protected:
-
     //! 读取压缩后的一行文本
     //! 自动进行解压缩处理
     Standard_EXPORT void ReadLine(TCollection_AsciiString& buffer) Standard_OVERRIDE;
@@ -132,7 +131,6 @@ protected:
     //! 读取压缩后的字符串（跳过首位空白符）
     //! 自动进行解压缩处理
     Standard_EXPORT void ReadString(TCollection_AsciiString& buffer) Standard_OVERRIDE;
-
 };
 
 #endif // _FSD_CmpFile_HeaderFile

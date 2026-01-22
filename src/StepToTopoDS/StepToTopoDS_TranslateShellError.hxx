@@ -17,11 +17,6 @@
 #ifndef _StepToTopoDS_TranslateShellError_HeaderFile
 #define _StepToTopoDS_TranslateShellError_HeaderFile
 
-
-enum StepToTopoDS_TranslateShellError
-{
-StepToTopoDS_TranslateShellDone,
-StepToTopoDS_TranslateShellOther
-};
+enum StepToTopoDS_TranslateShellError { StepToTopoDS_TranslateShellDone, StepToTopoDS_TranslateShellOther };
 
 #endif // _StepToTopoDS_TranslateShellError_HeaderFile

@@ -24,50 +24,37 @@
 #include <TopAbs_ShapeEnum.hxx>
 #include <TopoDS_Shape.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StdSelect_Shape,PrsMgr_PresentableObject)
+IMPLEMENT_STANDARD_RTTIEXT(StdSelect_Shape, PrsMgr_PresentableObject)
 
-StdSelect_Shape::StdSelect_Shape (const TopoDS_Shape& theShape,
-                                  const Handle(Prs3d_Drawer)& theDrawer)
-: mysh (theShape)
-{
-  if (!theDrawer.IsNull())
-  {
-    myDrawer->SetLink (theDrawer);
-  }
+StdSelect_Shape::StdSelect_Shape(const TopoDS_Shape& theShape, const Handle(Prs3d_Drawer) & theDrawer)
+    : mysh(theShape) {
+    if (!theDrawer.IsNull()) {
+        myDrawer->SetLink(theDrawer);
+    }
 }
 
-void StdSelect_Shape::Compute(const Handle(PrsMgr_PresentationManager)& ,
-			      const Handle(Prs3d_Presentation)& thePrs,
-			      const Standard_Integer theMode)
-{
-  if (mysh.IsNull())
-  {
-    return;
-  }
+void StdSelect_Shape::Compute(const Handle(PrsMgr_PresentationManager) &, const Handle(Prs3d_Presentation) & thePrs,
+                              const Standard_Integer theMode) {
+    if (mysh.IsNull()) {
+        return;
+    }
 
-  Standard_Boolean canShade = (mysh.ShapeType() < 5 || mysh.ShapeType() == 8);
-  if (theMode == 1)
-  {
-    if (canShade)
-    {
-      StdPrs_ShadedShape::Add (thePrs, mysh, myDrawer);
+    Standard_Boolean canShade = (mysh.ShapeType() < 5 || mysh.ShapeType() == 8);
+    if (theMode == 1) {
+        if (canShade) {
+            StdPrs_ShadedShape::Add(thePrs, mysh, myDrawer);
+        } else {
+            StdPrs_WFShape::Add(thePrs, mysh, myDrawer);
+        }
+    } else if (theMode == 0) {
+        StdPrs_WFShape::Add(thePrs, mysh, myDrawer);
     }
-    else
-    {
-      StdPrs_WFShape::Add (thePrs, mysh, myDrawer);
-    }
-  }
-  else if (theMode == 0)
-  {
-    StdPrs_WFShape::Add (thePrs, mysh, myDrawer);
-  }
 }
 
-void StdSelect_Shape::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+void StdSelect_Shape::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, PrsMgr_PresentableObject)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, PrsMgr_PresentableObject)
 
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &mysh)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &mysh)
 }

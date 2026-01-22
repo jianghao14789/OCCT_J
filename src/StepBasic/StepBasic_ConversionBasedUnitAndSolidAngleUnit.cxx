@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_ConversionBasedUnit.hxx>
 #include <StepBasic_ConversionBasedUnitAndSolidAngleUnit.hxx>
@@ -20,32 +19,26 @@
 #include <StepBasic_SolidAngleUnit.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ConversionBasedUnitAndSolidAngleUnit,StepBasic_ConversionBasedUnit)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ConversionBasedUnitAndSolidAngleUnit, StepBasic_ConversionBasedUnit)
 
-StepBasic_ConversionBasedUnitAndSolidAngleUnit::StepBasic_ConversionBasedUnitAndSolidAngleUnit ()
-{
+StepBasic_ConversionBasedUnitAndSolidAngleUnit::StepBasic_ConversionBasedUnitAndSolidAngleUnit() {}
+
+void StepBasic_ConversionBasedUnitAndSolidAngleUnit::Init(const Handle(StepBasic_DimensionalExponents) & aDimensions,
+                                                          const Handle(TCollection_HAsciiString) & aName,
+                                                          const Handle(StepBasic_MeasureWithUnit) & aConversionFactor) {
+    // --- ANDOR component fields ---
+    StepBasic_ConversionBasedUnit::Init(aDimensions, aName, aConversionFactor);
+
+    // --- ANDOR component fields ---
+    solidAngleUnit = new StepBasic_SolidAngleUnit();
+    solidAngleUnit->Init(aDimensions);
 }
 
-void StepBasic_ConversionBasedUnitAndSolidAngleUnit::Init(const Handle(StepBasic_DimensionalExponents)& aDimensions,
-							  const Handle(TCollection_HAsciiString)& aName,
-							  const Handle(StepBasic_MeasureWithUnit)& aConversionFactor)
-{
-  // --- ANDOR component fields ---
-  StepBasic_ConversionBasedUnit::Init(aDimensions, aName, aConversionFactor);
-
-  // --- ANDOR component fields ---
-  solidAngleUnit = new StepBasic_SolidAngleUnit();
-  solidAngleUnit->Init(aDimensions);
+void StepBasic_ConversionBasedUnitAndSolidAngleUnit::SetSolidAngleUnit(const Handle(StepBasic_SolidAngleUnit) &
+                                                                       aSolidAngleUnit) {
+    solidAngleUnit = aSolidAngleUnit;
 }
 
-
-void StepBasic_ConversionBasedUnitAndSolidAngleUnit::SetSolidAngleUnit(const Handle(StepBasic_SolidAngleUnit)& aSolidAngleUnit)
-{
-  solidAngleUnit = aSolidAngleUnit;
+Handle(StepBasic_SolidAngleUnit) StepBasic_ConversionBasedUnitAndSolidAngleUnit::SolidAngleUnit() const {
+    return solidAngleUnit;
 }
-
-Handle(StepBasic_SolidAngleUnit) StepBasic_ConversionBasedUnitAndSolidAngleUnit::SolidAngleUnit() const
-{
-  return solidAngleUnit;
-}
-

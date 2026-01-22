@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESGraph_HArray1OfColor, IGESGraph_Array1OfColor)
 
-
 #endif

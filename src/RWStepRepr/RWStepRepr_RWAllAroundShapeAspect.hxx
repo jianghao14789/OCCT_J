@@ -28,25 +28,23 @@ class StepRepr_AllAroundShapeAspect;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for AllAroundShapeAspect
-class RWStepRepr_RWAllAroundShapeAspect 
-{
+class RWStepRepr_RWAllAroundShapeAspect {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWAllAroundShapeAspect();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWAllAroundShapeAspect();
-  
-  //! Reads AllAroundShapeAspect
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_AllAroundShapeAspect)& ent)  const;
-  
-  //! Writes AllAroundShapeAspect
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_AllAroundShapeAspect)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepRepr_AllAroundShapeAspect)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads AllAroundShapeAspect
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_AllAroundShapeAspect) & ent) const;
+
+    //! Writes AllAroundShapeAspect
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_AllAroundShapeAspect) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_AllAroundShapeAspect) & ent, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepRepr_RWAllAroundShapeAspect_HeaderFile

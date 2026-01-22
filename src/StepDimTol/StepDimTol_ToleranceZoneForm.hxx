@@ -28,32 +28,27 @@ class TCollection_HAsciiString;
 class StepDimTol_ToleranceZoneForm;
 DEFINE_STANDARD_HANDLE(StepDimTol_ToleranceZoneForm, Standard_Transient)
 //! Added for Dimensional Tolerances
-class StepDimTol_ToleranceZoneForm : public Standard_Transient
-{
+class StepDimTol_ToleranceZoneForm : public Standard_Transient {
 
 public:
-  
-  Standard_EXPORT StepDimTol_ToleranceZoneForm();
-  
-  //! Init all field own and inherited
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& theName);
+    Standard_EXPORT StepDimTol_ToleranceZoneForm();
 
-  //! Returns field Name
-  inline Handle(TCollection_HAsciiString) Name()
-  {
-    return myName;
-  }
-  
-  //! Set field Name
-  inline void SetName(const Handle(TCollection_HAsciiString) &theName)
-  {
-    myName = theName;
-  }
+    //! Init all field own and inherited
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theName);
 
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_ToleranceZoneForm,Standard_Transient)
-  
+    //! Returns field Name
+    inline Handle(TCollection_HAsciiString) Name() {
+        return myName;
+    }
+
+    //! Set field Name
+    inline void SetName(const Handle(TCollection_HAsciiString) & theName) {
+        myName = theName;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_ToleranceZoneForm, Standard_Transient)
+
 private:
-  Handle(TCollection_HAsciiString) myName;
-
+    Handle(TCollection_HAsciiString) myName;
 };
 #endif // _StepDimTol_ToleranceZoneForm_HeaderFile

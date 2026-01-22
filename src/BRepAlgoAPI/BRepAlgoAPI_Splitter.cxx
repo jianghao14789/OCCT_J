@@ -19,56 +19,49 @@
 
 //=======================================================================
 // function: Empty constructor
-// purpose: 
+// purpose:
 //=======================================================================
-BRepAlgoAPI_Splitter::BRepAlgoAPI_Splitter()
-  : BRepAlgoAPI_BuilderAlgo() {}
+BRepAlgoAPI_Splitter::BRepAlgoAPI_Splitter() : BRepAlgoAPI_BuilderAlgo() {}
 
 //=======================================================================
 // function: Constructor with already prepared PaveFiller
-// purpose: 
+// purpose:
 //=======================================================================
-BRepAlgoAPI_Splitter::BRepAlgoAPI_Splitter(const BOPAlgo_PaveFiller& thePF)
-  : BRepAlgoAPI_BuilderAlgo(thePF) {}
+BRepAlgoAPI_Splitter::BRepAlgoAPI_Splitter(const BOPAlgo_PaveFiller& thePF) : BRepAlgoAPI_BuilderAlgo(thePF) {}
 
 //=======================================================================
 // function: Build
-// purpose: 
+// purpose:
 //=======================================================================
-void BRepAlgoAPI_Splitter::Build(const Message_ProgressRange& theRange)
-{
-  // Set Not Done status by default
-  NotDone();
-  // Clear the contents
-  Clear();
-  // Check for availability of arguments and tools
-  if (myArguments.IsEmpty() ||
-     (myArguments.Extent() + myTools.Extent()) < 2)
-  {
-    AddError (new BOPAlgo_AlertTooFewArguments);
-    return;
-  }
+void BRepAlgoAPI_Splitter::Build(const Message_ProgressRange& theRange) {
+    // Set Not Done status by default
+    NotDone();
+    // Clear the contents
+    Clear();
+    // Check for availability of arguments and tools
+    if (myArguments.IsEmpty() || (myArguments.Extent() + myTools.Extent()) < 2) {
+        AddError(new BOPAlgo_AlertTooFewArguments);
+        return;
+    }
 
-  // If necessary perform intersection of the argument shapes
-  Message_ProgressScope aPS(theRange, "Performing Split operation", myIsIntersectionNeeded ? 100 : 30);
-  if (myIsIntersectionNeeded)
-  {
-    // Combine Arguments and Tools for intersection into a single list
-    TopTools_ListOfShape aLArgs = myArguments;
-    for (TopTools_ListOfShape::Iterator it(myTools); it.More(); it.Next())
-      aLArgs.Append(it.Value());
+    // If necessary perform intersection of the argument shapes
+    Message_ProgressScope aPS(theRange, "Performing Split operation", myIsIntersectionNeeded ? 100 : 30);
+    if (myIsIntersectionNeeded) {
+        // Combine Arguments and Tools for intersection into a single list
+        TopTools_ListOfShape aLArgs = myArguments;
+        for (TopTools_ListOfShape::Iterator it(myTools); it.More(); it.Next())
+            aLArgs.Append(it.Value());
 
-    // Perform intersection
-    IntersectShapes(aLArgs, aPS.Next(70));
-    if (HasErrors())
-      return;
-  }
+        // Perform intersection
+        IntersectShapes(aLArgs, aPS.Next(70));
+        if (HasErrors()) return;
+    }
 
-  // Initialization of the building tool
-  myBuilder = new BOPAlgo_Splitter(myAllocator);
-  myBuilder->SetArguments(myArguments);
-  ((BOPAlgo_Splitter*)myBuilder)->SetTools(myTools);
+    // Initialization of the building tool
+    myBuilder = new BOPAlgo_Splitter(myAllocator);
+    myBuilder->SetArguments(myArguments);
+    ((BOPAlgo_Splitter*)myBuilder)->SetTools(myTools);
 
-  // Build result shape basing on the intersection results
-  BuildResult(aPS.Next(30));
+    // Build result shape basing on the intersection results
+    BuildResult(aPS.Next(30));
 }

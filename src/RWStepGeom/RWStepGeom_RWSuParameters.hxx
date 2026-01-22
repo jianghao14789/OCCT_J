@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:14 2020 
+// Created on : Sat May 02 12:41:14 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,17 @@ class Interface_EntityIterator;
 class StepGeom_SuParameters;
 
 //! Read & Write tool for SuParameters
-class RWStepGeom_RWSuParameters
-{
+class RWStepGeom_RWSuParameters {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWSuParameters();
 
-  Standard_EXPORT RWStepGeom_RWSuParameters();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theAch, const Handle(StepGeom_SuParameters) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theAch, const Handle(StepGeom_SuParameters)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepGeom_SuParameters) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepGeom_SuParameters)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepGeom_SuParameters)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepGeom_SuParameters) & theEnt, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepGeom_RWSuParameters_HeaderFile_

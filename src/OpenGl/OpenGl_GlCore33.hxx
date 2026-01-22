@@ -19,58 +19,51 @@
 #include <OpenGl_GlCore32.hxx>
 
 //! OpenGL 3.3 definition.
-struct OpenGl_GlCore33 : public OpenGl_GlCore32
-{
+struct OpenGl_GlCore33 : public OpenGl_GlCore32 {
 private:
-  typedef OpenGl_GlCore32 theBaseClass_t;
+    typedef OpenGl_GlCore32 theBaseClass_t;
 
 #if !defined(GL_ES_VERSION_2_0)
 
 public: //! @name GL_ARB_blend_func_extended (added to OpenGL 3.3 core)
-
-  using theBaseClass_t::glBindFragDataLocationIndexed;
-  using theBaseClass_t::glGetFragDataIndex;
+    using theBaseClass_t::glBindFragDataLocationIndexed;
+    using theBaseClass_t::glGetFragDataIndex;
 
 public: //! @name GL_ARB_sampler_objects (added to OpenGL 3.3 core)
-
-  using theBaseClass_t::glGenSamplers;
-  using theBaseClass_t::glDeleteSamplers;
-  using theBaseClass_t::glIsSampler;
-  using theBaseClass_t::glBindSampler;
-  using theBaseClass_t::glSamplerParameteri;
-  using theBaseClass_t::glSamplerParameteriv;
-  using theBaseClass_t::glSamplerParameterf;
-  using theBaseClass_t::glSamplerParameterfv;
-  using theBaseClass_t::glSamplerParameterIiv;
-  using theBaseClass_t::glSamplerParameterIuiv;
-  using theBaseClass_t::glGetSamplerParameteriv;
-  using theBaseClass_t::glGetSamplerParameterIiv;
-  using theBaseClass_t::glGetSamplerParameterfv;
-  using theBaseClass_t::glGetSamplerParameterIuiv;
+    using theBaseClass_t::glBindSampler;
+    using theBaseClass_t::glDeleteSamplers;
+    using theBaseClass_t::glGenSamplers;
+    using theBaseClass_t::glGetSamplerParameterfv;
+    using theBaseClass_t::glGetSamplerParameterIiv;
+    using theBaseClass_t::glGetSamplerParameterIuiv;
+    using theBaseClass_t::glGetSamplerParameteriv;
+    using theBaseClass_t::glIsSampler;
+    using theBaseClass_t::glSamplerParameterf;
+    using theBaseClass_t::glSamplerParameterfv;
+    using theBaseClass_t::glSamplerParameteri;
+    using theBaseClass_t::glSamplerParameterIiv;
+    using theBaseClass_t::glSamplerParameterIuiv;
+    using theBaseClass_t::glSamplerParameteriv;
 
 public: //! @name GL_ARB_timer_query (added to OpenGL 3.3 core)
-
-  using theBaseClass_t::glQueryCounter;
-  using theBaseClass_t::glGetQueryObjecti64v;
-  using theBaseClass_t::glGetQueryObjectui64v;
+    using theBaseClass_t::glGetQueryObjecti64v;
+    using theBaseClass_t::glGetQueryObjectui64v;
+    using theBaseClass_t::glQueryCounter;
 
 public: //! @name GL_ARB_vertex_type_2_10_10_10_rev (added to OpenGL 3.3 core)
-
-  using theBaseClass_t::glVertexAttribP1ui;
-  using theBaseClass_t::glVertexAttribP1uiv;
-  using theBaseClass_t::glVertexAttribP2ui;
-  using theBaseClass_t::glVertexAttribP2uiv;
-  using theBaseClass_t::glVertexAttribP3ui;
-  using theBaseClass_t::glVertexAttribP3uiv;
-  using theBaseClass_t::glVertexAttribP4ui;
-  using theBaseClass_t::glVertexAttribP4uiv;
+    using theBaseClass_t::glVertexAttribP1ui;
+    using theBaseClass_t::glVertexAttribP1uiv;
+    using theBaseClass_t::glVertexAttribP2ui;
+    using theBaseClass_t::glVertexAttribP2uiv;
+    using theBaseClass_t::glVertexAttribP3ui;
+    using theBaseClass_t::glVertexAttribP3uiv;
+    using theBaseClass_t::glVertexAttribP4ui;
+    using theBaseClass_t::glVertexAttribP4uiv;
 
 public: //! @name OpenGL 3.3 additives to 3.2
-
-  using theBaseClass_t::glVertexAttribDivisor;
+    using theBaseClass_t::glVertexAttribDivisor;
 
 #endif
-
 };
 
 #endif // _OpenGl_GlCore33_Header

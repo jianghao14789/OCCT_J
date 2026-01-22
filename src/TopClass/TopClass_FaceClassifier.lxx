@@ -17,32 +17,28 @@
 #include TheFaceExplorer_hxx
 
 //=======================================================================
-//function : Rejected
-//purpose  : 
+// function : Rejected
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean TopClass_FaceClassifier::Rejected() const
-{
-  return rejected;
+inline Standard_Boolean TopClass_FaceClassifier::Rejected() const {
+    return rejected;
 }
 
 //=======================================================================
-//function : Nowires
-//purpose  : 
+// function : Nowires
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean TopClass_FaceClassifier::NoWires() const
-{
-  return nowires;
+inline Standard_Boolean TopClass_FaceClassifier::NoWires() const {
+    return nowires;
 }
 
 //=======================================================================
-//function : Position
-//purpose  : 
+// function : Position
+// purpose  :
 //=======================================================================
 
-inline IntRes2d_Position TopClass_FaceClassifier::Position() const
-{
-  return myPosition;
+inline IntRes2d_Position TopClass_FaceClassifier::Position() const {
+    return myPosition;
 }
-

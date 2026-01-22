@@ -16,21 +16,19 @@
 #include <XSAlgo_AlgoContainer.hxx>
 
 //=======================================================================
-//function : SetToolContainer
-//purpose  : 
+// function : SetToolContainer
+// purpose  :
 //=======================================================================
 
-inline  void XSAlgo_AlgoContainer::SetToolContainer(const Handle(XSAlgo_ToolContainer)& TC) 
-{
-  myTC = TC;
+inline void XSAlgo_AlgoContainer::SetToolContainer(const Handle(XSAlgo_ToolContainer) & TC) {
+    myTC = TC;
 }
 
 //=======================================================================
-//function : ToolContainer
-//purpose  : 
+// function : ToolContainer
+// purpose  :
 //=======================================================================
 
-inline  Handle(XSAlgo_ToolContainer) XSAlgo_AlgoContainer::ToolContainer() const
-{
-  return myTC;
+inline Handle(XSAlgo_ToolContainer) XSAlgo_AlgoContainer::ToolContainer() const {
+    return myTC;
 }

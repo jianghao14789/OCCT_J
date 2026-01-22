@@ -27,48 +27,28 @@ class StepAP214_ExternallyDefinedClass;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ExternallyDefinedClass
-class RWStepAP214_RWExternallyDefinedClass 
-{
+class RWStepAP214_RWExternallyDefinedClass {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP214_RWExternallyDefinedClass();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP214_RWExternallyDefinedClass();
-  
-  //! Reads ExternallyDefinedClass
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP214_ExternallyDefinedClass)& ent) const;
-  
-  //! Writes ExternallyDefinedClass
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP214_ExternallyDefinedClass)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP214_ExternallyDefinedClass)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ExternallyDefinedClass
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP214_ExternallyDefinedClass) & ent) const;
 
+    //! Writes ExternallyDefinedClass
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepAP214_ExternallyDefinedClass) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP214_ExternallyDefinedClass) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_RWExternallyDefinedClass_HeaderFile

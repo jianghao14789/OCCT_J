@@ -21,39 +21,38 @@
 //! This class provides units for two dimension groups:
 //! - lengths (length, radius, diameter)
 //! - angles
-class Prs3d_DimensionUnits
-{
+class Prs3d_DimensionUnits {
 public:
+    //! Default constructor. Sets meters as default length units
+    //! and radians as default angle units.
+    Prs3d_DimensionUnits() : myLengthUnits("m"), myAngleUnits("rad") {}
 
-  //! Default constructor. Sets meters as default length units
-  //! and radians as default angle units.
-  Prs3d_DimensionUnits() 
-    : myLengthUnits ("m"),
-      myAngleUnits ("rad") 
-  {}
+    Prs3d_DimensionUnits(const Prs3d_DimensionUnits& theUnits)
+        : myLengthUnits(theUnits.GetLengthUnits()), myAngleUnits(theUnits.GetAngleUnits()) {}
 
-  Prs3d_DimensionUnits (const Prs3d_DimensionUnits& theUnits)
-    : myLengthUnits (theUnits.GetLengthUnits()),
-      myAngleUnits (theUnits.GetAngleUnits())
-  {}
+    //! Sets angle units
+    void SetAngleUnits(const TCollection_AsciiString& theUnits) {
+        myAngleUnits = theUnits;
+    }
 
-  //! Sets angle units
-  void SetAngleUnits (const TCollection_AsciiString& theUnits) { myAngleUnits = theUnits; }
+    //! @return angle units
+    const TCollection_AsciiString& GetAngleUnits() const {
+        return myAngleUnits;
+    }
 
-  //! @return angle units
-  const TCollection_AsciiString& GetAngleUnits() const { return myAngleUnits; }
+    //! Sets length units
+    void SetLengthUnits(const TCollection_AsciiString& theUnits) {
+        myLengthUnits = theUnits;
+    }
 
-  //! Sets length units
-  void SetLengthUnits (const TCollection_AsciiString& theUnits) { myLengthUnits = theUnits; }
-
-  //! @return length units
-  const TCollection_AsciiString& GetLengthUnits() const { return myLengthUnits; }
+    //! @return length units
+    const TCollection_AsciiString& GetLengthUnits() const {
+        return myLengthUnits;
+    }
 
 private:
-
-  TCollection_AsciiString myLengthUnits;
-  TCollection_AsciiString myAngleUnits;
-
+    TCollection_AsciiString myLengthUnits;
+    TCollection_AsciiString myAngleUnits;
 };
 
 #endif

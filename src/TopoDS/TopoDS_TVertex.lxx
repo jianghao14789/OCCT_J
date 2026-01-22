@@ -15,12 +15,11 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_TVertex
-//purpose  : 
+// function : TopoDS_TVertex
+// purpose  :
 //=======================================================================
 
-inline TopoDS_TVertex::TopoDS_TVertex() : TopoDS_TShape()
-{
+inline TopoDS_TVertex::TopoDS_TVertex() : TopoDS_TShape() {
     Closed(Standard_True);
     Convex(Standard_True);
 }

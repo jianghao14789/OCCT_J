@@ -27,42 +27,20 @@ class Interface_Check;
 class StepBasic_ProductCategory;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for ProductCategory
-class RWStepBasic_RWProductCategory 
-{
+class RWStepBasic_RWProductCategory {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWProductCategory();
 
-  
-  Standard_EXPORT RWStepBasic_RWProductCategory();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ProductCategory)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ProductCategory)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_ProductCategory) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_ProductCategory) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWProductCategory_HeaderFile

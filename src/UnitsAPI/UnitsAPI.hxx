@@ -27,7 +27,6 @@
 #include <Standard_Boolean.hxx>
 class Units_Dimensions;
 
-
 //! The UnitsAPI global functions are used to
 //! convert a value from any unit into another unit.
 //! Principles
@@ -53,12 +52,9 @@ class Units_Dimensions;
 //! the SetCurrentUnit function. The Current
 //! System is indicated by Current in the synopses
 //! of the UnitsAPI functions.
-class UnitsAPI
-{
+class UnitsAPI {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Converts the current unit value to the local system units value.
     //! Example: CurrentToLS(1.,"LENGTH") returns 1000. if the current length unit
@@ -86,7 +82,8 @@ public:
 
     //! Converts the local unit value to the local system units value.
     //! and gives the associated dimension of the unit
-    Standard_EXPORT static Standard_Real AnyToLS(const Standard_Real aData, const Standard_CString aUnit, Handle(Units_Dimensions)& aDim);
+    Standard_EXPORT static Standard_Real AnyToLS(const Standard_Real aData, const Standard_CString aUnit,
+                                                 Handle(Units_Dimensions) & aDim);
 
     //! Converts the local unit value to the SI system units value.
     //! Example: AnyToSI(1.,"in.") returns 0.0254
@@ -94,7 +91,8 @@ public:
 
     //! Converts the local unit value to the SI system units value.
     //! and gives the associated dimension of the unit
-    Standard_EXPORT static Standard_Real AnyToSI(const Standard_Real aData, const Standard_CString aUnit, Handle(Units_Dimensions)& aDim);
+    Standard_EXPORT static Standard_Real AnyToSI(const Standard_Real aData, const Standard_CString aUnit,
+                                                 Handle(Units_Dimensions) & aDim);
 
     //! Converts the local system units value to the local unit value.
     //! Example: AnyFromLS(25.4,"in.") returns 1. if the LocalSystem is MDTV.
@@ -110,17 +108,20 @@ public:
     //! current unit for the working environment, as
     //! defined for the physical quantity aQuantity by the
     //! last call to the SetCurrentUnit function, into the unit aUnit.
-    Standard_EXPORT static Standard_Real CurrentToAny(const Standard_Real aData, const Standard_CString aQuantity, const Standard_CString aUnit);
+    Standard_EXPORT static Standard_Real CurrentToAny(const Standard_Real aData, const Standard_CString aQuantity,
+                                                      const Standard_CString aUnit);
 
     //! Converts the aData value expressed in the unit
     //! aUnit, into the current unit for the working
     //! environment, as defined for the physical quantity
     //! aQuantity by the last call to the SetCurrentUnit function.
-    Standard_EXPORT static Standard_Real CurrentFromAny(const Standard_Real aData, const Standard_CString aQuantity, const Standard_CString aUnit);
+    Standard_EXPORT static Standard_Real CurrentFromAny(const Standard_Real aData, const Standard_CString aQuantity,
+                                                        const Standard_CString aUnit);
 
     //! Converts the local unit value to another local unit value.
     //! Example: AnyToAny(0.0254,"in.","millimeter") returns 1. ;
-    Standard_EXPORT static Standard_Real AnyToAny(const Standard_Real aData, const Standard_CString aUnit1, const Standard_CString aUnit2);
+    Standard_EXPORT static Standard_Real AnyToAny(const Standard_Real aData, const Standard_CString aUnit1,
+                                                  const Standard_CString aUnit2);
 
     //! Converts the local system units value to the SI system unit value.
     //! Example: LSToSI(1.,"LENGTH") returns 0.001 if the local system
@@ -181,29 +182,9 @@ public:
     //! returns FALSE when it's WRONG.
     Standard_EXPORT static Standard_Boolean Check(const Standard_CString aQuantity, const Standard_CString aUnit);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
     Standard_EXPORT static void CheckLoading(const UnitsAPI_SystemUnits aSystemUnit);
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _UnitsAPI_HeaderFile

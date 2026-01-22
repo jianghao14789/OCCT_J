@@ -20,5 +20,4 @@
 
 typedef NCollection_Sequence<Standard_ShortReal> TShort_SequenceOfShortReal;
 
-
 #endif

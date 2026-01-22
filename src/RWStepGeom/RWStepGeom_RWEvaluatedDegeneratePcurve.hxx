@@ -28,44 +28,25 @@ class StepGeom_EvaluatedDegeneratePcurve;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for EvaluatedDegeneratePcurve
-class RWStepGeom_RWEvaluatedDegeneratePcurve 
-{
+class RWStepGeom_RWEvaluatedDegeneratePcurve {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWEvaluatedDegeneratePcurve();
 
-  
-  Standard_EXPORT RWStepGeom_RWEvaluatedDegeneratePcurve();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_EvaluatedDegeneratePcurve)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_EvaluatedDegeneratePcurve)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_EvaluatedDegeneratePcurve)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepGeom_EvaluatedDegeneratePcurve) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepGeom_EvaluatedDegeneratePcurve) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepGeom_EvaluatedDegeneratePcurve) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWEvaluatedDegeneratePcurve_HeaderFile

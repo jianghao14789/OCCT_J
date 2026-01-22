@@ -11,53 +11,43 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_CurveStyleFont.hxx>
 #include <StepVisual_CurveStyleFontPattern.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_CurveStyleFont,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_CurveStyleFont, Standard_Transient)
 
-StepVisual_CurveStyleFont::StepVisual_CurveStyleFont ()  {}
+StepVisual_CurveStyleFont::StepVisual_CurveStyleFont() {}
 
-void StepVisual_CurveStyleFont::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepVisual_HArray1OfCurveStyleFontPattern)& aPatternList)
-{
-	// --- classe own fields ---
-	name = aName;
-	patternList = aPatternList;
+void StepVisual_CurveStyleFont::Init(const Handle(TCollection_HAsciiString) & aName,
+                                     const Handle(StepVisual_HArray1OfCurveStyleFontPattern) & aPatternList) {
+    // --- classe own fields ---
+    name = aName;
+    patternList = aPatternList;
 }
 
-
-void StepVisual_CurveStyleFont::SetName(const Handle(TCollection_HAsciiString)& aName)
-{
-	name = aName;
+void StepVisual_CurveStyleFont::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    name = aName;
 }
 
-Handle(TCollection_HAsciiString) StepVisual_CurveStyleFont::Name() const
-{
-	return name;
+Handle(TCollection_HAsciiString) StepVisual_CurveStyleFont::Name() const {
+    return name;
 }
 
-void StepVisual_CurveStyleFont::SetPatternList(const Handle(StepVisual_HArray1OfCurveStyleFontPattern)& aPatternList)
-{
-	patternList = aPatternList;
+void StepVisual_CurveStyleFont::SetPatternList(const Handle(StepVisual_HArray1OfCurveStyleFontPattern) & aPatternList) {
+    patternList = aPatternList;
 }
 
-Handle(StepVisual_HArray1OfCurveStyleFontPattern) StepVisual_CurveStyleFont::PatternList() const
-{
-	return patternList;
+Handle(StepVisual_HArray1OfCurveStyleFontPattern) StepVisual_CurveStyleFont::PatternList() const {
+    return patternList;
 }
 
-Handle(StepVisual_CurveStyleFontPattern) StepVisual_CurveStyleFont::PatternListValue(const Standard_Integer num) const
-{
-	return patternList->Value(num);
+Handle(StepVisual_CurveStyleFontPattern) StepVisual_CurveStyleFont::PatternListValue(const Standard_Integer num) const {
+    return patternList->Value(num);
 }
 
-Standard_Integer StepVisual_CurveStyleFont::NbPatternList () const
-{
-	if (patternList.IsNull()) return 0;
-	return patternList->Length();
+Standard_Integer StepVisual_CurveStyleFont::NbPatternList() const {
+    if (patternList.IsNull()) return 0;
+    return patternList->Length();
 }

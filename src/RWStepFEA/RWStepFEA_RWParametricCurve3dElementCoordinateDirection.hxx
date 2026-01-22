@@ -27,48 +27,29 @@ class StepFEA_ParametricCurve3dElementCoordinateDirection;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ParametricCurve3dElementCoordinateDirection
-class RWStepFEA_RWParametricCurve3dElementCoordinateDirection 
-{
+class RWStepFEA_RWParametricCurve3dElementCoordinateDirection {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWParametricCurve3dElementCoordinateDirection();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWParametricCurve3dElementCoordinateDirection();
-  
-  //! Reads ParametricCurve3dElementCoordinateDirection
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_ParametricCurve3dElementCoordinateDirection)& ent) const;
-  
-  //! Writes ParametricCurve3dElementCoordinateDirection
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_ParametricCurve3dElementCoordinateDirection)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_ParametricCurve3dElementCoordinateDirection)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ParametricCurve3dElementCoordinateDirection
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_ParametricCurve3dElementCoordinateDirection) & ent) const;
 
+    //! Writes ParametricCurve3dElementCoordinateDirection
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_ParametricCurve3dElementCoordinateDirection) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_ParametricCurve3dElementCoordinateDirection) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWParametricCurve3dElementCoordinateDirection_HeaderFile

@@ -20,5 +20,4 @@
 
 DEFINE_HSEQUENCE(StepElement_HSequenceOfSurfaceElementPurposeMember, StepElement_SequenceOfSurfaceElementPurposeMember)
 
-
 #endif

@@ -35,7 +35,6 @@ class Storage_InternalData;
 class Storage_stCONSTclCOM;
 class Storage_TypedCallBack;
 
-
 //! Storage package is used to write and read persistent objects.
 //! These objects are read and written by a retrieval or storage
 //! algorithm (Storage_Schema object) in a container (disk, memory,
@@ -55,30 +54,15 @@ class Storage_TypedCallBack;
 //! -   call the function Write from the schema,
 //! setting the driver and the Storage_Data   instance as parameters,
 //! -      close the driver.
-class Storage
-{
+class Storage {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! returns the version of Storage's read/write routines
     Standard_EXPORT static TCollection_AsciiString Version();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
     friend class Storage_BaseDriver;
     friend class Storage_CallBack;
     friend class Storage_DefaultCallBack;
@@ -91,13 +75,6 @@ private:
     friend class Storage_InternalData;
     friend class Storage_stCONSTclCOM;
     friend class Storage_TypedCallBack;
-
 };
-
-
-
-
-
-
 
 #endif // _Storage_HeaderFile

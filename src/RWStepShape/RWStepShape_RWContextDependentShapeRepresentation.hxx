@@ -28,44 +28,25 @@ class StepShape_ContextDependentShapeRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ContextDependentShapeRepresentation
-class RWStepShape_RWContextDependentShapeRepresentation 
-{
+class RWStepShape_RWContextDependentShapeRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWContextDependentShapeRepresentation();
 
-  
-  Standard_EXPORT RWStepShape_RWContextDependentShapeRepresentation();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ContextDependentShapeRepresentation)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ContextDependentShapeRepresentation)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_ContextDependentShapeRepresentation)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_ContextDependentShapeRepresentation) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepShape_ContextDependentShapeRepresentation) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_ContextDependentShapeRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWContextDependentShapeRepresentation_HeaderFile

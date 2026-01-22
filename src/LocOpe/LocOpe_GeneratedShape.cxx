@@ -14,11 +14,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <LocOpe_GeneratedShape.hxx>
 #include <Standard_Type.hxx>
 #include <TopoDS_Edge.hxx>
 #include <TopoDS_Face.hxx>
 #include <TopoDS_Vertex.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(LocOpe_GeneratedShape,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(LocOpe_GeneratedShape, Standard_Transient)

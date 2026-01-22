@@ -29,7 +29,6 @@
 class gp_Dir2d;
 class gp_Trsf2d;
 
-
 //! Describes a bounding box in 2D space.
 //! A bounding box is parallel to the axes of the coordinates
 //! system. If it is finite, it is defined by the two intervals:
@@ -48,10 +47,8 @@ class gp_Trsf2d;
 //! limit the bounding box if it is finite, six flags (OpenXmin, OpenXmax, OpenYmin,
 //! OpenYmax, WholeSpace and Void) which describe the bounding box if it is infinite or empty, and
 //! -   a gap, which is included on both sides in any direction when consulting the finite bounds of the box.
-class Bnd_Box2d
-{
+class Bnd_Box2d {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates an empty 2D bounding box.
@@ -60,11 +57,12 @@ public:
 
     //! Sets this bounding box so that it covers the whole 2D
     //! space, i.e. it is infinite in all directions.
-    void SetWhole() { Flags = WholeMask; }
+    void SetWhole() {
+        Flags = WholeMask;
+    }
 
     //! Sets this 2D bounding box so that it is empty. All points are outside a void box.
-    void SetVoid()
-    {
+    void SetVoid() {
         Flags = VoidMask;
         Gap = 0.0;
     }
@@ -72,8 +70,7 @@ public:
     //! Sets this 2D bounding box so that it bounds
     //! the point P. This involves first setting this bounding box
     //! to be void and then adding the point PThe rectangle bounds   the  point <P>.
-    void Set(const gp_Pnt2d& thePnt)
-    {
+    void Set(const gp_Pnt2d& thePnt) {
         Flags = VoidMask;
         Gap = 0.0;
         Add(thePnt);
@@ -84,8 +81,7 @@ public:
     //! points M defined by M=P+u*D, where u is greater than
     //! or equal to 0, are inside the bounding area. This involves
     //! first setting this 2D box to be void and then adding the   half-line.
-    void Set(const gp_Pnt2d& thePnt, const gp_Dir2d& theDir)
-    {
+    void Set(const gp_Pnt2d& thePnt, const gp_Dir2d& theDir) {
         Flags = VoidMask;
         Gap = 0.0;
         Add(thePnt, theDir);
@@ -95,24 +91,28 @@ public:
     //! contains at least:
     //! -   interval [ aXmin,aXmax ] in the "X Direction",
     //! -   interval [ aYmin,aYmax ] in the "Y Direction"
-    Standard_EXPORT void Update(const Standard_Real aXmin, const Standard_Real aYmin, const Standard_Real aXmax, const Standard_Real aYmax);
+    Standard_EXPORT void Update(const Standard_Real aXmin, const Standard_Real aYmin, const Standard_Real aXmax,
+                                const Standard_Real aYmax);
 
     //! Adds a point of coordinates (X,Y) to this bounding box.
     Standard_EXPORT void Update(const Standard_Real X, const Standard_Real Y);
 
     //! Returns the gap of this 2D bounding box.
-    Standard_Real GetGap() const { return Gap; }
+    Standard_Real GetGap() const {
+        return Gap;
+    }
 
     //! Set the gap of this 2D bounding box to abs(Tol).
-    void SetGap(const Standard_Real Tol) { Gap = Tol; }
+    void SetGap(const Standard_Real Tol) {
+        Gap = Tol;
+    }
 
     //! Enlarges     the  box  with    a  tolerance  value.
     //! This means that the minimum values of its X and Y
     //! intervals of definition, when they are finite, are reduced by
     //! the absolute value of Tol, while the maximum values are
     //! increased by the same amount.
-    void Enlarge(const Standard_Real theTol)
-    {
+    void Enlarge(const Standard_Real theTol) {
         Standard_Real aTol = theTol < 0.0 ? -theTol : theTol;
         if (Gap < aTol) Gap = aTol;
     }
@@ -121,38 +121,59 @@ public:
     //! The gap is included. If this bounding box is infinite (i.e. "open"), returned values
     //! may be equal to +/- Precision::Infinite().
     //! if IsVoid()
-    Standard_EXPORT void Get(Standard_Real& aXmin, Standard_Real& aYmin, Standard_Real& aXmax, Standard_Real& aYmax) const;
+    Standard_EXPORT void Get(Standard_Real& aXmin, Standard_Real& aYmin, Standard_Real& aXmax,
+                             Standard_Real& aYmax) const;
 
     //! The Box will be infinitely long in the Xmin direction.
-    void OpenXmin() { Flags |= XminMask; }
+    void OpenXmin() {
+        Flags |= XminMask;
+    }
 
     //! The Box will be infinitely long in the Xmax direction.
-    void OpenXmax() { Flags |= XmaxMask; }
+    void OpenXmax() {
+        Flags |= XmaxMask;
+    }
 
     //! The Box will be infinitely long in the Ymin direction.
-    void OpenYmin() { Flags |= YminMask; }
+    void OpenYmin() {
+        Flags |= YminMask;
+    }
 
     //! The Box will be infinitely long in the Ymax direction.
-    void OpenYmax() { Flags |= YmaxMask; }
+    void OpenYmax() {
+        Flags |= YmaxMask;
+    }
 
     //! Returns true if this bounding box is open in the Xmin direction.
-    Standard_Boolean IsOpenXmin() const { return (Flags & XminMask) != 0; }
+    Standard_Boolean IsOpenXmin() const {
+        return (Flags & XminMask) != 0;
+    }
 
     //! Returns true if this bounding box is open in the Xmax direction.
-    Standard_Boolean IsOpenXmax() const { return (Flags & XmaxMask) != 0; }
+    Standard_Boolean IsOpenXmax() const {
+        return (Flags & XmaxMask) != 0;
+    }
 
     //! Returns true if this bounding box is open in the Ymin direction.
-    Standard_Boolean IsOpenYmin() const { return (Flags & YminMask) != 0; }
+    Standard_Boolean IsOpenYmin() const {
+        return (Flags & YminMask) != 0;
+    }
 
     //! Returns true if this bounding box is open in the Ymax direction.
-    Standard_Boolean IsOpenYmax() const { return (Flags & YmaxMask) != 0; }
+    Standard_Boolean IsOpenYmax() const {
+        return (Flags & YmaxMask) != 0;
+    }
 
     //! Returns true if this bounding box is infinite in all 4
     //! directions (Whole Space flag).
-    Standard_Boolean IsWhole() const { return (Flags & WholeMask) == WholeMask; }
+    Standard_Boolean IsWhole() const {
+        return (Flags & WholeMask) == WholeMask;
+    }
 
     //! Returns true if this 2D bounding box is empty (Void flag).
-    Standard_Boolean IsVoid() const { return (Flags & VoidMask) != 0; }
+    Standard_Boolean IsVoid() const {
+        return (Flags & VoidMask) != 0;
+    }
 
     //! Returns a bounding box which is the result of applying the
     //! transformation T to this bounding box.
@@ -166,11 +187,12 @@ public:
     Standard_EXPORT void Add(const Bnd_Box2d& Other);
 
     //! Adds the 2d point.
-    void Add(const gp_Pnt2d& thePnt) { Update(thePnt.X(), thePnt.Y()); }
+    void Add(const gp_Pnt2d& thePnt) {
+        Update(thePnt.X(), thePnt.Y());
+    }
 
     //! Extends bounding box from thePnt in the direction theDir.
-    void Add(const gp_Pnt2d& thePnt, const gp_Dir2d& theDir)
-    {
+    void Add(const gp_Pnt2d& thePnt, const gp_Dir2d& theDir) {
         Add(thePnt);
         Add(theDir);
     }
@@ -193,24 +215,21 @@ public:
     Standard_EXPORT Standard_Boolean IsOut(const Bnd_Box2d& Other) const;
 
     //! Returns True if transformed <Box2d> is out <me>.
-    Standard_Boolean IsOut(const Bnd_Box2d& theOther, const gp_Trsf2d& theTrsf) const
-    {
+    Standard_Boolean IsOut(const Bnd_Box2d& theOther, const gp_Trsf2d& theTrsf) const {
         return IsOut(theOther.Transformed(theTrsf));
     }
 
     //! Compares  a transformed  bounding with  a    transformed
     //! bounding. The default implementation is  to make a copy
     //! of <me> and <Other>, to transform them and to test.
-    Standard_Boolean IsOut(const gp_Trsf2d& T1, const Bnd_Box2d& Other, const gp_Trsf2d& T2) const
-    {
+    Standard_Boolean IsOut(const gp_Trsf2d& T1, const Bnd_Box2d& Other, const gp_Trsf2d& T2) const {
         return Transformed(T1).IsOut(Other.Transformed(T2));
     }
 
     Standard_EXPORT void Dump() const;
 
     //! Computes the squared diagonal of me.
-    Standard_Real SquareExtent() const
-    {
+    Standard_Real SquareExtent() const {
         if (IsVoid()) return 0.0;
         const Standard_Real aDx = Xmax - Xmin + Gap + Gap;
         const Standard_Real aDy = Ymax - Ymin + Gap + Gap;
@@ -218,10 +237,8 @@ public:
     }
 
 protected:
-
     //! Bit flags.
-    enum MaskFlags
-    {
+    enum MaskFlags {
         VoidMask = 0x01,
         XminMask = 0x02,
         XmaxMask = 0x04,
@@ -231,14 +248,12 @@ protected:
     };
 
 private:
-
     Standard_Real Xmin;
     Standard_Real Xmax;
     Standard_Real Ymin;
     Standard_Real Ymax;
     Standard_Real Gap;
     Standard_Integer Flags;
-
 };
 
 #endif // _Bnd_Box2d_HeaderFile

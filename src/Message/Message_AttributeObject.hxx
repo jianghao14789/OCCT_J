@@ -20,31 +20,34 @@ class Standard_Transient;
 
 //! Alert object storing a transient object
 //! 存储 Transient 对象的警报对象
-class Message_AttributeObject : public Message_Attribute
-{
+class Message_AttributeObject : public Message_Attribute {
     DEFINE_STANDARD_RTTIEXT(Message_AttributeObject, Message_Attribute)
 public:
     //! Constructor with string argument
     //! 带字符串参数的构造函数
-    Standard_EXPORT Message_AttributeObject(const Handle(Standard_Transient)& theObject,
-        const TCollection_AsciiString& theName = TCollection_AsciiString());
+    Standard_EXPORT Message_AttributeObject(const Handle(Standard_Transient) & theObject,
+                                            const TCollection_AsciiString& theName = TCollection_AsciiString());
 
     //! Returns object
     //! @return the object instance
     //! 返回对象
     //! @return 对象实例
-    const Handle(Standard_Transient)& Object() const { return myObject; }
+    const Handle(Standard_Transient) & Object() const {
+        return myObject;
+    }
 
     //! Sets the object
     //! @param theObject an instance
     //! 设置对象
     //! @param theObject 一个实例
-    void SetObject(const Handle(Standard_Transient)& theObject) { myObject = theObject; }
+    void SetObject(const Handle(Standard_Transient) & theObject) {
+        myObject = theObject;
+    }
 
     //! Dumps the content of me into the stream
     //! 将内容转储到流中
     virtual Standard_EXPORT void DumpJson(Standard_OStream& theOStream,
-        Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 private:
     Handle(Standard_Transient) myObject; //!< 警报对象

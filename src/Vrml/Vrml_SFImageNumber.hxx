@@ -18,13 +18,6 @@
 #define _Vrml_SFImageNumber_HeaderFile
 
 //! qualifies VRML geometry shapes.
-enum Vrml_SFImageNumber
-{
-Vrml_NULL,
-Vrml_ONE,
-Vrml_TWO,
-Vrml_THREE,
-Vrml_FOUR
-};
+enum Vrml_SFImageNumber { Vrml_NULL, Vrml_ONE, Vrml_TWO, Vrml_THREE, Vrml_FOUR };
 
 #endif // _Vrml_SFImageNumber_HeaderFile

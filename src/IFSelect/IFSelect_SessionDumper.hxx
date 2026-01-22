@@ -25,7 +25,6 @@
 class IFSelect_SessionFile;
 class TCollection_AsciiString;
 
-
 class IFSelect_SessionDumper;
 DEFINE_STANDARD_HANDLE(IFSelect_SessionDumper, Standard_Transient)
 
@@ -54,67 +53,49 @@ DEFINE_STANDARD_HANDLE(IFSelect_SessionDumper, Standard_Transient)
 //!
 //! SessionDumpers are organized in a Library which is used by
 //! SessionFile. They are put at Creation Time in this Library.
-class IFSelect_SessionDumper : public Standard_Transient
-{
+class IFSelect_SessionDumper : public Standard_Transient {
 
 public:
+    //! Returns the First item of the Library of Dumper. The Next ones
+    //! are then obtained by Next on the returned items
+    Standard_EXPORT static Handle(IFSelect_SessionDumper) First();
 
-  
-  //! Returns the First item of the Library of Dumper. The Next ones
-  //! are then obtained by Next on the returned items
-  Standard_EXPORT static Handle(IFSelect_SessionDumper) First();
-  
-  //! Returns the Next SesionDumper in the Library. Returns a Null
-  //! Handle at the End.
-  Standard_EXPORT Handle(IFSelect_SessionDumper) Next() const;
-  
-  //! Writes the Own Parameters of a given Item, if it forecast to
-  //! manage its Type.
-  //! Returns True if it has recognized the Type of the Item (in
-  //! this case, it is assumed to have written the Own Parameters if
-  //! there are some), False else : in that case, SessionFile will
-  //! try another SessionDumper in the Library.
-  //! WriteOwn can use these methods from SessionFile : SendVoid,
-  //! SendItem, SendText, and if necessary, WorkSession.
-  Standard_EXPORT virtual Standard_Boolean WriteOwn (IFSelect_SessionFile& file, const Handle(Standard_Transient)& item) const = 0;
-  
-  //! Recognizes a Type (given as <type>) then Creates an Item of
-  //! this Type with the Own Parameter, as required.
-  //! Returns True if it has recognized the Type (in this case, it
-  //! is assumed to have created the Item, returned as <item>),
-  //! False else : in that case, SessionFile will try another
-  //! SessionDumper in the Library.
-  //! ReadOwn can use these methods from SessionFile to access Own
-  //! Parameters : NbOwnParams, IsVoid, IsText, TextValue, ItemValue
-  Standard_EXPORT virtual Standard_Boolean ReadOwn (IFSelect_SessionFile& file, const TCollection_AsciiString& type, Handle(Standard_Transient)& item) const = 0;
+    //! Returns the Next SesionDumper in the Library. Returns a Null
+    //! Handle at the End.
+    Standard_EXPORT Handle(IFSelect_SessionDumper) Next() const;
 
+    //! Writes the Own Parameters of a given Item, if it forecast to
+    //! manage its Type.
+    //! Returns True if it has recognized the Type of the Item (in
+    //! this case, it is assumed to have written the Own Parameters if
+    //! there are some), False else : in that case, SessionFile will
+    //! try another SessionDumper in the Library.
+    //! WriteOwn can use these methods from SessionFile : SendVoid,
+    //! SendItem, SendText, and if necessary, WorkSession.
+    Standard_EXPORT virtual Standard_Boolean WriteOwn(IFSelect_SessionFile& file,
+                                                      const Handle(Standard_Transient) & item) const = 0;
 
+    //! Recognizes a Type (given as <type>) then Creates an Item of
+    //! this Type with the Own Parameter, as required.
+    //! Returns True if it has recognized the Type (in this case, it
+    //! is assumed to have created the Item, returned as <item>),
+    //! False else : in that case, SessionFile will try another
+    //! SessionDumper in the Library.
+    //! ReadOwn can use these methods from SessionFile to access Own
+    //! Parameters : NbOwnParams, IsVoid, IsText, TextValue, ItemValue
+    Standard_EXPORT virtual Standard_Boolean ReadOwn(IFSelect_SessionFile& file, const TCollection_AsciiString& type,
+                                                     Handle(Standard_Transient) & item) const = 0;
 
-
-  DEFINE_STANDARD_RTTIEXT(IFSelect_SessionDumper,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(IFSelect_SessionDumper, Standard_Transient)
 
 protected:
-
-  
-  //! The Initialization puts a just created SessionDumper in the
-  //! Library of SessionDumper. Then, it suffices to create once
-  //! a SessionDumper to fill the Library with it
-  Standard_EXPORT IFSelect_SessionDumper();
-
-
+    //! The Initialization puts a just created SessionDumper in the
+    //! Library of SessionDumper. Then, it suffices to create once
+    //! a SessionDumper to fill the Library with it
+    Standard_EXPORT IFSelect_SessionDumper();
 
 private:
-
-
-  Handle(IFSelect_SessionDumper) thenext;
-
-
+    Handle(IFSelect_SessionDumper) thenext;
 };
-
-
-
-
-
-
 
 #endif // _IFSelect_SessionDumper_HeaderFile

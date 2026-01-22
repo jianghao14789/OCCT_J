@@ -22,52 +22,32 @@
 #include <Standard_Transient.hxx>
 class StepBasic_MeasureWithUnit;
 
-
 class StepShape_ToleranceValue;
 DEFINE_STANDARD_HANDLE(StepShape_ToleranceValue, Standard_Transient)
 
 //! Added for Dimensional Tolerances
-class StepShape_ToleranceValue : public Standard_Transient
-{
+class StepShape_ToleranceValue : public Standard_Transient {
 
 public:
+    Standard_EXPORT StepShape_ToleranceValue();
 
-  
-  Standard_EXPORT StepShape_ToleranceValue();
-  
-  Standard_EXPORT void Init (const Handle(Standard_Transient)& lower_bound, const Handle(Standard_Transient)& upper_bound);
-  
-  Standard_EXPORT Handle(Standard_Transient) LowerBound() const;
-  
-  Standard_EXPORT void SetLowerBound (const Handle(Standard_Transient)& lower_bound);
-  
-  Standard_EXPORT Handle(Standard_Transient) UpperBound() const;
-  
-  Standard_EXPORT void SetUpperBound (const Handle(Standard_Transient)& upper_bound);
+    Standard_EXPORT void Init(const Handle(Standard_Transient) & lower_bound,
+                              const Handle(Standard_Transient) & upper_bound);
 
+    Standard_EXPORT Handle(Standard_Transient) LowerBound() const;
 
+    Standard_EXPORT void SetLowerBound(const Handle(Standard_Transient) & lower_bound);
 
+    Standard_EXPORT Handle(Standard_Transient) UpperBound() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepShape_ToleranceValue,Standard_Transient)
+    Standard_EXPORT void SetUpperBound(const Handle(Standard_Transient) & upper_bound);
+
+    DEFINE_STANDARD_RTTIEXT(StepShape_ToleranceValue, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(Standard_Transient) theLowerBound;
-  Handle(Standard_Transient) theUpperBound;
-
-
+    Handle(Standard_Transient) theLowerBound;
+    Handle(Standard_Transient) theUpperBound;
 };
-
-
-
-
-
-
 
 #endif // _StepShape_ToleranceValue_HeaderFile

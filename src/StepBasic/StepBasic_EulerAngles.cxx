@@ -18,43 +18,38 @@
 #include <Standard_Type.hxx>
 #include <StepBasic_EulerAngles.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_EulerAngles,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_EulerAngles, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_EulerAngles
-//purpose  : 
+// function : StepBasic_EulerAngles
+// purpose  :
 //=======================================================================
-StepBasic_EulerAngles::StepBasic_EulerAngles ()
-{
+StepBasic_EulerAngles::StepBasic_EulerAngles() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_EulerAngles::Init(const Handle(TColStd_HArray1OfReal) & aAngles) {
+
+    theAngles = aAngles;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Angles
+// purpose  :
 //=======================================================================
 
-void StepBasic_EulerAngles::Init (const Handle(TColStd_HArray1OfReal) &aAngles)
-{
-
-  theAngles = aAngles;
+Handle(TColStd_HArray1OfReal) StepBasic_EulerAngles::Angles() const {
+    return theAngles;
 }
 
 //=======================================================================
-//function : Angles
-//purpose  : 
+// function : SetAngles
+// purpose  :
 //=======================================================================
 
-Handle(TColStd_HArray1OfReal) StepBasic_EulerAngles::Angles () const
-{
-  return theAngles;
-}
-
-//=======================================================================
-//function : SetAngles
-//purpose  : 
-//=======================================================================
-
-void StepBasic_EulerAngles::SetAngles (const Handle(TColStd_HArray1OfReal) &aAngles)
-{
-  theAngles = aAngles;
+void StepBasic_EulerAngles::SetAngles(const Handle(TColStd_HArray1OfReal) & aAngles) {
+    theAngles = aAngles;
 }

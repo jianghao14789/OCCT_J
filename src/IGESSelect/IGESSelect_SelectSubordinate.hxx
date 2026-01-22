@@ -29,7 +29,7 @@ class TCollection_AsciiString;
 
 // resolve name collisions with X11 headers
 #ifdef Status
-  #undef Status
+#undef Status
 #endif
 
 class IGESSelect_SelectSubordinate;
@@ -46,48 +46,29 @@ DEFINE_STANDARD_HANDLE(IGESSelect_SelectSubordinate, IFSelect_SelectExtract)
 //! 5 : 2 or 3  ->  at least Logically
 //! 6 : 1 or 2 or 3 -> any kind of dependence
 //! (corresponds to 0 reversed)
-class IGESSelect_SelectSubordinate : public IFSelect_SelectExtract
-{
+class IGESSelect_SelectSubordinate : public IFSelect_SelectExtract {
 
 public:
+    //! Creates a SelectSubordinate with a status to be sorted
+    Standard_EXPORT IGESSelect_SelectSubordinate(const Standard_Integer status);
 
-  
-  //! Creates a SelectSubordinate with a status to be sorted
-  Standard_EXPORT IGESSelect_SelectSubordinate(const Standard_Integer status);
-  
-  //! Returns the status used for sorting
-  Standard_EXPORT Standard_Integer Status() const;
-  
-  //! Returns True if <ent> is an IGES Entity with Subordinate
-  //! Status matching the criterium
-  Standard_EXPORT Standard_Boolean Sort (const Standard_Integer rank, const Handle(Standard_Transient)& ent, const Handle(Interface_InterfaceModel)& model) const Standard_OVERRIDE;
-  
-  //! Returns the Selection criterium : "IGES Entity, Independent"
-  //! etc...
-  Standard_EXPORT TCollection_AsciiString ExtractLabel() const Standard_OVERRIDE;
+    //! Returns the status used for sorting
+    Standard_EXPORT Standard_Integer Status() const;
 
+    //! Returns True if <ent> is an IGES Entity with Subordinate
+    //! Status matching the criterium
+    Standard_EXPORT Standard_Boolean Sort(const Standard_Integer rank, const Handle(Standard_Transient) & ent,
+                                          const Handle(Interface_InterfaceModel) & model) const Standard_OVERRIDE;
 
+    //! Returns the Selection criterium : "IGES Entity, Independent"
+    //! etc...
+    Standard_EXPORT TCollection_AsciiString ExtractLabel() const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_SelectSubordinate,IFSelect_SelectExtract)
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_SelectSubordinate, IFSelect_SelectExtract)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer thestatus;
-
-
+    Standard_Integer thestatus;
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_SelectSubordinate_HeaderFile

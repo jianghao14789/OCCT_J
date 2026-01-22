@@ -15,28 +15,18 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopBas_Interference
-//purpose  : 
+// function : TopBas_Interference
+// purpose  :
 //=======================================================================
 
-TopBas_Interference::TopBas_Interference()
-{
-}
+TopBas_Interference::TopBas_Interference() {}
 
 //=======================================================================
-//function : TopBas_Interference
-//purpose  : 
+// function : TopBas_Interference
+// purpose  :
 //=======================================================================
 
-TopBas_Interference::TopBas_Interference(const TheSubShape& Inters,
-					 const TheShape& Bound,
-					 const TopAbs_Orientation Orient,
-					 const TopAbs_Orientation Trans,
-					 const TopAbs_Orientation BTrans) :
-       myIntersection(Inters),
-       myBoundary(Bound),
-       myOrientation(Orient),
-       myTransition(Trans),
-       myBTransition(BTrans)
-{
-}
+TopBas_Interference::TopBas_Interference(const TheSubShape& Inters, const TheShape& Bound,
+                                         const TopAbs_Orientation Orient, const TopAbs_Orientation Trans,
+                                         const TopAbs_Orientation BTrans)
+    : myIntersection(Inters), myBoundary(Bound), myOrientation(Orient), myTransition(Trans), myBTransition(BTrans) {}

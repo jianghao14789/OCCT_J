@@ -25,44 +25,22 @@
 #include <Standard_Boolean.hxx>
 class StepToTopoDS_PointPair;
 
-
-
-class StepToTopoDS_PointPairHasher 
-{
+class StepToTopoDS_PointPairHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes a hash code for the point pair, in the range [1, theUpperBound]
+    //! @param thePointPair the point pair which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    Standard_EXPORT static Standard_Integer HashCode(const StepToTopoDS_PointPair& thePointPair,
+                                                     Standard_Integer theUpperBound);
 
-  //! Computes a hash code for the point pair, in the range [1, theUpperBound]
-  //! @param thePointPair the point pair which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  Standard_EXPORT static Standard_Integer HashCode (const StepToTopoDS_PointPair& thePointPair, Standard_Integer theUpperBound);
-  
-  //! Returns True  when the two  PointPair are the same
-  Standard_EXPORT static Standard_Boolean IsEqual (const StepToTopoDS_PointPair& K1, const StepToTopoDS_PointPair& K2);
-
-
-
+    //! Returns True  when the two  PointPair are the same
+    Standard_EXPORT static Standard_Boolean IsEqual(const StepToTopoDS_PointPair& K1, const StepToTopoDS_PointPair& K2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepToTopoDS_PointPairHasher_HeaderFile

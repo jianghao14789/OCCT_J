@@ -17,17 +17,15 @@
 #ifndef _IntPatch_IType_HeaderFile
 #define _IntPatch_IType_HeaderFile
 
-
-enum IntPatch_IType
-{
-IntPatch_Lin,
-IntPatch_Circle,
-IntPatch_Ellipse,
-IntPatch_Parabola,
-IntPatch_Hyperbola,
-IntPatch_Analytic,
-IntPatch_Walking,
-IntPatch_Restriction
+enum IntPatch_IType {
+    IntPatch_Lin,
+    IntPatch_Circle,
+    IntPatch_Ellipse,
+    IntPatch_Parabola,
+    IntPatch_Hyperbola,
+    IntPatch_Analytic,
+    IntPatch_Walking,
+    IntPatch_Restriction
 };
 
 #endif // _IntPatch_IType_HeaderFile

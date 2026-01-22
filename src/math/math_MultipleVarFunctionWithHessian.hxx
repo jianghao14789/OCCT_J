@@ -57,12 +57,11 @@ public:
     //! hessian   <H> of  the functions  for the  variable <X>.
     //! Returns  True  if  the computation  was  done
     //! successfully, False otherwise.
-    Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G, math_Matrix& H) = 0;
+    Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G,
+                                                    math_Matrix& H) = 0;
 
 protected:
-
 private:
-
 };
 
 #endif // _math_MultipleVarFunctionWithHessian_HeaderFile

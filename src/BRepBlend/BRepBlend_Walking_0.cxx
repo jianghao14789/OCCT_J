@@ -36,7 +36,6 @@
 #include <gp_Pnt.hxx>
 #include <gp_Pnt2d.hxx>
 #include <IntSurf_Transition.hxx>
- 
 
 #define TheVertex Handle(Adaptor3d_HVertex)
 #define TheVertex_hxx <Adaptor3d_HVertex.hxx>
@@ -71,4 +70,3 @@
 #define Blend_Walking BRepBlend_Walking
 #define Blend_Walking_hxx <BRepBlend_Walking.hxx>
 #include <Blend_Walking.gxx>
-

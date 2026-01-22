@@ -30,78 +30,83 @@ class Graphic3d_DataStructureManager;
 
 DEFINE_STANDARD_HANDLE(PrsMgr_Presentation, Graphic3d_Structure)
 
-class PrsMgr_Presentation : public Graphic3d_Structure
-{
-  DEFINE_STANDARD_RTTIEXT(PrsMgr_Presentation, Graphic3d_Structure)
-  friend class PrsMgr_PresentationManager;
-  friend class PrsMgr_PresentableObject;
+class PrsMgr_Presentation : public Graphic3d_Structure {
+    DEFINE_STANDARD_RTTIEXT(PrsMgr_Presentation, Graphic3d_Structure)
+    friend class PrsMgr_PresentationManager;
+    friend class PrsMgr_PresentableObject;
+
 public:
+    //! Destructor
+    Standard_EXPORT ~PrsMgr_Presentation();
 
-  //! Destructor
-  Standard_EXPORT ~PrsMgr_Presentation();
+    Standard_DEPRECATED("Dummy to simplify porting - returns self") Prs3d_Presentation* Presentation() {
+        return this;
+    }
 
-  Standard_DEPRECATED("Dummy to simplify porting - returns self")
-  Prs3d_Presentation* Presentation() { return this; }
+    //! returns the PresentationManager in which the presentation has been created.
+    const Handle(PrsMgr_PresentationManager) & PresentationManager() const {
+        return myPresentationManager;
+    }
 
-  //! returns the PresentationManager in which the presentation has been created.
-  const Handle(PrsMgr_PresentationManager)& PresentationManager() const { return myPresentationManager; }
+    void SetUpdateStatus(const Standard_Boolean theUpdateStatus) {
+        myMustBeUpdated = theUpdateStatus;
+    }
 
-  void SetUpdateStatus (const Standard_Boolean theUpdateStatus) { myMustBeUpdated = theUpdateStatus; }
+    Standard_Boolean MustBeUpdated() const {
+        return myMustBeUpdated;
+    }
 
-  Standard_Boolean MustBeUpdated() const { return myMustBeUpdated; }
+    //! Return display mode index.
+    Standard_Integer Mode() const {
+        return myMode;
+    }
 
-  //! Return display mode index.
-  Standard_Integer Mode() const { return myMode; }
+    //! Display structure.
+    Standard_EXPORT virtual void Display() Standard_OVERRIDE;
 
-  //! Display structure.
-  Standard_EXPORT virtual void Display() Standard_OVERRIDE;
+    //! Remove structure.
+    Standard_EXPORT virtual void Erase() Standard_OVERRIDE;
 
-  //! Remove structure.
-  Standard_EXPORT virtual void Erase() Standard_OVERRIDE;
+    //! Highlight structure.
+    Standard_EXPORT void Highlight(const Handle(Prs3d_Drawer) & theStyle);
 
-  //! Highlight structure.
-  Standard_EXPORT void Highlight (const Handle(Prs3d_Drawer)& theStyle);
+    //! Unhighlight structure.
+    Standard_EXPORT void Unhighlight();
 
-  //! Unhighlight structure.
-  Standard_EXPORT void Unhighlight();
+    //! Return TRUE if structure has been displayed and in no hidden state.
+    virtual Standard_Boolean IsDisplayed() const Standard_OVERRIDE {
+        return base_type::IsDisplayed() && base_type::IsVisible();
+    }
 
-  //! Return TRUE if structure has been displayed and in no hidden state.
-  virtual Standard_Boolean IsDisplayed() const Standard_OVERRIDE
-  {
-    return base_type::IsDisplayed()
-        && base_type::IsVisible();
-  }
+    //! removes the whole content of the presentation.
+    //! Does not remove the other connected presentations.
+    Standard_EXPORT virtual void Clear(const Standard_Boolean theWithDestruction = Standard_True) Standard_OVERRIDE;
 
-  //! removes the whole content of the presentation.
-  //! Does not remove the other connected presentations.
-  Standard_EXPORT virtual void Clear (const Standard_Boolean theWithDestruction = Standard_True) Standard_OVERRIDE;
+    //! Compute structure using presentation manager.
+    Standard_EXPORT virtual void Compute() Standard_OVERRIDE;
 
-  //! Compute structure using presentation manager.
-  Standard_EXPORT virtual void Compute() Standard_OVERRIDE;
-
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 protected:
+    //! Main constructor.
+    Standard_EXPORT PrsMgr_Presentation(const Handle(PrsMgr_PresentationManager) & thePresentationManager,
+                                        const Handle(PrsMgr_PresentableObject) & thePresentableObject,
+                                        const Standard_Integer theMode);
 
-  //! Main constructor.
-  Standard_EXPORT PrsMgr_Presentation (const Handle(PrsMgr_PresentationManager)& thePresentationManager,
-                                       const Handle(PrsMgr_PresentableObject)& thePresentableObject,
-                                       const Standard_Integer theMode);
+    //! Displays myStructure.
+    Standard_EXPORT void display(const Standard_Boolean theIsHighlight);
 
-  //! Displays myStructure.
-  Standard_EXPORT void display (const Standard_Boolean theIsHighlight);
+    Standard_EXPORT virtual void computeHLR(const Handle(Graphic3d_Camera) & theProjector,
+                                            Handle(Graphic3d_Structure) & theGivenStruct) Standard_OVERRIDE;
 
-  Standard_EXPORT virtual void computeHLR (const Handle(Graphic3d_Camera)& theProjector,
-                                           Handle(Graphic3d_Structure)& theGivenStruct) Standard_OVERRIDE;
 protected:
-
-  Handle(PrsMgr_PresentationManager) myPresentationManager;
-  PrsMgr_PresentableObject* myPresentableObject;
-  Standard_Integer myBeforeHighlightState;
-  Standard_Integer myMode;
-  Standard_Boolean myMustBeUpdated;
-
+    Handle(PrsMgr_PresentationManager) myPresentationManager;
+    PrsMgr_PresentableObject* myPresentableObject;
+    Standard_Integer myBeforeHighlightState;
+    Standard_Integer myMode;
+    Standard_Boolean myMustBeUpdated;
 };
 
 #endif // _PrsMgr_Presentation_HeaderFile

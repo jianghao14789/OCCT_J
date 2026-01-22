@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Resource_Manager.hxx>
 #include <Standard_Dump.hxx>
 #include <TDF_Label.hxx>
@@ -23,59 +22,54 @@
 #include <XCAFDoc_DocumentTool.hxx>
 #include <XCAFPrs_Driver.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(XCAFApp_Application,TDocStd_Application)
+IMPLEMENT_STANDARD_RTTIEXT(XCAFApp_Application, TDocStd_Application)
 
 //=======================================================================
-//function : GetApplication
-//purpose  : 
+// function : GetApplication
+// purpose  :
 //=======================================================================
-Handle(XCAFApp_Application) XCAFApp_Application::GetApplication() 
-{
-  static Handle(XCAFApp_Application) locApp;
-  if ( locApp.IsNull() ) locApp = new XCAFApp_Application;
-  return locApp;
+Handle(XCAFApp_Application) XCAFApp_Application::GetApplication() {
+    static Handle(XCAFApp_Application) locApp;
+    if (locApp.IsNull()) locApp = new XCAFApp_Application;
+    return locApp;
 }
 
 //=======================================================================
-//function : XCAFApp_Application
-//purpose  : 
+// function : XCAFApp_Application
+// purpose  :
 //=======================================================================
 
-XCAFApp_Application::XCAFApp_Application()
-{
-  // register driver for presentation
-  Handle(TPrsStd_DriverTable) table  = TPrsStd_DriverTable::Get();
-  table->AddDriver (XCAFPrs_Driver::GetID(), new XCAFPrs_Driver);
+XCAFApp_Application::XCAFApp_Application() {
+    // register driver for presentation
+    Handle(TPrsStd_DriverTable) table = TPrsStd_DriverTable::Get();
+    table->AddDriver(XCAFPrs_Driver::GetID(), new XCAFPrs_Driver);
 }
 
 //=======================================================================
-//function : ResourcesName
-//purpose  : 
+// function : ResourcesName
+// purpose  :
 //=======================================================================
 
-Standard_CString XCAFApp_Application::ResourcesName() 
-{
-  return Standard_CString("XCAF");
-//  return Standard_CString("Standard");
+Standard_CString XCAFApp_Application::ResourcesName() {
+    return Standard_CString("XCAF");
+    //  return Standard_CString("Standard");
 }
 
 //=======================================================================
-//function : InitDocument
-//purpose  : 
+// function : InitDocument
+// purpose  :
 //=======================================================================
 
-void XCAFApp_Application::InitDocument(const Handle(CDM_Document)& aDoc) const
-{
-  XCAFDoc_DocumentTool::Set(Handle(TDocStd_Document)::DownCast(aDoc)->Main());
+void XCAFApp_Application::InitDocument(const Handle(CDM_Document) & aDoc) const {
+    XCAFDoc_DocumentTool::Set(Handle(TDocStd_Document)::DownCast(aDoc)->Main());
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void XCAFApp_Application::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+void XCAFApp_Application::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, TDocStd_Application)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, TDocStd_Application)
 }

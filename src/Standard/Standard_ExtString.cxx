@@ -19,13 +19,11 @@
 // function : HashCode
 // purpose  :
 //============================================================================
-Standard_Integer HashCode(const Standard_ExtString theExtString, const Standard_Integer theUpperBound)
-{
+Standard_Integer HashCode(const Standard_ExtString theExtString, const Standard_Integer theUpperBound) {
     // compute SDBM hash of an ext string
     unsigned int hash = 0;
 
-    for (const Standard_ExtCharacter* c = theExtString; *c; ++c)
-    {
+    for (const Standard_ExtCharacter* c = theExtString; *c; ++c) {
         /* hash = hash * 33 ^ c */
         hash = (*c) + (hash << 6) + (hash << 16) - hash;
     }

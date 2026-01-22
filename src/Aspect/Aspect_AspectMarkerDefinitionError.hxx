@@ -25,10 +25,10 @@ class Aspect_AspectMarkerDefinitionError;
 DEFINE_STANDARD_HANDLE(Aspect_AspectMarkerDefinitionError, Standard_OutOfRange)
 
 #if !defined No_Exception && !defined No_Aspect_AspectMarkerDefinitionError
-  #define Aspect_AspectMarkerDefinitionError_Raise_if(CONDITION, MESSAGE) \
-  if (CONDITION) throw Aspect_AspectMarkerDefinitionError(MESSAGE);
+#define Aspect_AspectMarkerDefinitionError_Raise_if(CONDITION, MESSAGE)                                                \
+    if (CONDITION) throw Aspect_AspectMarkerDefinitionError(MESSAGE);
 #else
-  #define Aspect_AspectMarkerDefinitionError_Raise_if(CONDITION, MESSAGE)
+#define Aspect_AspectMarkerDefinitionError_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Aspect_AspectMarkerDefinitionError, Standard_OutOfRange)

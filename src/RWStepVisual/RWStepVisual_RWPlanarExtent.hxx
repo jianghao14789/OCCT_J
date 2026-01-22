@@ -27,42 +27,20 @@ class Interface_Check;
 class StepVisual_PlanarExtent;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for PlanarExtent
-class RWStepVisual_RWPlanarExtent 
-{
+class RWStepVisual_RWPlanarExtent {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWPlanarExtent();
 
-  
-  Standard_EXPORT RWStepVisual_RWPlanarExtent();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_PlanarExtent)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_PlanarExtent)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_PlanarExtent) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_PlanarExtent) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWPlanarExtent_HeaderFile

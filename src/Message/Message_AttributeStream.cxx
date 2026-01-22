@@ -19,8 +19,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeStream, Message_Attribute)
 
 //=======================================================================
-//function : Constructor
-//purpose  : 使用流和名称初始化流属性对象
+// function : Constructor
+// purpose  : 使用流和名称初始化流属性对象
 //
 // 说明：
 //   - Message_AttributeStream 是 Message_Attribute 的子类
@@ -45,15 +45,14 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeStream, Message_Attribute)
 //   - 调用 SetStream() 方法存储流的内容
 //=======================================================================
 Message_AttributeStream::Message_AttributeStream(const Standard_SStream& theStream,
-    const TCollection_AsciiString& theName)
-    : Message_Attribute(theName)
-{
+                                                 const TCollection_AsciiString& theName)
+    : Message_Attribute(theName) {
     SetStream(theStream);
 }
 
 //=======================================================================
-//function : SetStream
-//purpose  : 设置或更新流的值
+// function : SetStream
+// purpose  : 设置或更新流的值
 //
 // 参数说明：
 //   - theStream：新的流对象
@@ -74,8 +73,7 @@ Message_AttributeStream::Message_AttributeStream(const Standard_SStream& theStre
 //   attr.SetStream(ss);
 //   // 现在 attr 包含了 ss 的内容的副本
 //=======================================================================
-void Message_AttributeStream::SetStream(const Standard_SStream& theStream)
-{
+void Message_AttributeStream::SetStream(const Standard_SStream& theStream) {
     // 清空内部流：将其内容设置为空字符串
     myStream.str("");
     // 从输入流提取内容并写入内部流
@@ -85,8 +83,8 @@ void Message_AttributeStream::SetStream(const Standard_SStream& theStream)
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将流属性对象导出为 JSON 格式
+// function : DumpJson
+// purpose  : 将流属性对象导出为 JSON 格式
 //
 // 参数说明：
 //   - theOStream：输出流
@@ -115,12 +113,10 @@ void Message_AttributeStream::SetStream(const Standard_SStream& theStream)
 //   - OCCT_DUMP_BASE_CLASS()：输出基类的字段
 //   - OCCT_DUMP_STREAM_VALUE_DUMPED()：输出流的内容
 //=======================================================================
-void Message_AttributeStream::DumpJson(Standard_OStream& theOStream,
-    Standard_Integer theDepth) const
-{
+void Message_AttributeStream::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     // 开始输出对象的 JSON
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
-    
+
     // 输出基类（Message_Attribute）的字段
     // theDepth 用于控制基类字段的递归深度
     OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Message_Attribute)

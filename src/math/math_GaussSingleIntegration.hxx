@@ -28,27 +28,25 @@
 class StdFail_NotDone;
 class math_Function;
 
-
-
 //! This class implements the integration of a function of a single variable
 //! between the parameter bounds Lower and Upper.
 //! Warning: Order must be inferior or equal to 61.
 class math_GaussSingleIntegration {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT math_GaussSingleIntegration();
 
     //! The Gauss-Legendre integration with N = Order points of integration,
     //! is done on the function F between the bounds Lower and Upper.
-    Standard_EXPORT math_GaussSingleIntegration(math_Function& F, const Standard_Real Lower, const Standard_Real Upper, const Standard_Integer Order);
-
+    Standard_EXPORT math_GaussSingleIntegration(math_Function& F, const Standard_Real Lower, const Standard_Real Upper,
+                                                const Standard_Integer Order);
 
     //! The Gauss-Legendre integration with N = Order points of integration  and
     //! given tolerance = Tol is done on the function F between the bounds
     //! Lower and Upper.
-    Standard_EXPORT math_GaussSingleIntegration(math_Function& F, const Standard_Real Lower, const Standard_Real Upper, const Standard_Integer Order, const Standard_Real Tol);
+    Standard_EXPORT math_GaussSingleIntegration(math_Function& F, const Standard_Real Lower, const Standard_Real Upper,
+                                                const Standard_Integer Order, const Standard_Real Tol);
 
     //! returns True if all has been correctly done.
     Standard_Boolean IsDone() const;
@@ -60,10 +58,10 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
     //! performs  actual  computation
-    Standard_EXPORT void Perform(math_Function& F, const Standard_Real Lower, const Standard_Real Upper, const Standard_Integer Order);
+    Standard_EXPORT void Perform(math_Function& F, const Standard_Real Lower, const Standard_Real Upper,
+                                 const Standard_Integer Order);
 
     Standard_Real Val;
     Standard_Boolean Done;

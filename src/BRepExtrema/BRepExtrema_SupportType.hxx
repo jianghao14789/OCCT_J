@@ -14,11 +14,6 @@
 #ifndef _BRepExtrema_SupportType_HeaderFile
 #define _BRepExtrema_SupportType_HeaderFile
 
-enum BRepExtrema_SupportType
-{
-  BRepExtrema_IsVertex,
-  BRepExtrema_IsOnEdge,
-  BRepExtrema_IsInFace
-};
+enum BRepExtrema_SupportType { BRepExtrema_IsVertex, BRepExtrema_IsOnEdge, BRepExtrema_IsInFace };
 
 #endif

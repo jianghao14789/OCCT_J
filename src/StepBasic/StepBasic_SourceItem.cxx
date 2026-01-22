@@ -22,42 +22,37 @@
 #include <TCollection_HAsciiString.hxx>
 
 //=======================================================================
-//function : StepBasic_SourceItem
-//purpose  : 
+// function : StepBasic_SourceItem
+// purpose  :
 //=======================================================================
-StepBasic_SourceItem::StepBasic_SourceItem ()
-{
+StepBasic_SourceItem::StepBasic_SourceItem() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepBasic_SourceItem::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepData_SelectNamed))) return 1;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  : 
+// function : NewMember
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepBasic_SourceItem::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepData_SelectNamed))) return 1;
-  return 0;
+Handle(StepData_SelectMember) StepBasic_SourceItem::NewMember() const {
+    Handle(StepData_SelectNamed) member = new StepData_SelectNamed;
+    return member;
 }
 
 //=======================================================================
-//function : NewMember
-//purpose  : 
+// function : Identifier
+// purpose  :
 //=======================================================================
 
-Handle(StepData_SelectMember) StepBasic_SourceItem::NewMember() const
-{
-  Handle(StepData_SelectNamed) member = new StepData_SelectNamed;
-  return member;
-}
-
-//=======================================================================
-//function : Identifier
-//purpose  : 
-//=======================================================================
-
-Handle(TCollection_HAsciiString) StepBasic_SourceItem::Identifier () const
-{
-  return Handle(TCollection_HAsciiString)::DownCast(Value());
+Handle(TCollection_HAsciiString) StepBasic_SourceItem::Identifier() const {
+    return Handle(TCollection_HAsciiString)::DownCast(Value());
 }

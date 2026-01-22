@@ -15,10 +15,9 @@
 #define _Aspect_GraphicsLibrary_HeaderFile
 
 //! Graphics API enumeration.
-enum Aspect_GraphicsLibrary
-{
-  Aspect_GraphicsLibrary_OpenGL,
-  Aspect_GraphicsLibrary_OpenGLES,
+enum Aspect_GraphicsLibrary {
+    Aspect_GraphicsLibrary_OpenGL,
+    Aspect_GraphicsLibrary_OpenGLES,
 };
 
 #endif // _Aspect_GraphicsLibrary_HeaderFile

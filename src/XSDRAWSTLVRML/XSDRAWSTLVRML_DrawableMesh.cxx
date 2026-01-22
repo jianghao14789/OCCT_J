@@ -13,36 +13,31 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Draw_Display.hxx>
 #include <MeshVS_Mesh.hxx>
 #include <Standard_Type.hxx>
 #include <XSDRAWSTLVRML_DrawableMesh.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(XSDRAWSTLVRML_DrawableMesh,Draw_Drawable3D)
+IMPLEMENT_STANDARD_RTTIEXT(XSDRAWSTLVRML_DrawableMesh, Draw_Drawable3D)
 
 //================================================================
 // Function : DrawOn
 // Purpose  :
 //================================================================
-XSDRAWSTLVRML_DrawableMesh::XSDRAWSTLVRML_DrawableMesh( const Handle( MeshVS_Mesh )& aMesh )
-{
-  myMesh = aMesh;
+XSDRAWSTLVRML_DrawableMesh::XSDRAWSTLVRML_DrawableMesh(const Handle(MeshVS_Mesh) & aMesh) {
+    myMesh = aMesh;
 }
 
 //================================================================
 // Function :
 // Purpose  :
 //================================================================
-void XSDRAWSTLVRML_DrawableMesh::DrawOn(Draw_Display& /*d*/) const
-{
-}
+void XSDRAWSTLVRML_DrawableMesh::DrawOn(Draw_Display& /*d*/) const {}
 
 //================================================================
 // Function :
 // Purpose  :
 //================================================================
-Handle( MeshVS_Mesh ) XSDRAWSTLVRML_DrawableMesh::GetMesh() const
-{
-  return myMesh;
+Handle(MeshVS_Mesh) XSDRAWSTLVRML_DrawableMesh::GetMesh() const {
+    return myMesh;
 }

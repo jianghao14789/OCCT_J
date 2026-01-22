@@ -17,7 +17,6 @@
 #ifndef _CSLib_DerivativeStatus_HeaderFile
 #define _CSLib_DerivativeStatus_HeaderFile
 
-
 //! D1uIsNull : ||D1U|| <= Resolution
 //!
 //! D1vIsNull : ||D1V|| <= Resolution
@@ -39,8 +38,7 @@
 //! D1uIsParallelD1v : the angle between the derivatives in the U and
 //! V direction is null (tolerance criterion given
 //! as input data)
-enum CSLib_DerivativeStatus
-{
+enum CSLib_DerivativeStatus {
     CSLib_Done,
     CSLib_D1uIsNull,
     CSLib_D1vIsNull,

@@ -29,7 +29,6 @@
 class math_Matrix;
 class gp_Pnt;
 
-
 //! Deferred   class  for a  function  used  to compute  a
 //! blending surface between a  surface and a curve, using
 //! a  guide  line.   This   function is  used  to find  a
@@ -42,9 +41,7 @@ class gp_Pnt;
 //! point on the partner surface.
 class Blend_SurfPointFuncInv : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns 3.
     Standard_EXPORT Standard_Integer NbVariables() const;
@@ -88,27 +85,8 @@ public:
     //! Tol is the tolerance used in 3d space.
     Standard_EXPORT virtual Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) = 0;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Blend_SurfPointFuncInv_HeaderFile

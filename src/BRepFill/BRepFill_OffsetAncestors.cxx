@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepFill_OffsetAncestors.hxx>
 #include <BRepFill_OffsetWire.hxx>
 #include <StdFail_NotDone.hxx>
@@ -25,87 +24,73 @@
 #include <TopTools_ListIteratorOfListOfShape.hxx>
 
 //=======================================================================
-//function : BRepFill_OffsetAncestors
-//purpose  : 
+// function : BRepFill_OffsetAncestors
+// purpose  :
 //=======================================================================
-BRepFill_OffsetAncestors::BRepFill_OffsetAncestors()
-:myIsPerform(Standard_False)
-{
+BRepFill_OffsetAncestors::BRepFill_OffsetAncestors() : myIsPerform(Standard_False) {}
+
+//=======================================================================
+// function : BRepFill_OffsetAncestors
+// purpose  :
+//=======================================================================
+
+BRepFill_OffsetAncestors::BRepFill_OffsetAncestors(BRepFill_OffsetWire& Paral) {
+    Perform(Paral);
 }
 
-
 //=======================================================================
-//function : BRepFill_OffsetAncestors
-//purpose  : 
-//=======================================================================
-
-BRepFill_OffsetAncestors::BRepFill_OffsetAncestors
-(BRepFill_OffsetWire& Paral)
-{
-  Perform(Paral);
-}
-
-
-//=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void BRepFill_OffsetAncestors::Perform(BRepFill_OffsetWire& Paral)
-{
-  TopoDS_Face Spine = Paral.Spine();
-  
-  TopExp_Explorer                    Exp;
-  TopTools_ListIteratorOfListOfShape it;
+void BRepFill_OffsetAncestors::Perform(BRepFill_OffsetWire& Paral) {
+    TopoDS_Face Spine = Paral.Spine();
 
-  // on itere sur les edges.
-  for ( Exp.Init(Spine, TopAbs_EDGE); Exp.More(); Exp.Next()) {
-    for (it.Initialize(Paral.GeneratedShapes(Exp.Current()));
-	 it.More(); it.Next()) {
-      myMap.Bind( it.Value(), Exp.Current());
+    TopExp_Explorer Exp;
+    TopTools_ListIteratorOfListOfShape it;
+
+    // on itere sur les edges.
+    for (Exp.Init(Spine, TopAbs_EDGE); Exp.More(); Exp.Next()) {
+        for (it.Initialize(Paral.GeneratedShapes(Exp.Current())); it.More(); it.Next()) {
+            myMap.Bind(it.Value(), Exp.Current());
+        }
     }
-  }
 
-  // on itere sur les vertex.
-  for ( Exp.Init(Spine, TopAbs_VERTEX); Exp.More(); Exp.Next()) {
-    for (it.Initialize(Paral.GeneratedShapes(Exp.Current()));
-	 it.More(); it.Next()) {
-      myMap.Bind( it.Value(), Exp.Current());
+    // on itere sur les vertex.
+    for (Exp.Init(Spine, TopAbs_VERTEX); Exp.More(); Exp.Next()) {
+        for (it.Initialize(Paral.GeneratedShapes(Exp.Current())); it.More(); it.Next()) {
+            myMap.Bind(it.Value(), Exp.Current());
+        }
     }
-  }
 
-  myIsPerform = Standard_True;
+    myIsPerform = Standard_True;
 }
 
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsDone
+// purpose  :
 //=======================================================================
 
-Standard_Boolean BRepFill_OffsetAncestors::IsDone() const
-{
-  return myIsPerform;
+Standard_Boolean BRepFill_OffsetAncestors::IsDone() const {
+    return myIsPerform;
 }
 
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsDone
+// purpose  :
 //=======================================================================
 
-Standard_Boolean BRepFill_OffsetAncestors:: HasAncestor(const TopoDS_Edge& S1)
-const
-{
-  return myMap.IsBound(S1);
+Standard_Boolean BRepFill_OffsetAncestors::HasAncestor(const TopoDS_Edge& S1) const {
+    return myMap.IsBound(S1);
 }
 
 //=======================================================================
-//function : TopoDS_Shape&
-//purpose  : 
+// function : TopoDS_Shape&
+// purpose  :
 //=======================================================================
 
-const TopoDS_Shape& BRepFill_OffsetAncestors::Ancestor(const TopoDS_Edge& S1)
-const
-{
-  StdFail_NotDone_Raise_if (!myIsPerform, "BRepFill_OffsetAncestors::Ancestor() - Perform() should be called before accessing results");
-  return myMap(S1);
+const TopoDS_Shape& BRepFill_OffsetAncestors::Ancestor(const TopoDS_Edge& S1) const {
+    StdFail_NotDone_Raise_if(
+        !myIsPerform, "BRepFill_OffsetAncestors::Ancestor() - Perform() should be called before accessing results");
+    return myMap(S1);
 }

@@ -13,44 +13,38 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TCollection_AsciiString.hxx>
 #include <XmlLDrivers_NamespaceDef.hxx>
 
 //=======================================================================
-//function : XmlLDrivers_NamespaceDef
-//purpose  : Empty constructor
+// function : XmlLDrivers_NamespaceDef
+// purpose  : Empty constructor
 //=======================================================================
-XmlLDrivers_NamespaceDef::XmlLDrivers_NamespaceDef ()
- {}
+XmlLDrivers_NamespaceDef::XmlLDrivers_NamespaceDef() {}
 
 //=======================================================================
-//function : XmlLDrivers_NamespaceDef
-//purpose  : Constructor
+// function : XmlLDrivers_NamespaceDef
+// purpose  : Constructor
 //=======================================================================
 
-XmlLDrivers_NamespaceDef::XmlLDrivers_NamespaceDef
-                                (const TCollection_AsciiString& thePrefix,
-                                 const TCollection_AsciiString& theURI)
-        : myPrefix (thePrefix), myURI (theURI)
-{}
+XmlLDrivers_NamespaceDef::XmlLDrivers_NamespaceDef(const TCollection_AsciiString& thePrefix,
+                                                   const TCollection_AsciiString& theURI)
+    : myPrefix(thePrefix), myURI(theURI) {}
 
 //=======================================================================
-//function : Prefix
-//purpose  : Query
+// function : Prefix
+// purpose  : Query
 //=======================================================================
 
-const TCollection_AsciiString& XmlLDrivers_NamespaceDef::Prefix () const
-{
-  return myPrefix;
+const TCollection_AsciiString& XmlLDrivers_NamespaceDef::Prefix() const {
+    return myPrefix;
 }
 
 //=======================================================================
-//function : URI
-//purpose  : Query
+// function : URI
+// purpose  : Query
 //=======================================================================
 
-const TCollection_AsciiString& XmlLDrivers_NamespaceDef::URI () const
-{
-  return myURI;
+const TCollection_AsciiString& XmlLDrivers_NamespaceDef::URI() const {
+    return myURI;
 }

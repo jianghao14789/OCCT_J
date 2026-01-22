@@ -11,11 +11,9 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <XSControl_FuncShape.hxx>
 #include <XSDRAW_Functions.hxx>
 
-void  XSDRAW_Functions::Init ()
-{
-  XSControl_FuncShape::Init ();
+void XSDRAW_Functions::Init() {
+    XSControl_FuncShape::Init();
 }

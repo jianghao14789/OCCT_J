@@ -27,10 +27,8 @@ class gp_Pnt;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_VectorWithMagnitude;
 DEFINE_STANDARD_HANDLE(Geom_VectorWithMagnitude, Geom_Vector)
-
 
 //! Defines a vector with magnitude.
 //! A vector with magnitude can have a zero length.
@@ -68,25 +66,26 @@ public:
     Standard_EXPORT Standard_Real SquareMagnitude() const Standard_OVERRIDE;
 
     //! Adds the Vector Other to <me>.
-    Standard_EXPORT void Add(const Handle(Geom_Vector)& Other);
+    Standard_EXPORT void Add(const Handle(Geom_Vector) & Other);
 
     //! Adds the vector Other to <me>.
-    Standard_NODISCARD Standard_EXPORT Handle(Geom_VectorWithMagnitude) Added(const Handle(Geom_Vector)& Other) const;
+    Standard_NODISCARD Standard_EXPORT Handle(Geom_VectorWithMagnitude) Added(const Handle(Geom_Vector) & Other) const;
 
     //! Computes the cross product  between <me> and Other
     //! <me> ^ Other.
-    Standard_EXPORT void Cross(const Handle(Geom_Vector)& Other) Standard_OVERRIDE;
+    Standard_EXPORT void Cross(const Handle(Geom_Vector) & Other) Standard_OVERRIDE;
 
     //! Computes the cross product  between <me> and Other
     //! <me> ^ Other. A new vector is returned.
-    Standard_EXPORT Handle(Geom_Vector) Crossed(const Handle(Geom_Vector)& Other) const Standard_OVERRIDE;
+    Standard_EXPORT Handle(Geom_Vector) Crossed(const Handle(Geom_Vector) & Other) const Standard_OVERRIDE;
 
     //! Computes the triple vector product  <me> ^ (V1 ^ V2).
-    Standard_EXPORT void CrossCross(const Handle(Geom_Vector)& V1, const Handle(Geom_Vector)& V2) Standard_OVERRIDE;
+    Standard_EXPORT void CrossCross(const Handle(Geom_Vector) & V1, const Handle(Geom_Vector) & V2) Standard_OVERRIDE;
 
     //! Computes the triple vector product  <me> ^ (V1 ^ V2).
     //! A new vector is returned.
-    Standard_EXPORT Handle(Geom_Vector) CrossCrossed(const Handle(Geom_Vector)& V1, const Handle(Geom_Vector)& V2) const Standard_OVERRIDE;
+    Standard_EXPORT Handle(Geom_Vector)
+        CrossCrossed(const Handle(Geom_Vector) & V1, const Handle(Geom_Vector) & V2) const Standard_OVERRIDE;
 
     //! Divides <me> by a scalar.
     Standard_EXPORT void Divide(const Standard_Real Scalar);
@@ -114,11 +113,11 @@ public:
     Standard_NODISCARD Standard_EXPORT Handle(Geom_VectorWithMagnitude) Normalized() const;
 
     //! Subtracts the Vector Other to <me>.
-    Standard_EXPORT void Subtract(const Handle(Geom_Vector)& Other);
+    Standard_EXPORT void Subtract(const Handle(Geom_Vector) & Other);
 
     //! Subtracts the vector Other to <me>. A new vector is returned.
-    Standard_NODISCARD Standard_EXPORT
-        Handle(Geom_VectorWithMagnitude) Subtracted(const Handle(Geom_Vector)& Other) const;
+    Standard_NODISCARD Standard_EXPORT Handle(Geom_VectorWithMagnitude)
+        Subtracted(const Handle(Geom_Vector) & Other) const;
 
     //! Applies the transformation T to this vector.
     Standard_EXPORT void Transform(const gp_Trsf& T) Standard_OVERRIDE;
@@ -129,9 +128,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(Geom_VectorWithMagnitude, Geom_Vector)
 
 protected:
-
 private:
-
 };
 
 #endif // _Geom_VectorWithMagnitude_HeaderFile

@@ -35,10 +35,8 @@
 // Method  : StepToTopoDS_TranslateShell::StepToTopoDS_TranslateShell
 // Purpose : Empty Constructor
 // ============================================================================
-StepToTopoDS_TranslateShell::StepToTopoDS_TranslateShell()
-: myError(StepToTopoDS_TranslateShellOther)
-{
-  done = Standard_False;
+StepToTopoDS_TranslateShell::StepToTopoDS_TranslateShell() : myError(StepToTopoDS_TranslateShellOther) {
+    done = Standard_False;
 }
 
 // ============================================================================
@@ -46,66 +44,57 @@ StepToTopoDS_TranslateShell::StepToTopoDS_TranslateShell()
 // Purpose : Init with a ConnectedFaceSet and a Tool
 // ============================================================================
 
-void StepToTopoDS_TranslateShell::Init
-(const Handle(StepShape_ConnectedFaceSet)& CFS,
- StepToTopoDS_Tool& aTool,
- StepToTopoDS_NMTool& NMTool,
- const Message_ProgressRange& theProgress)
-{
-  //bug15697
-  if(CFS.IsNull())
-    return;
-  
-  if (!aTool.IsBound(CFS)) {
+void StepToTopoDS_TranslateShell::Init(const Handle(StepShape_ConnectedFaceSet) & CFS, StepToTopoDS_Tool& aTool,
+                                       StepToTopoDS_NMTool& NMTool, const Message_ProgressRange& theProgress) {
+    // bug15697
+    if (CFS.IsNull()) return;
 
-    BRep_Builder B;
-    Handle(Transfer_TransientProcess) TP = aTool.TransientProcess();
+    if (!aTool.IsBound(CFS)) {
 
-    Standard_Integer NbFc = CFS->NbCfsFaces();
-    TopoDS_Shell Sh;
-    B.MakeShell(Sh);
-    TopoDS_Face F;
-    TopoDS_Shape S;
-    Handle(StepShape_Face) StepFace;
+        BRep_Builder B;
+        Handle(Transfer_TransientProcess) TP = aTool.TransientProcess();
 
-    StepToTopoDS_TranslateFace myTranFace;
-    myTranFace.SetPrecision(Precision()); //gka
-    myTranFace.SetMaxTol(MaxTol());
+        Standard_Integer NbFc = CFS->NbCfsFaces();
+        TopoDS_Shell Sh;
+        B.MakeShell(Sh);
+        TopoDS_Face F;
+        TopoDS_Shape S;
+        Handle(StepShape_Face) StepFace;
 
-    Message_ProgressScope PS ( theProgress, "Face", NbFc);
-    for (Standard_Integer i = 1; i <= NbFc && PS.More(); i++, PS.Next()) {
+        StepToTopoDS_TranslateFace myTranFace;
+        myTranFace.SetPrecision(Precision()); // gka
+        myTranFace.SetMaxTol(MaxTol());
+
+        Message_ProgressScope PS(theProgress, "Face", NbFc);
+        for (Standard_Integer i = 1; i <= NbFc && PS.More(); i++, PS.Next()) {
 #ifdef OCCT_DEBUG
-      std::cout << "Processing Face : " << i << std::endl;
+            std::cout << "Processing Face : " << i << std::endl;
 #endif
-      StepFace = CFS->CfsFacesValue(i);
-      Handle(StepShape_FaceSurface) theFS =
-        Handle(StepShape_FaceSurface)::DownCast(StepFace);
-      if (!theFS.IsNull()) {
-        myTranFace.Init(theFS, aTool, NMTool);
-        if (myTranFace.IsDone()) {
-          S = myTranFace.Value();
-          F = TopoDS::Face(S);
-          B.Add(Sh, F);
+            StepFace = CFS->CfsFacesValue(i);
+            Handle(StepShape_FaceSurface) theFS = Handle(StepShape_FaceSurface)::DownCast(StepFace);
+            if (!theFS.IsNull()) {
+                myTranFace.Init(theFS, aTool, NMTool);
+                if (myTranFace.IsDone()) {
+                    S = myTranFace.Value();
+                    F = TopoDS::Face(S);
+                    B.Add(Sh, F);
+                } else { // Warning only + add FaceSurface file Identifier
+                    TP->AddWarning(theFS, " a Face from Shell not mapped to TopoDS");
+                }
+            } else { // Warning : add identifier
+                TP->AddWarning(StepFace, " Face is not of FaceSurface Type; not mapped to TopoDS");
+            }
         }
-        else { // Warning only + add FaceSurface file Identifier
-          TP->AddWarning(theFS, " a Face from Shell not mapped to TopoDS");
-        }
-      }
-      else { // Warning : add identifier
-        TP->AddWarning(StepFace, " Face is not of FaceSurface Type; not mapped to TopoDS");
-      }
+        Sh.Closed(BRep_Tool::IsClosed(Sh));
+        myResult = Sh;
+        aTool.Bind(CFS, myResult);
+        myError = StepToTopoDS_TranslateShellDone;
+        done = Standard_True;
+    } else {
+        myResult = TopoDS::Shell(aTool.Find(CFS));
+        myError = StepToTopoDS_TranslateShellDone;
+        done = Standard_True;
     }
-    Sh.Closed (BRep_Tool::IsClosed (Sh));
-    myResult = Sh;
-    aTool.Bind(CFS, myResult);
-    myError  = StepToTopoDS_TranslateShellDone;
-    done     = Standard_True;
-  }
-  else {
-    myResult = TopoDS::Shell(aTool.Find(CFS));
-    myError  = StepToTopoDS_TranslateShellDone;
-    done     = Standard_True;
-  }
 }
 
 // ============================================================================
@@ -113,10 +102,9 @@ void StepToTopoDS_TranslateShell::Init
 // Purpose : Return the mapped Shape
 // ============================================================================
 
-const TopoDS_Shape& StepToTopoDS_TranslateShell::Value() const 
-{
-  StdFail_NotDone_Raise_if (!done, "StepToTopoDS_TranslateShell::Value() - no result");
-  return myResult;
+const TopoDS_Shape& StepToTopoDS_TranslateShell::Value() const {
+    StdFail_NotDone_Raise_if(!done, "StepToTopoDS_TranslateShell::Value() - no result");
+    return myResult;
 }
 
 // ============================================================================
@@ -124,8 +112,6 @@ const TopoDS_Shape& StepToTopoDS_TranslateShell::Value() const
 // Purpose : Return the TranslateShell Error code
 // ============================================================================
 
-StepToTopoDS_TranslateShellError StepToTopoDS_TranslateShell::Error() const
-{
-  return myError;
+StepToTopoDS_TranslateShellError StepToTopoDS_TranslateShell::Error() const {
+    return myError;
 }
-

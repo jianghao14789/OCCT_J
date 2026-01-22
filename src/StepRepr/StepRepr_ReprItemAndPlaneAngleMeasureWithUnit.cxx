@@ -13,41 +13,37 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_PlaneAngleMeasureWithUnit.hxx>
 #include <StepRepr_ReprItemAndPlaneAngleMeasureWithUnit.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_ReprItemAndPlaneAngleMeasureWithUnit,StepRepr_ReprItemAndMeasureWithUnit)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_ReprItemAndPlaneAngleMeasureWithUnit, StepRepr_ReprItemAndMeasureWithUnit)
 
 //=======================================================================
-//function : StepRepr_ReprItemAndPlaneAngleMeasureWithUnit
-//purpose  : 
+// function : StepRepr_ReprItemAndPlaneAngleMeasureWithUnit
+// purpose  :
 //=======================================================================
-StepRepr_ReprItemAndPlaneAngleMeasureWithUnit::StepRepr_ReprItemAndPlaneAngleMeasureWithUnit() : StepRepr_ReprItemAndMeasureWithUnit()
-{
-  myPlaneAngleMeasureWithUnit = new StepBasic_PlaneAngleMeasureWithUnit();
+StepRepr_ReprItemAndPlaneAngleMeasureWithUnit::StepRepr_ReprItemAndPlaneAngleMeasureWithUnit()
+    : StepRepr_ReprItemAndMeasureWithUnit() {
+    myPlaneAngleMeasureWithUnit = new StepBasic_PlaneAngleMeasureWithUnit();
 }
 
 //=======================================================================
-//function : SetPlaneAngleMeasureWithUnit
-//purpose  : 
+// function : SetPlaneAngleMeasureWithUnit
+// purpose  :
 //=======================================================================
 
-void StepRepr_ReprItemAndPlaneAngleMeasureWithUnit::SetPlaneAngleMeasureWithUnit
-  (const Handle(StepBasic_PlaneAngleMeasureWithUnit)& aLMWU) 
-{
-  myPlaneAngleMeasureWithUnit = aLMWU;
+void StepRepr_ReprItemAndPlaneAngleMeasureWithUnit::SetPlaneAngleMeasureWithUnit(
+    const Handle(StepBasic_PlaneAngleMeasureWithUnit) & aLMWU) {
+    myPlaneAngleMeasureWithUnit = aLMWU;
 }
 
-
 //=======================================================================
-//function : GetPlaneAngleMeasureWithUnit
-//purpose  : 
+// function : GetPlaneAngleMeasureWithUnit
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_PlaneAngleMeasureWithUnit) StepRepr_ReprItemAndPlaneAngleMeasureWithUnit::
-       GetPlaneAngleMeasureWithUnit() const
-{
-  return myPlaneAngleMeasureWithUnit;
+Handle(StepBasic_PlaneAngleMeasureWithUnit)
+    StepRepr_ReprItemAndPlaneAngleMeasureWithUnit::GetPlaneAngleMeasureWithUnit() const {
+    return myPlaneAngleMeasureWithUnit;
 }

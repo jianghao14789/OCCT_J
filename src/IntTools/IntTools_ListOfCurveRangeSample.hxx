@@ -22,5 +22,4 @@
 typedef NCollection_List<IntTools_CurveRangeSample> IntTools_ListOfCurveRangeSample;
 typedef NCollection_List<IntTools_CurveRangeSample>::Iterator IntTools_ListIteratorOfListOfCurveRangeSample;
 
-
 #endif

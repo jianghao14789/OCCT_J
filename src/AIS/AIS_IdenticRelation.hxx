@@ -16,7 +16,6 @@
 
 #include <PrsDim_IdenticRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_IdenticRelation AIS_IdenticRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_IdenticRelation AIS_IdenticRelation;
 
 #endif // _AIS_IdenticRelation_HeaderFile

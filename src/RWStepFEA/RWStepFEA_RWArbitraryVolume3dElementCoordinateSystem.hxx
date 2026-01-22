@@ -27,48 +27,29 @@ class StepFEA_ArbitraryVolume3dElementCoordinateSystem;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ArbitraryVolume3dElementCoordinateSystem
-class RWStepFEA_RWArbitraryVolume3dElementCoordinateSystem 
-{
+class RWStepFEA_RWArbitraryVolume3dElementCoordinateSystem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWArbitraryVolume3dElementCoordinateSystem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWArbitraryVolume3dElementCoordinateSystem();
-  
-  //! Reads ArbitraryVolume3dElementCoordinateSystem
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_ArbitraryVolume3dElementCoordinateSystem)& ent) const;
-  
-  //! Writes ArbitraryVolume3dElementCoordinateSystem
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_ArbitraryVolume3dElementCoordinateSystem)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_ArbitraryVolume3dElementCoordinateSystem)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ArbitraryVolume3dElementCoordinateSystem
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_ArbitraryVolume3dElementCoordinateSystem) & ent) const;
 
+    //! Writes ArbitraryVolume3dElementCoordinateSystem
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_ArbitraryVolume3dElementCoordinateSystem) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_ArbitraryVolume3dElementCoordinateSystem) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWArbitraryVolume3dElementCoordinateSystem_HeaderFile

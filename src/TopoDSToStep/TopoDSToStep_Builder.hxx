@@ -31,55 +31,29 @@ class TopoDS_Shape;
 class TopoDSToStep_Tool;
 class Transfer_FinderProcess;
 
-
 //! This builder Class provides services to build
 //! a ProSTEP Shape model from a Cas.Cad BRep.
-class TopoDSToStep_Builder  : public TopoDSToStep_Root
-{
+class TopoDSToStep_Builder : public TopoDSToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopoDSToStep_Builder();
 
-  
-  Standard_EXPORT TopoDSToStep_Builder();
-  
-  Standard_EXPORT TopoDSToStep_Builder(const TopoDS_Shape& S,
-                                       TopoDSToStep_Tool& T,
-                                       const Handle(Transfer_FinderProcess)& FP,
-                                       const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT void Init (const TopoDS_Shape& S,
-                             TopoDSToStep_Tool& T,
-                             const Handle(Transfer_FinderProcess)& FP,
-                             const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT TopoDSToStep_BuilderError Error() const;
-  
-  Standard_EXPORT const Handle(StepShape_TopologicalRepresentationItem)& Value() const;
+    Standard_EXPORT TopoDSToStep_Builder(const TopoDS_Shape& S, TopoDSToStep_Tool& T,
+                                         const Handle(Transfer_FinderProcess) & FP,
+                                         const Message_ProgressRange& theProgress = Message_ProgressRange());
 
+    Standard_EXPORT void Init(const TopoDS_Shape& S, TopoDSToStep_Tool& T, const Handle(Transfer_FinderProcess) & FP,
+                              const Message_ProgressRange& theProgress = Message_ProgressRange());
 
+    Standard_EXPORT TopoDSToStep_BuilderError Error() const;
 
+    Standard_EXPORT const Handle(StepShape_TopologicalRepresentationItem) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepShape_TopologicalRepresentationItem) myResult;
-  TopoDSToStep_BuilderError myError;
-
-
+    Handle(StepShape_TopologicalRepresentationItem) myResult;
+    TopoDSToStep_BuilderError myError;
 };
-
-
-
-
-
-
 
 #endif // _TopoDSToStep_Builder_HeaderFile

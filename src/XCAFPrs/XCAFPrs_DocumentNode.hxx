@@ -22,35 +22,28 @@
 #include <TopLoc_Location.hxx>
 
 //! Structure defining document node.
-struct XCAFPrs_DocumentNode
-{
-  TCollection_AsciiString Id;         //!< string identifier
-  TDF_Label               Label;      //!< label in the document
-  TDF_Label               RefLabel;   //!< reference label in the document
-  XCAFPrs_Style           Style;      //!< node style
-  TopLoc_Location         Location;   //!< node global transformation
-  TopLoc_Location         LocalTrsf;  //!< node transformation relative to parent
-  TDF_ChildIterator       ChildIter;  //!< child iterator
-  Standard_Boolean        IsAssembly; //!< flag indicating that this label is assembly
+struct XCAFPrs_DocumentNode {
+    TCollection_AsciiString Id;  //!< string identifier
+    TDF_Label Label;             //!< label in the document
+    TDF_Label RefLabel;          //!< reference label in the document
+    XCAFPrs_Style Style;         //!< node style
+    TopLoc_Location Location;    //!< node global transformation
+    TopLoc_Location LocalTrsf;   //!< node transformation relative to parent
+    TDF_ChildIterator ChildIter; //!< child iterator
+    Standard_Boolean IsAssembly; //!< flag indicating that this label is assembly
 
-  XCAFPrs_DocumentNode() : IsAssembly (Standard_False) {}
+    XCAFPrs_DocumentNode() : IsAssembly(Standard_False) {}
 
 public: // Methods for hash map
+    //! Return hash code based on node string identifier.
+    static Standard_Integer HashCode(const XCAFPrs_DocumentNode& theNode, const Standard_Integer theN) {
+        return ::HashCode(theNode.Id, theN);
+    }
 
-  //! Return hash code based on node string identifier.
-  static Standard_Integer HashCode (const XCAFPrs_DocumentNode& theNode,
-                                    const Standard_Integer theN)
-  {
-    return ::HashCode (theNode.Id, theN);
-  }
-
-  //! Return TRUE if two document nodes has the same string identifier.
-  static Standard_Boolean IsEqual (const XCAFPrs_DocumentNode& theNode1,
-                                   const XCAFPrs_DocumentNode& theNode2)
-  {
-    return theNode1.Id == theNode2.Id;
-  }
-
+    //! Return TRUE if two document nodes has the same string identifier.
+    static Standard_Boolean IsEqual(const XCAFPrs_DocumentNode& theNode1, const XCAFPrs_DocumentNode& theNode2) {
+        return theNode1.Id == theNode2.Id;
+    }
 };
 
 #endif // _XCAFPrs_DocumentNode_HeaderFile

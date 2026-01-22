@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom_ToroidalSurface.hxx>
 #include <GeomToStep_MakeAxis2Placement3d.hxx>
 #include <GeomToStep_MakeToroidalSurface.hxx>
@@ -27,33 +26,30 @@
 // Creation d' une toroidal_surface de prostep a partir d' une ToroidalSurface
 // de Geom
 //=============================================================================
-GeomToStep_MakeToroidalSurface::GeomToStep_MakeToroidalSurface
-  ( const Handle(Geom_ToroidalSurface)& S )
-	
+GeomToStep_MakeToroidalSurface::GeomToStep_MakeToroidalSurface(const Handle(Geom_ToroidalSurface) & S)
+
 {
-  Handle(StepGeom_ToroidalSurface) Surf;
-  Handle(StepGeom_Axis2Placement3d) aPosition;
-  Standard_Real aMajorRadius, aMinorRadius;
-  
-  GeomToStep_MakeAxis2Placement3d MkAxis2(S->Position());
-  aPosition = MkAxis2.Value();
-  aMajorRadius = S->MajorRadius();
-  aMinorRadius = S->MinorRadius();
-  Surf = new StepGeom_ToroidalSurface;
-  Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
-  Standard_Real fact = StepData_GlobalFactors::Intance().LengthFactor();
-  Surf->Init(name, aPosition, aMajorRadius/fact, aMinorRadius/fact);
-  theToroidalSurface = Surf;
-  done = Standard_True;
+    Handle(StepGeom_ToroidalSurface) Surf;
+    Handle(StepGeom_Axis2Placement3d) aPosition;
+    Standard_Real aMajorRadius, aMinorRadius;
+
+    GeomToStep_MakeAxis2Placement3d MkAxis2(S->Position());
+    aPosition = MkAxis2.Value();
+    aMajorRadius = S->MajorRadius();
+    aMinorRadius = S->MinorRadius();
+    Surf = new StepGeom_ToroidalSurface;
+    Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
+    Standard_Real fact = StepData_GlobalFactors::Intance().LengthFactor();
+    Surf->Init(name, aPosition, aMajorRadius / fact, aMinorRadius / fact);
+    theToroidalSurface = Surf;
+    done = Standard_True;
 }
 
 //=============================================================================
 // renvoi des valeurs
 //=============================================================================
 
-const Handle(StepGeom_ToroidalSurface) &
-      GeomToStep_MakeToroidalSurface::Value() const
-{
-  StdFail_NotDone_Raise_if (!done, "GeomToStep_MakeToroidalSurface::Value() - no result");
-  return theToroidalSurface;
+const Handle(StepGeom_ToroidalSurface) & GeomToStep_MakeToroidalSurface::Value() const {
+    StdFail_NotDone_Raise_if(!done, "GeomToStep_MakeToroidalSurface::Value() - no result");
+    return theToroidalSurface;
 }

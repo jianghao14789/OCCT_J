@@ -19,19 +19,17 @@
 #include <Poly_Triangulation.hxx>
 #include <TopoDS_Face.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BRepTools_Modification,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(BRepTools_Modification, Standard_Transient)
 
-Standard_Boolean BRepTools_Modification::NewTriangulation(const TopoDS_Face&, Handle(Poly_Triangulation)&)
-{
-  return Standard_False;
+Standard_Boolean BRepTools_Modification::NewTriangulation(const TopoDS_Face&, Handle(Poly_Triangulation) &) {
+    return Standard_False;
 }
 
-Standard_Boolean BRepTools_Modification::NewPolygon(const TopoDS_Edge&, Handle(Poly_Polygon3D)&)
-{
-  return Standard_False;
+Standard_Boolean BRepTools_Modification::NewPolygon(const TopoDS_Edge&, Handle(Poly_Polygon3D) &) {
+    return Standard_False;
 }
 
-Standard_Boolean BRepTools_Modification::NewPolygonOnTriangulation(const TopoDS_Edge&, const TopoDS_Face&, Handle(Poly_PolygonOnTriangulation)&)
-{
-  return Standard_False;
+Standard_Boolean BRepTools_Modification::NewPolygonOnTriangulation(const TopoDS_Edge&, const TopoDS_Face&,
+                                                                   Handle(Poly_PolygonOnTriangulation) &) {
+    return Standard_False;
 }

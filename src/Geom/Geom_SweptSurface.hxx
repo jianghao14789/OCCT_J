@@ -25,7 +25,6 @@
 #include <Geom_Surface.hxx>
 class Geom_Curve;
 
-
 class Geom_SweptSurface;
 DEFINE_STANDARD_HANDLE(Geom_SweptSurface, Geom_Surface)
 
@@ -58,18 +57,17 @@ public:
     Standard_EXPORT Handle(Geom_Curve) BasisCurve() const;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_SweptSurface, Geom_Surface);
 
 protected:
-
     Handle(Geom_Curve) basisCurve;
     gp_Dir direction;
     GeomAbs_Shape smooth;
 
 private:
-
 };
 
 #endif // _Geom_SweptSurface_HeaderFile

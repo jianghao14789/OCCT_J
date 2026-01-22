@@ -23,7 +23,6 @@
 
 #include <Draw_Interpretor.hxx>
 
-
 //! Contains commands to activate package ShapeFix
 //! List of DRAW commands and corresponding functionalities:
 //! edgesameparam - ShapeFix::SameParameter
@@ -31,37 +30,15 @@
 //! stwire        - ShapeFix_Wire
 //! reface        - ShapeFix_Face
 //! repcurve      - ShapeFix_PCurves
-class SWDRAW_ShapeFix 
-{
+class SWDRAW_ShapeFix {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Loads commands defined in ShapeFix
-  Standard_EXPORT static void InitCommands (Draw_Interpretor& theCommands);
-
-
-
+    //! Loads commands defined in ShapeFix
+    Standard_EXPORT static void InitCommands(Draw_Interpretor& theCommands);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _SWDRAW_ShapeFix_HeaderFile

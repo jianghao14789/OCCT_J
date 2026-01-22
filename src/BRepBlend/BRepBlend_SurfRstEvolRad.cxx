@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor2d_Curve2d.hxx>
 #include <Adaptor3d_Curve.hxx>
 #include <Adaptor3d_Surface.hxx>
@@ -40,12 +39,7 @@
 
 #define Eps 1.e-15
 
-static void t3dto2d(Standard_Real& a,
-    Standard_Real& b,
-    const gp_Vec& A,
-    const gp_Vec& B,
-    const gp_Vec& C)
-{
+static void t3dto2d(Standard_Real& a, Standard_Real& b, const gp_Vec& A, const gp_Vec& B, const gp_Vec& C) {
     Standard_Real AB = A.Dot(B);
     Standard_Real AC = A.Dot(C);
     Standard_Real BC = B.Dot(C);
@@ -56,18 +50,15 @@ static void t3dto2d(Standard_Real& a,
     b = (AC * BB - AB * BC) / deno;
 }
 
-static void FusionneIntervalles(const TColStd_Array1OfReal& I1,
-    const TColStd_Array1OfReal& I2,
-    TColStd_SequenceOfReal& Seq)
-{
+static void FusionneIntervalles(const TColStd_Array1OfReal& I1, const TColStd_Array1OfReal& I2,
+                                TColStd_SequenceOfReal& Seq) {
     Standard_Integer ind1 = 1, ind2 = 1;
-    Standard_Real    Epspar = Precision::PConfusion() * 0.99;
+    Standard_Real Epspar = Precision::PConfusion() * 0.99;
     // it is supposed that positioning works with PConfusion()/2
-    Standard_Real    v1, v2;
+    Standard_Real v1, v2;
     // Initialisation : IND1 and IND2 point at the first element
     // of each of 2 tables to be processed. INDS points at the last
     // element created by TABSOR
-
 
     //--- TABSOR is filled by parsing TABLE1 and TABLE2 simultaneously ---
     //------------------ and eliminating multiple occurrencies ------------
@@ -80,13 +71,11 @@ static void FusionneIntervalles(const TColStd_Array1OfReal& I1,
             Seq.Append((v1 + v2) / 2);
             ind1++;
             ind2++;
-        }
-        else if (v1 < v2) {
+        } else if (v1 < v2) {
             // Here the element of I1 fits.
             Seq.Append(v1);
             ind1++;
-        }
-        else {
+        } else {
             // Here the element of TABLE2 fits.
             Seq.Append(v2);
             ind2++;
@@ -111,22 +100,17 @@ static void FusionneIntervalles(const TColStd_Array1OfReal& I1,
 }
 
 //=======================================================================
-//function : BRepBlend_SurfRstEvolRad
-//purpose  : Constructor
+// function : BRepBlend_SurfRstEvolRad
+// purpose  : Constructor
 //=======================================================================
-BRepBlend_SurfRstEvolRad::BRepBlend_SurfRstEvolRad
-(const Handle(Adaptor3d_Surface)& Surf,
-    const Handle(Adaptor3d_Surface)& SurfRst,
-    const Handle(Adaptor2d_Curve2d)& Rst,
-    const Handle(Adaptor3d_Curve)& CGuide,
-    const Handle(Law_Function)& Evol) :
-    surf(Surf), surfrst(SurfRst),
-    rst(Rst), cons(Rst, SurfRst),
-    guide(CGuide), tguide(CGuide),
-    istangent(Standard_True),
-    maxang(RealFirst()), minang(RealLast()),
-    distmin(RealLast()),
-    mySShape(BlendFunc_Rational)
+BRepBlend_SurfRstEvolRad::BRepBlend_SurfRstEvolRad(const Handle(Adaptor3d_Surface) & Surf,
+                                                   const Handle(Adaptor3d_Surface) & SurfRst,
+                                                   const Handle(Adaptor2d_Curve2d) & Rst,
+                                                   const Handle(Adaptor3d_Curve) & CGuide,
+                                                   const Handle(Law_Function) & Evol)
+    : surf(Surf), surfrst(SurfRst), rst(Rst), cons(Rst, SurfRst), guide(CGuide), tguide(CGuide),
+      istangent(Standard_True), maxang(RealFirst()), minang(RealLast()), distmin(RealLast()),
+      mySShape(BlendFunc_Rational)
 
 {
     tevol = Evol;
@@ -134,31 +118,26 @@ BRepBlend_SurfRstEvolRad::BRepBlend_SurfRstEvolRad
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Integer BRepBlend_SurfRstEvolRad::NbVariables() const
-{
+Standard_Integer BRepBlend_SurfRstEvolRad::NbVariables() const {
     return 3;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Integer BRepBlend_SurfRstEvolRad::NbEquations() const
-{
+Standard_Integer BRepBlend_SurfRstEvolRad::NbEquations() const {
     return 3;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::Value
-(const math_Vector& X,
-    math_Vector& F)
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::Value(const math_Vector& X, math_Vector& F) {
     gp_Vec d1u1, d1v1, ns, vref;
     Standard_Real norm;
 
@@ -178,13 +157,10 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Value
 }
 
 //=======================================================================
-//function : Derivatives
-//purpose  : 
+// function : Derivatives
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::Derivatives
-(const math_Vector& X,
-    math_Matrix& D)
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::Derivatives(const math_Vector& X, math_Matrix& D) {
     gp_Vec d1u1, d1v1, d2u1, d2v1, d2uv1, d1;
     gp_Vec ns, ncrossns, resul, temp, vref;
 
@@ -201,7 +177,6 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Derivatives
     D(2, 2) = 0.;
     D(2, 3) = nplan.Dot(d1);
 
-
     ns = d1u1.Crossed(d1v1);
     ncrossns = nplan.Crossed(ns);
     norm = ncrossns.Magnitude();
@@ -214,39 +189,29 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Derivatives
     // Derivative corresponding to u1
     temp = d2u1.Crossed(d1v1).Added(d1u1.Crossed(d2uv1));
     grosterme = ncrossns.Dot(nplan.Crossed(temp)) / norm / norm;
-    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan,
-        ray * grosterme / norm, ns,
-        -ray / norm, temp,
-        d1u1);
+    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan, ray * grosterme / norm, ns,
+                        -ray / norm, temp, d1u1);
 
     D(3, 1) = 2. * (resul.Dot(vref));
-
 
     // Derivative corresponding to v1
     temp = d2uv1.Crossed(d1v1).Added(d1u1.Crossed(d2v1));
     grosterme = ncrossns.Dot(nplan.Crossed(temp)) / norm / norm;
-    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan,
-        ray * grosterme / norm, ns,
-        -ray / norm, temp,
-        d1v1);
+    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan, ray * grosterme / norm, ns,
+                        -ray / norm, temp, d1v1);
 
     D(3, 2) = 2. * (resul.Dot(vref));
 
     D(3, 3) = -2. * (d1.Dot(vref));
 
     return Standard_True;
-
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::Values
-(const math_Vector& X,
-    math_Vector& F,
-    math_Matrix& D)
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::Values(const math_Vector& X, math_Vector& F, math_Matrix& D) {
     gp_Vec d1u1, d1v1, d1;
     gp_Vec d2u1, d2v1, d2uv1;
     gp_Vec ns, ncrossns, resul, temp, vref;
@@ -267,7 +232,6 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Values
     D(2, 2) = 0.;
     D(2, 3) = nplan.Dot(d1);
 
-
     ns = d1u1.Crossed(d1v1);
     ncrossns = nplan.Crossed(ns);
     norm = ncrossns.Magnitude();
@@ -279,25 +243,19 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Values
 
     F(3) = vref.SquareMagnitude() - ray * ray;
 
-
     // Derivative corresponding to u1
     temp = d2u1.Crossed(d1v1).Added(d1u1.Crossed(d2uv1));
     grosterme = ncrossns.Dot(nplan.Crossed(temp)) / norm / norm;
-    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan,
-        ray * grosterme / norm, ns,
-        -ray / norm, temp,
-        d1u1);
+    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan, ray * grosterme / norm, ns,
+                        -ray / norm, temp, d1u1);
 
     D(3, 1) = 2. * (resul.Dot(vref));
-
 
     // Derivative corresponding to v1
     temp = d2uv1.Crossed(d1v1).Added(d1u1.Crossed(d2v1));
     grosterme = ncrossns.Dot(nplan.Crossed(temp)) / norm / norm;
-    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan,
-        ray * grosterme / norm, ns,
-        -ray / norm, temp,
-        d1v1);
+    resul.SetLinearForm(-ray / norm * (grosterme * ndotns - nplan.Dot(temp)), nplan, ray * grosterme / norm, ns,
+                        -ray / norm, temp, d1v1);
 
     D(3, 2) = 2. * (resul.Dot(vref));
 
@@ -307,23 +265,20 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Values
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Set
-(const Handle(Adaptor3d_Surface)& SurfRef,
-    const Handle(Adaptor2d_Curve2d)& RstRef)
-{
+void BRepBlend_SurfRstEvolRad::Set(const Handle(Adaptor3d_Surface) & SurfRef,
+                                   const Handle(Adaptor2d_Curve2d) & RstRef) {
     surfref = SurfRef;
     rstref = RstRef;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Set(const Standard_Real Param)
-{
+void BRepBlend_SurfRstEvolRad::Set(const Standard_Real Param) {
     d1gui = gp_Vec(0., 0., 0.);
     nplan = gp_Vec(0., 0., 0.);
     tguide->D2(Param, ptgui, d1gui, d2gui);
@@ -339,39 +294,30 @@ void BRepBlend_SurfRstEvolRad::Set(const Standard_Real Param)
 }
 
 //=======================================================================
-//function : 
-//purpose  : Segments the curve in its useful part.
+// function :
+// purpose  : Segments the curve in its useful part.
 //           Precision is taken arbitrary small !?
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Set
-(const Standard_Real First,
-    const Standard_Real Last)
-{
+void BRepBlend_SurfRstEvolRad::Set(const Standard_Real First, const Standard_Real Last) {
     tguide = guide->Trim(First, Last, 1.e-12);
     tevol = fevol->Trim(First, Last, 1.e-12);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::GetTolerance
-(math_Vector& Tolerance,
-    const Standard_Real Tol) const
-{
+void BRepBlend_SurfRstEvolRad::GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const {
     Tolerance(1) = surf->UResolution(Tol);
     Tolerance(2) = surf->VResolution(Tol);
     Tolerance(3) = cons.Resolution(Tol);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::GetBounds
-(math_Vector& InfBound,
-    math_Vector& SupBound) const
-{
+void BRepBlend_SurfRstEvolRad::GetBounds(math_Vector& InfBound, math_Vector& SupBound) const {
     InfBound(1) = surf->FirstUParameter();
     InfBound(2) = surf->FirstVParameter();
     InfBound(3) = cons.FirstParameter();
@@ -379,14 +325,12 @@ void BRepBlend_SurfRstEvolRad::GetBounds
     SupBound(2) = surf->LastVParameter();
     SupBound(3) = cons.LastParameter();
 
-    if (!Precision::IsInfinite(InfBound(1)) &&
-        !Precision::IsInfinite(SupBound(1))) {
+    if (!Precision::IsInfinite(InfBound(1)) && !Precision::IsInfinite(SupBound(1))) {
         Standard_Real range = (SupBound(1) - InfBound(1));
         InfBound(1) -= range;
         SupBound(1) += range;
     }
-    if (!Precision::IsInfinite(InfBound(2)) &&
-        !Precision::IsInfinite(SupBound(2))) {
+    if (!Precision::IsInfinite(InfBound(2)) && !Precision::IsInfinite(SupBound(2))) {
         Standard_Real range = (SupBound(2) - InfBound(2));
         InfBound(2) -= range;
         SupBound(2) += range;
@@ -394,13 +338,10 @@ void BRepBlend_SurfRstEvolRad::GetBounds
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
-(const math_Vector& Sol,
-    const Standard_Real Tol)
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution(const math_Vector& Sol, const Standard_Real Tol) {
     math_Vector valsol(1, 3), secmember(1, 3);
     math_Matrix gradsol(1, 3, 1, 3);
 
@@ -410,9 +351,7 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
     Standard_Real Cosa, Sina, Angle;
 
     Values(Sol, valsol, gradsol);
-    if (Abs(valsol(1)) <= Tol &&
-        Abs(valsol(2)) <= Tol &&
-        Abs(valsol(3)) <= 2 * Tol * Abs(ray)) {
+    if (Abs(valsol(1)) <= Tol && Abs(valsol(2)) <= Tol && Abs(valsol(3)) <= 2 * Tol * Abs(ray)) {
 
         // Calculation of tangents
 
@@ -421,8 +360,7 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
         pt2drst = rst->Value(prmrst);
         surf->D1(Sol(1), Sol(2), pts, d1u1, d1v1);
         cons.D1(Sol(3), ptrst, d1);
-        dnplan.SetLinearForm(1. / normtg, d2gui,
-            -1. / normtg * (nplan.Dot(d2gui)), nplan);
+        dnplan.SetLinearForm(1. / normtg, d2gui, -1. / normtg * (nplan.Dot(d2gui)), nplan);
 
         temp.SetXYZ(pts.XYZ() - ptgui.XYZ());
         secmember(1) = normtg - dnplan.Dot(temp);
@@ -437,9 +375,8 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
 
         grosterme = ncrossns.Dot(dnplan.Crossed(ns)) / norm / norm;
         gp_Vec dnw;
-        dnw.SetLinearForm((dnplan.Dot(ns) - grosterme * ndotns) / norm, nplan,
-            ndotns / norm, dnplan,
-            grosterme / norm, ns);
+        dnw.SetLinearForm((dnplan.Dot(ns) - grosterme * ndotns) / norm, nplan, ndotns / norm, dnplan, grosterme / norm,
+                          ns);
 
         ns.SetLinearForm(ndotns / norm, nplan, -1. / norm, ns);
         resul.SetLinearForm(ray, ns, gp_Vec(ptrst, pts));
@@ -449,16 +386,15 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
         if (Resol.IsDone()) {
             Resol.Solve(secmember);
             istangent = Standard_False;
-        }
-        else {
+        } else {
             math_SVD SingRS(gradsol);
             if (SingRS.IsDone()) {
                 math_Vector DEDT(1, 3);
                 DEDT = secmember;
                 SingRS.Solve(DEDT, secmember, 1.e-6);
                 istangent = Standard_False;
-            }
-            else istangent = Standard_True;
+            } else
+                istangent = Standard_True;
         }
 
         if (!istangent) {
@@ -470,8 +406,7 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
             t3dto2d(a, b, tgrst, d1urst, d1vrst);
             tg2drst.SetCoord(a, b);
             istangent = Standard_False;
-        }
-        else {
+        } else {
             istangent = Standard_True;
         }
         // update of maxang
@@ -481,7 +416,7 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
         Cosa = ns.Dot(ns2);
         Sina = nplan.Dot(ns.Crossed(ns2));
         if (choix % 2 != 0) {
-            Sina = -Sina;  //nplan is changed into -nplan
+            Sina = -Sina; // nplan is changed into -nplan
         }
 
         Angle = ACos(Cosa);
@@ -489,8 +424,12 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
             Angle = 2. * M_PI - Angle;
         }
 
-        if (Angle > maxang) { maxang = Angle; }
-        if (Angle < minang) { minang = Angle; }
+        if (Angle > maxang) {
+            maxang = Angle;
+        }
+        if (Angle < minang) {
+            minang = Angle;
+        }
         distmin = Min(distmin, pts.Distance(ptrst));
 
         return Standard_True;
@@ -499,120 +438,112 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::IsSolution
     return Standard_False;
 }
 
-
 //=======================================================================
-//function : GetMinimalDistance
-//purpose  : 
+// function : GetMinimalDistance
+// purpose  :
 //=======================================================================
 
-Standard_Real BRepBlend_SurfRstEvolRad::GetMinimalDistance() const
-{
+Standard_Real BRepBlend_SurfRstEvolRad::GetMinimalDistance() const {
     return distmin;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Pnt& BRepBlend_SurfRstEvolRad::PointOnS() const
-{
+const gp_Pnt& BRepBlend_SurfRstEvolRad::PointOnS() const {
     return pts;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Pnt& BRepBlend_SurfRstEvolRad::PointOnRst() const
-{
+const gp_Pnt& BRepBlend_SurfRstEvolRad::PointOnRst() const {
     return ptrst;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Pnt2d& BRepBlend_SurfRstEvolRad::Pnt2dOnS() const
-{
+const gp_Pnt2d& BRepBlend_SurfRstEvolRad::Pnt2dOnS() const {
     return pt2ds;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Pnt2d& BRepBlend_SurfRstEvolRad::Pnt2dOnRst() const
-{
+const gp_Pnt2d& BRepBlend_SurfRstEvolRad::Pnt2dOnRst() const {
     return pt2drst;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Real BRepBlend_SurfRstEvolRad::ParameterOnRst() const
-{
+Standard_Real BRepBlend_SurfRstEvolRad::ParameterOnRst() const {
     return prmrst;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::IsTangencyPoint() const
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::IsTangencyPoint() const {
     return istangent;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Vec& BRepBlend_SurfRstEvolRad::TangentOnS() const
-{
-    if (istangent) { throw Standard_DomainError(); }
+const gp_Vec& BRepBlend_SurfRstEvolRad::TangentOnS() const {
+    if (istangent) {
+        throw Standard_DomainError();
+    }
     return tgs;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Vec2d& BRepBlend_SurfRstEvolRad::Tangent2dOnS() const
-{
-    if (istangent) { throw Standard_DomainError(); }
+const gp_Vec2d& BRepBlend_SurfRstEvolRad::Tangent2dOnS() const {
+    if (istangent) {
+        throw Standard_DomainError();
+    }
     return tg2ds;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Vec& BRepBlend_SurfRstEvolRad::TangentOnRst() const
-{
-    if (istangent) { throw Standard_DomainError(); }
+const gp_Vec& BRepBlend_SurfRstEvolRad::TangentOnRst() const {
+    if (istangent) {
+        throw Standard_DomainError();
+    }
     return tgrst;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-const gp_Vec2d& BRepBlend_SurfRstEvolRad::Tangent2dOnRst() const
-{
-    if (istangent) { throw Standard_DomainError(); }
+const gp_Vec2d& BRepBlend_SurfRstEvolRad::Tangent2dOnRst() const {
+    if (istangent) {
+        throw Standard_DomainError();
+    }
     return tg2drst;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::Decroch
-(const math_Vector& Sol,
-    gp_Vec& NS,
-    gp_Vec& TgS) const
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::Decroch(const math_Vector& Sol, gp_Vec& NS, gp_Vec& TgS) const {
     gp_Vec TgRst, NRst, NRstInPlane, NSInPlane;
     gp_Pnt bid, Center;
     gp_Vec d1u, d1v;
@@ -657,49 +588,40 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Decroch
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Set(const Standard_Integer Choix)
-{
+void BRepBlend_SurfRstEvolRad::Set(const Standard_Integer Choix) {
     choix = Choix;
     switch (choix) {
-    case 1:
-    case 2:
-        sg1 = -1;
-        break;
-    case 3:
-    case 4:
-        sg1 = 1;
-        break;
-    default:
-        sg1 = -1;
-        break;
+        case 1:
+        case 2:
+            sg1 = -1;
+            break;
+        case 3:
+        case 4:
+            sg1 = 1;
+            break;
+        default:
+            sg1 = -1;
+            break;
     }
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Set(const BlendFunc_SectionShape TypeSection)
-{
+void BRepBlend_SurfRstEvolRad::Set(const BlendFunc_SectionShape TypeSection) {
     mySShape = TypeSection;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Section
-(const Standard_Real Param,
-    const Standard_Real U,
-    const Standard_Real V,
-    const Standard_Real W,
-    Standard_Real& Pdeb,
-    Standard_Real& Pfin,
-    gp_Circ& C)
-{
+void BRepBlend_SurfRstEvolRad::Section(const Standard_Real Param, const Standard_Real U, const Standard_Real V,
+                                       const Standard_Real W, Standard_Real& Pdeb, Standard_Real& Pfin, gp_Circ& C) {
     gp_Vec d1u1, d1v1;
     gp_Vec ns, np;
     Standard_Real norm;
@@ -727,7 +649,7 @@ void BRepBlend_SurfRstEvolRad::Section
     }
     C.SetPosition(gp_Ax2(Center, np, ns));
 
-    Pdeb = 0.; //ElCLib::Parameter(C,pts);
+    Pdeb = 0.; // ElCLib::Parameter(C,pts);
     Pfin = ElCLib::Parameter(C, ptrst);
 
     // Test negative and almost null angles : Single Case
@@ -740,39 +662,35 @@ void BRepBlend_SurfRstEvolRad::Section
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::IsRational() const
-{
-    return  (mySShape == BlendFunc_Rational || mySShape == BlendFunc_QuasiAngular);
+Standard_Boolean BRepBlend_SurfRstEvolRad::IsRational() const {
+    return (mySShape == BlendFunc_Rational || mySShape == BlendFunc_QuasiAngular);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Real BRepBlend_SurfRstEvolRad::GetSectionSize() const
-{
+Standard_Real BRepBlend_SurfRstEvolRad::GetSectionSize() const {
     return maxang * Abs(ray);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::GetMinimalWeight(TColStd_Array1OfReal& Weigths) const
-{
+void BRepBlend_SurfRstEvolRad::GetMinimalWeight(TColStd_Array1OfReal& Weigths) const {
     BlendFunc::GetMinimalWeights(mySShape, myTConv, minang, maxang, Weigths);
-    // It is supposed that it does not depend on the Radius! 
+    // It is supposed that it does not depend on the Radius!
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Integer BRepBlend_SurfRstEvolRad::NbIntervals(const GeomAbs_Shape S) const
-{
+Standard_Integer BRepBlend_SurfRstEvolRad::NbIntervals(const GeomAbs_Shape S) const {
     Standard_Integer Nb_Int_Courbe, Nb_Int_Loi;
     Nb_Int_Courbe = guide->NbIntervals(BlendFunc::NextShape(S));
     Nb_Int_Loi = fevol->NbIntervals(S);
@@ -783,7 +701,7 @@ Standard_Integer BRepBlend_SurfRstEvolRad::NbIntervals(const GeomAbs_Shape S) co
 
     TColStd_Array1OfReal IntC(1, Nb_Int_Courbe + 1);
     TColStd_Array1OfReal IntL(1, Nb_Int_Loi + 1);
-    TColStd_SequenceOfReal    Inter;
+    TColStd_SequenceOfReal Inter;
     guide->Intervals(IntC, BlendFunc::NextShape(S));
     fevol->Intervals(IntL, S);
 
@@ -792,23 +710,20 @@ Standard_Integer BRepBlend_SurfRstEvolRad::NbIntervals(const GeomAbs_Shape S) co
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Intervals(TColStd_Array1OfReal& T,
-    const GeomAbs_Shape S) const
-{
+void BRepBlend_SurfRstEvolRad::Intervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const {
     Standard_Integer Nb_Int_Courbe, Nb_Int_Loi;
     Nb_Int_Courbe = guide->NbIntervals(BlendFunc::NextShape(S));
     Nb_Int_Loi = fevol->NbIntervals(S);
 
     if (Nb_Int_Loi == 1) {
         guide->Intervals(T, BlendFunc::NextShape(S));
-    }
-    else {
+    } else {
         TColStd_Array1OfReal IntC(1, Nb_Int_Courbe + 1);
         TColStd_Array1OfReal IntL(1, Nb_Int_Loi + 1);
-        TColStd_SequenceOfReal    Inter;
+        TColStd_SequenceOfReal Inter;
         guide->Intervals(IntC, BlendFunc::NextShape(S));
         fevol->Intervals(IntL, S);
 
@@ -819,36 +734,26 @@ void BRepBlend_SurfRstEvolRad::Intervals(TColStd_Array1OfReal& T,
     }
 }
 
-
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::GetShape
-(Standard_Integer& NbPoles,
-    Standard_Integer& NbKnots,
-    Standard_Integer& Degree,
-    Standard_Integer& NbPoles2d)
-{
+void BRepBlend_SurfRstEvolRad::GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots, Standard_Integer& Degree,
+                                        Standard_Integer& NbPoles2d) {
     NbPoles2d = 2;
     BlendFunc::GetShape(mySShape, maxang, NbPoles, NbKnots, Degree, myTConv);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::GetTolerance
-(const Standard_Real BoundTol,
-    const Standard_Real SurfTol,
-    const Standard_Real AngleTol,
-    math_Vector& Tol3d,
-    math_Vector& Tol1d) const
-{
+void BRepBlend_SurfRstEvolRad::GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol,
+                                            const Standard_Real AngleTol, math_Vector& Tol3d,
+                                            math_Vector& Tol1d) const {
     Standard_Integer low = Tol3d.Lower(), up = Tol3d.Upper();
     Standard_Real Tol;
-    Tol = GeomFill::GetTolerance(myTConv, minang, Abs(ray),
-        AngleTol, SurfTol);
+    Tol = GeomFill::GetTolerance(myTConv, minang, Abs(ray), AngleTol, SurfTol);
     Tol1d.Init(SurfTol);
     Tol3d.Init(SurfTol);
     Tol3d(low + 1) = Tol3d(up - 1) = Min(Tol, SurfTol);
@@ -856,39 +761,32 @@ void BRepBlend_SurfRstEvolRad::GetTolerance
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Knots(TColStd_Array1OfReal& TKnots)
-{
+void BRepBlend_SurfRstEvolRad::Knots(TColStd_Array1OfReal& TKnots) {
     GeomFill::Knots(myTConv, TKnots);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Mults(TColStd_Array1OfInteger& TMults)
-{
+void BRepBlend_SurfRstEvolRad::Mults(TColStd_Array1OfInteger& TMults) {
     GeomFill::Mults(myTConv, TMults);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::Section
-(const Blend_Point& P,
-    TColgp_Array1OfPnt& Poles,
-    TColgp_Array1OfVec& DPoles,
-    TColgp_Array1OfPnt2d& Poles2d,
-    TColgp_Array1OfVec2d& DPoles2d,
-    TColStd_Array1OfReal& Weigths,
-    TColStd_Array1OfReal& DWeigths)
-{
+Standard_Boolean BRepBlend_SurfRstEvolRad::Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                                   TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d,
+                                                   TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths,
+                                                   TColStd_Array1OfReal& DWeigths) {
 
     gp_Vec d1u1, d1v1, d2u1, d2v1, d2uv1, d1;
-    gp_Vec ns, ns2, dnplan, dnw, dn2w;//,np2,dnp2;
+    gp_Vec ns, ns2, dnplan, dnw, dn2w; //,np2,dnp2;
     gp_Vec ncrossns;
     gp_Vec resulu, resulv, temp, tgct, resul;
     gp_Vec d1urst, d1vrst;
@@ -911,8 +809,7 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Section
     aDray = sg1 * aDray;
     normtg = d1gui.Magnitude();
     nplan = d1gui.Normalized();
-    dnplan.SetLinearForm(1. / normtg, d2gui,
-        -1. / normtg * (nplan.Dot(d2gui)), nplan);
+    dnplan.SetLinearForm(1. / normtg, d2gui, -1. / normtg * (nplan.Dot(d2gui)), nplan);
 
     P.ParametersOnS(sol(1), sol(2));
     sol(3) = prmrst = P.ParameterOnC();
@@ -943,30 +840,27 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Section
     // Derivative of n1 corresponding to w
 
     grosterme = ncrossns.Dot(dnplan.Crossed(ns)) / norm / norm;
-    dnw.SetLinearForm((dnplan.Dot(ns) - grosterme * ndotns) / norm, nplan,
-        ndotns / norm, dnplan,
-        grosterme / norm, ns);
+    dnw.SetLinearForm((dnplan.Dot(ns) - grosterme * ndotns) / norm, nplan, ndotns / norm, dnplan, grosterme / norm, ns);
 
     temp.SetLinearForm(ndotns / norm, nplan, -1. / norm, ns);
     resul.SetLinearForm(ray, temp, gp_Vec(ptrst, pts));
 
-    //secmember(3) = -2.*ray*(dnw.Dot(resul)); // jag 950105 il manquait ray
+    // secmember(3) = -2.*ray*(dnw.Dot(resul)); // jag 950105 il manquait ray
     secmember(3) = -2. * ray * (dnw.Dot(resul)) - 2. * aDray * (temp.Dot(resul)) + 2. * ray * aDray;
     math_Gauss Resol(gradsol);
 
     if (Resol.IsDone()) {
         Resol.Solve(secmember);
         istgt = Standard_False;
-    }
-    else {
+    } else {
         math_SVD SingRS(gradsol);
         if (SingRS.IsDone()) {
             math_Vector DEDT(1, 3);
             DEDT = secmember;
             SingRS.Solve(DEDT, secmember, 1.e-6);
             istgt = Standard_False;
-        }
-        else istgt = Standard_True;
+        } else
+            istgt = Standard_True;
     }
 
     if (!istgt) {
@@ -976,17 +870,14 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Section
         // Derivative of n1 corresponding to u1
         temp = d2u1.Crossed(d1v1).Added(d1u1.Crossed(d2uv1));
         grosterme = ncrossns.Dot(nplan.Crossed(temp)) / norm / norm;
-        resulu.SetLinearForm(-(grosterme * ndotns - nplan.Dot(temp)) / norm, nplan,
-            grosterme / norm, ns,
-            -1. / norm, temp);
+        resulu.SetLinearForm(-(grosterme * ndotns - nplan.Dot(temp)) / norm, nplan, grosterme / norm, ns, -1. / norm,
+                             temp);
 
         // Derivative of n1 corresponding to v1
         temp = d2uv1.Crossed(d1v1).Added(d1u1.Crossed(d2v1));
         grosterme = ncrossns.Dot(nplan.Crossed(temp)) / norm / norm;
-        resulv.SetLinearForm(-(grosterme * ndotns - nplan.Dot(temp)) / norm, nplan,
-            grosterme / norm, ns,
-            -1. / norm, temp);
-
+        resulv.SetLinearForm(-(grosterme * ndotns - nplan.Dot(temp)) / norm, nplan, grosterme / norm, ns, -1. / norm,
+                             temp);
 
         dnw.SetLinearForm(secmember(1), resulu, secmember(2), resulv, dnw);
         ns.SetLinearForm(ndotns / norm, nplan, -1. / norm, ns);
@@ -999,8 +890,7 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Section
         dn2w.SetLinearForm(ns2.Dot(dn2w), ns2, -1., dn2w);
 
         istgt = Standard_False;
-    }
-    else {
+    } else {
         ns.SetLinearForm(ndotns / norm, nplan, -1. / norm, ns);
         ns2 = -resul.Normalized();
         istgt = Standard_True;
@@ -1052,62 +942,38 @@ Standard_Boolean BRepBlend_SurfRstEvolRad::Section
     if (!istgt) {
         if (ray < 0.) { // to avoid Abs(dray) some lines below
             rayprim = -aDray;
-        }
-        else rayprim = aDray;
+        } else
+            rayprim = aDray;
 
-        return GeomFill::GetCircle(myTConv,
-            ns, ns2,
-            dnw, dn2w,
-            nplan, dnplan,
-            pts, ptrst,
-            tgs, tgrst,
-            Abs(ray), rayprim,
-            Center, tgct,
-            Poles,
-            DPoles,
-            Weigths,
-            DWeigths);
-    }
-    else {
-        GeomFill::GetCircle(myTConv,
-            ns, ns2,
-            nplan, pts, ptrst,
-            Abs(ray), Center,
-            Poles, Weigths);
+        return GeomFill::GetCircle(myTConv, ns, ns2, dnw, dn2w, nplan, dnplan, pts, ptrst, tgs, tgrst, Abs(ray),
+                                   rayprim, Center, tgct, Poles, DPoles, Weigths, DWeigths);
+    } else {
+        GeomFill::GetCircle(myTConv, ns, ns2, nplan, pts, ptrst, Abs(ray), Center, Poles, Weigths);
         return Standard_False;
     }
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfRstEvolRad::Section(const Blend_Point& /*P*/,
-    TColgp_Array1OfPnt& /*Poles*/,
-    TColgp_Array1OfVec& /*DPoles*/,
-    TColgp_Array1OfVec& /*D2Poles*/,
-    TColgp_Array1OfPnt2d& /*Poles2d*/,
-    TColgp_Array1OfVec2d& /*DPoles2d*/,
-    TColgp_Array1OfVec2d& /*D2Poles2d*/,
-    TColStd_Array1OfReal& /*Weigths*/,
-    TColStd_Array1OfReal& /*DWeigths*/,
-    TColStd_Array1OfReal& /*D2Weigths*/)
-{
+Standard_Boolean
+BRepBlend_SurfRstEvolRad::Section(const Blend_Point& /*P*/, TColgp_Array1OfPnt& /*Poles*/,
+                                  TColgp_Array1OfVec& /*DPoles*/, TColgp_Array1OfVec& /*D2Poles*/,
+                                  TColgp_Array1OfPnt2d& /*Poles2d*/, TColgp_Array1OfVec2d& /*DPoles2d*/,
+                                  TColgp_Array1OfVec2d& /*D2Poles2d*/, TColStd_Array1OfReal& /*Weigths*/,
+                                  TColStd_Array1OfReal& /*DWeigths*/, TColStd_Array1OfReal& /*D2Weigths*/) {
     return Standard_False;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfRstEvolRad::Section
-(const Blend_Point& P,
-    TColgp_Array1OfPnt& Poles,
-    TColgp_Array1OfPnt2d& Poles2d,
-    TColStd_Array1OfReal& Weigths)
-{
-    gp_Vec d1u1, d1v1;//,d1;
-    gp_Vec ns, ns2;//,temp,np2;
+void BRepBlend_SurfRstEvolRad::Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d,
+                                       TColStd_Array1OfReal& Weigths) {
+    gp_Vec d1u1, d1v1; //,d1;
+    gp_Vec ns, ns2;    //,temp,np2;
     gp_Pnt Center;
 
     Standard_Real norm, u1, v1, w;
@@ -1122,8 +988,8 @@ void BRepBlend_SurfRstEvolRad::Section
     nplan = d1gui.Normalized();
 
     P.ParametersOnS(u1, v1);
-    w = P.ParameterOnC(); //jlr : point on curve not on surface
-    gp_Pnt2d  pt2d = rst->Value(w);
+    w = P.ParameterOnC(); // jlr : point on curve not on surface
+    gp_Pnt2d pt2d = rst->Value(w);
 
     surf->D1(u1, v1, pts, d1u1, d1v1);
     ptrst = cons.Value(w);
@@ -1155,23 +1021,15 @@ void BRepBlend_SurfRstEvolRad::Section
         nplan.Reverse();
     }
 
-    GeomFill::GetCircle(myTConv,
-        ns, ns2,
-        nplan, pts, ptrst,
-        Abs(ray), Center,
-        Poles, Weigths);
+    GeomFill::GetCircle(myTConv, ns, ns2, nplan, pts, ptrst, Abs(ray), Center, Poles, Weigths);
 }
 
-void BRepBlend_SurfRstEvolRad::Resolution(const Standard_Integer IC2d,
-    const Standard_Real Tol,
-    Standard_Real& TolU,
-    Standard_Real& TolV) const
-{
+void BRepBlend_SurfRstEvolRad::Resolution(const Standard_Integer IC2d, const Standard_Real Tol, Standard_Real& TolU,
+                                          Standard_Real& TolV) const {
     if (IC2d == 1) {
         TolU = surf->UResolution(Tol);
         TolV = surf->VResolution(Tol);
-    }
-    else {
+    } else {
         TolU = surfrst->UResolution(Tol);
         TolV = surfrst->VResolution(Tol);
     }

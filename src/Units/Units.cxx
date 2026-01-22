@@ -50,65 +50,55 @@ static TCollection_AsciiString lastunit;
 static Handle(Units_Dimensions) lastdimension;
 static Standard_Real lastvalue, lastmove;
 
-
 //=======================================================================
-//function : UnitsFile
-//purpose  : 
+// function : UnitsFile
+// purpose  :
 //=======================================================================
 
 void Units::UnitsFile(const Standard_CString afile) {
     unitsfile = TCollection_AsciiString(afile);
 }
 
-
 //=======================================================================
-//function : LexiconFile
-//purpose  : 
+// function : LexiconFile
+// purpose  :
 //=======================================================================
 
 void Units::LexiconFile(const Standard_CString afile) {
     lexiconfile = TCollection_AsciiString(afile);
 }
 
-
 //=======================================================================
-//function : DictionaryOfUnits
-//purpose  : 
+// function : DictionaryOfUnits
+// purpose  :
 //=======================================================================
 
-Handle(Units_UnitsDictionary) Units::DictionaryOfUnits(const Standard_Boolean amode)
-{
-    if (unitsdictionary.IsNull())
-    {
+Handle(Units_UnitsDictionary) Units::DictionaryOfUnits(const Standard_Boolean amode) {
+    if (unitsdictionary.IsNull()) {
         //      std::cout<<"Allocation du dictionnaire"<<std::endl;
         unitsdictionary = new Units_UnitsDictionary();
         //      std::cout<<"Creation du dictionnaire"<<std::endl;
         unitsdictionary->Creates();
-    }
-    else if (amode)
-    {
+    } else if (amode) {
         //      std::cout<<"Creation du dictionnaire"<<std::endl;
         unitsdictionary->Creates();
     }
     return unitsdictionary;
 }
 
-
 //=======================================================================
-//function : Quantity
-//purpose  : 
+// function : Quantity
+// purpose  :
 //=======================================================================
 
-Handle(Units_Quantity) Units::Quantity(const Standard_CString aquantity)
-{
+Handle(Units_Quantity) Units::Quantity(const Standard_CString aquantity) {
     Standard_Integer index;
     Handle(Units_Quantity) quantity;
     Handle(Units_Quantity) nullquantity;
     Handle(Units_QuantitiesSequence) quantitiessequence;
 
     quantitiessequence = Units::DictionaryOfUnits()->Sequence();
-    for (index = 1; index <= quantitiessequence->Length(); index++)
-    {
+    for (index = 1; index <= quantitiessequence->Length(); index++) {
         quantity = quantitiessequence->Value(index);
         if (quantity->Name() == aquantity) return quantity;
     }
@@ -119,15 +109,13 @@ Handle(Units_Quantity) Units::Quantity(const Standard_CString aquantity)
     return nullquantity;
 }
 
-
 //=======================================================================
-//function : Quantity
-//purpose  :
+// function : Quantity
+// purpose  :
 //=======================================================================
 
 static TCollection_AsciiString symbol_string, quantity_string;
-Standard_CString Units::FirstQuantity(const Standard_CString aunit)
-{
+Standard_CString Units::FirstQuantity(const Standard_CString aunit) {
     Standard_Integer i, j, k;
     Handle(Units_Quantity) thequantity;
     Handle(Units_QuantitiesSequence) quantitiessequence;
@@ -161,14 +149,12 @@ Standard_CString Units::FirstQuantity(const Standard_CString aunit)
     return NULL;
 }
 
-
 //=======================================================================
-//function : LexiconUnits
-//purpose  : 
+// function : LexiconUnits
+// purpose  :
 //=======================================================================
 
-Handle(Units_Lexicon) Units::LexiconUnits(const Standard_Boolean amode)
-{
+Handle(Units_Lexicon) Units::LexiconUnits(const Standard_Boolean amode) {
     if (lexiconunits.IsNull()) {
         //      std::cout<<"Allocation du lexique d'unites"<<std::endl;
         lexiconunits = new Units_UnitsLexicon();
@@ -178,14 +164,12 @@ Handle(Units_Lexicon) Units::LexiconUnits(const Standard_Boolean amode)
     return lexiconunits;
 }
 
-
 //=======================================================================
-//function : LexiconFormula
-//purpose  : 
+// function : LexiconFormula
+// purpose  :
 //=======================================================================
 
-Handle(Units_Lexicon) Units::LexiconFormula()
-{
+Handle(Units_Lexicon) Units::LexiconFormula() {
     if (lexiconformula.IsNull()) {
         //      std::cout<<"Allocation du lexique d'expression"<<std::endl;
         lexiconformula = new Units_Lexicon();
@@ -195,56 +179,45 @@ Handle(Units_Lexicon) Units::LexiconFormula()
     return lexiconformula;
 }
 
-
 //=======================================================================
-//function : NullDimensions
-//purpose  : 
+// function : NullDimensions
+// purpose  :
 //=======================================================================
 
-Handle(Units_Dimensions) Units::NullDimensions()
-{
+Handle(Units_Dimensions) Units::NullDimensions() {
     if (nulldimensions.IsNull()) nulldimensions = new Units_Dimensions(0., 0., 0., 0., 0., 0., 0., 0., 0.);
     return nulldimensions;
 }
 
-
 //=======================================================================
-//function : Convert
-//purpose  : 
+// function : Convert
+// purpose  :
 //=======================================================================
 
-Standard_Real Units::Convert(const Standard_Real avalue,
-    const Standard_CString afirstunit,
-    const Standard_CString asecondunit)
-{
+Standard_Real Units::Convert(const Standard_Real avalue, const Standard_CString afirstunit,
+                             const Standard_CString asecondunit) {
     Units_Measurement measurement(avalue, afirstunit);
     measurement.Convert(asecondunit);
     return measurement.Measurement();
 }
 
-
 //=======================================================================
-//function : ToSI
-//purpose  :
+// function : ToSI
+// purpose  :
 //=======================================================================
 
-Standard_Real Units::ToSI(const Standard_Real aData,
-    const Standard_CString aUnit) {
+Standard_Real Units::ToSI(const Standard_Real aData, const Standard_CString aUnit) {
 
     Handle(Units_Dimensions) aDimBid;
     return Units::ToSI(aData, aUnit, aDimBid);
 }
 
-
 //=======================================================================
-//function : ToSI
-//purpose  :
+// function : ToSI
+// purpose  :
 //=======================================================================
 
-Standard_Real Units::ToSI(const Standard_Real aData,
-    const Standard_CString aUnit,
-    Handle(Units_Dimensions)& dim)
-{
+Standard_Real Units::ToSI(const Standard_Real aData, const Standard_CString aUnit, Handle(Units_Dimensions) & dim) {
     if (lastunit != aUnit) {
 
         lastunit = TCollection_AsciiString(aUnit);
@@ -259,8 +232,7 @@ Standard_Real Units::ToSI(const Standard_Real aData,
         lastvalue = token->Value();
         lastmove = 0.;
         if (token->IsKind(STANDARD_TYPE(Units_ShiftedToken))) {
-            Handle(Units_ShiftedToken) stoken =
-                Handle(Units_ShiftedToken)::DownCast(token);
+            Handle(Units_ShiftedToken) stoken = Handle(Units_ShiftedToken)::DownCast(token);
             lastmove = stoken->Move();
         }
         lastdimension = token->Dimensions();
@@ -269,28 +241,22 @@ Standard_Real Units::ToSI(const Standard_Real aData,
     return (aData + lastmove) * lastvalue;
 }
 
-
 //=======================================================================
-//function : FromSI
-//purpose  :
+// function : FromSI
+// purpose  :
 //=======================================================================
 
-Standard_Real Units::FromSI(const Standard_Real aData,
-    const Standard_CString aUnit) {
+Standard_Real Units::FromSI(const Standard_Real aData, const Standard_CString aUnit) {
     Handle(Units_Dimensions) aDimBid;
     return Units::FromSI(aData, aUnit, aDimBid);
 }
 
-
 //=======================================================================
-//function : FromSI
-//purpose  :
+// function : FromSI
+// purpose  :
 //=======================================================================
 
-Standard_Real Units::FromSI(const Standard_Real aData,
-    const Standard_CString aUnit,
-    Handle(Units_Dimensions)& dim)
-{
+Standard_Real Units::FromSI(const Standard_Real aData, const Standard_CString aUnit, Handle(Units_Dimensions) & dim) {
     if (lastunit != aUnit) {
         lastunit = TCollection_AsciiString(aUnit);
         Units_UnitSentence unitsentence(aUnit);
@@ -304,8 +270,7 @@ Standard_Real Units::FromSI(const Standard_Real aData,
         lastvalue = token->Value();
         lastmove = 0.;
         if (token->IsKind(STANDARD_TYPE(Units_ShiftedToken))) {
-            Handle(Units_ShiftedToken) stoken =
-                Handle(Units_ShiftedToken)::DownCast(token);
+            Handle(Units_ShiftedToken) stoken = Handle(Units_ShiftedToken)::DownCast(token);
             lastmove = stoken->Move();
         }
         lastdimension = token->Dimensions();
@@ -314,14 +279,12 @@ Standard_Real Units::FromSI(const Standard_Real aData,
     return (aData / lastvalue) - lastmove;
 }
 
-
 //=======================================================================
-//function : Dimensions
-//purpose  :
+// function : Dimensions
+// purpose  :
 //=======================================================================
 
-Handle(Units_Dimensions) Units::Dimensions(const Standard_CString aType)
-{
+Handle(Units_Dimensions) Units::Dimensions(const Standard_CString aType) {
     if (aType) {
         Handle(Units_UnitsDictionary) dico = Units::DictionaryOfUnits(Standard_False);
 

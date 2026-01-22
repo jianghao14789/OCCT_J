@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_DateRole.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_DateRole,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_DateRole, Standard_Transient)
 
-StepBasic_DateRole::StepBasic_DateRole ()  {}
+StepBasic_DateRole::StepBasic_DateRole() {}
 
-void StepBasic_DateRole::Init(
-	const Handle(TCollection_HAsciiString)& aName)
-{
-	// --- classe own fields ---
-	name = aName;
+void StepBasic_DateRole::Init(const Handle(TCollection_HAsciiString) & aName) {
+    // --- classe own fields ---
+    name = aName;
 }
 
-
-void StepBasic_DateRole::SetName(const Handle(TCollection_HAsciiString)& aName)
-{
-	name = aName;
+void StepBasic_DateRole::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    name = aName;
 }
 
-Handle(TCollection_HAsciiString) StepBasic_DateRole::Name() const
-{
-	return name;
+Handle(TCollection_HAsciiString) StepBasic_DateRole::Name() const {
+    return name;
 }

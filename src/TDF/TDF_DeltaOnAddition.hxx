@@ -22,7 +22,6 @@
 #include <TDF_AttributeDelta.hxx>
 class TDF_Attribute;
 
-
 class TDF_DeltaOnAddition;
 DEFINE_STANDARD_HANDLE(TDF_DeltaOnAddition, TDF_AttributeDelta)
 
@@ -31,39 +30,19 @@ DEFINE_STANDARD_HANDLE(TDF_DeltaOnAddition, TDF_AttributeDelta)
 //!
 //! Applying this AttributeDelta means REMOVING its
 //! attribute.
-class TDF_DeltaOnAddition : public TDF_AttributeDelta
-{
+class TDF_DeltaOnAddition : public TDF_AttributeDelta {
 
 public:
+    //! Creates a TDF_DeltaOnAddition.
+    Standard_EXPORT TDF_DeltaOnAddition(const Handle(TDF_Attribute) & anAtt);
 
-  
-  //! Creates a TDF_DeltaOnAddition.
-  Standard_EXPORT TDF_DeltaOnAddition(const Handle(TDF_Attribute)& anAtt);
-  
-  //! Applies the delta to the attribute.
-  Standard_EXPORT void Apply() Standard_OVERRIDE;
+    //! Applies the delta to the attribute.
+    Standard_EXPORT void Apply() Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TDF_DeltaOnAddition,TDF_AttributeDelta)
+    DEFINE_STANDARD_RTTIEXT(TDF_DeltaOnAddition, TDF_AttributeDelta)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _TDF_DeltaOnAddition_HeaderFile

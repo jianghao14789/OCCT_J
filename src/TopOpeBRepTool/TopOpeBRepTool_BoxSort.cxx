@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Bnd_Box.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom_Surface.hxx>
@@ -42,279 +41,272 @@
 #define MTClioloi TColStd_ListIteratorOfListOfInteger
 
 //=======================================================================
-//function : TopOpeBRepTool_BoxSort
-//purpose  : 
+// function : TopOpeBRepTool_BoxSort
+// purpose  :
 //=======================================================================
-TopOpeBRepTool_BoxSort::TopOpeBRepTool_BoxSort()
-{
+TopOpeBRepTool_BoxSort::TopOpeBRepTool_BoxSort() {}
+
+//=======================================================================
+// function : TopOpeBRepTool_BoxSort
+// purpose  :
+//=======================================================================
+TopOpeBRepTool_BoxSort::TopOpeBRepTool_BoxSort(const MTOhbt& HBT) {
+    SetHBoxTool(HBT);
+}
+
+// modified by NIZNHY-PKV Mon Dec 16 10:26:00 2002 f
+//=======================================================================
+// function : ~TopOpeBRepTool_BoxSort
+// purpose  :
+//=======================================================================
+TopOpeBRepTool_BoxSort::~TopOpeBRepTool_BoxSort() {
+    if (!myHBT.IsNull()) {
+        myHBT->Clear();
+    }
+}
+// modified by NIZNHY-PKV Mon Dec 16 10:26:02 2002 t
+
+//=======================================================================
+// function : SetHBoxTool
+// purpose  :
+//=======================================================================
+void TopOpeBRepTool_BoxSort::SetHBoxTool(const MTOhbt& HBT) {
+    myHBT = HBT;
 }
 
 //=======================================================================
-//function : TopOpeBRepTool_BoxSort
-//purpose  : 
+// function : HBoxTool
+// purpose  :
 //=======================================================================
-TopOpeBRepTool_BoxSort::TopOpeBRepTool_BoxSort(const MTOhbt& HBT)
-{
-  SetHBoxTool(HBT);
-}
-
-//modified by NIZNHY-PKV Mon Dec 16 10:26:00 2002 f
-//=======================================================================
-//function : ~TopOpeBRepTool_BoxSort
-//purpose  : 
-//=======================================================================
-TopOpeBRepTool_BoxSort::~TopOpeBRepTool_BoxSort()
-{
-  if (!myHBT.IsNull()) {
-    myHBT->Clear();
-  }
-}
-//modified by NIZNHY-PKV Mon Dec 16 10:26:02 2002 t
-
-//=======================================================================
-//function : SetHBoxTool
-//purpose  : 
-//=======================================================================
-void TopOpeBRepTool_BoxSort::SetHBoxTool(const MTOhbt& HBT)
-{
-  myHBT = HBT;
+const MTOhbt& TopOpeBRepTool_BoxSort::HBoxTool() const {
+    return myHBT;
 }
 
 //=======================================================================
-//function : HBoxTool
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-const MTOhbt& TopOpeBRepTool_BoxSort::HBoxTool() const
-{
-  return myHBT;
+void TopOpeBRepTool_BoxSort::Clear() {
+    myCOB.SetVoid();
+    //  myHAB.Nullify();
+    //  myHAI.Nullify();
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : AddBoxes
+// purpose  :
 //=======================================================================
-void TopOpeBRepTool_BoxSort::Clear()
-{
-  myCOB.SetVoid();
-//  myHAB.Nullify();
-//  myHAI.Nullify();
+void TopOpeBRepTool_BoxSort::AddBoxes(const TopoDS_Shape& S, const TopAbs_ShapeEnum TS, const TopAbs_ShapeEnum TA) {
+    if (myHBT.IsNull()) myHBT = new TopOpeBRepTool_HBoxTool();
+    myHBT->AddBoxes(S, TS, TA);
 }
 
 //=======================================================================
-//function : AddBoxes
-//purpose  : 
+// function : MakeHAB
+// purpose  :
 //=======================================================================
-void TopOpeBRepTool_BoxSort::AddBoxes(const TopoDS_Shape& S,const TopAbs_ShapeEnum TS,const TopAbs_ShapeEnum TA)
-{
-  if (myHBT.IsNull()) myHBT = new TopOpeBRepTool_HBoxTool();
-  myHBT->AddBoxes(S,TS,TA);
-}  
-
-//=======================================================================
-//function : MakeHAB
-//purpose  : 
-//=======================================================================
-void TopOpeBRepTool_BoxSort::MakeHAB(const TopoDS_Shape& S,const TopAbs_ShapeEnum TS,const TopAbs_ShapeEnum TA)
-{
+void TopOpeBRepTool_BoxSort::MakeHAB(const TopoDS_Shape& S, const TopAbs_ShapeEnum TS, const TopAbs_ShapeEnum TA) {
 #ifdef OCCT_DEBUG
-  TopAbs_ShapeEnum t =
+    TopAbs_ShapeEnum t =
 #endif
-                       S.ShapeType();
-  Standard_Integer n = 0; TopExp_Explorer ex;
-  for (ex.Init(S,TS,TA);ex.More();ex.Next()) n++;
+        S.ShapeType();
+    Standard_Integer n = 0;
+    TopExp_Explorer ex;
+    for (ex.Init(S, TS, TA); ex.More(); ex.Next())
+        n++;
 
-  myHAB = new Bnd_HArray1OfBox(0,n);
-  Bnd_Array1OfBox& AB = myHAB->ChangeArray1();
-  myHAI = new TColStd_HArray1OfInteger(0,n);
-  TColStd_Array1OfInteger& AI = myHAI->ChangeArray1();
-  
-  Standard_Integer i = 0;
-  for (ex.Init(S,TS,TA);ex.More();ex.Next()) {
-    i++;
-    const TopoDS_Shape& ss = ex.Current();    
-    Standard_Boolean hb = myHBT->HasBox(ss);
-    if (!hb) myHBT->AddBox(ss);
-    Standard_Integer im = myHBT->Index(ss);
-    const Bnd_Box& B = myHBT->Box(ss);
-    AI.ChangeValue(i) = im;
-    AB.ChangeValue(i) = B;
-  }
+    myHAB = new Bnd_HArray1OfBox(0, n);
+    Bnd_Array1OfBox& AB = myHAB->ChangeArray1();
+    myHAI = new TColStd_HArray1OfInteger(0, n);
+    TColStd_Array1OfInteger& AI = myHAI->ChangeArray1();
+
+    Standard_Integer i = 0;
+    for (ex.Init(S, TS, TA); ex.More(); ex.Next()) {
+        i++;
+        const TopoDS_Shape& ss = ex.Current();
+        Standard_Boolean hb = myHBT->HasBox(ss);
+        if (!hb) myHBT->AddBox(ss);
+        Standard_Integer im = myHBT->Index(ss);
+        const Bnd_Box& B = myHBT->Box(ss);
+        AI.ChangeValue(i) = im;
+        AB.ChangeValue(i) = B;
+    }
 
 #ifdef OCCT_DEBUG
-  if (TBOX) {
-    std::cout<<"# BS::MakeHAB : ";TopAbs::Print(t,std::cout);std::cout<<" : "<<n<<"\n";
-    std::cout.flush();
-  }
-#endif
-
-}
-
-//=======================================================================
-//function : HAB
-//purpose  : 
-//=======================================================================
-const Handle(Bnd_HArray1OfBox)& TopOpeBRepTool_BoxSort::HAB() const
-{
-  return myHAB;
-}
-
-//=======================================================================
-//function : MakeHABCOB
-//purpose  : 
-//=======================================================================
-void TopOpeBRepTool_BoxSort::MakeHABCOB(const Handle(Bnd_HArray1OfBox)& HAB,
-					Bnd_Box& COB)
-{
-  COB.SetVoid();
-  Standard_Integer n = HAB->Upper();
-  const Bnd_Array1OfBox& AB = HAB->Array1();
-  for (Standard_Integer i = 1; i <= n; i++) {
-    const Bnd_Box& B = AB(i);
-    COB.Add(B);
-  }
-}
-
-//=======================================================================
-//function : HABShape
-//purpose  : 
-//=======================================================================
-const TopoDS_Shape& TopOpeBRepTool_BoxSort::HABShape(const Standard_Integer I) const
-{
-  Standard_Integer iu = myHAI->Upper();
-  Standard_Boolean b = (I >= 1 && I <= iu);
-  if (!b) {
-    throw Standard_ProgramError("BS::Box3");
-  }
-  Standard_Integer im = myHAI->Value(I);
-  const TopoDS_Shape& S = myHBT->Shape(im);
-  return S;
-}
-
-//=======================================================================
-//function : MakeCOB
-//purpose  : 
-//=======================================================================
-void TopOpeBRepTool_BoxSort::MakeCOB(const TopoDS_Shape& S,const TopAbs_ShapeEnum TS,const TopAbs_ShapeEnum TA)
-{
-  MakeHAB(S,TS,TA);
-  MakeHABCOB(myHAB,myCOB);
-  myBSB.Initialize(myCOB,myHAB);
-#ifdef OCCT_DEBUG
-  if (TBOX) {myHBT->DumpB(myCOB);std::cout<<";# BS::MakeCOB"<<std::endl;}
+    if (TBOX) {
+        std::cout << "# BS::MakeHAB : ";
+        TopAbs::Print(t, std::cout);
+        std::cout << " : " << n << "\n";
+        std::cout.flush();
+    }
 #endif
 }
 
 //=======================================================================
-//function : AddBoxesMakeCOB
-//purpose  : 
+// function : HAB
+// purpose  :
 //=======================================================================
-void TopOpeBRepTool_BoxSort::AddBoxesMakeCOB(const TopoDS_Shape& S,const TopAbs_ShapeEnum TS,const TopAbs_ShapeEnum TA)
-{
-  AddBoxes(S,TS,TA);
-  MakeCOB(S,TS,TA);
+const Handle(Bnd_HArray1OfBox) & TopOpeBRepTool_BoxSort::HAB() const {
+    return myHAB;
 }
 
 //=======================================================================
-//function : Compare
-//purpose  : 
+// function : MakeHABCOB
+// purpose  :
 //=======================================================================
-const MTClioloi& TopOpeBRepTool_BoxSort::Compare(const TopoDS_Shape &S)
-{
-  if ( myHBT.IsNull() ) myHBT = new TopOpeBRepTool_HBoxTool();
-  
-  gp_Pln P;
-  Standard_Boolean isPlane = Standard_False;
-  TopAbs_ShapeEnum t = S.ShapeType();
-  Standard_Boolean hasb = myHBT->HasBox(S);
-  if (!hasb) myHBT->AddBox(S);
+void TopOpeBRepTool_BoxSort::MakeHABCOB(const Handle(Bnd_HArray1OfBox) & HAB, Bnd_Box& COB) {
+    COB.SetVoid();
+    Standard_Integer n = HAB->Upper();
+    const Bnd_Array1OfBox& AB = HAB->Array1();
+    for (Standard_Integer i = 1; i <= n; i++) {
+        const Bnd_Box& B = AB(i);
+        COB.Add(B);
+    }
+}
 
-  myLastCompareShape = S;
-  myLastCompareShapeBox.SetVoid();
-  
-  if ( t == TopAbs_FACE) {
-    const TopoDS_Face& F = TopoDS::Face(S);
-    Standard_Boolean natu = BRep_Tool::NaturalRestriction(F);
-    if (natu) {
-      Handle(Geom_Surface) surf = BRep_Tool::Surface(F);
-      GeomAdaptor_Surface GAS(surf); 
-      GeomAbs_SurfaceType suty = GAS.GetType();
-      isPlane = (suty == GeomAbs_Plane);
-      if (isPlane) P = GAS.Plane();
-      else {
-	myLastCompareShapeBox = myHBT->Box(F);
-      }
+//=======================================================================
+// function : HABShape
+// purpose  :
+//=======================================================================
+const TopoDS_Shape& TopOpeBRepTool_BoxSort::HABShape(const Standard_Integer I) const {
+    Standard_Integer iu = myHAI->Upper();
+    Standard_Boolean b = (I >= 1 && I <= iu);
+    if (!b) {
+        throw Standard_ProgramError("BS::Box3");
     }
-    else {
-      myLastCompareShapeBox = myHBT->Box(F);
-    }
-  }
-  else if (t == TopAbs_EDGE) {
-    const TopoDS_Edge& E = TopoDS::Edge(S);
-    TopoDS_Vertex V1,V2; TopExp::Vertices(E,V1,V2);
-    Standard_Boolean perso = (V1.IsNull() || V2.IsNull());
-    if (perso) {
-      myHBT->ComputeBoxOnVertices(E,myLastCompareShapeBox);
-    } 
-    else {
-      myLastCompareShapeBox = myHBT->Box(E);
-    }
-  }
+    Standard_Integer im = myHAI->Value(I);
+    const TopoDS_Shape& S = myHBT->Shape(im);
+    return S;
+}
 
-  const TColStd_ListOfInteger* L;
-  if (isPlane) L = &myBSB.Compare(P);
-  else L = &myBSB.Compare(myLastCompareShapeBox);
-  myIterator.Initialize(*L);
-  
+//=======================================================================
+// function : MakeCOB
+// purpose  :
+//=======================================================================
+void TopOpeBRepTool_BoxSort::MakeCOB(const TopoDS_Shape& S, const TopAbs_ShapeEnum TS, const TopAbs_ShapeEnum TA) {
+    MakeHAB(S, TS, TA);
+    MakeHABCOB(myHAB, myCOB);
+    myBSB.Initialize(myCOB, myHAB);
 #ifdef OCCT_DEBUG
-  if (TBOX) {
-    Standard_Integer nl = (*L).Extent();
-    std::cout<<"#------------------------"<<std::endl;
-    myHBT->DumpB(myLastCompareShapeBox);std::cout<<"; # BS::Compare"<<std::endl;
-    std::cout<<"# touche "<<nl<<" boites ";std::cout.flush();
-    Standard_Integer il;
-    for (MTClioloi idd((*L));idd.More();idd.Next()) {
-      il=idd.Value();std::cout<<il<<" ";std::cout.flush();
+    if (TBOX) {
+        myHBT->DumpB(myCOB);
+        std::cout << ";# BS::MakeCOB" << std::endl;
     }
-    std::cout<<std::endl<<"#------------------------"<<std::endl;
-  }
 #endif
- 
- return myIterator;
-}
-	
-//=======================================================================
-//function : TouchedShape
-//purpose  : 
-//=======================================================================
-const TopoDS_Shape& TopOpeBRepTool_BoxSort::TouchedShape(const MTClioloi& LI) const
-{
-  Standard_Integer icur = LI.Value();
-  const TopoDS_Shape& Scur = HABShape(icur);
-  return Scur;
 }
 
 //=======================================================================
-//function : Box
-//purpose  : 
+// function : AddBoxesMakeCOB
+// purpose  :
 //=======================================================================
-const Bnd_Box& TopOpeBRepTool_BoxSort::Box(const TopoDS_Shape& S) const
-{
-  if ( myHBT.IsNull() ) {
-    *((MTOhbt*)&myHBT) = new TopOpeBRepTool_HBoxTool();
-  }
+void TopOpeBRepTool_BoxSort::AddBoxesMakeCOB(const TopoDS_Shape& S, const TopAbs_ShapeEnum TS,
+                                             const TopAbs_ShapeEnum TA) {
+    AddBoxes(S, TS, TA);
+    MakeCOB(S, TS, TA);
+}
 
-  if ( myHBT->HasBox(S) ) {
+//=======================================================================
+// function : Compare
+// purpose  :
+//=======================================================================
+const MTClioloi& TopOpeBRepTool_BoxSort::Compare(const TopoDS_Shape& S) {
+    if (myHBT.IsNull()) myHBT = new TopOpeBRepTool_HBoxTool();
+
+    gp_Pln P;
+    Standard_Boolean isPlane = Standard_False;
+    TopAbs_ShapeEnum t = S.ShapeType();
+    Standard_Boolean hasb = myHBT->HasBox(S);
+    if (!hasb) myHBT->AddBox(S);
+
+    myLastCompareShape = S;
+    myLastCompareShapeBox.SetVoid();
+
+    if (t == TopAbs_FACE) {
+        const TopoDS_Face& F = TopoDS::Face(S);
+        Standard_Boolean natu = BRep_Tool::NaturalRestriction(F);
+        if (natu) {
+            Handle(Geom_Surface) surf = BRep_Tool::Surface(F);
+            GeomAdaptor_Surface GAS(surf);
+            GeomAbs_SurfaceType suty = GAS.GetType();
+            isPlane = (suty == GeomAbs_Plane);
+            if (isPlane)
+                P = GAS.Plane();
+            else {
+                myLastCompareShapeBox = myHBT->Box(F);
+            }
+        } else {
+            myLastCompareShapeBox = myHBT->Box(F);
+        }
+    } else if (t == TopAbs_EDGE) {
+        const TopoDS_Edge& E = TopoDS::Edge(S);
+        TopoDS_Vertex V1, V2;
+        TopExp::Vertices(E, V1, V2);
+        Standard_Boolean perso = (V1.IsNull() || V2.IsNull());
+        if (perso) {
+            myHBT->ComputeBoxOnVertices(E, myLastCompareShapeBox);
+        } else {
+            myLastCompareShapeBox = myHBT->Box(E);
+        }
+    }
+
+    const TColStd_ListOfInteger* L;
+    if (isPlane)
+        L = &myBSB.Compare(P);
+    else
+        L = &myBSB.Compare(myLastCompareShapeBox);
+    myIterator.Initialize(*L);
+
+#ifdef OCCT_DEBUG
+    if (TBOX) {
+        Standard_Integer nl = (*L).Extent();
+        std::cout << "#------------------------" << std::endl;
+        myHBT->DumpB(myLastCompareShapeBox);
+        std::cout << "; # BS::Compare" << std::endl;
+        std::cout << "# touche " << nl << " boites ";
+        std::cout.flush();
+        Standard_Integer il;
+        for (MTClioloi idd((*L)); idd.More(); idd.Next()) {
+            il = idd.Value();
+            std::cout << il << " ";
+            std::cout.flush();
+        }
+        std::cout << std::endl << "#------------------------" << std::endl;
+    }
+#endif
+
+    return myIterator;
+}
+
+//=======================================================================
+// function : TouchedShape
+// purpose  :
+//=======================================================================
+const TopoDS_Shape& TopOpeBRepTool_BoxSort::TouchedShape(const MTClioloi& LI) const {
+    Standard_Integer icur = LI.Value();
+    const TopoDS_Shape& Scur = HABShape(icur);
+    return Scur;
+}
+
+//=======================================================================
+// function : Box
+// purpose  :
+//=======================================================================
+const Bnd_Box& TopOpeBRepTool_BoxSort::Box(const TopoDS_Shape& S) const {
+    if (myHBT.IsNull()) {
+        *((MTOhbt*)&myHBT) = new TopOpeBRepTool_HBoxTool();
+    }
+
+    if (myHBT->HasBox(S)) {
+        const Bnd_Box& B = myHBT->Box(S);
+        return B;
+    } else if (!myLastCompareShape.IsNull()) {
+        if (S.IsEqual(myLastCompareShape)) {
+            if (!myLastCompareShapeBox.IsVoid()) {
+                return myLastCompareShapeBox;
+            }
+        }
+    }
+
     const Bnd_Box& B = myHBT->Box(S);
     return B;
-  }
-  else if ( !myLastCompareShape.IsNull() ) {
-    if ( S.IsEqual(myLastCompareShape) ) {
-      if ( !myLastCompareShapeBox.IsVoid() ) {
-	return myLastCompareShapeBox;
-      }
-    }
-  }
-  
-  const Bnd_Box& B = myHBT->Box(S);
-  return B;
 }

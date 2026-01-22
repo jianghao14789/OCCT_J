@@ -43,7 +43,7 @@
 //! the most time consuming computations according to the given Gluing parameter:<br>
 //! 1. Computation of FACE/FACE intersections for partial coincidence;<br>
 //! 2. And computation of VERTEX/FACE, EDGE/FACE and FACE/FACE intersections for full coincidence.<br>
-//! 
+//!
 //! By setting the Gluing option for the operation user should guarantee
 //! that the arguments are really coinciding. The algorithms do not check this itself.
 //! Setting inappropriate option for the operation is likely to lead to incorrect result.<br>
@@ -53,11 +53,6 @@
 //! **BOPAlgo_GlueShift** - Glue option for shapes with partial coincidence;<br>
 //! **BOPAlgo_GlueFull** - Glue option for shapes with full coincidence.
 //!
-enum BOPAlgo_GlueEnum
-{
-    BOPAlgo_GlueOff,
-    BOPAlgo_GlueShift,
-    BOPAlgo_GlueFull
-};
+enum BOPAlgo_GlueEnum { BOPAlgo_GlueOff, BOPAlgo_GlueShift, BOPAlgo_GlueFull };
 
 #endif // _BOPAlgo_GlueEnum_HeaderFile

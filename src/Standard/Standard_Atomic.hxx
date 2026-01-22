@@ -207,8 +207,7 @@ inline bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldVal
 // • __sync_sub_and_fetch(ptr, value)：原子减法，返回新值
 // • __sync_val_compare_and_swap(ptr, oldval, newval)：CAS 操作，返回旧值
 
-int Standard_Atomic_Increment(volatile int* theValue)
-{
+int Standard_Atomic_Increment(volatile int* theValue) {
     // __sync_add_and_fetch：原子地将 theValue 加 1，返回新值
     // 参数 1：操作数变量的指针
     // 参数 2：要加的值（这里是 1）
@@ -216,8 +215,7 @@ int Standard_Atomic_Increment(volatile int* theValue)
     return __sync_add_and_fetch(theValue, 1);
 }
 
-int Standard_Atomic_Decrement(volatile int* theValue)
-{
+int Standard_Atomic_Decrement(volatile int* theValue) {
     // __sync_sub_and_fetch：原子地将 theValue 减 1，返回新值
     // 参数 1：操作数变量的指针
     // 参数 2：要减的值（这里是 1）
@@ -225,8 +223,7 @@ int Standard_Atomic_Decrement(volatile int* theValue)
     return __sync_sub_and_fetch(theValue, 1);
 }
 
-bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue)
-{
+bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue) {
     // __sync_val_compare_and_swap：CAS 操作
     // 参数 1：要修改的变量指针
     // 参数 2：期望的旧值
@@ -256,28 +253,28 @@ bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int
 // • _InterlockedCompareExchange(dst, exch, cmp)：CAS 操作
 
 extern "C" {
-    // 声明 Windows API 函数
-    // volatile long* 而不是 int*，因为 Windows API 使用 long 类型
+// 声明 Windows API 函数
+// volatile long* 而不是 int*，因为 Windows API 使用 long 类型
 
-    //! _InterlockedIncrement - Windows 提供的原子自增函数
-    //! 参数：指向 long 的指针
-    //! 返回值：自增后的值
-    long _InterlockedIncrement(volatile long* lpAddend);
+//! _InterlockedIncrement - Windows 提供的原子自增函数
+//! 参数：指向 long 的指针
+//! 返回值：自增后的值
+long _InterlockedIncrement(volatile long* lpAddend);
 
-    //! _InterlockedDecrement - Windows 提供的原子自减函数
-    //! 参数：指向 long 的指针
-    //! 返回值：自减后的值
-    long _InterlockedDecrement(volatile long* lpAddend);
+//! _InterlockedDecrement - Windows 提供的原子自减函数
+//! 参数：指向 long 的指针
+//! 返回值：自减后的值
+long _InterlockedDecrement(volatile long* lpAddend);
 
-    //! _InterlockedCompareExchange - Windows 提供的 CAS 函数
-    //! 参数 1：目标变量（long 指针）
-    //! 参数 2：交换值（新值）
-    //! 参数 3：比较值（旧值）
-    //! 返回值：修改前的旧值
-    long _InterlockedCompareExchange(long volatile* Destination, long Exchange, long Comparand);
+//! _InterlockedCompareExchange - Windows 提供的 CAS 函数
+//! 参数 1：目标变量（long 指针）
+//! 参数 2：交换值（新值）
+//! 参数 3：比较值（旧值）
+//! 返回值：修改前的旧值
+long _InterlockedCompareExchange(long volatile* Destination, long Exchange, long Comparand);
 }
 
-#if defined(_MSC_VER) && ! defined(__INTEL_COMPILER)
+#if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
 // force intrinsic instead of WinAPI calls
 // 中文说明：
 // 指导 MSVC 编译器使用内置函数（Intrinsic）而不是真实的函数调用
@@ -292,9 +289,9 @@ extern "C" {
 // • 仅对 MSVC 有效（不对 Intel Compiler 使用）
 // • Intel Compiler 自己管理何时使用内置函数
 
-#pragma intrinsic (_InterlockedIncrement)
-#pragma intrinsic (_InterlockedDecrement)
-#pragma intrinsic (_InterlockedCompareExchange)
+#pragma intrinsic(_InterlockedIncrement)
+#pragma intrinsic(_InterlockedDecrement)
+#pragma intrinsic(_InterlockedCompareExchange)
 #endif
 
 // WinAPI function or MSVC intrinsic
@@ -314,26 +311,24 @@ extern "C" {
 // • OCCT 为了跨平台兼容性，使用 int 作为统一的整数类型
 // • 通过指针转换来适配 Windows API
 
-int Standard_Atomic_Increment(volatile int* theValue)
-{
+int Standard_Atomic_Increment(volatile int* theValue) {
     // 将 int* 安全地转换为 long*，因为大小相同
     // 调用 Windows API 进行原子自增
     return _InterlockedIncrement(reinterpret_cast<volatile long*>(theValue));
 }
 
-int Standard_Atomic_Decrement(volatile int* theValue)
-{
+int Standard_Atomic_Decrement(volatile int* theValue) {
     // 将 int* 安全地转换为 long*，因为大小相同
     // 调用 Windows API 进行原子自减
     return _InterlockedDecrement(reinterpret_cast<volatile long*>(theValue));
 }
 
-bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue)
-{
+bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue) {
     // 将 int* 安全地转换为 long*，因为大小相同
     // _InterlockedCompareExchange 返回修改前的值
     // 我们判断返回值是否等于 theOldValue 来确定是否成功
-    return _InterlockedCompareExchange(reinterpret_cast<volatile long*>(theValue), theNewValue, theOldValue) == theOldValue;
+    return _InterlockedCompareExchange(reinterpret_cast<volatile long*>(theValue), theNewValue, theOldValue) ==
+           theOldValue;
 }
 
 #elif defined(__APPLE__)
@@ -366,24 +361,21 @@ bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int
 // • 确保操作的可见性和顺序性
 // • 在多核系统中非常重要
 
-int Standard_Atomic_Increment(volatile int* theValue)
-{
+int Standard_Atomic_Increment(volatile int* theValue) {
     // OSAtomicIncrement32Barrier：原子自增 32 位整数
     // 返回新值
     // Barrier 保证了操作的原子性和内存可见性
     return OSAtomicIncrement32Barrier(theValue);
 }
 
-int Standard_Atomic_Decrement(volatile int* theValue)
-{
+int Standard_Atomic_Decrement(volatile int* theValue) {
     // OSAtomicDecrement32Barrier：原子自减 32 位整数
     // 返回新值
     // Barrier 保证了操作的原子性和内存可见性
     return OSAtomicDecrement32Barrier(theValue);
 }
 
-bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue)
-{
+bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue) {
     // OSAtomicCompareAndSwapInt：CAS 操作
     // 参数 1：旧值（期望值）
     // 参数 2：新值
@@ -426,24 +418,21 @@ bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int
 // • 我们需要加 1 来得到修改后的值
 // • 同样，__atomic_dec 返回的是修改前的值，需要减 1
 
-int Standard_Atomic_Increment(volatile int* theValue)
-{
+int Standard_Atomic_Increment(volatile int* theValue) {
     // __atomic_inc 返回修改前的值
     // 例如：原值为 5，执行后返回 5，但变量已变为 6
     // 我们需要加 1 来获得修改后的值（6）
     return __atomic_inc(theValue) + 1; // analog of __sync_fetch_and_add
 }
 
-int Standard_Atomic_Decrement(volatile int* theValue)
-{
+int Standard_Atomic_Decrement(volatile int* theValue) {
     // __atomic_dec 返回修改前的值
     // 例如：原值为 5，执行后返回 5，但变量已变为 4
     // 我们需要减 1 来获得修改后的值（4）
     return __atomic_dec(theValue) - 1; // analog of __sync_fetch_and_sub
 }
 
-bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue)
-{
+bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue) {
     // __atomic_cmpxchg：CAS 操作
     // 成功时返回 0，失败时返回非 0
     // 我们比较返回值是否等于 0 来判断是否成功
@@ -475,8 +464,7 @@ bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int
 // 中文说明：
 // 非原子的自增实现（仅作为最后的后备方案）
 // 危险：在多线程环境下不安全！
-int Standard_Atomic_Increment(volatile int* theValue)
-{
+int Standard_Atomic_Increment(volatile int* theValue) {
     // 简单的自增操作，不具有原子性
     // 在多线程环境下可能出现数据竞争
     return ++(*theValue);
@@ -485,8 +473,7 @@ int Standard_Atomic_Increment(volatile int* theValue)
 // 中文说明：
 // 非原子的自减实现（仅作为最后的后备方案）
 // 危险：在多线程环境下不安全！
-int Standard_Atomic_Decrement(volatile int* theValue)
-{
+int Standard_Atomic_Decrement(volatile int* theValue) {
     // 简单的自减操作，不具有原子性
     // 在多线程环境下可能出现数据竞争
     return --(*theValue);
@@ -495,14 +482,12 @@ int Standard_Atomic_Decrement(volatile int* theValue)
 // 中文说明：
 // 非原子的 CAS 实现（仅作为最后的后备方案）
 // 危险：在多线程环境下不安全！
-bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue)
-{
+bool Standard_Atomic_CompareAndSwap(volatile int* theValue, int theOldValue, int theNewValue) {
     // 这两步操作不是原子的：
     // 1. 比较 *theValue == theOldValue
     // 2. 如果相等，赋值 *theValue = theNewValue
     // 两步之间可能被其他线程修改，导致不一致
-    if (*theValue == theOldValue)
-    {
+    if (*theValue == theOldValue) {
         *theValue = theNewValue;
         return true;
     }

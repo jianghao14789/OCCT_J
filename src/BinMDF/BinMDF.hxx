@@ -23,7 +23,6 @@
 class BinMDF_ADriverTable;
 class Message_Messenger;
 
-
 //! This package provides classes and methods to
 //! translate a transient DF into a persistent one and
 //! vice versa.
@@ -40,41 +39,20 @@ class Message_Messenger;
 //! translation process, a driver table is asked to
 //! give a translation driver for each current object
 //! to be translated.
-class BinMDF 
-{
+class BinMDF {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Adds the attribute storage drivers to <aDriverTable>.
-  Standard_EXPORT static void AddDrivers (const Handle(BinMDF_ADriverTable)& aDriverTable, const Handle(Message_Messenger)& aMsgDrv);
-
-
-
+    //! Adds the attribute storage drivers to <aDriverTable>.
+    Standard_EXPORT static void AddDrivers(const Handle(BinMDF_ADriverTable) & aDriverTable,
+                                           const Handle(Message_Messenger) & aMsgDrv);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class BinMDF_ADriver;
-friend class BinMDF_ReferenceDriver;
-friend class BinMDF_TagSourceDriver;
-friend class BinMDF_ADriverTable;
-
+    friend class BinMDF_ADriver;
+    friend class BinMDF_ReferenceDriver;
+    friend class BinMDF_TagSourceDriver;
+    friend class BinMDF_ADriverTable;
 };
-
-
-
-
-
-
 
 #endif // _BinMDF_HeaderFile

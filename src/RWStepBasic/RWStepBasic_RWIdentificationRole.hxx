@@ -27,48 +27,27 @@ class StepBasic_IdentificationRole;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for IdentificationRole
-class RWStepBasic_RWIdentificationRole 
-{
+class RWStepBasic_RWIdentificationRole {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWIdentificationRole();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWIdentificationRole();
-  
-  //! Reads IdentificationRole
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_IdentificationRole)& ent) const;
-  
-  //! Writes IdentificationRole
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_IdentificationRole)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_IdentificationRole)& ent, Interface_EntityIterator& iter) const;
+    //! Reads IdentificationRole
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_IdentificationRole) & ent) const;
 
+    //! Writes IdentificationRole
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_IdentificationRole) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_IdentificationRole) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWIdentificationRole_HeaderFile

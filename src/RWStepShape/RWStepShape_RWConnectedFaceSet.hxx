@@ -28,44 +28,22 @@ class StepShape_ConnectedFaceSet;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ConnectedFaceSet
-class RWStepShape_RWConnectedFaceSet 
-{
+class RWStepShape_RWConnectedFaceSet {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWConnectedFaceSet();
 
-  
-  Standard_EXPORT RWStepShape_RWConnectedFaceSet();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ConnectedFaceSet)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ConnectedFaceSet)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_ConnectedFaceSet)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_ConnectedFaceSet) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_ConnectedFaceSet) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_ConnectedFaceSet) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWConnectedFaceSet_HeaderFile

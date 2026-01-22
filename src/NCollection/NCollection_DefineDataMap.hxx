@@ -33,7 +33,7 @@
 
 // *********************************************** Class DataMap *************
 
-#define DEFINE_DATAMAP(_ClassName_, _BaseCollection_, TheKeyType, TheItemType) \
-typedef NCollection_DataMap<TheKeyType, TheItemType > _ClassName_;
+#define DEFINE_DATAMAP(_ClassName_, _BaseCollection_, TheKeyType, TheItemType)                                         \
+    typedef NCollection_DataMap<TheKeyType, TheItemType> _ClassName_;
 
 #endif

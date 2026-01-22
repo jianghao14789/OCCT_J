@@ -21,8 +21,8 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_Map.hxx>
 
-typedef NCollection_Map<Handle(AIS_InteractiveObject),TColStd_MapTransientHasher> AIS_MapOfInteractive;
-typedef NCollection_Map<Handle(AIS_InteractiveObject),TColStd_MapTransientHasher>::Iterator AIS_MapIteratorOfMapOfInteractive;
-
+typedef NCollection_Map<Handle(AIS_InteractiveObject), TColStd_MapTransientHasher> AIS_MapOfInteractive;
+typedef NCollection_Map<Handle(AIS_InteractiveObject), TColStd_MapTransientHasher>::Iterator
+    AIS_MapIteratorOfMapOfInteractive;
 
 #endif

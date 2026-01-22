@@ -24,7 +24,6 @@
 #include <AppDef_BSpParFunctionOfMyBSplGradientOfBSplineCompute.hxx>
 #include <AppDef_BSpGradient_BFGSOfMyBSplGradientOfBSplineCompute.hxx>
 #include <AppParCurves_MultiBSpCurve.hxx>
- 
 
 #define MultiLine AppDef_MultiLine
 #define MultiLine_hxx <AppDef_MultiLine.hxx>
@@ -39,4 +38,3 @@
 #define AppParCurves_BSpGradient AppDef_MyBSplGradientOfBSplineCompute
 #define AppParCurves_BSpGradient_hxx <AppDef_MyBSplGradientOfBSplineCompute.hxx>
 #include <AppParCurves_BSpGradient.gxx>
-

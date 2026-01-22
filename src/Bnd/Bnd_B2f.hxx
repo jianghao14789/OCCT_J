@@ -30,14 +30,9 @@ class gp_Pnt2d;
 class gp_Trsf2d;
 class gp_Ax2d;
 
-
-
-class Bnd_B2f
-{
+class Bnd_B2f {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Empty constructor.
     Bnd_B2f();
@@ -92,7 +87,8 @@ public:
 
     //! Check a circle for the intersection with the current box.
     //! Returns True if there is no intersection between boxes.
-    Standard_EXPORT Standard_Boolean IsOut(const gp_XY& theCenter, const Standard_Real theRadius, const Standard_Boolean isCircleHollow = Standard_False) const;
+    Standard_EXPORT Standard_Boolean IsOut(const gp_XY& theCenter, const Standard_Real theRadius,
+                                           const Standard_Boolean isCircleHollow = Standard_False) const;
 
     //! Check the given box for the intersection with the current box.
     //! Returns True if there is no intersection between boxes.
@@ -128,23 +124,11 @@ public:
     //! All components of theHSize must be non-negative.
     void SetHSize(const gp_XY& theHSize);
 
-
-
-
 protected:
-
-
-
     Standard_ShortReal myCenter[2];
     Standard_ShortReal myHSize[2];
 
-
 private:
-
-
-
-
-
 };
 
 #define RealType Standard_ShortReal
@@ -158,8 +142,5 @@ private:
 #undef RealType_hxx
 #undef Bnd_B2x
 #undef Bnd_B2x_hxx
-
-
-
 
 #endif // _Bnd_B2f_HeaderFile

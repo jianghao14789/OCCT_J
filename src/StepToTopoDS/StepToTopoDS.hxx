@@ -50,72 +50,55 @@ class StepToTopoDS_PointPair;
 class StepToTopoDS_PointPairHasher;
 class StepToTopoDS_NMTool;
 
-
 //! This package implements the mapping between AP214
 //! Shape representation and  CAS.CAD Shape Representation.
 //! The source schema is Part42 (which is included in AP214)
-class StepToTopoDS 
-{
+class StepToTopoDS {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeBuilderError(const StepToTopoDS_BuilderError Error);
 
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeBuilderError (const StepToTopoDS_BuilderError Error);
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeShellError (const StepToTopoDS_TranslateShellError Error);
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeFaceError (const StepToTopoDS_TranslateFaceError Error);
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeEdgeError (const StepToTopoDS_TranslateEdgeError Error);
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeVertexError (const StepToTopoDS_TranslateVertexError Error);
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodeVertexLoopError (const StepToTopoDS_TranslateVertexLoopError Error);
-  
-  Standard_EXPORT static Handle(TCollection_HAsciiString) DecodePolyLoopError (const StepToTopoDS_TranslatePolyLoopError Error);
-  
-  Standard_EXPORT static Standard_CString DecodeGeometricToolError (const StepToTopoDS_GeometricToolError Error);
+    Standard_EXPORT static Handle(TCollection_HAsciiString)
+        DecodeShellError(const StepToTopoDS_TranslateShellError Error);
 
+    Standard_EXPORT static Handle(TCollection_HAsciiString)
+        DecodeFaceError(const StepToTopoDS_TranslateFaceError Error);
 
+    Standard_EXPORT static Handle(TCollection_HAsciiString)
+        DecodeEdgeError(const StepToTopoDS_TranslateEdgeError Error);
 
+    Standard_EXPORT static Handle(TCollection_HAsciiString)
+        DecodeVertexError(const StepToTopoDS_TranslateVertexError Error);
+
+    Standard_EXPORT static Handle(TCollection_HAsciiString)
+        DecodeVertexLoopError(const StepToTopoDS_TranslateVertexLoopError Error);
+
+    Standard_EXPORT static Handle(TCollection_HAsciiString)
+        DecodePolyLoopError(const StepToTopoDS_TranslatePolyLoopError Error);
+
+    Standard_EXPORT static Standard_CString DecodeGeometricToolError(const StepToTopoDS_GeometricToolError Error);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class StepToTopoDS_Root;
-friend class StepToTopoDS_TranslateShell;
-friend class StepToTopoDS_TranslateFace;
-friend class StepToTopoDS_TranslateEdgeLoop;
-friend class StepToTopoDS_TranslateEdge;
-friend class StepToTopoDS_TranslateVertex;
-friend class StepToTopoDS_TranslatePolyLoop;
-friend class StepToTopoDS_TranslateVertexLoop;
-friend class StepToTopoDS_TranslateCompositeCurve;
-friend class StepToTopoDS_TranslateCurveBoundedSurface;
-friend class StepToTopoDS_Builder;
-friend class StepToTopoDS_MakeTransformed;
-friend class StepToTopoDS_GeometricTool;
-friend class StepToTopoDS_Tool;
-friend class StepToTopoDS_CartesianPointHasher;
-friend class StepToTopoDS_PointPair;
-friend class StepToTopoDS_PointPairHasher;
-friend class StepToTopoDS_NMTool;
-
+    friend class StepToTopoDS_Root;
+    friend class StepToTopoDS_TranslateShell;
+    friend class StepToTopoDS_TranslateFace;
+    friend class StepToTopoDS_TranslateEdgeLoop;
+    friend class StepToTopoDS_TranslateEdge;
+    friend class StepToTopoDS_TranslateVertex;
+    friend class StepToTopoDS_TranslatePolyLoop;
+    friend class StepToTopoDS_TranslateVertexLoop;
+    friend class StepToTopoDS_TranslateCompositeCurve;
+    friend class StepToTopoDS_TranslateCurveBoundedSurface;
+    friend class StepToTopoDS_Builder;
+    friend class StepToTopoDS_MakeTransformed;
+    friend class StepToTopoDS_GeometricTool;
+    friend class StepToTopoDS_Tool;
+    friend class StepToTopoDS_CartesianPointHasher;
+    friend class StepToTopoDS_PointPair;
+    friend class StepToTopoDS_PointPairHasher;
+    friend class StepToTopoDS_NMTool;
 };
-
-
-
-
-
-
 
 #endif // _StepToTopoDS_HeaderFile

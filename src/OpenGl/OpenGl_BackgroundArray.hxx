@@ -26,84 +26,83 @@
 
 //! Tool class for generating reusable data for
 //! gradient or texture background rendering.
-class OpenGl_BackgroundArray : public OpenGl_PrimitiveArray
-{
+class OpenGl_BackgroundArray : public OpenGl_PrimitiveArray {
 public:
+    //! Main constructor.
+    Standard_EXPORT OpenGl_BackgroundArray(const Graphic3d_TypeOfBackground theType);
 
-  //! Main constructor.
-  Standard_EXPORT OpenGl_BackgroundArray (const Graphic3d_TypeOfBackground theType);
+    //! Render primitives to the window
+    Standard_EXPORT void Render(const Handle(OpenGl_Workspace) & theWorkspace,
+                                Graphic3d_Camera::Projection theProjection) const;
 
-  //! Render primitives to the window
-  Standard_EXPORT void Render (const Handle(OpenGl_Workspace)& theWorkspace,
-                               Graphic3d_Camera::Projection theProjection) const;
+    //! Check if background parameters are set properly
+    Standard_EXPORT bool IsDefined() const;
 
-  //! Check if background parameters are set properly
-  Standard_EXPORT bool IsDefined() const;
+    //! Sets background texture parameters
+    Standard_EXPORT void SetTextureParameters(const Aspect_FillMethod theFillMethod);
 
-  //! Sets background texture parameters
-  Standard_EXPORT void SetTextureParameters (const Aspect_FillMethod theFillMethod);
+    //! Sets texture fill method
+    Standard_EXPORT void SetTextureFillMethod(const Aspect_FillMethod theFillMethod);
 
-  //! Sets texture fill method
-  Standard_EXPORT void SetTextureFillMethod (const Aspect_FillMethod theFillMethod);
+    //! Gets background texture fill method
+    Aspect_FillMethod TextureFillMethod() const {
+        return myFillMethod;
+    }
 
-  //! Gets background texture fill method
-  Aspect_FillMethod TextureFillMethod() const { return myFillMethod; }
+    //! Gets background gradient fill method
+    Aspect_GradientFillMethod GradientFillMethod() const {
+        return myGradientParams.type;
+    }
 
-  //! Gets background gradient fill method
-  Aspect_GradientFillMethod GradientFillMethod() const { return myGradientParams.type; }
+    //! Returns color of gradient background for the given index.
+    const OpenGl_Vec4& GradientColor(const Standard_Integer theIndex) const {
+        return (&myGradientParams.color1)[theIndex];
+    }
 
-  //! Returns color of gradient background for the given index.
-  const OpenGl_Vec4& GradientColor (const Standard_Integer theIndex) const { return (&myGradientParams.color1)[theIndex]; }
+    //! Sets type of gradient fill method
+    Standard_EXPORT void SetGradientFillMethod(const Aspect_GradientFillMethod theType);
 
-  //! Sets type of gradient fill method
-  Standard_EXPORT void SetGradientFillMethod (const Aspect_GradientFillMethod theType);
-
-  //! Sets background gradient parameters
-  Standard_EXPORT void SetGradientParameters (const Quantity_Color&           theColor1,
-                                              const Quantity_Color&           theColor2,
-                                              const Aspect_GradientFillMethod theType);
+    //! Sets background gradient parameters
+    Standard_EXPORT void SetGradientParameters(const Quantity_Color& theColor1, const Quantity_Color& theColor2,
+                                               const Aspect_GradientFillMethod theType);
 
 protected: //! @name Internal structure for storing gradient parameters
-
-  struct OpenGl_GradientParameters
-  {
-    OpenGl_Vec4 color1;
-    OpenGl_Vec4 color2;
-    Aspect_GradientFillMethod type;
-  };
+    struct OpenGl_GradientParameters {
+        OpenGl_Vec4 color1;
+        OpenGl_Vec4 color2;
+        Aspect_GradientFillMethod type;
+    };
 
 protected:
+    //! Fill attributes arrays for background array according to its type:
+    //! - for gradient background its attributes consist of colors and gradient coordinates
+    //! - for texture one its attributes consist of position and texture coordinates.
+    Standard_EXPORT Standard_Boolean init(const Handle(OpenGl_Workspace) & theWorkspace) const;
 
-  //! Fill attributes arrays for background array according to its type:
-  //! - for gradient background its attributes consist of colors and gradient coordinates
-  //! - for texture one its attributes consist of position and texture coordinates.
-  Standard_EXPORT Standard_Boolean init (const Handle(OpenGl_Workspace)& theWorkspace) const;
+    //! Initializes gradient arrays.
+    Standard_EXPORT Standard_Boolean createGradientArray(const Handle(OpenGl_Context) & theCtx) const;
 
-  //! Initializes gradient arrays.
-  Standard_EXPORT Standard_Boolean createGradientArray (const Handle(OpenGl_Context)& theCtx) const;
+    //! Initializes texture arrays.
+    //! @param theWorkspace OpenGl workspace that stores texture in the current enabled face aspect.
+    Standard_EXPORT Standard_Boolean createTextureArray(const Handle(OpenGl_Workspace) & theWorkspace) const;
 
-  //! Initializes texture arrays.
-  //! @param theWorkspace OpenGl workspace that stores texture in the current enabled face aspect.
-  Standard_EXPORT Standard_Boolean createTextureArray (const Handle(OpenGl_Workspace)& theWorkspace) const;
+    //! Initializes cubemap arrays.
+    Standard_EXPORT Standard_Boolean createCubeMapArray() const;
 
-  //! Initializes cubemap arrays.
-  Standard_EXPORT Standard_Boolean createCubeMapArray() const;
+    //! Marks array parameters as changed,
+    //! on next rendering stage array data is to be updated.
+    Standard_EXPORT void invalidateData();
 
-  //! Marks array parameters as changed,
-  //! on next rendering stage array data is to be updated.
-  Standard_EXPORT void invalidateData();
-
-  using OpenGl_PrimitiveArray::Render;
+    using OpenGl_PrimitiveArray::Render;
 
 protected:
-
-  Graphic3d_TypeOfBackground        myType;           //!< Type of background: texture or gradient.
-  Aspect_FillMethod                 myFillMethod;     //!< Texture parameters
-  mutable OpenGl_GradientParameters myGradientParams; //!< Gradient parameters
-  mutable Standard_Integer          myViewWidth;      //!< view width  used for array initialization
-  mutable Standard_Integer          myViewHeight;     //!< view height used for array initialization
-  mutable Standard_Boolean          myToUpdate;       //!< Shows if array parameters were changed and data (myAttribs storage) is to be updated
-
+    Graphic3d_TypeOfBackground myType;                  //!< Type of background: texture or gradient.
+    Aspect_FillMethod myFillMethod;                     //!< Texture parameters
+    mutable OpenGl_GradientParameters myGradientParams; //!< Gradient parameters
+    mutable Standard_Integer myViewWidth;               //!< view width  used for array initialization
+    mutable Standard_Integer myViewHeight;              //!< view height used for array initialization
+    mutable Standard_Boolean
+        myToUpdate; //!< Shows if array parameters were changed and data (myAttribs storage) is to be updated
 };
 
 #endif // OpenGl_BackgroundArray_Header

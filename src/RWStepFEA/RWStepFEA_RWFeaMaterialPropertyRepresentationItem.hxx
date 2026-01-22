@@ -27,48 +27,29 @@ class StepFEA_FeaMaterialPropertyRepresentationItem;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaMaterialPropertyRepresentationItem
-class RWStepFEA_RWFeaMaterialPropertyRepresentationItem 
-{
+class RWStepFEA_RWFeaMaterialPropertyRepresentationItem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaMaterialPropertyRepresentationItem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaMaterialPropertyRepresentationItem();
-  
-  //! Reads FeaMaterialPropertyRepresentationItem
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaMaterialPropertyRepresentationItem)& ent) const;
-  
-  //! Writes FeaMaterialPropertyRepresentationItem
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaMaterialPropertyRepresentationItem)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaMaterialPropertyRepresentationItem)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaMaterialPropertyRepresentationItem
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_FeaMaterialPropertyRepresentationItem) & ent) const;
 
+    //! Writes FeaMaterialPropertyRepresentationItem
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_FeaMaterialPropertyRepresentationItem) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaMaterialPropertyRepresentationItem) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaMaterialPropertyRepresentationItem_HeaderFile

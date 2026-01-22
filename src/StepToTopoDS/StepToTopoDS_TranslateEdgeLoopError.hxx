@@ -17,11 +17,6 @@
 #ifndef _StepToTopoDS_TranslateEdgeLoopError_HeaderFile
 #define _StepToTopoDS_TranslateEdgeLoopError_HeaderFile
 
-
-enum StepToTopoDS_TranslateEdgeLoopError
-{
-StepToTopoDS_TranslateEdgeLoopDone,
-StepToTopoDS_TranslateEdgeLoopOther
-};
+enum StepToTopoDS_TranslateEdgeLoopError { StepToTopoDS_TranslateEdgeLoopDone, StepToTopoDS_TranslateEdgeLoopOther };
 
 #endif // _StepToTopoDS_TranslateEdgeLoopError_HeaderFile

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArcSine.hxx>
 #include <Expr_Cosine.hxx>
@@ -31,13 +30,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Sine, Expr_UnaryExpression)
 
-Expr_Sine::Expr_Sine(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_Sine::Expr_Sine(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_Sine::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Sine::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) myexp = Operand();
     if (myexp->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) myNVexp = Handle(Expr_NumericValue)::DownCast(myexp);
@@ -50,13 +47,11 @@ Handle(Expr_GeneralExpression) Expr_Sine::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_Sine::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Sine::Copy() const {
     return new Expr_Sine(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_Sine::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Sine::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (Other->IsKind(STANDARD_TYPE(Expr_Sine))) {
         Handle(Expr_GeneralExpression) myexp = Operand();
         return myexp->IsIdentical(Other->SubExpression(1));
@@ -64,13 +59,11 @@ Standard_Boolean Expr_Sine::IsIdentical(const Handle(Expr_GeneralExpression)& Ot
     return Standard_False;
 }
 
-Standard_Boolean Expr_Sine::IsLinear() const
-{
+Standard_Boolean Expr_Sine::IsLinear() const {
     return !ContainsUnknowns();
 }
 
-Handle(Expr_GeneralExpression) Expr_Sine::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Sine::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -81,13 +74,11 @@ Handle(Expr_GeneralExpression) Expr_Sine::Derivative(const Handle(Expr_NamedUnkn
     return resu->ShallowSimplified();
 }
 
-Standard_Real Expr_Sine::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Sine::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     return ::Sin(Operand()->Evaluate(vars, vals));
 }
 
-TCollection_AsciiString Expr_Sine::String() const
-{
+TCollection_AsciiString Expr_Sine::String() const {
     TCollection_AsciiString str("Sin(");
     str += Operand()->String();
     str += ")";

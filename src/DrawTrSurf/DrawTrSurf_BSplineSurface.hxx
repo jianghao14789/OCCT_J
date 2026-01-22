@@ -30,84 +30,105 @@ DEFINE_STANDARD_HANDLE(DrawTrSurf_BSplineSurface, DrawTrSurf_Surface)
 //! of the surface.
 //! You can use the general class Surface from DrawTrSurf too,
 //! if you just want to sea boundaries and isoparametric curves.
-class DrawTrSurf_BSplineSurface : public DrawTrSurf_Surface
-{
-  DEFINE_STANDARD_RTTIEXT(DrawTrSurf_BSplineSurface, DrawTrSurf_Surface)
-  Draw_Drawable3D_FACTORY
-public:
-  
-  //! default drawing mode.
-  //! The isoparametric curves corresponding to the knots values are drawn.
-  //! The control points and the knots points are drawn.
-  //! The boundaries are yellow, the isoparametric curves are blues.
-  //! For the discretisation 50 points are computed in each parametric direction.
-  Standard_EXPORT DrawTrSurf_BSplineSurface (const Handle(Geom_BSplineSurface)& S);
+class DrawTrSurf_BSplineSurface : public DrawTrSurf_Surface {
+    DEFINE_STANDARD_RTTIEXT(DrawTrSurf_BSplineSurface, DrawTrSurf_Surface)
+Draw_Drawable3D_FACTORY public :
 
-  //! The isoparametric curves corresponding to the knots values are drawn.
-  Standard_EXPORT DrawTrSurf_BSplineSurface (const Handle(Geom_BSplineSurface)& S,
-                                             const Draw_Color& BoundsColor, const Draw_Color& IsosColor, const Draw_Color& PolesColor,
-                                             const Draw_Color& KnotsColor, const Draw_MarkerShape KnotsShape, const Standard_Integer KnotsSize,
-                                             const Standard_Boolean ShowPoles, const Standard_Boolean ShowKnots,
-                                             const Standard_Integer Discret, const Standard_Real Deflection, const Standard_Integer DrawMode);
+    //! default drawing mode.
+    //! The isoparametric curves corresponding to the knots values are drawn.
+    //! The control points and the knots points are drawn.
+    //! The boundaries are yellow, the isoparametric curves are blues.
+    //! For the discretisation 50 points are computed in each parametric direction.
+    Standard_EXPORT DrawTrSurf_BSplineSurface(const Handle(Geom_BSplineSurface) & S);
 
-  //! Parametric equidistant iso curves are drawn.
-  Standard_EXPORT DrawTrSurf_BSplineSurface (const Handle(Geom_BSplineSurface)& S,
-                                             const Standard_Integer NbUIsos, const Standard_Integer NbVIsos,
-                                             const Draw_Color& BoundsColor, const Draw_Color& IsosColor, const Draw_Color& PolesColor,
-                                             const Draw_Color& KnotsColor, const Draw_MarkerShape KnotsShape, const Standard_Integer KnotsSize,
-                                             const Standard_Boolean ShowPoles, const Standard_Boolean ShowKnots,
-                                             const Standard_Integer Discret, const Standard_Real Deflection, const Standard_Integer DrawMode);
+    //! The isoparametric curves corresponding to the knots values are drawn.
+    Standard_EXPORT DrawTrSurf_BSplineSurface(const Handle(Geom_BSplineSurface) & S, const Draw_Color& BoundsColor,
+                                              const Draw_Color& IsosColor, const Draw_Color& PolesColor,
+                                              const Draw_Color& KnotsColor, const Draw_MarkerShape KnotsShape,
+                                              const Standard_Integer KnotsSize, const Standard_Boolean ShowPoles,
+                                              const Standard_Boolean ShowKnots, const Standard_Integer Discret,
+                                              const Standard_Real Deflection, const Standard_Integer DrawMode);
 
-  Standard_EXPORT virtual void DrawOn (Draw_Display& dis) const Standard_OVERRIDE;
+    //! Parametric equidistant iso curves are drawn.
+    Standard_EXPORT DrawTrSurf_BSplineSurface(const Handle(Geom_BSplineSurface) & S, const Standard_Integer NbUIsos,
+                                              const Standard_Integer NbVIsos, const Draw_Color& BoundsColor,
+                                              const Draw_Color& IsosColor, const Draw_Color& PolesColor,
+                                              const Draw_Color& KnotsColor, const Draw_MarkerShape KnotsShape,
+                                              const Standard_Integer KnotsSize, const Standard_Boolean ShowPoles,
+                                              const Standard_Boolean ShowKnots, const Standard_Integer Discret,
+                                              const Standard_Real Deflection, const Standard_Integer DrawMode);
 
-  void ShowPoles() { drawPoles = Standard_True; }
+    Standard_EXPORT virtual void DrawOn(Draw_Display& dis) const Standard_OVERRIDE;
 
-  void ShowKnots() { drawKnots = Standard_True; }
+    void ShowPoles() {
+        drawPoles = Standard_True;
+    }
 
-  //! change the number of isoparametric curves to be drawn.
-  Standard_EXPORT virtual void ShowIsos (const Standard_Integer Nu, const Standard_Integer Nv) Standard_OVERRIDE;
+    void ShowKnots() {
+        drawKnots = Standard_True;
+    }
 
-  //! change the number of isoparametric curves to be drawn.
-  Standard_EXPORT void ShowKnotsIsos();
+    //! change the number of isoparametric curves to be drawn.
+    Standard_EXPORT virtual void ShowIsos(const Standard_Integer Nu, const Standard_Integer Nv) Standard_OVERRIDE;
 
-  //! rub out all the isoparametric curves.
-  Standard_EXPORT virtual void ClearIsos() Standard_OVERRIDE;
+    //! change the number of isoparametric curves to be drawn.
+    Standard_EXPORT void ShowKnotsIsos();
 
-  void ClearPoles() { drawPoles = Standard_False; }
+    //! rub out all the isoparametric curves.
+    Standard_EXPORT virtual void ClearIsos() Standard_OVERRIDE;
 
-  void ClearKnots() { drawKnots = Standard_False; }
-  
-  Standard_EXPORT void FindPole (const Standard_Real X, const Standard_Real Y, const Draw_Display& D, const Standard_Real Prec, Standard_Integer& UIndex, Standard_Integer& VIndex) const;
-  
-  Standard_EXPORT void FindUKnot (const Standard_Real X, const Standard_Real Y, const Draw_Display& D, const Standard_Real Prec, Standard_Integer& UIndex) const;
-  
-  Standard_EXPORT void FindVKnot (const Standard_Real X, const Standard_Real Y, const Draw_Display& D, const Standard_Real Prec, Standard_Integer& VIndex) const;
+    void ClearPoles() {
+        drawPoles = Standard_False;
+    }
 
-  void SetPolesColor (const Draw_Color& theColor) { polesLook = theColor; }
+    void ClearKnots() {
+        drawKnots = Standard_False;
+    }
 
-  void SetKnotsColor (const Draw_Color& theColor) { knotsLook = theColor; }
+    Standard_EXPORT void FindPole(const Standard_Real X, const Standard_Real Y, const Draw_Display& D,
+                                  const Standard_Real Prec, Standard_Integer& UIndex, Standard_Integer& VIndex) const;
 
-  void SetKnotsShape (const Draw_MarkerShape theShape) { knotsForm = theShape; }
+    Standard_EXPORT void FindUKnot(const Standard_Real X, const Standard_Real Y, const Draw_Display& D,
+                                   const Standard_Real Prec, Standard_Integer& UIndex) const;
 
-  Draw_MarkerShape KnotsShape() const { return knotsForm; }
+    Standard_EXPORT void FindVKnot(const Standard_Real X, const Standard_Real Y, const Draw_Display& D,
+                                   const Standard_Real Prec, Standard_Integer& VIndex) const;
 
-  Draw_Color KnotsColor() const { return knotsLook; }
+    void SetPolesColor(const Draw_Color& theColor) {
+        polesLook = theColor;
+    }
 
-  Draw_Color PolesColor() const { return polesLook; }
+    void SetKnotsColor(const Draw_Color& theColor) {
+        knotsLook = theColor;
+    }
 
-  //! For variable copy.
-  Standard_EXPORT virtual Handle(Draw_Drawable3D) Copy() const Standard_OVERRIDE;
+    void SetKnotsShape(const Draw_MarkerShape theShape) {
+        knotsForm = theShape;
+    }
+
+    Draw_MarkerShape KnotsShape() const {
+        return knotsForm;
+    }
+
+    Draw_Color KnotsColor() const {
+        return knotsLook;
+    }
+
+    Draw_Color PolesColor() const {
+        return polesLook;
+    }
+
+    //! For variable copy.
+    Standard_EXPORT virtual Handle(Draw_Drawable3D) Copy() const Standard_OVERRIDE;
 
 private:
-
-  Standard_Boolean drawPoles;
-  Standard_Boolean drawKnots;
-  Standard_Boolean knotsIsos;
-  Draw_MarkerShape knotsForm;
-  Draw_Color knotsLook;
-  Standard_Integer knotsDim;
-  Draw_Color polesLook;
-
+    Standard_Boolean drawPoles;
+    Standard_Boolean drawKnots;
+    Standard_Boolean knotsIsos;
+    Draw_MarkerShape knotsForm;
+    Draw_Color knotsLook;
+    Standard_Integer knotsDim;
+    Draw_Color polesLook;
 };
 
 #endif // _DrawTrSurf_BSplineSurface_HeaderFile

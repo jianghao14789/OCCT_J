@@ -26,22 +26,17 @@
 class Expr_GeneralExpression;
 class Expr_NamedUnknown;
 
-
 class Expr_SingleRelation;
 DEFINE_STANDARD_HANDLE(Expr_SingleRelation, Expr_GeneralRelation)
 
-
-class Expr_SingleRelation : public Expr_GeneralRelation
-{
+class Expr_SingleRelation : public Expr_GeneralRelation {
 
 public:
-
-
     //! Defines the first member of the relation
-    Standard_EXPORT void SetFirstMember(const Handle(Expr_GeneralExpression)& exp);
+    Standard_EXPORT void SetFirstMember(const Handle(Expr_GeneralExpression) & exp);
 
     //! Defines the second member of the relation
-    Standard_EXPORT void SetSecondMember(const Handle(Expr_GeneralExpression)& exp);
+    Standard_EXPORT void SetSecondMember(const Handle(Expr_GeneralExpression) & exp);
 
     //! Returns the first member of the relation
     Standard_EXPORT Handle(Expr_GeneralExpression) FirstMember() const;
@@ -64,34 +59,18 @@ public:
     Standard_EXPORT Handle(Expr_GeneralRelation) SubRelation(const Standard_Integer index) const Standard_OVERRIDE;
 
     //! Tests if <me> contains <exp>.
-    Standard_EXPORT Standard_Boolean Contains(const Handle(Expr_GeneralExpression)& exp) const Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean Contains(const Handle(Expr_GeneralExpression) & exp) const Standard_OVERRIDE;
 
     //! Replaces all occurrences of <var> with <with> in <me>.
-    Standard_EXPORT void Replace(const Handle(Expr_NamedUnknown)& var, const Handle(Expr_GeneralExpression)& with) Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT void Replace(const Handle(Expr_NamedUnknown) & var,
+                                 const Handle(Expr_GeneralExpression) & with) Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Expr_SingleRelation, Expr_GeneralRelation)
 
 protected:
-
-
-
-
 private:
-
-
     Handle(Expr_GeneralExpression) myFirstMember;
     Handle(Expr_GeneralExpression) mySecondMember;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Expr_SingleRelation_HeaderFile

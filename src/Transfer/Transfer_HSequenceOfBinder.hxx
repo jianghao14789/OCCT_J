@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(Transfer_HSequenceOfBinder, Transfer_SequenceOfBinder)
 
-
 #endif

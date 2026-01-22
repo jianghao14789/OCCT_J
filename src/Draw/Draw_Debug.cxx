@@ -22,21 +22,17 @@
 // intended for use from debugger prompt (Command Window in Visual Studio)
 
 //! Execute given DRAW command
-Standard_EXPORT const char* Draw_Eval (const char *theCommandStr)
-{
-  if (theCommandStr == 0)
-  {
-    return "Error: null command string";
-  }
-  try {
-    OCC_CATCH_SIGNALS
-    Draw_Interpretor& aCommands = Draw::GetInterpretor();
-    aCommands.Eval (theCommandStr);
-    std::cout << aCommands.Result() << std::endl;
-    return aCommands.Result();
-  }
-  catch (Standard_Failure const& anException)
-  {
-    return anException.GetMessageString();
-  }
+Standard_EXPORT const char* Draw_Eval(const char* theCommandStr) {
+    if (theCommandStr == 0) {
+        return "Error: null command string";
+    }
+    try {
+        OCC_CATCH_SIGNALS
+        Draw_Interpretor& aCommands = Draw::GetInterpretor();
+        aCommands.Eval(theCommandStr);
+        std::cout << aCommands.Result() << std::endl;
+        return aCommands.Result();
+    } catch (Standard_Failure const& anException) {
+        return anException.GetMessageString();
+    }
 }

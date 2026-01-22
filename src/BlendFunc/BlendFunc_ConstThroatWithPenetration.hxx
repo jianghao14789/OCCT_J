@@ -37,13 +37,11 @@ class math_Matrix;
 //! the length of the leg from apex to top is constant - it is throat
 class BlendFunc_ConstThroatWithPenetration : public BlendFunc_ConstThroat {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_ConstThroatWithPenetration(const Handle(Adaptor3d_Surface)& S1,
-        const Handle(Adaptor3d_Surface)& S2,
-        const Handle(Adaptor3d_Curve)& C);
-
+    Standard_EXPORT BlendFunc_ConstThroatWithPenetration(const Handle(Adaptor3d_Surface) & S1,
+                                                         const Handle(Adaptor3d_Surface) & S2,
+                                                         const Handle(Adaptor3d_Curve) & C);
 
     //! computes the values <F> of the Functions for the
     //! variable <X>.
@@ -57,15 +55,15 @@ public:
     //! False otherwise.
     Standard_EXPORT Standard_Boolean Derivatives(const math_Vector& X, math_Matrix& D) Standard_OVERRIDE;
 
-    //Standard_EXPORT void Set (const Standard_Real Param) Standard_OVERRIDE;
+    // Standard_EXPORT void Set (const Standard_Real Param) Standard_OVERRIDE;
 
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) Standard_OVERRIDE;
 
-    //Standard_EXPORT const gp_Pnt& PointOnS1() const Standard_OVERRIDE;
+    // Standard_EXPORT const gp_Pnt& PointOnS1() const Standard_OVERRIDE;
 
-    //Standard_EXPORT const gp_Pnt& PointOnS2() const Standard_OVERRIDE;
+    // Standard_EXPORT const gp_Pnt& PointOnS2() const Standard_OVERRIDE;
 
-    //Standard_EXPORT Standard_Boolean IsTangencyPoint() const Standard_OVERRIDE;
+    // Standard_EXPORT Standard_Boolean IsTangencyPoint() const Standard_OVERRIDE;
 
     Standard_EXPORT const gp_Vec& TangentOnS1() const Standard_OVERRIDE;
 
@@ -79,32 +77,18 @@ public:
     //! at the beginning and the end of the section, and
     //! returns the normal (of the surfaces) at
     //! these points.
-    //Standard_EXPORT void Tangent (const Standard_Real U1, const Standard_Real V1, const Standard_Real U2, const Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst, gp_Vec& NormLast) const Standard_OVERRIDE;
+    // Standard_EXPORT void Tangent (const Standard_Real U1, const Standard_Real V1, const Standard_Real U2, const
+    // Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst, gp_Vec& NormLast) const Standard_OVERRIDE;
 
     //! Sets the throat and the "quadrant".
-    //Standard_EXPORT void Set (const Standard_Real theThroat, const Standard_Real, const Standard_Integer Choix) Standard_OVERRIDE;
+    // Standard_EXPORT void Set (const Standard_Real theThroat, const Standard_Real, const Standard_Integer Choix)
+    // Standard_OVERRIDE;
 
     //! Returns the length of the maximum section
     Standard_EXPORT Standard_Real GetSectionSize() const Standard_OVERRIDE;
 
-
-
-
-
 protected:
-
-
-
 private:
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _BlendFunc_ConstThroatWithPenetration_HeaderFile

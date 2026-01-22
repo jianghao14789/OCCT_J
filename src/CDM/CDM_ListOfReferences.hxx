@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(CDM_Reference)> CDM_ListOfReferences;
 typedef NCollection_List<Handle(CDM_Reference)>::Iterator CDM_ListIteratorOfListOfReferences;
 
-
 #endif

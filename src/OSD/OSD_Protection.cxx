@@ -14,7 +14,6 @@
 
 #ifndef _WIN32
 
-
 #include <OSD_Directory.hxx>
 #include <OSD_File.hxx>
 #include <OSD_FileNode.hxx>
@@ -22,85 +21,114 @@
 #include <OSD_WhoAmI.hxx>
 
 #include <sys/stat.h>
-// Ci-joint le tableau de gestion des protection (Ajout et Retrait). Les 
+// Ci-joint le tableau de gestion des protection (Ajout et Retrait). Les
 // tableaux sont des tableaux a deux dimensions, indices par l'enumeration
 // OSD_SingleProtection. Il y a en tout 16 possibilites dans l enumeration.
 // Voir JPT pour tous renseignements....
-static OSD_SingleProtection TabProtAdd[16][16] =
-{
-{OSD_None,OSD_R,OSD_W,OSD_RW,OSD_X,OSD_RX,OSD_WX,OSD_RWX,OSD_D,OSD_RD,OSD_WD,OSD_RWD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD},
+static OSD_SingleProtection TabProtAdd[16][16] = {
+    {OSD_None, OSD_R, OSD_W, OSD_RW, OSD_X, OSD_RX, OSD_WX, OSD_RWX, OSD_D, OSD_RD, OSD_WD, OSD_RWD, OSD_XD, OSD_RXD,
+     OSD_WXD, OSD_RWXD},
 
-{OSD_R,OSD_R,OSD_RW,OSD_RW,OSD_RX,OSD_RX,OSD_RWX,OSD_RWX,OSD_RD,OSD_RD,OSD_RWD,OSD_RWD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD},
+    {OSD_R, OSD_R, OSD_RW, OSD_RW, OSD_RX, OSD_RX, OSD_RWX, OSD_RWX, OSD_RD, OSD_RD, OSD_RWD, OSD_RWD, OSD_RXD, OSD_RXD,
+     OSD_RWXD, OSD_RWXD},
 
-{OSD_W,OSD_RW,OSD_W,OSD_RW,OSD_WX,OSD_RWX,OSD_WX,OSD_RWX,OSD_WD,OSD_RWD,OSD_WD,OSD_RWD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD},
+    {OSD_W, OSD_RW, OSD_W, OSD_RW, OSD_WX, OSD_RWX, OSD_WX, OSD_RWX, OSD_WD, OSD_RWD, OSD_WD, OSD_RWD, OSD_WXD,
+     OSD_RWXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RW,OSD_RW,OSD_RW,OSD_RW,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWD,OSD_RWD,OSD_RWD,OSD_RWD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD},
+    {OSD_RW, OSD_RW, OSD_RW, OSD_RW, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWD, OSD_RWD, OSD_RWD, OSD_RWD, OSD_RWXD,
+     OSD_RWXD, OSD_RWXD, OSD_RWXD},
 
-{OSD_X,OSD_RX,OSD_WX,OSD_RWX,OSD_X,OSD_RX,OSD_WX,OSD_RWX,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD},
+    {OSD_X, OSD_RX, OSD_WX, OSD_RWX, OSD_X, OSD_RX, OSD_WX, OSD_RWX, OSD_XD, OSD_RXD, OSD_WXD, OSD_RWXD, OSD_XD,
+     OSD_RXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RX,OSD_RX,OSD_RWX,OSD_RWX,OSD_RX,OSD_RX,OSD_RWX,OSD_RWX,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD},
+    {OSD_RX, OSD_RX, OSD_RWX, OSD_RWX, OSD_RX, OSD_RX, OSD_RWX, OSD_RWX, OSD_RXD, OSD_RXD, OSD_RWXD, OSD_RWXD, OSD_RXD,
+     OSD_RXD, OSD_RWXD, OSD_RWXD},
 
-{OSD_WX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_WX,OSD_RWX,OSD_WX,OSD_RWX,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD},
+    {OSD_WX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_WX, OSD_RWX, OSD_WX, OSD_RWX, OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD, OSD_WXD,
+     OSD_RWXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWX,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD},
+    {OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWX, OSD_RWXD, OSD_RWXD, OSD_RWXD,
+     OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD},
 
-{OSD_D,OSD_RD,OSD_WD,OSD_RWD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD,OSD_D,OSD_RD,OSD_WD,OSD_RWD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD},
+    {OSD_D, OSD_RD, OSD_WD, OSD_RWD, OSD_XD, OSD_RXD, OSD_WXD, OSD_RWXD, OSD_D, OSD_RD, OSD_WD, OSD_RWD, OSD_XD,
+     OSD_RXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RD,OSD_RD,OSD_RWD,OSD_RWD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD,OSD_RD,OSD_RD,OSD_RWD,OSD_RWD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD},
+    {OSD_RD, OSD_RD, OSD_RWD, OSD_RWD, OSD_RXD, OSD_RXD, OSD_RWXD, OSD_RWXD, OSD_RD, OSD_RD, OSD_RWD, OSD_RWD, OSD_RXD,
+     OSD_RXD, OSD_RWXD, OSD_RWXD},
 
-{OSD_WD,OSD_RWD,OSD_WD,OSD_RWD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WD,OSD_RWD,OSD_WD,OSD_RWD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD},
+    {OSD_WD, OSD_RWD, OSD_WD, OSD_RWD, OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD, OSD_WD, OSD_RWD, OSD_WD, OSD_RWD, OSD_WXD,
+     OSD_RWXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RWD,OSD_RWD,OSD_RWD,OSD_RWD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWD,OSD_RWD,OSD_RWD,OSD_RWD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD},
+    {OSD_RWD, OSD_RWD, OSD_RWD, OSD_RWD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWD, OSD_RWD, OSD_RWD, OSD_RWD,
+     OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD},
 
-{OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD,OSD_XD,OSD_RXD,OSD_WXD,OSD_RWXD},
+    {OSD_XD, OSD_RXD, OSD_WXD, OSD_RWXD, OSD_XD, OSD_RXD, OSD_WXD, OSD_RWXD, OSD_XD, OSD_RXD, OSD_WXD, OSD_RWXD, OSD_XD,
+     OSD_RXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD,OSD_RXD,OSD_RXD,OSD_RWXD,OSD_RWXD},
+    {OSD_RXD, OSD_RXD, OSD_RWXD, OSD_RWXD, OSD_RXD, OSD_RXD, OSD_RWXD, OSD_RWXD, OSD_RXD, OSD_RXD, OSD_RWXD, OSD_RWXD,
+     OSD_RXD, OSD_RXD, OSD_RWXD, OSD_RWXD},
 
-{OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD,OSD_WXD,OSD_RWXD},
+    {OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD,
+     OSD_WXD, OSD_RWXD, OSD_WXD, OSD_RWXD},
 
-{OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD,OSD_RWXD}
-
-};
-
-// ----------------------- 
-
-static OSD_SingleProtection TabProtSub[16][16] =
-{
-{OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None},
-
-{OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None},
-
-{OSD_W,OSD_W,OSD_None,OSD_None,OSD_W,OSD_W,OSD_None,OSD_None,OSD_W,OSD_W,OSD_None,OSD_None,OSD_W,OSD_W,OSD_None,OSD_None},
-
-{OSD_RW,OSD_W,OSD_R,OSD_None,OSD_RW,OSD_W,OSD_R,OSD_None,OSD_RW,OSD_W,OSD_R,OSD_None,OSD_RW,OSD_W,OSD_R,OSD_None},
-
-{OSD_X,OSD_X,OSD_X,OSD_None,OSD_None,OSD_None,OSD_None,OSD_X,OSD_X,OSD_X,OSD_X,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None},
-
-{OSD_RX,OSD_X,OSD_RX,OSD_X,OSD_R,OSD_None,OSD_R,OSD_None,OSD_RX,OSD_X,OSD_RX,OSD_X,OSD_R,OSD_None,OSD_R,OSD_None},
-
-{OSD_WX,OSD_WX,OSD_X,OSD_X,OSD_W,OSD_W,OSD_None,OSD_None,OSD_WX,OSD_WX,OSD_X,OSD_X,OSD_W,OSD_W,OSD_None,OSD_None},
-
-{OSD_RWX,OSD_WX,OSD_RX,OSD_X,OSD_RW,OSD_W,OSD_R,OSD_None,OSD_RWX,OSD_WX,OSD_RX,OSD_X,OSD_RW,OSD_W,OSD_R,OSD_None},
-
-{OSD_D,OSD_D,OSD_D,OSD_D,OSD_D,OSD_D,OSD_D,OSD_D,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None,OSD_None},
-
-{OSD_RD,OSD_D,OSD_RD,OSD_D,OSD_RD,OSD_D,OSD_RD,OSD_D,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None,OSD_R,OSD_None},
-
-{OSD_WD,OSD_WD,OSD_D,OSD_D,OSD_WD,OSD_WD,OSD_D,OSD_D,OSD_W,OSD_W,OSD_None,OSD_None,OSD_W,OSD_W,OSD_None,OSD_None},
-
-{OSD_RWD,OSD_WD,OSD_RD,OSD_D,OSD_RWD,OSD_WD,OSD_RD,OSD_D,OSD_RW,OSD_W,OSD_R,OSD_None,OSD_RW,OSD_W,OSD_R,OSD_None},
-
-{OSD_XD,OSD_XD,OSD_XD,OSD_XD,OSD_D,OSD_D,OSD_D,OSD_D,OSD_X,OSD_X,OSD_X,OSD_X,OSD_None,OSD_None,OSD_None,OSD_None},
-
-{OSD_RXD,OSD_XD,OSD_RXD,OSD_XD,OSD_RD,OSD_D,OSD_RD,OSD_D,OSD_RX,OSD_X,OSD_RX,OSD_X,OSD_R,OSD_None,OSD_R,OSD_None},
-
-{OSD_WXD,OSD_WXD,OSD_XD,OSD_XD,OSD_WD,OSD_WD,OSD_D,OSD_D,OSD_WX,OSD_WX,OSD_X,OSD_X,OSD_W,OSD_W,OSD_None,OSD_None},
-
-{OSD_RWXD,OSD_WXD,OSD_RXD,OSD_XD,OSD_RWD,OSD_WD,OSD_RD,OSD_D,OSD_RWX,OSD_WX,OSD_RX,OSD_X,OSD_RW,OSD_W,OSD_R,OSD_None}
+    {OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD,
+     OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD, OSD_RWXD}
 
 };
-//const OSD_WhoAmI Iam = OSD_WProtection;
 
+// -----------------------
+
+static OSD_SingleProtection TabProtSub[16][16] = {
+    {OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None,
+     OSD_None, OSD_None, OSD_None, OSD_None, OSD_None},
+
+    {OSD_R, OSD_None, OSD_R, OSD_None, OSD_R, OSD_None, OSD_R, OSD_None, OSD_R, OSD_None, OSD_R, OSD_None, OSD_R,
+     OSD_None, OSD_R, OSD_None},
+
+    {OSD_W, OSD_W, OSD_None, OSD_None, OSD_W, OSD_W, OSD_None, OSD_None, OSD_W, OSD_W, OSD_None, OSD_None, OSD_W, OSD_W,
+     OSD_None, OSD_None},
+
+    {OSD_RW, OSD_W, OSD_R, OSD_None, OSD_RW, OSD_W, OSD_R, OSD_None, OSD_RW, OSD_W, OSD_R, OSD_None, OSD_RW, OSD_W,
+     OSD_R, OSD_None},
+
+    {OSD_X, OSD_X, OSD_X, OSD_None, OSD_None, OSD_None, OSD_None, OSD_X, OSD_X, OSD_X, OSD_X, OSD_None, OSD_None,
+     OSD_None, OSD_None, OSD_None},
+
+    {OSD_RX, OSD_X, OSD_RX, OSD_X, OSD_R, OSD_None, OSD_R, OSD_None, OSD_RX, OSD_X, OSD_RX, OSD_X, OSD_R, OSD_None,
+     OSD_R, OSD_None},
+
+    {OSD_WX, OSD_WX, OSD_X, OSD_X, OSD_W, OSD_W, OSD_None, OSD_None, OSD_WX, OSD_WX, OSD_X, OSD_X, OSD_W, OSD_W,
+     OSD_None, OSD_None},
+
+    {OSD_RWX, OSD_WX, OSD_RX, OSD_X, OSD_RW, OSD_W, OSD_R, OSD_None, OSD_RWX, OSD_WX, OSD_RX, OSD_X, OSD_RW, OSD_W,
+     OSD_R, OSD_None},
+
+    {OSD_D, OSD_D, OSD_D, OSD_D, OSD_D, OSD_D, OSD_D, OSD_D, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None, OSD_None,
+     OSD_None, OSD_None},
+
+    {OSD_RD, OSD_D, OSD_RD, OSD_D, OSD_RD, OSD_D, OSD_RD, OSD_D, OSD_R, OSD_None, OSD_R, OSD_None, OSD_R, OSD_None,
+     OSD_R, OSD_None},
+
+    {OSD_WD, OSD_WD, OSD_D, OSD_D, OSD_WD, OSD_WD, OSD_D, OSD_D, OSD_W, OSD_W, OSD_None, OSD_None, OSD_W, OSD_W,
+     OSD_None, OSD_None},
+
+    {OSD_RWD, OSD_WD, OSD_RD, OSD_D, OSD_RWD, OSD_WD, OSD_RD, OSD_D, OSD_RW, OSD_W, OSD_R, OSD_None, OSD_RW, OSD_W,
+     OSD_R, OSD_None},
+
+    {OSD_XD, OSD_XD, OSD_XD, OSD_XD, OSD_D, OSD_D, OSD_D, OSD_D, OSD_X, OSD_X, OSD_X, OSD_X, OSD_None, OSD_None,
+     OSD_None, OSD_None},
+
+    {OSD_RXD, OSD_XD, OSD_RXD, OSD_XD, OSD_RD, OSD_D, OSD_RD, OSD_D, OSD_RX, OSD_X, OSD_RX, OSD_X, OSD_R, OSD_None,
+     OSD_R, OSD_None},
+
+    {OSD_WXD, OSD_WXD, OSD_XD, OSD_XD, OSD_WD, OSD_WD, OSD_D, OSD_D, OSD_WX, OSD_WX, OSD_X, OSD_X, OSD_W, OSD_W,
+     OSD_None, OSD_None},
+
+    {OSD_RWXD, OSD_WXD, OSD_RXD, OSD_XD, OSD_RWD, OSD_WD, OSD_RD, OSD_D, OSD_RWX, OSD_WX, OSD_RX, OSD_X, OSD_RW, OSD_W,
+     OSD_R, OSD_None}
+
+};
+// const OSD_WhoAmI Iam = OSD_WProtection;
 
 // Initialize System, Group, World for read only and User for read & write
 
@@ -111,10 +139,8 @@ OSD_Protection::OSD_Protection() {
     w = OSD_R;
 }
 
-OSD_Protection::OSD_Protection(const OSD_SingleProtection System,
-    const OSD_SingleProtection User,
-    const OSD_SingleProtection Group,
-    const OSD_SingleProtection World) {
+OSD_Protection::OSD_Protection(const OSD_SingleProtection System, const OSD_SingleProtection User,
+                               const OSD_SingleProtection Group, const OSD_SingleProtection World) {
 
     s = System;
     u = User;
@@ -122,28 +148,22 @@ OSD_Protection::OSD_Protection(const OSD_SingleProtection System,
     w = World;
 }
 
-void  OSD_Protection::Values(OSD_SingleProtection& System,
-    OSD_SingleProtection& User,
-    OSD_SingleProtection& Group,
-    OSD_SingleProtection& World) {
+void OSD_Protection::Values(OSD_SingleProtection& System, OSD_SingleProtection& User, OSD_SingleProtection& Group,
+                            OSD_SingleProtection& World) {
     System = s;
     User = u;
     Group = g;
     World = w;
 }
 
-
-void  OSD_Protection::SetValues(const OSD_SingleProtection System,
-    const OSD_SingleProtection User,
-    const OSD_SingleProtection Group,
-    const OSD_SingleProtection World) {
+void OSD_Protection::SetValues(const OSD_SingleProtection System, const OSD_SingleProtection User,
+                               const OSD_SingleProtection Group, const OSD_SingleProtection World) {
 
     s = System;
     u = User;
     g = Group;
     w = World;
 }
-
 
 void OSD_Protection::SetSystem(const OSD_SingleProtection priv) {
     s = priv;
@@ -161,39 +181,33 @@ void OSD_Protection::SetWorld(const OSD_SingleProtection priv) {
     w = priv;
 }
 
-
-OSD_SingleProtection OSD_Protection::System()const {
-    return(s);
+OSD_SingleProtection OSD_Protection::System() const {
+    return (s);
 }
 
-OSD_SingleProtection OSD_Protection::User()const {
-    return(u);
+OSD_SingleProtection OSD_Protection::User() const {
+    return (u);
 }
 
-OSD_SingleProtection OSD_Protection::Group()const {
-    return(g);
+OSD_SingleProtection OSD_Protection::Group() const {
+    return (g);
 }
 
-OSD_SingleProtection OSD_Protection::World()const {
-    return(w);
+OSD_SingleProtection OSD_Protection::World() const {
+    return (w);
 }
 
-
-void OSD_Protection::Add(OSD_SingleProtection& aProtection,
-    const OSD_SingleProtection aRight) {
+void OSD_Protection::Add(OSD_SingleProtection& aProtection, const OSD_SingleProtection aRight) {
     aProtection = TabProtAdd[aProtection][aRight];
 }
 
-
-void OSD_Protection::Sub(OSD_SingleProtection& aProtection,
-    const OSD_SingleProtection aRight) {
+void OSD_Protection::Sub(OSD_SingleProtection& aProtection, const OSD_SingleProtection aRight) {
     aProtection = TabProtSub[aProtection][aRight];
 }
 
-
 /* Get internal UNIX's access rights for user, group and other */
 
-Standard_Integer  OSD_Protection::Internal()const {
+Standard_Integer OSD_Protection::Internal() const {
 
     Standard_Integer internal_prot = 0;
 
@@ -220,7 +234,6 @@ Standard_Integer  OSD_Protection::Internal()const {
     return (internal_prot);
 }
 
-
 #else
 
 //------------------------------------------------------------------------
@@ -229,12 +242,12 @@ Standard_Integer  OSD_Protection::Internal()const {
 
 #include <OSD_Protection.hxx>
 
-#define FLAG_READ    0x00000001
-#define FLAG_WRITE   0x00000002
+#define FLAG_READ 0x00000001
+#define FLAG_WRITE 0x00000002
 #define FLAG_EXECUTE 0x00000004
-#define FLAG_DELETE  0x00000008
+#define FLAG_DELETE 0x00000008
 
-static Standard_Integer     __fastcall _get_mask(OSD_SingleProtection);
+static Standard_Integer __fastcall _get_mask(OSD_SingleProtection);
 static OSD_SingleProtection __fastcall _get_prot(Standard_Integer);
 
 OSD_Protection::OSD_Protection() {
@@ -244,98 +257,83 @@ OSD_Protection::OSD_Protection() {
     g = OSD_RX;
     w = OSD_RX;
 
-}  // end constructor ( 1 )
+} // end constructor ( 1 )
 
-OSD_Protection::OSD_Protection(
-    const OSD_SingleProtection System,
-    const OSD_SingleProtection User,
-    const OSD_SingleProtection Group,
-    const OSD_SingleProtection World
-) {
+OSD_Protection::OSD_Protection(const OSD_SingleProtection System, const OSD_SingleProtection User,
+                               const OSD_SingleProtection Group, const OSD_SingleProtection World) {
 
     SetValues(System, User, Group, World);
 
-}  // end constructor ( 2 )
+} // end constructor ( 2 )
 
-void OSD_Protection::Values(
-    OSD_SingleProtection& System,
-    OSD_SingleProtection& User,
-    OSD_SingleProtection& Group,
-    OSD_SingleProtection& World
-) {
+void OSD_Protection::Values(OSD_SingleProtection& System, OSD_SingleProtection& User, OSD_SingleProtection& Group,
+                            OSD_SingleProtection& World) {
     System = s;
     User = u;
     Group = g;
     World = w;
 
-}  // end OSD_Protection :: Values
+} // end OSD_Protection :: Values
 
-void OSD_Protection::SetValues(
-    const OSD_SingleProtection System,
-    const OSD_SingleProtection User,
-    const OSD_SingleProtection Group,
-    const OSD_SingleProtection World
-) {
+void OSD_Protection::SetValues(const OSD_SingleProtection System, const OSD_SingleProtection User,
+                               const OSD_SingleProtection Group, const OSD_SingleProtection World) {
 
     s = System;
     u = User;
     g = Group;
     w = World;
 
-}  // end OSD_Protection :: SetValues
+} // end OSD_Protection :: SetValues
 
 void OSD_Protection::SetSystem(const OSD_SingleProtection priv) {
 
     s = priv;
 
-}  // end OSD_Protection :: SetSystem
+} // end OSD_Protection :: SetSystem
 
 void OSD_Protection::SetUser(const OSD_SingleProtection priv) {
 
     u = priv;
 
-}  // end OSD_Protection :: SetUser
+} // end OSD_Protection :: SetUser
 
 void OSD_Protection::SetGroup(const OSD_SingleProtection priv) {
 
     g = priv;
 
-}  // end OSD_Protection :: SetGroup
+} // end OSD_Protection :: SetGroup
 
 void OSD_Protection::SetWorld(const OSD_SingleProtection priv) {
 
     w = priv;
 
-}  // end OSD_Protection :: SetWorld
+} // end OSD_Protection :: SetWorld
 
 OSD_SingleProtection OSD_Protection::System() const {
 
     return s;
 
-}  // end OSD_Protection :: System
+} // end OSD_Protection :: System
 
 OSD_SingleProtection OSD_Protection::User() const {
 
     return u;
 
-}  // end OSD_Protection :: User
+} // end OSD_Protection :: User
 
 OSD_SingleProtection OSD_Protection::Group() const {
 
     return g;
 
-}  // end OSD_Protection :: Group
+} // end OSD_Protection :: Group
 
 OSD_SingleProtection OSD_Protection::World() const {
 
     return w;
 
-}  // end OSD_Protection :: World
+} // end OSD_Protection :: World
 
-void OSD_Protection::Add(
-    OSD_SingleProtection& aProt,
-    const OSD_SingleProtection aRight
-) {
+void OSD_Protection::Add(OSD_SingleProtection& aProt, const OSD_SingleProtection aRight) {
 
     Standard_Integer pMask = 0;
     Standard_Integer rMask = 0;
@@ -344,30 +342,19 @@ void OSD_Protection::Add(
     pMask = _get_mask(aProt);
     rMask = _get_mask(aRight);
 
-    if ((rMask & FLAG_READ && !(pMask & FLAG_READ)) || pMask & FLAG_READ)
+    if ((rMask & FLAG_READ && !(pMask & FLAG_READ)) || pMask & FLAG_READ) sMask |= FLAG_READ;
 
-        sMask |= FLAG_READ;
+    if ((rMask & FLAG_WRITE && !(pMask & FLAG_WRITE)) || pMask & FLAG_WRITE) sMask |= FLAG_WRITE;
 
-    if ((rMask & FLAG_WRITE && !(pMask & FLAG_WRITE)) || pMask & FLAG_WRITE)
+    if ((rMask & FLAG_EXECUTE && !(pMask & FLAG_EXECUTE)) || pMask & FLAG_EXECUTE) sMask |= FLAG_EXECUTE;
 
-        sMask |= FLAG_WRITE;
-
-    if ((rMask & FLAG_EXECUTE && !(pMask & FLAG_EXECUTE)) || pMask & FLAG_EXECUTE)
-
-        sMask |= FLAG_EXECUTE;
-
-    if ((rMask & FLAG_DELETE && !(pMask & FLAG_DELETE)) || pMask & FLAG_DELETE)
-
-        sMask |= FLAG_DELETE;
+    if ((rMask & FLAG_DELETE && !(pMask & FLAG_DELETE)) || pMask & FLAG_DELETE) sMask |= FLAG_DELETE;
 
     aProt = _get_prot(sMask);
 
-}  // end OSD_Protection :: Add
+} // end OSD_Protection :: Add
 
-void OSD_Protection::Sub(
-    OSD_SingleProtection& aProt,
-    const OSD_SingleProtection aRight
-) {
+void OSD_Protection::Sub(OSD_SingleProtection& aProt, const OSD_SingleProtection aRight) {
 
     Standard_Integer pMask = 0;
     Standard_Integer rMask = 0;
@@ -375,55 +362,47 @@ void OSD_Protection::Sub(
     pMask = _get_mask(aProt);
     rMask = _get_mask(aRight);
 
-    if (rMask & FLAG_READ)
+    if (rMask & FLAG_READ) pMask &= ~FLAG_READ;
 
-        pMask &= ~FLAG_READ;
+    if (rMask & FLAG_WRITE) pMask &= ~FLAG_WRITE;
 
-    if (rMask & FLAG_WRITE)
+    if (rMask & FLAG_EXECUTE) pMask &= ~FLAG_EXECUTE;
 
-        pMask &= ~FLAG_WRITE;
-
-    if (rMask & FLAG_EXECUTE)
-
-        pMask &= ~FLAG_EXECUTE;
-
-    if (rMask & FLAG_DELETE)
-
-        pMask &= ~FLAG_DELETE;
+    if (rMask & FLAG_DELETE) pMask &= ~FLAG_DELETE;
 
     aProt = _get_prot(pMask);
 
-}  // end OSD_Protection :: Sub
+} // end OSD_Protection :: Sub
 
 Standard_Integer OSD_Protection::Internal() const {
 
     return 0;
 
-}  // end OSD_Protection :: Internal
+} // end OSD_Protection :: Internal
 
 static Standard_Integer __fastcall _get_mask(OSD_SingleProtection p) {
 
     Standard_Integer retVal = 0;
 
-    if (p == OSD_R || p == OSD_RW || p == OSD_RX || p == OSD_RWX ||
-        p == OSD_RXD || p == OSD_RWXD || p == OSD_RD || p == OSD_RWD
-        ) retVal |= FLAG_READ;
+    if (p == OSD_R || p == OSD_RW || p == OSD_RX || p == OSD_RWX || p == OSD_RXD || p == OSD_RWXD || p == OSD_RD ||
+        p == OSD_RWD)
+        retVal |= FLAG_READ;
 
-    if (p == OSD_W || p == OSD_RW || p == OSD_WX || p == OSD_RWX ||
-        p == OSD_WXD || p == OSD_RWXD || p == OSD_WD || p == OSD_RWD
-        ) retVal |= FLAG_WRITE;
+    if (p == OSD_W || p == OSD_RW || p == OSD_WX || p == OSD_RWX || p == OSD_WXD || p == OSD_RWXD || p == OSD_WD ||
+        p == OSD_RWD)
+        retVal |= FLAG_WRITE;
 
-    if (p == OSD_X || p == OSD_RX || p == OSD_WX || p == OSD_RWX ||
-        p == OSD_XD || p == OSD_RXD || p == OSD_WXD || p == OSD_RWXD
-        ) retVal |= FLAG_EXECUTE;
+    if (p == OSD_X || p == OSD_RX || p == OSD_WX || p == OSD_RWX || p == OSD_XD || p == OSD_RXD || p == OSD_WXD ||
+        p == OSD_RWXD)
+        retVal |= FLAG_EXECUTE;
 
-    if (p == OSD_D || p == OSD_RD || p == OSD_WD || p == OSD_RWD ||
-        p == OSD_XD || p == OSD_RXD || p == OSD_WXD || p == OSD_RWXD
-        ) retVal |= FLAG_DELETE;
+    if (p == OSD_D || p == OSD_RD || p == OSD_WD || p == OSD_RWD || p == OSD_XD || p == OSD_RXD || p == OSD_WXD ||
+        p == OSD_RWXD)
+        retVal |= FLAG_DELETE;
 
     return retVal;
 
-}  // end _get_mask
+} // end _get_mask
 
 static OSD_SingleProtection __fastcall _get_prot(Standard_Integer m) {
 
@@ -431,104 +410,104 @@ static OSD_SingleProtection __fastcall _get_prot(Standard_Integer m) {
 
     switch (m) {
 
-    case FLAG_READ:
+        case FLAG_READ:
 
-        retVal = OSD_R;
+            retVal = OSD_R;
 
-        break;
+            break;
 
-    case FLAG_WRITE:
+        case FLAG_WRITE:
 
-        retVal = OSD_W;
+            retVal = OSD_W;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_WRITE:
+        case FLAG_READ | FLAG_WRITE:
 
-        retVal = OSD_RW;
+            retVal = OSD_RW;
 
-        break;
+            break;
 
-    case FLAG_EXECUTE:
+        case FLAG_EXECUTE:
 
-        retVal = OSD_X;
+            retVal = OSD_X;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_EXECUTE:
+        case FLAG_READ | FLAG_EXECUTE:
 
-        retVal = OSD_RX;
+            retVal = OSD_RX;
 
-        break;
+            break;
 
-    case FLAG_WRITE | FLAG_EXECUTE:
+        case FLAG_WRITE | FLAG_EXECUTE:
 
-        retVal = OSD_WX;
+            retVal = OSD_WX;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_WRITE | FLAG_EXECUTE:
+        case FLAG_READ | FLAG_WRITE | FLAG_EXECUTE:
 
-        retVal = OSD_RWX;
+            retVal = OSD_RWX;
 
-        break;
+            break;
 
-    case FLAG_DELETE:
+        case FLAG_DELETE:
 
-        retVal = OSD_D;
+            retVal = OSD_D;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_DELETE:
+        case FLAG_READ | FLAG_DELETE:
 
-        retVal = OSD_RD;
+            retVal = OSD_RD;
 
-        break;
+            break;
 
-    case FLAG_WRITE | FLAG_DELETE:
+        case FLAG_WRITE | FLAG_DELETE:
 
-        retVal = OSD_WD;
+            retVal = OSD_WD;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_WRITE | FLAG_DELETE:
+        case FLAG_READ | FLAG_WRITE | FLAG_DELETE:
 
-        retVal = OSD_RWD;
+            retVal = OSD_RWD;
 
-        break;
+            break;
 
-    case FLAG_EXECUTE | FLAG_DELETE:
+        case FLAG_EXECUTE | FLAG_DELETE:
 
-        retVal = OSD_XD;
+            retVal = OSD_XD;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_EXECUTE | FLAG_DELETE:
+        case FLAG_READ | FLAG_EXECUTE | FLAG_DELETE:
 
-        retVal = OSD_RXD;
+            retVal = OSD_RXD;
 
-        break;
+            break;
 
-    case FLAG_WRITE | FLAG_EXECUTE | FLAG_DELETE:
+        case FLAG_WRITE | FLAG_EXECUTE | FLAG_DELETE:
 
-        retVal = OSD_WXD;
+            retVal = OSD_WXD;
 
-        break;
+            break;
 
-    case FLAG_READ | FLAG_WRITE | FLAG_EXECUTE | FLAG_DELETE:
+        case FLAG_READ | FLAG_WRITE | FLAG_EXECUTE | FLAG_DELETE:
 
-        retVal = OSD_RWXD;
+            retVal = OSD_RWXD;
 
-        break;
+            break;
 
-    default:
+        default:
 
-        retVal = OSD_None;
+            retVal = OSD_None;
 
-    }  // end switch
+    } // end switch
 
     return retVal;
 
-}  // end _get_prot
+} // end _get_prot
 
 #endif

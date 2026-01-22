@@ -15,11 +15,10 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : IsDone
-//purpose  : 
+// function : IsDone
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean TDF_CopyLabel::IsDone() const
-{
-  return myIsDone;
+inline Standard_Boolean TDF_CopyLabel::IsDone() const {
+    return myIsDone;
 }

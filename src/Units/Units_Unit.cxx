@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <TCollection_AsciiString.hxx>
 #include <TCollection_HAsciiString.hxx>
@@ -28,14 +27,11 @@
 IMPLEMENT_STANDARD_RTTIEXT(Units_Unit, Standard_Transient)
 
 //=======================================================================
-//function : Units_Unit
-//purpose  : 
+// function : Units_Unit
+// purpose  :
 //=======================================================================
-Units_Unit::Units_Unit(const Standard_CString aname,
-    const Standard_CString asymbol,
-    const Standard_Real avalue,
-    const Handle(Units_Quantity)& aquantity)
-{
+Units_Unit::Units_Unit(const Standard_CString aname, const Standard_CString asymbol, const Standard_Real avalue,
+                       const Handle(Units_Quantity) & aquantity) {
     thename = new TCollection_HAsciiString(aname);
     thevalue = avalue;
     thequantity = aquantity;
@@ -45,13 +41,11 @@ Units_Unit::Units_Unit(const Standard_CString aname,
 }
 
 //=======================================================================
-//function : Units_Unit
-//purpose  : 
+// function : Units_Unit
+// purpose  :
 //=======================================================================
 
-Units_Unit::Units_Unit(const Standard_CString aname,
-    const Standard_CString asymbol)
-{
+Units_Unit::Units_Unit(const Standard_CString aname, const Standard_CString asymbol) {
     thename = new TCollection_HAsciiString(aname);
     thevalue = 0.;
     Handle(TCollection_HAsciiString) symbol = new TCollection_HAsciiString(asymbol);
@@ -60,51 +54,46 @@ Units_Unit::Units_Unit(const Standard_CString aname,
 }
 
 //=======================================================================
-//function : Units_Unit
-//purpose  : 
+// function : Units_Unit
+// purpose  :
 //=======================================================================
 
-Units_Unit::Units_Unit(const Standard_CString aname)
-{
+Units_Unit::Units_Unit(const Standard_CString aname) {
     thename = new TCollection_HAsciiString(aname);
     thevalue = 0.;
     thesymbolssequence = new TColStd_HSequenceOfHAsciiString();
 }
 
 //=======================================================================
-//function : Symbol
-//purpose  : 
+// function : Symbol
+// purpose  :
 //=======================================================================
 
-void Units_Unit::Symbol(const Standard_CString asymbol)
-{
+void Units_Unit::Symbol(const Standard_CString asymbol) {
     Handle(TCollection_HAsciiString) symbol = new TCollection_HAsciiString(asymbol);
     thesymbolssequence->Append(symbol);
 }
 
 //=======================================================================
-//function : Token
-//purpose  : 
+// function : Token
+// purpose  :
 //=======================================================================
 
-Handle(Units_Token) Units_Unit::Token() const
-{
+Handle(Units_Token) Units_Unit::Token() const {
     TCollection_AsciiString string = thesymbolssequence->Value(1)->String();
     return new Units_Token(string.ToCString(), " ", thevalue, thequantity->Dimensions());
 }
 
 //=======================================================================
-//function : IsEqual
-//purpose  : 
+// function : IsEqual
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Units_Unit::IsEqual(const Standard_CString astring) const
-{
+Standard_Boolean Units_Unit::IsEqual(const Standard_CString astring) const {
     Standard_Integer index;
     TCollection_AsciiString symbol;
 
-    for (index = 1; index <= thesymbolssequence->Length(); index++)
-    {
+    for (index = 1; index <= thesymbolssequence->Length(); index++) {
         symbol = thesymbolssequence->Value(index)->String();
         if (symbol == astring) return Standard_True;
     }
@@ -113,20 +102,17 @@ Standard_Boolean Units_Unit::IsEqual(const Standard_CString astring) const
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Units_Unit::Dump(const Standard_Integer /*ashift*/,
-    const Standard_Integer) const
-{
+void Units_Unit::Dump(const Standard_Integer /*ashift*/, const Standard_Integer) const {
     Standard_Integer index;
     TCollection_AsciiString string;
 
     //  int i;
     //  for(i=0; i<ashift; i++)std::cout<<"  ";
-    for (index = 1; index <= thesymbolssequence->Length(); index++)
-    {
+    for (index = 1; index <= thesymbolssequence->Length(); index++) {
         string = thesymbolssequence->Value(index)->String();
         if (index != 1) std::cout << " or ";
         std::cout << "\"" << string.ToCString() << "\"";
@@ -135,11 +121,10 @@ void Units_Unit::Dump(const Standard_Integer /*ashift*/,
 }
 
 //=======================================================================
-//function : operator ==
-//purpose  : 
+// function : operator ==
+// purpose  :
 //=======================================================================
 
-Standard_Boolean operator ==(const Handle(Units_Unit)& aunit, const Standard_CString astring)
-{
+Standard_Boolean operator==(const Handle(Units_Unit) & aunit, const Standard_CString astring) {
     return aunit->IsEqual(astring);
 }

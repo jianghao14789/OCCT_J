@@ -35,7 +35,7 @@
 
 // *********************************************** Class IndexedDataMap ******
 
-#define DEFINE_INDEXEDDATAMAP(_ClassName_, _BaseCollection_, TheKeyType, TheItemType) \
-typedef NCollection_IndexedDataMap <TheKeyType, TheItemType > _ClassName_;
+#define DEFINE_INDEXEDDATAMAP(_ClassName_, _BaseCollection_, TheKeyType, TheItemType)                                  \
+    typedef NCollection_IndexedDataMap<TheKeyType, TheItemType> _ClassName_;
 
 #endif

@@ -26,66 +26,46 @@
 #include <Standard_Integer.hxx>
 class CDM_Document;
 
-
 class CDF_Directory;
 DEFINE_STANDARD_HANDLE(CDF_Directory, Standard_Transient)
 
 //! A directory is a collection of documents. There is only one instance
 //! of a given document in a directory.
 //! put.
-class CDF_Directory : public Standard_Transient
-{
+class CDF_Directory : public Standard_Transient {
 
 public:
+    //! Creates an empty directory.
+    Standard_EXPORT CDF_Directory();
 
-  
-  //! Creates an empty directory.
-  Standard_EXPORT CDF_Directory();
-  
-  //! adds a document into the directory.
-  Standard_EXPORT void Add (const Handle(CDM_Document)& aDocument);
-  
-  //! removes the document.
-  Standard_EXPORT void Remove (const Handle(CDM_Document)& aDocument);
-  
-  //! Returns true if the document aDocument is in the directory
-  Standard_EXPORT Standard_Boolean Contains (const Handle(CDM_Document)& aDocument) const;
-  
-  //! returns the last document (if any) which has been added
-  //! in the directory.
-  Standard_EXPORT Handle(CDM_Document) Last();
-  
-  //! returns the number of documents of the directory.
-  Standard_EXPORT Standard_Integer Length() const;
-  
-  //! returns true if the directory is empty.
-  Standard_EXPORT Standard_Boolean IsEmpty() const;
+    //! adds a document into the directory.
+    Standard_EXPORT void Add(const Handle(CDM_Document) & aDocument);
 
+    //! removes the document.
+    Standard_EXPORT void Remove(const Handle(CDM_Document) & aDocument);
 
-friend class CDF_DirectoryIterator;
+    //! Returns true if the document aDocument is in the directory
+    Standard_EXPORT Standard_Boolean Contains(const Handle(CDM_Document) & aDocument) const;
 
+    //! returns the last document (if any) which has been added
+    //! in the directory.
+    Standard_EXPORT Handle(CDM_Document) Last();
 
-  DEFINE_STANDARD_RTTIEXT(CDF_Directory,Standard_Transient)
+    //! returns the number of documents of the directory.
+    Standard_EXPORT Standard_Integer Length() const;
+
+    //! returns true if the directory is empty.
+    Standard_EXPORT Standard_Boolean IsEmpty() const;
+
+    friend class CDF_DirectoryIterator;
+
+    DEFINE_STANDARD_RTTIEXT(CDF_Directory, Standard_Transient)
 
 protected:
-
-
-
-
 private:
+    Standard_EXPORT const CDM_ListOfDocument& List() const;
 
-  
-  Standard_EXPORT const CDM_ListOfDocument& List() const;
-
-  CDM_ListOfDocument myDocuments;
-
-
+    CDM_ListOfDocument myDocuments;
 };
-
-
-
-
-
-
 
 #endif // _CDF_Directory_HeaderFile

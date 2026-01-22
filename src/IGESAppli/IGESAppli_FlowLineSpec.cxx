@@ -22,31 +22,24 @@
 #include <Standard_Type.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESAppli_FlowLineSpec,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESAppli_FlowLineSpec, IGESData_IGESEntity)
 
-IGESAppli_FlowLineSpec::IGESAppli_FlowLineSpec ()    {  }
+IGESAppli_FlowLineSpec::IGESAppli_FlowLineSpec() {}
 
-    void  IGESAppli_FlowLineSpec::Init
-  (const Handle(Interface_HArray1OfHAsciiString)& allProperties)
-{
-  if (allProperties->Lower() != 1)
-    throw Standard_DimensionMismatch("IGESAppli_FlowLineSpec : Init");
-  theNameAndModifiers = allProperties;
-  InitTypeAndForm(406,14);
+void IGESAppli_FlowLineSpec::Init(const Handle(Interface_HArray1OfHAsciiString) & allProperties) {
+    if (allProperties->Lower() != 1) throw Standard_DimensionMismatch("IGESAppli_FlowLineSpec : Init");
+    theNameAndModifiers = allProperties;
+    InitTypeAndForm(406, 14);
 }
 
-    Standard_Integer  IGESAppli_FlowLineSpec::NbPropertyValues () const
-{
-  return theNameAndModifiers->Length();
+Standard_Integer IGESAppli_FlowLineSpec::NbPropertyValues() const {
+    return theNameAndModifiers->Length();
 }
 
-    Handle(TCollection_HAsciiString)  IGESAppli_FlowLineSpec::FlowLineName () const
-{
-  return theNameAndModifiers->Value(1);
+Handle(TCollection_HAsciiString) IGESAppli_FlowLineSpec::FlowLineName() const {
+    return theNameAndModifiers->Value(1);
 }
 
-    Handle(TCollection_HAsciiString)  IGESAppli_FlowLineSpec::Modifier
-  (const Standard_Integer Index) const
-{
-  return theNameAndModifiers->Value(Index);
+Handle(TCollection_HAsciiString) IGESAppli_FlowLineSpec::Modifier(const Standard_Integer Index) const {
+    return theNameAndModifiers->Value(Index);
 }

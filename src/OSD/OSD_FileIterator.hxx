@@ -27,12 +27,9 @@ class OSD_File;
 
 //! Manages a breadth-only search for files in the specified Path.
 //! There is no specific order of results.
-class OSD_FileIterator
-{
+class OSD_FileIterator {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Instantiates Object as empty Iterator;
     Standard_EXPORT OSD_FileIterator();
@@ -43,8 +40,7 @@ public:
     Standard_EXPORT OSD_FileIterator(const OSD_Path& where, const TCollection_AsciiString& Mask);
 
     Standard_EXPORT void Destroy();
-    ~OSD_FileIterator()
-    {
+    ~OSD_FileIterator() {
         Destroy();
     }
 
@@ -76,7 +72,6 @@ public:
     Standard_EXPORT Standard_Integer Error() const;
 
 private:
-
     OSD_File TheIterator;
     Standard_Boolean myFlag;
     TCollection_AsciiString myMask;

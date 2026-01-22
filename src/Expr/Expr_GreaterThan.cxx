@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_GeneralRelation.hxx>
@@ -26,14 +25,13 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_GreaterThan, Expr_SingleRelation)
 
-Expr_GreaterThan::Expr_GreaterThan(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
-{
+Expr_GreaterThan::Expr_GreaterThan(const Handle(Expr_GeneralExpression) & exp1,
+                                   const Handle(Expr_GeneralExpression) & exp2) {
     SetFirstMember(exp1);
     SetSecondMember(exp2);
 }
 
-Standard_Boolean Expr_GreaterThan::IsSatisfied() const
-{
+Standard_Boolean Expr_GreaterThan::IsSatisfied() const {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     fm = fm->Simplified();
@@ -48,28 +46,23 @@ Standard_Boolean Expr_GreaterThan::IsSatisfied() const
     return Standard_False;
 }
 
-Handle(Expr_GeneralRelation) Expr_GreaterThan::Simplified() const
-{
+Handle(Expr_GeneralRelation) Expr_GreaterThan::Simplified() const {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     return new Expr_GreaterThan(fm->Simplified(), sm->Simplified());
 }
 
-void Expr_GreaterThan::Simplify()
-{
+void Expr_GreaterThan::Simplify() {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     SetFirstMember(fm->Simplified());
     SetSecondMember(sm->Simplified());
 }
 
-Handle(Expr_GeneralRelation) Expr_GreaterThan::Copy() const
-{
-    return new Expr_GreaterThan(Expr::CopyShare(FirstMember()),
-        Expr::CopyShare(SecondMember()));
+Handle(Expr_GeneralRelation) Expr_GreaterThan::Copy() const {
+    return new Expr_GreaterThan(Expr::CopyShare(FirstMember()), Expr::CopyShare(SecondMember()));
 }
 
-TCollection_AsciiString Expr_GreaterThan::String() const
-{
+TCollection_AsciiString Expr_GreaterThan::String() const {
     return FirstMember()->String() + " > " + SecondMember()->String();
 }

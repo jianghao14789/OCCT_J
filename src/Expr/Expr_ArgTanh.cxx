@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArgTanh.hxx>
 #include <Expr_Difference.hxx>
@@ -32,13 +31,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_ArgTanh, Expr_UnaryExpression)
 
-Expr_ArgTanh::Expr_ArgTanh(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_ArgTanh::Expr_ArgTanh(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgTanh::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_ArgTanh::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) op = Operand();
     if (op->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) valop = Handle(Expr_NumericValue)::DownCast(op);
@@ -51,13 +48,11 @@ Handle(Expr_GeneralExpression) Expr_ArgTanh::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgTanh::Copy() const
-{
-    return  new Expr_ArgTanh(Expr::CopyShare(Operand()));
+Handle(Expr_GeneralExpression) Expr_ArgTanh::Copy() const {
+    return new Expr_ArgTanh(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_ArgTanh::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_ArgTanh::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_ArgTanh))) {
         return Standard_False;
     }
@@ -65,16 +60,14 @@ Standard_Boolean Expr_ArgTanh::IsIdentical(const Handle(Expr_GeneralExpression)&
     return op->IsIdentical(Other->SubExpression(1));
 }
 
-Standard_Boolean Expr_ArgTanh::IsLinear() const
-{
+Standard_Boolean Expr_ArgTanh::IsLinear() const {
     if (ContainsUnknowns()) {
         return Standard_False;
     }
     return Standard_True;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgTanh::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_ArgTanh::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -87,20 +80,18 @@ Handle(Expr_GeneralExpression) Expr_ArgTanh::Derivative(const Handle(Expr_NamedU
 
     Handle(Expr_Difference) thedif = 1.0 - sq->ShallowSimplified();
 
-    // ArgTanh'(F(X)) = F'(X)/(1 - F(X)2) 
+    // ArgTanh'(F(X)) = F'(X)/(1 - F(X)2)
     Handle(Expr_Division) thediv = derop / thedif->ShallowSimplified();
 
     return thediv->ShallowSimplified();
 }
 
-Standard_Real Expr_ArgTanh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_ArgTanh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Real val = Operand()->Evaluate(vars, vals);
     return ::Log((1.0 + val) / (1.0 - val)) / 2.0;
 }
 
-TCollection_AsciiString Expr_ArgTanh::String() const
-{
+TCollection_AsciiString Expr_ArgTanh::String() const {
     TCollection_AsciiString str("ATanh(");
     str += Operand()->String();
     str += ")";

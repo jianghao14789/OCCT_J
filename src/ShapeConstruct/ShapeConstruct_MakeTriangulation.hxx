@@ -28,50 +28,27 @@
 #include <Standard_Boolean.hxx>
 class TopoDS_Wire;
 
-
-
-class ShapeConstruct_MakeTriangulation  : public BRepBuilderAPI_MakeShape
-{
+class ShapeConstruct_MakeTriangulation : public BRepBuilderAPI_MakeShape {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT ShapeConstruct_MakeTriangulation(const TColgp_Array1OfPnt& pnts, const Standard_Real prec = 0.0);
 
-  
-  Standard_EXPORT ShapeConstruct_MakeTriangulation(const TColgp_Array1OfPnt& pnts, const Standard_Real prec = 0.0);
-  
-  Standard_EXPORT ShapeConstruct_MakeTriangulation(const TopoDS_Wire& wire, const Standard_Real prec = 0.0);
-  
-  Standard_EXPORT virtual void Build(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Boolean IsDone() const Standard_OVERRIDE;
+    Standard_EXPORT ShapeConstruct_MakeTriangulation(const TopoDS_Wire& wire, const Standard_Real prec = 0.0);
 
+    Standard_EXPORT virtual void
+    Build(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
-
+    Standard_EXPORT virtual Standard_Boolean IsDone() const Standard_OVERRIDE;
 
 protected:
-
-
-
-
-
 private:
+    Standard_EXPORT void Triangulate(const TopoDS_Wire& wire);
 
-  
-  Standard_EXPORT void Triangulate (const TopoDS_Wire& wire);
-  
-  Standard_EXPORT void AddFacet (const TopoDS_Wire& wire);
+    Standard_EXPORT void AddFacet(const TopoDS_Wire& wire);
 
-
-  Standard_Real myPrecision;
-  TopoDS_Wire myWire;
-
-
+    Standard_Real myPrecision;
+    TopoDS_Wire myWire;
 };
-
-
-
-
-
-
 
 #endif // _ShapeConstruct_MakeTriangulation_HeaderFile

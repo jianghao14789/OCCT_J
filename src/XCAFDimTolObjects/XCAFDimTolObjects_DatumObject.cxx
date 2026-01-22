@@ -13,380 +13,340 @@
 
 #include <XCAFDimTolObjects_DatumObject.hxx>
 
-
-IMPLEMENT_STANDARD_RTTIEXT(XCAFDimTolObjects_DatumObject,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(XCAFDimTolObjects_DatumObject, Standard_Transient)
 
 //=======================================================================
-//function : XCAFDimTolObjects_DatumObject
-//purpose  : 
+// function : XCAFDimTolObjects_DatumObject
+// purpose  :
 //=======================================================================
 
-XCAFDimTolObjects_DatumObject::XCAFDimTolObjects_DatumObject()
-{
-  myIsDTarget = Standard_False;
-  myIsValidDT = Standard_False;
-  myHasPlane = Standard_False;
-  myHasPnt = Standard_False;
-  myHasPntText = Standard_False;
+XCAFDimTolObjects_DatumObject::XCAFDimTolObjects_DatumObject() {
+    myIsDTarget = Standard_False;
+    myIsValidDT = Standard_False;
+    myHasPlane = Standard_False;
+    myHasPnt = Standard_False;
+    myHasPntText = Standard_False;
 }
 
 //=======================================================================
-//function : XCAFDimTolObjects_DatumObject
-//purpose  : 
+// function : XCAFDimTolObjects_DatumObject
+// purpose  :
 //=======================================================================
 
-XCAFDimTolObjects_DatumObject::XCAFDimTolObjects_DatumObject(const Handle(XCAFDimTolObjects_DatumObject)& theObj)
-{
-  myName = theObj->myName;
-  myModifiers = theObj->myModifiers;
-  myModifierWithValue = theObj->myModifierWithValue;
-  myValueOfModifier = theObj->myValueOfModifier;
-  myDatumTarget = theObj->myDatumTarget;
-  myPosition = theObj->myPosition;
-  myIsDTarget = theObj->myIsDTarget;
-  myIsValidDT = theObj->myIsValidDT;
-  myDTargetType = theObj->myDTargetType;
-  myLength = theObj->myLength;
-  myWidth = theObj->myWidth;
-  myDatumTargetNumber = theObj->myDatumTargetNumber;
-  myAxis = theObj->myAxis;
-  myPlane = theObj->myPlane;
-  myPnt= theObj->myPnt;
-  myPntText= theObj->myPntText;
-  myHasPlane = theObj->myHasPlane;
-  myHasPnt = theObj->myHasPnt;
-  myHasPntText = theObj->myHasPntText;
-  myPresentation = theObj->myPresentation;
-  mySemanticName = theObj->mySemanticName;
-  myPresentationName = theObj->myPresentationName;
+XCAFDimTolObjects_DatumObject::XCAFDimTolObjects_DatumObject(const Handle(XCAFDimTolObjects_DatumObject) & theObj) {
+    myName = theObj->myName;
+    myModifiers = theObj->myModifiers;
+    myModifierWithValue = theObj->myModifierWithValue;
+    myValueOfModifier = theObj->myValueOfModifier;
+    myDatumTarget = theObj->myDatumTarget;
+    myPosition = theObj->myPosition;
+    myIsDTarget = theObj->myIsDTarget;
+    myIsValidDT = theObj->myIsValidDT;
+    myDTargetType = theObj->myDTargetType;
+    myLength = theObj->myLength;
+    myWidth = theObj->myWidth;
+    myDatumTargetNumber = theObj->myDatumTargetNumber;
+    myAxis = theObj->myAxis;
+    myPlane = theObj->myPlane;
+    myPnt = theObj->myPnt;
+    myPntText = theObj->myPntText;
+    myHasPlane = theObj->myHasPlane;
+    myHasPnt = theObj->myHasPnt;
+    myHasPntText = theObj->myHasPntText;
+    myPresentation = theObj->myPresentation;
+    mySemanticName = theObj->mySemanticName;
+    myPresentationName = theObj->myPresentationName;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) XCAFDimTolObjects_DatumObject::GetSemanticName() const
-{
-  return mySemanticName;
+Handle(TCollection_HAsciiString) XCAFDimTolObjects_DatumObject::GetSemanticName() const {
+    return mySemanticName;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetSemanticName(const Handle(TCollection_HAsciiString)& theName)
-{
-  mySemanticName = theName;
+void XCAFDimTolObjects_DatumObject::SetSemanticName(const Handle(TCollection_HAsciiString) & theName) {
+    mySemanticName = theName;
 }
 
 //=======================================================================
-//function : GetName
-//purpose  : 
+// function : GetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) XCAFDimTolObjects_DatumObject::GetName() const
-{
-  if(myName.IsNull())
-    return new TCollection_HAsciiString();
-  return myName;
+Handle(TCollection_HAsciiString) XCAFDimTolObjects_DatumObject::GetName() const {
+    if (myName.IsNull()) return new TCollection_HAsciiString();
+    return myName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetName(const Handle(TCollection_HAsciiString)& theName)
-{
-  myName = theName;
+void XCAFDimTolObjects_DatumObject::SetName(const Handle(TCollection_HAsciiString) & theName) {
+    myName = theName;
 }
 
 //=======================================================================
-//function : GetModifiers
-//purpose  : 
+// function : GetModifiers
+// purpose  :
 //=======================================================================
 
-XCAFDimTolObjects_DatumModifiersSequence XCAFDimTolObjects_DatumObject::GetModifiers() const
-{
-  return myModifiers;
+XCAFDimTolObjects_DatumModifiersSequence XCAFDimTolObjects_DatumObject::GetModifiers() const {
+    return myModifiers;
 }
 
 //=======================================================================
-//function : SetModifiers
-//purpose  : 
+// function : SetModifiers
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetModifiers(const XCAFDimTolObjects_DatumModifiersSequence& theModifiers)
-{
-  myModifiers = theModifiers;
+void XCAFDimTolObjects_DatumObject::SetModifiers(const XCAFDimTolObjects_DatumModifiersSequence& theModifiers) {
+    myModifiers = theModifiers;
 }
 
 //=======================================================================
-//function : SetModifierWithValue
-//purpose  : 
+// function : SetModifierWithValue
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetModifierWithValue(const XCAFDimTolObjects_DatumModifWithValue theModifier, const Standard_Real theValue)
-{
-  myModifierWithValue = theModifier;
-  myValueOfModifier = theValue;
+void XCAFDimTolObjects_DatumObject::SetModifierWithValue(const XCAFDimTolObjects_DatumModifWithValue theModifier,
+                                                         const Standard_Real theValue) {
+    myModifierWithValue = theModifier;
+    myValueOfModifier = theValue;
 }
 
 //=======================================================================
-//function : GetModifierWithValue
-//purpose  : 
+// function : GetModifierWithValue
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::GetModifierWithValue(XCAFDimTolObjects_DatumModifWithValue& theModifier, Standard_Real& theValue) const
-{
-  theModifier = myModifierWithValue;
-  theValue = myValueOfModifier;
-}
-  
-//=======================================================================
-//function : AddModifier
-//purpose  : 
-//=======================================================================
-
-void XCAFDimTolObjects_DatumObject::AddModifier(const XCAFDimTolObjects_DatumSingleModif theModifier)
-{
-  myModifiers.Append(theModifier);
+void XCAFDimTolObjects_DatumObject::GetModifierWithValue(XCAFDimTolObjects_DatumModifWithValue& theModifier,
+                                                         Standard_Real& theValue) const {
+    theModifier = myModifierWithValue;
+    theValue = myValueOfModifier;
 }
 
 //=======================================================================
-//function : GetDatumTarget
-//purpose  : 
+// function : AddModifier
+// purpose  :
 //=======================================================================
 
-TopoDS_Shape XCAFDimTolObjects_DatumObject::GetDatumTarget()  const
-{
-  return myDatumTarget;
+void XCAFDimTolObjects_DatumObject::AddModifier(const XCAFDimTolObjects_DatumSingleModif theModifier) {
+    myModifiers.Append(theModifier);
 }
 
 //=======================================================================
-//function : SetDatumTarget
-//purpose  : 
+// function : GetDatumTarget
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetDatumTarget (const TopoDS_Shape& theShape) 
-{
-  myDatumTarget = theShape;
-}
-  
-//=======================================================================
-//function : GetPosition
-//purpose  : 
-//=======================================================================
-
-Standard_Integer XCAFDimTolObjects_DatumObject::GetPosition() const
-{
-  return myPosition;
+TopoDS_Shape XCAFDimTolObjects_DatumObject::GetDatumTarget() const {
+    return myDatumTarget;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : SetDatumTarget
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetPosition(const Standard_Integer thePosition)
-{
-  myPosition = thePosition;
+void XCAFDimTolObjects_DatumObject::SetDatumTarget(const TopoDS_Shape& theShape) {
+    myDatumTarget = theShape;
 }
 
 //=======================================================================
-//function : IsDatumTarget
-//purpose  : 
+// function : GetPosition
+// purpose  :
 //=======================================================================
 
-Standard_Boolean XCAFDimTolObjects_DatumObject::IsDatumTarget() const
-{
-  return myIsDTarget;
+Standard_Integer XCAFDimTolObjects_DatumObject::GetPosition() const {
+    return myPosition;
 }
 
 //=======================================================================
-//function : IsDatumTarget
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::IsDatumTarget(const Standard_Boolean theIsDT)
-{
-  myIsDTarget = theIsDT;
+void XCAFDimTolObjects_DatumObject::SetPosition(const Standard_Integer thePosition) {
+    myPosition = thePosition;
 }
 
 //=======================================================================
-//function : GetDatumTargetType
-//purpose  : 
+// function : IsDatumTarget
+// purpose  :
 //=======================================================================
 
-XCAFDimTolObjects_DatumTargetType XCAFDimTolObjects_DatumObject::GetDatumTargetType() const
-{
-  return myDTargetType;
+Standard_Boolean XCAFDimTolObjects_DatumObject::IsDatumTarget() const {
+    return myIsDTarget;
 }
 
 //=======================================================================
-//function : SetDatumTargetType
-//purpose  : 
+// function : IsDatumTarget
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetDatumTargetType(const XCAFDimTolObjects_DatumTargetType theType)
-{
-  myDTargetType = theType;
+void XCAFDimTolObjects_DatumObject::IsDatumTarget(const Standard_Boolean theIsDT) {
+    myIsDTarget = theIsDT;
 }
 
 //=======================================================================
-//function : GetDatumTargetAxis
-//purpose  : 
+// function : GetDatumTargetType
+// purpose  :
 //=======================================================================
 
-gp_Ax2 XCAFDimTolObjects_DatumObject::GetDatumTargetAxis() const
-{
-  return myAxis;
+XCAFDimTolObjects_DatumTargetType XCAFDimTolObjects_DatumObject::GetDatumTargetType() const {
+    return myDTargetType;
 }
 
 //=======================================================================
-//function : SetDatumTargetAxis
-//purpose  : 
+// function : SetDatumTargetType
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetDatumTargetAxis(const gp_Ax2& theAxis)
-{
-  myAxis = theAxis;
-  myIsValidDT = Standard_True;
+void XCAFDimTolObjects_DatumObject::SetDatumTargetType(const XCAFDimTolObjects_DatumTargetType theType) {
+    myDTargetType = theType;
 }
 
 //=======================================================================
-//function : GetDatumTargetLength
-//purpose  : 
+// function : GetDatumTargetAxis
+// purpose  :
 //=======================================================================
 
-Standard_Real XCAFDimTolObjects_DatumObject::GetDatumTargetLength() const
-{
-  return myLength;
+gp_Ax2 XCAFDimTolObjects_DatumObject::GetDatumTargetAxis() const {
+    return myAxis;
 }
 
 //=======================================================================
-//function : SetDatumTargetLength
-//purpose  : 
+// function : SetDatumTargetAxis
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetDatumTargetLength(const Standard_Real theLength)
-{
-  myLength = theLength;
-  myIsValidDT = Standard_True;
-}
-
-
-//=======================================================================
-//function : GetDatumTargetWidth
-//purpose  : 
-//=======================================================================
-
-Standard_Real XCAFDimTolObjects_DatumObject::GetDatumTargetWidth() const
-{
-  return myWidth;
+void XCAFDimTolObjects_DatumObject::SetDatumTargetAxis(const gp_Ax2& theAxis) {
+    myAxis = theAxis;
+    myIsValidDT = Standard_True;
 }
 
 //=======================================================================
-//function : SetDatumTargetWidth
-//purpose  : 
+// function : GetDatumTargetLength
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetDatumTargetWidth(const Standard_Real theWidth)
-{
-  myWidth = theWidth;
-  myIsValidDT = Standard_True;
+Standard_Real XCAFDimTolObjects_DatumObject::GetDatumTargetLength() const {
+    return myLength;
 }
 
 //=======================================================================
-//function : GetDatumTargetNumber
-//purpose  : 
+// function : SetDatumTargetLength
+// purpose  :
 //=======================================================================
 
-Standard_Integer XCAFDimTolObjects_DatumObject::GetDatumTargetNumber() const
-{
-  return myDatumTargetNumber;
+void XCAFDimTolObjects_DatumObject::SetDatumTargetLength(const Standard_Real theLength) {
+    myLength = theLength;
+    myIsValidDT = Standard_True;
 }
 
 //=======================================================================
-//function : SetDatumTargetNumber
-//purpose  : 
+// function : GetDatumTargetWidth
+// purpose  :
 //=======================================================================
 
-void XCAFDimTolObjects_DatumObject::SetDatumTargetNumber(const Standard_Integer theNumber)
-{
-  myDatumTargetNumber = theNumber;
+Standard_Real XCAFDimTolObjects_DatumObject::GetDatumTargetWidth() const {
+    return myWidth;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  :
+// function : SetDatumTargetWidth
+// purpose  :
 //=======================================================================
-void XCAFDimTolObjects_DatumObject::DumpJson (Standard_OStream& theOStream,
-                                                  Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
 
-  if (!myName.IsNull())
-  {
-    Standard_CString aDatumName = myName->ToCString();
-    OCCT_DUMP_FIELD_VALUE_STRING (theOStream, aDatumName)
-  }
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myModifierWithValue)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myValueOfModifier)
+void XCAFDimTolObjects_DatumObject::SetDatumTargetWidth(const Standard_Real theWidth) {
+    myWidth = theWidth;
+    myIsValidDT = Standard_True;
+}
 
-  if (!myDatumTarget.IsNull())
-  {
-    OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myDatumTarget)
-  }
+//=======================================================================
+// function : GetDatumTargetNumber
+// purpose  :
+//=======================================================================
 
-    
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myPosition)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myIsDTarget)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myIsValidDT)
+Standard_Integer XCAFDimTolObjects_DatumObject::GetDatumTargetNumber() const {
+    return myDatumTargetNumber;
+}
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myDTargetType)
-  OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myAxis)
+//=======================================================================
+// function : SetDatumTargetNumber
+// purpose  :
+//=======================================================================
 
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myLength)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myWidth)
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myDatumTargetNumber)
+void XCAFDimTolObjects_DatumObject::SetDatumTargetNumber(const Standard_Integer theNumber) {
+    myDatumTargetNumber = theNumber;
+}
 
-  if (myHasPlane)
-  {
-    OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myPlane)
-  }
+//=======================================================================
+// function : DumpJson
+// purpose  :
+//=======================================================================
+void XCAFDimTolObjects_DatumObject::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-  if (myHasPnt)
-  {
-    OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myPnt)
-  }
+    if (!myName.IsNull()) {
+        Standard_CString aDatumName = myName->ToCString();
+        OCCT_DUMP_FIELD_VALUE_STRING(theOStream, aDatumName)
+    }
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myModifierWithValue)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myValueOfModifier)
 
-  if (myHasPntText)
-  {
-    OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myPntText)
-  }
+    if (!myDatumTarget.IsNull()) {
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myDatumTarget)
+    }
 
-  if (!myPresentation.IsNull())
-  {
-    OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, &myPresentation)
-  }
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myPosition)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myIsDTarget)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myIsValidDT)
 
-  if (!mySemanticName.IsNull())
-  {
-    Standard_CString aSemanticName = mySemanticName->ToCString();
-    OCCT_DUMP_FIELD_VALUE_STRING (theOStream, aSemanticName)
-  }
-  if (!myPresentationName.IsNull())
-  {
-    Standard_CString aPresentationName = myPresentationName->ToCString();
-    OCCT_DUMP_FIELD_VALUE_STRING (theOStream, aPresentationName)
-  }
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDTargetType)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myAxis)
 
-  for (XCAFDimTolObjects_DatumModifiersSequence::Iterator aModifIt (myModifiers); aModifIt.More(); aModifIt.Next())
-  {
-    XCAFDimTolObjects_DatumSingleModif aModifier = aModifIt.Value();
-    OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, aModifier)
-  }
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myLength)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myWidth)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myDatumTargetNumber)
+
+    if (myHasPlane) {
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myPlane)
+    }
+
+    if (myHasPnt) {
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myPnt)
+    }
+
+    if (myHasPntText) {
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myPntText)
+    }
+
+    if (!myPresentation.IsNull()) {
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myPresentation)
+    }
+
+    if (!mySemanticName.IsNull()) {
+        Standard_CString aSemanticName = mySemanticName->ToCString();
+        OCCT_DUMP_FIELD_VALUE_STRING(theOStream, aSemanticName)
+    }
+    if (!myPresentationName.IsNull()) {
+        Standard_CString aPresentationName = myPresentationName->ToCString();
+        OCCT_DUMP_FIELD_VALUE_STRING(theOStream, aPresentationName)
+    }
+
+    for (XCAFDimTolObjects_DatumModifiersSequence::Iterator aModifIt(myModifiers); aModifIt.More(); aModifIt.Next()) {
+        XCAFDimTolObjects_DatumSingleModif aModifier = aModifIt.Value();
+        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, aModifier)
+    }
 }

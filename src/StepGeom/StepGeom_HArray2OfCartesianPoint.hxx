@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY2(StepGeom_HArray2OfCartesianPoint, StepGeom_Array2OfCartesianPoint)
 
-
 #endif

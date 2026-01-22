@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(HLRAlgo_HArray1OfTData, HLRAlgo_Array1OfTData)
 
-
 #endif

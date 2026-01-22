@@ -27,12 +27,6 @@
 //! AIS_ConnectedInteractive. Transform indicates
 //! that the Interactive Object reference geometry has
 //! changed location relative to the reference geometry.
-enum AIS_ConnectStatus
-{
-AIS_CS_None,
-AIS_CS_Connection,
-AIS_CS_Transform,
-AIS_CS_Both
-};
+enum AIS_ConnectStatus { AIS_CS_None, AIS_CS_Connection, AIS_CS_Transform, AIS_CS_Both };
 
 #endif // _AIS_ConnectStatus_HeaderFile

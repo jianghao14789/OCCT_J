@@ -25,89 +25,68 @@ IMPLEMENT_STANDARD_RTTIEXT(RWGltf_GltfLatePrimitiveArray, RWMesh_TriangulationSo
 // function : RWGltf_GltfLatePrimitiveArray
 // purpose  :
 // =======================================================================
-RWGltf_GltfLatePrimitiveArray::RWGltf_GltfLatePrimitiveArray (const TCollection_AsciiString& theId,
-                                                              const TCollection_AsciiString& theName)
-: myId (theId),
-  myName (theName),
-  myPrimMode (RWGltf_GltfPrimitiveMode_UNKNOWN)
-{
-}
+RWGltf_GltfLatePrimitiveArray::RWGltf_GltfLatePrimitiveArray(const TCollection_AsciiString& theId,
+                                                             const TCollection_AsciiString& theName)
+    : myId(theId), myName(theName), myPrimMode(RWGltf_GltfPrimitiveMode_UNKNOWN) {}
 
 // =======================================================================
 // function : ~RWGltf_GltfLatePrimitiveArray
 // purpose  :
 // =======================================================================
-RWGltf_GltfLatePrimitiveArray::~RWGltf_GltfLatePrimitiveArray()
-{
-  //
+RWGltf_GltfLatePrimitiveArray::~RWGltf_GltfLatePrimitiveArray() {
+    //
 }
 
 // =======================================================================
 // function : BaseColor
 // purpose  :
 // =======================================================================
-Quantity_ColorRGBA RWGltf_GltfLatePrimitiveArray::BaseColor() const
-{
-  if (!myMaterialPbr.IsNull())
-  {
-    return myMaterialPbr->BaseColor;
-  }
-  else if (!myMaterialCommon.IsNull())
-  {
-    return Quantity_ColorRGBA (myMaterialCommon->DiffuseColor, 1.0f - myMaterialCommon->Transparency);
-  }
-  return Quantity_ColorRGBA();
+Quantity_ColorRGBA RWGltf_GltfLatePrimitiveArray::BaseColor() const {
+    if (!myMaterialPbr.IsNull()) {
+        return myMaterialPbr->BaseColor;
+    } else if (!myMaterialCommon.IsNull()) {
+        return Quantity_ColorRGBA(myMaterialCommon->DiffuseColor, 1.0f - myMaterialCommon->Transparency);
+    }
+    return Quantity_ColorRGBA();
 }
 
 // =======================================================================
 // function : AddPrimArrayData
 // purpose  :
 // =======================================================================
-RWGltf_GltfPrimArrayData& RWGltf_GltfLatePrimitiveArray::AddPrimArrayData (RWGltf_GltfArrayType theType)
-{
-  if (theType == RWGltf_GltfArrayType_Position)
-  {
-    // make sure positions go first
-    myData.Prepend (RWGltf_GltfPrimArrayData (theType));
-    return myData.ChangeFirst();
-  }
-  else if (theType == RWGltf_GltfArrayType_Indices)
-  {
-    // make sure indexes go after vertex positions but before any other vertex attributes
-    if (myData.First().Type == RWGltf_GltfArrayType_Position)
-    {
-      myData.InsertAfter (myData.Lower(), RWGltf_GltfPrimArrayData (theType));
-      return myData.ChangeValue (myData.Lower() + 1);
+RWGltf_GltfPrimArrayData& RWGltf_GltfLatePrimitiveArray::AddPrimArrayData(RWGltf_GltfArrayType theType) {
+    if (theType == RWGltf_GltfArrayType_Position) {
+        // make sure positions go first
+        myData.Prepend(RWGltf_GltfPrimArrayData(theType));
+        return myData.ChangeFirst();
+    } else if (theType == RWGltf_GltfArrayType_Indices) {
+        // make sure indexes go after vertex positions but before any other vertex attributes
+        if (myData.First().Type == RWGltf_GltfArrayType_Position) {
+            myData.InsertAfter(myData.Lower(), RWGltf_GltfPrimArrayData(theType));
+            return myData.ChangeValue(myData.Lower() + 1);
+        } else {
+            myData.Prepend(RWGltf_GltfPrimArrayData(theType));
+            return myData.ChangeFirst();
+        }
+    } else {
+        myData.Append(RWGltf_GltfPrimArrayData(theType));
+        return myData.ChangeLast();
     }
-    else
-    {
-      myData.Prepend (RWGltf_GltfPrimArrayData (theType));
-      return myData.ChangeFirst();
-    }
-  }
-  else
-  {
-    myData.Append (RWGltf_GltfPrimArrayData (theType));
-    return myData.ChangeLast();
-  }
 }
 
 //=======================================================================
-//function : LoadStreamData
-//purpose  :
+// function : LoadStreamData
+// purpose  :
 //=======================================================================
-Handle(Poly_Triangulation) RWGltf_GltfLatePrimitiveArray::LoadStreamData() const
-{
-  Handle(RWGltf_TriangulationReader) aGltfReader = Handle(RWGltf_TriangulationReader)::DownCast(myReader);
-  if (aGltfReader.IsNull())
-  {
-    return Handle(Poly_Triangulation)();
-  }
-  Handle(Poly_Triangulation) aResult = createNewEntity();
-  if (!aGltfReader->LoadStreamData (this, aResult))
-  {
-    return Handle(Poly_Triangulation)();
-  }
-  aResult->SetMeshPurpose (aResult->MeshPurpose() | Poly_MeshPurpose_Loaded);
-  return aResult;
+Handle(Poly_Triangulation) RWGltf_GltfLatePrimitiveArray::LoadStreamData() const {
+    Handle(RWGltf_TriangulationReader) aGltfReader = Handle(RWGltf_TriangulationReader)::DownCast(myReader);
+    if (aGltfReader.IsNull()) {
+        return Handle(Poly_Triangulation)();
+    }
+    Handle(Poly_Triangulation) aResult = createNewEntity();
+    if (!aGltfReader->LoadStreamData(this, aResult)) {
+        return Handle(Poly_Triangulation)();
+    }
+    aResult->SetMeshPurpose(aResult->MeshPurpose() | Poly_MeshPurpose_Loaded);
+    return aResult;
 }

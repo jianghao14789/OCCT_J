@@ -30,28 +30,21 @@
  * This class collects objects to be added, and then add them to the tree
  * in a random order.
  */
-template <class TheObjType, class TheBndType> class NCollection_UBTreeFiller
-{
+template <class TheObjType, class TheBndType> class NCollection_UBTreeFiller {
 public:
     // ---------- PUBLIC TYPES ----------
 
     //! Structure of pair (object, bnd box)
-    struct ObjBnd
-    {
-        TheObjType  myObj;
-        TheBndType  myBnd;
-        ObjBnd(const TheObjType& theObj, const TheBndType& theBnd)
-            : myObj(theObj), myBnd(theBnd) {
-        }
-        ObjBnd()
-            : myObj(TheObjType()), myBnd(TheBndType()) {
-        }
+    struct ObjBnd {
+        TheObjType myObj;
+        TheBndType myBnd;
+        ObjBnd(const TheObjType& theObj, const TheBndType& theBnd) : myObj(theObj), myBnd(theBnd) {}
+        ObjBnd() : myObj(TheObjType()), myBnd(TheBndType()) {}
     };
 
     //! UBTree algorithm
-    typedef NCollection_UBTree<TheObjType, TheBndType>    UBTree;
-    typedef TYPENAME UBTree::TreeNode                     UBTreeNode;
-
+    typedef NCollection_UBTree<TheObjType, TheBndType> UBTree;
+    typedef TYPENAME UBTree::TreeNode UBTreeNode;
 
     // ---------- PUBLIC METHODS ----------
 
@@ -76,8 +69,7 @@ public:
     }
 
     //! Adds a pair (theObj, theBnd) to my sequence
-    void Add(const TheObjType& theObj, const TheBndType& theBnd)
-    {
+    void Add(const TheObjType& theObj, const TheBndType& theBnd) {
         mySeqPtr.Append(ObjBnd(theObj, theBnd));
     }
 
@@ -94,7 +86,9 @@ public:
      * Remove all data from Filler, partculary if the Tree no more needed
      * so the destructor of this Filler should not populate the useless Tree.
      */
-    void                             Reset() { mySeqPtr.Clear(); }
+    void Reset() {
+        mySeqPtr.Clear();
+    }
 
     /**
      * Check the filled tree for the total number of items and the balance
@@ -108,45 +102,39 @@ public:
      * Destructor. Fills the tree with accumulated items if they have not been
      * passed by a previous call of method Fill().
      */
-    ~NCollection_UBTreeFiller()
-    {
+    ~NCollection_UBTreeFiller() {
         if (mySeqPtr.Length() > 0)
 #ifdef OCCT_DEBUG_UBTREE
-            std::cout << "~NCollection_UBTreeFiller: " << Fill()
-            << " objects added to the tree" << std::endl;
+            std::cout << "~NCollection_UBTreeFiller: " << Fill() << " objects added to the tree" << std::endl;
 #else
             Fill();
 #endif
     }
 
 private:
-
     // Assignment operator is made empty and private in order to
     // avoid warning on MSVC (C4512)
-    void operator = (const NCollection_UBTreeFiller&) {}
+    void operator=(const NCollection_UBTreeFiller&) {}
 
-    static Standard_Real    checkNode(const UBTreeNode& theNode,
-        const Standard_Integer theLength,
-        Standard_Integer& theNumber);
-
+    static Standard_Real checkNode(const UBTreeNode& theNode, const Standard_Integer theLength,
+                                   Standard_Integer& theNumber);
 
 private:
     // ---------- PRIVATE FIELDS ----------
 
     UBTree& myTree;
-    NCollection_Vector<ObjBnd>            mySeqPtr;
-    opencascade::std::mt19937             myRandGen;      //!< random number generator
-    Standard_Boolean                      myIsFullRandom;
+    NCollection_Vector<ObjBnd> mySeqPtr;
+    opencascade::std::mt19937 myRandGen; //!< random number generator
+    Standard_Boolean myIsFullRandom;
 };
 
 //=======================================================================
-//function : Fill
-//purpose  : 
+// function : Fill
+// purpose  :
 //=======================================================================
 
 template <class TheObjType, class TheBndType>
-Standard_Integer NCollection_UBTreeFiller<TheObjType, TheBndType>::Fill()
-{
+Standard_Integer NCollection_UBTreeFiller<TheObjType, TheBndType>::Fill() {
     Standard_Integer i, nbAdd = mySeqPtr.Length();
     // Fisher-Yates randomization
     if (myIsFullRandom)
@@ -170,41 +158,36 @@ Standard_Integer NCollection_UBTreeFiller<TheObjType, TheBndType>::Fill()
 }
 
 //=======================================================================
-//function : CheckTree
-//purpose  : 
+// function : CheckTree
+// purpose  :
 //=======================================================================
 
 template <class TheObjType, class TheBndType>
-Standard_Integer NCollection_UBTreeFiller<TheObjType, TheBndType>::CheckTree
-(Standard_OStream& theStream)
-{
+Standard_Integer NCollection_UBTreeFiller<TheObjType, TheBndType>::CheckTree(Standard_OStream& theStream) {
     Standard_Integer aNumber(0);
     const Standard_Real aLen = checkNode(myTree.Root(), 0, aNumber);
     const Standard_Real num = (double)aNumber;
     const Standard_Real aLen1 = sqrt(aLen / num);
     const Standard_Real aLen0 = log(num) / log(2.);
     char buf[128];
-    sprintf(buf, "Checking UBTree:%8d leaves, balance =%7.2f",
-        aNumber, aLen1 / aLen0);
+    sprintf(buf, "Checking UBTree:%8d leaves, balance =%7.2f", aNumber, aLen1 / aLen0);
     theStream << buf << std::endl;
     return aNumber;
 }
 
 //=======================================================================
-//function : checkNode
-//purpose  : 
+// function : checkNode
+// purpose  :
 //=======================================================================
 
 template <class TheObjType, class TheBndType>
-Standard_Real NCollection_UBTreeFiller<TheObjType, TheBndType>::checkNode
-(const TYPENAME NCollection_UBTree<TheObjType, TheBndType>::TreeNode& theNode,
-    const Standard_Integer theLength,
-    Standard_Integer& theNumber)
-{
+Standard_Real NCollection_UBTreeFiller<TheObjType, TheBndType>::checkNode(
+    const TYPENAME NCollection_UBTree<TheObjType, TheBndType>::TreeNode& theNode, const Standard_Integer theLength,
+    Standard_Integer& theNumber) {
     Standard_Real aLength;
     if (!theNode.IsLeaf())
         aLength = (checkNode(theNode.Child(0), theLength + 1, theNumber) +
-            checkNode(theNode.Child(1), theLength + 1, theNumber));
+                   checkNode(theNode.Child(1), theLength + 1, theNumber));
     else {
         theNumber++;
         aLength = theLength * theLength;

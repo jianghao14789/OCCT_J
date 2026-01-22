@@ -24,75 +24,67 @@
 #include <StepRepr_ShapeAspectRelationship.hxx>
 
 //=======================================================================
-//function : StepRepr_RepresentedDefinition
-//purpose  : 
+// function : StepRepr_RepresentedDefinition
+// purpose  :
 //=======================================================================
-StepRepr_RepresentedDefinition::StepRepr_RepresentedDefinition ()
-{
+StepRepr_RepresentedDefinition::StepRepr_RepresentedDefinition() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepRepr_RepresentedDefinition::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepBasic_GeneralProperty))) return 1;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_PropertyDefinition))) return 2;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_PropertyDefinitionRelationship))) return 3;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_ShapeAspect))) return 4;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_ShapeAspectRelationship))) return 5;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  : 
+// function : GeneralProperty
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepRepr_RepresentedDefinition::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepBasic_GeneralProperty))) return 1;
-  if (ent->IsKind(STANDARD_TYPE(StepRepr_PropertyDefinition))) return 2;
-  if (ent->IsKind(STANDARD_TYPE(StepRepr_PropertyDefinitionRelationship))) return 3;
-  if (ent->IsKind(STANDARD_TYPE(StepRepr_ShapeAspect))) return 4;
-  if (ent->IsKind(STANDARD_TYPE(StepRepr_ShapeAspectRelationship))) return 5;
-  return 0;
+Handle(StepBasic_GeneralProperty) StepRepr_RepresentedDefinition::GeneralProperty() const {
+    return Handle(StepBasic_GeneralProperty)::DownCast(Value());
 }
 
 //=======================================================================
-//function : GeneralProperty
-//purpose  : 
+// function : PropertyDefinition
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_GeneralProperty) StepRepr_RepresentedDefinition::GeneralProperty () const
-{
-  return Handle(StepBasic_GeneralProperty)::DownCast(Value());
+Handle(StepRepr_PropertyDefinition) StepRepr_RepresentedDefinition::PropertyDefinition() const {
+    return Handle(StepRepr_PropertyDefinition)::DownCast(Value());
 }
 
 //=======================================================================
-//function : PropertyDefinition
-//purpose  : 
+// function : PropertyDefinitionRelationship
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_PropertyDefinition) StepRepr_RepresentedDefinition::PropertyDefinition () const
-{
-  return Handle(StepRepr_PropertyDefinition)::DownCast(Value());
+Handle(StepRepr_PropertyDefinitionRelationship) StepRepr_RepresentedDefinition::PropertyDefinitionRelationship() const {
+    return Handle(StepRepr_PropertyDefinitionRelationship)::DownCast(Value());
 }
 
 //=======================================================================
-//function : PropertyDefinitionRelationship
-//purpose  : 
+// function : ShapeAspect
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_PropertyDefinitionRelationship) StepRepr_RepresentedDefinition::PropertyDefinitionRelationship () const
-{
-  return Handle(StepRepr_PropertyDefinitionRelationship)::DownCast(Value());
+Handle(StepRepr_ShapeAspect) StepRepr_RepresentedDefinition::ShapeAspect() const {
+    return Handle(StepRepr_ShapeAspect)::DownCast(Value());
 }
 
 //=======================================================================
-//function : ShapeAspect
-//purpose  : 
+// function : ShapeAspectRelationship
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_ShapeAspect) StepRepr_RepresentedDefinition::ShapeAspect () const
-{
-  return Handle(StepRepr_ShapeAspect)::DownCast(Value());
-}
-
-//=======================================================================
-//function : ShapeAspectRelationship
-//purpose  : 
-//=======================================================================
-
-Handle(StepRepr_ShapeAspectRelationship) StepRepr_RepresentedDefinition::ShapeAspectRelationship () const
-{
-  return Handle(StepRepr_ShapeAspectRelationship)::DownCast(Value());
+Handle(StepRepr_ShapeAspectRelationship) StepRepr_RepresentedDefinition::ShapeAspectRelationship() const {
+    return Handle(StepRepr_ShapeAspectRelationship)::DownCast(Value());
 }

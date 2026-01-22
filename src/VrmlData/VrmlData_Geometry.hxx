@@ -24,61 +24,56 @@
  *  Contains the topological representation (TopoDS_Shell) of the VRML geometry
  */
 
-class VrmlData_Geometry : public VrmlData_Node
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class VrmlData_Geometry : public VrmlData_Node {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  /**
-   * Empty constructor
-   */
-  inline VrmlData_Geometry ()
-    : myIsModified      (Standard_True)
-  {}
+    /**
+     * Empty constructor
+     */
+    inline VrmlData_Geometry() : myIsModified(Standard_True) {}
 
-  /**
-   * Constructor
-   */
-  inline VrmlData_Geometry (const VrmlData_Scene& theScene,
-                            const char            * theName)
-    : VrmlData_Node     (theScene, theName),
-      myIsModified      (Standard_True)
-  {}
+    /**
+     * Constructor
+     */
+    inline VrmlData_Geometry(const VrmlData_Scene& theScene, const char* theName)
+        : VrmlData_Node(theScene, theName), myIsModified(Standard_True) {}
 
-  /**
-   * Query the shape. This method checks the flag myIsModified; if True it
-   * should rebuild the shape presentation.
-   */
-  Standard_EXPORT virtual const Handle(TopoDS_TShape)&  TShape () = 0;
+    /**
+     * Query the shape. This method checks the flag myIsModified; if True it
+     * should rebuild the shape presentation.
+     */
+    Standard_EXPORT virtual const Handle(TopoDS_TShape) & TShape() = 0;
 
- protected:
-  // ---------- PROTECTED METHODS ----------
+protected:
+    // ---------- PROTECTED METHODS ----------
 
-  /**
-   * Set the TShape.
-   */
-  inline void   SetTShape       (const Handle(TopoDS_TShape)& theTShape)
-  { myTShape = theTShape; }
+    /**
+     * Set the TShape.
+     */
+    inline void SetTShape(const Handle(TopoDS_TShape) & theTShape) {
+        myTShape = theTShape;
+    }
 
-  /**
-   * Mark modification
-   */
-  inline void   SetModified     ()      { myIsModified= Standard_True; }
+    /**
+     * Mark modification
+     */
+    inline void SetModified() {
+        myIsModified = Standard_True;
+    }
 
+protected:
+    // ---------- PROTECTED FIELDS ----------
 
- protected:
-  // ---------- PROTECTED FIELDS ----------
+    Handle(TopoDS_TShape) myTShape;
+    Standard_Boolean myIsModified;
 
-  Handle(TopoDS_TShape)  myTShape;
-  Standard_Boolean       myIsModified;
-
- public:
-// Declaration of CASCADE RTTI
-DEFINE_STANDARD_RTTIEXT(VrmlData_Geometry,VrmlData_Node)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(VrmlData_Geometry, VrmlData_Node)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (VrmlData_Geometry, VrmlData_Node)
-
+DEFINE_STANDARD_HANDLE(VrmlData_Geometry, VrmlData_Node)
 
 #endif

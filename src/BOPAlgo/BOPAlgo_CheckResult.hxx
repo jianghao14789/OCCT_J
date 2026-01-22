@@ -25,15 +25,11 @@
 #include <TopTools_ListOfShape.hxx>
 #include <Standard_Real.hxx>
 
-
 //! contains information about faulty shapes and faulty types
 //! can't be processed by Boolean Operations
-class BOPAlgo_CheckResult
-{
+class BOPAlgo_CheckResult {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! empty constructor
     Standard_EXPORT BOPAlgo_CheckResult();
@@ -92,19 +88,8 @@ public:
     //! Returns the parameter for the second shape
     Standard_EXPORT Standard_Real GetMaxParameter2() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TopoDS_Shape myShape1;
     TopoDS_Shape myShape2;
     BOPAlgo_CheckStatus myStatus;
@@ -114,14 +99,6 @@ private:
     Standard_Real myMaxDist2;
     Standard_Real myMaxPar1;
     Standard_Real myMaxPar2;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BOPAlgo_CheckResult_HeaderFile

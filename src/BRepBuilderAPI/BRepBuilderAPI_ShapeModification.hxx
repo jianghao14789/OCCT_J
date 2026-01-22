@@ -25,13 +25,12 @@
 //! each API function. The MakeShape class then uses this
 //! to determine what has happened to the shapes which
 //! constitute the list of operands.
-enum BRepBuilderAPI_ShapeModification
-{
-BRepBuilderAPI_Preserved,
-BRepBuilderAPI_Deleted,
-BRepBuilderAPI_Trimmed,
-BRepBuilderAPI_Merged,
-BRepBuilderAPI_BoundaryModified
+enum BRepBuilderAPI_ShapeModification {
+    BRepBuilderAPI_Preserved,
+    BRepBuilderAPI_Deleted,
+    BRepBuilderAPI_Trimmed,
+    BRepBuilderAPI_Merged,
+    BRepBuilderAPI_BoundaryModified
 };
 
 #endif // _BRepBuilderAPI_ShapeModification_HeaderFile

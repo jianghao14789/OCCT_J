@@ -27,48 +27,26 @@ class StepAP214_Class;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Class
-class RWStepAP214_RWClass 
-{
+class RWStepAP214_RWClass {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP214_RWClass();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP214_RWClass();
-  
-  //! Reads Class
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP214_Class)& ent) const;
-  
-  //! Writes Class
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP214_Class)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP214_Class)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Class
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepAP214_Class) & ent) const;
 
+    //! Writes Class
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepAP214_Class) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP214_Class) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_RWClass_HeaderFile

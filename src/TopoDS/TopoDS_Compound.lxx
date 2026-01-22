@@ -15,10 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_Compound
-//purpose  : 
+// function : TopoDS_Compound
+// purpose  :
 //=======================================================================
 
-inline TopoDS_Compound::TopoDS_Compound ()
-{
-}
+inline TopoDS_Compound::TopoDS_Compound() {}

@@ -30,18 +30,14 @@ class TCollection_HAsciiString;
 class TCollection_AsciiString;
 class Units_Dimensions;
 
-
 class Units_UnitsDictionary;
 DEFINE_STANDARD_HANDLE(Units_UnitsDictionary, Standard_Transient)
 
 //! This class creates  a dictionary of all  the units
 //! you want to know.
-class Units_UnitsDictionary : public Standard_Transient
-{
+class Units_UnitsDictionary : public Standard_Transient {
 
 public:
-
-
     //! Returns an empty instance of UnitsDictionary.
     Standard_EXPORT Units_UnitsDictionary();
 
@@ -65,31 +61,15 @@ public:
 
     //! Dumps  for a     designated  physical       dimensions
     //! <adimensions> all the previously stored units.
-    void Dump(const Handle(Units_Dimensions)& adimensions) const;
-
-
-
+    void Dump(const Handle(Units_Dimensions) & adimensions) const;
 
     DEFINE_STANDARD_RTTIEXT(Units_UnitsDictionary, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
     Handle(Units_QuantitiesSequence) thequantitiessequence;
-
-
 };
 
-
 #include <Units_UnitsDictionary.lxx>
-
-
-
-
 
 #endif // _Units_UnitsDictionary_HeaderFile

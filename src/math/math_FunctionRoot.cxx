@@ -12,12 +12,12 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math_FunctionRoot.hxx>
 #include <math_FunctionSetRoot.hxx>
@@ -32,7 +32,6 @@ private:
     math_FunctionWithDerivative* Ff;
 
 public:
-
     math_MyFunctionSetWithDerivatives(math_FunctionWithDerivative& F);
 
     Standard_Integer NbVariables() const;
@@ -42,8 +41,7 @@ public:
     Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
 };
 
-math_MyFunctionSetWithDerivatives::math_MyFunctionSetWithDerivatives
-(math_FunctionWithDerivative& F) {
+math_MyFunctionSetWithDerivatives::math_MyFunctionSetWithDerivatives(math_FunctionWithDerivative& F) {
     Ff = &F;
 }
 
@@ -63,11 +61,8 @@ Standard_Boolean math_MyFunctionSetWithDerivatives::Values(const math_Vector& X,
     return Ff->Values(X(1), F(1), D(1, 1));
 }
 
-
-math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative& F,
-    const Standard_Real Guess,
-    const Standard_Real Tolerance,
-    const Standard_Integer NbIterations) {
+math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess,
+                                     const Standard_Real Tolerance, const Standard_Integer NbIterations) {
     math_Vector V(1, 1), Tol(1, 1);
     math_MyFunctionSetWithDerivatives Ff(F);
     V(1) = Guess;
@@ -83,12 +78,9 @@ math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative& F,
         NbIter = Sol.NbIterations();
     }
 }
-math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative& F,
-    const Standard_Real Guess,
-    const Standard_Real Tolerance,
-    const Standard_Real A,
-    const Standard_Real B,
-    const Standard_Integer NbIterations) {
+math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess,
+                                     const Standard_Real Tolerance, const Standard_Real A, const Standard_Real B,
+                                     const Standard_Integer NbIterations) {
     math_Vector V(1, 1), Aa(1, 1), Bb(1, 1), Tol(1, 1);
     math_MyFunctionSetWithDerivatives Ff(F);
     V(1) = Guess;
@@ -115,8 +107,7 @@ void math_FunctionRoot::Dump(Standard_OStream& o) const {
         o << " Number of iterations = " << NbIter << std::endl;
         o << " The Root is: " << TheRoot << std::endl;
         o << "The value at the root is: " << TheError << std::endl;
-    }
-    else {
+    } else {
         o << " Status = not Done \n";
     }
 }

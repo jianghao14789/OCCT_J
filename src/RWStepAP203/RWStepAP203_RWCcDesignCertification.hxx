@@ -28,48 +28,28 @@ class StepAP203_CcDesignCertification;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CcDesignCertification
-class RWStepAP203_RWCcDesignCertification 
-{
+class RWStepAP203_RWCcDesignCertification {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP203_RWCcDesignCertification();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP203_RWCcDesignCertification();
-  
-  //! Reads CcDesignCertification
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP203_CcDesignCertification)& ent) const;
-  
-  //! Writes CcDesignCertification
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP203_CcDesignCertification)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP203_CcDesignCertification)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CcDesignCertification
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP203_CcDesignCertification) & ent) const;
 
+    //! Writes CcDesignCertification
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepAP203_CcDesignCertification) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP203_CcDesignCertification) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP203_RWCcDesignCertification_HeaderFile

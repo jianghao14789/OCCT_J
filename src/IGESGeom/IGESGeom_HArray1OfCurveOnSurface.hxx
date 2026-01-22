@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESGeom_HArray1OfCurveOnSurface, IGESGeom_Array1OfCurveOnSurface)
 
-
 #endif

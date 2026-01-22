@@ -27,48 +27,29 @@ class StepBasic_DocumentProductEquivalence;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DocumentProductEquivalence
-class RWStepBasic_RWDocumentProductEquivalence 
-{
+class RWStepBasic_RWDocumentProductEquivalence {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWDocumentProductEquivalence();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWDocumentProductEquivalence();
-  
-  //! Reads DocumentProductEquivalence
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_DocumentProductEquivalence)& ent) const;
-  
-  //! Writes DocumentProductEquivalence
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_DocumentProductEquivalence)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_DocumentProductEquivalence)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DocumentProductEquivalence
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_DocumentProductEquivalence) & ent) const;
 
+    //! Writes DocumentProductEquivalence
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_DocumentProductEquivalence) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_DocumentProductEquivalence) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWDocumentProductEquivalence_HeaderFile

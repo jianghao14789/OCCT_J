@@ -27,48 +27,26 @@ class StepFEA_FeaParametricPoint;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaParametricPoint
-class RWStepFEA_RWFeaParametricPoint 
-{
+class RWStepFEA_RWFeaParametricPoint {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaParametricPoint();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaParametricPoint();
-  
-  //! Reads FeaParametricPoint
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaParametricPoint)& ent) const;
-  
-  //! Writes FeaParametricPoint
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaParametricPoint)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaParametricPoint)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaParametricPoint
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_FeaParametricPoint) & ent) const;
 
+    //! Writes FeaParametricPoint
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_FeaParametricPoint) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaParametricPoint) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaParametricPoint_HeaderFile

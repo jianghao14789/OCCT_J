@@ -27,48 +27,27 @@ class StepDimTol_FlatnessTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FlatnessTolerance
-class RWStepDimTol_RWFlatnessTolerance 
-{
+class RWStepDimTol_RWFlatnessTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWFlatnessTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWFlatnessTolerance();
-  
-  //! Reads FlatnessTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_FlatnessTolerance)& ent) const;
-  
-  //! Writes FlatnessTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_FlatnessTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_FlatnessTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FlatnessTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_FlatnessTolerance) & ent) const;
 
+    //! Writes FlatnessTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_FlatnessTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_FlatnessTolerance) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWFlatnessTolerance_HeaderFile

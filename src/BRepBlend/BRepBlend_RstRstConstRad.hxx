@@ -40,15 +40,17 @@ class math_Matrix;
 class gp_Circ;
 class Blend_Point;
 
-
 //! Copy of CSConstRad with a pcurve on surface
 //! as support.
 class BRepBlend_RstRstConstRad : public Blend_RstRstFunction {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BRepBlend_RstRstConstRad(const Handle(Adaptor3d_Surface)& Surf1, const Handle(Adaptor2d_Curve2d)& Rst1, const Handle(Adaptor3d_Surface)& Surf2, const Handle(Adaptor2d_Curve2d)& Rst2, const Handle(Adaptor3d_Curve)& CGuide);
+    Standard_EXPORT BRepBlend_RstRstConstRad(const Handle(Adaptor3d_Surface) & Surf1,
+                                             const Handle(Adaptor2d_Curve2d) & Rst1,
+                                             const Handle(Adaptor3d_Surface) & Surf2,
+                                             const Handle(Adaptor2d_Curve2d) & Rst2,
+                                             const Handle(Adaptor3d_Curve) & CGuide);
 
     //! Returns 2.
     Standard_EXPORT Standard_Integer NbVariables() const Standard_OVERRIDE;
@@ -74,7 +76,8 @@ public:
     //! False otherwise.
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D) Standard_OVERRIDE;
 
-    Standard_EXPORT void Set(const Handle(Adaptor3d_Surface)& SurfRef1, const Handle(Adaptor2d_Curve2d)& RstRef1, const Handle(Adaptor3d_Surface)& SurfRef2, const Handle(Adaptor2d_Curve2d)& RstRef2);
+    Standard_EXPORT void Set(const Handle(Adaptor3d_Surface) & SurfRef1, const Handle(Adaptor2d_Curve2d) & RstRef1,
+                             const Handle(Adaptor3d_Surface) & SurfRef2, const Handle(Adaptor2d_Curve2d) & RstRef2);
 
     Standard_EXPORT void Set(const Standard_Real Param) Standard_OVERRIDE;
 
@@ -123,7 +126,8 @@ public:
 
     //! Permet  d ' implementer   un   critere  de  decrochage
     //! specifique a la fonction.
-    Standard_EXPORT Blend_DecrochStatus Decroch(const math_Vector& Sol, gp_Vec& NRst1, gp_Vec& TgRst1, gp_Vec& NRst2, gp_Vec& TgRst2) const Standard_OVERRIDE;
+    Standard_EXPORT Blend_DecrochStatus Decroch(const math_Vector& Sol, gp_Vec& NRst1, gp_Vec& TgRst1, gp_Vec& NRst2,
+                                                gp_Vec& TgRst2) const Standard_OVERRIDE;
 
     Standard_EXPORT void Set(const Standard_Real Radius, const Standard_Integer Choix);
 
@@ -133,9 +137,11 @@ public:
 
     //! Give the center of circle define by PtRst1, PtRst2 and
     //! radius ray.
-    Standard_EXPORT Standard_Boolean CenterCircleRst1Rst2(const gp_Pnt& PtRst1, const gp_Pnt& PtRst2, const gp_Vec& np, gp_Pnt& Center, gp_Vec& VdMed) const;
+    Standard_EXPORT Standard_Boolean CenterCircleRst1Rst2(const gp_Pnt& PtRst1, const gp_Pnt& PtRst2, const gp_Vec& np,
+                                                          gp_Pnt& Center, gp_Vec& VdMed) const;
 
-    Standard_EXPORT void Section(const Standard_Real Param, const Standard_Real U, const Standard_Real V, Standard_Real& Pdeb, Standard_Real& Pfin, gp_Circ& C);
+    Standard_EXPORT void Section(const Standard_Real Param, const Standard_Real U, const Standard_Real V,
+                                 Standard_Real& Pdeb, Standard_Real& Pfin, gp_Circ& C);
 
     //! Returns  if the section is rationnal
     Standard_EXPORT Standard_Boolean IsRational() const Standard_OVERRIDE;
@@ -157,33 +163,45 @@ public:
     //! for the parameters. i.e. T.Length() > NbIntervals()
     Standard_EXPORT void Intervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const Standard_OVERRIDE;
 
-    Standard_EXPORT void GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots, Standard_Integer& Degree, Standard_Integer& NbPoles2d) Standard_OVERRIDE;
+    Standard_EXPORT void GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots, Standard_Integer& Degree,
+                                  Standard_Integer& NbPoles2d) Standard_OVERRIDE;
 
     //! Returns the tolerance to reach in approximation
     //! to respecte
     //! BoundTol error at the Boundary
     //! AngleTol tangent error at the Boundary
     //! SurfTol error inside the surface.
-    Standard_EXPORT void GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol, const Standard_Real AngleTol, math_Vector& Tol3d, math_Vector& Tol1D) const Standard_OVERRIDE;
+    Standard_EXPORT void GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol,
+                                      const Standard_Real AngleTol, math_Vector& Tol3d,
+                                      math_Vector& Tol1D) const Standard_OVERRIDE;
 
     Standard_EXPORT void Knots(TColStd_Array1OfReal& TKnots) Standard_OVERRIDE;
 
     Standard_EXPORT void Mults(TColStd_Array1OfInteger& TMults) Standard_OVERRIDE;
 
     //! Used for the first and last section
-    Standard_EXPORT Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths) Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                             TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d,
+                                             TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths,
+                                             TColStd_Array1OfReal& DWeigths) Standard_OVERRIDE;
 
-    Standard_EXPORT void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d, TColStd_Array1OfReal& Weigths) Standard_OVERRIDE;
+    Standard_EXPORT void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d,
+                                 TColStd_Array1OfReal& Weigths) Standard_OVERRIDE;
 
     //! Used for the first and last section
     //! The method returns Standard_True if the derivatives
     //! are computed, otherwise it returns Standard_False.
-    Standard_EXPORT Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles, TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColgp_Array1OfVec2d& D2Poles2d, TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths, TColStd_Array1OfReal& D2Weigths) Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                             TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles,
+                                             TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d,
+                                             TColgp_Array1OfVec2d& D2Poles2d, TColStd_Array1OfReal& Weigths,
+                                             TColStd_Array1OfReal& DWeigths,
+                                             TColStd_Array1OfReal& D2Weigths) Standard_OVERRIDE;
 
-    Standard_EXPORT void Resolution(const Standard_Integer IC2d, const Standard_Real Tol, Standard_Real& TolU, Standard_Real& TolV) const Standard_OVERRIDE;
+    Standard_EXPORT void Resolution(const Standard_Integer IC2d, const Standard_Real Tol, Standard_Real& TolU,
+                                    Standard_Real& TolV) const Standard_OVERRIDE;
 
 protected:
-
 private:
     Handle(Adaptor3d_Surface) surf1;
     Handle(Adaptor3d_Surface) surf2;

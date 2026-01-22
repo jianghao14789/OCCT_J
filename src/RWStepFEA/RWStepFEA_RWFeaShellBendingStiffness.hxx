@@ -27,48 +27,28 @@ class StepFEA_FeaShellBendingStiffness;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaShellBendingStiffness
-class RWStepFEA_RWFeaShellBendingStiffness 
-{
+class RWStepFEA_RWFeaShellBendingStiffness {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaShellBendingStiffness();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaShellBendingStiffness();
-  
-  //! Reads FeaShellBendingStiffness
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaShellBendingStiffness)& ent) const;
-  
-  //! Writes FeaShellBendingStiffness
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaShellBendingStiffness)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaShellBendingStiffness)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaShellBendingStiffness
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_FeaShellBendingStiffness) & ent) const;
 
+    //! Writes FeaShellBendingStiffness
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_FeaShellBendingStiffness) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaShellBendingStiffness) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaShellBendingStiffness_HeaderFile

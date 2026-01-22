@@ -27,48 +27,29 @@ class StepDimTol_CircularRunoutTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CircularRunoutTolerance
-class RWStepDimTol_RWCircularRunoutTolerance 
-{
+class RWStepDimTol_RWCircularRunoutTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWCircularRunoutTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWCircularRunoutTolerance();
-  
-  //! Reads CircularRunoutTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_CircularRunoutTolerance)& ent) const;
-  
-  //! Writes CircularRunoutTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_CircularRunoutTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_CircularRunoutTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CircularRunoutTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_CircularRunoutTolerance) & ent) const;
 
+    //! Writes CircularRunoutTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_CircularRunoutTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_CircularRunoutTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWCircularRunoutTolerance_HeaderFile

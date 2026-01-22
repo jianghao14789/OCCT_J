@@ -21,15 +21,12 @@
 #include <Standard_Macro.hxx>
 
 //! This class provides methods to read and write triangulation from / to the OBJ files.
-class RWObj
-{
+class RWObj {
 public:
-
-  //! Read specified OBJ file and returns its content as triangulation.
-  //! In case of error, returns Null handle.
-  Standard_EXPORT static Handle(Poly_Triangulation) ReadFile (const Standard_CString theFile,
-                                                              const Message_ProgressRange& aProgress = Message_ProgressRange());
-
+    //! Read specified OBJ file and returns its content as triangulation.
+    //! In case of error, returns Null handle.
+    Standard_EXPORT static Handle(Poly_Triangulation)
+        ReadFile(const Standard_CString theFile, const Message_ProgressRange& aProgress = Message_ProgressRange());
 };
 
 #endif // _RWObj_HeaderFile

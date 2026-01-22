@@ -14,11 +14,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <CDM_Document.hxx>
 #include <PCDM_DriverError.hxx>
 #include <PCDM_Writer.hxx>
 #include <Standard_Type.hxx>
 #include <TCollection_ExtendedString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(PCDM_Writer,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(PCDM_Writer, Standard_Transient)

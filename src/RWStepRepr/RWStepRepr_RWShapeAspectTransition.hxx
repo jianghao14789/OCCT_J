@@ -27,48 +27,28 @@ class StepRepr_ShapeAspectTransition;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ShapeAspectTransition
-class RWStepRepr_RWShapeAspectTransition 
-{
+class RWStepRepr_RWShapeAspectTransition {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWShapeAspectTransition();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWShapeAspectTransition();
-  
-  //! Reads ShapeAspectTransition
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_ShapeAspectTransition)& ent) const;
-  
-  //! Writes ShapeAspectTransition
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_ShapeAspectTransition)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_ShapeAspectTransition)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ShapeAspectTransition
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_ShapeAspectTransition) & ent) const;
 
+    //! Writes ShapeAspectTransition
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_ShapeAspectTransition) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_ShapeAspectTransition) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWShapeAspectTransition_HeaderFile

@@ -31,26 +31,22 @@
 #include <TopAbs_Orientation.hxx>
 class TopoDS_Wire;
 
-
 //! The WireExplorer is a tool to explore the edges of
 //! a wire in a connection order.
 //!
 //! i.e. each edge is connected to the previous one by
 //! its origin.
 //! If a wire is not closed returns only a segment of edges which
-//! length depends on started in exploration edge. 
-//! Algorithm suggests that wire is valid and has no any defects, which 
+//! length depends on started in exploration edge.
+//! Algorithm suggests that wire is valid and has no any defects, which
 //! can stop edge exploration. Such defects can be loops, wrong orientation of edges
-//! (two edges go in to shared vertex or go out from shared vertex), branching of edges, 
+//! (two edges go in to shared vertex or go out from shared vertex), branching of edges,
 //! the presens of edges with INTERNAL or EXTERNAL orientation. If wire has
 //! such kind of defects WireExplorer can return not all
 //! edges in a wire. it depends on type of defect and position of starting edge.
-class BRepTools_WireExplorer
-{
+class BRepTools_WireExplorer {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs an empty explorer (which can be initialized using Init)
     Standard_EXPORT BRepTools_WireExplorer();
@@ -75,12 +71,8 @@ public:
     //! F is used to select the edge connected to the
     //! previous in the parametric representation of <F>.
     //! <UMIn>, <UMax>, <VMin>, <VMax> - the UV bounds of the face <F>.
-    Standard_EXPORT void Init(const TopoDS_Wire& W,
-        const TopoDS_Face& F,
-        const Standard_Real UMin,
-        const Standard_Real UMax,
-        const Standard_Real VMin,
-        const Standard_Real VMax);
+    Standard_EXPORT void Init(const TopoDS_Wire& W, const TopoDS_Face& F, const Standard_Real UMin,
+                              const Standard_Real UMax, const Standard_Real VMin, const Standard_Real VMax);
 
     //! Returns True if there  is a current  edge.
     Standard_EXPORT Standard_Boolean More() const;
@@ -101,19 +93,8 @@ public:
     //! Clears the content of the explorer.
     Standard_EXPORT void Clear();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TopTools_DataMapOfShapeListOfShape myMap;
     TopoDS_Edge myEdge;
     TopoDS_Vertex myVertex;
@@ -122,14 +103,6 @@ private:
     Standard_Boolean myReverse;
     Standard_Real myTolU;
     Standard_Real myTolV;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepTools_WireExplorer_HeaderFile

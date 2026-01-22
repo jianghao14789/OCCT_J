@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor2d_Curve2d.hxx>
 #include <Adaptor3d_HVertex.hxx>
 #include <Contap_Point.hxx>
@@ -22,19 +21,10 @@
 #include <IntSurf_Transition.hxx>
 #include <Standard_DomainError.hxx>
 
-Contap_Point::Contap_Point ():
-uparam(0.0), vparam(0.0), paraline(0.0),
-onarc(Standard_False), prmarc(0.0), isvtx(Standard_False),
-ismult(Standard_False), myInternal(Standard_False)
-{
-}
+Contap_Point::Contap_Point()
+    : uparam(0.0), vparam(0.0), paraline(0.0), onarc(Standard_False), prmarc(0.0), isvtx(Standard_False),
+      ismult(Standard_False), myInternal(Standard_False) {}
 
-Contap_Point::Contap_Point (const gp_Pnt& Pt,
-                            const Standard_Real U,
-                            const Standard_Real V):
-pt(Pt),uparam(U),vparam(V),
-paraline(0.0), onarc(Standard_False),
-prmarc(0.0), isvtx(Standard_False),
-ismult(Standard_False), myInternal(Standard_False)
-{
-}
+Contap_Point::Contap_Point(const gp_Pnt& Pt, const Standard_Real U, const Standard_Real V)
+    : pt(Pt), uparam(U), vparam(V), paraline(0.0), onarc(Standard_False), prmarc(0.0), isvtx(Standard_False),
+      ismult(Standard_False), myInternal(Standard_False) {}

@@ -22,60 +22,54 @@
 #include <Standard_Integer.hxx>
 
 //! Class for using global units variables
-class StepData_GlobalFactors
-{
+class StepData_GlobalFactors {
 
 private:
-
-  Standard_EXPORT StepData_GlobalFactors();
+    Standard_EXPORT StepData_GlobalFactors();
 
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
- 
-  //! Returns a global static object
-  Standard_EXPORT static StepData_GlobalFactors& Intance();
+    //! Returns a global static object
+    Standard_EXPORT static StepData_GlobalFactors& Intance();
 
-  //! Initializes the 3 factors for the conversion of units
-  Standard_EXPORT void InitializeFactors(
-    const Standard_Real theLengthFactor,
-    const Standard_Real thePlaneAngleFactor,
-    const Standard_Real theSolidAngleFactor);
+    //! Initializes the 3 factors for the conversion of units
+    Standard_EXPORT void InitializeFactors(const Standard_Real theLengthFactor, const Standard_Real thePlaneAngleFactor,
+                                           const Standard_Real theSolidAngleFactor);
 
-  //! Sets length unit for current transfer process
-  Standard_EXPORT void SetCascadeUnit(const Standard_Real theUnit);
+    //! Sets length unit for current transfer process
+    Standard_EXPORT void SetCascadeUnit(const Standard_Real theUnit);
 
-  //! Returns length unit for current transfer process (mm by default)
-  Standard_EXPORT Standard_Real CascadeUnit();
+    //! Returns length unit for current transfer process (mm by default)
+    Standard_EXPORT Standard_Real CascadeUnit();
 
-  //! Returns transient length factor for scaling of shapes
-  //! at one stage of transfer process
-  Standard_EXPORT Standard_Real LengthFactor();
+    //! Returns transient length factor for scaling of shapes
+    //! at one stage of transfer process
+    Standard_EXPORT Standard_Real LengthFactor();
 
-  //! Returns transient plane angle factor for conversion of angles
-  //! at one stage of transfer process
-  Standard_EXPORT Standard_Real PlaneAngleFactor();
+    //! Returns transient plane angle factor for conversion of angles
+    //! at one stage of transfer process
+    Standard_EXPORT Standard_Real PlaneAngleFactor();
 
-  //! Returns transient solid angle factor for conversion of angles
-  //! at one stage of transfer process
-  Standard_EXPORT Standard_Real SolidAngleFactor();
+    //! Returns transient solid angle factor for conversion of angles
+    //! at one stage of transfer process
+    Standard_EXPORT Standard_Real SolidAngleFactor();
 
-  //! Returns transient factor radian degree for conversion of angles
-  //! at one stage of transfer process
-  Standard_EXPORT Standard_Real FactorRadianDegree();
+    //! Returns transient factor radian degree for conversion of angles
+    //! at one stage of transfer process
+    Standard_EXPORT Standard_Real FactorRadianDegree();
 
-  //! Returns transient factor degree radian for conversion of angles
-  //! at one stage of transfer process
-  Standard_EXPORT Standard_Real FactorDegreeRadian();
+    //! Returns transient factor degree radian for conversion of angles
+    //! at one stage of transfer process
+    Standard_EXPORT Standard_Real FactorDegreeRadian();
 
 private:
-
-  Standard_Real myLengthFactor;
-  Standard_Real myPlaneAngleFactor;
-  Standard_Real mySolidAngleFactor;
-  Standard_Real myFactRD;
-  Standard_Real myFactDR;
-  Standard_Real myCascadeUnit;
+    Standard_Real myLengthFactor;
+    Standard_Real myPlaneAngleFactor;
+    Standard_Real mySolidAngleFactor;
+    Standard_Real myFactRD;
+    Standard_Real myFactDR;
+    Standard_Real myCascadeUnit;
 };
 
 #endif // _StepData_GlobalFactors_HeaderFile

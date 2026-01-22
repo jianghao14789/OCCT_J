@@ -17,14 +17,6 @@
 #ifndef _GProp_EquaType_HeaderFile
 #define _GProp_EquaType_HeaderFile
 
-
-enum GProp_EquaType
-{
-GProp_Plane,
-GProp_Line,
-GProp_Point,
-GProp_Space,
-GProp_None
-};
+enum GProp_EquaType { GProp_Plane, GProp_Line, GProp_Point, GProp_Space, GProp_None };
 
 #endif // _GProp_EquaType_HeaderFile

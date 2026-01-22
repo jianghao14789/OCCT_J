@@ -32,50 +32,28 @@ class StepBasic_SiUnit;
 class StepData_StepWriter;
 class TCollection_AsciiString;
 
-
 //! Read & Write Module for SiUnit
-class RWStepBasic_RWSiUnit 
-{
+class RWStepBasic_RWSiUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWSiUnit();
 
-  
-  Standard_EXPORT RWStepBasic_RWSiUnit();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_SiUnit)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_SiUnit)& ent) const;
-  
-  Standard_EXPORT Standard_Boolean DecodePrefix (StepBasic_SiPrefix& aPrefix, const Standard_CString text) const;
-  
-  Standard_EXPORT Standard_Boolean DecodeName (StepBasic_SiUnitName& aName, const Standard_CString text) const;
-  
-  Standard_EXPORT TCollection_AsciiString EncodePrefix (const StepBasic_SiPrefix aPrefix) const;
-  
-  Standard_EXPORT TCollection_AsciiString EncodeName (const StepBasic_SiUnitName aName) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_SiUnit) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_SiUnit) & ent) const;
 
+    Standard_EXPORT Standard_Boolean DecodePrefix(StepBasic_SiPrefix& aPrefix, const Standard_CString text) const;
 
+    Standard_EXPORT Standard_Boolean DecodeName(StepBasic_SiUnitName& aName, const Standard_CString text) const;
+
+    Standard_EXPORT TCollection_AsciiString EncodePrefix(const StepBasic_SiPrefix aPrefix) const;
+
+    Standard_EXPORT TCollection_AsciiString EncodeName(const StepBasic_SiUnitName aName) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWSiUnit_HeaderFile

@@ -15,10 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_Shell
-//purpose  : 
+// function : TopoDS_Shell
+// purpose  :
 //=======================================================================
 
-inline TopoDS_Shell::TopoDS_Shell ()
-{
-}
+inline TopoDS_Shell::TopoDS_Shell() {}

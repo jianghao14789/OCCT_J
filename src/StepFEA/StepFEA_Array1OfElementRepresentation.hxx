@@ -19,5 +19,4 @@
 
 typedef NCollection_Array1<Handle(StepFEA_ElementRepresentation)> StepFEA_Array1OfElementRepresentation;
 
-
 #endif

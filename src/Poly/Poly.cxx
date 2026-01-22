@@ -34,28 +34,24 @@
 #include <TShort_HArray1OfShortReal.hxx>
 
 //=======================================================================
-//function : Catenate
-//purpose  : Join several triangulations to one new triangulation object
+// function : Catenate
+// purpose  : Join several triangulations to one new triangulation object
 //=======================================================================
-Handle(Poly_Triangulation) Poly::Catenate(const Poly_ListOfTriangulation& lstTri)
-{
+Handle(Poly_Triangulation) Poly::Catenate(const Poly_ListOfTriangulation& lstTri) {
     Standard_Integer nNodes(0);
     Standard_Integer nTrian(0);
 
     // Sum up the total number of nodes.
     Poly_ListOfTriangulation::Iterator anIter(lstTri);
-    for (; anIter.More(); anIter.Next())
-    {
-        const Handle(Poly_Triangulation)& aTri = anIter.Value();
-        if (!aTri.IsNull())
-        {
+    for (; anIter.More(); anIter.Next()) {
+        const Handle(Poly_Triangulation) & aTri = anIter.Value();
+        if (!aTri.IsNull()) {
             nNodes += aTri->NbNodes();
             nTrian += aTri->NbTriangles();
         }
     }
 
-    if (nNodes == 0)
-    {
+    if (nNodes == 0) {
         return Handle(Poly_Triangulation)();
     }
 
@@ -63,26 +59,20 @@ Handle(Poly_Triangulation) Poly::Catenate(const Poly_ListOfTriangulation& lstTri
     Standard_Integer iNode[3] = {};
     nNodes = 0;
     nTrian = 0;
-    for (anIter.Init(lstTri); anIter.More(); anIter.Next())
-    {
-        const Handle(Poly_Triangulation)& aTri = anIter.Value();
-        if (aTri.IsNull())
-        {
+    for (anIter.Init(lstTri); anIter.More(); anIter.Next()) {
+        const Handle(Poly_Triangulation) & aTri = anIter.Value();
+        if (aTri.IsNull()) {
             continue;
         }
 
         const Standard_Integer nbNodes = aTri->NbNodes();
         const Standard_Integer nbTrian = aTri->NbTriangles();
-        for (Standard_Integer i = 1; i <= nbNodes; i++)
-        {
+        for (Standard_Integer i = 1; i <= nbNodes; i++) {
             aResult->SetNode(i + nNodes, aTri->Node(i));
         }
-        for (Standard_Integer i = 1; i <= nbTrian; i++)
-        {
+        for (Standard_Integer i = 1; i <= nbTrian; i++) {
             aTri->Triangle(i).Get(iNode[0], iNode[1], iNode[2]);
-            aResult->SetTriangle(i + nTrian, Poly_Triangle(iNode[0] + nNodes,
-                iNode[1] + nNodes,
-                iNode[2] + nNodes));
+            aResult->SetTriangle(i + nTrian, Poly_Triangle(iNode[0] + nNodes, iNode[1] + nNodes, iNode[2] + nNodes));
         }
         nNodes += nbNodes;
         nTrian += nbTrian;
@@ -91,20 +81,16 @@ Handle(Poly_Triangulation) Poly::Catenate(const Poly_ListOfTriangulation& lstTri
 }
 
 //=======================================================================
-//function : Write
-//purpose  :
+// function : Write
+// purpose  :
 //=======================================================================
 
-void Poly::Write(const Handle(Poly_Triangulation)& T,
-    Standard_OStream& OS,
-    const Standard_Boolean Compact)
-{
+void Poly::Write(const Handle(Poly_Triangulation) & T, Standard_OStream& OS, const Standard_Boolean Compact) {
     OS << "Poly_Triangulation\n";
     if (Compact) {
         OS << T->NbNodes() << " " << T->NbTriangles() << " ";
         OS << ((T->HasUVNodes()) ? "1" : "0") << "\n";
-    }
-    else {
+    } else {
         OS << std::setw(8) << T->NbNodes() << " Nodes\n";
         OS << std::setw(8) << T->NbTriangles() << " Triangles\n";
         OS << ((T->HasUVNodes()) ? "with" : "without") << " UV nodes\n";
@@ -120,8 +106,7 @@ void Poly::Write(const Handle(Poly_Triangulation)& T,
     if (!Compact) OS << "\n3D Nodes :\n";
 
     Standard_Integer i, nbNodes = T->NbNodes();
-    for (i = 1; i <= nbNodes; i++)
-    {
+    for (i = 1; i <= nbNodes; i++) {
         const gp_Pnt aNode = T->Node(i);
         if (!Compact) OS << std::setw(10) << i << " : ";
         if (!Compact) OS << std::setw(17);
@@ -132,11 +117,9 @@ void Poly::Write(const Handle(Poly_Triangulation)& T,
         OS << aNode.Z() << "\n";
     }
 
-    if (T->HasUVNodes())
-    {
+    if (T->HasUVNodes()) {
         if (!Compact) OS << "\nUV Nodes :\n";
-        for (i = 1; i <= nbNodes; i++)
-        {
+        for (i = 1; i <= nbNodes; i++) {
             const gp_Pnt2d aNode2d = T->UVNode(i);
             if (!Compact) OS << std::setw(10) << i << " : ";
             if (!Compact) OS << std::setw(17);
@@ -149,8 +132,7 @@ void Poly::Write(const Handle(Poly_Triangulation)& T,
     if (!Compact) OS << "\nTriangles :\n";
     Standard_Integer nbTriangles = T->NbTriangles();
     Standard_Integer n1, n2, n3;
-    for (i = 1; i <= nbTriangles; i++)
-    {
+    for (i = 1; i <= nbTriangles; i++) {
         if (!Compact) OS << std::setw(10) << i << " : ";
         T->Triangle(i).Get(n1, n2, n3);
         if (!Compact) OS << std::setw(10);
@@ -160,24 +142,19 @@ void Poly::Write(const Handle(Poly_Triangulation)& T,
         if (!Compact) OS << std::setw(10);
         OS << n3 << "\n";
     }
-
 }
 
 //=======================================================================
-//function : Write
-//purpose  :
+// function : Write
+// purpose  :
 //=======================================================================
 
-void Poly::Write(const Handle(Poly_Polygon3D)& P,
-    Standard_OStream& OS,
-    const Standard_Boolean        Compact)
-{
+void Poly::Write(const Handle(Poly_Polygon3D) & P, Standard_OStream& OS, const Standard_Boolean Compact) {
     OS << "Poly_Polygon3D\n";
     if (Compact) {
         OS << P->NbNodes() << " ";
         OS << ((P->HasParameters()) ? "1" : "0") << "\n";
-    }
-    else {
+    } else {
         OS << std::setw(8) << P->NbNodes() << " Nodes\n";
         OS << ((P->HasParameters()) ? "with" : "without") << " parameters\n";
     }
@@ -211,25 +188,18 @@ void Poly::Write(const Handle(Poly_Polygon3D)& P,
         }
         OS << "\n";
     }
-
-
 }
 
-
 //=======================================================================
-//function : Write
-//purpose  :
+// function : Write
+// purpose  :
 //=======================================================================
 
-void Poly::Write(const Handle(Poly_Polygon2D)& P,
-    Standard_OStream& OS,
-    const Standard_Boolean        Compact)
-{
+void Poly::Write(const Handle(Poly_Polygon2D) & P, Standard_OStream& OS, const Standard_Boolean Compact) {
     OS << "Poly_Polygon2D\n";
     if (Compact) {
         OS << P->NbNodes() << " ";
-    }
-    else {
+    } else {
         OS << std::setw(8) << P->NbNodes() << " Nodes\n";
     }
 
@@ -253,48 +223,39 @@ void Poly::Write(const Handle(Poly_Polygon2D)& P,
     }
 }
 
-
-
 //=======================================================================
-//function : Dump
-//purpose  :
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Poly::Dump(const Handle(Poly_Triangulation)& T, Standard_OStream& OS)
-{
+void Poly::Dump(const Handle(Poly_Triangulation) & T, Standard_OStream& OS) {
     Poly::Write(T, OS, Standard_False);
 }
 
-
 //=======================================================================
-//function : Dump
-//purpose  :
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Poly::Dump(const Handle(Poly_Polygon3D)& P, Standard_OStream& OS)
-{
+void Poly::Dump(const Handle(Poly_Polygon3D) & P, Standard_OStream& OS) {
     Poly::Write(P, OS, Standard_False);
 }
 
-
 //=======================================================================
-//function : Dump
-//purpose  :
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Poly::Dump(const Handle(Poly_Polygon2D)& P, Standard_OStream& OS)
-{
+void Poly::Dump(const Handle(Poly_Polygon2D) & P, Standard_OStream& OS) {
     Poly::Write(P, OS, Standard_False);
 }
 
-
 //=======================================================================
-//function : ReadTriangulation
-//purpose  :
+// function : ReadTriangulation
+// purpose  :
 //=======================================================================
 
-Handle(Poly_Triangulation) Poly::ReadTriangulation(Standard_IStream& IS)
-{
+Handle(Poly_Triangulation) Poly::ReadTriangulation(Standard_IStream& IS) {
     // Read a triangulation
 
     char line[100];
@@ -333,7 +294,6 @@ Handle(Poly_Triangulation) Poly::ReadTriangulation(Standard_IStream& IS)
         }
     }
 
-
     // read the triangles
     Standard_Integer n1, n2, n3;
     Poly_Array1OfTriangle Triangles(1, nbTriangles);
@@ -342,25 +302,24 @@ Handle(Poly_Triangulation) Poly::ReadTriangulation(Standard_IStream& IS)
         Triangles(i).Set(n1, n2, n3);
     }
 
-
     Handle(Poly_Triangulation) T;
 
-    if (hasUV) T = new Poly_Triangulation(Nodes, UVNodes, Triangles);
-    else T = new Poly_Triangulation(Nodes, Triangles);
+    if (hasUV)
+        T = new Poly_Triangulation(Nodes, UVNodes, Triangles);
+    else
+        T = new Poly_Triangulation(Nodes, Triangles);
 
     T->Deflection(d);
 
     return T;
 }
 
-
 //=======================================================================
-//function : ReadPolygon3D
-//purpose  :
+// function : ReadPolygon3D
+// purpose  :
 //=======================================================================
 
-Handle(Poly_Polygon3D) Poly::ReadPolygon3D(Standard_IStream& IS)
-{
+Handle(Poly_Polygon3D) Poly::ReadPolygon3D(Standard_IStream& IS) {
     // Read a 3d polygon
 
     char line[100];
@@ -410,12 +369,11 @@ Handle(Poly_Polygon3D) Poly::ReadPolygon3D(Standard_IStream& IS)
 }
 
 //=======================================================================
-//function : ReadPolygon3D
-//purpose  :
+// function : ReadPolygon3D
+// purpose  :
 //=======================================================================
 
-Handle(Poly_Polygon2D) Poly::ReadPolygon2D(Standard_IStream& IS)
-{
+Handle(Poly_Polygon2D) Poly::ReadPolygon2D(Standard_IStream& IS) {
     // Read a 2d polygon
 
     char line[100];
@@ -443,8 +401,7 @@ Handle(Poly_Polygon2D) Poly::ReadPolygon2D(Standard_IStream& IS)
         Nodes(i).SetCoord(x, y);
     }
 
-    Handle(Poly_Polygon2D) P =
-        new Poly_Polygon2D(Nodes);
+    Handle(Poly_Polygon2D) P = new Poly_Polygon2D(Nodes);
 
     P->Deflection(d);
 
@@ -452,44 +409,38 @@ Handle(Poly_Polygon2D) Poly::ReadPolygon2D(Standard_IStream& IS)
 }
 
 //=======================================================================
-//function : ComputeNormals
-//purpose  :
+// function : ComputeNormals
+// purpose  :
 //=======================================================================
-void Poly::ComputeNormals(const Handle(Poly_Triangulation)& theTri)
-{
+void Poly::ComputeNormals(const Handle(Poly_Triangulation) & theTri) {
     theTri->ComputeNormals();
 }
 
 //=======================================================================
-//function : PointOnTriangle
-//purpose  : 
+// function : PointOnTriangle
+// purpose  :
 //=======================================================================
 
-Standard_Real Poly::PointOnTriangle(const gp_XY& theP1, const gp_XY& theP2, const gp_XY& theP3,
-    const gp_XY& theP, gp_XY& theUV)
-{
+Standard_Real Poly::PointOnTriangle(const gp_XY& theP1, const gp_XY& theP2, const gp_XY& theP3, const gp_XY& theP,
+                                    gp_XY& theUV) {
     gp_XY aDP = theP - theP1;
     gp_XY aDU = theP2 - theP1;
     gp_XY aDV = theP3 - theP1;
     Standard_Real aDet = aDU ^ aDV;
 
     // case of non-degenerated triangle
-    if (Abs(aDet) > gp::Resolution())
-    {
+    if (Abs(aDet) > gp::Resolution()) {
         Standard_Real aU = (aDP ^ aDV) / aDet;
         Standard_Real aV = -(aDP ^ aDU) / aDet;
 
         // if point is inside triangle, just return parameters
-        if (aU > -gp::Resolution() &&
-            aV > -gp::Resolution() &&
-            1. - aU - aV > -gp::Resolution())
-        {
+        if (aU > -gp::Resolution() && aV > -gp::Resolution() && 1. - aU - aV > -gp::Resolution()) {
             theUV.SetCoord(aU, aV);
             return 0.;
         }
 
-        // else find closest point on triangle sides; note that in general case  
-        // triangle can be very distorted and it is necessary to check 
+        // else find closest point on triangle sides; note that in general case
+        // triangle can be very distorted and it is necessary to check
         // projection on all sides regardless of values of computed parameters
 
         // project on side U=0
@@ -500,8 +451,7 @@ Standard_Real Poly::PointOnTriangle(const gp_XY& theP1, const gp_XY& theP2, cons
         // project on side V=0
         Standard_Real u = Min(1., Max(0., (aDP * aDU) / aDU.SquareModulus()));
         Standard_Real d = (u * aDU - aDP).SquareModulus();
-        if (d < aD)
-        {
+        if (d < aD) {
             aU = u;
             aV = 0.;
             aD = d;
@@ -511,8 +461,7 @@ Standard_Real Poly::PointOnTriangle(const gp_XY& theP1, const gp_XY& theP2, cons
         gp_XY aDUV = aDV - aDU;
         Standard_Real v = Min(1., Max(0., ((aDP - aDU) * aDUV) / aDUV.SquareModulus()));
         d = (theP2 + v * aDUV - theP).SquareModulus();
-        if (d < aD)
-        {
+        if (d < aD) {
             aU = 1. - v;
             aV = v;
             aD = d;
@@ -531,32 +480,25 @@ Standard_Real Poly::PointOnTriangle(const gp_XY& theP1, const gp_XY& theP2, cons
         {
             theUV.SetCoord(0., 0.);
             return (theP - theP1).SquareModulus();
-        }
-        else
-        {
+        } else {
             theUV.SetCoord(0., (aDP * aDV) / aL2V);
             return (theP - (theP1 + theUV.Y() * aDV)).SquareModulus();
         }
-    }
-    else if (aL2V < gp::Resolution()) // side 1-3 is degenerated
+    } else if (aL2V < gp::Resolution()) // side 1-3 is degenerated
     {
         theUV.SetCoord((aDP * aDU) / aL2U, 0.);
         return (theP - (theP1 + theUV.X() * aDU)).SquareModulus();
-    }
-    else // sides 1-2 and 1-3 are collinear
+    } else // sides 1-2 and 1-3 are collinear
     {
         // select parameter on one of sides so as to have points closer to picked
         Standard_Real aU = Min(1., Max(0., (aDP * aDU) / aL2U));
         Standard_Real aV = Min(1., Max(0., (aDP * aDV) / aL2V));
         Standard_Real aD1 = (aDP - aU * aDU).SquareModulus();
         Standard_Real aD2 = (aDP - aV * aDV).SquareModulus();
-        if (aD1 < aD2)
-        {
+        if (aD1 < aD2) {
             theUV.SetCoord((aDP * aDU) / aL2U, 0.);
             return aD1;
-        }
-        else
-        {
+        } else {
             theUV.SetCoord(0., (aDP * aDV) / aL2V);
             return aD2;
         }
@@ -564,15 +506,12 @@ Standard_Real Poly::PointOnTriangle(const gp_XY& theP1, const gp_XY& theP2, cons
 }
 
 //=======================================================================
-//function : Intersect
-//purpose  :
+// function : Intersect
+// purpose  :
 //=======================================================================
-Standard_Boolean Poly::Intersect(const Handle(Poly_Triangulation)& theTri,
-    const gp_Ax1& theAxis,
-    const Standard_Boolean theIsClosest,
-    Poly_Triangle& theTriangle,
-    Standard_Real& theDistance)
-{
+Standard_Boolean Poly::Intersect(const Handle(Poly_Triangulation) & theTri, const gp_Ax1& theAxis,
+                                 const Standard_Boolean theIsClosest, Poly_Triangle& theTriangle,
+                                 Standard_Real& theDistance) {
     const Standard_Real aConf = 1E-15;
     const gp_XYZ& aLoc = theAxis.Location().XYZ();
     const gp_Dir& aDir = theAxis.Direction();
@@ -580,28 +519,18 @@ Standard_Boolean Poly::Intersect(const Handle(Poly_Triangulation)& theTri,
     Standard_Real aResult = theIsClosest ? RealLast() : 0.0;
     Standard_Real aParam = 0.0;
     Standard_Integer aTriNodes[3] = {};
-    for (Standard_Integer aTriIter = 1; aTriIter <= theTri->NbTriangles(); ++aTriIter)
-    {
+    for (Standard_Integer aTriIter = 1; aTriIter <= theTri->NbTriangles(); ++aTriIter) {
         const Poly_Triangle& aTri = theTri->Triangle(aTriIter);
         aTri.Get(aTriNodes[0], aTriNodes[1], aTriNodes[2]);
-        if (IntersectTriLine(aLoc, aDir,
-            theTri->Node(aTriNodes[0]).XYZ(),
-            theTri->Node(aTriNodes[1]).XYZ(),
-            theTri->Node(aTriNodes[2]).XYZ(),
-            aParam))
-        {
-            if (aParam > aConf)
-            {
-                if (theIsClosest)
-                {
-                    if (aParam < aResult)
-                    {
+        if (IntersectTriLine(aLoc, aDir, theTri->Node(aTriNodes[0]).XYZ(), theTri->Node(aTriNodes[1]).XYZ(),
+                             theTri->Node(aTriNodes[2]).XYZ(), aParam)) {
+            if (aParam > aConf) {
+                if (theIsClosest) {
+                    if (aParam < aResult) {
                         aResult = aParam;
                         theTriangle = aTri;
                     }
-                }
-                else if (aParam > aResult)
-                {
+                } else if (aParam > aResult) {
                     aResult = aParam;
                     theTriangle = aTri;
                 }
@@ -609,8 +538,7 @@ Standard_Boolean Poly::Intersect(const Handle(Poly_Triangulation)& theTri,
         }
     }
 
-    if (aConf < aResult && aResult < RealLast())
-    {
+    if (aConf < aResult && aResult < RealLast()) {
         theDistance = aResult;
         return Standard_True;
     }
@@ -618,65 +546,40 @@ Standard_Boolean Poly::Intersect(const Handle(Poly_Triangulation)& theTri,
 }
 
 //! Calculate the minor of the given matrix, defined by the columns specified by values c1, c2, c3.
-static double Determinant(const double a[3][4],
-    const int    c1,
-    const int    c2,
-    const int    c3)
-{
-    return a[0][c1] * a[1][c2] * a[2][c3] +
-        a[0][c2] * a[1][c3] * a[2][c1] +
-        a[0][c3] * a[1][c1] * a[2][c2] -
-        a[0][c3] * a[1][c2] * a[2][c1] -
-        a[0][c2] * a[1][c1] * a[2][c3] -
-        a[0][c1] * a[1][c3] * a[2][c2];
+static double Determinant(const double a[3][4], const int c1, const int c2, const int c3) {
+    return a[0][c1] * a[1][c2] * a[2][c3] + a[0][c2] * a[1][c3] * a[2][c1] + a[0][c3] * a[1][c1] * a[2][c2] -
+           a[0][c3] * a[1][c2] * a[2][c1] - a[0][c2] * a[1][c1] * a[2][c3] - a[0][c1] * a[1][c3] * a[2][c2];
 }
 
 //=======================================================================
-//function : IntersectTriLine
-//purpose  : Intersect a triangle with a line
+// function : IntersectTriLine
+// purpose  : Intersect a triangle with a line
 //=======================================================================
-Standard_Integer Poly::IntersectTriLine(const gp_XYZ& theStart,
-    const gp_Dir& theDir,
-    const gp_XYZ& theV0,
-    const gp_XYZ& theV1,
-    const gp_XYZ& theV2,
-    Standard_Real& theParam)
-{
+Standard_Integer Poly::IntersectTriLine(const gp_XYZ& theStart, const gp_Dir& theDir, const gp_XYZ& theV0,
+                                        const gp_XYZ& theV1, const gp_XYZ& theV2, Standard_Real& theParam) {
     int aRes = 0;
     const double aConf = 1E-15;
 
-    const double aMat34[3][4] =
-    {
-      { -theDir.X(),
-        theV1.X() - theV0.X(), theV2.X() - theV0.X(), theStart.X() - theV0.X() },
-      { -theDir.Y(),
-        theV1.Y() - theV0.Y(), theV2.Y() - theV0.Y(), theStart.Y() - theV0.Y() },
-      { -theDir.Z(),
-        theV1.Z() - theV0.Z(), theV2.Z() - theV0.Z(), theStart.Z() - theV0.Z() }
-    };
+    const double aMat34[3][4] = {{-theDir.X(), theV1.X() - theV0.X(), theV2.X() - theV0.X(), theStart.X() - theV0.X()},
+                                 {-theDir.Y(), theV1.Y() - theV0.Y(), theV2.Y() - theV0.Y(), theStart.Y() - theV0.Y()},
+                                 {-theDir.Z(), theV1.Z() - theV0.Z(), theV2.Z() - theV0.Z(), theStart.Z() - theV0.Z()}};
 
     const double aD = Determinant(aMat34, 0, 1, 2);
     const double aDt = Determinant(aMat34, 3, 1, 2);
-    if (aD > aConf)
-    {
+    if (aD > aConf) {
         const double aDa = Determinant(aMat34, 0, 3, 2);
-        if (aDa > -aConf)
-        {
+        if (aDa > -aConf) {
             const double aDb = Determinant(aMat34, 0, 1, 3);
             aRes = ((aDb > -aConf) && (aDa + aDb <= aD + aConf));
         }
-    }
-    else if (aD < -aConf)
-    {
+    } else if (aD < -aConf) {
         const double aDa = Determinant(aMat34, 0, 3, 2);
-        if (aDa < aConf)
-        {
+        if (aDa < aConf) {
             const double aDb = Determinant(aMat34, 0, 1, 3);
             aRes = ((aDb < aConf) && (aDa + aDb >= aD - aConf));
         }
     }
-    if (aRes != 0)
-    {
+    if (aRes != 0) {
         theParam = aDt / aD;
     }
 

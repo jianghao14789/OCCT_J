@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <MoniTool_Element.hxx>
 #include <MoniTool_ElemHasher.hxx>
 
@@ -19,15 +18,13 @@
 // function : HashCode
 // purpose  :
 //============================================================================
-Standard_Integer MoniTool_ElemHasher::HashCode (const Handle (MoniTool_Element) & theElement,
-                                                const Standard_Integer            theUpperBound)
-{
-  return ::HashCode(theElement->GetHashCode() - 1, theUpperBound);
+Standard_Integer MoniTool_ElemHasher::HashCode(const Handle(MoniTool_Element) & theElement,
+                                               const Standard_Integer theUpperBound) {
+    return ::HashCode(theElement->GetHashCode() - 1, theUpperBound);
 }
 
-    Standard_Boolean  MoniTool_ElemHasher::IsEqual
-  (const Handle(MoniTool_Element)& K1, const Handle(MoniTool_Element)& K2)
-{
-  if (K1.IsNull()) return Standard_False;
-  return K1->Equates(K2);
+Standard_Boolean MoniTool_ElemHasher::IsEqual(const Handle(MoniTool_Element) & K1,
+                                              const Handle(MoniTool_Element) & K2) {
+    if (K1.IsNull()) return Standard_False;
+    return K1->Equates(K2);
 }

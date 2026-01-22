@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<Handle(StepVisual_CurveStyleFontPattern)> StepVisual_Array1OfCurveStyleFontPattern;
 
-
 #endif

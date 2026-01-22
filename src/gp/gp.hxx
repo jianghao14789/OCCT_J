@@ -39,10 +39,8 @@ class gp_Ax2d;
 //! surfaces.
 //! These entities are defined in 2d and 3d space.
 //! All the classes of this package are non-persistent.
-class gp
-{
+class gp {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Method of package gp
@@ -53,7 +51,9 @@ public:
     //! example, to avoid division by zero in geometric
     //! computations. In the documentation, tolerance criterion is
     //! always referred to as gp::Resolution().
-    static Standard_Real Resolution() { return RealSmall(); }
+    static Standard_Real Resolution() {
+        return RealSmall();
+    }
 
     //! Identifies a Cartesian point with coordinates X = Y = Z = 0.0.0
     Standard_EXPORT static const gp_Pnt& Origin();
@@ -111,7 +111,6 @@ public:
     //! Identifies an axis where its origin is Origin2d
     //! and its unit vector coordinates are Y = 1.0,  X = 0.0
     Standard_EXPORT static const gp_Ax2d& OY2d();
-
 };
 
 #endif // _gp_HeaderFile

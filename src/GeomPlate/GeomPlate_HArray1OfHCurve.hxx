@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(GeomPlate_HArray1OfHCurve, GeomPlate_Array1OfHCurve)
 
-
 #endif

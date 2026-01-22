@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY1(StepFEA_HArray1OfNodeRepresentation, StepFEA_Array1OfNodeRepresentation)
 
-
 #endif

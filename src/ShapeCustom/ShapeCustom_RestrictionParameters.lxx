@@ -14,157 +14,141 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : GMaxDegree
-//purpose  : 
+// function : GMaxDegree
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& ShapeCustom_RestrictionParameters::GMaxDegree()
-{
-  return myGMaxDegree;
+inline Standard_Integer& ShapeCustom_RestrictionParameters::GMaxDegree() {
+    return myGMaxDegree;
 }
 
 //=======================================================================
-//function : GMaxSeg
-//purpose  : 
+// function : GMaxSeg
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer& ShapeCustom_RestrictionParameters::GMaxSeg()
-{
-  return myGMaxSeg;
+inline Standard_Integer& ShapeCustom_RestrictionParameters::GMaxSeg() {
+    return myGMaxSeg;
 }
 
 //=======================================================================
-//function : ConvertPlane
-//purpose  : 
+// function : ConvertPlane
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertPlane()
-{
-  return myConvPlane;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertPlane() {
+    return myConvPlane;
 }
 
 //=======================================================================
-//function : ConvertBezierSurf
-//purpose  : 
+// function : ConvertBezierSurf
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertBezierSurf()
-{
-  return myConvBezierSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertBezierSurf() {
+    return myConvBezierSurf;
 }
 
 //=======================================================================
-//function : ConvertRevolutionSurf
-//purpose  : 
+// function : ConvertRevolutionSurf
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertRevolutionSurf()
-{
-  return myConvRevolSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertRevolutionSurf() {
+    return myConvRevolSurf;
 }
 
 //=======================================================================
-//function : ConvertExtrusionSurf
-//purpose  : 
+// function : ConvertExtrusionSurf
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertExtrusionSurf()
-{
-  return myConvExtrSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertExtrusionSurf() {
+    return myConvExtrSurf;
 }
 
 //=======================================================================
-//function : ConvertOffsetSurf
-//purpose  : 
+// function : ConvertOffsetSurf
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertOffsetSurf()
-{
-  return myConvOffsetSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertOffsetSurf() {
+    return myConvOffsetSurf;
 }
 
 //=======================================================================
-//function : SegmentSurfaceMode
-//purpose  : 
+// function : SegmentSurfaceMode
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::SegmentSurfaceMode()
-{
-  return mySegmentSurfaceMode;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::SegmentSurfaceMode() {
+    return mySegmentSurfaceMode;
 }
 
 //=======================================================================
-//function : ConvertCurve3d
-//purpose  : 
+// function : ConvertCurve3d
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertCurve3d()
-{
-  return myConvCurve3d;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertCurve3d() {
+    return myConvCurve3d;
 }
 
 //=======================================================================
-//function : ConvertOffsetCurv3d
-//purpose  : 
+// function : ConvertOffsetCurv3d
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertOffsetCurv3d()
-{
-  return myConvOffsetCurv3d;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertOffsetCurv3d() {
+    return myConvOffsetCurv3d;
 }
 
 //=======================================================================
-//function : ConvertCurve2d
-//purpose  : 
+// function : ConvertCurve2d
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertCurve2d()
-{
-  return myConvCurve2d;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertCurve2d() {
+    return myConvCurve2d;
 }
 
 //=======================================================================
-//function : ConvertOffsetCurv2d
-//purpose  : 
+// function : ConvertOffsetCurv2d
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertOffsetCurv2d()
-{
-  return myConvOffsetCurv2d;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertOffsetCurv2d() {
+    return myConvOffsetCurv2d;
 }
 
 //=======================================================================
-//function : ConvertConicalSurface
-//purpose  : 
+// function : ConvertConicalSurface
+// purpose  :
 //=======================================================================
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertConicalSurf()
-{
-  return myConvConicalSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertConicalSurf() {
+    return myConvConicalSurf;
 }
 
 //=======================================================================
-//function : ConvertSphericalSurf
-//purpose  : 
+// function : ConvertSphericalSurf
+// purpose  :
 //=======================================================================
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertSphericalSurf()
-{
-  return myConvSphericalSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertSphericalSurf() {
+    return myConvSphericalSurf;
 }
 
 //=======================================================================
-//function : ConvertToroidalSurf
-//purpose  : 
+// function : ConvertToroidalSurf
+// purpose  :
 //=======================================================================
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertToroidalSurf()
-{
-  return myConvCylindricalSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertToroidalSurf() {
+    return myConvCylindricalSurf;
 }
 
 //=======================================================================
-//function : ConvertCylindricalSurf
-//purpose  : 
+// function : ConvertCylindricalSurf
+// purpose  :
 //=======================================================================
-inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertCylindricalSurf()
-{
-  return myConvToroidalSurf;
+inline Standard_Boolean& ShapeCustom_RestrictionParameters::ConvertCylindricalSurf() {
+    return myConvToroidalSurf;
 }

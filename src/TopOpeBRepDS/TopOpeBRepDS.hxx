@@ -78,120 +78,102 @@ class TopOpeBRepDS_ListOfShapeOn1State;
 class TopOpeBRepDS_Explorer;
 class TopOpeBRepDS_ShapeWithState;
 
-
 //! This package provides services used by the TopOpeBRepBuild
 //! package performing topological operations on the BRep
 //! data structure.
-class TopOpeBRepDS 
-{
+class TopOpeBRepDS {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! IN OU ON UN
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopAbs_State S);
 
-  
-  //! IN OU ON UN
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopAbs_State S);
-  
-  Standard_EXPORT static Standard_OStream& Print (const TopAbs_State S, Standard_OStream& OS);
-  
-  //! <K>
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopOpeBRepDS_Kind K);
-  
-  //! S1(<K>,<I>)S2
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopOpeBRepDS_Kind K, const Standard_Integer I, const TCollection_AsciiString& B = "", const TCollection_AsciiString& A = "");
-  
-  Standard_EXPORT static Standard_OStream& Print (const TopOpeBRepDS_Kind K, Standard_OStream& S);
-  
-  Standard_EXPORT static Standard_OStream& Print (const TopOpeBRepDS_Kind K, const Standard_Integer I, Standard_OStream& S, const TCollection_AsciiString& B = "", const TCollection_AsciiString& A = "");
-  
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopAbs_ShapeEnum T);
-  
-  //! (<T>,<I>)
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopAbs_ShapeEnum T, const Standard_Integer I);
-  
-  Standard_EXPORT static Standard_OStream& Print (const TopAbs_ShapeEnum T, const Standard_Integer I, Standard_OStream& S);
-  
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopAbs_Orientation O);
-  
-  Standard_EXPORT static TCollection_AsciiString SPrint (const TopOpeBRepDS_Config C);
-  
-  Standard_EXPORT static Standard_OStream& Print (const TopOpeBRepDS_Config C, Standard_OStream& S);
-  
-  Standard_EXPORT static Standard_Boolean IsGeometry (const TopOpeBRepDS_Kind K);
-  
-  Standard_EXPORT static Standard_Boolean IsTopology (const TopOpeBRepDS_Kind K);
-  
-  Standard_EXPORT static TopAbs_ShapeEnum KindToShape (const TopOpeBRepDS_Kind K);
-  
-  Standard_EXPORT static TopOpeBRepDS_Kind ShapeToKind (const TopAbs_ShapeEnum S);
+    Standard_EXPORT static Standard_OStream& Print(const TopAbs_State S, Standard_OStream& OS);
 
+    //! <K>
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopOpeBRepDS_Kind K);
 
+    //! S1(<K>,<I>)S2
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopOpeBRepDS_Kind K, const Standard_Integer I,
+                                                          const TCollection_AsciiString& B = "",
+                                                          const TCollection_AsciiString& A = "");
 
+    Standard_EXPORT static Standard_OStream& Print(const TopOpeBRepDS_Kind K, Standard_OStream& S);
+
+    Standard_EXPORT static Standard_OStream& Print(const TopOpeBRepDS_Kind K, const Standard_Integer I,
+                                                   Standard_OStream& S, const TCollection_AsciiString& B = "",
+                                                   const TCollection_AsciiString& A = "");
+
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopAbs_ShapeEnum T);
+
+    //! (<T>,<I>)
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopAbs_ShapeEnum T, const Standard_Integer I);
+
+    Standard_EXPORT static Standard_OStream& Print(const TopAbs_ShapeEnum T, const Standard_Integer I,
+                                                   Standard_OStream& S);
+
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopAbs_Orientation O);
+
+    Standard_EXPORT static TCollection_AsciiString SPrint(const TopOpeBRepDS_Config C);
+
+    Standard_EXPORT static Standard_OStream& Print(const TopOpeBRepDS_Config C, Standard_OStream& S);
+
+    Standard_EXPORT static Standard_Boolean IsGeometry(const TopOpeBRepDS_Kind K);
+
+    Standard_EXPORT static Standard_Boolean IsTopology(const TopOpeBRepDS_Kind K);
+
+    Standard_EXPORT static TopAbs_ShapeEnum KindToShape(const TopOpeBRepDS_Kind K);
+
+    Standard_EXPORT static TopOpeBRepDS_Kind ShapeToKind(const TopAbs_ShapeEnum S);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class TopOpeBRepDS_Interference;
-friend class TopOpeBRepDS_InterferenceIterator;
-friend class TopOpeBRepDS_TKI;
-friend class TopOpeBRepDS_Transition;
-friend class TopOpeBRepDS_CurvePointInterference;
-friend class TopOpeBRepDS_SurfaceCurveInterference;
-friend class TopOpeBRepDS_SolidSurfaceInterference;
-friend class TopOpeBRepDS_ShapeShapeInterference;
-friend class TopOpeBRepDS_EdgeVertexInterference;
-friend class TopOpeBRepDS_FaceEdgeInterference;
-friend class TopOpeBRepDS_Surface;
-friend class TopOpeBRepDS_Curve;
-friend class TopOpeBRepDS_Point;
-friend class TopOpeBRepDS_GeometryData;
-friend class TopOpeBRepDS_SurfaceData;
-friend class TopOpeBRepDS_CurveData;
-friend class TopOpeBRepDS_PointData;
-friend class TopOpeBRepDS_ShapeData;
-friend class TopOpeBRepDS_DSS;
-friend class TopOpeBRepDS_DataStructure;
-friend class TopOpeBRepDS_SurfaceIterator;
-friend class TopOpeBRepDS_CurveIterator;
-friend class TopOpeBRepDS_PointIterator;
-friend class TopOpeBRepDS_SurfaceExplorer;
-friend class TopOpeBRepDS_CurveExplorer;
-friend class TopOpeBRepDS_PointExplorer;
-friend class TopOpeBRepDS_InterferenceTool;
-friend class TopOpeBRepDS_BuildTool;
-friend class TopOpeBRepDS_Dumper;
-friend class TopOpeBRepDS_Marker;
-friend class TopOpeBRepDS_HDataStructure;
-friend class TopOpeBRepDS_EdgeInterferenceTool;
-friend class TopOpeBRepDS_Edge3dInterferenceTool;
-friend class TopOpeBRepDS_FaceInterferenceTool;
-friend class TopOpeBRepDS_Filter;
-friend class TopOpeBRepDS_Reducer;
-friend class TopOpeBRepDS_TOOL;
-friend class TopOpeBRepDS_FIR;
-friend class TopOpeBRepDS_EIR;
-friend class TopOpeBRepDS_Check;
-friend class TopOpeBRepDS_GapFiller;
-friend class TopOpeBRepDS_GapTool;
-friend class TopOpeBRepDS_Association;
-friend class TopOpeBRepDS_ListOfShapeOn1State;
-friend class TopOpeBRepDS_Explorer;
-friend class TopOpeBRepDS_ShapeWithState;
-
+    friend class TopOpeBRepDS_Interference;
+    friend class TopOpeBRepDS_InterferenceIterator;
+    friend class TopOpeBRepDS_TKI;
+    friend class TopOpeBRepDS_Transition;
+    friend class TopOpeBRepDS_CurvePointInterference;
+    friend class TopOpeBRepDS_SurfaceCurveInterference;
+    friend class TopOpeBRepDS_SolidSurfaceInterference;
+    friend class TopOpeBRepDS_ShapeShapeInterference;
+    friend class TopOpeBRepDS_EdgeVertexInterference;
+    friend class TopOpeBRepDS_FaceEdgeInterference;
+    friend class TopOpeBRepDS_Surface;
+    friend class TopOpeBRepDS_Curve;
+    friend class TopOpeBRepDS_Point;
+    friend class TopOpeBRepDS_GeometryData;
+    friend class TopOpeBRepDS_SurfaceData;
+    friend class TopOpeBRepDS_CurveData;
+    friend class TopOpeBRepDS_PointData;
+    friend class TopOpeBRepDS_ShapeData;
+    friend class TopOpeBRepDS_DSS;
+    friend class TopOpeBRepDS_DataStructure;
+    friend class TopOpeBRepDS_SurfaceIterator;
+    friend class TopOpeBRepDS_CurveIterator;
+    friend class TopOpeBRepDS_PointIterator;
+    friend class TopOpeBRepDS_SurfaceExplorer;
+    friend class TopOpeBRepDS_CurveExplorer;
+    friend class TopOpeBRepDS_PointExplorer;
+    friend class TopOpeBRepDS_InterferenceTool;
+    friend class TopOpeBRepDS_BuildTool;
+    friend class TopOpeBRepDS_Dumper;
+    friend class TopOpeBRepDS_Marker;
+    friend class TopOpeBRepDS_HDataStructure;
+    friend class TopOpeBRepDS_EdgeInterferenceTool;
+    friend class TopOpeBRepDS_Edge3dInterferenceTool;
+    friend class TopOpeBRepDS_FaceInterferenceTool;
+    friend class TopOpeBRepDS_Filter;
+    friend class TopOpeBRepDS_Reducer;
+    friend class TopOpeBRepDS_TOOL;
+    friend class TopOpeBRepDS_FIR;
+    friend class TopOpeBRepDS_EIR;
+    friend class TopOpeBRepDS_Check;
+    friend class TopOpeBRepDS_GapFiller;
+    friend class TopOpeBRepDS_GapTool;
+    friend class TopOpeBRepDS_Association;
+    friend class TopOpeBRepDS_ListOfShapeOn1State;
+    friend class TopOpeBRepDS_Explorer;
+    friend class TopOpeBRepDS_ShapeWithState;
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRepDS_HeaderFile

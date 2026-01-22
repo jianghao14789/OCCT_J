@@ -24,14 +24,11 @@
 class StepRepr_CentreOfSymmetry;
 DEFINE_STANDARD_HANDLE(StepRepr_CentreOfSymmetry, StepRepr_DerivedShapeAspect)
 //! Added for Dimensional Tolerances
-class StepRepr_CentreOfSymmetry : public StepRepr_DerivedShapeAspect
-{
+class StepRepr_CentreOfSymmetry : public StepRepr_DerivedShapeAspect {
 
 public:
-  
-  Standard_EXPORT StepRepr_CentreOfSymmetry();
+    Standard_EXPORT StepRepr_CentreOfSymmetry();
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_CentreOfSymmetry,StepRepr_DerivedShapeAspect)
-
+    DEFINE_STANDARD_RTTIEXT(StepRepr_CentreOfSymmetry, StepRepr_DerivedShapeAspect)
 };
 #endif // _StepRepr_CentreOfSymmetry_HeaderFile

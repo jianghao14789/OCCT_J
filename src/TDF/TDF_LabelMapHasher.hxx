@@ -19,25 +19,22 @@
 #include <TDF_Label.hxx>
 
 //! A label hasher for label maps.
-class TDF_LabelMapHasher 
-{
+class TDF_LabelMapHasher {
 public:
-  //! Computes a hash code for the given label, in the range [1, theUpperBound]
-  //! @param theLabel the label which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode(const TDF_Label& theLabel, const Standard_Integer theUpperBound)
-  {
-    return ::HashCode(theLabel.myLabelNode, theUpperBound);
-  }
+    //! Computes a hash code for the given label, in the range [1, theUpperBound]
+    //! @param theLabel the label which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const TDF_Label& theLabel, const Standard_Integer theUpperBound) {
+        return ::HashCode(theLabel.myLabelNode, theUpperBound);
+    }
 
-  //! Returns True  when the two  keys are the same. Two
-  //! same  keys  must   have  the  same  hashcode,  the
-  //! contrary is not necessary.
-  static Standard_Boolean IsEqual(const TDF_Label& aLab1, const TDF_Label& aLab2)
-  {
-    return aLab1.IsEqual(aLab2);
-  }
+    //! Returns True  when the two  keys are the same. Two
+    //! same  keys  must   have  the  same  hashcode,  the
+    //! contrary is not necessary.
+    static Standard_Boolean IsEqual(const TDF_Label& aLab1, const TDF_Label& aLab2) {
+        return aLab1.IsEqual(aLab2);
+    }
 };
 
 #endif // _TDF_LabelMapHasher_HeaderFile

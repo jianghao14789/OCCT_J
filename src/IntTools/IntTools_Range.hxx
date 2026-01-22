@@ -22,67 +22,37 @@
 
 #include <Standard_Real.hxx>
 
-
 //! The class describes the  1-d range
 //! [myFirst, myLast].
-class IntTools_Range 
-{
+class IntTools_Range {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT IntTools_Range();
 
-  
+    //! Initialize me by range boundaries
+    Standard_EXPORT IntTools_Range(const Standard_Real aFirst, const Standard_Real aLast);
 
-  //! Empty constructor
-  Standard_EXPORT IntTools_Range();
-  
+    //! Modifier
+    Standard_EXPORT void SetFirst(const Standard_Real aFirst);
 
-  //! Initialize me by range boundaries
-  Standard_EXPORT IntTools_Range(const Standard_Real aFirst, const Standard_Real aLast);
-  
+    //! Modifier
+    Standard_EXPORT void SetLast(const Standard_Real aLast);
 
-  //! Modifier
-  Standard_EXPORT void SetFirst (const Standard_Real aFirst);
-  
+    //! Selector
+    Standard_EXPORT Standard_Real First() const;
 
-  //! Modifier
-  Standard_EXPORT void SetLast (const Standard_Real aLast);
-  
+    //! Selector
+    Standard_EXPORT Standard_Real Last() const;
 
-  //! Selector
-  Standard_EXPORT Standard_Real First() const;
-  
-
-  //! Selector
-  Standard_EXPORT Standard_Real Last() const;
-  
-
-  //! Selector
-  Standard_EXPORT void Range (Standard_Real& aFirst, Standard_Real& aLast) const;
-
-
-
+    //! Selector
+    Standard_EXPORT void Range(Standard_Real& aFirst, Standard_Real& aLast) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Real myFirst;
-  Standard_Real myLast;
-
-
+    Standard_Real myFirst;
+    Standard_Real myLast;
 };
-
-
-
-
-
-
 
 #endif // _IntTools_Range_HeaderFile

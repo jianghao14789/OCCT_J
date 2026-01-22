@@ -21,7 +21,6 @@
 #include <HLRBRep_TheLocateExtPCOfTheProjPCurOfCInter.hxx>
 #include <HLRBRep_PCLocFOfTheLocateExtPCOfTheProjPCurOfCInter.hxx>
 #include <gp_Pnt2d.hxx>
- 
 
 #define TheCurve Standard_Address
 #define TheCurve_hxx <Standard_Address.hxx>
@@ -38,4 +37,3 @@
 #define IntCurve_ProjPCurGen HLRBRep_TheProjPCurOfCInter
 #define IntCurve_ProjPCurGen_hxx <HLRBRep_TheProjPCurOfCInter.hxx>
 #include <IntCurve_ProjPCurGen.gxx>
-

@@ -37,7 +37,6 @@ class gp_Vec;
 class gp_Vec2d;
 class Blend_Point;
 
-
 //! Deferred class for a function used to compute a blending
 //! surface between two surfaces, using a guide line.
 //! The vector <X> used in Value, Values and Derivatives methods
@@ -46,9 +45,7 @@ class Blend_Point;
 //! second surface.
 class Blend_Function : public Blend_AppFunction {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns 4.
     Standard_EXPORT Standard_Integer NbVariables() const Standard_OVERRIDE;
@@ -91,59 +88,29 @@ public:
     //! at the beginning and the end of the section, and
     //! returns the normal (of the surfaces) at
     //! these points.
-    Standard_EXPORT virtual void Tangent(const Standard_Real U1,
-        const Standard_Real V1,
-        const Standard_Real U2,
-        const Standard_Real V2,
-        gp_Vec& TgFirst,
-        gp_Vec& TgLast,
-        gp_Vec& NormFirst,
-        gp_Vec& NormLast) const = 0;
+    Standard_EXPORT virtual void Tangent(const Standard_Real U1, const Standard_Real V1, const Standard_Real U2,
+                                         const Standard_Real V2, gp_Vec& TgFirst, gp_Vec& TgLast, gp_Vec& NormFirst,
+                                         gp_Vec& NormLast) const = 0;
 
     Standard_EXPORT virtual Standard_Boolean TwistOnS1() const;
 
     Standard_EXPORT virtual Standard_Boolean TwistOnS2() const;
 
-    Standard_EXPORT virtual void Section(const Blend_Point& P,
-        TColgp_Array1OfPnt& Poles,
-        TColgp_Array1OfPnt2d& Poles2d,
-        TColStd_Array1OfReal& Weigths) Standard_OVERRIDE = 0;
+    Standard_EXPORT virtual void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d,
+                                         TColStd_Array1OfReal& Weigths) Standard_OVERRIDE = 0;
 
     //! Used for the first and last section
     //! The method returns Standard_True if the derivatives
     //! are computed, otherwise it returns Standard_False
-    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P,
-        TColgp_Array1OfPnt& Poles,
-        TColgp_Array1OfVec& DPoles,
-        TColgp_Array1OfVec& D2Poles,
-        TColgp_Array1OfPnt2d& Poles2d,
-        TColgp_Array1OfVec2d& DPoles2d,
-        TColgp_Array1OfVec2d& D2Poles2d,
-        TColStd_Array1OfReal& Weigths,
-        TColStd_Array1OfReal& DWeigths,
-        TColStd_Array1OfReal& D2Weigths) Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                                     TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles,
+                                                     TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d,
+                                                     TColgp_Array1OfVec2d& D2Poles2d, TColStd_Array1OfReal& Weigths,
+                                                     TColStd_Array1OfReal& DWeigths,
+                                                     TColStd_Array1OfReal& D2Weigths) Standard_OVERRIDE;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Blend_Function_HeaderFile

@@ -16,7 +16,6 @@
 
 #include <PrsDim_TangentRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_TangentRelation AIS_TangentRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_TangentRelation AIS_TangentRelation;
 
 #endif // _AIS_TangentRelation_HeaderFile

@@ -17,15 +17,13 @@
 // MSVC versions prior to 12 did not provided acosh, asinh, atanh functions in standard library
 #if defined(_MSC_VER) && (_MSC_VER < 1800)
 
-Standard_EXPORT double  __cdecl acosh(double X)
-{
-    double  res;
+Standard_EXPORT double __cdecl acosh(double X) {
+    double res;
     res = log(X + sqrt(X * X - 1));
     return res;
 };
-Standard_EXPORT double  __cdecl  asinh(double X)
-{
-    double  res;
+Standard_EXPORT double __cdecl asinh(double X) {
+    double res;
     //  Modified by Sergey KHROMOV - Mon Nov 11 16:27:11 2002 Begin
     //  Correction of the formula to avoid numerical problems.
     //	res = log(X + sqrt(X * X + 1));
@@ -36,8 +34,7 @@ Standard_EXPORT double  __cdecl  asinh(double X)
     //  Modified by Sergey KHROMOV - Mon Nov 11 16:27:13 2002 End
     return res;
 };
-Standard_EXPORT double __cdecl  atanh(double X)
-{
+Standard_EXPORT double __cdecl atanh(double X) {
     double res;
     res = log((1 + X) / (1 - X)) / 2;
     return res;

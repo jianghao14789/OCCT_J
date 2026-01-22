@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(TColGeom2d_HSequenceOfBoundedCurve, TColGeom2d_SequenceOfBoundedCurve)
 
-
 #endif

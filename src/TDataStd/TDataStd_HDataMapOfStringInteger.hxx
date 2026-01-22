@@ -25,23 +25,23 @@
 
 //! Extension of TColStd_DataMapOfStringInteger class
 //! to be manipulated by handle.
-class TDataStd_HDataMapOfStringInteger : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTIEXT(TDataStd_HDataMapOfStringInteger, Standard_Transient)
+class TDataStd_HDataMapOfStringInteger : public Standard_Transient {
+    DEFINE_STANDARD_RTTIEXT(TDataStd_HDataMapOfStringInteger, Standard_Transient)
 public:
+    Standard_EXPORT TDataStd_HDataMapOfStringInteger(const Standard_Integer NbBuckets = 1);
 
-  Standard_EXPORT TDataStd_HDataMapOfStringInteger(const Standard_Integer NbBuckets = 1);
+    Standard_EXPORT TDataStd_HDataMapOfStringInteger(const TColStd_DataMapOfStringInteger& theOther);
 
-  Standard_EXPORT TDataStd_HDataMapOfStringInteger(const TColStd_DataMapOfStringInteger& theOther);
+    const TColStd_DataMapOfStringInteger& Map() const {
+        return myMap;
+    }
 
-  const TColStd_DataMapOfStringInteger& Map() const { return myMap; }
-
-  TColStd_DataMapOfStringInteger& ChangeMap() { return myMap; }
+    TColStd_DataMapOfStringInteger& ChangeMap() {
+        return myMap;
+    }
 
 private:
-
-  TColStd_DataMapOfStringInteger myMap;
-
+    TColStd_DataMapOfStringInteger myMap;
 };
 
 DEFINE_STANDARD_HANDLE(TDataStd_HDataMapOfStringInteger, Standard_Transient)

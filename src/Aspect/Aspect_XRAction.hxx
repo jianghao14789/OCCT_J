@@ -21,38 +21,46 @@
 #include <TCollection_AsciiString.hxx>
 
 //! XR action definition.
-class Aspect_XRAction : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTIEXT(Aspect_XRAction, Standard_Transient)
+class Aspect_XRAction : public Standard_Transient {
+    DEFINE_STANDARD_RTTIEXT(Aspect_XRAction, Standard_Transient)
 public:
+    //! Return action id.
+    const TCollection_AsciiString& Id() const {
+        return myId;
+    }
 
-  //! Return action id.
-  const TCollection_AsciiString& Id() const { return myId; }
+    //! Return action type.
+    Aspect_XRActionType Type() const {
+        return myType;
+    }
 
-  //! Return action type.
-  Aspect_XRActionType Type() const { return myType; }
+    //! Return TRUE if action is defined.
+    bool IsValid() const {
+        return myRawHandle != 0;
+    }
 
-  //! Return TRUE if action is defined.
-  bool IsValid() const { return myRawHandle != 0; }
+    //! Return action handle.
+    uint64_t RawHandle() const {
+        return myRawHandle;
+    }
 
-  //! Return action handle.
-  uint64_t RawHandle() const { return myRawHandle; }
+    //! Set action handle.
+    void SetRawHandle(uint64_t theHande) {
+        myRawHandle = theHande;
+    }
 
-  //! Set action handle.
-  void SetRawHandle (uint64_t theHande) { myRawHandle = theHande; }
-
-  //! Main constructor.
-  Aspect_XRAction (const TCollection_AsciiString& theId,
-                   const Aspect_XRActionType theType)
-  : myId (theId), myRawHandle (0), myType (theType) {}
+    //! Main constructor.
+    Aspect_XRAction(const TCollection_AsciiString& theId, const Aspect_XRActionType theType)
+        : myId(theId), myRawHandle(0), myType(theType) {}
 
 protected:
-  TCollection_AsciiString myId;        //!< action id
-  uint64_t                myRawHandle; //!< action handle
-  Aspect_XRActionType     myType;      //!< action type
+    TCollection_AsciiString myId; //!< action id
+    uint64_t myRawHandle;         //!< action handle
+    Aspect_XRActionType myType;   //!< action type
 };
 
 //! Map of actions with action Id as a key.
-typedef NCollection_IndexedDataMap<TCollection_AsciiString, Handle(Aspect_XRAction), TCollection_AsciiString> Aspect_XRActionMap;
+typedef NCollection_IndexedDataMap<TCollection_AsciiString, Handle(Aspect_XRAction), TCollection_AsciiString>
+    Aspect_XRActionMap;
 
 #endif // _Aspect_XRAction_HeaderFile

@@ -26,78 +26,63 @@
 #include <IGESGeom_Line.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESDimen_CurveDimension,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESDimen_CurveDimension, IGESData_IGESEntity)
 
-IGESDimen_CurveDimension::IGESDimen_CurveDimension ()    {  }
+IGESDimen_CurveDimension::IGESDimen_CurveDimension() {}
 
-
-    void  IGESDimen_CurveDimension::Init
-  (const Handle(IGESDimen_GeneralNote)& aNote,
-   const Handle(IGESData_IGESEntity)&   aCurve,
-   const Handle(IGESData_IGESEntity)&   anotherCurve,
-   const Handle(IGESDimen_LeaderArrow)& aLeader,
-   const Handle(IGESDimen_LeaderArrow)& anotherLeader,
-   const Handle(IGESDimen_WitnessLine)& aLine,
-   const Handle(IGESDimen_WitnessLine)& anotherLine)
-{
-  theNote              = aNote;
-  theFirstCurve        = aCurve;
-  theSecondCurve       = anotherCurve;
-  theFirstLeader       = aLeader;
-  theSecondLeader      = anotherLeader;
-  theFirstWitnessLine  = aLine;
-  theSecondWitnessLine = anotherLine;
-  InitTypeAndForm(204,0);
+void IGESDimen_CurveDimension::Init(const Handle(IGESDimen_GeneralNote) & aNote,
+                                    const Handle(IGESData_IGESEntity) & aCurve,
+                                    const Handle(IGESData_IGESEntity) & anotherCurve,
+                                    const Handle(IGESDimen_LeaderArrow) & aLeader,
+                                    const Handle(IGESDimen_LeaderArrow) & anotherLeader,
+                                    const Handle(IGESDimen_WitnessLine) & aLine,
+                                    const Handle(IGESDimen_WitnessLine) & anotherLine) {
+    theNote = aNote;
+    theFirstCurve = aCurve;
+    theSecondCurve = anotherCurve;
+    theFirstLeader = aLeader;
+    theSecondLeader = anotherLeader;
+    theFirstWitnessLine = aLine;
+    theSecondWitnessLine = anotherLine;
+    InitTypeAndForm(204, 0);
 }
 
-    Handle(IGESDimen_GeneralNote)  IGESDimen_CurveDimension::Note () const 
-{
-  return theNote;
+Handle(IGESDimen_GeneralNote) IGESDimen_CurveDimension::Note() const {
+    return theNote;
 }
 
-    Handle(IGESData_IGESEntity)  IGESDimen_CurveDimension::FirstCurve () const 
-{
-  return theFirstCurve;
+Handle(IGESData_IGESEntity) IGESDimen_CurveDimension::FirstCurve() const {
+    return theFirstCurve;
 }
 
-    Standard_Boolean  IGESDimen_CurveDimension::HasSecondCurve () const 
-{
-  return (! theSecondCurve.IsNull());
+Standard_Boolean IGESDimen_CurveDimension::HasSecondCurve() const {
+    return (!theSecondCurve.IsNull());
 }
 
-    Handle(IGESData_IGESEntity)  IGESDimen_CurveDimension::SecondCurve () const 
-{
-  return theSecondCurve;
+Handle(IGESData_IGESEntity) IGESDimen_CurveDimension::SecondCurve() const {
+    return theSecondCurve;
 }
 
-    Handle(IGESDimen_LeaderArrow)  IGESDimen_CurveDimension::FirstLeader () const 
-{
-  return theFirstLeader;
+Handle(IGESDimen_LeaderArrow) IGESDimen_CurveDimension::FirstLeader() const {
+    return theFirstLeader;
 }
 
-    Handle(IGESDimen_LeaderArrow)  IGESDimen_CurveDimension::SecondLeader () const 
-{
-  return theSecondLeader;
+Handle(IGESDimen_LeaderArrow) IGESDimen_CurveDimension::SecondLeader() const {
+    return theSecondLeader;
 }
 
-    Standard_Boolean  IGESDimen_CurveDimension::HasFirstWitnessLine () const 
-{
-  return (! theFirstWitnessLine.IsNull());
+Standard_Boolean IGESDimen_CurveDimension::HasFirstWitnessLine() const {
+    return (!theFirstWitnessLine.IsNull());
 }
 
-    Handle(IGESDimen_WitnessLine)  IGESDimen_CurveDimension::FirstWitnessLine
-  () const 
-{
-  return theFirstWitnessLine;
+Handle(IGESDimen_WitnessLine) IGESDimen_CurveDimension::FirstWitnessLine() const {
+    return theFirstWitnessLine;
 }
 
-    Standard_Boolean  IGESDimen_CurveDimension::HasSecondWitnessLine () const 
-{
-  return (! theSecondWitnessLine.IsNull());
+Standard_Boolean IGESDimen_CurveDimension::HasSecondWitnessLine() const {
+    return (!theSecondWitnessLine.IsNull());
 }
 
-    Handle(IGESDimen_WitnessLine)  IGESDimen_CurveDimension::SecondWitnessLine
-  () const 
-{
-  return theSecondWitnessLine;
+Handle(IGESDimen_WitnessLine) IGESDimen_CurveDimension::SecondWitnessLine() const {
+    return theSecondWitnessLine;
 }

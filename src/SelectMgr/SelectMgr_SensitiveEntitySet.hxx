@@ -31,70 +31,72 @@ typedef NCollection_DataMap<Handle(SelectMgr_EntityOwner), Standard_Integer> Sel
 //! This class is used to store all calculated sensitive entities of one selectable object.
 //! It provides an interface for building BVH tree which is used to speed-up
 //! the performance of searching for overlap among sensitives of one selectable object
-class SelectMgr_SensitiveEntitySet : public BVH_PrimitiveSet3d
-{
-  DEFINE_STANDARD_RTTIEXT(SelectMgr_SensitiveEntitySet, BVH_PrimitiveSet3d)
+class SelectMgr_SensitiveEntitySet : public BVH_PrimitiveSet3d {
+    DEFINE_STANDARD_RTTIEXT(SelectMgr_SensitiveEntitySet, BVH_PrimitiveSet3d)
 public:
+    //! Empty constructor.
+    Standard_EXPORT SelectMgr_SensitiveEntitySet(const Handle(Select3D_BVHBuilder3d) & theBuilder);
 
-  //! Empty constructor.
-  Standard_EXPORT SelectMgr_SensitiveEntitySet (const Handle(Select3D_BVHBuilder3d)& theBuilder);
+    virtual ~SelectMgr_SensitiveEntitySet() {}
 
-  virtual ~SelectMgr_SensitiveEntitySet() {}
+    //! Adds new entity to the set and marks BVH tree for rebuild
+    Standard_EXPORT void Append(const Handle(SelectMgr_SensitiveEntity) & theEntity);
 
-  //! Adds new entity to the set and marks BVH tree for rebuild
-  Standard_EXPORT void Append (const Handle(SelectMgr_SensitiveEntity)& theEntity);
+    //! Adds every entity of selection theSelection to the set and marks
+    //! BVH tree for rebuild
+    Standard_EXPORT void Append(const Handle(SelectMgr_Selection) & theSelection);
 
-  //! Adds every entity of selection theSelection to the set and marks
-  //! BVH tree for rebuild
-  Standard_EXPORT void Append (const Handle(SelectMgr_Selection)& theSelection);
+    //! Removes every entity of selection theSelection from the set
+    //! and marks BVH tree for rebuild
+    Standard_EXPORT void Remove(const Handle(SelectMgr_Selection) & theSelection);
 
-  //! Removes every entity of selection theSelection from the set
-  //! and marks BVH tree for rebuild
-  Standard_EXPORT void Remove (const Handle(SelectMgr_Selection)& theSelection);
+    //! Returns bounding box of entity with index theIdx
+    Standard_EXPORT virtual Select3D_BndBox3d Box(const Standard_Integer theIndex) const Standard_OVERRIDE;
 
-  //! Returns bounding box of entity with index theIdx
-  Standard_EXPORT virtual Select3D_BndBox3d Box (const Standard_Integer theIndex) const Standard_OVERRIDE;
+    //! Make inherited method Box() visible to avoid CLang warning
+    using BVH_PrimitiveSet3d::Box;
 
-  //! Make inherited method Box() visible to avoid CLang warning
-  using BVH_PrimitiveSet3d::Box;
+    //! Returns geometry center of sensitive entity index theIdx
+    //! along the given axis theAxis
+    Standard_EXPORT virtual Standard_Real Center(const Standard_Integer theIndex,
+                                                 const Standard_Integer theAxis) const Standard_OVERRIDE;
 
-  //! Returns geometry center of sensitive entity index theIdx
-  //! along the given axis theAxis
-  Standard_EXPORT virtual Standard_Real Center (const Standard_Integer theIndex,
-                                                const Standard_Integer theAxis) const Standard_OVERRIDE;
+    //! Swaps items with indexes theIdx1 and theIdx2
+    Standard_EXPORT virtual void Swap(const Standard_Integer theIndex1,
+                                      const Standard_Integer theIndex2) Standard_OVERRIDE;
 
-  //! Swaps items with indexes theIdx1 and theIdx2
-  Standard_EXPORT virtual void Swap (const Standard_Integer theIndex1,
-                                     const Standard_Integer theIndex2) Standard_OVERRIDE;
+    //! Returns the amount of entities
+    Standard_EXPORT virtual Standard_Integer Size() const Standard_OVERRIDE;
 
-  //! Returns the amount of entities
-  Standard_EXPORT virtual Standard_Integer Size() const Standard_OVERRIDE;
+    //! Returns the entity with index theIndex in the set
+    Standard_EXPORT const Handle(SelectMgr_SensitiveEntity) & GetSensitiveById(const Standard_Integer theIndex) const;
 
-  //! Returns the entity with index theIndex in the set
-  Standard_EXPORT const Handle(SelectMgr_SensitiveEntity)& GetSensitiveById (const Standard_Integer theIndex) const;
+    //! Returns map of entities.
+    const SelectMgr_IndexedMapOfHSensitive& Sensitives() const {
+        return mySensitives;
+    }
 
-  //! Returns map of entities.
-  const SelectMgr_IndexedMapOfHSensitive& Sensitives() const { return mySensitives; }
+    //! Returns map of owners.
+    const SelectMgr_MapOfOwners& Owners() const {
+        return myOwnersMap;
+    }
 
-  //! Returns map of owners.
-  const SelectMgr_MapOfOwners& Owners() const { return myOwnersMap; }
-
-  //! Returns map of entities.
-  Standard_Boolean HasEntityWithPersistence() const { return myHasEntityWithPersistence; }
+    //! Returns map of entities.
+    Standard_Boolean HasEntityWithPersistence() const {
+        return myHasEntityWithPersistence;
+    }
 
 protected:
+    //! Adds entity owner to the map of owners (or increases its counter if it is already there).
+    Standard_EXPORT void addOwner(const Handle(SelectMgr_EntityOwner) & theOwner);
 
-  //! Adds entity owner to the map of owners (or increases its counter if it is already there).
-  Standard_EXPORT void addOwner (const Handle(SelectMgr_EntityOwner)& theOwner);
-
-  //! Decreases counter of owner in the map of owners (or removes it from the map if counter == 0).
-  Standard_EXPORT void removeOwner (const Handle(SelectMgr_EntityOwner)& theOwner);
+    //! Decreases counter of owner in the map of owners (or removes it from the map if counter == 0).
+    Standard_EXPORT void removeOwner(const Handle(SelectMgr_EntityOwner) & theOwner);
 
 private:
-
-  SelectMgr_IndexedMapOfHSensitive mySensitives; //!< Map of entities and its corresponding index in BVH
-  SelectMgr_MapOfOwners            myOwnersMap;  //!< Map of entity owners and its corresponding number of sensitives
-  Standard_Boolean  myHasEntityWithPersistence;  //!< flag if some of sensitive entity has own transform persistence
+    SelectMgr_IndexedMapOfHSensitive mySensitives; //!< Map of entities and its corresponding index in BVH
+    SelectMgr_MapOfOwners myOwnersMap;             //!< Map of entity owners and its corresponding number of sensitives
+    Standard_Boolean myHasEntityWithPersistence;   //!< flag if some of sensitive entity has own transform persistence
 };
 
 #endif // _SelectMgr_SensitiveEntitySet_HeaderFile

@@ -20,15 +20,14 @@
 //! Provides values for different types of faces. These
 //! values are used to filter faces in frameworks inheriting
 //! StdSelect_FaceFilter.
-enum StdSelect_TypeOfFace
-{
-StdSelect_AnyFace,
-StdSelect_Plane,
-StdSelect_Cylinder,
-StdSelect_Sphere,
-StdSelect_Torus,
-StdSelect_Revol,
-StdSelect_Cone
+enum StdSelect_TypeOfFace {
+    StdSelect_AnyFace,
+    StdSelect_Plane,
+    StdSelect_Cylinder,
+    StdSelect_Sphere,
+    StdSelect_Torus,
+    StdSelect_Revol,
+    StdSelect_Cone
 };
 
 #endif // _StdSelect_TypeOfFace_HeaderFile

@@ -12,286 +12,256 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BOPDS_CommonBlock.hxx>
 #include <BOPDS_PaveBlock.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BOPDS_CommonBlock,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(BOPDS_CommonBlock, Standard_Transient)
 
 //=======================================================================
-// function:  
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
-BOPDS_CommonBlock::BOPDS_CommonBlock()
-:
-  myTolerance(0.0)
-{
-}
+BOPDS_CommonBlock::BOPDS_CommonBlock() : myTolerance(0.0) {}
 //=======================================================================
-// function:  
-// purpose: 
+// function:
+// purpose:
 //=======================================================================
-  BOPDS_CommonBlock::BOPDS_CommonBlock(const Handle(NCollection_BaseAllocator)& theAllocator)
-:
-  myPaveBlocks(theAllocator),
-  myFaces(theAllocator),
-  myTolerance(0.0)
-{
-}
+BOPDS_CommonBlock::BOPDS_CommonBlock(const Handle(NCollection_BaseAllocator) & theAllocator)
+    : myPaveBlocks(theAllocator), myFaces(theAllocator), myTolerance(0.0) {}
 //=======================================================================
 // function:  AddPaveBlock
-// purpose: 
+// purpose:
 //=======================================================================
-  void BOPDS_CommonBlock::AddPaveBlock(const Handle(BOPDS_PaveBlock)& aPB)
-{
-  if (myPaveBlocks.IsEmpty()) {
-    myPaveBlocks.Append(aPB);
-    return;
-  }
-  //
-  // Put the pave block with the minimal index of the original edge in the first place
-  if (aPB->OriginalEdge() < myPaveBlocks.First()->OriginalEdge()) {
-    myPaveBlocks.Prepend(aPB);
-  }
-  else {
-    myPaveBlocks.Append(aPB);
-  }
+void BOPDS_CommonBlock::AddPaveBlock(const Handle(BOPDS_PaveBlock) & aPB) {
+    if (myPaveBlocks.IsEmpty()) {
+        myPaveBlocks.Append(aPB);
+        return;
+    }
+    //
+    // Put the pave block with the minimal index of the original edge in the first place
+    if (aPB->OriginalEdge() < myPaveBlocks.First()->OriginalEdge()) {
+        myPaveBlocks.Prepend(aPB);
+    } else {
+        myPaveBlocks.Append(aPB);
+    }
 }
 //=======================================================================
 // function:  SetPaveBlocks
-// purpose: 
+// purpose:
 //=======================================================================
-  void BOPDS_CommonBlock::SetPaveBlocks(const BOPDS_ListOfPaveBlock& aLPB)
-{
-  myPaveBlocks.Clear();
-  BOPDS_ListIteratorOfListOfPaveBlock aIt(aLPB);
-  for (; aIt.More(); aIt.Next()) {
-    AddPaveBlock(aIt.Value());
-  }
+void BOPDS_CommonBlock::SetPaveBlocks(const BOPDS_ListOfPaveBlock& aLPB) {
+    myPaveBlocks.Clear();
+    BOPDS_ListIteratorOfListOfPaveBlock aIt(aLPB);
+    for (; aIt.More(); aIt.Next()) {
+        AddPaveBlock(aIt.Value());
+    }
 }
 //=======================================================================
 // function:  PaveBlocks
-// purpose: 
+// purpose:
 //=======================================================================
-  const BOPDS_ListOfPaveBlock& BOPDS_CommonBlock::PaveBlocks()const
-{
-  return myPaveBlocks;
+const BOPDS_ListOfPaveBlock& BOPDS_CommonBlock::PaveBlocks() const {
+    return myPaveBlocks;
 }
 //=======================================================================
 // function:  AddFace
-// purpose: 
+// purpose:
 //=======================================================================
-  void BOPDS_CommonBlock::AddFace(const Standard_Integer aF)
-{
-  myFaces.Append(aF);
+void BOPDS_CommonBlock::AddFace(const Standard_Integer aF) {
+    myFaces.Append(aF);
 }
 //=======================================================================
 // function:  AddFaces
-// purpose: 
+// purpose:
 //=======================================================================
-  void BOPDS_CommonBlock::SetFaces(const TColStd_ListOfInteger& aLF)
-{
-  myFaces=aLF;
+void BOPDS_CommonBlock::SetFaces(const TColStd_ListOfInteger& aLF) {
+    myFaces = aLF;
 }
 //=======================================================================
 // function:  AppendFaces
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPDS_CommonBlock::AppendFaces(TColStd_ListOfInteger& aLF)
-{
-  myFaces.Append(aLF);
+void BOPDS_CommonBlock::AppendFaces(TColStd_ListOfInteger& aLF) {
+    myFaces.Append(aLF);
 }
-  //=======================================================================
-// function:  Faces
-// purpose: 
 //=======================================================================
-  const TColStd_ListOfInteger& BOPDS_CommonBlock::Faces()const
-{
-  return myFaces;
+// function:  Faces
+// purpose:
+//=======================================================================
+const TColStd_ListOfInteger& BOPDS_CommonBlock::Faces() const {
+    return myFaces;
 }
 //=======================================================================
 // function:  PaveBlock1
-// purpose: 
+// purpose:
 //=======================================================================
-  const Handle(BOPDS_PaveBlock)& BOPDS_CommonBlock::PaveBlock1()const
-{
-  return myPaveBlocks.First();
+const Handle(BOPDS_PaveBlock) & BOPDS_CommonBlock::PaveBlock1() const {
+    return myPaveBlocks.First();
 }
 //=======================================================================
 // function:  SetRealPaveBlock
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPDS_CommonBlock::SetRealPaveBlock(const Handle(BOPDS_PaveBlock)& thePB)
-{
-  BOPDS_ListIteratorOfListOfPaveBlock it(myPaveBlocks);
-  for (; it.More(); it.Next())
-  {
-    if (it.Value() == thePB)
-    {
-      myPaveBlocks.Prepend(thePB);
-      myPaveBlocks.Remove(it);
-      break;
+void BOPDS_CommonBlock::SetRealPaveBlock(const Handle(BOPDS_PaveBlock) & thePB) {
+    BOPDS_ListIteratorOfListOfPaveBlock it(myPaveBlocks);
+    for (; it.More(); it.Next()) {
+        if (it.Value() == thePB) {
+            myPaveBlocks.Prepend(thePB);
+            myPaveBlocks.Remove(it);
+            break;
+        }
     }
-  }
 }
 //=======================================================================
 // function:  PaveBlockOnEdge
-// purpose: 
+// purpose:
 //=======================================================================
-  Handle(BOPDS_PaveBlock)& BOPDS_CommonBlock::PaveBlockOnEdge(const Standard_Integer aIx)
-{
-  static Handle(BOPDS_PaveBlock) aPBs;
-  //
-  Standard_Integer aIOr;
-  BOPDS_ListIteratorOfListOfPaveBlock anIt;
-  //
-  anIt.Initialize(myPaveBlocks);
-  for (; anIt.More(); anIt.Next()) {
-    Handle(BOPDS_PaveBlock)& aPB=anIt.ChangeValue();
-    aIOr=aPB->OriginalEdge();
-    if (aIOr==aIx){
-      return aPB;
+Handle(BOPDS_PaveBlock) & BOPDS_CommonBlock::PaveBlockOnEdge(const Standard_Integer aIx) {
+    static Handle(BOPDS_PaveBlock) aPBs;
+    //
+    Standard_Integer aIOr;
+    BOPDS_ListIteratorOfListOfPaveBlock anIt;
+    //
+    anIt.Initialize(myPaveBlocks);
+    for (; anIt.More(); anIt.Next()) {
+        Handle(BOPDS_PaveBlock) & aPB = anIt.ChangeValue();
+        aIOr = aPB->OriginalEdge();
+        if (aIOr == aIx) {
+            return aPB;
+        }
     }
-  }
-  return aPBs;
+    return aPBs;
 }
 //=======================================================================
 // function:  IsPaveBlockOnFace
-// purpose: 
+// purpose:
 //=======================================================================
-  Standard_Boolean BOPDS_CommonBlock::IsPaveBlockOnFace(const Standard_Integer aIx)const
-{
-  Standard_Boolean bFound;
-  Standard_Integer nF;
-  TColStd_ListIteratorOfListOfInteger anIt;
-  //
-  bFound=Standard_False;
-  anIt.Initialize(myFaces);
-  for (; anIt.More(); anIt.Next()) {
-    nF=anIt.Value();
-    if (nF==aIx){
-      return !bFound;
+Standard_Boolean BOPDS_CommonBlock::IsPaveBlockOnFace(const Standard_Integer aIx) const {
+    Standard_Boolean bFound;
+    Standard_Integer nF;
+    TColStd_ListIteratorOfListOfInteger anIt;
+    //
+    bFound = Standard_False;
+    anIt.Initialize(myFaces);
+    for (; anIt.More(); anIt.Next()) {
+        nF = anIt.Value();
+        if (nF == aIx) {
+            return !bFound;
+        }
     }
-  }
-  return bFound;
+    return bFound;
 }
 //=======================================================================
 // function:  IsPaveBlockOnEdge
-// purpose: 
+// purpose:
 //=======================================================================
-  Standard_Boolean BOPDS_CommonBlock::IsPaveBlockOnEdge(const Standard_Integer aIx)const
-{
-  Standard_Boolean bFound;
-  Standard_Integer aIOr;
-  BOPDS_ListIteratorOfListOfPaveBlock anIt;
-  //
-  bFound=Standard_False;
-  anIt.Initialize(myPaveBlocks);
-  for (; anIt.More(); anIt.Next()) {
-    const Handle(BOPDS_PaveBlock)& aPB=anIt.Value();
-    aIOr=aPB->OriginalEdge();
-    if (aIOr==aIx){
-      return !bFound;
+Standard_Boolean BOPDS_CommonBlock::IsPaveBlockOnEdge(const Standard_Integer aIx) const {
+    Standard_Boolean bFound;
+    Standard_Integer aIOr;
+    BOPDS_ListIteratorOfListOfPaveBlock anIt;
+    //
+    bFound = Standard_False;
+    anIt.Initialize(myPaveBlocks);
+    for (; anIt.More(); anIt.Next()) {
+        const Handle(BOPDS_PaveBlock) & aPB = anIt.Value();
+        aIOr = aPB->OriginalEdge();
+        if (aIOr == aIx) {
+            return !bFound;
+        }
     }
-  }
-  return bFound;
-}
-//=======================================================================
-//function : SetEdge
-//purpose  : 
-//=======================================================================
-  void BOPDS_CommonBlock::SetEdge(const Standard_Integer theEdge)
-{
-  BOPDS_ListIteratorOfListOfPaveBlock anIt;
-  //
-  anIt.Initialize(myPaveBlocks);
-  for (; anIt.More(); anIt.Next()) {
-    Handle(BOPDS_PaveBlock)& aPB=anIt.ChangeValue();
-    aPB->SetEdge(theEdge);
-  }
-}
-//=======================================================================
-//function : Edge
-//purpose  : 
-//=======================================================================
-  Standard_Integer BOPDS_CommonBlock::Edge()const
-{
-  const Handle(BOPDS_PaveBlock)& aPB1=myPaveBlocks.First();
-  if(!aPB1.IsNull()) {
-    return aPB1->Edge();
-  }
-  return -1;
-}
-//=======================================================================
-// function:  Contains
-// purpose: 
-//=======================================================================
-  Standard_Boolean BOPDS_CommonBlock::Contains(const Handle(BOPDS_PaveBlock)& aPBx)const
-{
-  Standard_Boolean bFound;
-  Standard_Integer aNb1;
-  BOPDS_ListIteratorOfListOfPaveBlock anIt;
-  //
-  bFound=Standard_False;
-  aNb1=myPaveBlocks.Extent();
-  //
-  if (!aNb1) {
     return bFound;
-  }
-  //
-  anIt.Initialize(myPaveBlocks);
-  for (; anIt.More(); anIt.Next()) {
-    const Handle(BOPDS_PaveBlock)& aPB=anIt.Value();
-    if (aPB==aPBx) {
-      return !bFound;
+}
+//=======================================================================
+// function : SetEdge
+// purpose  :
+//=======================================================================
+void BOPDS_CommonBlock::SetEdge(const Standard_Integer theEdge) {
+    BOPDS_ListIteratorOfListOfPaveBlock anIt;
+    //
+    anIt.Initialize(myPaveBlocks);
+    for (; anIt.More(); anIt.Next()) {
+        Handle(BOPDS_PaveBlock) & aPB = anIt.ChangeValue();
+        aPB->SetEdge(theEdge);
     }
-  }
-  return bFound;
+}
+//=======================================================================
+// function : Edge
+// purpose  :
+//=======================================================================
+Standard_Integer BOPDS_CommonBlock::Edge() const {
+    const Handle(BOPDS_PaveBlock) & aPB1 = myPaveBlocks.First();
+    if (!aPB1.IsNull()) {
+        return aPB1->Edge();
+    }
+    return -1;
 }
 //=======================================================================
 // function:  Contains
-// purpose: 
+// purpose:
 //=======================================================================
-  Standard_Boolean BOPDS_CommonBlock::Contains(const Standard_Integer theF)const
-{
-  Standard_Boolean bFound;
-  TColStd_ListIteratorOfListOfInteger aIt;
-  //
-  bFound=Standard_False;
-  aIt.Initialize(myFaces);
-  for (; aIt.More(); aIt.Next()) {
-    if (aIt.Value()==theF) {
-      return !bFound;
+Standard_Boolean BOPDS_CommonBlock::Contains(const Handle(BOPDS_PaveBlock) & aPBx) const {
+    Standard_Boolean bFound;
+    Standard_Integer aNb1;
+    BOPDS_ListIteratorOfListOfPaveBlock anIt;
+    //
+    bFound = Standard_False;
+    aNb1 = myPaveBlocks.Extent();
+    //
+    if (!aNb1) {
+        return bFound;
     }
-  }
-  return bFound;
+    //
+    anIt.Initialize(myPaveBlocks);
+    for (; anIt.More(); anIt.Next()) {
+        const Handle(BOPDS_PaveBlock) & aPB = anIt.Value();
+        if (aPB == aPBx) {
+            return !bFound;
+        }
+    }
+    return bFound;
+}
+//=======================================================================
+// function:  Contains
+// purpose:
+//=======================================================================
+Standard_Boolean BOPDS_CommonBlock::Contains(const Standard_Integer theF) const {
+    Standard_Boolean bFound;
+    TColStd_ListIteratorOfListOfInteger aIt;
+    //
+    bFound = Standard_False;
+    aIt.Initialize(myFaces);
+    for (; aIt.More(); aIt.Next()) {
+        if (aIt.Value() == theF) {
+            return !bFound;
+        }
+    }
+    return bFound;
 }
 //=======================================================================
 // function:  Dump
-// purpose: 
+// purpose:
 //=======================================================================
-  void BOPDS_CommonBlock::Dump()const
-{
-  Standard_Integer nF;
-  TColStd_ListIteratorOfListOfInteger aIt;
-  BOPDS_ListIteratorOfListOfPaveBlock aItPB;
-  //
-  printf(" -- CB:\n");
-  aItPB.Initialize(myPaveBlocks);
-  for (; aItPB.More(); aItPB.Next()) {
-    const Handle(BOPDS_PaveBlock)& aPB=aItPB.Value();
-    aPB->Dump();
-    printf("\n");
-  }
-  //
-  if (myFaces.Extent()) {
-    printf(" Faces:");
-    aIt.Initialize(myFaces);
-    for (; aIt.More(); aIt.Next()) {
-      nF=aIt.Value();
-      printf(" %d", nF);
+void BOPDS_CommonBlock::Dump() const {
+    Standard_Integer nF;
+    TColStd_ListIteratorOfListOfInteger aIt;
+    BOPDS_ListIteratorOfListOfPaveBlock aItPB;
+    //
+    printf(" -- CB:\n");
+    aItPB.Initialize(myPaveBlocks);
+    for (; aItPB.More(); aItPB.Next()) {
+        const Handle(BOPDS_PaveBlock) & aPB = aItPB.Value();
+        aPB->Dump();
+        printf("\n");
     }
-    printf("\n");
-  }
+    //
+    if (myFaces.Extent()) {
+        printf(" Faces:");
+        aIt.Initialize(myFaces);
+        for (; aIt.More(); aIt.Next()) {
+            nF = aIt.Value();
+            printf(" %d", nF);
+        }
+        printf("\n");
+    }
 }

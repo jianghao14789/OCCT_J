@@ -26,50 +26,29 @@ class Plate_GtoCConstraint;
 class Plate_FreeGtoCConstraint;
 class gp_XYZ;
 
-
 //! define an order 1 derivatives of a 3d valued
 //! function of a 2d variable
-class Plate_D1 
-{
+class Plate_D1 {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT Plate_D1(const gp_XYZ& du, const gp_XYZ& dv);
 
-  
-  Standard_EXPORT Plate_D1(const gp_XYZ& du, const gp_XYZ& dv);
-  
-  Standard_EXPORT Plate_D1(const Plate_D1& ref);
-  
+    Standard_EXPORT Plate_D1(const Plate_D1& ref);
+
     const gp_XYZ& DU() const;
-  
+
     const gp_XYZ& DV() const;
 
-
-friend class Plate_GtoCConstraint;
-friend class Plate_FreeGtoCConstraint;
-
+    friend class Plate_GtoCConstraint;
+    friend class Plate_FreeGtoCConstraint;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  gp_XYZ Du;
-  gp_XYZ Dv;
-
-
+    gp_XYZ Du;
+    gp_XYZ Dv;
 };
 
-
 #include <Plate_D1.lxx>
-
-
-
-
 
 #endif // _Plate_D1_HeaderFile

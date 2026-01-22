@@ -21,8 +21,7 @@
 
 //! Class providing container of alerts
 //! 提供警报容器的类
-class Message_CompositeAlerts : public Standard_Transient
-{
+class Message_CompositeAlerts : public Standard_Transient {
     DEFINE_STANDARD_RTTIEXT(Message_CompositeAlerts, Standard_Transient)
 public:
     //! Empty constructor
@@ -37,46 +36,43 @@ public:
     //! @param theGravity an alert gravity
     //! @param theAlert an alert to be added as a child alert
     //! @return true if the alert is added or merged
-    //! 
+    //!
     //! 添加具有指定严重级别的警报。如果警报支持合并，它将被合并。
     //! @param theGravity 警报严重级别
     //! @param theAlert 要添加为子警报的警报
     //! @return 如果警报被添加或合并，返回 true
-    Standard_EXPORT Standard_Boolean AddAlert(Message_Gravity theGravity,
-        const Handle(Message_Alert)& theAlert);
+    Standard_EXPORT Standard_Boolean AddAlert(Message_Gravity theGravity, const Handle(Message_Alert) & theAlert);
 
     //! Removes alert with specified gravity.
     //! @param theGravity an alert gravity
     //! @param theAlert an alert to be removed from the children
     //! @return true if the alert is removed
-    //! 
+    //!
     //! 删除具有指定严重级别的警报。
     //! @param theGravity 警报严重级别
     //! @param theAlert 要从子警报中删除的警报
     //! @return 如果警报被删除，返回 true
-    Standard_EXPORT Standard_Boolean RemoveAlert(Message_Gravity theGravity,
-        const Handle(Message_Alert)& theAlert);
+    Standard_EXPORT Standard_Boolean RemoveAlert(Message_Gravity theGravity, const Handle(Message_Alert) & theAlert);
 
     //! Returns true if the alert belong the list of the child alerts.
     //! @param theAlert an alert to be checked as a child alert
     //! @return true if the alert is found in a container of children
-    //! 
+    //!
     //! 返回 true 如果警报属于子警报列表。
     //! @param theAlert 要作为子警报检查的警报
     //! @return 如果在子警报容器中找到警报，返回 true
-    Standard_EXPORT Standard_Boolean HasAlert(const Handle(Message_Alert)& theAlert);
+    Standard_EXPORT Standard_Boolean HasAlert(const Handle(Message_Alert) & theAlert);
 
     //! Returns true if specific type of alert is recorded with specified gravity
     //! @param theType an alert type
     //! @param theGravity an alert gravity
     //! @return true if the alert is found in a container of children
-    //! 
+    //!
     //! 返回 true 如果以指定的严重级别记录了特定类型的警报
     //! @param theType 警报类型
     //! @param theGravity 警报严重级别
     //! @return 如果在子警报容器中找到警报，返回 true
-    Standard_EXPORT Standard_Boolean HasAlert(const Handle(Standard_Type)& theType,
-        Message_Gravity theGravity);
+    Standard_EXPORT Standard_Boolean HasAlert(const Handle(Standard_Type) & theType, Message_Gravity theGravity);
 
     //! Clears all collected alerts
     //! 清除所有收集的警报
@@ -92,7 +88,7 @@ public:
     //! @param theType an alert type
     //! 清除具有指定类型的收集的警报
     //! @param theType 警报类型
-    Standard_EXPORT void Clear(const Handle(Standard_Type)& theType);
+    Standard_EXPORT void Clear(const Handle(Standard_Type) & theType);
 
     //! Dumps the content of me into the stream
     //! 将内容转储到流中

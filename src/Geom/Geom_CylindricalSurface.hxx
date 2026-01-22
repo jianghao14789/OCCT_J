@@ -33,7 +33,6 @@ class gp_Pnt;
 class gp_Vec;
 class Geom_Geometry;
 
-
 class Geom_CylindricalSurface;
 DEFINE_STANDARD_HANDLE(Geom_CylindricalSurface, Geom_ElementarySurface)
 
@@ -71,7 +70,6 @@ DEFINE_STANDARD_HANDLE(Geom_CylindricalSurface, Geom_ElementarySurface)
 class Geom_CylindricalSurface : public Geom_ElementarySurface {
 
 public:
-
     //! A3 defines the local coordinate system of the cylindrical surface.
     //! The "ZDirection" of A3 defines the direction of the surface's axis of symmetry.
     //! At the creation the parametrization of the surface is defined
@@ -120,7 +118,8 @@ public:
     //!   me->TransformParameters(U,V,T)
     //! @endcode
     //! This method multiplies V by T.ScaleFactor()
-    Standard_EXPORT virtual void TransformParameters(Standard_Real& U, Standard_Real& V, const gp_Trsf& T) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void TransformParameters(Standard_Real& U, Standard_Real& V,
+                                                     const gp_Trsf& T) const Standard_OVERRIDE;
 
     //! Returns a 2d transformation used to find the new
     //! parameters of a point on the transformed surface.
@@ -141,7 +140,8 @@ public:
     //! The CylindricalSurface is infinite in the V direction so
     //! V1 = Realfirst, V2 = RealLast from package Standard.
     //! U1 = 0 and U2 = 2*PI.
-    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1, Standard_Real& V2) const Standard_OVERRIDE;
+    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1,
+                                Standard_Real& V2) const Standard_OVERRIDE;
 
     //! Returns the coefficients of the implicit equation of the quadric
     //! in the absolute cartesian coordinate system :
@@ -149,7 +149,9 @@ public:
     //! @code
     //! A1.X**2 + A2.Y**2 + A3.Z**2 + 2.(B1.X.Y + B2.X.Z + B3.Y.Z) + 2.(C1.X + C2.Y + C3.Z) + D = 0.0
     //! @endcode
-    Standard_EXPORT void Coefficients(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3, Standard_Real& B1, Standard_Real& B2, Standard_Real& B3, Standard_Real& C1, Standard_Real& C2, Standard_Real& C3, Standard_Real& D) const;
+    Standard_EXPORT void Coefficients(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3, Standard_Real& B1,
+                                      Standard_Real& B2, Standard_Real& B3, Standard_Real& C1, Standard_Real& C2,
+                                      Standard_Real& C3, Standard_Real& D) const;
 
     //! Returns the radius of this cylinder.
     Standard_EXPORT Standard_Real Radius() const;
@@ -186,21 +188,25 @@ public:
 
     //! Computes the current point and the first derivatives in the
     //! directions U and V.
-    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const Standard_OVERRIDE;
+    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U,
+                            gp_Vec& D1V) const Standard_OVERRIDE;
 
     //! Computes the current point, the first and the second derivatives
     //! in the directions U and V.
-    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
+    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
 
     //! Computes the current point, the first, the second and the
     //! third   derivatives in the directions U and V.
-    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const Standard_OVERRIDE;
-
+    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV,
+                            gp_Vec& D3UVV) const Standard_OVERRIDE;
 
     //! Computes the derivative of order Nu in the direction u and Nv
     //! in the direction v.
     //! Raised if Nu + Nv < 1 or Nu < 0 or Nv < 0.
-    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const Standard_Integer Nv) const Standard_OVERRIDE;
+    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu,
+                              const Standard_Integer Nv) const Standard_OVERRIDE;
 
     //! Applies the transformation T to this cylinder.
     Standard_EXPORT void Transform(const gp_Trsf& T) Standard_OVERRIDE;
@@ -209,14 +215,13 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_CylindricalSurface, Geom_ElementarySurface)
 
 private:
-
     Standard_Real radius;
-
 };
 
 #endif // _Geom_CylindricalSurface_HeaderFile

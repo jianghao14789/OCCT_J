@@ -35,7 +35,6 @@
 #include <BRepApprox_TheComputeLineBezierOfApprox.hxx>
 #include <BRepApprox_MyGradientOfTheComputeLineBezierOfApprox.hxx>
 #include <AppParCurves_MultiBSpCurve.hxx>
- 
 
 #define ThePSurface BRepAdaptor_Surface
 #define ThePSurface_hxx <BRepAdaptor_Surface.hxx>
@@ -83,4 +82,3 @@
 #define ApproxInt_Approx BRepApprox_Approx
 #define ApproxInt_Approx_hxx <BRepApprox_Approx.hxx>
 #include <ApproxInt_Approx.gxx>
-

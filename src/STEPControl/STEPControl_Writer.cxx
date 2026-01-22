@@ -28,144 +28,128 @@
 #include <UnitsMethods.hxx>
 
 //=======================================================================
-//function : STEPControl_Writer
-//purpose  : 
+// function : STEPControl_Writer
+// purpose  :
 //=======================================================================
-STEPControl_Writer::STEPControl_Writer ()
-{
-  STEPControl_Controller::Init();
-  SetWS (new XSControl_WorkSession);
+STEPControl_Writer::STEPControl_Writer() {
+    STEPControl_Controller::Init();
+    SetWS(new XSControl_WorkSession);
 }
 
-
 //=======================================================================
-//function : STEPControl_Writer
+// function : STEPControl_Writer
 
-//purpose  : 
+// purpose  :
 //=======================================================================
 
-STEPControl_Writer::STEPControl_Writer
-  (const Handle(XSControl_WorkSession)& WS, const Standard_Boolean scratch)
-{
-  STEPControl_Controller::Init();
-  SetWS (WS,scratch);
+STEPControl_Writer::STEPControl_Writer(const Handle(XSControl_WorkSession) & WS, const Standard_Boolean scratch) {
+    STEPControl_Controller::Init();
+    SetWS(WS, scratch);
 }
 
-
 //=======================================================================
-//function : SetWS
+// function : SetWS
 
-//purpose  : 
+// purpose  :
 //=======================================================================
 
-void STEPControl_Writer::SetWS(const Handle(XSControl_WorkSession)& WS,
-                               const Standard_Boolean scratch)
-{
-  thesession = WS;
-  thesession->SelectNorm("STEP");
-  thesession->InitTransferReader(0);
-  Handle(StepData_StepModel) model = Model (scratch);
+void STEPControl_Writer::SetWS(const Handle(XSControl_WorkSession) & WS, const Standard_Boolean scratch) {
+    thesession = WS;
+    thesession->SelectNorm("STEP");
+    thesession->InitTransferReader(0);
+    Handle(StepData_StepModel) model = Model(scratch);
 }
 
-
 //=======================================================================
-//function : WS
-//purpose  : 
+// function : WS
+// purpose  :
 //=======================================================================
 
-Handle(XSControl_WorkSession) STEPControl_Writer::WS () const
-{
-  return thesession;
+Handle(XSControl_WorkSession) STEPControl_Writer::WS() const {
+    return thesession;
 }
 
-
 //=======================================================================
-//function : Model
-//purpose  : 
+// function : Model
+// purpose  :
 //=======================================================================
 
-Handle(StepData_StepModel) STEPControl_Writer::Model
-       (const Standard_Boolean newone)
-{
-  DeclareAndCast(StepData_StepModel,model,thesession->Model());
-  if (newone || model.IsNull())
-    model = GetCasted(StepData_StepModel,thesession->NewModel());
-  return model;
+Handle(StepData_StepModel) STEPControl_Writer::Model(const Standard_Boolean newone) {
+    DeclareAndCast(StepData_StepModel, model, thesession->Model());
+    if (newone || model.IsNull()) model = GetCasted(StepData_StepModel, thesession->NewModel());
+    return model;
 }
 
-
 //=======================================================================
-//function : SetTolerance
-//purpose  : 
+// function : SetTolerance
+// purpose  :
 //=======================================================================
 
-void STEPControl_Writer::SetTolerance (const Standard_Real Tol)
-{
-  DeclareAndCast(STEPControl_ActorWrite,act,WS()->NormAdaptor()->ActorWrite());
-  if (!act.IsNull()) act->SetTolerance (Tol);
+void STEPControl_Writer::SetTolerance(const Standard_Real Tol) {
+    DeclareAndCast(STEPControl_ActorWrite, act, WS()->NormAdaptor()->ActorWrite());
+    if (!act.IsNull()) act->SetTolerance(Tol);
 }
 
-
 //=======================================================================
-//function : UnsetTolerance
-//purpose  : 
+// function : UnsetTolerance
+// purpose  :
 //=======================================================================
 
-void STEPControl_Writer::UnsetTolerance ()
-{
-  SetTolerance (-1.);
+void STEPControl_Writer::UnsetTolerance() {
+    SetTolerance(-1.);
 }
 
-
 //=======================================================================
-//function : Transfer
-//purpose  : 
+// function : Transfer
+// purpose  :
 //=======================================================================
 
-IFSelect_ReturnStatus STEPControl_Writer::Transfer
-  (const TopoDS_Shape& sh,
-   const STEPControl_StepModelType mode,
-   const Standard_Boolean compgraph,
-   const Message_ProgressRange& theProgress)
-{
-  Standard_Integer mws = -1;
-  switch (mode) {
-    case STEPControl_AsIs :                   mws = 0;  break;
-    case STEPControl_FacetedBrep :            mws = 1;  break;
-    case STEPControl_ShellBasedSurfaceModel : mws = 2;  break;
-    case STEPControl_ManifoldSolidBrep :      mws = 3;  break;
-    case STEPControl_GeometricCurveSet :      mws = 4;  break;
-    default : break;
-  }
-  if (mws < 0) return IFSelect_RetError;    // cas non reconnu
-  thesession->TransferWriter()->SetTransferMode (mws);
-  if (!Model()->IsInitializedUnit())
-  {
-    XSAlgo::AlgoContainer()->PrepareForTransfer(); // update unit info
-    Model()->SetLocalLengthUnit(UnitsMethods::GetCasCadeLengthUnit());
-  }
-  return thesession->TransferWriteShape(sh, compgraph, theProgress);
+IFSelect_ReturnStatus STEPControl_Writer::Transfer(const TopoDS_Shape& sh, const STEPControl_StepModelType mode,
+                                                   const Standard_Boolean compgraph,
+                                                   const Message_ProgressRange& theProgress) {
+    Standard_Integer mws = -1;
+    switch (mode) {
+        case STEPControl_AsIs:
+            mws = 0;
+            break;
+        case STEPControl_FacetedBrep:
+            mws = 1;
+            break;
+        case STEPControl_ShellBasedSurfaceModel:
+            mws = 2;
+            break;
+        case STEPControl_ManifoldSolidBrep:
+            mws = 3;
+            break;
+        case STEPControl_GeometricCurveSet:
+            mws = 4;
+            break;
+        default:
+            break;
+    }
+    if (mws < 0) return IFSelect_RetError; // cas non reconnu
+    thesession->TransferWriter()->SetTransferMode(mws);
+    if (!Model()->IsInitializedUnit()) {
+        XSAlgo::AlgoContainer()->PrepareForTransfer(); // update unit info
+        Model()->SetLocalLengthUnit(UnitsMethods::GetCasCadeLengthUnit());
+    }
+    return thesession->TransferWriteShape(sh, compgraph, theProgress);
 }
 
-
 //=======================================================================
-//function : Write
-//purpose  : 
+// function : Write
+// purpose  :
 //=======================================================================
 
-IFSelect_ReturnStatus STEPControl_Writer::Write (const Standard_CString filename)
-{
-  return thesession->SendAll(filename);
+IFSelect_ReturnStatus STEPControl_Writer::Write(const Standard_CString filename) {
+    return thesession->SendAll(filename);
 }
 
-
 //=======================================================================
-//function : PrintStatsTransfer
-//purpose  : 
+// function : PrintStatsTransfer
+// purpose  :
 //=======================================================================
 
-void STEPControl_Writer::PrintStatsTransfer
-  (const Standard_Integer what, const Standard_Integer mode) const
-{
-  thesession->TransferWriter()->PrintStats (what,mode);
+void STEPControl_Writer::PrintStatsTransfer(const Standard_Integer what, const Standard_Integer mode) const {
+    thesession->TransferWriter()->PrintStats(what, mode);
 }

@@ -14,8 +14,8 @@
 // commercial license or contractual agreement.
 
 //            Automatically created from NCollection_Array2.hxx by GAWK
-// Purpose:   The class Array2 represents bi-dimensional arrays 
-//            of fixed size known at run time. 
+// Purpose:   The class Array2 represents bi-dimensional arrays
+//            of fixed size known at run time.
 //            The ranges of indices are user defined.
 // Warning:   Programs clients of such class must be independent
 //            of the range of the first element. Then, a C++ for
@@ -30,7 +30,6 @@
 
 // *********************************************** Template for Array2 class
 
-#define DEFINE_ARRAY2(_ClassName_, _BaseCollection_, TheItemType)              \
-typedef NCollection_Array2<TheItemType > _ClassName_;
+#define DEFINE_ARRAY2(_ClassName_, _BaseCollection_, TheItemType) typedef NCollection_Array2<TheItemType> _ClassName_;
 
 #endif

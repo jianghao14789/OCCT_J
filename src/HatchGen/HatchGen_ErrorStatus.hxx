@@ -18,13 +18,12 @@
 #define _HatchGen_ErrorStatus_HeaderFile
 
 //! Error status.
-enum HatchGen_ErrorStatus
-{
-HatchGen_NoProblem,
-HatchGen_TrimFailure,
-HatchGen_TransitionFailure,
-HatchGen_IncoherentParity,
-HatchGen_IncompatibleStates
+enum HatchGen_ErrorStatus {
+    HatchGen_NoProblem,
+    HatchGen_TrimFailure,
+    HatchGen_TransitionFailure,
+    HatchGen_IncoherentParity,
+    HatchGen_IncompatibleStates
 };
 
 #endif // _HatchGen_ErrorStatus_HeaderFile

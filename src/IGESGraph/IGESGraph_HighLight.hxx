@@ -24,7 +24,6 @@
 #include <IGESData_IGESEntity.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class IGESGraph_HighLight;
 DEFINE_STANDARD_HANDLE(IGESGraph_HighLight, IGESData_IGESEntity)
 
@@ -33,53 +32,33 @@ DEFINE_STANDARD_HANDLE(IGESGraph_HighLight, IGESData_IGESEntity)
 //!
 //! Attaches information that an entity is to be
 //! displayed in some system dependent manner
-class IGESGraph_HighLight : public IGESData_IGESEntity
-{
+class IGESGraph_HighLight : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESGraph_HighLight();
 
-  
-  Standard_EXPORT IGESGraph_HighLight();
-  
-  //! This method is used to set the fields of the class
-  //! HighLight
-  //! - nbProps          : Number of property values (NP = 1)
-  //! - aHighLightStatus : HighLight Flag
-  Standard_EXPORT void Init (const Standard_Integer nbProps, const Standard_Integer aHighLightStatus);
-  
-  //! returns the number of property values in <me>
-  Standard_EXPORT Standard_Integer NbPropertyValues() const;
-  
-  //! returns 0 if <me> is not highlighted(default),
-  //! 1 if <me> is highlighted
-  Standard_EXPORT Standard_Integer HighLightStatus() const;
-  
-  //! returns True if entity is highlighted
-  Standard_EXPORT Standard_Boolean IsHighLighted() const;
+    //! This method is used to set the fields of the class
+    //! HighLight
+    //! - nbProps          : Number of property values (NP = 1)
+    //! - aHighLightStatus : HighLight Flag
+    Standard_EXPORT void Init(const Standard_Integer nbProps, const Standard_Integer aHighLightStatus);
 
+    //! returns the number of property values in <me>
+    Standard_EXPORT Standard_Integer NbPropertyValues() const;
 
+    //! returns 0 if <me> is not highlighted(default),
+    //! 1 if <me> is highlighted
+    Standard_EXPORT Standard_Integer HighLightStatus() const;
 
+    //! returns True if entity is highlighted
+    Standard_EXPORT Standard_Boolean IsHighLighted() const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESGraph_HighLight,IGESData_IGESEntity)
+    DEFINE_STANDARD_RTTIEXT(IGESGraph_HighLight, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer theNbPropertyValues;
-  Standard_Integer theHighLight;
-
-
+    Standard_Integer theNbPropertyValues;
+    Standard_Integer theHighLight;
 };
-
-
-
-
-
-
 
 #endif // _IGESGraph_HighLight_HeaderFile

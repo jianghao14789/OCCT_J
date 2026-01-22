@@ -65,14 +65,9 @@ class math_ComputeGaussPointsAndWeights;
 class math_ComputeKronrodPointsAndWeights;
 class math_DoubleTab;
 
-
-
-class math
-{
+class math {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT static Standard_Integer GaussPointsMax();
 
@@ -93,7 +88,8 @@ public:
     //! computed.
     //! Returns Standard_True if Index is positive, Points' and Weights'
     //! length is equal to Index, Points and Weights are successfully computed.
-    Standard_EXPORT static Standard_Boolean OrderedGaussPointsAndWeights(const Standard_Integer Index, math_Vector& Points, math_Vector& Weights);
+    Standard_EXPORT static Standard_Boolean OrderedGaussPointsAndWeights(const Standard_Integer Index,
+                                                                         math_Vector& Points, math_Vector& Weights);
 
     //! Returns a vector of Kronrod points and a vector of their
     //! weights for Gauss-Kronrod computation method.
@@ -108,12 +104,11 @@ public:
     //! if Index is odd, it is equal to the size of Points and Weights
     //! and the computation of Points and Weights is performed successfully.
     //! Otherwise this method returns Standard_False.
-    Standard_EXPORT static Standard_Boolean KronrodPointsAndWeights(const Standard_Integer Index, math_Vector& Points, math_Vector& Weights);
+    Standard_EXPORT static Standard_Boolean KronrodPointsAndWeights(const Standard_Integer Index, math_Vector& Points,
+                                                                    math_Vector& Weights);
 
 protected:
-
 private:
-
     friend class math_Matrix;
     friend class math_Function;
     friend class math_FunctionWithDerivative;

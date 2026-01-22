@@ -28,58 +28,61 @@ class Standard_OutOfRange;
 //! This comes into play in the detection of meshing and triangulation in surfaces.
 //! In some cases this class can raise Standard_ConstructionError and
 //! Standard_OutOfRange exceptions. For more details see Select3D_SensitivePoly.
-class Select3D_SensitiveTriangle : public Select3D_SensitiveEntity
-{
+class Select3D_SensitiveTriangle : public Select3D_SensitiveEntity {
 public:
+    //! Constructs a sensitive triangle object defined by the
+    //! owner theOwnerId, the points P1, P2, P3, and the type of sensitivity Sensitivity.
+    Standard_EXPORT Select3D_SensitiveTriangle(const Handle(SelectMgr_EntityOwner) & theOwnerId, const gp_Pnt& thePnt0,
+                                               const gp_Pnt& thePnt1, const gp_Pnt& thePnt2,
+                                               const Select3D_TypeOfSensitivity theType = Select3D_TOS_INTERIOR);
 
-  //! Constructs a sensitive triangle object defined by the
-  //! owner theOwnerId, the points P1, P2, P3, and the type of sensitivity Sensitivity.
-  Standard_EXPORT Select3D_SensitiveTriangle (const Handle(SelectMgr_EntityOwner)& theOwnerId,
-                                              const gp_Pnt& thePnt0,
-                                              const gp_Pnt& thePnt1,
-                                              const gp_Pnt& thePnt2,
-                                              const Select3D_TypeOfSensitivity theType = Select3D_TOS_INTERIOR);
+    //! Checks whether the triangle overlaps current selecting volume
+    Standard_EXPORT virtual Standard_Boolean Matches(SelectBasics_SelectingVolumeManager& theMgr,
+                                                     SelectBasics_PickResult& thePickResult) Standard_OVERRIDE;
 
-  //! Checks whether the triangle overlaps current selecting volume
-  Standard_EXPORT virtual Standard_Boolean Matches (SelectBasics_SelectingVolumeManager& theMgr,
-                                                    SelectBasics_PickResult& thePickResult) Standard_OVERRIDE;
+    //! Returns the 3D points P1, P2, P3 used at the time of construction.
+    void Points3D(gp_Pnt& thePnt0, gp_Pnt& thePnt1, gp_Pnt& thePnt2) const {
+        thePnt0 = myPoints[0];
+        thePnt1 = myPoints[1];
+        thePnt2 = myPoints[2];
+    }
 
-  //! Returns the 3D points P1, P2, P3 used at the time of construction.
-  void Points3D (gp_Pnt& thePnt0, gp_Pnt& thePnt1, gp_Pnt& thePnt2) const
-  {
-    thePnt0 = myPoints[0];
-    thePnt1 = myPoints[1];
-    thePnt2 = myPoints[2];
-  }
+    //! Returns the center point of the sensitive triangle created at construction time.
+    gp_Pnt Center3D() const {
+        return myCentroid;
+    }
 
-  //! Returns the center point of the sensitive triangle created at construction time.
-  gp_Pnt Center3D() const { return myCentroid; }
+    //! Returns the copy of this
+    Standard_EXPORT virtual Handle(Select3D_SensitiveEntity) GetConnected() Standard_OVERRIDE;
 
-  //! Returns the copy of this
-  Standard_EXPORT virtual Handle(Select3D_SensitiveEntity) GetConnected() Standard_OVERRIDE;
+    //! Returns bounding box of the triangle. If location transformation is set, it
+    //! will be applied
+    Standard_EXPORT virtual Select3D_BndBox3d BoundingBox() Standard_OVERRIDE;
 
-  //! Returns bounding box of the triangle. If location transformation is set, it
-  //! will be applied
-  Standard_EXPORT virtual Select3D_BndBox3d BoundingBox() Standard_OVERRIDE;
+    //! Returns TRUE if BVH tree is in invalidated state
+    virtual Standard_Boolean ToBuildBVH() const Standard_OVERRIDE {
+        return Standard_False;
+    }
 
-  //! Returns TRUE if BVH tree is in invalidated state
-  virtual Standard_Boolean ToBuildBVH() const Standard_OVERRIDE { return Standard_False; }
+    //! Returns the amount of points
+    virtual Standard_Integer NbSubElements() const Standard_OVERRIDE {
+        return 3;
+    }
 
-  //! Returns the amount of points
-  virtual Standard_Integer NbSubElements() const Standard_OVERRIDE { return 3; }
+    virtual gp_Pnt CenterOfGeometry() const Standard_OVERRIDE {
+        return myCentroid;
+    }
 
-  virtual gp_Pnt CenterOfGeometry() const Standard_OVERRIDE { return myCentroid; }
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
-
-  DEFINE_STANDARD_RTTIEXT(Select3D_SensitiveTriangle,Select3D_SensitiveEntity)
+    DEFINE_STANDARD_RTTIEXT(Select3D_SensitiveTriangle, Select3D_SensitiveEntity)
 
 private:
-
-  Select3D_TypeOfSensitivity mySensType;     //!< Type of sensitivity: boundary or interior
-  gp_Pnt                     myCentroid;     //!< Center of triangle
-  gp_Pnt                     myPoints[3];
+    Select3D_TypeOfSensitivity mySensType; //!< Type of sensitivity: boundary or interior
+    gp_Pnt myCentroid;                     //!< Center of triangle
+    gp_Pnt myPoints[3];
 };
 
 DEFINE_STANDARD_HANDLE(Select3D_SensitiveTriangle, Select3D_SensitiveEntity)

@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepVisual_RenderingPropertiesSelect> StepVisual_Array1OfRenderingPropertiesSelect;
 
-
 #endif

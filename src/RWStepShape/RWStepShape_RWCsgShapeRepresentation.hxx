@@ -28,44 +28,24 @@ class StepShape_CsgShapeRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for CsgShapeRepresentation
-class RWStepShape_RWCsgShapeRepresentation 
-{
+class RWStepShape_RWCsgShapeRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWCsgShapeRepresentation();
 
-  
-  Standard_EXPORT RWStepShape_RWCsgShapeRepresentation();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_CsgShapeRepresentation)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_CsgShapeRepresentation)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_CsgShapeRepresentation)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_CsgShapeRepresentation) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_CsgShapeRepresentation) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_CsgShapeRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWCsgShapeRepresentation_HeaderFile

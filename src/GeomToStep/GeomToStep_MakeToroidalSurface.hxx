@@ -25,44 +25,21 @@
 class StepGeom_ToroidalSurface;
 class Geom_ToroidalSurface;
 
-
 //! This class implements the mapping between class
 //! ToroidalSurface from Geom and the class
 //! ToroidalSurface from StepGeom which describes a
 //! toroidal_surface from Prostep
-class GeomToStep_MakeToroidalSurface  : public GeomToStep_Root
-{
+class GeomToStep_MakeToroidalSurface : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeToroidalSurface(const Handle(Geom_ToroidalSurface) & TorSurf);
 
-  
-  Standard_EXPORT GeomToStep_MakeToroidalSurface(const Handle(Geom_ToroidalSurface)& TorSurf);
-  
-  Standard_EXPORT const Handle(StepGeom_ToroidalSurface)& Value() const;
-
-
-
+    Standard_EXPORT const Handle(StepGeom_ToroidalSurface) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_ToroidalSurface) theToroidalSurface;
-
-
+    Handle(StepGeom_ToroidalSurface) theToroidalSurface;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeToroidalSurface_HeaderFile

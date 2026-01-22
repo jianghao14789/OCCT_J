@@ -22,35 +22,28 @@
 #include <StepRepr_RepresentationItem.hxx>
 class TCollection_HAsciiString;
 
-
 class StepRepr_IntegerRepresentationItem;
 DEFINE_STANDARD_HANDLE(StepRepr_IntegerRepresentationItem, StepRepr_RepresentationItem)
 
-
-class StepRepr_IntegerRepresentationItem : public StepRepr_RepresentationItem
-{
+class StepRepr_IntegerRepresentationItem : public StepRepr_RepresentationItem {
 
 public:
+    //! Returns a IntegerRepresentationItem
+    Standard_EXPORT StepRepr_IntegerRepresentationItem();
 
-  
-  //! Returns a IntegerRepresentationItem
-  Standard_EXPORT StepRepr_IntegerRepresentationItem();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& theName, const Standard_Integer theValue);
-  
-  inline void SetValue(const Standard_Integer theValue)
-  {
-    value = theValue;
-  }
-  
-  inline Standard_Integer Value() const 
-  {
-    return value;
-  }
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theName, const Standard_Integer theValue);
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_IntegerRepresentationItem,StepRepr_RepresentationItem)
+    inline void SetValue(const Standard_Integer theValue) {
+        value = theValue;
+    }
+
+    inline Standard_Integer Value() const {
+        return value;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_IntegerRepresentationItem, StepRepr_RepresentationItem)
 
 private:
-  Standard_Integer value;
+    Standard_Integer value;
 };
 #endif // _StepRepr_IntegerRepresentationItem_HeaderFile

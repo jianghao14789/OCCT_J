@@ -25,48 +25,26 @@
 class TCollection_HAsciiString;
 class StepGeom_Axis2Placement;
 
-
 class StepGeom_Conic;
 DEFINE_STANDARD_HANDLE(StepGeom_Conic, StepGeom_Curve)
 
-
-class StepGeom_Conic : public StepGeom_Curve
-{
+class StepGeom_Conic : public StepGeom_Curve {
 
 public:
+    //! Returns a Conic
+    Standard_EXPORT StepGeom_Conic();
 
-  
-  //! Returns a Conic
-  Standard_EXPORT StepGeom_Conic();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const StepGeom_Axis2Placement& aPosition);
-  
-  Standard_EXPORT void SetPosition (const StepGeom_Axis2Placement& aPosition);
-  
-  Standard_EXPORT StepGeom_Axis2Placement Position() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName, const StepGeom_Axis2Placement& aPosition);
 
+    Standard_EXPORT void SetPosition(const StepGeom_Axis2Placement& aPosition);
 
+    Standard_EXPORT StepGeom_Axis2Placement Position() const;
 
-
-  DEFINE_STANDARD_RTTIEXT(StepGeom_Conic,StepGeom_Curve)
+    DEFINE_STANDARD_RTTIEXT(StepGeom_Conic, StepGeom_Curve)
 
 protected:
-
-
-
-
 private:
-
-
-  StepGeom_Axis2Placement position;
-
-
+    StepGeom_Axis2Placement position;
 };
-
-
-
-
-
-
 
 #endif // _StepGeom_Conic_HeaderFile

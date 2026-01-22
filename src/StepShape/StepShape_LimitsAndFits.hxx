@@ -22,62 +22,44 @@
 #include <Standard_Transient.hxx>
 class TCollection_HAsciiString;
 
-
 class StepShape_LimitsAndFits;
 DEFINE_STANDARD_HANDLE(StepShape_LimitsAndFits, Standard_Transient)
 
 //! Added for Dimensional Tolerances
-class StepShape_LimitsAndFits : public Standard_Transient
-{
+class StepShape_LimitsAndFits : public Standard_Transient {
 
 public:
+    Standard_EXPORT StepShape_LimitsAndFits();
 
-  
-  Standard_EXPORT StepShape_LimitsAndFits();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& form_variance, const Handle(TCollection_HAsciiString)& zone_variance, const Handle(TCollection_HAsciiString)& grade, const Handle(TCollection_HAsciiString)& source);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) FormVariance() const;
-  
-  Standard_EXPORT void SetFormVariance (const Handle(TCollection_HAsciiString)& form_variance);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) ZoneVariance() const;
-  
-  Standard_EXPORT void SetZoneVariance (const Handle(TCollection_HAsciiString)& zone_variance);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) Grade() const;
-  
-  Standard_EXPORT void SetGrade (const Handle(TCollection_HAsciiString)& grade);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) Source() const;
-  
-  Standard_EXPORT void SetSource (const Handle(TCollection_HAsciiString)& source);
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & form_variance,
+                              const Handle(TCollection_HAsciiString) & zone_variance,
+                              const Handle(TCollection_HAsciiString) & grade,
+                              const Handle(TCollection_HAsciiString) & source);
 
+    Standard_EXPORT Handle(TCollection_HAsciiString) FormVariance() const;
 
+    Standard_EXPORT void SetFormVariance(const Handle(TCollection_HAsciiString) & form_variance);
 
+    Standard_EXPORT Handle(TCollection_HAsciiString) ZoneVariance() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepShape_LimitsAndFits,Standard_Transient)
+    Standard_EXPORT void SetZoneVariance(const Handle(TCollection_HAsciiString) & zone_variance);
+
+    Standard_EXPORT Handle(TCollection_HAsciiString) Grade() const;
+
+    Standard_EXPORT void SetGrade(const Handle(TCollection_HAsciiString) & grade);
+
+    Standard_EXPORT Handle(TCollection_HAsciiString) Source() const;
+
+    Standard_EXPORT void SetSource(const Handle(TCollection_HAsciiString) & source);
+
+    DEFINE_STANDARD_RTTIEXT(StepShape_LimitsAndFits, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) theFormVariance;
-  Handle(TCollection_HAsciiString) theZoneVariance;
-  Handle(TCollection_HAsciiString) theGrade;
-  Handle(TCollection_HAsciiString) theSource;
-
-
+    Handle(TCollection_HAsciiString) theFormVariance;
+    Handle(TCollection_HAsciiString) theZoneVariance;
+    Handle(TCollection_HAsciiString) theGrade;
+    Handle(TCollection_HAsciiString) theSource;
 };
-
-
-
-
-
-
 
 #endif // _StepShape_LimitsAndFits_HeaderFile

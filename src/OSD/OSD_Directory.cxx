@@ -43,8 +43,7 @@ const OSD_WhoAmI Iam = OSD_WDirectory;
 // function : OSD_Directory
 // purpose  :
 // =======================================================================
-OSD_Directory::OSD_Directory()
-{
+OSD_Directory::OSD_Directory() {
     //
 }
 
@@ -52,9 +51,7 @@ OSD_Directory::OSD_Directory()
 // function : OSD_Directory
 // purpose  :
 // =======================================================================
-OSD_Directory::OSD_Directory(const OSD_Path& theName)
-    : OSD_FileNode(theName)
-{
+OSD_Directory::OSD_Directory(const OSD_Path& theName) : OSD_FileNode(theName) {
     //
 }
 
@@ -62,38 +59,32 @@ OSD_Directory::OSD_Directory(const OSD_Path& theName)
 // function : Build
 // purpose  :
 // =======================================================================
-void OSD_Directory::Build(const OSD_Protection& theProtect)
-{
+void OSD_Directory::Build(const OSD_Protection& theProtect) {
 #ifdef _WIN32
     TCollection_AsciiString aDirName;
     myPath.SystemName(aDirName);
-    if (aDirName.IsEmpty())
-    {
+    if (aDirName.IsEmpty()) {
         throw Standard_ProgramError("OSD_Directory::Build(): incorrect call - no directory name");
     }
 
     Standard_Boolean isOK = Exists();
-    if (!isOK)
-    {
+    if (!isOK) {
         // myError will be set to fail by Exists() if intermediate dirs do not exist
         myError.Reset();
 
         // create directory if it does not exist;
         TCollection_ExtendedString aDirNameW(aDirName);
-        if (CreateDirectoryW(aDirNameW.ToWideString(), NULL))
-        {
+        if (CreateDirectoryW(aDirNameW.ToWideString(), NULL)) {
             isOK = Standard_True;
         }
         // if failed due to absence of intermediate directories, create them recursively
-        else if (GetLastError() == ERROR_PATH_NOT_FOUND)
-        {
+        else if (GetLastError() == ERROR_PATH_NOT_FOUND) {
             OSD_Path aSupPath = myPath;
             aSupPath.UpTrek();
             aSupPath.SetName(myPath.TrekValue(myPath.TrekLength())); // incredible, but required!
             OSD_Directory aSupDir(aSupPath);
             aSupDir.Build(theProtect);
-            if (aSupDir.Failed())
-            {
+            if (aSupDir.Failed()) {
                 myError = aSupDir.myError;
                 return;
             }
@@ -101,16 +92,13 @@ void OSD_Directory::Build(const OSD_Protection& theProtect)
         }
     }
 
-    if (isOK)
-    {
+    if (isOK) {
 #ifndef OCCT_UWP
         SetProtection(theProtect);
 #else
         (void)theProtect;
 #endif
-    }
-    else
-    {
+    } else {
         _osd_wnt_set_error(myError, OSD_WDirectory);
     }
 #else
@@ -119,22 +107,19 @@ void OSD_Directory::Build(const OSD_Protection& theProtect)
     myPath.SystemName(aBuffer);
     umask(0);
     int aStatus = mkdir(aBuffer.ToCString(), anInternalProt);
-    if (aStatus == -1 && errno == ENOENT)
-    {
+    if (aStatus == -1 && errno == ENOENT) {
         OSD_Path aSupPath = myPath;
         aSupPath.UpTrek();
         aSupPath.SetName(myPath.TrekValue(myPath.TrekLength())); // incredible, but required!
         OSD_Directory aSupDir(aSupPath);
         aSupDir.Build(theProtect);
-        if (aSupDir.Failed())
-        {
+        if (aSupDir.Failed()) {
             myError = aSupDir.myError;
             return;
         }
         aStatus = mkdir(aBuffer.ToCString(), anInternalProt);
     }
-    if (aStatus == -1 && errno != EEXIST)
-    {
+    if (aStatus == -1 && errno != EEXIST) {
         char anErrMsg[2048];
         Sprintf(anErrMsg, "OSD_Directory::Build Directory \"%.2000s\"", aBuffer.ToCString());
         myError.SetValue(errno, Iam, anErrMsg);
@@ -146,12 +131,10 @@ void OSD_Directory::Build(const OSD_Protection& theProtect)
 // function : BuildTemporary
 // purpose  :
 // =======================================================================
-OSD_Directory OSD_Directory::BuildTemporary()
-{
+OSD_Directory OSD_Directory::BuildTemporary() {
 #ifdef _WIN32
     wchar_t* aTmpNameW = _wtmpnam(NULL);
-    if (aTmpNameW == NULL)
-    {
+    if (aTmpNameW == NULL) {
         return OSD_Directory();
     }
 
@@ -164,8 +147,7 @@ OSD_Directory OSD_Directory::BuildTemporary()
 #else
     // create a temporary directory with 0700 permissions
     char aTmpName[] = "/tmp/CSFXXXXXX";
-    if (NULL == mkdtemp(aTmpName))
-    {
+    if (NULL == mkdtemp(aTmpName)) {
         return OSD_Directory(); // can't create a directory
     }
 

@@ -28,19 +28,17 @@
 
 class math_Matrix;
 
-
 //! This class describes the function on a parametric surface.
 //! the form of the function is F(u,v) = 0 where u and v are
 //! the parameteric coordinates of a point on the surface,
 //! to compute the contours of the surface.
 class Contap_SurfFunction : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Contap_SurfFunction();
 
-    Standard_EXPORT void Set(const Handle(Adaptor3d_Surface)& S);
+    Standard_EXPORT void Set(const Handle(Adaptor3d_Surface) & S);
 
     void Set(const gp_Pnt& Eye);
 
@@ -91,17 +89,14 @@ public:
 
     Standard_Real Angle() const;
 
-    const Handle(Adaptor3d_Surface)& Surface() const;
+    const Handle(Adaptor3d_Surface) & Surface() const;
 
     //! Method is entered for compatibility with IntPatch_TheSurfFunction.
-    const Handle(Adaptor3d_Surface)& PSurface() const
-    {
+    const Handle(Adaptor3d_Surface) & PSurface() const {
         return Surface();
     }
 
-
 protected:
-
 private:
     Handle(Adaptor3d_Surface) mySurf;
     Standard_Real myMean;

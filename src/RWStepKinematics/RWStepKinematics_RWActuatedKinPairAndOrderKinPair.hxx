@@ -27,21 +27,21 @@ class StepData_StepWriter;
 class Interface_EntityIterator;
 class StepKinematics_ActuatedKinPairAndOrderKinPair;
 
-
 //! Read & Write Module for GeoTolAndGeoTolWthMod
-class RWStepKinematics_RWActuatedKinPairAndOrderKinPair
-{
+class RWStepKinematics_RWActuatedKinPairAndOrderKinPair {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWActuatedKinPairAndOrderKinPair();
 
-  
-  Standard_EXPORT RWStepKinematics_RWActuatedKinPairAndOrderKinPair();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_ActuatedKinPairAndOrderKinPair)& theEnt) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& theSW, const Handle(StepKinematics_ActuatedKinPairAndOrderKinPair)& theEnt) const;
-  
-  Standard_EXPORT void Share (const Handle(StepKinematics_ActuatedKinPairAndOrderKinPair)& theEnt, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_ActuatedKinPairAndOrderKinPair) & theEnt) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_ActuatedKinPairAndOrderKinPair) & theEnt) const;
+
+    Standard_EXPORT void Share(const Handle(StepKinematics_ActuatedKinPairAndOrderKinPair) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWGeoTolAndGeoTolWthMod_HeaderFile

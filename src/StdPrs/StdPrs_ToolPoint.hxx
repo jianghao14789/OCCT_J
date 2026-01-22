@@ -23,14 +23,12 @@
 
 class Geom_Point;
 
-class StdPrs_ToolPoint 
-{
+class StdPrs_ToolPoint {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  Standard_EXPORT static void Coord (const Handle(Geom_Point)& aPoint, Standard_Real& X, Standard_Real& Y, Standard_Real& Z);
-
+    Standard_EXPORT static void Coord(const Handle(Geom_Point) & aPoint, Standard_Real& X, Standard_Real& Y,
+                                      Standard_Real& Z);
 };
 
 #endif // _StdPrs_ToolPoint_HeaderFile

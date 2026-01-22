@@ -25,53 +25,32 @@
 class TDF_Data;
 class Draw_Display;
 
-
 class DDF_Data;
 DEFINE_STANDARD_HANDLE(DDF_Data, Draw_Drawable3D)
 
 //! Encapsulates a data framework from TDF in a drawable object
-class DDF_Data : public Draw_Drawable3D
-{
+class DDF_Data : public Draw_Drawable3D {
 
 public:
+    Standard_EXPORT DDF_Data(const Handle(TDF_Data) & aDF);
 
-  
-  Standard_EXPORT DDF_Data(const Handle(TDF_Data)& aDF);
-  
-  Standard_EXPORT void DrawOn (Draw_Display& dis) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Handle(Draw_Drawable3D) Copy() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Dump (Standard_OStream& S) const Standard_OVERRIDE;
-  
-  Standard_EXPORT void DataFramework (const Handle(TDF_Data)& aDF);
-  
-  Standard_EXPORT Handle(TDF_Data) DataFramework() const;
-  
-  Standard_EXPORT virtual void Whatis (Draw_Interpretor& I) const Standard_OVERRIDE;
+    Standard_EXPORT void DrawOn(Draw_Display& dis) const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Handle(Draw_Drawable3D) Copy() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void Dump(Standard_OStream& S) const Standard_OVERRIDE;
 
+    Standard_EXPORT void DataFramework(const Handle(TDF_Data) & aDF);
 
-  DEFINE_STANDARD_RTTIEXT(DDF_Data,Draw_Drawable3D)
+    Standard_EXPORT Handle(TDF_Data) DataFramework() const;
+
+    Standard_EXPORT virtual void Whatis(Draw_Interpretor& I) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(DDF_Data, Draw_Drawable3D)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TDF_Data) myDF;
-
-
+    Handle(TDF_Data) myDF;
 };
-
-
-
-
-
-
 
 #endif // _DDF_Data_HeaderFile

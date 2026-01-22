@@ -17,12 +17,6 @@
 #ifndef _Vrml_VertexOrdering_HeaderFile
 #define _Vrml_VertexOrdering_HeaderFile
 
-
-enum Vrml_VertexOrdering
-{
-Vrml_UNKNOWN_ORDERING,
-Vrml_CLOCKWISE,
-Vrml_COUNTERCLOCKWISE
-};
+enum Vrml_VertexOrdering { Vrml_UNKNOWN_ORDERING, Vrml_CLOCKWISE, Vrml_COUNTERCLOCKWISE };
 
 #endif // _Vrml_VertexOrdering_HeaderFile

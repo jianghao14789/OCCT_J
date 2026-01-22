@@ -26,10 +26,10 @@ class Prs3d_InvalidAngle;
 DEFINE_STANDARD_HANDLE(Prs3d_InvalidAngle, Standard_RangeError)
 
 #if !defined No_Exception && !defined No_Prs3d_InvalidAngle
-  #define Prs3d_InvalidAngle_Raise_if(CONDITION, MESSAGE) \
-  if (CONDITION) throw Prs3d_InvalidAngle(MESSAGE);
+#define Prs3d_InvalidAngle_Raise_if(CONDITION, MESSAGE)                                                                \
+    if (CONDITION) throw Prs3d_InvalidAngle(MESSAGE);
 #else
-  #define Prs3d_InvalidAngle_Raise_if(CONDITION, MESSAGE)
+#define Prs3d_InvalidAngle_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(Prs3d_InvalidAngle, Standard_RangeError)

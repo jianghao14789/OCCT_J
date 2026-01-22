@@ -23,69 +23,56 @@
 IMPLEMENT_STANDARD_RTTIEXT(BinMXCAFDoc_NoteCommentDriver, BinMXCAFDoc_NoteDriver)
 
 //=======================================================================
-//function :
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-BinMXCAFDoc_NoteCommentDriver::BinMXCAFDoc_NoteCommentDriver(const Handle(Message_Messenger)& theMsgDriver)
-  : BinMXCAFDoc_NoteDriver(theMsgDriver, STANDARD_TYPE(XCAFDoc_NoteComment)->Name())
-{
+BinMXCAFDoc_NoteCommentDriver::BinMXCAFDoc_NoteCommentDriver(const Handle(Message_Messenger) & theMsgDriver)
+    : BinMXCAFDoc_NoteDriver(theMsgDriver, STANDARD_TYPE(XCAFDoc_NoteComment)->Name()) {}
+
+//=======================================================================
+// function :
+// purpose  :
+//=======================================================================
+Handle(TDF_Attribute) BinMXCAFDoc_NoteCommentDriver::NewEmpty() const {
+    return new XCAFDoc_NoteComment();
 }
 
 //=======================================================================
-//function :
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Handle(TDF_Attribute) BinMXCAFDoc_NoteCommentDriver::NewEmpty() const
-{
-  return new XCAFDoc_NoteComment();
+Standard_Boolean BinMXCAFDoc_NoteCommentDriver::Paste(const BinObjMgt_Persistent& theSource,
+                                                      const Handle(TDF_Attribute) & theTarget,
+                                                      BinObjMgt_RRelocationTable& theRelocTable) const {
+    if (!BinMXCAFDoc_NoteDriver::Paste(theSource, theTarget, theRelocTable)) return Standard_False;
+
+    Handle(XCAFDoc_NoteComment) aNote = Handle(XCAFDoc_NoteComment)::DownCast(theTarget);
+    if (aNote.IsNull()) return Standard_False;
+
+    TCollection_ExtendedString aComment;
+    if (!(theSource >> aComment)) return Standard_False;
+
+    aNote->Set(aComment);
+
+    return Standard_True;
 }
 
 //=======================================================================
-//function :
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BinMXCAFDoc_NoteCommentDriver::Paste(const BinObjMgt_Persistent&  theSource,
-                                                      const Handle(TDF_Attribute)& theTarget,
-                                                      BinObjMgt_RRelocationTable&  theRelocTable) const
-{
-  if (!BinMXCAFDoc_NoteDriver::Paste(theSource, theTarget, theRelocTable))
-    return Standard_False;
+void BinMXCAFDoc_NoteCommentDriver::Paste(const Handle(TDF_Attribute) & theSource, BinObjMgt_Persistent& theTarget,
+                                          BinObjMgt_SRelocationTable& theRelocTable) const {
+    BinMXCAFDoc_NoteDriver::Paste(theSource, theTarget, theRelocTable);
 
-  Handle(XCAFDoc_NoteComment) aNote = Handle(XCAFDoc_NoteComment)::DownCast(theTarget);
-  if (aNote.IsNull())
-    return Standard_False;
-
-  TCollection_ExtendedString aComment;
-  if (!(theSource >> aComment))
-    return Standard_False;
-
-  aNote->Set(aComment);
-
-  return Standard_True;
+    Handle(XCAFDoc_NoteComment) aNote = Handle(XCAFDoc_NoteComment)::DownCast(theSource);
+    if (!aNote.IsNull()) theTarget << aNote->Comment();
 }
 
 //=======================================================================
-//function :
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BinMXCAFDoc_NoteCommentDriver::Paste(const Handle(TDF_Attribute)& theSource,
-                                          BinObjMgt_Persistent&        theTarget,
-                                          BinObjMgt_SRelocationTable&  theRelocTable) const
-{
-  BinMXCAFDoc_NoteDriver::Paste(theSource, theTarget, theRelocTable);
-
-  Handle(XCAFDoc_NoteComment) aNote = Handle(XCAFDoc_NoteComment)::DownCast(theSource);
-  if (!aNote.IsNull())
-    theTarget << aNote->Comment();
-}
-
-//=======================================================================
-//function :
-//purpose  : 
-//=======================================================================
-BinMXCAFDoc_NoteCommentDriver::BinMXCAFDoc_NoteCommentDriver(const Handle(Message_Messenger)& theMsgDriver,
-                                                             Standard_CString                 theName)
-  : BinMXCAFDoc_NoteDriver(theMsgDriver, theName)
-{
-
-}
+BinMXCAFDoc_NoteCommentDriver::BinMXCAFDoc_NoteCommentDriver(const Handle(Message_Messenger) & theMsgDriver,
+                                                             Standard_CString theName)
+    : BinMXCAFDoc_NoteDriver(theMsgDriver, theName) {}

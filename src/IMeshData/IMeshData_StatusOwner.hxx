@@ -21,56 +21,42 @@
 #include <Standard_Type.hxx>
 
 //! Extension interface class providing status functionality.
-class IMeshData_StatusOwner
-{
+class IMeshData_StatusOwner {
 public:
+    //! Destructor.
+    virtual ~IMeshData_StatusOwner() {}
 
-  //! Destructor.
-  virtual ~IMeshData_StatusOwner()
-  {
-  }
+    //! Returns true in case if status is strictly equal to the given value.
+    Standard_Boolean IsEqual(const IMeshData_Status theValue) const {
+        return (myStatus == theValue);
+    }
 
-  //! Returns true in case if status is strictly equal to the given value.
-  Standard_Boolean IsEqual(const IMeshData_Status theValue) const
-  {
-    return (myStatus == theValue);
-  }
+    //! Returns true in case if status is set.
+    Standard_Boolean IsSet(const IMeshData_Status theValue) const {
+        return (myStatus & theValue) != 0;
+    }
 
-  //! Returns true in case if status is set.
-  Standard_Boolean IsSet(const IMeshData_Status theValue) const
-  {
-    return (myStatus & theValue) != 0;
-  }
+    //! Adds status to status flags of a face.
+    void SetStatus(const IMeshData_Status theValue) {
+        myStatus |= theValue;
+    }
 
-  //! Adds status to status flags of a face.
-  void SetStatus(const IMeshData_Status theValue)
-  {
-    myStatus |= theValue;
-  }
+    //! Adds status to status flags of a face.
+    void UnsetStatus(const IMeshData_Status theValue) {
+        myStatus &= ~theValue;
+    }
 
-  //! Adds status to status flags of a face.
-  void UnsetStatus(const IMeshData_Status theValue)
-  {
-    myStatus &= ~theValue;
-  }
-
-  //! Returns complete status mask.
-  Standard_Integer GetStatusMask() const
-  {
-    return myStatus;
-  }
+    //! Returns complete status mask.
+    Standard_Integer GetStatusMask() const {
+        return myStatus;
+    }
 
 protected:
-
-  //! Constructor. Initializes default status.
-  IMeshData_StatusOwner()
-    : myStatus(IMeshData_NoError)
-  {
-  }
+    //! Constructor. Initializes default status.
+    IMeshData_StatusOwner() : myStatus(IMeshData_NoError) {}
 
 private:
-
-  Standard_Integer myStatus;
+    Standard_Integer myStatus;
 };
 
 #endif

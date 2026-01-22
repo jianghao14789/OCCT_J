@@ -33,7 +33,6 @@ class Adaptor3d_Surface;
 class math_Matrix;
 class Extrema_POnSurf;
 
-
 //! Function to find extrema of the
 //! distance between two surfaces.
 class Extrema_FuncExtSS : public math_FunctionSetWithDerivatives {
@@ -76,7 +75,6 @@ public:
     Standard_EXPORT const Extrema_POnSurf& PointOnS2(const Standard_Integer N) const;
 
 private:
-
     const Adaptor3d_Surface* myS1;
     const Adaptor3d_Surface* myS2;
     gp_Pnt myP1;
@@ -90,7 +88,6 @@ private:
     Extrema_SequenceOfPOnSurf myPoint2;
     Standard_Boolean myS1init;
     Standard_Boolean myS2init;
-
 };
 
 #endif // _Extrema_FuncExtSS_HeaderFile

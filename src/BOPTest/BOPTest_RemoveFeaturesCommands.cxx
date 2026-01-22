@@ -30,90 +30,79 @@
 #include <TopoDS.hxx>
 #include <TopoDS_Compound.hxx>
 
-static Standard_Integer RemoveFeatures (Draw_Interpretor&, Standard_Integer, const char**);
+static Standard_Integer RemoveFeatures(Draw_Interpretor&, Standard_Integer, const char**);
 
 //=======================================================================
-//function : RemoveFeaturesCommands
-//purpose  : 
+// function : RemoveFeaturesCommands
+// purpose  :
 //=======================================================================
-void BOPTest::RemoveFeaturesCommands(Draw_Interpretor& theCommands)
-{
-  static Standard_Boolean done = Standard_False;
-  if (done) return;
-  done = Standard_True;
-  // Chapter's name
-  const char* group = "BOPTest commands";
-  // Commands
-  theCommands.Add("removefeatures", "removefeatures result shape f1 f2 ... [-parallel]\n"
-                  "\t\tRemoves user-defined features (faces) from the shape.\n"
-                  "\t\tresult   - result of the operation;\n"
-                  "\t\tshape    - the shape to remove the features from;\n"
-                  "\t\tf1, f2   - features to remove from the shape;\n"
-                  "\t\tparallel - enables the parallel processing mode.",
-                  __FILE__, RemoveFeatures, group);
+void BOPTest::RemoveFeaturesCommands(Draw_Interpretor& theCommands) {
+    static Standard_Boolean done = Standard_False;
+    if (done) return;
+    done = Standard_True;
+    // Chapter's name
+    const char* group = "BOPTest commands";
+    // Commands
+    theCommands.Add("removefeatures",
+                    "removefeatures result shape f1 f2 ... [-parallel]\n"
+                    "\t\tRemoves user-defined features (faces) from the shape.\n"
+                    "\t\tresult   - result of the operation;\n"
+                    "\t\tshape    - the shape to remove the features from;\n"
+                    "\t\tf1, f2   - features to remove from the shape;\n"
+                    "\t\tparallel - enables the parallel processing mode.",
+                    __FILE__, RemoveFeatures, group);
 }
 
 //=======================================================================
-//function : RemoveFeatures
-//purpose  : 
+// function : RemoveFeatures
+// purpose  :
 //=======================================================================
-Standard_Integer RemoveFeatures(Draw_Interpretor& theDI,
-                                Standard_Integer  theArgc,
-                                const char ** theArgv)
-{
-  if (theArgc < 4)
-  {
-    theDI.PrintHelp(theArgv[0]);
-    return 1;
-  }
-
-  // Get the shape to remove the features from
-  TopoDS_Shape aShape = DBRep::Get(theArgv[2]);
-  if (aShape.IsNull())
-  {
-    theDI << "Error: " << theArgv[2] << " is a null shape.\n";
-    return 1;
-  }
-
-  BRepAlgoAPI_Defeaturing aRF;
-  aRF.SetShape(aShape);
-
-  // Add faces to remove
-  for (Standard_Integer i = 3; i < theArgc; ++i)
-  {
-    TopoDS_Shape aF = DBRep::Get(theArgv[i]);
-    if (aF.IsNull())
-    {
-      if (!strcmp(theArgv[i], "-parallel"))
-      {
-        // enable the parallel processing mode
-        aRF.SetRunParallel(Standard_True);
-      }
-      else
-        theDI << "Warning: " << theArgv[i] << " is a null shape. Skip it.\n";
-
-      continue;
+Standard_Integer RemoveFeatures(Draw_Interpretor& theDI, Standard_Integer theArgc, const char** theArgv) {
+    if (theArgc < 4) {
+        theDI.PrintHelp(theArgv[0]);
+        return 1;
     }
 
-    aRF.AddFaceToRemove(aF);
-  }
+    // Get the shape to remove the features from
+    TopoDS_Shape aShape = DBRep::Get(theArgv[2]);
+    if (aShape.IsNull()) {
+        theDI << "Error: " << theArgv[2] << " is a null shape.\n";
+        return 1;
+    }
 
-  aRF.SetToFillHistory(BRepTest_Objects::IsHistoryNeeded());
-  Handle(Draw_ProgressIndicator) aProgress = new Draw_ProgressIndicator(theDI, 1);
-  // Perform the removal
-  aRF.Build(aProgress->Start());
+    BRepAlgoAPI_Defeaturing aRF;
+    aRF.SetShape(aShape);
 
-  // Check for the errors/warnings
-  BOPTest::ReportAlerts(aRF.GetReport());
+    // Add faces to remove
+    for (Standard_Integer i = 3; i < theArgc; ++i) {
+        TopoDS_Shape aF = DBRep::Get(theArgv[i]);
+        if (aF.IsNull()) {
+            if (!strcmp(theArgv[i], "-parallel")) {
+                // enable the parallel processing mode
+                aRF.SetRunParallel(Standard_True);
+            } else
+                theDI << "Warning: " << theArgv[i] << " is a null shape. Skip it.\n";
 
-  if (BRepTest_Objects::IsHistoryNeeded())
-    BRepTest_Objects::SetHistory(aRF.History());
+            continue;
+        }
 
-  if (aRF.HasErrors())
+        aRF.AddFaceToRemove(aF);
+    }
+
+    aRF.SetToFillHistory(BRepTest_Objects::IsHistoryNeeded());
+    Handle(Draw_ProgressIndicator) aProgress = new Draw_ProgressIndicator(theDI, 1);
+    // Perform the removal
+    aRF.Build(aProgress->Start());
+
+    // Check for the errors/warnings
+    BOPTest::ReportAlerts(aRF.GetReport());
+
+    if (BRepTest_Objects::IsHistoryNeeded()) BRepTest_Objects::SetHistory(aRF.History());
+
+    if (aRF.HasErrors()) return 0;
+
+    const TopoDS_Shape& aResult = aRF.Shape();
+    DBRep::Set(theArgv[1], aResult);
+
     return 0;
-
-  const TopoDS_Shape& aResult = aRF.Shape();
-  DBRep::Set(theArgv[1], aResult);
-
-  return 0;
 }

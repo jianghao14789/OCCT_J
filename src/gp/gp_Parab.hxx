@@ -48,17 +48,12 @@
 //! Geom_Parabola which provides additional functions for
 //! constructing parabolas and works, in particular, with the
 //! parametric equations of parabolas
-class gp_Parab
-{
+class gp_Parab {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates an indefinite Parabola.
-    gp_Parab()
-        : focalLength(RealLast())
-    {
-    }
+    gp_Parab() : focalLength(RealLast()) {}
 
     //! Creates a parabola with its local coordinate system "theA2"
     //! and it's focal length "Focal".
@@ -68,10 +63,7 @@ public:
     //! the parabola
     //! Raises ConstructionError if theFocal < 0.0
     //! Raised if theFocal < 0.0
-    gp_Parab(const gp_Ax2& theA2, const Standard_Real theFocal)
-        : pos(theA2),
-        focalLength(theFocal)
-    {
+    gp_Parab(const gp_Ax2& theA2, const Standard_Real theFocal) : pos(theA2), focalLength(theFocal) {
         Standard_ConstructionError_Raise_if(theFocal < 0.0, "gp_Parab() - focal length should be >= 0");
     }
 
@@ -91,27 +83,34 @@ public:
     //! recomputed in the same way as for any gp_Ax2)
     //! Raises ConstructionError if the direction of theA1 is parallel to the previous
     //! XAxis of the parabola.
-    void SetAxis(const gp_Ax1& theA1) { pos.SetAxis(theA1); }
+    void SetAxis(const gp_Ax1& theA1) {
+        pos.SetAxis(theA1);
+    }
 
     //! Changes the focal distance of the parabola.
     //! Raises ConstructionError if theFocal < 0.0
-    void SetFocal(const Standard_Real theFocal)
-    {
+    void SetFocal(const Standard_Real theFocal) {
         Standard_ConstructionError_Raise_if(theFocal < 0.0, "gp_Parab::SetFocal() - focal length should be >= 0");
         focalLength = theFocal;
     }
 
     //! Changes the location of the parabola. It is the vertex of
     //! the parabola.
-    void SetLocation(const gp_Pnt& theP) { pos.SetLocation(theP); }
+    void SetLocation(const gp_Pnt& theP) {
+        pos.SetLocation(theP);
+    }
 
     //! Changes the local coordinate system of the parabola.
-    void SetPosition(const gp_Ax2& theA2) { pos = theA2; }
+    void SetPosition(const gp_Ax2& theA2) {
+        pos = theA2;
+    }
 
     //! Returns the main axis of the parabola.
     //! It is the axis normal to the plane of the parabola passing
     //! through the vertex of the parabola.
-    const gp_Ax1& Axis() const { return pos.Axis(); }
+    const gp_Ax1& Axis() const {
+        return pos.Axis();
+    }
 
     //! Computes the directrix of this parabola.
     //! The directrix is:
@@ -126,30 +125,42 @@ public:
 
     //! Returns the distance between the vertex and the focus
     //! of the parabola.
-    Standard_Real Focal() const { return focalLength; }
+    Standard_Real Focal() const {
+        return focalLength;
+    }
 
     //! -   Computes the focus of the parabola.
     gp_Pnt Focus() const;
 
     //! Returns the vertex of the parabola. It is the "Location"
     //! point of the coordinate system of the parabola.
-    const gp_Pnt& Location() const { return pos.Location(); }
+    const gp_Pnt& Location() const {
+        return pos.Location();
+    }
 
     //! Computes the parameter of the parabola.
     //! It is the distance between the focus and the directrix of
     //! the parabola. This distance is twice the focal length.
-    Standard_Real Parameter() const { return 2.0 * focalLength; }
+    Standard_Real Parameter() const {
+        return 2.0 * focalLength;
+    }
 
     //! Returns the local coordinate system of the parabola.
-    const gp_Ax2& Position() const { return pos; }
+    const gp_Ax2& Position() const {
+        return pos;
+    }
 
     //! Returns the symmetry axis of the parabola. The location point
     //! of the axis is the vertex of the parabola.
-    gp_Ax1 XAxis() const { return gp_Ax1(pos.Location(), pos.XDirection()); }
+    gp_Ax1 XAxis() const {
+        return gp_Ax1(pos.Location(), pos.XDirection());
+    }
 
     //! It is an axis parallel to the directrix of the parabola.
     //! The location point of this axis is the vertex of the parabola.
-    gp_Ax1 YAxis() const { return gp_Ax1(pos.Location(), pos.YDirection()); }
+    gp_Ax1 YAxis() const {
+        return gp_Ax1(pos.Location(), pos.YDirection());
+    }
 
     Standard_EXPORT void Mirror(const gp_Pnt& theP);
 
@@ -172,12 +183,13 @@ public:
     //! the plane of the symmetry (Location, XDirection, YDirection).
     Standard_NODISCARD Standard_EXPORT gp_Parab Mirrored(const gp_Ax2& theA2) const;
 
-    void Rotate(const gp_Ax1& theA1, const Standard_Real theAng) { pos.Rotate(theA1, theAng); }
+    void Rotate(const gp_Ax1& theA1, const Standard_Real theAng) {
+        pos.Rotate(theA1, theAng);
+    }
 
     //! Rotates a parabola. theA1 is the axis of the rotation.
     //! Ang is the angular value of the rotation in radians.
-    Standard_NODISCARD gp_Parab Rotated(const gp_Ax1& theA1, const Standard_Real theAng) const
-    {
+    Standard_NODISCARD gp_Parab Rotated(const gp_Ax1& theA1, const Standard_Real theAng) const {
         gp_Parab aPrb = *this;
         aPrb.pos.Rotate(theA1, theAng);
         return aPrb;
@@ -195,104 +207,90 @@ public:
     //! Transforms a parabola with the transformation theT from class Trsf.
     Standard_NODISCARD gp_Parab Transformed(const gp_Trsf& theT) const;
 
-    void Translate(const gp_Vec& theV) { pos.Translate(theV); }
+    void Translate(const gp_Vec& theV) {
+        pos.Translate(theV);
+    }
 
     //! Translates a parabola in the direction of the vector theV.
     //! The magnitude of the translation is the vector's magnitude.
-    Standard_NODISCARD gp_Parab Translated(const gp_Vec& theV) const
-    {
+    Standard_NODISCARD gp_Parab Translated(const gp_Vec& theV) const {
         gp_Parab aPrb = *this;
         aPrb.pos.Translate(theV);
         return aPrb;
     }
 
-    void Translate(const gp_Pnt& theP1, const gp_Pnt& theP2) { pos.Translate(theP1, theP2); }
+    void Translate(const gp_Pnt& theP1, const gp_Pnt& theP2) {
+        pos.Translate(theP1, theP2);
+    }
 
     //! Translates a parabola from the point theP1 to the point theP2.
-    Standard_NODISCARD gp_Parab Translated(const gp_Pnt& theP1, const gp_Pnt& theP2) const
-    {
+    Standard_NODISCARD gp_Parab Translated(const gp_Pnt& theP1, const gp_Pnt& theP2) const {
         gp_Parab aPrb = *this;
         aPrb.pos.Translate(theP1, theP2);
         return aPrb;
     }
 
 private:
-
     gp_Ax2 pos;
     Standard_Real focalLength;
-
 };
 
 //=======================================================================
-//function : gp_Parab
+// function : gp_Parab
 // purpose :
 //=======================================================================
-inline gp_Parab::gp_Parab(const gp_Ax1& theD,
-    const gp_Pnt& theF)
-{
+inline gp_Parab::gp_Parab(const gp_Ax1& theD, const gp_Pnt& theF) {
     gp_Lin aDroite(theD);
     focalLength = aDroite.Distance(theF) / 2.;
     gp_Ax1 anAx = aDroite.Normal(theF).Position();
     gp_Ax1 anAy = aDroite.Position();
     const gp_Dir& aDD = anAx.Direction();
-    pos = gp_Ax2(gp_Pnt(theF.X() - focalLength * aDD.X(),
-        theF.Y() - focalLength * aDD.Y(),
-        theF.Z() - focalLength * aDD.Z()),
-        anAx.Direction().Crossed(anAy.Direction()),
-        anAx.Direction());
+    pos = gp_Ax2(
+        gp_Pnt(theF.X() - focalLength * aDD.X(), theF.Y() - focalLength * aDD.Y(), theF.Z() - focalLength * aDD.Z()),
+        anAx.Direction().Crossed(anAy.Direction()), anAx.Direction());
 }
 
 //=======================================================================
-//function : Directrix
+// function : Directrix
 // purpose :
 //=======================================================================
-inline gp_Ax1 gp_Parab::Directrix() const
-{
+inline gp_Ax1 gp_Parab::Directrix() const {
     const gp_Pnt& aPP = pos.Location();
     const gp_Dir& aDD = pos.XDirection();
-    gp_Pnt aP(aPP.X() - focalLength * aDD.X(),
-        aPP.Y() - focalLength * aDD.Y(),
-        aPP.Z() - focalLength * aDD.Z());
+    gp_Pnt aP(aPP.X() - focalLength * aDD.X(), aPP.Y() - focalLength * aDD.Y(), aPP.Z() - focalLength * aDD.Z());
     return gp_Ax1(aP, pos.YDirection());
 }
 
 //=======================================================================
-//function : Focus
+// function : Focus
 // purpose :
 //=======================================================================
-inline gp_Pnt gp_Parab::Focus() const
-{
+inline gp_Pnt gp_Parab::Focus() const {
     const gp_Pnt& aPP = pos.Location();
     const gp_Dir& aDD = pos.XDirection();
-    return gp_Pnt(aPP.X() + focalLength * aDD.X(),
-        aPP.Y() + focalLength * aDD.Y(),
-        aPP.Z() + focalLength * aDD.Z());
+    return gp_Pnt(aPP.X() + focalLength * aDD.X(), aPP.Y() + focalLength * aDD.Y(), aPP.Z() + focalLength * aDD.Z());
 }
 
 //=======================================================================
-//function : Scale
+// function : Scale
 // purpose :
 //=======================================================================
-inline void gp_Parab::Scale(const gp_Pnt& theP, const Standard_Real theS)
-{
+inline void gp_Parab::Scale(const gp_Pnt& theP, const Standard_Real theS) {
     focalLength *= theS;
-    if (focalLength < 0)
-    {
+    if (focalLength < 0) {
         focalLength = -focalLength;
     }
     pos.Scale(theP, theS);
 }
 
 //=======================================================================
-//function : Scaled
+// function : Scaled
 // purpose :
 //=======================================================================
-inline gp_Parab gp_Parab::Scaled(const gp_Pnt& theP, const Standard_Real theS) const
-{
+inline gp_Parab gp_Parab::Scaled(const gp_Pnt& theP, const Standard_Real theS) const {
     gp_Parab aPrb = *this;
     aPrb.focalLength *= theS;
-    if (aPrb.focalLength < 0)
-    {
+    if (aPrb.focalLength < 0) {
         aPrb.focalLength = -aPrb.focalLength;
     }
     aPrb.pos.Scale(theP, theS);
@@ -300,29 +298,25 @@ inline gp_Parab gp_Parab::Scaled(const gp_Pnt& theP, const Standard_Real theS) c
 }
 
 //=======================================================================
-//function : Transform
+// function : Transform
 // purpose :
 //=======================================================================
-inline void gp_Parab::Transform(const gp_Trsf& theT)
-{
+inline void gp_Parab::Transform(const gp_Trsf& theT) {
     focalLength *= theT.ScaleFactor();
-    if (focalLength < 0)
-    {
+    if (focalLength < 0) {
         focalLength = -focalLength;
     }
     pos.Transform(theT);
 }
 
 //=======================================================================
-//function : Transformed
+// function : Transformed
 // purpose :
 //=======================================================================
-inline gp_Parab gp_Parab::Transformed(const gp_Trsf& theT) const
-{
+inline gp_Parab gp_Parab::Transformed(const gp_Trsf& theT) const {
     gp_Parab aPrb = *this;
     aPrb.focalLength *= theT.ScaleFactor();
-    if (aPrb.focalLength < 0)
-    {
+    if (aPrb.focalLength < 0) {
         aPrb.focalLength = -aPrb.focalLength;
     }
     aPrb.pos.Transform(theT);

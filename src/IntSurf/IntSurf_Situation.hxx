@@ -17,12 +17,6 @@
 #ifndef _IntSurf_Situation_HeaderFile
 #define _IntSurf_Situation_HeaderFile
 
-
-enum IntSurf_Situation
-{
-IntSurf_Inside,
-IntSurf_Outside,
-IntSurf_Unknown
-};
+enum IntSurf_Situation { IntSurf_Inside, IntSurf_Outside, IntSurf_Unknown };
 
 #endif // _IntSurf_Situation_HeaderFile

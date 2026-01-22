@@ -22,8 +22,8 @@
 #include <TopTools_ShapeMapHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TopoDS_Shape,Handle(Geom_Surface),TopTools_ShapeMapHasher> TopOpeBRepDS_ShapeSurface;
-typedef NCollection_DataMap<TopoDS_Shape,Handle(Geom_Surface),TopTools_ShapeMapHasher>::Iterator TopOpeBRepDS_DataMapIteratorOfShapeSurface;
-
+typedef NCollection_DataMap<TopoDS_Shape, Handle(Geom_Surface), TopTools_ShapeMapHasher> TopOpeBRepDS_ShapeSurface;
+typedef NCollection_DataMap<TopoDS_Shape, Handle(Geom_Surface), TopTools_ShapeMapHasher>::Iterator
+    TopOpeBRepDS_DataMapIteratorOfShapeSurface;
 
 #endif

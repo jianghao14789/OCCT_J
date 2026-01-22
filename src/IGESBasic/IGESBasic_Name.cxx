@@ -20,27 +20,20 @@
 #include <Standard_Type.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESBasic_Name,IGESData_NameEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESBasic_Name, IGESData_NameEntity)
 
-IGESBasic_Name::IGESBasic_Name ()    {  }
+IGESBasic_Name::IGESBasic_Name() {}
 
-
-    void  IGESBasic_Name::Init
-  (const Standard_Integer nbPropVal,
-   const Handle(TCollection_HAsciiString)& aName)
-{
-  theName             = aName;
-  theNbPropertyValues = nbPropVal;
-  InitTypeAndForm(406,15);
+void IGESBasic_Name::Init(const Standard_Integer nbPropVal, const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
+    theNbPropertyValues = nbPropVal;
+    InitTypeAndForm(406, 15);
 }
 
-
-    Standard_Integer  IGESBasic_Name::NbPropertyValues () const
-{
-  return theNbPropertyValues;
+Standard_Integer IGESBasic_Name::NbPropertyValues() const {
+    return theNbPropertyValues;
 }
 
-    Handle(TCollection_HAsciiString)  IGESBasic_Name::Value () const
-{
-  return theName;
+Handle(TCollection_HAsciiString) IGESBasic_Name::Value() const {
+    return theName;
 }

@@ -17,12 +17,6 @@
 #ifndef _FilletSurf_StatusDone_HeaderFile
 #define _FilletSurf_StatusDone_HeaderFile
 
-
-enum FilletSurf_StatusDone
-{
-FilletSurf_IsOk,
-FilletSurf_IsNotOk,
-FilletSurf_IsPartial
-};
+enum FilletSurf_StatusDone { FilletSurf_IsOk, FilletSurf_IsNotOk, FilletSurf_IsPartial };
 
 #endif // _FilletSurf_StatusDone_HeaderFile

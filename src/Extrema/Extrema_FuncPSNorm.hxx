@@ -32,8 +32,6 @@ class Adaptor3d_Surface;
 class math_Matrix;
 class Extrema_POnSurf;
 
-
-
 //! Functional for search of extremum of the distance between point P and
 //! surface S, starting from approximate solution (u0, v0).
 //!
@@ -94,7 +92,6 @@ public:
     Standard_EXPORT const Extrema_POnSurf& Point(const Standard_Integer N) const;
 
 private:
-
     gp_Pnt myP;
     const Adaptor3d_Surface* myS;
     Standard_Real myU;

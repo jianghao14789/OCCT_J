@@ -25,23 +25,23 @@
 
 //! Extension of TDataStd_DataMapOfStringHArray1OfInteger class
 //! to be manipulated by handle.
-class TDataStd_HDataMapOfStringHArray1OfInteger : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTIEXT(TDataStd_HDataMapOfStringHArray1OfInteger, Standard_Transient)
+class TDataStd_HDataMapOfStringHArray1OfInteger : public Standard_Transient {
+    DEFINE_STANDARD_RTTIEXT(TDataStd_HDataMapOfStringHArray1OfInteger, Standard_Transient)
 public:
+    Standard_EXPORT TDataStd_HDataMapOfStringHArray1OfInteger(const Standard_Integer NbBuckets = 1);
 
-  Standard_EXPORT TDataStd_HDataMapOfStringHArray1OfInteger(const Standard_Integer NbBuckets = 1);
+    Standard_EXPORT TDataStd_HDataMapOfStringHArray1OfInteger(const TDataStd_DataMapOfStringHArray1OfInteger& theOther);
 
-  Standard_EXPORT TDataStd_HDataMapOfStringHArray1OfInteger(const TDataStd_DataMapOfStringHArray1OfInteger& theOther);
+    const TDataStd_DataMapOfStringHArray1OfInteger& Map() const {
+        return myMap;
+    }
 
-  const TDataStd_DataMapOfStringHArray1OfInteger& Map() const { return myMap; }
-
-  TDataStd_DataMapOfStringHArray1OfInteger& ChangeMap() { return myMap; }
+    TDataStd_DataMapOfStringHArray1OfInteger& ChangeMap() {
+        return myMap;
+    }
 
 private:
-
-  TDataStd_DataMapOfStringHArray1OfInteger myMap;
-
+    TDataStd_DataMapOfStringHArray1OfInteger myMap;
 };
 
 DEFINE_STANDARD_HANDLE(TDataStd_HDataMapOfStringHArray1OfInteger, Standard_Transient)

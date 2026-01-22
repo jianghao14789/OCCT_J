@@ -18,12 +18,6 @@
 #define _Transfer_UndefMode_HeaderFile
 
 //! used on processing Undefined Entities (see TransferOutput)
-enum Transfer_UndefMode
-{
-Transfer_UndefIgnore,
-Transfer_UndefFailure,
-Transfer_UndefContent,
-Transfer_UndefUser
-};
+enum Transfer_UndefMode { Transfer_UndefIgnore, Transfer_UndefFailure, Transfer_UndefContent, Transfer_UndefUser };
 
 #endif // _Transfer_UndefMode_HeaderFile

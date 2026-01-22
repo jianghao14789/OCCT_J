@@ -21,41 +21,20 @@
 
 #include <StepRepr_AssemblyComponentUsage.hxx>
 
-
 class StepRepr_NextAssemblyUsageOccurrence;
 DEFINE_STANDARD_HANDLE(StepRepr_NextAssemblyUsageOccurrence, StepRepr_AssemblyComponentUsage)
 
 //! Representation of STEP entity NextAssemblyUsageOccurrence
-class StepRepr_NextAssemblyUsageOccurrence : public StepRepr_AssemblyComponentUsage
-{
+class StepRepr_NextAssemblyUsageOccurrence : public StepRepr_AssemblyComponentUsage {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepRepr_NextAssemblyUsageOccurrence();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepRepr_NextAssemblyUsageOccurrence();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepRepr_NextAssemblyUsageOccurrence,StepRepr_AssemblyComponentUsage)
+    DEFINE_STANDARD_RTTIEXT(StepRepr_NextAssemblyUsageOccurrence, StepRepr_AssemblyComponentUsage)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_NextAssemblyUsageOccurrence_HeaderFile

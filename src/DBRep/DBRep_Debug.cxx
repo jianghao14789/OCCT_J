@@ -30,84 +30,66 @@
 // intended for use from debugger prompt (Command Window in Visual Studio)
 
 //! Save shape identified by pointer
-Standard_EXPORT const char* DBRep_Set (const char* theNameStr, void* theShapePtr)
-{
-  if (theNameStr == 0 || theShapePtr == 0)
-  {
-    return "Error: name or shape is null";
-  }
-  try {
-    DBRep::Set (theNameStr, *(TopoDS_Shape*)theShapePtr);
-    return theNameStr;
-  }
-  catch (Standard_Failure const& anException)
-  {
-    return anException.GetMessageString();
-  }
-}
-
-//=======================================================================
-//function : fromContainer
-//purpose  : static function to copy shapes from container into compound
-//=======================================================================
-template <class T>
-static Standard_Boolean fromContainer (void* theContainer,
-                                       TopoDS_Compound& theShape)
-{
-  try
-  {
-    T *pContainer = (T*) theContainer;
-    for (typename T::Iterator it (*pContainer); it.More(); it.Next())
-    {
-      BRep_Builder().Add (theShape, it.Value());
+Standard_EXPORT const char* DBRep_Set(const char* theNameStr, void* theShapePtr) {
+    if (theNameStr == 0 || theShapePtr == 0) {
+        return "Error: name or shape is null";
     }
-    return true;
-  }
-  catch (Standard_Failure const&)
-  {
-    return false;
-  }
+    try {
+        DBRep::Set(theNameStr, *(TopoDS_Shape*)theShapePtr);
+        return theNameStr;
+    } catch (Standard_Failure const& anException) {
+        return anException.GetMessageString();
+    }
 }
 
 //=======================================================================
-//function : DBRep_SetComp
-//purpose  : make compound from the given container of shapes
+// function : fromContainer
+// purpose  : static function to copy shapes from container into compound
 //=======================================================================
-Standard_EXPORT const char* DBRep_SetComp(const char* theNameStr, void* theListPtr)
-{
-  if (theNameStr == 0 || theListPtr == 0)
-  {
-    return "Error: name or list of shapes is null";
-  }
-
-  TopoDS_Compound aC;
-  BRep_Builder().MakeCompound(aC);
-
-  if (fromContainer<TopTools_ListOfShape>       (theListPtr, aC)
-   || fromContainer<TopTools_MapOfShape>        (theListPtr, aC)
-   || fromContainer<TopTools_IndexedMapOfShape> (theListPtr, aC)
-   || fromContainer<TopTools_SequenceOfShape>   (theListPtr, aC)
-   || fromContainer<TopTools_Array1OfShape>     (theListPtr, aC)
-   || fromContainer<NCollection_Vector<TopoDS_Shape> > (theListPtr, aC))
-  {
-    DBRep::Set (theNameStr, aC);
-    return theNameStr;
-  }
-  else
-  {
-    return "Error: Invalid type";
-  }
+template <class T> static Standard_Boolean fromContainer(void* theContainer, TopoDS_Compound& theShape) {
+    try {
+        T* pContainer = (T*)theContainer;
+        for (typename T::Iterator it(*pContainer); it.More(); it.Next()) {
+            BRep_Builder().Add(theShape, it.Value());
+        }
+        return true;
+    } catch (Standard_Failure const&) {
+        return false;
+    }
 }
 
-// MSVC debugger cannot deal correctly with functions whose argunments 
+//=======================================================================
+// function : DBRep_SetComp
+// purpose  : make compound from the given container of shapes
+//=======================================================================
+Standard_EXPORT const char* DBRep_SetComp(const char* theNameStr, void* theListPtr) {
+    if (theNameStr == 0 || theListPtr == 0) {
+        return "Error: name or list of shapes is null";
+    }
+
+    TopoDS_Compound aC;
+    BRep_Builder().MakeCompound(aC);
+
+    if (fromContainer<TopTools_ListOfShape>(theListPtr, aC) || fromContainer<TopTools_MapOfShape>(theListPtr, aC) ||
+        fromContainer<TopTools_IndexedMapOfShape>(theListPtr, aC) ||
+        fromContainer<TopTools_SequenceOfShape>(theListPtr, aC) ||
+        fromContainer<TopTools_Array1OfShape>(theListPtr, aC) ||
+        fromContainer<NCollection_Vector<TopoDS_Shape>>(theListPtr, aC)) {
+        DBRep::Set(theNameStr, aC);
+        return theNameStr;
+    } else {
+        return "Error: Invalid type";
+    }
+}
+
+// MSVC debugger cannot deal correctly with functions whose argunments
 // have non-standard types. Here we define alternative to the above functions
 // with good types with the hope that GDB on Linux or other debugger could
 // work with them (DBX could, on SUN Solaris).
 #ifndef _MSC_VER
 
-const char* DBRep_Set (char* theName, const TopoDS_Shape& theShape)
-{
- return DBRep_Set (theName, (void*)&theShape);
+const char* DBRep_Set(char* theName, const TopoDS_Shape& theShape) {
+    return DBRep_Set(theName, (void*)&theShape);
 }
 
 #endif /* _MSC_VER */

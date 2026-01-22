@@ -23,10 +23,7 @@
 #include <gp_Vec2d.hxx>
 #include <Standard_ConstructionError.hxx>
 
-gp_Parab2d::gp_Parab2d(const gp_Ax2d& theDirectrix,
-    const gp_Pnt2d& theFocus,
-    const Standard_Boolean theSense)
-{
+gp_Parab2d::gp_Parab2d(const gp_Ax2d& theDirectrix, const gp_Pnt2d& theFocus, const Standard_Boolean theSense) {
     const gp_Pnt2d& aDirLoc = theDirectrix.Location();
     const gp_Dir2d& aDirVec = theDirectrix.Direction();
 
@@ -37,17 +34,14 @@ gp_Parab2d::gp_Parab2d(const gp_Ax2d& theDirectrix,
 
     focalLength = 0.5 * anOrigin.Distance(theFocus);
 
-    gp_Dir2d aXDir = (focalLength > 0.0) ? gp_Dir2d(theFocus.XY() - anOrigin.XY()) :
-        theDirectrix.Rotated(aDirLoc,
-            theSense ? -M_PI_2 : M_PI_2).Direction();
+    gp_Dir2d aXDir = (focalLength > 0.0) ? gp_Dir2d(theFocus.XY() - anOrigin.XY())
+                                         : theDirectrix.Rotated(aDirLoc, theSense ? -M_PI_2 : M_PI_2).Direction();
 
     pos = gp_Ax22d(anApex, aXDir, aDirVec);
 }
 
-void gp_Parab2d::Coefficients
-(Standard_Real& A, Standard_Real& B, Standard_Real& C,
-    Standard_Real& D, Standard_Real& E, Standard_Real& F) const
-{
+void gp_Parab2d::Coefficients(Standard_Real& A, Standard_Real& B, Standard_Real& C, Standard_Real& D, Standard_Real& E,
+                              Standard_Real& F) const {
     Standard_Real P = 2.0 * focalLength;
     gp_Trsf2d T;
     T.SetTransformation(pos.XAxis());
@@ -65,27 +59,22 @@ void gp_Parab2d::Coefficients
     F = (T23 * T23) - (2.0 * P * T13);
 }
 
-void gp_Parab2d::Mirror(const gp_Pnt2d& P)
-{
+void gp_Parab2d::Mirror(const gp_Pnt2d& P) {
     pos.Mirror(P);
 }
 
-gp_Parab2d gp_Parab2d::Mirrored(const gp_Pnt2d& P) const
-{
+gp_Parab2d gp_Parab2d::Mirrored(const gp_Pnt2d& P) const {
     gp_Parab2d Prb = *this;
     Prb.pos.Mirror(P);
     return Prb;
 }
 
-void gp_Parab2d::Mirror(const gp_Ax2d& A)
-{
+void gp_Parab2d::Mirror(const gp_Ax2d& A) {
     pos.Mirror(A);
 }
 
-gp_Parab2d gp_Parab2d::Mirrored(const gp_Ax2d& A) const
-{
+gp_Parab2d gp_Parab2d::Mirrored(const gp_Ax2d& A) const {
     gp_Parab2d Prb = *this;
     Prb.pos.Mirror(A);
     return Prb;
 }
-

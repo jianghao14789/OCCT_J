@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <gp_Trsf.hxx>
 #include <Standard_ConstructionError.hxx>
 #include <Standard_Stream.hxx>
@@ -25,40 +24,33 @@
 IMPLEMENT_STANDARD_RTTIEXT(TopLoc_Datum3D, Standard_Transient)
 
 //=======================================================================
-//function : TopLoc_Datum3D
-//purpose  : Identity
+// function : TopLoc_Datum3D
+// purpose  : Identity
 //=======================================================================
-TopLoc_Datum3D::TopLoc_Datum3D()
-{
-}
+TopLoc_Datum3D::TopLoc_Datum3D() {}
 
 //=======================================================================
-//function : TopLoc_Datum3D
-//purpose  : 
+// function : TopLoc_Datum3D
+// purpose  :
 //=======================================================================
 
-TopLoc_Datum3D::TopLoc_Datum3D(const gp_Trsf& T) :
-    myTrsf(T)
-{
-}
+TopLoc_Datum3D::TopLoc_Datum3D(const gp_Trsf& T) : myTrsf(T) {}
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void TopLoc_Datum3D::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
+void TopLoc_Datum3D::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
-        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myTrsf)
+    OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, &myTrsf)
 }
 
 //=======================================================================
-//function : ShallowDump
-//purpose  : 
+// function : ShallowDump
+// purpose  :
 //=======================================================================
 
-void  TopLoc_Datum3D::ShallowDump(Standard_OStream& S) const
-{
+void TopLoc_Datum3D::ShallowDump(Standard_OStream& S) const {
     S << " TopLoc_Datum3D " << (void*)this << std::endl;
     Standard_Integer i;
     gp_Trsf T = myTrsf;
@@ -71,4 +63,3 @@ void  TopLoc_Datum3D::ShallowDump(Standard_OStream& S) const
     }
     S << std::endl;
 }
-

@@ -25,31 +25,24 @@
 
 class BOPDS_Pair;
 
-class BOPDS_PairMapHasher 
-{
+class BOPDS_PairMapHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes a hash code for the given pair, in the range [1, theUpperBound]
+    //! @param thePair the pair which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const BOPDS_Pair& thePair, const Standard_Integer theUpperBound) {
+        return thePair.HashCode(theUpperBound);
+    }
 
-  //! Computes a hash code for the given pair, in the range [1, theUpperBound]
-  //! @param thePair the pair which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const BOPDS_Pair& thePair, const Standard_Integer theUpperBound)
-  {
-    return thePair.HashCode (theUpperBound);
-  }
-
-  static Standard_Boolean IsEqual(const BOPDS_Pair& thePair1,
-                                  const BOPDS_Pair& thePair2)
-  {
-    return thePair1.IsEqual(thePair2);
-  }
+    static Standard_Boolean IsEqual(const BOPDS_Pair& thePair1, const BOPDS_Pair& thePair2) {
+        return thePair1.IsEqual(thePair2);
+    }
 
 protected:
-
 private:
-
 };
 
 #endif // _BOPDS_PairMapHasher_HeaderFile

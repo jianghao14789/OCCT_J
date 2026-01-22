@@ -23,5 +23,4 @@
 typedef NCollection_List<Message_Msg> Message_ListOfMsg;
 typedef NCollection_List<Message_Msg>::Iterator Message_ListIteratorOfListOfMsg;
 
-
 #endif

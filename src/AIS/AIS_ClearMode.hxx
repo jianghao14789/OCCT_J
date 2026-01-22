@@ -23,13 +23,6 @@
 //! for example, are only created for the selection
 //! process. By means of these enumerations, they can
 //! be cleared from local context.
-enum AIS_ClearMode
-{
-AIS_CM_All,
-AIS_CM_Interactive,
-AIS_CM_Filters,
-AIS_CM_StandardModes,
-AIS_CM_TemporaryShapePrs
-};
+enum AIS_ClearMode { AIS_CM_All, AIS_CM_Interactive, AIS_CM_Filters, AIS_CM_StandardModes, AIS_CM_TemporaryShapePrs };
 
 #endif // _AIS_ClearMode_HeaderFile

@@ -1,4 +1,4 @@
-// Created on : Fri May 08 19:02:07 2020 
+// Created on : Fri May 08 19:02:07 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,9 +19,7 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_LinearFlexibleLinkRepresentation, StepKinematics_KinematicLinkRepresentation)
 
 //=======================================================================
-//function : StepKinematics_LinearFlexibleLinkRepresentation
-//purpose  :
+// function : StepKinematics_LinearFlexibleLinkRepresentation
+// purpose  :
 //=======================================================================
-StepKinematics_LinearFlexibleLinkRepresentation::StepKinematics_LinearFlexibleLinkRepresentation ()
-{
-}
+StepKinematics_LinearFlexibleLinkRepresentation::StepKinematics_LinearFlexibleLinkRepresentation() {}

@@ -31,7 +31,6 @@ class TDF_Attribute;
 class TDF_RelocationTable;
 class TDF_DataSet;
 
-
 class TFunction_Function;
 DEFINE_STANDARD_HANDLE(TFunction_Function, TDF_Attribute)
 
@@ -39,72 +38,75 @@ DEFINE_STANDARD_HANDLE(TFunction_Function, TDF_Attribute)
 //! -   a link to an evaluation driver
 //! -   the means of providing a link between a
 //! function and an evaluation driver.
-class TFunction_Function : public TDF_Attribute
-{
+class TFunction_Function : public TDF_Attribute {
 
 public:
+    //! Static methods:
+    //! ==============
+    //! Finds or Creates a function attribute on the label <L>.
+    //! Returns the function attribute.
+    Standard_EXPORT static Handle(TFunction_Function) Set(const TDF_Label& L);
 
-  
-  //! Static methods:
-  //! ==============
-  //! Finds or Creates a function attribute on the label <L>.
-  //! Returns the function attribute.
-  Standard_EXPORT static Handle(TFunction_Function) Set (const TDF_Label& L);
-  
-  //! Finds or Creates a function attribute on the label <L>.
-  //! Sets a driver ID to the function.
-  //! Returns the function attribute.
-  Standard_EXPORT static Handle(TFunction_Function) Set (const TDF_Label& L, const Standard_GUID& DriverID);
-  
-  //! Returns the GUID for functions.
-  //! Returns a function found on the label.
-  //! Instance methods:
-  //! ================
-  Standard_EXPORT static const Standard_GUID& GetID();
-  
-  Standard_EXPORT TFunction_Function();
+    //! Finds or Creates a function attribute on the label <L>.
+    //! Sets a driver ID to the function.
+    //! Returns the function attribute.
+    Standard_EXPORT static Handle(TFunction_Function) Set(const TDF_Label& L, const Standard_GUID& DriverID);
 
-  //! Returns the GUID for this function's driver.
-  const Standard_GUID& GetDriverGUID() const { return myDriverGUID; }
+    //! Returns the GUID for functions.
+    //! Returns a function found on the label.
+    //! Instance methods:
+    //! ================
+    Standard_EXPORT static const Standard_GUID& GetID();
 
-  //! Sets the driver for this function as that
-  //! identified by the GUID guid.
-  Standard_EXPORT void SetDriverGUID (const Standard_GUID& guid);
+    Standard_EXPORT TFunction_Function();
 
-  //! Returns true if the execution failed
-  Standard_Boolean Failed() const { return myFailure != 0; }
+    //! Returns the GUID for this function's driver.
+    const Standard_GUID& GetDriverGUID() const {
+        return myDriverGUID;
+    }
 
-  //! Sets the failed index.
-  Standard_EXPORT void SetFailure (const Standard_Integer mode = 0);
+    //! Sets the driver for this function as that
+    //! identified by the GUID guid.
+    Standard_EXPORT void SetDriverGUID(const Standard_GUID& guid);
 
-  //! Returns an index of failure if the execution of this function failed.
-  //! If this integer value is 0, no failure has occurred.
-  //! Implementation of Attribute methods:
-  //! ===================================
-  Standard_Integer GetFailure() const { return myFailure; }
+    //! Returns true if the execution failed
+    Standard_Boolean Failed() const {
+        return myFailure != 0;
+    }
 
-  Standard_EXPORT const Standard_GUID& ID() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Restore (const Handle(TDF_Attribute)& with) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Paste (const Handle(TDF_Attribute)& into, const Handle(TDF_RelocationTable)& RT) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void References (const Handle(TDF_DataSet)& aDataSet) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_OStream& Dump (Standard_OStream& anOS) const Standard_OVERRIDE;
+    //! Sets the failed index.
+    Standard_EXPORT void SetFailure(const Standard_Integer mode = 0);
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Returns an index of failure if the execution of this function failed.
+    //! If this integer value is 0, no failure has occurred.
+    //! Implementation of Attribute methods:
+    //! ===================================
+    Standard_Integer GetFailure() const {
+        return myFailure;
+    }
 
-  DEFINE_STANDARD_RTTIEXT(TFunction_Function,TDF_Attribute)
+    Standard_EXPORT const Standard_GUID& ID() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void Restore(const Handle(TDF_Attribute) & with) Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void Paste(const Handle(TDF_Attribute) & into,
+                                       const Handle(TDF_RelocationTable) & RT) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual void References(const Handle(TDF_DataSet) & aDataSet) const Standard_OVERRIDE;
+
+    Standard_EXPORT virtual Standard_OStream& Dump(Standard_OStream& anOS) const Standard_OVERRIDE;
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(TFunction_Function, TDF_Attribute)
 
 private:
-
-  Standard_GUID myDriverGUID;
-  Standard_Integer myFailure;
-
+    Standard_GUID myDriverGUID;
+    Standard_Integer myFailure;
 };
 
 #endif // _TFunction_Function_HeaderFile

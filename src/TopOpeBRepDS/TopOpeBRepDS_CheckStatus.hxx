@@ -17,11 +17,6 @@
 #ifndef _TopOpeBRepDS_CheckStatus_HeaderFile
 #define _TopOpeBRepDS_CheckStatus_HeaderFile
 
-
-enum TopOpeBRepDS_CheckStatus
-{
-TopOpeBRepDS_OK,
-TopOpeBRepDS_NOK
-};
+enum TopOpeBRepDS_CheckStatus { TopOpeBRepDS_OK, TopOpeBRepDS_NOK };
 
 #endif // _TopOpeBRepDS_CheckStatus_HeaderFile

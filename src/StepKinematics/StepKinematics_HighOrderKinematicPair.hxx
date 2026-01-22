@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -29,14 +29,11 @@
 DEFINE_STANDARD_HANDLE(StepKinematics_HighOrderKinematicPair, StepKinematics_KinematicPair)
 
 //! Representation of STEP entity HighOrderKinematicPair
-class StepKinematics_HighOrderKinematicPair : public StepKinematics_KinematicPair
-{
-public :
+class StepKinematics_HighOrderKinematicPair : public StepKinematics_KinematicPair {
+public:
+    //! default constructor
+    Standard_EXPORT StepKinematics_HighOrderKinematicPair();
 
-  //! default constructor
-  Standard_EXPORT StepKinematics_HighOrderKinematicPair();
-
-DEFINE_STANDARD_RTTIEXT(StepKinematics_HighOrderKinematicPair, StepKinematics_KinematicPair)
-
+    DEFINE_STANDARD_RTTIEXT(StepKinematics_HighOrderKinematicPair, StepKinematics_KinematicPair)
 };
 #endif // _StepKinematics_HighOrderKinematicPair_HeaderFile_

@@ -20,43 +20,39 @@
 #include <StepBasic_ActionRequestAssignment.hxx>
 #include <StepBasic_VersionedActionRequest.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ActionRequestAssignment,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ActionRequestAssignment, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_ActionRequestAssignment
-//purpose  : 
+// function : StepBasic_ActionRequestAssignment
+// purpose  :
 //=======================================================================
-StepBasic_ActionRequestAssignment::StepBasic_ActionRequestAssignment ()
-{
+StepBasic_ActionRequestAssignment::StepBasic_ActionRequestAssignment() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_ActionRequestAssignment::Init(const Handle(StepBasic_VersionedActionRequest) & aAssignedActionRequest) {
+
+    theAssignedActionRequest = aAssignedActionRequest;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AssignedActionRequest
+// purpose  :
 //=======================================================================
 
-void StepBasic_ActionRequestAssignment::Init (const Handle(StepBasic_VersionedActionRequest) &aAssignedActionRequest)
-{
-
-  theAssignedActionRequest = aAssignedActionRequest;
+Handle(StepBasic_VersionedActionRequest) StepBasic_ActionRequestAssignment::AssignedActionRequest() const {
+    return theAssignedActionRequest;
 }
 
 //=======================================================================
-//function : AssignedActionRequest
-//purpose  : 
+// function : SetAssignedActionRequest
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_VersionedActionRequest) StepBasic_ActionRequestAssignment::AssignedActionRequest () const
-{
-  return theAssignedActionRequest;
-}
-
-//=======================================================================
-//function : SetAssignedActionRequest
-//purpose  : 
-//=======================================================================
-
-void StepBasic_ActionRequestAssignment::SetAssignedActionRequest (const Handle(StepBasic_VersionedActionRequest) &aAssignedActionRequest)
-{
-  theAssignedActionRequest = aAssignedActionRequest;
+void StepBasic_ActionRequestAssignment::SetAssignedActionRequest(const Handle(StepBasic_VersionedActionRequest) &
+                                                                 aAssignedActionRequest) {
+    theAssignedActionRequest = aAssignedActionRequest;
 }

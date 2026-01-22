@@ -30,14 +30,9 @@ class gp_Trsf;
 class gp_Ax1;
 class gp_Ax3;
 
-
-
-class Bnd_B3d
-{
+class Bnd_B3d {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Empty constructor.
     Bnd_B3d();
@@ -95,7 +90,8 @@ public:
     //! parameter 'IsSphereHollow' is True, then the intersection is not
     //! reported for a box that is completely inside the sphere (otherwise
     //! this method would report an intersection).
-    Standard_EXPORT Standard_Boolean IsOut(const gp_XYZ& theCenter, const Standard_Real theRadius, const Standard_Boolean isSphereHollow = Standard_False) const;
+    Standard_EXPORT Standard_Boolean IsOut(const gp_XYZ& theCenter, const Standard_Real theRadius,
+                                           const Standard_Boolean isSphereHollow = Standard_False) const;
 
     //! Check the given box for the intersection with the current box.
     //! Returns True if there is no intersection between boxes.
@@ -112,7 +108,8 @@ public:
     //! theOverthickness is the addition to the size of the current box
     //! (may be negative). If positive, it can be treated as the thickness
     //! of the line 'theLine' or the radius of the cylinder along 'theLine'
-    Standard_EXPORT Standard_Boolean IsOut(const gp_Ax1& theLine, const Standard_Boolean isRay = Standard_False, const Standard_Real theOverthickness = 0.0) const;
+    Standard_EXPORT Standard_Boolean IsOut(const gp_Ax1& theLine, const Standard_Boolean isRay = Standard_False,
+                                           const Standard_Real theOverthickness = 0.0) const;
 
     //! Check the given Plane for the intersection with the current box.
     //! Returns True if there is no intersection.
@@ -134,23 +131,11 @@ public:
     //! All components of theHSize must be non-negative.
     void SetHSize(const gp_XYZ& theHSize);
 
-
-
-
 protected:
-
-
-
     Standard_Real myCenter[3];
     Standard_Real myHSize[3];
 
-
 private:
-
-
-
-
-
 };
 
 #define RealType Standard_Real
@@ -164,8 +149,5 @@ private:
 #undef RealType_hxx
 #undef Bnd_B3x
 #undef Bnd_B3x_hxx
-
-
-
 
 #endif // _Bnd_B3d_HeaderFile

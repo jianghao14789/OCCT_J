@@ -21,140 +21,110 @@
 #include <TopTools_ListIteratorOfListOfShape.hxx>
 
 //=======================================================================
-//function : BRepOffsetAPI_MakeOffsetShape
-//purpose  : 
+// function : BRepOffsetAPI_MakeOffsetShape
+// purpose  :
 //=======================================================================
-BRepOffsetAPI_MakeOffsetShape::BRepOffsetAPI_MakeOffsetShape()
-: myLastUsedAlgo(OffsetAlgo_NONE)
-{
+BRepOffsetAPI_MakeOffsetShape::BRepOffsetAPI_MakeOffsetShape() : myLastUsedAlgo(OffsetAlgo_NONE) {}
+
+//=======================================================================
+// function : PerformByJoin
+// purpose  :
+//=======================================================================
+void BRepOffsetAPI_MakeOffsetShape::PerformByJoin(const TopoDS_Shape& S, const Standard_Real Offset,
+                                                  const Standard_Real Tol, const BRepOffset_Mode Mode,
+                                                  const Standard_Boolean Intersection, const Standard_Boolean SelfInter,
+                                                  const GeomAbs_JoinType Join, const Standard_Boolean RemoveIntEdges,
+                                                  const Message_ProgressRange& theRange) {
+    NotDone();
+    myLastUsedAlgo = OffsetAlgo_JOIN;
+
+    myOffsetShape.Initialize(S, Offset, Tol, Mode, Intersection, SelfInter, Join, Standard_False, RemoveIntEdges);
+    myOffsetShape.MakeOffsetShape(theRange);
+
+    if (!myOffsetShape.IsDone()) return;
+
+    myShape = myOffsetShape.Shape();
+    Done();
 }
 
 //=======================================================================
-//function : PerformByJoin
-//purpose  : 
+// function : PerformBySimple
+// purpose  :
 //=======================================================================
-void BRepOffsetAPI_MakeOffsetShape::PerformByJoin
-(const TopoDS_Shape&    S,
- const Standard_Real    Offset,
- const Standard_Real    Tol,
- const BRepOffset_Mode  Mode,
- const Standard_Boolean Intersection,
- const Standard_Boolean SelfInter,
- const GeomAbs_JoinType Join,
- const Standard_Boolean RemoveIntEdges,
- const Message_ProgressRange& theRange)
-{
-  NotDone();
-  myLastUsedAlgo = OffsetAlgo_JOIN;
+void BRepOffsetAPI_MakeOffsetShape::PerformBySimple(const TopoDS_Shape& theS, const Standard_Real theOffsetValue) {
+    NotDone();
+    myLastUsedAlgo = OffsetAlgo_SIMPLE;
 
-  myOffsetShape.Initialize (S,Offset,Tol,Mode,Intersection,SelfInter,
-                            Join, Standard_False, RemoveIntEdges);
-  myOffsetShape.MakeOffsetShape(theRange);
+    mySimpleOffsetShape.Initialize(theS, theOffsetValue);
+    mySimpleOffsetShape.Perform();
 
-  if (!myOffsetShape.IsDone())
-    return;
+    if (!mySimpleOffsetShape.IsDone()) return;
 
-  myShape  = myOffsetShape.Shape();
-  Done();
+    myShape = mySimpleOffsetShape.GetResultShape();
+    Done();
 }
 
 //=======================================================================
-//function : PerformBySimple
-//purpose  : 
+// function :MakeOffset
+// purpose  :
 //=======================================================================
-void BRepOffsetAPI_MakeOffsetShape::PerformBySimple(const TopoDS_Shape& theS,
-                                                    const Standard_Real theOffsetValue)
-{
-  NotDone();
-  myLastUsedAlgo = OffsetAlgo_SIMPLE;
-
-  mySimpleOffsetShape.Initialize(theS, theOffsetValue);
-  mySimpleOffsetShape.Perform();
-
-  if (!mySimpleOffsetShape.IsDone())
-    return;
-
-  myShape = mySimpleOffsetShape.GetResultShape();
-  Done();
+const BRepOffset_MakeOffset& BRepOffsetAPI_MakeOffsetShape::MakeOffset() const {
+    return myOffsetShape;
 }
 
 //=======================================================================
-//function :MakeOffset
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
-const BRepOffset_MakeOffset& BRepOffsetAPI_MakeOffsetShape::MakeOffset() const
-{
-  return myOffsetShape;
+void BRepOffsetAPI_MakeOffsetShape::Build(const Message_ProgressRange& /*theRange*/) {}
+
+//=======================================================================
+// function : Generated
+// purpose  :
+//=======================================================================
+const TopTools_ListOfShape& BRepOffsetAPI_MakeOffsetShape::Generated(const TopoDS_Shape& S) {
+    myGenerated.Clear();
+    if (myLastUsedAlgo == OffsetAlgo_JOIN) {
+        myGenerated = myOffsetShape.Generated(S);
+    } else if (myLastUsedAlgo == OffsetAlgo_SIMPLE) {
+        TopoDS_Shape aGenShape = mySimpleOffsetShape.Generated(S);
+        if (!aGenShape.IsNull() && !aGenShape.IsSame(S)) myGenerated.Append(aGenShape);
+    }
+
+    return myGenerated;
 }
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : Modified
+// purpose  :
 //=======================================================================
-void BRepOffsetAPI_MakeOffsetShape::Build(const Message_ProgressRange& /*theRange*/)
-{
+const TopTools_ListOfShape& BRepOffsetAPI_MakeOffsetShape::Modified(const TopoDS_Shape& S) {
+    myGenerated.Clear();
+    if (myLastUsedAlgo == OffsetAlgo_JOIN) {
+        myGenerated = myOffsetShape.Modified(S);
+    } else if (myLastUsedAlgo == OffsetAlgo_SIMPLE) {
+        TopoDS_Shape aGenShape = mySimpleOffsetShape.Modified(S);
+        if (!aGenShape.IsNull() && !aGenShape.IsSame(S)) myGenerated.Append(aGenShape);
+    }
+
+    return myGenerated;
 }
 
 //=======================================================================
-//function : Generated
-//purpose  : 
+// function : IsDeleted
+// purpose  :
 //=======================================================================
-const TopTools_ListOfShape& BRepOffsetAPI_MakeOffsetShape::Generated (const TopoDS_Shape& S)
-{
-  myGenerated.Clear();
-  if (myLastUsedAlgo == OffsetAlgo_JOIN)
-  {
-    myGenerated = myOffsetShape.Generated (S);
-  }
-  else if (myLastUsedAlgo == OffsetAlgo_SIMPLE)
-  {
-    TopoDS_Shape aGenShape = mySimpleOffsetShape.Generated(S);
-    if (!aGenShape.IsNull() && !aGenShape.IsSame (S))
-      myGenerated.Append(aGenShape);
-  }
-
-  return myGenerated;
+Standard_Boolean BRepOffsetAPI_MakeOffsetShape::IsDeleted(const TopoDS_Shape& S) {
+    if (myLastUsedAlgo == OffsetAlgo_JOIN) {
+        return myOffsetShape.IsDeleted(S);
+    }
+    return Standard_False;
 }
 
 //=======================================================================
-//function : Modified
-//purpose  : 
+// function : GetJoinType
+// purpose  : Query offset join type.
 //=======================================================================
-const TopTools_ListOfShape& BRepOffsetAPI_MakeOffsetShape::Modified (const TopoDS_Shape& S)
-{
-  myGenerated.Clear();
-  if (myLastUsedAlgo == OffsetAlgo_JOIN)
-  {
-    myGenerated = myOffsetShape.Modified (S);
-  }
-  else if (myLastUsedAlgo == OffsetAlgo_SIMPLE)
-  {
-    TopoDS_Shape aGenShape = mySimpleOffsetShape.Modified(S);
-    if (!aGenShape.IsNull() && !aGenShape.IsSame (S))
-      myGenerated.Append(aGenShape);
-  }
-
-  return myGenerated;
-}
-
-//=======================================================================
-//function : IsDeleted
-//purpose  : 
-//=======================================================================
-Standard_Boolean BRepOffsetAPI_MakeOffsetShape::IsDeleted (const TopoDS_Shape& S)
-{
-  if (myLastUsedAlgo == OffsetAlgo_JOIN)
-  {
-    return myOffsetShape.IsDeleted(S);
-  }
-  return Standard_False;
-}
-
-//=======================================================================
-//function : GetJoinType
-//purpose  : Query offset join type.
-//=======================================================================
-GeomAbs_JoinType BRepOffsetAPI_MakeOffsetShape::GetJoinType() const
-{
-  return myOffsetShape.GetJoinType();
+GeomAbs_JoinType BRepOffsetAPI_MakeOffsetShape::GetJoinType() const {
+    return myOffsetShape.GetJoinType();
 }

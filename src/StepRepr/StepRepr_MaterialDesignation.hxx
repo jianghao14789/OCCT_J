@@ -25,52 +25,31 @@
 class TCollection_HAsciiString;
 class StepRepr_CharacterizedDefinition;
 
-
 class StepRepr_MaterialDesignation;
 DEFINE_STANDARD_HANDLE(StepRepr_MaterialDesignation, Standard_Transient)
 
-
-class StepRepr_MaterialDesignation : public Standard_Transient
-{
+class StepRepr_MaterialDesignation : public Standard_Transient {
 
 public:
+    Standard_EXPORT StepRepr_MaterialDesignation();
 
-  
-  Standard_EXPORT StepRepr_MaterialDesignation();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const StepRepr_CharacterizedDefinition& aOfDefinition);
-  
-  Standard_EXPORT void SetName (const Handle(TCollection_HAsciiString)& aName);
-  
-  Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
-  
-  Standard_EXPORT void SetOfDefinition (const StepRepr_CharacterizedDefinition& aOfDefinition);
-  
-  Standard_EXPORT StepRepr_CharacterizedDefinition OfDefinition() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName,
+                              const StepRepr_CharacterizedDefinition& aOfDefinition);
 
+    Standard_EXPORT void SetName(const Handle(TCollection_HAsciiString) & aName);
 
+    Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
 
+    Standard_EXPORT void SetOfDefinition(const StepRepr_CharacterizedDefinition& aOfDefinition);
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_MaterialDesignation,Standard_Transient)
+    Standard_EXPORT StepRepr_CharacterizedDefinition OfDefinition() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_MaterialDesignation, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) name;
-  StepRepr_CharacterizedDefinition ofDefinition;
-
-
+    Handle(TCollection_HAsciiString) name;
+    StepRepr_CharacterizedDefinition ofDefinition;
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_MaterialDesignation_HeaderFile

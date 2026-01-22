@@ -20,8 +20,8 @@
 #include <IntTools_SurfaceRangeSampleMapHasher.hxx>
 #include <NCollection_Map.hxx>
 
-typedef NCollection_Map<IntTools_SurfaceRangeSample,IntTools_SurfaceRangeSampleMapHasher> IntTools_MapOfSurfaceSample;
-typedef NCollection_Map<IntTools_SurfaceRangeSample,IntTools_SurfaceRangeSampleMapHasher>::Iterator IntTools_MapIteratorOfMapOfSurfaceSample;
-
+typedef NCollection_Map<IntTools_SurfaceRangeSample, IntTools_SurfaceRangeSampleMapHasher> IntTools_MapOfSurfaceSample;
+typedef NCollection_Map<IntTools_SurfaceRangeSample, IntTools_SurfaceRangeSampleMapHasher>::Iterator
+    IntTools_MapIteratorOfMapOfSurfaceSample;
 
 #endif

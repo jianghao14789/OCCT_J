@@ -19,9 +19,8 @@
 // Purpose  : Sets the intersection type at this point.
 //=======================================================================
 
-inline void HatchGen_PointOnElement::SetIntersectionType (const HatchGen_IntersectionType Type)
-{
-  myType = Type ;
+inline void HatchGen_PointOnElement::SetIntersectionType(const HatchGen_IntersectionType Type) {
+    myType = Type;
 }
 
 //=======================================================================
@@ -29,7 +28,6 @@ inline void HatchGen_PointOnElement::SetIntersectionType (const HatchGen_Interse
 // Purpose  : Returns the intersection type at this point.
 //=======================================================================
 
-inline HatchGen_IntersectionType HatchGen_PointOnElement::IntersectionType () const
-{
-  return myType ;
+inline HatchGen_IntersectionType HatchGen_PointOnElement::IntersectionType() const {
+    return myType;
 }

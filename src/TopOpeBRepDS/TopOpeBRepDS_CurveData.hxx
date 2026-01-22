@@ -26,42 +26,19 @@
 class TopOpeBRepDS_DataStructure;
 class TopOpeBRepDS_Curve;
 
-
-
-class TopOpeBRepDS_CurveData  : public TopOpeBRepDS_GeometryData
-{
+class TopOpeBRepDS_CurveData : public TopOpeBRepDS_GeometryData {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopOpeBRepDS_CurveData();
 
-  
-  Standard_EXPORT TopOpeBRepDS_CurveData();
-  
-  Standard_EXPORT TopOpeBRepDS_CurveData(const TopOpeBRepDS_Curve& C);
+    Standard_EXPORT TopOpeBRepDS_CurveData(const TopOpeBRepDS_Curve& C);
 
-
-friend class TopOpeBRepDS_DataStructure;
-
+    friend class TopOpeBRepDS_DataStructure;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  TopOpeBRepDS_Curve myCurve;
-
-
+    TopOpeBRepDS_Curve myCurve;
 };
-
-
-
-
-
-
 
 #endif // _TopOpeBRepDS_CurveData_HeaderFile

@@ -23,15 +23,6 @@
 #include <TransferBRep_ShapeInfo.hxx>
 #include <Transfer_Finder.hxx>
 
- 
-
-
-
-
-
-
-
-
 #define TheKey TopoDS_Shape
 #define TheKey_hxx <TopoDS_Shape.hxx>
 #define TheHasher TopTools_ShapeMapHasher
@@ -42,4 +33,3 @@
 #define Transfer_Mapper_hxx <TransferBRep_ShapeMapper.hxx>
 #define Handle_Transfer_Mapper Handle(TransferBRep_ShapeMapper)
 #include <Transfer_Mapper.gxx>
-

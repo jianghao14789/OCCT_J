@@ -19,22 +19,19 @@
 typedef std::pair<Standard_Integer, Standard_Integer> MeshVS_NodePair;
 
 //! Provides symmetric hash methods pair of integers.
-struct MeshVS_SymmetricPairHasher
-{
-  //! Computes a hash code for the node pair, in the range [1, theUpperBound]
-  //! @param theNodePair the node pair which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const MeshVS_NodePair& theNodePair, const Standard_Integer theUpperBound)
-  {
-    return ::HashCode(theNodePair.first + theNodePair.second, theUpperBound);
-  }
+struct MeshVS_SymmetricPairHasher {
+    //! Computes a hash code for the node pair, in the range [1, theUpperBound]
+    //! @param theNodePair the node pair which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const MeshVS_NodePair& theNodePair, const Standard_Integer theUpperBound) {
+        return ::HashCode(theNodePair.first + theNodePair.second, theUpperBound);
+    }
 
-  static Standard_Boolean IsEqual (const MeshVS_NodePair& thePair1, const MeshVS_NodePair& thePair2)
-  {
-    return (thePair1.first == thePair2.first && thePair1.second == thePair2.second)
-        || (thePair1.first == thePair2.second && thePair1.second == thePair2.first);
-  }
+    static Standard_Boolean IsEqual(const MeshVS_NodePair& thePair1, const MeshVS_NodePair& thePair2) {
+        return (thePair1.first == thePair2.first && thePair1.second == thePair2.second) ||
+               (thePair1.first == thePair2.second && thePair1.second == thePair2.first);
+    }
 };
 
 #endif // _MeshVS_SymmetricPairHasher_HeaderFile

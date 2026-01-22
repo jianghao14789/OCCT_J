@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes a vertex which
 //! - references an underlying vertex with the potential
 //! to be given a location and an orientation
@@ -32,38 +31,17 @@
 //! - has an orientation for the underlying vertex, in
 //! terms of its geometry (as opposed to orientation in
 //! relation to other shapes).
-class TopoDS_Vertex  : public TopoDS_Shape
-{
+class TopoDS_Vertex : public TopoDS_Shape {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Undefined Vertex.
+    //! Undefined Vertex.
     TopoDS_Vertex();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <TopoDS_Vertex.lxx>
-
-
-
-
 
 #endif // _TopoDS_Vertex_HeaderFile

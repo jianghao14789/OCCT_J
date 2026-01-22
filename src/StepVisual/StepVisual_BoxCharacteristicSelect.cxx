@@ -14,27 +14,22 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <StepVisual_BoxCharacteristicSelect.hxx>
 
 StepVisual_BoxCharacteristicSelect::StepVisual_BoxCharacteristicSelect() {}
 
-void StepVisual_BoxCharacteristicSelect::SetTypeOfContent(const Standard_Integer aType)
-{
-  theTypeOfContent = aType;
+void StepVisual_BoxCharacteristicSelect::SetTypeOfContent(const Standard_Integer aType) {
+    theTypeOfContent = aType;
 }
 
-Standard_Integer StepVisual_BoxCharacteristicSelect::TypeOfContent() const 
-{
-  return theTypeOfContent;
+Standard_Integer StepVisual_BoxCharacteristicSelect::TypeOfContent() const {
+    return theTypeOfContent;
 }
 
-Standard_Real StepVisual_BoxCharacteristicSelect::RealValue() const
-{
-  return theRealValue;
+Standard_Real StepVisual_BoxCharacteristicSelect::RealValue() const {
+    return theRealValue;
 }
 
-void StepVisual_BoxCharacteristicSelect::SetRealValue(const Standard_Real aValue)
-{
-  theRealValue = aValue;
+void StepVisual_BoxCharacteristicSelect::SetRealValue(const Standard_Real aValue) {
+    theRealValue = aValue;
 }

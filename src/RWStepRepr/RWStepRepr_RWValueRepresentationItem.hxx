@@ -26,19 +26,17 @@ class Interface_Check;
 class StepRepr_ValueRepresentationItem;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for ValueRepresentationItem
-class RWStepRepr_RWValueRepresentationItem 
-{
+class RWStepRepr_RWValueRepresentationItem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepRepr_RWValueRepresentationItem();
 
-  
-  Standard_EXPORT RWStepRepr_RWValueRepresentationItem();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_ValueRepresentationItem)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_ValueRepresentationItem)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_ValueRepresentationItem) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_ValueRepresentationItem) & ent) const;
 };
 #endif // _RWStepRepr_RWValueRepresentationItem_HeaderFile

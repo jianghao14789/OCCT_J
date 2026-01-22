@@ -29,50 +29,28 @@ class TopoDS_Edge;
 class TopoDSToStep_Tool;
 class Transfer_FinderProcess;
 
-
 //! This class implements the mapping between classes
 //! Edge from TopoDS and TopologicalRepresentationItem from
 //! StepShape.
-class TopoDSToStep_MakeStepEdge  : public TopoDSToStep_Root
-{
+class TopoDSToStep_MakeStepEdge : public TopoDSToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopoDSToStep_MakeStepEdge();
 
-  
-  Standard_EXPORT TopoDSToStep_MakeStepEdge();
-  
-  Standard_EXPORT TopoDSToStep_MakeStepEdge(const TopoDS_Edge& E, TopoDSToStep_Tool& T, const Handle(Transfer_FinderProcess)& FP);
-  
-  Standard_EXPORT void Init (const TopoDS_Edge& E, TopoDSToStep_Tool& T, const Handle(Transfer_FinderProcess)& FP);
-  
-  Standard_EXPORT const Handle(StepShape_TopologicalRepresentationItem)& Value() const;
-  
-  Standard_EXPORT TopoDSToStep_MakeEdgeError Error() const;
+    Standard_EXPORT TopoDSToStep_MakeStepEdge(const TopoDS_Edge& E, TopoDSToStep_Tool& T,
+                                              const Handle(Transfer_FinderProcess) & FP);
 
+    Standard_EXPORT void Init(const TopoDS_Edge& E, TopoDSToStep_Tool& T, const Handle(Transfer_FinderProcess) & FP);
 
+    Standard_EXPORT const Handle(StepShape_TopologicalRepresentationItem) & Value() const;
 
+    Standard_EXPORT TopoDSToStep_MakeEdgeError Error() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepShape_TopologicalRepresentationItem) myResult;
-  TopoDSToStep_MakeEdgeError myError;
-
-
+    Handle(StepShape_TopologicalRepresentationItem) myResult;
+    TopoDSToStep_MakeEdgeError myError;
 };
-
-
-
-
-
-
 
 #endif // _TopoDSToStep_MakeStepEdge_HeaderFile

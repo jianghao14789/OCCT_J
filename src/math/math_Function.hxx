@@ -28,7 +28,8 @@
 //! associated with a Function of a single variable.
 class math_Function {
 public:
-    DEFINE_STANDARD_ALLOC;;
+    DEFINE_STANDARD_ALLOC;
+    ;
 
     //! Virtual destructor, for safe inheritance
     virtual ~math_Function() {}

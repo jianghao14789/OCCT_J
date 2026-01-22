@@ -33,7 +33,6 @@ class Standard_NumericError;
 class math_FunctionWithDerivative;
 class math_FunctionSample;
 
-
 //! This algorithm uses a sample of the function to find
 //! all intervals on which the function is null, and afterwards
 //! uses the FunctionRoots algorithm to find the points
@@ -41,8 +40,8 @@ class math_FunctionSample;
 //! Knowledge of the derivative is required.
 class math_FunctionAllRoots {
 public:
-
-    DEFINE_STANDARD_ALLOC;;
+    DEFINE_STANDARD_ALLOC;
+    ;
 
     //! The algorithm uses the sample to find intervals on which
     //! the function is null. An interval is found if, for at least
@@ -52,7 +51,9 @@ public:
     //! algorithm.
     //! Between two intervals, the roots of the function F are
     //! calculated using the FunctionRoots algorithm.
-    Standard_EXPORT math_FunctionAllRoots(math_FunctionWithDerivative& F, const math_FunctionSample& S, const Standard_Real EpsX, const Standard_Real EpsF, const Standard_Real EpsNul);
+    Standard_EXPORT math_FunctionAllRoots(math_FunctionWithDerivative& F, const math_FunctionSample& S,
+                                          const Standard_Real EpsX, const Standard_Real EpsF,
+                                          const Standard_Real EpsNul);
 
     //! Returns True if the computation has been done successfully.
     Standard_Boolean IsDone() const;
@@ -91,7 +92,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
     Standard_Boolean done;
     TColStd_SequenceOfReal pdeb;

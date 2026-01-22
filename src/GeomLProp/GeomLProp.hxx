@@ -26,54 +26,36 @@
 #include <Standard_Boolean.hxx>
 class Geom_Curve;
 
-
 //! These global functions compute the degree of
 //! continuity of a 3D curve built by concatenation of two
 //! other curves (or portions of curves) at their junction point.
-class GeomLProp 
-{
+class GeomLProp {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes the regularity at the junction between C1 and
+    //! C2. The booleans r1 and r2 are true if the curves must
+    //! be taken reversed.  The point u1 on C1 and the point
+    //! u2 on C2 must be confused.
+    //! tl and ta are the linear and angular tolerance used two
+    //! compare the derivative.
+    Standard_EXPORT static GeomAbs_Shape Continuity(const Handle(Geom_Curve) & C1, const Handle(Geom_Curve) & C2,
+                                                    const Standard_Real u1, const Standard_Real u2,
+                                                    const Standard_Boolean r1, const Standard_Boolean r2,
+                                                    const Standard_Real tl, const Standard_Real ta);
 
-  
-  //! Computes the regularity at the junction between C1 and
-  //! C2. The booleans r1 and r2 are true if the curves must
-  //! be taken reversed.  The point u1 on C1 and the point
-  //! u2 on C2 must be confused.
-  //! tl and ta are the linear and angular tolerance used two
-  //! compare the derivative.
-  Standard_EXPORT static GeomAbs_Shape Continuity (const Handle(Geom_Curve)& C1, const Handle(Geom_Curve)& C2, const Standard_Real u1, const Standard_Real u2, const Standard_Boolean r1, const Standard_Boolean r2, const Standard_Real tl, const Standard_Real ta);
-  
-  //! The  same  as  preceding   but   using  the   standard
-  //! tolerances from package Precision.
-  Standard_EXPORT static GeomAbs_Shape Continuity (const Handle(Geom_Curve)& C1, const Handle(Geom_Curve)& C2, const Standard_Real u1, const Standard_Real u2, const Standard_Boolean r1, const Standard_Boolean r2);
-
-
-
+    //! The  same  as  preceding   but   using  the   standard
+    //! tolerances from package Precision.
+    Standard_EXPORT static GeomAbs_Shape Continuity(const Handle(Geom_Curve) & C1, const Handle(Geom_Curve) & C2,
+                                                    const Standard_Real u1, const Standard_Real u2,
+                                                    const Standard_Boolean r1, const Standard_Boolean r2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class GeomLProp_CurveTool;
-friend class GeomLProp_SurfaceTool;
-friend class GeomLProp_CLProps;
-friend class GeomLProp_SLProps;
-
+    friend class GeomLProp_CurveTool;
+    friend class GeomLProp_SurfaceTool;
+    friend class GeomLProp_CLProps;
+    friend class GeomLProp_SLProps;
 };
-
-
-
-
-
-
 
 #endif // _GeomLProp_HeaderFile

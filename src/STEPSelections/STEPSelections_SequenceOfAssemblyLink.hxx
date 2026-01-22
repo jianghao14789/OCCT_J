@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<Handle(STEPSelections_AssemblyLink)> STEPSelections_SequenceOfAssemblyLink;
 
-
 #endif

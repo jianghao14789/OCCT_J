@@ -20,8 +20,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_Attribute, Standard_Transient)
 
 //=======================================================================
-//function : Constructor
-//purpose  : 使用给定的名称初始化属性对象
+// function : Constructor
+// purpose  : 使用给定的名称初始化属性对象
 //
 // 说明：
 //   - Message_Attribute 是扩展警报的附加属性容器
@@ -42,14 +42,11 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_Attribute, Standard_Transient)
 //   - 一个警报可以有多个属性
 //   - 属性被组织在 AlertExtended 对象中
 //=======================================================================
-Message_Attribute::Message_Attribute(const TCollection_AsciiString& theName)
-    : myName(theName)
-{
-}
+Message_Attribute::Message_Attribute(const TCollection_AsciiString& theName) : myName(theName) {}
 
 //=======================================================================
-//function : GetMessageKey
-//purpose  : 获取用于消息处理的键，返回属性的名称
+// function : GetMessageKey
+// purpose  : 获取用于消息处理的键，返回属性的名称
 //
 // 说明：
 //   - 这个方法返回属性的名称
@@ -69,15 +66,14 @@ Message_Attribute::Message_Attribute(const TCollection_AsciiString& theName)
 //   Message_Attribute attr("FileNotFound");
 //   const char* key = attr.GetMessageKey();  // 返回 "FileNotFound"
 //=======================================================================
-Standard_CString Message_Attribute::GetMessageKey() const
-{
+Standard_CString Message_Attribute::GetMessageKey() const {
     // 三元运算符：如果 myName 不为空，返回其 C 字符串表示；否则返回空字符串
     return !myName.IsEmpty() ? myName.ToCString() : "";
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将对象内容导出为 JSON 格式（用于调试和日志记录）
+// function : DumpJson
+// purpose  : 将对象内容导出为 JSON 格式（用于调试和日志记录）
 //
 // 参数说明：
 //   - theOStream：输出流，JSON 将被写入此流
@@ -99,11 +95,10 @@ Standard_CString Message_Attribute::GetMessageKey() const
 //   - OCCT_DUMP_TRANSIENT_CLASS_BEGIN()：开始对象的 JSON 输出
 //   - OCCT_DUMP_FIELD_VALUE_STRING()：输出字符串字段
 //=======================================================================
-void Message_Attribute::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-{
+void Message_Attribute::DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
     // 开始输出瞬态类（非永久存储的对象）的 JSON
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
-    
+
     // 输出属性的名称字段
     OCCT_DUMP_FIELD_VALUE_STRING(theOStream, myName)
 }

@@ -14,30 +14,26 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <math_Vector.hxx>
 #include <PLib_DoubleJacobiPolynomial.hxx>
 #include <PLib_JacobiPolynomial.hxx>
 
 //=======================================================================
-//function : PLib_DoubleJacobiPolynomial
-//purpose  : 
+// function : PLib_DoubleJacobiPolynomial
+// purpose  :
 //=======================================================================
 PLib_DoubleJacobiPolynomial::PLib_DoubleJacobiPolynomial()
 
-{
-}
+{}
 
 //=======================================================================
-//function : PLib_DoubleJacobiPolynomial
-//purpose  : 
+// function : PLib_DoubleJacobiPolynomial
+// purpose  :
 //=======================================================================
 
-PLib_DoubleJacobiPolynomial::PLib_DoubleJacobiPolynomial(const Handle(PLib_JacobiPolynomial)& JacPolU,
-    const Handle(PLib_JacobiPolynomial)& JacPolV) :
-    myJacPolU(JacPolU),
-    myJacPolV(JacPolV)
-{
+PLib_DoubleJacobiPolynomial::PLib_DoubleJacobiPolynomial(const Handle(PLib_JacobiPolynomial) & JacPolU,
+                                                         const Handle(PLib_JacobiPolynomial) & JacPolV)
+    : myJacPolU(JacPolU), myJacPolV(JacPolV) {
     Handle(TColStd_HArray1OfReal) TabMaxU =
         new TColStd_HArray1OfReal(0, JacPolU->WorkDegree() - 2 * (JacPolU->NivConstr() + 1));
     JacPolU->MaxValue(TabMaxU->ChangeArray1());
@@ -50,17 +46,13 @@ PLib_DoubleJacobiPolynomial::PLib_DoubleJacobiPolynomial(const Handle(PLib_Jacob
 }
 
 //=======================================================================
-//function : MaxErrorU
-//purpose  : 
+// function : MaxErrorU
+// purpose  :
 //=======================================================================
 
-Standard_Real
-PLib_DoubleJacobiPolynomial::MaxErrorU(const Standard_Integer Dimension,
-    const Standard_Integer DegreeU,
-    const Standard_Integer DegreeV,
-    const Standard_Integer dJacCoeff,
-    const TColStd_Array1OfReal& JacCoeff) const
-{
+Standard_Real PLib_DoubleJacobiPolynomial::MaxErrorU(const Standard_Integer Dimension, const Standard_Integer DegreeU,
+                                                     const Standard_Integer DegreeV, const Standard_Integer dJacCoeff,
+                                                     const TColStd_Array1OfReal& JacCoeff) const {
     Standard_Integer ii, idim, dJac, MinU, MinV, WorkDegreeU, WorkDegreeV;
     Standard_Real Bid0;
 
@@ -75,25 +67,21 @@ PLib_DoubleJacobiPolynomial::MaxErrorU(const Standard_Integer Dimension,
     for (idim = 1; idim <= Dimension; idim++) {
         dJac = dJacCoeff + (idim - 1) * (WorkDegreeU + 1) * (WorkDegreeV + 1);
         for (ii = MinU; ii <= DegreeU; ii++) {
-            MaxErrDim(idim) += (Abs(JacCoeff(ii + DegreeV * (WorkDegreeU + 1) + dJac)) *
-                myTabMaxU->Value(ii - MinU) * Bid0);
+            MaxErrDim(idim) +=
+                (Abs(JacCoeff(ii + DegreeV * (WorkDegreeU + 1) + dJac)) * myTabMaxU->Value(ii - MinU) * Bid0);
         }
     }
     return (MaxErrDim.Norm());
 }
 
 //=======================================================================
-//function : MaxErrorV
-//purpose  : 
+// function : MaxErrorV
+// purpose  :
 //=======================================================================
 
-Standard_Real
-PLib_DoubleJacobiPolynomial::MaxErrorV(const Standard_Integer Dimension,
-    const Standard_Integer DegreeU,
-    const Standard_Integer DegreeV,
-    const Standard_Integer dJacCoeff,
-    const TColStd_Array1OfReal& JacCoeff) const
-{
+Standard_Real PLib_DoubleJacobiPolynomial::MaxErrorV(const Standard_Integer Dimension, const Standard_Integer DegreeU,
+                                                     const Standard_Integer DegreeV, const Standard_Integer dJacCoeff,
+                                                     const TColStd_Array1OfReal& JacCoeff) const {
     Standard_Integer jj, idim, dJac, MinU, MinV, WorkDegreeU, WorkDegreeV;
     Standard_Real Bid0;
 
@@ -108,28 +96,24 @@ PLib_DoubleJacobiPolynomial::MaxErrorV(const Standard_Integer Dimension,
     for (idim = 1; idim <= Dimension; idim++) {
         dJac = dJacCoeff + (idim - 1) * (WorkDegreeU + 1) * (WorkDegreeV + 1);
         for (jj = MinV; jj <= DegreeV; jj++) {
-            MaxErrDim(idim) += (Abs(JacCoeff(DegreeU + jj * (WorkDegreeU + 1) + dJac)) *
-                myTabMaxV->Value(jj - MinV) * Bid0);
+            MaxErrDim(idim) +=
+                (Abs(JacCoeff(DegreeU + jj * (WorkDegreeU + 1) + dJac)) * myTabMaxV->Value(jj - MinV) * Bid0);
         }
     }
     return (MaxErrDim.Norm());
 }
 
 //=======================================================================
-//function : MaxError
-//purpose  : 
+// function : MaxError
+// purpose  :
 //=======================================================================
 
-Standard_Real
-PLib_DoubleJacobiPolynomial::MaxError(const Standard_Integer Dimension,
-    const Standard_Integer MinDegreeU,
-    const Standard_Integer MaxDegreeU,
-    const Standard_Integer MinDegreeV,
-    const Standard_Integer MaxDegreeV,
-    const Standard_Integer dJacCoeff,
-    const TColStd_Array1OfReal& JacCoeff,
-    const Standard_Real Error) const
-{
+Standard_Real PLib_DoubleJacobiPolynomial::MaxError(const Standard_Integer Dimension, const Standard_Integer MinDegreeU,
+                                                    const Standard_Integer MaxDegreeU,
+                                                    const Standard_Integer MinDegreeV,
+                                                    const Standard_Integer MaxDegreeV, const Standard_Integer dJacCoeff,
+                                                    const TColStd_Array1OfReal& JacCoeff,
+                                                    const Standard_Real Error) const {
     Standard_Integer ii, jj, idim, dJac, MinU, MinV, WorkDegreeU, WorkDegreeV;
     Standard_Real Bid0, Bid1;
 
@@ -166,22 +150,16 @@ PLib_DoubleJacobiPolynomial::MaxError(const Standard_Integer Dimension,
 }
 
 //=======================================================================
-//function : ReduceDegree
-//purpose  : 
+// function : ReduceDegree
+// purpose  :
 //=======================================================================
 
-void PLib_DoubleJacobiPolynomial::ReduceDegree(const Standard_Integer Dimension,
-    const Standard_Integer MinDegreeU,
-    const Standard_Integer MaxDegreeU,
-    const Standard_Integer MinDegreeV,
-    const Standard_Integer MaxDegreeV,
-    const Standard_Integer dJacCoeff,
-    const TColStd_Array1OfReal& JacCoeff,
-    const Standard_Real EpmsCut,
-    Standard_Real& MaxError,
-    Standard_Integer& NewDegreeU,
-    Standard_Integer& NewDegreeV) const
-{
+void PLib_DoubleJacobiPolynomial::ReduceDegree(const Standard_Integer Dimension, const Standard_Integer MinDegreeU,
+                                               const Standard_Integer MaxDegreeU, const Standard_Integer MinDegreeV,
+                                               const Standard_Integer MaxDegreeV, const Standard_Integer dJacCoeff,
+                                               const TColStd_Array1OfReal& JacCoeff, const Standard_Real EpmsCut,
+                                               Standard_Real& MaxError, Standard_Integer& NewDegreeU,
+                                               Standard_Integer& NewDegreeV) const {
     Standard_Integer NewU, NewV;
     Standard_Real ErrU, ErrV;
 
@@ -225,8 +203,7 @@ void PLib_DoubleJacobiPolynomial::ReduceDegree(const Standard_Integer Dimension,
                 MaxError = ErrV;
                 NewV--;
             }
-        }
-        else {
+        } else {
             if (ErrU < EpmsCut) {
                 MaxError = ErrU;
                 NewU--;
@@ -241,17 +218,14 @@ void PLib_DoubleJacobiPolynomial::ReduceDegree(const Standard_Integer Dimension,
 }
 
 //=======================================================================
-//function : AverageError
-//purpose  : 
+// function : AverageError
+// purpose  :
 //=======================================================================
 
-Standard_Real
-PLib_DoubleJacobiPolynomial::AverageError(const Standard_Integer Dimension,
-    const Standard_Integer DegreeU,
-    const Standard_Integer DegreeV,
-    const Standard_Integer dJacCoeff,
-    const TColStd_Array1OfReal& JacCoeff) const
-{
+Standard_Real PLib_DoubleJacobiPolynomial::AverageError(const Standard_Integer Dimension,
+                                                        const Standard_Integer DegreeU, const Standard_Integer DegreeV,
+                                                        const Standard_Integer dJacCoeff,
+                                                        const TColStd_Array1OfReal& JacCoeff) const {
     Standard_Integer ii, jj, idim, dJac, IDebU, IDebV, MinU, MinV, WorkDegreeU, WorkDegreeV;
     Standard_Real Bid0, Bid1, AverageErr;
 
@@ -289,16 +263,15 @@ PLib_DoubleJacobiPolynomial::AverageError(const Standard_Integer Dimension,
 }
 
 //=======================================================================
-//function : WDoubleJacobiToCoefficients
-//purpose  : 
+// function : WDoubleJacobiToCoefficients
+// purpose  :
 //=======================================================================
 
 void PLib_DoubleJacobiPolynomial::WDoubleJacobiToCoefficients(const Standard_Integer Dimension,
-    const Standard_Integer DegreeU,
-    const Standard_Integer DegreeV,
-    const TColStd_Array1OfReal& JacCoeff,
-    TColStd_Array1OfReal& Coefficients) const
-{
+                                                              const Standard_Integer DegreeU,
+                                                              const Standard_Integer DegreeV,
+                                                              const TColStd_Array1OfReal& JacCoeff,
+                                                              TColStd_Array1OfReal& Coefficients) const {
     Standard_Integer iu, iv, idim, WorkDegreeU, WorkDegreeV;
 
     Coefficients.Init(0.);
@@ -342,4 +315,3 @@ void PLib_DoubleJacobiPolynomial::WDoubleJacobiToCoefficients(const Standard_Int
         }
     }
 }
-

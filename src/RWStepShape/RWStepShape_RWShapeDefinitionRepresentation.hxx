@@ -28,48 +28,29 @@ class StepShape_ShapeDefinitionRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ShapeDefinitionRepresentation
-class RWStepShape_RWShapeDefinitionRepresentation 
-{
+class RWStepShape_RWShapeDefinitionRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWShapeDefinitionRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWShapeDefinitionRepresentation();
-  
-  //! Reads ShapeDefinitionRepresentation
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ShapeDefinitionRepresentation)& ent) const;
-  
-  //! Writes ShapeDefinitionRepresentation
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ShapeDefinitionRepresentation)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_ShapeDefinitionRepresentation)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ShapeDefinitionRepresentation
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_ShapeDefinitionRepresentation) & ent) const;
 
+    //! Writes ShapeDefinitionRepresentation
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepShape_ShapeDefinitionRepresentation) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_ShapeDefinitionRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWShapeDefinitionRepresentation_HeaderFile

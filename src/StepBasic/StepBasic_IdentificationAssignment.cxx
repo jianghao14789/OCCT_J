@@ -20,66 +20,59 @@
 #include <StepBasic_IdentificationRole.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_IdentificationAssignment,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_IdentificationAssignment, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_IdentificationAssignment
-//purpose  : 
+// function : StepBasic_IdentificationAssignment
+// purpose  :
 //=======================================================================
-StepBasic_IdentificationAssignment::StepBasic_IdentificationAssignment ()
-{
+StepBasic_IdentificationAssignment::StepBasic_IdentificationAssignment() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_IdentificationAssignment::Init(const Handle(TCollection_HAsciiString) & aAssignedId,
+                                              const Handle(StepBasic_IdentificationRole) & aRole) {
+
+    theAssignedId = aAssignedId;
+
+    theRole = aRole;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AssignedId
+// purpose  :
 //=======================================================================
 
-void StepBasic_IdentificationAssignment::Init (const Handle(TCollection_HAsciiString) &aAssignedId,
-                                               const Handle(StepBasic_IdentificationRole) &aRole)
-{
-
-  theAssignedId = aAssignedId;
-
-  theRole = aRole;
+Handle(TCollection_HAsciiString) StepBasic_IdentificationAssignment::AssignedId() const {
+    return theAssignedId;
 }
 
 //=======================================================================
-//function : AssignedId
-//purpose  : 
+// function : SetAssignedId
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_IdentificationAssignment::AssignedId () const
-{
-  return theAssignedId;
+void StepBasic_IdentificationAssignment::SetAssignedId(const Handle(TCollection_HAsciiString) & aAssignedId) {
+    theAssignedId = aAssignedId;
 }
 
 //=======================================================================
-//function : SetAssignedId
-//purpose  : 
+// function : Role
+// purpose  :
 //=======================================================================
 
-void StepBasic_IdentificationAssignment::SetAssignedId (const Handle(TCollection_HAsciiString) &aAssignedId)
-{
-  theAssignedId = aAssignedId;
+Handle(StepBasic_IdentificationRole) StepBasic_IdentificationAssignment::Role() const {
+    return theRole;
 }
 
 //=======================================================================
-//function : Role
-//purpose  : 
+// function : SetRole
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_IdentificationRole) StepBasic_IdentificationAssignment::Role () const
-{
-  return theRole;
-}
-
-//=======================================================================
-//function : SetRole
-//purpose  : 
-//=======================================================================
-
-void StepBasic_IdentificationAssignment::SetRole (const Handle(StepBasic_IdentificationRole) &aRole)
-{
-  theRole = aRole;
+void StepBasic_IdentificationAssignment::SetRole(const Handle(StepBasic_IdentificationRole) & aRole) {
+    theRole = aRole;
 }

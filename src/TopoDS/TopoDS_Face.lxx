@@ -15,10 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_Face
-//purpose  : 
+// function : TopoDS_Face
+// purpose  :
 //=======================================================================
 
-inline TopoDS_Face::TopoDS_Face ()
-{
-}
+inline TopoDS_Face::TopoDS_Face() {}

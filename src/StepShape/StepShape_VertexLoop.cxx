@@ -11,33 +11,27 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepShape_Vertex.hxx>
 #include <StepShape_VertexLoop.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_VertexLoop,StepShape_Loop)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_VertexLoop, StepShape_Loop)
 
-StepShape_VertexLoop::StepShape_VertexLoop ()  {}
+StepShape_VertexLoop::StepShape_VertexLoop() {}
 
-void StepShape_VertexLoop::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepShape_Vertex)& aLoopVertex)
-{
-	// --- classe own fields ---
-	loopVertex = aLoopVertex;
-	// --- classe inherited fields ---
-	StepRepr_RepresentationItem::Init(aName);
+void StepShape_VertexLoop::Init(const Handle(TCollection_HAsciiString) & aName,
+                                const Handle(StepShape_Vertex) & aLoopVertex) {
+    // --- classe own fields ---
+    loopVertex = aLoopVertex;
+    // --- classe inherited fields ---
+    StepRepr_RepresentationItem::Init(aName);
 }
 
-
-void StepShape_VertexLoop::SetLoopVertex(const Handle(StepShape_Vertex)& aLoopVertex)
-{
-	loopVertex = aLoopVertex;
+void StepShape_VertexLoop::SetLoopVertex(const Handle(StepShape_Vertex) & aLoopVertex) {
+    loopVertex = aLoopVertex;
 }
 
-Handle(StepShape_Vertex) StepShape_VertexLoop::LoopVertex() const
-{
-	return loopVertex;
+Handle(StepShape_Vertex) StepShape_VertexLoop::LoopVertex() const {
+    return loopVertex;
 }

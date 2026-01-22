@@ -29,106 +29,93 @@
 //! detected). As a result, this tool can be used for relatively
 //! fast approximated test which provides sub-set of potentially
 //! overlapped faces.
-class BRepExtrema_SelfIntersection : public BRepExtrema_ElementFilter
-{
-  friend class BRepExtrema_OverlapTool;
+class BRepExtrema_SelfIntersection : public BRepExtrema_ElementFilter {
+    friend class BRepExtrema_OverlapTool;
 
 public:
+    //! Creates uninitialized self-intersection tool.
+    Standard_EXPORT BRepExtrema_SelfIntersection(const Standard_Real theTolerance = 0.0);
 
-  //! Creates uninitialized self-intersection tool.
-  Standard_EXPORT BRepExtrema_SelfIntersection (const Standard_Real theTolerance = 0.0);
-
-  //! Creates self-intersection tool for the given shape.
-  Standard_EXPORT BRepExtrema_SelfIntersection (const TopoDS_Shape& theShape, const Standard_Real theTolerance = 0.0);
+    //! Creates self-intersection tool for the given shape.
+    Standard_EXPORT BRepExtrema_SelfIntersection(const TopoDS_Shape& theShape, const Standard_Real theTolerance = 0.0);
 
 public:
+    //! Returns tolerance value used for self-intersection test.
+    Standard_Real Tolerance() const {
+        return myTolerance;
+    }
 
-  //! Returns tolerance value used for self-intersection test.
-  Standard_Real Tolerance() const
-  {
-    return myTolerance;
-  }
+    //! Sets tolerance value used for self-intersection test.
+    void SetTolerance(const Standard_Real theTolerance) {
+        myTolerance = theTolerance;
+    }
 
-  //! Sets tolerance value used for self-intersection test.
-  void SetTolerance (const Standard_Real theTolerance)
-  {
-    myTolerance = theTolerance;
-  }
+    //! Loads shape for detection of self-intersections.
+    Standard_EXPORT Standard_Boolean LoadShape(const TopoDS_Shape& theShape);
 
-  //! Loads shape for detection of self-intersections.
-  Standard_EXPORT Standard_Boolean LoadShape (const TopoDS_Shape& theShape);
+    //! Performs detection of self-intersections.
+    Standard_EXPORT void Perform();
 
-  //! Performs detection of self-intersections.
-  Standard_EXPORT void Perform();
+    //! True if the detection is completed.
+    Standard_Boolean IsDone() const {
+        return myOverlapTool.IsDone();
+    }
 
-  //! True if the detection is completed.
-  Standard_Boolean IsDone() const
-  { 
-    return myOverlapTool.IsDone();
-  }
+    //! Returns set of IDs of overlapped sub-shapes (started from 0).
+    const BRepExtrema_MapOfIntegerPackedMapOfInteger& OverlapElements() const {
+        return myOverlapTool.OverlapSubShapes1();
+    }
 
-  //! Returns set of IDs of overlapped sub-shapes (started from 0).
-  const BRepExtrema_MapOfIntegerPackedMapOfInteger& OverlapElements() const
-  {
-    return myOverlapTool.OverlapSubShapes1();
-  }
+    //! Returns sub-shape from the shape for the given index (started from 0).
+    const TopoDS_Face& GetSubShape(const Standard_Integer theID) const {
+        return myFaceList.Value(theID);
+    }
 
-  //! Returns sub-shape from the shape for the given index (started from 0).
-  const TopoDS_Face& GetSubShape (const Standard_Integer theID) const
-  {
-    return myFaceList.Value (theID);
-  }
-
-  //! Returns set of all the face triangles of the shape.
-  const Handle(BRepExtrema_TriangleSet)& ElementSet() const
-  {
-    return myElementSet;
-  }
+    //! Returns set of all the face triangles of the shape.
+    const Handle(BRepExtrema_TriangleSet) & ElementSet() const {
+        return myElementSet;
+    }
 
 #ifdef OVERLAP_TOOL_OUTPUT_TRIANGLES
-  //! Returns set of overlapped mesh elements (only triangles).
-  const TColStd_PackedMapOfInteger& OverlapTriangles() const
-  {
-    return myOverlapTool.OverlapTriangles1();
-  }
+    //! Returns set of overlapped mesh elements (only triangles).
+    const TColStd_PackedMapOfInteger& OverlapTriangles() const {
+        return myOverlapTool.OverlapTriangles1();
+    }
 #endif
 
 protected:
+    //! Filter out correct adjacent mesh elements.
+    Standard_EXPORT virtual BRepExtrema_ElementFilter::FilterResult PreCheckElements(const Standard_Integer theIndex1,
+                                                                                     const Standard_Integer theIndex2);
 
-  //! Filter out correct adjacent mesh elements.
-  Standard_EXPORT virtual BRepExtrema_ElementFilter::FilterResult PreCheckElements (const Standard_Integer theIndex1,
-                                                                                    const Standard_Integer theIndex2);
+    //! Checks if the given triangles have only single common vertex.
+    Standard_EXPORT BRepExtrema_ElementFilter::FilterResult isRegularSharedVertex(const BVH_Vec3d& theSharedVert,
+                                                                                  const BVH_Vec3d& theTrng1Vtxs1,
+                                                                                  const BVH_Vec3d& theTrng1Vtxs2,
+                                                                                  const BVH_Vec3d& theTrng2Vtxs1,
+                                                                                  const BVH_Vec3d& theTrng2Vtxs2);
 
-  //! Checks if the given triangles have only single common vertex.
-  Standard_EXPORT BRepExtrema_ElementFilter::FilterResult isRegularSharedVertex (const BVH_Vec3d& theSharedVert,
-                                                                                 const BVH_Vec3d& theTrng1Vtxs1,
-                                                                                 const BVH_Vec3d& theTrng1Vtxs2,
-                                                                                 const BVH_Vec3d& theTrng2Vtxs1,
-                                                                                 const BVH_Vec3d& theTrng2Vtxs2);
-
-  //! Checks if the given triangles have only single common edge.
-  Standard_EXPORT BRepExtrema_ElementFilter::FilterResult isRegularSharedEdge (const BVH_Vec3d& theTrng1Vtxs0,
-                                                                               const BVH_Vec3d& theTrng1Vtxs1,
-                                                                               const BVH_Vec3d& theTrng1Vtxs2,
-                                                                               const BVH_Vec3d& theTrng2Vtxs2);
+    //! Checks if the given triangles have only single common edge.
+    Standard_EXPORT BRepExtrema_ElementFilter::FilterResult isRegularSharedEdge(const BVH_Vec3d& theTrng1Vtxs0,
+                                                                                const BVH_Vec3d& theTrng1Vtxs1,
+                                                                                const BVH_Vec3d& theTrng1Vtxs2,
+                                                                                const BVH_Vec3d& theTrng2Vtxs2);
 
 private:
+    //! Self-intersection tolerance.
+    Standard_Real myTolerance;
 
-  //! Self-intersection tolerance.
-  Standard_Real myTolerance;
+    //! Is the input shape inited?
+    Standard_Boolean myIsInit;
 
-  //! Is the input shape inited?
-  Standard_Boolean myIsInit;
+    //! List of triangulated faces of the shape.
+    BRepExtrema_ShapeList myFaceList;
 
-  //! List of triangulated faces of the shape.
-  BRepExtrema_ShapeList myFaceList;
+    //! Set of all the face triangles of the shape.
+    Handle(BRepExtrema_TriangleSet) myElementSet;
 
-  //! Set of all the face triangles of the shape.
-  Handle(BRepExtrema_TriangleSet) myElementSet;
-
-  //! Overlap tool used for self-intersection test.
-  BRepExtrema_OverlapTool myOverlapTool;
-
+    //! Overlap tool used for self-intersection test.
+    BRepExtrema_OverlapTool myOverlapTool;
 };
 
 #endif // _BRepExtrema_SelfIntersection_HeaderFile

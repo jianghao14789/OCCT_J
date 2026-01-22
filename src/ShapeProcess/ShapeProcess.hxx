@@ -38,53 +38,32 @@ class ShapeProcess_OperLibrary;
 //! customization is implemented via user-editable resource
 //! file which defines sequence of operators to be executed
 //! and their parameters.
-class ShapeProcess 
-{
+class ShapeProcess {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Registers operator to make it visible for Performer
+    Standard_EXPORT static Standard_Boolean RegisterOperator(const Standard_CString name,
+                                                             const Handle(ShapeProcess_Operator) & op);
 
-  
-  //! Registers operator to make it visible for Performer
-  Standard_EXPORT static Standard_Boolean RegisterOperator (const Standard_CString name, const Handle(ShapeProcess_Operator)& op);
-  
-  //! Finds operator by its name
-  Standard_EXPORT static Standard_Boolean FindOperator (const Standard_CString name, Handle(ShapeProcess_Operator)& op);
-  
-  //! Performs a specified sequence of operators on Context
-  //! Resource file and other data should be already loaded
-  //! to Context (including description of sequence seq)
-  Standard_EXPORT static Standard_Boolean Perform 
-                   (const Handle(ShapeProcess_Context)& context,
-                    const Standard_CString seq,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange());
+    //! Finds operator by its name
+    Standard_EXPORT static Standard_Boolean FindOperator(const Standard_CString name,
+                                                         Handle(ShapeProcess_Operator) & op);
 
-
-
+    //! Performs a specified sequence of operators on Context
+    //! Resource file and other data should be already loaded
+    //! to Context (including description of sequence seq)
+    Standard_EXPORT static Standard_Boolean Perform(const Handle(ShapeProcess_Context) & context,
+                                                    const Standard_CString seq,
+                                                    const Message_ProgressRange& theProgress = Message_ProgressRange());
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class ShapeProcess_Context;
-friend class ShapeProcess_ShapeContext;
-friend class ShapeProcess_Operator;
-friend class ShapeProcess_UOperator;
-friend class ShapeProcess_OperLibrary;
-
+    friend class ShapeProcess_Context;
+    friend class ShapeProcess_ShapeContext;
+    friend class ShapeProcess_Operator;
+    friend class ShapeProcess_UOperator;
+    friend class ShapeProcess_OperLibrary;
 };
-
-
-
-
-
-
 
 #endif // _ShapeProcess_HeaderFile

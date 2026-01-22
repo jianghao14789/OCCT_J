@@ -17,11 +17,6 @@
 #ifndef _Vrml_ShapeType_HeaderFile
 #define _Vrml_ShapeType_HeaderFile
 
-
-enum Vrml_ShapeType
-{
-Vrml_UNKNOWN_SHAPE_TYPE,
-Vrml_SOLID
-};
+enum Vrml_ShapeType { Vrml_UNKNOWN_SHAPE_TYPE, Vrml_SOLID };
 
 #endif // _Vrml_ShapeType_HeaderFile

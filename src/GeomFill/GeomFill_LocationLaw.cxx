@@ -24,76 +24,63 @@
 #include <Standard_OutOfRange.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(GeomFill_LocationLaw,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(GeomFill_LocationLaw, Standard_Transient)
 
-Standard_Boolean GeomFill_LocationLaw::D1(const Standard_Real, gp_Mat&, gp_Vec&,gp_Mat&, gp_Vec&,TColgp_Array1OfPnt2d&,TColgp_Array1OfVec2d&) 
-{
-  throw Standard_NotImplemented("GeomFill_LocationLaw::D1");
+Standard_Boolean GeomFill_LocationLaw::D1(const Standard_Real, gp_Mat&, gp_Vec&, gp_Mat&, gp_Vec&,
+                                          TColgp_Array1OfPnt2d&, TColgp_Array1OfVec2d&) {
+    throw Standard_NotImplemented("GeomFill_LocationLaw::D1");
 }
 
- Standard_Boolean GeomFill_LocationLaw::D2(const Standard_Real,
-					   gp_Mat&,gp_Vec&,
-					   gp_Mat&, gp_Vec&,
-					   gp_Mat&, gp_Vec&, 
-					   TColgp_Array1OfPnt2d&,TColgp_Array1OfVec2d&,TColgp_Array1OfVec2d&) 
-{
-  throw Standard_NotImplemented("GeomFill_LocationLaw::D2");
+Standard_Boolean GeomFill_LocationLaw::D2(const Standard_Real, gp_Mat&, gp_Vec&, gp_Mat&, gp_Vec&, gp_Mat&, gp_Vec&,
+                                          TColgp_Array1OfPnt2d&, TColgp_Array1OfVec2d&, TColgp_Array1OfVec2d&) {
+    throw Standard_NotImplemented("GeomFill_LocationLaw::D2");
 }
 
- Standard_Integer GeomFill_LocationLaw::Nb2dCurves() const
-{
-  Standard_Integer N = TraceNumber();
-  if  (HasFirstRestriction()) N++;
-  if  (HasLastRestriction()) N++;
+Standard_Integer GeomFill_LocationLaw::Nb2dCurves() const {
+    Standard_Integer N = TraceNumber();
+    if (HasFirstRestriction()) N++;
+    if (HasLastRestriction()) N++;
 
-  return N;
+    return N;
 }
 
- Standard_Boolean GeomFill_LocationLaw::HasFirstRestriction() const
-{
-  return Standard_False;
+Standard_Boolean GeomFill_LocationLaw::HasFirstRestriction() const {
+    return Standard_False;
 }
 
- Standard_Boolean GeomFill_LocationLaw::HasLastRestriction() const
-{
-  return Standard_False;
+Standard_Boolean GeomFill_LocationLaw::HasLastRestriction() const {
+    return Standard_False;
 }
 
- Standard_Integer GeomFill_LocationLaw::TraceNumber() const
-{
-  return 0;
+Standard_Integer GeomFill_LocationLaw::TraceNumber() const {
+    return 0;
 }
 
 //==================================================================
-//Function : ErrorStatus
-//Purpose :
+// Function : ErrorStatus
+// Purpose :
 //==================================================================
- GeomFill_PipeError GeomFill_LocationLaw::ErrorStatus() const
-{
-  return GeomFill_PipeOk;
+GeomFill_PipeError GeomFill_LocationLaw::ErrorStatus() const {
+    return GeomFill_PipeOk;
 }
 
-// void GeomFill_LocationLaw::Resolution(const Standard_Integer Index,const Standard_Real Tol,Standard_Real& TolU,Standard_Real& TolV) const
- void GeomFill_LocationLaw::Resolution(const Standard_Integer ,const Standard_Real ,Standard_Real& ,Standard_Real& ) const
-{
-  throw Standard_NotImplemented("GeomFill_LocationLaw::Resolution");
+// void GeomFill_LocationLaw::Resolution(const Standard_Integer Index,const Standard_Real Tol,Standard_Real&
+// TolU,Standard_Real& TolV) const
+void GeomFill_LocationLaw::Resolution(const Standard_Integer, const Standard_Real, Standard_Real&,
+                                      Standard_Real&) const {
+    throw Standard_NotImplemented("GeomFill_LocationLaw::Resolution");
 }
 
- void GeomFill_LocationLaw::SetTolerance(const Standard_Real,
-					 const Standard_Real ) 
-{
- // Ne fait rien !!
+void GeomFill_LocationLaw::SetTolerance(const Standard_Real, const Standard_Real) {
+    // Ne fait rien !!
 }
- Standard_Boolean GeomFill_LocationLaw::IsTranslation(Standard_Real&) const
-{
-  return Standard_False;
+Standard_Boolean GeomFill_LocationLaw::IsTranslation(Standard_Real&) const {
+    return Standard_False;
 }
 
- Standard_Boolean GeomFill_LocationLaw::IsRotation(Standard_Real&) const
-{
-  return Standard_False;
+Standard_Boolean GeomFill_LocationLaw::IsRotation(Standard_Real&) const {
+    return Standard_False;
 }
- void GeomFill_LocationLaw::Rotation(gp_Pnt&) const
-{
-  throw Standard_NotImplemented("GeomFill_SectionLaw::Rotation");
+void GeomFill_LocationLaw::Rotation(gp_Pnt&) const {
+    throw Standard_NotImplemented("GeomFill_SectionLaw::Rotation");
 }

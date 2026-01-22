@@ -32,16 +32,12 @@ class OSD_Path;
 class TCollection_AsciiString;
 class OSD_Directory;
 
-
 //! Manages a breadth-only search for sub-directories in the specified
 //! Path.
 //! There is no specific order of results.
-class OSD_DirectoryIterator
-{
+class OSD_DirectoryIterator {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Instantiates Object as empty Iterator;
     Standard_EXPORT OSD_DirectoryIterator();
@@ -52,8 +48,7 @@ public:
     Standard_EXPORT OSD_DirectoryIterator(const OSD_Path& where, const TCollection_AsciiString& Mask);
 
     Standard_EXPORT void Destroy();
-    ~OSD_DirectoryIterator()
-    {
+    ~OSD_DirectoryIterator() {
         Destroy();
     }
 

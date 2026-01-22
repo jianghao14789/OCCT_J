@@ -22,8 +22,9 @@
 #include <StepToTopoDS_PointPairHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<StepToTopoDS_PointPair,TopoDS_Edge,StepToTopoDS_PointPairHasher> StepToTopoDS_PointEdgeMap;
-typedef NCollection_DataMap<StepToTopoDS_PointPair,TopoDS_Edge,StepToTopoDS_PointPairHasher>::Iterator StepToTopoDS_DataMapIteratorOfPointEdgeMap;
-
+typedef NCollection_DataMap<StepToTopoDS_PointPair, TopoDS_Edge, StepToTopoDS_PointPairHasher>
+    StepToTopoDS_PointEdgeMap;
+typedef NCollection_DataMap<StepToTopoDS_PointPair, TopoDS_Edge, StepToTopoDS_PointPairHasher>::Iterator
+    StepToTopoDS_DataMapIteratorOfPointEdgeMap;
 
 #endif

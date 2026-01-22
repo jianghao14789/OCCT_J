@@ -26,55 +26,41 @@
 struct IMeshTools_Parameters;
 
 //! Interface class represents API for tool building discrete model.
-//! 
+//!
 //! The following statuses should be used by default:
 //! Message_Done1 - model has been successfully built.
 //! Message_Fail1 - empty shape.
 //! Message_Fail2 - model has not been build due to unexpected reason.
-class IMeshTools_ModelBuilder : public Message_Algorithm
-{
+class IMeshTools_ModelBuilder : public Message_Algorithm {
 public:
+    //! Destructor.
+    virtual ~IMeshTools_ModelBuilder() {}
 
-  //! Destructor.
-  virtual ~IMeshTools_ModelBuilder()
-  {
-  }
+    //! Exceptions protected method to create discrete model for the given shape.
+    //! Returns nullptr in case of failure.
+    Handle(IMeshData_Model) Perform(const TopoDS_Shape& theShape, const IMeshTools_Parameters& theParameters) {
+        ClearStatus();
 
-  //! Exceptions protected method to create discrete model for the given shape.
-  //! Returns nullptr in case of failure.
-  Handle (IMeshData_Model) Perform (
-    const TopoDS_Shape&          theShape,
-    const IMeshTools_Parameters& theParameters)
-  {
-    ClearStatus ();
+        try {
+            OCC_CATCH_SIGNALS
 
-    try
-    {
-      OCC_CATCH_SIGNALS
-
-      return performInternal (theShape, theParameters);
+            return performInternal(theShape, theParameters);
+        } catch (Standard_Failure const&) {
+            SetStatus(Message_Fail2);
+            return NULL;
+        }
     }
-    catch (Standard_Failure const&)
-    {
-      SetStatus (Message_Fail2);
-      return NULL;
-    }
-  }
 
-  DEFINE_STANDARD_RTTIEXT(IMeshTools_ModelBuilder, Message_Algorithm)
+    DEFINE_STANDARD_RTTIEXT(IMeshTools_ModelBuilder, Message_Algorithm)
 
 protected:
+    //! Constructor.
+    IMeshTools_ModelBuilder() {}
 
-  //! Constructor.
-  IMeshTools_ModelBuilder()
-  {
-  }
-
-  //! Creates discrete model for the given shape.
-  //! Returns nullptr in case of failure.
-  Standard_EXPORT virtual Handle (IMeshData_Model) performInternal (
-    const TopoDS_Shape&          theShape,
-    const IMeshTools_Parameters& theParameters) = 0;
+    //! Creates discrete model for the given shape.
+    //! Returns nullptr in case of failure.
+    Standard_EXPORT virtual Handle(IMeshData_Model)
+        performInternal(const TopoDS_Shape& theShape, const IMeshTools_Parameters& theParameters) = 0;
 };
 
 #endif

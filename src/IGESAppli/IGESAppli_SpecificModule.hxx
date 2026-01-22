@@ -31,42 +31,25 @@ DEFINE_STANDARD_HANDLE(IGESAppli_SpecificModule, IGESData_SpecificModule)
 
 //! Defines Services attached to IGES Entities :
 //! Dump & OwnCorrect, for IGESAppli
-class IGESAppli_SpecificModule : public IGESData_SpecificModule
-{
+class IGESAppli_SpecificModule : public IGESData_SpecificModule {
 
 public:
+    //! Creates a SpecificModule from IGESAppli & puts it into SpecificLib
+    Standard_EXPORT IGESAppli_SpecificModule();
 
-  
-  //! Creates a SpecificModule from IGESAppli & puts it into SpecificLib
-  Standard_EXPORT IGESAppli_SpecificModule();
-  
-  //! Specific Dump (own parameters) for IGESAppli
-  Standard_EXPORT void OwnDump (const Standard_Integer CN, const Handle(IGESData_IGESEntity)& ent, const IGESData_IGESDumper& dumper, Standard_OStream& S, const Standard_Integer own) const Standard_OVERRIDE;
-  
-  //! ---Purpose
-  Standard_EXPORT virtual Standard_Boolean OwnCorrect (const Standard_Integer CN, const Handle(IGESData_IGESEntity)& ent) const Standard_OVERRIDE;
+    //! Specific Dump (own parameters) for IGESAppli
+    Standard_EXPORT void OwnDump(const Standard_Integer CN, const Handle(IGESData_IGESEntity) & ent,
+                                 const IGESData_IGESDumper& dumper, Standard_OStream& S,
+                                 const Standard_Integer own) const Standard_OVERRIDE;
 
+    //! ---Purpose
+    Standard_EXPORT virtual Standard_Boolean OwnCorrect(const Standard_Integer CN, const Handle(IGESData_IGESEntity) &
+                                                                                       ent) const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESAppli_SpecificModule,IGESData_SpecificModule)
+    DEFINE_STANDARD_RTTIEXT(IGESAppli_SpecificModule, IGESData_SpecificModule)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESAppli_SpecificModule_HeaderFile

@@ -22,34 +22,30 @@
 #include <TColStd_HSequenceOfReal.hxx>
 
 //=======================================================================
-//function : StepFEA_SymmetricTensor22d
-//purpose  : 
+// function : StepFEA_SymmetricTensor22d
+// purpose  :
 //=======================================================================
-StepFEA_SymmetricTensor22d::StepFEA_SymmetricTensor22d ()
-{
+StepFEA_SymmetricTensor22d::StepFEA_SymmetricTensor22d() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepFEA_SymmetricTensor22d::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepData_SelectArrReal))) return 1;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  : 
+// function : AnisotropicSymmetricTensor22d
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepFEA_SymmetricTensor22d::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepData_SelectArrReal))) return 1;
-  return 0;
-}
-
-//=======================================================================
-//function : AnisotropicSymmetricTensor22d
-//purpose  : 
-//=======================================================================
-
-Handle(TColStd_HArray1OfReal) StepFEA_SymmetricTensor22d::AnisotropicSymmetricTensor22d () const
-{
-  //return Handle(TColStd_HArray1OfReal)::DownCast(Value());
-  Handle(StepData_SelectArrReal) SSR = Handle(StepData_SelectArrReal)::DownCast(Value());
-  if(SSR.IsNull()) return new TColStd_HArray1OfReal(1,3);
-  return SSR->ArrReal();
+Handle(TColStd_HArray1OfReal) StepFEA_SymmetricTensor22d::AnisotropicSymmetricTensor22d() const {
+    // return Handle(TColStd_HArray1OfReal)::DownCast(Value());
+    Handle(StepData_SelectArrReal) SSR = Handle(StepData_SelectArrReal)::DownCast(Value());
+    if (SSR.IsNull()) return new TColStd_HArray1OfReal(1, 3);
+    return SSR->ArrReal();
 }

@@ -19,101 +19,114 @@
 #include <Graphic3d_Aspects.hxx>
 
 //! Creates and updates a group of attributes for text primitives.
-class Graphic3d_AspectText3d : public Graphic3d_Aspects
-{
-  DEFINE_STANDARD_RTTIEXT(Graphic3d_AspectText3d, Graphic3d_Aspects)
+class Graphic3d_AspectText3d : public Graphic3d_Aspects {
+    DEFINE_STANDARD_RTTIEXT(Graphic3d_AspectText3d, Graphic3d_Aspects)
 public:
+    //! Creates a context table for text primitives defined with the following default values:
+    //! Color            : Quantity_NOC_YELLOW
+    //! Font             : Font_NOF_ASCII_MONO
+    //! The style        : Aspect_TOST_NORMAL
+    //! The display type : Aspect_TODT_NORMAL
+    Standard_EXPORT Graphic3d_AspectText3d();
 
-  //! Creates a context table for text primitives defined with the following default values:
-  //! Color            : Quantity_NOC_YELLOW
-  //! Font             : Font_NOF_ASCII_MONO
-  //! The style        : Aspect_TOST_NORMAL
-  //! The display type : Aspect_TODT_NORMAL
-  Standard_EXPORT Graphic3d_AspectText3d();
+    //! Creates a context table for text primitives defined with the specified values.
+    //! @param theColor [in] text color
+    //! @param theFont  [in] font family name or alias like Font_NOF_ASCII_MONO
+    //! @param theExpansionFactor [in] deprecated parameter, has no effect
+    //! @param theSpace [in] deprecated parameter, has no effect
+    //! @param theStyle [in] font style
+    //! @param theDisplayType [in] display mode
+    Standard_EXPORT Graphic3d_AspectText3d(const Quantity_Color& theColor, Standard_CString theFont,
+                                           Standard_Real theExpansionFactor, Standard_Real theSpace,
+                                           Aspect_TypeOfStyleText theStyle = Aspect_TOST_NORMAL,
+                                           Aspect_TypeOfDisplayText theDisplayType = Aspect_TODT_NORMAL);
 
-  //! Creates a context table for text primitives defined with the specified values.
-  //! @param theColor [in] text color
-  //! @param theFont  [in] font family name or alias like Font_NOF_ASCII_MONO
-  //! @param theExpansionFactor [in] deprecated parameter, has no effect
-  //! @param theSpace [in] deprecated parameter, has no effect
-  //! @param theStyle [in] font style
-  //! @param theDisplayType [in] display mode
-  Standard_EXPORT Graphic3d_AspectText3d (const Quantity_Color& theColor,
-                                          Standard_CString theFont,
-                                          Standard_Real theExpansionFactor,
-                                          Standard_Real theSpace,
-                                          Aspect_TypeOfStyleText theStyle = Aspect_TOST_NORMAL,
-                                          Aspect_TypeOfDisplayText theDisplayType = Aspect_TODT_NORMAL);
-
-  //! Return the text color.
-  const Quantity_Color& Color() const { return myInteriorColor.GetRGB(); }
-
-  //! Return the text color.
-  const Quantity_ColorRGBA& ColorRGBA() const { return myInteriorColor; }
-
-  //! Modifies the color.
-  void SetColor (const Quantity_Color& theColor) { myInteriorColor.SetRGB (theColor); }
-
-  //! Modifies the color.
-  void SetColor (const Quantity_ColorRGBA& theColor) { myInteriorColor = theColor; }
-
-  //! Return the font.
-  const TCollection_AsciiString& Font() const
-  {
-    if (myTextFont.IsNull())
-    {
-      static const TCollection_AsciiString anEmpty;
-      return anEmpty;
+    //! Return the text color.
+    const Quantity_Color& Color() const {
+        return myInteriorColor.GetRGB();
     }
-    return myTextFont->String();
-  }
 
-  //! Modifies the font.
-  void SetFont (const TCollection_AsciiString& theFont)
-  {
-    if (!theFont.IsEmpty())
-    {
-      myTextFont = new TCollection_HAsciiString (theFont);
+    //! Return the text color.
+    const Quantity_ColorRGBA& ColorRGBA() const {
+        return myInteriorColor;
     }
-    else
-    {
-      myTextFont.Nullify();
+
+    //! Modifies the color.
+    void SetColor(const Quantity_Color& theColor) {
+        myInteriorColor.SetRGB(theColor);
     }
-  }
 
-  //! Modifies the font.
-  void SetFont (const Standard_CString theFont)
-  {
-    SetFont (TCollection_AsciiString (theFont));
-  }
+    //! Modifies the color.
+    void SetColor(const Quantity_ColorRGBA& theColor) {
+        myInteriorColor = theColor;
+    }
 
-  //! Return the text style.
-  Aspect_TypeOfStyleText Style() const { return myTextStyle; }
+    //! Return the font.
+    const TCollection_AsciiString& Font() const {
+        if (myTextFont.IsNull()) {
+            static const TCollection_AsciiString anEmpty;
+            return anEmpty;
+        }
+        return myTextFont->String();
+    }
 
-  //! Modifies the style of the text.
-  void SetStyle (Aspect_TypeOfStyleText theStyle) { myTextStyle = theStyle; }
+    //! Modifies the font.
+    void SetFont(const TCollection_AsciiString& theFont) {
+        if (!theFont.IsEmpty()) {
+            myTextFont = new TCollection_HAsciiString(theFont);
+        } else {
+            myTextFont.Nullify();
+        }
+    }
 
-  //! Return display type.
-  Aspect_TypeOfDisplayText DisplayType() const { return myTextDisplayType; }
+    //! Modifies the font.
+    void SetFont(const Standard_CString theFont) {
+        SetFont(TCollection_AsciiString(theFont));
+    }
 
-  //! Define the display type of the text.
-  void SetDisplayType (Aspect_TypeOfDisplayText theDisplayType) { myTextDisplayType = theDisplayType; }
+    //! Return the text style.
+    Aspect_TypeOfStyleText Style() const {
+        return myTextStyle;
+    }
 
-  //! Returns TRUE when the Text Zoomable is on.
-  bool GetTextZoomable() const { return myIsTextZoomable; }
+    //! Modifies the style of the text.
+    void SetStyle(Aspect_TypeOfStyleText theStyle) {
+        myTextStyle = theStyle;
+    }
 
-  //! Returns Angle of degree
-  Standard_ShortReal GetTextAngle() const { return myTextAngle; }
+    //! Return display type.
+    Aspect_TypeOfDisplayText DisplayType() const {
+        return myTextDisplayType;
+    }
 
-  //! Turns usage of text rotated
-  void SetTextAngle (const Standard_Real theAngle) { myTextAngle = (Standard_ShortReal )theAngle; }
+    //! Define the display type of the text.
+    void SetDisplayType(Aspect_TypeOfDisplayText theDisplayType) {
+        myTextDisplayType = theDisplayType;
+    }
 
-  //! Returns text FontAspect
-  Font_FontAspect GetTextFontAspect() const { return myTextFontAspect; }
-  
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Returns TRUE when the Text Zoomable is on.
+    bool GetTextZoomable() const {
+        return myIsTextZoomable;
+    }
 
+    //! Returns Angle of degree
+    Standard_ShortReal GetTextAngle() const {
+        return myTextAngle;
+    }
+
+    //! Turns usage of text rotated
+    void SetTextAngle(const Standard_Real theAngle) {
+        myTextAngle = (Standard_ShortReal)theAngle;
+    }
+
+    //! Returns text FontAspect
+    Font_FontAspect GetTextFontAspect() const {
+        return myTextFontAspect;
+    }
+
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 };
 
 DEFINE_STANDARD_HANDLE(Graphic3d_AspectText3d, Graphic3d_Aspects)

@@ -24,61 +24,40 @@
 #include <Standard_Transient.hxx>
 class TopoDS_Shape;
 
-
 class TopoDS_HShape;
 DEFINE_STANDARD_HANDLE(TopoDS_HShape, Standard_Transient)
 
 //! Class to manipulate a Shape with  handle.
-class TopoDS_HShape : public Standard_Transient
-{
+class TopoDS_HShape : public Standard_Transient {
 
 public:
-
-  
-  //! Constructs an empty shape object
+    //! Constructs an empty shape object
     TopoDS_HShape();
-  
-  //! Constructs a shape object defined by the shape aShape.
-    TopoDS_HShape(const TopoDS_Shape& aShape);
-  
-  //! Loads this shape with the shape aShape
-    void Shape (const TopoDS_Shape& aShape);
-  
-  //! Returns a reference to a constant TopoDS_Shape based on this shape.
-    const TopoDS_Shape& Shape() const;
-  
 
-  //! Exchanges the TopoDS_Shape object defining this
-  //! shape for another one referencing the same underlying shape
-  //! Accesses the list of shapes within the underlying
-  //! shape referenced by the TopoDS_Shape object.
-  //! Returns a reference to a TopoDS_Shape based on
-  //! this shape. The TopoDS_Shape can be modified.
+    //! Constructs a shape object defined by the shape aShape.
+    TopoDS_HShape(const TopoDS_Shape& aShape);
+
+    //! Loads this shape with the shape aShape
+    void Shape(const TopoDS_Shape& aShape);
+
+    //! Returns a reference to a constant TopoDS_Shape based on this shape.
+    const TopoDS_Shape& Shape() const;
+
+    //! Exchanges the TopoDS_Shape object defining this
+    //! shape for another one referencing the same underlying shape
+    //! Accesses the list of shapes within the underlying
+    //! shape referenced by the TopoDS_Shape object.
+    //! Returns a reference to a TopoDS_Shape based on
+    //! this shape. The TopoDS_Shape can be modified.
     TopoDS_Shape& ChangeShape();
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TopoDS_HShape,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(TopoDS_HShape, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  TopoDS_Shape myShape;
-
-
+    TopoDS_Shape myShape;
 };
 
-
 #include <TopoDS_HShape.lxx>
-
-
-
-
 
 #endif // _TopoDS_HShape_HeaderFile

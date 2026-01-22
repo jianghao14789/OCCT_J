@@ -19,7 +19,6 @@
 
 #include <SelectMgr_ViewerSelector.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef SelectMgr_ViewerSelector SelectMgr_ViewerSelector3d;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef SelectMgr_ViewerSelector SelectMgr_ViewerSelector3d;
 
 #endif

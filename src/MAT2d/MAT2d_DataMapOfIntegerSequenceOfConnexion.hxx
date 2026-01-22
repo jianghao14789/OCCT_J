@@ -22,8 +22,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,MAT2d_SequenceOfConnexion,TColStd_MapIntegerHasher> MAT2d_DataMapOfIntegerSequenceOfConnexion;
-typedef NCollection_DataMap<Standard_Integer,MAT2d_SequenceOfConnexion,TColStd_MapIntegerHasher>::Iterator MAT2d_DataMapIteratorOfDataMapOfIntegerSequenceOfConnexion;
-
+typedef NCollection_DataMap<Standard_Integer, MAT2d_SequenceOfConnexion, TColStd_MapIntegerHasher>
+    MAT2d_DataMapOfIntegerSequenceOfConnexion;
+typedef NCollection_DataMap<Standard_Integer, MAT2d_SequenceOfConnexion, TColStd_MapIntegerHasher>::Iterator
+    MAT2d_DataMapIteratorOfDataMapOfIntegerSequenceOfConnexion;
 
 #endif

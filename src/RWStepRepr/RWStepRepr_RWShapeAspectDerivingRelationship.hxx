@@ -27,48 +27,29 @@ class StepRepr_ShapeAspectDerivingRelationship;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ShapeAspectDerivingRelationship
-class RWStepRepr_RWShapeAspectDerivingRelationship 
-{
+class RWStepRepr_RWShapeAspectDerivingRelationship {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWShapeAspectDerivingRelationship();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWShapeAspectDerivingRelationship();
-  
-  //! Reads ShapeAspectDerivingRelationship
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_ShapeAspectDerivingRelationship)& ent) const;
-  
-  //! Writes ShapeAspectDerivingRelationship
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_ShapeAspectDerivingRelationship)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_ShapeAspectDerivingRelationship)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ShapeAspectDerivingRelationship
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_ShapeAspectDerivingRelationship) & ent) const;
 
+    //! Writes ShapeAspectDerivingRelationship
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_ShapeAspectDerivingRelationship) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_ShapeAspectDerivingRelationship) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWShapeAspectDerivingRelationship_HeaderFile

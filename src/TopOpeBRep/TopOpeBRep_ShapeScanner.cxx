@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TopAbs.hxx>
 #include <TopoDS_Shape.hxx>
 #include <TopOpeBRep_ShapeScanner.hxx>
@@ -23,132 +22,122 @@
 #include <TopOpeBRepTool_ShapeExplorer.hxx>
 
 //=======================================================================
-//function : TopOpeBRep_ShapeScanner
-//purpose  : 
+// function : TopOpeBRep_ShapeScanner
+// purpose  :
 //=======================================================================
-TopOpeBRep_ShapeScanner::TopOpeBRep_ShapeScanner()
-{
-}    
+TopOpeBRep_ShapeScanner::TopOpeBRep_ShapeScanner() {}
 
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-void TopOpeBRep_ShapeScanner::Clear()
-{
-  myBoxSort.Clear();
-}    
-
-//=======================================================================
-//function : AddBoxesMakeCOB
-//purpose  : 
-//=======================================================================
-void TopOpeBRep_ShapeScanner::AddBoxesMakeCOB(const TopoDS_Shape& S,const TopAbs_ShapeEnum TS,const TopAbs_ShapeEnum TA)
-{
-  myBoxSort.AddBoxesMakeCOB(S,TS,TA);
+void TopOpeBRep_ShapeScanner::Clear() {
+    myBoxSort.Clear();
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AddBoxesMakeCOB
+// purpose  :
 //=======================================================================
-void TopOpeBRep_ShapeScanner::Init(TopOpeBRepTool_ShapeExplorer &E)
-{
-  TColStd_ListOfInteger anEmptyList;
-
-  myListIterator.Initialize(anEmptyList);
-
-  for (; E.More(); E.Next() )  {
-    const TopoDS_Shape& cur = E.Current();
-//    TopAbs_ShapeEnum t = cur.ShapeType();
-    Init(cur);
-    Standard_Boolean b = More();
-    if ( b ) break;
-  }
+void TopOpeBRep_ShapeScanner::AddBoxesMakeCOB(const TopoDS_Shape& S, const TopAbs_ShapeEnum TS,
+                                              const TopAbs_ShapeEnum TA) {
+    myBoxSort.AddBoxesMakeCOB(S, TS, TA);
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-void TopOpeBRep_ShapeScanner::Init(const TopoDS_Shape &E)
-{
-  myListIterator = myBoxSort.Compare(E);
+void TopOpeBRep_ShapeScanner::Init(TopOpeBRepTool_ShapeExplorer& E) {
+    TColStd_ListOfInteger anEmptyList;
+
+    myListIterator.Initialize(anEmptyList);
+
+    for (; E.More(); E.Next()) {
+        const TopoDS_Shape& cur = E.Current();
+        //    TopAbs_ShapeEnum t = cur.ShapeType();
+        Init(cur);
+        Standard_Boolean b = More();
+        if (b) break;
+    }
 }
 
 //=======================================================================
-//function : More
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-Standard_Boolean TopOpeBRep_ShapeScanner::More() const
-{
-  Standard_Boolean b = myListIterator.More();
-  return b;
+void TopOpeBRep_ShapeScanner::Init(const TopoDS_Shape& E) {
+    myListIterator = myBoxSort.Compare(E);
 }
 
 //=======================================================================
-//function : Next
-//purpose  : 
+// function : More
+// purpose  :
 //=======================================================================
-void TopOpeBRep_ShapeScanner::Next()
-{
-  myListIterator.Next();
+Standard_Boolean TopOpeBRep_ShapeScanner::More() const {
+    Standard_Boolean b = myListIterator.More();
+    return b;
 }
 
 //=======================================================================
-//function : Current
-//purpose  : 
+// function : Next
+// purpose  :
 //=======================================================================
-const TopoDS_Shape& TopOpeBRep_ShapeScanner::Current() const
-{
-  const TopoDS_Shape& E = myBoxSort.TouchedShape(myListIterator);
-  return E;
+void TopOpeBRep_ShapeScanner::Next() {
+    myListIterator.Next();
 }
 
 //=======================================================================
-//function : BoxSort
-//purpose  : 
+// function : Current
+// purpose  :
 //=======================================================================
-const TopOpeBRepTool_BoxSort& TopOpeBRep_ShapeScanner::BoxSort() const
-{
-  return myBoxSort;
+const TopoDS_Shape& TopOpeBRep_ShapeScanner::Current() const {
+    const TopoDS_Shape& E = myBoxSort.TouchedShape(myListIterator);
+    return E;
 }
 
 //=======================================================================
-//function : BoxSort
-//purpose  : 
+// function : BoxSort
+// purpose  :
 //=======================================================================
-TopOpeBRepTool_BoxSort& TopOpeBRep_ShapeScanner::ChangeBoxSort()
-{
-  return myBoxSort;
+const TopOpeBRepTool_BoxSort& TopOpeBRep_ShapeScanner::BoxSort() const {
+    return myBoxSort;
 }
 
 //=======================================================================
-//function : Index
-//purpose  : 
+// function : BoxSort
+// purpose  :
 //=======================================================================
-Standard_Integer TopOpeBRep_ShapeScanner::Index()const 
-{
-  Standard_Integer n = 0;
-  if ( myListIterator.More() ) n = myListIterator.Value();
-  return n;
+TopOpeBRepTool_BoxSort& TopOpeBRep_ShapeScanner::ChangeBoxSort() {
+    return myBoxSort;
 }
 
 //=======================================================================
-//function : DumpCurrent
-//purpose  : 
+// function : Index
+// purpose  :
 //=======================================================================
-Standard_OStream& TopOpeBRep_ShapeScanner::DumpCurrent(Standard_OStream& OS)const 
-{
+Standard_Integer TopOpeBRep_ShapeScanner::Index() const {
+    Standard_Integer n = 0;
+    if (myListIterator.More()) n = myListIterator.Value();
+    return n;
+}
+
+//=======================================================================
+// function : DumpCurrent
+// purpose  :
+//=======================================================================
+Standard_OStream& TopOpeBRep_ShapeScanner::DumpCurrent(Standard_OStream& OS) const {
 #ifdef OCCT_DEBUG
-  if ( More() ) { 
-    const TopoDS_Shape&     S = Current();
-    TopAbs_ShapeEnum    T = S.ShapeType();
-    TopAbs_Orientation  O = S.Orientation();
-    Standard_Integer    I = Index();
-    TopAbs::Print(T,std::cout);
-    std::cout<<"("<<I<<","; TopAbs::Print(O,std::cout); std::cout<<") ";
-  }
+    if (More()) {
+        const TopoDS_Shape& S = Current();
+        TopAbs_ShapeEnum T = S.ShapeType();
+        TopAbs_Orientation O = S.Orientation();
+        Standard_Integer I = Index();
+        TopAbs::Print(T, std::cout);
+        std::cout << "(" << I << ",";
+        TopAbs::Print(O, std::cout);
+        std::cout << ") ";
+    }
 #endif
-  return OS;
+    return OS;
 }

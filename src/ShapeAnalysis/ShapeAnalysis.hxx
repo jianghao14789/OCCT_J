@@ -45,7 +45,6 @@ class ShapeAnalysis_FreeBoundsProperties;
 class ShapeAnalysis_TransferParameters;
 class ShapeAnalysis_TransferParametersProj;
 
-
 //! This package is intended to analyze geometrical objects
 //! and topological shapes. Analysis domain includes both
 //! exploring geometrical and topological properties of
@@ -60,93 +59,75 @@ class ShapeAnalysis_TransferParametersProj;
 //! checking small faces,
 //! analyzing shape tolerances,
 //! analyzing of free bounds of the shape.
-class ShapeAnalysis 
-{
+class ShapeAnalysis {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Returns the outer wire on the face <Face>.
+    //! This is replacement of the method BRepTools::OuterWire
+    //! until it works badly.
+    //! Returns the first wire oriented as outer according to
+    //! FClass2d_Classifier. If none, last wire is returned.
+    Standard_EXPORT static TopoDS_Wire OuterWire(const TopoDS_Face& face);
 
-  
-  //! Returns the outer wire on the face <Face>.
-  //! This is replacement of the method BRepTools::OuterWire
-  //! until it works badly.
-  //! Returns the first wire oriented as outer according to
-  //! FClass2d_Classifier. If none, last wire is returned.
-  Standard_EXPORT static TopoDS_Wire OuterWire (const TopoDS_Face& face);
-  
-  //! Returns a total area of 2d wire
-  Standard_EXPORT static Standard_Real TotCross2D (const Handle(ShapeExtend_WireData)& sewd, const TopoDS_Face& aFace);
-  
-  //! Returns a total area of 3d wire
-  Standard_EXPORT static Standard_Real ContourArea (const TopoDS_Wire& theWire);
-  
-  //! Returns True if <F> has outer bound.
-  Standard_EXPORT static Standard_Boolean IsOuterBound (const TopoDS_Face& face);
-  
-  //! Returns a shift required to move point
-  //! <Val> to the range [ToVal-Period/2,ToVal+Period/2].
-  //! This shift will be the divisible by Period.
-  //! Intended for adjusting parameters on periodic surfaces.
-  Standard_EXPORT static Standard_Real AdjustByPeriod (const Standard_Real Val, const Standard_Real ToVal, const Standard_Real Period);
-  
-  //! Returns a shift required to move point
-  //! <Val> to the range [ValMin,ValMax].
-  //! This shift will be the divisible by Period
-  //! with Period = ValMax - ValMin.
-  //! Intended for adjusting parameters on periodic surfaces.
-  Standard_EXPORT static Standard_Real AdjustToPeriod (const Standard_Real Val, const Standard_Real ValMin, const Standard_Real ValMax);
-  
-  //! Finds the start and end vertices of the shape
-  //! Shape can be of the following type:
-  //! vertex: V1 and V2 are the same and equal to <shape>,
-  //! edge  : V1 is start and V2 is end vertex (see ShapeAnalysis_Edge
-  //! methods FirstVertex and LastVertex),
-  //! wire  : V1 is start vertex of the first edge, V2 is end vertex
-  //! of the last edge (also see ShapeAnalysis_Edge).
-  //! If wire contains no edges V1 and V2 are nullified
-  //! If none of the above V1 and V2 are nullified
-  Standard_EXPORT static void FindBounds (const TopoDS_Shape& shape, TopoDS_Vertex& V1, TopoDS_Vertex& V2);
-  
-  //! Computes exact UV bounds of all wires on the face
-  Standard_EXPORT static void GetFaceUVBounds (const TopoDS_Face& F, Standard_Real& Umin, Standard_Real& Umax, Standard_Real& Vmin, Standard_Real& Vmax);
+    //! Returns a total area of 2d wire
+    Standard_EXPORT static Standard_Real TotCross2D(const Handle(ShapeExtend_WireData) & sewd,
+                                                    const TopoDS_Face& aFace);
 
+    //! Returns a total area of 3d wire
+    Standard_EXPORT static Standard_Real ContourArea(const TopoDS_Wire& theWire);
 
+    //! Returns True if <F> has outer bound.
+    Standard_EXPORT static Standard_Boolean IsOuterBound(const TopoDS_Face& face);
 
+    //! Returns a shift required to move point
+    //! <Val> to the range [ToVal-Period/2,ToVal+Period/2].
+    //! This shift will be the divisible by Period.
+    //! Intended for adjusting parameters on periodic surfaces.
+    Standard_EXPORT static Standard_Real AdjustByPeriod(const Standard_Real Val, const Standard_Real ToVal,
+                                                        const Standard_Real Period);
+
+    //! Returns a shift required to move point
+    //! <Val> to the range [ValMin,ValMax].
+    //! This shift will be the divisible by Period
+    //! with Period = ValMax - ValMin.
+    //! Intended for adjusting parameters on periodic surfaces.
+    Standard_EXPORT static Standard_Real AdjustToPeriod(const Standard_Real Val, const Standard_Real ValMin,
+                                                        const Standard_Real ValMax);
+
+    //! Finds the start and end vertices of the shape
+    //! Shape can be of the following type:
+    //! vertex: V1 and V2 are the same and equal to <shape>,
+    //! edge  : V1 is start and V2 is end vertex (see ShapeAnalysis_Edge
+    //! methods FirstVertex and LastVertex),
+    //! wire  : V1 is start vertex of the first edge, V2 is end vertex
+    //! of the last edge (also see ShapeAnalysis_Edge).
+    //! If wire contains no edges V1 and V2 are nullified
+    //! If none of the above V1 and V2 are nullified
+    Standard_EXPORT static void FindBounds(const TopoDS_Shape& shape, TopoDS_Vertex& V1, TopoDS_Vertex& V2);
+
+    //! Computes exact UV bounds of all wires on the face
+    Standard_EXPORT static void GetFaceUVBounds(const TopoDS_Face& F, Standard_Real& Umin, Standard_Real& Umax,
+                                                Standard_Real& Vmin, Standard_Real& Vmax);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class ShapeAnalysis_Geom;
-friend class ShapeAnalysis_Curve;
-friend class ShapeAnalysis_Surface;
-friend class ShapeAnalysis_Edge;
-friend class ShapeAnalysis_Wire;
-friend class ShapeAnalysis_WireOrder;
-friend class ShapeAnalysis_WireVertex;
-friend class ShapeAnalysis_CheckSmallFace;
-friend class ShapeAnalysis_Shell;
-friend class ShapeAnalysis_ShapeTolerance;
-friend class ShapeAnalysis_ShapeContents;
-friend class ShapeAnalysis_FreeBounds;
-friend class ShapeAnalysis_FreeBoundData;
-friend class ShapeAnalysis_FreeBoundsProperties;
-friend class ShapeAnalysis_TransferParameters;
-friend class ShapeAnalysis_TransferParametersProj;
-
+    friend class ShapeAnalysis_Geom;
+    friend class ShapeAnalysis_Curve;
+    friend class ShapeAnalysis_Surface;
+    friend class ShapeAnalysis_Edge;
+    friend class ShapeAnalysis_Wire;
+    friend class ShapeAnalysis_WireOrder;
+    friend class ShapeAnalysis_WireVertex;
+    friend class ShapeAnalysis_CheckSmallFace;
+    friend class ShapeAnalysis_Shell;
+    friend class ShapeAnalysis_ShapeTolerance;
+    friend class ShapeAnalysis_ShapeContents;
+    friend class ShapeAnalysis_FreeBounds;
+    friend class ShapeAnalysis_FreeBoundData;
+    friend class ShapeAnalysis_FreeBoundsProperties;
+    friend class ShapeAnalysis_TransferParameters;
+    friend class ShapeAnalysis_TransferParametersProj;
 };
-
-
-
-
-
-
 
 #endif // _ShapeAnalysis_HeaderFile

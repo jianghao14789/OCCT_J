@@ -22,7 +22,6 @@
 #include <TDF_AttributeDelta.hxx>
 class TDF_Attribute;
 
-
 class TDF_DeltaOnModification;
 DEFINE_STANDARD_HANDLE(TDF_DeltaOnModification, TDF_AttributeDelta)
 
@@ -31,39 +30,19 @@ DEFINE_STANDARD_HANDLE(TDF_DeltaOnModification, TDF_AttributeDelta)
 //!
 //! Applying this AttributeDelta means GOING BACK to
 //! the attribute previously registered state.
-class TDF_DeltaOnModification : public TDF_AttributeDelta
-{
+class TDF_DeltaOnModification : public TDF_AttributeDelta {
 
 public:
+    //! Applies the delta to the attribute.
+    Standard_EXPORT virtual void Apply() Standard_OVERRIDE;
 
-  
-  //! Applies the delta to the attribute.
-  Standard_EXPORT virtual void Apply() Standard_OVERRIDE;
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TDF_DeltaOnModification,TDF_AttributeDelta)
+    DEFINE_STANDARD_RTTIEXT(TDF_DeltaOnModification, TDF_AttributeDelta)
 
 protected:
-
-  
-  //! Initializes a TDF_DeltaOnModification.
-  Standard_EXPORT TDF_DeltaOnModification(const Handle(TDF_Attribute)& anAttribute);
-
-
+    //! Initializes a TDF_DeltaOnModification.
+    Standard_EXPORT TDF_DeltaOnModification(const Handle(TDF_Attribute) & anAttribute);
 
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _TDF_DeltaOnModification_HeaderFile

@@ -22,47 +22,41 @@
 #include <Standard_NoSuchObject.hxx>
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
-void TopoDS_Iterator::Initialize(const TopoDS_Shape& S,
-                                 const Standard_Boolean cumOri,
-                                 const Standard_Boolean cumLoc)
-{
-  if (cumLoc)
-    myLocation = S.Location();
-  else
-    myLocation.Identity();
-  if (cumOri)
-    myOrientation = S.Orientation();
-  else
-    myOrientation = TopAbs_FORWARD;
+void TopoDS_Iterator::Initialize(const TopoDS_Shape& S, const Standard_Boolean cumOri, const Standard_Boolean cumLoc) {
+    if (cumLoc)
+        myLocation = S.Location();
+    else
+        myLocation.Identity();
+    if (cumOri)
+        myOrientation = S.Orientation();
+    else
+        myOrientation = TopAbs_FORWARD;
 
-  if (S.IsNull())
-    myShapes = TopoDS_ListIteratorOfListOfShape();
-  else
-    myShapes.Initialize(S.TShape()->myShapes);
+    if (S.IsNull())
+        myShapes = TopoDS_ListIteratorOfListOfShape();
+    else
+        myShapes.Initialize(S.TShape()->myShapes);
 
-  if (More()) {
-    myShape = myShapes.Value();
-    myShape.Orientation(TopAbs::Compose(myOrientation,myShape.Orientation()));
-    if (!myLocation.IsIdentity())
-      myShape.Move(myLocation, Standard_False);
-  }
+    if (More()) {
+        myShape = myShapes.Value();
+        myShape.Orientation(TopAbs::Compose(myOrientation, myShape.Orientation()));
+        if (!myLocation.IsIdentity()) myShape.Move(myLocation, Standard_False);
+    }
 }
 
 //=======================================================================
-//function : Next
-//purpose  : 
+// function : Next
+// purpose  :
 //=======================================================================
 
-void TopoDS_Iterator::Next()
-{
-  myShapes.Next();
-  if (More()) {
-    myShape = myShapes.Value();
-    myShape.Orientation(TopAbs::Compose(myOrientation,myShape.Orientation()));
-    if (!myLocation.IsIdentity())
-      myShape.Move(myLocation, Standard_False);
-  }
+void TopoDS_Iterator::Next() {
+    myShapes.Next();
+    if (More()) {
+        myShape = myShapes.Value();
+        myShape.Orientation(TopAbs::Compose(myOrientation, myShape.Orientation()));
+        if (!myLocation.IsIdentity()) myShape.Move(myLocation, Standard_False);
+    }
 }

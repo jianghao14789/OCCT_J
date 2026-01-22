@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _ShapePersistent_HSequence_HeaderFile
 #define _ShapePersistent_HSequence_HeaderFile
 
@@ -25,137 +24,114 @@
 #include <TColgp_HSequenceOfDir.hxx>
 #include <TColgp_HSequenceOfVec.hxx>
 
+class ShapePersistent_HSequence {
+    template <class SequenceClass> class node : public StdObjMgt_Persistent {
+    public:
+        typedef typename SequenceClass::value_type ItemType;
 
-class ShapePersistent_HSequence
-{
-  template <class SequenceClass>
-  class node : public StdObjMgt_Persistent
-  {
-  public:
-    typedef typename SequenceClass::value_type ItemType;
+    public:
+        //! Read persistent data from a file.
+        Standard_EXPORT virtual void Read(StdObjMgt_ReadData& theReadData);
 
-  public:
-    //! Read persistent data from a file.
-    Standard_EXPORT virtual void Read (StdObjMgt_ReadData& theReadData);
+        //! Write persistent data to a file.
+        Standard_EXPORT virtual void Write(StdObjMgt_WriteData& theWriteData) const;
 
-    //! Write persistent data to a file.
-    Standard_EXPORT virtual void Write (StdObjMgt_WriteData& theWriteData) const;
+        //! Gets persistent objects
+        virtual void PChildren(SequenceOfPersistent& theChildren) const {
+            theChildren.Append(this->myPreviuos);
+            theChildren.Append(this->myNext);
+        }
 
-    //! Gets persistent objects
-    virtual void PChildren (SequenceOfPersistent& theChildren) const
-    {
-      theChildren.Append(this->myPreviuos);
-      theChildren.Append(this->myNext);
-    }
+        //! Returns persistent type name
+        virtual Standard_CString PName() const {
+            Standard_NotImplemented::Raise("ShapePersistent_HSequence::node::PName - not implemented");
+            return "";
+        }
 
-    //! Returns persistent type name
-    virtual Standard_CString PName() const
-    {
-      Standard_NotImplemented::Raise("ShapePersistent_HSequence::node::PName - not implemented");
-      return "";
-    }
+        const Handle(node) & Previuos() const {
+            return myPreviuos;
+        }
+        const Handle(node) & Next() const {
+            return myNext;
+        }
+        const ItemType& Item() const {
+            return myItem;
+        }
 
-    const Handle(node)& Previuos() const  { return myPreviuos; } 
-    const Handle(node)& Next()     const  { return myNext; } 
-    const ItemType&     Item()     const  { return myItem; }
+    private:
+        Handle(node) myPreviuos;
+        Handle(node) myNext;
+        ItemType myItem;
+    };
 
-  private:
-    Handle(node) myPreviuos;
-    Handle(node) myNext;
-    ItemType     myItem;
-  };
+    template <class SequenceClass> class instance : public StdObjMgt_Persistent {
+    public:
+        typedef node<SequenceClass> Node;
 
-  template <class SequenceClass>
-  class instance : public StdObjMgt_Persistent
-  {
-  public:
-    typedef node<SequenceClass> Node;
+    public:
+        //! Empty constructor.
+        instance() : mySize(0) {}
 
-  public:
-    //! Empty constructor.
-    instance()
-    : mySize(0)
-    {
-    }
+        //! Read persistent data from a file.
+        Standard_EXPORT virtual void Read(StdObjMgt_ReadData& theReadData);
 
-    //! Read persistent data from a file.
-    Standard_EXPORT virtual void Read (StdObjMgt_ReadData& theReadData);
+        //! Write persistent data to a file.
+        Standard_EXPORT virtual void Write(StdObjMgt_WriteData& theWriteData) const;
 
-    //! Write persistent data to a file.
-    Standard_EXPORT virtual void Write (StdObjMgt_WriteData& theWriteData) const;
+        //! Gets persistent objects
+        virtual void PChildren(SequenceOfPersistent& theChildren) const {
+            theChildren.Append(this->myFirst);
+            theChildren.Append(this->myLast);
+        }
 
-    //! Gets persistent objects
-    virtual void PChildren(SequenceOfPersistent& theChildren) const
-    {
-      theChildren.Append(this->myFirst);
-      theChildren.Append(this->myLast);
-    }
+        //! Returns persistent type name
+        virtual Standard_CString PName() const {
+            Standard_NotImplemented::Raise("ShapePersistent_HSequence::instance::PName - not implemented");
+            return "";
+        }
 
-    //! Returns persistent type name
-    virtual Standard_CString PName() const
-    {
-      Standard_NotImplemented::Raise("ShapePersistent_HSequence::instance::PName - not implemented");
-      return "";
-    }
+        //! Import transient object from the persistent data.
+        Standard_EXPORT Handle(SequenceClass) Import() const;
 
-    //! Import transient object from the persistent data.
-    Standard_EXPORT Handle(SequenceClass) Import() const;
-
-  private:
-    Handle(Node)     myFirst;
-    Handle(Node)     myLast;
-    Standard_Integer mySize;
-  };
+    private:
+        Handle(Node) myFirst;
+        Handle(Node) myLast;
+        Standard_Integer mySize;
+    };
 
 public:
-  typedef instance<TColgp_HSequenceOfXYZ> XYZ;
-  typedef instance<TColgp_HSequenceOfPnt> Pnt;
-  typedef instance<TColgp_HSequenceOfDir> Dir;
-  typedef instance<TColgp_HSequenceOfVec> Vec;
+    typedef instance<TColgp_HSequenceOfXYZ> XYZ;
+    typedef instance<TColgp_HSequenceOfPnt> Pnt;
+    typedef instance<TColgp_HSequenceOfDir> Dir;
+    typedef instance<TColgp_HSequenceOfVec> Vec;
 };
 
 //=======================================================================
-// XYZ 
+// XYZ
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfXYZ>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfXYZ>::PName() const;
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfXYZ>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfXYZ>::PName() const;
 
 //=======================================================================
-// Pnt 
+// Pnt
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfPnt>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfPnt>::PName() const;
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfPnt>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfPnt>::PName() const;
 
 //=======================================================================
-// Dir 
+// Dir
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfDir>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfDir>::PName() const;
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfDir>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfDir>::PName() const;
 
 //=======================================================================
-// Vec 
+// Vec
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfVec>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfVec>::PName() const;
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfVec>
-  ::PName() const;
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfVec>::PName() const;
 
 #endif

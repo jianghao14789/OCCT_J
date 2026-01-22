@@ -24,46 +24,41 @@
 #include <PCDM_StorageDriver.hxx>
 #include <TDocStd_Application.hxx>
 
-static Standard_GUID StdLRetrievalDriver ("bd696001-5b34-11d1-b5ba-00a0c9064368");
+static Standard_GUID StdLRetrievalDriver("bd696001-5b34-11d1-b5ba-00a0c9064368");
 
 //=======================================================================
-//function : Factory
-//purpose  : Depending from the ID, returns a list of storage
+// function : Factory
+// purpose  : Depending from the ID, returns a list of storage
 //           or retrieval attribute drivers. Used for plugin
 //=======================================================================
-Handle(Standard_Transient) StdLDrivers::Factory (const Standard_GUID& aGUID)
-{
-  if (aGUID == StdLRetrievalDriver)
-  {
+Handle(Standard_Transient) StdLDrivers::Factory(const Standard_GUID& aGUID) {
+    if (aGUID == StdLRetrievalDriver) {
 #ifdef OCCT_DEBUG
-    std::cout << "StdLDrivers : Retrieval Plugin" << std::endl;
+        std::cout << "StdLDrivers : Retrieval Plugin" << std::endl;
 #endif
 
-    static Handle(StdLDrivers_DocumentRetrievalDriver) model_rd = new StdLDrivers_DocumentRetrievalDriver;
-    return model_rd;
-  }
- 
-  throw Standard_Failure("StdLDrivers : unknown GUID");
+        static Handle(StdLDrivers_DocumentRetrievalDriver) model_rd = new StdLDrivers_DocumentRetrievalDriver;
+        return model_rd;
+    }
+
+    throw Standard_Failure("StdLDrivers : unknown GUID");
 }
 
 //=======================================================================
-//function : DefineFormat
-//purpose  : 
+// function : DefineFormat
+// purpose  :
 //=======================================================================
-void StdLDrivers::DefineFormat (const Handle(TDocStd_Application)& theApp)
-{
-  theApp->DefineFormat ("OCC-StdLite", "Lite OCAF Document", "stdl",
-                        new StdLDrivers_DocumentRetrievalDriver, 0);
+void StdLDrivers::DefineFormat(const Handle(TDocStd_Application) & theApp) {
+    theApp->DefineFormat("OCC-StdLite", "Lite OCAF Document", "stdl", new StdLDrivers_DocumentRetrievalDriver, 0);
 }
 
 //=======================================================================
-//function : BindTypes
-//purpose  : Register types
+// function : BindTypes
+// purpose  : Register types
 //=======================================================================
-void StdLDrivers::BindTypes (StdObjMgt_MapOfInstantiators& theMap)
-{
-  StdLPersistent::BindTypes (theMap);
+void StdLDrivers::BindTypes(StdObjMgt_MapOfInstantiators& theMap) {
+    StdLPersistent::BindTypes(theMap);
 }
 
 // Declare entry point PLUGINFACTORY
-PLUGIN (StdLDrivers)
+PLUGIN(StdLDrivers)

@@ -25,54 +25,32 @@
 #include <Standard_Boolean.hxx>
 class Standard_NoMoreObject;
 
-
 //! Iterator on the elements of a block.
-class TopOpeBRepBuild_BlockIterator 
-{
+class TopOpeBRepBuild_BlockIterator {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopOpeBRepBuild_BlockIterator();
 
-  
-  Standard_EXPORT TopOpeBRepBuild_BlockIterator();
-  
-  Standard_EXPORT TopOpeBRepBuild_BlockIterator(const Standard_Integer Lower, const Standard_Integer Upper);
-  
+    Standard_EXPORT TopOpeBRepBuild_BlockIterator(const Standard_Integer Lower, const Standard_Integer Upper);
+
     void Initialize();
-  
+
     Standard_Boolean More() const;
-  
+
     void Next();
-  
+
     Standard_Integer Value() const;
-  
+
     Standard_Integer Extent() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-  Standard_Integer myLower;
-  Standard_Integer myUpper;
-  Standard_Integer myValue;
-
-
+    Standard_Integer myLower;
+    Standard_Integer myUpper;
+    Standard_Integer myValue;
 };
 
-
 #include <TopOpeBRepBuild_BlockIterator.lxx>
-
-
-
-
 
 #endif // _TopOpeBRepBuild_BlockIterator_HeaderFile

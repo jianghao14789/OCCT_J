@@ -20,39 +20,33 @@
 #include <gp_TrsfNLerp.hxx>
 
 //! Animation defining object transformation.
-class AIS_AnimationObject : public AIS_Animation
-{
-  DEFINE_STANDARD_RTTIEXT(AIS_AnimationObject, AIS_Animation)
+class AIS_AnimationObject : public AIS_Animation {
+    DEFINE_STANDARD_RTTIEXT(AIS_AnimationObject, AIS_Animation)
 public:
-
-  //! Constructor with initialization.
-  //! Note that start/end transformations specify exactly local transformation of the object,
-  //! not the transformation to be applied to existing local transformation.
-  //! @param theAnimationName animation identifier
-  //! @param theContext       interactive context where object have been displayed
-  //! @param theObject        object to apply local transformation
-  //! @param theTrsfStart     local transformation at the start of animation (e.g. theObject->LocalTransformation())
-  //! @param theTrsfEnd       local transformation at the end   of animation
-  Standard_EXPORT AIS_AnimationObject (const TCollection_AsciiString& theAnimationName,
-                                       const Handle(AIS_InteractiveContext)& theContext,
-                                       const Handle(AIS_InteractiveObject)&  theObject,
-                                       const gp_Trsf& theTrsfStart,
-                                       const gp_Trsf& theTrsfEnd);
+    //! Constructor with initialization.
+    //! Note that start/end transformations specify exactly local transformation of the object,
+    //! not the transformation to be applied to existing local transformation.
+    //! @param theAnimationName animation identifier
+    //! @param theContext       interactive context where object have been displayed
+    //! @param theObject        object to apply local transformation
+    //! @param theTrsfStart     local transformation at the start of animation (e.g. theObject->LocalTransformation())
+    //! @param theTrsfEnd       local transformation at the end   of animation
+    Standard_EXPORT AIS_AnimationObject(const TCollection_AsciiString& theAnimationName,
+                                        const Handle(AIS_InteractiveContext) & theContext,
+                                        const Handle(AIS_InteractiveObject) & theObject, const gp_Trsf& theTrsfStart,
+                                        const gp_Trsf& theTrsfEnd);
 
 protected:
+    //! Update the progress.
+    Standard_EXPORT virtual void update(const AIS_AnimationProgress& theProgress) Standard_OVERRIDE;
 
-  //! Update the progress.
-  Standard_EXPORT virtual void update (const AIS_AnimationProgress& theProgress) Standard_OVERRIDE;
-
-  //! Invalidate the viewer for proper update.
-  Standard_EXPORT void invalidateViewer();
+    //! Invalidate the viewer for proper update.
+    Standard_EXPORT void invalidateViewer();
 
 protected:
-
-  Handle(AIS_InteractiveContext) myContext;   //!< context where object is displayed
-  Handle(AIS_InteractiveObject)  myObject;    //!< presentation object to set location
-  gp_TrsfNLerp                   myTrsfLerp;  //!< interpolation tool
-
+    Handle(AIS_InteractiveContext) myContext; //!< context where object is displayed
+    Handle(AIS_InteractiveObject) myObject;   //!< presentation object to set location
+    gp_TrsfNLerp myTrsfLerp;                  //!< interpolation tool
 };
 
 DEFINE_STANDARD_HANDLE(AIS_AnimationObject, AIS_Animation)

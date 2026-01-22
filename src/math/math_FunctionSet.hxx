@@ -25,7 +25,6 @@
 #include <Standard_Boolean.hxx>
 #include <math_Vector.hxx>
 
-
 //! This abstract class describes the virtual functions associated to
 //! a set on N Functions of M independent variables.
 class math_FunctionSet {
@@ -62,9 +61,7 @@ public:
     Standard_EXPORT virtual ~math_FunctionSet();
 
 protected:
-
 private:
-
 };
 
 #endif // _math_FunctionSet_HeaderFile

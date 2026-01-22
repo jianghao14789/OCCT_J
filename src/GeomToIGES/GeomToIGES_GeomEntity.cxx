@@ -14,71 +14,57 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//rln 06.01.98 new method SetUnit
+// rln 06.01.98 new method SetUnit
 
 #include <GeomToIGES_GeomEntity.hxx>
 #include <IGESData_IGESModel.hxx>
 
 //=======================================================================
-//function : GeomToIGES_GeomEntity
-//purpose  : 
+// function : GeomToIGES_GeomEntity
+// purpose  :
 //=======================================================================
-GeomToIGES_GeomEntity::GeomToIGES_GeomEntity()
-{
-}
-
+GeomToIGES_GeomEntity::GeomToIGES_GeomEntity() {}
 
 //=======================================================================
-//function : GeomToIGES_GeomEntity
-//purpose  : 
+// function : GeomToIGES_GeomEntity
+// purpose  :
 //=======================================================================
 
-GeomToIGES_GeomEntity::GeomToIGES_GeomEntity
-(const GeomToIGES_GeomEntity& other)
-{
-  TheUnitFactor = other.GetUnit();
-  TheModel      = other.GetModel();
-}
-
-
-//=======================================================================
-//function : SetModel
-//purpose  : 
-//=======================================================================
-void GeomToIGES_GeomEntity::SetModel(const Handle(IGESData_IGESModel)& model)
-{  
-  TheModel = model;  
-  Standard_Real unitfactor = TheModel->GlobalSection().UnitValue();
-  TheUnitFactor = unitfactor;
-}
-
-
-//=======================================================================
-//function : GetModel
-//purpose  : 
-//=======================================================================
-Handle(IGESData_IGESModel) GeomToIGES_GeomEntity::GetModel() const
-{ 
-  return TheModel; 
-}
-
-
-//=======================================================================
-//function : GetUnit
-//purpose  : 
-//=======================================================================
-void GeomToIGES_GeomEntity::SetUnit(const Standard_Real unit)
-{
-  TheUnitFactor = unit;
+GeomToIGES_GeomEntity::GeomToIGES_GeomEntity(const GeomToIGES_GeomEntity& other) {
+    TheUnitFactor = other.GetUnit();
+    TheModel = other.GetModel();
 }
 
 //=======================================================================
-//function : GetUnit
-//purpose  : 
+// function : SetModel
+// purpose  :
 //=======================================================================
-Standard_Real GeomToIGES_GeomEntity::GetUnit() const
-{
-  return TheUnitFactor;
-}  
+void GeomToIGES_GeomEntity::SetModel(const Handle(IGESData_IGESModel) & model) {
+    TheModel = model;
+    Standard_Real unitfactor = TheModel->GlobalSection().UnitValue();
+    TheUnitFactor = unitfactor;
+}
 
+//=======================================================================
+// function : GetModel
+// purpose  :
+//=======================================================================
+Handle(IGESData_IGESModel) GeomToIGES_GeomEntity::GetModel() const {
+    return TheModel;
+}
 
+//=======================================================================
+// function : GetUnit
+// purpose  :
+//=======================================================================
+void GeomToIGES_GeomEntity::SetUnit(const Standard_Real unit) {
+    TheUnitFactor = unit;
+}
+
+//=======================================================================
+// function : GetUnit
+// purpose  :
+//=======================================================================
+Standard_Real GeomToIGES_GeomEntity::GetUnit() const {
+    return TheUnitFactor;
+}

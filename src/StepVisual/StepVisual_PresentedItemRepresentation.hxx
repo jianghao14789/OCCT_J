@@ -25,52 +25,32 @@
 class StepVisual_PresentedItem;
 class StepVisual_PresentationRepresentationSelect;
 
-
 class StepVisual_PresentedItemRepresentation;
 DEFINE_STANDARD_HANDLE(StepVisual_PresentedItemRepresentation, Standard_Transient)
 
 //! Added from StepVisual Rev2 to Rev4
-class StepVisual_PresentedItemRepresentation : public Standard_Transient
-{
+class StepVisual_PresentedItemRepresentation : public Standard_Transient {
 
 public:
+    Standard_EXPORT StepVisual_PresentedItemRepresentation();
 
-  
-  Standard_EXPORT StepVisual_PresentedItemRepresentation();
-  
-  Standard_EXPORT void Init (const StepVisual_PresentationRepresentationSelect& aPresentation, const Handle(StepVisual_PresentedItem)& aItem);
-  
-  Standard_EXPORT void SetPresentation (const StepVisual_PresentationRepresentationSelect& aPresentation);
-  
-  Standard_EXPORT StepVisual_PresentationRepresentationSelect Presentation() const;
-  
-  Standard_EXPORT void SetItem (const Handle(StepVisual_PresentedItem)& aItem);
-  
-  Standard_EXPORT Handle(StepVisual_PresentedItem) Item() const;
+    Standard_EXPORT void Init(const StepVisual_PresentationRepresentationSelect& aPresentation,
+                              const Handle(StepVisual_PresentedItem) & aItem);
 
+    Standard_EXPORT void SetPresentation(const StepVisual_PresentationRepresentationSelect& aPresentation);
 
+    Standard_EXPORT StepVisual_PresentationRepresentationSelect Presentation() const;
 
+    Standard_EXPORT void SetItem(const Handle(StepVisual_PresentedItem) & aItem);
 
-  DEFINE_STANDARD_RTTIEXT(StepVisual_PresentedItemRepresentation,Standard_Transient)
+    Standard_EXPORT Handle(StepVisual_PresentedItem) Item() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepVisual_PresentedItemRepresentation, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  StepVisual_PresentationRepresentationSelect thePresentation;
-  Handle(StepVisual_PresentedItem) theItem;
-
-
+    StepVisual_PresentationRepresentationSelect thePresentation;
+    Handle(StepVisual_PresentedItem) theItem;
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_PresentedItemRepresentation_HeaderFile

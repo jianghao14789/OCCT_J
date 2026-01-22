@@ -39,14 +39,9 @@ class gp_Pnt;
 class gp_Vec;
 class gp_Dir;
 
-
-
-class BRepLProp_SLProps
-{
+class BRepLProp_SLProps {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Initializes the local properties of the surface <S>
     //! for the parameter values (<U>, <V>).
@@ -58,11 +53,13 @@ public:
     //! only the tangent, N should be equal to 1.
     //! <Resolution> is the linear tolerance (it is used to test
     //! if a vector is null).
-    Standard_EXPORT BRepLProp_SLProps(const BRepAdaptor_Surface& S, const Standard_Real U, const Standard_Real V, const Standard_Integer N, const Standard_Real Resolution);
+    Standard_EXPORT BRepLProp_SLProps(const BRepAdaptor_Surface& S, const Standard_Real U, const Standard_Real V,
+                                      const Standard_Integer N, const Standard_Real Resolution);
 
     //! idem as previous constructor but without setting the value
     //! of parameters <U> and <V>.
-    Standard_EXPORT BRepLProp_SLProps(const BRepAdaptor_Surface& S, const Standard_Integer N, const Standard_Real Resolution);
+    Standard_EXPORT BRepLProp_SLProps(const BRepAdaptor_Surface& S, const Standard_Integer N,
+                                      const Standard_Real Resolution);
 
     //! idem as previous constructor but without setting the value
     //! of parameters <U> and <V> and the surface.
@@ -145,19 +142,8 @@ public:
     //! Returns the Gaussian curvature
     Standard_EXPORT Standard_Real GaussianCurvature();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     BRepAdaptor_Surface mySurf;
     Standard_Real myU;
     Standard_Real myV;
@@ -183,14 +169,6 @@ private:
     LProp_Status myVTangentStatus;
     LProp_Status myNormalStatus;
     LProp_Status myCurvatureStatus;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepLProp_SLProps_HeaderFile

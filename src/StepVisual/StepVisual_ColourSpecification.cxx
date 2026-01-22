@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_ColourSpecification.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_ColourSpecification,StepVisual_Colour)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_ColourSpecification, StepVisual_Colour)
 
-StepVisual_ColourSpecification::StepVisual_ColourSpecification ()  {}
+StepVisual_ColourSpecification::StepVisual_ColourSpecification() {}
 
-void StepVisual_ColourSpecification::Init(
-	const Handle(TCollection_HAsciiString)& aName)
-{
-	// --- classe own fields ---
-	name = aName;
+void StepVisual_ColourSpecification::Init(const Handle(TCollection_HAsciiString) & aName) {
+    // --- classe own fields ---
+    name = aName;
 }
 
-
-void StepVisual_ColourSpecification::SetName(const Handle(TCollection_HAsciiString)& aName)
-{
-	name = aName;
+void StepVisual_ColourSpecification::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    name = aName;
 }
 
-Handle(TCollection_HAsciiString) StepVisual_ColourSpecification::Name() const
-{
-	return name;
+Handle(TCollection_HAsciiString) StepVisual_ColourSpecification::Name() const {
+    return name;
 }

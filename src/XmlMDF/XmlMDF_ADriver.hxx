@@ -33,67 +33,62 @@ class TCollection_AsciiString;
 class XmlObjMgt_Persistent;
 class TCollection_ExtendedString;
 
-
 class XmlMDF_ADriver;
 DEFINE_STANDARD_HANDLE(XmlMDF_ADriver, Standard_Transient)
 
 //! Attribute Storage/Retrieval Driver.
-class XmlMDF_ADriver : public Standard_Transient
-{
+class XmlMDF_ADriver : public Standard_Transient {
 
 public:
+    //! Returns the version number from which the driver
+    //! is available.
+    Standard_EXPORT virtual Standard_Integer VersionNumber() const;
 
-  
-  //! Returns the version number from which the driver
-  //! is available.
-  Standard_EXPORT virtual Standard_Integer VersionNumber() const;
-  
-  //! Creates a new attribute from TDF.
-  Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const = 0;
-  
-  //! Returns the type of source object,
-  //! inheriting from Attribute from TDF.
-  Standard_EXPORT virtual Handle(Standard_Type) SourceType() const;
-  
-  //! Returns the full XML tag name (including NS prefix)
-  Standard_EXPORT const TCollection_AsciiString& TypeName() const;
+    //! Creates a new attribute from TDF.
+    Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const = 0;
 
-  //! Returns the namespace string
-  const TCollection_AsciiString& Namespace() const { return myNamespace; }
+    //! Returns the type of source object,
+    //! inheriting from Attribute from TDF.
+    Standard_EXPORT virtual Handle(Standard_Type) SourceType() const;
 
-  //! Translate the contents of <aSource> and put it
-  //! into <aTarget>, using the relocation table
-  //! <aRelocTable> to keep the sharings.
-  Standard_EXPORT virtual Standard_Boolean Paste (const XmlObjMgt_Persistent& aSource, const Handle(TDF_Attribute)& aTarget, XmlObjMgt_RRelocationTable& aRelocTable) const = 0;
-  
-  //! Translate the contents of <aSource> and put it
-  //! into <aTarget>, using the relocation table
-  //! <aRelocTable> to keep the sharings.
-  Standard_EXPORT virtual void Paste (const Handle(TDF_Attribute)& aSource, XmlObjMgt_Persistent& aTarget, XmlObjMgt_SRelocationTable& aRelocTable) const = 0;
+    //! Returns the full XML tag name (including NS prefix)
+    Standard_EXPORT const TCollection_AsciiString& TypeName() const;
 
-  //! Returns the current message driver of this driver
-  const Handle(Message_Messenger)& MessageDriver() const { return myMessageDriver; }
+    //! Returns the namespace string
+    const TCollection_AsciiString& Namespace() const {
+        return myNamespace;
+    }
 
-  DEFINE_STANDARD_RTTIEXT(XmlMDF_ADriver,Standard_Transient)
+    //! Translate the contents of <aSource> and put it
+    //! into <aTarget>, using the relocation table
+    //! <aRelocTable> to keep the sharings.
+    Standard_EXPORT virtual Standard_Boolean Paste(const XmlObjMgt_Persistent& aSource,
+                                                   const Handle(TDF_Attribute) & aTarget,
+                                                   XmlObjMgt_RRelocationTable& aRelocTable) const = 0;
+
+    //! Translate the contents of <aSource> and put it
+    //! into <aTarget>, using the relocation table
+    //! <aRelocTable> to keep the sharings.
+    Standard_EXPORT virtual void Paste(const Handle(TDF_Attribute) & aSource, XmlObjMgt_Persistent& aTarget,
+                                       XmlObjMgt_SRelocationTable& aRelocTable) const = 0;
+
+    //! Returns the current message driver of this driver
+    const Handle(Message_Messenger) & MessageDriver() const {
+        return myMessageDriver;
+    }
+
+    DEFINE_STANDARD_RTTIEXT(XmlMDF_ADriver, Standard_Transient)
 
 protected:
+    Standard_EXPORT XmlMDF_ADriver(const Handle(Message_Messenger) & theMessageDriver,
+                                   const Standard_CString theNamespace, const Standard_CString theName = NULL);
 
-  Standard_EXPORT XmlMDF_ADriver(const Handle(Message_Messenger)& theMessageDriver, const Standard_CString theNamespace, const Standard_CString theName = NULL);
-
-  TCollection_AsciiString myTypeName;
-  TCollection_AsciiString myNamespace;
-  Handle(Message_Messenger) myMessageDriver;
+    TCollection_AsciiString myTypeName;
+    TCollection_AsciiString myNamespace;
+    Handle(Message_Messenger) myMessageDriver;
 
 private:
-
-friend class XmlMDF;
-
+    friend class XmlMDF;
 };
-
-
-
-
-
-
 
 #endif // _XmlMDF_ADriver_HeaderFile

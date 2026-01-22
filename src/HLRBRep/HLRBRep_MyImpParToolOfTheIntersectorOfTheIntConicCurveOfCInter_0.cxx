@@ -18,7 +18,6 @@
 
 #include <IntCurve_IConicTool.hxx>
 #include <HLRBRep_CurveTool.hxx>
- 
 
 #define ImpTool IntCurve_IConicTool
 #define ImpTool_hxx <IntCurve_IConicTool.hxx>
@@ -29,4 +28,3 @@
 #define IntImpParGen_ImpParTool HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter
 #define IntImpParGen_ImpParTool_hxx <HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter.hxx>
 #include <IntImpParGen_ImpParTool.gxx>
-

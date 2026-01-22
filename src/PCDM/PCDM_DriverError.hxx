@@ -26,10 +26,10 @@ class PCDM_DriverError;
 DEFINE_STANDARD_HANDLE(PCDM_DriverError, Standard_Failure)
 
 #if !defined No_Exception && !defined No_PCDM_DriverError
-  #define PCDM_DriverError_Raise_if(CONDITION, MESSAGE) \
-  if (CONDITION) throw PCDM_DriverError(MESSAGE);
+#define PCDM_DriverError_Raise_if(CONDITION, MESSAGE)                                                                  \
+    if (CONDITION) throw PCDM_DriverError(MESSAGE);
 #else
-  #define PCDM_DriverError_Raise_if(CONDITION, MESSAGE)
+#define PCDM_DriverError_Raise_if(CONDITION, MESSAGE)
 #endif
 
 DEFINE_STANDARD_EXCEPTION(PCDM_DriverError, Standard_Failure)

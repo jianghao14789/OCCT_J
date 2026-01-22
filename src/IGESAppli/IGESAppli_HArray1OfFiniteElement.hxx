@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESAppli_HArray1OfFiniteElement, IGESAppli_Array1OfFiniteElement)
 
-
 #endif

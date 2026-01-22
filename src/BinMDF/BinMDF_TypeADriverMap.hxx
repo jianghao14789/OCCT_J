@@ -21,8 +21,9 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(Standard_Type),Handle(BinMDF_ADriver),TColStd_MapTransientHasher> BinMDF_TypeADriverMap;
-typedef NCollection_DataMap<Handle(Standard_Type),Handle(BinMDF_ADriver),TColStd_MapTransientHasher>::Iterator BinMDF_DataMapIteratorOfTypeADriverMap;
-
+typedef NCollection_DataMap<Handle(Standard_Type), Handle(BinMDF_ADriver), TColStd_MapTransientHasher>
+    BinMDF_TypeADriverMap;
+typedef NCollection_DataMap<Handle(Standard_Type), Handle(BinMDF_ADriver), TColStd_MapTransientHasher>::Iterator
+    BinMDF_DataMapIteratorOfTypeADriverMap;
 
 #endif

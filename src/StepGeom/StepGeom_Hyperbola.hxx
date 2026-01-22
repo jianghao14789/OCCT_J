@@ -25,53 +25,32 @@
 class TCollection_HAsciiString;
 class StepGeom_Axis2Placement;
 
-
 class StepGeom_Hyperbola;
 DEFINE_STANDARD_HANDLE(StepGeom_Hyperbola, StepGeom_Conic)
 
-
-class StepGeom_Hyperbola : public StepGeom_Conic
-{
+class StepGeom_Hyperbola : public StepGeom_Conic {
 
 public:
+    //! Returns a Hyperbola
+    Standard_EXPORT StepGeom_Hyperbola();
 
-  
-  //! Returns a Hyperbola
-  Standard_EXPORT StepGeom_Hyperbola();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const StepGeom_Axis2Placement& aPosition, const Standard_Real aSemiAxis, const Standard_Real aSemiImagAxis);
-  
-  Standard_EXPORT void SetSemiAxis (const Standard_Real aSemiAxis);
-  
-  Standard_EXPORT Standard_Real SemiAxis() const;
-  
-  Standard_EXPORT void SetSemiImagAxis (const Standard_Real aSemiImagAxis);
-  
-  Standard_EXPORT Standard_Real SemiImagAxis() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName, const StepGeom_Axis2Placement& aPosition,
+                              const Standard_Real aSemiAxis, const Standard_Real aSemiImagAxis);
 
+    Standard_EXPORT void SetSemiAxis(const Standard_Real aSemiAxis);
 
+    Standard_EXPORT Standard_Real SemiAxis() const;
 
+    Standard_EXPORT void SetSemiImagAxis(const Standard_Real aSemiImagAxis);
 
-  DEFINE_STANDARD_RTTIEXT(StepGeom_Hyperbola,StepGeom_Conic)
+    Standard_EXPORT Standard_Real SemiImagAxis() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepGeom_Hyperbola, StepGeom_Conic)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Real semiAxis;
-  Standard_Real semiImagAxis;
-
-
+    Standard_Real semiAxis;
+    Standard_Real semiImagAxis;
 };
-
-
-
-
-
-
 
 #endif // _StepGeom_Hyperbola_HeaderFile

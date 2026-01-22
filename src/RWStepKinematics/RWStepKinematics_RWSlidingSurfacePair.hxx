@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepKinematics_SlidingSurfacePair;
 
 //! Read & Write tool for SlidingSurfacePair
-class RWStepKinematics_RWSlidingSurfacePair
-{
+class RWStepKinematics_RWSlidingSurfacePair {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWSlidingSurfacePair();
 
-  Standard_EXPORT RWStepKinematics_RWSlidingSurfacePair();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_SlidingSurfacePair) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_SlidingSurfacePair)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_SlidingSurfacePair) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepKinematics_SlidingSurfacePair)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepKinematics_SlidingSurfacePair)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepKinematics_SlidingSurfacePair) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepKinematics_RWSlidingSurfacePair_HeaderFile_

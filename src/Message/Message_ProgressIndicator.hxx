@@ -79,8 +79,7 @@ class Message_ProgressScope;
 //!
 //! 参见 Show() 和 UserBreak() 方法的文档了解详情。
 
-class Message_ProgressIndicator : public Standard_Transient
-{
+class Message_ProgressIndicator : public Standard_Transient {
     DEFINE_STANDARD_RTTIEXT(Message_ProgressIndicator, Standard_Transient)
 public:
     //!@name Initialization of progress indication
@@ -102,8 +101,7 @@ public:
     //!
     //! 如果参数是非 null 的 handle，返回 theProgress->Start()。
     //! 否则，返回可安全用于算法但不绑定到进度指示器的虚拟范围。
-    Standard_EXPORT static Message_ProgressRange Start
-    (const Handle(Message_ProgressIndicator)& theProgress);
+    Standard_EXPORT static Message_ProgressRange Start(const Handle(Message_ProgressIndicator) & theProgress);
 
 protected:
     //!@name Virtual methods to be defined by descendant.
@@ -125,8 +123,7 @@ protected:
     //! 该方法应尽快返回以避免延迟调用算法。
     //!
     //! 默认实现返回 False。
-    virtual Standard_Boolean UserBreak()
-    {
+    virtual Standard_Boolean UserBreak() {
         return Standard_False;
     }
 
@@ -163,8 +160,7 @@ protected:
     //!
     //! 参数 theScope 是正在推进的当前范围；它可用于显示正在进行的范围及其父范围的
     //! 名称和范围，提供更多当前过程阶段的可见性。
-    virtual void Show(const Message_ProgressScope& theScope,
-        const Standard_Boolean isForce) = 0;
+    virtual void Show(const Message_ProgressScope& theScope, const Standard_Boolean isForce) = 0;
 
     //! Call-back method called by Start(), can be redefined by descendants
     //! if some actions are needed when the indicator is restarted.
@@ -182,8 +178,7 @@ public:
     //!
     //! 返回范围为 0 到 1 的总进度位置。当进度推进时，不应并发调用，
     //! 除非来自 Show() 方法的实现。
-    Standard_Real GetPosition() const
-    {
+    Standard_Real GetPosition() const {
         return myPosition;
     }
 
@@ -192,13 +187,11 @@ public:
     Standard_EXPORT ~Message_ProgressIndicator();
 
 protected:
-
     //! Constructor
     //! 构造函数
     Standard_EXPORT Message_ProgressIndicator();
 
 private:
-
     //! Increment the progress value by the specified step,
     //! then calls Show() to update presentation.
     //! The parameter theScope is reference to the caller object;
@@ -208,28 +201,25 @@ private:
     void Increment(const Standard_Real theStep, const Message_ProgressScope& theScope);
 
 private:
-
-    Standard_Real myPosition;            //!< 总进度位置，范围为 0 到 1
-                                         //!< Total progress position ranged from 0 to 1
-    Standard_Mutex myMutex;              //!< 保护 myPosition 免受并发增量
-                                         //!< Protection of myPosition from concurrent increment
-    Message_ProgressScope* myRootScope;  //!< 根进度范围
-                                         //!< The root progress scope
+    Standard_Real myPosition;           //!< 总进度位置，范围为 0 到 1
+                                        //!< Total progress position ranged from 0 to 1
+    Standard_Mutex myMutex;             //!< 保护 myPosition 免受并发增量
+                                        //!< Protection of myPosition from concurrent increment
+    Message_ProgressScope* myRootScope; //!< 根进度范围
+                                        //!< The root progress scope
 
 private:
-    friend class Message_ProgressScope;  //!< Friend: can call Increment()
-    friend class Message_ProgressRange;  //!< Friend: can call Increment()
+    friend class Message_ProgressScope; //!< Friend: can call Increment()
+    friend class Message_ProgressRange; //!< Friend: can call Increment()
 };
 
 #include <Message_ProgressScope.hxx>
 
 //=======================================================================
-//function : Increment
-//purpose  : 按指定步骤增加进度值并更新演示
+// function : Increment
+// purpose  : 按指定步骤增加进度值并更新演示
 //=======================================================================
-inline void Message_ProgressIndicator::Increment(const Standard_Real theStep,
-    const Message_ProgressScope& theScope)
-{
+inline void Message_ProgressIndicator::Increment(const Standard_Real theStep, const Message_ProgressScope& theScope) {
     // protect incrementation by mutex to avoid problems in multithreaded scenarios
     // （用互斥量保护增量以避免多线程场景中的问题）
     Standard_Mutex::Sentry aSentry(myMutex);

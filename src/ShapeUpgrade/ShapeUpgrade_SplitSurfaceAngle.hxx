@@ -24,54 +24,33 @@
 #include <ShapeUpgrade_SplitSurface.hxx>
 #include <Standard_Boolean.hxx>
 
-
 class ShapeUpgrade_SplitSurfaceAngle;
 DEFINE_STANDARD_HANDLE(ShapeUpgrade_SplitSurfaceAngle, ShapeUpgrade_SplitSurface)
 
 //! Splits a surfaces of revolution, cylindrical, toroidal,
 //! conical, spherical so that each resulting segment covers
 //! not more than defined number of degrees.
-class ShapeUpgrade_SplitSurfaceAngle : public ShapeUpgrade_SplitSurface
-{
+class ShapeUpgrade_SplitSurfaceAngle : public ShapeUpgrade_SplitSurface {
 
 public:
+    //! Empty constructor.
+    Standard_EXPORT ShapeUpgrade_SplitSurfaceAngle(const Standard_Real MaxAngle);
 
-  
-  //! Empty constructor.
-  Standard_EXPORT ShapeUpgrade_SplitSurfaceAngle(const Standard_Real MaxAngle);
-  
-  //! Set maximal angle
-  Standard_EXPORT void SetMaxAngle (const Standard_Real MaxAngle);
-  
-  //! Returns maximal angle
-  Standard_EXPORT Standard_Real MaxAngle() const;
-  
-  //! Performs splitting of the supporting surface(s).
-  //! First defines splitting values, then calls inherited method.
-  Standard_EXPORT virtual void Compute (const Standard_Boolean Segment) Standard_OVERRIDE;
+    //! Set maximal angle
+    Standard_EXPORT void SetMaxAngle(const Standard_Real MaxAngle);
 
+    //! Returns maximal angle
+    Standard_EXPORT Standard_Real MaxAngle() const;
 
+    //! Performs splitting of the supporting surface(s).
+    //! First defines splitting values, then calls inherited method.
+    Standard_EXPORT virtual void Compute(const Standard_Boolean Segment) Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurfaceAngle,ShapeUpgrade_SplitSurface)
+    DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitSurfaceAngle, ShapeUpgrade_SplitSurface)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Real myMaxAngle;
-
-
+    Standard_Real myMaxAngle;
 };
-
-
-
-
-
-
 
 #endif // _ShapeUpgrade_SplitSurfaceAngle_HeaderFile

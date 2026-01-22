@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRep_CurveOn2Surfaces.hxx>
 #include <BRep_CurveRepresentation.hxx>
 #include <BRep_GCurve.hxx>
@@ -32,94 +31,85 @@ static const Standard_Integer RangeMask = 2;
 static const Standard_Integer DegeneratedMask = 4;
 
 //=======================================================================
-//function : BRep_TEdge
-//purpose  : 
+// function : BRep_TEdge
+// purpose  :
 //=======================================================================
 
-BRep_TEdge::BRep_TEdge() :
-    TopoDS_TEdge(),
-    myTolerance(RealEpsilon()),
-    myFlags(0)
-{
+BRep_TEdge::BRep_TEdge() : TopoDS_TEdge(), myTolerance(RealEpsilon()), myFlags(0) {
     SameParameter(Standard_True);
     SameRange(Standard_True);
 }
 
 //=======================================================================
-//function : SameParameter
-//purpose  : 
+// function : SameParameter
+// purpose  :
 //=======================================================================
 
-Standard_Boolean BRep_TEdge::SameParameter() const
-{
+Standard_Boolean BRep_TEdge::SameParameter() const {
     return (myFlags & ParameterMask) != 0;
 }
 
-
 //=======================================================================
-//function : SameParameter
-//purpose  : 
+// function : SameParameter
+// purpose  :
 //=======================================================================
 
-void  BRep_TEdge::SameParameter(const Standard_Boolean S)
-{
-    if (S) myFlags |= ParameterMask;
-    else   myFlags &= ~ParameterMask;
+void BRep_TEdge::SameParameter(const Standard_Boolean S) {
+    if (S)
+        myFlags |= ParameterMask;
+    else
+        myFlags &= ~ParameterMask;
 }
 
-
 //=======================================================================
-//function : SameRange
-//purpose  : 
+// function : SameRange
+// purpose  :
 //=======================================================================
 
-Standard_Boolean BRep_TEdge::SameRange() const
-{
+Standard_Boolean BRep_TEdge::SameRange() const {
     return (myFlags & RangeMask) != 0;
 }
 
 //=======================================================================
-//function : SameRange
-//purpose  : 
+// function : SameRange
+// purpose  :
 //=======================================================================
 
-void  BRep_TEdge::SameRange(const Standard_Boolean S)
-{
-    if (S) myFlags |= RangeMask;
-    else   myFlags &= ~RangeMask;
+void BRep_TEdge::SameRange(const Standard_Boolean S) {
+    if (S)
+        myFlags |= RangeMask;
+    else
+        myFlags &= ~RangeMask;
 }
 
-
 //=======================================================================
-//function : Degenerated
-//purpose  : 
+// function : Degenerated
+// purpose  :
 //=======================================================================
 
-Standard_Boolean BRep_TEdge::Degenerated() const
-{
+Standard_Boolean BRep_TEdge::Degenerated() const {
     return (myFlags & DegeneratedMask) != 0;
 }
 
 //=======================================================================
-//function : Degenerated
-//purpose  : 
+// function : Degenerated
+// purpose  :
 //=======================================================================
 
-void  BRep_TEdge::Degenerated(const Standard_Boolean S)
-{
-    if (S) myFlags |= DegeneratedMask;
-    else   myFlags &= ~DegeneratedMask;
+void BRep_TEdge::Degenerated(const Standard_Boolean S) {
+    if (S)
+        myFlags |= DegeneratedMask;
+    else
+        myFlags &= ~DegeneratedMask;
 }
 
 //=======================================================================
-//function : EmptyCopy
-//purpose  : 
+// function : EmptyCopy
+// purpose  :
 //=======================================================================
 
-Handle(TopoDS_TShape) BRep_TEdge::EmptyCopy() const
-{
-    Handle(BRep_TEdge) TE =
-        new BRep_TEdge();
+Handle(TopoDS_TShape) BRep_TEdge::EmptyCopy() const {
+    Handle(BRep_TEdge) TE = new BRep_TEdge();
     TE->Tolerance(myTolerance);
     // copy the curves representations
     BRep_ListOfCurveRepresentation& l = TE->ChangeCurves();
@@ -142,8 +132,8 @@ Handle(TopoDS_TShape) BRep_TEdge::EmptyCopy() const
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
 void BRep_TEdge::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream);
@@ -154,7 +144,7 @@ void BRep_TEdge::DumpJson(Standard_OStream& theOStream, Standard_Integer theDept
     OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myFlags);
 
     for (BRep_ListIteratorOfListOfCurveRepresentation itr(myCurves); itr.More(); itr.Next()) {
-        const Handle(BRep_CurveRepresentation)& aCurveRepresentation = itr.Value();
+        const Handle(BRep_CurveRepresentation) & aCurveRepresentation = itr.Value();
         OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, aCurveRepresentation.get())
     }
 }

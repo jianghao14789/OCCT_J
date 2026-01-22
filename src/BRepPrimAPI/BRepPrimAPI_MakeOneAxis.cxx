@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRepBuilderAPI.hxx>
 #include <BRepPrim_OneAxis.hxx>
 #include <BRepPrimAPI_MakeOneAxis.hxx>
@@ -25,81 +24,69 @@
 #include <TopoDS_Solid.hxx>
 
 //=======================================================================
-//function : Face
-//purpose  : 
+// function : Face
+// purpose  :
 //=======================================================================
-const TopoDS_Face&  BRepPrimAPI_MakeOneAxis::Face()
-{
-  Build();
-  return ((BRepPrim_OneAxis*) OneAxis())->LateralFace();
-}
-
-
-//=======================================================================
-//function : Shell
-//purpose  : 
-//=======================================================================
-
-const TopoDS_Shell&  BRepPrimAPI_MakeOneAxis::Shell()
-{
-  Build();
-  return ((BRepPrim_OneAxis*) OneAxis())->Shell();
+const TopoDS_Face& BRepPrimAPI_MakeOneAxis::Face() {
+    Build();
+    return ((BRepPrim_OneAxis*)OneAxis())->LateralFace();
 }
 
 //=======================================================================
-//function : Build
-//purpose  : 
+// function : Shell
+// purpose  :
 //=======================================================================
 
-void BRepPrimAPI_MakeOneAxis::Build(const Message_ProgressRange& /*theRange*/)
-{
-  BRep_Builder B;
-  B.MakeSolid(TopoDS::Solid(myShape));
-  B.Add(myShape,((BRepPrim_OneAxis*) OneAxis())->Shell());
-  Done();
+const TopoDS_Shell& BRepPrimAPI_MakeOneAxis::Shell() {
+    Build();
+    return ((BRepPrim_OneAxis*)OneAxis())->Shell();
 }
 
 //=======================================================================
-//function : Solid
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
 
-const TopoDS_Solid&  BRepPrimAPI_MakeOneAxis::Solid()
-{
-  Build();
-  return TopoDS::Solid(myShape);
-}
-
-
-
-//=======================================================================
-//function : operator
-//purpose  : 
-//=======================================================================
-
-BRepPrimAPI_MakeOneAxis::operator TopoDS_Face()
-{
-  return Face();
+void BRepPrimAPI_MakeOneAxis::Build(const Message_ProgressRange& /*theRange*/) {
+    BRep_Builder B;
+    B.MakeSolid(TopoDS::Solid(myShape));
+    B.Add(myShape, ((BRepPrim_OneAxis*)OneAxis())->Shell());
+    Done();
 }
 
 //=======================================================================
-//function : operator
-//purpose  : 
+// function : Solid
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeOneAxis::operator TopoDS_Shell()
-{
-  return Shell();
+const TopoDS_Solid& BRepPrimAPI_MakeOneAxis::Solid() {
+    Build();
+    return TopoDS::Solid(myShape);
 }
 
-
 //=======================================================================
-//function : operator
-//purpose  : 
+// function : operator
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakeOneAxis::operator TopoDS_Solid()
-{
-  return Solid();
+BRepPrimAPI_MakeOneAxis::operator TopoDS_Face() {
+    return Face();
 }
 
+//=======================================================================
+// function : operator
+// purpose  :
+//=======================================================================
+
+BRepPrimAPI_MakeOneAxis::operator TopoDS_Shell() {
+    return Shell();
+}
+
+//=======================================================================
+// function : operator
+// purpose  :
+//=======================================================================
+
+BRepPrimAPI_MakeOneAxis::operator TopoDS_Solid() {
+    return Solid();
+}

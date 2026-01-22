@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,gp_Pnt2d,TColStd_MapIntegerHasher> MAT2d_DataMapOfIntegerPnt2d;
-typedef NCollection_DataMap<Standard_Integer,gp_Pnt2d,TColStd_MapIntegerHasher>::Iterator MAT2d_DataMapIteratorOfDataMapOfIntegerPnt2d;
-
+typedef NCollection_DataMap<Standard_Integer, gp_Pnt2d, TColStd_MapIntegerHasher> MAT2d_DataMapOfIntegerPnt2d;
+typedef NCollection_DataMap<Standard_Integer, gp_Pnt2d, TColStd_MapIntegerHasher>::Iterator
+    MAT2d_DataMapIteratorOfDataMapOfIntegerPnt2d;
 
 #endif

@@ -20,16 +20,12 @@
 #include <BRepTools_ReShape.hxx>
 #include <TopTools_LocationSet.hxx>
 
-
-
 //! Removes location datums, which satisfy conditions:
 //! aTrsf.IsNegative() || (Abs(Abs(aTrsf.ScaleFactor()) - 1.) > TopLoc_Location::ScalePrec())
 //! from all locations of shape and its subshapes
-class BRepTools_PurgeLocations
-{
+class BRepTools_PurgeLocations {
 
 public:
-
     Standard_EXPORT BRepTools_PurgeLocations();
 
     //! Removes all locations correspodingly to criterium from theShape.
@@ -38,13 +34,12 @@ public:
     //! Returns shape with removed locations.
     Standard_EXPORT const TopoDS_Shape& GetResult() const;
 
-    Standard_EXPORT Standard_Boolean  IsDone() const;
+    Standard_EXPORT Standard_Boolean IsDone() const;
 
     //! Returns modified shape obtained from initial shape.
     TopoDS_Shape ModifiedShape(const TopoDS_Shape& theInitShape) const;
 
 private:
-
     void AddShape(const TopoDS_Shape& theS);
     Standard_Boolean PurgeLocation(const TopoDS_Shape& theS, TopoDS_Shape& theRes);
 
@@ -54,7 +49,6 @@ private:
     TopTools_LocationSet myLocations;
     TopTools_DataMapOfShapeShape myMapNewShapes;
     Handle(BRepTools_ReShape) myReShape;
-
 };
 
 #endif // _BRepTools_PurgeLocations_HeaderFile

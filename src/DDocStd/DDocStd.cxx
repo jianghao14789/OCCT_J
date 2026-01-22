@@ -36,118 +36,102 @@
 #include <XmlDrivers.hxx>
 
 //=======================================================================
-//function : Find
-//purpose  : 
+// function : Find
+// purpose  :
 //=======================================================================
 
-const Handle(TDocStd_Application)& DDocStd::GetApplication()
-{
-  static Handle(TDocStd_Application) anApp;
-  if (anApp.IsNull())
-  {
-    anApp = new TDocStd_Application;
+const Handle(TDocStd_Application) & DDocStd::GetApplication() {
+    static Handle(TDocStd_Application) anApp;
+    if (anApp.IsNull()) {
+        anApp = new TDocStd_Application;
 
-    // Initialize standard document formats at creation - they should
-    // be available even if this DRAW plugin is not loaded by pload command
-    StdLDrivers::DefineFormat(anApp);
-    BinLDrivers::DefineFormat(anApp);
-    XmlLDrivers::DefineFormat(anApp);
-    StdDrivers::DefineFormat(anApp);
-    BinDrivers::DefineFormat(anApp);
-    XmlDrivers::DefineFormat(anApp);
-  }
-  return anApp;
+        // Initialize standard document formats at creation - they should
+        // be available even if this DRAW plugin is not loaded by pload command
+        StdLDrivers::DefineFormat(anApp);
+        BinLDrivers::DefineFormat(anApp);
+        XmlLDrivers::DefineFormat(anApp);
+        StdDrivers::DefineFormat(anApp);
+        BinDrivers::DefineFormat(anApp);
+        XmlDrivers::DefineFormat(anApp);
+    }
+    return anApp;
 }
 
-
 //=======================================================================
-//function : GetDocument
-//purpose  : 
+// function : GetDocument
+// purpose  :
 //=======================================================================
 
-Standard_Boolean DDocStd::GetDocument (Standard_CString&         Name,
-				       Handle(TDocStd_Document)& DOC,
-				       const Standard_Boolean    Complain)
-{
-  Handle(DDocStd_DrawDocument) DD = Handle(DDocStd_DrawDocument)::DownCast (Draw::GetExisting (Name));
-  if (DD.IsNull()) {
-    if (Complain) std::cout << Name << " is not a Document" << std::endl; 
+Standard_Boolean DDocStd::GetDocument(Standard_CString& Name, Handle(TDocStd_Document) & DOC,
+                                      const Standard_Boolean Complain) {
+    Handle(DDocStd_DrawDocument) DD = Handle(DDocStd_DrawDocument)::DownCast(Draw::GetExisting(Name));
+    if (DD.IsNull()) {
+        if (Complain) std::cout << Name << " is not a Document" << std::endl;
+        return Standard_False;
+    }
+    Handle(TDocStd_Document) STDDOC = DD->GetDocument();
+    if (!STDDOC.IsNull()) {
+        DOC = STDDOC;
+        return Standard_True;
+    }
+    if (Complain) std::cout << Name << " is not a CAF Document" << std::endl;
     return Standard_False;
-  }
-  Handle(TDocStd_Document) STDDOC = DD->GetDocument();
-  if (!STDDOC.IsNull()) {
-    DOC = STDDOC;
-    return Standard_True;
-  }
-  if (Complain) std::cout << Name << " is not a CAF Document" << std::endl; 
-  return Standard_False;
-}
-
-
-//=======================================================================
-//function : Label
-//purpose  : try to retrieve a label 
-//=======================================================================
-
-Standard_Boolean DDocStd::Find (const Handle(TDocStd_Document)& D,
-				const Standard_CString  Entry,
-				TDF_Label& Label,   
-				const Standard_Boolean  Complain)
-{
-  Label.Nullify();
-  TDF_Tool::Label(D->GetData(),Entry,Label,Standard_False);
-  if (Label.IsNull() && Complain) std::cout<<"No label for entry "<<Entry<<std::endl;
-  return !Label.IsNull();
 }
 
 //=======================================================================
-//function : Find
-//purpose  : Try to retrieve an attribute.
+// function : Label
+// purpose  : try to retrieve a label
 //=======================================================================
 
-Standard_Boolean DDocStd::Find (const Handle(TDocStd_Document)& D,
-				const Standard_CString  Entry,
-				const Standard_GUID&    ID,
-				Handle(TDF_Attribute)&  A,
-				const Standard_Boolean  Complain) 
-{
-  TDF_Label L;
-  if (Find(D,Entry,L,Complain)) {
-    if (L.FindAttribute(ID,A)) return Standard_True;
-    if (Complain) std::cout <<"attribute not found for entry : "<< Entry <<std::endl; 
-  }
-  return Standard_False;   
-}
-
-
-//=======================================================================
-//function : ReturnLabel
-//purpose  : 
-//=======================================================================
- 
-Draw_Interpretor& DDocStd::ReturnLabel(Draw_Interpretor& di, const TDF_Label& L)
-{
-  TCollection_AsciiString S;
-  TDF_Tool::Entry(L,S);
-  di << S.ToCString();
-  return di;
+Standard_Boolean DDocStd::Find(const Handle(TDocStd_Document) & D, const Standard_CString Entry, TDF_Label& Label,
+                               const Standard_Boolean Complain) {
+    Label.Nullify();
+    TDF_Tool::Label(D->GetData(), Entry, Label, Standard_False);
+    if (Label.IsNull() && Complain) std::cout << "No label for entry " << Entry << std::endl;
+    return !Label.IsNull();
 }
 
 //=======================================================================
-//function : AllCommands
-//purpose  : 
+// function : Find
+// purpose  : Try to retrieve an attribute.
 //=======================================================================
 
-void DDocStd::AllCommands(Draw_Interpretor& theCommands) 
-{
-  static Standard_Boolean done = Standard_False;
-  if (done) return;
-  done = Standard_True;
+Standard_Boolean DDocStd::Find(const Handle(TDocStd_Document) & D, const Standard_CString Entry,
+                               const Standard_GUID& ID, Handle(TDF_Attribute) & A, const Standard_Boolean Complain) {
+    TDF_Label L;
+    if (Find(D, Entry, L, Complain)) {
+        if (L.FindAttribute(ID, A)) return Standard_True;
+        if (Complain) std::cout << "attribute not found for entry : " << Entry << std::endl;
+    }
+    return Standard_False;
+}
 
-  // define commands
-  DDocStd::ApplicationCommands(theCommands);
-  DDocStd::DocumentCommands(theCommands);
-  DDocStd::ToolsCommands(theCommands);
-  DDocStd::MTMCommands(theCommands);
-  DDocStd::ShapeSchemaCommands(theCommands);
+//=======================================================================
+// function : ReturnLabel
+// purpose  :
+//=======================================================================
+
+Draw_Interpretor& DDocStd::ReturnLabel(Draw_Interpretor& di, const TDF_Label& L) {
+    TCollection_AsciiString S;
+    TDF_Tool::Entry(L, S);
+    di << S.ToCString();
+    return di;
+}
+
+//=======================================================================
+// function : AllCommands
+// purpose  :
+//=======================================================================
+
+void DDocStd::AllCommands(Draw_Interpretor& theCommands) {
+    static Standard_Boolean done = Standard_False;
+    if (done) return;
+    done = Standard_True;
+
+    // define commands
+    DDocStd::ApplicationCommands(theCommands);
+    DDocStd::DocumentCommands(theCommands);
+    DDocStd::ToolsCommands(theCommands);
+    DDocStd::MTMCommands(theCommands);
+    DDocStd::ShapeSchemaCommands(theCommands);
 }

@@ -39,7 +39,6 @@ class gp_Vec;
 class gp_Vec2d;
 class Blend_Point;
 
-
 //! Deferred class for a function used to compute a blending
 //! surface between a surface and a pcurve on an other Surface,
 //! using a guide line.
@@ -49,7 +48,6 @@ class Blend_Point;
 //! the curve.
 class Blend_SurfRstFunction : public Blend_AppFunction {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Returns 3 (default value). Can be redefined.
@@ -173,14 +171,17 @@ public:
     //! for the parameters. i.e. T.Length() > NbIntervals()
     Standard_EXPORT virtual void Intervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const = 0;
 
-    Standard_EXPORT virtual void GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots, Standard_Integer& Degree, Standard_Integer& NbPoles2d) = 0;
+    Standard_EXPORT virtual void GetShape(Standard_Integer& NbPoles, Standard_Integer& NbKnots,
+                                          Standard_Integer& Degree, Standard_Integer& NbPoles2d) = 0;
 
     //! Returns the tolerance to reach in approximation
     //! to respecte
     //! BoundTol error at the Boundary
     //! AngleTol tangent error at the Boundary
     //! SurfTol error inside the surface.
-    Standard_EXPORT virtual void GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol, const Standard_Real AngleTol, math_Vector& Tol3d, math_Vector& Tol1D) const = 0;
+    Standard_EXPORT virtual void GetTolerance(const Standard_Real BoundTol, const Standard_Real SurfTol,
+                                              const Standard_Real AngleTol, math_Vector& Tol3d,
+                                              math_Vector& Tol1D) const = 0;
 
     Standard_EXPORT virtual void Knots(TColStd_Array1OfReal& TKnots) = 0;
 
@@ -189,19 +190,24 @@ public:
     //! Used for the first and last section
     //! The method returns Standard_True if the derivatives
     //! are computed, otherwise it returns Standard_False.
-    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths) = 0;
+    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles,
+                                                     TColgp_Array1OfVec& DPoles, TColgp_Array1OfPnt2d& Poles2d,
+                                                     TColgp_Array1OfVec2d& DPoles2d, TColStd_Array1OfReal& Weigths,
+                                                     TColStd_Array1OfReal& DWeigths) = 0;
 
     //! Used for the first and last section
     //! The method returns Standard_True if the derivatives
     //! are computed, otherwise it returns Standard_False.
-    Standard_EXPORT virtual Standard_Boolean Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles, TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColgp_Array1OfVec2d& D2Poles2d, TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths, TColStd_Array1OfReal& D2Weigths) = 0;
+    Standard_EXPORT virtual Standard_Boolean
+    Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfVec& DPoles, TColgp_Array1OfVec& D2Poles,
+            TColgp_Array1OfPnt2d& Poles2d, TColgp_Array1OfVec2d& DPoles2d, TColgp_Array1OfVec2d& D2Poles2d,
+            TColStd_Array1OfReal& Weigths, TColStd_Array1OfReal& DWeigths, TColStd_Array1OfReal& D2Weigths) = 0;
 
-    Standard_EXPORT virtual void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d, TColStd_Array1OfReal& Weigths) = 0;
+    Standard_EXPORT virtual void Section(const Blend_Point& P, TColgp_Array1OfPnt& Poles, TColgp_Array1OfPnt2d& Poles2d,
+                                         TColStd_Array1OfReal& Weigths) = 0;
 
 protected:
-
 private:
-
 };
 
 #endif // _Blend_SurfRstFunction_HeaderFile

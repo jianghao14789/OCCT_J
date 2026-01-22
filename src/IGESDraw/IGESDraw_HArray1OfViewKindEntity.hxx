@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESDraw_HArray1OfViewKindEntity, IGESDraw_Array1OfViewKindEntity)
 
-
 #endif

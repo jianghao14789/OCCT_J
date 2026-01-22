@@ -27,48 +27,26 @@ class StepShape_Subface;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Subface
-class RWStepShape_RWSubface 
-{
+class RWStepShape_RWSubface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWSubface();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWSubface();
-  
-  //! Reads Subface
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_Subface)& ent) const;
-  
-  //! Writes Subface
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_Subface)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_Subface)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Subface
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_Subface) & ent) const;
 
+    //! Writes Subface
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_Subface) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_Subface) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWSubface_HeaderFile

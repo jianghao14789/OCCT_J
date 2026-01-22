@@ -21,49 +21,42 @@
 #include <StepShape_SeamEdge.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_SeamEdge,StepShape_OrientedEdge)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_SeamEdge, StepShape_OrientedEdge)
 
 //=======================================================================
-//function : StepShape_SeamEdge
-//purpose  : 
+// function : StepShape_SeamEdge
+// purpose  :
 //=======================================================================
-StepShape_SeamEdge::StepShape_SeamEdge ()
-{
+StepShape_SeamEdge::StepShape_SeamEdge() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepShape_SeamEdge::Init(const Handle(TCollection_HAsciiString) & aRepresentationItem_Name,
+                              const Handle(StepShape_Edge) & aOrientedEdge_EdgeElement,
+                              const Standard_Boolean aOrientedEdge_Orientation,
+                              const Handle(StepGeom_Pcurve) & aPcurveReference) {
+    StepShape_OrientedEdge::Init(aRepresentationItem_Name, aOrientedEdge_EdgeElement, aOrientedEdge_Orientation);
+
+    thePcurveReference = aPcurveReference;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : PcurveReference
+// purpose  :
 //=======================================================================
 
-void StepShape_SeamEdge::Init (const Handle(TCollection_HAsciiString) &aRepresentationItem_Name,
-                               const Handle(StepShape_Edge) &aOrientedEdge_EdgeElement,
-                               const Standard_Boolean aOrientedEdge_Orientation,
-                               const Handle(StepGeom_Pcurve) &aPcurveReference)
-{
-  StepShape_OrientedEdge::Init(aRepresentationItem_Name,
-                               aOrientedEdge_EdgeElement,
-                               aOrientedEdge_Orientation);
-
-  thePcurveReference = aPcurveReference;
+Handle(StepGeom_Pcurve) StepShape_SeamEdge::PcurveReference() const {
+    return thePcurveReference;
 }
 
 //=======================================================================
-//function : PcurveReference
-//purpose  : 
+// function : SetPcurveReference
+// purpose  :
 //=======================================================================
 
-Handle(StepGeom_Pcurve) StepShape_SeamEdge::PcurveReference () const
-{
-  return thePcurveReference;
-}
-
-//=======================================================================
-//function : SetPcurveReference
-//purpose  : 
-//=======================================================================
-
-void StepShape_SeamEdge::SetPcurveReference (const Handle(StepGeom_Pcurve) &aPcurveReference)
-{
-  thePcurveReference = aPcurveReference;
+void StepShape_SeamEdge::SetPcurveReference(const Handle(StepGeom_Pcurve) & aPcurveReference) {
+    thePcurveReference = aPcurveReference;
 }

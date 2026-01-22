@@ -21,86 +21,78 @@
 #include <StepRepr_QuantifiedAssemblyComponentUsage.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_QuantifiedAssemblyComponentUsage,StepRepr_AssemblyComponentUsage)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_QuantifiedAssemblyComponentUsage, StepRepr_AssemblyComponentUsage)
 
 //=======================================================================
-//function : StepRepr_QuantifiedAssemblyComponentUsage
-//purpose  : 
+// function : StepRepr_QuantifiedAssemblyComponentUsage
+// purpose  :
 //=======================================================================
-StepRepr_QuantifiedAssemblyComponentUsage::StepRepr_QuantifiedAssemblyComponentUsage ()
-{
+StepRepr_QuantifiedAssemblyComponentUsage::StepRepr_QuantifiedAssemblyComponentUsage() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepRepr_QuantifiedAssemblyComponentUsage::Init(
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Id,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Name,
+    const Standard_Boolean hasProductDefinitionRelationship_Description,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Description,
+    const Handle(StepBasic_ProductDefinition) & aProductDefinitionRelationship_RelatingProductDefinition,
+    const Handle(StepBasic_ProductDefinition) & aProductDefinitionRelationship_RelatedProductDefinition,
+    const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(TCollection_HAsciiString) & aAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(StepBasic_MeasureWithUnit) & aQuantity) {
+    StepRepr_AssemblyComponentUsage::Init(
+        aProductDefinitionRelationship_Id, aProductDefinitionRelationship_Name,
+        hasProductDefinitionRelationship_Description, aProductDefinitionRelationship_Description,
+        aProductDefinitionRelationship_RelatingProductDefinition,
+        aProductDefinitionRelationship_RelatedProductDefinition, hasAssemblyComponentUsage_ReferenceDesignator,
+        aAssemblyComponentUsage_ReferenceDesignator);
+
+    theQuantity = aQuantity;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void StepRepr_QuantifiedAssemblyComponentUsage::Init (const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Id,
-                                                      const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Name,
-                                                      const Standard_Boolean hasProductDefinitionRelationship_Description,
-                                                      const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Description,
-                                                      const Handle(StepBasic_ProductDefinition) &aProductDefinitionRelationship_RelatingProductDefinition,
-                                                      const Handle(StepBasic_ProductDefinition) &aProductDefinitionRelationship_RelatedProductDefinition,
-                                                      const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
-                                                      const Handle(TCollection_HAsciiString) &aAssemblyComponentUsage_ReferenceDesignator,
-                                                      const Handle(StepBasic_MeasureWithUnit) &aQuantity)
-{
-  StepRepr_AssemblyComponentUsage::Init(aProductDefinitionRelationship_Id,
-                                        aProductDefinitionRelationship_Name,
-                                        hasProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_RelatingProductDefinition,
-                                        aProductDefinitionRelationship_RelatedProductDefinition,
-                                        hasAssemblyComponentUsage_ReferenceDesignator,
-                                        aAssemblyComponentUsage_ReferenceDesignator);
+void StepRepr_QuantifiedAssemblyComponentUsage::Init(
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Id,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Name,
+    const Standard_Boolean hasProductDefinitionRelationship_Description,
+    const Handle(TCollection_HAsciiString) & aProductDefinitionRelationship_Description,
+    const StepBasic_ProductDefinitionOrReference& aProductDefinitionRelationship_RelatingProductDefinition,
+    const StepBasic_ProductDefinitionOrReference& aProductDefinitionRelationship_RelatedProductDefinition,
+    const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(TCollection_HAsciiString) & aAssemblyComponentUsage_ReferenceDesignator,
+    const Handle(StepBasic_MeasureWithUnit) & aQuantity) {
+    StepRepr_AssemblyComponentUsage::Init(
+        aProductDefinitionRelationship_Id, aProductDefinitionRelationship_Name,
+        hasProductDefinitionRelationship_Description, aProductDefinitionRelationship_Description,
+        aProductDefinitionRelationship_RelatingProductDefinition,
+        aProductDefinitionRelationship_RelatedProductDefinition, hasAssemblyComponentUsage_ReferenceDesignator,
+        aAssemblyComponentUsage_ReferenceDesignator);
 
-  theQuantity = aQuantity;
+    theQuantity = aQuantity;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Quantity
+// purpose  :
 //=======================================================================
 
-void StepRepr_QuantifiedAssemblyComponentUsage::Init (const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Id,
-                                                      const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Name,
-                                                      const Standard_Boolean hasProductDefinitionRelationship_Description,
-                                                      const Handle(TCollection_HAsciiString) &aProductDefinitionRelationship_Description,
-                                                      const StepBasic_ProductDefinitionOrReference &aProductDefinitionRelationship_RelatingProductDefinition,
-                                                      const StepBasic_ProductDefinitionOrReference &aProductDefinitionRelationship_RelatedProductDefinition,
-                                                      const Standard_Boolean hasAssemblyComponentUsage_ReferenceDesignator,
-                                                      const Handle(TCollection_HAsciiString) &aAssemblyComponentUsage_ReferenceDesignator,
-                                                      const Handle(StepBasic_MeasureWithUnit) &aQuantity)
-{
-  StepRepr_AssemblyComponentUsage::Init(aProductDefinitionRelationship_Id,
-                                        aProductDefinitionRelationship_Name,
-                                        hasProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_Description,
-                                        aProductDefinitionRelationship_RelatingProductDefinition,
-                                        aProductDefinitionRelationship_RelatedProductDefinition,
-                                        hasAssemblyComponentUsage_ReferenceDesignator,
-                                        aAssemblyComponentUsage_ReferenceDesignator);
-
-  theQuantity = aQuantity;
+Handle(StepBasic_MeasureWithUnit) StepRepr_QuantifiedAssemblyComponentUsage::Quantity() const {
+    return theQuantity;
 }
 
 //=======================================================================
-//function : Quantity
-//purpose  : 
+// function : SetQuantity
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_MeasureWithUnit) StepRepr_QuantifiedAssemblyComponentUsage::Quantity () const
-{
-  return theQuantity;
-}
-
-//=======================================================================
-//function : SetQuantity
-//purpose  : 
-//=======================================================================
-
-void StepRepr_QuantifiedAssemblyComponentUsage::SetQuantity (const Handle(StepBasic_MeasureWithUnit) &aQuantity)
-{
-  theQuantity = aQuantity;
+void StepRepr_QuantifiedAssemblyComponentUsage::SetQuantity(const Handle(StepBasic_MeasureWithUnit) & aQuantity) {
+    theQuantity = aQuantity;
 }

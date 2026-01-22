@@ -15,7 +15,6 @@
 
 //            Automatically created from NCollection_Vector.hxx by GAWK
 
-
 #ifndef NCollection_DefineVector_HeaderFile
 #define NCollection_DefineVector_HeaderFile
 
@@ -38,7 +37,6 @@
 // at index 0  and stops at the index equal to (remembered_length-1).  It is OK
 // to enlarge the vector during the iteration.
 
-#define DEFINE_VECTOR(_ClassName_, _BaseCollection_, TheItemType)              \
-typedef NCollection_Vector<TheItemType > _ClassName_;
+#define DEFINE_VECTOR(_ClassName_, _BaseCollection_, TheItemType) typedef NCollection_Vector<TheItemType> _ClassName_;
 
 #endif

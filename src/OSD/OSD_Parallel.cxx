@@ -36,166 +36,140 @@
 namespace {
 
 #if defined(_WIN32) && !defined(OCCT_UWP)
-    //! For a 64-bit app running under 64-bit Windows, this is FALSE.
-    static bool isWow64()
-    {
-        typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
-        BOOL bIsWow64 = FALSE;
+//! For a 64-bit app running under 64-bit Windows, this is FALSE.
+static bool isWow64() {
+    typedef BOOL(WINAPI * LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
+    BOOL bIsWow64 = FALSE;
 
-        HMODULE aKern32Module = GetModuleHandleW(L"kernel32");
-        LPFN_ISWOW64PROCESS aFunIsWow64 = (aKern32Module == NULL) ? (LPFN_ISWOW64PROCESS)NULL
-            : (LPFN_ISWOW64PROCESS)GetProcAddress(aKern32Module, "IsWow64Process");
+    HMODULE aKern32Module = GetModuleHandleW(L"kernel32");
+    LPFN_ISWOW64PROCESS aFunIsWow64 = (aKern32Module == NULL)
+                                          ? (LPFN_ISWOW64PROCESS)NULL
+                                          : (LPFN_ISWOW64PROCESS)GetProcAddress(aKern32Module, "IsWow64Process");
 
-        return aFunIsWow64 != NULL &&
-            aFunIsWow64(GetCurrentProcess(), &bIsWow64) &&
-            bIsWow64 != FALSE;
-    }
+    return aFunIsWow64 != NULL && aFunIsWow64(GetCurrentProcess(), &bIsWow64) && bIsWow64 != FALSE;
+}
 
 #elif defined(__ANDROID__)
 
-    //! Simple number parser.
-    static const char* parseNumber(int& theResult,
-        const char* theInput,
-        const char* theLimit,
-        const int   theBase = 10)
-    {
-        const char* aCharIter = theInput;
-        int aValue = 0;
-        while (aCharIter < theLimit)
-        {
-            int aDigit = (*aCharIter - '0');
-            if ((unsigned int)aDigit >= 10U)
-            {
-                aDigit = (*aCharIter - 'a');
-                if ((unsigned int)aDigit >= 6U)
-                {
-                    aDigit = (*aCharIter - 'A');
-                }
-                if ((unsigned int)aDigit >= 6U)
-                {
-                    break;
-                }
-                aDigit += 10;
+//! Simple number parser.
+static const char* parseNumber(int& theResult, const char* theInput, const char* theLimit, const int theBase = 10) {
+    const char* aCharIter = theInput;
+    int aValue = 0;
+    while (aCharIter < theLimit) {
+        int aDigit = (*aCharIter - '0');
+        if ((unsigned int)aDigit >= 10U) {
+            aDigit = (*aCharIter - 'a');
+            if ((unsigned int)aDigit >= 6U) {
+                aDigit = (*aCharIter - 'A');
             }
-            if (aDigit >= theBase)
-            {
+            if ((unsigned int)aDigit >= 6U) {
                 break;
             }
-            aValue = aValue * theBase + aDigit;
-            ++aCharIter;
+            aDigit += 10;
         }
-        if (aCharIter == theInput)
-        {
-            return NULL;
+        if (aDigit >= theBase) {
+            break;
         }
-
-        theResult = aValue;
-        return aCharIter;
+        aValue = aValue * theBase + aDigit;
+        ++aCharIter;
+    }
+    if (aCharIter == theInput) {
+        return NULL;
     }
 
-    //! Read CPUs mask from sysfs.
-    static uint32_t readCpuMask(const char* thePath)
-    {
-        FILE* aFileHandle = fopen(thePath, "rb");
-        if (aFileHandle == NULL)
-        {
-            return 0;
-        }
+    theResult = aValue;
+    return aCharIter;
+}
 
-        fseek(aFileHandle, 0, SEEK_END);
-        long aFileLen = ftell(aFileHandle);
-        if (aFileLen <= 0L)
-        {
-            fclose(aFileHandle);
-            return 0;
-        }
+//! Read CPUs mask from sysfs.
+static uint32_t readCpuMask(const char* thePath) {
+    FILE* aFileHandle = fopen(thePath, "rb");
+    if (aFileHandle == NULL) {
+        return 0;
+    }
 
-        char* aBuffer = (char*)Standard::Allocate(aFileLen);
-        if (aBuffer == NULL)
-        {
-            return 0;
-        }
-
-        fseek(aFileHandle, 0, SEEK_SET);
-        size_t aCountRead = fread(aBuffer, 1, aFileLen, aFileHandle);
-        (void)aCountRead;
+    fseek(aFileHandle, 0, SEEK_END);
+    long aFileLen = ftell(aFileHandle);
+    if (aFileLen <= 0L) {
         fclose(aFileHandle);
+        return 0;
+    }
 
-        uint32_t aCpuMask = 0;
-        const char* anEnd = aBuffer + aFileLen;
-        for (const char* aCharIter = aBuffer; aCharIter < anEnd && *aCharIter != '\n';)
-        {
-            const char* aChunkEnd = (const char*)::memchr(aCharIter, ',', anEnd - aCharIter);
-            if (aChunkEnd == NULL)
-            {
-                aChunkEnd = anEnd;
-            }
+    char* aBuffer = (char*)Standard::Allocate(aFileLen);
+    if (aBuffer == NULL) {
+        return 0;
+    }
 
-            // get first value
-            int anIndexLower = 0;
-            aCharIter = parseNumber(anIndexLower, aCharIter, aChunkEnd);
-            if (aCharIter == NULL)
-            {
+    fseek(aFileHandle, 0, SEEK_SET);
+    size_t aCountRead = fread(aBuffer, 1, aFileLen, aFileHandle);
+    (void)aCountRead;
+    fclose(aFileHandle);
+
+    uint32_t aCpuMask = 0;
+    const char* anEnd = aBuffer + aFileLen;
+    for (const char* aCharIter = aBuffer; aCharIter < anEnd && *aCharIter != '\n';) {
+        const char* aChunkEnd = (const char*)::memchr(aCharIter, ',', anEnd - aCharIter);
+        if (aChunkEnd == NULL) {
+            aChunkEnd = anEnd;
+        }
+
+        // get first value
+        int anIndexLower = 0;
+        aCharIter = parseNumber(anIndexLower, aCharIter, aChunkEnd);
+        if (aCharIter == NULL) {
+            Standard::Free(aBuffer);
+            return aCpuMask;
+        }
+
+        // if we're not at the end of the item, expect a dash and integer; extract end value.
+        int anIndexUpper = anIndexLower;
+        if (aCharIter < aChunkEnd && *aCharIter == '-') {
+            aCharIter = parseNumber(anIndexUpper, aCharIter + 1, aChunkEnd);
+            if (aCharIter == NULL) {
                 Standard::Free(aBuffer);
                 return aCpuMask;
             }
+        }
 
-            // if we're not at the end of the item, expect a dash and integer; extract end value.
-            int anIndexUpper = anIndexLower;
-            if (aCharIter < aChunkEnd && *aCharIter == '-')
-            {
-                aCharIter = parseNumber(anIndexUpper, aCharIter + 1, aChunkEnd);
-                if (aCharIter == NULL)
-                {
-                    Standard::Free(aBuffer);
-                    return aCpuMask;
-                }
-            }
-
-            // set bits CPU list
-            for (int aCpuIndex = anIndexLower; aCpuIndex <= anIndexUpper; ++aCpuIndex)
-            {
-                if ((unsigned int)aCpuIndex < 32)
-                {
-                    aCpuMask |= (uint32_t)(1U << aCpuIndex);
-                }
-            }
-
-            aCharIter = aChunkEnd;
-            if (aCharIter < anEnd)
-            {
-                ++aCharIter;
+        // set bits CPU list
+        for (int aCpuIndex = anIndexLower; aCpuIndex <= anIndexUpper; ++aCpuIndex) {
+            if ((unsigned int)aCpuIndex < 32) {
+                aCpuMask |= (uint32_t)(1U << aCpuIndex);
             }
         }
 
-        Standard::Free(aBuffer);
-        return aCpuMask;
+        aCharIter = aChunkEnd;
+        if (aCharIter < anEnd) {
+            ++aCharIter;
+        }
     }
-#endif
 
-    static Standard_Boolean OSD_Parallel_ToUseOcctThreads =
-#ifdef HAVE_TBB
-        Standard_False;
-#else
-        Standard_True;
-#endif
+    Standard::Free(aBuffer);
+    return aCpuMask;
 }
+#endif
+
+static Standard_Boolean OSD_Parallel_ToUseOcctThreads =
+#ifdef HAVE_TBB
+    Standard_False;
+#else
+    Standard_True;
+#endif
+} // namespace
 
 //=======================================================================
-//function : ToUseOcctThreads
-//purpose  :
+// function : ToUseOcctThreads
+// purpose  :
 //=======================================================================
-Standard_Boolean OSD_Parallel::ToUseOcctThreads()
-{
+Standard_Boolean OSD_Parallel::ToUseOcctThreads() {
     return OSD_Parallel_ToUseOcctThreads;
 }
 
 //=======================================================================
-//function : SetUseOcctThreads
-//purpose  :
+// function : SetUseOcctThreads
+// purpose  :
 //=======================================================================
-void OSD_Parallel::SetUseOcctThreads(Standard_Boolean theToUseOcct)
-{
+void OSD_Parallel::SetUseOcctThreads(Standard_Boolean theToUseOcct) {
 #ifdef HAVE_TBB
     OSD_Parallel_ToUseOcctThreads = theToUseOcct;
 #else
@@ -204,39 +178,31 @@ void OSD_Parallel::SetUseOcctThreads(Standard_Boolean theToUseOcct)
 }
 
 //=======================================================================
-//function : NbLogicalProcessors
-//purpose  : Returns number of logical processors.
+// function : NbLogicalProcessors
+// purpose  : Returns number of logical processors.
 //=======================================================================
-Standard_Integer OSD_Parallel::NbLogicalProcessors()
-{
+Standard_Integer OSD_Parallel::NbLogicalProcessors() {
     static Standard_Integer aNumLogicalProcessors = 0;
-    if (aNumLogicalProcessors != 0)
-    {
+    if (aNumLogicalProcessors != 0) {
         return aNumLogicalProcessors;
     }
 #ifdef _WIN32
     // GetSystemInfo() will return the number of processors in a data field in a SYSTEM_INFO structure.
     SYSTEM_INFO aSysInfo;
 #ifndef OCCT_UWP
-    if (isWow64())
-    {
-        typedef BOOL(WINAPI* LPFN_GSI)(LPSYSTEM_INFO);
+    if (isWow64()) {
+        typedef BOOL(WINAPI * LPFN_GSI)(LPSYSTEM_INFO);
 
         HMODULE aKern32 = GetModuleHandleW(L"kernel32");
         LPFN_GSI aFuncSysInfo = (LPFN_GSI)GetProcAddress(aKern32, "GetNativeSystemInfo");
 
         // So, they suggest 32-bit apps should call this instead of the other in WOW64
-        if (aFuncSysInfo != NULL)
-        {
+        if (aFuncSysInfo != NULL) {
             aFuncSysInfo(&aSysInfo);
-        }
-        else
-        {
+        } else {
             GetSystemInfo(&aSysInfo);
         }
-    }
-    else
-    {
+    } else {
         GetSystemInfo(&aSysInfo);
     }
 #else
@@ -250,8 +216,7 @@ Standard_Integer OSD_Parallel::NbLogicalProcessors()
     uint32_t aCpuMaskPossible = readCpuMask("/sys/devices/system/cpu/possible");
     aCpuMaskPresent &= aCpuMaskPossible;
     aNumLogicalProcessors = __builtin_popcount(aCpuMaskPresent);
-    if (aNumLogicalProcessors >= 1)
-    {
+    if (aNumLogicalProcessors >= 1) {
         return aNumLogicalProcessors;
     }
 #endif

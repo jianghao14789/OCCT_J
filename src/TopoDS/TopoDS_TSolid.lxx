@@ -15,11 +15,10 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_TSolid
-//purpose  : 
+// function : TopoDS_TSolid
+// purpose  :
 //=======================================================================
 
-inline TopoDS_TSolid::TopoDS_TSolid() : TopoDS_TShape()
-{
-  Orientable(Standard_False);
+inline TopoDS_TSolid::TopoDS_TSolid() : TopoDS_TShape() {
+    Orientable(Standard_False);
 }

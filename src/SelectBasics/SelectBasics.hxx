@@ -22,14 +22,17 @@
 #include <Standard_Integer.hxx>
 
 //! interface class for dynamic selection
-class SelectBasics 
-{
+class SelectBasics {
 public:
+    //! Structure to provide all-in-one result of selection of sensitive for "Matches" method of
+    //! Select3D_SensitiveEntity.
+    static Standard_Integer MaxOwnerPriority() {
+        return 9;
+    }
 
-  //! Structure to provide all-in-one result of selection of sensitive for "Matches" method of Select3D_SensitiveEntity.
-  static Standard_Integer MaxOwnerPriority() { return 9; }
-
-  static Standard_Integer MinOwnerPriority() { return 0; }
+    static Standard_Integer MinOwnerPriority() {
+        return 0;
+    }
 };
 
 #endif // _SelectBasics_HeaderFile

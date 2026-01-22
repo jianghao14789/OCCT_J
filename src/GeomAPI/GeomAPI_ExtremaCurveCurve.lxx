@@ -15,12 +15,10 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Extrema
-//purpose  : 
+// function : Extrema
+// purpose  :
 //=======================================================================
 
-inline const Extrema_ExtCC& GeomAPI_ExtremaCurveCurve::Extrema() const
-{
-  return myExtCC;
+inline const Extrema_ExtCC& GeomAPI_ExtremaCurveCurve::Extrema() const {
+    return myExtCC;
 }
-

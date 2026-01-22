@@ -24,51 +24,43 @@
 #include <OSD_MemInfo.hxx>
 
 //=======================================================================
-//function : Constructor
-//purpose  : 构造函数，初始化级别并添加到默认报告
+// function : Constructor
+// purpose  : 构造函数，初始化级别并添加到默认报告
 //=======================================================================
-Message_Level::Message_Level(const TCollection_AsciiString& theName)
-{
-    const Handle(Message_Report)& aDefaultReport = Message::DefaultReport();
-    if (!aDefaultReport.IsNull() && aDefaultReport->IsActiveInMessenger())
-    {
+Message_Level::Message_Level(const TCollection_AsciiString& theName) {
+    const Handle(Message_Report) & aDefaultReport = Message::DefaultReport();
+    if (!aDefaultReport.IsNull() && aDefaultReport->IsActiveInMessenger()) {
         aDefaultReport->AddLevel(this, theName);
     }
 }
 
 //=======================================================================
-//function : Destructor
-//purpose  : 析构函数，从报告中移除级别
+// function : Destructor
+// purpose  : 析构函数，从报告中移除级别
 //=======================================================================
-Message_Level::~Message_Level()
-{
+Message_Level::~Message_Level() {
     remove();
 }
 
 //=======================================================================
-//function : SetRootAlert
-//purpose  : 设置根警报并可能启动其度量
+// function : SetRootAlert
+// purpose  : 设置根警报并可能启动其度量
 //=======================================================================
-void Message_Level::SetRootAlert(const Handle(Message_AlertExtended)& theAlert,
-    const Standard_Boolean isRequiredToStart)
-{
+void Message_Level::SetRootAlert(const Handle(Message_AlertExtended) & theAlert,
+                                 const Standard_Boolean isRequiredToStart) {
     myRootAlert = theAlert;
-    if (isRequiredToStart)
-    {
+    if (isRequiredToStart) {
         Message_AttributeMeter::StartAlert(myRootAlert);
     }
 }
 
 //=======================================================================
-//function : AddAlert
-//purpose  : 向级别添加警报
+// function : AddAlert
+// purpose  : 向级别添加警报
 //=======================================================================
-Standard_Boolean Message_Level::AddAlert(const Message_Gravity theGravity,
-    const Handle(Message_Alert)& theAlert)
-{
+Standard_Boolean Message_Level::AddAlert(const Message_Gravity theGravity, const Handle(Message_Alert) & theAlert) {
     Handle(Message_AlertExtended) anAlertExtended = Handle(Message_AlertExtended)::DownCast(theAlert);
-    if (anAlertExtended.IsNull())
-    {
+    if (anAlertExtended.IsNull()) {
         return Standard_False;
     }
 
@@ -94,21 +86,18 @@ Standard_Boolean Message_Level::AddAlert(const Message_Gravity theGravity,
 }
 
 //=======================================================================
-//function : remove
-//purpose  : 从报告中移除级别
+// function : remove
+// purpose  : 从报告中移除级别
 //=======================================================================
-void Message_Level::remove()
-{
-    const Handle(Message_Report)& aDefaultReport = Message::DefaultReport();
-    if (aDefaultReport.IsNull() || !aDefaultReport->IsActiveInMessenger())
-    {
+void Message_Level::remove() {
+    const Handle(Message_Report) & aDefaultReport = Message::DefaultReport();
+    if (aDefaultReport.IsNull() || !aDefaultReport->IsActiveInMessenger()) {
         return;
     }
 
     Message_AttributeMeter::StopAlert(myLastAlert);
 
-    if (!Message::DefaultReport().IsNull())
-    {
+    if (!Message::DefaultReport().IsNull()) {
         Message::DefaultReport()->RemoveLevel(this);
     }
 }

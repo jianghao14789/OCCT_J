@@ -18,60 +18,51 @@
 #include <TopoDS_Face.hxx>
 
 //=======================================================================
-//function : BRepGProp_Domain
-//purpose  : Empty constructor.
+// function : BRepGProp_Domain
+// purpose  : Empty constructor.
 //=======================================================================
 
-inline BRepGProp_Domain::BRepGProp_Domain ()
-{
+inline BRepGProp_Domain::BRepGProp_Domain() {}
+
+//=======================================================================
+// function : BRepGProp_Domain
+// purpose  : Constructor. Initializes the domain with the face.
+//=======================================================================
+
+inline BRepGProp_Domain::BRepGProp_Domain(const TopoDS_Face& F) : myExplorer(F.Oriented(TopAbs_FORWARD), TopAbs_EDGE) {}
+
+//=======================================================================
+// function : Init
+// purpose  : Initializes the domain with the face.
+//=======================================================================
+
+inline void BRepGProp_Domain::Init(const TopoDS_Face& F) {
+    myExplorer.Init(F.Oriented(TopAbs_FORWARD), TopAbs_EDGE);
 }
 
 //=======================================================================
-//function : BRepGProp_Domain
-//purpose  : Constructor. Initializes the domain with the face.
+// function : More
+// purpose  : Returns True if there is another arc of curve in the list.
 //=======================================================================
 
-inline BRepGProp_Domain::BRepGProp_Domain (const TopoDS_Face& F) :
-       myExplorer(F.Oriented(TopAbs_FORWARD),TopAbs_EDGE)
-{
+inline Standard_Boolean BRepGProp_Domain::More() {
+    return myExplorer.More();
 }
 
 //=======================================================================
-//function : Init
-//purpose  : Initializes the domain with the face.
+// function : Init
+// purpose  : Initializes the exploration with the face already set.
 //=======================================================================
 
-inline void BRepGProp_Domain::Init(const TopoDS_Face& F)
-{
-  myExplorer.Init(F.Oriented(TopAbs_FORWARD),TopAbs_EDGE);
+inline void BRepGProp_Domain::Init() {
+    myExplorer.ReInit();
 }
 
 //=======================================================================
-//function : More
-//purpose  : Returns True if there is another arc of curve in the list.
+// function : Value
+// purpose  : Returns the current edge.
 //=======================================================================
 
-inline Standard_Boolean BRepGProp_Domain::More ()
-{
-  return myExplorer.More();
-}
-
-//=======================================================================
-//function : Init
-//purpose  : Initializes the exploration with the face already set.
-//=======================================================================
-
-inline void BRepGProp_Domain::Init ()
-{
-  myExplorer.ReInit();
-}
-
-//=======================================================================
-//function : Value
-//purpose  : Returns the current edge.
-//=======================================================================
-
-inline const TopoDS_Edge& BRepGProp_Domain::Value () 
-{
-  return TopoDS::Edge(myExplorer.Current());
+inline const TopoDS_Edge& BRepGProp_Domain::Value() {
+    return TopoDS::Edge(myExplorer.Current());
 }

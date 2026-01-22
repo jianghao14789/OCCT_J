@@ -32,7 +32,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_Parabola;
 DEFINE_STANDARD_HANDLE(Geom_Parabola, Geom_Conic)
 
@@ -71,7 +70,6 @@ DEFINE_STANDARD_HANDLE(Geom_Parabola, Geom_Conic)
 //! The parameter range is ] -infinite, +infinite [.
 class Geom_Parabola : public Geom_Conic {
 public:
-
     //! Creates a parabola from a non transient one.
     Standard_EXPORT Geom_Parabola(const gp_Parab& Prb);
 
@@ -100,7 +98,6 @@ public:
 
     //! Converts the gp_Parab parabola Prb into this parabola.
     Standard_EXPORT void SetParab(const gp_Parab& Prb);
-
 
     //! Returns the non transient parabola from gp with the same
     //! geometric properties as <me>.
@@ -175,7 +172,8 @@ public:
 
     //! Returns the point P of parameter U, the first second and third
     //! derivatives V1 V2 and V3.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! For the point of parameter U of this parabola,
     //! computes the vector corresponding to the Nth derivative.
@@ -214,12 +212,12 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Parabola, Geom_Conic)
 
 protected:
-
 private:
     Standard_Real focalLength;
 };

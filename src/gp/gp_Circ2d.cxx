@@ -12,7 +12,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//modif JCV 10/01/91 suite a la deuxieme revue de projet toolkit geometry
+// modif JCV 10/01/91 suite a la deuxieme revue de projet toolkit geometry
 
 #include <gp_Circ2d.hxx>
 
@@ -23,27 +23,22 @@
 #include <gp_Vec2d.hxx>
 #include <Standard_ConstructionError.hxx>
 
-void gp_Circ2d::Mirror(const gp_Pnt2d& P)
-{
+void gp_Circ2d::Mirror(const gp_Pnt2d& P) {
     pos.Mirror(P);
 }
 
-gp_Circ2d gp_Circ2d::Mirrored(const gp_Pnt2d& P) const
-{
+gp_Circ2d gp_Circ2d::Mirrored(const gp_Pnt2d& P) const {
     gp_Circ2d C = *this;
     C.pos.Mirror(P);
     return C;
 }
 
-void gp_Circ2d::Mirror(const gp_Ax2d& A)
-{
+void gp_Circ2d::Mirror(const gp_Ax2d& A) {
     pos.Mirror(A);
 }
 
-gp_Circ2d gp_Circ2d::Mirrored(const gp_Ax2d& A) const
-{
+gp_Circ2d gp_Circ2d::Mirrored(const gp_Ax2d& A) const {
     gp_Circ2d C = *this;
     C.pos.Mirror(A);
     return C;
 }
-

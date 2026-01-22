@@ -31,54 +31,53 @@ class gp_Trsf;
 class gp_Vec;
 
 //! Defines a 3D cartesian point.
-class gp_Pnt
-{
+class gp_Pnt {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates a point with zero coordinates.
     gp_Pnt() {}
 
     //! Creates a point from a XYZ object.
-    gp_Pnt(const gp_XYZ& theCoord)
-        : coord(theCoord)
-    {
-    }
+    gp_Pnt(const gp_XYZ& theCoord) : coord(theCoord) {}
 
     //! Creates a  point with its 3 cartesian's coordinates : theXp, theYp, theZp.
     gp_Pnt(const Standard_Real theXp, const Standard_Real theYp, const Standard_Real theZp)
-        : coord(theXp, theYp, theZp)
-    {
-    }
+        : coord(theXp, theYp, theZp) {}
 
     //! Changes the coordinate of range theIndex :
     //! theIndex = 1 => X is modified
     //! theIndex = 2 => Y is modified
     //! theIndex = 3 => Z is modified
     //! Raised if theIndex != {1, 2, 3}.
-    void SetCoord(const Standard_Integer theIndex, const Standard_Real theXi)
-    {
+    void SetCoord(const Standard_Integer theIndex, const Standard_Real theXi) {
         coord.SetCoord(theIndex, theXi);
     }
 
     //! For this point, assigns  the values theXp, theYp and theZp to its three coordinates.
-    void SetCoord(const Standard_Real theXp, const Standard_Real theYp, const Standard_Real theZp)
-    {
+    void SetCoord(const Standard_Real theXp, const Standard_Real theYp, const Standard_Real theZp) {
         coord.SetCoord(theXp, theYp, theZp);
     }
 
     //! Assigns the given value to the X coordinate of this point.
-    void SetX(const Standard_Real theX) { coord.SetX(theX); }
+    void SetX(const Standard_Real theX) {
+        coord.SetX(theX);
+    }
 
     //! Assigns the given value to the Y coordinate of this point.
-    void SetY(const Standard_Real theY) { coord.SetY(theY); }
+    void SetY(const Standard_Real theY) {
+        coord.SetY(theY);
+    }
 
     //! Assigns the given value to the Z coordinate of this point.
-    void SetZ(const Standard_Real theZ) { coord.SetZ(theZ); }
+    void SetZ(const Standard_Real theZ) {
+        coord.SetZ(theZ);
+    }
 
     //! Assigns the three coordinates of theCoord to this point.
-    void SetXYZ(const gp_XYZ& theCoord) { coord = theCoord; }
+    void SetXYZ(const gp_XYZ& theCoord) {
+        coord = theCoord;
+    }
 
     //! Returns the coordinate of corresponding to the value of theIndex :
     //! theIndex = 1 => X is returned
@@ -86,37 +85,49 @@ public:
     //! theIndex = 3 => Z is returned
     //! Raises OutOfRange if theIndex != {1, 2, 3}.
     //! Raised if theIndex != {1, 2, 3}.
-    Standard_Real Coord(const Standard_Integer theIndex) const { return coord.Coord(theIndex); }
+    Standard_Real Coord(const Standard_Integer theIndex) const {
+        return coord.Coord(theIndex);
+    }
 
     //! For this point gives its three coordinates theXp, theYp and theZp.
-    void Coord(Standard_Real& theXp, Standard_Real& theYp, Standard_Real& theZp) const
-    {
+    void Coord(Standard_Real& theXp, Standard_Real& theYp, Standard_Real& theZp) const {
         coord.Coord(theXp, theYp, theZp);
     }
 
     //! For this point, returns its X coordinate.
-    Standard_Real X() const { return coord.X(); }
+    Standard_Real X() const {
+        return coord.X();
+    }
 
     //! For this point, returns its Y coordinate.
-    Standard_Real Y() const { return coord.Y(); }
+    Standard_Real Y() const {
+        return coord.Y();
+    }
 
     //! For this point, returns its Z coordinate.
-    Standard_Real Z() const { return coord.Z(); }
+    Standard_Real Z() const {
+        return coord.Z();
+    }
 
     //! For this point, returns its three coordinates as a XYZ object.
-    const gp_XYZ& XYZ() const { return coord; }
+    const gp_XYZ& XYZ() const {
+        return coord;
+    }
 
     //! For this point, returns its three coordinates as a XYZ object.
-    const gp_XYZ& Coord() const { return coord; }
+    const gp_XYZ& Coord() const {
+        return coord;
+    }
 
     //! Returns the coordinates of this point.
     //! Note: This syntax allows direct modification of the returned value.
-    gp_XYZ& ChangeCoord() { return coord; }
+    gp_XYZ& ChangeCoord() {
+        return coord;
+    }
 
     //! Assigns the result of the following expression to this point
     //! (theAlpha*this + theBeta*theP) / (theAlpha + theBeta)
-    void BaryCenter(const Standard_Real theAlpha, const gp_Pnt& theP, const Standard_Real theBeta)
-    {
+    void BaryCenter(const Standard_Real theAlpha, const gp_Pnt& theP, const Standard_Real theBeta) {
         coord.SetLinearForm(theAlpha, coord, theBeta, theP.coord);
         coord.Divide(theAlpha + theBeta);
     }
@@ -124,8 +135,7 @@ public:
     //! Comparison
     //! Returns True if the distance between the two points is
     //! lower or equal to theLinearTolerance.
-    Standard_Boolean IsEqual(const gp_Pnt& theOther, const Standard_Real theLinearTolerance) const
-    {
+    Standard_Boolean IsEqual(const gp_Pnt& theOther, const Standard_Real theLinearTolerance) const {
         return Distance(theOther) <= theLinearTolerance;
     }
 
@@ -160,8 +170,7 @@ public:
 
     void Rotate(const gp_Ax1& theA1, const Standard_Real theAng);
 
-    Standard_NODISCARD gp_Pnt Rotated(const gp_Ax1& theA1, const Standard_Real theAng) const
-    {
+    Standard_NODISCARD gp_Pnt Rotated(const gp_Ax1& theA1, const Standard_Real theAng) const {
         gp_Pnt aP = *this;
         aP.Rotate(theA1, theAng);
         return aP;
@@ -170,8 +179,7 @@ public:
     //! Scales a point. theS is the scaling value.
     void Scale(const gp_Pnt& theP, const Standard_Real theS);
 
-    Standard_NODISCARD gp_Pnt Scaled(const gp_Pnt& theP, const Standard_Real theS) const
-    {
+    Standard_NODISCARD gp_Pnt Scaled(const gp_Pnt& theP, const Standard_Real theS) const {
         gp_Pnt aPres = *this;
         aPres.Scale(theP, theS);
         return aPres;
@@ -180,8 +188,7 @@ public:
     //! Transforms a point with the transformation T.
     Standard_EXPORT void Transform(const gp_Trsf& theT);
 
-    Standard_NODISCARD gp_Pnt Transformed(const gp_Trsf& theT) const
-    {
+    Standard_NODISCARD gp_Pnt Transformed(const gp_Trsf& theT) const {
         gp_Pnt aP = *this;
         aP.Transform(theT);
         return aP;
@@ -194,14 +201,12 @@ public:
     Standard_NODISCARD gp_Pnt Translated(const gp_Vec& theV) const;
 
     //! Translates a point from the point theP1 to the point theP2.
-    void Translate(const gp_Pnt& theP1, const gp_Pnt& theP2)
-    {
+    void Translate(const gp_Pnt& theP1, const gp_Pnt& theP2) {
         coord.Add(theP2.coord);
         coord.Subtract(theP1.coord);
     }
 
-    Standard_NODISCARD gp_Pnt Translated(const gp_Pnt& theP1, const gp_Pnt& theP2) const
-    {
+    Standard_NODISCARD gp_Pnt Translated(const gp_Pnt& theP1, const gp_Pnt& theP2) const {
         gp_Pnt aP = *this;
         aP.Translate(theP1, theP2);
         return aP;
@@ -214,9 +219,7 @@ public:
     Standard_EXPORT Standard_Boolean InitFromJson(const Standard_SStream& theSStream, Standard_Integer& theStreamPos);
 
 private:
-
     gp_XYZ coord;
-
 };
 
 #include <gp_Trsf.hxx>
@@ -224,50 +227,64 @@ private:
 #include <gp_XYZ.hxx>
 
 //=======================================================================
-//function : Distance
+// function : Distance
 // purpose :
 //=======================================================================
-inline Standard_Real gp_Pnt::Distance(const gp_Pnt& theOther) const
-{
+inline Standard_Real gp_Pnt::Distance(const gp_Pnt& theOther) const {
     Standard_Real aD = 0, aDD;
     const gp_XYZ& aXYZ = theOther.coord;
-    aDD = coord.X(); aDD -= aXYZ.X(); aDD *= aDD; aD += aDD;
-    aDD = coord.Y(); aDD -= aXYZ.Y(); aDD *= aDD; aD += aDD;
-    aDD = coord.Z(); aDD -= aXYZ.Z(); aDD *= aDD; aD += aDD;
+    aDD = coord.X();
+    aDD -= aXYZ.X();
+    aDD *= aDD;
+    aD += aDD;
+    aDD = coord.Y();
+    aDD -= aXYZ.Y();
+    aDD *= aDD;
+    aD += aDD;
+    aDD = coord.Z();
+    aDD -= aXYZ.Z();
+    aDD *= aDD;
+    aD += aDD;
     return sqrt(aD);
 }
 
 //=======================================================================
-//function : SquareDistance
+// function : SquareDistance
 // purpose :
 //=======================================================================
-inline Standard_Real gp_Pnt::SquareDistance(const gp_Pnt& theOther) const
-{
+inline Standard_Real gp_Pnt::SquareDistance(const gp_Pnt& theOther) const {
     Standard_Real aD = 0, aDD;
     const gp_XYZ& XYZ = theOther.coord;
-    aDD = coord.X(); aDD -= XYZ.X(); aDD *= aDD; aD += aDD;
-    aDD = coord.Y(); aDD -= XYZ.Y(); aDD *= aDD; aD += aDD;
-    aDD = coord.Z(); aDD -= XYZ.Z(); aDD *= aDD; aD += aDD;
+    aDD = coord.X();
+    aDD -= XYZ.X();
+    aDD *= aDD;
+    aD += aDD;
+    aDD = coord.Y();
+    aDD -= XYZ.Y();
+    aDD *= aDD;
+    aD += aDD;
+    aDD = coord.Z();
+    aDD -= XYZ.Z();
+    aDD *= aDD;
+    aD += aDD;
     return aD;
 }
 
 //=======================================================================
-//function : Rotate
+// function : Rotate
 // purpose :
 //=======================================================================
-inline void gp_Pnt::Rotate(const gp_Ax1& theA1, const Standard_Real theAng)
-{
+inline void gp_Pnt::Rotate(const gp_Ax1& theA1, const Standard_Real theAng) {
     gp_Trsf aT;
     aT.SetRotation(theA1, theAng);
     aT.Transforms(coord);
 }
 
 //=======================================================================
-//function : Scale
+// function : Scale
 // purpose :
 //=======================================================================
-inline void gp_Pnt::Scale(const gp_Pnt& theP, const Standard_Real theS)
-{
+inline void gp_Pnt::Scale(const gp_Pnt& theP, const Standard_Real theS) {
     gp_XYZ aXYZ = theP.coord;
     aXYZ.Multiply(1.0 - theS);
     coord.Multiply(theS);
@@ -275,20 +292,18 @@ inline void gp_Pnt::Scale(const gp_Pnt& theP, const Standard_Real theS)
 }
 
 //=======================================================================
-//function : Translate
+// function : Translate
 // purpose :
 //=======================================================================
-inline void gp_Pnt::Translate(const gp_Vec& theV)
-{
+inline void gp_Pnt::Translate(const gp_Vec& theV) {
     coord.Add(theV.XYZ());
 }
 
 //=======================================================================
-//function : Translated
+// function : Translated
 // purpose :
 //=======================================================================
-inline gp_Pnt gp_Pnt::Translated(const gp_Vec& theV) const
-{
+inline gp_Pnt gp_Pnt::Translated(const gp_Vec& theV) const {
     gp_Pnt aP = *this;
     aP.coord.Add(theV.XYZ());
     return aP;

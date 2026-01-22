@@ -27,48 +27,28 @@ class StepDimTol_CylindricityTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CylindricityTolerance
-class RWStepDimTol_RWCylindricityTolerance 
-{
+class RWStepDimTol_RWCylindricityTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWCylindricityTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWCylindricityTolerance();
-  
-  //! Reads CylindricityTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_CylindricityTolerance)& ent) const;
-  
-  //! Writes CylindricityTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_CylindricityTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_CylindricityTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CylindricityTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_CylindricityTolerance) & ent) const;
 
+    //! Writes CylindricityTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_CylindricityTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_CylindricityTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWCylindricityTolerance_HeaderFile

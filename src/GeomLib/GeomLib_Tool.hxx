@@ -28,57 +28,36 @@ class Geom_Surface;
 class Geom2d_Curve;
 class gp_Pnt2d;
 
-
 //! Provides various methods with Geom2d and Geom curves and surfaces.
 //! The methods of this class compute the parameter(s) of a given point on a
-//! curve or a surface. To get the valid result the point must be located rather close 
+//! curve or a surface. To get the valid result the point must be located rather close
 //! to the curve (surface) or at least to allow getting unambiguous result
 //! (do not put point at center of circle...),
-//! but choice of "trust" distance between curve/surface and point is 
+//! but choice of "trust" distance between curve/surface and point is
 //! responcibility of user (parameter MaxDist).
 //! Return FALSE if the point is beyond the MaxDist
 //! limit or if computation fails.
-class GeomLib_Tool 
-{
+class GeomLib_Tool {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Extracts the parameter of a 3D point lying on a 3D curve
+    //! or at a distance less than the MaxDist value.
+    Standard_EXPORT static Standard_Boolean Parameter(const Handle(Geom_Curve) & Curve, const gp_Pnt& Point,
+                                                      const Standard_Real MaxDist, Standard_Real& U);
 
-  
+    //! Extracts the parameter of a 3D point lying on a surface
+    //! or at a distance less than the MaxDist value.
+    Standard_EXPORT static Standard_Boolean Parameters(const Handle(Geom_Surface) & Surface, const gp_Pnt& Point,
+                                                       const Standard_Real MaxDist, Standard_Real& U, Standard_Real& V);
 
-  //! Extracts the parameter of a 3D point lying on a 3D curve
-  //! or at a distance less than the MaxDist value.
-  Standard_EXPORT static Standard_Boolean Parameter (const Handle(Geom_Curve)& Curve, const gp_Pnt& Point, const Standard_Real MaxDist, Standard_Real& U);
-  
-  //! Extracts the parameter of a 3D point lying on a surface
-  //! or at a distance less than the MaxDist value.
-  Standard_EXPORT static Standard_Boolean Parameters (const Handle(Geom_Surface)& Surface, const gp_Pnt& Point, const Standard_Real MaxDist, Standard_Real& U, Standard_Real& V);
-  
-  //! Extracts the parameter of a 2D point lying on a 2D curve
-  //! or at a distance less than the MaxDist value.
-  Standard_EXPORT static Standard_Boolean Parameter (const Handle(Geom2d_Curve)& Curve, const gp_Pnt2d& Point, const Standard_Real MaxDist, Standard_Real& U);
-
-
-
+    //! Extracts the parameter of a 2D point lying on a 2D curve
+    //! or at a distance less than the MaxDist value.
+    Standard_EXPORT static Standard_Boolean Parameter(const Handle(Geom2d_Curve) & Curve, const gp_Pnt2d& Point,
+                                                      const Standard_Real MaxDist, Standard_Real& U);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _GeomLib_Tool_HeaderFile

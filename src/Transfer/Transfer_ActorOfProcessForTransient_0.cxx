@@ -45,4 +45,3 @@
 #define Transfer_TransferProcess_hxx <Transfer_ProcessForTransient.hxx>
 #define Handle_Transfer_TransferProcess Handle(Transfer_ProcessForTransient)
 #include <Transfer_Actor.gxx>
-

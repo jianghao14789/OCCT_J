@@ -26,118 +26,101 @@ class BRepMesh_DataStructureOfDelaun;
 
 //! Class provides base functionality for algorithms building face triangulation.
 //! Performs initialization of BRepMesh_DataStructureOfDelaun and nodes map structures.
-class BRepMesh_BaseMeshAlgo : public IMeshTools_MeshAlgo
-{
+class BRepMesh_BaseMeshAlgo : public IMeshTools_MeshAlgo {
 public:
+    typedef NCollection_Shared<NCollection_Vector<gp_Pnt>> VectorOfPnt;
 
-  typedef NCollection_Shared<NCollection_Vector<gp_Pnt> > VectorOfPnt;
+    //! Constructor.
+    Standard_EXPORT BRepMesh_BaseMeshAlgo();
 
-  //! Constructor.
-  Standard_EXPORT BRepMesh_BaseMeshAlgo();
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMesh_BaseMeshAlgo();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMesh_BaseMeshAlgo();
+    //! Performs processing of the given face.
+    Standard_EXPORT virtual void
+    Perform(const IMeshData::IFaceHandle& theDFace, const IMeshTools_Parameters& theParameters,
+            const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
-  //! Performs processing of the given face.
-  Standard_EXPORT virtual void Perform(
-    const IMeshData::IFaceHandle& theDFace,
-    const IMeshTools_Parameters&  theParameters,
-    const Message_ProgressRange&  theRange = Message_ProgressRange()) Standard_OVERRIDE;
-
-  DEFINE_STANDARD_RTTIEXT(BRepMesh_BaseMeshAlgo, IMeshTools_MeshAlgo)
+    DEFINE_STANDARD_RTTIEXT(BRepMesh_BaseMeshAlgo, IMeshTools_MeshAlgo)
 
 protected:
+    //! Gets discrete face.
+    const IMeshData::IFaceHandle& getDFace() const {
+        return myDFace;
+    }
 
-  //! Gets discrete face.
-  const IMeshData::IFaceHandle& getDFace() const
-  {
-    return myDFace;
-  }
+    //! Gets meshing parameters.
+    const IMeshTools_Parameters& getParameters() const {
+        return myParameters;
+    }
 
-  //! Gets meshing parameters.
-  const IMeshTools_Parameters& getParameters() const
-  {
-    return myParameters;
-  }
+    //! Gets common allocator.
+    const Handle(NCollection_IncAllocator) & getAllocator() const {
+        return myAllocator;
+    }
 
-  //! Gets common allocator.
-  const Handle(NCollection_IncAllocator)& getAllocator() const
-  {
-    return myAllocator;
-  }
+    //! Gets mesh structure.
+    const Handle(BRepMesh_DataStructureOfDelaun) & getStructure() const {
+        return myStructure;
+    }
 
-  //! Gets mesh structure.
-  const Handle(BRepMesh_DataStructureOfDelaun)& getStructure() const
-  {
-    return myStructure;
-  }
-
-  //! Gets 3d nodes map.
-  const Handle(VectorOfPnt)& getNodesMap() const
-  {
-    return myNodesMap;
-  }
+    //! Gets 3d nodes map.
+    const Handle(VectorOfPnt) & getNodesMap() const {
+        return myNodesMap;
+    }
 
 protected:
+    //! Registers the given point in vertex map and adds 2d point to mesh data structure.
+    //! Returns index of node in the structure.
+    Standard_EXPORT virtual Standard_Integer registerNode(const gp_Pnt& thePoint, const gp_Pnt2d& thePoint2d,
+                                                          const BRepMesh_DegreeOfFreedom theMovability,
+                                                          const Standard_Boolean isForceAdd);
 
-  //! Registers the given point in vertex map and adds 2d point to mesh data structure.
-  //! Returns index of node in the structure.
-  Standard_EXPORT virtual Standard_Integer registerNode(
-    const gp_Pnt&                  thePoint,
-    const gp_Pnt2d&                thePoint2d,
-    const BRepMesh_DegreeOfFreedom theMovability,
-    const Standard_Boolean         isForceAdd);
+    //! Adds the given 2d point to mesh data structure.
+    //! Returns index of node in the structure.
+    Standard_EXPORT virtual Standard_Integer addNodeToStructure(const gp_Pnt2d& thePoint,
+                                                                const Standard_Integer theLocation3d,
+                                                                const BRepMesh_DegreeOfFreedom theMovability,
+                                                                const Standard_Boolean isForceAdd);
 
-  //! Adds the given 2d point to mesh data structure.
-  //! Returns index of node in the structure.
-  Standard_EXPORT virtual Standard_Integer addNodeToStructure(
-    const gp_Pnt2d&                thePoint,
-    const Standard_Integer         theLocation3d,
-    const BRepMesh_DegreeOfFreedom theMovability,
-    const Standard_Boolean         isForceAdd);
+    //! Returns 2d point associated to the given vertex.
+    Standard_EXPORT virtual gp_Pnt2d getNodePoint2d(const BRepMesh_Vertex& theVertex) const;
 
-  //! Returns 2d point associated to the given vertex.
-  Standard_EXPORT virtual gp_Pnt2d getNodePoint2d(const BRepMesh_Vertex& theVertex) const;
+    //! Performs initialization of data structure using existing model data.
+    Standard_EXPORT virtual Standard_Boolean initDataStructure();
 
-  //! Performs initialization of data structure using existing model data.
-  Standard_EXPORT virtual Standard_Boolean initDataStructure();
-
-  //! Generates mesh for the contour stored in data structure.
-  Standard_EXPORT virtual void generateMesh(const Message_ProgressRange& theRange) = 0;
+    //! Generates mesh for the contour stored in data structure.
+    Standard_EXPORT virtual void generateMesh(const Message_ProgressRange& theRange) = 0;
 
 private:
+    //! If the given edge has another pcurve for current face coinciding with specified one,
+    //! returns TopAbs_INTERNAL flag. Elsewhere returns orientation of specified pcurve.
+    TopAbs_Orientation fixSeamEdgeOrientation(const IMeshData::IEdgeHandle& theDEdge,
+                                              const IMeshData::IPCurveHandle& thePCurve) const;
 
-  //! If the given edge has another pcurve for current face coinciding with specified one,
-  //! returns TopAbs_INTERNAL flag. Elsewhere returns orientation of specified pcurve.
-  TopAbs_Orientation fixSeamEdgeOrientation(
-    const IMeshData::IEdgeHandle&   theDEdge,
-    const IMeshData::IPCurveHandle& thePCurve) const;
+    //! Adds new link to the mesh data structure.
+    //! Movability of the link and order of nodes depend on orientation parameter.
+    Standard_Integer addLinkToMesh(const Standard_Integer theFirstNodeId, const Standard_Integer theLastNodeId,
+                                   const TopAbs_Orientation theOrientation);
 
-  //! Adds new link to the mesh data structure.
-  //! Movability of the link and order of nodes depend on orientation parameter.
-  Standard_Integer addLinkToMesh(
-    const Standard_Integer   theFirstNodeId,
-    const Standard_Integer   theLastNodeId,
-    const TopAbs_Orientation theOrientation);
+    //! Commits generated triangulation to TopoDS face.
+    void commitSurfaceTriangulation();
 
-  //! Commits generated triangulation to TopoDS face.
-  void commitSurfaceTriangulation();
+    //! Collects triangles to output data.
+    Handle(Poly_Triangulation) collectTriangles();
 
-  //! Collects triangles to output data.
-  Handle(Poly_Triangulation) collectTriangles();
-
-  //! Collects nodes to output data.
-  void collectNodes(const Handle(Poly_Triangulation)& theTriangulation);
+    //! Collects nodes to output data.
+    void collectNodes(const Handle(Poly_Triangulation) & theTriangulation);
 
 private:
-  typedef NCollection_Shared<NCollection_DataMap<Standard_Integer, Standard_Integer> > DMapOfIntegerInteger;
+    typedef NCollection_Shared<NCollection_DataMap<Standard_Integer, Standard_Integer>> DMapOfIntegerInteger;
 
-  IMeshData::IFaceHandle                 myDFace;
-  IMeshTools_Parameters                  myParameters;
-  Handle(NCollection_IncAllocator)       myAllocator;
-  Handle(BRepMesh_DataStructureOfDelaun) myStructure;
-  Handle(VectorOfPnt)                    myNodesMap;
-  Handle(DMapOfIntegerInteger)           myUsedNodes;
+    IMeshData::IFaceHandle myDFace;
+    IMeshTools_Parameters myParameters;
+    Handle(NCollection_IncAllocator) myAllocator;
+    Handle(BRepMesh_DataStructureOfDelaun) myStructure;
+    Handle(VectorOfPnt) myNodesMap;
+    Handle(DMapOfIntegerInteger) myUsedNodes;
 };
 
 #endif

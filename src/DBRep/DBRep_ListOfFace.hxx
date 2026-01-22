@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(DBRep_Face)> DBRep_ListOfFace;
 typedef NCollection_List<Handle(DBRep_Face)>::Iterator DBRep_ListIteratorOfListOfFace;
 
-
 #endif

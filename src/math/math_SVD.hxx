@@ -31,7 +31,6 @@ class StdFail_NotDone;
 class Standard_DimensionError;
 class math_Matrix;
 
-
 //! SVD implements the solution of a set of N linear equations
 //! of M unknowns without condition on N or M. The Singular
 //! Value Decomposition algorithm is used. For singular or
@@ -70,7 +69,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
     Standard_Boolean Done;
     math_Matrix U;

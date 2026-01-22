@@ -20,69 +20,53 @@
 #include <Standard_DefineHandle.hxx>
 
 //! Represents initial set of parameters triangulation is built for.
-class Poly_TriangulationParameters : public Standard_Transient
-{
+class Poly_TriangulationParameters : public Standard_Transient {
 public:
-
     //! Constructor.
     //! Initializes object with the given parameters.
     //! @param theDeflection linear deflection
     //! @param theAngle angular deflection
     //! @param theMinSize minimum size
-    Poly_TriangulationParameters(const Standard_Real theDeflection = -1.,
-        const Standard_Real theAngle = -1.,
-        const Standard_Real theMinSize = -1.)
-        : myDeflection(theDeflection)
-        , myAngle(theAngle)
-        , myMinSize(theMinSize)
-    {
-    }
+    Poly_TriangulationParameters(const Standard_Real theDeflection = -1., const Standard_Real theAngle = -1.,
+                                 const Standard_Real theMinSize = -1.)
+        : myDeflection(theDeflection), myAngle(theAngle), myMinSize(theMinSize) {}
 
     //! Destructor.
-    virtual ~Poly_TriangulationParameters()
-    {
-    }
+    virtual ~Poly_TriangulationParameters() {}
 
     //! Returns true if linear deflection is defined.
-    Standard_Boolean HasDeflection() const
-    {
+    Standard_Boolean HasDeflection() const {
         return !(myDeflection < 0.);
     }
 
     //! Returns true if angular deflection is defined.
-    Standard_Boolean HasAngle() const
-    {
+    Standard_Boolean HasAngle() const {
         return !(myAngle < 0.);
     }
 
     //! Returns true if minimum size is defined.
-    Standard_Boolean HasMinSize() const
-    {
+    Standard_Boolean HasMinSize() const {
         return !(myMinSize < 0.);
     }
 
     //! Returns linear deflection or -1 if undefined.
-    Standard_Real Deflection() const
-    {
+    Standard_Real Deflection() const {
         return myDeflection;
     }
 
     //! Returns angular deflection or -1 if undefined.
-    Standard_Real Angle() const
-    {
+    Standard_Real Angle() const {
         return myAngle;
     }
 
     //! Returns minimum size or -1 if undefined.
-    Standard_Real MinSize() const
-    {
+    Standard_Real MinSize() const {
         return myMinSize;
     }
 
     DEFINE_STANDARD_RTTIEXT(Poly_TriangulationParameters, Standard_Transient)
 
 private:
-
     Standard_Real myDeflection;
     Standard_Real myAngle;
     Standard_Real myMinSize;

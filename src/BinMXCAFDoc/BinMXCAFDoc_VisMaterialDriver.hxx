@@ -22,38 +22,34 @@
 DEFINE_STANDARD_HANDLE(BinMXCAFDoc_VisMaterialDriver, BinMDF_ADriver)
 
 //! Binary persistence driver for XCAFDoc_VisMaterial attribute.
-class BinMXCAFDoc_VisMaterialDriver : public BinMDF_ADriver
-{
-  DEFINE_STANDARD_RTTIEXT(BinMXCAFDoc_VisMaterialDriver, BinMDF_ADriver)
+class BinMXCAFDoc_VisMaterialDriver : public BinMDF_ADriver {
+    DEFINE_STANDARD_RTTIEXT(BinMXCAFDoc_VisMaterialDriver, BinMDF_ADriver)
 
-  //! Persistence version (major for breaking changes, minor for adding new fields at end).
-  enum
-  {
-    MaterialVersionMajor_1 = 1,
-    MaterialVersionMinor_0 = 0,
-    MaterialVersionMinor_1 = 1, //!< added IOR
+    //! Persistence version (major for breaking changes, minor for adding new fields at end).
+    enum {
+        MaterialVersionMajor_1 = 1,
+        MaterialVersionMinor_0 = 0,
+        MaterialVersionMinor_1 = 1, //!< added IOR
 
-    MaterialVersionMajor = MaterialVersionMajor_1,
-    MaterialVersionMinor = MaterialVersionMinor_1
-  };
+        MaterialVersionMajor = MaterialVersionMajor_1,
+        MaterialVersionMinor = MaterialVersionMinor_1
+    };
+
 public:
+    //! Main constructor.
+    Standard_EXPORT BinMXCAFDoc_VisMaterialDriver(const Handle(Message_Messenger) & theMsgDriver);
 
-  //! Main constructor.
-  Standard_EXPORT BinMXCAFDoc_VisMaterialDriver (const Handle(Message_Messenger)& theMsgDriver);
+    //! Create new instance of XCAFDoc_VisMaterial.
+    Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
 
-  //! Create new instance of XCAFDoc_VisMaterial.
-  Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
+    //! Paste attribute from persistence into document.
+    Standard_EXPORT virtual Standard_Boolean Paste(const BinObjMgt_Persistent& theSource,
+                                                   const Handle(TDF_Attribute) & theTarget,
+                                                   BinObjMgt_RRelocationTable& theRelocTable) const Standard_OVERRIDE;
 
-  //! Paste attribute from persistence into document.
-  Standard_EXPORT virtual Standard_Boolean Paste (const BinObjMgt_Persistent&  theSource,
-                                                  const Handle(TDF_Attribute)& theTarget,
-                                                  BinObjMgt_RRelocationTable&  theRelocTable) const Standard_OVERRIDE;
-
-  //! Paste attribute from document into persistence.
-  Standard_EXPORT virtual void Paste (const Handle(TDF_Attribute)& theSource,
-                                      BinObjMgt_Persistent&        theTarget,
-                                      BinObjMgt_SRelocationTable&  theRelocTable) const Standard_OVERRIDE;
-
+    //! Paste attribute from document into persistence.
+    Standard_EXPORT virtual void Paste(const Handle(TDF_Attribute) & theSource, BinObjMgt_Persistent& theTarget,
+                                       BinObjMgt_SRelocationTable& theRelocTable) const Standard_OVERRIDE;
 };
 
 #endif // _BinMXCAFDoc_VisMaterialDriver_HeaderFile

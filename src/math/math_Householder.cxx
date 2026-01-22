@@ -12,12 +12,12 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#ifndef OCCT_DEBUG
+// #ifndef OCCT_DEBUG
 #define No_Standard_RangeError
 #define No_Standard_OutOfRange
 #define No_Standard_DimensionError
 
-//#endif
+// #endif
 
 #include <math_Householder.hxx>
 #include <math_Matrix.hxx>
@@ -30,18 +30,15 @@
 // produit de matrice orthogonale par une triangulaire superieure. Les seconds
 // membres sont modifies dans le meme temps.
 // Les references sur le cote sont celles de l'algorithme explique en page
-// 90 du livre "Introduction a l'analyse numerique matricielle et a 
-// l'optimisation." par P.G. CIARLET, edition MASSON. Les secondes 
+// 90 du livre "Introduction a l'analyse numerique matricielle et a
+// l'optimisation." par P.G. CIARLET, edition MASSON. Les secondes
 // references sont celles du sous-programme HOUSEO d'Euclid.
-// A la difference du sous-programme Houseo, la premiere colonne n'est pas 
+// A la difference du sous-programme Houseo, la premiere colonne n'est pas
 // traitee separement. Les tests effectues ont montre que le code effectue
 // specialement pour celle-ci etait plus long qu'une simple recopie. C'est
 // donc cette solution de recopie initiale qui a ete retenue.
-math_Householder::math_Householder(const math_Matrix& A, const math_Vector& B,
-    const Standard_Real EPS) :
-    Sol(1, A.ColNumber(), 1, 1),
-    Q(1, A.RowNumber(),
-        1, A.ColNumber()) {
+math_Householder::math_Householder(const math_Matrix& A, const math_Vector& B, const Standard_Real EPS)
+    : Sol(1, A.ColNumber(), 1, 1), Q(1, A.RowNumber(), 1, A.ColNumber()) {
 
     mylowerArow = A.LowerRow();
     mylowerAcol = A.LowerCol();
@@ -52,14 +49,8 @@ math_Householder::math_Householder(const math_Matrix& A, const math_Vector& B,
     Perform(A, B1, EPS);
 }
 
-
-
-math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B,
-    const Standard_Real EPS) :
-    Sol(1, A.ColNumber(),
-        1, B.ColNumber()),
-    Q(1, A.RowNumber(),
-        A.LowerCol(), A.UpperCol()) {
+math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B, const Standard_Real EPS)
+    : Sol(1, A.ColNumber(), 1, B.ColNumber()), Q(1, A.RowNumber(), A.LowerCol(), A.UpperCol()) {
 
     mylowerArow = A.LowerRow();
     mylowerAcol = A.LowerCol();
@@ -68,17 +59,11 @@ math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B,
     Perform(A, B, EPS);
 }
 
-
-math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B,
-    const Standard_Integer lowerArow,
-    const Standard_Integer upperArow,
-    const Standard_Integer lowerAcol,
-    const Standard_Integer upperAcol,
-    const Standard_Real EPS) :
-    Sol(1, upperAcol - lowerAcol + 1,
-        1, B.ColNumber()),
-    Q(1, upperArow - lowerArow + 1,
-        1, upperAcol - lowerAcol + 1) {
+math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B, const Standard_Integer lowerArow,
+                                   const Standard_Integer upperArow, const Standard_Integer lowerAcol,
+                                   const Standard_Integer upperAcol, const Standard_Real EPS)
+    : Sol(1, upperAcol - lowerAcol + 1, 1, B.ColNumber()),
+      Q(1, upperArow - lowerArow + 1, 1, upperAcol - lowerAcol + 1) {
     mylowerArow = lowerArow;
     myupperArow = upperArow;
     mylowerAcol = lowerAcol;
@@ -87,9 +72,7 @@ math_Householder::math_Householder(const math_Matrix& A, const math_Matrix& B,
     Perform(A, B, EPS);
 }
 
-
-void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B,
-    const Standard_Real EPS) {
+void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B, const Standard_Real EPS) {
 
     Standard_Integer i, j, k, n, l, m;
     Standard_Real scale, f, g, h = 0., alfaii;
@@ -117,20 +100,20 @@ void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B,
         h = scale = 0.0;
         for (k = i; k <= l; k++) {
             qki = Q(k, i);
-            h += qki * qki;                           // = ||a||*||a||     = EUAI
+            h += qki * qki; // = ||a||*||a||     = EUAI
         }
-        f = Q(i, i);                               // = a1              = AII
+        f = Q(i, i); // = a1              = AII
         g = f < 1.e-15 ? Sqrt(h) : -Sqrt(h);
         if (fabs(g) <= EPS) {
             Done = Standard_False;
             return;
         }
-        h -= f * g;                                 // = (v*v)/2         = C1
-        alfaii = g - f;                             // = v               = ALFAII
+        h -= f * g;     // = (v*v)/2         = C1
+        alfaii = g - f; // = v               = ALFAII
         for (j = i + 1; j <= n; j++) {
             scale = 0.0;
             for (k = i; k <= l; k++) {
-                scale += Q(k, i) * Q(k, j);                //                   = SCAL
+                scale += Q(k, i) * Q(k, j); //                   = SCAL
             }
             cj = (g * Q(i, j) - scale) / h;
             Q(i, j) = Q(i, j) - alfaii * cj;
@@ -155,7 +138,6 @@ void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B,
         Q(i, i) = g;
     }
 
-
     // Remontee:
     for (j = 1; j <= m; j++) {
         Sol(n, j) = B2(n, j) / Q(n, n);
@@ -170,17 +152,12 @@ void math_Householder::Perform(const math_Matrix& A, const math_Matrix& B,
     Done = Standard_True;
 }
 
-
-
-
 void math_Householder::Dump(Standard_OStream& o) const {
 
     o << "math_Householder ";
     if (Done) {
         o << " Status = Done \n";
-    }
-    else {
+    } else {
         o << "Status = not Done \n";
     }
 }
-

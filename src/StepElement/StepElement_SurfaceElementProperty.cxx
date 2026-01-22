@@ -20,89 +20,80 @@
 #include <StepElement_SurfaceSectionField.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceElementProperty,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceElementProperty, Standard_Transient)
 
 //=======================================================================
-//function : StepElement_SurfaceElementProperty
-//purpose  : 
+// function : StepElement_SurfaceElementProperty
+// purpose  :
 //=======================================================================
-StepElement_SurfaceElementProperty::StepElement_SurfaceElementProperty ()
-{
+StepElement_SurfaceElementProperty::StepElement_SurfaceElementProperty() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepElement_SurfaceElementProperty::Init(const Handle(TCollection_HAsciiString) & aPropertyId,
+                                              const Handle(TCollection_HAsciiString) & aDescription,
+                                              const Handle(StepElement_SurfaceSectionField) & aSection) {
+
+    thePropertyId = aPropertyId;
+
+    theDescription = aDescription;
+
+    theSection = aSection;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : PropertyId
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceElementProperty::Init (const Handle(TCollection_HAsciiString) &aPropertyId,
-                                               const Handle(TCollection_HAsciiString) &aDescription,
-                                               const Handle(StepElement_SurfaceSectionField) &aSection)
-{
-
-  thePropertyId = aPropertyId;
-
-  theDescription = aDescription;
-
-  theSection = aSection;
+Handle(TCollection_HAsciiString) StepElement_SurfaceElementProperty::PropertyId() const {
+    return thePropertyId;
 }
 
 //=======================================================================
-//function : PropertyId
-//purpose  : 
+// function : SetPropertyId
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepElement_SurfaceElementProperty::PropertyId () const
-{
-  return thePropertyId;
+void StepElement_SurfaceElementProperty::SetPropertyId(const Handle(TCollection_HAsciiString) & aPropertyId) {
+    thePropertyId = aPropertyId;
 }
 
 //=======================================================================
-//function : SetPropertyId
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceElementProperty::SetPropertyId (const Handle(TCollection_HAsciiString) &aPropertyId)
-{
-  thePropertyId = aPropertyId;
+Handle(TCollection_HAsciiString) StepElement_SurfaceElementProperty::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepElement_SurfaceElementProperty::Description () const
-{
-  return theDescription;
+void StepElement_SurfaceElementProperty::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : Section
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceElementProperty::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(StepElement_SurfaceSectionField) StepElement_SurfaceElementProperty::Section() const {
+    return theSection;
 }
 
 //=======================================================================
-//function : Section
-//purpose  : 
+// function : SetSection
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_SurfaceSectionField) StepElement_SurfaceElementProperty::Section () const
-{
-  return theSection;
-}
-
-//=======================================================================
-//function : SetSection
-//purpose  : 
-//=======================================================================
-
-void StepElement_SurfaceElementProperty::SetSection (const Handle(StepElement_SurfaceSectionField) &aSection)
-{
-  theSection = aSection;
+void StepElement_SurfaceElementProperty::SetSection(const Handle(StepElement_SurfaceSectionField) & aSection) {
+    theSection = aSection;
 }

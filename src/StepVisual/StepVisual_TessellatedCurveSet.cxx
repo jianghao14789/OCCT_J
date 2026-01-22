@@ -11,32 +11,26 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_TessellatedCurveSet.hxx>
 #include <StepVisual_TessellatedItem.hxx>
 
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_TessellatedCurveSet, StepVisual_TessellatedItem)
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_TessellatedCurveSet,StepVisual_TessellatedItem)
+StepVisual_TessellatedCurveSet::StepVisual_TessellatedCurveSet() {}
 
-StepVisual_TessellatedCurveSet::StepVisual_TessellatedCurveSet ()  {}
-
-void StepVisual_TessellatedCurveSet::Init(const Handle(TCollection_HAsciiString)& theName,
-  const Handle(StepVisual_CoordinatesList)& theCoordList,
-  const NCollection_Handle<StepVisual_VectorOfHSequenceOfInteger>& theCurves)
-{
-  StepRepr_RepresentationItem::Init(theName);
-  myCoordList = theCoordList;
-  myCurves = theCurves;
+void StepVisual_TessellatedCurveSet::Init(const Handle(TCollection_HAsciiString) & theName,
+                                          const Handle(StepVisual_CoordinatesList) & theCoordList,
+                                          const NCollection_Handle<StepVisual_VectorOfHSequenceOfInteger>& theCurves) {
+    StepRepr_RepresentationItem::Init(theName);
+    myCoordList = theCoordList;
+    myCurves = theCurves;
 }
 
-
-NCollection_Handle<StepVisual_VectorOfHSequenceOfInteger> StepVisual_TessellatedCurveSet::Curves() const
-{
-  return myCurves;
+NCollection_Handle<StepVisual_VectorOfHSequenceOfInteger> StepVisual_TessellatedCurveSet::Curves() const {
+    return myCurves;
 }
 
-Handle(StepVisual_CoordinatesList) StepVisual_TessellatedCurveSet::CoordList() const
-{
-  return myCoordList;
+Handle(StepVisual_CoordinatesList) StepVisual_TessellatedCurveSet::CoordList() const {
+    return myCoordList;
 }

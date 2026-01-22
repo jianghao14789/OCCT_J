@@ -31,18 +31,14 @@ class StdFail_NotDone;
 class Standard_DimensionError;
 class math_Matrix;
 
-
 //! This class implements the least square solution of a set of
 //! n linear equations of m unknowns (n >= m) using the gauss LU
 //! decomposition algorithm.
 //! This algorithm is more likely subject to numerical instability
 //! than math_SVD.
-class math_GaussLeastSquare
-{
+class math_GaussLeastSquare {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Given an input n X m matrix A with n >= m this constructor
     //! performs the LU decomposition with partial pivoting
@@ -71,34 +67,17 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
-
     Standard_Boolean Singular;
     math_Matrix LU;
     math_Matrix A2;
     math_IntegerVector Index;
     Standard_Real D;
 
-
 private:
-
-
-
     Standard_Boolean Done;
-
-
 };
 
-
 #include <math_GaussLeastSquare.lxx>
-
-
-
-
 
 #endif // _math_GaussLeastSquare_HeaderFile

@@ -17,77 +17,57 @@
 #include <StepData_EnumTool.hxx>
 #include <TCollection_AsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_SimpleDatumReferenceModifierMember,StepData_SelectInt)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_SimpleDatumReferenceModifierMember, StepData_SelectInt)
 
-static StepData_EnumTool tool
-  (".ANY_CROSS_SECTION.",
-   ".ANY_LONGITUDINAL_SECTION.",
-   ".BASIC.",
-   ".CONTACTING_FEATURE.",
-   ".DEGREE_OF_FREEDOM_CONSTRAINT_U.",
-   ".DEGREE_OF_FREEDOM_CONSTRAINT_V.",
-   ".DEGREE_OF_FREEDOM_CONSTRAINT_W.",
-   ".DEGREE_OF_FREEDOM_CONSTRAINT_X.",
-   ".DEGREE_OF_FREEDOM_CONSTRAINT_Y.",
-   ".DEGREE_OF_FREEDOM_CONSTRAINT_Z.",
-   ".DISTANCE_VARIABLE.",
-   ".FREE_STATE.",
-   ".LEAST_MATERIAL_REQUIREMENT.",
-   ".LINE.",
-   ".MAJOR_DIAMETER.",
-   ".MAXIMUM_MATERIAL_REQUIREMENT.",
-   ".MINOR_DIAMETER.",
-   ".ORIENTATION.",
-   ".PITCH_DIAMETER.",
-   ".PLANE.",
-   ".POINT.",
-   ".TRANSLATION.");
+static StepData_EnumTool tool(".ANY_CROSS_SECTION.", ".ANY_LONGITUDINAL_SECTION.", ".BASIC.", ".CONTACTING_FEATURE.",
+                              ".DEGREE_OF_FREEDOM_CONSTRAINT_U.", ".DEGREE_OF_FREEDOM_CONSTRAINT_V.",
+                              ".DEGREE_OF_FREEDOM_CONSTRAINT_W.", ".DEGREE_OF_FREEDOM_CONSTRAINT_X.",
+                              ".DEGREE_OF_FREEDOM_CONSTRAINT_Y.", ".DEGREE_OF_FREEDOM_CONSTRAINT_Z.",
+                              ".DISTANCE_VARIABLE.", ".FREE_STATE.", ".LEAST_MATERIAL_REQUIREMENT.", ".LINE.",
+                              ".MAJOR_DIAMETER.", ".MAXIMUM_MATERIAL_REQUIREMENT.", ".MINOR_DIAMETER.", ".ORIENTATION.",
+                              ".PITCH_DIAMETER.", ".PLANE.", ".POINT.", ".TRANSLATION.");
 
 //=======================================================================
-//function : StepDimTol_SimpleDatumReferenceModifierMember
-//purpose  : 
+// function : StepDimTol_SimpleDatumReferenceModifierMember
+// purpose  :
 //=======================================================================
 
-StepDimTol_SimpleDatumReferenceModifierMember::StepDimTol_SimpleDatumReferenceModifierMember ()   {  }
+StepDimTol_SimpleDatumReferenceModifierMember::StepDimTol_SimpleDatumReferenceModifierMember() {}
 
 //=======================================================================
-//function : EnumText
-//purpose  : 
+// function : EnumText
+// purpose  :
 //=======================================================================
 
-Standard_CString  StepDimTol_SimpleDatumReferenceModifierMember::EnumText () const
-  {  return tool.Text(Int()).ToCString();  }
-
-//=======================================================================
-//function : SetEnumText
-//purpose  : 
-//=======================================================================
-
-void  StepDimTol_SimpleDatumReferenceModifierMember::SetEnumText (const Standard_Integer /*theValue*/, 
-                                                                  const Standard_CString theText)
-{
-    Standard_Integer aVal = tool.Value (theText);
-    if (aVal >= 0) SetInt (aVal);
+Standard_CString StepDimTol_SimpleDatumReferenceModifierMember::EnumText() const {
+    return tool.Text(Int()).ToCString();
 }
 
 //=======================================================================
-//function : SetValue
-//purpose  : 
+// function : SetEnumText
+// purpose  :
 //=======================================================================
 
-void  StepDimTol_SimpleDatumReferenceModifierMember::SetValue (const StepDimTol_SimpleDatumReferenceModifier theValue)
-{
-    SetInt ( Standard_Integer (theValue) );  
+void StepDimTol_SimpleDatumReferenceModifierMember::SetEnumText(const Standard_Integer /*theValue*/,
+                                                                const Standard_CString theText) {
+    Standard_Integer aVal = tool.Value(theText);
+    if (aVal >= 0) SetInt(aVal);
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : SetValue
+// purpose  :
 //=======================================================================
 
-StepDimTol_SimpleDatumReferenceModifier StepDimTol_SimpleDatumReferenceModifierMember::Value () const
-{
-    return StepDimTol_SimpleDatumReferenceModifier (Int());  
+void StepDimTol_SimpleDatumReferenceModifierMember::SetValue(const StepDimTol_SimpleDatumReferenceModifier theValue) {
+    SetInt(Standard_Integer(theValue));
 }
 
+//=======================================================================
+// function : Value
+// purpose  :
+//=======================================================================
 
+StepDimTol_SimpleDatumReferenceModifier StepDimTol_SimpleDatumReferenceModifierMember::Value() const {
+    return StepDimTol_SimpleDatumReferenceModifier(Int());
+}

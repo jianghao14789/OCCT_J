@@ -33,18 +33,14 @@ class Geom2d_Geometry;
 class gp_Trsf2d;
 class gp_Vec2d;
 
-
 class Bisector_BisecCC;
 DEFINE_STANDARD_HANDLE(Bisector_BisecCC, Bisector_Curve)
 
 //! Construct the bisector between two curves.
 //! The curves can intersect only in their extremities.
-class Bisector_BisecCC : public Bisector_Curve
-{
+class Bisector_BisecCC : public Bisector_Curve {
 
 public:
-
-
     Standard_EXPORT Bisector_BisecCC();
 
     //! Constructs  the bisector  between the  curves <Cu1>
@@ -58,7 +54,9 @@ public:
     //! <DistMax> is used to trim the bisector.The distance
     //! between the points of the bisector and <Cu> is smaller
     //! than <DistMax>.
-    Standard_EXPORT Bisector_BisecCC(const Handle(Geom2d_Curve)& Cu1, const Handle(Geom2d_Curve)& Cu2, const Standard_Real Side1, const Standard_Real Side2, const gp_Pnt2d& Origin, const Standard_Real DistMax = 500);
+    Standard_EXPORT Bisector_BisecCC(const Handle(Geom2d_Curve) & Cu1, const Handle(Geom2d_Curve) & Cu2,
+                                     const Standard_Real Side1, const Standard_Real Side2, const gp_Pnt2d& Origin,
+                                     const Standard_Real DistMax = 500);
 
     //! Computes the bisector  between the  curves <Cu1>
     //! and <Cu2>.
@@ -72,7 +70,9 @@ public:
     //! <DistMax> is used to trim the bisector.The distance
     //! between the points of the bisector and <Cu> is smaller
     //! than <DistMax>.
-    Standard_EXPORT void Perform(const Handle(Geom2d_Curve)& Cu1, const Handle(Geom2d_Curve)& Cu2, const Standard_Real Side1, const Standard_Real Side2, const gp_Pnt2d& Origin, const Standard_Real DistMax = 500);
+    Standard_EXPORT void Perform(const Handle(Geom2d_Curve) & Cu1, const Handle(Geom2d_Curve) & Cu2,
+                                 const Standard_Real Side1, const Standard_Real Side2, const gp_Pnt2d& Origin,
+                                 const Standard_Real DistMax = 500);
 
     Standard_EXPORT Standard_Boolean IsExtendAtStart() const Standard_OVERRIDE;
 
@@ -92,7 +92,6 @@ public:
     Standard_EXPORT Handle(Bisector_BisecCC) ChangeGuide() const;
 
     Standard_EXPORT Handle(Geom2d_Geometry) Copy() const Standard_OVERRIDE;
-
 
     //! Transformation of a geometric object. This tansformation
     //! can be a translation, a rotation, a symmetry, a scaling
@@ -130,14 +129,16 @@ public:
     //! the two curves I separate.
     //! Computes the parameters on each curve corresponding
     //! of the projection of the current point.
-    Standard_EXPORT gp_Pnt2d ValueAndDist(const Standard_Real U, Standard_Real& U1, Standard_Real& U2, Standard_Real& Distance) const;
+    Standard_EXPORT gp_Pnt2d ValueAndDist(const Standard_Real U, Standard_Real& U1, Standard_Real& U2,
+                                          Standard_Real& Distance) const;
 
     //! Returns the point of parameter U.
     //! Computes the distance between the current point and
     //! the two curves I separate.
     //! Computes the parameters on each curve corresponding
     //! of the projection of the current point.
-    Standard_EXPORT gp_Pnt2d ValueByInt(const Standard_Real U, Standard_Real& U1, Standard_Real& U2, Standard_Real& Distance) const;
+    Standard_EXPORT gp_Pnt2d ValueByInt(const Standard_Real U, Standard_Real& U1, Standard_Real& U2,
+                                        Standard_Real& Distance) const;
 
     Standard_EXPORT void D0(const Standard_Real U, gp_Pnt2d& P) const Standard_OVERRIDE;
 
@@ -145,7 +146,8 @@ public:
 
     Standard_EXPORT void D2(const Standard_Real U, gp_Pnt2d& P, gp_Vec2d& V1, gp_Vec2d& V2) const Standard_OVERRIDE;
 
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt2d& P, gp_Vec2d& V1, gp_Vec2d& V2, gp_Vec2d& V3) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt2d& P, gp_Vec2d& V1, gp_Vec2d& V2,
+                            gp_Vec2d& V3) const Standard_OVERRIDE;
 
     Standard_EXPORT gp_Vec2d DN(const Standard_Real U, const Standard_Integer N) const Standard_OVERRIDE;
 
@@ -166,30 +168,23 @@ public:
 
     Standard_EXPORT void Dump(const Standard_Integer Deep = 0, const Standard_Integer Offset = 0) const;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Bisector_BisecCC, Bisector_Curve)
 
 protected:
-
-
-
-
 private:
-
-
-    Standard_EXPORT void Values(const Standard_Real U, const Standard_Integer N, gp_Pnt2d& P, gp_Vec2d& V1, gp_Vec2d& V2, gp_Vec2d& V3) const;
+    Standard_EXPORT void Values(const Standard_Real U, const Standard_Integer N, gp_Pnt2d& P, gp_Vec2d& V1,
+                                gp_Vec2d& V2, gp_Vec2d& V3) const;
 
     Standard_EXPORT void SupLastParameter();
 
-    Standard_EXPORT gp_Pnt2d Extension(const Standard_Real U, Standard_Real& U1, Standard_Real& U2, Standard_Real& Dist, gp_Vec2d& T1) const;
+    Standard_EXPORT gp_Pnt2d Extension(const Standard_Real U, Standard_Real& U1, Standard_Real& U2, Standard_Real& Dist,
+                                       gp_Vec2d& T1) const;
 
     Standard_EXPORT Standard_Real SearchBound(const Standard_Real U1, const Standard_Real U2) const;
 
     Standard_EXPORT void ComputePointEnd();
 
-    Standard_EXPORT void Curve(const Standard_Integer Index, const Handle(Geom2d_Curve)& C);
+    Standard_EXPORT void Curve(const Standard_Integer Index, const Handle(Geom2d_Curve) & C);
 
     Standard_EXPORT void Sign(const Standard_Integer Index, const Standard_Real Sign);
 
@@ -234,14 +229,6 @@ private:
     Standard_Boolean extensionEnd;
     gp_Pnt2d pointStart;
     gp_Pnt2d pointEnd;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Bisector_BisecCC_HeaderFile

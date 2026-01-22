@@ -28,48 +28,29 @@ class StepBasic_CertificationAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CertificationAssignment
-class RWStepBasic_RWCertificationAssignment 
-{
+class RWStepBasic_RWCertificationAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWCertificationAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWCertificationAssignment();
-  
-  //! Reads CertificationAssignment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_CertificationAssignment)& ent) const;
-  
-  //! Writes CertificationAssignment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_CertificationAssignment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_CertificationAssignment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CertificationAssignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_CertificationAssignment) & ent) const;
 
+    //! Writes CertificationAssignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_CertificationAssignment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_CertificationAssignment) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWCertificationAssignment_HeaderFile

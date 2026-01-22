@@ -24,7 +24,6 @@
 #include <TDF_DeltaOnModification.hxx>
 class TNaming_NamedShape;
 
-
 class TNaming_DeltaOnModification;
 DEFINE_STANDARD_HANDLE(TNaming_DeltaOnModification, TDF_DeltaOnModification)
 
@@ -33,41 +32,21 @@ DEFINE_STANDARD_HANDLE(TNaming_DeltaOnModification, TDF_DeltaOnModification)
 //!
 //! Applying this AttributeDelta means GOING BACK to
 //! the attribute previously registered state.
-class TNaming_DeltaOnModification : public TDF_DeltaOnModification
-{
+class TNaming_DeltaOnModification : public TDF_DeltaOnModification {
 
 public:
+    //! Initializes a TDF_DeltaOnModification.
+    Standard_EXPORT TNaming_DeltaOnModification(const Handle(TNaming_NamedShape) & NS);
 
-  
-  //! Initializes a TDF_DeltaOnModification.
-  Standard_EXPORT TNaming_DeltaOnModification(const Handle(TNaming_NamedShape)& NS);
-  
-  //! Applies the delta to the attribute.
-  Standard_EXPORT virtual void Apply() Standard_OVERRIDE;
+    //! Applies the delta to the attribute.
+    Standard_EXPORT virtual void Apply() Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(TNaming_DeltaOnModification,TDF_DeltaOnModification)
+    DEFINE_STANDARD_RTTIEXT(TNaming_DeltaOnModification, TDF_DeltaOnModification)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TopTools_HArray1OfShape) myOld;
-  Handle(TopTools_HArray1OfShape) myNew;
-
-
+    Handle(TopTools_HArray1OfShape) myOld;
+    Handle(TopTools_HArray1OfShape) myNew;
 };
-
-
-
-
-
-
 
 #endif // _TNaming_DeltaOnModification_HeaderFile

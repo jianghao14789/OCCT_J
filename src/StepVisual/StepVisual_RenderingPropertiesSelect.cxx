@@ -19,43 +19,39 @@
 #include <StepVisual_SurfaceStyleTransparent.hxx>
 
 //=======================================================================
-//function : StepVisual_RenderingPropertiesSelect
-//purpose  :
+// function : StepVisual_RenderingPropertiesSelect
+// purpose  :
 //=======================================================================
 
-StepVisual_RenderingPropertiesSelect::StepVisual_RenderingPropertiesSelect ()
-{
+StepVisual_RenderingPropertiesSelect::StepVisual_RenderingPropertiesSelect() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepVisual_RenderingPropertiesSelect::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepVisual_SurfaceStyleReflectanceAmbient))) return 1;
+    if (ent->IsKind(STANDARD_TYPE(StepVisual_SurfaceStyleTransparent))) return 2;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  :
+// function : SurfaceStyleReflectanceAmbient
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepVisual_RenderingPropertiesSelect::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepVisual_SurfaceStyleReflectanceAmbient))) return 1;
-  if (ent->IsKind(STANDARD_TYPE(StepVisual_SurfaceStyleTransparent))) return 2;
-  return 0;
+Handle(StepVisual_SurfaceStyleReflectanceAmbient)
+    StepVisual_RenderingPropertiesSelect::SurfaceStyleReflectanceAmbient() const {
+    return Handle(StepVisual_SurfaceStyleReflectanceAmbient)::DownCast(Value());
 }
 
 //=======================================================================
-//function : SurfaceStyleReflectanceAmbient
-//purpose  :
+// function : SurfaceStyleTransparent
+// purpose  :
 //=======================================================================
 
-Handle(StepVisual_SurfaceStyleReflectanceAmbient) StepVisual_RenderingPropertiesSelect::SurfaceStyleReflectanceAmbient () const
-{
-  return Handle(StepVisual_SurfaceStyleReflectanceAmbient)::DownCast(Value());
-}
-
-//=======================================================================
-//function : SurfaceStyleTransparent
-//purpose  :
-//=======================================================================
-
-Handle(StepVisual_SurfaceStyleTransparent) StepVisual_RenderingPropertiesSelect::SurfaceStyleTransparent () const
-{
-  return Handle(StepVisual_SurfaceStyleTransparent)::DownCast(Value());
+Handle(StepVisual_SurfaceStyleTransparent) StepVisual_RenderingPropertiesSelect::SurfaceStyleTransparent() const {
+    return Handle(StepVisual_SurfaceStyleTransparent)::DownCast(Value());
 }

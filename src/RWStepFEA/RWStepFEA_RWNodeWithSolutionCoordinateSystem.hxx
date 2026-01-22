@@ -27,48 +27,29 @@ class StepFEA_NodeWithSolutionCoordinateSystem;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for NodeWithSolutionCoordinateSystem
-class RWStepFEA_RWNodeWithSolutionCoordinateSystem 
-{
+class RWStepFEA_RWNodeWithSolutionCoordinateSystem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWNodeWithSolutionCoordinateSystem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWNodeWithSolutionCoordinateSystem();
-  
-  //! Reads NodeWithSolutionCoordinateSystem
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_NodeWithSolutionCoordinateSystem)& ent) const;
-  
-  //! Writes NodeWithSolutionCoordinateSystem
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_NodeWithSolutionCoordinateSystem)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_NodeWithSolutionCoordinateSystem)& ent, Interface_EntityIterator& iter) const;
+    //! Reads NodeWithSolutionCoordinateSystem
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_NodeWithSolutionCoordinateSystem) & ent) const;
 
+    //! Writes NodeWithSolutionCoordinateSystem
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_NodeWithSolutionCoordinateSystem) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_NodeWithSolutionCoordinateSystem) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWNodeWithSolutionCoordinateSystem_HeaderFile

@@ -16,6 +16,6 @@
 #include <Standard_Type.hxx>
 #include <StepVisual_TessellatedAnnotationOccurrence.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_TessellatedAnnotationOccurrence,StepVisual_StyledItem);
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_TessellatedAnnotationOccurrence, StepVisual_StyledItem);
 
-StepVisual_TessellatedAnnotationOccurrence::StepVisual_TessellatedAnnotationOccurrence ()  {}
+StepVisual_TessellatedAnnotationOccurrence::StepVisual_TessellatedAnnotationOccurrence() {}

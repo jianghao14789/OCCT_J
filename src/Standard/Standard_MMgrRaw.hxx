@@ -19,25 +19,23 @@
 #include <Standard_MMgrRoot.hxx>
 
 /**
-* Implementation of raw OCC memory manager which uses standard C
-* functions: malloc (or calloc), free and realloc
-* without any optimization
-*/
+ * Implementation of raw OCC memory manager which uses standard C
+ * functions: malloc (or calloc), free and realloc
+ * without any optimization
+ */
 
-class Standard_MMgrRaw : public Standard_MMgrRoot
-{
+class Standard_MMgrRaw : public Standard_MMgrRoot {
 public:
     //! Constructor; if aClear is True, the memory will be nullified
     //! upon allocation.
     Standard_EXPORT Standard_MMgrRaw(const Standard_Boolean aClear = Standard_False);
 
-    //! Allocate aSize bytes 
+    //! Allocate aSize bytes
     Standard_EXPORT virtual Standard_Address Allocate(const Standard_Size aSize);
 
-    //! Reallocate aPtr to the size aSize. 
+    //! Reallocate aPtr to the size aSize.
     //! The new pointer is returned.
-    Standard_EXPORT virtual Standard_Address Reallocate(Standard_Address thePtr,
-        const Standard_Size theSize);
+    Standard_EXPORT virtual Standard_Address Reallocate(Standard_Address thePtr, const Standard_Size theSize);
 
     //! Free allocated memory. The pointer is nullified.
     Standard_EXPORT virtual void Free(Standard_Address thePtr);

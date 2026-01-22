@@ -43,10 +43,10 @@ public:
     //! or IsConverged() returns True for 2 successives Iterations.
     //! Warning: This constructor does not perform computation.
     Standard_EXPORT math_NewtonMinimum(const math_MultipleVarFunctionWithHessian& theFunction,
-        const Standard_Real theTolerance = Precision::Confusion(),
-        const Standard_Integer theNbIterations = 40,
-        const Standard_Real theConvexity = 1.0e-6,
-        const Standard_Boolean theWithSingularity = Standard_True);
+                                       const Standard_Real theTolerance = Precision::Confusion(),
+                                       const Standard_Integer theNbIterations = 40,
+                                       const Standard_Real theConvexity = 1.0e-6,
+                                       const Standard_Boolean theWithSingularity = Standard_True);
 
     //! Search the solution.
     Standard_EXPORT void Perform(math_MultipleVarFunctionWithHessian& theFunction, const math_Vector& theStartingPoint);
@@ -108,7 +108,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
     math_Status TheStatus;
     math_Vector TheLocation;
     math_Vector TheGradient;
@@ -127,10 +126,8 @@ protected:
     math_Vector myRight;
 
 private:
-
     Standard_Boolean Done;
     Standard_Integer Itermax;
-
 };
 
 #include <math_NewtonMinimum.lxx>

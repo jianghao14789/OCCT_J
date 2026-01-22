@@ -27,7 +27,6 @@
 #include <Standard_Real.hxx>
 class Standard_OutOfRange;
 
-
 class Law_Function;
 DEFINE_STANDARD_HANDLE(Law_Function, Standard_Transient)
 
@@ -35,7 +34,6 @@ DEFINE_STANDARD_HANDLE(Law_Function, Standard_Transient)
 class Law_Function : public Standard_Transient {
 
 public:
-
     Standard_EXPORT virtual GeomAbs_Shape Continuity() const = 0;
 
     //! Returns  the number  of  intervals for  continuity
@@ -64,7 +62,8 @@ public:
     //! It is usfule to determines the derivatives
     //! in these values <First> and <Last> if
     //! the Law is not Cn.
-    Standard_EXPORT virtual Handle(Law_Function) Trim(const Standard_Real PFirst, const Standard_Real PLast, const Standard_Real Tol) const = 0;
+    Standard_EXPORT virtual Handle(Law_Function)
+        Trim(const Standard_Real PFirst, const Standard_Real PLast, const Standard_Real Tol) const = 0;
 
     //! Returns the parametric bounds of the function.
     Standard_EXPORT virtual void Bounds(Standard_Real& PFirst, Standard_Real& PLast) = 0;
@@ -72,9 +71,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(Law_Function, Standard_Transient)
 
 protected:
-
 private:
-
 };
 
 #endif // _Law_Function_HeaderFile

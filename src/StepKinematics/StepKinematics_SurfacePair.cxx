@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,93 +19,80 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_SurfacePair, StepKinematics_HighOrderKinematicPair)
 
 //=======================================================================
-//function : StepKinematics_SurfacePair
-//purpose  :
+// function : StepKinematics_SurfacePair
+// purpose  :
 //=======================================================================
-StepKinematics_SurfacePair::StepKinematics_SurfacePair ()
-{
+StepKinematics_SurfacePair::StepKinematics_SurfacePair() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_SurfacePair::Init(
+    const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+    const Handle(TCollection_HAsciiString) & theItemDefinedTransformation_Name,
+    const Standard_Boolean hasItemDefinedTransformation_Description,
+    const Handle(TCollection_HAsciiString) & theItemDefinedTransformation_Description,
+    const Handle(StepRepr_RepresentationItem) & theItemDefinedTransformation_TransformItem1,
+    const Handle(StepRepr_RepresentationItem) & theItemDefinedTransformation_TransformItem2,
+    const Handle(StepKinematics_KinematicJoint) & theKinematicPair_Joint, const Handle(StepGeom_Surface) & theSurface1,
+    const Handle(StepGeom_Surface) & theSurface2, const Standard_Boolean theOrientation) {
+    StepKinematics_HighOrderKinematicPair::Init(
+        theRepresentationItem_Name, theItemDefinedTransformation_Name, hasItemDefinedTransformation_Description,
+        theItemDefinedTransformation_Description, theItemDefinedTransformation_TransformItem1,
+        theItemDefinedTransformation_TransformItem2, theKinematicPair_Joint);
+
+    mySurface1 = theSurface1;
+
+    mySurface2 = theSurface2;
+
+    myOrientation = theOrientation;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : Surface1
+// purpose  :
 //=======================================================================
-void StepKinematics_SurfacePair::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                       const Handle(TCollection_HAsciiString)& theItemDefinedTransformation_Name,
-                                       const Standard_Boolean hasItemDefinedTransformation_Description,
-                                       const Handle(TCollection_HAsciiString)& theItemDefinedTransformation_Description,
-                                       const Handle(StepRepr_RepresentationItem)& theItemDefinedTransformation_TransformItem1,
-                                       const Handle(StepRepr_RepresentationItem)& theItemDefinedTransformation_TransformItem2,
-                                       const Handle(StepKinematics_KinematicJoint)& theKinematicPair_Joint,
-                                       const Handle(StepGeom_Surface)& theSurface1,
-                                       const Handle(StepGeom_Surface)& theSurface2,
-                                       const Standard_Boolean theOrientation)
-{
-  StepKinematics_HighOrderKinematicPair::Init(theRepresentationItem_Name,
-                                              theItemDefinedTransformation_Name,
-                                              hasItemDefinedTransformation_Description,
-                                              theItemDefinedTransformation_Description,
-                                              theItemDefinedTransformation_TransformItem1,
-                                              theItemDefinedTransformation_TransformItem2,
-                                              theKinematicPair_Joint);
-
-  mySurface1 = theSurface1;
-
-  mySurface2 = theSurface2;
-
-  myOrientation = theOrientation;
+Handle(StepGeom_Surface) StepKinematics_SurfacePair::Surface1() const {
+    return mySurface1;
 }
 
 //=======================================================================
-//function : Surface1
-//purpose  :
+// function : SetSurface1
+// purpose  :
 //=======================================================================
-Handle(StepGeom_Surface) StepKinematics_SurfacePair::Surface1 () const
-{
-  return mySurface1;
+void StepKinematics_SurfacePair::SetSurface1(const Handle(StepGeom_Surface) & theSurface1) {
+    mySurface1 = theSurface1;
 }
 
 //=======================================================================
-//function : SetSurface1
-//purpose  :
+// function : Surface2
+// purpose  :
 //=======================================================================
-void StepKinematics_SurfacePair::SetSurface1 (const Handle(StepGeom_Surface)& theSurface1)
-{
-  mySurface1 = theSurface1;
+Handle(StepGeom_Surface) StepKinematics_SurfacePair::Surface2() const {
+    return mySurface2;
 }
 
 //=======================================================================
-//function : Surface2
-//purpose  :
+// function : SetSurface2
+// purpose  :
 //=======================================================================
-Handle(StepGeom_Surface) StepKinematics_SurfacePair::Surface2 () const
-{
-  return mySurface2;
+void StepKinematics_SurfacePair::SetSurface2(const Handle(StepGeom_Surface) & theSurface2) {
+    mySurface2 = theSurface2;
 }
 
 //=======================================================================
-//function : SetSurface2
-//purpose  :
+// function : Orientation
+// purpose  :
 //=======================================================================
-void StepKinematics_SurfacePair::SetSurface2 (const Handle(StepGeom_Surface)& theSurface2)
-{
-  mySurface2 = theSurface2;
+Standard_Boolean StepKinematics_SurfacePair::Orientation() const {
+    return myOrientation;
 }
 
 //=======================================================================
-//function : Orientation
-//purpose  :
+// function : SetOrientation
+// purpose  :
 //=======================================================================
-Standard_Boolean StepKinematics_SurfacePair::Orientation () const
-{
-  return myOrientation;
-}
-
-//=======================================================================
-//function : SetOrientation
-//purpose  :
-//=======================================================================
-void StepKinematics_SurfacePair::SetOrientation (const Standard_Boolean theOrientation)
-{
-  myOrientation = theOrientation;
+void StepKinematics_SurfacePair::SetOrientation(const Standard_Boolean theOrientation) {
+    myOrientation = theOrientation;
 }

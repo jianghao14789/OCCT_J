@@ -17,12 +17,6 @@
 #ifndef _TopOpeBRepDS_Config_HeaderFile
 #define _TopOpeBRepDS_Config_HeaderFile
 
-
-enum TopOpeBRepDS_Config
-{
-TopOpeBRepDS_UNSHGEOMETRY,
-TopOpeBRepDS_SAMEORIENTED,
-TopOpeBRepDS_DIFFORIENTED
-};
+enum TopOpeBRepDS_Config { TopOpeBRepDS_UNSHGEOMETRY, TopOpeBRepDS_SAMEORIENTED, TopOpeBRepDS_DIFFORIENTED };
 
 #endif // _TopOpeBRepDS_Config_HeaderFile

@@ -18,65 +18,43 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(StdStorage_Root, Standard_Transient)
 
-StdStorage_Root::StdStorage_Root()
-  : myRef(0) 
-{
-}
+StdStorage_Root::StdStorage_Root() : myRef(0) {}
 
-StdStorage_Root::StdStorage_Root(const TCollection_AsciiString&      theName,
-                                 const Handle(StdObjMgt_Persistent)& theObject)
-  : myName(theName)
-  , myType(theObject->PName())
-  , myObject(theObject)
-  , myRef(0)
-{
-}
+StdStorage_Root::StdStorage_Root(const TCollection_AsciiString& theName, const Handle(StdObjMgt_Persistent) & theObject)
+    : myName(theName), myType(theObject->PName()), myObject(theObject), myRef(0) {}
 
-StdStorage_Root::StdStorage_Root(const TCollection_AsciiString& theName,
-                                 const Standard_Integer         theRef,
+StdStorage_Root::StdStorage_Root(const TCollection_AsciiString& theName, const Standard_Integer theRef,
                                  const TCollection_AsciiString& theType)
-  : myName(theName)
-  , myType(theType)
-  , myRef(theRef)
-{
+    : myName(theName), myType(theType), myRef(theRef) {}
+
+void StdStorage_Root::SetName(const TCollection_AsciiString& theName) {
+    myName = theName;
 }
 
-void StdStorage_Root::SetName(const TCollection_AsciiString& theName)
-{
-  myName = theName;
+TCollection_AsciiString StdStorage_Root::Name() const {
+    return myName;
 }
 
-TCollection_AsciiString StdStorage_Root::Name() const
-{
-  return myName;
+void StdStorage_Root::SetObject(const Handle(StdObjMgt_Persistent) & anObject) {
+    myObject = anObject;
 }
 
-void StdStorage_Root::SetObject(const Handle(StdObjMgt_Persistent)& anObject)
-{
-  myObject = anObject;
+Handle(StdObjMgt_Persistent) StdStorage_Root::Object() const {
+    return myObject;
 }
 
-Handle(StdObjMgt_Persistent) StdStorage_Root::Object() const
-{
-  return myObject;
+TCollection_AsciiString StdStorage_Root::Type() const {
+    return myType;
 }
 
-TCollection_AsciiString StdStorage_Root::Type() const
-{
-  return myType;
+void StdStorage_Root::SetReference(const Standard_Integer aRef) {
+    myRef = aRef;
 }
 
-void StdStorage_Root::SetReference(const Standard_Integer aRef)
-{
-  myRef = aRef;
+Standard_Integer StdStorage_Root::Reference() const {
+    return myRef;
 }
 
-Standard_Integer StdStorage_Root::Reference() const
-{
-  return myRef;
-}
-
-void StdStorage_Root::SetType(const TCollection_AsciiString& aType)
-{
-  myType = aType;
+void StdStorage_Root::SetType(const TCollection_AsciiString& aType) {
+    myType = aType;
 }

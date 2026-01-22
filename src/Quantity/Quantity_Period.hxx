@@ -28,10 +28,8 @@ class Quantity_PeriodDefinitionError;
 //! Manages date intervals. For example, a Period object
 //! gives the interval between two dates.
 //! A period is expressed in seconds and microseconds.
-class Quantity_Period
-{
+class Quantity_Period {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates a Period
@@ -41,7 +39,9 @@ public:
     //! 0 <= ss
     //! 0 <= mis
     //! 0 <= mics
-    Standard_EXPORT Quantity_Period(const Standard_Integer dd, const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss, const Standard_Integer mis = 0, const Standard_Integer mics = 0);
+    Standard_EXPORT Quantity_Period(const Standard_Integer dd, const Standard_Integer hh, const Standard_Integer mn,
+                                    const Standard_Integer ss, const Standard_Integer mis = 0,
+                                    const Standard_Integer mics = 0);
 
     //! Creates a Period with a number of seconds and microseconds.
     //! Exceptions
@@ -61,7 +61,8 @@ public:
     //! Example of return values:
     //! 2 days, 15 hours, 0 minute , 0 second
     //! 0 millisecond and 0 microsecond
-    Standard_EXPORT void Values(Standard_Integer& dd, Standard_Integer& hh, Standard_Integer& mn, Standard_Integer& ss, Standard_Integer& mis, Standard_Integer& mics) const;
+    Standard_EXPORT void Values(Standard_Integer& dd, Standard_Integer& hh, Standard_Integer& mn, Standard_Integer& ss,
+                                Standard_Integer& mis, Standard_Integer& mics) const;
 
     //! Returns the number of seconds in Ss and the
     //! number of remainding microseconds in Mics of this period.
@@ -72,7 +73,9 @@ public:
     //! -   with dd days, hh hours, mn minutes, ss
     //! seconds, mis (defaulted to 0) milliseconds and
     //! mics (defaulted to 0) microseconds; or
-    Standard_EXPORT void SetValues(const Standard_Integer dd, const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss, const Standard_Integer mis = 0, const Standard_Integer mics = 0);
+    Standard_EXPORT void SetValues(const Standard_Integer dd, const Standard_Integer hh, const Standard_Integer mn,
+                                   const Standard_Integer ss, const Standard_Integer mis = 0,
+                                   const Standard_Integer mics = 0);
 
     //! Assigns to this period the time interval defined
     //! -   with Ss seconds and Mics (defaulted to 0) microseconds.
@@ -90,36 +93,31 @@ public:
 
     //! Subtracts one Period from another and returns the difference.
     Standard_EXPORT Quantity_Period Subtract(const Quantity_Period& anOther) const;
-    Quantity_Period operator - (const Quantity_Period& anOther) const
-    {
+    Quantity_Period operator-(const Quantity_Period& anOther) const {
         return Subtract(anOther);
     }
 
     //! Adds one Period to another one.
     Standard_EXPORT Quantity_Period Add(const Quantity_Period& anOther) const;
-    Quantity_Period operator + (const Quantity_Period& anOther) const
-    {
+    Quantity_Period operator+(const Quantity_Period& anOther) const {
         return Add(anOther);
     }
 
     //! Returns TRUE if both <me> and <other> are equal.
     Standard_EXPORT Standard_Boolean IsEqual(const Quantity_Period& anOther) const;
-    Standard_Boolean operator == (const Quantity_Period& anOther) const
-    {
+    Standard_Boolean operator==(const Quantity_Period& anOther) const {
         return IsEqual(anOther);
     }
 
     //! Returns TRUE if <me> is shorter than <other>.
     Standard_EXPORT Standard_Boolean IsShorter(const Quantity_Period& anOther) const;
-    Standard_Boolean operator < (const Quantity_Period& anOther) const
-    {
+    Standard_Boolean operator<(const Quantity_Period& anOther) const {
         return IsShorter(anOther);
     }
 
     //! Returns TRUE if <me> is longer then <other>.
     Standard_EXPORT Standard_Boolean IsLonger(const Quantity_Period& anOther) const;
-    Standard_Boolean operator > (const Quantity_Period& anOther) const
-    {
+    Standard_Boolean operator>(const Quantity_Period& anOther) const {
         return IsLonger(anOther);
     }
 
@@ -130,7 +128,9 @@ public:
     //! 0 <= ss
     //! 0 <= mis
     //! 0 <= mics
-    Standard_EXPORT static Standard_Boolean IsValid(const Standard_Integer dd, const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss, const Standard_Integer mis = 0, const Standard_Integer mics = 0);
+    Standard_EXPORT static Standard_Boolean IsValid(const Standard_Integer dd, const Standard_Integer hh,
+                                                    const Standard_Integer mn, const Standard_Integer ss,
+                                                    const Standard_Integer mis = 0, const Standard_Integer mics = 0);
 
     //! Checks the validity of a Period in form (ss,mic)
     //! With:      0 <= ss
@@ -138,10 +138,8 @@ public:
     Standard_EXPORT static Standard_Boolean IsValid(const Standard_Integer ss, const Standard_Integer mics = 0);
 
 private:
-
     Standard_Integer mySec;
     Standard_Integer myUSec;
-
 };
 
 #endif // _Quantity_Period_HeaderFile

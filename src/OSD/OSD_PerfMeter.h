@@ -22,52 +22,62 @@
  */
 #ifdef PERF_ENABLE_METERS
 
- /**
-  * @def PERF_START_METER(theMeterName)
-  * Forces meter MeterName to begin to count by remembering the current data of timer.
-  * Creates new meter if there is no such meter.
-  */
-#define PERF_START_METER(_m_name) { \
-  static int __iMeter = -1; \
-  if  (__iMeter >= 0)  perf_start_imeter (__iMeter); \
-  else      __iMeter = perf_start_meter (_m_name);   \
-}
+/**
+ * @def PERF_START_METER(theMeterName)
+ * Forces meter MeterName to begin to count by remembering the current data of timer.
+ * Creates new meter if there is no such meter.
+ */
+#define PERF_START_METER(_m_name)                                                                                      \
+    {                                                                                                                  \
+        static int __iMeter = -1;                                                                                      \
+        if (__iMeter >= 0)                                                                                             \
+            perf_start_imeter(__iMeter);                                                                               \
+        else                                                                                                           \
+            __iMeter = perf_start_meter(_m_name);                                                                      \
+    }
 
-  /**
-   * @def PERF_STOP_METER(theMeterName)
-   * Forces meter MeterName to stop and cumulate the time elapsed since the start.
-   */
-#define PERF_STOP_METER(_m_name) { \
-  static int __iMeter = -1; \
-  if  (__iMeter >= 0)  perf_stop_imeter (__iMeter); \
-  else      __iMeter = perf_stop_meter (_m_name); \
-}
+/**
+ * @def PERF_STOP_METER(theMeterName)
+ * Forces meter MeterName to stop and cumulate the time elapsed since the start.
+ */
+#define PERF_STOP_METER(_m_name)                                                                                       \
+    {                                                                                                                  \
+        static int __iMeter = -1;                                                                                      \
+        if (__iMeter >= 0)                                                                                             \
+            perf_stop_imeter(__iMeter);                                                                                \
+        else                                                                                                           \
+            __iMeter = perf_stop_meter(_m_name);                                                                       \
+    }
 
-   /**
-    * @def PERF_TICK_METER(theMeterName)
-    * Increments the counter of meter MeterName without changing its state with respect to measurement of time.
-    * Creates new meter if there is no such meter.
-    * It is useful to count the number of enters to a part of code without wasting a time to measure CPU time.
-    */
-#define PERF_TICK_METER(_m_name) { \
-  static int __iMeter = -1; \
-  if  (__iMeter >= 0)  perf_tick_imeter (__iMeter); \
-  else      __iMeter = perf_tick_meter (_m_name); \
-}
+/**
+ * @def PERF_TICK_METER(theMeterName)
+ * Increments the counter of meter MeterName without changing its state with respect to measurement of time.
+ * Creates new meter if there is no such meter.
+ * It is useful to count the number of enters to a part of code without wasting a time to measure CPU time.
+ */
+#define PERF_TICK_METER(_m_name)                                                                                       \
+    {                                                                                                                  \
+        static int __iMeter = -1;                                                                                      \
+        if (__iMeter >= 0)                                                                                             \
+            perf_tick_imeter(__iMeter);                                                                                \
+        else                                                                                                           \
+            __iMeter = perf_tick_meter(_m_name);                                                                       \
+    }
 
-    /**
-     * @def PERF_CLOSE_METER(theMeterName)
-     * Prints out and resets the given meter.
-     */
-#define PERF_CLOSE_METER(_m_name) perf_close_meter (_m_name);
+/**
+ * @def PERF_CLOSE_METER(theMeterName)
+ * Prints out and resets the given meter.
+ */
+#define PERF_CLOSE_METER(_m_name) perf_close_meter(_m_name);
 
-     /**
-      * @def PERF_PRINT_ALL
-      * Prints all existing meters which have been entered at least once and resets them.
-      */
-#define PERF_PRINT_ALL() { \
-  perf_print_all_meters(1); \
-}
+/**
+ * @def PERF_PRINT_ALL
+ * Prints all existing meters which have been entered at least once and resets them.
+ */
+#define PERF_PRINT_ALL()                                                                                               \
+    {                                                                                                                  \
+        perf_print_all_meters(1);                                                                                      \
+    }
 
 #else
 #define PERF_TICK_METER(_m_name)
@@ -77,10 +87,10 @@
 #define PERF_PRINT_ALL()
 #endif
 
- /**
-  * Creates new counter (if it is absent) identified by theMeterName and resets its cumulative value
-  * @return meter global identifier if OK, -1 if alloc problem
-  */
+/**
+ * Creates new counter (if it is absent) identified by theMeterName and resets its cumulative value
+ * @return meter global identifier if OK, -1 if alloc problem
+ */
 Standard_EXPORTEXTERNC int perf_init_meter(const char* const theMeterName);
 
 /**
@@ -126,10 +136,8 @@ Standard_EXPORTEXTERNC int perf_tick_imeter(const int theMeterId);
  * @param theNbEnter [OUT] number of enters if the pointer != NULL
  * @param theSeconds [OUT] seconds if the pointer != NULL
  * @return meter global identifier if OK, -1 if no such meter
-*/
-Standard_EXPORTEXTERNC int perf_get_meter(const char* const theMeterName,
-    int* theNbEnter,
-    double* theSeconds);
+ */
+Standard_EXPORTEXTERNC int perf_get_meter(const char* const theMeterName, int* theNbEnter, double* theSeconds);
 
 /**
  * Prints on stdout the cumulated time and the number of enters for the specified meter.
@@ -142,8 +150,8 @@ Standard_EXPORTEXTERNC void perf_close_meter(const char* const theMeterName);
 Standard_EXPORTEXTERNC void perf_close_imeter(const int theMeterId);
 
 /**
- * Prints on stdout the cumulated time and the number of enters for each alive meter which have the number of enters > 0.
- * Resets all meters if reset is non-null.
+ * Prints on stdout the cumulated time and the number of enters for each alive meter which have the number of enters >
+ * 0. Resets all meters if reset is non-null.
  */
 Standard_EXPORTEXTERNC void perf_print_all_meters(int reset);
 

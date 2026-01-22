@@ -19,41 +19,36 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleTransparent, Standard_Transient)
 
 //=======================================================================
-//function : StepVisual_SurfaceStyleTransparent
-//purpose  :
+// function : StepVisual_SurfaceStyleTransparent
+// purpose  :
 //=======================================================================
 
-StepVisual_SurfaceStyleTransparent::StepVisual_SurfaceStyleTransparent ()
-{
+StepVisual_SurfaceStyleTransparent::StepVisual_SurfaceStyleTransparent() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepVisual_SurfaceStyleTransparent::Init(const Standard_Real theTransparency) {
+
+    myTransparency = theTransparency;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : Transparency
+// purpose  :
 //=======================================================================
 
-void StepVisual_SurfaceStyleTransparent::Init (const Standard_Real theTransparency)
-{
-
-  myTransparency = theTransparency;
+Standard_Real StepVisual_SurfaceStyleTransparent::Transparency() const {
+    return myTransparency;
 }
 
 //=======================================================================
-//function : Transparency
-//purpose  :
+// function : SetTransparency
+// purpose  :
 //=======================================================================
 
-Standard_Real StepVisual_SurfaceStyleTransparent::Transparency () const
-{
-  return myTransparency;
-}
-
-//=======================================================================
-//function : SetTransparency
-//purpose  :
-//=======================================================================
-
-void StepVisual_SurfaceStyleTransparent::SetTransparency (const Standard_Real theTransparency)
-{
-  myTransparency = theTransparency;
+void StepVisual_SurfaceStyleTransparent::SetTransparency(const Standard_Real theTransparency) {
+    myTransparency = theTransparency;
 }

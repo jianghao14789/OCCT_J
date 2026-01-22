@@ -27,21 +27,17 @@ class TopoDS_Shape;
 class gp_Pnt;
 
 //! Writes to the stream a gp_Pnt data
-Standard_OStream& operator << (Standard_OStream& OS, const gp_Pnt P);
+Standard_OStream& operator<<(Standard_OStream& OS, const gp_Pnt P);
 
 //! Computes a hash code for the given value of the uint64_t type, in range [1, theUpperBound]
-inline Standard_Integer HashCode(const uint64_t theValue, const Standard_Integer theUpperBound)
-{
+inline Standard_Integer HashCode(const uint64_t theValue, const Standard_Integer theUpperBound) {
     return IntegerHashCode(theValue, 0xffffffffffffffff, theUpperBound);
 }
 
 //! A base class for all readers/writers of TopoDS_Shape into/from stream.
-class BinTools_ShapeSetBase
-{
+class BinTools_ShapeSetBase {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! A default constructor.
     Standard_EXPORT BinTools_ShapeSetBase();
@@ -49,22 +45,32 @@ public:
     Standard_EXPORT virtual ~BinTools_ShapeSetBase();
 
     //! Return true if shape should be stored with triangles.
-    Standard_Boolean IsWithTriangles() const { return myWithTriangles; }
+    Standard_Boolean IsWithTriangles() const {
+        return myWithTriangles;
+    }
     //! Return true if shape should be stored triangulation with normals.
-    Standard_Boolean IsWithNormals() const { return myWithNormals; }
+    Standard_Boolean IsWithNormals() const {
+        return myWithNormals;
+    }
 
     //! Define if shape will be stored with triangles.
     //! Ignored (always written) if face defines only triangulation (no surface).
-    void SetWithTriangles(const Standard_Boolean theWithTriangles) { myWithTriangles = theWithTriangles; }
+    void SetWithTriangles(const Standard_Boolean theWithTriangles) {
+        myWithTriangles = theWithTriangles;
+    }
     //! Define if shape will be stored triangulation with normals.
     //! Ignored (always written) if face defines only triangulation (no surface).
-    void SetWithNormals(const Standard_Boolean theWithNormals) { myWithNormals = theWithNormals; }
+    void SetWithNormals(const Standard_Boolean theWithNormals) {
+        myWithNormals = theWithNormals;
+    }
 
     //! Sets the BinTools_FormatVersion.
     Standard_EXPORT void SetFormatNb(const Standard_Integer theFormatNb);
 
     //! Returns the BinTools_FormatVersion.
-    Standard_EXPORT Standard_Integer FormatNb() const { return myFormatNb; }
+    Standard_EXPORT Standard_Integer FormatNb() const {
+        return myFormatNb;
+    }
 
     //! Clears the content of the set.
     Standard_EXPORT virtual void Clear() {}
@@ -81,9 +87,8 @@ public:
     //! Write the type.
     //! calls WriteGeometry(S).
     //! Write the flags, the subshapes.
-    Standard_EXPORT virtual void Write
-    (Standard_OStream& /*OS*/, const Message_ProgressRange & /*theRange*/ = Message_ProgressRange()) {
-    }
+    Standard_EXPORT virtual void Write(Standard_OStream& /*OS*/,
+                                       const Message_ProgressRange& /*theRange*/ = Message_ProgressRange()) {}
 
     //! Reads the content of me from the binary stream  <IS>. me
     //! is first cleared.
@@ -97,9 +102,8 @@ public:
     //! Reads the type.
     //! calls ReadGeometry(T,S).
     //! Reads the flag, the subshapes.
-    Standard_EXPORT virtual void Read
-    (Standard_IStream& /*IS*/, const Message_ProgressRange & /*theRange*/ = Message_ProgressRange()) {
-    }
+    Standard_EXPORT virtual void Read(Standard_IStream& /*IS*/,
+                                      const Message_ProgressRange& /*theRange*/ = Message_ProgressRange()) {}
 
     //! Writes   on  <OS>   the shape   <S>.    Writes the
     //! orientation, the index of the TShape and the index
@@ -110,8 +114,8 @@ public:
     Standard_EXPORT virtual void Read(Standard_IStream& /*theStream*/, TopoDS_Shape& /*theShape*/) {}
 
     static const Standard_CString THE_ASCII_VERSIONS[BinTools_FormatVersion_UPPER + 1];
-private:
 
+private:
     Standard_Integer myFormatNb;
     Standard_Boolean myWithTriangles;
     Standard_Boolean myWithNormals;

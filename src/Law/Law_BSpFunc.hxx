@@ -29,7 +29,6 @@ class Law_BSpline;
 class Standard_OutOfRange;
 class Law_Function;
 
-
 class Law_BSpFunc;
 DEFINE_STANDARD_HANDLE(Law_BSpFunc, Law_Function)
 
@@ -37,53 +36,51 @@ DEFINE_STANDARD_HANDLE(Law_BSpFunc, Law_Function)
 //! methods and classes are implemented in package Law
 //! to    construct  the  basis    curve with  several
 //! constraints.
-class Law_BSpFunc : public Law_Function
-{
+class Law_BSpFunc : public Law_Function {
 
 public:
+    Standard_EXPORT Law_BSpFunc();
 
-  Standard_EXPORT Law_BSpFunc();
-  
-  Standard_EXPORT Law_BSpFunc(const Handle(Law_BSpline)& C, const Standard_Real First, const Standard_Real Last);
-  
-  Standard_EXPORT GeomAbs_Shape Continuity() const Standard_OVERRIDE;
-  
-  //! Returns  the number  of  intervals for  continuity
-  //! <S>. May be one if Continuity(me) >= <S>
-  Standard_EXPORT Standard_Integer NbIntervals (const GeomAbs_Shape S) const Standard_OVERRIDE;
+    Standard_EXPORT Law_BSpFunc(const Handle(Law_BSpline) & C, const Standard_Real First, const Standard_Real Last);
 
-  //! Stores in <T> the parameters bounding the intervals of continuity <S>.
-  //! The array must provide enough room to accommodate for the parameters, i.e. T.Length() > NbIntervals()
-  Standard_EXPORT void Intervals (TColStd_Array1OfReal& T, const GeomAbs_Shape S) const Standard_OVERRIDE;
+    Standard_EXPORT GeomAbs_Shape Continuity() const Standard_OVERRIDE;
 
-  Standard_EXPORT Standard_Real Value (const Standard_Real X) Standard_OVERRIDE;
-  
-  Standard_EXPORT void D1 (const Standard_Real X, Standard_Real& F, Standard_Real& D) Standard_OVERRIDE;
-  
-  Standard_EXPORT void D2 (const Standard_Real X, Standard_Real& F, Standard_Real& D, Standard_Real& D2) Standard_OVERRIDE;
-  
-  //! Returns a  law equivalent of  <me>  between
-  //! parameters <First>  and <Last>. <Tol>  is used  to
-  //! test for 3d points confusion.
-  //! It is usfule to determines the derivatives
-  //! in these values <First> and <Last> if
-  //! the Law is not Cn.
-  Standard_EXPORT Handle(Law_Function) Trim (const Standard_Real PFirst, const Standard_Real PLast, const Standard_Real Tol) const Standard_OVERRIDE;
-  
-  Standard_EXPORT void Bounds (Standard_Real& PFirst, Standard_Real& PLast) Standard_OVERRIDE;
-  
-  Standard_EXPORT Handle(Law_BSpline) Curve() const;
-  
-  Standard_EXPORT void SetCurve (const Handle(Law_BSpline)& C);
+    //! Returns  the number  of  intervals for  continuity
+    //! <S>. May be one if Continuity(me) >= <S>
+    Standard_EXPORT Standard_Integer NbIntervals(const GeomAbs_Shape S) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(Law_BSpFunc,Law_Function)
+    //! Stores in <T> the parameters bounding the intervals of continuity <S>.
+    //! The array must provide enough room to accommodate for the parameters, i.e. T.Length() > NbIntervals()
+    Standard_EXPORT void Intervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const Standard_OVERRIDE;
+
+    Standard_EXPORT Standard_Real Value(const Standard_Real X) Standard_OVERRIDE;
+
+    Standard_EXPORT void D1(const Standard_Real X, Standard_Real& F, Standard_Real& D) Standard_OVERRIDE;
+
+    Standard_EXPORT void D2(const Standard_Real X, Standard_Real& F, Standard_Real& D,
+                            Standard_Real& D2) Standard_OVERRIDE;
+
+    //! Returns a  law equivalent of  <me>  between
+    //! parameters <First>  and <Last>. <Tol>  is used  to
+    //! test for 3d points confusion.
+    //! It is usfule to determines the derivatives
+    //! in these values <First> and <Last> if
+    //! the Law is not Cn.
+    Standard_EXPORT Handle(Law_Function)
+        Trim(const Standard_Real PFirst, const Standard_Real PLast, const Standard_Real Tol) const Standard_OVERRIDE;
+
+    Standard_EXPORT void Bounds(Standard_Real& PFirst, Standard_Real& PLast) Standard_OVERRIDE;
+
+    Standard_EXPORT Handle(Law_BSpline) Curve() const;
+
+    Standard_EXPORT void SetCurve(const Handle(Law_BSpline) & C);
+
+    DEFINE_STANDARD_RTTIEXT(Law_BSpFunc, Law_Function)
 
 private:
-
-  Handle(Law_BSpline) curv;
-  Standard_Real first;
-  Standard_Real last;
-
+    Handle(Law_BSpline) curv;
+    Standard_Real first;
+    Standard_Real last;
 };
 
 #endif // _Law_BSpFunc_HeaderFile

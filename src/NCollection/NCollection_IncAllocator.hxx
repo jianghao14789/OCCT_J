@@ -39,8 +39,7 @@ class Standard_Mutex;
  *  (consider creating dedicated allocators per working thread),
  *  and thread-safety of allocations is DISABLED by default (see SetThreadSafe()).
  */
-class NCollection_IncAllocator : public NCollection_BaseAllocator
-{
+class NCollection_IncAllocator : public NCollection_BaseAllocator {
 public:
     // The type defining the alignement of allocated objects
     typedef void* aligned_t;
@@ -59,19 +58,17 @@ public:
     Standard_EXPORT virtual void* Allocate(const size_t size) Standard_OVERRIDE;
 
     //! Free a previously allocated memory. Does nothing
-    Standard_EXPORT virtual void  Free(void* anAddress) Standard_OVERRIDE;
+    Standard_EXPORT virtual void Free(void* anAddress) Standard_OVERRIDE;
 
     //! Diagnostic method, returns the total allocated size
-    Standard_EXPORT size_t        GetMemSize() const;
+    Standard_EXPORT size_t GetMemSize() const;
 
     //! Destructor (calls Clean() internally)
     Standard_EXPORT ~NCollection_IncAllocator();
 
     //! Reallocation: it is always allowed but is only efficient with the
     //! last allocated item
-    Standard_EXPORT void* Reallocate(void* anAddress,
-        const size_t oldSize,
-        const size_t newSize);
+    Standard_EXPORT void* Reallocate(void* anAddress, const size_t oldSize, const size_t newSize);
 
     //! Re-initialize the allocator so that the next Allocate call should
     //! start allocating in the very beginning as though the allocator is just
@@ -80,17 +77,16 @@ public:
     //! @param doReleaseMem
     //!   True - release all previously allocated memory, False - preserve it
     //!   for future allocations.
-    Standard_EXPORT void          Reset(const Standard_Boolean
-        doReleaseMem = Standard_True);
+    Standard_EXPORT void Reset(const Standard_Boolean doReleaseMem = Standard_True);
 
     static const size_t DefaultBlockSize = 24600;
 
 protected:
-    struct         IBlock;
+    struct IBlock;
 
     //! Flush all previously allocated data. All pointers returned by
     //! Allocate() become invalid -- be very careful with this
-    Standard_EXPORT void  Clean();
+    Standard_EXPORT void Clean();
 
     //! Allocate a new block and return a pointer to it
     //! ** only for internal usage **
@@ -99,13 +95,12 @@ protected:
 private:
     // Prohibited methods
     NCollection_IncAllocator(const NCollection_IncAllocator&);
-    NCollection_IncAllocator& operator = (const NCollection_IncAllocator&);
+    NCollection_IncAllocator& operator=(const NCollection_IncAllocator&);
 
 protected:
     // ----- PROTECTED CLASS IBlock -------
     struct IBlock {
-        aligned_t* allocateInBlock(const size_t cSize)
-        {
+        aligned_t* allocateInBlock(const size_t cSize) {
             aligned_t* aResult = p_free_space;
             p_free_space += cSize;
             return aResult;
@@ -114,12 +109,13 @@ protected:
         aligned_t* p_end_block;
         struct IBlock* p_next;
     };
+
 protected:
     // --------- PROTECTED FIELDS ---------
     Standard_Mutex* myMutex;
     IBlock* myFirstBlock;
-    size_t        mySize;
-    size_t        myMemSize;
+    size_t mySize;
+    size_t myMemSize;
 
 public:
     // Declaration of CASCADE RTTI

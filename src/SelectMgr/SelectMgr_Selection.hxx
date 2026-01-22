@@ -60,78 +60,97 @@ class Select3D_SensitiveEntity;
 //! -   mode 4 : selection of the faces
 //! -   mode 5 : selection of the shells
 //! -   mode 6 :   selection of the constituent solids.
-class SelectMgr_Selection : public Standard_Transient
-{
-  DEFINE_STANDARD_RTTIEXT(SelectMgr_Selection, Standard_Transient)
+class SelectMgr_Selection : public Standard_Transient {
+    DEFINE_STANDARD_RTTIEXT(SelectMgr_Selection, Standard_Transient)
 public:
+    //! Constructs a selection object defined by the selection mode IdMode.
+    //! The default setting 0 is the selection mode for a shape in its entirety.
+    Standard_EXPORT SelectMgr_Selection(const Standard_Integer theModeIdx = 0);
 
-  //! Constructs a selection object defined by the selection mode IdMode.
-  //! The default setting 0 is the selection mode for a shape in its entirety.
-  Standard_EXPORT SelectMgr_Selection (const Standard_Integer theModeIdx = 0);
+    Standard_EXPORT ~SelectMgr_Selection();
 
-  Standard_EXPORT ~SelectMgr_Selection();
+    Standard_EXPORT void Destroy();
 
-  Standard_EXPORT void Destroy();
+    //! Adds the sensitive primitive to the list of stored entities in this object.
+    //! Raises NullObject if the primitive is a null handle.
+    Standard_EXPORT void Add(const Handle(Select3D_SensitiveEntity) & theSensitive);
 
-  //! Adds the sensitive primitive to the list of stored entities in this object.
-  //! Raises NullObject if the primitive is a null handle.
-  Standard_EXPORT void Add (const Handle(Select3D_SensitiveEntity)& theSensitive);
+    //! empties the selection from all the stored entities
+    Standard_EXPORT void Clear();
 
-  //! empties the selection from all the stored entities
-  Standard_EXPORT void Clear();
+    //! returns true if no sensitive entity is stored.
+    Standard_Boolean IsEmpty() const {
+        return myEntities.IsEmpty();
+    }
 
-  //! returns true if no sensitive entity is stored.
-  Standard_Boolean IsEmpty() const { return myEntities.IsEmpty(); }
+    //! returns the selection mode represented by this selection
+    Standard_Integer Mode() const {
+        return myMode;
+    }
 
-  //! returns the selection mode represented by this selection
-  Standard_Integer Mode() const { return myMode; }
+    //! Return entities.
+    const NCollection_Vector<Handle(SelectMgr_SensitiveEntity)>& Entities() const {
+        return myEntities;
+    }
 
-  //! Return entities.
-  const NCollection_Vector<Handle(SelectMgr_SensitiveEntity)>& Entities() const { return myEntities; }
+    //! Return entities.
+    NCollection_Vector<Handle(SelectMgr_SensitiveEntity)>& ChangeEntities() {
+        return myEntities;
+    }
 
-  //! Return entities.
-  NCollection_Vector<Handle(SelectMgr_SensitiveEntity)>& ChangeEntities() { return myEntities; }
+    //! Returns the flag UpdateFlag.
+    //! This flage gives the update status of this framework
+    //! in a ViewerSelector object:
+    //! -   full
+    //! -   partial, or
+    //! -   none.
+    SelectMgr_TypeOfUpdate UpdateStatus() const {
+        return myUpdateStatus;
+    }
 
-  //! Returns the flag UpdateFlag.
-  //! This flage gives the update status of this framework
-  //! in a ViewerSelector object:
-  //! -   full
-  //! -   partial, or
-  //! -   none.
-  SelectMgr_TypeOfUpdate UpdateStatus() const { return myUpdateStatus; }
+    void UpdateStatus(const SelectMgr_TypeOfUpdate theStatus) {
+        myUpdateStatus = theStatus;
+    }
 
-  void UpdateStatus (const SelectMgr_TypeOfUpdate theStatus) { myUpdateStatus = theStatus; }
+    void UpdateBVHStatus(const SelectMgr_TypeOfBVHUpdate theStatus) {
+        myBVHUpdateStatus = theStatus;
+    }
 
-  void UpdateBVHStatus (const SelectMgr_TypeOfBVHUpdate theStatus) { myBVHUpdateStatus = theStatus; }
+    SelectMgr_TypeOfBVHUpdate BVHUpdateStatus() const {
+        return myBVHUpdateStatus;
+    }
 
-  SelectMgr_TypeOfBVHUpdate BVHUpdateStatus() const { return myBVHUpdateStatus; }
+    //! Returns status of selection
+    SelectMgr_StateOfSelection GetSelectionState() const {
+        return mySelectionState;
+    }
 
-  //! Returns status of selection
-  SelectMgr_StateOfSelection GetSelectionState() const { return mySelectionState; }
+    //! Sets status of selection
+    void SetSelectionState(const SelectMgr_StateOfSelection theState) const {
+        mySelectionState = theState;
+    }
 
-  //! Sets status of selection
-  void SetSelectionState (const SelectMgr_StateOfSelection theState) const { mySelectionState = theState; }
+    //! Returns sensitivity of the selection
+    Standard_Integer Sensitivity() const {
+        return mySensFactor;
+    }
 
-  //! Returns sensitivity of the selection
-  Standard_Integer Sensitivity() const { return mySensFactor; }
+    //! Changes sensitivity of the selection and all its entities to the given value.
+    //! IMPORTANT: This method does not update any outer selection structures, so for
+    //! proper updates use SelectMgr_SelectionManager::SetSelectionSensitivity method.
+    Standard_EXPORT void SetSensitivity(const Standard_Integer theNewSens);
 
-  //! Changes sensitivity of the selection and all its entities to the given value.
-  //! IMPORTANT: This method does not update any outer selection structures, so for
-  //! proper updates use SelectMgr_SelectionManager::SetSelectionSensitivity method.
-  Standard_EXPORT void SetSensitivity (const Standard_Integer theNewSens);
-
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 
 private:
-
-  NCollection_Vector<Handle(SelectMgr_SensitiveEntity)> myEntities;
-  Standard_Integer                                      myMode;
-  SelectMgr_TypeOfUpdate                                myUpdateStatus;
-  mutable SelectMgr_StateOfSelection                    mySelectionState;
-  mutable SelectMgr_TypeOfBVHUpdate                     myBVHUpdateStatus;
-  Standard_Integer                                      mySensFactor;
-  Standard_Boolean                                      myIsCustomSens;
+    NCollection_Vector<Handle(SelectMgr_SensitiveEntity)> myEntities;
+    Standard_Integer myMode;
+    SelectMgr_TypeOfUpdate myUpdateStatus;
+    mutable SelectMgr_StateOfSelection mySelectionState;
+    mutable SelectMgr_TypeOfBVHUpdate myBVHUpdateStatus;
+    Standard_Integer mySensFactor;
+    Standard_Boolean myIsCustomSens;
 };
 
 DEFINE_STANDARD_HANDLE(SelectMgr_Selection, Standard_Transient)

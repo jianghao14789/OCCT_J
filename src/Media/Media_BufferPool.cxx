@@ -14,7 +14,7 @@
 
 // activate some C99 macros like UINT64_C in "stdint.h" which used by FFmpeg
 #ifndef __STDC_CONSTANT_MACROS
-  #define __STDC_CONSTANT_MACROS
+#define __STDC_CONSTANT_MACROS
 #endif
 
 #include <Media_BufferPool.hxx>
@@ -23,10 +23,9 @@
 
 #ifdef HAVE_FFMPEG
 #include <Standard_WarningsDisable.hxx>
-extern "C"
-{
-  #include <libavcodec/avcodec.h>
-  #include <libavutil/imgutils.h>
+extern "C" {
+#include <libavcodec/avcodec.h>
+#include <libavutil/imgutils.h>
 };
 #include <Standard_WarningsRestore.hxx>
 #endif
@@ -37,71 +36,61 @@ IMPLEMENT_STANDARD_RTTIEXT(Media_BufferPool, Standard_Transient)
 // function : Media_BufferPool
 // purpose  :
 // =======================================================================
-Media_BufferPool::Media_BufferPool()
-: myPool (NULL),
-  myBufferSize (0)
-{
-  //
+Media_BufferPool::Media_BufferPool() : myPool(NULL), myBufferSize(0) {
+    //
 }
 
 // =======================================================================
 // function : ~Media_BufferPool
 // purpose  :
 // =======================================================================
-Media_BufferPool::~Media_BufferPool()
-{
-  Release();
+Media_BufferPool::~Media_BufferPool() {
+    Release();
 }
 
 // =======================================================================
 // function : Release
 // purpose  :
 // =======================================================================
-void Media_BufferPool::Release()
-{
-  if (myPool != NULL)
-  {
-  #ifdef HAVE_FFMPEG
-    av_buffer_pool_uninit (&myPool);
-  #endif
-    myPool       = NULL;
-    myBufferSize = 0;
-  }
+void Media_BufferPool::Release() {
+    if (myPool != NULL) {
+#ifdef HAVE_FFMPEG
+        av_buffer_pool_uninit(&myPool);
+#endif
+        myPool = NULL;
+        myBufferSize = 0;
+    }
 }
 
 // =======================================================================
 // function : Init
 // purpose  :
 // =======================================================================
-bool Media_BufferPool::Init (int theBufferSize)
-{
-  if (myBufferSize == theBufferSize)
-  {
-    return true;
-  }
+bool Media_BufferPool::Init(int theBufferSize) {
+    if (myBufferSize == theBufferSize) {
+        return true;
+    }
 
-  Release();
-  if (theBufferSize == 0)
-  {
-    return true;
-  }
+    Release();
+    if (theBufferSize == 0) {
+        return true;
+    }
 
 #ifdef HAVE_FFMPEG
-  myPool = av_buffer_pool_init (theBufferSize, NULL);
+    myPool = av_buffer_pool_init(theBufferSize, NULL);
 #endif
-  myBufferSize = theBufferSize;
-  return myPool != NULL;
+    myBufferSize = theBufferSize;
+    return myPool != NULL;
 }
 
 // =======================================================================
 // function : GetBuffer
 // purpose  :
 // =======================================================================
-AVBufferRef* Media_BufferPool::GetBuffer()
-{
+AVBufferRef* Media_BufferPool::GetBuffer() {
 #ifdef HAVE_FFMPEG
-  return av_buffer_pool_get (myPool);
+    return av_buffer_pool_get(myPool);
 #else
-  return NULL;
+    return NULL;
 #endif
 }

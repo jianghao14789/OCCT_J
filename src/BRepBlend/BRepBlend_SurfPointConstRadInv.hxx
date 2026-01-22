@@ -35,10 +35,10 @@ class math_Matrix;
 //! point on the partner surface.
 class BRepBlend_SurfPointConstRadInv : public Blend_SurfPointFuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BRepBlend_SurfPointConstRadInv(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C);
+    Standard_EXPORT BRepBlend_SurfPointConstRadInv(const Handle(Adaptor3d_Surface) & S,
+                                                   const Handle(Adaptor3d_Curve) & C);
 
     Standard_EXPORT void Set(const Standard_Real R, const Standard_Integer Choix);
 
@@ -81,32 +81,13 @@ public:
     //! Tol is the tolerance used in 3d space.
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Handle(Adaptor3d_Surface) surf;
     Handle(Adaptor3d_Curve) curv;
     gp_Pnt point;
     Standard_Real ray;
     Standard_Integer choix;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepBlend_SurfPointConstRadInv_HeaderFile

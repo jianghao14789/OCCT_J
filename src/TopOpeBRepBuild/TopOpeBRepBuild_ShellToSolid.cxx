@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TopoDS_Shell.hxx>
 #include <TopoDS_Solid.hxx>
 #include <TopOpeBRepBuild_Builder.hxx>
@@ -25,54 +24,46 @@
 #include <TopTools_ListIteratorOfListOfShape.hxx>
 
 //=======================================================================
-//function : TopOpeBRepBuild_ShellToSolid
-//purpose  : 
+// function : TopOpeBRepBuild_ShellToSolid
+// purpose  :
 //=======================================================================
-TopOpeBRepBuild_ShellToSolid::TopOpeBRepBuild_ShellToSolid()
-{
+TopOpeBRepBuild_ShellToSolid::TopOpeBRepBuild_ShellToSolid() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void TopOpeBRepBuild_ShellToSolid::Init() {
+    myLSh.Clear();
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AddShell
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_ShellToSolid::Init()
-{
-  myLSh.Clear();
-}
-
-
-//=======================================================================
-//function : AddShell
-//purpose  : 
-//=======================================================================
-
-void TopOpeBRepBuild_ShellToSolid::AddShell(const TopoDS_Shell& Sh)
-{
-  myLSh.Append(Sh);
+void TopOpeBRepBuild_ShellToSolid::AddShell(const TopoDS_Shell& Sh) {
+    myLSh.Append(Sh);
 }
 
 //=======================================================================
-//function : MakeSolids
-//purpose  : 
+// function : MakeSolids
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_ShellToSolid::MakeSolids(const TopoDS_Solid& So,
-					      TopTools_ListOfShape& LSo)
-{
-  LSo.Clear();
-  
-  TopOpeBRepBuild_ShellFaceSet sfs(So);
-  for (TopTools_ListIteratorOfListOfShape it(myLSh);it.More();it.Next())
-    sfs.AddShape(it.Value());
-  
-  Standard_Boolean ForceClass = Standard_True;
-  TopOpeBRepBuild_SolidBuilder SB;  
-  SB.InitSolidBuilder(sfs,ForceClass);  
+void TopOpeBRepBuild_ShellToSolid::MakeSolids(const TopoDS_Solid& So, TopTools_ListOfShape& LSo) {
+    LSo.Clear();
 
-  TopOpeBRepDS_BuildTool BT;
-  TopOpeBRepBuild_Builder B(BT);
-  B.MakeSolids(SB,LSo);
+    TopOpeBRepBuild_ShellFaceSet sfs(So);
+    for (TopTools_ListIteratorOfListOfShape it(myLSh); it.More(); it.Next())
+        sfs.AddShape(it.Value());
 
+    Standard_Boolean ForceClass = Standard_True;
+    TopOpeBRepBuild_SolidBuilder SB;
+    SB.InitSolidBuilder(sfs, ForceClass);
+
+    TopOpeBRepDS_BuildTool BT;
+    TopOpeBRepBuild_Builder B(BT);
+    B.MakeSolids(SB, LSo);
 }

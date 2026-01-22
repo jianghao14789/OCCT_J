@@ -24,89 +24,85 @@
 #include <StepData_StepWriter.hxx>
 
 //=======================================================================
-//function : RWStepBasic_RWDocumentProductEquivalence
-//purpose  : 
+// function : RWStepBasic_RWDocumentProductEquivalence
+// purpose  :
 //=======================================================================
-RWStepBasic_RWDocumentProductEquivalence::RWStepBasic_RWDocumentProductEquivalence ()
-{
+RWStepBasic_RWDocumentProductEquivalence::RWStepBasic_RWDocumentProductEquivalence() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepBasic_RWDocumentProductEquivalence::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                        const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                        const Handle(StepBasic_DocumentProductEquivalence) &
+                                                            ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 4, ach, "document_product_equivalence")) return;
+
+    // Inherited fields of DocumentProductAssociation
+
+    Handle(TCollection_HAsciiString) aDocumentProductAssociation_Name;
+    data->ReadString(num, 1, "document_product_association.name", ach, aDocumentProductAssociation_Name);
+
+    Handle(TCollection_HAsciiString) aDocumentProductAssociation_Description;
+    Standard_Boolean hasDocumentProductAssociation_Description = Standard_True;
+    if (data->IsParamDefined(num, 2)) {
+        data->ReadString(num, 2, "document_product_association.description", ach,
+                         aDocumentProductAssociation_Description);
+    } else {
+        hasDocumentProductAssociation_Description = Standard_False;
+    }
+
+    Handle(StepBasic_Document) aDocumentProductAssociation_RelatingDocument;
+    data->ReadEntity(num, 3, "document_product_association.relating_document", ach, STANDARD_TYPE(StepBasic_Document),
+                     aDocumentProductAssociation_RelatingDocument);
+
+    StepBasic_ProductOrFormationOrDefinition aDocumentProductAssociation_RelatedProduct;
+    data->ReadEntity(num, 4, "document_product_association.related_product", ach,
+                     aDocumentProductAssociation_RelatedProduct);
+
+    // Initialize entity
+    ent->Init(aDocumentProductAssociation_Name, hasDocumentProductAssociation_Description,
+              aDocumentProductAssociation_Description, aDocumentProductAssociation_RelatingDocument,
+              aDocumentProductAssociation_RelatedProduct);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepBasic_RWDocumentProductEquivalence::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                         const Standard_Integer num,
-                                                         Handle(Interface_Check)& ach,
-                                                         const Handle(StepBasic_DocumentProductEquivalence) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,4,ach,"document_product_equivalence") ) return;
+void RWStepBasic_RWDocumentProductEquivalence::WriteStep(StepData_StepWriter& SW,
+                                                         const Handle(StepBasic_DocumentProductEquivalence) &
+                                                             ent) const {
 
-  // Inherited fields of DocumentProductAssociation
+    // Inherited fields of DocumentProductAssociation
 
-  Handle(TCollection_HAsciiString) aDocumentProductAssociation_Name;
-  data->ReadString (num, 1, "document_product_association.name", ach, aDocumentProductAssociation_Name);
+    SW.Send(ent->StepBasic_DocumentProductAssociation::Name());
 
-  Handle(TCollection_HAsciiString) aDocumentProductAssociation_Description;
-  Standard_Boolean hasDocumentProductAssociation_Description = Standard_True;
-  if ( data->IsParamDefined (num,2) ) {
-    data->ReadString (num, 2, "document_product_association.description", ach, aDocumentProductAssociation_Description);
-  }
-  else {
-    hasDocumentProductAssociation_Description = Standard_False;
-  }
+    if (ent->StepBasic_DocumentProductAssociation::HasDescription()) {
+        SW.Send(ent->StepBasic_DocumentProductAssociation::Description());
+    } else
+        SW.SendUndef();
 
-  Handle(StepBasic_Document) aDocumentProductAssociation_RelatingDocument;
-  data->ReadEntity (num, 3, "document_product_association.relating_document", ach, STANDARD_TYPE(StepBasic_Document), aDocumentProductAssociation_RelatingDocument);
+    SW.Send(ent->StepBasic_DocumentProductAssociation::RelatingDocument());
 
-  StepBasic_ProductOrFormationOrDefinition aDocumentProductAssociation_RelatedProduct;
-  data->ReadEntity (num, 4, "document_product_association.related_product", ach, aDocumentProductAssociation_RelatedProduct);
-
-  // Initialize entity
-  ent->Init(aDocumentProductAssociation_Name,
-            hasDocumentProductAssociation_Description,
-            aDocumentProductAssociation_Description,
-            aDocumentProductAssociation_RelatingDocument,
-            aDocumentProductAssociation_RelatedProduct);
+    SW.Send(ent->StepBasic_DocumentProductAssociation::RelatedProduct().Value());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepBasic_RWDocumentProductEquivalence::WriteStep (StepData_StepWriter& SW,
-                                                          const Handle(StepBasic_DocumentProductEquivalence) &ent) const
-{
+void RWStepBasic_RWDocumentProductEquivalence::Share(const Handle(StepBasic_DocumentProductEquivalence) & ent,
+                                                     Interface_EntityIterator& iter) const {
 
-  // Inherited fields of DocumentProductAssociation
+    // Inherited fields of DocumentProductAssociation
 
-  SW.Send (ent->StepBasic_DocumentProductAssociation::Name());
+    iter.AddItem(ent->StepBasic_DocumentProductAssociation::RelatingDocument());
 
-  if ( ent->StepBasic_DocumentProductAssociation::HasDescription() ) {
-    SW.Send (ent->StepBasic_DocumentProductAssociation::Description());
-  }
-  else SW.SendUndef();
-
-  SW.Send (ent->StepBasic_DocumentProductAssociation::RelatingDocument());
-
-  SW.Send (ent->StepBasic_DocumentProductAssociation::RelatedProduct().Value());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepBasic_RWDocumentProductEquivalence::Share (const Handle(StepBasic_DocumentProductEquivalence) &ent,
-                                                      Interface_EntityIterator& iter) const
-{
-
-  // Inherited fields of DocumentProductAssociation
-
-  iter.AddItem (ent->StepBasic_DocumentProductAssociation::RelatingDocument());
-
-  iter.AddItem (ent->StepBasic_DocumentProductAssociation::RelatedProduct().Value());
+    iter.AddItem(ent->StepBasic_DocumentProductAssociation::RelatedProduct().Value());
 }

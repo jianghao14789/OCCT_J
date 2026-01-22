@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_Different.hxx>
 #include <Expr_GeneralExpression.hxx>
@@ -25,14 +24,13 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Different, Expr_SingleRelation)
 
-Expr_Different::Expr_Different(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
-{
+Expr_Different::Expr_Different(const Handle(Expr_GeneralExpression) & exp1,
+                               const Handle(Expr_GeneralExpression) & exp2) {
     SetFirstMember(exp1);
     SetSecondMember(exp2);
 }
 
-Standard_Boolean Expr_Different::IsSatisfied() const
-{
+Standard_Boolean Expr_Different::IsSatisfied() const {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     fm = fm->Simplified();
@@ -40,29 +38,23 @@ Standard_Boolean Expr_Different::IsSatisfied() const
     return (!fm->IsIdentical(sm));
 }
 
-Handle(Expr_GeneralRelation) Expr_Different::Simplified() const
-{
+Handle(Expr_GeneralRelation) Expr_Different::Simplified() const {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     return new Expr_Different(fm->Simplified(), sm->Simplified());
 }
 
-void Expr_Different::Simplify()
-{
+void Expr_Different::Simplify() {
     Handle(Expr_GeneralExpression) fm = FirstMember();
     Handle(Expr_GeneralExpression) sm = SecondMember();
     SetFirstMember(fm->Simplified());
     SetSecondMember(sm->Simplified());
 }
 
-Handle(Expr_GeneralRelation) Expr_Different::Copy() const
-{
-    return new Expr_Different(Expr::CopyShare(FirstMember()),
-        Expr::CopyShare(SecondMember()));
+Handle(Expr_GeneralRelation) Expr_Different::Copy() const {
+    return new Expr_Different(Expr::CopyShare(FirstMember()), Expr::CopyShare(SecondMember()));
 }
 
-
-TCollection_AsciiString Expr_Different::String() const
-{
+TCollection_AsciiString Expr_Different::String() const {
     return FirstMember()->String() + " <> " + SecondMember()->String();
 }

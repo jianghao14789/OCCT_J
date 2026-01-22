@@ -26,7 +26,6 @@ class IGESData_IGESModel;
 class Interface_CopyTool;
 class TCollection_AsciiString;
 
-
 class IGESSelect_UpdateCreationDate;
 DEFINE_STANDARD_HANDLE(IGESSelect_UpdateCreationDate, IGESSelect_ModelModifier)
 
@@ -35,44 +34,25 @@ DEFINE_STANDARD_HANDLE(IGESSelect_UpdateCreationDate, IGESSelect_ModelModifier)
 //! system (time of application of the Modifier).
 //! The Selection of the Modifier is not used : it simply acts as
 //! a criterium to select IGES Files to touch up
-class IGESSelect_UpdateCreationDate : public IGESSelect_ModelModifier
-{
+class IGESSelect_UpdateCreationDate : public IGESSelect_ModelModifier {
 
 public:
+    //! Creates an UpdateCreationDate, which uses the system Date
+    Standard_EXPORT IGESSelect_UpdateCreationDate();
 
-  
-  //! Creates an UpdateCreationDate, which uses the system Date
-  Standard_EXPORT IGESSelect_UpdateCreationDate();
-  
-  //! Specific action : only <target> is used : the system Date
-  //! is set to Global Section Item n0 18.
-  Standard_EXPORT void Performing (IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel)& target, Interface_CopyTool& TC) const Standard_OVERRIDE;
-  
-  //! Returns a text which is
-  //! "Update IGES Header Creation Date"
-  Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
+    //! Specific action : only <target> is used : the system Date
+    //! is set to Global Section Item n0 18.
+    Standard_EXPORT void Performing(IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel) & target,
+                                    Interface_CopyTool& TC) const Standard_OVERRIDE;
 
+    //! Returns a text which is
+    //! "Update IGES Header Creation Date"
+    Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_UpdateCreationDate,IGESSelect_ModelModifier)
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_UpdateCreationDate, IGESSelect_ModelModifier)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_UpdateCreationDate_HeaderFile

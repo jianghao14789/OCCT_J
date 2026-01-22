@@ -28,44 +28,22 @@ class StepBasic_ProductType;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ProductType
-class RWStepBasic_RWProductType 
-{
+class RWStepBasic_RWProductType {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWProductType();
 
-  
-  Standard_EXPORT RWStepBasic_RWProductType();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ProductType)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ProductType)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepBasic_ProductType)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_ProductType) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_ProductType) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepBasic_ProductType) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWProductType_HeaderFile

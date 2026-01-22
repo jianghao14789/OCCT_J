@@ -20,5 +20,4 @@
 
 DEFINE_HSEQUENCE(StepFEA_HSequenceOfElementGeometricRelationship, StepFEA_SequenceOfElementGeometricRelationship)
 
-
 #endif

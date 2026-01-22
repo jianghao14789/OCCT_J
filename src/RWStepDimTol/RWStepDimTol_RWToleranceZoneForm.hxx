@@ -27,23 +27,20 @@ class Interface_Check;
 class StepDimTol_ToleranceZoneForm;
 class StepData_StepWriter;
 
-
 //! Read & Write tool for ToleranceZoneForm
-class RWStepDimTol_RWToleranceZoneForm 
-{
+class RWStepDimTol_RWToleranceZoneForm {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWToleranceZoneForm();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWToleranceZoneForm();
-  
-  //! Reads ToleranceZoneForm
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_ToleranceZoneForm)& ent)  const;
-  
-  //! Writes ToleranceZoneForm
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_ToleranceZoneForm)& ent)  const;
+    //! Reads ToleranceZoneForm
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_ToleranceZoneForm) & ent) const;
 
+    //! Writes ToleranceZoneForm
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_ToleranceZoneForm) & ent) const;
 };
 #endif // _RWStepDimTol_RWToleranceZoneForm_HeaderFile

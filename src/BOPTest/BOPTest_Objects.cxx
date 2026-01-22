@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BOPAlgo_BOP.hxx>
 #include <BOPAlgo_Builder.hxx>
 #include <BOPAlgo_PaveFiller.hxx>
@@ -23,494 +22,468 @@
 #include <NCollection_BaseAllocator.hxx>
 #include <Precision.hxx>
 
-static Handle(NCollection_BaseAllocator)& Allocator1();
+static Handle(NCollection_BaseAllocator) & Allocator1();
 
 //=======================================================================
-//function : BOPTest_Session
-//purpose  : 
+// function : BOPTest_Session
+// purpose  :
 //=======================================================================
 class BOPTest_Session {
- public:
-  //
-  BOPTest_Session() {
-    Init();
-  };
-  //
-  ~BOPTest_Session(){
-    Clear();
-  };
-  //
-  // Init
-  void Init() {
-    Handle(NCollection_BaseAllocator) pA1, pA2;
+public:
     //
-    pA1=NCollection_BaseAllocator::CommonBaseAllocator();
-    pA2=NCollection_BaseAllocator::CommonBaseAllocator();
+    BOPTest_Session() {
+        Init();
+    };
     //
-    myPaveFiller=new BOPAlgo_PaveFiller(pA1);
-    myBuilderDefault=new BOPAlgo_Builder(pA2);
+    ~BOPTest_Session() {
+        Clear();
+    };
     //
-    myBuilder=myBuilderDefault;
-    SetDefaultOptions();
-  };
-  //
-  // Clear
-  void Clear() {
-    if (myPaveFiller) {
-      delete myPaveFiller;
-      myPaveFiller=NULL;
+    // Init
+    void Init() {
+        Handle(NCollection_BaseAllocator) pA1, pA2;
+        //
+        pA1 = NCollection_BaseAllocator::CommonBaseAllocator();
+        pA2 = NCollection_BaseAllocator::CommonBaseAllocator();
+        //
+        myPaveFiller = new BOPAlgo_PaveFiller(pA1);
+        myBuilderDefault = new BOPAlgo_Builder(pA2);
+        //
+        myBuilder = myBuilderDefault;
+        SetDefaultOptions();
+    };
+    //
+    // Clear
+    void Clear() {
+        if (myPaveFiller) {
+            delete myPaveFiller;
+            myPaveFiller = NULL;
+        }
+        //
+        if (myBuilderDefault) {
+            delete myBuilderDefault;
+            myBuilderDefault = NULL;
+        }
+    };
+    //
+    // IsValid
+    Standard_Boolean IsValid() const {
+        return (myPaveFiller != NULL);
+    }
+    // PaveFiller
+    BOPAlgo_PaveFiller& PaveFiller() {
+        return *myPaveFiller;
+    };
+    //
+    // Builder
+    BOPAlgo_Builder& Builder() {
+        return *myBuilder;
+    };
+    //
+    // SetBuilder
+    void SetBuilder(BOPAlgo_Builder* pBuilder) {
+        myBuilder = pBuilder;
+    };
+    //
+    // SetBuilderDef
+    void SetBuilderDefault() {
+        myBuilder = myBuilderDefault;
+    };
+    //
+    TopTools_ListOfShape& Shapes() {
+        return myShapes;
     }
     //
-    if (myBuilderDefault) {
-      delete myBuilderDefault;
-      myBuilderDefault=NULL;
+    TopTools_ListOfShape& Tools() {
+        return myTools;
     }
-  };
-  //
-  // IsValid
-  Standard_Boolean IsValid() const {
-    return (myPaveFiller!=NULL);
-  }
-  // PaveFiller
-  BOPAlgo_PaveFiller& PaveFiller() {
-    return *myPaveFiller;
-  };
-  //
-  // Builder
-  BOPAlgo_Builder& Builder() {
-    return *myBuilder;
-  };
-  // 
-  // SetBuilder
-  void SetBuilder(BOPAlgo_Builder* pBuilder) {
-    myBuilder=pBuilder;
-  };
-  //
-  // SetBuilderDef
-  void SetBuilderDefault() {
-    myBuilder=myBuilderDefault;
-  };
-  //
-  TopTools_ListOfShape& Shapes() {
-    return myShapes;
-  }
-  //
-  TopTools_ListOfShape& Tools() {
-    return myTools;
-  }
-  // Resets all options to default values
-  void SetDefaultOptions()
-  {
-    myRunParallel = Standard_False;
-    myNonDestructive = Standard_False;
-    myFuzzyValue = Precision::Confusion();
-    myGlue = BOPAlgo_GlueOff;
-    myDrawWarnShapes = Standard_False;
-    myCheckInverted = Standard_True;
-    myUseOBB = Standard_False;
-    myUnifyEdges = Standard_False;
-    myUnifyFaces = Standard_False;
-    myAngTol = Precision::Angular();
-  }
-  //
-  void SetRunParallel(const Standard_Boolean bFlag) {
-    myRunParallel=bFlag;
-  };
-  //
-  Standard_Boolean RunParallel()const {
-    return myRunParallel;
-  };
-  //
-  void SetFuzzyValue(const Standard_Real aValue) {
-    myFuzzyValue=aValue;
-  };
-  //
-  Standard_Real FuzzyValue()const {
-    return myFuzzyValue;
-  };
-  //
-  void SetNonDestructive(const Standard_Boolean theFlag) {
-    myNonDestructive = theFlag;
-  };
-  //
-  Standard_Boolean NonDestructive()const {
-    return myNonDestructive;
-  };
-  //
-  void SetGlue(const BOPAlgo_GlueEnum theGlue) {
-    myGlue = theGlue;
-  };
-  //
-  BOPAlgo_GlueEnum Glue() const {
-    return myGlue;
-  };
-  //
-  void SetDrawWarnShapes(const Standard_Boolean bDraw) {
-    myDrawWarnShapes = bDraw;
-  };
-  //
-  Standard_Boolean DrawWarnShapes() const {
-    return myDrawWarnShapes;
-  };
-  //
-  void SetCheckInverted(const Standard_Boolean bCheck) {
-    myCheckInverted = bCheck;
-  };
-  //
-  Standard_Boolean CheckInverted() const {
-    return myCheckInverted;
-  };
-  //
-  void SetUseOBB(const Standard_Boolean bUse) {
-    myUseOBB = bUse;
-  };
-  //
-  Standard_Boolean UseOBB() const {
-    return myUseOBB;
-  };
+    // Resets all options to default values
+    void SetDefaultOptions() {
+        myRunParallel = Standard_False;
+        myNonDestructive = Standard_False;
+        myFuzzyValue = Precision::Confusion();
+        myGlue = BOPAlgo_GlueOff;
+        myDrawWarnShapes = Standard_False;
+        myCheckInverted = Standard_True;
+        myUseOBB = Standard_False;
+        myUnifyEdges = Standard_False;
+        myUnifyFaces = Standard_False;
+        myAngTol = Precision::Angular();
+    }
+    //
+    void SetRunParallel(const Standard_Boolean bFlag) {
+        myRunParallel = bFlag;
+    };
+    //
+    Standard_Boolean RunParallel() const {
+        return myRunParallel;
+    };
+    //
+    void SetFuzzyValue(const Standard_Real aValue) {
+        myFuzzyValue = aValue;
+    };
+    //
+    Standard_Real FuzzyValue() const {
+        return myFuzzyValue;
+    };
+    //
+    void SetNonDestructive(const Standard_Boolean theFlag) {
+        myNonDestructive = theFlag;
+    };
+    //
+    Standard_Boolean NonDestructive() const {
+        return myNonDestructive;
+    };
+    //
+    void SetGlue(const BOPAlgo_GlueEnum theGlue) {
+        myGlue = theGlue;
+    };
+    //
+    BOPAlgo_GlueEnum Glue() const {
+        return myGlue;
+    };
+    //
+    void SetDrawWarnShapes(const Standard_Boolean bDraw) {
+        myDrawWarnShapes = bDraw;
+    };
+    //
+    Standard_Boolean DrawWarnShapes() const {
+        return myDrawWarnShapes;
+    };
+    //
+    void SetCheckInverted(const Standard_Boolean bCheck) {
+        myCheckInverted = bCheck;
+    };
+    //
+    Standard_Boolean CheckInverted() const {
+        return myCheckInverted;
+    };
+    //
+    void SetUseOBB(const Standard_Boolean bUse) {
+        myUseOBB = bUse;
+    };
+    //
+    Standard_Boolean UseOBB() const {
+        return myUseOBB;
+    };
 
-  // Controls the Unification of Edges after BOP
-  void SetUnifyEdges(const Standard_Boolean bUE) { myUnifyEdges = bUE; }
-  // Returns flag of Edges unification
-  Standard_Boolean UnifyEdges() const { return myUnifyEdges; }
+    // Controls the Unification of Edges after BOP
+    void SetUnifyEdges(const Standard_Boolean bUE) {
+        myUnifyEdges = bUE;
+    }
+    // Returns flag of Edges unification
+    Standard_Boolean UnifyEdges() const {
+        return myUnifyEdges;
+    }
 
-  // Controls the Unification of Faces after BOP
-  void SetUnifyFaces(const Standard_Boolean bUF) { myUnifyFaces = bUF; }
-  // Returns flag of Faces unification
-  Standard_Boolean UnifyFaces() const { return myUnifyFaces; }
+    // Controls the Unification of Faces after BOP
+    void SetUnifyFaces(const Standard_Boolean bUF) {
+        myUnifyFaces = bUF;
+    }
+    // Returns flag of Faces unification
+    Standard_Boolean UnifyFaces() const {
+        return myUnifyFaces;
+    }
 
-  // Sets angular tolerance for Edges and Faces unification
-  void SetAngular(const Standard_Real theAngTol) { myAngTol = theAngTol; }
-  // Returns angular tolerance
-  Standard_Real Angular() const { return myAngTol; }
+    // Sets angular tolerance for Edges and Faces unification
+    void SetAngular(const Standard_Real theAngTol) {
+        myAngTol = theAngTol;
+    }
+    // Returns angular tolerance
+    Standard_Real Angular() const {
+        return myAngTol;
+    }
 
 protected:
-  //
-  BOPTest_Session(const BOPTest_Session&);
-  BOPTest_Session& operator=(const BOPTest_Session&);
-  //
+    //
+    BOPTest_Session(const BOPTest_Session&);
+    BOPTest_Session& operator=(const BOPTest_Session&);
+    //
 protected:
-  //
-  BOPAlgo_PaveFiller* myPaveFiller;
-  BOPAlgo_Builder* myBuilder;
-  BOPAlgo_Builder* myBuilderDefault;
-  //
-  TopTools_ListOfShape myShapes;
-  TopTools_ListOfShape myTools;
-  Standard_Boolean myRunParallel;
-  Standard_Boolean myNonDestructive;
-  Standard_Real myFuzzyValue;
-  BOPAlgo_GlueEnum myGlue;
-  Standard_Boolean myDrawWarnShapes;
-  Standard_Boolean myCheckInverted;
-  Standard_Boolean myUseOBB;
-  Standard_Boolean myUnifyEdges;
-  Standard_Boolean myUnifyFaces;
-  Standard_Real myAngTol;
+    //
+    BOPAlgo_PaveFiller* myPaveFiller;
+    BOPAlgo_Builder* myBuilder;
+    BOPAlgo_Builder* myBuilderDefault;
+    //
+    TopTools_ListOfShape myShapes;
+    TopTools_ListOfShape myTools;
+    Standard_Boolean myRunParallel;
+    Standard_Boolean myNonDestructive;
+    Standard_Real myFuzzyValue;
+    BOPAlgo_GlueEnum myGlue;
+    Standard_Boolean myDrawWarnShapes;
+    Standard_Boolean myCheckInverted;
+    Standard_Boolean myUseOBB;
+    Standard_Boolean myUnifyEdges;
+    Standard_Boolean myUnifyFaces;
+    Standard_Real myAngTol;
 };
 //
 //=======================================================================
-//function : GetSession
-//purpose  : 
+// function : GetSession
+// purpose  :
 //=======================================================================
-static BOPTest_Session& GetSession()
-{
-  static BOPTest_Session* pSession=new BOPTest_Session;
-  //
-  if (!pSession->IsValid()) {
-    pSession->Init();
-  }
-  return *pSession;
+static BOPTest_Session& GetSession() {
+    static BOPTest_Session* pSession = new BOPTest_Session;
+    //
+    if (!pSession->IsValid()) {
+        pSession->Init();
+    }
+    return *pSession;
 }
 //
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::Init() 
-{
-  GetSession().Init();
+void BOPTest_Objects::Init() {
+    GetSession().Init();
 }
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::Clear() 
-{
-  GetSession().Clear();
-  Shapes().Clear();
-  Tools().Clear();
+void BOPTest_Objects::Clear() {
+    GetSession().Clear();
+    Shapes().Clear();
+    Tools().Clear();
 }
 //=======================================================================
-//function : PaveFiller
-//purpose  : 
+// function : PaveFiller
+// purpose  :
 //=======================================================================
-BOPAlgo_PaveFiller& BOPTest_Objects::PaveFiller() 
-{
-  return GetSession().PaveFiller();
+BOPAlgo_PaveFiller& BOPTest_Objects::PaveFiller() {
+    return GetSession().PaveFiller();
 }
 //=======================================================================
-//function : PDS
-//purpose  : 
+// function : PDS
+// purpose  :
 //=======================================================================
-BOPDS_PDS BOPTest_Objects::PDS() 
-{
-  return BOPTest_Objects::PaveFiller().PDS();
+BOPDS_PDS BOPTest_Objects::PDS() {
+    return BOPTest_Objects::PaveFiller().PDS();
 }
 //=======================================================================
-//function : Builder
-//purpose  : 
+// function : Builder
+// purpose  :
 //=======================================================================
-BOPAlgo_Builder& BOPTest_Objects::Builder()
-{
-  return GetSession().Builder();
+BOPAlgo_Builder& BOPTest_Objects::Builder() {
+    return GetSession().Builder();
 }
 //=======================================================================
-//function : SetBuilder
-//purpose  : 
+// function : SetBuilder
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetBuilder(const BOPAlgo_PBuilder& theBuilder)
-{
-  BOPAlgo_Builder* pB;
-  //
-  pB=(BOPAlgo_Builder*)theBuilder;
-  GetSession().SetBuilder(pB);
+void BOPTest_Objects::SetBuilder(const BOPAlgo_PBuilder& theBuilder) {
+    BOPAlgo_Builder* pB;
+    //
+    pB = (BOPAlgo_Builder*)theBuilder;
+    GetSession().SetBuilder(pB);
 }
 //=======================================================================
-//function : SetBuilderDefault
-//purpose  : 
+// function : SetBuilderDefault
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetBuilderDefault()
-{
-  GetSession().SetBuilderDefault();
+void BOPTest_Objects::SetBuilderDefault() {
+    GetSession().SetBuilderDefault();
 }
 //=======================================================================
-//function : BOP
-//purpose  : 
+// function : BOP
+// purpose  :
 //=======================================================================
-BOPAlgo_BOP& BOPTest_Objects::BOP()
-{
-  static BOPAlgo_BOP sBOP(Allocator1());
-  return sBOP;
+BOPAlgo_BOP& BOPTest_Objects::BOP() {
+    static BOPAlgo_BOP sBOP(Allocator1());
+    return sBOP;
 }
 //=======================================================================
-//function : Section
-//purpose  : 
+// function : Section
+// purpose  :
 //=======================================================================
-BOPAlgo_Section& BOPTest_Objects::Section()
-{
-  static BOPAlgo_Section sSection(Allocator1());
-  return sSection;
+BOPAlgo_Section& BOPTest_Objects::Section() {
+    static BOPAlgo_Section sSection(Allocator1());
+    return sSection;
 }
 //=======================================================================
-//function : CellsBuilder
-//purpose  : 
+// function : CellsBuilder
+// purpose  :
 //=======================================================================
-BOPAlgo_CellsBuilder& BOPTest_Objects::CellsBuilder()
-{
-  static BOPAlgo_CellsBuilder sCBuilder(Allocator1());
-  return sCBuilder;
+BOPAlgo_CellsBuilder& BOPTest_Objects::CellsBuilder() {
+    static BOPAlgo_CellsBuilder sCBuilder(Allocator1());
+    return sCBuilder;
 }
 //=======================================================================
-//function : Splitter
-//purpose  : 
+// function : Splitter
+// purpose  :
 //=======================================================================
-BOPAlgo_Splitter& BOPTest_Objects::Splitter()
-{
-  static BOPAlgo_Splitter aSplitter(Allocator1());
-  return aSplitter;
+BOPAlgo_Splitter& BOPTest_Objects::Splitter() {
+    static BOPAlgo_Splitter aSplitter(Allocator1());
+    return aSplitter;
 }
 //=======================================================================
-//function : Shapes
-//purpose  : 
+// function : Shapes
+// purpose  :
 //=======================================================================
-TopTools_ListOfShape& BOPTest_Objects::Shapes()
-{
-  return GetSession().Shapes();
+TopTools_ListOfShape& BOPTest_Objects::Shapes() {
+    return GetSession().Shapes();
 }
 //=======================================================================
-//function : Tools
-//purpose  : 
+// function : Tools
+// purpose  :
 //=======================================================================
-TopTools_ListOfShape& BOPTest_Objects::Tools()
-{
-  return GetSession().Tools();
+TopTools_ListOfShape& BOPTest_Objects::Tools() {
+    return GetSession().Tools();
 }
 //=======================================================================
-//function : SetDefaultOptions
-//purpose  : 
+// function : SetDefaultOptions
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetDefaultOptions()
-{
-  GetSession().SetDefaultOptions();
+void BOPTest_Objects::SetDefaultOptions() {
+    GetSession().SetDefaultOptions();
 }
 //=======================================================================
-//function : SetRunParallel
-//purpose  : 
+// function : SetRunParallel
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetRunParallel(const Standard_Boolean bFlag)
-{
-  GetSession().SetRunParallel(bFlag);
+void BOPTest_Objects::SetRunParallel(const Standard_Boolean bFlag) {
+    GetSession().SetRunParallel(bFlag);
 }
 //=======================================================================
-//function : RunParallel
-//purpose  : 
+// function : RunParallel
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::RunParallel()
-{
-  return GetSession().RunParallel();
+Standard_Boolean BOPTest_Objects::RunParallel() {
+    return GetSession().RunParallel();
 }
 //=======================================================================
-//function : SetFuzzyValue
-//purpose  : 
+// function : SetFuzzyValue
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetFuzzyValue(const Standard_Real aValue)
-{
-  GetSession().SetFuzzyValue(aValue);
+void BOPTest_Objects::SetFuzzyValue(const Standard_Real aValue) {
+    GetSession().SetFuzzyValue(aValue);
 }
 //=======================================================================
-//function : FuzzyValue
-//purpose  : 
+// function : FuzzyValue
+// purpose  :
 //=======================================================================
-Standard_Real BOPTest_Objects::FuzzyValue()
-{
-  return GetSession().FuzzyValue();
+Standard_Real BOPTest_Objects::FuzzyValue() {
+    return GetSession().FuzzyValue();
 }
 //=======================================================================
-//function : SetNonDestructive
-//purpose  : 
+// function : SetNonDestructive
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetNonDestructive(const Standard_Boolean theFlag)
-{
-  GetSession().SetNonDestructive(theFlag);
+void BOPTest_Objects::SetNonDestructive(const Standard_Boolean theFlag) {
+    GetSession().SetNonDestructive(theFlag);
 }
 //=======================================================================
-//function : NonDestructive
-//purpose  : 
+// function : NonDestructive
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::NonDestructive()
-{
-  return GetSession().NonDestructive();
+Standard_Boolean BOPTest_Objects::NonDestructive() {
+    return GetSession().NonDestructive();
 }
 //=======================================================================
-//function : SetGlue
-//purpose  : 
+// function : SetGlue
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetGlue(const BOPAlgo_GlueEnum theGlue)
-{
-  GetSession().SetGlue(theGlue);
+void BOPTest_Objects::SetGlue(const BOPAlgo_GlueEnum theGlue) {
+    GetSession().SetGlue(theGlue);
 }
 //=======================================================================
-//function : Glue
-//purpose  : 
+// function : Glue
+// purpose  :
 //=======================================================================
-BOPAlgo_GlueEnum BOPTest_Objects::Glue()
-{
-  return GetSession().Glue();
+BOPAlgo_GlueEnum BOPTest_Objects::Glue() {
+    return GetSession().Glue();
 }
 //=======================================================================
-//function : SetDrawWarnShapes
-//purpose  : 
+// function : SetDrawWarnShapes
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetDrawWarnShapes(const Standard_Boolean bDraw)
-{
-  GetSession().SetDrawWarnShapes(bDraw);
+void BOPTest_Objects::SetDrawWarnShapes(const Standard_Boolean bDraw) {
+    GetSession().SetDrawWarnShapes(bDraw);
 }
 //=======================================================================
-//function : DrawWarnShapes
-//purpose  : 
+// function : DrawWarnShapes
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::DrawWarnShapes()
-{
-  return GetSession().DrawWarnShapes();
+Standard_Boolean BOPTest_Objects::DrawWarnShapes() {
+    return GetSession().DrawWarnShapes();
 }
 //=======================================================================
-//function : SetCheckInverted
-//purpose  : 
+// function : SetCheckInverted
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetCheckInverted(const Standard_Boolean bCheck)
-{
-  GetSession().SetCheckInverted(bCheck);
+void BOPTest_Objects::SetCheckInverted(const Standard_Boolean bCheck) {
+    GetSession().SetCheckInverted(bCheck);
 }
 //=======================================================================
-//function : CheckInverted
-//purpose  : 
+// function : CheckInverted
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::CheckInverted()
-{
-  return GetSession().CheckInverted();
+Standard_Boolean BOPTest_Objects::CheckInverted() {
+    return GetSession().CheckInverted();
 }
 //=======================================================================
-//function : SetUseOBB
-//purpose  : 
+// function : SetUseOBB
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetUseOBB(const Standard_Boolean bUseOBB)
-{
-  GetSession().SetUseOBB(bUseOBB);
+void BOPTest_Objects::SetUseOBB(const Standard_Boolean bUseOBB) {
+    GetSession().SetUseOBB(bUseOBB);
 }
 //=======================================================================
-//function : UseOBB
-//purpose  : 
+// function : UseOBB
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::UseOBB()
-{
-  return GetSession().UseOBB();
+Standard_Boolean BOPTest_Objects::UseOBB() {
+    return GetSession().UseOBB();
 }
 //=======================================================================
-//function : SetUnifyEdges
-//purpose  : 
+// function : SetUnifyEdges
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetUnifyEdges(const Standard_Boolean bUE)
-{
-  GetSession().SetUnifyEdges(bUE);
+void BOPTest_Objects::SetUnifyEdges(const Standard_Boolean bUE) {
+    GetSession().SetUnifyEdges(bUE);
 }
 //=======================================================================
-//function : UnifyEdges
-//purpose  : 
+// function : UnifyEdges
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::UnifyEdges()
-{
-  return GetSession().UnifyEdges();
+Standard_Boolean BOPTest_Objects::UnifyEdges() {
+    return GetSession().UnifyEdges();
 }
 //=======================================================================
-//function : SetUnifyFaces
-//purpose  : 
+// function : SetUnifyFaces
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetUnifyFaces(const Standard_Boolean bUF)
-{
-  GetSession().SetUnifyFaces(bUF);
+void BOPTest_Objects::SetUnifyFaces(const Standard_Boolean bUF) {
+    GetSession().SetUnifyFaces(bUF);
 }
 //=======================================================================
-//function : UnifyFaces
-//purpose  : 
+// function : UnifyFaces
+// purpose  :
 //=======================================================================
-Standard_Boolean BOPTest_Objects::UnifyFaces()
-{
-  return GetSession().UnifyFaces();
+Standard_Boolean BOPTest_Objects::UnifyFaces() {
+    return GetSession().UnifyFaces();
 }
 //=======================================================================
-//function : SetAngular
-//purpose  : 
+// function : SetAngular
+// purpose  :
 //=======================================================================
-void BOPTest_Objects::SetAngular(const Standard_Real theAngTol)
-{
-  GetSession().SetAngular(theAngTol);
+void BOPTest_Objects::SetAngular(const Standard_Real theAngTol) {
+    GetSession().SetAngular(theAngTol);
 }
 //=======================================================================
-//function : Angular
-//purpose  : 
+// function : Angular
+// purpose  :
 //=======================================================================
-Standard_Real BOPTest_Objects::Angular()
-{
-  return GetSession().Angular();
+Standard_Real BOPTest_Objects::Angular() {
+    return GetSession().Angular();
 }
 //=======================================================================
-//function : Allocator1
-//purpose  : 
+// function : Allocator1
+// purpose  :
 //=======================================================================
-Handle(NCollection_BaseAllocator)& Allocator1() 
-{
-  static Handle(NCollection_BaseAllocator) sAL1=
-    NCollection_BaseAllocator::CommonBaseAllocator();
-  return sAL1;
+Handle(NCollection_BaseAllocator) & Allocator1() {
+    static Handle(NCollection_BaseAllocator) sAL1 = NCollection_BaseAllocator::CommonBaseAllocator();
+    return sAL1;
 }

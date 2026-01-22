@@ -31,10 +31,10 @@ class math_Matrix;
 
 class HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter(const Standard_Address& curve1, const Standard_Address& curve2);
+    Standard_EXPORT HLRBRep_TheDistBetweenPCurvesOfTheIntPCurvePCurveOfCInter(const Standard_Address& curve1,
+                                                                              const Standard_Address& curve2);
 
     //! returns 2.
     Standard_EXPORT Standard_Integer NbVariables() const;
@@ -61,7 +61,6 @@ public:
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
 
 protected:
-
 private:
     Standard_Address thecurve1;
     Standard_Address thecurve2;

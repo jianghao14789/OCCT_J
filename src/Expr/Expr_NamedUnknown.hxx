@@ -29,18 +29,14 @@
 class Expr_GeneralExpression;
 class TCollection_AsciiString;
 
-
 class Expr_NamedUnknown;
 DEFINE_STANDARD_HANDLE(Expr_NamedUnknown, Expr_NamedExpression)
 
 //! This class describes any variable of an expression.
 //! Assignment is treated directly in this class.
-class Expr_NamedUnknown : public Expr_NamedExpression
-{
+class Expr_NamedUnknown : public Expr_NamedExpression {
 
 public:
-
-
     Standard_EXPORT Expr_NamedUnknown(const TCollection_AsciiString& name);
 
     //! Tests if an expression is assigned to <me>.
@@ -48,11 +44,11 @@ public:
 
     //! If exists, returns the assigned expression.
     //! An exception is raised if the expression does not exist.
-    Standard_EXPORT const Handle(Expr_GeneralExpression)& AssignedExpression() const;
+    Standard_EXPORT const Handle(Expr_GeneralExpression) & AssignedExpression() const;
 
     //! Assigns <me> to <exp> expression.
     //! Raises exception if <exp> refers to <me>.
-    Standard_EXPORT void Assign(const Handle(Expr_GeneralExpression)& exp);
+    Standard_EXPORT void Assign(const Handle(Expr_GeneralExpression) & exp);
 
     //! Suppresses the assigned expression
     void Deassign();
@@ -63,7 +59,8 @@ public:
 
     //! Returns the <I>-th sub-expression of <me>
     //! raises OutOfRange if <I> > NbSubExpressions(me)
-    Standard_EXPORT const Handle(Expr_GeneralExpression)& SubExpression(const Standard_Integer I) const Standard_OVERRIDE;
+    Standard_EXPORT const Handle(Expr_GeneralExpression) &
+        SubExpression(const Standard_Integer I) const Standard_OVERRIDE;
 
     //! Returns a GeneralExpression after replacement of
     //! NamedUnknowns by an associated expression and after
@@ -81,46 +78,33 @@ public:
     Standard_EXPORT Standard_Boolean ContainsUnknowns() const Standard_OVERRIDE;
 
     //! Tests if <exp> is contained in <me>.
-    Standard_EXPORT Standard_Boolean Contains(const Handle(Expr_GeneralExpression)& exp) const Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean Contains(const Handle(Expr_GeneralExpression) & exp) const Standard_OVERRIDE;
 
     Standard_EXPORT Standard_Boolean IsLinear() const Standard_OVERRIDE;
 
     //! Returns the derivative on <X> unknown of <me>
-    Standard_EXPORT Handle(Expr_GeneralExpression) Derivative(const Handle(Expr_NamedUnknown)& X) const Standard_OVERRIDE;
+    Standard_EXPORT Handle(Expr_GeneralExpression)
+        Derivative(const Handle(Expr_NamedUnknown) & X) const Standard_OVERRIDE;
 
     //! Replaces all occurrences of <var> with <with> in <me>
     //! Raises InvalidOperand if <with> contains <me>.
-    Standard_EXPORT void Replace(const Handle(Expr_NamedUnknown)& var, const Handle(Expr_GeneralExpression)& with) Standard_OVERRIDE;
+    Standard_EXPORT void Replace(const Handle(Expr_NamedUnknown) & var,
+                                 const Handle(Expr_GeneralExpression) & with) Standard_OVERRIDE;
 
     //! Returns the value of <me> (as a Real) by
     //! replacement of <vars> by <vals>.
     //! Raises NotEvaluable if <me> contains NamedUnknown not
     //! in <vars> or NumericError if result cannot be computed.
-    Standard_EXPORT Standard_Real Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const Standard_OVERRIDE;
-
-
-
+    Standard_EXPORT Standard_Real Evaluate(const Expr_Array1OfNamedUnknown& vars,
+                                           const TColStd_Array1OfReal& vals) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Expr_NamedUnknown, Expr_NamedExpression)
 
 protected:
-
-
-
-
 private:
-
-
     Handle(Expr_GeneralExpression) myExpression;
-
-
 };
 
-
 #include <Expr_NamedUnknown.lxx>
-
-
-
-
 
 #endif // _Expr_NamedUnknown_HeaderFile

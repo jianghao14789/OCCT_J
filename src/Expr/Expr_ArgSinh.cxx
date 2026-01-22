@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArgSinh.hxx>
 #include <Expr_Division.hxx>
@@ -33,13 +32,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_ArgSinh, Expr_UnaryExpression)
 
-Expr_ArgSinh::Expr_ArgSinh(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_ArgSinh::Expr_ArgSinh(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgSinh::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_ArgSinh::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) op = Operand();
     if (op->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) valop = Handle(Expr_NumericValue)::DownCast(op);
@@ -52,13 +49,11 @@ Handle(Expr_GeneralExpression) Expr_ArgSinh::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgSinh::Copy() const
-{
-    return  new Expr_ArgSinh(Expr::CopyShare(Operand()));
+Handle(Expr_GeneralExpression) Expr_ArgSinh::Copy() const {
+    return new Expr_ArgSinh(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_ArgSinh::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_ArgSinh::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (!Other->IsKind(STANDARD_TYPE(Expr_ArgSinh))) {
         return Standard_False;
     }
@@ -66,16 +61,14 @@ Standard_Boolean Expr_ArgSinh::IsIdentical(const Handle(Expr_GeneralExpression)&
     return op->IsIdentical(Other->SubExpression(1));
 }
 
-Standard_Boolean Expr_ArgSinh::IsLinear() const
-{
+Standard_Boolean Expr_ArgSinh::IsLinear() const {
     if (ContainsUnknowns()) {
         return Standard_False;
     }
     return Standard_True;
 }
 
-Handle(Expr_GeneralExpression) Expr_ArgSinh::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_ArgSinh::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -89,20 +82,18 @@ Handle(Expr_GeneralExpression) Expr_ArgSinh::Derivative(const Handle(Expr_NamedU
     // sqrt(X2 + 1)
     Handle(Expr_SquareRoot) theroot = new Expr_SquareRoot(thesum->ShallowSimplified());
 
-    // ArgSinh'(F(X)) = F'(X)/sqrt(F(X)2+1) 
+    // ArgSinh'(F(X)) = F'(X)/sqrt(F(X)2+1)
     Handle(Expr_Division) thediv = derop / theroot->ShallowSimplified();
 
     return thediv->ShallowSimplified();
 }
 
-Standard_Real Expr_ArgSinh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_ArgSinh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Real val = Operand()->Evaluate(vars, vals);
     return ::Log(val + ::Sqrt(::Square(val) + 1.0));
 }
 
-TCollection_AsciiString Expr_ArgSinh::String() const
-{
+TCollection_AsciiString Expr_ArgSinh::String() const {
     TCollection_AsciiString str("ASinh(");
     str += Operand()->String();
     str += ")";

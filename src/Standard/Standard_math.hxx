@@ -34,7 +34,6 @@ Standard_EXPORT double __cdecl asinh(double);
 Standard_EXPORT double __cdecl atanh(double);
 #endif
 
-#endif  /* _MSC_VER */
-
+#endif /* _MSC_VER */
 
 #endif

@@ -25,52 +25,32 @@
 class StepBasic_Approval;
 class StepBasic_DateTimeSelect;
 
-
 class StepBasic_ApprovalDateTime;
 DEFINE_STANDARD_HANDLE(StepBasic_ApprovalDateTime, Standard_Transient)
 
 //! Added from StepBasic Rev2 to Rev4
-class StepBasic_ApprovalDateTime : public Standard_Transient
-{
+class StepBasic_ApprovalDateTime : public Standard_Transient {
 
 public:
+    Standard_EXPORT StepBasic_ApprovalDateTime();
 
-  
-  Standard_EXPORT StepBasic_ApprovalDateTime();
-  
-  Standard_EXPORT void Init (const StepBasic_DateTimeSelect& aDateTime, const Handle(StepBasic_Approval)& aDatedApproval);
-  
-  Standard_EXPORT void SetDateTime (const StepBasic_DateTimeSelect& aDateTime);
-  
-  Standard_EXPORT StepBasic_DateTimeSelect DateTime() const;
-  
-  Standard_EXPORT void SetDatedApproval (const Handle(StepBasic_Approval)& aDatedApproval);
-  
-  Standard_EXPORT Handle(StepBasic_Approval) DatedApproval() const;
+    Standard_EXPORT void Init(const StepBasic_DateTimeSelect& aDateTime,
+                              const Handle(StepBasic_Approval) & aDatedApproval);
 
+    Standard_EXPORT void SetDateTime(const StepBasic_DateTimeSelect& aDateTime);
 
+    Standard_EXPORT StepBasic_DateTimeSelect DateTime() const;
 
+    Standard_EXPORT void SetDatedApproval(const Handle(StepBasic_Approval) & aDatedApproval);
 
-  DEFINE_STANDARD_RTTIEXT(StepBasic_ApprovalDateTime,Standard_Transient)
+    Standard_EXPORT Handle(StepBasic_Approval) DatedApproval() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepBasic_ApprovalDateTime, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  StepBasic_DateTimeSelect theDateTime;
-  Handle(StepBasic_Approval) theDatedApproval;
-
-
+    StepBasic_DateTimeSelect theDateTime;
+    Handle(StepBasic_Approval) theDatedApproval;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_ApprovalDateTime_HeaderFile

@@ -11,50 +11,40 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Vrml_Separator.hxx>
 
-Vrml_Separator::Vrml_Separator(const Vrml_SeparatorRenderCulling aRenderCulling)
-{
-  myRenderCulling = aRenderCulling;
-  myFlagPrint = 0;
+Vrml_Separator::Vrml_Separator(const Vrml_SeparatorRenderCulling aRenderCulling) {
+    myRenderCulling = aRenderCulling;
+    myFlagPrint = 0;
 }
 
- Vrml_Separator::Vrml_Separator()
-{
-  myRenderCulling = Vrml_AUTO;
-  myFlagPrint = 0;
+Vrml_Separator::Vrml_Separator() {
+    myRenderCulling = Vrml_AUTO;
+    myFlagPrint = 0;
 }
 
-void Vrml_Separator::SetRenderCulling(const Vrml_SeparatorRenderCulling aRenderCulling)
-{
-  myRenderCulling = aRenderCulling;
+void Vrml_Separator::SetRenderCulling(const Vrml_SeparatorRenderCulling aRenderCulling) {
+    myRenderCulling = aRenderCulling;
 }
 
-Vrml_SeparatorRenderCulling Vrml_Separator::RenderCulling() const 
-{
-  return myRenderCulling;
+Vrml_SeparatorRenderCulling Vrml_Separator::RenderCulling() const {
+    return myRenderCulling;
 }
 
-Standard_OStream& Vrml_Separator::Print(Standard_OStream& anOStream) 
-{
-  if ( myFlagPrint == 0 )
-    {
-      anOStream  << "Separator {\n";
-      if ( myRenderCulling != Vrml_AUTO )
-	{
-	 if ( myRenderCulling == Vrml_ON )
-	    anOStream  << "    renderCulling\tON\n";
-	 else
-	    anOStream  << "    renderCulling\tOFF\n";
-	}
-      myFlagPrint = 1;
-    } //End of if
-  else 
-    {
-     anOStream  << "}\n";
-     myFlagPrint = 0;
+Standard_OStream& Vrml_Separator::Print(Standard_OStream& anOStream) {
+    if (myFlagPrint == 0) {
+        anOStream << "Separator {\n";
+        if (myRenderCulling != Vrml_AUTO) {
+            if (myRenderCulling == Vrml_ON)
+                anOStream << "    renderCulling\tON\n";
+            else
+                anOStream << "    renderCulling\tOFF\n";
+        }
+        myFlagPrint = 1;
+    } // End of if
+    else {
+        anOStream << "}\n";
+        myFlagPrint = 0;
     }
- return anOStream;
+    return anOStream;
 }
-

@@ -18,7 +18,7 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepVisual_AnnotationCurveOccurrenceAndGeomReprItem, StepVisual_AnnotationCurveOccurrence)
 
 //=======================================================================
-//function : StepVisual_AnnotationCurveOccurrenceAndGeomReprItem
-//purpose  : 
+// function : StepVisual_AnnotationCurveOccurrenceAndGeomReprItem
+// purpose  :
 //=======================================================================
-StepVisual_AnnotationCurveOccurrenceAndGeomReprItem::StepVisual_AnnotationCurveOccurrenceAndGeomReprItem()    {  }
+StepVisual_AnnotationCurveOccurrenceAndGeomReprItem::StepVisual_AnnotationCurveOccurrenceAndGeomReprItem() {}

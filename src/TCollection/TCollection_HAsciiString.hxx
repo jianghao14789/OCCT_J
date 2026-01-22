@@ -35,7 +35,6 @@ class Standard_NegativeValue;
 class TCollection_AsciiString;
 class TCollection_HExtendedString;
 
-
 class TCollection_HAsciiString;
 DEFINE_STANDARD_HANDLE(TCollection_HAsciiString, Standard_Transient)
 
@@ -47,12 +46,9 @@ DEFINE_STANDARD_HANDLE(TCollection_HAsciiString, Standard_Transient)
 //! -   HAsciiString strings may be shared by several objects.
 //! -   You may use an AsciiString object to get the actual string.
 //! Note: HAsciiString objects use an AsciiString string as a field.
-class TCollection_HAsciiString : public Standard_Transient
-{
+class TCollection_HAsciiString : public Standard_Transient {
 
 public:
-
-
     //! Initializes a HAsciiString to an empty AsciiString.
     Standard_EXPORT TCollection_HAsciiString();
 
@@ -76,20 +72,21 @@ public:
     Standard_EXPORT TCollection_HAsciiString(const TCollection_AsciiString& aString);
 
     //! Initializes a HAsciiString with a HAsciiString.
-    Standard_EXPORT TCollection_HAsciiString(const Handle(TCollection_HAsciiString)& aString);
+    Standard_EXPORT TCollection_HAsciiString(const Handle(TCollection_HAsciiString) & aString);
 
     //! Initializes a HAsciiString with a HExtendedString.
     //! If replaceNonAscii is non-null character, it will be used
     //! in place of any non-ascii character found in the source string.
     //! Otherwise, creates UTF-8 unicode string.
-    Standard_EXPORT TCollection_HAsciiString(const Handle(TCollection_HExtendedString)& aString, const Standard_Character replaceNonAscii);
+    Standard_EXPORT TCollection_HAsciiString(const Handle(TCollection_HExtendedString) & aString,
+                                             const Standard_Character replaceNonAscii);
 
     //! Appends <other>  to me.
     void AssignCat(const Standard_CString other);
 
     //! Appends <other>  to me.
     //! Example:  aString = aString + anotherString
-    void AssignCat(const Handle(TCollection_HAsciiString)& other);
+    void AssignCat(const Handle(TCollection_HAsciiString) & other);
 
     //! Converts the first character into its corresponding
     //! upper-case character and the other characters into lowercase.
@@ -117,7 +114,7 @@ public:
     //! Creates a new string by concatenation of this
     //! ASCII string and the other ASCII string.
     //! Example:  aString = aString + anotherString
-    Standard_EXPORT Handle(TCollection_HAsciiString) Cat(const Handle(TCollection_HAsciiString)& other) const;
+    Standard_EXPORT Handle(TCollection_HAsciiString) Cat(const Handle(TCollection_HAsciiString) & other) const;
 
     //! Modifies this ASCII string so that its length
     //! becomes equal to Width and the new characters
@@ -150,7 +147,8 @@ public:
     //! assert ( !strcmp(
     //! myMistake->ToCString(),
     //! "Father") );
-    Standard_EXPORT void ChangeAll(const Standard_Character aChar, const Standard_Character NewChar, const Standard_Boolean CaseSensitive = Standard_True);
+    Standard_EXPORT void ChangeAll(const Standard_Character aChar, const Standard_Character NewChar,
+                                   const Standard_Boolean CaseSensitive = Standard_True);
 
     //! Removes all characters contained in <me>.
     //! This produces an empty HAsciiString.
@@ -169,7 +167,9 @@ public:
     //! me = "aabAcAa"
     //! returns
     //! 1
-    Standard_EXPORT Standard_Integer FirstLocationInSet(const Handle(TCollection_HAsciiString)& Set, const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
+    Standard_EXPORT Standard_Integer FirstLocationInSet(const Handle(TCollection_HAsciiString) & Set,
+                                                        const Standard_Integer FromIndex,
+                                                        const Standard_Integer ToIndex) const;
 
     //! Returns the index of the first character of <me>
     //! that is not present in the set <Set>.
@@ -184,7 +184,9 @@ public:
     //! me = "aabAcAa"
     //! returns
     //! 3
-    Standard_EXPORT Standard_Integer FirstLocationNotInSet(const Handle(TCollection_HAsciiString)& Set, const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
+    Standard_EXPORT Standard_Integer FirstLocationNotInSet(const Handle(TCollection_HAsciiString) & Set,
+                                                           const Standard_Integer FromIndex,
+                                                           const Standard_Integer ToIndex) const;
 
     //! Insert a Character at position <where>.
     //! Example:
@@ -200,7 +202,7 @@ public:
     Standard_EXPORT void Insert(const Standard_Integer where, const Standard_CString what);
 
     //! Insert a HAsciiString at position <where>.
-    Standard_EXPORT void Insert(const Standard_Integer where, const Handle(TCollection_HAsciiString)& what);
+    Standard_EXPORT void Insert(const Standard_Integer where, const Handle(TCollection_HAsciiString) & what);
 
     //! Inserts the other ASCII string a after a specific index in the string <me>
     //! Example:
@@ -208,7 +210,7 @@ public:
     //! me = "cde" , Index = 0 , other = "ab"
     //! after
     //! me = "abcde" , other = "ab"
-    Standard_EXPORT void InsertAfter(const Standard_Integer Index, const Handle(TCollection_HAsciiString)& other);
+    Standard_EXPORT void InsertAfter(const Standard_Integer Index, const Handle(TCollection_HAsciiString) & other);
 
     //! Inserts the other ASCII string a before a specific index in the string <me>
     //! Raises an exception if Index is out of bounds
@@ -217,16 +219,16 @@ public:
     //! me = "cde" , Index = 1 , other = "ab"
     //! after
     //! me = "abcde" , other = "ab"
-    Standard_EXPORT void InsertBefore(const Standard_Integer Index, const Handle(TCollection_HAsciiString)& other);
+    Standard_EXPORT void InsertBefore(const Standard_Integer Index, const Handle(TCollection_HAsciiString) & other);
 
     //! Returns True if the string <me> contains zero character
     Standard_EXPORT Standard_Boolean IsEmpty() const;
 
     //! Returns TRUE if <me> is 'ASCII' less than <other>.
-    Standard_EXPORT Standard_Boolean IsLess(const Handle(TCollection_HAsciiString)& other) const;
+    Standard_EXPORT Standard_Boolean IsLess(const Handle(TCollection_HAsciiString) & other) const;
 
     //! Returns TRUE if <me> is 'ASCII' greater than <other>.
-    Standard_EXPORT Standard_Boolean IsGreater(const Handle(TCollection_HAsciiString)& other) const;
+    Standard_EXPORT Standard_Boolean IsGreater(const Handle(TCollection_HAsciiString) & other) const;
 
     //! Converts a HAsciiString containing a numeric expression to
     //! an Integer.
@@ -246,15 +248,16 @@ public:
 
     //! Returns True if the string S not contains same characters than
     //! the string <me>.
-    Standard_EXPORT Standard_Boolean IsDifferent(const Handle(TCollection_HAsciiString)& S) const;
+    Standard_EXPORT Standard_Boolean IsDifferent(const Handle(TCollection_HAsciiString) & S) const;
 
     //! Returns True if the string S contains same characters than the
     //! string <me>.
-    Standard_EXPORT Standard_Boolean IsSameString(const Handle(TCollection_HAsciiString)& S) const;
+    Standard_EXPORT Standard_Boolean IsSameString(const Handle(TCollection_HAsciiString) & S) const;
 
     //! Returns True if the string S contains same characters than the
     //! string <me>.
-    Standard_EXPORT Standard_Boolean IsSameString(const Handle(TCollection_HAsciiString)& S, const Standard_Boolean CaseSensitive) const;
+    Standard_EXPORT Standard_Boolean IsSameString(const Handle(TCollection_HAsciiString) & S,
+                                                  const Standard_Boolean CaseSensitive) const;
 
     //! Removes all space characters in the beginning of the string
     Standard_EXPORT void LeftAdjust();
@@ -287,7 +290,8 @@ public:
     //! me = "aabAaAa"
     //! returns
     //! 4
-    Standard_EXPORT Standard_Integer Location(const Handle(TCollection_HAsciiString)& other, const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
+    Standard_EXPORT Standard_Integer Location(const Handle(TCollection_HAsciiString) & other,
+                                              const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
 
     //! Returns the index of the nth occurrence of the character C
     //! in the string <me> from the starting index FromIndex to the
@@ -300,7 +304,8 @@ public:
     //! after
     //! me = "aabAa"
     //! returns 5
-    Standard_EXPORT Standard_Integer Location(const Standard_Integer N, const Standard_Character C, const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
+    Standard_EXPORT Standard_Integer Location(const Standard_Integer N, const Standard_Character C,
+                                              const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
 
     //! Converts <me> to its lower-case equivalent.
     Standard_EXPORT void LowerCase();
@@ -311,7 +316,7 @@ public:
     //! me = "cde" , S = "ab"
     //! after
     //! me = "abcde" , S = "ab"
-    Standard_EXPORT void Prepend(const Handle(TCollection_HAsciiString)& other);
+    Standard_EXPORT void Prepend(const Handle(TCollection_HAsciiString) & other);
 
     //! Prints this string on the stream <astream>.
     Standard_EXPORT void Print(Standard_OStream& astream) const;
@@ -367,7 +372,7 @@ public:
     //! Searches a String in <me> from the beginning
     //! and returns position of first item <what> matching.
     //! it returns -1 if not found.
-    Standard_EXPORT Standard_Integer Search(const Handle(TCollection_HAsciiString)& what) const;
+    Standard_EXPORT Standard_Integer Search(const Handle(TCollection_HAsciiString) & what) const;
 
     //! Searches a CString in a String from the end
     //! and returns position of first item <what> matching.
@@ -380,7 +385,7 @@ public:
     //! Searches a HAsciiString in another HAsciiString from the end
     //! and returns position of first item <what> matching.
     //! It returns -1 if not found.
-    Standard_EXPORT Standard_Integer SearchFromEnd(const Handle(TCollection_HAsciiString)& what) const;
+    Standard_EXPORT Standard_Integer SearchFromEnd(const Handle(TCollection_HAsciiString) & what) const;
 
     //! Replaces one character in the string at position <where>.
     //! If <where> is less than zero or greater than the length of <me>
@@ -399,7 +404,7 @@ public:
     Standard_EXPORT void SetValue(const Standard_Integer where, const Standard_CString what);
 
     //! Replaces a part of <me> by another string.
-    Standard_EXPORT void SetValue(const Standard_Integer where, const Handle(TCollection_HAsciiString)& what);
+    Standard_EXPORT void SetValue(const Standard_Integer where, const Handle(TCollection_HAsciiString) & what);
 
     //! Splits a HAsciiString into two sub-strings.
     //! Example:
@@ -419,7 +424,8 @@ public:
     //! me = "abcdefg"
     //! returns
     //! "cdef"
-    Standard_EXPORT Handle(TCollection_HAsciiString) SubString(const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
+    Standard_EXPORT Handle(TCollection_HAsciiString)
+        SubString(const Standard_Integer FromIndex, const Standard_Integer ToIndex) const;
 
     //! Returns pointer to string (char *)
     //! This is useful for some casual manipulations
@@ -441,7 +447,8 @@ public:
     //! aString contains "1234; test:message   , value"
     //! aString.Token("; :,",4) returns "value"
     //! aString.Token("; :,",2) returns "test"
-    Standard_EXPORT Handle(TCollection_HAsciiString) Token(const Standard_CString separators = " \t", const Standard_Integer whichone = 1) const;
+    Standard_EXPORT Handle(TCollection_HAsciiString)
+        Token(const Standard_CString separators = " \t", const Standard_Integer whichone = 1) const;
 
     //! Truncates <me> to <ahowmany> characters.
     //! Example:  me = "Hello Dolly" -> Trunc(3) -> me = "Hel"
@@ -465,31 +472,15 @@ public:
     //! Returns the field myString.
     const TCollection_AsciiString& String() const;
 
-    Standard_EXPORT Standard_Boolean IsSameState(const Handle(TCollection_HAsciiString)& other) const;
-
-
-
+    Standard_EXPORT Standard_Boolean IsSameState(const Handle(TCollection_HAsciiString) & other) const;
 
     DEFINE_STANDARD_RTTIEXT(TCollection_HAsciiString, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
     TCollection_AsciiString myString;
-
-
 };
 
-
 #include <TCollection_HAsciiString.lxx>
-
-
-
-
 
 #endif // _TCollection_HAsciiString_HeaderFile

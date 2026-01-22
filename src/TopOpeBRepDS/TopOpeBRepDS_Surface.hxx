@@ -26,41 +26,46 @@
 class Geom_Surface;
 
 //! A Geom surface and a tolerance.
-class TopOpeBRepDS_Surface 
-{
+class TopOpeBRepDS_Surface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopOpeBRepDS_Surface();
 
-  Standard_EXPORT TopOpeBRepDS_Surface();
-  
-  Standard_EXPORT TopOpeBRepDS_Surface(const Handle(Geom_Surface)& P, const Standard_Real T);
-  
-  Standard_EXPORT TopOpeBRepDS_Surface(const TopOpeBRepDS_Surface& Other);
-  
-  Standard_EXPORT void Assign (const TopOpeBRepDS_Surface& Other);
-void operator= (const TopOpeBRepDS_Surface& Other)
-{
-  Assign(Other);
-}
+    Standard_EXPORT TopOpeBRepDS_Surface(const Handle(Geom_Surface) & P, const Standard_Real T);
 
-  const Handle(Geom_Surface)& Surface() const { return mySurface; }
+    Standard_EXPORT TopOpeBRepDS_Surface(const TopOpeBRepDS_Surface& Other);
 
-  Standard_Real Tolerance() const { return myTolerance; }
+    Standard_EXPORT void Assign(const TopOpeBRepDS_Surface& Other);
+    void operator=(const TopOpeBRepDS_Surface& Other) {
+        Assign(Other);
+    }
 
-  //! Update the tolerance
-  void Tolerance (Standard_Real theTol) { myTolerance = theTol; }
+    const Handle(Geom_Surface) & Surface() const {
+        return mySurface;
+    }
 
-  Standard_Boolean Keep() const { return myKeep; }
+    Standard_Real Tolerance() const {
+        return myTolerance;
+    }
 
-  void ChangeKeep (Standard_Boolean theToKeep) { myKeep = theToKeep; }
+    //! Update the tolerance
+    void Tolerance(Standard_Real theTol) {
+        myTolerance = theTol;
+    }
+
+    Standard_Boolean Keep() const {
+        return myKeep;
+    }
+
+    void ChangeKeep(Standard_Boolean theToKeep) {
+        myKeep = theToKeep;
+    }
 
 private:
-
-  Handle(Geom_Surface) mySurface;
-  Standard_Real myTolerance;
-  Standard_Boolean myKeep;
-
+    Handle(Geom_Surface) mySurface;
+    Standard_Real myTolerance;
+    Standard_Boolean myKeep;
 };
 
 #endif // _TopOpeBRepDS_Surface_HeaderFile

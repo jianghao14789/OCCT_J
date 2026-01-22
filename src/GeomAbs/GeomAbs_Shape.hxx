@@ -17,7 +17,6 @@
 #ifndef _GeomAbs_Shape_HeaderFile
 #define _GeomAbs_Shape_HeaderFile
 
-
 //! Provides information about the continuity of a curve:
 //! -   C0: only geometric continuity.
 //! -   G1: for each point on the curve, the tangent vectors
@@ -45,15 +44,6 @@
 //! We may also say that a surface is "Ci" in u, and "Cj" in v
 //! to indicate the continuity of its derivatives up to the order
 //! i in the u parametric direction, and j in the v parametric direction.
-enum GeomAbs_Shape
-{
-    GeomAbs_C0,
-    GeomAbs_G1,
-    GeomAbs_C1,
-    GeomAbs_G2,
-    GeomAbs_C2,
-    GeomAbs_C3,
-    GeomAbs_CN
-};
+enum GeomAbs_Shape { GeomAbs_C0, GeomAbs_G1, GeomAbs_C1, GeomAbs_G2, GeomAbs_C2, GeomAbs_C3, GeomAbs_CN };
 
 #endif // _GeomAbs_Shape_HeaderFile

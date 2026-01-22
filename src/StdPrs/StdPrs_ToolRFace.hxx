@@ -26,63 +26,67 @@
 class TopoDS_Edge;
 
 //! Iterator over 2D curves restricting a face (skipping internal/external edges).
-//! In addition, the algorithm skips NULL curves - IsInvalidGeometry() can be checked if this should be handled within algorithm.
-class StdPrs_ToolRFace 
-{
+//! In addition, the algorithm skips NULL curves - IsInvalidGeometry() can be checked if this should be handled within
+//! algorithm.
+class StdPrs_ToolRFace {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor.
+    Standard_EXPORT StdPrs_ToolRFace();
 
-  //! Empty constructor.
-  Standard_EXPORT StdPrs_ToolRFace();
+    //! Constructor with initialization.
+    Standard_EXPORT StdPrs_ToolRFace(const Handle(BRepAdaptor_Surface) & aSurface);
 
-  //! Constructor with initialization.
-  Standard_EXPORT StdPrs_ToolRFace(const Handle(BRepAdaptor_Surface)& aSurface);
-  
-  //! Return TRUE indicating that iterator looks only for oriented edges.
-  Standard_Boolean IsOriented() const { return Standard_True; }
-  
-  //! Move iterator to the first element.
-  void Init()
-  {
-    myExplorer.Init (myFace, TopAbs_EDGE);
-    next();
-  }
+    //! Return TRUE indicating that iterator looks only for oriented edges.
+    Standard_Boolean IsOriented() const {
+        return Standard_True;
+    }
 
-  //! Return TRUE if iterator points to the curve.
-  Standard_Boolean More() const { return myExplorer.More(); }
+    //! Move iterator to the first element.
+    void Init() {
+        myExplorer.Init(myFace, TopAbs_EDGE);
+        next();
+    }
 
-  //! Go to the next curve in the face.
-  void Next()
-  {
-    myExplorer.Next();
-    next();
-  }
+    //! Return TRUE if iterator points to the curve.
+    Standard_Boolean More() const {
+        return myExplorer.More();
+    }
 
-  //! Return current curve.
-  const Adaptor2d_Curve2d& Value() const { return myCurve; }
+    //! Go to the next curve in the face.
+    void Next() {
+        myExplorer.Next();
+        next();
+    }
 
-  //! Return current edge.
-  Standard_EXPORT const TopoDS_Edge& Edge() const;
+    //! Return current curve.
+    const Adaptor2d_Curve2d& Value() const {
+        return myCurve;
+    }
 
-  //! Return current edge orientation.
-  TopAbs_Orientation Orientation() const { return myExplorer.Current().Orientation(); }
+    //! Return current edge.
+    Standard_EXPORT const TopoDS_Edge& Edge() const;
 
-  //! Return TRUE if NULL curves have been skipped.
-  Standard_Boolean IsInvalidGeometry() const { return myHasNullCurves; }
+    //! Return current edge orientation.
+    TopAbs_Orientation Orientation() const {
+        return myExplorer.Current().Orientation();
+    }
+
+    //! Return TRUE if NULL curves have been skipped.
+    Standard_Boolean IsInvalidGeometry() const {
+        return myHasNullCurves;
+    }
 
 private:
-
-  //! Find nearest valid item for the iterator.
-  Standard_EXPORT void next();
+    //! Find nearest valid item for the iterator.
+    Standard_EXPORT void next();
 
 private:
-
-  TopoDS_Face myFace;
-  TopExp_Explorer myExplorer;
-  Geom2dAdaptor_Curve myCurve;
-  Standard_Boolean myHasNullCurves;
-
+    TopoDS_Face myFace;
+    TopExp_Explorer myExplorer;
+    Geom2dAdaptor_Curve myCurve;
+    Standard_Boolean myHasNullCurves;
 };
 
 #endif // _StdPrs_ToolRFace_HeaderFile

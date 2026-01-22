@@ -49,8 +49,7 @@ public:
     DEFINE_STANDARD_ALLOC;
 
     //! Constructor.
-    Standard_EXPORT Extrema_FuncPSDist(const Adaptor3d_Surface& theS,
-        const gp_Pnt& theP);
+    Standard_EXPORT Extrema_FuncPSDist(const Adaptor3d_Surface& theS, const gp_Pnt& theP);
 
     //! Number of variables.
     Standard_EXPORT Standard_Integer NbVariables() const Standard_OVERRIDE;

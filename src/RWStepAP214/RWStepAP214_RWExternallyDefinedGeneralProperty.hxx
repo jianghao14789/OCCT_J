@@ -27,48 +27,29 @@ class StepAP214_ExternallyDefinedGeneralProperty;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ExternallyDefinedGeneralProperty
-class RWStepAP214_RWExternallyDefinedGeneralProperty 
-{
+class RWStepAP214_RWExternallyDefinedGeneralProperty {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP214_RWExternallyDefinedGeneralProperty();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP214_RWExternallyDefinedGeneralProperty();
-  
-  //! Reads ExternallyDefinedGeneralProperty
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP214_ExternallyDefinedGeneralProperty)& ent) const;
-  
-  //! Writes ExternallyDefinedGeneralProperty
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP214_ExternallyDefinedGeneralProperty)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP214_ExternallyDefinedGeneralProperty)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ExternallyDefinedGeneralProperty
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP214_ExternallyDefinedGeneralProperty) & ent) const;
 
+    //! Writes ExternallyDefinedGeneralProperty
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP214_ExternallyDefinedGeneralProperty) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP214_ExternallyDefinedGeneralProperty) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_RWExternallyDefinedGeneralProperty_HeaderFile

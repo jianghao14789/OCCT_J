@@ -18,39 +18,33 @@
 IMPLEMENT_STANDARD_RTTIEXT(XCAFPrs_Texture, Graphic3d_Texture2Dmanual)
 
 //=======================================================================
-//function : XCAFPrs_Texture
-//purpose  :
+// function : XCAFPrs_Texture
+// purpose  :
 //=======================================================================
-XCAFPrs_Texture::XCAFPrs_Texture (const Image_Texture& theImageSource,
-                                  const Graphic3d_TextureUnit theUnit)
-: Graphic3d_Texture2Dmanual (""),
-  myImageSource (theImageSource)
-{
-  if (!myImageSource.TextureId().IsEmpty())
-  {
-    myTexId = myImageSource.TextureId();
-  }
-  myParams->SetTextureUnit (theUnit);
-  myIsColorMap = theUnit == Graphic3d_TextureUnit_BaseColor
-              || theUnit == Graphic3d_TextureUnit_Emissive;
+XCAFPrs_Texture::XCAFPrs_Texture(const Image_Texture& theImageSource, const Graphic3d_TextureUnit theUnit)
+    : Graphic3d_Texture2Dmanual(""), myImageSource(theImageSource) {
+    if (!myImageSource.TextureId().IsEmpty()) {
+        myTexId = myImageSource.TextureId();
+    }
+    myParams->SetTextureUnit(theUnit);
+    myIsColorMap = theUnit == Graphic3d_TextureUnit_BaseColor || theUnit == Graphic3d_TextureUnit_Emissive;
 }
 
 //=======================================================================
-//function : GetCompressedImage
-//purpose  :
+// function : GetCompressedImage
+// purpose  :
 //=======================================================================
-Handle(Image_CompressedPixMap) XCAFPrs_Texture::GetCompressedImage (const Handle(Image_SupportedFormats)& theSupported)
-{
-  return myImageSource.ReadCompressedImage (theSupported);
+Handle(Image_CompressedPixMap) XCAFPrs_Texture::GetCompressedImage(const Handle(Image_SupportedFormats) &
+                                                                   theSupported) {
+    return myImageSource.ReadCompressedImage(theSupported);
 }
 
 //=======================================================================
-//function : GetImage
-//purpose  :
+// function : GetImage
+// purpose  :
 //=======================================================================
-Handle(Image_PixMap) XCAFPrs_Texture::GetImage (const Handle(Image_SupportedFormats)& theSupported)
-{
-  Handle(Image_PixMap) anImage = myImageSource.ReadImage (theSupported);
-  convertToCompatible (theSupported, anImage);
-  return anImage;
+Handle(Image_PixMap) XCAFPrs_Texture::GetImage(const Handle(Image_SupportedFormats) & theSupported) {
+    Handle(Image_PixMap) anImage = myImageSource.ReadImage(theSupported);
+    convertToCompatible(theSupported, anImage);
+    return anImage;
 }

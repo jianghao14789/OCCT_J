@@ -27,48 +27,26 @@ class StepDimTol_DatumFeature;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DatumFeature
-class RWStepDimTol_RWDatumFeature 
-{
+class RWStepDimTol_RWDatumFeature {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWDatumFeature();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWDatumFeature();
-  
-  //! Reads DatumFeature
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_DatumFeature)& ent) const;
-  
-  //! Writes DatumFeature
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_DatumFeature)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_DatumFeature)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DatumFeature
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepDimTol_DatumFeature) & ent) const;
 
+    //! Writes DatumFeature
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_DatumFeature) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_DatumFeature) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWDatumFeature_HeaderFile

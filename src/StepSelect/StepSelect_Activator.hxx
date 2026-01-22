@@ -26,47 +26,27 @@
 #include <Standard_CString.hxx>
 class IFSelect_SessionPilot;
 
-
 class StepSelect_Activator;
 DEFINE_STANDARD_HANDLE(StepSelect_Activator, IFSelect_Activator)
 
 //! Performs Actions specific to StepSelect, i.e. creation of
 //! Step Selections and Counters, plus dumping specific to Step
-class StepSelect_Activator : public IFSelect_Activator
-{
+class StepSelect_Activator : public IFSelect_Activator {
 
 public:
+    Standard_EXPORT StepSelect_Activator();
 
-  
-  Standard_EXPORT StepSelect_Activator();
-  
-  //! Executes a Command Line for StepSelect
-  Standard_EXPORT IFSelect_ReturnStatus Do (const Standard_Integer number, const Handle(IFSelect_SessionPilot)& pilot) Standard_OVERRIDE;
-  
-  //! Sends a short help message for StepSelect commands
-  Standard_EXPORT Standard_CString Help (const Standard_Integer number) const Standard_OVERRIDE;
+    //! Executes a Command Line for StepSelect
+    Standard_EXPORT IFSelect_ReturnStatus Do(const Standard_Integer number,
+                                             const Handle(IFSelect_SessionPilot) & pilot) Standard_OVERRIDE;
 
+    //! Sends a short help message for StepSelect commands
+    Standard_EXPORT Standard_CString Help(const Standard_Integer number) const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(StepSelect_Activator,IFSelect_Activator)
+    DEFINE_STANDARD_RTTIEXT(StepSelect_Activator, IFSelect_Activator)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepSelect_Activator_HeaderFile

@@ -32,121 +32,102 @@ class XCAFPrs_Style;
 class TDocStd_Document;
 class TDF_Label;
 
-
 /**
  * Algorithm converting one shape or a set of shapes to VrmlData_Scene.
  */
 
-class VrmlData_ShapeConvert 
-{
- public:
+class VrmlData_ShapeConvert {
+public:
+    typedef struct {
+        TCollection_AsciiString Name;
+        TopoDS_Shape Shape;
+        Handle(VrmlData_Node) Node;
+    } ShapeData;
 
-  typedef struct {
-    TCollection_AsciiString Name;
-    TopoDS_Shape            Shape;
-    Handle(VrmlData_Node)   Node;
-  } ShapeData;
+    // ---------- PUBLIC METHODS ----------
 
-  // ---------- PUBLIC METHODS ----------
+    /**
+     * Constructor.
+     * @param theScene
+     *   Scene receiving all Vrml data.
+     * @param theScale
+     *   Scale factor, considering that VRML standard specifies coordinates in
+     *   meters. So if your data are in mm, you should provide theScale=0.001
+     */
+    inline VrmlData_ShapeConvert(VrmlData_Scene& theScene, const Standard_Real theScale = 1.)
+        : myScene(theScene), myScale(theScale), myDeflection(0.0), myDeflAngle(0.0) {}
 
+    /**
+     * Add one shape to the internal list, may be called several times with
+     * different shapes.
+     */
+    Standard_EXPORT void AddShape(const TopoDS_Shape& theShape, const char* theName = 0L);
 
-  /**
-   * Constructor.
-   * @param theScene
-   *   Scene receiving all Vrml data.
-   * @param theScale
-   *   Scale factor, considering that VRML standard specifies coordinates in
-   *   meters. So if your data are in mm, you should provide theScale=0.001
-   */
-  inline VrmlData_ShapeConvert (VrmlData_Scene&     theScene,
-                                const Standard_Real theScale = 1.)
-    : myScene (theScene),
-      myScale (theScale),
-      myDeflection(0.0),
-      myDeflAngle(0.0)
-  {}
+    /**
+     * Convert all accumulated shapes and store them in myScene.
+     * The internal data structures are cleared in the end of conversion.
+     * @param theExtractFaces
+     *   If True,  converter extracst faces from the shapes.
+     * @param theExtractEdges
+     *   If True,  converter extracts edges from the shapes.
+     * @param theDeflection
+     *   Deflection for tessellation of geometrical lines/surfaces. Existing mesh
+     *   is used if its deflection is smaller than the one given by this
+     *   parameter.
+     * @param theDeflAngle
+     *   Angular deflection for tessellation of geometrical lines.
+     */
+    Standard_EXPORT void Convert(const Standard_Boolean theExtractFaces, const Standard_Boolean theExtractEdges,
+                                 const Standard_Real theDeflection = 0.01,
+                                 const Standard_Real theDeflAngle = 20. * M_PI / 180.);
+    // this value of theDeflAngle is used by default
+    // for tesselation while shading (Drawer->HLRAngle())
 
-  /**
-   * Add one shape to the internal list, may be called several times with
-   * different shapes.
-   */
-  Standard_EXPORT void AddShape (const TopoDS_Shape& theShape,
-                                 const char *        theName = 0L);
+    /**
+     * Add all shapes start from given document with colors and names to the internal structure
+     */
+    Standard_EXPORT void ConvertDocument(const Handle(TDocStd_Document) & theDoc);
 
-  /**
-   * Convert all accumulated shapes and store them in myScene.
-   * The internal data structures are cleared in the end of conversion.
-   * @param theExtractFaces
-   *   If True,  converter extracst faces from the shapes. 
-   * @param theExtractEdges
-   *   If True,  converter extracts edges from the shapes.
-   * @param theDeflection 
-   *   Deflection for tessellation of geometrical lines/surfaces. Existing mesh
-   *   is used if its deflection is smaller than the one given by this
-   *   parameter.
-   * @param theDeflAngle 
-   *   Angular deflection for tessellation of geometrical lines. 
-   */
-  Standard_EXPORT void Convert (const Standard_Boolean theExtractFaces,
-				const Standard_Boolean theExtractEdges,
-                                const Standard_Real    theDeflection = 0.01,
-				const Standard_Real    theDeflAngle = 20.*M_PI/180.);
-                                //this value of theDeflAngle is used by default 
-                                //for tesselation while shading (Drawer->HLRAngle())
+protected:
+    // ---------- PROTECTED METHODS ----------
 
-  /**
-   * Add all shapes start from given document with colors and names to the internal structure
-   */
-  Standard_EXPORT void ConvertDocument(const Handle(TDocStd_Document)& theDoc);
+    Handle(VrmlData_Geometry) triToIndexedFaceSet(const Handle(Poly_Triangulation) &, const TopoDS_Face&,
+                                                  const Handle(VrmlData_Coordinate) &);
 
- protected:
-  // ---------- PROTECTED METHODS ----------
+    Handle(VrmlData_Geometry) polToIndexedLineSet(const Handle(Poly_Polygon3D) &);
 
-  Handle(VrmlData_Geometry) triToIndexedFaceSet
-                                (const Handle(Poly_Triangulation)&,
-                                 const TopoDS_Face&,
-                                 const Handle(VrmlData_Coordinate)&);
+    Handle(VrmlData_Appearance) defaultMaterialFace() const;
 
-  Handle(VrmlData_Geometry) polToIndexedLineSet
-                                (const Handle(Poly_Polygon3D)&);
+    Handle(VrmlData_Appearance) defaultMaterialEdge() const;
 
-  Handle(VrmlData_Appearance) defaultMaterialFace () const;
+    Handle(VrmlData_Geometry)
+        makeTShapeNode(const TopoDS_Shape& theShape, const TopAbs_ShapeEnum theShapeType, TopLoc_Location& theLoc);
 
-  Handle(VrmlData_Appearance) defaultMaterialEdge () const;
+    void addAssembly(const Handle(VrmlData_Group) & theParent, const TDF_Label& theLabel,
+                     const Handle(TDocStd_Document) & theDoc, const Standard_Boolean theNeedCreateGroup);
 
-  Handle(VrmlData_Geometry) makeTShapeNode(const TopoDS_Shape& theShape,
-                                           const TopAbs_ShapeEnum theShapeType,
-                                           TopLoc_Location& theLoc);
+    void addInstance(const Handle(VrmlData_Group) & theParent, const TDF_Label& theLabel,
+                     const Handle(TDocStd_Document) & theDoc);
 
-  void addAssembly (const Handle(VrmlData_Group)& theParent,
-                    const TDF_Label& theLabel,
-                    const Handle(TDocStd_Document)& theDoc,
-                    const Standard_Boolean theNeedCreateGroup);
+    void addShape(const Handle(VrmlData_Group) & theParent, const TDF_Label& theLabel,
+                  const Handle(TDocStd_Document) & theDoc);
 
-  void addInstance (const Handle(VrmlData_Group)& theParent,
-                    const TDF_Label& theLabel,
-                    const Handle(TDocStd_Document)& theDoc);
+    Handle(VrmlData_Appearance)
+        makeMaterialFromStyle(const XCAFPrs_Style& theStyle, const TDF_Label& theAttribLab) const;
 
-  void addShape (const Handle(VrmlData_Group)& theParent,
-                 const TDF_Label& theLabel,
-                 const Handle(TDocStd_Document)& theDoc);
+private:
+    // ---------- PRIVATE FIELDS ----------
 
-  Handle(VrmlData_Appearance) makeMaterialFromStyle (const XCAFPrs_Style& theStyle,
-                                                     const TDF_Label& theAttribLab) const;
+    VrmlData_Scene& myScene;
+    Standard_Real myScale;
+    NCollection_List<ShapeData> myShapes;
 
- private:
-  // ---------- PRIVATE FIELDS ----------
+    Standard_Real myDeflection;
+    Standard_Real myDeflAngle;
+    NCollection_DataMap<TopoDS_Shape, Handle(VrmlData_Geometry)> myRelMap;
 
-  VrmlData_Scene&                       myScene;
-  Standard_Real                         myScale;
-  NCollection_List <ShapeData>          myShapes;
-
-  Standard_Real myDeflection;
-  Standard_Real myDeflAngle;
-  NCollection_DataMap <TopoDS_Shape, Handle(VrmlData_Geometry)> myRelMap;
-
-  // ---------- PRIVATE METHODS ----------
-  void operator= (const VrmlData_ShapeConvert&);
+    // ---------- PRIVATE METHODS ----------
+    void operator=(const VrmlData_ShapeConvert&);
 };
 
 #endif

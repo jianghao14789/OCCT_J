@@ -19,5 +19,4 @@
 
 typedef NCollection_Sequence<Handle(StepFEA_Curve3dElementProperty)> StepFEA_SequenceOfCurve3dElementProperty;
 
-
 #endif

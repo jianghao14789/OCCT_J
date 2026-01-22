@@ -27,21 +27,21 @@ class StepKinematics_MechanismStateRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for MechanismStateRepresentation
-class RWStepKinematics_RWMechanismStateRepresentation
-{
+class RWStepKinematics_RWMechanismStateRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWMechanismStateRepresentation();
 
-  Standard_EXPORT RWStepKinematics_RWMechanismStateRepresentation();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_MechanismStateRepresentation)& theEnt) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& theSW, const Handle(StepKinematics_MechanismStateRepresentation)& theEnt) const;
-  
-  Standard_EXPORT void Share (const Handle(StepKinematics_MechanismStateRepresentation)& theEnt, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_MechanismStateRepresentation) & theEnt) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_MechanismStateRepresentation) & theEnt) const;
+
+    Standard_EXPORT void Share(const Handle(StepKinematics_MechanismStateRepresentation) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepKinematics_RWMechanismStateRepresentation_HeaderFile

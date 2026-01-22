@@ -31,35 +31,29 @@ class TopoDS_Wire;
 //! Computes deflection for corresponded shape and checks whether it
 //! fits existing polygonal representation. If not, cleans shape from
 //! outdated info.
-class BRepMesh_ShapeVisitor : public IMeshTools_ShapeVisitor
-{
+class BRepMesh_ShapeVisitor : public IMeshTools_ShapeVisitor {
 public:
+    //! Constructor.
+    Standard_EXPORT BRepMesh_ShapeVisitor(const Handle(IMeshData_Model) & theModel);
 
-  //! Constructor.
-  Standard_EXPORT BRepMesh_ShapeVisitor (const Handle (IMeshData_Model)& theModel);
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMesh_ShapeVisitor();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMesh_ShapeVisitor ();
+    //! Handles TopoDS_Face object.
+    Standard_EXPORT virtual void Visit(const TopoDS_Face& theFace) Standard_OVERRIDE;
 
-  //! Handles TopoDS_Face object.
-  Standard_EXPORT virtual void Visit (const TopoDS_Face& theFace) Standard_OVERRIDE;
+    //! Handles TopoDS_Edge object.
+    Standard_EXPORT virtual void Visit(const TopoDS_Edge& theEdge) Standard_OVERRIDE;
 
-  //! Handles TopoDS_Edge object.
-  Standard_EXPORT virtual void Visit (const TopoDS_Edge& theEdge) Standard_OVERRIDE;
-
-  DEFINE_STANDARD_RTTIEXT(BRepMesh_ShapeVisitor, IMeshTools_ShapeVisitor)
-
-private:
-
-  //! Adds wire to face discrete model.
-  Standard_Boolean addWire (
-    const TopoDS_Wire&            theWire,
-    const IMeshData::IFaceHandle& theDFace);
+    DEFINE_STANDARD_RTTIEXT(BRepMesh_ShapeVisitor, IMeshTools_ShapeVisitor)
 
 private:
+    //! Adds wire to face discrete model.
+    Standard_Boolean addWire(const TopoDS_Wire& theWire, const IMeshData::IFaceHandle& theDFace);
 
-  Handle (IMeshData_Model)      myModel;
-  IMeshData::DMapOfShapeInteger myDEdgeMap;
+private:
+    Handle(IMeshData_Model) myModel;
+    IMeshData::DMapOfShapeInteger myDEdgeMap;
 };
 
 #endif

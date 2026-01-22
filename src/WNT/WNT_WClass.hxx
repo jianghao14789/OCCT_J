@@ -48,40 +48,39 @@
 //! the Window class and do not use the WClass at all.
 //! We implemented this class for sake of flexibility of
 //! event processing.
-class WNT_WClass : public Standard_Transient
-{
-  friend class WNT_Window;
-  DEFINE_STANDARD_RTTIEXT(WNT_WClass, Standard_Transient)
+class WNT_WClass : public Standard_Transient {
+    friend class WNT_Window;
+    DEFINE_STANDARD_RTTIEXT(WNT_WClass, Standard_Transient)
 public:
-  
-  //! Creates a Windows NT window class and registers it.
-  Standard_EXPORT WNT_WClass (const TCollection_AsciiString& theClassName,
-                              const Standard_Address theWndProc,
-                              const unsigned int theStyle,
-                              const Standard_Integer theClassExtra  = 0,
-                              const Standard_Integer theWindowExtra = 0,
-                              const Aspect_Handle theCursor = NULL,
-                              const Aspect_Handle theIcon   = NULL,
-                              const TCollection_AsciiString& theMenuName = TCollection_AsciiString());
+    //! Creates a Windows NT window class and registers it.
+    Standard_EXPORT WNT_WClass(const TCollection_AsciiString& theClassName, const Standard_Address theWndProc,
+                               const unsigned int theStyle, const Standard_Integer theClassExtra = 0,
+                               const Standard_Integer theWindowExtra = 0, const Aspect_Handle theCursor = NULL,
+                               const Aspect_Handle theIcon = NULL,
+                               const TCollection_AsciiString& theMenuName = TCollection_AsciiString());
 
-  //! Destroys all resources attached to the class
-  Standard_EXPORT ~WNT_WClass();
+    //! Destroys all resources attached to the class
+    Standard_EXPORT ~WNT_WClass();
 
-  //! Returns address of window procedure.
-  Standard_Address WndProc() const { return myWndProc; }
+    //! Returns address of window procedure.
+    Standard_Address WndProc() const {
+        return myWndProc;
+    }
 
-  //! Returns a class name.
-  const TCollection_AsciiString& Name() const { return myClassName; }
+    //! Returns a class name.
+    const TCollection_AsciiString& Name() const {
+        return myClassName;
+    }
 
-  //! Returns a program instance handle.
-  Aspect_Handle Instance() const { return myAppInstance; }
+    //! Returns a program instance handle.
+    Aspect_Handle Instance() const {
+        return myAppInstance;
+    }
 
 protected:
-
-  TCollection_AsciiString myClassName;
-  Aspect_Handle           myAppInstance;
-  Standard_Address        myWndProc;
-
+    TCollection_AsciiString myClassName;
+    Aspect_Handle myAppInstance;
+    Standard_Address myWndProc;
 };
 
 DEFINE_STANDARD_HANDLE(WNT_WClass, Standard_Transient)

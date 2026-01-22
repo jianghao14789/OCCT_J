@@ -15,10 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_Edge
-//purpose  : Empty Constructor
+// function : TopoDS_Edge
+// purpose  : Empty Constructor
 //=======================================================================
 
-inline TopoDS_Edge::TopoDS_Edge ()
-{
-}
+inline TopoDS_Edge::TopoDS_Edge() {}

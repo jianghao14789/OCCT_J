@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,83 +19,76 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_SlidingSurfacePairValue, StepKinematics_PairValue)
 
 //=======================================================================
-//function : StepKinematics_SlidingSurfacePairValue
-//purpose  :
+// function : StepKinematics_SlidingSurfacePairValue
+// purpose  :
 //=======================================================================
-StepKinematics_SlidingSurfacePairValue::StepKinematics_SlidingSurfacePairValue ()
-{
+StepKinematics_SlidingSurfacePairValue::StepKinematics_SlidingSurfacePairValue() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_SlidingSurfacePairValue::Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                                                  const Handle(StepKinematics_KinematicPair) &
+                                                      thePairValue_AppliesToPair,
+                                                  const Handle(StepGeom_PointOnSurface) & theActualPointOnSurface1,
+                                                  const Handle(StepGeom_PointOnSurface) & theActualPointOnSurface2,
+                                                  const Standard_Real theActualRotation) {
+    StepKinematics_PairValue::Init(theRepresentationItem_Name, thePairValue_AppliesToPair);
+
+    myActualPointOnSurface1 = theActualPointOnSurface1;
+
+    myActualPointOnSurface2 = theActualPointOnSurface2;
+
+    myActualRotation = theActualRotation;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : ActualPointOnSurface1
+// purpose  :
 //=======================================================================
-void StepKinematics_SlidingSurfacePairValue::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                                   const Handle(StepKinematics_KinematicPair)& thePairValue_AppliesToPair,
-                                                   const Handle(StepGeom_PointOnSurface)& theActualPointOnSurface1,
-                                                   const Handle(StepGeom_PointOnSurface)& theActualPointOnSurface2,
-                                                   const Standard_Real theActualRotation)
-{
-  StepKinematics_PairValue::Init(theRepresentationItem_Name,
-                                 thePairValue_AppliesToPair);
-
-  myActualPointOnSurface1 = theActualPointOnSurface1;
-
-  myActualPointOnSurface2 = theActualPointOnSurface2;
-
-  myActualRotation = theActualRotation;
+Handle(StepGeom_PointOnSurface) StepKinematics_SlidingSurfacePairValue::ActualPointOnSurface1() const {
+    return myActualPointOnSurface1;
 }
 
 //=======================================================================
-//function : ActualPointOnSurface1
-//purpose  :
+// function : SetActualPointOnSurface1
+// purpose  :
 //=======================================================================
-Handle(StepGeom_PointOnSurface) StepKinematics_SlidingSurfacePairValue::ActualPointOnSurface1 () const
-{
-  return myActualPointOnSurface1;
+void StepKinematics_SlidingSurfacePairValue::SetActualPointOnSurface1(const Handle(StepGeom_PointOnSurface) &
+                                                                      theActualPointOnSurface1) {
+    myActualPointOnSurface1 = theActualPointOnSurface1;
 }
 
 //=======================================================================
-//function : SetActualPointOnSurface1
-//purpose  :
+// function : ActualPointOnSurface2
+// purpose  :
 //=======================================================================
-void StepKinematics_SlidingSurfacePairValue::SetActualPointOnSurface1 (const Handle(StepGeom_PointOnSurface)& theActualPointOnSurface1)
-{
-  myActualPointOnSurface1 = theActualPointOnSurface1;
+Handle(StepGeom_PointOnSurface) StepKinematics_SlidingSurfacePairValue::ActualPointOnSurface2() const {
+    return myActualPointOnSurface2;
 }
 
 //=======================================================================
-//function : ActualPointOnSurface2
-//purpose  :
+// function : SetActualPointOnSurface2
+// purpose  :
 //=======================================================================
-Handle(StepGeom_PointOnSurface) StepKinematics_SlidingSurfacePairValue::ActualPointOnSurface2 () const
-{
-  return myActualPointOnSurface2;
+void StepKinematics_SlidingSurfacePairValue::SetActualPointOnSurface2(const Handle(StepGeom_PointOnSurface) &
+                                                                      theActualPointOnSurface2) {
+    myActualPointOnSurface2 = theActualPointOnSurface2;
 }
 
 //=======================================================================
-//function : SetActualPointOnSurface2
-//purpose  :
+// function : ActualRotation
+// purpose  :
 //=======================================================================
-void StepKinematics_SlidingSurfacePairValue::SetActualPointOnSurface2 (const Handle(StepGeom_PointOnSurface)& theActualPointOnSurface2)
-{
-  myActualPointOnSurface2 = theActualPointOnSurface2;
+Standard_Real StepKinematics_SlidingSurfacePairValue::ActualRotation() const {
+    return myActualRotation;
 }
 
 //=======================================================================
-//function : ActualRotation
-//purpose  :
+// function : SetActualRotation
+// purpose  :
 //=======================================================================
-Standard_Real StepKinematics_SlidingSurfacePairValue::ActualRotation () const
-{
-  return myActualRotation;
-}
-
-//=======================================================================
-//function : SetActualRotation
-//purpose  :
-//=======================================================================
-void StepKinematics_SlidingSurfacePairValue::SetActualRotation (const Standard_Real theActualRotation)
-{
-  myActualRotation = theActualRotation;
+void StepKinematics_SlidingSurfacePairValue::SetActualRotation(const Standard_Real theActualRotation) {
+    myActualRotation = theActualRotation;
 }

@@ -25,276 +25,226 @@
 #include <Geom_BSplineCurve.hxx>
 #include <Adaptor3d_Curve.hxx>
 
-
 //=======================================================================
-//function : FirstParameter
-//purpose  : 
+// function : FirstParameter
+// purpose  :
 //=======================================================================
 
-inline Standard_Real Extrema_CurveTool::FirstParameter(const Adaptor3d_Curve& C)
-{
-  return C.FirstParameter();
+inline Standard_Real Extrema_CurveTool::FirstParameter(const Adaptor3d_Curve& C) {
+    return C.FirstParameter();
 }
 
 //=======================================================================
-//function : LastParameter
-//purpose  : 
+// function : LastParameter
+// purpose  :
 //=======================================================================
 
-inline Standard_Real Extrema_CurveTool::LastParameter(const Adaptor3d_Curve& C)
-{
-  return C.LastParameter();
+inline Standard_Real Extrema_CurveTool::LastParameter(const Adaptor3d_Curve& C) {
+    return C.LastParameter();
 }
 
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
 
-inline gp_Pnt Extrema_CurveTool::Value(const Adaptor3d_Curve& C,
-				       const Standard_Real U)
-{
-  return C.Value(U);
+inline gp_Pnt Extrema_CurveTool::Value(const Adaptor3d_Curve& C, const Standard_Real U) {
+    return C.Value(U);
 }
 
 //=======================================================================
-//function : D0
-//purpose  : 
+// function : D0
+// purpose  :
 //=======================================================================
 
-inline void Extrema_CurveTool::D0(const Adaptor3d_Curve& C, 
-					const Standard_Real U, 
-					gp_Pnt& P)
-{
-  C.D0(U, P);
+inline void Extrema_CurveTool::D0(const Adaptor3d_Curve& C, const Standard_Real U, gp_Pnt& P) {
+    C.D0(U, P);
 }
 
 //=======================================================================
-//function : D1
-//purpose  : 
+// function : D1
+// purpose  :
 //=======================================================================
 
-inline void Extrema_CurveTool::D1(const Adaptor3d_Curve& C,
-				  const Standard_Real U,
-				  gp_Pnt& P,
-				  gp_Vec& V)
-{
-  C.D1(U, P, V);
+inline void Extrema_CurveTool::D1(const Adaptor3d_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V) {
+    C.D1(U, P, V);
 }
 
 //=======================================================================
-//function : D2
-//purpose  : 
+// function : D2
+// purpose  :
 //=======================================================================
 
-inline void Extrema_CurveTool::D2(const Adaptor3d_Curve& C,
-				  const Standard_Real U,
-				  gp_Pnt& P,
-				  gp_Vec& V1,
-				  gp_Vec& V2)
-{
-  C.D2(U, P, V1, V2);
+inline void Extrema_CurveTool::D2(const Adaptor3d_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2) {
+    C.D2(U, P, V1, V2);
 }
 
 //=======================================================================
-//function : D3
-//purpose  : 
+// function : D3
+// purpose  :
 //=======================================================================
 
- inline void Extrema_CurveTool::D3(const Adaptor3d_Curve& C, 
-					 const Standard_Real U, 
-					 gp_Pnt& P, 
-					 gp_Vec& V1, 
-					 gp_Vec& V2, 
-					 gp_Vec& V3)
-{
-  C.D3(U, P, V1, V2, V3);
+inline void Extrema_CurveTool::D3(const Adaptor3d_Curve& C, const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                                  gp_Vec& V3) {
+    C.D3(U, P, V1, V2, V3);
 }
 
 //=======================================================================
-//function : DN
-//purpose  : 
+// function : DN
+// purpose  :
 //=======================================================================
-inline gp_Vec Extrema_CurveTool::DN(const Adaptor3d_Curve& C, 
-					     const Standard_Real U, 
-					     const Standard_Integer N)
-{
-  return C.DN(U, N);
-}
-
-
-//=======================================================================
-//function : Continuity
-//purpose  : 
-//=======================================================================
-
-inline GeomAbs_Shape Extrema_CurveTool::Continuity(const Adaptor3d_Curve& C)
-{
-  return C.Continuity();
+inline gp_Vec Extrema_CurveTool::DN(const Adaptor3d_Curve& C, const Standard_Real U, const Standard_Integer N) {
+    return C.DN(U, N);
 }
 
 //=======================================================================
-//function : NbIntervals
-//purpose  : 
+// function : Continuity
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer Extrema_CurveTool::NbIntervals(Adaptor3d_Curve& C,
-						       const GeomAbs_Shape S)
-{
-  return C.NbIntervals(S);
-}
-
-
-//=======================================================================
-//function : Intervals
-//purpose  : 
-//=======================================================================
-
-inline void Extrema_CurveTool::Intervals(Adaptor3d_Curve& C,
-					 TColStd_Array1OfReal& T,
-					 const GeomAbs_Shape   S)
-{
-  C.Intervals(T, S);
+inline GeomAbs_Shape Extrema_CurveTool::Continuity(const Adaptor3d_Curve& C) {
+    return C.Continuity();
 }
 
 //=======================================================================
-//function : Period
-//purpose  : 
+// function : NbIntervals
+// purpose  :
 //=======================================================================
 
-inline Standard_Real Extrema_CurveTool::Period(const Adaptor3d_Curve& C)
-{
-  return C.Period();
-}
-
-
-//=======================================================================
-//function : GetType
-//purpose  : 
-//=======================================================================
-
-inline GeomAbs_CurveType Extrema_CurveTool::GetType(const Adaptor3d_Curve& C)
-{
-  return C.GetType();
+inline Standard_Integer Extrema_CurveTool::NbIntervals(Adaptor3d_Curve& C, const GeomAbs_Shape S) {
+    return C.NbIntervals(S);
 }
 
 //=======================================================================
-//function : Line
-//purpose  : 
+// function : Intervals
+// purpose  :
 //=======================================================================
 
-inline gp_Lin Extrema_CurveTool::Line(const Adaptor3d_Curve& C)
-{
-  return C.Line();
+inline void Extrema_CurveTool::Intervals(Adaptor3d_Curve& C, TColStd_Array1OfReal& T, const GeomAbs_Shape S) {
+    C.Intervals(T, S);
 }
 
 //=======================================================================
-//function : Circle
-//purpose  : 
+// function : Period
+// purpose  :
 //=======================================================================
 
-inline gp_Circ Extrema_CurveTool::Circle(const Adaptor3d_Curve& C)
-{
-  return C.Circle();
+inline Standard_Real Extrema_CurveTool::Period(const Adaptor3d_Curve& C) {
+    return C.Period();
 }
 
 //=======================================================================
-//function : Ellipse
-//purpose  : 
+// function : GetType
+// purpose  :
 //=======================================================================
 
-inline gp_Elips Extrema_CurveTool::Ellipse(const Adaptor3d_Curve& C)
-{
-  return C.Ellipse();
+inline GeomAbs_CurveType Extrema_CurveTool::GetType(const Adaptor3d_Curve& C) {
+    return C.GetType();
 }
 
 //=======================================================================
-//function : Hyperbola
-//purpose  : 
+// function : Line
+// purpose  :
 //=======================================================================
 
-inline gp_Hypr Extrema_CurveTool::Hyperbola(const Adaptor3d_Curve& C)
-{
-  return C.Hyperbola();
+inline gp_Lin Extrema_CurveTool::Line(const Adaptor3d_Curve& C) {
+    return C.Line();
 }
 
 //=======================================================================
-//function : Parabola
-//purpose  : 
+// function : Circle
+// purpose  :
 //=======================================================================
 
-inline gp_Parab Extrema_CurveTool::Parabola(const Adaptor3d_Curve& C)
-{
-  return C.Parabola();
-}
-//=======================================================================
-//function : NbPoles
-//purpose  : 
-//=======================================================================
-
- inline Standard_Integer Extrema_CurveTool::NbPoles(const Adaptor3d_Curve& C)
-{
-  return C.NbPoles();
+inline gp_Circ Extrema_CurveTool::Circle(const Adaptor3d_Curve& C) {
+    return C.Circle();
 }
 
 //=======================================================================
-//function : Degree
-//purpose  : 
+// function : Ellipse
+// purpose  :
 //=======================================================================
 
- inline Standard_Integer Extrema_CurveTool::Degree(const Adaptor3d_Curve& C)
-{
-  return C.Degree();
+inline gp_Elips Extrema_CurveTool::Ellipse(const Adaptor3d_Curve& C) {
+    return C.Ellipse();
 }
 
 //=======================================================================
-//function : IsRational
-//purpose  : 
+// function : Hyperbola
+// purpose  :
 //=======================================================================
 
- inline Standard_Boolean Extrema_CurveTool::IsRational(const Adaptor3d_Curve& C)
-{
-  return C.IsRational();
+inline gp_Hypr Extrema_CurveTool::Hyperbola(const Adaptor3d_Curve& C) {
+    return C.Hyperbola();
 }
 
 //=======================================================================
-//function : NbKnots
-//purpose  : 
+// function : Parabola
+// purpose  :
 //=======================================================================
 
- inline Standard_Integer Extrema_CurveTool::NbKnots(const Adaptor3d_Curve& C)
-{
-  return C.NbKnots();
+inline gp_Parab Extrema_CurveTool::Parabola(const Adaptor3d_Curve& C) {
+    return C.Parabola();
 }
-
-
 //=======================================================================
-//function : Bezier
-//purpose  : 
+// function : NbPoles
+// purpose  :
 //=======================================================================
 
-inline Handle(Geom_BezierCurve) Extrema_CurveTool::Bezier(const Adaptor3d_Curve& C)
-{
-  return C.Bezier();
+inline Standard_Integer Extrema_CurveTool::NbPoles(const Adaptor3d_Curve& C) {
+    return C.NbPoles();
 }
 
 //=======================================================================
-//function : BSpline
-//purpose  : 
+// function : Degree
+// purpose  :
 //=======================================================================
 
-inline Handle(Geom_BSplineCurve) Extrema_CurveTool::BSpline(const Adaptor3d_Curve& C)
-{
-  return C.BSpline();
+inline Standard_Integer Extrema_CurveTool::Degree(const Adaptor3d_Curve& C) {
+    return C.Degree();
 }
 
 //=======================================================================
-//function : Resolution
-//purpose  : 
+// function : IsRational
+// purpose  :
 //=======================================================================
 
-inline Standard_Real Extrema_CurveTool::Resolution(const Adaptor3d_Curve& C,
-						   const Standard_Real R3d) 
-{
-  return C.Resolution(R3d);
+inline Standard_Boolean Extrema_CurveTool::IsRational(const Adaptor3d_Curve& C) {
+    return C.IsRational();
+}
+
+//=======================================================================
+// function : NbKnots
+// purpose  :
+//=======================================================================
+
+inline Standard_Integer Extrema_CurveTool::NbKnots(const Adaptor3d_Curve& C) {
+    return C.NbKnots();
+}
+
+//=======================================================================
+// function : Bezier
+// purpose  :
+//=======================================================================
+
+inline Handle(Geom_BezierCurve) Extrema_CurveTool::Bezier(const Adaptor3d_Curve& C) {
+    return C.Bezier();
+}
+
+//=======================================================================
+// function : BSpline
+// purpose  :
+//=======================================================================
+
+inline Handle(Geom_BSplineCurve) Extrema_CurveTool::BSpline(const Adaptor3d_Curve& C) {
+    return C.BSpline();
+}
+
+//=======================================================================
+// function : Resolution
+// purpose  :
+//=======================================================================
+
+inline Standard_Real Extrema_CurveTool::Resolution(const Adaptor3d_Curve& C, const Standard_Real R3d) {
+    return C.Resolution(R3d);
 }

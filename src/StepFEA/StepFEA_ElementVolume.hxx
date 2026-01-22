@@ -14,10 +14,6 @@
 #ifndef _StepFEA_ElementVolume_HeaderFile
 #define _StepFEA_ElementVolume_HeaderFile
 
-
-enum StepFEA_ElementVolume
-{
-StepFEA_Volume
-};
+enum StepFEA_ElementVolume { StepFEA_Volume };
 
 #endif // _StepFEA_ElementVolume_HeaderFile

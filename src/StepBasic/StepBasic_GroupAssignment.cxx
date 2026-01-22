@@ -19,43 +19,38 @@
 #include <StepBasic_Group.hxx>
 #include <StepBasic_GroupAssignment.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_GroupAssignment,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_GroupAssignment, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_GroupAssignment
-//purpose  : 
+// function : StepBasic_GroupAssignment
+// purpose  :
 //=======================================================================
-StepBasic_GroupAssignment::StepBasic_GroupAssignment ()
-{
+StepBasic_GroupAssignment::StepBasic_GroupAssignment() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_GroupAssignment::Init(const Handle(StepBasic_Group) & aAssignedGroup) {
+
+    theAssignedGroup = aAssignedGroup;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AssignedGroup
+// purpose  :
 //=======================================================================
 
-void StepBasic_GroupAssignment::Init (const Handle(StepBasic_Group) &aAssignedGroup)
-{
-
-  theAssignedGroup = aAssignedGroup;
+Handle(StepBasic_Group) StepBasic_GroupAssignment::AssignedGroup() const {
+    return theAssignedGroup;
 }
 
 //=======================================================================
-//function : AssignedGroup
-//purpose  : 
+// function : SetAssignedGroup
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_Group) StepBasic_GroupAssignment::AssignedGroup () const
-{
-  return theAssignedGroup;
-}
-
-//=======================================================================
-//function : SetAssignedGroup
-//purpose  : 
-//=======================================================================
-
-void StepBasic_GroupAssignment::SetAssignedGroup (const Handle(StepBasic_Group) &aAssignedGroup)
-{
-  theAssignedGroup = aAssignedGroup;
+void StepBasic_GroupAssignment::SetAssignedGroup(const Handle(StepBasic_Group) & aAssignedGroup) {
+    theAssignedGroup = aAssignedGroup;
 }

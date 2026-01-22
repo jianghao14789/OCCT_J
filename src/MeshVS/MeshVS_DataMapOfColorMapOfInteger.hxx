@@ -20,7 +20,9 @@
 #include <TColStd_MapOfInteger.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Quantity_Color, TColStd_MapOfInteger, Quantity_ColorHasher>           MeshVS_DataMapOfColorMapOfInteger;
-typedef NCollection_DataMap<Quantity_Color, TColStd_MapOfInteger, Quantity_ColorHasher>::Iterator MeshVS_DataMapIteratorOfDataMapOfColorMapOfInteger;
+typedef NCollection_DataMap<Quantity_Color, TColStd_MapOfInteger, Quantity_ColorHasher>
+    MeshVS_DataMapOfColorMapOfInteger;
+typedef NCollection_DataMap<Quantity_Color, TColStd_MapOfInteger, Quantity_ColorHasher>::Iterator
+    MeshVS_DataMapIteratorOfDataMapOfColorMapOfInteger;
 
 #endif

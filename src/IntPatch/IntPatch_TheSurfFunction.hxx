@@ -31,16 +31,15 @@ class math_Matrix;
 
 class IntPatch_TheSurfFunction : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT IntPatch_TheSurfFunction();
 
-    Standard_EXPORT IntPatch_TheSurfFunction(const Handle(Adaptor3d_Surface)& PS, const IntSurf_Quadric& IS);
+    Standard_EXPORT IntPatch_TheSurfFunction(const Handle(Adaptor3d_Surface) & PS, const IntSurf_Quadric& IS);
 
     Standard_EXPORT IntPatch_TheSurfFunction(const IntSurf_Quadric& IS);
 
-    void Set(const Handle(Adaptor3d_Surface)& PS);
+    void Set(const Handle(Adaptor3d_Surface) & PS);
 
     void SetImplicitSurface(const IntSurf_Quadric& IS);
 
@@ -70,12 +69,11 @@ public:
 
     const gp_Dir2d& Direction2d();
 
-    const Handle(Adaptor3d_Surface)& PSurface() const;
+    const Handle(Adaptor3d_Surface) & PSurface() const;
 
     const IntSurf_Quadric& ISurface() const;
 
 protected:
-
 private:
     Standard_Address surf;
     Standard_Address func;
@@ -119,8 +117,5 @@ private:
 #undef TheISurfaceTool_hxx
 #undef IntImp_ZerImpFunc
 #undef IntImp_ZerImpFunc_hxx
-
-
-
 
 #endif // _IntPatch_TheSurfFunction_HeaderFile

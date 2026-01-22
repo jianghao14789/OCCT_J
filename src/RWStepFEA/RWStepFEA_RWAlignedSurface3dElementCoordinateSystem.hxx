@@ -27,48 +27,29 @@ class StepFEA_AlignedSurface3dElementCoordinateSystem;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for AlignedSurface3dElementCoordinateSystem
-class RWStepFEA_RWAlignedSurface3dElementCoordinateSystem 
-{
+class RWStepFEA_RWAlignedSurface3dElementCoordinateSystem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWAlignedSurface3dElementCoordinateSystem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWAlignedSurface3dElementCoordinateSystem();
-  
-  //! Reads AlignedSurface3dElementCoordinateSystem
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_AlignedSurface3dElementCoordinateSystem)& ent) const;
-  
-  //! Writes AlignedSurface3dElementCoordinateSystem
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_AlignedSurface3dElementCoordinateSystem)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_AlignedSurface3dElementCoordinateSystem)& ent, Interface_EntityIterator& iter) const;
+    //! Reads AlignedSurface3dElementCoordinateSystem
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_AlignedSurface3dElementCoordinateSystem) & ent) const;
 
+    //! Writes AlignedSurface3dElementCoordinateSystem
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_AlignedSurface3dElementCoordinateSystem) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_AlignedSurface3dElementCoordinateSystem) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWAlignedSurface3dElementCoordinateSystem_HeaderFile

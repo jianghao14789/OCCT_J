@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,27 +28,24 @@
 DEFINE_STANDARD_HANDLE(StepKinematics_SphericalPairValue, StepKinematics_PairValue)
 
 //! Representation of STEP entity SphericalPairValue
-class StepKinematics_SphericalPairValue : public StepKinematics_PairValue
-{
-public :
+class StepKinematics_SphericalPairValue : public StepKinematics_PairValue {
+public:
+    //! default constructor
+    Standard_EXPORT StepKinematics_SphericalPairValue();
 
-  //! default constructor
-  Standard_EXPORT StepKinematics_SphericalPairValue();
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                              const Handle(StepKinematics_KinematicPair) & thePairValue_AppliesToPair,
+                              const StepKinematics_SpatialRotation& theInputOrientation);
 
-  //! Initialize all fields (own and inherited)
- Standard_EXPORT void Init(const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                           const Handle(StepKinematics_KinematicPair)& thePairValue_AppliesToPair,
-                           const StepKinematics_SpatialRotation& theInputOrientation);
+    //! Returns field InputOrientation
+    Standard_EXPORT StepKinematics_SpatialRotation InputOrientation() const;
+    //! Sets field InputOrientation
+    Standard_EXPORT void SetInputOrientation(const StepKinematics_SpatialRotation& theInputOrientation);
 
-  //! Returns field InputOrientation
-  Standard_EXPORT StepKinematics_SpatialRotation InputOrientation() const;
-  //! Sets field InputOrientation
-  Standard_EXPORT void SetInputOrientation (const StepKinematics_SpatialRotation& theInputOrientation);
-
-DEFINE_STANDARD_RTTIEXT(StepKinematics_SphericalPairValue, StepKinematics_PairValue)
+    DEFINE_STANDARD_RTTIEXT(StepKinematics_SphericalPairValue, StepKinematics_PairValue)
 
 private:
-  StepKinematics_SpatialRotation myInputOrientation;
-
+    StepKinematics_SpatialRotation myInputOrientation;
 };
 #endif // _StepKinematics_SphericalPairValue_HeaderFile_

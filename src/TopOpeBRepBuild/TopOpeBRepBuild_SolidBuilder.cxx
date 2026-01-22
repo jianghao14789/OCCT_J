@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TopoDS_Shape.hxx>
 #include <TopOpeBRepBuild_BlockBuilder.hxx>
 #include <TopOpeBRepBuild_Loop.hxx>
@@ -25,211 +24,193 @@
 #include <TopOpeBRepBuild_SolidBuilder.hxx>
 
 //=======================================================================
-//function : TopOpeBRepBuild_SolidBuilder
-//purpose  : 
+// function : TopOpeBRepBuild_SolidBuilder
+// purpose  :
 //=======================================================================
-TopOpeBRepBuild_SolidBuilder::TopOpeBRepBuild_SolidBuilder()
-{
+TopOpeBRepBuild_SolidBuilder::TopOpeBRepBuild_SolidBuilder() {}
+
+//=======================================================================
+// function : TopOpeBRepBuild_SolidBuilder
+// purpose  :
+//=======================================================================
+
+TopOpeBRepBuild_SolidBuilder::TopOpeBRepBuild_SolidBuilder(TopOpeBRepBuild_ShellFaceSet& SFS,
+                                                           const Standard_Boolean ForceClass) {
+    InitSolidBuilder(SFS, ForceClass);
 }
 
 //=======================================================================
-//function : TopOpeBRepBuild_SolidBuilder
-//purpose  : 
+// function : InitSolidBuilder
+// purpose  :
 //=======================================================================
 
-TopOpeBRepBuild_SolidBuilder::TopOpeBRepBuild_SolidBuilder
-(TopOpeBRepBuild_ShellFaceSet& SFS, const Standard_Boolean ForceClass)
-{
-  InitSolidBuilder(SFS,ForceClass);
+void TopOpeBRepBuild_SolidBuilder::InitSolidBuilder(TopOpeBRepBuild_ShellFaceSet& SFS,
+                                                    const Standard_Boolean ForceClass) {
+    MakeLoops(SFS);
+    TopOpeBRepBuild_BlockBuilder& BB = myBlockBuilder;
+    TopOpeBRepBuild_LoopSet& LS = myLoopSet;
+    TopOpeBRepBuild_ShellFaceClassifier SFC(BB);
+    mySolidAreaBuilder.InitSolidAreaBuilder(LS, SFC, ForceClass);
 }
 
 //=======================================================================
-//function : InitSolidBuilder
-//purpose  : 
+// function : InitSolid
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_SolidBuilder::InitSolidBuilder
-(TopOpeBRepBuild_ShellFaceSet& SFS, const Standard_Boolean ForceClass)
-{
-  MakeLoops(SFS);
-  TopOpeBRepBuild_BlockBuilder& BB = myBlockBuilder;
-  TopOpeBRepBuild_LoopSet& LS = myLoopSet;
-  TopOpeBRepBuild_ShellFaceClassifier SFC(BB);
-  mySolidAreaBuilder.InitSolidAreaBuilder(LS,SFC,ForceClass);
+Standard_Integer TopOpeBRepBuild_SolidBuilder::InitSolid() {
+    Standard_Integer n = mySolidAreaBuilder.InitArea();
+    return n;
 }
 
 //=======================================================================
-//function : InitSolid
-//purpose  : 
+// function : MoreSolid
+// purpose  :
 //=======================================================================
 
-Standard_Integer TopOpeBRepBuild_SolidBuilder::InitSolid()
-{
-  Standard_Integer n = mySolidAreaBuilder.InitArea();
-  return n;
+Standard_Boolean TopOpeBRepBuild_SolidBuilder::MoreSolid() const {
+    Standard_Boolean b = mySolidAreaBuilder.MoreArea();
+    return b;
 }
 
 //=======================================================================
-//function : MoreSolid
-//purpose  : 
+// function : NextSolid
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepBuild_SolidBuilder::MoreSolid() const
-{
-  Standard_Boolean b = mySolidAreaBuilder.MoreArea();
-  return b;
+void TopOpeBRepBuild_SolidBuilder::NextSolid() {
+    mySolidAreaBuilder.NextArea();
 }
 
 //=======================================================================
-//function : NextSolid
-//purpose  : 
+// function : InitShell
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_SolidBuilder::NextSolid()
-{
-  mySolidAreaBuilder.NextArea();
+Standard_Integer TopOpeBRepBuild_SolidBuilder::InitShell() {
+    Standard_Integer n = mySolidAreaBuilder.InitLoop();
+    return n;
 }
 
 //=======================================================================
-//function : InitShell
-//purpose  : 
+// function : MoreShell
+// purpose  :
 //=======================================================================
 
-Standard_Integer TopOpeBRepBuild_SolidBuilder::InitShell()
-{
-  Standard_Integer n = mySolidAreaBuilder.InitLoop();
-  return n;
+Standard_Boolean TopOpeBRepBuild_SolidBuilder::MoreShell() const {
+    Standard_Boolean b = mySolidAreaBuilder.MoreLoop();
+    return b;
 }
 
 //=======================================================================
-//function : MoreShell
-//purpose  : 
+// function : NextShell
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepBuild_SolidBuilder::MoreShell() const
-{
-  Standard_Boolean b = mySolidAreaBuilder.MoreLoop();
-  return b;
+void TopOpeBRepBuild_SolidBuilder::NextShell() {
+    mySolidAreaBuilder.NextLoop();
 }
 
 //=======================================================================
-//function : NextShell
-//purpose  : 
+// function : IsOldShell
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_SolidBuilder::NextShell()
-{
-  mySolidAreaBuilder.NextLoop();
+Standard_Boolean TopOpeBRepBuild_SolidBuilder::IsOldShell() const {
+    const Handle(TopOpeBRepBuild_Loop) & L = mySolidAreaBuilder.Loop();
+    Standard_Boolean b = L->IsShape();
+    return b;
 }
 
 //=======================================================================
-//function : IsOldShell
-//purpose  : 
+// function : OldShell
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepBuild_SolidBuilder::IsOldShell() const
-{
-  const Handle(TopOpeBRepBuild_Loop)& L = mySolidAreaBuilder.Loop();
-  Standard_Boolean b = L->IsShape();
-  return b;
+const TopoDS_Shape& TopOpeBRepBuild_SolidBuilder::OldShell() const {
+    const Handle(TopOpeBRepBuild_Loop) & L = mySolidAreaBuilder.Loop();
+    const TopoDS_Shape& B = L->Shape();
+    return B;
 }
 
 //=======================================================================
-//function : OldShell
-//purpose  : 
+// function : InitFace
+// purpose  :
 //=======================================================================
 
-const TopoDS_Shape& TopOpeBRepBuild_SolidBuilder::OldShell() const
-{
-  const Handle(TopOpeBRepBuild_Loop)& L = mySolidAreaBuilder.Loop();
-  const TopoDS_Shape& B = L->Shape();
-  return B;
+Standard_Integer TopOpeBRepBuild_SolidBuilder::InitFace() {
+    const Handle(TopOpeBRepBuild_Loop) & L = mySolidAreaBuilder.Loop();
+    if (L->IsShape())
+        throw Standard_DomainError("TopOpeBRepBuild_SolidBuilder:InitFace");
+    else {
+        myBlockIterator = L->BlockIterator();
+        myBlockIterator.Initialize();
+    }
+    Standard_Integer n = myBlockIterator.Extent();
+    return n;
 }
 
 //=======================================================================
-//function : InitFace
-//purpose  : 
+// function : MoreFace
+// purpose  :
 //=======================================================================
 
-Standard_Integer TopOpeBRepBuild_SolidBuilder::InitFace()
-{
-  const Handle(TopOpeBRepBuild_Loop)& L = mySolidAreaBuilder.Loop();
-  if ( L->IsShape() )
-    throw Standard_DomainError("TopOpeBRepBuild_SolidBuilder:InitFace");
-  else {
-    myBlockIterator = L->BlockIterator();
-    myBlockIterator.Initialize();
-  }
-  Standard_Integer n = myBlockIterator.Extent();
-  return n;
+Standard_Boolean TopOpeBRepBuild_SolidBuilder::MoreFace() const {
+    Standard_Boolean b = myBlockIterator.More();
+    return b;
 }
 
 //=======================================================================
-//function : MoreFace
-//purpose  : 
+// function : NextFace
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepBuild_SolidBuilder::MoreFace() const
-{
-  Standard_Boolean b = myBlockIterator.More();
-  return b;
+void TopOpeBRepBuild_SolidBuilder::NextFace() {
+    myBlockIterator.Next();
 }
 
 //=======================================================================
-//function : NextFace
-//purpose  : 
+// function : Face
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_SolidBuilder::NextFace()
-{
-  myBlockIterator.Next();
-}
-
-//=======================================================================
-//function : Face
-//purpose  : 
-//=======================================================================
-
-const TopoDS_Shape& TopOpeBRepBuild_SolidBuilder::Face() const
-{
+const TopoDS_Shape& TopOpeBRepBuild_SolidBuilder::Face() const {
 #ifdef OCCT_DEBUG
 //  const Standard_Integer i = myBlockIterator.Value(); // DEB
 #endif
-  const TopoDS_Shape& F = myBlockBuilder.Element(myBlockIterator);
-  return F;
+    const TopoDS_Shape& F = myBlockBuilder.Element(myBlockIterator);
+    return F;
 }
 
 //=======================================================================
-//function : MakeLoops
-//purpose  : 
+// function : MakeLoops
+// purpose  :
 //=======================================================================
 
-void TopOpeBRepBuild_SolidBuilder::MakeLoops(TopOpeBRepBuild_ShapeSet& SS)
-{
-  TopOpeBRepBuild_BlockBuilder& BB = myBlockBuilder;
-  TopOpeBRepBuild_ListOfLoop& LL = myLoopSet.ChangeListOfLoop();
+void TopOpeBRepBuild_SolidBuilder::MakeLoops(TopOpeBRepBuild_ShapeSet& SS) {
+    TopOpeBRepBuild_BlockBuilder& BB = myBlockBuilder;
+    TopOpeBRepBuild_ListOfLoop& LL = myLoopSet.ChangeListOfLoop();
 
-  // Build blocks on elements of SS
-  BB.MakeBlock(SS);
+    // Build blocks on elements of SS
+    BB.MakeBlock(SS);
 
-  // make list of loop (LL) of the LoopSet
-  // - on shapes of the ShapeSet (SS)
-  // - on blocks of the BlockBuilder (BB)
+    // make list of loop (LL) of the LoopSet
+    // - on shapes of the ShapeSet (SS)
+    // - on blocks of the BlockBuilder (BB)
 
-  LL.Clear();
-  
-  // Add shapes of SS as shape loops
-  for(SS.InitShapes(); SS.MoreShapes(); SS.NextShape()) {
-    const TopoDS_Shape& S = SS.Shape();
-    Handle(TopOpeBRepBuild_Loop) ShapeLoop = new TopOpeBRepBuild_Loop(S);
-    LL.Append(ShapeLoop);
-  }
-  
-  // Add blocks of BB as block loops
-  for (BB.InitBlock(); BB.MoreBlock(); BB.NextBlock()) {
-    TopOpeBRepBuild_BlockIterator BI = BB.BlockIterator();
-    Handle(TopOpeBRepBuild_Loop) BlockLoop = new TopOpeBRepBuild_Loop(BI);
-    LL.Append(BlockLoop);
-  }
+    LL.Clear();
 
+    // Add shapes of SS as shape loops
+    for (SS.InitShapes(); SS.MoreShapes(); SS.NextShape()) {
+        const TopoDS_Shape& S = SS.Shape();
+        Handle(TopOpeBRepBuild_Loop) ShapeLoop = new TopOpeBRepBuild_Loop(S);
+        LL.Append(ShapeLoop);
+    }
+
+    // Add blocks of BB as block loops
+    for (BB.InitBlock(); BB.MoreBlock(); BB.NextBlock()) {
+        TopOpeBRepBuild_BlockIterator BI = BB.BlockIterator();
+        Handle(TopOpeBRepBuild_Loop) BlockLoop = new TopOpeBRepBuild_Loop(BI);
+        LL.Append(BlockLoop);
+    }
 }

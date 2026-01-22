@@ -22,7 +22,6 @@
 
 #include <IFSelect_SelectFlag.hxx>
 
-
 class IFSelect_SelectIncorrectEntities;
 DEFINE_STANDARD_HANDLE(IFSelect_SelectIncorrectEntities, IFSelect_SelectFlag)
 
@@ -31,37 +30,17 @@ DEFINE_STANDARD_HANDLE(IFSelect_SelectIncorrectEntities, IFSelect_SelectFlag)
 //! (flag "Incorrect")
 //! It can find a result only if ComputeCheck has formerly been
 //! called on the WorkSession. Else, its result will be empty.
-class IFSelect_SelectIncorrectEntities : public IFSelect_SelectFlag
-{
+class IFSelect_SelectIncorrectEntities : public IFSelect_SelectFlag {
 
 public:
+    //! Creates a SelectIncorrectEntities
+    //! i.e. a SelectFlag("Incorrect")
+    Standard_EXPORT IFSelect_SelectIncorrectEntities();
 
-  
-  //! Creates a SelectIncorrectEntities
-  //! i.e. a SelectFlag("Incorrect")
-  Standard_EXPORT IFSelect_SelectIncorrectEntities();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(IFSelect_SelectIncorrectEntities,IFSelect_SelectFlag)
+    DEFINE_STANDARD_RTTIEXT(IFSelect_SelectIncorrectEntities, IFSelect_SelectFlag)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IFSelect_SelectIncorrectEntities_HeaderFile

@@ -14,113 +14,91 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <GeomFill_Boundary.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Vec.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(GeomFill_Boundary,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(GeomFill_Boundary, Standard_Transient)
 
 //=======================================================================
-//function : GeomFill_Boundary
-//purpose  : 
+// function : GeomFill_Boundary
+// purpose  :
 //=======================================================================
-GeomFill_Boundary::GeomFill_Boundary(const Standard_Real Tol3d, 
-				     const Standard_Real Tolang):
- myT3d(Tol3d), myTang(Tolang)
-{
+GeomFill_Boundary::GeomFill_Boundary(const Standard_Real Tol3d, const Standard_Real Tolang)
+    : myT3d(Tol3d), myTang(Tolang) {}
+
+//=======================================================================
+// function : HasNormals
+// purpose  :
+//=======================================================================
+
+Standard_Boolean GeomFill_Boundary::HasNormals() const {
+    return Standard_False;
 }
 
-
 //=======================================================================
-//function : HasNormals
-//purpose  : 
+// function : Norm
+// purpose  :
 //=======================================================================
 
-Standard_Boolean GeomFill_Boundary::HasNormals() const 
-{
-  return Standard_False;
+gp_Vec GeomFill_Boundary::Norm(const Standard_Real) const {
+    throw Standard_Failure("GeomFill_Boundary::Norm : Undefined normals");
 }
 
-
 //=======================================================================
-//function : Norm
-//purpose  : 
+// function : D1Norm
+// purpose  :
 //=======================================================================
 
-gp_Vec GeomFill_Boundary::Norm(const Standard_Real ) const 
-{
-  throw Standard_Failure("GeomFill_Boundary::Norm : Undefined normals");
+void GeomFill_Boundary::D1Norm(const Standard_Real, gp_Vec&, gp_Vec&) const {
+    throw Standard_Failure("GeomFill_Boundary::Norm : Undefined normals");
 }
 
-
 //=======================================================================
-//function : D1Norm
-//purpose  : 
+// function : Points
+// purpose  :
 //=======================================================================
 
-void GeomFill_Boundary::D1Norm(const Standard_Real , gp_Vec& , gp_Vec& ) const 
-{
-  throw Standard_Failure("GeomFill_Boundary::Norm : Undefined normals");
+void GeomFill_Boundary::Points(gp_Pnt& PFirst, gp_Pnt& PLast) const {
+    Standard_Real f, l;
+    Bounds(f, l);
+    PFirst = Value(f);
+    PLast = Value(l);
 }
 
-
 //=======================================================================
-//function : Points
-//purpose  : 
+// function : Tol3d
+// purpose  :
 //=======================================================================
 
-void GeomFill_Boundary::Points(gp_Pnt& PFirst, gp_Pnt& PLast) const
-{
-  Standard_Real f,l;
-  Bounds(f,l);
-  PFirst = Value(f);
-  PLast  = Value(l);
+Standard_Real GeomFill_Boundary::Tol3d() const {
+    return myT3d;
 }
 
-
 //=======================================================================
-//function : Tol3d
-//purpose  : 
+// function : Tol3d
+// purpose  :
 //=======================================================================
 
-Standard_Real GeomFill_Boundary::Tol3d() const 
-{
-  return myT3d;
+void GeomFill_Boundary::Tol3d(const Standard_Real Tol) {
+    myT3d = Tol;
 }
 
-
 //=======================================================================
-//function : Tol3d
-//purpose  : 
+// function : Tolang
+// purpose  :
 //=======================================================================
 
-void GeomFill_Boundary::Tol3d(const Standard_Real Tol)
-{
-  myT3d = Tol;
+Standard_Real GeomFill_Boundary::Tolang() const {
+    return myTang;
 }
 
-
 //=======================================================================
-//function : Tolang
-//purpose  : 
+// function : Tolang
+// purpose  :
 //=======================================================================
 
-Standard_Real GeomFill_Boundary::Tolang() const 
-{
-  return myTang;
+void GeomFill_Boundary::Tolang(const Standard_Real Tol) {
+    myTang = Tol;
 }
-
-
-//=======================================================================
-//function : Tolang
-//purpose  : 
-//=======================================================================
-
-void GeomFill_Boundary::Tolang(const Standard_Real Tol)
-{
-  myTang = Tol;
-}
-
-

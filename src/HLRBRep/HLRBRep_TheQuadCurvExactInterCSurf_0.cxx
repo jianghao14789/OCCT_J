@@ -20,7 +20,6 @@
 #include <gp_Lin.hxx>
 #include <HLRBRep_LineTool.hxx>
 #include <HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf.hxx>
- 
 
 #define TheSurface Standard_Address
 #define TheSurface_hxx <Standard_Address.hxx>
@@ -35,4 +34,3 @@
 #define IntCurveSurface_QuadricCurveExactInter HLRBRep_TheQuadCurvExactInterCSurf
 #define IntCurveSurface_QuadricCurveExactInter_hxx <HLRBRep_TheQuadCurvExactInterCSurf.hxx>
 #include <IntCurveSurface_QuadricCurveExactInter.gxx>
-

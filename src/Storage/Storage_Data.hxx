@@ -39,7 +39,6 @@ class TCollection_ExtendedString;
 class Standard_Persistent;
 class Storage_Root;
 
-
 class Storage_Data;
 DEFINE_STANDARD_HANDLE(Storage_Data, Standard_Transient)
 
@@ -73,13 +72,9 @@ DEFINE_STANDARD_HANDLE(Storage_Data, Standard_Transient)
 //! are not maintained by the storage/retrieval
 //! mechanism: external references are not
 //! supported by Storage_Schema algorithm
-class Storage_Data : public Standard_Transient
-{
+class Storage_Data : public Standard_Transient {
 
 public:
-
-
-
     //! Creates an empty set of data.
     //! You explicitly create a Storage_Data object
     //! when preparing the set of objects to be stored
@@ -103,7 +98,6 @@ public:
     //! reason why the operation failed. The algorithm
     //! stops its analysis at the first detected error
     Standard_EXPORT Storage_Error ErrorStatus() const;
-
 
     //! Clears the error status positioned either by:
     //! -   the last storage operation performed with the
@@ -173,7 +167,7 @@ public:
 
     //! add a persistent root to write. the name of the root
     //! is a driver reference number.
-    Standard_EXPORT void AddRoot(const Handle(Standard_Persistent)& anObject) const;
+    Standard_EXPORT void AddRoot(const Handle(Standard_Persistent) & anObject) const;
 
     //! Adds the root anObject to this set of data.
     //! The name of the root is aName if given; if not, it
@@ -182,7 +176,8 @@ public:
     //! When naming the roots, it is easier to retrieve
     //! objects by significant references rather than by
     //! references without any semantic values.
-    Standard_EXPORT void AddRoot(const TCollection_AsciiString& aName, const Handle(Standard_Persistent)& anObject) const;
+    Standard_EXPORT void AddRoot(const TCollection_AsciiString& aName,
+                                 const Handle(Standard_Persistent) & anObject) const;
 
     //! Removes from this set of data the root object named aName.
     //! Warning
@@ -220,18 +215,14 @@ public:
     //! Storage_Schema algorithm used to store or retrieve them.
     Standard_EXPORT Standard_Boolean IsType(const TCollection_AsciiString& aName) const;
 
-
     //! Gives the list of types of objects used in this set of data in a sequence.
     Standard_EXPORT Handle(TColStd_HSequenceOfAsciiString) Types() const;
 
-
     friend class Storage_Schema;
-
 
     DEFINE_STANDARD_RTTIEXT(Storage_Data, Standard_Transient)
 
-
-        Standard_EXPORT Handle(Storage_HeaderData) HeaderData() const;
+    Standard_EXPORT Handle(Storage_HeaderData) HeaderData() const;
 
     Standard_EXPORT Handle(Storage_RootData) RootData() const;
 
@@ -242,7 +233,6 @@ public:
     Standard_EXPORT void Clear() const;
 
 private:
-
     Standard_EXPORT void SetErrorStatus(const Storage_Error anError);
 
     Standard_EXPORT void SetErrorStatusExtension(const TCollection_AsciiString& anErrorExt);
@@ -253,14 +243,6 @@ private:
     Handle(Storage_InternalData) myInternal;
     Storage_Error myErrorStatus;
     TCollection_AsciiString myErrorStatusExt;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Storage_Data_HeaderFile

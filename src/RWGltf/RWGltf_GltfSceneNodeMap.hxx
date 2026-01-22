@@ -18,31 +18,25 @@
 #include <XCAFPrs_DocumentExplorer.hxx>
 
 //! Indexed map of scene nodes with custom search algorithm.
-class RWGltf_GltfSceneNodeMap : public NCollection_IndexedMap<XCAFPrs_DocumentNode, XCAFPrs_DocumentNode>
-{
+class RWGltf_GltfSceneNodeMap : public NCollection_IndexedMap<XCAFPrs_DocumentNode, XCAFPrs_DocumentNode> {
 public:
+    //! Empty constructor.
+    RWGltf_GltfSceneNodeMap() {}
 
-  //! Empty constructor.
-  RWGltf_GltfSceneNodeMap() {}
+    //! Find index from document node string identifier.
+    Standard_Integer FindIndex(const TCollection_AsciiString& theNodeId) const {
+        if (IsEmpty()) {
+            return 0;
+        }
 
-  //! Find index from document node string identifier.
-  Standard_Integer FindIndex (const TCollection_AsciiString& theNodeId) const
-  {
-    if (IsEmpty())
-    {
-      return 0;
+        for (IndexedMapNode* aNode1Iter = (IndexedMapNode*)myData1[::HashCode(theNodeId, NbBuckets())];
+             aNode1Iter != NULL; aNode1Iter = (IndexedMapNode*)aNode1Iter->Next()) {
+            if (::IsEqual(aNode1Iter->Key1().Id, theNodeId)) {
+                return aNode1Iter->Index();
+            }
+        }
+        return 0;
     }
-
-    for (IndexedMapNode* aNode1Iter = (IndexedMapNode* )myData1[::HashCode (theNodeId, NbBuckets())]; aNode1Iter != NULL; aNode1Iter = (IndexedMapNode* )aNode1Iter->Next())
-    {
-      if (::IsEqual (aNode1Iter->Key1().Id, theNodeId))
-      {
-        return aNode1Iter->Index();
-      }
-    }
-    return 0;
-  }
-
 };
 
 #endif // _RWGltf_GltfSceneNodeMap_HeaderFile

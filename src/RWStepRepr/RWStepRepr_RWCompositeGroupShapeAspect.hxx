@@ -28,25 +28,25 @@ class StepRepr_CompositeGroupShapeAspect;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CompositeGroupShapeAspect
-class RWStepRepr_RWCompositeGroupShapeAspect 
-{
+class RWStepRepr_RWCompositeGroupShapeAspect {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWCompositeGroupShapeAspect();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWCompositeGroupShapeAspect();
-  
-  //! Reads CompositeGroupShapeAspect
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_CompositeGroupShapeAspect)& ent)  const;
-  
-  //! Writes CompositeGroupShapeAspect
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_CompositeGroupShapeAspect)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepRepr_CompositeGroupShapeAspect)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads CompositeGroupShapeAspect
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_CompositeGroupShapeAspect) & ent) const;
+
+    //! Writes CompositeGroupShapeAspect
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_CompositeGroupShapeAspect) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_CompositeGroupShapeAspect) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepRepr_RWCompositeGroupShapeAspect_HeaderFile

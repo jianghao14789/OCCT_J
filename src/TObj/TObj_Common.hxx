@@ -15,7 +15,7 @@
 
 // The original implementation Copyright: (C) RINA S.p.A
 
-// Purpose:   This header file collects basic definitions 
+// Purpose:   This header file collects basic definitions
 //            to be included in most of sources
 
 #ifndef TObj_Common_HeaderFile
@@ -35,16 +35,14 @@
 //! @param theHExtendedString the handle referred to extended string which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-inline Standard_Integer HashCode (const Handle (TCollection_HExtendedString) & theHExtendedString,
-                                  const Standard_Integer                       theUpperBound)
-{
-  return TCollection_ExtendedString::HashCode (theHExtendedString->String(), theUpperBound);
+inline Standard_Integer HashCode(const Handle(TCollection_HExtendedString) & theHExtendedString,
+                                 const Standard_Integer theUpperBound) {
+    return TCollection_ExtendedString::HashCode(theHExtendedString->String(), theUpperBound);
 }
 
-inline Standard_Boolean IsEqual (const Handle(TCollection_HExtendedString)& theStr1,
-                                 const Handle(TCollection_HExtendedString)& theStr2)
-{
-  return TCollection_ExtendedString::IsEqual(theStr1->String(),theStr2->String());
+inline Standard_Boolean IsEqual(const Handle(TCollection_HExtendedString) & theStr1,
+                                const Handle(TCollection_HExtendedString) & theStr2) {
+    return TCollection_ExtendedString::IsEqual(theStr1->String(), theStr2->String());
 }
 
 #endif

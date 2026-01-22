@@ -28,49 +28,28 @@ class StepGeom_CurveBoundedSurface;
 class Transfer_TransientProcess;
 class TopoDS_Face;
 
-
 //! Translate curve_bounded_surface into TopoDS_Face
-class StepToTopoDS_TranslateCurveBoundedSurface  : public StepToTopoDS_Root
-{
+class StepToTopoDS_TranslateCurveBoundedSurface : public StepToTopoDS_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Create empty tool
+    Standard_EXPORT StepToTopoDS_TranslateCurveBoundedSurface();
 
-  
-  //! Create empty tool
-  Standard_EXPORT StepToTopoDS_TranslateCurveBoundedSurface();
-  
-  //! Translate surface
-  Standard_EXPORT StepToTopoDS_TranslateCurveBoundedSurface(const Handle(StepGeom_CurveBoundedSurface)& CBS, const Handle(Transfer_TransientProcess)& TP);
-  
-  //! Translate surface
-  Standard_EXPORT Standard_Boolean Init (const Handle(StepGeom_CurveBoundedSurface)& CBS, const Handle(Transfer_TransientProcess)& TP);
-  
-  //! Returns result of last translation or null wire if failed.
-  Standard_EXPORT const TopoDS_Face& Value() const;
+    //! Translate surface
+    Standard_EXPORT StepToTopoDS_TranslateCurveBoundedSurface(const Handle(StepGeom_CurveBoundedSurface) & CBS,
+                                                              const Handle(Transfer_TransientProcess) & TP);
 
+    //! Translate surface
+    Standard_EXPORT Standard_Boolean Init(const Handle(StepGeom_CurveBoundedSurface) & CBS,
+                                          const Handle(Transfer_TransientProcess) & TP);
 
-
+    //! Returns result of last translation or null wire if failed.
+    Standard_EXPORT const TopoDS_Face& Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  TopoDS_Face myFace;
-
-
+    TopoDS_Face myFace;
 };
-
-
-
-
-
-
 
 #endif // _StepToTopoDS_TranslateCurveBoundedSurface_HeaderFile

@@ -23,8 +23,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_Alert, Standard_Transient)
 
 //=======================================================================
-//function : GetMessageKey
-//purpose  : 获取用于生成消息的键（通常用于多语言消息查找）
+// function : GetMessageKey
+// purpose  : 获取用于生成消息的键（通常用于多语言消息查找）
 //
 // 说明：
 //   - 这个方法返回的键用于在消息表中查找对应的消息文本
@@ -39,15 +39,14 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_Alert, Standard_Transient)
 //   - 如果键是 "ERROR_INVALID_INPUT"，系统会在消息文件中查找该键对应的本地化消息
 //=======================================================================
 
-Standard_CString Message_Alert::GetMessageKey() const
-{
+Standard_CString Message_Alert::GetMessageKey() const {
     // 调用动态类型获取方法，获取当前对象的类名
     return DynamicType()->Name();
 }
 
 //=======================================================================
-//function : SupportsMerge
-//purpose  : 检查是否支持将多个相同类型的警报合并为一个
+// function : SupportsMerge
+// purpose  : 检查是否支持将多个相同类型的警报合并为一个
 //
 // 说明：
 //   - 当多个相同的警报被添加时，系统可以选择合并它们而不是单独存储
@@ -63,16 +62,15 @@ Standard_CString Message_Alert::GetMessageKey() const
 //   - 子类可以重写此方法改变合并行为
 //=======================================================================
 
-Standard_Boolean Message_Alert::SupportsMerge() const
-{
+Standard_Boolean Message_Alert::SupportsMerge() const {
     // by default, support merge
     // 默认情况下，所有警报都支持合并
     return Standard_True;
 }
 
 //=======================================================================
-//function : Merge
-//purpose  : 尝试将此警报与另一个警报合并
+// function : Merge
+// purpose  : 尝试将此警报与另一个警报合并
 //
 // 参数说明：
 //   - theTarget：要合并的目标警报对象
@@ -96,8 +94,7 @@ Standard_Boolean Message_Alert::SupportsMerge() const
 //   - 可以更新为 "发现 5 个错误"
 //=======================================================================
 
-Standard_Boolean Message_Alert::Merge(const Handle(Message_Alert)& /*theTarget*/)
-{
+Standard_Boolean Message_Alert::Merge(const Handle(Message_Alert) & /*theTarget*/) {
     // by default, merge trivially（默认情况下，合并总是成功的）
     // 参数名称前的 // 表示这个参数在此函数中未使用
     // 这避免了编译器的未使用参数警告
@@ -105,8 +102,8 @@ Standard_Boolean Message_Alert::Merge(const Handle(Message_Alert)& /*theTarget*/
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将对象的内容以 JSON 格式输出（用于调试和日志记录）
+// function : DumpJson
+// purpose  : 将对象的内容以 JSON 格式输出（用于调试和日志记录）
 //
 // 参数说明：
 //   - theOStream：输出流对象，JSON 将被写入此流
@@ -131,8 +128,7 @@ Standard_Boolean Message_Alert::Merge(const Handle(Message_Alert)& /*theTarget*/
 //   - 开始 JSON 对象的声明
 //   - 标记这是一个瞬态类（非永久存储的类）
 //=======================================================================
-void Message_Alert::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-{
+void Message_Alert::DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
     // 开始 JSON 对象的输出
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
     // 注意：这个基类的 DumpJson 实现很简单

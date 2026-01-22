@@ -29,100 +29,82 @@
 class IntCurveSurface_IntersectionPoint;
 class IntCurveSurface_IntersectionSegment;
 
-
-
-class IntCurveSurface_Intersection 
-{
+class IntCurveSurface_Intersection {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! returns the <done> field.
+    Standard_EXPORT Standard_Boolean IsDone() const;
 
-  
-  //! returns the <done> field.
-  Standard_EXPORT Standard_Boolean IsDone() const;
-  
-  //! returns the number of IntersectionPoint
-  //! if IsDone returns True.
-  //! else NotDone is raised.
-  Standard_EXPORT Standard_Integer NbPoints() const;
-  
-  //! returns the IntersectionPoint of range <Index>
-  //! raises NotDone if the computation has failed or if
-  //! the computation has not been done
-  //! raises OutOfRange if Index is not in the range <1..NbPoints>
-  Standard_EXPORT const IntCurveSurface_IntersectionPoint& Point (const Standard_Integer Index) const;
-  
-  //! returns the number of IntersectionSegment
-  //! if IsDone returns True.
-  //! else NotDone is raised.
-  Standard_EXPORT Standard_Integer NbSegments() const;
-  
-  //! returns the IntersectionSegment of range <Index>
-  //! raises NotDone if the computation has failed or if
-  //! the computation has not been done
-  //! raises OutOfRange if Index is not in the range <1..NbSegment>
-  Standard_EXPORT const IntCurveSurface_IntersectionSegment& Segment (const Standard_Integer Index) const;
+    //! returns the number of IntersectionPoint
+    //! if IsDone returns True.
+    //! else NotDone is raised.
+    Standard_EXPORT Standard_Integer NbPoints() const;
 
-  //! Returns true if curve is parallel or belongs surface
-  //! This case is recognized only for some pairs 
-  //! of analytical curves and surfaces (plane - line, ...)
-  Standard_EXPORT Standard_Boolean IsParallel() const;
+    //! returns the IntersectionPoint of range <Index>
+    //! raises NotDone if the computation has failed or if
+    //! the computation has not been done
+    //! raises OutOfRange if Index is not in the range <1..NbPoints>
+    Standard_EXPORT const IntCurveSurface_IntersectionPoint& Point(const Standard_Integer Index) const;
 
-  //! Dump all the fields.
-  Standard_EXPORT void Dump() const;
+    //! returns the number of IntersectionSegment
+    //! if IsDone returns True.
+    //! else NotDone is raised.
+    Standard_EXPORT Standard_Integer NbSegments() const;
+
+    //! returns the IntersectionSegment of range <Index>
+    //! raises NotDone if the computation has failed or if
+    //! the computation has not been done
+    //! raises OutOfRange if Index is not in the range <1..NbSegment>
+    Standard_EXPORT const IntCurveSurface_IntersectionSegment& Segment(const Standard_Integer Index) const;
+
+    //! Returns true if curve is parallel or belongs surface
+    //! This case is recognized only for some pairs
+    //! of analytical curves and surfaces (plane - line, ...)
+    Standard_EXPORT Standard_Boolean IsParallel() const;
+
+    //! Dump all the fields.
+    Standard_EXPORT void Dump() const;
 
 protected:
-  
-  //! Empty Constructor;
-  Standard_EXPORT IntCurveSurface_Intersection();
-  
-  //! Destructor is protected, for safe inheritance
-  ~IntCurveSurface_Intersection() {}
+    //! Empty Constructor;
+    Standard_EXPORT IntCurveSurface_Intersection();
 
-  //! Internal method
-  //! copy the <Inter> fields to <me>
-  Standard_EXPORT void SetValues (const IntCurveSurface_Intersection& Inter);
-  
-  //! Internal method
-  //! Append the IntersectionPoints and
-  //! IntersectionSegments of <Inter> to <me>.
-  Standard_EXPORT void Append (const IntCurveSurface_Intersection& Inter, const Standard_Real FirstParamOnCurve, const Standard_Real LastParamOnCurve);
-  
-  //! Internal method
-  //! Append the IntersectionPoints of <Inter> to <me>
-  Standard_EXPORT void Append (const IntCurveSurface_IntersectionPoint& Pt);
-  
-  //! Internal method
-  //! Append the IntersectionPoints of <Inter> to <me>
-  Standard_EXPORT void Append (const IntCurveSurface_IntersectionSegment& Seg);
-  
-  //! Internal method
-  //! Reset all the fields of <me>
-  //! Clear the sequences of IntersectionPoints and Segments
-  //! Set the field <done> to Standard_False.
-  Standard_EXPORT void ResetFields();
+    //! Destructor is protected, for safe inheritance
+    ~IntCurveSurface_Intersection() {}
 
+    //! Internal method
+    //! copy the <Inter> fields to <me>
+    Standard_EXPORT void SetValues(const IntCurveSurface_Intersection& Inter);
 
-  Standard_Boolean done;
-  Standard_Boolean myIsParallel; //Curve is "parallel" surface
-  //This case is recognized only for some pairs 
-  //of analytical curves and surfaces (plane - line, ...)
+    //! Internal method
+    //! Append the IntersectionPoints and
+    //! IntersectionSegments of <Inter> to <me>.
+    Standard_EXPORT void Append(const IntCurveSurface_Intersection& Inter, const Standard_Real FirstParamOnCurve,
+                                const Standard_Real LastParamOnCurve);
 
+    //! Internal method
+    //! Append the IntersectionPoints of <Inter> to <me>
+    Standard_EXPORT void Append(const IntCurveSurface_IntersectionPoint& Pt);
+
+    //! Internal method
+    //! Append the IntersectionPoints of <Inter> to <me>
+    Standard_EXPORT void Append(const IntCurveSurface_IntersectionSegment& Seg);
+
+    //! Internal method
+    //! Reset all the fields of <me>
+    //! Clear the sequences of IntersectionPoints and Segments
+    //! Set the field <done> to Standard_False.
+    Standard_EXPORT void ResetFields();
+
+    Standard_Boolean done;
+    Standard_Boolean myIsParallel; // Curve is "parallel" surface
+    // This case is recognized only for some pairs
+    // of analytical curves and surfaces (plane - line, ...)
 
 private:
-
-
-
-  IntCurveSurface_SequenceOfPnt lpnt;
-  IntCurveSurface_SequenceOfSeg lseg;
-
-
+    IntCurveSurface_SequenceOfPnt lpnt;
+    IntCurveSurface_SequenceOfSeg lseg;
 };
-
-
-
-
-
-
 
 #endif // _IntCurveSurface_Intersection_HeaderFile

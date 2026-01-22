@@ -28,25 +28,25 @@ class StepDimTol_GeometricToleranceWithDefinedAreaUnit;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GeometricToleranceWithDefinedAreaUnit
-class RWStepDimTol_RWGeometricToleranceWithDefinedAreaUnit 
-{
+class RWStepDimTol_RWGeometricToleranceWithDefinedAreaUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWGeometricToleranceWithDefinedAreaUnit();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWGeometricToleranceWithDefinedAreaUnit();
-  
-  //! Reads GeometricToleranceWithDefinedAreaUnit
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_GeometricToleranceWithDefinedAreaUnit)& ent)  const;
-  
-  //! Writes GeometricToleranceWithDefinedAreaUnit
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_GeometricToleranceWithDefinedAreaUnit)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_GeometricToleranceWithDefinedAreaUnit)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads GeometricToleranceWithDefinedAreaUnit
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_GeometricToleranceWithDefinedAreaUnit) & ent) const;
+
+    //! Writes GeometricToleranceWithDefinedAreaUnit
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_GeometricToleranceWithDefinedAreaUnit) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_GeometricToleranceWithDefinedAreaUnit) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWGeometricToleranceWithDefinedAreaUnit_HeaderFile

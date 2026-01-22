@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(TopOpeBRepBuild_Pave)> TopOpeBRepBuild_ListOfPave;
 typedef NCollection_List<Handle(TopOpeBRepBuild_Pave)>::Iterator TopOpeBRepBuild_ListIteratorOfListOfPave;
 
-
 #endif

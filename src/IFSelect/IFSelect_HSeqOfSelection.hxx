@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(IFSelect_HSeqOfSelection, IFSelect_TSeqOfSelection)
 
-
 #endif

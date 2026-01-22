@@ -29,7 +29,6 @@
 #include <GeomInt_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfWLApprox.hxx>
 #include <AppParCurves_MultiBSpCurve.hxx>
 #include <AppParCurves_MultiCurve.hxx>
- 
 
 #define MultiLine GeomInt_TheMultiLineOfWLApprox
 #define MultiLine_hxx <GeomInt_TheMultiLineOfWLApprox.hxx>
@@ -38,17 +37,23 @@
 #define Approx_MyBSplGradient GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox
 #define Approx_MyBSplGradient_hxx <GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_BSpParLeastSquareOfMyBSplGradient GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox
-#define Approx_BSpParLeastSquareOfMyBSplGradient_hxx <GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
+#define Approx_BSpParLeastSquareOfMyBSplGradient_hxx                                                                   \
+<GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_BSpParFunctionOfMyBSplGradient GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox
-#define Approx_BSpParFunctionOfMyBSplGradient_hxx <GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
+#define Approx_BSpParFunctionOfMyBSplGradient_hxx                                                                      \
+<GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_BSpGradient_BFGSOfMyBSplGradient GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox
-#define Approx_BSpGradient_BFGSOfMyBSplGradient_hxx <GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
+#define Approx_BSpGradient_BFGSOfMyBSplGradient_hxx                                                                    \
+<GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_BSpParLeastSquareOfMyBSplGradient GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox
-#define Approx_BSpParLeastSquareOfMyBSplGradient_hxx <GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
+#define Approx_BSpParLeastSquareOfMyBSplGradient_hxx                                                                   \
+<GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_BSpParFunctionOfMyBSplGradient GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox
-#define Approx_BSpParFunctionOfMyBSplGradient_hxx <GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
+#define Approx_BSpParFunctionOfMyBSplGradient_hxx                                                                      \
+<GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_BSpGradient_BFGSOfMyBSplGradient GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox
-#define Approx_BSpGradient_BFGSOfMyBSplGradient_hxx <GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
+#define Approx_BSpGradient_BFGSOfMyBSplGradient_hxx                                                                    \
+<GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox.hxx>
 #define Approx_MyGradientbis GeomInt_MyGradientbisOfTheComputeLineOfWLApprox
 #define Approx_MyGradientbis_hxx <GeomInt_MyGradientbisOfTheComputeLineOfWLApprox.hxx>
 #define Approx_ParLeastSquareOfMyGradientbis GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox
@@ -70,4 +75,3 @@
 #define Approx_BSplComputeLine GeomInt_TheComputeLineOfWLApprox
 #define Approx_BSplComputeLine_hxx <GeomInt_TheComputeLineOfWLApprox.hxx>
 #include <Approx_BSplComputeLine.gxx>
-

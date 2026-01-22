@@ -68,42 +68,35 @@ class TopoDS_Shape;
 //! - *BOPAlgo_AlertIntersectionFailed* - in case the intersection of the arguments has failed;
 //! - *BOPAlgo_AlertBuilderFailed* - in case building splits of arguments has failed with some unexpected error.
 //!
-class BOPAlgo_Builder : public BOPAlgo_BuilderShape
-{
+class BOPAlgo_Builder : public BOPAlgo_BuilderShape {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Empty constructor.
     Standard_EXPORT BOPAlgo_Builder();
     Standard_EXPORT virtual ~BOPAlgo_Builder();
 
-    Standard_EXPORT BOPAlgo_Builder(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_Builder(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     //! Clears the content of the algorithm.
     Standard_EXPORT virtual void Clear() Standard_OVERRIDE;
 
     //! Returns the PaveFiller, algorithm for sub-shapes intersection.
-    BOPAlgo_PPaveFiller PPaveFiller()
-    {
+    BOPAlgo_PPaveFiller PPaveFiller() {
         return myPaveFiller;
     }
 
     //! Returns the Data Structure, holder of intersection information.
-    BOPDS_PDS PDS()
-    {
+    BOPDS_PDS PDS() {
         return myDS;
     }
 
     //! Returns the Context, tool for cashing heavy algorithms.
-    Handle(IntTools_Context) Context() const
-    {
+    Handle(IntTools_Context) Context() const {
         return myContext;
     }
 
-
 public: //! @name Arguments
-
     //! Adds the argument to the operation.
     Standard_EXPORT virtual void AddArgument(const TopoDS_Shape& theShape);
 
@@ -111,71 +104,61 @@ public: //! @name Arguments
     Standard_EXPORT virtual void SetArguments(const TopTools_ListOfShape& theLS);
 
     //! Returns the list of arguments.
-    const TopTools_ListOfShape& Arguments() const
-    {
+    const TopTools_ListOfShape& Arguments() const {
         return myArguments;
     }
 
 public: //! @name Options
-
     //! Sets the flag that defines the mode of treatment.
     //! In non-destructive mode the argument shapes are not modified. Instead
     //! a copy of a sub-shape is created in the result if it is needed to be updated.
     //! This flag is taken into account if internal PaveFiller is used only.
     //! In the case of calling PerformWithFiller the corresponding flag of that PaveFiller
     //! is in force.
-    void SetNonDestructive(const Standard_Boolean theFlag)
-    {
+    void SetNonDestructive(const Standard_Boolean theFlag) {
         myNonDestructive = theFlag;
     }
 
     //! Returns the flag that defines the mode of treatment.
     //! In non-destructive mode the argument shapes are not modified. Instead
     //! a copy of a sub-shape is created in the result if it is needed to be updated.
-    Standard_Boolean NonDestructive() const
-    {
+    Standard_Boolean NonDestructive() const {
         return myNonDestructive;
     }
 
     //! Sets the glue option for the algorithm
-    void SetGlue(const BOPAlgo_GlueEnum theGlue)
-    {
+    void SetGlue(const BOPAlgo_GlueEnum theGlue) {
         myGlue = theGlue;
     }
 
     //! Returns the glue option of the algorithm
-    BOPAlgo_GlueEnum Glue() const
-    {
+    BOPAlgo_GlueEnum Glue() const {
         return myGlue;
     }
 
     //! Enables/Disables the check of the input solids for inverted status
-    void SetCheckInverted(const Standard_Boolean theCheck)
-    {
+    void SetCheckInverted(const Standard_Boolean theCheck) {
         myCheckInverted = theCheck;
     }
 
     //! Returns the flag defining whether the check for input solids on inverted status
     //! should be performed or not.
-    Standard_Boolean CheckInverted() const
-    {
+    Standard_Boolean CheckInverted() const {
         return myCheckInverted;
     }
 
-
 public: //! @name Performing the operation
-
     //! Performs the operation.
     //! The intersection will be performed also.
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
     //! Performs the operation with the prepared filler.
     //! The intersection will not be performed in this case.
-    Standard_EXPORT virtual void PerformWithFiller(const BOPAlgo_PaveFiller& theFiller, const Message_ProgressRange& theRange = Message_ProgressRange());
-
+    Standard_EXPORT virtual void PerformWithFiller(const BOPAlgo_PaveFiller& theFiller,
+                                                   const Message_ProgressRange& theRange = Message_ProgressRange());
 
 public: //! @name BOPs on open solids
-
     //! Builds the result shape according to the given states for the objects
     //! and tools. These states can be unambiguously converted into the Boolean operation type.
     //! Thus, it performs the Boolean operation on the given groups of shapes.
@@ -215,12 +198,10 @@ public: //! @name BOPs on open solids
     //! @param theTools       - The group of Tools for BOP;
     //! @param theToolsState  - State for tools faces to pass into result;
     //! @param theReport      - The alternative report to avoid pollution of the main one.
-    Standard_EXPORT virtual void BuildBOP(const TopTools_ListOfShape& theObjects,
-        const TopAbs_State           theObjState,
-        const TopTools_ListOfShape& theTools,
-        const TopAbs_State           theToolsState,
-        const Message_ProgressRange& theRange,
-        Handle(Message_Report)       theReport = NULL);
+    Standard_EXPORT virtual void BuildBOP(const TopTools_ListOfShape& theObjects, const TopAbs_State theObjState,
+                                          const TopTools_ListOfShape& theTools, const TopAbs_State theToolsState,
+                                          const Message_ProgressRange& theRange,
+                                          Handle(Message_Report) theReport = NULL);
 
     //! Builds the result of Boolean operation of given type
     //! basing on the result of Builder operation (GF or any other).
@@ -242,51 +223,41 @@ public: //! @name BOPs on open solids
     //! @param theOperation - The BOP type;
     //! @param theRange     - The parameter to progressIndicator
     //! @param theReport    - The alternative report to avoid pollution of the global one.
-    void BuildBOP(const TopTools_ListOfShape& theObjects,
-        const TopTools_ListOfShape& theTools,
-        const BOPAlgo_Operation      theOperation,
-        const Message_ProgressRange& theRange,
-        Handle(Message_Report)       theReport = NULL)
-    {
+    void BuildBOP(const TopTools_ListOfShape& theObjects, const TopTools_ListOfShape& theTools,
+                  const BOPAlgo_Operation theOperation, const Message_ProgressRange& theRange,
+                  Handle(Message_Report) theReport = NULL) {
         TopAbs_State anObjState, aToolsState;
-        switch (theOperation)
-        {
-        case BOPAlgo_COMMON:
-        {
-            anObjState = TopAbs_IN;
-            aToolsState = TopAbs_IN;
-            break;
-        }
-        case BOPAlgo_FUSE:
-        {
-            anObjState = TopAbs_OUT;
-            aToolsState = TopAbs_OUT;
-            break;
-        }
-        case BOPAlgo_CUT:
-        {
-            anObjState = TopAbs_OUT;
-            aToolsState = TopAbs_IN;
-            break;
-        }
-        case BOPAlgo_CUT21:
-        {
-            anObjState = TopAbs_IN;
-            aToolsState = TopAbs_OUT;
-            break;
-        }
-        default:
-        {
-            anObjState = TopAbs_UNKNOWN;
-            aToolsState = TopAbs_UNKNOWN;
-            break;
-        }
+        switch (theOperation) {
+            case BOPAlgo_COMMON: {
+                anObjState = TopAbs_IN;
+                aToolsState = TopAbs_IN;
+                break;
+            }
+            case BOPAlgo_FUSE: {
+                anObjState = TopAbs_OUT;
+                aToolsState = TopAbs_OUT;
+                break;
+            }
+            case BOPAlgo_CUT: {
+                anObjState = TopAbs_OUT;
+                aToolsState = TopAbs_IN;
+                break;
+            }
+            case BOPAlgo_CUT21: {
+                anObjState = TopAbs_IN;
+                aToolsState = TopAbs_OUT;
+                break;
+            }
+            default: {
+                anObjState = TopAbs_UNKNOWN;
+                aToolsState = TopAbs_UNKNOWN;
+                break;
+            }
         }
         BuildBOP(theObjects, anObjState, theTools, aToolsState, theRange, theReport);
     }
 
 protected: //! @name History methods
-
     //! Prepare information for history support.
     Standard_EXPORT void PrepareHistory(const Message_ProgressRange& theRange);
 
@@ -315,31 +286,25 @@ protected: //! @name History methods
     Standard_EXPORT virtual const TopTools_ListOfShape& LocGenerated(const TopoDS_Shape& theS);
 
 public: //! @name Images/Origins
-
     //! Returns the map of images.
-    const TopTools_DataMapOfShapeListOfShape& Images() const
-    {
+    const TopTools_DataMapOfShapeListOfShape& Images() const {
         return myImages;
     }
 
     //! Returns the map of origins.
-    const TopTools_DataMapOfShapeListOfShape& Origins() const
-    {
+    const TopTools_DataMapOfShapeListOfShape& Origins() const {
         return myOrigins;
     }
 
     //! Returns the map of Same Domain (SD) shapes - coinciding shapes
     //! from different arguments.
-    const TopTools_DataMapOfShapeShape& ShapesSD() const
-    {
+    const TopTools_DataMapOfShapeShape& ShapesSD() const {
         return myShapesSD;
     }
 
-protected://! @name Analyze progress of the operation
-
+protected: //! @name Analyze progress of the operation
     //! List of operations to be supported by the Progress Indicator
-    enum BOPAlgo_PIOperation
-    {
+    enum BOPAlgo_PIOperation {
         PIOperation_TreatVertices = 0,
         PIOperation_TreatEdges,
         PIOperation_TreatWires,
@@ -353,72 +318,99 @@ protected://! @name Analyze progress of the operation
         PIOperation_Last
     };
 
-
     //! Auxiliary structure to get information about number of shapes
     //! of each type participated in operation.
-    class NbShapes
-    {
+    class NbShapes {
     public:
-        NbShapes()
-        {
-            for (Standard_Integer i = 0; i < 8; ++i)
-            {
+        NbShapes() {
+            for (Standard_Integer i = 0; i < 8; ++i) {
                 myNbShapesArr[i] = 0;
             }
         }
 
-        Standard_Integer NbVertices()   const { return myNbShapesArr[0]; }
-        Standard_Integer NbEdges()      const { return myNbShapesArr[1]; }
-        Standard_Integer NbWires()      const { return myNbShapesArr[2]; }
-        Standard_Integer NbFaces()      const { return myNbShapesArr[3]; }
-        Standard_Integer NbShells()     const { return myNbShapesArr[4]; }
-        Standard_Integer NbSolids()     const { return myNbShapesArr[5]; }
-        Standard_Integer NbCompsolids() const { return myNbShapesArr[6]; }
-        Standard_Integer NbCompounds()  const { return myNbShapesArr[7]; }
+        Standard_Integer NbVertices() const {
+            return myNbShapesArr[0];
+        }
+        Standard_Integer NbEdges() const {
+            return myNbShapesArr[1];
+        }
+        Standard_Integer NbWires() const {
+            return myNbShapesArr[2];
+        }
+        Standard_Integer NbFaces() const {
+            return myNbShapesArr[3];
+        }
+        Standard_Integer NbShells() const {
+            return myNbShapesArr[4];
+        }
+        Standard_Integer NbSolids() const {
+            return myNbShapesArr[5];
+        }
+        Standard_Integer NbCompsolids() const {
+            return myNbShapesArr[6];
+        }
+        Standard_Integer NbCompounds() const {
+            return myNbShapesArr[7];
+        }
 
-        Standard_Integer& NbVertices() { return myNbShapesArr[0]; }
-        Standard_Integer& NbEdges() { return myNbShapesArr[1]; }
-        Standard_Integer& NbWires() { return myNbShapesArr[2]; }
-        Standard_Integer& NbFaces() { return myNbShapesArr[3]; }
-        Standard_Integer& NbShells() { return myNbShapesArr[4]; }
-        Standard_Integer& NbSolids() { return myNbShapesArr[5]; }
-        Standard_Integer& NbCompsolids() { return myNbShapesArr[6]; }
-        Standard_Integer& NbCompounds() { return myNbShapesArr[7]; }
+        Standard_Integer& NbVertices() {
+            return myNbShapesArr[0];
+        }
+        Standard_Integer& NbEdges() {
+            return myNbShapesArr[1];
+        }
+        Standard_Integer& NbWires() {
+            return myNbShapesArr[2];
+        }
+        Standard_Integer& NbFaces() {
+            return myNbShapesArr[3];
+        }
+        Standard_Integer& NbShells() {
+            return myNbShapesArr[4];
+        }
+        Standard_Integer& NbSolids() {
+            return myNbShapesArr[5];
+        }
+        Standard_Integer& NbCompsolids() {
+            return myNbShapesArr[6];
+        }
+        Standard_Integer& NbCompounds() {
+            return myNbShapesArr[7];
+        }
 
     private:
         Standard_Integer myNbShapesArr[8];
     };
 
 protected:
-
     //! Compute number of shapes of certain type participating in operation
     Standard_EXPORT NbShapes getNbShapes() const;
 
     //! Filling steps for constant operations
-    Standard_EXPORT void fillPIConstants(const Standard_Real theWhole, BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
+    Standard_EXPORT void fillPIConstants(const Standard_Real theWhole,
+                                         BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
 
     //! Filling steps for all other operations
     Standard_EXPORT void fillPISteps(BOPAlgo_PISteps& theSteps) const Standard_OVERRIDE;
 
 protected: //! @name Methods for building the result
-
     //! Performs the building of the result.
     //! The method calls the PerformInternal1() method surrounded by a try-catch block.
-    Standard_EXPORT virtual void PerformInternal(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange);
+    Standard_EXPORT virtual void PerformInternal(const BOPAlgo_PaveFiller& thePF,
+                                                 const Message_ProgressRange& theRange);
 
     //! Performs the building of the result.
     //! To build the result of any other operation
     //! it will be necessary to override this method.
-    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange);
+    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF,
+                                                  const Message_ProgressRange& theRange);
 
     //! Builds the result of operation.
     //! The method is called for each of the arguments type and
     //! adds into the result the splits of the arguments of that type.
     Standard_EXPORT virtual void BuildResult(const TopAbs_ShapeEnum theType);
 
-
 protected: //! @name Checking input arguments
-
     //! Checks the input data.
     Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
 
@@ -428,21 +420,15 @@ protected: //! @name Checking input arguments
     //! Prepares the result shape by making it empty compound.
     Standard_EXPORT virtual void Prepare();
 
-
 protected: //! @name Fill Images of VERTICES
-
     //! Fills the images of vertices.
     Standard_EXPORT void FillImagesVertices(const Message_ProgressRange& theRange);
 
-
 protected: //! @name Fill Images of EDGES
-
     //! Fills the images of edges.
     Standard_EXPORT void FillImagesEdges(const Message_ProgressRange& theRange);
 
-
 protected: //! @name Fill Images of CONTAINERS
-
     //! Fills the images of containers (WIRES/SHELLS/COMPSOLID).
     Standard_EXPORT void FillImagesContainers(const TopAbs_ShapeEnum theType, const Message_ProgressRange& theRange);
 
@@ -450,9 +436,7 @@ protected: //! @name Fill Images of CONTAINERS
     //! of its sub-shapes.
     Standard_EXPORT void FillImagesContainer(const TopoDS_Shape& theS, const TopAbs_ShapeEnum theType);
 
-
 protected: //! @name Fill Images of FACES
-
     //! Fills the images of faces.
     //! The method consists of three steps:
     //! 1. Build the splits of faces;
@@ -472,9 +456,7 @@ protected: //! @name Fill Images of FACES
     //! and adds them as INTERNAL into the splits.
     Standard_EXPORT void FillInternalVertices(const Message_ProgressRange& theRange);
 
-
 protected: //! @name Fill Images of SOLIDS
-
     //! Fills the images of solids.
     //! The method consists of four steps:
     //! 1. Build the draft solid - just rebuild the solid using the splits of faces;
@@ -485,56 +467,53 @@ protected: //! @name Fill Images of SOLIDS
 
     //! Builds the draft solid by rebuilding the shells of the solid
     //! with the splits of faces.
-    Standard_EXPORT void BuildDraftSolid(const TopoDS_Shape& theSolid,
-        TopoDS_Shape& theDraftSolid,
-        TopTools_ListOfShape& theLIF);
+    Standard_EXPORT void BuildDraftSolid(const TopoDS_Shape& theSolid, TopoDS_Shape& theDraftSolid,
+                                         TopTools_ListOfShape& theLIF);
 
     //! Finds faces located inside each solid.
     Standard_EXPORT virtual void FillIn3DParts(TopTools_DataMapOfShapeShape& theDraftSolids,
-        const Message_ProgressRange& theRange);
+                                               const Message_ProgressRange& theRange);
 
     //! Builds the splits of the solids using their draft versions
     //! and faces located inside.
     Standard_EXPORT void BuildSplitSolids(TopTools_DataMapOfShapeShape& theDraftSolids,
-        const Message_ProgressRange& theRange);
+                                          const Message_ProgressRange& theRange);
 
     //! Classifies the vertices and edges from the arguments relatively
     //! splits of solids and makes them INTERNAL for solids.
     Standard_EXPORT void FillInternalShapes(const Message_ProgressRange& theRange);
 
-
 protected: //! @name Fill Images of COMPOUNDS
-
     //! Fills the images of compounds.
     Standard_EXPORT void FillImagesCompounds(const Message_ProgressRange& theRange);
 
     //! Builds the image of the given compound.
-    Standard_EXPORT void FillImagesCompound(const TopoDS_Shape& theS,
-        TopTools_MapOfShape& theMF);
+    Standard_EXPORT void FillImagesCompound(const TopoDS_Shape& theS, TopTools_MapOfShape& theMF);
 
 protected: //! @name Post treatment
-
     //! Post treatment of the result of the operation.
     //! The method checks validity of the sub-shapes of the result
     //! and updates the tolerances to make them valid.
     Standard_EXPORT virtual void PostTreat(const Message_ProgressRange& theRange);
 
-protected: //! @name Fields
-
-    TopTools_ListOfShape myArguments;             //!< Arguments of the operation
-    TopTools_MapOfShape myMapFence;               //!< Fence map providing the uniqueness of the shapes in the list of arguments
-    BOPAlgo_PPaveFiller myPaveFiller;             //!< Pave Filler - algorithm for sub-shapes intersection
-    BOPDS_PDS myDS;                               //!< Data Structure - holder of intersection information
-    Handle(IntTools_Context) myContext;           //!< Context - tool for cashing heavy algorithms such as Projectors and Classifiers
-    Standard_Integer myEntryPoint;                //!< EntryPoint - controls the deletion of the PaveFiller, which could live longer than the Builder
+protected:                            //! @name Fields
+    TopTools_ListOfShape myArguments; //!< Arguments of the operation
+    TopTools_MapOfShape myMapFence;   //!< Fence map providing the uniqueness of the shapes in the list of arguments
+    BOPAlgo_PPaveFiller myPaveFiller; //!< Pave Filler - algorithm for sub-shapes intersection
+    BOPDS_PDS myDS;                   //!< Data Structure - holder of intersection information
+    Handle(
+        IntTools_Context) myContext; //!< Context - tool for cashing heavy algorithms such as Projectors and Classifiers
+    Standard_Integer myEntryPoint;   //!< EntryPoint - controls the deletion of the PaveFiller, which could live longer
+                                     //!< than the Builder
     TopTools_DataMapOfShapeListOfShape myImages;  //!< Images - map of Images of the sub-shapes of arguments
     TopTools_DataMapOfShapeShape myShapesSD;      //!< ShapesSD - map of SD Shapes
     TopTools_DataMapOfShapeListOfShape myOrigins; //!< Origins - map of Origins, back map of Images
-    TopTools_DataMapOfShapeListOfShape myInParts; //!< InParts - map of own and acquired IN faces of the arguments solids
-    Standard_Boolean myNonDestructive;            //!< Safe processing option allows avoiding modification of the input shapes
-    BOPAlgo_GlueEnum myGlue;                      //!< Gluing option allows speeding up the intersection of the input shapes
-    Standard_Boolean myCheckInverted;             //!< Check inverted option allows disabling the check of input solids on inverted status
-
+    TopTools_DataMapOfShapeListOfShape
+        myInParts;                     //!< InParts - map of own and acquired IN faces of the arguments solids
+    Standard_Boolean myNonDestructive; //!< Safe processing option allows avoiding modification of the input shapes
+    BOPAlgo_GlueEnum myGlue;           //!< Gluing option allows speeding up the intersection of the input shapes
+    Standard_Boolean
+        myCheckInverted; //!< Check inverted option allows disabling the check of input solids on inverted status
 };
 
 #endif // _BOPAlgo_Builder_HeaderFile

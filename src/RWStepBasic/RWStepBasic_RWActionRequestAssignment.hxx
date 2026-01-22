@@ -28,48 +28,29 @@ class StepBasic_ActionRequestAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ActionRequestAssignment
-class RWStepBasic_RWActionRequestAssignment 
-{
+class RWStepBasic_RWActionRequestAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWActionRequestAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWActionRequestAssignment();
-  
-  //! Reads ActionRequestAssignment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ActionRequestAssignment)& ent) const;
-  
-  //! Writes ActionRequestAssignment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ActionRequestAssignment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_ActionRequestAssignment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ActionRequestAssignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_ActionRequestAssignment) & ent) const;
 
+    //! Writes ActionRequestAssignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_ActionRequestAssignment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_ActionRequestAssignment) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWActionRequestAssignment_HeaderFile

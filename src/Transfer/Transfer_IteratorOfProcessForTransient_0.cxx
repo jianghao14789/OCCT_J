@@ -22,7 +22,6 @@
 #include <Transfer_TransferMapOfProcessForTransient.hxx>
 #include <Transfer_ActorOfProcessForTransient.hxx>
 #include <Transfer_Binder.hxx>
- 
 
 #define TheStart Handle(Standard_Transient)
 #define TheStart_hxx <Standard_Transient.hxx>
@@ -42,4 +41,3 @@
 #define Transfer_TransferProcess_hxx <Transfer_ProcessForTransient.hxx>
 #define Handle_Transfer_TransferProcess Handle(Transfer_ProcessForTransient)
 #include <Transfer_Iterator.gxx>
-

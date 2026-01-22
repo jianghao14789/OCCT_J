@@ -21,37 +21,28 @@
 
 //! Auxiliary class extending UV range splitter in order to generate
 //! internal nodes for NURBS surface.
-class BRepMesh_TorusRangeSplitter : public BRepMesh_UVParamRangeSplitter
-{
+class BRepMesh_TorusRangeSplitter : public BRepMesh_UVParamRangeSplitter {
 public:
+    //! Constructor.
+    BRepMesh_TorusRangeSplitter() {}
 
-  //! Constructor.
-  BRepMesh_TorusRangeSplitter()
-  {
-  }
+    //! Destructor.
+    virtual ~BRepMesh_TorusRangeSplitter() {}
 
-  //! Destructor.
-  virtual ~BRepMesh_TorusRangeSplitter()
-  {
-  }
+    //! Returns list of nodes generated using surface data and specified parameters.
+    Standard_EXPORT virtual Handle(IMeshData::ListOfPnt2d)
+        GenerateSurfaceNodes(const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
 
-  //! Returns list of nodes generated using surface data and specified parameters.
-  Standard_EXPORT virtual Handle(IMeshData::ListOfPnt2d) GenerateSurfaceNodes(
-    const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
-
-  //! Registers border point.
-  Standard_EXPORT virtual void AddPoint(const gp_Pnt2d& thePoint) Standard_OVERRIDE;
+    //! Registers border point.
+    Standard_EXPORT virtual void AddPoint(const gp_Pnt2d& thePoint) Standard_OVERRIDE;
 
 private:
+    Handle(IMeshData::SequenceOfReal)
+        fillParams(const IMeshData::IMapOfReal& theParams, const std::pair<Standard_Real, Standard_Real>& theRange,
+                   const Standard_Integer theStepsNb, const Standard_Real theScale,
+                   const Handle(NCollection_IncAllocator) & theAllocator) const;
 
-  Handle(IMeshData::SequenceOfReal) fillParams(
-    const IMeshData::IMapOfReal&                   theParams,
-    const std::pair<Standard_Real, Standard_Real>& theRange,
-    const Standard_Integer                         theStepsNb,
-    const Standard_Real                            theScale,
-    const Handle(NCollection_IncAllocator)&        theAllocator) const;
-
-  Standard_Real FUN_CalcAverageDUV(TColStd_Array1OfReal& P, const Standard_Integer PLen) const;
+    Standard_Real FUN_CalcAverageDUV(TColStd_Array1OfReal& P, const Standard_Integer PLen) const;
 };
 
 #endif

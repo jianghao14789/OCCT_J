@@ -27,81 +27,66 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(BRepMesh_MeshAlgoFactory, IMeshTools_MeshAlgoFactory)
 
-namespace
-{
-  struct BaseMeshAlgo
-  {
+namespace {
+struct BaseMeshAlgo {
     typedef BRepMesh_DelaunayBaseMeshAlgo Type;
-  };
+};
 
-  template<class RangeSplitter>
-  struct NodeInsertionMeshAlgo
-  {
+template <class RangeSplitter> struct NodeInsertionMeshAlgo {
     typedef BRepMesh_DelaunayNodeInsertionMeshAlgo<RangeSplitter, BRepMesh_DelaunayBaseMeshAlgo> Type;
-  };
+};
 
-  template<class RangeSplitter>
-  struct DeflectionControlMeshAlgo
-  {
+template <class RangeSplitter> struct DeflectionControlMeshAlgo {
     typedef BRepMesh_DelaunayDeflectionControlMeshAlgo<RangeSplitter, BRepMesh_DelaunayBaseMeshAlgo> Type;
-  };
-}
+};
+} // namespace
 
 //=======================================================================
 // Function: Constructor
-// Purpose : 
+// Purpose :
 //=======================================================================
-BRepMesh_MeshAlgoFactory::BRepMesh_MeshAlgoFactory()
-{
-}
+BRepMesh_MeshAlgoFactory::BRepMesh_MeshAlgoFactory() {}
 
 //=======================================================================
 // Function: Destructor
-// Purpose : 
+// Purpose :
 //=======================================================================
-BRepMesh_MeshAlgoFactory::~BRepMesh_MeshAlgoFactory()
-{
-}
+BRepMesh_MeshAlgoFactory::~BRepMesh_MeshAlgoFactory() {}
 
 //=======================================================================
 // Function: GetAlgo
-// Purpose : 
+// Purpose :
 //=======================================================================
-Handle(IMeshTools_MeshAlgo) BRepMesh_MeshAlgoFactory::GetAlgo(
-  const GeomAbs_SurfaceType    theSurfaceType,
-  const IMeshTools_Parameters& theParameters) const
-{
-  switch (theSurfaceType)
-  {
-  case GeomAbs_Plane:
-    return theParameters.InternalVerticesMode ?
-      new NodeInsertionMeshAlgo<BRepMesh_DefaultRangeSplitter>::Type :
-      new BaseMeshAlgo::Type;
-    break;
+Handle(IMeshTools_MeshAlgo) BRepMesh_MeshAlgoFactory::GetAlgo(const GeomAbs_SurfaceType theSurfaceType,
+                                                              const IMeshTools_Parameters& theParameters) const {
+    switch (theSurfaceType) {
+        case GeomAbs_Plane:
+            return theParameters.InternalVerticesMode ? new NodeInsertionMeshAlgo<BRepMesh_DefaultRangeSplitter>::Type
+                                                      : new BaseMeshAlgo::Type;
+            break;
 
-  case GeomAbs_Sphere:
-    return new NodeInsertionMeshAlgo<BRepMesh_SphereRangeSplitter>::Type;
-    break;
+        case GeomAbs_Sphere:
+            return new NodeInsertionMeshAlgo<BRepMesh_SphereRangeSplitter>::Type;
+            break;
 
-  case GeomAbs_Cylinder:
-    return theParameters.InternalVerticesMode ?
-      new NodeInsertionMeshAlgo<BRepMesh_CylinderRangeSplitter>::Type :
-      new BaseMeshAlgo::Type;
-    break;
+        case GeomAbs_Cylinder:
+            return theParameters.InternalVerticesMode ? new NodeInsertionMeshAlgo<BRepMesh_CylinderRangeSplitter>::Type
+                                                      : new BaseMeshAlgo::Type;
+            break;
 
-  case GeomAbs_Cone:
-    return new NodeInsertionMeshAlgo<BRepMesh_ConeRangeSplitter>::Type;
-    break;
+        case GeomAbs_Cone:
+            return new NodeInsertionMeshAlgo<BRepMesh_ConeRangeSplitter>::Type;
+            break;
 
-  case GeomAbs_Torus:
-    return new NodeInsertionMeshAlgo<BRepMesh_TorusRangeSplitter>::Type;
-    break;
+        case GeomAbs_Torus:
+            return new NodeInsertionMeshAlgo<BRepMesh_TorusRangeSplitter>::Type;
+            break;
 
-  case GeomAbs_SurfaceOfRevolution:
-    return new DeflectionControlMeshAlgo<BRepMesh_BoundaryParamsRangeSplitter>::Type;
-    break;
+        case GeomAbs_SurfaceOfRevolution:
+            return new DeflectionControlMeshAlgo<BRepMesh_BoundaryParamsRangeSplitter>::Type;
+            break;
 
-  default:
-    return new DeflectionControlMeshAlgo<BRepMesh_NURBSRangeSplitter>::Type;
-  }
+        default:
+            return new DeflectionControlMeshAlgo<BRepMesh_NURBSRangeSplitter>::Type;
+    }
 }

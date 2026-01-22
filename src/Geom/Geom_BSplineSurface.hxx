@@ -42,7 +42,6 @@ class Geom_Curve;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_BSplineSurface;
 DEFINE_STANDARD_HANDLE(Geom_BSplineSurface, Geom_BoundedSurface)
 
@@ -159,7 +158,6 @@ DEFINE_STANDARD_HANDLE(Geom_BSplineSurface, Geom_BoundedSurface)
 //! a practical guide Gerald Farin
 class Geom_BSplineSurface : public Geom_BoundedSurface {
 public:
-
     //! Creates  a non-rational b-spline surface (weights
     //! default value is 1.).
     //! The following conditions must be verified.
@@ -179,7 +177,12 @@ public:
     //! Poles.ColLength() == Sum(UMults(i)) except the first or last
     //! The previous conditions for U holds  also for V, with the
     //! RowLength of the poles.
-    Standard_EXPORT Geom_BSplineSurface(const TColgp_Array2OfPnt& Poles, const TColStd_Array1OfReal& UKnots, const TColStd_Array1OfReal& VKnots, const TColStd_Array1OfInteger& UMults, const TColStd_Array1OfInteger& VMults, const Standard_Integer UDegree, const Standard_Integer VDegree, const Standard_Boolean UPeriodic = Standard_False, const Standard_Boolean VPeriodic = Standard_False);
+    Standard_EXPORT Geom_BSplineSurface(const TColgp_Array2OfPnt& Poles, const TColStd_Array1OfReal& UKnots,
+                                        const TColStd_Array1OfReal& VKnots, const TColStd_Array1OfInteger& UMults,
+                                        const TColStd_Array1OfInteger& VMults, const Standard_Integer UDegree,
+                                        const Standard_Integer VDegree,
+                                        const Standard_Boolean UPeriodic = Standard_False,
+                                        const Standard_Boolean VPeriodic = Standard_False);
 
     //! Creates  a non-rational b-spline surface (weights
     //! default value is 1.).
@@ -211,7 +214,12 @@ public:
     //!
     //! The previous conditions for U holds  also for V, with the
     //! RowLength of the poles.
-    Standard_EXPORT Geom_BSplineSurface(const TColgp_Array2OfPnt& Poles, const TColStd_Array2OfReal& Weights, const TColStd_Array1OfReal& UKnots, const TColStd_Array1OfReal& VKnots, const TColStd_Array1OfInteger& UMults, const TColStd_Array1OfInteger& VMults, const Standard_Integer UDegree, const Standard_Integer VDegree, const Standard_Boolean UPeriodic = Standard_False, const Standard_Boolean VPeriodic = Standard_False);
+    Standard_EXPORT Geom_BSplineSurface(const TColgp_Array2OfPnt& Poles, const TColStd_Array2OfReal& Weights,
+                                        const TColStd_Array1OfReal& UKnots, const TColStd_Array1OfReal& VKnots,
+                                        const TColStd_Array1OfInteger& UMults, const TColStd_Array1OfInteger& VMults,
+                                        const Standard_Integer UDegree, const Standard_Integer VDegree,
+                                        const Standard_Boolean UPeriodic = Standard_False,
+                                        const Standard_Boolean VPeriodic = Standard_False);
 
     //! Exchanges the u and v parametric directions on
     //! this BSpline surface.
@@ -224,7 +232,7 @@ public:
     Standard_EXPORT void ExchangeUV();
 
     //! Sets the surface U periodic.
-    //! Modifies this surface to be periodic in the U 
+    //! Modifies this surface to be periodic in the U
     //! parametric direction.
     //! To become periodic in a given parametric direction a
     //! surface must be closed in that parametric direction,
@@ -292,14 +300,14 @@ public:
 
     //! Sets the surface U not periodic.
     //! Changes this BSpline surface into a non-periodic
-    //! surface along U direction. 
+    //! surface along U direction.
     //! If this surface is already non-periodic, it is not modified.
     //! Note: the poles and knots tables are modified.
     Standard_EXPORT void SetUNotPeriodic();
 
     //! Sets the surface V not periodic.
     //! Changes this BSpline surface into a non-periodic
-    //! surface along V direction. 
+    //! surface along V direction.
     //! If this surface is already non-periodic, it is not modified.
     //! Note: the poles and knots tables are modified.
     Standard_EXPORT void SetVNotPeriodic();
@@ -324,7 +332,7 @@ public:
     //! surface, produced by reversing its U parametric
     //! direction, for the point of u parameter U,  on this BSpline surface.
     //! For a BSpline surface, these functions return respectively:
-    //! - UFirst + ULast - U, 
+    //! - UFirst + ULast - U,
     //! where UFirst, ULast are
     //! the values of the first and last parameters of this
     //! BSpline surface, in the u parametric directions.
@@ -373,7 +381,9 @@ public:
     //! insert is outside the bounds of this BSpline surface in
     //! the specified parametric direction. The comparison
     //! uses the precision criterion ParametricTolerance.
-    Standard_EXPORT void InsertUKnots(const TColStd_Array1OfReal& Knots, const TColStd_Array1OfInteger& Mults, const Standard_Real ParametricTolerance = 0.0, const Standard_Boolean Add = Standard_True);
+    Standard_EXPORT void InsertUKnots(const TColStd_Array1OfReal& Knots, const TColStd_Array1OfInteger& Mults,
+                                      const Standard_Real ParametricTolerance = 0.0,
+                                      const Standard_Boolean Add = Standard_True);
 
     //! Inserts into the knots table for the V
     //! parametric direction of this BSpline surface:
@@ -394,7 +404,9 @@ public:
     //! insert is outside the bounds of this BSpline surface in
     //! the specified parametric direction. The comparison
     //! uses the precision criterion ParametricTolerance.
-    Standard_EXPORT void InsertVKnots(const TColStd_Array1OfReal& Knots, const TColStd_Array1OfInteger& Mults, const Standard_Real ParametricTolerance = 0.0, const Standard_Boolean Add = Standard_True);
+    Standard_EXPORT void InsertVKnots(const TColStd_Array1OfReal& Knots, const TColStd_Array1OfInteger& Mults,
+                                      const Standard_Real ParametricTolerance = 0.0,
+                                      const Standard_Boolean Add = Standard_True);
 
     //! Reduces to M the multiplicity of the knot of index
     //! Index in the U parametric direction. If M is 0, the knot is removed.
@@ -413,7 +425,8 @@ public:
     //! Exceptions
     //! Standard_OutOfRange if Index is outside the
     //! bounds of the knots table of this BSpline surface.
-    Standard_EXPORT Standard_Boolean RemoveUKnot(const Standard_Integer Index, const Standard_Integer M, const Standard_Real Tolerance);
+    Standard_EXPORT Standard_Boolean RemoveUKnot(const Standard_Integer Index, const Standard_Integer M,
+                                                 const Standard_Real Tolerance);
 
     //! Reduces to M the multiplicity of the knot of index
     //! Index in the V parametric direction. If M is 0, the knot is removed.
@@ -432,7 +445,8 @@ public:
     //! Exceptions
     //! Standard_OutOfRange if Index is outside the
     //! bounds of the knots table of this BSpline surface.
-    Standard_EXPORT Standard_Boolean RemoveVKnot(const Standard_Integer Index, const Standard_Integer M, const Standard_Real Tolerance);
+    Standard_EXPORT Standard_Boolean RemoveVKnot(const Standard_Integer Index, const Standard_Integer M,
+                                                 const Standard_Real Tolerance);
 
     //! Increases the multiplicity of the knot of range UIndex
     //! in the UKnots sequence.
@@ -457,7 +471,8 @@ public:
     //! M should be greater than the previous multiplicity of the
     //! all the knots FromI1,..., ToI2 and lower or equal to the
     //! Degree of the surface in the U parametric direction.
-    Standard_EXPORT void IncreaseUMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2, const Standard_Integer M);
+    Standard_EXPORT void IncreaseUMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2,
+                                               const Standard_Integer M);
 
     //! Increments the multiplicity of the consecutives uknots FromI1..ToI2
     //! by step.   The multiplicity of each knot FromI1,.....,ToI2 must be
@@ -467,7 +482,8 @@ public:
     //! [FirstUKnotIndex, LastUKnotIndex]
     //!
     //! Raised if one knot has a multiplicity greater than UDegree.
-    Standard_EXPORT void IncrementUMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2, const Standard_Integer Step);
+    Standard_EXPORT void IncrementUMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2,
+                                                const Standard_Integer Step);
 
     //! Increases the multiplicity of a knot in the V direction.
     //! M is the new multiplicity.
@@ -490,7 +506,8 @@ public:
     //! M should be greater than the previous multiplicity of the
     //! all the knots FromI1,..., ToI2 and lower or equal to the
     //! Degree of the surface in the V parametric direction.
-    Standard_EXPORT void IncreaseVMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2, const Standard_Integer M);
+    Standard_EXPORT void IncreaseVMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2,
+                                               const Standard_Integer M);
 
     //! Increments the multiplicity of the consecutives vknots FromI1..ToI2
     //! by step.  The multiplicity of each knot FromI1,.....,ToI2 must be
@@ -500,7 +517,8 @@ public:
     //! [FirstVKnotIndex, LastVKnotIndex]
     //!
     //! Raised if one knot has a multiplicity greater than VDegree.
-    Standard_EXPORT void IncrementVMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2, const Standard_Integer Step);
+    Standard_EXPORT void IncrementVMultiplicity(const Standard_Integer FromI1, const Standard_Integer ToI2,
+                                                const Standard_Integer Step);
 
     //! Inserts a knot value in the sequence of UKnots. If U is a knot
     //! value this method increases the multiplicity of the knot if the
@@ -511,7 +529,9 @@ public:
     //! Raised if U is out of the bounds [U1, U2] given by the methods
     //! Bounds, the criterion ParametricTolerance is used.
     //! Raised if M is not in the range [1, UDegree].
-    Standard_EXPORT void InsertUKnot(const Standard_Real U, const Standard_Integer M, const Standard_Real ParametricTolerance, const Standard_Boolean Add = Standard_True);
+    Standard_EXPORT void InsertUKnot(const Standard_Real U, const Standard_Integer M,
+                                     const Standard_Real ParametricTolerance,
+                                     const Standard_Boolean Add = Standard_True);
 
     //! Inserts a knot value in the sequence of VKnots. If V is a knot
     //! value this method increases the multiplicity of the knot if the
@@ -523,7 +543,9 @@ public:
     //! raises if V is out of the Bounds [V1, V2] given by the methods
     //! Bounds, the criterion ParametricTolerance is used.
     //! raises if M is not in the range [1, VDegree].
-    Standard_EXPORT void InsertVKnot(const Standard_Real V, const Standard_Integer M, const Standard_Real ParametricTolerance, const Standard_Boolean Add = Standard_True);
+    Standard_EXPORT void InsertVKnot(const Standard_Real V, const Standard_Integer M,
+                                     const Standard_Real ParametricTolerance,
+                                     const Standard_Boolean Add = Standard_True);
 
     //! Segments the surface between U1 and U2 in the U-Direction.
     //! between V1 and V2 in the V-Direction.
@@ -542,9 +564,9 @@ public:
     //! i.e. ((U2 - U1) - UPeriod) > Precision::PConfusion().
     //! Standard_DomainError if V2 - V1 exceeds the vperiod for vperiodic surfaces.
     //! i.e. ((V2 - V1) - VPeriod) > Precision::PConfusion()).
-    Standard_EXPORT void Segment(const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2,
-        const Standard_Real theUTolerance = Precision::PConfusion(),
-        const Standard_Real theVTolerance = Precision::PConfusion());
+    Standard_EXPORT void Segment(const Standard_Real U1, const Standard_Real U2, const Standard_Real V1,
+                                 const Standard_Real V2, const Standard_Real theUTolerance = Precision::PConfusion(),
+                                 const Standard_Real theVTolerance = Precision::PConfusion());
 
     //! Segments the surface between U1 and U2 in the U-Direction.
     //! between V1 and V2 in the V-Direction.
@@ -566,9 +588,10 @@ public:
     //! i.e. ((U2 - U1) - UPeriod) > Precision::PConfusion().
     //! Standard_DomainError if V2 - V1 exceeds the vperiod for vperiodic surfaces.
     //! i.e. ((V2 - V1) - VPeriod) > Precision::PConfusion()).
-    Standard_EXPORT void CheckAndSegment(const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2,
-        const Standard_Real theUTolerance = Precision::PConfusion(),
-        const Standard_Real theVTolerance = Precision::PConfusion());
+    Standard_EXPORT void CheckAndSegment(const Standard_Real U1, const Standard_Real U2, const Standard_Real V1,
+                                         const Standard_Real V2,
+                                         const Standard_Real theUTolerance = Precision::PConfusion(),
+                                         const Standard_Real theVTolerance = Precision::PConfusion());
 
     //! Substitutes the UKnots of range UIndex with K.
     //!
@@ -622,7 +645,6 @@ public:
     //! multiplicity of the knot of range VIndex.
     Standard_EXPORT void SetVKnot(const Standard_Integer VIndex, const Standard_Real K, const Standard_Integer M);
 
-
     //! Locates the parametric value U in the sequence of UKnots.
     //! If "WithKnotRepetition" is True we consider the knot's
     //! representation with repetition of multiple knot value,
@@ -633,7 +655,9 @@ public:
     //! ParametricTolerance is used).
     //! . if I1 < 1  => U < UKnots(1) - Abs(ParametricTolerance)
     //! . if I2 > NbUKnots => U > UKnots(NbUKnots)+Abs(ParametricTolerance)
-    Standard_EXPORT void LocateU(const Standard_Real U, const Standard_Real ParametricTolerance, Standard_Integer& I1, Standard_Integer& I2, const Standard_Boolean WithKnotRepetition = Standard_False) const;
+    Standard_EXPORT void LocateU(const Standard_Real U, const Standard_Real ParametricTolerance, Standard_Integer& I1,
+                                 Standard_Integer& I2,
+                                 const Standard_Boolean WithKnotRepetition = Standard_False) const;
 
     //! Locates the parametric value V in the sequence of knots.
     //! If "WithKnotRepetition" is True we consider the knot's
@@ -649,7 +673,9 @@ public:
     //! The following methods are available only if the surface
     //! is Uniform or QuasiUniform in the considered direction
     //! The knot repartition is modified.
-    Standard_EXPORT void LocateV(const Standard_Real V, const Standard_Real ParametricTolerance, Standard_Integer& I1, Standard_Integer& I2, const Standard_Boolean WithKnotRepetition = Standard_False) const;
+    Standard_EXPORT void LocateV(const Standard_Real V, const Standard_Real ParametricTolerance, Standard_Integer& I1,
+                                 Standard_Integer& I2,
+                                 const Standard_Boolean WithKnotRepetition = Standard_False) const;
 
     //! Substitutes the pole of range (UIndex, VIndex) with P.
     //! If the surface is rational the weight of range (UIndex, VIndex)
@@ -665,7 +691,8 @@ public:
     //! Raised if UIndex < 1 or UIndex > NbUPoles or VIndex < 1 or
     //! VIndex > NbVPoles.
     //! Raised if Weight <= Resolution from package gp.
-    Standard_EXPORT void SetPole(const Standard_Integer UIndex, const Standard_Integer VIndex, const gp_Pnt& P, const Standard_Real Weight);
+    Standard_EXPORT void SetPole(const Standard_Integer UIndex, const Standard_Integer VIndex, const gp_Pnt& P,
+                                 const Standard_Real Weight);
 
     //! Changes a column of poles or a part of this column.
     //! Raised if Vindex < 1 or VIndex > NbVPoles.
@@ -684,7 +711,8 @@ public:
     //! bounds of CPoles.
     //! Raised if one of the weight value of CPoleWeights is lower or
     //! equal to Resolution from package gp.
-    Standard_EXPORT void SetPoleCol(const Standard_Integer VIndex, const TColgp_Array1OfPnt& CPoles, const TColStd_Array1OfReal& CPoleWeights);
+    Standard_EXPORT void SetPoleCol(const Standard_Integer VIndex, const TColgp_Array1OfPnt& CPoles,
+                                    const TColStd_Array1OfReal& CPoleWeights);
 
     //! Changes a row of poles or a part of this row with the
     //! corresponding weights. If the surface was rational it can
@@ -697,7 +725,8 @@ public:
     //! bounds of CPoles.
     //! Raised if one of the weight value of CPoleWeights is lower or
     //! equal to Resolution from package gp.
-    Standard_EXPORT void SetPoleRow(const Standard_Integer UIndex, const TColgp_Array1OfPnt& CPoles, const TColStd_Array1OfReal& CPoleWeights);
+    Standard_EXPORT void SetPoleRow(const Standard_Integer UIndex, const TColgp_Array1OfPnt& CPoles,
+                                    const TColStd_Array1OfReal& CPoleWeights);
 
     //! Changes a row of poles or a part of this row.
     //! Raised if Uindex < 1 or UIndex > NbUPoles.
@@ -714,7 +743,8 @@ public:
     //!
     //! Raised if weight is lower or equal to Resolution from
     //! package gp
-    Standard_EXPORT void SetWeight(const Standard_Integer UIndex, const Standard_Integer VIndex, const Standard_Real Weight);
+    Standard_EXPORT void SetWeight(const Standard_Integer UIndex, const Standard_Integer VIndex,
+                                   const Standard_Real Weight);
 
     //! Changes a column of weights of a part of this column.
     //!
@@ -751,7 +781,11 @@ public:
     //! VIndex1 < 1 || VIndex1 > NbVPoles or
     //! VIndex2 < 1 || VIndex2 > NbVPoles
     //! characteristics of the surface
-    Standard_EXPORT void MovePoint(const Standard_Real U, const Standard_Real V, const gp_Pnt& P, const Standard_Integer UIndex1, const Standard_Integer UIndex2, const Standard_Integer VIndex1, const Standard_Integer VIndex2, Standard_Integer& UFirstIndex, Standard_Integer& ULastIndex, Standard_Integer& VFirstIndex, Standard_Integer& VLastIndex);
+    Standard_EXPORT void MovePoint(const Standard_Real U, const Standard_Real V, const gp_Pnt& P,
+                                   const Standard_Integer UIndex1, const Standard_Integer UIndex2,
+                                   const Standard_Integer VIndex1, const Standard_Integer VIndex2,
+                                   Standard_Integer& UFirstIndex, Standard_Integer& ULastIndex,
+                                   Standard_Integer& VFirstIndex, Standard_Integer& VLastIndex);
 
     //! Returns true if the first control points row and the last
     //! control points row are identical. The tolerance criterion
@@ -807,7 +841,8 @@ public:
     //! knots UKnots and VKnots only if the first knots and the
     //! last knots have a multiplicity equal to UDegree + 1 or
     //! VDegree + 1
-    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1, Standard_Real& V2) const Standard_OVERRIDE;
+    Standard_EXPORT void Bounds(Standard_Real& U1, Standard_Real& U2, Standard_Real& V1,
+                                Standard_Real& V2) const Standard_OVERRIDE;
 
     //! Returns the continuity of the surface :
     //! C0 : only geometric continuity,
@@ -985,7 +1020,6 @@ public:
     //! Ku = {k1, k1, k1, k2, k3, k3, k4, k4, k4}
     Standard_EXPORT const TColStd_Array1OfReal& VKnotSequence() const;
 
-
     //! Returns the multiplicity value of knot of range VIndex in
     //! the v direction.
     //! Raised if VIndex < 1 or VIndex > NbVKnots
@@ -1019,13 +1053,17 @@ public:
     Standard_EXPORT void D0(const Standard_Real U, const Standard_Real V, gp_Pnt& P) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the surface is not C1.
-    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const Standard_OVERRIDE;
+    Standard_EXPORT void D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U,
+                            gp_Vec& D1V) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the surface is not C2.
-    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
+    Standard_EXPORT void D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const Standard_OVERRIDE;
 
     //! Raised if the continuity of the surface is not C3.
-    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V,
+                            gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV,
+                            gp_Vec& D3UVV) const Standard_OVERRIDE;
 
     //! Nu is the order of derivation in the U parametric direction and
     //! Nv is the order of derivation in the V parametric direction.
@@ -1048,31 +1086,46 @@ public:
     //! the evaluations are the same as if we consider the whole
     //! definition of the surface. Of course the evaluations are
     //! different outside this parametric domain.
-    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const Standard_Integer Nv) const Standard_OVERRIDE;
+    Standard_EXPORT gp_Vec DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu,
+                              const Standard_Integer Nv) const Standard_OVERRIDE;
 
     //! Raised if FromUK1 = ToUK2 or FromVK1 = ToVK2.
-    Standard_EXPORT void LocalD0(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1, const Standard_Integer ToUK2, const Standard_Integer FromVK1, const Standard_Integer ToVK2, gp_Pnt& P) const;
+    Standard_EXPORT void LocalD0(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1,
+                                 const Standard_Integer ToUK2, const Standard_Integer FromVK1,
+                                 const Standard_Integer ToVK2, gp_Pnt& P) const;
 
     //! Raised if the local continuity of the surface is not C1
     //! between the knots FromUK1, ToUK2 and FromVK1, ToVK2.
     //! Raised if FromUK1 = ToUK2 or FromVK1 = ToVK2.
-    Standard_EXPORT void LocalD1(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1, const Standard_Integer ToUK2, const Standard_Integer FromVK1, const Standard_Integer ToVK2, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const;
+    Standard_EXPORT void LocalD1(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1,
+                                 const Standard_Integer ToUK2, const Standard_Integer FromVK1,
+                                 const Standard_Integer ToVK2, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const;
 
     //! Raised if the local continuity of the surface is not C2
     //! between the knots FromUK1, ToUK2 and FromVK1, ToVK2.
     //! Raised if FromUK1 = ToUK2 or FromVK1 = ToVK2.
-    Standard_EXPORT void LocalD2(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1, const Standard_Integer ToUK2, const Standard_Integer FromVK1, const Standard_Integer ToVK2, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const;
+    Standard_EXPORT void LocalD2(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1,
+                                 const Standard_Integer ToUK2, const Standard_Integer FromVK1,
+                                 const Standard_Integer ToVK2, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U,
+                                 gp_Vec& D2V, gp_Vec& D2UV) const;
 
     //! Raised if the local continuity of the surface is not C3
     //! between the knots FromUK1, ToUK2 and FromVK1, ToVK2.
     //! Raised if FromUK1 = ToUK2 or FromVK1 = ToVK2.
-    Standard_EXPORT void LocalD3(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1, const Standard_Integer ToUK2, const Standard_Integer FromVK1, const Standard_Integer ToVK2, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const;
+    Standard_EXPORT void LocalD3(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1,
+                                 const Standard_Integer ToUK2, const Standard_Integer FromVK1,
+                                 const Standard_Integer ToVK2, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U,
+                                 gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV,
+                                 gp_Vec& D3UVV) const;
 
     //! Raised if the local continuity of the surface is not CNu
     //! between the knots FromUK1, ToUK2 and CNv between the knots
     //! FromVK1, ToVK2.
     //! Raised if FromUK1 = ToUK2 or FromVK1 = ToVK2.
-    Standard_EXPORT gp_Vec LocalDN(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1, const Standard_Integer ToUK2, const Standard_Integer FromVK1, const Standard_Integer ToVK2, const Standard_Integer Nu, const Standard_Integer Nv) const;
+    Standard_EXPORT gp_Vec LocalDN(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1,
+                                   const Standard_Integer ToUK2, const Standard_Integer FromVK1,
+                                   const Standard_Integer ToVK2, const Standard_Integer Nu,
+                                   const Standard_Integer Nv) const;
 
     //! Computes the point of parameter U, V on the BSpline surface patch
     //! defines between the knots UK1 UK2, VK1, VK2. U can be out of the
@@ -1080,7 +1133,9 @@ public:
     //! [Knot VK1, Knot VK2]  but for the computation we only use the
     //! definition of the surface between these knot values.
     //! Raises if FromUK1 = ToUK2 or FromVK1 = ToVK2.
-    Standard_EXPORT gp_Pnt LocalValue(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1, const Standard_Integer ToUK2, const Standard_Integer FromVK1, const Standard_Integer ToVK2) const;
+    Standard_EXPORT gp_Pnt LocalValue(const Standard_Real U, const Standard_Real V, const Standard_Integer FromUK1,
+                                      const Standard_Integer ToUK2, const Standard_Integer FromVK1,
+                                      const Standard_Integer ToVK2) const;
 
     //! Computes the U isoparametric curve.
     //! A B-spline curve is returned.
@@ -1118,31 +1173,30 @@ public:
     //! | u1 - u0 | < UTolerance and
     //! | v1 - v0 | < VTolerance
     //! ====> |f (u1,v1) - f (u0,v0)| < Tolerance3D
-    Standard_EXPORT void Resolution(const Standard_Real Tolerance3D, Standard_Real& UTolerance, Standard_Real& VTolerance);
+    Standard_EXPORT void Resolution(const Standard_Real Tolerance3D, Standard_Real& UTolerance,
+                                    Standard_Real& VTolerance);
 
     //! Creates a new object which is a copy of this BSpline surface.
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_BSplineSurface, Geom_BoundedSurface)
 
 protected:
-
     //! Segments the surface between U1 and U2 in the U-Direction.
     //! between V1 and V2 in the V-Direction.
     //! The control points are modified, the first and the last point
     //! are not the same.
     //!
     //! Parameters EpsU, EpsV define the proximity along U-Direction and V-Direction respectively.
-    void segment(const Standard_Real U1, const Standard_Real U2,
-        const Standard_Real V1, const Standard_Real V2,
-        const Standard_Real EpsU, const Standard_Real EpsV,
-        const Standard_Boolean SegmentInU, const Standard_Boolean SegmentInV);
+    void segment(const Standard_Real U1, const Standard_Real U2, const Standard_Real V1, const Standard_Real V2,
+                 const Standard_Real EpsU, const Standard_Real EpsV, const Standard_Boolean SegmentInU,
+                 const Standard_Boolean SegmentInV);
 
 private:
-
     //! Recompute  the  flatknots,  the knotsdistribution, the
     //! continuity for U.
     Standard_EXPORT void UpdateUKnots();

@@ -44,7 +44,10 @@ public:
     //! abs(Xi - Xi-1) <= Epsx and abs(F(Xi)-K) <= EpsF.
     //! The function is considered as null between A and B if
     //! abs(F-K) <= EpsNull within this range.
-    Standard_EXPORT math_FunctionRoots(math_FunctionWithDerivative& F, const Standard_Real A, const Standard_Real B, const Standard_Integer NbSample, const Standard_Real EpsX = 0.0, const Standard_Real EpsF = 0.0, const Standard_Real EpsNull = 0.0, const Standard_Real K = 0.0);
+    Standard_EXPORT math_FunctionRoots(math_FunctionWithDerivative& F, const Standard_Real A, const Standard_Real B,
+                                       const Standard_Integer NbSample, const Standard_Real EpsX = 0.0,
+                                       const Standard_Real EpsF = 0.0, const Standard_Real EpsNull = 0.0,
+                                       const Standard_Real K = 0.0);
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
@@ -74,9 +77,7 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
-
     Standard_Boolean Done;
     Standard_Boolean AllNull;
     TColStd_SequenceOfReal Sol;

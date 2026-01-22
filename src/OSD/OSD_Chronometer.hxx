@@ -31,10 +31,8 @@
 //! must occur from the same thread where Start() was called
 //! (unless chronometer is stopped); otherwise measurement will
 //! yield false values.
-class OSD_Chronometer
-{
+class OSD_Chronometer {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Initializes a stopped Chronometer.
@@ -48,7 +46,9 @@ public:
     Standard_EXPORT virtual ~OSD_Chronometer();
 
     //! Return true if timer has been started.
-    Standard_Boolean IsStarted() const { return !myIsStopped; }
+    Standard_Boolean IsStarted() const {
+        return !myIsStopped;
+    }
 
     //! Stops and Reinitializes the Chronometer.
     Standard_EXPORT virtual void Reset();
@@ -75,8 +75,7 @@ public:
 
     //! Returns the current CPU user time in seconds.
     //! The chronometer can be running (laps Time) or stopped.
-    Standard_Real UserTimeCPU() const
-    {
+    Standard_Real UserTimeCPU() const {
         Standard_Real aUserTime = 0.0, aSysTime = 0.0;
         Show(aUserTime, aSysTime);
         return aUserTime;
@@ -84,8 +83,7 @@ public:
 
     //! Returns the current CPU system time in seconds.
     //! The chronometer can be running (laps Time) or stopped.
-    Standard_Real SystemTimeCPU() const
-    {
+    Standard_Real SystemTimeCPU() const {
         Standard_Real aUserTime = 0.0, aSysTime = 0.0;
         Show(aUserTime, aSysTime);
         return aSysTime;
@@ -93,14 +91,15 @@ public:
 
     //! Returns the current CPU user time in a variable.
     //! The chronometer can be running (laps Time) or stopped.
-    void Show(Standard_Real& theUserSeconds) const { theUserSeconds = UserTimeCPU(); }
+    void Show(Standard_Real& theUserSeconds) const {
+        theUserSeconds = UserTimeCPU();
+    }
 
     //! Returns the current CPU user and system time in variables.
     //! The chronometer can be running (laps Time) or stopped.
     Standard_EXPORT void Show(Standard_Real& theUserSec, Standard_Real& theSystemSec) const;
 
 public:
-
     //! Returns CPU time (user and system) consumed by the current
     //! process since its start, in seconds. The actual precision of
     //! the measurement depends on granularity provided by the system,
@@ -114,14 +113,12 @@ public:
     Standard_EXPORT static void GetThreadCPU(Standard_Real& UserSeconds, Standard_Real& SystemSeconds);
 
 protected:
-
-    Standard_Real    myStartCpuUser;
-    Standard_Real    myStartCpuSys;
-    Standard_Real    myCumulCpuUser;
-    Standard_Real    myCumulCpuSys;
+    Standard_Real myStartCpuUser;
+    Standard_Real myStartCpuSys;
+    Standard_Real myCumulCpuUser;
+    Standard_Real myCumulCpuSys;
     Standard_Boolean myIsStopped;
     Standard_Boolean myIsThreadOnly;
-
 };
 
 #endif // _OSD_Chronometer_HeaderFile

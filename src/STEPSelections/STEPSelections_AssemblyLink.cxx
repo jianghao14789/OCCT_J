@@ -14,24 +14,20 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Transient.hxx>
 #include <Standard_Type.hxx>
 #include <StepRepr_NextAssemblyUsageOccurrence.hxx>
 #include <STEPSelections_AssemblyComponent.hxx>
 #include <STEPSelections_AssemblyLink.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(STEPSelections_AssemblyLink,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(STEPSelections_AssemblyLink, Standard_Transient)
 
-STEPSelections_AssemblyLink::STEPSelections_AssemblyLink()
-{
-}
+STEPSelections_AssemblyLink::STEPSelections_AssemblyLink() {}
 
-STEPSelections_AssemblyLink::STEPSelections_AssemblyLink(const Handle(StepRepr_NextAssemblyUsageOccurrence)& nauo,
-						       const Handle(Standard_Transient)& item,
-						       const Handle(STEPSelections_AssemblyComponent)& part)
-{
-  myNAUO = nauo;
-  myItem = item;
-  myComponent = part;
+STEPSelections_AssemblyLink::STEPSelections_AssemblyLink(const Handle(StepRepr_NextAssemblyUsageOccurrence) & nauo,
+                                                         const Handle(Standard_Transient) & item,
+                                                         const Handle(STEPSelections_AssemblyComponent) & part) {
+    myNAUO = nauo;
+    myItem = item;
+    myComponent = part;
 }

@@ -21,37 +21,24 @@
 #include <Standard_NotImplemented.hxx>
 #include <StdFail_NotDone.hxx>
 
-math_Gauss::math_Gauss(const math_Matrix& A,
-    const Standard_Real MinPivot,
-    const Message_ProgressRange& theProgress)
-    : LU(1, A.RowNumber(), 1, A.ColNumber()),
-    Index(1, A.RowNumber()),
-    D(0.0),
-    Done(Standard_False)
-{
+math_Gauss::math_Gauss(const math_Matrix& A, const Standard_Real MinPivot, const Message_ProgressRange& theProgress)
+    : LU(1, A.RowNumber(), 1, A.ColNumber()), Index(1, A.RowNumber()), D(0.0), Done(Standard_False) {
     math_NotSquare_Raise_if(A.RowNumber() != A.ColNumber(), " ");
     LU = A;
-    Standard_Integer Error = LU_Decompose(LU,
-        Index,
-        D,
-        MinPivot,
-        theProgress);
+    Standard_Integer Error = LU_Decompose(LU, Index, D, MinPivot, theProgress);
     if (!Error) {
         Done = Standard_True;
-    }
-    else {
+    } else {
         Done = Standard_False;
     }
 }
 
-void  math_Gauss::Solve(const math_Vector& B, math_Vector& X) const {
+void math_Gauss::Solve(const math_Vector& B, math_Vector& X) const {
 
     StdFail_NotDone_Raise_if(!Done, " ");
 
     X = B;
-    LU_Solve(LU,
-        Index,
-        X);
+    LU_Solve(LU, Index, X);
 }
 
 void math_Gauss::Solve(math_Vector& X) const {
@@ -61,9 +48,7 @@ void math_Gauss::Solve(math_Vector& X) const {
     if (X.Length() != LU.RowNumber()) {
         throw Standard_DimensionError();
     }
-    LU_Solve(LU,
-        Index,
-        X);
+    LU_Solve(LU, Index, X);
 }
 
 Standard_Real math_Gauss::Determinant() const {
@@ -81,9 +66,7 @@ void math_Gauss::Invert(math_Matrix& Inv) const {
 
     StdFail_NotDone_Raise_if(!Done, " ");
 
-    Standard_DimensionError_Raise_if((Inv.RowNumber() != LU.RowNumber()) ||
-        (Inv.ColNumber() != LU.ColNumber()),
-        " ");
+    Standard_DimensionError_Raise_if((Inv.RowNumber() != LU.RowNumber()) || (Inv.ColNumber() != LU.ColNumber()), " ");
 
     Standard_Integer LowerRow = Inv.LowerRow();
     Standard_Integer LowerCol = Inv.LowerCol();
@@ -100,17 +83,14 @@ void math_Gauss::Invert(math_Matrix& Inv) const {
             Inv(I + LowerRow - 1, J + LowerCol - 1) = Column(I);
         }
     }
-
 }
-
 
 void math_Gauss::Dump(Standard_OStream& o) const {
     o << "math_Gauss ";
     if (Done) {
         o << " Status = Done \n";
         o << " Determinant of A = " << D << std::endl;
-    }
-    else {
+    } else {
         o << " Status = not Done \n";
     }
 }

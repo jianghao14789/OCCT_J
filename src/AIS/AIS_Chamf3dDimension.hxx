@@ -16,7 +16,6 @@
 
 #include <PrsDim_Chamf3dDimension.hxx>
 
-Standard_DEPRECATED("Alias to moved class")
-typedef PrsDim_Chamf3dDimension AIS_Chamf3dDimension;
+Standard_DEPRECATED("Alias to moved class") typedef PrsDim_Chamf3dDimension AIS_Chamf3dDimension;
 
 #endif // _AIS_Chamf3dDimension_HeaderFile

@@ -26,92 +26,79 @@
 #include <Geom_Curve.hxx>
 
 //=======================================================================
-//function : BRepLib_CheckCurveOnSurface
-//purpose  : 
+// function : BRepLib_CheckCurveOnSurface
+// purpose  :
 //=======================================================================
-BRepLib_CheckCurveOnSurface::BRepLib_CheckCurveOnSurface
-                                            ( const TopoDS_Edge& theEdge,
-                                              const TopoDS_Face& theFace)
-{
-  Init(theEdge, theFace);
+BRepLib_CheckCurveOnSurface::BRepLib_CheckCurveOnSurface(const TopoDS_Edge& theEdge, const TopoDS_Face& theFace) {
+    Init(theEdge, theFace);
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-void BRepLib_CheckCurveOnSurface::Init(const TopoDS_Edge& theEdge, const TopoDS_Face& theFace)
-{
-  myCOnSurfGeom.Init();
+void BRepLib_CheckCurveOnSurface::Init(const TopoDS_Edge& theEdge, const TopoDS_Face& theFace) {
+    myCOnSurfGeom.Init();
 
-  if (theEdge.IsNull() || theFace.IsNull())
-  {
-    return;
-  }
-  //
-  if (BRep_Tool::Degenerated(theEdge) ||
-      !BRep_Tool::IsGeometric(theEdge))
-  {
-    return;
-  }
-  
-  // 3D curve initialization
-  const Handle(Adaptor3d_Curve) anAdaptor3dCurve = new BRepAdaptor_Curve(theEdge);
+    if (theEdge.IsNull() || theFace.IsNull()) {
+        return;
+    }
+    //
+    if (BRep_Tool::Degenerated(theEdge) || !BRep_Tool::IsGeometric(theEdge)) {
+        return;
+    }
 
-  // Surface initialization
+    // 3D curve initialization
+    const Handle(Adaptor3d_Curve) anAdaptor3dCurve = new BRepAdaptor_Curve(theEdge);
 
-  TopLoc_Location aLocation;
-  Standard_Real aFirstParam, aLastParam;
+    // Surface initialization
 
-  Handle(Geom2d_Curve) aGeom2dCurve = BRep_Tool::CurveOnSurface(theEdge, theFace, aFirstParam, aLastParam);
-  Handle(Geom_Surface) aGeomSurface = BRep_Tool::Surface(theFace);
+    TopLoc_Location aLocation;
+    Standard_Real aFirstParam, aLastParam;
 
-  // 2D curves initialization 
-  Handle(Adaptor2d_Curve2d) anAdaptorCurve = 
-    new Geom2dAdaptor_Curve(aGeom2dCurve, aFirstParam, aLastParam);
-  Handle(GeomAdaptor_Surface) aGeomAdaptorSurface = new GeomAdaptor_Surface(aGeomSurface);
+    Handle(Geom2d_Curve) aGeom2dCurve = BRep_Tool::CurveOnSurface(theEdge, theFace, aFirstParam, aLastParam);
+    Handle(Geom_Surface) aGeomSurface = BRep_Tool::Surface(theFace);
 
-  myAdaptorCurveOnSurface = new Adaptor3d_CurveOnSurface(anAdaptorCurve, aGeomAdaptorSurface);
+    // 2D curves initialization
+    Handle(Adaptor2d_Curve2d) anAdaptorCurve = new Geom2dAdaptor_Curve(aGeom2dCurve, aFirstParam, aLastParam);
+    Handle(GeomAdaptor_Surface) aGeomAdaptorSurface = new GeomAdaptor_Surface(aGeomSurface);
 
-  if(BRep_Tool::IsClosed(theEdge, theFace))
-  {
-    Handle(Geom2d_Curve) aGeom2dReversedCurve = 
-      BRep_Tool::CurveOnSurface(TopoDS::Edge(theEdge.Reversed()), theFace, aFirstParam, aLastParam);
-    Handle(Adaptor2d_Curve2d) anAdaptorReversedCurve =
-      new Geom2dAdaptor_Curve(aGeom2dReversedCurve, aFirstParam, aLastParam);
-     myAdaptorCurveOnSurface2 = new Adaptor3d_CurveOnSurface(anAdaptorReversedCurve, aGeomAdaptorSurface);
-  }
+    myAdaptorCurveOnSurface = new Adaptor3d_CurveOnSurface(anAdaptorCurve, aGeomAdaptorSurface);
 
-  myCOnSurfGeom.Init(anAdaptor3dCurve);
+    if (BRep_Tool::IsClosed(theEdge, theFace)) {
+        Handle(Geom2d_Curve) aGeom2dReversedCurve =
+            BRep_Tool::CurveOnSurface(TopoDS::Edge(theEdge.Reversed()), theFace, aFirstParam, aLastParam);
+        Handle(Adaptor2d_Curve2d) anAdaptorReversedCurve =
+            new Geom2dAdaptor_Curve(aGeom2dReversedCurve, aFirstParam, aLastParam);
+        myAdaptorCurveOnSurface2 = new Adaptor3d_CurveOnSurface(anAdaptorReversedCurve, aGeomAdaptorSurface);
+    }
+
+    myCOnSurfGeom.Init(anAdaptor3dCurve);
 }
 
 //=======================================================================
-//function : Perform
-//purpose  : if isTheMTDisabled == TRUE parallelization is not used
+// function : Perform
+// purpose  : if isTheMTDisabled == TRUE parallelization is not used
 //=======================================================================
-void BRepLib_CheckCurveOnSurface::Perform(const Standard_Boolean isMultiThread)
-{
-  // Compute the max distance
-  Compute(myAdaptorCurveOnSurface, isMultiThread);
-  if (ErrorStatus())
-  {
-    return;
-  }
-  //
-  if (!myAdaptorCurveOnSurface2.IsNull())
-  {
-    // compute max distance for myAdaptorCurveOnSurface2
-    // (for the second curve on closed surface)
-    Compute(myAdaptorCurveOnSurface2, isMultiThread);
-  }
+void BRepLib_CheckCurveOnSurface::Perform(const Standard_Boolean isMultiThread) {
+    // Compute the max distance
+    Compute(myAdaptorCurveOnSurface, isMultiThread);
+    if (ErrorStatus()) {
+        return;
+    }
+    //
+    if (!myAdaptorCurveOnSurface2.IsNull()) {
+        // compute max distance for myAdaptorCurveOnSurface2
+        // (for the second curve on closed surface)
+        Compute(myAdaptorCurveOnSurface2, isMultiThread);
+    }
 }
 
 //=======================================================================
-//function : Compute
-//purpose  : if isTheMTDisabled == TRUE parallelization is not used
+// function : Compute
+// purpose  : if isTheMTDisabled == TRUE parallelization is not used
 //=======================================================================
-void BRepLib_CheckCurveOnSurface::Compute(const Handle(Adaptor3d_CurveOnSurface)& theCurveOnSurface,
-                                          const Standard_Boolean isMultiThread)
-{
-  myCOnSurfGeom.Perform(theCurveOnSurface, isMultiThread);
+void BRepLib_CheckCurveOnSurface::Compute(const Handle(Adaptor3d_CurveOnSurface) & theCurveOnSurface,
+                                          const Standard_Boolean isMultiThread) {
+    myCOnSurfGeom.Perform(theCurveOnSurface, isMultiThread);
 }

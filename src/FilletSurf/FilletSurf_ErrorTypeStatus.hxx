@@ -17,15 +17,13 @@
 #ifndef _FilletSurf_ErrorTypeStatus_HeaderFile
 #define _FilletSurf_ErrorTypeStatus_HeaderFile
 
-
-enum FilletSurf_ErrorTypeStatus
-{
-FilletSurf_EmptyList,
-FilletSurf_EdgeNotG1,
-FilletSurf_FacesNotG1,
-FilletSurf_EdgeNotOnShape,
-FilletSurf_NotSharpEdge,
-FilletSurf_PbFilletCompute
+enum FilletSurf_ErrorTypeStatus {
+    FilletSurf_EmptyList,
+    FilletSurf_EdgeNotG1,
+    FilletSurf_FacesNotG1,
+    FilletSurf_EdgeNotOnShape,
+    FilletSurf_NotSharpEdge,
+    FilletSurf_PbFilletCompute
 };
 
 #endif // _FilletSurf_ErrorTypeStatus_HeaderFile

@@ -27,13 +27,12 @@
 //! local operation will be performed
 //! -   SelectionShU - selection of a shape up to which a
 //! local operation will be performed.
-enum BRepFeat_PerfSelection
-{
-BRepFeat_NoSelection,
-BRepFeat_SelectionFU,
-BRepFeat_SelectionU,
-BRepFeat_SelectionSh,
-BRepFeat_SelectionShU
+enum BRepFeat_PerfSelection {
+    BRepFeat_NoSelection,
+    BRepFeat_SelectionFU,
+    BRepFeat_SelectionU,
+    BRepFeat_SelectionSh,
+    BRepFeat_SelectionShU
 };
 
 #endif // _BRepFeat_PerfSelection_HeaderFile

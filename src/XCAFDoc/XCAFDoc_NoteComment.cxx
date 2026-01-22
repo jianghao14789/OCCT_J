@@ -22,125 +22,101 @@ IMPLEMENT_STANDARD_RTTIEXT(XCAFDoc_NoteComment, XCAFDoc_Note)
 // function : GetID
 // purpose  :
 // =======================================================================
-const Standard_GUID&
-XCAFDoc_NoteComment::GetID()
-{
-  static Standard_GUID s_ID("FDEA4C52-0F54-484c-B590-579E18F7B5D4");
-  return s_ID;
+const Standard_GUID& XCAFDoc_NoteComment::GetID() {
+    static Standard_GUID s_ID("FDEA4C52-0F54-484c-B590-579E18F7B5D4");
+    return s_ID;
 }
 
 // =======================================================================
 // function : Get
 // purpose  :
 // =======================================================================
-Handle(XCAFDoc_NoteComment)
-XCAFDoc_NoteComment::Get(const TDF_Label& theLabel)
-{
-  Handle(XCAFDoc_NoteComment) aThis;
-  theLabel.FindAttribute(XCAFDoc_NoteComment::GetID(), aThis);
-  return aThis;
+Handle(XCAFDoc_NoteComment) XCAFDoc_NoteComment::Get(const TDF_Label& theLabel) {
+    Handle(XCAFDoc_NoteComment) aThis;
+    theLabel.FindAttribute(XCAFDoc_NoteComment::GetID(), aThis);
+    return aThis;
 }
 
 // =======================================================================
 // function : Set
 // purpose  :
 // =======================================================================
-Handle(XCAFDoc_NoteComment)
-XCAFDoc_NoteComment::Set(const TDF_Label&                  theLabel,
-                         const TCollection_ExtendedString& theUserName,
-                         const TCollection_ExtendedString& theTimeStamp,
-                         const TCollection_ExtendedString& theComment)
-{
-  Handle(XCAFDoc_NoteComment) aNoteComment;
-  if (!theLabel.IsNull() && !theLabel.FindAttribute(XCAFDoc_NoteComment::GetID(), aNoteComment))
-  {
-    aNoteComment = new XCAFDoc_NoteComment();
-    aNoteComment->XCAFDoc_Note::Set(theUserName, theTimeStamp);
-    aNoteComment->Set(theComment);
-    theLabel.AddAttribute(aNoteComment);
-  }
-  return aNoteComment;
+Handle(XCAFDoc_NoteComment) XCAFDoc_NoteComment::Set(const TDF_Label& theLabel,
+                                                     const TCollection_ExtendedString& theUserName,
+                                                     const TCollection_ExtendedString& theTimeStamp,
+                                                     const TCollection_ExtendedString& theComment) {
+    Handle(XCAFDoc_NoteComment) aNoteComment;
+    if (!theLabel.IsNull() && !theLabel.FindAttribute(XCAFDoc_NoteComment::GetID(), aNoteComment)) {
+        aNoteComment = new XCAFDoc_NoteComment();
+        aNoteComment->XCAFDoc_Note::Set(theUserName, theTimeStamp);
+        aNoteComment->Set(theComment);
+        theLabel.AddAttribute(aNoteComment);
+    }
+    return aNoteComment;
 }
 
 // =======================================================================
 // function : XCAFDoc_NoteComment
 // purpose  :
 // =======================================================================
-XCAFDoc_NoteComment::XCAFDoc_NoteComment()
-{
-}
+XCAFDoc_NoteComment::XCAFDoc_NoteComment() {}
 
 // =======================================================================
 // function : Set
 // purpose  :
 // =======================================================================
-void
-XCAFDoc_NoteComment::Set(const TCollection_ExtendedString& theComment)
-{
-  Backup();
+void XCAFDoc_NoteComment::Set(const TCollection_ExtendedString& theComment) {
+    Backup();
 
-  myComment = theComment;
+    myComment = theComment;
 }
 
 // =======================================================================
 // function : ID
 // purpose  :
 // =======================================================================
-const Standard_GUID&
-XCAFDoc_NoteComment::ID() const
-{
-  return GetID();
+const Standard_GUID& XCAFDoc_NoteComment::ID() const {
+    return GetID();
 }
 
 // =======================================================================
 // function : NewEmpty
 // purpose  :
 // =======================================================================
-Handle(TDF_Attribute)
-XCAFDoc_NoteComment::NewEmpty() const
-{
-  return new XCAFDoc_NoteComment();
+Handle(TDF_Attribute) XCAFDoc_NoteComment::NewEmpty() const {
+    return new XCAFDoc_NoteComment();
 }
 
 // =======================================================================
 // function : Restore
 // purpose  :
 // =======================================================================
-void
-XCAFDoc_NoteComment::Restore(const Handle(TDF_Attribute)& theAttr)
-{
-  XCAFDoc_Note::Restore(theAttr);
+void XCAFDoc_NoteComment::Restore(const Handle(TDF_Attribute) & theAttr) {
+    XCAFDoc_Note::Restore(theAttr);
 
-  Handle(XCAFDoc_NoteComment) aMine = Handle(XCAFDoc_NoteComment)::DownCast(theAttr);
-  if (!aMine.IsNull())
-    myComment = aMine->myComment;
+    Handle(XCAFDoc_NoteComment) aMine = Handle(XCAFDoc_NoteComment)::DownCast(theAttr);
+    if (!aMine.IsNull()) myComment = aMine->myComment;
 }
 
 // =======================================================================
 // function : Paste
 // purpose  :
 // =======================================================================
-void
-XCAFDoc_NoteComment::Paste(const Handle(TDF_Attribute)&       theAttrInto,
-                           const Handle(TDF_RelocationTable)& theRT) const
-{
-  XCAFDoc_Note::Paste(theAttrInto, theRT);
+void XCAFDoc_NoteComment::Paste(const Handle(TDF_Attribute) & theAttrInto,
+                                const Handle(TDF_RelocationTable) & theRT) const {
+    XCAFDoc_Note::Paste(theAttrInto, theRT);
 
-  Handle(XCAFDoc_NoteComment) aMine = Handle(XCAFDoc_NoteComment)::DownCast(theAttrInto);
-  if (!aMine.IsNull())
-    aMine->Set(myComment);
+    Handle(XCAFDoc_NoteComment) aMine = Handle(XCAFDoc_NoteComment)::DownCast(theAttrInto);
+    if (!aMine.IsNull()) aMine->Set(myComment);
 }
 
 // =======================================================================
 // function : Dump
 // purpose  :
 // =======================================================================
-Standard_OStream&
-XCAFDoc_NoteComment::Dump(Standard_OStream& theOS) const
-{
-  XCAFDoc_Note::Dump(theOS);
-  theOS << "\n"
-    << "Comment : " << (!myComment.IsEmpty() ? myComment : "<empty>")
-    ;
-  return theOS;
+Standard_OStream& XCAFDoc_NoteComment::Dump(Standard_OStream& theOS) const {
+    XCAFDoc_Note::Dump(theOS);
+    theOS << "\n"
+          << "Comment : " << (!myComment.IsEmpty() ? myComment : "<empty>");
+    return theOS;
 }

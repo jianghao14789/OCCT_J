@@ -27,12 +27,7 @@
 //=============================================================================
 // GeomToIGES_GeomPoint
 //=============================================================================
-GeomToIGES_GeomPoint::GeomToIGES_GeomPoint
-(const GeomToIGES_GeomEntity& GE)
-:GeomToIGES_GeomEntity(GE)
-{
-}
-
+GeomToIGES_GeomPoint::GeomToIGES_GeomPoint(const GeomToIGES_GeomEntity& GE) : GeomToIGES_GeomEntity(GE) {}
 
 //=============================================================================
 // GeomToIGES_GeomPoint
@@ -40,29 +35,24 @@ GeomToIGES_GeomPoint::GeomToIGES_GeomPoint
 
 GeomToIGES_GeomPoint::GeomToIGES_GeomPoint()
 
-:GeomToIGES_GeomEntity()
-{
-}
-
+    : GeomToIGES_GeomEntity() {}
 
 //=============================================================================
 // Transfer de Point de Geom vers IGES
 // TranferPoint
 //=============================================================================
 
-Handle(IGESGeom_Point) GeomToIGES_GeomPoint::TransferPoint
-( const Handle(Geom_Point)& P)
-{
-  Handle(IGESGeom_Point) Piges = new IGESGeom_Point;
-  if (P.IsNull()) {
-    return Piges;
-  }
+Handle(IGESGeom_Point) GeomToIGES_GeomPoint::TransferPoint(const Handle(Geom_Point) & P) {
+    Handle(IGESGeom_Point) Piges = new IGESGeom_Point;
+    if (P.IsNull()) {
+        return Piges;
+    }
 
-  Standard_Real X,Y,Z;
-  P->Coord (X,Y,Z);
-  Handle(IGESBasic_SubfigureDef) voidsubdef;
-  Piges-> Init(gp_XYZ(X/GetUnit(),Y/GetUnit(),Z/GetUnit()), voidsubdef);
-  return Piges;
+    Standard_Real X, Y, Z;
+    P->Coord(X, Y, Z);
+    Handle(IGESBasic_SubfigureDef) voidsubdef;
+    Piges->Init(gp_XYZ(X / GetUnit(), Y / GetUnit(), Z / GetUnit()), voidsubdef);
+    return Piges;
 }
 
 //=============================================================================
@@ -70,18 +60,16 @@ Handle(IGESGeom_Point) GeomToIGES_GeomPoint::TransferPoint
 // TranferPoint
 //=============================================================================
 
-Handle(IGESGeom_Point) GeomToIGES_GeomPoint::TransferPoint
-( const Handle(Geom_CartesianPoint)& P)
-{
+Handle(IGESGeom_Point) GeomToIGES_GeomPoint::TransferPoint(const Handle(Geom_CartesianPoint) & P) {
 
-  Handle(IGESGeom_Point) Piges = new IGESGeom_Point;
-  if (P.IsNull()) {
+    Handle(IGESGeom_Point) Piges = new IGESGeom_Point;
+    if (P.IsNull()) {
+        return Piges;
+    }
+
+    Standard_Real X, Y, Z;
+    P->Coord(X, Y, Z);
+    Handle(IGESBasic_SubfigureDef) voidsubdef;
+    Piges->Init(gp_XYZ(X / GetUnit(), Y / GetUnit(), Z / GetUnit()), voidsubdef);
     return Piges;
-  }
-
-  Standard_Real X,Y,Z;
-  P->Coord (X,Y,Z);
-  Handle(IGESBasic_SubfigureDef) voidsubdef;
-  Piges-> Init(gp_XYZ(X/GetUnit(),Y/GetUnit(),Z/GetUnit()), voidsubdef);
-  return Piges;
 }

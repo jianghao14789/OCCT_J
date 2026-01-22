@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Handle(MAT_Arc),TColStd_MapIntegerHasher> MAT_DataMapOfIntegerArc;
-typedef NCollection_DataMap<Standard_Integer,Handle(MAT_Arc),TColStd_MapIntegerHasher>::Iterator MAT_DataMapIteratorOfDataMapOfIntegerArc;
-
+typedef NCollection_DataMap<Standard_Integer, Handle(MAT_Arc), TColStd_MapIntegerHasher> MAT_DataMapOfIntegerArc;
+typedef NCollection_DataMap<Standard_Integer, Handle(MAT_Arc), TColStd_MapIntegerHasher>::Iterator
+    MAT_DataMapIteratorOfDataMapOfIntegerArc;
 
 #endif

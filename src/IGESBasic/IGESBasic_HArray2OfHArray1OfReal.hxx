@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY2(IGESBasic_HArray2OfHArray1OfReal, IGESBasic_Array2OfHArray1OfReal)
 
-
 #endif

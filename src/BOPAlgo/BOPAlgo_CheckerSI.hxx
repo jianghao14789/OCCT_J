@@ -26,7 +26,6 @@
 #include <Standard_Boolean.hxx>
 #include <BOPAlgo_PaveFiller.hxx>
 
-
 //! Checks the shape on self-interference.
 //!
 //! The algorithm can set the following errors:
@@ -36,17 +35,15 @@
 //! in BOPAlgo_PaveFiller::PerformInternal() method, the errors from this method
 //! directly will be returned.
 
-class BOPAlgo_CheckerSI : public BOPAlgo_PaveFiller
-{
+class BOPAlgo_CheckerSI : public BOPAlgo_PaveFiller {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT BOPAlgo_CheckerSI();
     Standard_EXPORT virtual ~BOPAlgo_CheckerSI();
 
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
     //! Sets the level of checking shape on self-interference.<br>
     //! It defines which interferences will be checked:<br>
@@ -63,7 +60,6 @@ public:
     Standard_EXPORT void SetLevelOfCheck(const Standard_Integer theLevel);
 
 protected:
-
     Standard_EXPORT virtual void Init(const Message_ProgressRange& theRange) Standard_OVERRIDE;
 
     //! Treats the intersection results
@@ -91,7 +87,6 @@ protected:
     Standard_Integer myLevelOfCheck;
 
 private:
-
 };
 
 #endif // _BOPAlgo_CheckerSI_HeaderFile

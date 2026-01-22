@@ -31,43 +31,26 @@ DEFINE_STANDARD_HANDLE(IGESDraw_SpecificModule, IGESData_SpecificModule)
 
 //! Defines Services attached to IGES Entities :
 //! Dump & OwnCorrect, for IGESDraw
-class IGESDraw_SpecificModule : public IGESData_SpecificModule
-{
+class IGESDraw_SpecificModule : public IGESData_SpecificModule {
 
 public:
+    //! Creates a SpecificModule from IGESDraw & puts it into SpecificLib
+    Standard_EXPORT IGESDraw_SpecificModule();
 
-  
-  //! Creates a SpecificModule from IGESDraw & puts it into SpecificLib
-  Standard_EXPORT IGESDraw_SpecificModule();
-  
-  //! Specific Dump (own parameters) for IGESDraw
-  Standard_EXPORT void OwnDump (const Standard_Integer CN, const Handle(IGESData_IGESEntity)& ent, const IGESData_IGESDumper& dumper, Standard_OStream& S, const Standard_Integer own) const Standard_OVERRIDE;
-  
-  //! Performs non-ambiguous Corrections on Entities which support
-  //! them (Planar)
-  Standard_EXPORT virtual Standard_Boolean OwnCorrect (const Standard_Integer CN, const Handle(IGESData_IGESEntity)& ent) const Standard_OVERRIDE;
+    //! Specific Dump (own parameters) for IGESDraw
+    Standard_EXPORT void OwnDump(const Standard_Integer CN, const Handle(IGESData_IGESEntity) & ent,
+                                 const IGESData_IGESDumper& dumper, Standard_OStream& S,
+                                 const Standard_Integer own) const Standard_OVERRIDE;
 
+    //! Performs non-ambiguous Corrections on Entities which support
+    //! them (Planar)
+    Standard_EXPORT virtual Standard_Boolean OwnCorrect(const Standard_Integer CN, const Handle(IGESData_IGESEntity) &
+                                                                                       ent) const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESDraw_SpecificModule,IGESData_SpecificModule)
+    DEFINE_STANDARD_RTTIEXT(IGESDraw_SpecificModule, IGESData_SpecificModule)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESDraw_SpecificModule_HeaderFile

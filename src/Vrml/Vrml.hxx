@@ -63,7 +63,6 @@ class Vrml_WWWAnchor;
 class Vrml_WWWInline;
 class Vrml_Instancing;
 
-
 //! Vrml package  implements the specification  of the
 //! VRML ( Virtual  Reality Modeling Language ).  VRML
 //! is a standard  language for describing interactive
@@ -73,79 +72,58 @@ class Vrml_Instancing;
 //! This package is used by VrmlConverter package.
 //! The developer should  already be familiar with VRML
 //! specification before using this package.
-class Vrml 
-{
+class Vrml {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Writes a header in anOStream (VRML file).
+    //! Writes one line of commentary in  anOStream (VRML file).
+    Standard_EXPORT static Standard_OStream& VrmlHeaderWriter(Standard_OStream& anOStream);
 
-  
-  //! Writes a header in anOStream (VRML file).
-  //! Writes one line of commentary in  anOStream (VRML file).
-  Standard_EXPORT static Standard_OStream& VrmlHeaderWriter (Standard_OStream& anOStream);
-  
-  Standard_EXPORT static Standard_OStream& CommentWriter (const Standard_CString aComment, Standard_OStream& anOStream);
-
-
-
+    Standard_EXPORT static Standard_OStream& CommentWriter(const Standard_CString aComment,
+                                                           Standard_OStream& anOStream);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class Vrml_SFImage;
-friend class Vrml_SFRotation;
-friend class Vrml_AsciiText;
-friend class Vrml_Cone;
-friend class Vrml_Cube;
-friend class Vrml_Cylinder;
-friend class Vrml_IndexedFaceSet;
-friend class Vrml_IndexedLineSet;
-friend class Vrml_PointSet;
-friend class Vrml_Sphere;
-friend class Vrml_Coordinate3;
-friend class Vrml_FontStyle;
-friend class Vrml_Info;
-friend class Vrml_LOD;
-friend class Vrml_Material;
-friend class Vrml_MaterialBinding;
-friend class Vrml_Normal;
-friend class Vrml_NormalBinding;
-friend class Vrml_Texture2;
-friend class Vrml_Texture2Transform;
-friend class Vrml_TextureCoordinate2;
-friend class Vrml_ShapeHints;
-friend class Vrml_MatrixTransform;
-friend class Vrml_Rotation;
-friend class Vrml_Scale;
-friend class Vrml_Transform;
-friend class Vrml_Translation;
-friend class Vrml_OrthographicCamera;
-friend class Vrml_PerspectiveCamera;
-friend class Vrml_DirectionalLight;
-friend class Vrml_PointLight;
-friend class Vrml_SpotLight;
-friend class Vrml_Group;
-friend class Vrml_Separator;
-friend class Vrml_Switch;
-friend class Vrml_TransformSeparator;
-friend class Vrml_WWWAnchor;
-friend class Vrml_WWWInline;
-friend class Vrml_Instancing;
-
+    friend class Vrml_SFImage;
+    friend class Vrml_SFRotation;
+    friend class Vrml_AsciiText;
+    friend class Vrml_Cone;
+    friend class Vrml_Cube;
+    friend class Vrml_Cylinder;
+    friend class Vrml_IndexedFaceSet;
+    friend class Vrml_IndexedLineSet;
+    friend class Vrml_PointSet;
+    friend class Vrml_Sphere;
+    friend class Vrml_Coordinate3;
+    friend class Vrml_FontStyle;
+    friend class Vrml_Info;
+    friend class Vrml_LOD;
+    friend class Vrml_Material;
+    friend class Vrml_MaterialBinding;
+    friend class Vrml_Normal;
+    friend class Vrml_NormalBinding;
+    friend class Vrml_Texture2;
+    friend class Vrml_Texture2Transform;
+    friend class Vrml_TextureCoordinate2;
+    friend class Vrml_ShapeHints;
+    friend class Vrml_MatrixTransform;
+    friend class Vrml_Rotation;
+    friend class Vrml_Scale;
+    friend class Vrml_Transform;
+    friend class Vrml_Translation;
+    friend class Vrml_OrthographicCamera;
+    friend class Vrml_PerspectiveCamera;
+    friend class Vrml_DirectionalLight;
+    friend class Vrml_PointLight;
+    friend class Vrml_SpotLight;
+    friend class Vrml_Group;
+    friend class Vrml_Separator;
+    friend class Vrml_Switch;
+    friend class Vrml_TransformSeparator;
+    friend class Vrml_WWWAnchor;
+    friend class Vrml_WWWInline;
+    friend class Vrml_Instancing;
 };
-
-
-
-
-
-
 
 #endif // _Vrml_HeaderFile

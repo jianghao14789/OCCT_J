@@ -29,16 +29,13 @@ class Standard_Failure;
 
 //! The package Standard provides global memory allocator and other basic
 //! services used by other OCCT components.
-//! 
+//!
 //! Standard 包提供全局内存分配器和其他基本服务，供 OCCT 其他组件使用。
 //! 这是 OCCT 的核心模块，处理内存管理、错误处理等基础功能。
 
-class Standard
-{
+class Standard {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Allocates memory blocks
     //! aSize - bytes to  allocate
@@ -56,9 +53,7 @@ public:
     //! @param thePtr - previously allocated memory block to be freed
     //! Free() 的模板版本，释放内存后将指针置为空
     //! @param thePtr - 之前分配的需要释放的内存块
-    template <typename T>
-    static inline void Free(T*& thePtr)
-    {
+    template <typename T> static inline void Free(T*& thePtr) {
         Free((void*)thePtr);
         thePtr = 0;
     }
@@ -92,9 +87,7 @@ public:
     //! @param thePtrAligned the memory block previously allocated with AllocateAligned()
     //! FreeAligned() 的模板版本，释放对齐内存后将指针置为空
     //! @param thePtrAligned 之前用 AllocateAligned() 分配的内存块
-    template <typename T>
-    static inline void FreeAligned(T*& thePtrAligned)
-    {
+    template <typename T> static inline void FreeAligned(T*& thePtrAligned) {
         FreeAligned((void*)thePtrAligned);
         thePtrAligned = 0;
     }
@@ -122,7 +115,7 @@ public:
     //!                        in case of DbgHelp (Windows) should be a pointer to CONTEXT
     //! @param theNbTopSkip [in] number of traces on top of the stack to skip
     //! @return TRUE on success
-    //! 
+    //!
     //! 向消息缓冲区追加堆栈跟踪信息（用于调试）
     //! 在去除符号的二进制文件中，堆栈信息可能不完整
     //! 实现细节：
@@ -138,12 +131,8 @@ public:
     //! @param theContext [输入] 可选的平台相关帧上下文（Windows DbgHelp 应为 CONTEXT 指针）
     //! @param theNbTopSkip [输入] 从堆栈顶部跳过的跟踪数量
     //! @return 成功返回 TRUE，失败返回 FALSE
-    Standard_EXPORT static Standard_Boolean StackTrace(char* theBuffer,
-        const int theBufferSize,
-        const int theNbTraces,
-        void* theContext = NULL,
-        const int theNbTopSkip = 0);
-
+    Standard_EXPORT static Standard_Boolean StackTrace(char* theBuffer, const int theBufferSize, const int theNbTraces,
+                                                       void* theContext = NULL, const int theNbTopSkip = 0);
 };
 
 // include definition of handle to make it always visible

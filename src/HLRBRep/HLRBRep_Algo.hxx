@@ -25,7 +25,6 @@
 class TopoDS_Shape;
 class Standard_Transient;
 
-
 class HLRBRep_Algo;
 DEFINE_STANDARD_HANDLE(HLRBRep_Algo, HLRBRep_InternalAlgo)
 
@@ -61,59 +60,40 @@ DEFINE_STANDARD_HANDLE(HLRBRep_Algo, HLRBRep_InternalAlgo)
 //! -   Note that this is not the sort of algorithm used in generating shading, which
 //! calculates the visible and hidden parts of each face in a shape to be visualized by
 //! comparing each face in the shape with every other face in the same shape.
-class HLRBRep_Algo : public HLRBRep_InternalAlgo
-{
+class HLRBRep_Algo : public HLRBRep_InternalAlgo {
 
 public:
+    //! Constructs an empty framework for the
+    //! calculation of visible and hidden lines of a shape in a projection.
+    //! Use the function:
+    //! -   Projector to define the point of view
+    //! -   Add to select the shape or shapes to be visualized
+    //! -   Update to compute the outlines of the shape, and
+    //! -   Hide to compute the visible and hidden lines of the shape.
+    Standard_EXPORT HLRBRep_Algo();
 
-  
-  //! Constructs an empty framework for the
-  //! calculation of visible and hidden lines of a shape in a projection.
-  //! Use the function:
-  //! -   Projector to define the point of view
-  //! -   Add to select the shape or shapes to be visualized
-  //! -   Update to compute the outlines of the shape, and
-  //! -   Hide to compute the visible and hidden lines of the shape.
-  Standard_EXPORT HLRBRep_Algo();
-  
-  Standard_EXPORT HLRBRep_Algo(const Handle(HLRBRep_Algo)& A);
-  
-  //! add the Shape <S>.
-  Standard_EXPORT void Add (const TopoDS_Shape& S, const Handle(Standard_Transient)& SData, const Standard_Integer nbIso = 0);
-  
-  //! Adds the shape S to this framework, and
-  //! specifies the number of isoparameters nbiso desired in visualizing S.
-  //! You may add as many shapes as you wish. Use the function Add once for each shape.
-  Standard_EXPORT void Add (const TopoDS_Shape& S, const Standard_Integer nbIso = 0);
-  
-  //! return  the index  of  the  Shape <S>  and
-  //! return 0 if the Shape <S> is not found.
-  Standard_EXPORT Standard_Integer Index (const TopoDS_Shape& S);
-  
-  //! nullify all the results of OutLiner from HLRTopoBRep.
-  Standard_EXPORT void OutLinedShapeNullify();
+    Standard_EXPORT HLRBRep_Algo(const Handle(HLRBRep_Algo) & A);
 
+    //! add the Shape <S>.
+    Standard_EXPORT void Add(const TopoDS_Shape& S, const Handle(Standard_Transient) & SData,
+                             const Standard_Integer nbIso = 0);
 
+    //! Adds the shape S to this framework, and
+    //! specifies the number of isoparameters nbiso desired in visualizing S.
+    //! You may add as many shapes as you wish. Use the function Add once for each shape.
+    Standard_EXPORT void Add(const TopoDS_Shape& S, const Standard_Integer nbIso = 0);
 
+    //! return  the index  of  the  Shape <S>  and
+    //! return 0 if the Shape <S> is not found.
+    Standard_EXPORT Standard_Integer Index(const TopoDS_Shape& S);
 
-  DEFINE_STANDARD_RTTIEXT(HLRBRep_Algo,HLRBRep_InternalAlgo)
+    //! nullify all the results of OutLiner from HLRTopoBRep.
+    Standard_EXPORT void OutLinedShapeNullify();
+
+    DEFINE_STANDARD_RTTIEXT(HLRBRep_Algo, HLRBRep_InternalAlgo)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _HLRBRep_Algo_HeaderFile

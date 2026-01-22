@@ -28,48 +28,29 @@ class StepAP203_CcDesignSecurityClassification;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CcDesignSecurityClassification
-class RWStepAP203_RWCcDesignSecurityClassification 
-{
+class RWStepAP203_RWCcDesignSecurityClassification {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepAP203_RWCcDesignSecurityClassification();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepAP203_RWCcDesignSecurityClassification();
-  
-  //! Reads CcDesignSecurityClassification
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP203_CcDesignSecurityClassification)& ent) const;
-  
-  //! Writes CcDesignSecurityClassification
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP203_CcDesignSecurityClassification)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepAP203_CcDesignSecurityClassification)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CcDesignSecurityClassification
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP203_CcDesignSecurityClassification) & ent) const;
 
+    //! Writes CcDesignSecurityClassification
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP203_CcDesignSecurityClassification) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepAP203_CcDesignSecurityClassification) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP203_RWCcDesignSecurityClassification_HeaderFile

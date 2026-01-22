@@ -28,18 +28,14 @@
 #include <Standard_Boolean.hxx>
 class Units_Dimensions;
 
-
 class Units_Token;
 DEFINE_STANDARD_HANDLE(Units_Token, Standard_Transient)
 
 //! This class defines an elementary word contained in
 //! a Sentence object.
-class Units_Token : public Standard_Transient
-{
+class Units_Token : public Standard_Transient {
 
 public:
-
-
     //! Creates and returns a empty token.
     Standard_EXPORT Units_Token();
 
@@ -49,7 +45,7 @@ public:
 
     //! Creates and returns a  token.  <atoken> is  copied  in
     //! the returned token.
-    Standard_EXPORT Units_Token(const Handle(Units_Token)& atoken);
+    Standard_EXPORT Units_Token(const Handle(Units_Token) & atoken);
 
     //! Creates  and  returns a  token.   <aword> is  a string
     //! containing the  available word and  <amean>  gives the
@@ -67,7 +63,8 @@ public:
     //! signification of  the  token, <avalue> is  the numeric
     //! value  of the dimension,  and <adimensions>   is   the
     //! dimension of the given word <aword>.
-    Standard_EXPORT Units_Token(const Standard_CString aword, const Standard_CString amean, const Standard_Real avalue, const Handle(Units_Dimensions)& adimension);
+    Standard_EXPORT Units_Token(const Standard_CString aword, const Standard_CString amean, const Standard_Real avalue,
+                                const Handle(Units_Dimensions) & adimension);
 
     //! Creates and returns a  token, which is a ShiftedToken.
     Standard_EXPORT virtual Handle(Units_Token) Creates() const;
@@ -98,7 +95,7 @@ public:
     Handle(Units_Dimensions) Dimensions() const;
 
     //! Sets the field <thedimensions> to <adimensions>.
-    Standard_EXPORT void Dimensions(const Handle(Units_Dimensions)& adimensions);
+    Standard_EXPORT void Dimensions(const Handle(Units_Dimensions) & adimensions);
 
     //! Updates     the  token  <me>    with  the   additional
     //! signification  <amean> by  concatenation   of the  two
@@ -112,16 +109,16 @@ public:
     //! Returns a  token which is  the addition  of  <me>  and
     //! another token <atoken>. The  addition  is  possible if
     //! and only if the dimensions are the same.
-    Standard_EXPORT Handle(Units_Token) Add(const Handle(Units_Token)& atoken) const;
+    Standard_EXPORT Handle(Units_Token) Add(const Handle(Units_Token) & atoken) const;
 
     //! Returns a token  which is the  subtraction of <me> and
     //! another token <atoken>. The subtraction is possible if
     //! and only if the dimensions are the same.
-    Standard_EXPORT Handle(Units_Token) Subtract(const Handle(Units_Token)& atoken) const;
+    Standard_EXPORT Handle(Units_Token) Subtract(const Handle(Units_Token) & atoken) const;
 
     //! Returns a  token  which  is the  product of   <me> and
     //! another token <atoken>.
-    Standard_EXPORT Handle(Units_Token) Multiply(const Handle(Units_Token)& atoken) const;
+    Standard_EXPORT Handle(Units_Token) Multiply(const Handle(Units_Token) & atoken) const;
 
     //! This   virtual method is   called  by  the Measurement
     //! methods,  to  compute    the   measurement   during  a
@@ -130,7 +127,7 @@ public:
 
     //! Returns a token which is the division of <me> by another
     //! token <atoken>.
-    Standard_EXPORT Handle(Units_Token) Divide(const Handle(Units_Token)& atoken) const;
+    Standard_EXPORT Handle(Units_Token) Divide(const Handle(Units_Token) & atoken) const;
 
     //! This  virtual  method  is  called by  the  Measurement
     //! methods,   to   compute   the measurement  during    a
@@ -140,7 +137,7 @@ public:
     //! Returns a token which is <me> to the power  of another
     //! token <atoken>.  The computation  is possible  only if
     //! <atoken> is a dimensionless constant.
-    Standard_EXPORT Handle(Units_Token) Power(const Handle(Units_Token)& atoken) const;
+    Standard_EXPORT Handle(Units_Token) Power(const Handle(Units_Token) & atoken) const;
 
     //! Returns a token which is <me> to the power  of <anexponent>.
     Standard_EXPORT Handle(Units_Token) Power(const Standard_Real anexponent) const;
@@ -152,7 +149,7 @@ public:
     //! Returns true  if the  field  <theword> and  the string
     //! <theword> contained  in  the  token <atoken>  are  the
     //! same, false otherwise.
-    Standard_EXPORT Standard_Boolean IsEqual(const Handle(Units_Token)& atoken) const;
+    Standard_EXPORT Standard_Boolean IsEqual(const Handle(Units_Token) & atoken) const;
 
     //! Returns false if  the field <theword>  and the  string
     //! <astring> are the same, true otherwise.
@@ -161,7 +158,7 @@ public:
     //! Returns false if  the field <theword>  and the  string
     //! <theword> contained  in the  token  <atoken>  are  the
     //! same, true otherwise.
-    Standard_Boolean IsNotEqual(const Handle(Units_Token)& atoken) const;
+    Standard_Boolean IsNotEqual(const Handle(Units_Token) & atoken) const;
 
     //! Returns   true  if the   field <theword>  is  strictly
     //! contained at  the beginning  of the string  <astring>,
@@ -176,41 +173,26 @@ public:
     //! Returns false  if   the field   <theword> is  strictly
     //! contained at  the  beginning  of the string <astring>,
     //! true otherwise.
-    Standard_Boolean IsGreater(const Handle(Units_Token)& atoken) const;
+    Standard_Boolean IsGreater(const Handle(Units_Token) & atoken) const;
 
     //! Returns true  if  the string <astring>   is   strictly
     //! contained   at the  beginning  of  the field <theword>
     //! false otherwise.
-    Standard_Boolean IsGreaterOrEqual(const Handle(Units_Token)& atoken) const;
+    Standard_Boolean IsGreaterOrEqual(const Handle(Units_Token) & atoken) const;
 
     //! Useful for debugging
     Standard_EXPORT virtual void Dump(const Standard_Integer ashift, const Standard_Integer alevel) const;
 
-
-
     DEFINE_STANDARD_RTTIEXT(Units_Token, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
     TCollection_AsciiString theword;
     TCollection_AsciiString themean;
     Standard_Real thevalue;
     Handle(Units_Dimensions) thedimensions;
-
-
 };
 
-
 #include <Units_Token.lxx>
-
-
-
-
 
 #endif // _Units_Token_HeaderFile

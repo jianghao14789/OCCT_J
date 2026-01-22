@@ -27,48 +27,26 @@ class StepShape_ConnectedEdgeSet;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ConnectedEdgeSet
-class RWStepShape_RWConnectedEdgeSet 
-{
+class RWStepShape_RWConnectedEdgeSet {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWConnectedEdgeSet();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWConnectedEdgeSet();
-  
-  //! Reads ConnectedEdgeSet
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ConnectedEdgeSet)& ent) const;
-  
-  //! Writes ConnectedEdgeSet
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ConnectedEdgeSet)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_ConnectedEdgeSet)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ConnectedEdgeSet
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_ConnectedEdgeSet) & ent) const;
 
+    //! Writes ConnectedEdgeSet
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_ConnectedEdgeSet) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_ConnectedEdgeSet) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWConnectedEdgeSet_HeaderFile

@@ -29,11 +29,8 @@
 
 #include <Standard_ConstructionError.hxx>
 
-static Standard_Real Locate(const Standard_Real Angfin,
-    const TColgp_Array1OfPnt2d& TPoles,
-    const Standard_Real Umin,
-    const Standard_Real Umax)
-{
+static Standard_Real Locate(const Standard_Real Angfin, const TColgp_Array1OfPnt2d& TPoles, const Standard_Real Umin,
+                            const Standard_Real Umax) {
     Standard_Real umin = Umin;
     Standard_Real umax = Umax;
     Standard_Real Ptol = Precision::Angular();
@@ -51,35 +48,22 @@ static Standard_Real Locate(const Standard_Real Angfin,
         }
         if (theta < Angfin) {
             umin = ptest;
-        }
-        else if (theta > Angfin) {
+        } else if (theta > Angfin) {
             umax = ptest;
         }
     }
     return (umin + umax) / 2.;
 }
 
+void BuildPolynomialCosAndSin(const Standard_Real UFirst, const Standard_Real ULast, const Standard_Integer num_poles,
+                              Handle(TColStd_HArray1OfReal) & CosNumeratorPtr,
+                              Handle(TColStd_HArray1OfReal) & SinNumeratorPtr,
+                              Handle(TColStd_HArray1OfReal) & DenominatorPtr) {
 
-void BuildPolynomialCosAndSin
-(const Standard_Real UFirst,
-    const Standard_Real ULast,
-    const Standard_Integer num_poles,
-    Handle(TColStd_HArray1OfReal)& CosNumeratorPtr,
-    Handle(TColStd_HArray1OfReal)& SinNumeratorPtr,
-    Handle(TColStd_HArray1OfReal)& DenominatorPtr)
-{
-
-    Standard_Real  Delta,
-        locUFirst,
+    Standard_Real Delta, locUFirst,
         //  locULast,
         //  temp_value,
-        t_min,
-        t_max,
-        trim_min,
-        trim_max,
-        middle,
-        Angle,
-        PI2 = 2 * M_PI;
+        t_min, t_max, trim_min, trim_max, middle, Angle, PI2 = 2 * M_PI;
     Standard_Integer ii, degree = num_poles - 1;
     locUFirst = UFirst;
 
@@ -96,9 +80,9 @@ void BuildPolynomialCosAndSin
     Delta = ULast - UFirst;
     middle = 0.5e0 * Delta;
 
-    // coincide the required bisector of the angular sector with 
-    // axis -Ox definition of the circle in Bezier of degree 7 so that 
-    // parametre 1/2 of Bezier was exactly a point of the bissectrice 
+    // coincide the required bisector of the angular sector with
+    // axis -Ox definition of the circle in Bezier of degree 7 so that
+    // parametre 1/2 of Bezier was exactly a point of the bissectrice
     // of the required angular sector.
     //
     Angle = middle - M_PI;
@@ -106,8 +90,7 @@ void BuildPolynomialCosAndSin
     // Circle of radius 1. See Euclid
     //
 
-    TColgp_Array1OfPnt2d TPoles(1, 8),
-        NewTPoles(1, 8);
+    TColgp_Array1OfPnt2d TPoles(1, 8), NewTPoles(1, 8);
     TPoles(1).SetCoord(1., 0.);
     TPoles(2).SetCoord(1., 1.013854);
     TPoles(3).SetCoord(-0.199043, 1.871905);
@@ -122,47 +105,31 @@ void BuildPolynomialCosAndSin
         TPoles(ii).Transform(T);
     }
 
-
     t_min = 1.0e0 - (Delta * 1.3e0 / M_PI);
     t_min *= 0.5e0;
     t_min = Max(t_min, 0.0e0);
     t_max = 1.0e0 + (Delta * 1.3e0 / M_PI);
     t_max *= 0.5e0;
     t_max = Min(t_max, 1.0e0);
-    trim_max = Locate(Delta,
-        TPoles,
-        t_min,
-        t_max);
+    trim_max = Locate(Delta, TPoles, t_min, t_max);
     //
-    // as Bezier is symmetric correspondingly to the bissector 
+    // as Bezier is symmetric correspondingly to the bissector
     // of the angular sector ...
 
     trim_min = 1.0e0 - trim_max;
     //
     Standard_Real knot_array[2];
-    Standard_Integer  mults_array[2];
+    Standard_Integer mults_array[2];
     knot_array[0] = 0.0e0;
     knot_array[1] = 1.0e0;
     mults_array[0] = degree + 1;
     mults_array[1] = degree + 1;
 
-    TColStd_Array1OfReal  the_knots(knot_array[0], 1, 2),
-        the_new_knots(knot_array[0], 1, 2);
-    TColStd_Array1OfInteger the_mults(mults_array[0], 1, 2),
-        the_new_mults(mults_array[0], 1, 2);
+    TColStd_Array1OfReal the_knots(knot_array[0], 1, 2), the_new_knots(knot_array[0], 1, 2);
+    TColStd_Array1OfInteger the_mults(mults_array[0], 1, 2), the_new_mults(mults_array[0], 1, 2);
 
-    BSplCLib::Trimming(degree,
-        Standard_False,
-        the_knots,
-        the_mults,
-        TPoles,
-        BSplCLib::NoWeights(),
-        trim_min,
-        trim_max,
-        the_new_knots,
-        the_new_mults,
-        NewTPoles,
-        BSplCLib::NoWeights());
+    BSplCLib::Trimming(degree, Standard_False, the_knots, the_mults, TPoles, BSplCLib::NoWeights(), trim_min, trim_max,
+                       the_new_knots, the_new_mults, NewTPoles, BSplCLib::NoWeights());
 
     // readjustment is obviously redundant
     Standard_Real SinD = Sin(Delta), CosD = Cos(Delta);

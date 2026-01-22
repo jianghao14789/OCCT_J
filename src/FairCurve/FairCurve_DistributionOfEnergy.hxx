@@ -26,11 +26,9 @@
 #include <TColgp_HArray1OfPnt2d.hxx>
 #include <math_FunctionSet.hxx>
 
-
 //! Abstract class to use the Energy of an FairCurve
 class FairCurve_DistributionOfEnergy : public math_FunctionSet {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! returns the number of variables of the function.
@@ -42,8 +40,11 @@ public:
     Standard_EXPORT void SetDerivativeOrder(const Standard_Integer DerivativeOrder);
 
 protected:
-
-    Standard_EXPORT FairCurve_DistributionOfEnergy(const Standard_Integer BSplOrder, const Handle(TColStd_HArray1OfReal)& FlatKnots, const Handle(TColgp_HArray1OfPnt2d)& Poles, const Standard_Integer DerivativeOrder, const Standard_Integer NbValAux = 0);
+    Standard_EXPORT FairCurve_DistributionOfEnergy(const Standard_Integer BSplOrder,
+                                                   const Handle(TColStd_HArray1OfReal) & FlatKnots,
+                                                   const Handle(TColgp_HArray1OfPnt2d) & Poles,
+                                                   const Standard_Integer DerivativeOrder,
+                                                   const Standard_Integer NbValAux = 0);
 
     Standard_Integer MyBSplOrder;
     Handle(TColStd_HArray1OfReal) MyFlatKnots;
@@ -54,7 +55,6 @@ protected:
     Standard_Integer MyNbValAux;
 
 private:
-
 };
 
 #endif // _FairCurve_DistributionOfEnergy_HeaderFile

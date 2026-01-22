@@ -41,12 +41,12 @@ class math_Matrix;
 
 class Extrema_CCLocFOfLocECC2d : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Extrema_CCLocFOfLocECC2d(const Standard_Real thetol = 1.0e-10);
 
-    Standard_EXPORT Extrema_CCLocFOfLocECC2d(const Adaptor2d_Curve2d& C1, const Adaptor2d_Curve2d& C2, const Standard_Real thetol = 1.0e-10);
+    Standard_EXPORT Extrema_CCLocFOfLocECC2d(const Adaptor2d_Curve2d& C1, const Adaptor2d_Curve2d& C2,
+                                             const Standard_Real thetol = 1.0e-10);
 
     Standard_EXPORT void SetCurve(const Standard_Integer theRank, const Adaptor2d_Curve2d& C1);
 
@@ -93,7 +93,6 @@ public:
     Standard_EXPORT Standard_Real SearchOfTolerance(const Standard_Address C);
 
 protected:
-
 private:
     Standard_Address myC1;
     Standard_Address myC2;
@@ -114,7 +113,6 @@ private:
     Standard_Real myUsupremum;
     Standard_Real myVinfium;
     Standard_Real myVsupremum;
-
 };
 
 #define Curve1 Adaptor2d_Curve2d
@@ -156,8 +154,5 @@ private:
 #undef Extrema_SeqPOnC_hxx
 #undef Extrema_FuncExtCC
 #undef Extrema_FuncExtCC_hxx
-
-
-
 
 #endif // _Extrema_CCLocFOfLocECC2d_HeaderFile

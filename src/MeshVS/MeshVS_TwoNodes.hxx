@@ -24,23 +24,20 @@
 //! Structure containing two IDs (of nodes) for using as a key in a map
 //! (as representation of a mesh link)
 //!
-struct MeshVS_TwoNodes
-{
-  Standard_Integer First, Second;
+struct MeshVS_TwoNodes {
+    Standard_Integer First, Second;
 
-  MeshVS_TwoNodes (Standard_Integer aFirst=0, Standard_Integer aSecond=0) 
-  : First(aFirst), Second(aSecond) {}
+    MeshVS_TwoNodes(Standard_Integer aFirst = 0, Standard_Integer aSecond = 0) : First(aFirst), Second(aSecond) {}
 };
 
 //! Computes a hash code for two nodes, in the range [1, theUpperBound]
 //! @param theTwoNodes the object of structure containing two IDs which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-inline Standard_Integer HashCode (const MeshVS_TwoNodes& theTwoNodes, const Standard_Integer theUpperBound)
-{
-  // symmetrical with respect to theTwoNodes.First and theTwoNodes.Second
-  const Standard_Integer aKey = theTwoNodes.First + theTwoNodes.Second;
-  return HashCode (aKey, theUpperBound);
+inline Standard_Integer HashCode(const MeshVS_TwoNodes& theTwoNodes, const Standard_Integer theUpperBound) {
+    // symmetrical with respect to theTwoNodes.First and theTwoNodes.Second
+    const Standard_Integer aKey = theTwoNodes.First + theTwoNodes.Second;
+    return HashCode(aKey, theUpperBound);
 }
 
 //================================================================
@@ -48,11 +45,9 @@ inline Standard_Integer HashCode (const MeshVS_TwoNodes& theTwoNodes, const Stan
 // Purpose  :
 //================================================================
 
-inline Standard_Boolean operator==( const MeshVS_TwoNodes& obj1,
-                                    const MeshVS_TwoNodes& obj2 )
-{
-  return ( ( obj1.First == obj2.First  ) && ( obj1.Second == obj2.Second ) ) ||
-         ( ( obj1.First == obj2.Second ) && ( obj1.Second == obj2.First  ) );
+inline Standard_Boolean operator==(const MeshVS_TwoNodes& obj1, const MeshVS_TwoNodes& obj2) {
+    return ((obj1.First == obj2.First) && (obj1.Second == obj2.Second)) ||
+           ((obj1.First == obj2.Second) && (obj1.Second == obj2.First));
 }
 
 #endif

@@ -24,7 +24,6 @@
 #include <Standard_Type.hxx>
 #include <Standard_CString.hxx>
 
-
 class Transfer_VoidBinder;
 DEFINE_STANDARD_HANDLE(Transfer_VoidBinder, Transfer_Binder)
 
@@ -33,44 +32,24 @@ DEFINE_STANDARD_HANDLE(Transfer_VoidBinder, Transfer_Binder)
 //! It is interpreted by TransferProcess, which admits a
 //! VoidBinder to be over-written, and copies its check to the
 //! new Binder
-class Transfer_VoidBinder : public Transfer_Binder
-{
+class Transfer_VoidBinder : public Transfer_Binder {
 
 public:
+    //! a VoidBinder is not Multiple (Remark : it is not Simple too)
+    //! But it can bring next results ...
+    Standard_EXPORT Transfer_VoidBinder();
 
-  
-  //! a VoidBinder is not Multiple (Remark : it is not Simple too)
-  //! But it can bring next results ...
-  Standard_EXPORT Transfer_VoidBinder();
-  
-  //! while a VoidBinder admits no Result, its ResultType returns
-  //! the type of <me>
-  Standard_EXPORT Handle(Standard_Type) ResultType() const Standard_OVERRIDE;
-  
-  //! Returns "(void)"
-  Standard_EXPORT Standard_CString ResultTypeName() const Standard_OVERRIDE;
+    //! while a VoidBinder admits no Result, its ResultType returns
+    //! the type of <me>
+    Standard_EXPORT Handle(Standard_Type) ResultType() const Standard_OVERRIDE;
 
+    //! Returns "(void)"
+    Standard_EXPORT Standard_CString ResultTypeName() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(Transfer_VoidBinder,Transfer_Binder)
+    DEFINE_STANDARD_RTTIEXT(Transfer_VoidBinder, Transfer_Binder)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Transfer_VoidBinder_HeaderFile

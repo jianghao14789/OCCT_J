@@ -17,7 +17,6 @@
 #ifndef _GccEnt_Position_HeaderFile
 #define _GccEnt_Position_HeaderFile
 
-
 //! Qualifies the position of a solution of a construction
 //! algorithm with respect to one of its arguments. This is one of the following:
 //! -   GccEnt_unqualified: the position of the solution
@@ -32,13 +31,6 @@
 //! Note: the interior of a line or any open curve is
 //! defined as the left-hand side of the line or curve in
 //! relation to its orientation.
-enum GccEnt_Position
-{
-GccEnt_unqualified,
-GccEnt_enclosing,
-GccEnt_enclosed,
-GccEnt_outside,
-GccEnt_noqualifier
-};
+enum GccEnt_Position { GccEnt_unqualified, GccEnt_enclosing, GccEnt_enclosed, GccEnt_outside, GccEnt_noqualifier };
 
 #endif // _GccEnt_Position_HeaderFile

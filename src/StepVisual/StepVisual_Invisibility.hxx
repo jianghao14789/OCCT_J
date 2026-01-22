@@ -25,52 +25,30 @@
 #include <Standard_Integer.hxx>
 class StepVisual_InvisibleItem;
 
-
 class StepVisual_Invisibility;
 DEFINE_STANDARD_HANDLE(StepVisual_Invisibility, Standard_Transient)
 
-
-class StepVisual_Invisibility : public Standard_Transient
-{
+class StepVisual_Invisibility : public Standard_Transient {
 
 public:
+    //! Returns a Invisibility
+    Standard_EXPORT StepVisual_Invisibility();
 
-  
-  //! Returns a Invisibility
-  Standard_EXPORT StepVisual_Invisibility();
-  
-  Standard_EXPORT void Init (const Handle(StepVisual_HArray1OfInvisibleItem)& aInvisibleItems);
-  
-  Standard_EXPORT void SetInvisibleItems (const Handle(StepVisual_HArray1OfInvisibleItem)& aInvisibleItems);
-  
-  Standard_EXPORT Handle(StepVisual_HArray1OfInvisibleItem) InvisibleItems() const;
-  
-  Standard_EXPORT StepVisual_InvisibleItem InvisibleItemsValue (const Standard_Integer num) const;
-  
-  Standard_EXPORT Standard_Integer NbInvisibleItems() const;
+    Standard_EXPORT void Init(const Handle(StepVisual_HArray1OfInvisibleItem) & aInvisibleItems);
 
+    Standard_EXPORT void SetInvisibleItems(const Handle(StepVisual_HArray1OfInvisibleItem) & aInvisibleItems);
 
+    Standard_EXPORT Handle(StepVisual_HArray1OfInvisibleItem) InvisibleItems() const;
 
+    Standard_EXPORT StepVisual_InvisibleItem InvisibleItemsValue(const Standard_Integer num) const;
 
-  DEFINE_STANDARD_RTTIEXT(StepVisual_Invisibility,Standard_Transient)
+    Standard_EXPORT Standard_Integer NbInvisibleItems() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepVisual_Invisibility, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepVisual_HArray1OfInvisibleItem) invisibleItems;
-
-
+    Handle(StepVisual_HArray1OfInvisibleItem) invisibleItems;
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_Invisibility_HeaderFile

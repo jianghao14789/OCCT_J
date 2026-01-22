@@ -17,11 +17,6 @@
 #ifndef _TopoDSToStep_MakeVertexError_HeaderFile
 #define _TopoDSToStep_MakeVertexError_HeaderFile
 
-
-enum TopoDSToStep_MakeVertexError
-{
-TopoDSToStep_VertexDone,
-TopoDSToStep_VertexOther
-};
+enum TopoDSToStep_MakeVertexError { TopoDSToStep_VertexDone, TopoDSToStep_VertexOther };
 
 #endif // _TopoDSToStep_MakeVertexError_HeaderFile

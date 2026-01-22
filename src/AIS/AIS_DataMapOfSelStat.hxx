@@ -22,8 +22,9 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(SelectMgr_SelectableObject),Handle(AIS_LocalStatus),TColStd_MapTransientHasher> AIS_DataMapOfSelStat;
-typedef NCollection_DataMap<Handle(SelectMgr_SelectableObject),Handle(AIS_LocalStatus),TColStd_MapTransientHasher>::Iterator AIS_DataMapIteratorOfDataMapOfSelStat;
-
+typedef NCollection_DataMap<Handle(SelectMgr_SelectableObject), Handle(AIS_LocalStatus), TColStd_MapTransientHasher>
+    AIS_DataMapOfSelStat;
+typedef NCollection_DataMap<Handle(SelectMgr_SelectableObject), Handle(AIS_LocalStatus),
+                            TColStd_MapTransientHasher>::Iterator AIS_DataMapIteratorOfDataMapOfSelStat;
 
 #endif

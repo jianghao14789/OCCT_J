@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 // LPA, JCV  07/92 passage sur C1.
-// JCV 07/92 Introduction de la method Dump 
+// JCV 07/92 Introduction de la method Dump
 
 #include <gp_Cone.hxx>
 
@@ -25,12 +25,9 @@
 #include <gp_Vec.hxx>
 #include <Standard_ConstructionError.hxx>
 
-void gp_Cone::Coefficients
-(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3,
-    Standard_Real& B1, Standard_Real& B2, Standard_Real& B3,
-    Standard_Real& C1, Standard_Real& C2, Standard_Real& C3,
-    Standard_Real& D) const
-{
+void gp_Cone::Coefficients(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3, Standard_Real& B1,
+                           Standard_Real& B2, Standard_Real& B3, Standard_Real& C1, Standard_Real& C2,
+                           Standard_Real& C3, Standard_Real& D) const {
     // Dans le repere du cone :
     // X**2 + Y**2 - (radius + Z * Tan(semiAngle))**2 = 0.0
     gp_Trsf T;
@@ -60,39 +57,32 @@ void gp_Cone::Coefficients
     D = T14 * T14 + T24 * T24 - radius * radius - T34 * T34 - 2.0 * radius * T34;
 }
 
-void gp_Cone::Mirror(const gp_Pnt& P)
-{
+void gp_Cone::Mirror(const gp_Pnt& P) {
     pos.Mirror(P);
 }
 
-gp_Cone gp_Cone::Mirrored(const gp_Pnt& P) const
-{
+gp_Cone gp_Cone::Mirrored(const gp_Pnt& P) const {
     gp_Cone C = *this;
     C.pos.Mirror(P);
     return C;
 }
 
-void gp_Cone::Mirror(const gp_Ax1& A1)
-{
+void gp_Cone::Mirror(const gp_Ax1& A1) {
     pos.Mirror(A1);
 }
 
-gp_Cone gp_Cone::Mirrored(const gp_Ax1& A1) const
-{
+gp_Cone gp_Cone::Mirrored(const gp_Ax1& A1) const {
     gp_Cone C = *this;
     C.pos.Mirror(A1);
     return C;
 }
 
-void gp_Cone::Mirror(const gp_Ax2& A2)
-{
+void gp_Cone::Mirror(const gp_Ax2& A2) {
     pos.Mirror(A2);
 }
 
-gp_Cone gp_Cone::Mirrored(const gp_Ax2& A2) const
-{
+gp_Cone gp_Cone::Mirrored(const gp_Ax2& A2) const {
     gp_Cone C = *this;
     C.pos.Mirror(A2);
     return C;
 }
-

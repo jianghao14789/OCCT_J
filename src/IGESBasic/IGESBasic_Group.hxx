@@ -26,7 +26,6 @@
 #include <Standard_Boolean.hxx>
 class Standard_Transient;
 
-
 class IGESBasic_Group;
 DEFINE_STANDARD_HANDLE(IGESBasic_Group, IGESData_IGESEntity)
 
@@ -43,77 +42,57 @@ DEFINE_STANDARD_HANDLE(IGESBasic_Group, IGESData_IGESEntity)
 //! non Ordered,     WithoutBackP : form  7
 //! Ordered, non WithoutBackP : form 14
 //! Ordered,     WithoutBackP : form 15
-class IGESBasic_Group : public IGESData_IGESEntity
-{
+class IGESBasic_Group : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESBasic_Group();
 
-  
-  Standard_EXPORT IGESBasic_Group();
-  
-  //! Creates a Group with a predefined count of items
-  //! (which all start as null)
-  Standard_EXPORT IGESBasic_Group(const Standard_Integer nb);
-  
-  //! This method is used to set the fields of the class Group
-  //! - allEntities : Used to store pointers to members of
-  //! the Group.
-  Standard_EXPORT void Init (const Handle(IGESData_HArray1OfIGESEntity)& allEntities);
-  
-  //! Sets a Group to be, or not to be  Ordered (according mode)
-  Standard_EXPORT void SetOrdered (const Standard_Boolean mode);
-  
-  //! Sets a Group to be, or not to be  WithoutBackP
-  Standard_EXPORT void SetWithoutBackP (const Standard_Boolean mode);
-  
-  //! Returns True if <me> is Ordered
-  Standard_EXPORT Standard_Boolean IsOrdered() const;
-  
-  //! Returns True if <me> is WithoutBackP
-  Standard_EXPORT Standard_Boolean IsWithoutBackP() const;
-  
-  //! Enforce a new value for the type and form
-  Standard_EXPORT void SetUser (const Standard_Integer type, const Standard_Integer form);
-  
-  //! Changes the count of item
-  //! If greater, new items are null
-  //! If lower, old items are lost
-  Standard_EXPORT void SetNb (const Standard_Integer nb);
-  
-  //! returns the number of IGESEntities in the Group
-  Standard_EXPORT Standard_Integer NbEntities() const;
-  
-  //! returns the specific entity from the Group
-  Standard_EXPORT Handle(IGESData_IGESEntity) Entity (const Standard_Integer Index) const;
-  
-  //! returns the specific entity from the Group
-  Standard_EXPORT Handle(Standard_Transient) Value (const Standard_Integer Index) const;
-  
-  //! Sets a new value for item <Index>
-  Standard_EXPORT void SetValue (const Standard_Integer Index, const Handle(IGESData_IGESEntity)& ent);
+    //! Creates a Group with a predefined count of items
+    //! (which all start as null)
+    Standard_EXPORT IGESBasic_Group(const Standard_Integer nb);
 
+    //! This method is used to set the fields of the class Group
+    //! - allEntities : Used to store pointers to members of
+    //! the Group.
+    Standard_EXPORT void Init(const Handle(IGESData_HArray1OfIGESEntity) & allEntities);
 
+    //! Sets a Group to be, or not to be  Ordered (according mode)
+    Standard_EXPORT void SetOrdered(const Standard_Boolean mode);
 
+    //! Sets a Group to be, or not to be  WithoutBackP
+    Standard_EXPORT void SetWithoutBackP(const Standard_Boolean mode);
 
-  DEFINE_STANDARD_RTTIEXT(IGESBasic_Group,IGESData_IGESEntity)
+    //! Returns True if <me> is Ordered
+    Standard_EXPORT Standard_Boolean IsOrdered() const;
+
+    //! Returns True if <me> is WithoutBackP
+    Standard_EXPORT Standard_Boolean IsWithoutBackP() const;
+
+    //! Enforce a new value for the type and form
+    Standard_EXPORT void SetUser(const Standard_Integer type, const Standard_Integer form);
+
+    //! Changes the count of item
+    //! If greater, new items are null
+    //! If lower, old items are lost
+    Standard_EXPORT void SetNb(const Standard_Integer nb);
+
+    //! returns the number of IGESEntities in the Group
+    Standard_EXPORT Standard_Integer NbEntities() const;
+
+    //! returns the specific entity from the Group
+    Standard_EXPORT Handle(IGESData_IGESEntity) Entity(const Standard_Integer Index) const;
+
+    //! returns the specific entity from the Group
+    Standard_EXPORT Handle(Standard_Transient) Value(const Standard_Integer Index) const;
+
+    //! Sets a new value for item <Index>
+    Standard_EXPORT void SetValue(const Standard_Integer Index, const Handle(IGESData_IGESEntity) & ent);
+
+    DEFINE_STANDARD_RTTIEXT(IGESBasic_Group, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(IGESData_HArray1OfIGESEntity) theEntities;
-
-
+    Handle(IGESData_HArray1OfIGESEntity) theEntities;
 };
-
-
-
-
-
-
 
 #endif // _IGESBasic_Group_HeaderFile

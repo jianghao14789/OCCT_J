@@ -11,43 +11,33 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_DimensionalExponents.hxx>
 #include <StepBasic_SiUnit.hxx>
 #include <StepBasic_SiUnitAndTimeUnit.hxx>
 #include <StepBasic_TimeUnit.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_SiUnitAndTimeUnit,StepBasic_SiUnit)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_SiUnitAndTimeUnit, StepBasic_SiUnit)
 
-StepBasic_SiUnitAndTimeUnit::StepBasic_SiUnitAndTimeUnit ()  
-{
+StepBasic_SiUnitAndTimeUnit::StepBasic_SiUnitAndTimeUnit() {}
+
+void StepBasic_SiUnitAndTimeUnit::Init(const Standard_Boolean hasAprefix, const StepBasic_SiPrefix aPrefix,
+                                       const StepBasic_SiUnitName aName) {
+    // --- class inherited fields ---
+    // --- ANDOR component fields ---
+    StepBasic_SiUnit::Init(hasAprefix, aPrefix, aName);
+
+    // --- ANDOR component fields ---
+    timeUnit = new StepBasic_TimeUnit();
+    Handle(StepBasic_DimensionalExponents) aDimensions;
+    aDimensions.Nullify();
+    timeUnit->Init(aDimensions);
 }
 
-void StepBasic_SiUnitAndTimeUnit::Init(const Standard_Boolean hasAprefix,
-				       const StepBasic_SiPrefix aPrefix,
-				       const StepBasic_SiUnitName aName)
-{
-  // --- class inherited fields ---
-  // --- ANDOR component fields ---
-  StepBasic_SiUnit::Init(hasAprefix, aPrefix, aName);
-
-  // --- ANDOR component fields ---
-  timeUnit = new StepBasic_TimeUnit();
-  Handle(StepBasic_DimensionalExponents) aDimensions;
-  aDimensions.Nullify();
-  timeUnit->Init(aDimensions);
+void StepBasic_SiUnitAndTimeUnit::SetTimeUnit(const Handle(StepBasic_TimeUnit) & aTimeUnit) {
+    timeUnit = aTimeUnit;
 }
 
-
-void StepBasic_SiUnitAndTimeUnit::SetTimeUnit(const Handle(StepBasic_TimeUnit)& aTimeUnit)
-{
-  timeUnit = aTimeUnit;
+Handle(StepBasic_TimeUnit) StepBasic_SiUnitAndTimeUnit::TimeUnit() const {
+    return timeUnit;
 }
-
-Handle(StepBasic_TimeUnit) StepBasic_SiUnitAndTimeUnit::TimeUnit() const
-{
-  return timeUnit;
-}
-
-

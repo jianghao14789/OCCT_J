@@ -27,48 +27,29 @@ class StepFEA_CurveElementIntervalLinearlyVarying;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CurveElementIntervalLinearlyVarying
-class RWStepFEA_RWCurveElementIntervalLinearlyVarying 
-{
+class RWStepFEA_RWCurveElementIntervalLinearlyVarying {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWCurveElementIntervalLinearlyVarying();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWCurveElementIntervalLinearlyVarying();
-  
-  //! Reads CurveElementIntervalLinearlyVarying
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_CurveElementIntervalLinearlyVarying)& ent) const;
-  
-  //! Writes CurveElementIntervalLinearlyVarying
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_CurveElementIntervalLinearlyVarying)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_CurveElementIntervalLinearlyVarying)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CurveElementIntervalLinearlyVarying
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_CurveElementIntervalLinearlyVarying) & ent) const;
 
+    //! Writes CurveElementIntervalLinearlyVarying
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_CurveElementIntervalLinearlyVarying) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_CurveElementIntervalLinearlyVarying) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWCurveElementIntervalLinearlyVarying_HeaderFile

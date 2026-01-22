@@ -44,17 +44,13 @@ class Units_Lexicon;
 class Units_UnitsLexicon;
 class Units_Measurement;
 
-
 //! This  package provides all the  facilities  to create
 //! and question a dictionary of  units,  and also  to
 //! manipulate measurements which are real values with
 //! units.
-class Units
-{
+class Units {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Defines the location of the file containing all the
     //! information useful in creating the dictionary of all
@@ -68,7 +64,8 @@ public:
     //! Returns a unique instance of the dictionary of units.
     //! If <amode> is True, then it forces the recomputation of
     //! the dictionary of units.
-    Standard_EXPORT static Handle(Units_UnitsDictionary) DictionaryOfUnits(const Standard_Boolean amode = Standard_False);
+    Standard_EXPORT static Handle(Units_UnitsDictionary)
+        DictionaryOfUnits(const Standard_Boolean amode = Standard_False);
 
     //! Returns a unique quantity instance corresponding to <aquantity>.
     Standard_EXPORT static Handle(Units_Quantity) Quantity(const Standard_CString aquantity);
@@ -89,33 +86,24 @@ public:
     Standard_EXPORT static Handle(Units_Dimensions) NullDimensions();
 
     //! Converts <avalue> expressed in <afirstunit> into the <asecondunit>.
-    Standard_EXPORT static Standard_Real Convert(const Standard_Real avalue, const Standard_CString afirstunit, const Standard_CString asecondunit);
+    Standard_EXPORT static Standard_Real Convert(const Standard_Real avalue, const Standard_CString afirstunit,
+                                                 const Standard_CString asecondunit);
 
     Standard_EXPORT static Standard_Real ToSI(const Standard_Real aData, const Standard_CString aUnit);
 
-    Standard_EXPORT static Standard_Real ToSI(const Standard_Real aData, const Standard_CString aUnit, Handle(Units_Dimensions)& aDim);
+    Standard_EXPORT static Standard_Real ToSI(const Standard_Real aData, const Standard_CString aUnit,
+                                              Handle(Units_Dimensions) & aDim);
 
     Standard_EXPORT static Standard_Real FromSI(const Standard_Real aData, const Standard_CString aUnit);
 
-    Standard_EXPORT static Standard_Real FromSI(const Standard_Real aData, const Standard_CString aUnit, Handle(Units_Dimensions)& aDim);
+    Standard_EXPORT static Standard_Real FromSI(const Standard_Real aData, const Standard_CString aUnit,
+                                                Handle(Units_Dimensions) & aDim);
 
     //! return the dimension associated to the Type
     Standard_EXPORT static Handle(Units_Dimensions) Dimensions(const Standard_CString aType);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
     friend class Units_Dimensions;
     friend class Units_Unit;
     friend class Units_ShiftedUnit;
@@ -131,13 +119,6 @@ private:
     friend class Units_Lexicon;
     friend class Units_UnitsLexicon;
     friend class Units_Measurement;
-
 };
-
-
-
-
-
-
 
 #endif // _Units_HeaderFile

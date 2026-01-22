@@ -20,10 +20,8 @@
 #include <OSD_SignalMode.hxx>
 
 //! Set of Operating System Dependent (OSD) tools.
-class OSD
-{
+class OSD {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Sets or removes signal and FPE (floating-point exception) handlers.
@@ -69,25 +67,23 @@ public:
     //! Otherwise the (thread-specific) FPE flags are set to raise signal if one of
     //! floating-point exceptions (division by zero, overflow, or invalid operation) occurs.
     //!
-    //! The recommended approach is to call OSD::SetSignal() in the beginning of the 
+    //! The recommended approach is to call OSD::SetSignal() in the beginning of the
     //! execution of the program, in function main() or its equivalent.
     //! In multithreaded programs it is advisable to call OSD::SetSignal() or
-    //! OSD::SetThreadLocalSignal() with the same parameters in other threads where 
+    //! OSD::SetThreadLocalSignal() with the same parameters in other threads where
     //! OCCT is used, to ensure consistency of behavior.
     //!
-    //! Note that in order to handle signals as C++ exceptions on Linux and under 
+    //! Note that in order to handle signals as C++ exceptions on Linux and under
     //! MinGW on Windows it is necessary to compile both OCCT and application with
     //! OCC_CONVERT_SIGNALS macro, and use macro OCC_CATCH_SIGNALS within each try{}
-    //! block that has to catch this kind of exceptions. 
-    //! 
+    //! block that has to catch this kind of exceptions.
+    //!
     //! Refer to documentation of Standard_ErrorHandler.hxx for details.
-    Standard_EXPORT static void SetSignal(OSD_SignalMode theSignalMode,
-        Standard_Boolean theFloatingSignal);
+    Standard_EXPORT static void SetSignal(OSD_SignalMode theSignalMode, Standard_Boolean theFloatingSignal);
 
     //! Sets signal and FPE handlers.
     //! Short-cut for OSD::SetSignal (OSD_SignalMode_Set, theFloatingSignal).
-    static void SetSignal(const Standard_Boolean theFloatingSignal = Standard_True)
-    {
+    static void SetSignal(const Standard_Boolean theFloatingSignal = Standard_True) {
         SetSignal(OSD_SignalMode_Set, theFloatingSignal);
     }
 
@@ -95,8 +91,7 @@ public:
     //! This includes _set_se_translator() on Windows platform, and SetFloatingSignal().
     //! The main purpose of this method is initializing handlers for newly created threads
     //! without overriding global handlers (set by application or by OSD::SetSignal()).
-    Standard_EXPORT static void SetThreadLocalSignal(OSD_SignalMode theSignalMode,
-        Standard_Boolean theFloatingSignal);
+    Standard_EXPORT static void SetThreadLocalSignal(OSD_SignalMode theSignalMode, Standard_Boolean theFloatingSignal);
 
     //! Enables / disables generation of C signal on floating point exceptions (FPE).
     //! This call does NOT register a handler for signal raised in case of FPE -
@@ -141,7 +136,6 @@ public:
 
     //! Sets a length of stack trace to be put into exception redirected from signal.
     Standard_EXPORT static void SetSignalStackTraceLength(Standard_Integer theLength);
-
 };
 
 #endif // _OSD_HeaderFile

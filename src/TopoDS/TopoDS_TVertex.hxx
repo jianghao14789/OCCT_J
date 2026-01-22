@@ -23,7 +23,6 @@
 #include <TopoDS_TShape.hxx>
 #include <TopAbs_ShapeEnum.hxx>
 
-
 class TopoDS_TVertex;
 
 // resolve name collisions with X11 headers
@@ -37,19 +36,16 @@ DEFINE_STANDARD_HANDLE(TopoDS_TVertex, TopoDS_TShape)
 //! dimensions.
 class TopoDS_TVertex : public TopoDS_TShape {
 public:
-
     //! Returns VERTEX.
     Standard_EXPORT TopAbs_ShapeEnum ShapeType() const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(TopoDS_TVertex, TopoDS_TShape)
 
 protected:
-
     //! Construct a vertex.
     TopoDS_TVertex();
 
 private:
-
 };
 
 #include <TopoDS_TVertex.lxx>

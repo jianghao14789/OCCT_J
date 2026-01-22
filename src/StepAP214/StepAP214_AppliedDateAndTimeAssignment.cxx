@@ -11,45 +11,37 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepAP214_AppliedDateAndTimeAssignment.hxx>
 #include <StepAP214_DateAndTimeItem.hxx>
 #include <StepBasic_DateAndTime.hxx>
 #include <StepBasic_DateTimeRole.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepAP214_AppliedDateAndTimeAssignment,StepBasic_DateAndTimeAssignment)
+IMPLEMENT_STANDARD_RTTIEXT(StepAP214_AppliedDateAndTimeAssignment, StepBasic_DateAndTimeAssignment)
 
-StepAP214_AppliedDateAndTimeAssignment::StepAP214_AppliedDateAndTimeAssignment ()  {}
+StepAP214_AppliedDateAndTimeAssignment::StepAP214_AppliedDateAndTimeAssignment() {}
 
-void StepAP214_AppliedDateAndTimeAssignment::Init(
-	const Handle(StepBasic_DateAndTime)& aAssignedDateAndTime,
-	const Handle(StepBasic_DateTimeRole)& aRole,
-	const Handle(StepAP214_HArray1OfDateAndTimeItem)& aItems)
-{
-  // --- classe own fields ---
-  items = aItems;
-  // --- classe inherited fields ---
-  StepBasic_DateAndTimeAssignment::Init(aAssignedDateAndTime, aRole);
+void StepAP214_AppliedDateAndTimeAssignment::Init(const Handle(StepBasic_DateAndTime) & aAssignedDateAndTime,
+                                                  const Handle(StepBasic_DateTimeRole) & aRole,
+                                                  const Handle(StepAP214_HArray1OfDateAndTimeItem) & aItems) {
+    // --- classe own fields ---
+    items = aItems;
+    // --- classe inherited fields ---
+    StepBasic_DateAndTimeAssignment::Init(aAssignedDateAndTime, aRole);
 }
 
-
-void StepAP214_AppliedDateAndTimeAssignment::SetItems(const Handle(StepAP214_HArray1OfDateAndTimeItem)& aItems)
-{
-  items = aItems;
+void StepAP214_AppliedDateAndTimeAssignment::SetItems(const Handle(StepAP214_HArray1OfDateAndTimeItem) & aItems) {
+    items = aItems;
 }
 
-Handle(StepAP214_HArray1OfDateAndTimeItem) StepAP214_AppliedDateAndTimeAssignment::Items() const
-{
-  return items;
+Handle(StepAP214_HArray1OfDateAndTimeItem) StepAP214_AppliedDateAndTimeAssignment::Items() const {
+    return items;
 }
 
-StepAP214_DateAndTimeItem StepAP214_AppliedDateAndTimeAssignment::ItemsValue(const Standard_Integer num) const
-{
-  return items->Value(num);
+StepAP214_DateAndTimeItem StepAP214_AppliedDateAndTimeAssignment::ItemsValue(const Standard_Integer num) const {
+    return items->Value(num);
 }
 
-Standard_Integer StepAP214_AppliedDateAndTimeAssignment::NbItems () const
-{
-  return items->Length();
+Standard_Integer StepAP214_AppliedDateAndTimeAssignment::NbItems() const {
+    return items->Length();
 }

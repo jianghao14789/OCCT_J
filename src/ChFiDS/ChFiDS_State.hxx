@@ -28,15 +28,14 @@
 //! - OnSame  means  that the  edge of  the  fillet  has a
 //! concave side different than one of the two other edges
 //! and identical to the third edge.
-enum ChFiDS_State
-{
-ChFiDS_OnSame,
-ChFiDS_OnDiff,
-ChFiDS_AllSame,
-ChFiDS_BreakPoint,
-ChFiDS_FreeBoundary,
-ChFiDS_Closed,
-ChFiDS_Tangent
+enum ChFiDS_State {
+    ChFiDS_OnSame,
+    ChFiDS_OnDiff,
+    ChFiDS_AllSame,
+    ChFiDS_BreakPoint,
+    ChFiDS_FreeBoundary,
+    ChFiDS_Closed,
+    ChFiDS_Tangent
 };
 
 #endif // _ChFiDS_State_HeaderFile

@@ -28,12 +28,10 @@
 class StdFail_NotDone;
 class math_Function;
 
-
 //! This class implements the Brent method to find the root of a function
 //! located within two bounds. No knowledge of the derivative is required.
 class math_BracketedRoot {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! The Brent method is used to find the root of the function F between
@@ -43,7 +41,9 @@ public:
     //! The solution is found when :
     //! abs(Xi - Xi-1) <= Tolerance;
     //! The maximum number of iterations allowed is given by NbIterations.
-    Standard_EXPORT math_BracketedRoot(math_Function& F, const Standard_Real Bound1, const Standard_Real Bound2, const Standard_Real Tolerance, const Standard_Integer NbIterations = 100, const Standard_Real ZEPS = 1.0e-12);
+    Standard_EXPORT math_BracketedRoot(math_Function& F, const Standard_Real Bound1, const Standard_Real Bound2,
+                                       const Standard_Real Tolerance, const Standard_Integer NbIterations = 100,
+                                       const Standard_Real ZEPS = 1.0e-12);
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
@@ -66,14 +66,11 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
-
     Standard_Boolean Done;
     Standard_Real TheRoot;
     Standard_Real TheError;
     Standard_Integer NbIter;
-
 };
 
 #include <math_BracketedRoot.lxx>

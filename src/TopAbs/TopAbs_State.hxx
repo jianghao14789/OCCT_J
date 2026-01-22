@@ -22,12 +22,6 @@
 //! The figure shown above illustrates the states of
 //! vertices found in various parts of the edge relative
 //! to the face which it intersects.
-enum TopAbs_State
-{
-TopAbs_IN,
-TopAbs_OUT,
-TopAbs_ON,
-TopAbs_UNKNOWN
-};
+enum TopAbs_State { TopAbs_IN, TopAbs_OUT, TopAbs_ON, TopAbs_UNKNOWN };
 
 #endif // _TopAbs_State_HeaderFile

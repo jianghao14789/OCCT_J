@@ -23,92 +23,61 @@
 #include <Standard_Real.hxx>
 #include <Standard_Boolean.hxx>
 
-
-
 //! The class BOPDS_Pave is to store
 //! information about vertex on an edge
-class BOPDS_Pave 
-{
+class BOPDS_Pave {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-
-  //! Empty constructor
+    //! Empty constructor
     BOPDS_Pave();
 
-  //! Modifier
-  //! Sets the index of vertex <theIndex>
-    void SetIndex (const Standard_Integer theIndex);
-  
+    //! Modifier
+    //! Sets the index of vertex <theIndex>
+    void SetIndex(const Standard_Integer theIndex);
 
-  //! Selector
-  //! Returns the index of vertex
+    //! Selector
+    //! Returns the index of vertex
     Standard_Integer Index() const;
-  
 
-  //! Modifier
-  //! Sets the parameter of vertex <theParameter>
-    void SetParameter (const Standard_Real theParameter);
-  
+    //! Modifier
+    //! Sets the parameter of vertex <theParameter>
+    void SetParameter(const Standard_Real theParameter);
 
-  //! Selector
-  //! Returns the parameter of vertex
+    //! Selector
+    //! Returns the parameter of vertex
     Standard_Real Parameter() const;
-  
 
-  //! Selector
-  //! Returns the index of vertex <theIndex>
-  //! Returns the parameter of vertex <theParameter>
-    void Contents (Standard_Integer& theIndex, Standard_Real& theParameter) const;
-  
+    //! Selector
+    //! Returns the index of vertex <theIndex>
+    //! Returns the parameter of vertex <theParameter>
+    void Contents(Standard_Integer& theIndex, Standard_Real& theParameter) const;
 
-  //! Query
-  //! Returns true if thr parameter od this is less
-  //! than the parameter of  <theOther>
-    Standard_Boolean IsLess (const BOPDS_Pave& theOther) const;
-  Standard_Boolean operator < (const BOPDS_Pave& theOther) const
-{
-  return IsLess(theOther);
-}
-  
+    //! Query
+    //! Returns true if thr parameter od this is less
+    //! than the parameter of  <theOther>
+    Standard_Boolean IsLess(const BOPDS_Pave& theOther) const;
+    Standard_Boolean operator<(const BOPDS_Pave& theOther) const {
+        return IsLess(theOther);
+    }
 
-  //! Query
-  //! Returns true if thr parameter od this is equal
-  //! to the parameter of  <theOther>
-    Standard_Boolean IsEqual (const BOPDS_Pave& theOther) const;
-  Standard_Boolean operator == (const BOPDS_Pave& theOther) const
-{
-  return IsEqual(theOther);
-}
-  
-  Standard_EXPORT void Dump() const;
+    //! Query
+    //! Returns true if thr parameter od this is equal
+    //! to the parameter of  <theOther>
+    Standard_Boolean IsEqual(const BOPDS_Pave& theOther) const;
+    Standard_Boolean operator==(const BOPDS_Pave& theOther) const {
+        return IsEqual(theOther);
+    }
 
-
-
+    Standard_EXPORT void Dump() const;
 
 protected:
-
-
-
-  Standard_Integer myIndex;
-  Standard_Real myParameter;
-
+    Standard_Integer myIndex;
+    Standard_Real myParameter;
 
 private:
-
-
-
-
-
 };
 
-
 #include <BOPDS_Pave.lxx>
-
-
-
-
 
 #endif // _BOPDS_Pave_HeaderFile

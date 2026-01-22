@@ -18,9 +18,7 @@
 #include <Standard_ConstructionError.hxx>
 #include <Standard_OutOfRange.hxx>
 
-Standard_Boolean gp_XY::IsEqual(const gp_XY& Other,
-    const Standard_Real Tolerance) const
-{
+Standard_Boolean gp_XY::IsEqual(const gp_XY& Other, const Standard_Real Tolerance) const {
     Standard_Real val;
     val = x - Other.x;
     if (val < 0) val = -val;
@@ -30,4 +28,3 @@ Standard_Boolean gp_XY::IsEqual(const gp_XY& Other,
     if (val > Tolerance) return Standard_False;
     return Standard_True;
 }
-

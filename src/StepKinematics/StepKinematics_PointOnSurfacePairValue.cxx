@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,62 +19,57 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_PointOnSurfacePairValue, StepKinematics_PairValue)
 
 //=======================================================================
-//function : StepKinematics_PointOnSurfacePairValue
-//purpose  :
+// function : StepKinematics_PointOnSurfacePairValue
+// purpose  :
 //=======================================================================
-StepKinematics_PointOnSurfacePairValue::StepKinematics_PointOnSurfacePairValue ()
-{
+StepKinematics_PointOnSurfacePairValue::StepKinematics_PointOnSurfacePairValue() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_PointOnSurfacePairValue::Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                                                  const Handle(StepKinematics_KinematicPair) &
+                                                      thePairValue_AppliesToPair,
+                                                  const Handle(StepGeom_PointOnSurface) & theActualPointOnSurface,
+                                                  const StepKinematics_SpatialRotation& theInputOrientation) {
+    StepKinematics_PairValue::Init(theRepresentationItem_Name, thePairValue_AppliesToPair);
+
+    myActualPointOnSurface = theActualPointOnSurface;
+
+    myInputOrientation = theInputOrientation;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : ActualPointOnSurface
+// purpose  :
 //=======================================================================
-void StepKinematics_PointOnSurfacePairValue::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                                   const Handle(StepKinematics_KinematicPair)& thePairValue_AppliesToPair,
-                                                   const Handle(StepGeom_PointOnSurface)& theActualPointOnSurface,
-                                                   const StepKinematics_SpatialRotation& theInputOrientation)
-{
-  StepKinematics_PairValue::Init(theRepresentationItem_Name,
-                                 thePairValue_AppliesToPair);
-
-  myActualPointOnSurface = theActualPointOnSurface;
-
-  myInputOrientation = theInputOrientation;
+Handle(StepGeom_PointOnSurface) StepKinematics_PointOnSurfacePairValue::ActualPointOnSurface() const {
+    return myActualPointOnSurface;
 }
 
 //=======================================================================
-//function : ActualPointOnSurface
-//purpose  :
+// function : SetActualPointOnSurface
+// purpose  :
 //=======================================================================
-Handle(StepGeom_PointOnSurface) StepKinematics_PointOnSurfacePairValue::ActualPointOnSurface () const
-{
-  return myActualPointOnSurface;
+void StepKinematics_PointOnSurfacePairValue::SetActualPointOnSurface(const Handle(StepGeom_PointOnSurface) &
+                                                                     theActualPointOnSurface) {
+    myActualPointOnSurface = theActualPointOnSurface;
 }
 
 //=======================================================================
-//function : SetActualPointOnSurface
-//purpose  :
+// function : InputOrientation
+// purpose  :
 //=======================================================================
-void StepKinematics_PointOnSurfacePairValue::SetActualPointOnSurface (const Handle(StepGeom_PointOnSurface)& theActualPointOnSurface)
-{
-  myActualPointOnSurface = theActualPointOnSurface;
+StepKinematics_SpatialRotation StepKinematics_PointOnSurfacePairValue::InputOrientation() const {
+    return myInputOrientation;
 }
 
 //=======================================================================
-//function : InputOrientation
-//purpose  :
+// function : SetInputOrientation
+// purpose  :
 //=======================================================================
-StepKinematics_SpatialRotation StepKinematics_PointOnSurfacePairValue::InputOrientation () const
-{
-  return myInputOrientation;
-}
-
-//=======================================================================
-//function : SetInputOrientation
-//purpose  :
-//=======================================================================
-void StepKinematics_PointOnSurfacePairValue::SetInputOrientation (const StepKinematics_SpatialRotation& theInputOrientation)
-{
-  myInputOrientation = theInputOrientation;
+void StepKinematics_PointOnSurfacePairValue::SetInputOrientation(
+    const StepKinematics_SpatialRotation& theInputOrientation) {
+    myInputOrientation = theInputOrientation;
 }

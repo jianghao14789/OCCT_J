@@ -28,44 +28,25 @@ class StepGeom_QuasiUniformCurveAndRationalBSplineCurve;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for QuasiUniformCurveAndRationalBSplineCurve
-class RWStepGeom_RWQuasiUniformCurveAndRationalBSplineCurve 
-{
+class RWStepGeom_RWQuasiUniformCurveAndRationalBSplineCurve {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWQuasiUniformCurveAndRationalBSplineCurve();
 
-  
-  Standard_EXPORT RWStepGeom_RWQuasiUniformCurveAndRationalBSplineCurve();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_QuasiUniformCurveAndRationalBSplineCurve)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_QuasiUniformCurveAndRationalBSplineCurve)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_QuasiUniformCurveAndRationalBSplineCurve)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepGeom_QuasiUniformCurveAndRationalBSplineCurve) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepGeom_QuasiUniformCurveAndRationalBSplineCurve) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepGeom_QuasiUniformCurveAndRationalBSplineCurve) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWQuasiUniformCurveAndRationalBSplineCurve_HeaderFile

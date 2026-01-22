@@ -16,7 +16,6 @@
 
 #include <PrsDim_MidPointRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_MidPointRelation AIS_MidPointRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_MidPointRelation AIS_MidPointRelation;
 
 #endif // _AIS_MidPointRelation_HeaderFile

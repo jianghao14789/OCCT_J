@@ -16,7 +16,6 @@
 
 #include <PrsDim_Dimension.hxx>
 
-Standard_DEPRECATED("Alias to moved class")
-typedef PrsDim_Dimension AIS_Dimension;
+Standard_DEPRECATED("Alias to moved class") typedef PrsDim_Dimension AIS_Dimension;
 
 #endif // _AIS_Dimension_HeaderFile

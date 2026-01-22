@@ -14,7 +14,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//JCV 09/07/92 portage sur C1
+// JCV 09/07/92 portage sur C1
 
 #include <Geom_Geometry.hxx>
 #include <gp_Ax1.hxx>
@@ -27,12 +27,12 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Geom_Geometry, Standard_Transient)
 
-typedef Geom_Geometry         Geometry;
-typedef gp_Pnt                Pnt;
-typedef gp_Vec                Vec;
-typedef gp_Ax1                Ax1;
-typedef gp_Ax2                Ax2;
-typedef gp_Trsf               Trsf;
+typedef Geom_Geometry Geometry;
+typedef gp_Pnt Pnt;
+typedef gp_Vec Vec;
+typedef gp_Ax1 Ax1;
+typedef gp_Ax2 Ax2;
+typedef gp_Trsf Trsf;
 
 Handle(Geom_Geometry) Geom_Geometry::Copy() const {
 
@@ -40,14 +40,11 @@ Handle(Geom_Geometry) Geom_Geometry::Copy() const {
     throw Standard_ConstructionError();
 }
 
-
 void Geom_Geometry::Mirror(const gp_Pnt& P) {
     Trsf T;
     T.SetMirror(P);
     Transform(T);
 }
-
-
 
 void Geom_Geometry::Mirror(const gp_Ax1& A1) {
 
@@ -56,14 +53,12 @@ void Geom_Geometry::Mirror(const gp_Ax1& A1) {
     Transform(T);
 }
 
-
 void Geom_Geometry::Mirror(const gp_Ax2& A2) {
 
     Trsf T;
     T.SetMirror(A2);
     Transform(T);
 }
-
 
 void Geom_Geometry::Rotate(const gp_Ax1& A1, const Standard_Real Ang) {
 
@@ -72,14 +67,12 @@ void Geom_Geometry::Rotate(const gp_Ax1& A1, const Standard_Real Ang) {
     Transform(T);
 }
 
-
 void Geom_Geometry::Scale(const gp_Pnt& P, const Standard_Real S) {
 
     Trsf T;
     T.SetScale(P, S);
     Transform(T);
 }
-
 
 void Geom_Geometry::Translate(const gp_Vec& V) {
 
@@ -88,83 +81,60 @@ void Geom_Geometry::Translate(const gp_Vec& V) {
     Transform(T);
 }
 
-
 void Geom_Geometry::Translate(const gp_Pnt& P1, const gp_Pnt& P2) {
 
     Vec V(P1, P2);
     Translate(V);
 }
 
-
-Handle(Geom_Geometry) Geom_Geometry::Mirrored(const gp_Pnt& P) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Mirrored(const gp_Pnt& P) const {
     Handle(Geom_Geometry) G = Copy();
     G->Mirror(P);
     return G;
 }
 
-
-Handle(Geom_Geometry) Geom_Geometry::Mirrored(const gp_Ax1& A1) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Mirrored(const gp_Ax1& A1) const {
     Handle(Geom_Geometry) G = Copy();
     G->Mirror(A1);
     return G;
 }
 
-
-Handle(Geom_Geometry) Geom_Geometry::Mirrored(const gp_Ax2& A2) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Mirrored(const gp_Ax2& A2) const {
     Handle(Geom_Geometry) G = Copy();
     G->Mirror(A2);
     return G;
 }
 
-
-
-Handle(Geom_Geometry) Geom_Geometry::Rotated(const gp_Ax1& A1, const Standard_Real Ang) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Rotated(const gp_Ax1& A1, const Standard_Real Ang) const {
     Handle(Geom_Geometry) G = Copy();
     G->Rotate(A1, Ang);
     return G;
 }
 
-
-
-Handle(Geom_Geometry) Geom_Geometry::Scaled(const gp_Pnt& P, const Standard_Real S) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Scaled(const gp_Pnt& P, const Standard_Real S) const {
     Handle(Geom_Geometry) G = Copy();
     G->Scale(P, S);
     return G;
 }
 
-
-
-Handle(Geom_Geometry) Geom_Geometry::Transformed(const gp_Trsf& T) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Transformed(const gp_Trsf& T) const {
     Handle(Geom_Geometry) G = Copy();
     G->Transform(T);
     return G;
 }
 
-
-
-Handle(Geom_Geometry) Geom_Geometry::Translated(const gp_Vec& V) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Translated(const gp_Vec& V) const {
     Handle(Geom_Geometry) G = Copy();
     G->Translate(V);
     return G;
 }
 
-
-Handle(Geom_Geometry) Geom_Geometry::Translated(const gp_Pnt& P1, const gp_Pnt& P2) const
-{
+Handle(Geom_Geometry) Geom_Geometry::Translated(const gp_Pnt& P1, const gp_Pnt& P2) const {
     Handle(Geom_Geometry) G = Copy();
     G->Translate(P1, P2);
     return G;
 }
 
-
-void Geom_Geometry::DumpJson(Standard_OStream& theOStream, Standard_Integer) const
-{
+void Geom_Geometry::DumpJson(Standard_OStream& theOStream, Standard_Integer) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 }

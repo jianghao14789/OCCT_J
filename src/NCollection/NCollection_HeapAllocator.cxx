@@ -17,21 +17,18 @@
 #include <Standard_OutOfMemory.hxx>
 #include <Standard_Mutex.hxx>
 
-
 IMPLEMENT_STANDARD_RTTIEXT(NCollection_HeapAllocator, NCollection_BaseAllocator)
 
 //=======================================================================
-//function : Allocate
-//purpose  : 
+// function : Allocate
+// purpose  :
 //=======================================================================
 
-void* NCollection_HeapAllocator::Allocate(const Standard_Size theSize)
-{
+void* NCollection_HeapAllocator::Allocate(const Standard_Size theSize) {
     // the size is rounded up to word size.
     const Standard_Size aRoundSize = (theSize + 3) & ~0x3;
     void* aResult = malloc(aRoundSize);
-    if (aResult == NULL)
-    {
+    if (aResult == NULL) {
         char aBuffer[96];
         Sprintf(aBuffer, "Failed to allocate %" PRIuPTR " bytes in global dynamic heap", theSize);
         throw Standard_OutOfMemory(aBuffer);
@@ -40,23 +37,20 @@ void* NCollection_HeapAllocator::Allocate(const Standard_Size theSize)
 }
 
 //=======================================================================
-//function : Free
-//purpose  : 
+// function : Free
+// purpose  :
 //=======================================================================
 
-void NCollection_HeapAllocator::Free(void* anAddress)
-{
+void NCollection_HeapAllocator::Free(void* anAddress) {
     if (anAddress) free(anAddress);
 }
 
 //=======================================================================
-//function : GlobalHeapAllocator
-//purpose  : 
+// function : GlobalHeapAllocator
+// purpose  :
 //=======================================================================
 
-const Handle(NCollection_HeapAllocator)&
-NCollection_HeapAllocator::GlobalHeapAllocator()
-{
+const Handle(NCollection_HeapAllocator) & NCollection_HeapAllocator::GlobalHeapAllocator() {
     static Handle(NCollection_HeapAllocator) pAllocator;
     if (pAllocator.IsNull()) {
         static Standard_Mutex theMutex;

@@ -23,70 +23,61 @@ class Adaptor3d_CurveOnSurface;
 
 //! Computes the max distance between 3D-curve and 2D-curve
 //! in some surface.
-class GeomLib_CheckCurveOnSurface 
-{
+class GeomLib_CheckCurveOnSurface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Default constructor
+    Standard_EXPORT GeomLib_CheckCurveOnSurface(void);
 
-  //! Default constructor
-  Standard_EXPORT GeomLib_CheckCurveOnSurface(void);
-  
-  //! Constructor
-  Standard_EXPORT
-    GeomLib_CheckCurveOnSurface(const Handle(Adaptor3d_Curve)& theCurve,
-                                const Standard_Real theTolRange = 
-                                                      Precision::PConfusion());
-  
-  //! Sets the data for the algorithm
-  Standard_EXPORT void Init (const Handle(Adaptor3d_Curve)& theCurve,
-                             const Standard_Real theTolRange = Precision::PConfusion());
+    //! Constructor
+    Standard_EXPORT GeomLib_CheckCurveOnSurface(const Handle(Adaptor3d_Curve) & theCurve,
+                                                const Standard_Real theTolRange = Precision::PConfusion());
 
-  //! Initializes all members by default values
-  Standard_EXPORT void Init();
+    //! Sets the data for the algorithm
+    Standard_EXPORT void Init(const Handle(Adaptor3d_Curve) & theCurve,
+                              const Standard_Real theTolRange = Precision::PConfusion());
 
-  //! Computes the max distance for the 3d curve <myCurve>
-  //! and 2d curve <theCurveOnSurface>
-  //! If isMultiThread == Standard_True then computation will be performed in parallel.
-  Standard_EXPORT void Perform(const Handle(Adaptor3d_CurveOnSurface)& theCurveOnSurface,
-                               const Standard_Boolean isMultiThread = Standard_False);
+    //! Initializes all members by default values
+    Standard_EXPORT void Init();
 
-  //! Returns true if the max distance has been found
-  Standard_Boolean IsDone() const
-  {
-    return (myErrorStatus == 0);
-  }
-  
-  //! Returns error status
-  //! The possible values are:
-  //! 0 - OK;
-  //! 1 - null curve or surface or 2d curve;
-  //! 2 - invalid parametric range;
-  //! 3 - error in calculations.
-  Standard_Integer ErrorStatus() const
-  {
-    return myErrorStatus;
-  }
-  
-  //! Returns max distance
-  Standard_Real MaxDistance() const
-  {
-    return myMaxDistance;
-  }
-  
-  //! Returns parameter in which the distance is maximal
-  Standard_Real MaxParameter() const
-  {
-    return myMaxParameter;
-  }
+    //! Computes the max distance for the 3d curve <myCurve>
+    //! and 2d curve <theCurveOnSurface>
+    //! If isMultiThread == Standard_True then computation will be performed in parallel.
+    Standard_EXPORT void Perform(const Handle(Adaptor3d_CurveOnSurface) & theCurveOnSurface,
+                                 const Standard_Boolean isMultiThread = Standard_False);
+
+    //! Returns true if the max distance has been found
+    Standard_Boolean IsDone() const {
+        return (myErrorStatus == 0);
+    }
+
+    //! Returns error status
+    //! The possible values are:
+    //! 0 - OK;
+    //! 1 - null curve or surface or 2d curve;
+    //! 2 - invalid parametric range;
+    //! 3 - error in calculations.
+    Standard_Integer ErrorStatus() const {
+        return myErrorStatus;
+    }
+
+    //! Returns max distance
+    Standard_Real MaxDistance() const {
+        return myMaxDistance;
+    }
+
+    //! Returns parameter in which the distance is maximal
+    Standard_Real MaxParameter() const {
+        return myMaxParameter;
+    }
 
 private:
-
-  Handle(Adaptor3d_Curve) myCurve;
-  Standard_Integer myErrorStatus;
-  Standard_Real myMaxDistance;
-  Standard_Real myMaxParameter;
-  Standard_Real myTolRange;
+    Handle(Adaptor3d_Curve) myCurve;
+    Standard_Integer myErrorStatus;
+    Standard_Real myMaxDistance;
+    Standard_Real myMaxParameter;
+    Standard_Real myTolRange;
 };
 
 #endif // _BRepLib_CheckCurveOnSurface_HeaderFile

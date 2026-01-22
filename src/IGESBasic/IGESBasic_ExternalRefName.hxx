@@ -23,7 +23,6 @@
 #include <IGESData_IGESEntity.hxx>
 class TCollection_HAsciiString;
 
-
 class IGESBasic_ExternalRefName;
 DEFINE_STANDARD_HANDLE(IGESBasic_ExternalRefName, IGESData_IGESEntity)
 
@@ -31,44 +30,24 @@ DEFINE_STANDARD_HANDLE(IGESBasic_ExternalRefName, IGESData_IGESEntity)
 //! in package IGESBasic
 //! Used when it is assumed that a copy of the subfigure
 //! exists in native form on the receiving system
-class IGESBasic_ExternalRefName : public IGESData_IGESEntity
-{
+class IGESBasic_ExternalRefName : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESBasic_ExternalRefName();
 
-  
-  Standard_EXPORT IGESBasic_ExternalRefName();
-  
-  //! This method is used to set the fields of the class
-  //! ExternalRefName
-  //! - anExtName : External Reference Entity Symbolic Name
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& anExtName);
-  
-  //! returns External Reference Entity Symbolic Name
-  Standard_EXPORT Handle(TCollection_HAsciiString) ReferenceName() const;
+    //! This method is used to set the fields of the class
+    //! ExternalRefName
+    //! - anExtName : External Reference Entity Symbolic Name
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & anExtName);
 
+    //! returns External Reference Entity Symbolic Name
+    Standard_EXPORT Handle(TCollection_HAsciiString) ReferenceName() const;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESBasic_ExternalRefName,IGESData_IGESEntity)
+    DEFINE_STANDARD_RTTIEXT(IGESBasic_ExternalRefName, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) theExtRefEntitySymbName;
-
-
+    Handle(TCollection_HAsciiString) theExtRefEntitySymbName;
 };
-
-
-
-
-
-
 
 #endif // _IGESBasic_ExternalRefName_HeaderFile

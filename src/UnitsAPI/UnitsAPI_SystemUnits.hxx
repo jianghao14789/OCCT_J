@@ -27,11 +27,6 @@
 //! millimeters instead of meters.
 //! Use the function SetLocalSystem to set up one
 //! of these unit systems as working environment.
-enum UnitsAPI_SystemUnits
-{
-    UnitsAPI_DEFAULT,
-    UnitsAPI_SI,
-    UnitsAPI_MDTV
-};
+enum UnitsAPI_SystemUnits { UnitsAPI_DEFAULT, UnitsAPI_SI, UnitsAPI_MDTV };
 
 #endif // _UnitsAPI_SystemUnits_HeaderFile

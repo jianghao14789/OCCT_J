@@ -21,8 +21,11 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(StepShape_ShapeDefinitionRepresentation),Handle(STEPCAFControl_ExternFile),TColStd_MapTransientHasher> STEPCAFControl_DataMapOfSDRExternFile;
-typedef NCollection_DataMap<Handle(StepShape_ShapeDefinitionRepresentation),Handle(STEPCAFControl_ExternFile),TColStd_MapTransientHasher>::Iterator STEPCAFControl_DataMapIteratorOfDataMapOfSDRExternFile;
-
+typedef NCollection_DataMap<Handle(StepShape_ShapeDefinitionRepresentation), Handle(STEPCAFControl_ExternFile),
+                            TColStd_MapTransientHasher>
+    STEPCAFControl_DataMapOfSDRExternFile;
+typedef NCollection_DataMap<Handle(StepShape_ShapeDefinitionRepresentation), Handle(STEPCAFControl_ExternFile),
+                            TColStd_MapTransientHasher>::Iterator
+    STEPCAFControl_DataMapIteratorOfDataMapOfSDRExternFile;
 
 #endif

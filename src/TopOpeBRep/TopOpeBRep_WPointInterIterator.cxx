@@ -14,88 +14,75 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_ProgramError.hxx>
 #include <TopOpeBRep_LineInter.hxx>
 #include <TopOpeBRep_WPointInter.hxx>
 #include <TopOpeBRep_WPointInterIterator.hxx>
 
 //=======================================================================
-//function : WPointIterator
-//purpose  : 
+// function : WPointIterator
+// purpose  :
 //=======================================================================
-TopOpeBRep_WPointInterIterator::TopOpeBRep_WPointInterIterator() :
-myLineInter(NULL),myWPointIndex(0),myWPointNb(0)
-{
+TopOpeBRep_WPointInterIterator::TopOpeBRep_WPointInterIterator() : myLineInter(NULL), myWPointIndex(0), myWPointNb(0) {}
+
+//=======================================================================
+// function : WPointIterator
+// purpose  :
+//=======================================================================
+
+TopOpeBRep_WPointInterIterator::TopOpeBRep_WPointInterIterator(const TopOpeBRep_LineInter& LI) {
+    Init(LI);
 }
 
 //=======================================================================
-//function : WPointIterator
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-TopOpeBRep_WPointInterIterator::TopOpeBRep_WPointInterIterator
-(const TopOpeBRep_LineInter& LI)
-{
-  Init(LI);
-}
-
-
-//=======================================================================
-//function : Init
-//purpose  : 
-//=======================================================================
-
-void TopOpeBRep_WPointInterIterator::Init(const TopOpeBRep_LineInter& LI)
-{
-  myLineInter = (TopOpeBRep_LineInter*)&LI;
-  Init();
-}
-
-
-//=======================================================================
-//function : Init
-//purpose  : 
-//=======================================================================
-
-void TopOpeBRep_WPointInterIterator::Init()
-{
-  myWPointIndex = 1;
-  myWPointNb = myLineInter->NbWPoint();
-}
-
-
-//=======================================================================
-//function : More
-//purpose  : 
-//=======================================================================
-
-Standard_Boolean TopOpeBRep_WPointInterIterator::More() const
-{
-  return (myWPointIndex <= myWPointNb);
+void TopOpeBRep_WPointInterIterator::Init(const TopOpeBRep_LineInter& LI) {
+    myLineInter = (TopOpeBRep_LineInter*)&LI;
+    Init();
 }
 
 //=======================================================================
-//function : Next
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void TopOpeBRep_WPointInterIterator::Next()
-{
-  myWPointIndex++;
+void TopOpeBRep_WPointInterIterator::Init() {
+    myWPointIndex = 1;
+    myWPointNb = myLineInter->NbWPoint();
 }
 
 //=======================================================================
-//function : CurrentWP
-//purpose  :
+// function : More
+// purpose  :
 //=======================================================================
 
-const TopOpeBRep_WPointInter& TopOpeBRep_WPointInterIterator::CurrentWP()
-{
-  if (!More()) 
-    throw Standard_ProgramError("TopOpeBRep_WPointInterIterator::Current");
-  const TopOpeBRep_WPointInter& WP = myLineInter->WPoint(myWPointIndex);
-  return WP;
+Standard_Boolean TopOpeBRep_WPointInterIterator::More() const {
+    return (myWPointIndex <= myWPointNb);
 }
 
-TopOpeBRep_PLineInter TopOpeBRep_WPointInterIterator::PLineInterDummy() const {return myLineInter;}
+//=======================================================================
+// function : Next
+// purpose  :
+//=======================================================================
+
+void TopOpeBRep_WPointInterIterator::Next() {
+    myWPointIndex++;
+}
+
+//=======================================================================
+// function : CurrentWP
+// purpose  :
+//=======================================================================
+
+const TopOpeBRep_WPointInter& TopOpeBRep_WPointInterIterator::CurrentWP() {
+    if (!More()) throw Standard_ProgramError("TopOpeBRep_WPointInterIterator::Current");
+    const TopOpeBRep_WPointInter& WP = myLineInter->WPoint(myWPointIndex);
+    return WP;
+}
+
+TopOpeBRep_PLineInter TopOpeBRep_WPointInterIterator::PLineInterDummy() const {
+    return myLineInter;
+}

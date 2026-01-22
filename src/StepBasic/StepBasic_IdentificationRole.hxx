@@ -23,62 +23,42 @@
 #include <Standard_Transient.hxx>
 class TCollection_HAsciiString;
 
-
 class StepBasic_IdentificationRole;
 DEFINE_STANDARD_HANDLE(StepBasic_IdentificationRole, Standard_Transient)
 
 //! Representation of STEP entity IdentificationRole
-class StepBasic_IdentificationRole : public Standard_Transient
-{
+class StepBasic_IdentificationRole : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_IdentificationRole();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_IdentificationRole();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const Standard_Boolean hasDescription, const Handle(TCollection_HAsciiString)& aDescription);
-  
-  //! Returns field Name
-  Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
-  
-  //! Set field Name
-  Standard_EXPORT void SetName (const Handle(TCollection_HAsciiString)& Name);
-  
-  //! Returns field Description
-  Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
-  
-  //! Set field Description
-  Standard_EXPORT void SetDescription (const Handle(TCollection_HAsciiString)& Description);
-  
-  //! Returns True if optional field Description is defined
-  Standard_EXPORT Standard_Boolean HasDescription() const;
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName, const Standard_Boolean hasDescription,
+                              const Handle(TCollection_HAsciiString) & aDescription);
 
+    //! Returns field Name
+    Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
 
+    //! Set field Name
+    Standard_EXPORT void SetName(const Handle(TCollection_HAsciiString) & Name);
 
+    //! Returns field Description
+    Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepBasic_IdentificationRole,Standard_Transient)
+    //! Set field Description
+    Standard_EXPORT void SetDescription(const Handle(TCollection_HAsciiString) & Description);
+
+    //! Returns True if optional field Description is defined
+    Standard_EXPORT Standard_Boolean HasDescription() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepBasic_IdentificationRole, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) theName;
-  Handle(TCollection_HAsciiString) theDescription;
-  Standard_Boolean defDescription;
-
-
+    Handle(TCollection_HAsciiString) theName;
+    Handle(TCollection_HAsciiString) theDescription;
+    Standard_Boolean defDescription;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_IdentificationRole_HeaderFile

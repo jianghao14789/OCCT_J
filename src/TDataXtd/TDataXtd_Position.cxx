@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <gp_Pnt.hxx>
 #include <Standard_GUID.hxx>
 #include <Standard_Type.hxx>
@@ -22,129 +21,110 @@
 #include <TDF_Label.hxx>
 #include <TDF_RelocationTable.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(TDataXtd_Position,TDF_Attribute)
+IMPLEMENT_STANDARD_RTTIEXT(TDataXtd_Position, TDF_Attribute)
 
 //=======================================================================
-//function : Set (class method)
-//purpose  : 
+// function : Set (class method)
+// purpose  :
 //=======================================================================
-void TDataXtd_Position::Set(const TDF_Label& aLabel, const gp_Pnt& aPos) 
-{
-  Handle(TDataXtd_Position) pos;
-  if (!aLabel.FindAttribute(TDataXtd_Position::GetID(), pos)) {
-    pos = new TDataXtd_Position();
-    aLabel.AddAttribute(pos);
-  }
-  pos->SetPosition( aPos ); 
+void TDataXtd_Position::Set(const TDF_Label& aLabel, const gp_Pnt& aPos) {
+    Handle(TDataXtd_Position) pos;
+    if (!aLabel.FindAttribute(TDataXtd_Position::GetID(), pos)) {
+        pos = new TDataXtd_Position();
+        aLabel.AddAttribute(pos);
+    }
+    pos->SetPosition(aPos);
 }
 
 //=======================================================================
-//function : Set
-//purpose  : 
+// function : Set
+// purpose  :
 //=======================================================================
-Handle(TDataXtd_Position) TDataXtd_Position::Set (const TDF_Label& L)
-{
-  Handle(TDataXtd_Position) POS;
-  if (!L.FindAttribute (TDataXtd_Position::GetID (), POS)) {    
-    POS = new TDataXtd_Position;
-    L.AddAttribute(POS);
-  }
-  return POS;
+Handle(TDataXtd_Position) TDataXtd_Position::Set(const TDF_Label& L) {
+    Handle(TDataXtd_Position) POS;
+    if (!L.FindAttribute(TDataXtd_Position::GetID(), POS)) {
+        POS = new TDataXtd_Position;
+        L.AddAttribute(POS);
+    }
+    return POS;
 }
 
 //=======================================================================
-//function : Get (class method)
-//purpose  : 
+// function : Get (class method)
+// purpose  :
 //=======================================================================
-Standard_Boolean TDataXtd_Position::Get(const TDF_Label& aLabel, gp_Pnt& aPos) 
-{
-  Handle(TDataXtd_Position) pos;
-  if( aLabel.FindAttribute( TDataXtd_Position::GetID(), pos) ) {
-    aPos = pos->GetPosition();
-    return Standard_True; 
-  }
-  return Standard_False; 
+Standard_Boolean TDataXtd_Position::Get(const TDF_Label& aLabel, gp_Pnt& aPos) {
+    Handle(TDataXtd_Position) pos;
+    if (aLabel.FindAttribute(TDataXtd_Position::GetID(), pos)) {
+        aPos = pos->GetPosition();
+        return Standard_True;
+    }
+    return Standard_False;
 }
 
 //=======================================================================
-//function : GetID
-//purpose  : 
+// function : GetID
+// purpose  :
 //=======================================================================
-const Standard_GUID& TDataXtd_Position::GetID() 
-{
-  static Standard_GUID TDataXtd_Position_guid("55553252-ce0c-11d1-b5d8-00a0c9064368");
-  return TDataXtd_Position_guid;
+const Standard_GUID& TDataXtd_Position::GetID() {
+    static Standard_GUID TDataXtd_Position_guid("55553252-ce0c-11d1-b5d8-00a0c9064368");
+    return TDataXtd_Position_guid;
 }
 
 //=======================================================================
-//function : TDataXtd_Position
-//purpose  : 
+// function : TDataXtd_Position
+// purpose  :
 //=======================================================================
-TDataXtd_Position::TDataXtd_Position()
-  :myPosition(gp_Pnt(0.,0.,0.))
-{
+TDataXtd_Position::TDataXtd_Position() : myPosition(gp_Pnt(0., 0., 0.)) {}
+
+//=======================================================================
+// function : GetPosition
+// purpose  :
+//=======================================================================
+const gp_Pnt& TDataXtd_Position::GetPosition() const {
+    return myPosition;
 }
 
 //=======================================================================
-//function : GetPosition
-//purpose  : 
+// function : Position
+// purpose  :
 //=======================================================================
-const gp_Pnt& TDataXtd_Position::GetPosition() const
-{
-  return myPosition;
+void TDataXtd_Position::SetPosition(const gp_Pnt& aPos) {
+    // OCC2932 correction
+    if (myPosition.X() == aPos.X() && myPosition.Y() == aPos.Y() && myPosition.Z() == aPos.Z()) return;
+
+    Backup();
+    myPosition = aPos;
 }
 
 //=======================================================================
-//function : Position
-//purpose  : 
+// function : ID
+// purpose  :
 //=======================================================================
-void TDataXtd_Position::SetPosition(const gp_Pnt& aPos) 
-{
-  // OCC2932 correction
-  if(myPosition.X() == aPos.X() &&
-     myPosition.Y() == aPos.Y() &&
-     myPosition.Z() == aPos.Z())
-    return;
-
-  Backup();
-  myPosition = aPos;
-}
-
- 
-
-//=======================================================================
-//function : ID
-//purpose  : 
-//=======================================================================
-const Standard_GUID& TDataXtd_Position::ID() const
-{
-  return GetID();
+const Standard_GUID& TDataXtd_Position::ID() const {
+    return GetID();
 }
 
 //=======================================================================
-//function : Restore
-//purpose  : 
+// function : Restore
+// purpose  :
 //=======================================================================
-void TDataXtd_Position::Restore(const Handle(TDF_Attribute)& anAttribute) 
-{
-  myPosition = Handle(TDataXtd_Position)::DownCast(anAttribute)->GetPosition();
+void TDataXtd_Position::Restore(const Handle(TDF_Attribute) & anAttribute) {
+    myPosition = Handle(TDataXtd_Position)::DownCast(anAttribute)->GetPosition();
 }
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : 
+// function : NewEmpty
+// purpose  :
 //=======================================================================
-Handle(TDF_Attribute) TDataXtd_Position::NewEmpty() const
-{
-  return new TDataXtd_Position; 
+Handle(TDF_Attribute) TDataXtd_Position::NewEmpty() const {
+    return new TDataXtd_Position;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : 
+// function : Paste
+// purpose  :
 //=======================================================================
-void TDataXtd_Position::Paste(const Handle(TDF_Attribute)& intoAttribute,
-			     const Handle(TDF_RelocationTable)&) const
-{
-  Handle(TDataXtd_Position)::DownCast(intoAttribute)->SetPosition(myPosition);
+void TDataXtd_Position::Paste(const Handle(TDF_Attribute) & intoAttribute, const Handle(TDF_RelocationTable) &) const {
+    Handle(TDataXtd_Position)::DownCast(intoAttribute)->SetPosition(myPosition);
 }

@@ -27,48 +27,29 @@ class StepShape_DimensionalLocationWithPath;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DimensionalLocationWithPath
-class RWStepShape_RWDimensionalLocationWithPath 
-{
+class RWStepShape_RWDimensionalLocationWithPath {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWDimensionalLocationWithPath();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWDimensionalLocationWithPath();
-  
-  //! Reads DimensionalLocationWithPath
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_DimensionalLocationWithPath)& ent) const;
-  
-  //! Writes DimensionalLocationWithPath
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_DimensionalLocationWithPath)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_DimensionalLocationWithPath)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DimensionalLocationWithPath
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_DimensionalLocationWithPath) & ent) const;
 
+    //! Writes DimensionalLocationWithPath
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepShape_DimensionalLocationWithPath) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_DimensionalLocationWithPath) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWDimensionalLocationWithPath_HeaderFile

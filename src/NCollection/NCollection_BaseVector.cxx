@@ -19,23 +19,19 @@
 #include <cstdlib>
 
 //=======================================================================
-//function : initV
-//purpose  : Initialisation of iterator by a vector
+// function : initV
+// purpose  : Initialisation of iterator by a vector
 //=======================================================================
 
-void NCollection_BaseVector::Iterator::initV(const NCollection_BaseVector& theVector, Standard_Boolean theToEnd)
-{
+void NCollection_BaseVector::Iterator::initV(const NCollection_BaseVector& theVector, Standard_Boolean theToEnd) {
     myVector = &theVector;
 
-    if (theVector.myNBlocks == 0)
-    {
+    if (theVector.myNBlocks == 0) {
         myCurIndex = 0;
         myEndIndex = 0;
         myICurBlock = 0;
         myIEndBlock = 0;
-    }
-    else
-    {
+    } else {
         myIEndBlock = theVector.myNBlocks - 1;
         myEndIndex = theVector.myData[myIEndBlock].Length;
 
@@ -45,45 +41,38 @@ void NCollection_BaseVector::Iterator::initV(const NCollection_BaseVector& theVe
 }
 
 //=======================================================================
-//function : allocMemBlocks
-//purpose  :
+// function : allocMemBlocks
+// purpose  :
 //=======================================================================
 
-NCollection_BaseVector::MemBlock* NCollection_BaseVector
-::allocMemBlocks(const Standard_Integer             theCapacity,
-    MemBlock* theSource,
-    const Standard_Integer             theSourceSize)
-{
+NCollection_BaseVector::MemBlock* NCollection_BaseVector ::allocMemBlocks(const Standard_Integer theCapacity,
+                                                                          MemBlock* theSource,
+                                                                          const Standard_Integer theSourceSize) {
     MemBlock* aData = (MemBlock*)myAllocator->Allocate(theCapacity * sizeof(MemBlock));
 
     // copy content from source array
     Standard_Integer aCapacity = 0;
-    if (theSource != NULL)
-    {
+    if (theSource != NULL) {
         memcpy(aData, theSource, theSourceSize * sizeof(MemBlock));
         aCapacity = theSourceSize;
         myAllocator->Free(theSource);
     }
 
     // Nullify newly allocated blocks
-    if (aCapacity < theCapacity)
-    {
+    if (aCapacity < theCapacity) {
         memset(&aData[aCapacity], 0, (theCapacity - aCapacity) * sizeof(MemBlock));
     }
     return aData;
 }
 
 //=======================================================================
-//function : Clear
-//purpose  :
+// function : Clear
+// purpose  :
 //=======================================================================
 
-void NCollection_BaseVector::Clear()
-{
-    if (myLength > 0)
-    {
-        for (Standard_Integer anItemIter = 0; anItemIter < myCapacity; ++anItemIter)
-        {
+void NCollection_BaseVector::Clear() {
+    if (myLength > 0) {
+        for (Standard_Integer anItemIter = 0; anItemIter < myCapacity; ++anItemIter) {
             myInitBlocks(*this, myData[anItemIter], 0, 0);
         }
         myLength = 0;
@@ -92,23 +81,19 @@ void NCollection_BaseVector::Clear()
 }
 
 //=======================================================================
-//function : expandV
-//purpose  : returns the pointer where the new data item is supposed to be put
+// function : expandV
+// purpose  : returns the pointer where the new data item is supposed to be put
 //=======================================================================
 
-void* NCollection_BaseVector::expandV(const Standard_Integer theIndex)
-{
+void* NCollection_BaseVector::expandV(const Standard_Integer theIndex) {
     const Standard_Integer aNewLength = theIndex + 1;
-    if (myNBlocks > 0)
-    {
+    if (myNBlocks > 0) {
         // Take the last array in the vector of arrays
         MemBlock& aLastBlock = myData[myNBlocks - 1];
-        Standard_RangeError_Raise_if(theIndex < aLastBlock.FirstIndex,
-            "NColelction_BaseVector::expandV");
+        Standard_RangeError_Raise_if(theIndex < aLastBlock.FirstIndex, "NColelction_BaseVector::expandV");
         Standard_Integer anIndLastBlock = theIndex - aLastBlock.FirstIndex;
         // Is there still room for 1 item in the last array?
-        if (anIndLastBlock < aLastBlock.Size)
-        {
+        if (anIndLastBlock < aLastBlock.Size) {
             myLength = aNewLength;
             aLastBlock.Length = anIndLastBlock + 1;
             return aLastBlock.findV(anIndLastBlock, myItemSize);
@@ -120,15 +105,15 @@ void* NCollection_BaseVector::expandV(const Standard_Integer theIndex)
     // or the whole vector is not yet initialised.
     // Initialise a new array, but before that check whether it is available within myCapacity.
     const Standard_Integer nNewBlock = myNBlocks + 1 + (theIndex - myLength) / myIncrement;
-    if (myCapacity < nNewBlock)
-    {
-        // Reallocate the array myData 
-        do myCapacity += GetCapacity(myIncrement); while (myCapacity <= nNewBlock);
+    if (myCapacity < nNewBlock) {
+        // Reallocate the array myData
+        do
+            myCapacity += GetCapacity(myIncrement);
+        while (myCapacity <= nNewBlock);
 
         myData = allocMemBlocks(myCapacity, myData, myNBlocks);
     }
-    if (myNBlocks > 0)
-    {
+    if (myNBlocks > 0) {
         // Change length of old last block to myIncrement
         MemBlock& aLastBlock = myData[myNBlocks - 1];
         aLastBlock.Length = myIncrement;
@@ -137,8 +122,7 @@ void* NCollection_BaseVector::expandV(const Standard_Integer theIndex)
     // Initialise new blocks
     MemBlock* aNewBlock = &myData[myNBlocks++];
     myInitBlocks(*this, *aNewBlock, myLength, myIncrement);
-    while (myNBlocks < nNewBlock)
-    {
+    while (myNBlocks < nNewBlock) {
         aNewBlock->Length = myIncrement;
         myLength += myIncrement;
         aNewBlock = &myData[myNBlocks++];

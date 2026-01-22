@@ -42,17 +42,16 @@
 //! - EDGE: A single dimensional shape corresponding
 //! to a curve, and bound by a vertex at each extremity.
 //! - VERTEX: A zero-dimensional shape corresponding to a point in geometry.
-enum TopAbs_ShapeEnum
-{
-TopAbs_COMPOUND,
-TopAbs_COMPSOLID,
-TopAbs_SOLID,
-TopAbs_SHELL,
-TopAbs_FACE,
-TopAbs_WIRE,
-TopAbs_EDGE,
-TopAbs_VERTEX,
-TopAbs_SHAPE
+enum TopAbs_ShapeEnum {
+    TopAbs_COMPOUND,
+    TopAbs_COMPSOLID,
+    TopAbs_SOLID,
+    TopAbs_SHELL,
+    TopAbs_FACE,
+    TopAbs_WIRE,
+    TopAbs_EDGE,
+    TopAbs_VERTEX,
+    TopAbs_SHAPE
 };
 
 #endif // _TopAbs_ShapeEnum_HeaderFile

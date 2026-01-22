@@ -19,5 +19,4 @@
 
 typedef NCollection_Sequence<Handle(StepFEA_NodeRepresentation)> StepFEA_SequenceOfNodeRepresentation;
 
-
 #endif

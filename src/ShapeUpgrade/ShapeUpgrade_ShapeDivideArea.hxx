@@ -25,49 +25,27 @@
 class TopoDS_Shape;
 class ShapeUpgrade_FaceDivide;
 
-
 //! Divides faces from sprcified shape  by max area criterium.
-class ShapeUpgrade_ShapeDivideArea  : public ShapeUpgrade_ShapeDivide
-{
+class ShapeUpgrade_ShapeDivideArea : public ShapeUpgrade_ShapeDivide {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT ShapeUpgrade_ShapeDivideArea();
 
-  
-  Standard_EXPORT ShapeUpgrade_ShapeDivideArea();
-  
-  //! Initialize by a Shape.
-  Standard_EXPORT ShapeUpgrade_ShapeDivideArea(const TopoDS_Shape& S);
-  
-  //! Set max area allowed for faces
+    //! Initialize by a Shape.
+    Standard_EXPORT ShapeUpgrade_ShapeDivideArea(const TopoDS_Shape& S);
+
+    //! Set max area allowed for faces
     Standard_Real& MaxArea();
 
-
-
-
 protected:
-
-  
-  //! Returns the tool for splitting faces.
-  Standard_EXPORT virtual Handle(ShapeUpgrade_FaceDivide) GetSplitFaceTool() const Standard_OVERRIDE;
-
-
-
+    //! Returns the tool for splitting faces.
+    Standard_EXPORT virtual Handle(ShapeUpgrade_FaceDivide) GetSplitFaceTool() const Standard_OVERRIDE;
 
 private:
-
-
-
-  Standard_Real myMaxArea;
-
-
+    Standard_Real myMaxArea;
 };
 
-
 #include <ShapeUpgrade_ShapeDivideArea.lxx>
-
-
-
-
 
 #endif // _ShapeUpgrade_ShapeDivideArea_HeaderFile

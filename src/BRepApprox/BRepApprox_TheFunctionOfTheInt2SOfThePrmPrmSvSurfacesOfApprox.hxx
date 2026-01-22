@@ -39,14 +39,12 @@ class BRepAdaptor_Surface;
 class BRepApprox_SurfaceTool;
 class math_Matrix;
 
-
-
 class BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox(const BRepAdaptor_Surface& S1, const BRepAdaptor_Surface& S2);
+    Standard_EXPORT BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox(const BRepAdaptor_Surface& S1,
+                                                                                  const BRepAdaptor_Surface& S2);
 
     Standard_EXPORT Standard_Integer NbVariables() const;
 
@@ -58,14 +56,17 @@ public:
 
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
 
-    Standard_EXPORT void ComputeParameters(const IntImp_ConstIsoparametric ChoixIso, const TColStd_Array1OfReal& Param, math_Vector& UVap, math_Vector& BornInf, math_Vector& BornSup, math_Vector& Tolerance);
+    Standard_EXPORT void ComputeParameters(const IntImp_ConstIsoparametric ChoixIso, const TColStd_Array1OfReal& Param,
+                                           math_Vector& UVap, math_Vector& BornInf, math_Vector& BornSup,
+                                           math_Vector& Tolerance);
 
     //! returns somme des fi*fi
     Standard_Real Root() const;
 
     gp_Pnt Point() const;
 
-    Standard_EXPORT Standard_Boolean IsTangent(const math_Vector& UVap, TColStd_Array1OfReal& Param, IntImp_ConstIsoparametric& BestChoix);
+    Standard_EXPORT Standard_Boolean IsTangent(const math_Vector& UVap, TColStd_Array1OfReal& Param,
+                                               IntImp_ConstIsoparametric& BestChoix);
 
     gp_Dir Direction() const;
 
@@ -78,11 +79,7 @@ public:
     const BRepAdaptor_Surface& AuxillarSurface2() const;
 
 protected:
-
 private:
-
-
-
     Standard_Address surf1;
     Standard_Address surf2;
     gp_Pnt pntsol1;
@@ -106,8 +103,6 @@ private:
     Standard_Real ures2;
     Standard_Real vres1;
     Standard_Real vres2;
-
-
 };
 
 #define ThePSurface BRepAdaptor_Surface

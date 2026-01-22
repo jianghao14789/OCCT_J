@@ -25,47 +25,25 @@
 #include <Standard_Boolean.hxx>
 class TopoDS_Shape;
 
-
-
-class TopTools_OrientedShapeMapHasher 
-{
+class TopTools_OrientedShapeMapHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes a hash code for the given shape, in the range [1, theUpperBound]
+    //! @param theShape the shape which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const TopoDS_Shape& theShape, const Standard_Integer theUpperBound);
 
-  //! Computes a hash code for the given shape, in the range [1, theUpperBound]
-  //! @param theShape the shape which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const TopoDS_Shape& theShape, const Standard_Integer theUpperBound);
-
-  //! Returns True when the two keys are equal. Two same
-  //! keys must have the same hashcode,  the contrary is
-  //! not necessary.
-    static Standard_Boolean IsEqual (const TopoDS_Shape& S1, const TopoDS_Shape& S2);
-
-
-
+    //! Returns True when the two keys are equal. Two same
+    //! keys must have the same hashcode,  the contrary is
+    //! not necessary.
+    static Standard_Boolean IsEqual(const TopoDS_Shape& S1, const TopoDS_Shape& S2);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <TopTools_OrientedShapeMapHasher.lxx>
-
-
-
-
 
 #endif // _TopTools_OrientedShapeMapHasher_HeaderFile

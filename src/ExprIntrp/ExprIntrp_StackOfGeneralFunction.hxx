@@ -23,5 +23,4 @@
 typedef NCollection_List<Handle(Expr_GeneralFunction)> ExprIntrp_StackOfGeneralFunction;
 typedef NCollection_List<Handle(Expr_GeneralFunction)>::Iterator ExprIntrp_ListIteratorOfStackOfGeneralFunction;
 
-
 #endif

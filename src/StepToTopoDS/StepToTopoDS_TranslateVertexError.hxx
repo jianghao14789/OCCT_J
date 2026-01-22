@@ -17,11 +17,6 @@
 #ifndef _StepToTopoDS_TranslateVertexError_HeaderFile
 #define _StepToTopoDS_TranslateVertexError_HeaderFile
 
-
-enum StepToTopoDS_TranslateVertexError
-{
-StepToTopoDS_TranslateVertexDone,
-StepToTopoDS_TranslateVertexOther
-};
+enum StepToTopoDS_TranslateVertexError { StepToTopoDS_TranslateVertexDone, StepToTopoDS_TranslateVertexOther };
 
 #endif // _StepToTopoDS_TranslateVertexError_HeaderFile

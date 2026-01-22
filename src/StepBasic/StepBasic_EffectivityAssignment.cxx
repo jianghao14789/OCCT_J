@@ -19,43 +19,39 @@
 #include <StepBasic_Effectivity.hxx>
 #include <StepBasic_EffectivityAssignment.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_EffectivityAssignment,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_EffectivityAssignment, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_EffectivityAssignment
-//purpose  : 
+// function : StepBasic_EffectivityAssignment
+// purpose  :
 //=======================================================================
-StepBasic_EffectivityAssignment::StepBasic_EffectivityAssignment ()
-{
+StepBasic_EffectivityAssignment::StepBasic_EffectivityAssignment() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_EffectivityAssignment::Init(const Handle(StepBasic_Effectivity) & aAssignedEffectivity) {
+
+    theAssignedEffectivity = aAssignedEffectivity;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AssignedEffectivity
+// purpose  :
 //=======================================================================
 
-void StepBasic_EffectivityAssignment::Init (const Handle(StepBasic_Effectivity) &aAssignedEffectivity)
-{
-
-  theAssignedEffectivity = aAssignedEffectivity;
+Handle(StepBasic_Effectivity) StepBasic_EffectivityAssignment::AssignedEffectivity() const {
+    return theAssignedEffectivity;
 }
 
 //=======================================================================
-//function : AssignedEffectivity
-//purpose  : 
+// function : SetAssignedEffectivity
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_Effectivity) StepBasic_EffectivityAssignment::AssignedEffectivity () const
-{
-  return theAssignedEffectivity;
-}
-
-//=======================================================================
-//function : SetAssignedEffectivity
-//purpose  : 
-//=======================================================================
-
-void StepBasic_EffectivityAssignment::SetAssignedEffectivity (const Handle(StepBasic_Effectivity) &aAssignedEffectivity)
-{
-  theAssignedEffectivity = aAssignedEffectivity;
+void StepBasic_EffectivityAssignment::SetAssignedEffectivity(const Handle(StepBasic_Effectivity) &
+                                                             aAssignedEffectivity) {
+    theAssignedEffectivity = aAssignedEffectivity;
 }

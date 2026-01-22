@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArgCosh.hxx>
 #include <Expr_Cosh.hxx>
@@ -31,13 +30,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Cosh, Expr_UnaryExpression)
 
-Expr_Cosh::Expr_Cosh(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_Cosh::Expr_Cosh(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_Cosh::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Cosh::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) myexp = Operand();
     if (myexp->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) myNVexp = Handle(Expr_NumericValue)::DownCast(myexp);
@@ -50,13 +47,11 @@ Handle(Expr_GeneralExpression) Expr_Cosh::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_Cosh::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Cosh::Copy() const {
     return new Expr_Cosh(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_Cosh::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Cosh::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (Other->IsKind(STANDARD_TYPE(Expr_Cosh))) {
         Handle(Expr_GeneralExpression) myexp = Operand();
         return myexp->IsIdentical(Other->SubExpression(1));
@@ -64,15 +59,13 @@ Standard_Boolean Expr_Cosh::IsIdentical(const Handle(Expr_GeneralExpression)& Ot
     return Standard_False;
 }
 
-Standard_Boolean Expr_Cosh::IsLinear() const
-{
+Standard_Boolean Expr_Cosh::IsLinear() const {
     return !ContainsUnknowns();
 }
 
-Handle(Expr_GeneralExpression) Expr_Cosh::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Cosh::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
-        return  new Expr_NumericValue(0.0);
+        return new Expr_NumericValue(0.0);
     }
     Handle(Expr_GeneralExpression) myexp = Operand();
     Handle(Expr_GeneralExpression) myder = myexp->Derivative(X);
@@ -82,14 +75,12 @@ Handle(Expr_GeneralExpression) Expr_Cosh::Derivative(const Handle(Expr_NamedUnkn
     return resu->ShallowSimplified();
 }
 
-Standard_Real Expr_Cosh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Cosh::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Real val = Operand()->Evaluate(vars, vals);
     return (::Exp(val) + ::Exp(-val)) / 2.0;
 }
 
-TCollection_AsciiString Expr_Cosh::String() const
-{
+TCollection_AsciiString Expr_Cosh::String() const {
     TCollection_AsciiString str("Cosh(");
     str += Operand()->String();
     str += ")";

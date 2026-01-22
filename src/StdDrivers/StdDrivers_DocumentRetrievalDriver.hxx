@@ -17,14 +17,13 @@
 #include <StdLDrivers_DocumentRetrievalDriver.hxx>
 
 //! retrieval driver of a Part document
-class StdDrivers_DocumentRetrievalDriver : public StdLDrivers_DocumentRetrievalDriver
-{
+class StdDrivers_DocumentRetrievalDriver : public StdLDrivers_DocumentRetrievalDriver {
 public:
-  DEFINE_STANDARD_RTTIEXT (StdDrivers_DocumentRetrievalDriver, StdLDrivers_DocumentRetrievalDriver)
+    DEFINE_STANDARD_RTTIEXT(StdDrivers_DocumentRetrievalDriver, StdLDrivers_DocumentRetrievalDriver)
 
 protected:
-  //! Register types.
-  Standard_EXPORT virtual void bindTypes (StdObjMgt_MapOfInstantiators& theMap) Standard_OVERRIDE;
+    //! Register types.
+    Standard_EXPORT virtual void bindTypes(StdObjMgt_MapOfInstantiators& theMap) Standard_OVERRIDE;
 };
 
 #endif // _StdDrivers_DocumentRetrievalDriver_HeaderFile

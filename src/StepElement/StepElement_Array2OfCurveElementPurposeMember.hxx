@@ -19,5 +19,4 @@
 
 typedef NCollection_Array2<Handle(StepElement_CurveElementPurposeMember)> StepElement_Array2OfCurveElementPurposeMember;
 
-
 #endif

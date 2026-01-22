@@ -23,13 +23,11 @@
 class StepRepr_GeometricAlignment;
 DEFINE_STANDARD_HANDLE(StepRepr_GeometricAlignment, StepRepr_DerivedShapeAspect)
 //! Added for Dimensional Tolerances
-class StepRepr_GeometricAlignment : public StepRepr_DerivedShapeAspect
-{
+class StepRepr_GeometricAlignment : public StepRepr_DerivedShapeAspect {
 
 public:
-  
-  Standard_EXPORT StepRepr_GeometricAlignment();
-  
-  DEFINE_STANDARD_RTTIEXT(StepRepr_GeometricAlignment,StepRepr_DerivedShapeAspect)
+    Standard_EXPORT StepRepr_GeometricAlignment();
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_GeometricAlignment, StepRepr_DerivedShapeAspect)
 };
 #endif // _StepRepr_GeometricAlignment_HeaderFile

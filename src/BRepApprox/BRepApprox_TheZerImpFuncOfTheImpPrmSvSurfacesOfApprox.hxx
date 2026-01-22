@@ -42,13 +42,12 @@ class gp_Dir2d;
 
 class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox();
 
-    Standard_EXPORT BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox(const BRepAdaptor_Surface& PS, const IntSurf_Quadric& IS);
+    Standard_EXPORT BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox(const BRepAdaptor_Surface& PS,
+                                                                          const IntSurf_Quadric& IS);
 
     Standard_EXPORT BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox(const IntSurf_Quadric& IS);
 
@@ -87,9 +86,7 @@ public:
     const IntSurf_Quadric& ISurface() const;
 
 protected:
-
 private:
-
     Standard_Address surf;
     Standard_Address func;
     Standard_Real u;
@@ -107,8 +104,6 @@ private:
     gp_Vec d1v;
     gp_Vec d3d;
     gp_Dir2d d2d;
-
-
 };
 
 #define ThePSurface BRepAdaptor_Surface
@@ -134,8 +129,5 @@ private:
 #undef TheISurfaceTool_hxx
 #undef IntImp_ZerImpFunc
 #undef IntImp_ZerImpFunc_hxx
-
-
-
 
 #endif // _BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_HeaderFile

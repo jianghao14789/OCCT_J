@@ -16,32 +16,26 @@
 #include <Poly_CoherentTriPtr.hxx>
 
 //=======================================================================
-//function : Iterator::Next
-//purpose  :
+// function : Iterator::Next
+// purpose  :
 //=======================================================================
 
-void Poly_CoherentTriPtr::Iterator::Next()
-{
-    if (myCurrent)
-    {
+void Poly_CoherentTriPtr::Iterator::Next() {
+    if (myCurrent) {
         myCurrent = myCurrent->myNext;
-        if (myCurrent == myFirst)
-            myCurrent = 0L;
+        if (myCurrent == myFirst) myCurrent = 0L;
     }
 }
 
 //=======================================================================
-//function : Append
-//purpose  : 
+// function : Append
+// purpose  :
 //=======================================================================
 
-void Poly_CoherentTriPtr::Append
-(const Poly_CoherentTriangle* pTri,
-    const Handle(NCollection_BaseAllocator)& theAlloc)
-{
+void Poly_CoherentTriPtr::Append(const Poly_CoherentTriangle* pTri,
+                                 const Handle(NCollection_BaseAllocator) & theAlloc) {
     Handle(NCollection_BaseAllocator) anAlloc = theAlloc;
-    if (theAlloc.IsNull())
-        anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
+    if (theAlloc.IsNull()) anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
     Poly_CoherentTriPtr* aNewPtr = new (anAlloc) Poly_CoherentTriPtr(*pTri);
     aNewPtr->myNext = myNext;
     myNext->myPrevious = aNewPtr;
@@ -50,17 +44,14 @@ void Poly_CoherentTriPtr::Append
 }
 
 //=======================================================================
-//function : Prepend
-//purpose  : 
+// function : Prepend
+// purpose  :
 //=======================================================================
 
-void Poly_CoherentTriPtr::Prepend
-(const Poly_CoherentTriangle* pTri,
-    const Handle(NCollection_BaseAllocator)& theAlloc)
-{
+void Poly_CoherentTriPtr::Prepend(const Poly_CoherentTriangle* pTri,
+                                  const Handle(NCollection_BaseAllocator) & theAlloc) {
     Handle(NCollection_BaseAllocator) anAlloc = theAlloc;
-    if (theAlloc.IsNull())
-        anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
+    if (theAlloc.IsNull()) anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
     Poly_CoherentTriPtr* aNewPtr = new (anAlloc) Poly_CoherentTriPtr(*pTri);
     aNewPtr->myPrevious = myPrevious;
     myPrevious->myNext = aNewPtr;
@@ -69,17 +60,13 @@ void Poly_CoherentTriPtr::Prepend
 }
 
 //=======================================================================
-//function : Remove
-//purpose  : 
+// function : Remove
+// purpose  :
 //=======================================================================
 
-void Poly_CoherentTriPtr::Remove
-(Poly_CoherentTriPtr* thePtr,
-    const Handle(NCollection_BaseAllocator)& theAlloc)
-{
+void Poly_CoherentTriPtr::Remove(Poly_CoherentTriPtr* thePtr, const Handle(NCollection_BaseAllocator) & theAlloc) {
     Handle(NCollection_BaseAllocator) anAlloc = theAlloc;
-    if (theAlloc.IsNull())
-        anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
+    if (theAlloc.IsNull()) anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
     if (thePtr->myNext && thePtr->myPrevious) {
         thePtr->myPrevious->myNext = thePtr->myNext;
         thePtr->myNext->myPrevious = thePtr->myPrevious;
@@ -90,21 +77,16 @@ void Poly_CoherentTriPtr::Remove
 }
 
 //=======================================================================
-//function : RemoveList
-//purpose  : 
+// function : RemoveList
+// purpose  :
 //=======================================================================
 
-void Poly_CoherentTriPtr::RemoveList
-(Poly_CoherentTriPtr* thePtr,
-    const Handle(NCollection_BaseAllocator)& theAlloc)
-{
+void Poly_CoherentTriPtr::RemoveList(Poly_CoherentTriPtr* thePtr, const Handle(NCollection_BaseAllocator) & theAlloc) {
     Handle(NCollection_BaseAllocator) anAlloc = theAlloc;
-    if (theAlloc.IsNull())
-        anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
+    if (theAlloc.IsNull()) anAlloc = NCollection_BaseAllocator::CommonBaseAllocator();
     Poly_CoherentTriPtr* aPtr = thePtr;
     do {
-        if (aPtr == 0L)
-            break;
+        if (aPtr == 0L) break;
         Poly_CoherentTriPtr* aLostPtr = aPtr;
         aPtr = aPtr->myNext;
         anAlloc->Free(aLostPtr);

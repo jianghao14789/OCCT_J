@@ -21,49 +21,42 @@
 #include <StepShape_Vertex.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_Subedge,StepShape_Edge)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_Subedge, StepShape_Edge)
 
 //=======================================================================
-//function : StepShape_Subedge
-//purpose  : 
+// function : StepShape_Subedge
+// purpose  :
 //=======================================================================
-StepShape_Subedge::StepShape_Subedge ()
-{
+StepShape_Subedge::StepShape_Subedge() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepShape_Subedge::Init(const Handle(TCollection_HAsciiString) & aRepresentationItem_Name,
+                             const Handle(StepShape_Vertex) & aEdge_EdgeStart,
+                             const Handle(StepShape_Vertex) & aEdge_EdgeEnd,
+                             const Handle(StepShape_Edge) & aParentEdge) {
+    StepShape_Edge::Init(aRepresentationItem_Name, aEdge_EdgeStart, aEdge_EdgeEnd);
+
+    theParentEdge = aParentEdge;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : ParentEdge
+// purpose  :
 //=======================================================================
 
-void StepShape_Subedge::Init (const Handle(TCollection_HAsciiString) &aRepresentationItem_Name,
-                              const Handle(StepShape_Vertex) &aEdge_EdgeStart,
-                              const Handle(StepShape_Vertex) &aEdge_EdgeEnd,
-                              const Handle(StepShape_Edge) &aParentEdge)
-{
-  StepShape_Edge::Init(aRepresentationItem_Name,
-                       aEdge_EdgeStart,
-                       aEdge_EdgeEnd);
-
-  theParentEdge = aParentEdge;
+Handle(StepShape_Edge) StepShape_Subedge::ParentEdge() const {
+    return theParentEdge;
 }
 
 //=======================================================================
-//function : ParentEdge
-//purpose  : 
+// function : SetParentEdge
+// purpose  :
 //=======================================================================
 
-Handle(StepShape_Edge) StepShape_Subedge::ParentEdge () const
-{
-  return theParentEdge;
-}
-
-//=======================================================================
-//function : SetParentEdge
-//purpose  : 
-//=======================================================================
-
-void StepShape_Subedge::SetParentEdge (const Handle(StepShape_Edge) &aParentEdge)
-{
-  theParentEdge = aParentEdge;
+void StepShape_Subedge::SetParentEdge(const Handle(StepShape_Edge) & aParentEdge) {
+    theParentEdge = aParentEdge;
 }

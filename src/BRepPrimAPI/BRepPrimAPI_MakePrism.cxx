@@ -25,137 +25,111 @@
 #include <TopoDS_Shape.hxx>
 
 // perform checks on the argument
-static const TopoDS_Shape& check(const TopoDS_Shape& S)
-{
- BRepLib::BuildCurves3d(S);
-   return S;
+static const TopoDS_Shape& check(const TopoDS_Shape& S) {
+    BRepLib::BuildCurves3d(S);
+    return S;
 }
 
 //=======================================================================
-//function : BRepPrimAPI_MakePrism
-//purpose  : 
+// function : BRepPrimAPI_MakePrism
+// purpose  :
 //=======================================================================
 
-BRepPrimAPI_MakePrism::BRepPrimAPI_MakePrism(const TopoDS_Shape& S,
-				     const gp_Vec& V, 
-				     const Standard_Boolean Copy,
-				     const Standard_Boolean Canonize) :
-       myPrism(check(S),V,Copy,Canonize)
-{
-  Build();
-}
-
-
-//=======================================================================
-//function : BRepPrimAPI_MakePrism
-//purpose  : 
-//=======================================================================
-
-BRepPrimAPI_MakePrism::BRepPrimAPI_MakePrism(const TopoDS_Shape& S, 
-				     const gp_Dir& D,
-				     const Standard_Boolean Inf, 
-				     const Standard_Boolean Copy,
-				     const Standard_Boolean Canonize) :
-       myPrism(check(S),D,Inf,Copy,Canonize)
-{
-  Build();
-}
-
-
-//=======================================================================
-//function : Prism
-//purpose  : 
-//=======================================================================
-
-const BRepSweep_Prism&  BRepPrimAPI_MakePrism::Prism()const 
-{
-  return myPrism;
-}
-
-
-//=======================================================================
-//function : Build
-//purpose  : 
-//=======================================================================
-
-void  BRepPrimAPI_MakePrism::Build(const Message_ProgressRange& /*theRange*/)
-{
-  myShape = myPrism.Shape();
-  Done();
+BRepPrimAPI_MakePrism::BRepPrimAPI_MakePrism(const TopoDS_Shape& S, const gp_Vec& V, const Standard_Boolean Copy,
+                                             const Standard_Boolean Canonize)
+    : myPrism(check(S), V, Copy, Canonize) {
+    Build();
 }
 
 //=======================================================================
-//function : FirstShape
-//purpose  : 
+// function : BRepPrimAPI_MakePrism
+// purpose  :
 //=======================================================================
 
-TopoDS_Shape BRepPrimAPI_MakePrism::FirstShape()
-{
-  return myPrism.FirstShape();
+BRepPrimAPI_MakePrism::BRepPrimAPI_MakePrism(const TopoDS_Shape& S, const gp_Dir& D, const Standard_Boolean Inf,
+                                             const Standard_Boolean Copy, const Standard_Boolean Canonize)
+    : myPrism(check(S), D, Inf, Copy, Canonize) {
+    Build();
 }
 
-
 //=======================================================================
-//function : LastShape
-//purpose  : 
+// function : Prism
+// purpose  :
 //=======================================================================
 
-TopoDS_Shape BRepPrimAPI_MakePrism::LastShape()
-{
-  return myPrism.LastShape();
+const BRepSweep_Prism& BRepPrimAPI_MakePrism::Prism() const {
+    return myPrism;
 }
 
-
 //=======================================================================
-//function : Generated
-//purpose  : 
+// function : Build
+// purpose  :
 //=======================================================================
 
-const TopTools_ListOfShape& BRepPrimAPI_MakePrism::Generated (const TopoDS_Shape& S)
-{
-  myGenerated.Clear();
-  if (myPrism.IsUsed(S) && myPrism.GenIsUsed(S))
-  {
-    myGenerated.Append(myPrism.Shape(S));
-  }
-  return myGenerated;
-
+void BRepPrimAPI_MakePrism::Build(const Message_ProgressRange& /*theRange*/) {
+    myShape = myPrism.Shape();
+    Done();
 }
 
+//=======================================================================
+// function : FirstShape
+// purpose  :
+//=======================================================================
+
+TopoDS_Shape BRepPrimAPI_MakePrism::FirstShape() {
+    return myPrism.FirstShape();
+}
+
+//=======================================================================
+// function : LastShape
+// purpose  :
+//=======================================================================
+
+TopoDS_Shape BRepPrimAPI_MakePrism::LastShape() {
+    return myPrism.LastShape();
+}
+
+//=======================================================================
+// function : Generated
+// purpose  :
+//=======================================================================
+
+const TopTools_ListOfShape& BRepPrimAPI_MakePrism::Generated(const TopoDS_Shape& S) {
+    myGenerated.Clear();
+    if (myPrism.IsUsed(S) && myPrism.GenIsUsed(S)) {
+        myGenerated.Append(myPrism.Shape(S));
+    }
+    return myGenerated;
+}
 
 // Modified by skv - Fri Mar  4 15:50:09 2005 Begin
 
 //=======================================================================
-//function : FirstShape
-//purpose  : This method returns the bottom shape of the prism, generated
+// function : FirstShape
+// purpose  : This method returns the bottom shape of the prism, generated
 //           with theShape (subShape of the generating shape)
 //=======================================================================
 
-TopoDS_Shape BRepPrimAPI_MakePrism::FirstShape(const TopoDS_Shape &theShape)
-{
-  return myPrism.FirstShape(theShape);
+TopoDS_Shape BRepPrimAPI_MakePrism::FirstShape(const TopoDS_Shape& theShape) {
+    return myPrism.FirstShape(theShape);
 }
 
-
 //=======================================================================
-//function : LastShape
-//purpose  : This method returns the top shape of the prism, generated
+// function : LastShape
+// purpose  : This method returns the top shape of the prism, generated
 //           with theShape (subShape of the generating shape)
 //=======================================================================
 
-TopoDS_Shape BRepPrimAPI_MakePrism::LastShape(const TopoDS_Shape &theShape)
-{
-  return myPrism.LastShape(theShape);
+TopoDS_Shape BRepPrimAPI_MakePrism::LastShape(const TopoDS_Shape& theShape) {
+    return myPrism.LastShape(theShape);
 }
 
 // Modified by skv - Fri Mar  4 15:50:09 2005 End
 
 //=======================================================================
-//function : IsDeleted
-//purpose  : 
+// function : IsDeleted
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepPrimAPI_MakePrism::IsDeleted(const TopoDS_Shape& S)
-{
-  return !myPrism.IsUsed(S);
+Standard_Boolean BRepPrimAPI_MakePrism::IsDeleted(const TopoDS_Shape& S) {
+    return !myPrism.IsUsed(S);
 }
-

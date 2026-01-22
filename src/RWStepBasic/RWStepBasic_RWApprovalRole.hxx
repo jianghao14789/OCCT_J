@@ -27,42 +27,20 @@ class Interface_Check;
 class StepBasic_ApprovalRole;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for ApprovalRole
-class RWStepBasic_RWApprovalRole 
-{
+class RWStepBasic_RWApprovalRole {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWApprovalRole();
 
-  
-  Standard_EXPORT RWStepBasic_RWApprovalRole();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ApprovalRole)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ApprovalRole)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_ApprovalRole) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_ApprovalRole) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWApprovalRole_HeaderFile

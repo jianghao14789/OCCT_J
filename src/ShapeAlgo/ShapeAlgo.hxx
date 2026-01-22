@@ -24,48 +24,24 @@ class ShapeAlgo_AlgoContainer;
 class ShapeAlgo_ToolContainer;
 class ShapeAlgo_AlgoContainer;
 
-
-
-class ShapeAlgo 
-{
+class ShapeAlgo {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Provides initerface to the algorithms from Shape Healing.
+    //! Creates and initializes default AlgoContainer.
+    Standard_EXPORT static void Init();
 
-  
-  //! Provides initerface to the algorithms from Shape Healing.
-  //! Creates and initializes default AlgoContainer.
-  Standard_EXPORT static void Init();
-  
-  //! Sets default AlgoContainer
-  Standard_EXPORT static void SetAlgoContainer (const Handle(ShapeAlgo_AlgoContainer)& aContainer);
-  
-  //! Returns default AlgoContainer
-  Standard_EXPORT static Handle(ShapeAlgo_AlgoContainer) AlgoContainer();
+    //! Sets default AlgoContainer
+    Standard_EXPORT static void SetAlgoContainer(const Handle(ShapeAlgo_AlgoContainer) & aContainer);
 
-
-
+    //! Returns default AlgoContainer
+    Standard_EXPORT static Handle(ShapeAlgo_AlgoContainer) AlgoContainer();
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class ShapeAlgo_ToolContainer;
-friend class ShapeAlgo_AlgoContainer;
-
+    friend class ShapeAlgo_ToolContainer;
+    friend class ShapeAlgo_AlgoContainer;
 };
-
-
-
-
-
-
 
 #endif // _ShapeAlgo_HeaderFile

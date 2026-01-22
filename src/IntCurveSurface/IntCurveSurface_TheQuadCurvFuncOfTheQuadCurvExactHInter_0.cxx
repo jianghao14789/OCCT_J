@@ -19,7 +19,6 @@
 #include <Adaptor3d_Curve.hxx>
 #include <IntSurf_Quadric.hxx>
 #include <IntCurveSurface_TheHCurveTool.hxx>
- 
 
 #define TheQuadric IntSurf_Quadric
 #define TheQuadric_hxx <IntSurf_Quadric.hxx>
@@ -30,4 +29,3 @@
 #define IntCurveSurface_QuadricCurveFunc IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter
 #define IntCurveSurface_QuadricCurveFunc_hxx <IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter.hxx>
 #include <IntCurveSurface_QuadricCurveFunc.gxx>
-

@@ -25,45 +25,21 @@ class XSDRAWSTLVRML_DataSource;
 class XSDRAWSTLVRML_DataSource3D;
 class XSDRAWSTLVRML_DrawableMesh;
 
-
-
-class XSDRAWSTLVRML 
-{
+class XSDRAWSTLVRML {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Inits commands for writing to STL and VRML formats
+    Standard_EXPORT static void InitCommands(Draw_Interpretor& theCommands);
 
-  
-  //! Inits commands for writing to STL and VRML formats
-  Standard_EXPORT static void InitCommands (Draw_Interpretor& theCommands);
-  
-  //! Loads all Draw commands of TKXSDRAW. Used for plugin.
-  Standard_EXPORT static void Factory (Draw_Interpretor& theDI);
-
-
-
+    //! Loads all Draw commands of TKXSDRAW. Used for plugin.
+    Standard_EXPORT static void Factory(Draw_Interpretor& theDI);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class XSDRAWSTLVRML_DataSource;
-friend class XSDRAWSTLVRML_DataSource3D;
-friend class XSDRAWSTLVRML_DrawableMesh;
-
+    friend class XSDRAWSTLVRML_DataSource;
+    friend class XSDRAWSTLVRML_DataSource3D;
+    friend class XSDRAWSTLVRML_DrawableMesh;
 };
-
-
-
-
-
-
 
 #endif // _XSDRAWSTLVRML_HeaderFile

@@ -28,7 +28,6 @@
 #include <Standard_CString.hxx>
 class MoniTool_AttrList;
 
-
 class MoniTool_Element;
 DEFINE_STANDARD_HANDLE(MoniTool_Element, Standard_Transient)
 
@@ -37,66 +36,46 @@ DEFINE_STANDARD_HANDLE(MoniTool_Element, Standard_Transient)
 //! not of the Element which acts only as an intermediate.
 //! When a Map asks for the HashCode of a Element, this one returns
 //! the code it has determined at creation time
-class MoniTool_Element : public Standard_Transient
-{
+class MoniTool_Element : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT MoniTool_Element();
 
-  
-  //! Empty constructor
-  Standard_EXPORT MoniTool_Element();
-  
-  //! Returns the HashCode which has been stored by SetHashCode
-  //! (remark that HashCode could be deferred then be defined by
-  //! sub-classes, the result is the same)
-  Standard_EXPORT Standard_Integer GetHashCode() const;
-  
-  //! Specific testof equality : to be defined by each sub-class,
-  //! must be False if Elements have not the same true Type, else
-  //! their contents must be compared
-  Standard_EXPORT virtual Standard_Boolean Equates (const Handle(MoniTool_Element)& other) const = 0;
-  
-  //! Returns the Type of the Value. By default, returns the
-  //! DynamicType of <me>, but can be redefined
-  Standard_EXPORT virtual Handle(Standard_Type) ValueType() const;
-  
-  //! Returns the name of the Type of the Value. Default is name
-  //! of ValueType, unless it is for a non-handled object
-  Standard_EXPORT virtual Standard_CString ValueTypeName() const;
-  
-  //! Returns (readonly) the Attribute List
-  Standard_EXPORT const MoniTool_AttrList& ListAttr() const;
-  
-  //! Returns (modifiable) the Attribute List
-  Standard_EXPORT MoniTool_AttrList& ChangeAttr();
+    //! Returns the HashCode which has been stored by SetHashCode
+    //! (remark that HashCode could be deferred then be defined by
+    //! sub-classes, the result is the same)
+    Standard_EXPORT Standard_Integer GetHashCode() const;
 
+    //! Specific testof equality : to be defined by each sub-class,
+    //! must be False if Elements have not the same true Type, else
+    //! their contents must be compared
+    Standard_EXPORT virtual Standard_Boolean Equates(const Handle(MoniTool_Element) & other) const = 0;
 
+    //! Returns the Type of the Value. By default, returns the
+    //! DynamicType of <me>, but can be redefined
+    Standard_EXPORT virtual Handle(Standard_Type) ValueType() const;
 
+    //! Returns the name of the Type of the Value. Default is name
+    //! of ValueType, unless it is for a non-handled object
+    Standard_EXPORT virtual Standard_CString ValueTypeName() const;
 
-  DEFINE_STANDARD_RTTIEXT(MoniTool_Element,Standard_Transient)
+    //! Returns (readonly) the Attribute List
+    Standard_EXPORT const MoniTool_AttrList& ListAttr() const;
+
+    //! Returns (modifiable) the Attribute List
+    Standard_EXPORT MoniTool_AttrList& ChangeAttr();
+
+    DEFINE_STANDARD_RTTIEXT(MoniTool_Element, Standard_Transient)
 
 protected:
-
-  
-  //! Stores the HashCode which corresponds to the Value given to
-  //! create the Mapper
-  Standard_EXPORT void SetHashCode (const Standard_Integer code);
-
-
+    //! Stores the HashCode which corresponds to the Value given to
+    //! create the Mapper
+    Standard_EXPORT void SetHashCode(const Standard_Integer code);
 
 private:
-
-
-  Standard_Integer thecode;
-  MoniTool_AttrList theattrib;
-
-
+    Standard_Integer thecode;
+    MoniTool_AttrList theattrib;
 };
-
-
-
-
-
-
 
 #endif // _MoniTool_Element_HeaderFile

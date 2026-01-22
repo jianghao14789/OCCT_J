@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(Geom_HSequenceOfBSplineSurface, Geom_SequenceOfBSplineSurface)
 
-
 #endif

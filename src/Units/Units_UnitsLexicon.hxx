@@ -27,7 +27,6 @@
 class TCollection_HAsciiString;
 class TCollection_AsciiString;
 
-
 class Units_UnitsLexicon;
 DEFINE_STANDARD_HANDLE(Units_UnitsLexicon, Units_Lexicon)
 
@@ -35,11 +34,9 @@ DEFINE_STANDARD_HANDLE(Units_UnitsLexicon, Units_Lexicon)
 //! recognize the different key  words  included  in a
 //! sentence. The  lexicon is stored  in a sequence of
 //! tokens.
-class Units_UnitsLexicon : public Units_Lexicon
-{
+class Units_UnitsLexicon : public Units_Lexicon {
 
 public:
-
     //! Returns an empty instance of UnitsLexicon
     Standard_EXPORT Units_UnitsLexicon();
 
@@ -51,25 +48,12 @@ public:
     //! Useful for debugging.
     virtual void Dump() const Standard_OVERRIDE;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Units_UnitsLexicon, Units_Lexicon)
 
 protected:
-
-
-
 private:
-
-
 };
 
-
 #include <Units_UnitsLexicon.lxx>
-
-
-
-
 
 #endif // _Units_UnitsLexicon_HeaderFile

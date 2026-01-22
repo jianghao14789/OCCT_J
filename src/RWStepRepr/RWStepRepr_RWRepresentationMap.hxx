@@ -28,44 +28,22 @@ class StepRepr_RepresentationMap;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for RepresentationMap
-class RWStepRepr_RWRepresentationMap 
-{
+class RWStepRepr_RWRepresentationMap {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepRepr_RWRepresentationMap();
 
-  
-  Standard_EXPORT RWStepRepr_RWRepresentationMap();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_RepresentationMap)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_RepresentationMap)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepRepr_RepresentationMap)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_RepresentationMap) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_RepresentationMap) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepRepr_RepresentationMap) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWRepresentationMap_HeaderFile

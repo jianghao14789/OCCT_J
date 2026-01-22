@@ -20,9 +20,8 @@ IMPLEMENT_STANDARD_RTTIEXT(OSD_CachedFileSystem, OSD_FileSystem)
 // function : OSD_CachedFileSystem
 // purpose :
 //=======================================================================
-OSD_CachedFileSystem::OSD_CachedFileSystem(const Handle(OSD_FileSystem)& theLinkedFileSystem)
-    : myLinkedFS(!theLinkedFileSystem.IsNull() ? theLinkedFileSystem : OSD_FileSystem::DefaultFileSystem())
-{
+OSD_CachedFileSystem::OSD_CachedFileSystem(const Handle(OSD_FileSystem) & theLinkedFileSystem)
+    : myLinkedFS(!theLinkedFileSystem.IsNull() ? theLinkedFileSystem : OSD_FileSystem::DefaultFileSystem()) {
     //
 }
 
@@ -30,8 +29,7 @@ OSD_CachedFileSystem::OSD_CachedFileSystem(const Handle(OSD_FileSystem)& theLink
 // function : IsSupportedPath
 // purpose :
 //=======================================================================
-Standard_Boolean OSD_CachedFileSystem::IsSupportedPath(const TCollection_AsciiString& theUrl) const
-{
+Standard_Boolean OSD_CachedFileSystem::IsSupportedPath(const TCollection_AsciiString& theUrl) const {
     return myLinkedFS->IsSupportedPath(theUrl);
 }
 
@@ -39,8 +37,8 @@ Standard_Boolean OSD_CachedFileSystem::IsSupportedPath(const TCollection_AsciiSt
 // function : IsOpenIStream
 // purpose :
 //=======================================================================
-Standard_Boolean OSD_CachedFileSystem::IsOpenIStream(const opencascade::std::shared_ptr<std::istream>& theStream) const
-{
+Standard_Boolean
+OSD_CachedFileSystem::IsOpenIStream(const opencascade::std::shared_ptr<std::istream>& theStream) const {
     return myLinkedFS->IsOpenIStream(theStream);
 }
 
@@ -48,8 +46,8 @@ Standard_Boolean OSD_CachedFileSystem::IsOpenIStream(const opencascade::std::sha
 // function : IsOpenOStream
 // purpose :
 //=======================================================================
-Standard_Boolean OSD_CachedFileSystem::IsOpenOStream(const opencascade::std::shared_ptr<std::ostream>& theStream) const
-{
+Standard_Boolean
+OSD_CachedFileSystem::IsOpenOStream(const opencascade::std::shared_ptr<std::ostream>& theStream) const {
     return myLinkedFS->IsOpenOStream(theStream);
 }
 
@@ -57,13 +55,11 @@ Standard_Boolean OSD_CachedFileSystem::IsOpenOStream(const opencascade::std::sha
 // function : OpenIStream
 // purpose :
 //=======================================================================
-opencascade::std::shared_ptr<std::istream> OSD_CachedFileSystem::OpenIStream(const TCollection_AsciiString& theUrl,
-    const std::ios_base::openmode theParams,
-    const int64_t theOffset,
-    const opencascade::std::shared_ptr<std::istream>& /*theOldStream*/)
-{
-    if (myStream.Url != theUrl)
-    {
+opencascade::std::shared_ptr<std::istream>
+OSD_CachedFileSystem::OpenIStream(const TCollection_AsciiString& theUrl, const std::ios_base::openmode theParams,
+                                  const int64_t theOffset,
+                                  const opencascade::std::shared_ptr<std::istream>& /*theOldStream*/) {
+    if (myStream.Url != theUrl) {
         myStream.Url = theUrl;
         myStream.Reset();
     }
@@ -76,8 +72,7 @@ opencascade::std::shared_ptr<std::istream> OSD_CachedFileSystem::OpenIStream(con
 // purpose :
 //=======================================================================
 opencascade::std::shared_ptr<std::ostream> OSD_CachedFileSystem::OpenOStream(const TCollection_AsciiString& theUrl,
-    const std::ios_base::openmode theMode)
-{
+                                                                             const std::ios_base::openmode theMode) {
     return myLinkedFS->OpenOStream(theUrl, theMode);
 }
 
@@ -85,17 +80,13 @@ opencascade::std::shared_ptr<std::ostream> OSD_CachedFileSystem::OpenOStream(con
 // function : OpenStreamBuffer
 // purpose :
 //=======================================================================
-opencascade::std::shared_ptr<std::streambuf> OSD_CachedFileSystem::OpenStreamBuffer(const TCollection_AsciiString& theUrl,
-    const std::ios_base::openmode theMode,
-    const int64_t theOffset,
-    int64_t* theOutBufSize)
-{
-    if ((theMode & std::ios::out) == std::ios::out)
-    {
+opencascade::std::shared_ptr<std::streambuf>
+OSD_CachedFileSystem::OpenStreamBuffer(const TCollection_AsciiString& theUrl, const std::ios_base::openmode theMode,
+                                       const int64_t theOffset, int64_t* theOutBufSize) {
+    if ((theMode & std::ios::out) == std::ios::out) {
         return myLinkedFS->OpenStreamBuffer(theUrl, theMode, theOffset, theOutBufSize);
     }
-    if (myStream.Url != theUrl)
-    {
+    if (myStream.Url != theUrl) {
         myStream.Url = theUrl;
         myStream.Reset();
     }

@@ -25,7 +25,6 @@
 #include <Standard_Integer.hxx>
 class TCollection_HAsciiString;
 
-
 class IGESAppli_FlowLineSpec;
 DEFINE_STANDARD_HANDLE(IGESAppli_FlowLineSpec, IGESData_IGESEntity)
 
@@ -33,51 +32,31 @@ DEFINE_STANDARD_HANDLE(IGESAppli_FlowLineSpec, IGESData_IGESEntity)
 //! in package IGESAppli
 //! Attaches one or more text strings to entities being
 //! used to represent a flow line
-class IGESAppli_FlowLineSpec : public IGESData_IGESEntity
-{
+class IGESAppli_FlowLineSpec : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESAppli_FlowLineSpec();
 
-  
-  Standard_EXPORT IGESAppli_FlowLineSpec();
-  
-  //! This method is used to set the fields of the class
-  //! FlowLineSpec
-  //! - allProperties : primary flow line specification and modifiers
-  Standard_EXPORT void Init (const Handle(Interface_HArray1OfHAsciiString)& allProperties);
-  
-  //! returns the number of property values
-  Standard_EXPORT Standard_Integer NbPropertyValues() const;
-  
-  //! returns primary flow line specification name
-  Standard_EXPORT Handle(TCollection_HAsciiString) FlowLineName() const;
-  
-  //! returns specified modifier element
-  //! raises exception if Index <= 1 or Index > NbPropertyValues
-  Standard_EXPORT Handle(TCollection_HAsciiString) Modifier (const Standard_Integer Index) const;
+    //! This method is used to set the fields of the class
+    //! FlowLineSpec
+    //! - allProperties : primary flow line specification and modifiers
+    Standard_EXPORT void Init(const Handle(Interface_HArray1OfHAsciiString) & allProperties);
 
+    //! returns the number of property values
+    Standard_EXPORT Standard_Integer NbPropertyValues() const;
 
+    //! returns primary flow line specification name
+    Standard_EXPORT Handle(TCollection_HAsciiString) FlowLineName() const;
 
+    //! returns specified modifier element
+    //! raises exception if Index <= 1 or Index > NbPropertyValues
+    Standard_EXPORT Handle(TCollection_HAsciiString) Modifier(const Standard_Integer Index) const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESAppli_FlowLineSpec,IGESData_IGESEntity)
+    DEFINE_STANDARD_RTTIEXT(IGESAppli_FlowLineSpec, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(Interface_HArray1OfHAsciiString) theNameAndModifiers;
-
-
+    Handle(Interface_HArray1OfHAsciiString) theNameAndModifiers;
 };
-
-
-
-
-
-
 
 #endif // _IGESAppli_FlowLineSpec_HeaderFile

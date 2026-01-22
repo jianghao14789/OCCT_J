@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepAP214_HArray1OfApprovalItem, StepAP214_Array1OfApprovalItem)
 
-
 #endif

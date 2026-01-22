@@ -21,7 +21,6 @@
 #include <TColStd_MapRealHasher.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 
-typedef NCollection_IndexedDataMap<Standard_Real,gp_Pnt,TColStd_MapRealHasher> QANCollection_IndexedDataMapOfRealPnt;
-
+typedef NCollection_IndexedDataMap<Standard_Real, gp_Pnt, TColStd_MapRealHasher> QANCollection_IndexedDataMapOfRealPnt;
 
 #endif

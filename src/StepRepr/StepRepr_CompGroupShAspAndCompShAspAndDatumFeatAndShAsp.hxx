@@ -24,13 +24,12 @@
 class StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp;
 DEFINE_STANDARD_HANDLE(StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp, StepRepr_CompShAspAndDatumFeatAndShAsp)
 //! Added for Dimensional Tolerances
-class StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp : public StepRepr_CompShAspAndDatumFeatAndShAsp
-{
+class StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp : public StepRepr_CompShAspAndDatumFeatAndShAsp {
 
 public:
-  
-  Standard_EXPORT StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp();
-  
-  DEFINE_STANDARD_RTTIEXT(StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp,StepRepr_CompShAspAndDatumFeatAndShAsp)
+    Standard_EXPORT StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp();
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp,
+                            StepRepr_CompShAspAndDatumFeatAndShAsp)
 };
 #endif // _StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp_HeaderFile

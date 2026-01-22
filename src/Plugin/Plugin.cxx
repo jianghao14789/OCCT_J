@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <OSD_SharedLibrary.hxx>
 #include <Plugin.hxx>
 #include <Plugin_Failure.hxx>
@@ -29,14 +28,11 @@
 static Standard_Character tc[1000];
 static Standard_PCharacter thePluginId = tc;
 
-
 //=======================================================================
-//function : Load
-//purpose  : 
+// function : Load
+// purpose  :
 //=======================================================================
-Handle(Standard_Transient) Plugin::Load(const Standard_GUID& aGUID,
-    const Standard_Boolean theVerbose)
-{
+Handle(Standard_Transient) Plugin::Load(const Standard_GUID& aGUID, const Standard_Boolean theVerbose) {
 
     aGUID.ToCString(thePluginId);
     TCollection_AsciiString pid(thePluginId);
@@ -50,10 +46,10 @@ Handle(Standard_Transient) Plugin::Load(const Standard_GUID& aGUID,
         theResource += ".Location";
 
         if (!PluginResource->Find(theResource.ToCString())) {
-            Standard_SStream aMsg; aMsg << "could not find the resource:";
+            Standard_SStream aMsg;
+            aMsg << "could not find the resource:";
             aMsg << theResource.ToCString() << std::endl;
-            if (theVerbose)
-                std::cout << "could not find the resource:" << theResource.ToCString() << std::endl;
+            if (theVerbose) std::cout << "could not find the resource:" << theResource.ToCString() << std::endl;
             throw Plugin_Failure(aMsg.str().c_str());
         }
 
@@ -66,38 +62,39 @@ Handle(Standard_Transient) Plugin::Load(const Standard_GUID& aGUID,
         thePluginLibrary += ".dll";
 #elif defined(__APPLE__)
         thePluginLibrary += ".dylib";
-#elif defined (HPUX) || defined(_hpux)
+#elif defined(HPUX) || defined(_hpux)
         thePluginLibrary += ".sl";
 #else
         thePluginLibrary += ".so";
-#endif  
+#endif
         OSD_SharedLibrary theSharedLibrary(thePluginLibrary.ToCString());
         if (!theSharedLibrary.DlOpen(OSD_RTLD_LAZY)) {
             TCollection_AsciiString error(theSharedLibrary.DlError());
-            Standard_SStream aMsg; aMsg << "could not open:";
+            Standard_SStream aMsg;
+            aMsg << "could not open:";
             aMsg << PluginResource->Value(theResource.ToCString());
             aMsg << "; reason:";
             aMsg << error.ToCString();
             if (theVerbose)
-                std::cout << "could not open: " << PluginResource->Value(theResource.ToCString()) << " ; reason: " << error.ToCString() << std::endl;
+                std::cout << "could not open: " << PluginResource->Value(theResource.ToCString())
+                          << " ; reason: " << error.ToCString() << std::endl;
             throw Plugin_Failure(aMsg.str().c_str());
         }
         f = theSharedLibrary.DlSymb("PLUGINFACTORY");
         if (f == NULL) {
             TCollection_AsciiString error(theSharedLibrary.DlError());
-            Standard_SStream aMsg; aMsg << "could not find the factory in:";
+            Standard_SStream aMsg;
+            aMsg << "could not find the factory in:";
             aMsg << PluginResource->Value(theResource.ToCString());
             aMsg << error.ToCString();
             throw Plugin_Failure(aMsg.str().c_str());
         }
         theMapOfFunctions.Bind(pid, f);
-    }
-    else
+    } else
         f = theMapOfFunctions(pid);
 
-    Standard_Transient* (*fp) (const Standard_GUID&) = NULL;
+    Standard_Transient* (*fp)(const Standard_GUID&) = NULL;
     fp = (Standard_Transient * (*)(const Standard_GUID&)) f;
-    Handle(Standard_Transient) theServiceFactory = (*fp) (aGUID);
+    Handle(Standard_Transient) theServiceFactory = (*fp)(aGUID);
     return theServiceFactory;
-
 }

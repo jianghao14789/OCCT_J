@@ -17,11 +17,10 @@
 #define _XCAFDimTolObjects_ToleranceZoneAffectedPlane_HeaderFile
 
 //! Defines types of tolerance zone affected plane
-enum XCAFDimTolObjects_ToleranceZoneAffectedPlane
-{
-  XCAFDimTolObjects_ToleranceZoneAffectedPlane_None,
-  XCAFDimTolObjects_ToleranceZoneAffectedPlane_Intersection,
-  XCAFDimTolObjects_ToleranceZoneAffectedPlane_Orientation
+enum XCAFDimTolObjects_ToleranceZoneAffectedPlane {
+    XCAFDimTolObjects_ToleranceZoneAffectedPlane_None,
+    XCAFDimTolObjects_ToleranceZoneAffectedPlane_Intersection,
+    XCAFDimTolObjects_ToleranceZoneAffectedPlane_Orientation
 };
 
 #endif // _XCAFDimTolObjects_ToleranceZoneAffectedPlane_HeaderFile

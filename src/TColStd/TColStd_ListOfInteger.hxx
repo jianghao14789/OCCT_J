@@ -21,5 +21,4 @@
 typedef NCollection_List<Standard_Integer> TColStd_ListOfInteger;
 typedef NCollection_List<Standard_Integer>::Iterator TColStd_ListIteratorOfListOfInteger;
 
-
 #endif

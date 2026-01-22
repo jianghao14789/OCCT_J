@@ -19,12 +19,12 @@
 
 typedef
 #ifdef SOLARIS
-sigjmp_buf
+    sigjmp_buf
 #elif defined(IRIX)
-sigjmp_buf
+    sigjmp_buf
 #else
-jmp_buf
+    jmp_buf
 #endif
-Standard_JmpBuf;
+        Standard_JmpBuf;
 
 #endif

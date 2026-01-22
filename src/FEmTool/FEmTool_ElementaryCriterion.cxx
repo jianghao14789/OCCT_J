@@ -14,29 +14,21 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <FEmTool_ElementaryCriterion.hxx>
 #include <math_Matrix.hxx>
 #include <Standard_DomainError.hxx>
 #include <Standard_NotImplemented.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(FEmTool_ElementaryCriterion,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(FEmTool_ElementaryCriterion, Standard_Transient)
 
-FEmTool_ElementaryCriterion::FEmTool_ElementaryCriterion()
-: myFirst(0.0),
-  myLast(0.0)
-{
+FEmTool_ElementaryCriterion::FEmTool_ElementaryCriterion() : myFirst(0.0), myLast(0.0) {}
+
+void FEmTool_ElementaryCriterion::Set(const Handle(TColStd_HArray2OfReal) & Coeff) {
+    myCoeff = Coeff;
 }
 
-void FEmTool_ElementaryCriterion::Set(const Handle(TColStd_HArray2OfReal)& Coeff)
-{
-  myCoeff = Coeff;
+void FEmTool_ElementaryCriterion::Set(const Standard_Real FirstKnot, const Standard_Real LastKnot) {
+    myFirst = FirstKnot;
+    myLast = LastKnot;
 }
-
-void FEmTool_ElementaryCriterion::Set(const Standard_Real FirstKnot, const Standard_Real LastKnot) 
-{
-  myFirst = FirstKnot; myLast = LastKnot;
-}
-
-

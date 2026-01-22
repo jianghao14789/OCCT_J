@@ -13,108 +13,88 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <gp_Pnt.hxx>
 #include <IntTools_PntOnFace.hxx>
 #include <TopoDS_Face.hxx>
 
 //=======================================================================
-//function : IntTools_PntOnFace::IntTools_PntOnFace
-//purpose  : 
+// function : IntTools_PntOnFace::IntTools_PntOnFace
+// purpose  :
 //=======================================================================
-IntTools_PntOnFace::IntTools_PntOnFace()
-:
-  myIsValid(Standard_False),
-  myU(99.),
-  myV(99.)
-{}
+IntTools_PntOnFace::IntTools_PntOnFace() : myIsValid(Standard_False), myU(99.), myV(99.) {}
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
-  void IntTools_PntOnFace::Init(const TopoDS_Face& aF,
-				const gp_Pnt& aP,
-				const Standard_Real anU,
-				const Standard_Real aV)
-{
-  myFace=aF;
-  myPnt=aP;
-  myU=anU;
-  myV=aV;
+void IntTools_PntOnFace::Init(const TopoDS_Face& aF, const gp_Pnt& aP, const Standard_Real anU,
+                              const Standard_Real aV) {
+    myFace = aF;
+    myPnt = aP;
+    myU = anU;
+    myV = aV;
 }
 //=======================================================================
-//function : SetFace
-//purpose  : 
+// function : SetFace
+// purpose  :
 //=======================================================================
-  void IntTools_PntOnFace::SetFace(const TopoDS_Face& aF)
-{
-  myFace=aF;
+void IntTools_PntOnFace::SetFace(const TopoDS_Face& aF) {
+    myFace = aF;
 }
 
 //=======================================================================
-//function : SetPnt
-//purpose  : 
+// function : SetPnt
+// purpose  :
 //=======================================================================
-  void IntTools_PntOnFace::SetPnt(const gp_Pnt& aP)
-{
-  myPnt=aP;
+void IntTools_PntOnFace::SetPnt(const gp_Pnt& aP) {
+    myPnt = aP;
 }
 //=======================================================================
-//function : SetParameters
-//purpose  : 
+// function : SetParameters
+// purpose  :
 //=======================================================================
-  void IntTools_PntOnFace::SetParameters(const Standard_Real anU,
-					 const Standard_Real aV)
-{
-  myU=anU;
-  myV=aV;
+void IntTools_PntOnFace::SetParameters(const Standard_Real anU, const Standard_Real aV) {
+    myU = anU;
+    myV = aV;
 }
 //=======================================================================
-//function : SetValid
-//purpose  : 
+// function : SetValid
+// purpose  :
 //=======================================================================
-  void IntTools_PntOnFace::SetValid(const Standard_Boolean bF)
-{
-  myIsValid=bF;
+void IntTools_PntOnFace::SetValid(const Standard_Boolean bF) {
+    myIsValid = bF;
 }
 
 //=======================================================================
-//function : Face
-//purpose  : 
+// function : Face
+// purpose  :
 //=======================================================================
-  const TopoDS_Face& IntTools_PntOnFace::Face()const
-{
-  return myFace;
+const TopoDS_Face& IntTools_PntOnFace::Face() const {
+    return myFace;
 }
 //=======================================================================
-//function : Pnt
-//purpose  : 
+// function : Pnt
+// purpose  :
 //=======================================================================
-  const gp_Pnt& IntTools_PntOnFace::Pnt()const
-{
-  return myPnt;
+const gp_Pnt& IntTools_PntOnFace::Pnt() const {
+    return myPnt;
 }
 //=======================================================================
-//function : Parameters
-//purpose  : 
+// function : Parameters
+// purpose  :
 //=======================================================================
-  void IntTools_PntOnFace::Parameters(Standard_Real& anU,
-				      Standard_Real& aV)const
-{
-  anU=myU;
-  aV=myV;
+void IntTools_PntOnFace::Parameters(Standard_Real& anU, Standard_Real& aV) const {
+    anU = myU;
+    aV = myV;
 }
 //=======================================================================
-//function : Valid
-//purpose  : 
+// function : Valid
+// purpose  :
 //=======================================================================
-  Standard_Boolean IntTools_PntOnFace::Valid()const
-{
-  return myIsValid;
+Standard_Boolean IntTools_PntOnFace::Valid() const {
+    return myIsValid;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-

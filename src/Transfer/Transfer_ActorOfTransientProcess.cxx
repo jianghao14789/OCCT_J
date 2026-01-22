@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Transient.hxx>
 #include <Standard_Type.hxx>
 #include <Transfer_ActorOfTransientProcess.hxx>
@@ -20,33 +19,27 @@
 #include <Transfer_SimpleBinderOfTransient.hxx>
 #include <Transfer_TransientProcess.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Transfer_ActorOfTransientProcess,Transfer_ActorOfProcessForTransient)
+IMPLEMENT_STANDARD_RTTIEXT(Transfer_ActorOfTransientProcess, Transfer_ActorOfProcessForTransient)
 
-Transfer_ActorOfTransientProcess::Transfer_ActorOfTransientProcess ()    {  }
+Transfer_ActorOfTransientProcess::Transfer_ActorOfTransientProcess() {}
 
-Handle(Transfer_Binder)  Transfer_ActorOfTransientProcess::Transfer
-  (const Handle(Standard_Transient)& start,
-   const Handle(Transfer_TransientProcess)& TP,
-   const Message_ProgressRange& theProgress)
-{
-  Handle(Standard_Transient) res = TransferTransient (start,TP, theProgress);
-  if (res.IsNull()) return NullResult();
-  return TransientResult (res);
+Handle(Transfer_Binder) Transfer_ActorOfTransientProcess::Transfer(const Handle(Standard_Transient) & start,
+                                                                   const Handle(Transfer_TransientProcess) & TP,
+                                                                   const Message_ProgressRange& theProgress) {
+    Handle(Standard_Transient) res = TransferTransient(start, TP, theProgress);
+    if (res.IsNull()) return NullResult();
+    return TransientResult(res);
 }
 
-Handle(Transfer_Binder)  Transfer_ActorOfTransientProcess::Transferring
-  (const Handle(Standard_Transient)& ent,
-   const Handle(Transfer_ProcessForTransient)& TP,
-   const Message_ProgressRange& theProgress)
-{
-  return Transfer(ent,Handle(Transfer_TransientProcess)::DownCast(TP), theProgress);
+Handle(Transfer_Binder) Transfer_ActorOfTransientProcess::Transferring(const Handle(Standard_Transient) & ent,
+                                                                       const Handle(Transfer_ProcessForTransient) & TP,
+                                                                       const Message_ProgressRange& theProgress) {
+    return Transfer(ent, Handle(Transfer_TransientProcess)::DownCast(TP), theProgress);
 }
 
-Handle(Standard_Transient)  Transfer_ActorOfTransientProcess::TransferTransient
-  (const Handle(Standard_Transient)& /*ent*/,
-   const Handle(Transfer_TransientProcess)& /*TP*/,
-   const Message_ProgressRange& )
-{
-  Handle(Standard_Transient) nulres;
-  return nulres;
+Handle(Standard_Transient) Transfer_ActorOfTransientProcess::TransferTransient(
+    const Handle(Standard_Transient) & /*ent*/, const Handle(Transfer_TransientProcess) & /*TP*/,
+    const Message_ProgressRange&) {
+    Handle(Standard_Transient) nulres;
+    return nulres;
 }

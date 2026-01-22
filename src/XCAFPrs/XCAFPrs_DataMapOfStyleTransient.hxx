@@ -21,8 +21,8 @@
 #include <XCAFPrs_Style.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<XCAFPrs_Style,Handle(Standard_Transient),XCAFPrs_Style> XCAFPrs_DataMapOfStyleTransient;
-typedef NCollection_DataMap<XCAFPrs_Style,Handle(Standard_Transient),XCAFPrs_Style>::Iterator XCAFPrs_DataMapIteratorOfDataMapOfStyleTransient;
-
+typedef NCollection_DataMap<XCAFPrs_Style, Handle(Standard_Transient), XCAFPrs_Style> XCAFPrs_DataMapOfStyleTransient;
+typedef NCollection_DataMap<XCAFPrs_Style, Handle(Standard_Transient), XCAFPrs_Style>::Iterator
+    XCAFPrs_DataMapIteratorOfDataMapOfStyleTransient;
 
 #endif

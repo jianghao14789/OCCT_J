@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArcCosine.hxx>
 #include <Expr_Cosine.hxx>
@@ -32,13 +31,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Cosine, Expr_UnaryExpression)
 
-Expr_Cosine::Expr_Cosine(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_Cosine::Expr_Cosine(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_Cosine::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Cosine::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) myexp = Operand();
     if (myexp->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) myNVexp = Handle(Expr_NumericValue)::DownCast(myexp);
@@ -51,13 +48,11 @@ Handle(Expr_GeneralExpression) Expr_Cosine::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_Cosine::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Cosine::Copy() const {
     return new Expr_Cosine(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_Cosine::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Cosine::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (Other->IsKind(STANDARD_TYPE(Expr_Cosine))) {
         Handle(Expr_GeneralExpression) myexp = Operand();
         return myexp->IsIdentical(Other->SubExpression(1));
@@ -65,13 +60,11 @@ Standard_Boolean Expr_Cosine::IsIdentical(const Handle(Expr_GeneralExpression)& 
     return Standard_False;
 }
 
-Standard_Boolean Expr_Cosine::IsLinear() const
-{
+Standard_Boolean Expr_Cosine::IsLinear() const {
     return !ContainsUnknowns();
 }
 
-Handle(Expr_GeneralExpression) Expr_Cosine::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Cosine::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -83,13 +76,11 @@ Handle(Expr_GeneralExpression) Expr_Cosine::Derivative(const Handle(Expr_NamedUn
     return resu->ShallowSimplified();
 }
 
-Standard_Real Expr_Cosine::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Cosine::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     return ::Cos(Operand()->Evaluate(vars, vals));
 }
 
-TCollection_AsciiString Expr_Cosine::String() const
-{
+TCollection_AsciiString Expr_Cosine::String() const {
     TCollection_AsciiString str("Cos(");
     str += Operand()->String();
     str += ")";

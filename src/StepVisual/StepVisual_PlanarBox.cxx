@@ -11,35 +11,27 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepGeom_Axis2Placement.hxx>
 #include <StepVisual_PlanarBox.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_PlanarBox,StepVisual_PlanarExtent)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_PlanarBox, StepVisual_PlanarExtent)
 
-StepVisual_PlanarBox::StepVisual_PlanarBox ()  {}
+StepVisual_PlanarBox::StepVisual_PlanarBox() {}
 
-void StepVisual_PlanarBox::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Standard_Real aSizeInX,
-	const Standard_Real aSizeInY,
-	const StepGeom_Axis2Placement& aPlacement)
-{
-	// --- classe own fields ---
-	placement = aPlacement;
-	// --- classe inherited fields ---
-	StepVisual_PlanarExtent::Init(aName, aSizeInX, aSizeInY);
+void StepVisual_PlanarBox::Init(const Handle(TCollection_HAsciiString) & aName, const Standard_Real aSizeInX,
+                                const Standard_Real aSizeInY, const StepGeom_Axis2Placement& aPlacement) {
+    // --- classe own fields ---
+    placement = aPlacement;
+    // --- classe inherited fields ---
+    StepVisual_PlanarExtent::Init(aName, aSizeInX, aSizeInY);
 }
 
-
-void StepVisual_PlanarBox::SetPlacement(const StepGeom_Axis2Placement& aPlacement)
-{
-	placement = aPlacement;
+void StepVisual_PlanarBox::SetPlacement(const StepGeom_Axis2Placement& aPlacement) {
+    placement = aPlacement;
 }
 
-StepGeom_Axis2Placement StepVisual_PlanarBox::Placement() const
-{
-	return placement;
+StepGeom_Axis2Placement StepVisual_PlanarBox::Placement() const {
+    return placement;
 }

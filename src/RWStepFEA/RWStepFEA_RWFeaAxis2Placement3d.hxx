@@ -27,48 +27,26 @@ class StepFEA_FeaAxis2Placement3d;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaAxis2Placement3d
-class RWStepFEA_RWFeaAxis2Placement3d 
-{
+class RWStepFEA_RWFeaAxis2Placement3d {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaAxis2Placement3d();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaAxis2Placement3d();
-  
-  //! Reads FeaAxis2Placement3d
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaAxis2Placement3d)& ent) const;
-  
-  //! Writes FeaAxis2Placement3d
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaAxis2Placement3d)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaAxis2Placement3d)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaAxis2Placement3d
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_FeaAxis2Placement3d) & ent) const;
 
+    //! Writes FeaAxis2Placement3d
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_FeaAxis2Placement3d) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaAxis2Placement3d) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaAxis2Placement3d_HeaderFile

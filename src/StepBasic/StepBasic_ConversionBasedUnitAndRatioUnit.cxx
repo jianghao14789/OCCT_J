@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepBasic_ConversionBasedUnit.hxx>
 #include <StepBasic_ConversionBasedUnitAndRatioUnit.hxx>
@@ -20,31 +19,25 @@
 #include <StepBasic_RatioUnit.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ConversionBasedUnitAndRatioUnit,StepBasic_ConversionBasedUnit)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ConversionBasedUnitAndRatioUnit, StepBasic_ConversionBasedUnit)
 
-StepBasic_ConversionBasedUnitAndRatioUnit::StepBasic_ConversionBasedUnitAndRatioUnit ()
-{
+StepBasic_ConversionBasedUnitAndRatioUnit::StepBasic_ConversionBasedUnitAndRatioUnit() {}
+
+void StepBasic_ConversionBasedUnitAndRatioUnit::Init(const Handle(StepBasic_DimensionalExponents) & aDimensions,
+                                                     const Handle(TCollection_HAsciiString) & aName,
+                                                     const Handle(StepBasic_MeasureWithUnit) & aConversionFactor) {
+    // --- ANDOR component fields ---
+    StepBasic_ConversionBasedUnit::Init(aDimensions, aName, aConversionFactor);
+
+    // --- ANDOR component fields ---
+    ratioUnit = new StepBasic_RatioUnit();
+    ratioUnit->Init(aDimensions);
 }
 
-void StepBasic_ConversionBasedUnitAndRatioUnit::Init(const Handle(StepBasic_DimensionalExponents)& aDimensions,
-						     const Handle(TCollection_HAsciiString)& aName,
-						     const Handle(StepBasic_MeasureWithUnit)& aConversionFactor)
-{
-  // --- ANDOR component fields ---
-  StepBasic_ConversionBasedUnit::Init(aDimensions, aName, aConversionFactor);
-	
-  // --- ANDOR component fields ---
-  ratioUnit = new StepBasic_RatioUnit();
-  ratioUnit->Init(aDimensions);
+void StepBasic_ConversionBasedUnitAndRatioUnit::SetRatioUnit(const Handle(StepBasic_RatioUnit) & aRatioUnit) {
+    ratioUnit = aRatioUnit;
 }
 
-
-void StepBasic_ConversionBasedUnitAndRatioUnit::SetRatioUnit(const Handle(StepBasic_RatioUnit)& aRatioUnit)
-{
-  ratioUnit = aRatioUnit;
-}
-
-Handle(StepBasic_RatioUnit) StepBasic_ConversionBasedUnitAndRatioUnit::RatioUnit() const
-{
-  return ratioUnit;
+Handle(StepBasic_RatioUnit) StepBasic_ConversionBasedUnitAndRatioUnit::RatioUnit() const {
+    return ratioUnit;
 }

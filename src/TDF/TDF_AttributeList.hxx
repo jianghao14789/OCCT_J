@@ -22,5 +22,4 @@
 typedef NCollection_List<Handle(TDF_Attribute)> TDF_AttributeList;
 typedef NCollection_List<Handle(TDF_Attribute)>::Iterator TDF_ListIteratorOfAttributeList;
 
-
 #endif

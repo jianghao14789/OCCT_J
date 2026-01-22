@@ -29,12 +29,10 @@
 //!
 //! This appendix of XSDRAW is compiled separately to distinguish
 //! basic features from user callable forms
-class XSDRAW_Functions 
-{
- public:
-  
-  //! Defines and loads all basic functions for XSDRAW (as ActFunc)
-  Standard_EXPORT static void Init();
+class XSDRAW_Functions {
+public:
+    //! Defines and loads all basic functions for XSDRAW (as ActFunc)
+    Standard_EXPORT static void Init();
 };
 
 #endif // _XSDRAW_Functions_HeaderFile

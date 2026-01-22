@@ -24,47 +24,26 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_CString.hxx>
 
-
 class StepGeom_TrimmingMember;
 DEFINE_STANDARD_HANDLE(StepGeom_TrimmingMember, StepData_SelectReal)
 
 //! For immediate members of TrimmingSelect, i.e. :
 //! ParameterValue (a Real)
-class StepGeom_TrimmingMember : public StepData_SelectReal
-{
+class StepGeom_TrimmingMember : public StepData_SelectReal {
 
 public:
+    Standard_EXPORT StepGeom_TrimmingMember();
 
-  
-  Standard_EXPORT StepGeom_TrimmingMember();
-  
-  Standard_EXPORT virtual Standard_Boolean HasName() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_CString Name() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Boolean SetName (const Standard_CString name) Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Boolean HasName() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Standard_CString Name() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Standard_Boolean SetName(const Standard_CString name) Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(StepGeom_TrimmingMember,StepData_SelectReal)
+    DEFINE_STANDARD_RTTIEXT(StepGeom_TrimmingMember, StepData_SelectReal)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepGeom_TrimmingMember_HeaderFile

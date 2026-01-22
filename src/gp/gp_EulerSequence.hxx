@@ -34,8 +34,7 @@
 //! conventions: classic Euler angles (intrinsic ZXZ) and
 //! yaw-pitch-roll (intrinsic ZYX).
 
-enum gp_EulerSequence
-{
+enum gp_EulerSequence {
     //! Classic Euler angles, alias to Intrinsic_ZXZ
     gp_EulerAngles,
 

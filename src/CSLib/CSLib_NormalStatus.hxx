@@ -17,7 +17,6 @@
 #ifndef _CSLib_NormalStatus_HeaderFile
 #define _CSLib_NormalStatus_HeaderFile
 
-
 //! if N is the normal
 //!
 //! InfinityOfSolutions : ||DN/du||>Resolution, ||DN/dv||>Resolution
@@ -33,8 +32,7 @@
 //! D1NvNuRatioIsNull   : ||D1Nu|| / ||D1Nv|| <= RealEpsilon
 //!
 //! D1NuIsParallelD1Nv  : The angle between D1Nu and D1Nv is Null.
-enum CSLib_NormalStatus
-{
+enum CSLib_NormalStatus {
     CSLib_Singular,
     CSLib_Defined,
     CSLib_InfinityOfSolutions,

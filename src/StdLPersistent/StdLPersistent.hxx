@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _StdLPersistent_HeaderFile
 #define _StdLPersistent_HeaderFile
 
@@ -19,11 +18,10 @@
 
 class StdObjMgt_MapOfInstantiators;
 
-class StdLPersistent
-{
+class StdLPersistent {
 public:
-  //! Register types.
-  Standard_EXPORT static void BindTypes (StdObjMgt_MapOfInstantiators& theMap);
+    //! Register types.
+    Standard_EXPORT static void BindTypes(StdObjMgt_MapOfInstantiators& theMap);
 };
 
 #endif

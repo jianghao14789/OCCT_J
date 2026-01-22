@@ -30,7 +30,6 @@ class Interface_Graph;
 class Standard_Transient;
 class Interface_InterfaceModel;
 
-
 class IFSelect_SelectFlag;
 DEFINE_STANDARD_HANDLE(IFSelect_SelectFlag, IFSelect_SelectExtract)
 
@@ -40,56 +39,37 @@ DEFINE_STANDARD_HANDLE(IFSelect_SelectFlag, IFSelect_SelectExtract)
 //!
 //! WorkSession from IFSelect defines flag "Incorrect"
 //! Objects which control application running define some others
-class IFSelect_SelectFlag : public IFSelect_SelectExtract
-{
+class IFSelect_SelectFlag : public IFSelect_SelectExtract {
 
 public:
+    //! Creates a Select Flag, to query a flag designated by its name
+    Standard_EXPORT IFSelect_SelectFlag(const Standard_CString flagname);
 
-  
-  //! Creates a Select Flag, to query a flag designated by its name
-  Standard_EXPORT IFSelect_SelectFlag(const Standard_CString flagname);
-  
-  //! Returns the name of the flag
-  Standard_EXPORT Standard_CString FlagName() const;
-  
-  //! Returns the list of selected entities. It is redefined to
-  //! work on the graph itself (not queried by sort)
-  //!
-  //! An entity is selected if its flag is True on Direct mode,
-  //! False on Reversed mode
-  //!
-  //! If flag does not exist for the given name, returns an empty
-  //! result, whatever the Direct/Reversed sense
-  Standard_EXPORT virtual Interface_EntityIterator RootResult (const Interface_Graph& G) const Standard_OVERRIDE;
-  
-  //! Returns always False because RootResult has done the work
-  Standard_EXPORT Standard_Boolean Sort (const Standard_Integer rank, const Handle(Standard_Transient)& ent, const Handle(Interface_InterfaceModel)& model) const Standard_OVERRIDE;
-  
-  //! Returns a text defining the criterium, includes the flag name
-  Standard_EXPORT TCollection_AsciiString ExtractLabel() const Standard_OVERRIDE;
+    //! Returns the name of the flag
+    Standard_EXPORT Standard_CString FlagName() const;
 
+    //! Returns the list of selected entities. It is redefined to
+    //! work on the graph itself (not queried by sort)
+    //!
+    //! An entity is selected if its flag is True on Direct mode,
+    //! False on Reversed mode
+    //!
+    //! If flag does not exist for the given name, returns an empty
+    //! result, whatever the Direct/Reversed sense
+    Standard_EXPORT virtual Interface_EntityIterator RootResult(const Interface_Graph& G) const Standard_OVERRIDE;
 
+    //! Returns always False because RootResult has done the work
+    Standard_EXPORT Standard_Boolean Sort(const Standard_Integer rank, const Handle(Standard_Transient) & ent,
+                                          const Handle(Interface_InterfaceModel) & model) const Standard_OVERRIDE;
 
+    //! Returns a text defining the criterium, includes the flag name
+    Standard_EXPORT TCollection_AsciiString ExtractLabel() const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(IFSelect_SelectFlag,IFSelect_SelectExtract)
+    DEFINE_STANDARD_RTTIEXT(IFSelect_SelectFlag, IFSelect_SelectExtract)
 
 protected:
-
-
-
-
 private:
-
-
-  TCollection_AsciiString thename;
-
-
+    TCollection_AsciiString thename;
 };
-
-
-
-
-
-
 
 #endif // _IFSelect_SelectFlag_HeaderFile

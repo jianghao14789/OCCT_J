@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepShape_HArray1OfOrientedEdge, StepShape_Array1OfOrientedEdge)
 
-
 #endif

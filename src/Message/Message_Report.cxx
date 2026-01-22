@@ -31,8 +31,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_Report, Standard_Transient)
 
 //=======================================================================
-//function : Message_Report
-//purpose  : 构造函数，初始化报告对象
+// function : Message_Report
+// purpose  : 构造函数，初始化报告对象
 //
 // 说明：
 //   - Report 是警报的集中管理器
@@ -46,15 +46,11 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_Report, Standard_Transient)
 //   - myCompositAlerts：复合警报容器（初始为空）
 //=======================================================================
 
-Message_Report::Message_Report()
-    : myLimit(-1),
-    myIsActiveInMessenger(Standard_False)
-{
-}
+Message_Report::Message_Report() : myLimit(-1), myIsActiveInMessenger(Standard_False) {}
 
 //=======================================================================
-//function : AddAlert
-//purpose  : 向报告中添加警报
+// function : AddAlert
+// purpose  : 向报告中添加警报
 //
 // 参数说明：
 //   - theGravity：警报的严重级别（Trace、Info、Warning、Alarm、Fail）
@@ -76,8 +72,7 @@ Message_Report::Message_Report()
 //   5. 检查警报数量是否超过限制
 //=======================================================================
 
-void Message_Report::AddAlert(Message_Gravity theGravity, const Handle(Message_Alert)& theAlert)
-{
+void Message_Report::AddAlert(Message_Gravity theGravity, const Handle(Message_Alert) & theAlert) {
     // 获取互斥锁，确保线程安全
     // Standard_Mutex::Sentry 是一个 RAII 风格的锁守卫
     // 析构时自动释放锁
@@ -85,14 +80,12 @@ void Message_Report::AddAlert(Message_Gravity theGravity, const Handle(Message_A
 
     // 顶级警报：如果没有警报级别
     // alerts of the top level
-    if (myAlertLevels.IsEmpty())
-    {
+    if (myAlertLevels.IsEmpty()) {
         // 获取或创建复合警报容器
         Handle(Message_CompositeAlerts) aCompositeAlert = compositeAlerts(Standard_True);
         // 尝试添加警报，如果成功则返回
         // AddAlert 会处理合并逻辑
-        if (aCompositeAlert->AddAlert(theGravity, theAlert))
-        {
+        if (aCompositeAlert->AddAlert(theGravity, theAlert)) {
             return;
         }
 
@@ -100,8 +93,7 @@ void Message_Report::AddAlert(Message_Gravity theGravity, const Handle(Message_A
         // 仅移除报告下的警报
         // remove alerts under the report only
         const Message_ListOfAlert& anAlerts = aCompositeAlert->Alerts(theGravity);
-        if (anAlerts.Extent() > myLimit)
-        {
+        if (anAlerts.Extent() > myLimit) {
             // Extent() 返回列表中的元素个数
             // First() 返回列表的第一个元素（最早添加的）
             aCompositeAlert->RemoveAlert(theGravity, anAlerts.First());
@@ -115,8 +107,8 @@ void Message_Report::AddAlert(Message_Gravity theGravity, const Handle(Message_A
 }
 
 //=======================================================================
-//function : GetAlerts
-//purpose  : 获取给定严重级别的所有警报列表
+// function : GetAlerts
+// purpose  : 获取给定严重级别的所有警报列表
 //
 // 参数说明：
 //   - theGravity：要查询的警报严重级别
@@ -140,13 +132,11 @@ void Message_Report::AddAlert(Message_Gravity theGravity, const Handle(Message_A
 //   }
 //=======================================================================
 
-const Message_ListOfAlert& Message_Report::GetAlerts(Message_Gravity theGravity) const
-{
+const Message_ListOfAlert& Message_Report::GetAlerts(Message_Gravity theGravity) const {
     // 空列表常量，用作回退
     static const Message_ListOfAlert anEmptyList;
     // 如果复合警报不存在，返回空列表
-    if (myCompositAlerts.IsNull())
-    {
+    if (myCompositAlerts.IsNull()) {
         return anEmptyList;
     }
     // 否则返回对应级别的警报列表
@@ -154,8 +144,8 @@ const Message_ListOfAlert& Message_Report::GetAlerts(Message_Gravity theGravity)
 }
 
 //=======================================================================
-//function : HasAlert
-//purpose  : 检查是否存在给定类型的警报（任何严重级别）
+// function : HasAlert
+// purpose  : 检查是否存在给定类型的警报（任何严重级别）
 //
 // 参数说明：
 //   - theType：要查找的警报类型（例如 Message_AttributeObject）
@@ -175,20 +165,17 @@ const Message_ListOfAlert& Message_Report::GetAlerts(Message_Gravity theGravity)
 //   - 如果任何一个返回 true，此方法返回 true
 //=======================================================================
 
-Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type)& theType)
-{
+Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type) & theType) {
     // 遍历所有严重级别
-    for (int iGravity = Message_Trace; iGravity <= Message_Fail; ++iGravity)
-    {
-        if (HasAlert(theType, (Message_Gravity)iGravity))
-            return Standard_True;
+    for (int iGravity = Message_Trace; iGravity <= Message_Fail; ++iGravity) {
+        if (HasAlert(theType, (Message_Gravity)iGravity)) return Standard_True;
     }
     return Standard_False;
 }
 
 //=======================================================================
-//function : HasAlert
-//purpose  : 检查是否存在给定类型和严重级别的警报
+// function : HasAlert
+// purpose  : 检查是否存在给定类型和严重级别的警报
 //
 // 参数说明：
 //   - theType：要查找的警报类型
@@ -204,11 +191,9 @@ Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type)& theType)
 //   - 提高了查询效率
 //=======================================================================
 
-Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type)& theType, Message_Gravity theGravity)
-{
+Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type) & theType, Message_Gravity theGravity) {
     // 如果没有警报容器，直接返回 false
-    if (compositeAlerts().IsNull())
-    {
+    if (compositeAlerts().IsNull()) {
         return Standard_False;
     }
 
@@ -217,8 +202,8 @@ Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type)& theType, 
 }
 
 //=======================================================================
-//function : IsActiveInMessenger
-//purpose  : 检查报告是否在 Messenger 中激活
+// function : IsActiveInMessenger
+// purpose  : 检查报告是否在 Messenger 中激活
 //
 // 说明：
 //   - 当报告在 Messenger 中激活时，所有发送给 Messenger 的消息都会被拦截并添加到报告中
@@ -229,14 +214,13 @@ Standard_Boolean Message_Report::HasAlert(const Handle(Standard_Type)& theType, 
 //   - Standard_True：报告已在 Messenger 中激活
 //   - Standard_False：报告未激活
 //=======================================================================
-Standard_Boolean Message_Report::IsActiveInMessenger(const Handle(Message_Messenger)&) const
-{
+Standard_Boolean Message_Report::IsActiveInMessenger(const Handle(Message_Messenger) &) const {
     return myIsActiveInMessenger;
 }
 
 //=======================================================================
-//function : ActivateInMessenger
-//purpose  : 在 Messenger 中激活或禁用报告
+// function : ActivateInMessenger
+// purpose  : 在 Messenger 中激活或禁用报告
 //
 // 参数说明：
 //   - toActivate：激活（true）或禁用（false）
@@ -256,30 +240,26 @@ Standard_Boolean Message_Report::IsActiveInMessenger(const Handle(Message_Messen
 //   // 现在消息不再被添加到 report
 //=======================================================================
 void Message_Report::ActivateInMessenger(const Standard_Boolean toActivate,
-    const Handle(Message_Messenger)& theMessenger)
-{
+                                         const Handle(Message_Messenger) & theMessenger) {
     // 如果状态未改变，不做任何操作
-    if (toActivate == IsActiveInMessenger())
-        return;
+    if (toActivate == IsActiveInMessenger()) return;
 
     myIsActiveInMessenger = toActivate;
     // 使用指定的 Messenger，如果为空则使用默认的
     Handle(Message_Messenger) aMessenger = theMessenger.IsNull() ? Message::DefaultMessenger() : theMessenger;
-    
-    if (toActivate)
-    {
+
+    if (toActivate) {
         // 激活：创建并添加打印机
         Handle(Message_PrinterToReport) aPrinterToReport = new Message_PrinterToReport();
-        aPrinterToReport->SetReport(this);  // 将打印机与报告关联
+        aPrinterToReport->SetReport(this); // 将打印机与报告关联
         aMessenger->AddPrinter(aPrinterToReport);
-    }
-    else // 禁用
+    } else // 禁用
     {
         // 禁用：移除所有关联的打印机
         Message_SequenceOfPrinters aPrintersToRemove;
         // 遍历所有打印机，找到关联到此报告的 PrinterToReport
-        for (Message_SequenceOfPrinters::Iterator anIterator(aMessenger->Printers()); anIterator.More(); anIterator.Next())
-        {
+        for (Message_SequenceOfPrinters::Iterator anIterator(aMessenger->Printers()); anIterator.More();
+             anIterator.Next()) {
             const Handle(Message_Printer) aPrinter = anIterator.Value();
             // 检查打印机是否是 PrinterToReport 类型
             if (aPrinter->IsKind(STANDARD_TYPE(Message_PrinterToReport)) &&
@@ -287,32 +267,29 @@ void Message_Report::ActivateInMessenger(const Standard_Boolean toActivate,
                 aPrintersToRemove.Append(aPrinter);
         }
         // 移除收集到的所有打印机
-        for (Message_SequenceOfPrinters::Iterator anIterator(aPrintersToRemove); anIterator.More(); anIterator.Next())
-        {
+        for (Message_SequenceOfPrinters::Iterator anIterator(aPrintersToRemove); anIterator.More(); anIterator.Next()) {
             aMessenger->RemovePrinter(anIterator.Value());
         }
     }
 }
 
 //=======================================================================
-//function : UpdateActiveInMessenger
-//purpose  : 更新报告在 Messenger 中的激活状态（检查实际状态）
+// function : UpdateActiveInMessenger
+// purpose  : 更新报告在 Messenger 中的激活状态（检查实际状态）
 //
 // 说明：
 //   - 这个方法同步 myIsActiveInMessenger 的状态
 //   - 用于查询报告是否确实在指定的 Messenger 中有激活的打印机
 //   - 应该在 Messenger 可能被外部修改后调用
 //=======================================================================
-void Message_Report::UpdateActiveInMessenger(const Handle(Message_Messenger)& theMessenger)
-{
+void Message_Report::UpdateActiveInMessenger(const Handle(Message_Messenger) & theMessenger) {
     Handle(Message_Messenger) aMessenger = theMessenger.IsNull() ? Message::DefaultMessenger() : theMessenger;
     // 遍历 Messenger 中的所有打印机
-    for (Message_SequenceOfPrinters::Iterator anIterator(aMessenger->Printers()); anIterator.More(); anIterator.Next())
-    {
+    for (Message_SequenceOfPrinters::Iterator anIterator(aMessenger->Printers()); anIterator.More();
+         anIterator.Next()) {
         // 如果找到关联到此报告的 PrinterToReport，标记为激活
         if (anIterator.Value()->IsKind(STANDARD_TYPE(Message_PrinterToReport)) &&
-            Handle(Message_PrinterToReport)::DownCast(anIterator.Value())->Report() == this)
-        {
+            Handle(Message_PrinterToReport)::DownCast(anIterator.Value())->Report() == this) {
             myIsActiveInMessenger = Standard_True;
             return;
         }
@@ -322,8 +299,8 @@ void Message_Report::UpdateActiveInMessenger(const Handle(Message_Messenger)& th
 }
 
 //=======================================================================
-//function : AddLevel
-//purpose  : 向报告中添加警报级别
+// function : AddLevel
+// purpose  : 向报告中添加警报级别
 //
 // 参数说明：
 //   - theLevel：要添加的警报级别对象
@@ -345,8 +322,7 @@ void Message_Report::UpdateActiveInMessenger(const Handle(Message_Messenger)& th
 //   - 如果是第一个级别，添加到报告的复合警报
 //   - 如果有前一个级别，添加到前一个级别下面
 //=======================================================================
-void Message_Report::AddLevel(Message_Level* theLevel, const TCollection_AsciiString& theName)
-{
+void Message_Report::AddLevel(Message_Level* theLevel, const TCollection_AsciiString& theName) {
     Standard_Mutex::Sentry aSentry(myMutex);
 
     // 将级别添加到列表
@@ -357,13 +333,10 @@ void Message_Report::AddLevel(Message_Level* theLevel, const TCollection_AsciiSt
 
     // 创建属性来标记级别
     Handle(Message_Attribute) anAttribute;
-    if (!ActiveMetrics().IsEmpty())
-    {
+    if (!ActiveMetrics().IsEmpty()) {
         // 如果启用了度量，使用度量属性
         anAttribute = new Message_AttributeMeter(theName);
-    }
-    else
-    {
+    } else {
         // 否则使用普通属性
         anAttribute = new Message_Attribute(theName);
     }
@@ -385,8 +358,8 @@ void Message_Report::AddLevel(Message_Level* theLevel, const TCollection_AsciiSt
 }
 
 //=======================================================================
-//function : RemoveLevel
-//purpose  : 从报告中移除警报级别
+// function : RemoveLevel
+// purpose  : 从报告中移除警报级别
 //
 // 参数说明：
 //   - theLevel：要移除的警报级别对象
@@ -397,39 +370,34 @@ void Message_Report::AddLevel(Message_Level* theLevel, const TCollection_AsciiSt
 //   - 会停止该级别相关的度量统计
 //=======================================================================
 
-void Message_Report::RemoveLevel(Message_Level* theLevel)
-{
+void Message_Report::RemoveLevel(Message_Level* theLevel) {
     Standard_Mutex::Sentry aSentry(myMutex);
 
     // 从后向前遍历，移除相关级别
-    for (int aLevelIndex = myAlertLevels.Size(); aLevelIndex >= 1; aLevelIndex--)
-    {
+    for (int aLevelIndex = myAlertLevels.Size(); aLevelIndex >= 1; aLevelIndex--) {
         Message_Level* aLevel = myAlertLevels.Value(aLevelIndex);
         // 停止与此级别关联的度量
         Message_AttributeMeter::StopAlert(aLevel->RootAlert());
 
         myAlertLevels.Remove(aLevelIndex);
-        if (aLevel == theLevel)
-        {
+        if (aLevel == theLevel) {
             return;
         }
     }
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 清除所有警报
+// function : Clear
+// purpose  : 清除所有警报
 //
 // 说明：
 //   - 删除报告中的所有警报
 //   - 同时清除所有警报级别
 //   - 清空后报告回到初始状态
 //=======================================================================
-void Message_Report::Clear()
-{
+void Message_Report::Clear() {
     // 如果没有警报，直接返回
-    if (compositeAlerts().IsNull())
-    {
+    if (compositeAlerts().IsNull()) {
         return;
     }
 
@@ -442,8 +410,8 @@ void Message_Report::Clear()
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 清除给定严重级别的所有警报
+// function : Clear
+// purpose  : 清除给定严重级别的所有警报
 //
 // 参数说明：
 //   - theGravity：要清除的警报严重级别
@@ -453,10 +421,8 @@ void Message_Report::Clear()
 //   - 其他级别的警报保留
 //   - 例如，可以只删除所有 Warning，保留 Fail 和 Alarm
 //=======================================================================
-void Message_Report::Clear(Message_Gravity theGravity)
-{
-    if (compositeAlerts().IsNull())
-    {
+void Message_Report::Clear(Message_Gravity theGravity) {
+    if (compositeAlerts().IsNull()) {
         return;
     }
 
@@ -467,8 +433,8 @@ void Message_Report::Clear(Message_Gravity theGravity)
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 清除给定类型的所有警报
+// function : Clear
+// purpose  : 清除给定类型的所有警报
 //
 // 参数说明：
 //   - theType：要清除的警报类型
@@ -477,10 +443,8 @@ void Message_Report::Clear(Message_Gravity theGravity)
 //   - 删除所有指定类型的警报（无论什么级别）
 //   - 例如，清除所有与文件 I/O 相关的警报
 //=======================================================================
-void Message_Report::Clear(const Handle(Standard_Type)& theType)
-{
-    if (compositeAlerts().IsNull())
-    {
+void Message_Report::Clear(const Handle(Standard_Type) & theType) {
+    if (compositeAlerts().IsNull()) {
         return;
     }
 
@@ -491,8 +455,8 @@ void Message_Report::Clear(const Handle(Standard_Type)& theType)
 }
 
 //=======================================================================
-//function : SetActiveMetric
-//purpose  : 激活或禁用指定的度量类型
+// function : SetActiveMetric
+// purpose  : 激活或禁用指定的度量类型
 //
 // 参数说明：
 //   - theMetricType：度量类型（例如 Message_MetricType_MemPrivate）
@@ -508,30 +472,24 @@ void Message_Report::Clear(const Handle(Standard_Type)& theType)
 //   report->SetActiveMetric(Message_MetricType_WallClock, Standard_True);
 //   // 现在产生的警报会包含私有内存和实时时钟信息
 //=======================================================================
-void Message_Report::SetActiveMetric(const Message_MetricType theMetricType,
-    const Standard_Boolean theActivate)
-{
+void Message_Report::SetActiveMetric(const Message_MetricType theMetricType, const Standard_Boolean theActivate) {
     // 如果状态已经是要求的状态，不做任何操作
-    if (theActivate == myActiveMetrics.Contains(theMetricType))
-    {
+    if (theActivate == myActiveMetrics.Contains(theMetricType)) {
         return;
     }
 
-    if (theActivate)
-    {
+    if (theActivate) {
         // 添加到激活度量集合
         myActiveMetrics.Add(theMetricType);
-    }
-    else
-    {
+    } else {
         // 从激活度量集合移除
         myActiveMetrics.RemoveKey(theMetricType);
     }
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 将所有警报转储到输出流
+// function : Dump
+// purpose  : 将所有警报转储到输出流
 //
 // 参数说明：
 //   - theOS：输出流
@@ -542,18 +500,16 @@ void Message_Report::SetActiveMetric(const Message_MetricType theMetricType,
 //   - 用于调试和日志记录
 //=======================================================================
 
-void Message_Report::Dump(Standard_OStream& theOS)
-{
+void Message_Report::Dump(Standard_OStream& theOS) {
     // 遍历所有严重级别
-    for (int iGravity = Message_Trace; iGravity <= Message_Fail; ++iGravity)
-    {
+    for (int iGravity = Message_Trace; iGravity <= Message_Fail; ++iGravity) {
         Dump(theOS, (Message_Gravity)iGravity);
     }
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 将给定严重级别的所有警报转储到输出流
+// function : Dump
+// purpose  : 将给定严重级别的所有警报转储到输出流
 //
 // 参数说明：
 //   - theOS：输出流
@@ -564,10 +520,8 @@ void Message_Report::Dump(Standard_OStream& theOS)
 //   - 用于生成关注特定类型警报的报告
 //=======================================================================
 
-void Message_Report::Dump(Standard_OStream& theOS, Message_Gravity theGravity)
-{
-    if (compositeAlerts().IsNull())
-    {
+void Message_Report::Dump(Standard_OStream& theOS, Message_Gravity theGravity) {
+    if (compositeAlerts().IsNull()) {
         return;
     }
 
@@ -576,8 +530,8 @@ void Message_Report::Dump(Standard_OStream& theOS, Message_Gravity theGravity)
 }
 
 //=======================================================================
-//function : SendMessages
-//purpose  : 向 Messenger 发送所有警报消息
+// function : SendMessages
+// purpose  : 向 Messenger 发送所有警报消息
 //
 // 参数说明：
 //   - theMessenger：接收消息的 Messenger 对象
@@ -588,18 +542,16 @@ void Message_Report::Dump(Standard_OStream& theOS, Message_Gravity theGravity)
 //   - 用于重新发送或回放警报
 //=======================================================================
 
-void Message_Report::SendMessages(const Handle(Message_Messenger)& theMessenger)
-{
+void Message_Report::SendMessages(const Handle(Message_Messenger) & theMessenger) {
     // 遍历所有严重级别并发送
-    for (int aGravIter = Message_Trace; aGravIter <= Message_Fail; ++aGravIter)
-    {
+    for (int aGravIter = Message_Trace; aGravIter <= Message_Fail; ++aGravIter) {
         SendMessages(theMessenger, (Message_Gravity)aGravIter);
     }
 }
 
 //=======================================================================
-//function : SendMessages
-//purpose  : 向 Messenger 发送给定严重级别的警报消息
+// function : SendMessages
+// purpose  : 向 Messenger 发送给定严重级别的警报消息
 //
 // 参数说明：
 //   - theMessenger：接收消息的 Messenger 对象
@@ -610,10 +562,8 @@ void Message_Report::SendMessages(const Handle(Message_Messenger)& theMessenger)
 //   - 用于有选择性地重新发送警报
 //=======================================================================
 
-void Message_Report::SendMessages(const Handle(Message_Messenger)& theMessenger, Message_Gravity theGravity)
-{
-    if (compositeAlerts().IsNull())
-    {
+void Message_Report::SendMessages(const Handle(Message_Messenger) & theMessenger, Message_Gravity theGravity) {
+    if (compositeAlerts().IsNull()) {
         return;
     }
 
@@ -622,8 +572,8 @@ void Message_Report::SendMessages(const Handle(Message_Messenger)& theMessenger,
 }
 
 //=======================================================================
-//function : Merge
-//purpose  : 合并另一个报告的所有警报到此报告
+// function : Merge
+// purpose  : 合并另一个报告的所有警报到此报告
 //
 // 参数说明：
 //   - theOther：要合并的源报告
@@ -641,18 +591,16 @@ void Message_Report::SendMessages(const Handle(Message_Messenger)& theMessenger,
 //   // 现在 report1 包含来自 report1 和 report2 的所有警报
 //=======================================================================
 
-void Message_Report::Merge(const Handle(Message_Report)& theOther)
-{
+void Message_Report::Merge(const Handle(Message_Report) & theOther) {
     // 遍历所有严重级别并合并
-    for (int aGravIter = Message_Trace; aGravIter <= Message_Fail; ++aGravIter)
-    {
+    for (int aGravIter = Message_Trace; aGravIter <= Message_Fail; ++aGravIter) {
         Merge(theOther, (Message_Gravity)aGravIter);
     }
 }
 
 //=======================================================================
-//function : Merge
-//purpose  : 合并另一个报告的给定严重级别的警报到此报告
+// function : Merge
+// purpose  : 合并另一个报告的给定严重级别的警报到此报告
 //
 // 参数说明：
 //   - theOther：要合并的源报告
@@ -662,19 +610,17 @@ void Message_Report::Merge(const Handle(Message_Report)& theOther)
 //   - 只合并指定级别的警报
 //=======================================================================
 
-void Message_Report::Merge(const Handle(Message_Report)& theOther, Message_Gravity theGravity)
-{
+void Message_Report::Merge(const Handle(Message_Report) & theOther, Message_Gravity theGravity) {
     // 遍历源报告中此级别的所有警报
-    for (Message_ListOfAlert::Iterator anIt(theOther->GetAlerts(theGravity)); anIt.More(); anIt.Next())
-    {
+    for (Message_ListOfAlert::Iterator anIt(theOther->GetAlerts(theGravity)); anIt.More(); anIt.Next()) {
         // 将每个警报添加到此报告
         AddAlert(theGravity, anIt.Value());
     }
 }
 
 //=======================================================================
-//function : compositeAlerts
-//purpose  : 获取或创建复合警报容器（内部方法）
+// function : compositeAlerts
+// purpose  : 获取或创建复合警报容器（内部方法）
 //
 // 参数说明：
 //   - isCreate：如果为 true 且容器不存在，则创建新的
@@ -688,11 +634,9 @@ void Message_Report::Merge(const Handle(Message_Report)& theOther, Message_Gravi
 //   - 只在需要时创建复合警报容器
 //   - 这样可以节省内存，因为空报告不需要创建容器
 //=======================================================================
-const Handle(Message_CompositeAlerts)& Message_Report::compositeAlerts(const Standard_Boolean isCreate)
-{
+const Handle(Message_CompositeAlerts) & Message_Report::compositeAlerts(const Standard_Boolean isCreate) {
     // 如果不存在且要求创建，则创建新的
-    if (myCompositAlerts.IsNull() && isCreate)
-    {
+    if (myCompositAlerts.IsNull() && isCreate) {
         myCompositAlerts = new Message_CompositeAlerts();
     }
 
@@ -700,8 +644,8 @@ const Handle(Message_CompositeAlerts)& Message_Report::compositeAlerts(const Sta
 }
 
 //=======================================================================
-//function : sendMessages
-//purpose  : 向 Messenger 发送警报消息（内部递归方法）
+// function : sendMessages
+// purpose  : 向 Messenger 发送警报消息（内部递归方法）
 //
 // 参数说明：
 //   - theMessenger：接收消息的 Messenger 对象
@@ -715,34 +659,29 @@ const Handle(Message_CompositeAlerts)& Message_Report::compositeAlerts(const Sta
 //   - 如果是 AlertExtended，递归处理其子警报
 //   - 用于支持警报的树形结构
 //=======================================================================
-void Message_Report::sendMessages(const Handle(Message_Messenger)& theMessenger, Message_Gravity theGravity,
-    const Handle(Message_CompositeAlerts)& theCompositeAlert)
-{
-    if (theCompositeAlert.IsNull())
-    {
+void Message_Report::sendMessages(const Handle(Message_Messenger) & theMessenger, Message_Gravity theGravity,
+                                  const Handle(Message_CompositeAlerts) & theCompositeAlert) {
+    if (theCompositeAlert.IsNull()) {
         return;
     }
 
     // 获取此容器中给定级别的所有警报
     const Message_ListOfAlert& anAlerts = theCompositeAlert->Alerts(theGravity);
-    for (Message_ListOfAlert::Iterator anIt(anAlerts); anIt.More(); anIt.Next())
-    {
+    for (Message_ListOfAlert::Iterator anIt(anAlerts); anIt.More(); anIt.Next()) {
         // 向 Messenger 发送警报的消息键
         theMessenger->Send(anIt.Value()->GetMessageKey(), theGravity);
-        
+
         // 尝试将警报转换为 AlertExtended（扩展警报）
         // 扩展警报可能包含子警报
         Handle(Message_AlertExtended) anExtendedAlert = Handle(Message_AlertExtended)::DownCast(anIt.Value());
-        if (anExtendedAlert.IsNull())
-        {
+        if (anExtendedAlert.IsNull()) {
             // 如果不是扩展警报，无子警报，继续下一个
             continue;
         }
 
         // 获取扩展警报内的复合警报
         Handle(Message_CompositeAlerts) aCompositeAlerts = anExtendedAlert->CompositeAlerts();
-        if (aCompositeAlerts.IsNull())
-        {
+        if (aCompositeAlerts.IsNull()) {
             // 没有子警报，继续下一个
             continue;
         }
@@ -753,8 +692,8 @@ void Message_Report::sendMessages(const Handle(Message_Messenger)& theMessenger,
 }
 
 //=======================================================================
-//function : dumpMessages
-//purpose  : 转储警报消息到输出流（内部递归方法）
+// function : dumpMessages
+// purpose  : 转储警报消息到输出流（内部递归方法）
 //
 // 参数说明：
 //   - theOS：输出流
@@ -767,24 +706,20 @@ void Message_Report::sendMessages(const Handle(Message_Messenger)& theMessenger,
 //   - 用于生成警报的文本报告
 //=======================================================================
 void Message_Report::dumpMessages(Standard_OStream& theOS, Message_Gravity theGravity,
-    const Handle(Message_CompositeAlerts)& theCompositeAlert)
-{
-    if (theCompositeAlert.IsNull())
-    {
+                                  const Handle(Message_CompositeAlerts) & theCompositeAlert) {
+    if (theCompositeAlert.IsNull()) {
         return;
     }
 
     // 获取此容器中给定级别的所有警报
     const Message_ListOfAlert& anAlerts = theCompositeAlert->Alerts(theGravity);
-    for (Message_ListOfAlert::Iterator anIt(anAlerts); anIt.More(); anIt.Next())
-    {
+    for (Message_ListOfAlert::Iterator anIt(anAlerts); anIt.More(); anIt.Next()) {
         // 输出警报的消息键
         theOS << anIt.Value()->GetMessageKey() << std::endl;
 
         // 尝试转换为扩展警报
         Handle(Message_AlertExtended) anExtendedAlert = Handle(Message_AlertExtended)::DownCast(anIt.Value());
-        if (anExtendedAlert.IsNull())
-        {
+        if (anExtendedAlert.IsNull()) {
             continue;
         }
 
@@ -794,17 +729,15 @@ void Message_Report::dumpMessages(Standard_OStream& theOS, Message_Gravity theGr
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将报告对象导出为 JSON 格式（用于调试）
+// function : DumpJson
+// purpose  : 将报告对象导出为 JSON 格式（用于调试）
 //=======================================================================
-void Message_Report::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
+void Message_Report::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-        if (!myCompositAlerts.IsNull())
-        {
-            OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, myCompositAlerts.get())
-        }
+    if (!myCompositAlerts.IsNull()) {
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, myCompositAlerts.get())
+    }
 
     // 输出警报级别的数量
     Standard_Integer anAlertLevels = myAlertLevels.Size();
@@ -812,13 +745,13 @@ void Message_Report::DumpJson(Standard_OStream& theOStream, Standard_Integer the
 
     // 输出激活的度量类型
     Standard_Integer anInc = 1;
-    for (NCollection_IndexedMap<Message_MetricType>::Iterator anIterator(myActiveMetrics); anIterator.More(); anIterator.Next())
-    {
+    for (NCollection_IndexedMap<Message_MetricType>::Iterator anIterator(myActiveMetrics); anIterator.More();
+         anIterator.Next()) {
         Message_MetricType anActiveMetric = anIterator.Value();
         OCCT_DUMP_FIELD_VALUE_NUMERICAL_INC(theOStream, anActiveMetric, anInc++)
     }
 
     // 输出其他设置
     OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myLimit)
-        OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myIsActiveInMessenger)
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myIsActiveInMessenger)
 }

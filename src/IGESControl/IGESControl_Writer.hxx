@@ -34,7 +34,6 @@ class TopoDS_Shape;
 class Standard_Transient;
 class IGESData_IGESEntity;
 
-
 //! This class creates and writes
 //! IGES files from CAS.CADE models. An IGES file can be written to
 //! an existing IGES file or to a new one.
@@ -45,83 +44,83 @@ class IGESData_IGESEntity;
 //! To modify the IGES file header or to change translation
 //! parameters it is necessary to use class Interface_Static (see
 //! IGESParameters and GeneralParameters).
-class IGESControl_Writer 
-{
+class IGESControl_Writer {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  //! Creates a writer object with the
-  //! default unit (millimeters) and write mode (Face).
-  //! IGESControl_Writer (const Standard_CString unit,
-  //! const Standard_Integer modecr = 0);
-  Standard_EXPORT IGESControl_Writer();
-  
-  //! Creates a writer with given
-  //! values for units and for write mode.
-  //! unit may be any unit that is accepted by the IGES standard.
-  //! By default, it is the millimeter.
-  //! modecr defines the write mode and may be:
-  //! - 0: Faces (default)
-  //! - 1: BRep.
-  Standard_EXPORT IGESControl_Writer(const Standard_CString unit, const Standard_Integer modecr = 0);
-  
-  //! Creates a writer object with the
-  //! prepared IGES model model in write mode.
-  //! modecr defines the write mode and may be:
-  //! - 0: Faces (default)
-  //! - 1: BRep.
-  Standard_EXPORT IGESControl_Writer(const Handle(IGESData_IGESModel)& model, const Standard_Integer modecr = 0);
-  
-  //! Returns the IGES model to be written in output.
-  const Handle(IGESData_IGESModel) & Model() const
-  { return myModel; }
+    //! Creates a writer object with the
+    //! default unit (millimeters) and write mode (Face).
+    //! IGESControl_Writer (const Standard_CString unit,
+    //! const Standard_Integer modecr = 0);
+    Standard_EXPORT IGESControl_Writer();
 
-  const Handle(Transfer_FinderProcess) & TransferProcess() const
-  { return myTP; }
+    //! Creates a writer with given
+    //! values for units and for write mode.
+    //! unit may be any unit that is accepted by the IGES standard.
+    //! By default, it is the millimeter.
+    //! modecr defines the write mode and may be:
+    //! - 0: Faces (default)
+    //! - 1: BRep.
+    Standard_EXPORT IGESControl_Writer(const Standard_CString unit, const Standard_Integer modecr = 0);
 
-  //! Returns/Sets the TransferProcess : it contains final results
-  //! and if some, check messages
-  void SetTransferProcess (const Handle(Transfer_FinderProcess)& TP)
-  { myTP = TP; }
-  
-  //! Translates a Shape to IGES Entities and adds them to the model
-  //! Returns True if done, False if Shape not suitable for IGES or null
-  Standard_EXPORT Standard_Boolean AddShape (const TopoDS_Shape& sh,
-                                             const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  //! Translates a Geometry (Surface or Curve) to IGES Entities and
-  //! adds them to the model
-  //! Returns True if done, False if geom is neither a Surface or
-  //! a Curve suitable for IGES or is null
-  Standard_EXPORT Standard_Boolean AddGeom (const Handle(Standard_Transient)& geom);
-  
-  //! Adds an IGES entity (and the ones it references) to the model
-  Standard_EXPORT Standard_Boolean AddEntity (const Handle(IGESData_IGESEntity)& ent);
-  
-  //! Computes the entities found in
-  //! the model, which is ready to be written.
-  //! This contrasts with the default computation of headers only.
-  Standard_EXPORT void ComputeModel();
-  
-  //! Computes then writes the model to an OStream
-  //! Returns True when done, false in case of error
-  Standard_EXPORT Standard_Boolean Write (Standard_OStream& S, const Standard_Boolean fnes = Standard_False);
-  
-  //! Prepares and writes an IGES model
-  //! either to an OStream, S or to a file name,CString.
-  //! Returns True if the operation was performed correctly and
-  //! False if an error occurred (for instance,
-  //! if the processor could not create the file).
-  Standard_EXPORT Standard_Boolean Write (const Standard_CString file, const Standard_Boolean fnes = Standard_False);
+    //! Creates a writer object with the
+    //! prepared IGES model model in write mode.
+    //! modecr defines the write mode and may be:
+    //! - 0: Faces (default)
+    //! - 1: BRep.
+    Standard_EXPORT IGESControl_Writer(const Handle(IGESData_IGESModel) & model, const Standard_Integer modecr = 0);
 
- private:
+    //! Returns the IGES model to be written in output.
+    const Handle(IGESData_IGESModel) & Model() const {
+        return myModel;
+    }
 
-  Handle(Transfer_FinderProcess) myTP;
-  Handle(IGESData_IGESModel) myModel;
-  IGESData_BasicEditor myEditor;
-  Standard_Integer myWriteMode;
-  Standard_Boolean myIsComputed;
+    const Handle(Transfer_FinderProcess) & TransferProcess() const {
+        return myTP;
+    }
+
+    //! Returns/Sets the TransferProcess : it contains final results
+    //! and if some, check messages
+    void SetTransferProcess(const Handle(Transfer_FinderProcess) & TP) {
+        myTP = TP;
+    }
+
+    //! Translates a Shape to IGES Entities and adds them to the model
+    //! Returns True if done, False if Shape not suitable for IGES or null
+    Standard_EXPORT Standard_Boolean AddShape(const TopoDS_Shape& sh,
+                                              const Message_ProgressRange& theProgress = Message_ProgressRange());
+
+    //! Translates a Geometry (Surface or Curve) to IGES Entities and
+    //! adds them to the model
+    //! Returns True if done, False if geom is neither a Surface or
+    //! a Curve suitable for IGES or is null
+    Standard_EXPORT Standard_Boolean AddGeom(const Handle(Standard_Transient) & geom);
+
+    //! Adds an IGES entity (and the ones it references) to the model
+    Standard_EXPORT Standard_Boolean AddEntity(const Handle(IGESData_IGESEntity) & ent);
+
+    //! Computes the entities found in
+    //! the model, which is ready to be written.
+    //! This contrasts with the default computation of headers only.
+    Standard_EXPORT void ComputeModel();
+
+    //! Computes then writes the model to an OStream
+    //! Returns True when done, false in case of error
+    Standard_EXPORT Standard_Boolean Write(Standard_OStream& S, const Standard_Boolean fnes = Standard_False);
+
+    //! Prepares and writes an IGES model
+    //! either to an OStream, S or to a file name,CString.
+    //! Returns True if the operation was performed correctly and
+    //! False if an error occurred (for instance,
+    //! if the processor could not create the file).
+    Standard_EXPORT Standard_Boolean Write(const Standard_CString file, const Standard_Boolean fnes = Standard_False);
+
+private:
+    Handle(Transfer_FinderProcess) myTP;
+    Handle(IGESData_IGESModel) myModel;
+    IGESData_BasicEditor myEditor;
+    Standard_Integer myWriteMode;
+    Standard_Boolean myIsComputed;
 };
 
 #endif // _IGESControl_Writer_HeaderFile

@@ -17,11 +17,10 @@
 #define _XCAFDimTolObjects_GeomToleranceTypeValue_HeaderFile
 
 //! Defines types of value of tolerane
-enum XCAFDimTolObjects_GeomToleranceTypeValue
-{
-XCAFDimTolObjects_GeomToleranceTypeValue_None,
-XCAFDimTolObjects_GeomToleranceTypeValue_Diameter,
-XCAFDimTolObjects_GeomToleranceTypeValue_SphericalDiameter
+enum XCAFDimTolObjects_GeomToleranceTypeValue {
+    XCAFDimTolObjects_GeomToleranceTypeValue_None,
+    XCAFDimTolObjects_GeomToleranceTypeValue_Diameter,
+    XCAFDimTolObjects_GeomToleranceTypeValue_SphericalDiameter
 };
 
 #endif // _XCAFDimTolObjects_GeomToleranceTypeValue_HeaderFile

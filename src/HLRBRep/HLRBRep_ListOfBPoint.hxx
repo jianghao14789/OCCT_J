@@ -23,5 +23,4 @@
 typedef NCollection_List<HLRBRep_BiPoint> HLRBRep_ListOfBPoint;
 typedef NCollection_List<HLRBRep_BiPoint>::Iterator HLRBRep_ListIteratorOfListOfBPoint;
 
-
 #endif

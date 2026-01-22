@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY1(StepFEA_HArray1OfDegreeOfFreedom, StepFEA_Array1OfDegreeOfFreedom)
 
-
 #endif

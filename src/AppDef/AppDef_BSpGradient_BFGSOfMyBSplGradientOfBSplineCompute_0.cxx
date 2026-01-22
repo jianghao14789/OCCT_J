@@ -22,7 +22,6 @@
 #include <AppDef_BSpParLeastSquareOfMyBSplGradientOfBSplineCompute.hxx>
 #include <AppDef_BSpParFunctionOfMyBSplGradientOfBSplineCompute.hxx>
 #include <math_MultipleVarFunctionWithGradient.hxx>
- 
 
 #define MultiLine AppDef_MultiLine
 #define MultiLine_hxx <AppDef_MultiLine.hxx>
@@ -37,4 +36,3 @@
 #define AppParCurves_BSpGradient AppDef_MyBSplGradientOfBSplineCompute
 #define AppParCurves_BSpGradient_hxx <AppDef_MyBSplGradientOfBSplineCompute.hxx>
 #include <AppParCurves_BSpGradient_BFGS.gxx>
-

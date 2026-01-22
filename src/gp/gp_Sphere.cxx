@@ -22,12 +22,9 @@
 #include <gp_Vec.hxx>
 #include <Standard_ConstructionError.hxx>
 
-void gp_Sphere::Coefficients
-(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3,
-    Standard_Real& B1, Standard_Real& B2, Standard_Real& B3,
-    Standard_Real& C1, Standard_Real& C2, Standard_Real& C3,
-    Standard_Real& D) const
-{
+void gp_Sphere::Coefficients(Standard_Real& A1, Standard_Real& A2, Standard_Real& A3, Standard_Real& B1,
+                             Standard_Real& B2, Standard_Real& B3, Standard_Real& C1, Standard_Real& C2,
+                             Standard_Real& C3, Standard_Real& D) const {
     // Dans le repere local de la sphere :
     // X*X + Y*Y + Z*Z - radius * radius = 0
     gp_Trsf T;
@@ -56,39 +53,32 @@ void gp_Sphere::Coefficients
     D = T14 * T14 + T24 * T24 + T34 * T34 - radius * radius;
 }
 
-void gp_Sphere::Mirror(const gp_Pnt& P)
-{
+void gp_Sphere::Mirror(const gp_Pnt& P) {
     pos.Mirror(P);
 }
 
-gp_Sphere gp_Sphere::Mirrored(const gp_Pnt& P) const
-{
+gp_Sphere gp_Sphere::Mirrored(const gp_Pnt& P) const {
     gp_Sphere C = *this;
     C.pos.Mirror(P);
     return C;
 }
 
-void gp_Sphere::Mirror(const gp_Ax1& A1)
-{
+void gp_Sphere::Mirror(const gp_Ax1& A1) {
     pos.Mirror(A1);
 }
 
-gp_Sphere gp_Sphere::Mirrored(const gp_Ax1& A1) const
-{
+gp_Sphere gp_Sphere::Mirrored(const gp_Ax1& A1) const {
     gp_Sphere C = *this;
     C.pos.Mirror(A1);
     return C;
 }
 
-void gp_Sphere::Mirror(const gp_Ax2& A2)
-{
+void gp_Sphere::Mirror(const gp_Ax2& A2) {
     pos.Mirror(A2);
 }
 
-gp_Sphere gp_Sphere::Mirrored(const gp_Ax2& A2) const
-{
+gp_Sphere gp_Sphere::Mirrored(const gp_Ax2& A2) const {
     gp_Sphere C = *this;
     C.pos.Mirror(A2);
     return C;
 }
-

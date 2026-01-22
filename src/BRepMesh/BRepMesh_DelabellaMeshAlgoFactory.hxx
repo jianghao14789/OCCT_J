@@ -23,22 +23,20 @@
 
 //! Implementation of IMeshTools_MeshAlgoFactory providing Delabella-based
 //! algorithms of different complexity depending on type of target surface.
-class BRepMesh_DelabellaMeshAlgoFactory : public IMeshTools_MeshAlgoFactory
-{
+class BRepMesh_DelabellaMeshAlgoFactory : public IMeshTools_MeshAlgoFactory {
 public:
+    //! Constructor.
+    Standard_EXPORT BRepMesh_DelabellaMeshAlgoFactory();
 
-  //! Constructor.
-  Standard_EXPORT BRepMesh_DelabellaMeshAlgoFactory ();
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMesh_DelabellaMeshAlgoFactory();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMesh_DelabellaMeshAlgoFactory ();
+    //! Creates instance of meshing algorithm for the given type of surface.
+    Standard_EXPORT virtual Handle(IMeshTools_MeshAlgo)
+        GetAlgo(const GeomAbs_SurfaceType theSurfaceType,
+                const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
 
-  //! Creates instance of meshing algorithm for the given type of surface.
-  Standard_EXPORT virtual Handle(IMeshTools_MeshAlgo) GetAlgo(
-    const GeomAbs_SurfaceType    theSurfaceType,
-    const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
-
-  DEFINE_STANDARD_RTTIEXT(BRepMesh_DelabellaMeshAlgoFactory, IMeshTools_MeshAlgoFactory)
+    DEFINE_STANDARD_RTTIEXT(BRepMesh_DelabellaMeshAlgoFactory, IMeshTools_MeshAlgoFactory)
 };
 
 #endif

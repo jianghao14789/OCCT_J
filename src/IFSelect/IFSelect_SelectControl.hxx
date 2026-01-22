@@ -24,7 +24,6 @@
 #include <Standard_Boolean.hxx>
 class IFSelect_SelectionIterator;
 
-
 class IFSelect_SelectControl;
 DEFINE_STANDARD_HANDLE(IFSelect_SelectControl, IFSelect_Selection)
 
@@ -41,56 +40,36 @@ DEFINE_STANDARD_HANDLE(IFSelect_SelectControl, IFSelect_Selection)
 //!
 //! The way RootResult and Label are produced are at charge of
 //! each sub-class
-class IFSelect_SelectControl : public IFSelect_Selection
-{
+class IFSelect_SelectControl : public IFSelect_Selection {
 
 public:
+    //! Returns the Main Input Selection
+    Standard_EXPORT Handle(IFSelect_Selection) MainInput() const;
 
-  
-  //! Returns the Main Input Selection
-  Standard_EXPORT Handle(IFSelect_Selection) MainInput() const;
-  
-  //! Returns True if a Control Input is defined
-  //! Thus, Result can be computed differently if there is a
-  //! Control Input or if there is none
-  Standard_EXPORT Standard_Boolean HasSecondInput() const;
-  
-  //! Returns the Control Input Selection, or a Null Handle
-  Standard_EXPORT Handle(IFSelect_Selection) SecondInput() const;
-  
-  //! Sets a Selection to be the Main Input
-  Standard_EXPORT void SetMainInput (const Handle(IFSelect_Selection)& sel);
-  
-  //! Sets a Selection to be the Control Input
-  Standard_EXPORT void SetSecondInput (const Handle(IFSelect_Selection)& sel);
-  
-  //! Puts in an Iterator the Selections from which "me" depends
-  //! That is to say, the list of Input Selections
-  Standard_EXPORT void FillIterator (IFSelect_SelectionIterator& iter) const Standard_OVERRIDE;
+    //! Returns True if a Control Input is defined
+    //! Thus, Result can be computed differently if there is a
+    //! Control Input or if there is none
+    Standard_EXPORT Standard_Boolean HasSecondInput() const;
 
+    //! Returns the Control Input Selection, or a Null Handle
+    Standard_EXPORT Handle(IFSelect_Selection) SecondInput() const;
 
+    //! Sets a Selection to be the Main Input
+    Standard_EXPORT void SetMainInput(const Handle(IFSelect_Selection) & sel);
 
+    //! Sets a Selection to be the Control Input
+    Standard_EXPORT void SetSecondInput(const Handle(IFSelect_Selection) & sel);
 
-  DEFINE_STANDARD_RTTIEXT(IFSelect_SelectControl,IFSelect_Selection)
+    //! Puts in an Iterator the Selections from which "me" depends
+    //! That is to say, the list of Input Selections
+    Standard_EXPORT void FillIterator(IFSelect_SelectionIterator& iter) const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(IFSelect_SelectControl, IFSelect_Selection)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(IFSelect_Selection) themain;
-  Handle(IFSelect_Selection) thesecond;
-
-
+    Handle(IFSelect_Selection) themain;
+    Handle(IFSelect_Selection) thesecond;
 };
-
-
-
-
-
-
 
 #endif // _IFSelect_SelectControl_HeaderFile

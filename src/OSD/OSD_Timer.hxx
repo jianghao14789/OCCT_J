@@ -26,7 +26,6 @@
 #include <Standard_OStream.hxx>
 #include <Standard_Integer.hxx>
 
-
 //! Working on heterogeneous platforms
 //! we need to use the system call gettimeofday.
 //! This function is portable and it measures ELAPSED
@@ -38,10 +37,8 @@
 //! aTimer.Show();    // Give the elapsed time between t1 and t2.
 //! // Give also the process CPU time between
 //! // t1 and t2.
-class OSD_Timer : public OSD_Chronometer
-{
+class OSD_Timer : public OSD_Chronometer {
 public:
-
     //! Returns current time in seconds with system-defined precision.
     //! The could be a system uptime or a time from some date.
     //! Returned value is intended for precise elapsed time measurements as a delta between timestamps.
@@ -49,7 +46,6 @@ public:
     Standard_EXPORT static Standard_Real GetWallClockTime();
 
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Builds a Chronometer initialized and stopped.
@@ -78,7 +74,8 @@ public:
 
     //! returns both the elapsed time(seconds,minutes,hours)
     //! and CPU  time.
-    Standard_EXPORT void Show(Standard_Real& theSeconds, Standard_Integer& theMinutes, Standard_Integer& theHours, Standard_Real& theCPUtime) const;
+    Standard_EXPORT void Show(Standard_Real& theSeconds, Standard_Integer& theMinutes, Standard_Integer& theHours,
+                              Standard_Real& theCPUtime) const;
 
     //! Stops the Timer.
     Standard_EXPORT virtual void Stop() Standard_OVERRIDE;
@@ -91,10 +88,8 @@ public:
     Standard_EXPORT Standard_Real ElapsedTime() const;
 
 private:
-
     Standard_Real myTimeStart;
     Standard_Real myTimeCumul;
-
 };
 
 #endif // _OSD_Timer_HeaderFile

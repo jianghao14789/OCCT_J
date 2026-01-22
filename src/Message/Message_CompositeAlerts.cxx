@@ -20,39 +20,34 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_CompositeAlerts, Standard_Transient)
 
 //=======================================================================
-//function : Alerts
-//purpose  : 获取给定严重级别的警报列表
+// function : Alerts
+// purpose  : 获取给定严重级别的警报列表
 //=======================================================================
-const Message_ListOfAlert& Message_CompositeAlerts::Alerts(const Message_Gravity theGravity) const
-{
+const Message_ListOfAlert& Message_CompositeAlerts::Alerts(const Message_Gravity theGravity) const {
     static const Message_ListOfAlert anEmptyList;
     Standard_ASSERT_RETURN(theGravity >= 0 && size_t(theGravity) < sizeof(myAlerts) / sizeof(myAlerts[0]),
-        "Requesting alerts for gravity not in valid range", anEmptyList);
+                           "Requesting alerts for gravity not in valid range", anEmptyList);
     return myAlerts[theGravity];
 }
 
 //=======================================================================
-//function : AddAlert
-//purpose  : 添加警报，如果支持合并则尝试合并
+// function : AddAlert
+// purpose  : 添加警报，如果支持合并则尝试合并
 //=======================================================================
-Standard_Boolean Message_CompositeAlerts::AddAlert(Message_Gravity theGravity, const Handle(Message_Alert)& theAlert)
-{
+Standard_Boolean Message_CompositeAlerts::AddAlert(Message_Gravity theGravity, const Handle(Message_Alert) & theAlert) {
     Standard_ASSERT_RETURN(!theAlert.IsNull(), "Attempt to add null alert", Standard_False);
     Standard_ASSERT_RETURN(theGravity >= 0 && size_t(theGravity) < sizeof(myAlerts) / sizeof(myAlerts[0]),
-        "Adding alert with gravity not in valid range", Standard_False);
+                           "Adding alert with gravity not in valid range", Standard_False);
 
     Message_ListOfAlert& aList = myAlerts[theGravity];
-    if (theAlert->SupportsMerge() && !aList.IsEmpty())
-    {
+    if (theAlert->SupportsMerge() && !aList.IsEmpty()) {
         // 合并仅对完全相同类型的警报执行
         // merge is performed only for alerts of exactly same type
-        const Handle(Standard_Type)& aType = theAlert->DynamicType();
-        for (Message_ListOfAlert::Iterator anIt(aList); anIt.More(); anIt.Next())
-        {
+        const Handle(Standard_Type) & aType = theAlert->DynamicType();
+        for (Message_ListOfAlert::Iterator anIt(aList); anIt.More(); anIt.Next()) {
             // 如果成功合并，则返回
             // if merged successfully, just return
-            if (aType == anIt.Value()->DynamicType() && theAlert->Merge(anIt.Value()))
-                return Standard_False;
+            if (aType == anIt.Value()->DynamicType() && theAlert->Merge(anIt.Value())) return Standard_False;
         }
     }
 
@@ -63,19 +58,17 @@ Standard_Boolean Message_CompositeAlerts::AddAlert(Message_Gravity theGravity, c
 }
 
 //=======================================================================
-//function : RemoveAlert
-//purpose  : 从列表中移除警报
+// function : RemoveAlert
+// purpose  : 从列表中移除警报
 //=======================================================================
 Standard_Boolean Message_CompositeAlerts::RemoveAlert(Message_Gravity theGravity,
-    const Handle(Message_Alert)& theAlert)
-{
+                                                      const Handle(Message_Alert) & theAlert) {
     Standard_ASSERT_RETURN(!theAlert.IsNull(), "Attempt to add null alert", Standard_False);
     Standard_ASSERT_RETURN(theGravity >= 0 && size_t(theGravity) < sizeof(myAlerts) / sizeof(myAlerts[0]),
-        "Adding alert with gravity not in valid range", Standard_False);
+                           "Adding alert with gravity not in valid range", Standard_False);
 
     Message_ListOfAlert& anAlerts = myAlerts[theGravity];
-    if (!anAlerts.Contains(theAlert))
-    {
+    if (!anAlerts.Contains(theAlert)) {
         return Standard_False;
     }
 
@@ -83,16 +76,13 @@ Standard_Boolean Message_CompositeAlerts::RemoveAlert(Message_Gravity theGravity
 }
 
 //=======================================================================
-//function : HasAlerts
-//purpose  : 检查是否存在给定的警报
+// function : HasAlerts
+// purpose  : 检查是否存在给定的警报
 //=======================================================================
-Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Message_Alert)& theAlert)
-{
-    for (int aGravIter = Message_Trace; aGravIter <= Message_Fail; ++aGravIter)
-    {
+Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Message_Alert) & theAlert) {
+    for (int aGravIter = Message_Trace; aGravIter <= Message_Fail; ++aGravIter) {
         const Message_ListOfAlert& anAlerts = Alerts((Message_Gravity)aGravIter);
-        if (anAlerts.Contains(theAlert))
-        {
+        if (anAlerts.Contains(theAlert)) {
             return Standard_True;
         }
     }
@@ -100,18 +90,15 @@ Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Message_Alert)& 
 }
 
 //=======================================================================
-//function : HasAlerts
-//purpose  : 检查是否存在给定类型和严重级别的警报
+// function : HasAlerts
+// purpose  : 检查是否存在给定类型和严重级别的警报
 //=======================================================================
-Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Standard_Type)& theType, Message_Gravity theGravity)
-{
+Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Standard_Type) & theType, Message_Gravity theGravity) {
     Standard_ASSERT_RETURN(theGravity >= 0 && size_t(theGravity) < sizeof(myAlerts) / sizeof(myAlerts[0]),
-        "Requesting alerts for gravity not in valid range", Standard_False);
+                           "Requesting alerts for gravity not in valid range", Standard_False);
 
-    for (Message_ListOfAlert::Iterator anIt(myAlerts[theGravity]); anIt.More(); anIt.Next())
-    {
-        if (anIt.Value()->IsInstance(theType))
-        {
+    for (Message_ListOfAlert::Iterator anIt(myAlerts[theGravity]); anIt.More(); anIt.Next()) {
+        if (anIt.Value()->IsInstance(theType)) {
             return Standard_True;
         }
     }
@@ -119,44 +106,35 @@ Standard_Boolean Message_CompositeAlerts::HasAlert(const Handle(Standard_Type)& 
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 清除所有严重级别的所有警报
+// function : Clear
+// purpose  : 清除所有严重级别的所有警报
 //=======================================================================
-void Message_CompositeAlerts::Clear()
-{
-    for (unsigned int i = 0; i < sizeof(myAlerts) / sizeof(myAlerts[0]); ++i)
-    {
+void Message_CompositeAlerts::Clear() {
+    for (unsigned int i = 0; i < sizeof(myAlerts) / sizeof(myAlerts[0]); ++i) {
         myAlerts[i].Clear();
     }
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 清除给定严重级别的所有警报
+// function : Clear
+// purpose  : 清除给定严重级别的所有警报
 //=======================================================================
-void Message_CompositeAlerts::Clear(Message_Gravity theGravity)
-{
+void Message_CompositeAlerts::Clear(Message_Gravity theGravity) {
     Standard_ASSERT_RETURN(theGravity >= 0 && size_t(theGravity) < sizeof(myAlerts) / sizeof(myAlerts[0]),
-        "Requesting alerts for gravity not in valid range", );
+                           "Requesting alerts for gravity not in valid range", );
     myAlerts[theGravity].Clear();
 }
 
 //=======================================================================
-//function : Clear
-//purpose  : 清除给定类型的所有警报
+// function : Clear
+// purpose  : 清除给定类型的所有警报
 //=======================================================================
-void Message_CompositeAlerts::Clear(const Handle(Standard_Type)& theType)
-{
-    for (unsigned int i = 0; i < sizeof(myAlerts) / sizeof(myAlerts[0]); ++i)
-    {
-        for (Message_ListOfAlert::Iterator anIt(myAlerts[i]); anIt.More(); )
-        {
-            if (anIt.Value().IsNull() || anIt.Value()->IsInstance(theType))
-            {
+void Message_CompositeAlerts::Clear(const Handle(Standard_Type) & theType) {
+    for (unsigned int i = 0; i < sizeof(myAlerts) / sizeof(myAlerts[0]); ++i) {
+        for (Message_ListOfAlert::Iterator anIt(myAlerts[i]); anIt.More();) {
+            if (anIt.Value().IsNull() || anIt.Value()->IsInstance(theType)) {
                 myAlerts[i].Remove(anIt);
-            }
-            else
-            {
+            } else {
                 anIt.More();
             }
         }
@@ -164,23 +142,18 @@ void Message_CompositeAlerts::Clear(const Handle(Standard_Type)& theType)
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将对象内容导出为 JSON 格式
+// function : DumpJson
+// purpose  : 将对象内容导出为 JSON 格式
 //=======================================================================
-void Message_CompositeAlerts::DumpJson(Standard_OStream& theOStream,
-    Standard_Integer theDepth) const
-{
+void Message_CompositeAlerts::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 
-        Standard_Integer anInc = 1;
-    for (unsigned int i = 0; i < sizeof(myAlerts) / sizeof(myAlerts[0]); ++i)
-    {
-        if (myAlerts[i].IsEmpty())
-            continue;
+    Standard_Integer anInc = 1;
+    for (unsigned int i = 0; i < sizeof(myAlerts) / sizeof(myAlerts[0]); ++i) {
+        if (myAlerts[i].IsEmpty()) continue;
 
-        for (Message_ListOfAlert::Iterator anIt(myAlerts[i]); anIt.More(); anIt.Next(), anInc++)
-        {
-            const Handle(Message_Alert)& anAlert = anIt.Value();
+        for (Message_ListOfAlert::Iterator anIt(myAlerts[i]); anIt.More(); anIt.Next(), anInc++) {
+            const Handle(Message_Alert) & anAlert = anIt.Value();
             OCCT_DUMP_FIELD_VALUES_DUMPED_INC(theOStream, theDepth, anAlert.get(), anInc)
         }
     }

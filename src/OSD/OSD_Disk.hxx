@@ -22,10 +22,8 @@
 #include <OSD_Path.hxx>
 
 //! Disk management (a set of disk oriented tools)
-class OSD_Disk
-{
+class OSD_Disk {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates a disk object.
@@ -58,22 +56,28 @@ public:
     Standard_EXPORT Standard_Integer DiskFree();
 
     //! Returns TRUE if an error occurs
-    Standard_Boolean Failed() const { return myError.Failed(); }
+    Standard_Boolean Failed() const {
+        return myError.Failed();
+    }
 
     //! Resets error counter to zero
-    void Reset() { myError.Reset(); }
+    void Reset() {
+        myError.Reset();
+    }
 
     //! Raises OSD_Error
-    void Perror() { myError.Perror(); }
+    void Perror() {
+        myError.Perror();
+    }
 
     //! Returns error number if 'Failed' is TRUE.
-    Standard_Integer Error() const { return myError.Error(); }
+    Standard_Integer Error() const {
+        return myError.Error();
+    }
 
 private:
-
     TCollection_AsciiString myDiskName;
     OSD_Error myError;
-
 };
 
 #endif // _OSD_Disk_HeaderFile

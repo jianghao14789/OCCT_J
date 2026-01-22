@@ -28,25 +28,22 @@ class StepRepr_GeometricAlignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for GeometricAlignment
-class RWStepRepr_RWGeometricAlignment 
-{
+class RWStepRepr_RWGeometricAlignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWGeometricAlignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWGeometricAlignment();
-  
-  //! Reads GeometricAlignment
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_GeometricAlignment)& ent)  const;
-  
-  //! Writes GeometricAlignment
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_GeometricAlignment)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepRepr_GeometricAlignment)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads GeometricAlignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_GeometricAlignment) & ent) const;
+
+    //! Writes GeometricAlignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_GeometricAlignment) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_GeometricAlignment) & ent, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepRepr_RWGeometricAlignment_HeaderFile

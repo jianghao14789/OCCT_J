@@ -27,42 +27,21 @@
 class Standard_DimensionMismatch;
 class Plate_LinearXYZConstraint;
 
-
 //! define m PinPointConstraint driven by m unknown
-class Plate_SampledCurveConstraint 
-{
+class Plate_SampledCurveConstraint {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT Plate_SampledCurveConstraint(const Plate_SequenceOfPinpointConstraint& SOPPC,
+                                                 const Standard_Integer n);
 
-  
-  Standard_EXPORT Plate_SampledCurveConstraint(const Plate_SequenceOfPinpointConstraint& SOPPC, const Standard_Integer n);
-  
     const Plate_LinearXYZConstraint& LXYZC() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-  Plate_LinearXYZConstraint myLXYZC;
-
-
+    Plate_LinearXYZConstraint myLXYZC;
 };
 
-
 #include <Plate_SampledCurveConstraint.lxx>
-
-
-
-
 
 #endif // _Plate_SampledCurveConstraint_HeaderFile

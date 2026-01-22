@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Handle(Adaptor2d_Curve2d),TColStd_MapIntegerHasher> ChFiKPart_RstMap;
-typedef NCollection_DataMap<Standard_Integer,Handle(Adaptor2d_Curve2d),TColStd_MapIntegerHasher>::Iterator ChFiKPart_DataMapIteratorOfRstMap;
-
+typedef NCollection_DataMap<Standard_Integer, Handle(Adaptor2d_Curve2d), TColStd_MapIntegerHasher> ChFiKPart_RstMap;
+typedef NCollection_DataMap<Standard_Integer, Handle(Adaptor2d_Curve2d), TColStd_MapIntegerHasher>::Iterator
+    ChFiKPart_DataMapIteratorOfRstMap;
 
 #endif

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_ProgramError.hxx>
 #include <TopOpeBRepDS_CurvePointInterference.hxx>
 #include <TopOpeBRepDS_EdgeVertexInterference.hxx>
@@ -22,135 +21,114 @@
 #include <TopOpeBRepDS_PointIterator.hxx>
 
 //=======================================================================
-//function : TopOpeBRepDS_PointIterator
-//purpose  : 
+// function : TopOpeBRepDS_PointIterator
+// purpose  :
 //=======================================================================
-TopOpeBRepDS_PointIterator::TopOpeBRepDS_PointIterator
-  (const TopOpeBRepDS_ListOfInterference& L) :
-  TopOpeBRepDS_InterferenceIterator(L)
-{
-  Match();
+TopOpeBRepDS_PointIterator::TopOpeBRepDS_PointIterator(const TopOpeBRepDS_ListOfInterference& L)
+    : TopOpeBRepDS_InterferenceIterator(L) {
+    Match();
 }
 
 //=======================================================================
-//function : MatchInterference
-//purpose  : 
+// function : MatchInterference
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepDS_PointIterator::MatchInterference
-   (const Handle(TopOpeBRepDS_Interference)& I) const
-{
-  TopOpeBRepDS_Kind GT = I->GeometryType();
-  Standard_Boolean r = ( GT == TopOpeBRepDS_POINT) || ( GT == TopOpeBRepDS_VERTEX);
-  return r;
+Standard_Boolean TopOpeBRepDS_PointIterator::MatchInterference(const Handle(TopOpeBRepDS_Interference) & I) const {
+    TopOpeBRepDS_Kind GT = I->GeometryType();
+    Standard_Boolean r = (GT == TopOpeBRepDS_POINT) || (GT == TopOpeBRepDS_VERTEX);
+    return r;
 }
 
 //=======================================================================
-//function : Current
-//purpose  : 
+// function : Current
+// purpose  :
 //=======================================================================
 
-Standard_Integer  TopOpeBRepDS_PointIterator::Current()const 
-{
-  return Value()->Geometry();
-}
-
-
-//=======================================================================
-//function : Orientation
-//purpose  : 
-//=======================================================================
-
-TopAbs_Orientation  TopOpeBRepDS_PointIterator::Orientation
-  (const TopAbs_State S)const 
-{
-  Handle(TopOpeBRepDS_Interference) I = Value();
-  const TopOpeBRepDS_Transition& T = I->Transition();
-  TopAbs_Orientation o = T.Orientation(S);
-  return o;
-}
-
-
-//=======================================================================
-//function : Parameter
-//purpose  : 
-//=======================================================================
-
-Standard_Real  TopOpeBRepDS_PointIterator::Parameter()const 
-{
-  const Handle(TopOpeBRepDS_Interference)& I = Value();
-  Handle(Standard_Type) T = I->DynamicType(); 
-  if      ( T == STANDARD_TYPE(TopOpeBRepDS_CurvePointInterference) ) { 
-    return Handle(TopOpeBRepDS_CurvePointInterference)::DownCast (I)->Parameter();
-  }
-  else if ( T == STANDARD_TYPE(TopOpeBRepDS_EdgeVertexInterference) ) {
-    return Handle(TopOpeBRepDS_EdgeVertexInterference)::DownCast (I)->Parameter();
-  }
-  else {
-    throw Standard_ProgramError("TopOpeBRepDS_PointIterator::Parameter()");
-  }
+Standard_Integer TopOpeBRepDS_PointIterator::Current() const {
+    return Value()->Geometry();
 }
 
 //=======================================================================
-//function : IsVertex
-//purpose  : 
+// function : Orientation
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepDS_PointIterator::IsVertex() const 
-{
-  return (Value()->GeometryType() == TopOpeBRepDS_VERTEX);
+TopAbs_Orientation TopOpeBRepDS_PointIterator::Orientation(const TopAbs_State S) const {
+    Handle(TopOpeBRepDS_Interference) I = Value();
+    const TopOpeBRepDS_Transition& T = I->Transition();
+    TopAbs_Orientation o = T.Orientation(S);
+    return o;
 }
 
 //=======================================================================
-//function : IsPoint
-//purpose  : 
+// function : Parameter
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepDS_PointIterator::IsPoint() const 
-{
-  return (Value()->GeometryType() == TopOpeBRepDS_POINT);
+Standard_Real TopOpeBRepDS_PointIterator::Parameter() const {
+    const Handle(TopOpeBRepDS_Interference) & I = Value();
+    Handle(Standard_Type) T = I->DynamicType();
+    if (T == STANDARD_TYPE(TopOpeBRepDS_CurvePointInterference)) {
+        return Handle(TopOpeBRepDS_CurvePointInterference)::DownCast(I)->Parameter();
+    } else if (T == STANDARD_TYPE(TopOpeBRepDS_EdgeVertexInterference)) {
+        return Handle(TopOpeBRepDS_EdgeVertexInterference)::DownCast(I)->Parameter();
+    } else {
+        throw Standard_ProgramError("TopOpeBRepDS_PointIterator::Parameter()");
+    }
 }
 
 //=======================================================================
-//function : DiffOriented
-//purpose  : 
+// function : IsVertex
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepDS_PointIterator::DiffOriented() const 
-{
-  const Handle(TopOpeBRepDS_Interference)& I = Value();
-  if ( I->DynamicType() == STANDARD_TYPE(TopOpeBRepDS_EdgeVertexInterference) ) {
-    return Handle(TopOpeBRepDS_EdgeVertexInterference)::DownCast (I)
-      ->Config() == TopOpeBRepDS_DIFFORIENTED;
-  }
-  else {
-    throw Standard_ProgramError("TopOpeBRepDS_PointIterator::DiffOriented()");
-  }
+Standard_Boolean TopOpeBRepDS_PointIterator::IsVertex() const {
+    return (Value()->GeometryType() == TopOpeBRepDS_VERTEX);
 }
 
 //=======================================================================
-//function : SameOriented
-//purpose  : 
+// function : IsPoint
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopOpeBRepDS_PointIterator::SameOriented() const 
-{
-  const Handle(TopOpeBRepDS_Interference)& I = Value();
-  if ( I->DynamicType() == STANDARD_TYPE(TopOpeBRepDS_EdgeVertexInterference) ) {
-    return Handle(TopOpeBRepDS_EdgeVertexInterference)::DownCast (I)
-      ->Config() == TopOpeBRepDS_SAMEORIENTED;
-  }
-  else {
-    throw Standard_ProgramError("TopOpeBRepDS_PointIterator::SameOriented()");
-  }
+Standard_Boolean TopOpeBRepDS_PointIterator::IsPoint() const {
+    return (Value()->GeometryType() == TopOpeBRepDS_POINT);
 }
 
 //=======================================================================
-//function : Support
-//purpose  : 
+// function : DiffOriented
+// purpose  :
 //=======================================================================
 
-Standard_Integer TopOpeBRepDS_PointIterator::Support() const 
-{
-  return (Value()->Support());
+Standard_Boolean TopOpeBRepDS_PointIterator::DiffOriented() const {
+    const Handle(TopOpeBRepDS_Interference) & I = Value();
+    if (I->DynamicType() == STANDARD_TYPE(TopOpeBRepDS_EdgeVertexInterference)) {
+        return Handle(TopOpeBRepDS_EdgeVertexInterference)::DownCast(I)->Config() == TopOpeBRepDS_DIFFORIENTED;
+    } else {
+        throw Standard_ProgramError("TopOpeBRepDS_PointIterator::DiffOriented()");
+    }
+}
+
+//=======================================================================
+// function : SameOriented
+// purpose  :
+//=======================================================================
+
+Standard_Boolean TopOpeBRepDS_PointIterator::SameOriented() const {
+    const Handle(TopOpeBRepDS_Interference) & I = Value();
+    if (I->DynamicType() == STANDARD_TYPE(TopOpeBRepDS_EdgeVertexInterference)) {
+        return Handle(TopOpeBRepDS_EdgeVertexInterference)::DownCast(I)->Config() == TopOpeBRepDS_SAMEORIENTED;
+    } else {
+        throw Standard_ProgramError("TopOpeBRepDS_PointIterator::SameOriented()");
+    }
+}
+
+//=======================================================================
+// function : Support
+// purpose  :
+//=======================================================================
+
+Standard_Integer TopOpeBRepDS_PointIterator::Support() const {
+    return (Value()->Support());
 }

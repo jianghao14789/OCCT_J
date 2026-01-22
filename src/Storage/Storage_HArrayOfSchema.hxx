@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(Storage_HArrayOfSchema, Storage_ArrayOfSchema)
 
-
 #endif

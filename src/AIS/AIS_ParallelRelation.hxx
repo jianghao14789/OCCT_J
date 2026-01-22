@@ -16,7 +16,6 @@
 
 #include <PrsDim_ParallelRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_ParallelRelation AIS_ParallelRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_ParallelRelation AIS_ParallelRelation;
 
 #endif // _AIS_ParallelRelation_HeaderFile

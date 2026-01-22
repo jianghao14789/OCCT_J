@@ -28,44 +28,22 @@ class StepShape_HalfSpaceSolid;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for HalfSpaceSolid
-class RWStepShape_RWHalfSpaceSolid 
-{
+class RWStepShape_RWHalfSpaceSolid {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWHalfSpaceSolid();
 
-  
-  Standard_EXPORT RWStepShape_RWHalfSpaceSolid();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_HalfSpaceSolid)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_HalfSpaceSolid)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_HalfSpaceSolid)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_HalfSpaceSolid) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_HalfSpaceSolid) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_HalfSpaceSolid) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWHalfSpaceSolid_HeaderFile

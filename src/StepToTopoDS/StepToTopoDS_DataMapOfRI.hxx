@@ -22,8 +22,9 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(StepRepr_RepresentationItem),TopoDS_Shape,TColStd_MapTransientHasher> StepToTopoDS_DataMapOfRI;
-typedef NCollection_DataMap<Handle(StepRepr_RepresentationItem),TopoDS_Shape,TColStd_MapTransientHasher>::Iterator StepToTopoDS_DataMapIteratorOfDataMapOfRI;
-
+typedef NCollection_DataMap<Handle(StepRepr_RepresentationItem), TopoDS_Shape, TColStd_MapTransientHasher>
+    StepToTopoDS_DataMapOfRI;
+typedef NCollection_DataMap<Handle(StepRepr_RepresentationItem), TopoDS_Shape, TColStd_MapTransientHasher>::Iterator
+    StepToTopoDS_DataMapIteratorOfDataMapOfRI;
 
 #endif

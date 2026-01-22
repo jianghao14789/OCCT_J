@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepDimTol_CoaxialityTolerance.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_CoaxialityTolerance,StepDimTol_GeometricToleranceWithDatumReference)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_CoaxialityTolerance, StepDimTol_GeometricToleranceWithDatumReference)
 
 //=======================================================================
-//function : StepDimTol_CoaxialityTolerance
-//purpose  : 
+// function : StepDimTol_CoaxialityTolerance
+// purpose  :
 //=======================================================================
-StepDimTol_CoaxialityTolerance::StepDimTol_CoaxialityTolerance ()
-{
-}
+StepDimTol_CoaxialityTolerance::StepDimTol_CoaxialityTolerance() {}

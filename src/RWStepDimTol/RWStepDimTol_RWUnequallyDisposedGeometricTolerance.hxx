@@ -28,25 +28,25 @@ class StepDimTol_UnequallyDisposedGeometricTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for UnequallyDisposedGeometricTolerance
-class RWStepDimTol_RWUnequallyDisposedGeometricTolerance 
-{
+class RWStepDimTol_RWUnequallyDisposedGeometricTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWUnequallyDisposedGeometricTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWUnequallyDisposedGeometricTolerance();
-  
-  //! Reads UnequallyDisposedGeometricTolerance
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_UnequallyDisposedGeometricTolerance)& ent)  const;
-  
-  //! Writes UnequallyDisposedGeometricTolerance
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_UnequallyDisposedGeometricTolerance)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_UnequallyDisposedGeometricTolerance)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads UnequallyDisposedGeometricTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_UnequallyDisposedGeometricTolerance) & ent) const;
+
+    //! Writes UnequallyDisposedGeometricTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_UnequallyDisposedGeometricTolerance) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_UnequallyDisposedGeometricTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWUnequallyDisposedGeometricTolerance_HeaderFile

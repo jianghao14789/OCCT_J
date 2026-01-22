@@ -18,23 +18,15 @@
 #include <NCollection_DataMap.hxx>
 #include <TCollection_AsciiString.hxx>
 
-
 class StdObjMgt_MapOfInstantiators
-  : public NCollection_DataMap<TCollection_AsciiString,
-                               StdObjMgt_Persistent::Instantiator,
-                               TCollection_AsciiString>
-{
+    : public NCollection_DataMap<TCollection_AsciiString, StdObjMgt_Persistent::Instantiator, TCollection_AsciiString> {
 public:
-  template <class Persistent>
-  void Bind (const TCollection_AsciiString& theTypeName)
-  {
-    NCollection_DataMap<TCollection_AsciiString,
-                        StdObjMgt_Persistent::Instantiator,
-                        TCollection_AsciiString>
-      ::Bind (theTypeName, Persistent::template Instantiate<Persistent>);
-  }
+    template <class Persistent> void Bind(const TCollection_AsciiString& theTypeName) {
+        NCollection_DataMap<TCollection_AsciiString, StdObjMgt_Persistent::Instantiator, TCollection_AsciiString>::Bind(
+            theTypeName, Persistent::template Instantiate<Persistent>);
+    }
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 };
 
 #endif // _StdObjMgt_MapOfInstantiators_HeaderFile

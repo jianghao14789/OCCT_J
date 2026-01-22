@@ -27,12 +27,11 @@
 //! The last edge which you attempted to add was not connected to the wire.
 //! -      BRepBuilderAPI_NonManifoldWire
 //! The wire with some singularity.
-enum BRepBuilderAPI_WireError
-{
-BRepBuilderAPI_WireDone,
-BRepBuilderAPI_EmptyWire,
-BRepBuilderAPI_DisconnectedWire,
-BRepBuilderAPI_NonManifoldWire
+enum BRepBuilderAPI_WireError {
+    BRepBuilderAPI_WireDone,
+    BRepBuilderAPI_EmptyWire,
+    BRepBuilderAPI_DisconnectedWire,
+    BRepBuilderAPI_NonManifoldWire
 };
 
 #endif // _BRepBuilderAPI_WireError_HeaderFile

@@ -26,7 +26,6 @@
 
 class gp_Pln;
 
-
 //! The   GeomAPI   package  provides  an  Application
 //! Programming Interface for the Geometry.
 //!
@@ -61,65 +60,43 @@ class gp_Pln;
 //!
 //! GeomAPI_ProjectPointOnCurve PonC(P,C);
 //! D = PonC.LowerDistance();
-class GeomAPI 
-{
+class GeomAPI {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! This function builds (in the
+    //! parametric space of the plane P) a 2D curve equivalent to the 3D curve
+    //! C. The 3D curve C is considered to be located in the plane P.
+    //! Warning
+    //! The 3D curve C must be of one of the following types:
+    //! -      a line
+    //! -      a circle
+    //! -      an ellipse
+    //! -      a hyperbola
+    //! -      a parabola
+    //! -      a Bezier curve
+    //! -      a BSpline curve
+    //! Exceptions Standard_NoSuchObject if C is not a defined type curve.
+    Standard_EXPORT static Handle(Geom2d_Curve) To2d(const Handle(Geom_Curve) & C, const gp_Pln& P);
 
-  
-  //! This function builds (in the
-  //! parametric space of the plane P) a 2D curve equivalent to the 3D curve
-  //! C. The 3D curve C is considered to be located in the plane P.
-  //! Warning
-  //! The 3D curve C must be of one of the following types:
-  //! -      a line
-  //! -      a circle
-  //! -      an ellipse
-  //! -      a hyperbola
-  //! -      a parabola
-  //! -      a Bezier curve
-  //! -      a BSpline curve
-  //! Exceptions Standard_NoSuchObject if C is not a defined type curve.
-  Standard_EXPORT static Handle(Geom2d_Curve) To2d (const Handle(Geom_Curve)& C, const gp_Pln& P);
-  
-  //! Builds a 3D curve equivalent to the 2D curve C
-  //! described in the parametric space defined by the local
-  //! coordinate system of plane P.
-  //! The resulting 3D curve is of the same nature as that of the curve C.
-  Standard_EXPORT static Handle(Geom_Curve) To3d (const Handle(Geom2d_Curve)& C, const gp_Pln& P);
-
-
-
+    //! Builds a 3D curve equivalent to the 2D curve C
+    //! described in the parametric space defined by the local
+    //! coordinate system of plane P.
+    //! The resulting 3D curve is of the same nature as that of the curve C.
+    Standard_EXPORT static Handle(Geom_Curve) To3d(const Handle(Geom2d_Curve) & C, const gp_Pln& P);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class GeomAPI_ProjectPointOnCurve;
-friend class GeomAPI_ProjectPointOnSurf;
-friend class GeomAPI_ExtremaCurveCurve;
-friend class GeomAPI_ExtremaCurveSurface;
-friend class GeomAPI_ExtremaSurfaceSurface;
-friend class GeomAPI_PointsToBSpline;
-friend class GeomAPI_PointsToBSplineSurface;
-friend class GeomAPI_Interpolate;
-friend class GeomAPI_IntSS;
-friend class GeomAPI_IntCS;
-
+    friend class GeomAPI_ProjectPointOnCurve;
+    friend class GeomAPI_ProjectPointOnSurf;
+    friend class GeomAPI_ExtremaCurveCurve;
+    friend class GeomAPI_ExtremaCurveSurface;
+    friend class GeomAPI_ExtremaSurfaceSurface;
+    friend class GeomAPI_PointsToBSpline;
+    friend class GeomAPI_PointsToBSplineSurface;
+    friend class GeomAPI_Interpolate;
+    friend class GeomAPI_IntSS;
+    friend class GeomAPI_IntCS;
 };
-
-
-
-
-
-
 
 #endif // _GeomAPI_HeaderFile

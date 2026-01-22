@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <IFSelect_Functions.hxx>
 #include <IFSelect_SessionPilot.hxx>
 #include <IFSelect_ShareOut.hxx>
@@ -24,32 +23,26 @@
 #include <Interface_Graph.hxx>
 #include <Interface_Macros.hxx>
 
-void  IGESSelect::Run ()
-{
-//  Handle(IFSelect_BasicActivator) Activator = new IFSelect_BasicActivator;
-  IFSelect_Functions::Init();
-  Handle(IFSelect_SessionPilot)   pilot = new IFSelect_SessionPilot("XSTEP-IGES>");
-  Handle(IGESSelect_Activator)    igesact = new IGESSelect_Activator;
-  pilot->SetSession (new IFSelect_WorkSession ( ));
-  pilot->SetLibrary (new IGESSelect_WorkLibrary);
+void IGESSelect::Run() {
+    //  Handle(IFSelect_BasicActivator) Activator = new IFSelect_BasicActivator;
+    IFSelect_Functions::Init();
+    Handle(IFSelect_SessionPilot) pilot = new IFSelect_SessionPilot("XSTEP-IGES>");
+    Handle(IGESSelect_Activator) igesact = new IGESSelect_Activator;
+    pilot->SetSession(new IFSelect_WorkSession());
+    pilot->SetLibrary(new IGESSelect_WorkLibrary);
 
-  pilot->ReadScript();
+    pilot->ReadScript();
 }
 
+Standard_Integer IGESSelect::WhatIges(const Handle(IGESData_IGESEntity) & ent, const Interface_Graph& G,
+                                      Handle(IGESData_IGESEntity) & /* sup */, Standard_Integer& /* index */) {
+    Handle(IGESData_IGESEntity) igesent = ent;
+    if (igesent.IsNull()) return Standard_False;
+    //  Standard_Integer igt = igesent->TypeNumber();
+    DeclareAndCast(IGESData_IGESModel, model, G.Model());
+    if (igesent.IsNull() || model.IsNull()) return 0;
 
-Standard_Integer  IGESSelect::WhatIges
-  (const Handle(IGESData_IGESEntity)& ent, const Interface_Graph& G,
-   Handle(IGESData_IGESEntity)& /* sup */, Standard_Integer& /* index */)
-{
-  Handle(IGESData_IGESEntity) igesent = ent;
-  if (igesent.IsNull()) return Standard_False;
-//  Standard_Integer igt = igesent->TypeNumber();
-  DeclareAndCast(IGESData_IGESModel,model,G.Model());
-  if (igesent.IsNull() || model.IsNull()) return 0;
+    //  Plane : de View ? de SingleParent ?  sinon cf TrimmedSurface & cie
 
-//  Plane : de View ? de SingleParent ?  sinon cf TrimmedSurface & cie
-
-    
-
-  return 0;
+    return 0;
 }

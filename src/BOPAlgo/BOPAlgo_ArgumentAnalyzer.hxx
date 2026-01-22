@@ -28,14 +28,10 @@
 #include <Standard_Real.hxx>
 #include <TopAbs_ShapeEnum.hxx>
 
-
 //! check the validity of argument(s) for Boolean Operations
-class BOPAlgo_ArgumentAnalyzer : public BOPAlgo_Algo
-{
+class BOPAlgo_ArgumentAnalyzer : public BOPAlgo_Algo {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! empty constructor
     Standard_EXPORT BOPAlgo_ArgumentAnalyzer();
@@ -104,10 +100,7 @@ public:
     //! returns a result of test
     Standard_EXPORT const BOPAlgo_ListOfCheckResult& GetCheckResult() const;
 
-
 protected:
-
-
     //! Prepares data;
     Standard_EXPORT void Prepare();
 
@@ -131,10 +124,7 @@ protected:
 
     Standard_EXPORT void TestCurveOnSurface();
 
-
 private:
-
-
     TopoDS_Shape myShape1;
     TopoDS_Shape myShape2;
     Standard_Boolean myStopOnFirst;
@@ -151,11 +141,8 @@ private:
     Standard_Boolean myEmpty1;
     Standard_Boolean myEmpty2;
     BOPAlgo_ListOfCheckResult myResult;
-
 };
 
-
 #include <BOPAlgo_ArgumentAnalyzer.lxx>
-
 
 #endif // _BOPAlgo_ArgumentAnalyzer_HeaderFile

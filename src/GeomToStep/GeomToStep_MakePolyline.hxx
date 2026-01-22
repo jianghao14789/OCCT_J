@@ -26,44 +26,21 @@
 #include <TColgp_Array1OfPnt2d.hxx>
 class StepGeom_Polyline;
 
-
 //! This class implements the mapping between an Array1 of points
 //! from gp and a Polyline from StepGeom.
-class GeomToStep_MakePolyline  : public GeomToStep_Root
-{
+class GeomToStep_MakePolyline : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakePolyline(const TColgp_Array1OfPnt& P);
 
-  
-  Standard_EXPORT GeomToStep_MakePolyline(const TColgp_Array1OfPnt& P);
-  
-  Standard_EXPORT GeomToStep_MakePolyline(const TColgp_Array1OfPnt2d& P);
-  
-  Standard_EXPORT const Handle(StepGeom_Polyline)& Value() const;
+    Standard_EXPORT GeomToStep_MakePolyline(const TColgp_Array1OfPnt2d& P);
 
-
-
+    Standard_EXPORT const Handle(StepGeom_Polyline) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_Polyline) thePolyline;
-
-
+    Handle(StepGeom_Polyline) thePolyline;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakePolyline_HeaderFile

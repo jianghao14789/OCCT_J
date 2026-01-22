@@ -27,42 +27,20 @@ class Interface_Check;
 class StepBasic_CalendarDate;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for CalendarDate
-class RWStepBasic_RWCalendarDate 
-{
+class RWStepBasic_RWCalendarDate {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWCalendarDate();
 
-  
-  Standard_EXPORT RWStepBasic_RWCalendarDate();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_CalendarDate)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_CalendarDate)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_CalendarDate) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_CalendarDate) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWCalendarDate_HeaderFile

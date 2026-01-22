@@ -19,44 +19,39 @@
 #include <StepElement_SurfaceSection.hxx>
 #include <StepElement_SurfaceSectionFieldConstant.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceSectionFieldConstant,StepElement_SurfaceSectionField)
+IMPLEMENT_STANDARD_RTTIEXT(StepElement_SurfaceSectionFieldConstant, StepElement_SurfaceSectionField)
 
 //=======================================================================
-//function : StepElement_SurfaceSectionFieldConstant
-//purpose  : 
+// function : StepElement_SurfaceSectionFieldConstant
+// purpose  :
 //=======================================================================
-StepElement_SurfaceSectionFieldConstant::StepElement_SurfaceSectionFieldConstant ()
-{
+StepElement_SurfaceSectionFieldConstant::StepElement_SurfaceSectionFieldConstant() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepElement_SurfaceSectionFieldConstant::Init(const Handle(StepElement_SurfaceSection) & aDefinition) {
+    //  StepElement_SurfaceSectionField::Init();
+
+    theDefinition = aDefinition;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Definition
+// purpose  :
 //=======================================================================
 
-void StepElement_SurfaceSectionFieldConstant::Init (const Handle(StepElement_SurfaceSection) &aDefinition)
-{
-//  StepElement_SurfaceSectionField::Init();
-
-  theDefinition = aDefinition;
+Handle(StepElement_SurfaceSection) StepElement_SurfaceSectionFieldConstant::Definition() const {
+    return theDefinition;
 }
 
 //=======================================================================
-//function : Definition
-//purpose  : 
+// function : SetDefinition
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_SurfaceSection) StepElement_SurfaceSectionFieldConstant::Definition () const
-{
-  return theDefinition;
-}
-
-//=======================================================================
-//function : SetDefinition
-//purpose  : 
-//=======================================================================
-
-void StepElement_SurfaceSectionFieldConstant::SetDefinition (const Handle(StepElement_SurfaceSection) &aDefinition)
-{
-  theDefinition = aDefinition;
+void StepElement_SurfaceSectionFieldConstant::SetDefinition(const Handle(StepElement_SurfaceSection) & aDefinition) {
+    theDefinition = aDefinition;
 }

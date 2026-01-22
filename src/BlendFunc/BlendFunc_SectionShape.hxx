@@ -17,13 +17,6 @@
 #ifndef _BlendFunc_SectionShape_HeaderFile
 #define _BlendFunc_SectionShape_HeaderFile
 
-
-enum BlendFunc_SectionShape
-{
-BlendFunc_Rational,
-BlendFunc_QuasiAngular,
-BlendFunc_Polynomial,
-BlendFunc_Linear
-};
+enum BlendFunc_SectionShape { BlendFunc_Rational, BlendFunc_QuasiAngular, BlendFunc_Polynomial, BlendFunc_Linear };
 
 #endif // _BlendFunc_SectionShape_HeaderFile

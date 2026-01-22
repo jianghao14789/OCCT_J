@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
 #include <BRepBuilderAPI.hxx>
@@ -31,43 +30,36 @@
 #include <TopTools_MapOfShape.hxx>
 
 //=======================================================================
-//function : Plane
-//purpose  : 
+// function : Plane
+// purpose  :
 //=======================================================================
-void  BRepBuilderAPI::Plane(const Handle(Geom_Plane)& P)
-{
-  BRepLib::Plane(P);
+void BRepBuilderAPI::Plane(const Handle(Geom_Plane) & P) {
+    BRepLib::Plane(P);
 }
 
-
 //=======================================================================
-//function : Plane
-//purpose  : 
+// function : Plane
+// purpose  :
 //=======================================================================
 
-const Handle(Geom_Plane)&  BRepBuilderAPI::Plane()
-{
-  return BRepLib::Plane();
+const Handle(Geom_Plane) & BRepBuilderAPI::Plane() {
+    return BRepLib::Plane();
 }
 
-
 //=======================================================================
-//function : Precision
-//purpose  : 
+// function : Precision
+// purpose  :
 //=======================================================================
 
-void  BRepBuilderAPI::Precision(const Standard_Real P)
-{
-  BRepLib::Precision(P);
+void BRepBuilderAPI::Precision(const Standard_Real P) {
+    BRepLib::Precision(P);
 }
 
-
 //=======================================================================
-//function : Precision
-//purpose  : 
+// function : Precision
+// purpose  :
 //=======================================================================
 
-Standard_Real  BRepBuilderAPI::Precision()
-{
-  return BRepLib::Precision();
+Standard_Real BRepBuilderAPI::Precision() {
+    return BRepLib::Precision();
 }

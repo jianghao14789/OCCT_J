@@ -28,44 +28,25 @@ class StepVisual_ContextDependentInvisibility;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ContextDependentInvisibility
-class RWStepVisual_RWContextDependentInvisibility 
-{
+class RWStepVisual_RWContextDependentInvisibility {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWContextDependentInvisibility();
 
-  
-  Standard_EXPORT RWStepVisual_RWContextDependentInvisibility();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_ContextDependentInvisibility)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_ContextDependentInvisibility)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_ContextDependentInvisibility)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_ContextDependentInvisibility) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepVisual_ContextDependentInvisibility) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepVisual_ContextDependentInvisibility) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepVisual_RWContextDependentInvisibility_HeaderFile

@@ -22,32 +22,28 @@
  * Purpose:     Abstract list node class. Used by BaseList
  * Remark:      Internal class
  */
-template <class TheItemType> class NCollection_TListNode
-    : public NCollection_ListNode
-{
+template <class TheItemType> class NCollection_TListNode : public NCollection_ListNode {
 public:
     //! Constructor
-    NCollection_TListNode(const TheItemType& theItem,
-        NCollection_ListNode* theNext = NULL) :
-        NCollection_ListNode(theNext), myValue(theItem) {
-    }
+    NCollection_TListNode(const TheItemType& theItem, NCollection_ListNode* theNext = NULL)
+        : NCollection_ListNode(theNext), myValue(theItem) {}
     //! Constant value access
-    const TheItemType& Value() const { return myValue; }
+    const TheItemType& Value() const {
+        return myValue;
+    }
     //! Variable value access
-    TheItemType& ChangeValue() { return myValue; }
+    TheItemType& ChangeValue() {
+        return myValue;
+    }
 
     //! Static deleter to be passed to BaseList
-    static void delNode(NCollection_ListNode* theNode,
-        Handle(NCollection_BaseAllocator)& theAl)
-    {
+    static void delNode(NCollection_ListNode* theNode, Handle(NCollection_BaseAllocator) & theAl) {
         ((NCollection_TListNode*)theNode)->myValue.~TheItemType();
         theAl->Free(theNode);
     }
 
-
 protected:
-    TheItemType    myValue; //!< The item stored in the node
-
+    TheItemType myValue; //!< The item stored in the node
 };
 
 #endif

@@ -28,48 +28,26 @@ class StepRepr_ConfigurationItem;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ConfigurationItem
-class RWStepRepr_RWConfigurationItem 
-{
+class RWStepRepr_RWConfigurationItem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWConfigurationItem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWConfigurationItem();
-  
-  //! Reads ConfigurationItem
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_ConfigurationItem)& ent) const;
-  
-  //! Writes ConfigurationItem
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_ConfigurationItem)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_ConfigurationItem)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ConfigurationItem
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_ConfigurationItem) & ent) const;
 
+    //! Writes ConfigurationItem
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_ConfigurationItem) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_ConfigurationItem) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWConfigurationItem_HeaderFile

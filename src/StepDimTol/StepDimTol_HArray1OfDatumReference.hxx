@@ -22,5 +22,4 @@
 
 DEFINE_HARRAY1(StepDimTol_HArray1OfDatumReference, StepDimTol_Array1OfDatumReference)
 
-
 #endif

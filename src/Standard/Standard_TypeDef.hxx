@@ -19,24 +19,24 @@
 #include <ctime>
 
 // VC9 does not have stdint.h
-#if(defined(_MSC_VER) && (_MSC_VER < 1600))
-  // old MSVC - hasn't stdint header
-typedef unsigned __int8   uint8_t;
-typedef unsigned __int16  uint16_t;
-typedef unsigned __int32  uint32_t;
-typedef unsigned __int64  uint64_t;
+#if (defined(_MSC_VER) && (_MSC_VER < 1600))
+// old MSVC - hasn't stdint header
+typedef unsigned __int8 uint8_t;
+typedef unsigned __int16 uint16_t;
+typedef unsigned __int32 uint32_t;
+typedef unsigned __int64 uint64_t;
 
-typedef signed __int8   int8_t;
-typedef signed __int16  int16_t;
-typedef signed __int32  int32_t;
-typedef signed __int64  int64_t;
+typedef signed __int8 int8_t;
+typedef signed __int16 int16_t;
+typedef signed __int32 int32_t;
+typedef signed __int64 int64_t;
 #else
 #include <stdint.h>
 #endif
 
-#if(defined(_MSC_VER) && (_MSC_VER < 1800))
-  // only Visual Studio 2013 (vc12) provides <cinttypes> header
-  // we do not defined all macros here - only used by OCCT framework
+#if (defined(_MSC_VER) && (_MSC_VER < 1800))
+// only Visual Studio 2013 (vc12) provides <cinttypes> header
+// we do not defined all macros here - only used by OCCT framework
 #define PRIx64 "I64x"
 #define PRIX64 "I64X"
 #define PRId64 "I64d"
@@ -59,8 +59,8 @@ typedef signed __int64  int64_t;
 #define SCNuPTR "u"
 #endif
 #else
-  // should be just <cinttypes> since C++11
-  // however we use this code for compatibility with old C99 compilers
+// should be just <cinttypes> since C++11
+// however we use this code for compatibility with old C99 compilers
 #ifndef __STDC_FORMAT_MACROS
 #define __STDC_FORMAT_MACROS
 #endif
@@ -68,34 +68,35 @@ typedef signed __int64  int64_t;
 #endif
 
 #define Standard_False false
-#define Standard_True  true
+#define Standard_True true
 
 #include <Standard_Macro.hxx>
 
-typedef int           Standard_Integer;
-typedef double        Standard_Real;
-typedef bool          Standard_Boolean;
-typedef float         Standard_ShortReal;
-typedef char          Standard_Character;
+typedef int Standard_Integer;
+typedef double Standard_Real;
+typedef bool Standard_Boolean;
+typedef float Standard_ShortReal;
+typedef char Standard_Character;
 typedef unsigned char Standard_Byte;
 typedef void* Standard_Address;
-typedef size_t        Standard_Size;
-typedef std::time_t   Standard_Time;
+typedef size_t Standard_Size;
+typedef std::time_t Standard_Time;
 
 // Unicode primitives, char16_t, char32_t
-typedef char          Standard_Utf8Char;     //!< signed   UTF-8 char
-typedef unsigned char Standard_Utf8UChar;    //!< unsigned UTF-8 char
-#if ((defined(__GNUC__) && !defined(__clang__) && ((__GNUC__ == 4 && __GNUC_MINOR__ <= 3) || __GNUC__ < 4)) || (defined(_MSC_VER) && (_MSC_VER < 1600)))
+typedef char Standard_Utf8Char;           //!< signed   UTF-8 char
+typedef unsigned char Standard_Utf8UChar; //!< unsigned UTF-8 char
+#if ((defined(__GNUC__) && !defined(__clang__) && ((__GNUC__ == 4 && __GNUC_MINOR__ <= 3) || __GNUC__ < 4)) ||         \
+     (defined(_MSC_VER) && (_MSC_VER < 1600)))
 // compatibility with old GCC and MSVC compilers
-typedef uint16_t      Standard_ExtCharacter;
-typedef uint16_t      Standard_Utf16Char;
-typedef uint32_t      Standard_Utf32Char;
+typedef uint16_t Standard_ExtCharacter;
+typedef uint16_t Standard_Utf16Char;
+typedef uint32_t Standard_Utf32Char;
 #else
-typedef char16_t      Standard_ExtCharacter;
-typedef char16_t      Standard_Utf16Char;    //!< UTF-16 char (always unsigned)
-typedef char32_t      Standard_Utf32Char;    //!< UTF-32 char (always unsigned)
+typedef char16_t Standard_ExtCharacter;
+typedef char16_t Standard_Utf16Char; //!< UTF-16 char (always unsigned)
+typedef char32_t Standard_Utf32Char; //!< UTF-32 char (always unsigned)
 #endif
-typedef wchar_t       Standard_WideChar;     //!< wide char (unsigned UTF-16 on Windows platform and signed UTF-32 on Linux)
+typedef wchar_t Standard_WideChar; //!< wide char (unsigned UTF-16 on Windows platform and signed UTF-32 on Linux)
 
 //
 typedef const Standard_Character* Standard_CString;

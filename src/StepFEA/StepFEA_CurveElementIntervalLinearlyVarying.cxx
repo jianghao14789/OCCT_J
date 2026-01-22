@@ -20,47 +20,44 @@
 #include <StepFEA_CurveElementIntervalLinearlyVarying.hxx>
 #include <StepFEA_CurveElementLocation.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_CurveElementIntervalLinearlyVarying,StepFEA_CurveElementInterval)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_CurveElementIntervalLinearlyVarying, StepFEA_CurveElementInterval)
 
 //=======================================================================
-//function : StepFEA_CurveElementIntervalLinearlyVarying
-//purpose  : 
+// function : StepFEA_CurveElementIntervalLinearlyVarying
+// purpose  :
 //=======================================================================
-StepFEA_CurveElementIntervalLinearlyVarying::StepFEA_CurveElementIntervalLinearlyVarying ()
-{
+StepFEA_CurveElementIntervalLinearlyVarying::StepFEA_CurveElementIntervalLinearlyVarying() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_CurveElementIntervalLinearlyVarying::Init(
+    const Handle(StepFEA_CurveElementLocation) & aCurveElementInterval_FinishPosition,
+    const Handle(StepBasic_EulerAngles) & aCurveElementInterval_EuAngles,
+    const Handle(StepElement_HArray1OfCurveElementSectionDefinition) & aSections) {
+    StepFEA_CurveElementInterval::Init(aCurveElementInterval_FinishPosition, aCurveElementInterval_EuAngles);
+
+    theSections = aSections;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Sections
+// purpose  :
 //=======================================================================
 
-void StepFEA_CurveElementIntervalLinearlyVarying::Init (const Handle(StepFEA_CurveElementLocation) &aCurveElementInterval_FinishPosition,
-                                                        const Handle(StepBasic_EulerAngles) &aCurveElementInterval_EuAngles,
-                                                        const Handle(StepElement_HArray1OfCurveElementSectionDefinition) &aSections)
-{
-  StepFEA_CurveElementInterval::Init(aCurveElementInterval_FinishPosition,
-                                     aCurveElementInterval_EuAngles);
-
-  theSections = aSections;
+Handle(StepElement_HArray1OfCurveElementSectionDefinition)
+    StepFEA_CurveElementIntervalLinearlyVarying::Sections() const {
+    return theSections;
 }
 
 //=======================================================================
-//function : Sections
-//purpose  : 
+// function : SetSections
+// purpose  :
 //=======================================================================
 
-Handle(StepElement_HArray1OfCurveElementSectionDefinition) StepFEA_CurveElementIntervalLinearlyVarying::Sections () const
-{
-  return theSections;
-}
-
-//=======================================================================
-//function : SetSections
-//purpose  : 
-//=======================================================================
-
-void StepFEA_CurveElementIntervalLinearlyVarying::SetSections (const Handle(StepElement_HArray1OfCurveElementSectionDefinition) &aSections)
-{
-  theSections = aSections;
+void StepFEA_CurveElementIntervalLinearlyVarying::SetSections(
+    const Handle(StepElement_HArray1OfCurveElementSectionDefinition) & aSections) {
+    theSections = aSections;
 }

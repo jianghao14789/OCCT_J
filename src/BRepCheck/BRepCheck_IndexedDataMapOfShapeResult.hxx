@@ -22,7 +22,7 @@
 #include <TopTools_OrientedShapeMapHasher.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 
-typedef NCollection_IndexedDataMap<TopoDS_Shape,Handle(BRepCheck_Result),TopTools_OrientedShapeMapHasher> BRepCheck_IndexedDataMapOfShapeResult;
-
+typedef NCollection_IndexedDataMap<TopoDS_Shape, Handle(BRepCheck_Result), TopTools_OrientedShapeMapHasher>
+    BRepCheck_IndexedDataMapOfShapeResult;
 
 #endif

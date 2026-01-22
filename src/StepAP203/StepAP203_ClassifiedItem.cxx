@@ -22,42 +22,37 @@
 #include <StepRepr_AssemblyComponentUsage.hxx>
 
 //=======================================================================
-//function : StepAP203_ClassifiedItem
-//purpose  : 
+// function : StepAP203_ClassifiedItem
+// purpose  :
 //=======================================================================
-StepAP203_ClassifiedItem::StepAP203_ClassifiedItem ()
-{
+StepAP203_ClassifiedItem::StepAP203_ClassifiedItem() {}
+
+//=======================================================================
+// function : CaseNum
+// purpose  :
+//=======================================================================
+
+Standard_Integer StepAP203_ClassifiedItem::CaseNum(const Handle(Standard_Transient) & ent) const {
+    if (ent.IsNull()) return 0;
+    if (ent->IsKind(STANDARD_TYPE(StepBasic_ProductDefinitionFormation))) return 1;
+    if (ent->IsKind(STANDARD_TYPE(StepRepr_AssemblyComponentUsage))) return 2;
+    return 0;
 }
 
 //=======================================================================
-//function : CaseNum
-//purpose  : 
+// function : ProductDefinitionFormation
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepAP203_ClassifiedItem::CaseNum (const Handle(Standard_Transient)& ent) const
-{
-  if (ent.IsNull()) return 0;
-  if (ent->IsKind(STANDARD_TYPE(StepBasic_ProductDefinitionFormation))) return 1;
-  if (ent->IsKind(STANDARD_TYPE(StepRepr_AssemblyComponentUsage))) return 2;
-  return 0;
+Handle(StepBasic_ProductDefinitionFormation) StepAP203_ClassifiedItem::ProductDefinitionFormation() const {
+    return Handle(StepBasic_ProductDefinitionFormation)::DownCast(Value());
 }
 
 //=======================================================================
-//function : ProductDefinitionFormation
-//purpose  : 
+// function : AssemblyComponentUsage
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_ProductDefinitionFormation) StepAP203_ClassifiedItem::ProductDefinitionFormation () const
-{
-  return Handle(StepBasic_ProductDefinitionFormation)::DownCast(Value());
-}
-
-//=======================================================================
-//function : AssemblyComponentUsage
-//purpose  : 
-//=======================================================================
-
-Handle(StepRepr_AssemblyComponentUsage) StepAP203_ClassifiedItem::AssemblyComponentUsage () const
-{
-  return Handle(StepRepr_AssemblyComponentUsage)::DownCast(Value());
+Handle(StepRepr_AssemblyComponentUsage) StepAP203_ClassifiedItem::AssemblyComponentUsage() const {
+    return Handle(StepRepr_AssemblyComponentUsage)::DownCast(Value());
 }

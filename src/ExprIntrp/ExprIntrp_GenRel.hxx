@@ -25,18 +25,14 @@
 class Expr_GeneralRelation;
 class TCollection_AsciiString;
 
-
 class ExprIntrp_GenRel;
 DEFINE_STANDARD_HANDLE(ExprIntrp_GenRel, ExprIntrp_Generator)
 
 //! Implements an interpreter for equations or system
 //! of equations made of expressions of package Expr.
-class ExprIntrp_GenRel : public ExprIntrp_Generator
-{
+class ExprIntrp_GenRel : public ExprIntrp_Generator {
 
 public:
-
-
     Standard_EXPORT static Handle(ExprIntrp_GenRel) Create();
 
     //! Processes given string.
@@ -50,32 +46,15 @@ public:
     //! IsDone answers false.
     Standard_EXPORT Handle(Expr_GeneralRelation) Relation() const;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(ExprIntrp_GenRel, ExprIntrp_Generator)
 
 protected:
-
-
-
-
 private:
-
-
     //! Creates an empty generator
     Standard_EXPORT ExprIntrp_GenRel();
 
     Standard_Boolean done;
     Handle(Expr_GeneralRelation) myRelation;
-
-
 };
-
-
-
-
-
-
 
 #endif // _ExprIntrp_GenRel_HeaderFile

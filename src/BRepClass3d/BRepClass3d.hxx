@@ -24,46 +24,22 @@
 class TopoDS_Shell;
 class TopoDS_Solid;
 
-
-
-class BRepClass3d 
-{
+class BRepClass3d {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Returns the outer most shell of <S>. Returns a Null
-  //! shell if <S> has no outer shell.
-  //! If <S> has only one shell, then it will return, without checking orientation.
-  Standard_EXPORT static TopoDS_Shell OuterShell (const TopoDS_Solid& S);
-
-
-
+    //! Returns the outer most shell of <S>. Returns a Null
+    //! shell if <S> has no outer shell.
+    //! If <S> has only one shell, then it will return, without checking orientation.
+    Standard_EXPORT static TopoDS_Shell OuterShell(const TopoDS_Solid& S);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class BRepClass3d_Intersector3d;
-friend class BRepClass3d_SolidExplorer;
-friend class BRepClass3d_SolidPassiveClassifier;
-friend class BRepClass3d_SClassifier;
-friend class BRepClass3d_SolidClassifier;
-
+    friend class BRepClass3d_Intersector3d;
+    friend class BRepClass3d_SolidExplorer;
+    friend class BRepClass3d_SolidPassiveClassifier;
+    friend class BRepClass3d_SClassifier;
+    friend class BRepClass3d_SolidClassifier;
 };
-
-
-
-
-
-
 
 #endif // _BRepClass3d_HeaderFile

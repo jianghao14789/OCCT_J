@@ -18,19 +18,18 @@
 #define _GProp_ValueType_HeaderFile
 
 //! Algorithmes :
-enum GProp_ValueType
-{
-GProp_Mass,
-GProp_CenterMassX,
-GProp_CenterMassY,
-GProp_CenterMassZ,
-GProp_InertiaXX,
-GProp_InertiaYY,
-GProp_InertiaZZ,
-GProp_InertiaXY,
-GProp_InertiaXZ,
-GProp_InertiaYZ,
-GProp_Unknown
+enum GProp_ValueType {
+    GProp_Mass,
+    GProp_CenterMassX,
+    GProp_CenterMassY,
+    GProp_CenterMassZ,
+    GProp_InertiaXX,
+    GProp_InertiaYY,
+    GProp_InertiaZZ,
+    GProp_InertiaXY,
+    GProp_InertiaXZ,
+    GProp_InertiaYZ,
+    GProp_Unknown
 };
 
 #endif // _GProp_ValueType_HeaderFile

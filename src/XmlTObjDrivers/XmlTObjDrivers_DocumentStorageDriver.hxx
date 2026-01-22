@@ -22,31 +22,26 @@
 #include <XmlLDrivers_DocumentStorageDriver.hxx>
 #include <XmlMDF_ADriverTable.hxx>
 
-
 //  Block of comments describing class XmlTObjDrivers_DocumentStorageDriver
 //
 
-class XmlTObjDrivers_DocumentStorageDriver :
-  public XmlLDrivers_DocumentStorageDriver
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class XmlTObjDrivers_DocumentStorageDriver : public XmlLDrivers_DocumentStorageDriver {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  Standard_EXPORT XmlTObjDrivers_DocumentStorageDriver
-                        (const TCollection_ExtendedString& theCopyright);
-  // Constructor
+    Standard_EXPORT XmlTObjDrivers_DocumentStorageDriver(const TCollection_ExtendedString& theCopyright);
+    // Constructor
 
-  Standard_EXPORT virtual Handle(XmlMDF_ADriverTable) AttributeDrivers
-                        (const Handle(Message_Messenger)& theMsgDriver) Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(XmlMDF_ADriverTable)
+        AttributeDrivers(const Handle(Message_Messenger) & theMsgDriver) Standard_OVERRIDE;
 
- public:
-  // Declaration of CASCADE RTTI
-  DEFINE_STANDARD_RTTIEXT(XmlTObjDrivers_DocumentStorageDriver,XmlLDrivers_DocumentStorageDriver)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(XmlTObjDrivers_DocumentStorageDriver, XmlLDrivers_DocumentStorageDriver)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (XmlTObjDrivers_DocumentStorageDriver,
-                        XmlLDrivers_DocumentStorageDriver)
+DEFINE_STANDARD_HANDLE(XmlTObjDrivers_DocumentStorageDriver, XmlLDrivers_DocumentStorageDriver)
 
 #endif
 

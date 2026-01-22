@@ -60,20 +60,18 @@
 //! Topology Data Structure stores precision criteria for each elementary shape (as a vertex, an edge or a face). When
 //! a new topological object is constructed, the precision criteria are taken from those provided by the Precision
 //! package, and stored in the related data structure. Later, a topological algorithm which analyses these objects will
-//! work with the values stored in the data structure. Also, if this algorithm is to build a new topological object, from
-//! these precision criteria, it will compute a new precision criterion for the new topological object, and write it into the
-//! data structure of the new topological object.
-//! The different precision criteria offered by the Precision package, cover the most common requirements of
-//! geometric algorithms, such as intersections, approximations, and so on.
-//! The choice of precision depends on the algorithm and on the geometric space. The geometric space may be :
+//! work with the values stored in the data structure. Also, if this algorithm is to build a new topological object,
+//! from these precision criteria, it will compute a new precision criterion for the new topological object, and write
+//! it into the data structure of the new topological object. The different precision criteria offered by the Precision
+//! package, cover the most common requirements of geometric algorithms, such as intersections, approximations, and so
+//! on. The choice of precision depends on the algorithm and on the geometric space. The geometric space may be :
 //! -   a "real" 2D or 3D space, where the lengths are measured in meters, millimeters, microns, inches, etc ..., or
 //! -   a "parametric" space, 1D on a curve or 2D on a surface, where lengths have no dimension.
 //! The choice of precision criteria for real space depends on the choice of the product, as it is based on the accuracy
 //! of the machine and the unit of measurement.
 //! The choice of precision criteria for parametric space depends on both the accuracy of the machine and the
-//! dimensions of the curve or the surface, since the parametric precision criterion and the real precision criterion are
-//! linked : if the curve is defined by the equation P(t), the inequation :
-//! Abs ( t2 - t1 ) < ParametricPrecision
+//! dimensions of the curve or the surface, since the parametric precision criterion and the real precision criterion
+//! are linked : if the curve is defined by the equation P(t), the inequation : Abs ( t2 - t1 ) < ParametricPrecision
 //! means that the parameters t1 and t2 are considered to be equal, and the inequation :
 //! Distance ( P(t2) , P(t1) ) < RealPrecision
 //! means that the points P(t1) and P(t2) are considered to be coincident. It seems to be the same idea, and it
@@ -95,10 +93,8 @@
 //! -   or to work in a combined real and parametric space.
 //! They must next decide which precision factor will give the best answer to the current problem. Within an application
 //! environment, it is crucial to master precision even though this process may take a great deal of time.
-class Precision
-{
+class Precision {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Returns the recommended precision value
@@ -120,7 +116,9 @@ public:
     //! you can use :
     //! If ( Abs( D1.D2 ) < Precision::Angular() ) ...
     //! (although the function IsNormal does exist).
-    static Standard_Real Angular() { return 1.e-12; }
+    static Standard_Real Angular() {
+        return 1.e-12;
+    }
 
     //! Returns the recommended precision value when
     //! checking coincidence of two points in real space.
@@ -162,11 +160,15 @@ public:
     //! distance (1 / 10 millimeter). This distance
     //! becomes easily measurable, but only within a restricted
     //! space which contains some small objects of the complete scene.
-    static Standard_Real Confusion() { return 1.e-7; }
+    static Standard_Real Confusion() {
+        return 1.e-7;
+    }
 
     //! Returns square of Confusion.
     //! Created for speed and convenience.
-    static Standard_Real SquareConfusion() { return Confusion() * Confusion(); }
+    static Standard_Real SquareConfusion() {
+        return Confusion() * Confusion();
+    }
 
     //! Returns the precision value in real space, frequently
     //! used by intersection algorithms to decide that a solution is reached.
@@ -190,7 +192,9 @@ public:
     //! The tolerance of intersection is equal to :
     //! Precision::Confusion() / 100.
     //! (that is, 1.e-9).
-    static Standard_Real Intersection() { return Confusion() * 0.01; }
+    static Standard_Real Intersection() {
+        return Confusion() * 0.01;
+    }
 
     //! Returns the precision value in real space, frequently used
     //! by approximation algorithms.
@@ -205,14 +209,18 @@ public:
     //! (that is, 1.e-6).
     //! You may use a smaller tolerance in an approximation
     //! algorithm, but this option might be costly.
-    static Standard_Real Approximation() { return Confusion() * 10.0; }
+    static Standard_Real Approximation() {
+        return Confusion() * 10.0;
+    }
 
     //! Convert a real  space precision  to  a  parametric
     //! space precision.   <T>  is the mean  value  of the
     //! length of the tangent of the curve or the surface.
     //!
     //! Value is P / T
-    static Standard_Real Parametric(const Standard_Real P, const Standard_Real T) { return P / T; }
+    static Standard_Real Parametric(const Standard_Real P, const Standard_Real T) {
+        return P / T;
+    }
 
     //! Returns a precision value in parametric space, which may be used :
     //! -   to test the coincidence of two points in the real space,
@@ -258,11 +266,15 @@ public:
     //! 2.Pi without impacting on the resulting point.
     //! Therefore, take great care when adjusting a parametric
     //! tolerance to your own algorithm.
-    static Standard_Real PConfusion(const Standard_Real T) { return Parametric(Confusion(), T); }
+    static Standard_Real PConfusion(const Standard_Real T) {
+        return Parametric(Confusion(), T);
+    }
 
     //! Returns square of PConfusion.
     //! Created for speed and convenience.
-    static Standard_Real SquarePConfusion() { return PConfusion() * PConfusion(); }
+    static Standard_Real SquarePConfusion() {
+        return PConfusion() * PConfusion();
+    }
 
     //! Returns a precision value in parametric space, which
     //! may be used by intersection algorithms, to decide that
@@ -277,7 +289,9 @@ public:
     //! segment whose length is equal to 100. (default value), or T.
     //! The parametric tolerance of intersection is equal to :
     //! -   Precision::Intersection() / 100., or Precision::Intersection() / T.
-    static Standard_Real PIntersection(const Standard_Real T) { return Parametric(Intersection(), T); }
+    static Standard_Real PIntersection(const Standard_Real T) {
+        return Parametric(Intersection(), T);
+    }
 
     //! Returns a precision value in parametric space, which may
     //! be used by approximation algorithms. The purpose of this
@@ -292,48 +306,65 @@ public:
     //! segment whose length is equal to 100. (default value), or T.
     //! The parametric tolerance of intersection is equal to :
     //! -   Precision::Approximation() / 100., or Precision::Approximation() / T.
-    static Standard_Real PApproximation(const Standard_Real T) { return Parametric(Approximation(), T); }
+    static Standard_Real PApproximation(const Standard_Real T) {
+        return Parametric(Approximation(), T);
+    }
 
     //! Convert a real  space precision  to  a  parametric
     //! space precision on a default curve.
     //!
     //! Value is Parametric(P,1.e+2)
-    static Standard_Real Parametric(const Standard_Real P) { return Parametric(P, 100.0); }
+    static Standard_Real Parametric(const Standard_Real P) {
+        return Parametric(P, 100.0);
+    }
 
     //! Used  to test distances  in parametric  space on a
     //! default curve.
     //!
     //! This is Precision::Parametric(Precision::Confusion())
-    static Standard_Real PConfusion() { return Parametric(Confusion()); }
+    static Standard_Real PConfusion() {
+        return Parametric(Confusion());
+    }
 
     //! Used for Intersections  in parametric  space  on a
     //! default curve.
     //!
     //! This is Precision::Parametric(Precision::Intersection())
-    static Standard_Real PIntersection() { return Parametric(Intersection()); }
+    static Standard_Real PIntersection() {
+        return Parametric(Intersection());
+    }
 
     //! Used for  Approximations  in parametric space on a
     //! default curve.
     //!
     //! This is Precision::Parametric(Precision::Approximation())
-    static Standard_Real PApproximation() { return Parametric(Approximation()); }
+    static Standard_Real PApproximation() {
+        return Parametric(Approximation());
+    }
 
     //! Returns True if R may be considered as an infinite
     //! number. Currently Abs(R) > 1e100
-    static Standard_Boolean IsInfinite(const Standard_Real R) { return Abs(R) >= (0.5 * Precision::Infinite()); }
+    static Standard_Boolean IsInfinite(const Standard_Real R) {
+        return Abs(R) >= (0.5 * Precision::Infinite());
+    }
 
     //! Returns True if R may be considered as  a positive
     //! infinite number. Currently R > 1e100
-    static Standard_Boolean IsPositiveInfinite(const Standard_Real R) { return R >= (0.5 * Precision::Infinite()); }
+    static Standard_Boolean IsPositiveInfinite(const Standard_Real R) {
+        return R >= (0.5 * Precision::Infinite());
+    }
 
     //! Returns True if R may  be considered as a negative
     //! infinite number. Currently R < -1e100
-    static Standard_Boolean IsNegativeInfinite(const Standard_Real R) { return R <= -(0.5 * Precision::Infinite()); }
+    static Standard_Boolean IsNegativeInfinite(const Standard_Real R) {
+        return R <= -(0.5 * Precision::Infinite());
+    }
 
     //! Returns a  big number that  can  be  considered as
     //! infinite. Use -Infinite() for a negative big number.
-    static Standard_Real Infinite() { return 2.e+100; }
-
+    static Standard_Real Infinite() {
+        return 2.e+100;
+    }
 };
 
 #endif // _Precision_HeaderFile

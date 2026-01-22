@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor3d_Curve.hxx>
 #include <Adaptor3d_Surface.hxx>
 #include <BRepBlend_SurfPointEvolRadInv.hxx>
@@ -23,55 +22,50 @@
 #include <math_Matrix.hxx>
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-BRepBlend_SurfPointEvolRadInv::BRepBlend_SurfPointEvolRadInv
-(const Handle(Adaptor3d_Surface)& S,
-    const Handle(Adaptor3d_Curve)& C,
-    const Handle(Law_Function)& Evol
-) : surf(S), curv(C)
-{
+BRepBlend_SurfPointEvolRadInv::BRepBlend_SurfPointEvolRadInv(const Handle(Adaptor3d_Surface) & S,
+                                                             const Handle(Adaptor3d_Curve) & C,
+                                                             const Handle(Law_Function) & Evol)
+    : surf(S), curv(C) {
     tevol = Evol;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfPointEvolRadInv::Set(const Standard_Integer Choix)
-{
+void BRepBlend_SurfPointEvolRadInv::Set(const Standard_Integer Choix) {
     choix = Choix;
     switch (choix) {
-    case 1:
-    case 2:
-        sg1 = -1;
-        break;
-    case 3:
-    case 4:
-        sg1 = 1;
-        break;
-    default:
-        sg1 = -1;
-        break;
+        case 1:
+        case 2:
+            sg1 = -1;
+            break;
+        case 3:
+        case 4:
+            sg1 = 1;
+            break;
+        default:
+            sg1 = -1;
+            break;
     }
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Integer BRepBlend_SurfPointEvolRadInv::NbEquations() const
-{
+Standard_Integer BRepBlend_SurfPointEvolRadInv::NbEquations() const {
     return 3;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfPointEvolRadInv::Value(const math_Vector& X, math_Vector& F)
-{
+Standard_Boolean BRepBlend_SurfPointEvolRadInv::Value(const math_Vector& X, math_Vector& F) {
     Standard_Real theD, norm, unsurnorm;
     gp_Pnt ptcur, pts;
     gp_Vec d1cur, d1u, d1v;
@@ -95,11 +89,10 @@ Standard_Boolean BRepBlend_SurfPointEvolRadInv::Value(const math_Vector& X, math
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfPointEvolRadInv::Derivatives(const math_Vector& X, math_Matrix& D)
-{
+Standard_Boolean BRepBlend_SurfPointEvolRadInv::Derivatives(const math_Vector& X, math_Matrix& D) {
     gp_Pnt ptcur, pts;
     gp_Vec d1cur, d2cur, nplan, dnplan, d1u, d1v, d2u, d2v, duv;
     Standard_Real dtheD, normd1cur, unsurnormd1cur, dray;
@@ -167,11 +160,10 @@ Standard_Boolean BRepBlend_SurfPointEvolRadInv::Derivatives(const math_Vector& X
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfPointEvolRadInv::Values(const math_Vector& X, math_Vector& F, math_Matrix& D)
-{
+Standard_Boolean BRepBlend_SurfPointEvolRadInv::Values(const math_Vector& X, math_Vector& F, math_Matrix& D) {
     gp_Pnt ptcur, pts;
     gp_Vec d1cur, d2cur, nplan, dnplan, d1u, d1v, d2u, d2v, duv;
     Standard_Real theD, dtheD, normd1cur, unsurnormd1cur, dray;
@@ -244,31 +236,28 @@ Standard_Boolean BRepBlend_SurfPointEvolRadInv::Values(const math_Vector& X, mat
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfPointEvolRadInv::Set(const gp_Pnt& P)
-{
+void BRepBlend_SurfPointEvolRadInv::Set(const gp_Pnt& P) {
     point = P;
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfPointEvolRadInv::GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const
-{
+void BRepBlend_SurfPointEvolRadInv::GetTolerance(math_Vector& Tolerance, const Standard_Real Tol) const {
     Tolerance(1) = curv->Resolution(Tol);
     Tolerance(2) = surf->UResolution(Tol);
     Tolerance(3) = surf->VResolution(Tol);
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-void BRepBlend_SurfPointEvolRadInv::GetBounds(math_Vector& InfBound, math_Vector& SupBound) const
-{
+void BRepBlend_SurfPointEvolRadInv::GetBounds(math_Vector& InfBound, math_Vector& SupBound) const {
     InfBound(1) = curv->FirstParameter();
     SupBound(1) = curv->LastParameter();
     InfBound(2) = surf->FirstUParameter();
@@ -278,18 +267,14 @@ void BRepBlend_SurfPointEvolRadInv::GetBounds(math_Vector& InfBound, math_Vector
 }
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-Standard_Boolean BRepBlend_SurfPointEvolRadInv::IsSolution(const math_Vector& Sol, const Standard_Real Tol)
-{
+Standard_Boolean BRepBlend_SurfPointEvolRadInv::IsSolution(const math_Vector& Sol, const Standard_Real Tol) {
     math_Vector valsol(1, 3);
     Value(Sol, valsol);
-    if (Abs(valsol(1)) <= Tol &&
-        Abs(valsol(2)) <= Tol &&
-        Abs(valsol(3)) <= 2 * Tol * Abs(ray)) {
+    if (Abs(valsol(1)) <= Tol && Abs(valsol(2)) <= Tol && Abs(valsol(3)) <= 2 * Tol * Abs(ray)) {
         return Standard_True;
     }
     return Standard_False;
 }
-

@@ -29,44 +29,40 @@ class StepKinematics_ActuatedKinPairAndOrderKinPair;
 DEFINE_STANDARD_HANDLE(StepKinematics_ActuatedKinPairAndOrderKinPair, StepKinematics_KinematicPair)
 
 //! Representation of STEP entity ActuatedKinPairAndOrderKinPair
-class StepKinematics_ActuatedKinPairAndOrderKinPair : public StepKinematics_KinematicPair
-{
-public :
+class StepKinematics_ActuatedKinPairAndOrderKinPair : public StepKinematics_KinematicPair {
+public:
+    //! default constructor
+    Standard_EXPORT StepKinematics_ActuatedKinPairAndOrderKinPair();
 
-  //! default constructor
-  Standard_EXPORT StepKinematics_ActuatedKinPairAndOrderKinPair();
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                              const Handle(TCollection_HAsciiString) & theItemDefinedTransformation_Name,
+                              const Standard_Boolean hasItemDefinedTransformation_Description,
+                              const Handle(TCollection_HAsciiString) & theItemDefinedTransformation_Description,
+                              const Handle(StepRepr_RepresentationItem) & theItemDefinedTransformation_TransformItem1,
+                              const Handle(StepRepr_RepresentationItem) & theItemDefinedTransformation_TransformItem2,
+                              const Handle(StepKinematics_KinematicJoint) & theJoint,
+                              const Handle(StepKinematics_ActuatedKinematicPair) & theActuatedKinematicPair,
+                              const Handle(StepKinematics_KinematicPair) & theOrderKinematicPair);
 
+    inline void SetActuatedKinematicPair(const Handle(StepKinematics_ActuatedKinematicPair) & aKP) {
+        myActuatedKinematicPair = aKP;
+    }
 
-  Standard_EXPORT void Init(const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                            const Handle(TCollection_HAsciiString)& theItemDefinedTransformation_Name,
-                            const Standard_Boolean hasItemDefinedTransformation_Description,
-                            const Handle(TCollection_HAsciiString)& theItemDefinedTransformation_Description,
-                            const Handle(StepRepr_RepresentationItem)& theItemDefinedTransformation_TransformItem1,
-                            const Handle(StepRepr_RepresentationItem)& theItemDefinedTransformation_TransformItem2,
-                            const Handle(StepKinematics_KinematicJoint)& theJoint,
-                            const Handle(StepKinematics_ActuatedKinematicPair)& theActuatedKinematicPair,
-                            const Handle(StepKinematics_KinematicPair)& theOrderKinematicPair);
+    inline Handle(StepKinematics_ActuatedKinematicPair) GetActuatedKinematicPair() const {
+        return myActuatedKinematicPair;
+    }
+    inline void SetOrderKinematicPair(const Handle(StepKinematics_KinematicPair) & aKP) {
+        myOrderKinematicPair = aKP;
+    }
 
-  inline void SetActuatedKinematicPair(const Handle(StepKinematics_ActuatedKinematicPair)& aKP) {
-    myActuatedKinematicPair = aKP;
-  }
+    inline Handle(StepKinematics_KinematicPair) GetOrderKinematicPair() const {
+        return myOrderKinematicPair;
+    }
 
-  inline Handle(StepKinematics_ActuatedKinematicPair) GetActuatedKinematicPair() const {
-    return myActuatedKinematicPair;
-  }
-  inline void SetOrderKinematicPair(const Handle(StepKinematics_KinematicPair)& aKP) {
-    myOrderKinematicPair = aKP;
-  }
-
-  inline Handle(StepKinematics_KinematicPair) GetOrderKinematicPair() const {
-    return myOrderKinematicPair;
-  }
-
-
-DEFINE_STANDARD_RTTIEXT(StepKinematics_ActuatedKinPairAndOrderKinPair, StepKinematics_KinematicPair)
+    DEFINE_STANDARD_RTTIEXT(StepKinematics_ActuatedKinPairAndOrderKinPair, StepKinematics_KinematicPair)
 
 private:
-  Handle(StepKinematics_ActuatedKinematicPair) myActuatedKinematicPair;
-  Handle(StepKinematics_KinematicPair) myOrderKinematicPair;
+    Handle(StepKinematics_ActuatedKinematicPair) myActuatedKinematicPair;
+    Handle(StepKinematics_KinematicPair) myOrderKinematicPair;
 };
 #endif // StepKinematics_ActuatedKinPairAndOrderKinPair

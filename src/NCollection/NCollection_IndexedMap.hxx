@@ -36,37 +36,31 @@
  *              discussion about the number of buckets.
  */
 
-template < class TheKeyType,
-    class Hasher = NCollection_DefaultHasher<TheKeyType> >
-class NCollection_IndexedMap : public NCollection_BaseMap
-{
+template <class TheKeyType, class Hasher = NCollection_DefaultHasher<TheKeyType>>
+class NCollection_IndexedMap : public NCollection_BaseMap {
 public:
     //! STL-compliant typedef for key type
     typedef TheKeyType key_type;
 
 protected:
     //! Adaptation of the TListNode to the INDEXEDmap
-    class IndexedMapNode : public NCollection_TListNode<TheKeyType>
-    {
+    class IndexedMapNode : public NCollection_TListNode<TheKeyType> {
     public:
         //! Constructor with 'Next'
-        IndexedMapNode(const TheKeyType& theKey1,
-            const Standard_Integer theIndex,
-            NCollection_ListNode* theNext1)
-            : NCollection_TListNode<TheKeyType>(theKey1, theNext1),
-            myIndex(theIndex)
-        {
-        }
+        IndexedMapNode(const TheKeyType& theKey1, const Standard_Integer theIndex, NCollection_ListNode* theNext1)
+            : NCollection_TListNode<TheKeyType>(theKey1, theNext1), myIndex(theIndex) {}
         //! Key1
-        TheKeyType& Key1() { return this->ChangeValue(); }
+        TheKeyType& Key1() {
+            return this->ChangeValue();
+        }
 
         //! Index
-        Standard_Integer& Index() { return myIndex; }
+        Standard_Integer& Index() {
+            return myIndex;
+        }
 
         //! Static deleter to be passed to BaseList
-        static void delNode(NCollection_ListNode* theNode,
-            Handle(NCollection_BaseAllocator)& theAl)
-        {
+        static void delNode(NCollection_ListNode* theNode, Handle(NCollection_BaseAllocator) & theAl) {
             ((IndexedMapNode*)theNode)->~IndexedMapNode();
             theAl->Free(theNode);
         }
@@ -77,55 +71,48 @@ protected:
 
 public:
     // **************** Implementation of the Iterator interface.
-    class Iterator
-    {
+    class Iterator {
     public:
         //! Empty constructor
-        Iterator(void) :
-            myMap(NULL),
-            myIndex(0) {
-        }
+        Iterator(void) : myMap(NULL), myIndex(0) {}
         //! Constructor
-        Iterator(const NCollection_IndexedMap& theMap) :
-            myMap((NCollection_IndexedMap*)&theMap),
-            myIndex(1) {
-        }
+        Iterator(const NCollection_IndexedMap& theMap) : myMap((NCollection_IndexedMap*)&theMap), myIndex(1) {}
         //! Query if the end of collection is reached by iterator
-        Standard_Boolean More(void) const
-        {
+        Standard_Boolean More(void) const {
             return (myMap != NULL) && (myIndex <= myMap->Extent());
         }
         //! Make a step along the collection
-        void Next(void)
-        {
+        void Next(void) {
             myIndex++;
         }
         //! Value access
-        const TheKeyType& Value(void) const
-        {
+        const TheKeyType& Value(void) const {
             Standard_NoSuchObject_Raise_if(!More(), "NCollection_IndexedMap::Iterator::Value");
             return myMap->FindKey(myIndex);
         }
 
         //! Performs comparison of two iterators.
-        Standard_Boolean IsEqual(const Iterator& theOther) const
-        {
+        Standard_Boolean IsEqual(const Iterator& theOther) const {
             return myMap == theOther.myMap && myIndex == theOther.myIndex;
         }
 
     private:
-        NCollection_IndexedMap* myMap;   // Pointer to the map being iterated
-        Standard_Integer         myIndex; // Current index
+        NCollection_IndexedMap* myMap; // Pointer to the map being iterated
+        Standard_Integer myIndex;      // Current index
     };
 
     //! Shorthand for a constant iterator type.
     typedef NCollection_StlIterator<std::forward_iterator_tag, Iterator, TheKeyType, true> const_iterator;
 
     //! Returns a const iterator pointing to the first element in the map.
-    const_iterator cbegin() const { return Iterator(*this); }
+    const_iterator cbegin() const {
+        return Iterator(*this);
+    }
 
     //! Returns a const iterator referring to the past-the-end element in the map.
-    const_iterator cend() const { return Iterator(); }
+    const_iterator cend() const {
+        return Iterator();
+    }
 
 public:
     // ---------- PUBLIC METHODS ------------
@@ -135,38 +122,31 @@ public:
 
     //! Constructor
     explicit NCollection_IndexedMap(const Standard_Integer theNbBuckets,
-        const Handle(NCollection_BaseAllocator)& theAllocator = 0L)
-        : NCollection_BaseMap(theNbBuckets, Standard_False, theAllocator) {
-    }
+                                    const Handle(NCollection_BaseAllocator) & theAllocator = 0L)
+        : NCollection_BaseMap(theNbBuckets, Standard_False, theAllocator) {}
 
     //! Copy constructor
     NCollection_IndexedMap(const NCollection_IndexedMap& theOther)
-        : NCollection_BaseMap(theOther.NbBuckets(), Standard_False, theOther.myAllocator)
-    {
+        : NCollection_BaseMap(theOther.NbBuckets(), Standard_False, theOther.myAllocator) {
         *this = theOther;
     }
 
     //! Exchange the content of two maps without re-allocations.
     //! Notice that allocators will be swapped as well!
-    void Exchange(NCollection_IndexedMap& theOther)
-    {
+    void Exchange(NCollection_IndexedMap& theOther) {
         this->exchangeMapsData(theOther);
     }
 
     //! Assign.
     //! This method does not change the internal allocator.
-    NCollection_IndexedMap& Assign(const NCollection_IndexedMap& theOther)
-    {
-        if (this == &theOther)
-            return *this;
+    NCollection_IndexedMap& Assign(const NCollection_IndexedMap& theOther) {
+        if (this == &theOther) return *this;
 
         Clear();
         Standard_Integer anExt = theOther.Extent();
-        if (anExt)
-        {
-            ReSize(anExt - 1); //mySize is same after resize
-            for (Standard_Integer anIndexIter = 1; anIndexIter <= anExt; ++anIndexIter)
-            {
+        if (anExt) {
+            ReSize(anExt - 1); // mySize is same after resize
+            for (Standard_Integer anIndexIter = 1; anIndexIter <= anExt; ++anIndexIter) {
                 const TheKeyType& aKey1 = theOther.FindKey(anIndexIter);
                 const Standard_Integer iK1 = Hasher::HashCode(aKey1, NbBuckets());
                 IndexedMapNode* pNode = new (this->myAllocator) IndexedMapNode(aKey1, anIndexIter, myData1[iK1]);
@@ -179,29 +159,22 @@ public:
     }
 
     //! Assignment operator
-    NCollection_IndexedMap& operator= (const NCollection_IndexedMap& theOther)
-    {
+    NCollection_IndexedMap& operator=(const NCollection_IndexedMap& theOther) {
         return Assign(theOther);
     }
 
     //! ReSize
-    void ReSize(const Standard_Integer theExtent)
-    {
+    void ReSize(const Standard_Integer theExtent) {
         NCollection_ListNode** ppNewData1 = NULL;
         NCollection_ListNode** ppNewData2 = NULL;
         Standard_Integer newBuck;
-        if (BeginResize(theExtent, newBuck, ppNewData1, ppNewData2))
-        {
-            if (myData1)
-            {
+        if (BeginResize(theExtent, newBuck, ppNewData1, ppNewData2)) {
+            if (myData1) {
                 memcpy(ppNewData2, myData2, sizeof(IndexedMapNode*) * Extent());
-                for (Standard_Integer aBucketIter = 0; aBucketIter <= NbBuckets(); ++aBucketIter)
-                {
-                    if (myData1[aBucketIter])
-                    {
+                for (Standard_Integer aBucketIter = 0; aBucketIter <= NbBuckets(); ++aBucketIter) {
+                    if (myData1[aBucketIter]) {
                         IndexedMapNode* p = (IndexedMapNode*)myData1[aBucketIter];
-                        while (p)
-                        {
+                        while (p) {
                             const Standard_Integer iK1 = Hasher::HashCode(p->Key1(), newBuck);
                             IndexedMapNode* q = (IndexedMapNode*)p->Next();
                             p->Next() = ppNewData1[iK1];
@@ -216,19 +189,15 @@ public:
     }
 
     //! Add
-    Standard_Integer Add(const TheKeyType& theKey1)
-    {
-        if (Resizable())
-        {
+    Standard_Integer Add(const TheKeyType& theKey1) {
+        if (Resizable()) {
             ReSize(Extent());
         }
 
         Standard_Integer iK1 = Hasher::HashCode(theKey1, NbBuckets());
         IndexedMapNode* pNode = (IndexedMapNode*)myData1[iK1];
-        while (pNode)
-        {
-            if (Hasher::IsEqual(pNode->Key1(), theKey1))
-            {
+        while (pNode) {
+            if (Hasher::IsEqual(pNode->Key1(), theKey1)) {
                 return pNode->Index();
             }
             pNode = (IndexedMapNode*)pNode->Next();
@@ -242,41 +211,31 @@ public:
     }
 
     //! Contains
-    Standard_Boolean Contains(const TheKeyType& theKey1) const
-    {
-        if (IsEmpty())
-            return Standard_False;
+    Standard_Boolean Contains(const TheKeyType& theKey1) const {
+        if (IsEmpty()) return Standard_False;
         Standard_Integer iK1 = Hasher::HashCode(theKey1, NbBuckets());
         IndexedMapNode* pNode1;
         pNode1 = (IndexedMapNode*)myData1[iK1];
-        while (pNode1)
-        {
-            if (Hasher::IsEqual(pNode1->Key1(), theKey1))
-                return Standard_True;
+        while (pNode1) {
+            if (Hasher::IsEqual(pNode1->Key1(), theKey1)) return Standard_True;
             pNode1 = (IndexedMapNode*)pNode1->Next();
         }
         return Standard_False;
     }
 
     //! Substitute
-    void Substitute(const Standard_Integer theIndex,
-        const TheKeyType& theKey1)
-    {
-        Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > Extent(),
-            "NCollection_IndexedMap::Substitute : "
-            "Index is out of range");
+    void Substitute(const Standard_Integer theIndex, const TheKeyType& theKey1) {
+        Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > Extent(), "NCollection_IndexedMap::Substitute : "
+                                                                          "Index is out of range");
 
         // check if theKey1 is not already in the map
         Standard_Integer iK1 = Hasher::HashCode(theKey1, NbBuckets());
         IndexedMapNode* p = (IndexedMapNode*)myData1[iK1];
-        while (p)
-        {
-            if (Hasher::IsEqual(p->Key1(), theKey1))
-            {
-                if (p->Index() != theIndex)
-                {
+        while (p) {
+            if (Hasher::IsEqual(p->Key1(), theKey1)) {
+                if (p->Index() != theIndex) {
                     throw Standard_DomainError("NCollection_IndexedMap::Substitute : "
-                        "Attempt to substitute existing key");
+                                               "Attempt to substitute existing key");
                 }
                 p->Key1() = theKey1;
                 return;
@@ -292,8 +251,7 @@ public:
         IndexedMapNode* q = (IndexedMapNode*)myData1[iK];
         if (q == p)
             myData1[iK] = (IndexedMapNode*)p->Next();
-        else
-        {
+        else {
             while (q->Next() != p)
                 q = (IndexedMapNode*)q->Next();
             q->Next() = p->Next();
@@ -306,14 +264,11 @@ public:
     }
 
     //! Swaps two elements with the given indices.
-    void Swap(const Standard_Integer theIndex1,
-        const Standard_Integer theIndex2)
-    {
-        Standard_OutOfRange_Raise_if(theIndex1 < 1 || theIndex1 > Extent()
-            || theIndex2 < 1 || theIndex2 > Extent(), "NCollection_IndexedMap::Swap");
+    void Swap(const Standard_Integer theIndex1, const Standard_Integer theIndex2) {
+        Standard_OutOfRange_Raise_if(theIndex1 < 1 || theIndex1 > Extent() || theIndex2 < 1 || theIndex2 > Extent(),
+                                     "NCollection_IndexedMap::Swap");
 
-        if (theIndex1 == theIndex2)
-        {
+        if (theIndex1 == theIndex2) {
             return;
         }
 
@@ -325,8 +280,7 @@ public:
     }
 
     //! RemoveLast
-    void RemoveLast(void)
-    {
+    void RemoveLast(void) {
         const Standard_Integer aLastIndex = Extent();
         Standard_OutOfRange_Raise_if(aLastIndex == 0, "NCollection_IndexedMap::RemoveLast");
 
@@ -339,8 +293,7 @@ public:
         IndexedMapNode* q = (IndexedMapNode*)myData1[iK1];
         if (q == p)
             myData1[iK1] = (IndexedMapNode*)p->Next();
-        else
-        {
+        else {
             while (q->Next() != p)
                 q = (IndexedMapNode*)q->Next();
             q->Next() = p->Next();
@@ -352,12 +305,10 @@ public:
 
     //! Remove the key of the given index.
     //! Caution! The index of the last key can be changed.
-    void RemoveFromIndex(const Standard_Integer theIndex)
-    {
+    void RemoveFromIndex(const Standard_Integer theIndex) {
         Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > Extent(), "NCollection_IndexedMap::RemoveFromIndex");
         const Standard_Integer aLastInd = Extent();
-        if (theIndex != aLastInd)
-        {
+        if (theIndex != aLastInd) {
             Swap(theIndex, aLastInd);
         }
         RemoveLast();
@@ -365,11 +316,9 @@ public:
 
     //! Remove the given key.
     //! Caution! The index of the last key can be changed.
-    Standard_Boolean RemoveKey(const TheKeyType& theKey1)
-    {
+    Standard_Boolean RemoveKey(const TheKeyType& theKey1) {
         Standard_Integer anIndToRemove = FindIndex(theKey1);
-        if (anIndToRemove < 1)
-        {
+        if (anIndToRemove < 1) {
             return Standard_False;
         }
 
@@ -378,28 +327,23 @@ public:
     }
 
     //! FindKey
-    const TheKeyType& FindKey(const Standard_Integer theIndex) const
-    {
+    const TheKeyType& FindKey(const Standard_Integer theIndex) const {
         Standard_OutOfRange_Raise_if(theIndex < 1 || theIndex > Extent(), "NCollection_IndexedMap::FindKey");
         IndexedMapNode* pNode2 = (IndexedMapNode*)myData2[theIndex - 1];
         return pNode2->Key1();
     }
 
     //! operator ()
-    const TheKeyType& operator() (const Standard_Integer theIndex) const
-    {
+    const TheKeyType& operator()(const Standard_Integer theIndex) const {
         return FindKey(theIndex);
     }
 
     //! FindIndex
-    Standard_Integer FindIndex(const TheKeyType& theKey1) const
-    {
+    Standard_Integer FindIndex(const TheKeyType& theKey1) const {
         if (IsEmpty()) return 0;
         IndexedMapNode* pNode1 = (IndexedMapNode*)myData1[Hasher::HashCode(theKey1, NbBuckets())];
-        while (pNode1)
-        {
-            if (Hasher::IsEqual(pNode1->Key1(), theKey1))
-            {
+        while (pNode1) {
+            if (Hasher::IsEqual(pNode1->Key1(), theKey1)) {
                 return pNode1->Index();
             }
             pNode1 = (IndexedMapNode*)pNode1->Next();
@@ -409,28 +353,23 @@ public:
 
     //! Clear data. If doReleaseMemory is false then the table of
     //! buckets is not released and will be reused.
-    void Clear(const Standard_Boolean doReleaseMemory = Standard_True)
-    {
+    void Clear(const Standard_Boolean doReleaseMemory = Standard_True) {
         Destroy(IndexedMapNode::delNode, doReleaseMemory);
     }
 
     //! Clear data and reset allocator
-    void Clear(const Handle(NCollection_BaseAllocator)& theAllocator)
-    {
+    void Clear(const Handle(NCollection_BaseAllocator) & theAllocator) {
         Clear();
-        this->myAllocator = (!theAllocator.IsNull() ? theAllocator :
-            NCollection_BaseAllocator::CommonBaseAllocator());
+        this->myAllocator = (!theAllocator.IsNull() ? theAllocator : NCollection_BaseAllocator::CommonBaseAllocator());
     }
 
     //! Destructor
-    virtual ~NCollection_IndexedMap(void)
-    {
+    virtual ~NCollection_IndexedMap(void) {
         Clear();
     }
 
     //! Size
-    Standard_Integer Size(void) const
-    {
+    Standard_Integer Size(void) const {
         return Extent();
     }
 };

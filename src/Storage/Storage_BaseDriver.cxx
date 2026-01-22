@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Storage_BaseDriver.hxx>
 #include <Storage_StreamExtCharParityError.hxx>
 #include <Storage_StreamFormatError.hxx>
@@ -23,16 +22,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Storage_BaseDriver, Standard_Transient)
 
-Storage_BaseDriver::Storage_BaseDriver() : myOpenMode(Storage_VSNone)
-{
-}
+Storage_BaseDriver::Storage_BaseDriver() : myOpenMode(Storage_VSNone) {}
 
-Storage_BaseDriver::~Storage_BaseDriver()
-{
-}
+Storage_BaseDriver::~Storage_BaseDriver() {}
 
-TCollection_AsciiString Storage_BaseDriver::ReadMagicNumber(Standard_IStream& theIStream)
-{
+TCollection_AsciiString Storage_BaseDriver::ReadMagicNumber(Standard_IStream& theIStream) {
     // magic number has the same length which is 7: BINFILE, CMPFILE and FSDFILE
     Standard_Size aMagicNumberLen = 7;
 
@@ -41,8 +35,7 @@ TCollection_AsciiString Storage_BaseDriver::ReadMagicNumber(Standard_IStream& th
     char aChar;
     Standard_Size aReadCharNb = 0;
 
-    while (theIStream.good() && (aReadCharNb < aMagicNumberLen))
-    {
+    while (theIStream.good() && (aReadCharNb < aMagicNumberLen)) {
         theIStream.get(aChar);
         aReadCharNb += (Standard_Size)theIStream.gcount();
         aReadMagicNumber += aChar;

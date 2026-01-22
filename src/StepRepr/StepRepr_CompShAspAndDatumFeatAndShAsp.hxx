@@ -24,13 +24,11 @@
 class StepRepr_CompShAspAndDatumFeatAndShAsp;
 DEFINE_STANDARD_HANDLE(StepRepr_CompShAspAndDatumFeatAndShAsp, StepRepr_ShapeAspect)
 //! Added for Dimensional Tolerances
-class StepRepr_CompShAspAndDatumFeatAndShAsp : public StepRepr_ShapeAspect
-{
+class StepRepr_CompShAspAndDatumFeatAndShAsp : public StepRepr_ShapeAspect {
 
 public:
-  
-  Standard_EXPORT StepRepr_CompShAspAndDatumFeatAndShAsp();
-  
-  DEFINE_STANDARD_RTTIEXT(StepRepr_CompShAspAndDatumFeatAndShAsp,StepRepr_ShapeAspect)
+    Standard_EXPORT StepRepr_CompShAspAndDatumFeatAndShAsp();
+
+    DEFINE_STANDARD_RTTIEXT(StepRepr_CompShAspAndDatumFeatAndShAsp, StepRepr_ShapeAspect)
 };
 #endif // _StepRepr_CompShAspAndDatumFeatAndShAsp_HeaderFile

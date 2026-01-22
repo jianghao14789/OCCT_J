@@ -28,8 +28,6 @@
 class Standard_RangeError;
 class StdFail_InfiniteSolutions;
 
-
-
 //! This class implements the calculation of all the real roots of a real
 //! polynomial of degree <= 4 using a direct method. Once found,
 //! the roots are polished using the Newton method.
@@ -39,11 +37,13 @@ public:
 
     //! computes all the real roots of the polynomial
     //! Ax4 + Bx3 + Cx2 + Dx + E using a direct method.
-    Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D, const Standard_Real E);
+    Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C,
+                                               const Standard_Real D, const Standard_Real E);
 
     //! computes all the real roots of the polynomial
     //! Ax3 + Bx2 + Cx + D using a direct method.
-    Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D);
+    Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C,
+                                               const Standard_Real D);
 
     //! computes all the real roots of the polynomial
     //! Ax2 + Bx + C using a direct method.
@@ -74,9 +74,11 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-    Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D, const Standard_Real E);
+    Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C,
+                               const Standard_Real D, const Standard_Real E);
 
-    Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D);
+    Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C,
+                               const Standard_Real D);
 
     Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C);
 

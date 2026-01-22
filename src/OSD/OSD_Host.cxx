@@ -32,17 +32,18 @@ const OSD_WhoAmI Iam = OSD_WHost;
 
 #if defined(__osf__) || defined(DECOSF1)
 #include <sys/types.h>
-#include <sys/sysinfo.h>  // For 'getsysinfo'
-#include <sys/socket.h>   // To get ethernet address
+#include <sys/sysinfo.h> // For 'getsysinfo'
+#include <sys/socket.h>  // To get ethernet address
 #include <sys/ioctl.h>
 #include <net/if.h>
 extern "C" {
-    int gethostname(char* address, int len);
+int gethostname(char* address, int len);
 }
 #endif
 
-extern "C" {int sysinfo(int, char*, long); }
-
+extern "C" {
+int sysinfo(int, char*, long);
+}
 
 // =========================================================================
 
@@ -58,26 +59,26 @@ TCollection_AsciiString OSD_Host::SystemVersion() {
     result = info.sysname;
     result += " ";
     result += info.release;
-    return(result);
+    return (result);
 }
 
 // =========================================================================
 
-OSD_SysType OSD_Host::SystemId()const {
+OSD_SysType OSD_Host::SystemId() const {
     struct utsname info;
 
     uname(&info);
 
-    if (!strcmp(info.sysname, "SunOS"))          return (OSD_UnixBSD);
-    if (!strcmp(info.sysname, "ULTRIX"))         return (OSD_UnixBSD);
-    if (!strcmp(info.sysname, "FreeBSD"))        return (OSD_UnixBSD);
-    if (!strncmp(info.sysname, "Linux", 5))       return (OSD_LinuxREDHAT);
-    if (!strncmp(info.sysname, "IRIX", 4))       return (OSD_UnixSystemV);
-    if (!strncmp(info.sysname, "OSF", 3))        return (OSD_OSF);
-    if (!strcmp(info.sysname, "AIX"))            return (OSD_Aix);
-    if (!strcmp(info.sysname, "UNIX_System_V"))  return (OSD_UnixSystemV);
-    if (!strcmp(info.sysname, "VMS_POSIX"))      return (OSD_VMS);
-    if (!strcmp(info.sysname, "Darwin"))         return (OSD_MacOs);
+    if (!strcmp(info.sysname, "SunOS")) return (OSD_UnixBSD);
+    if (!strcmp(info.sysname, "ULTRIX")) return (OSD_UnixBSD);
+    if (!strcmp(info.sysname, "FreeBSD")) return (OSD_UnixBSD);
+    if (!strncmp(info.sysname, "Linux", 5)) return (OSD_LinuxREDHAT);
+    if (!strncmp(info.sysname, "IRIX", 4)) return (OSD_UnixSystemV);
+    if (!strncmp(info.sysname, "OSF", 3)) return (OSD_OSF);
+    if (!strcmp(info.sysname, "AIX")) return (OSD_Aix);
+    if (!strcmp(info.sysname, "UNIX_System_V")) return (OSD_UnixSystemV);
+    if (!strcmp(info.sysname, "VMS_POSIX")) return (OSD_VMS);
+    if (!strcmp(info.sysname, "Darwin")) return (OSD_MacOs);
     return (OSD_Unknown);
 }
 
@@ -92,12 +93,10 @@ TCollection_AsciiString OSD_Host::HostName() {
     if (status == -1) myError.SetValue(errno, Iam, "Host Name");
 
     result = value;
-    return(result);
+    return (result);
 }
 
-
 // =========================================================================
-
 
 Standard_Integer OSD_Host::AvailableMemory() {
     Standard_Integer result;
@@ -105,8 +104,7 @@ Standard_Integer OSD_Host::AvailableMemory() {
 #if defined(__osf__) || defined(DECOSF1)
     char buffer[16];
     ////     result = getsysinfo(GSI_PHYSMEM,buffer, 16,0,NULL);
-    if (result != -1)
-        result *= 1024;
+    if (result != -1) result *= 1024;
 #else
     result = 0;
     //@@ A faire
@@ -123,9 +121,7 @@ TCollection_AsciiString OSD_Host::InternetAddress() {
     TCollection_AsciiString result, host;
 
     host = HostName();
-    memcpy(&internet_address,
-        gethostbyname(host.ToCString()),
-        sizeof(struct hostent));
+    memcpy(&internet_address, gethostbyname(host.ToCString()), sizeof(struct hostent));
 
     // Gets each bytes into integers
     a = (unsigned char)internet_address.h_addr_list[0][0];
@@ -134,7 +130,7 @@ TCollection_AsciiString OSD_Host::InternetAddress() {
     d = (unsigned char)internet_address.h_addr_list[0][3];
     sprintf(buffer, "%d.%d.%d.%d", a, b, c, d);
     result = buffer;
-    return(result);
+    return (result);
 }
 
 // =========================================================================
@@ -143,36 +139,34 @@ OSD_OEMType OSD_Host::MachineType() {
 
     uname(&info);
 
-    if (!strcmp(info.sysname, "SunOS"))         return (OSD_SUN);
-    if (!strcmp(info.sysname, "ULTRIX"))        return (OSD_DEC);
-    if (!strncmp(info.sysname, "IRIX", 4))       return (OSD_SGI);
-    if (!strcmp(info.sysname, "HP-UX"))         return (OSD_HP);
+    if (!strcmp(info.sysname, "SunOS")) return (OSD_SUN);
+    if (!strcmp(info.sysname, "ULTRIX")) return (OSD_DEC);
+    if (!strncmp(info.sysname, "IRIX", 4)) return (OSD_SGI);
+    if (!strcmp(info.sysname, "HP-UX")) return (OSD_HP);
     if (!strcmp(info.sysname, "UNIX_System_V")) return (OSD_NEC);
-    if (!strcmp(info.sysname, "VMS_POSIX"))     return (OSD_VAX);
-    if (!strncmp(info.sysname, "OSF", 3))        return (OSD_DEC);
-    if (!strncmp(info.sysname, "Linux", 5))      return (OSD_LIN);
-    if (!strcmp(info.sysname, "FreeBSD"))       return (OSD_LIN);
-    if (!strncmp(info.sysname, "AIX", 3))        return (OSD_AIX);
-    if (!strcmp(info.sysname, "Darwin"))        return (OSD_MAC);
+    if (!strcmp(info.sysname, "VMS_POSIX")) return (OSD_VAX);
+    if (!strncmp(info.sysname, "OSF", 3)) return (OSD_DEC);
+    if (!strncmp(info.sysname, "Linux", 5)) return (OSD_LIN);
+    if (!strcmp(info.sysname, "FreeBSD")) return (OSD_LIN);
+    if (!strncmp(info.sysname, "AIX", 3)) return (OSD_AIX);
+    if (!strcmp(info.sysname, "Darwin")) return (OSD_MAC);
     return (OSD_Unavailable);
-
 }
 
 void OSD_Host::Reset() {
     myError.Reset();
 }
 
-Standard_Boolean OSD_Host::Failed()const {
-    return(myError.Failed());
+Standard_Boolean OSD_Host::Failed() const {
+    return (myError.Failed());
 }
 
 void OSD_Host::Perror() {
     myError.Perror();
 }
 
-
-Standard_Integer OSD_Host::Error()const {
-    return(myError.Error());
+Standard_Integer OSD_Host::Error() const {
+    return (myError.Error());
 }
 
 #else
@@ -186,27 +180,27 @@ Standard_Integer OSD_Host::Error()const {
 #include <OSD_Host.hxx>
 
 #if defined(_MSC_VER)
-#pragma comment( lib, "WSOCK32.LIB" )
+#pragma comment(lib, "WSOCK32.LIB")
 #endif
 
 void _osd_wnt_set_error(OSD_Error&, Standard_Integer, ...);
 
-static BOOL                    fInit = FALSE;
+static BOOL fInit = FALSE;
 static TCollection_AsciiString hostName;
 static TCollection_AsciiString version;
 static TCollection_AsciiString interAddr;
-static Standard_Integer        memSize;
+static Standard_Integer memSize;
 
 OSD_Host::OSD_Host() {
 #ifndef OCCT_UWP
-    DWORD              nSize;
-    char               szHostName[MAX_COMPUTERNAME_LENGTH + 1];
+    DWORD nSize;
+    char szHostName[MAX_COMPUTERNAME_LENGTH + 1];
     char* hostAddr = 0;
-    MEMORYSTATUS       ms;
-    WSADATA            wd;
-    PHOSTENT           phe;
-    IN_ADDR            inAddr;
-    OSVERSIONINFOW     osVerInfo;
+    MEMORYSTATUS ms;
+    WSADATA wd;
+    PHOSTENT phe;
+    IN_ADDR inAddr;
+    OSVERSIONINFOW osVerInfo;
 
     if (!fInit) {
 
@@ -218,131 +212,118 @@ OSD_Host::OSD_Host() {
         ZeroMemory(szHostName, sizeof(char) * (MAX_COMPUTERNAME_LENGTH + 1));
 
         // suppress GetVersionEx() deprecation warning
-        Standard_DISABLE_DEPRECATION_WARNINGS
-            if (!GetVersionExW(&osVerInfo))
-            {
-                _osd_wnt_set_error(myError, OSD_WHost);
-            }
-            else if (!GetComputerNameA(szHostName, &nSize))
-            {
-                _osd_wnt_set_error(myError, OSD_WHost);
-            }
-            else
-            {
-                ms.dwLength = sizeof(MEMORYSTATUS);
-                GlobalMemoryStatus(&ms);
-            }  // end else
+        Standard_DISABLE_DEPRECATION_WARNINGS if (!GetVersionExW(&osVerInfo)) {
+            _osd_wnt_set_error(myError, OSD_WHost);
+        }
+        else if (!GetComputerNameA(szHostName, &nSize)) {
+            _osd_wnt_set_error(myError, OSD_WHost);
+        }
+        else {
+            ms.dwLength = sizeof(MEMORYSTATUS);
+            GlobalMemoryStatus(&ms);
+        } // end else
         Standard_ENABLE_DEPRECATION_WARNINGS
 
             if (!Failed()) {
 
-                memSize = (Standard_Integer)ms.dwAvailPageFile;
+            memSize = (Standard_Integer)ms.dwAvailPageFile;
 
-                if (WSAStartup(MAKEWORD(1, 1), &wd)) {
+            if (WSAStartup(MAKEWORD(1, 1), &wd)) {
 
-                    _osd_wnt_set_error(myError, OSD_WHost);
+                _osd_wnt_set_error(myError, OSD_WHost);
 
-                }
-                else if ((phe = gethostbyname(szHostName)) == NULL) {
+            } else if ((phe = gethostbyname(szHostName)) == NULL) {
 
-                    _osd_wnt_set_error(myError, OSD_WHost);
+                _osd_wnt_set_error(myError, OSD_WHost);
 
-                }
-                else {
+            } else {
 
-                    CopyMemory(&inAddr, *phe->h_addr_list, sizeof(IN_ADDR));
-                    hostAddr = inet_ntoa(inAddr);
+                CopyMemory(&inAddr, *phe->h_addr_list, sizeof(IN_ADDR));
+                hostAddr = inet_ntoa(inAddr);
 
-                }  // end else
+            } // end else
 
-            }  // end if
+        } // end if
 
         if (!Failed()) {
 
             hostName = szHostName;
             interAddr = Standard_CString(hostAddr);
-            TCollection_AsciiString aVersion = TCollection_AsciiString("Windows NT Version ") + (int)osVerInfo.dwMajorVersion + "." + (int)osVerInfo.dwMinorVersion;
-            if (*osVerInfo.szCSDVersion != L'\0')
-            {
+            TCollection_AsciiString aVersion = TCollection_AsciiString("Windows NT Version ") +
+                                               (int)osVerInfo.dwMajorVersion + "." + (int)osVerInfo.dwMinorVersion;
+            if (*osVerInfo.szCSDVersion != L'\0') {
                 aVersion += TCollection_AsciiString(" ") + TCollection_AsciiString(osVerInfo.szCSDVersion);
             }
             version = aVersion;
 
             fInit = TRUE;
 
-        }  // end if
+        } // end if
 
-    }  // end if
+    } // end if
 
-    if (fInit)
-
-        myName = hostName;
+    if (fInit) myName = hostName;
 #endif
-}  // end constructor
+} // end constructor
 
 TCollection_AsciiString OSD_Host::SystemVersion() {
 
     return version;
 
-}  // end OSD_Host :: SystemVersion
+} // end OSD_Host :: SystemVersion
 
 OSD_SysType OSD_Host::SystemId() const {
 
     return OSD_WindowsNT;
 
-}  // end OSD_Host :: SystemId
+} // end OSD_Host :: SystemId
 
 TCollection_AsciiString OSD_Host::HostName() {
 
     return hostName;
 
-}  // end OSD_Host :: HostName
+} // end OSD_Host :: HostName
 
 Standard_Integer OSD_Host::AvailableMemory() {
 
     return memSize;
 
-}  // end OSD_Host :: AvailableMemory
+} // end OSD_Host :: AvailableMemory
 
 TCollection_AsciiString OSD_Host::InternetAddress() {
 
     return interAddr;
 
-}  // end OSD_Host :: InternetAddress
+} // end OSD_Host :: InternetAddress
 
 OSD_OEMType OSD_Host::MachineType() {
 
     return OSD_PC;
 
-}  // end OSD_Host :: MachineTYpe
+} // end OSD_Host :: MachineTYpe
 
 Standard_Boolean OSD_Host::Failed() const {
 
     return myError.Failed();
 
-}  // end OSD_Host :: Failed
+} // end OSD_Host :: Failed
 
 void OSD_Host::Reset() {
 
     myError.Reset();
 
-}  // end OSD_Host :: Reset
+} // end OSD_Host :: Reset
 
 void OSD_Host::Perror() {
 
     myError.Perror();
 
-}  // end OSD_Host :: Perror
+} // end OSD_Host :: Perror
 
 Standard_Integer OSD_Host::Error() const {
 
     return myError.Error();
 
-}  //end OSD_Host :: Error
+} // end OSD_Host :: Error
 
 #endif
-
-
-
-
-

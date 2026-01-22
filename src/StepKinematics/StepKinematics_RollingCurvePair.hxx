@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -30,14 +30,11 @@
 DEFINE_STANDARD_HANDLE(StepKinematics_RollingCurvePair, StepKinematics_PlanarCurvePair)
 
 //! Representation of STEP entity RollingCurvePair
-class StepKinematics_RollingCurvePair : public StepKinematics_PlanarCurvePair
-{
-public :
+class StepKinematics_RollingCurvePair : public StepKinematics_PlanarCurvePair {
+public:
+    //! default constructor
+    Standard_EXPORT StepKinematics_RollingCurvePair();
 
-  //! default constructor
-  Standard_EXPORT StepKinematics_RollingCurvePair();
-
-DEFINE_STANDARD_RTTIEXT(StepKinematics_RollingCurvePair, StepKinematics_PlanarCurvePair)
-
+    DEFINE_STANDARD_RTTIEXT(StepKinematics_RollingCurvePair, StepKinematics_PlanarCurvePair)
 };
 #endif // _StepKinematics_RollingCurvePair_HeaderFile_

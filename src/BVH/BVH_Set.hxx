@@ -22,15 +22,11 @@
 //! the minimal geometry interface needed to construct BVH.
 //! \tparam T Numeric data type
 //! \tparam N Vector dimension
-template<class T, int N>
-class BVH_Set
-{
+template <class T, int N> class BVH_Set {
 public:
-
     typedef BVH_Box<T, N> BVH_BoxNt;
 
 public:
-
     //! Creates new abstract set of objects.
     BVH_Set() {}
 
@@ -38,19 +34,16 @@ public:
     virtual ~BVH_Set() {}
 
     //! Returns AABB of the entire set of objects.
-    virtual BVH_Box<T, N> Box() const
-    {
+    virtual BVH_Box<T, N> Box() const {
         BVH_Box<T, N> aBox;
         const Standard_Integer aSize = Size();
-        for (Standard_Integer anIndex = 0; anIndex < aSize; ++anIndex)
-        {
+        for (Standard_Integer anIndex = 0; anIndex < aSize; ++anIndex) {
             aBox.Combine(Box(anIndex));
         }
         return aBox;
     }
 
 public:
-
     //! Returns total number of objects.
     virtual Standard_Integer Size() const = 0;
 
@@ -58,13 +51,10 @@ public:
     virtual BVH_Box<T, N> Box(const Standard_Integer theIndex) const = 0;
 
     //! Returns centroid position along the given axis.
-    virtual T Center(const Standard_Integer theIndex,
-        const Standard_Integer theAxis) const = 0;
+    virtual T Center(const Standard_Integer theIndex, const Standard_Integer theAxis) const = 0;
 
     //! Performs transposing the two given objects in the set.
-    virtual void Swap(const Standard_Integer theIndex1,
-        const Standard_Integer theIndex2) = 0;
-
+    virtual void Swap(const Standard_Integer theIndex1, const Standard_Integer theIndex2) = 0;
 };
 
 #endif // _BVH_Set_Header

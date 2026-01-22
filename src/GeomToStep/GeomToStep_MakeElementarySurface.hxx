@@ -25,45 +25,22 @@
 class StepGeom_ElementarySurface;
 class Geom_ElementarySurface;
 
-
 //! This class implements the mapping between classes
 //! ElementarySurface from Geom and the class ElementarySurface
 //! from StepGeom which describes a ElementarySurface from
 //! prostep. As ElementarySurface is an abstract Surface this
 //! class is an access to the sub-class required.
-class GeomToStep_MakeElementarySurface  : public GeomToStep_Root
-{
+class GeomToStep_MakeElementarySurface : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeElementarySurface(const Handle(Geom_ElementarySurface) & S);
 
-  
-  Standard_EXPORT GeomToStep_MakeElementarySurface(const Handle(Geom_ElementarySurface)& S);
-  
-  Standard_EXPORT const Handle(StepGeom_ElementarySurface)& Value() const;
-
-
-
+    Standard_EXPORT const Handle(StepGeom_ElementarySurface) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_ElementarySurface) theElementarySurface;
-
-
+    Handle(StepGeom_ElementarySurface) theElementarySurface;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeElementarySurface_HeaderFile

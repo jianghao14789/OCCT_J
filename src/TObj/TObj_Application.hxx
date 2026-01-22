@@ -28,109 +28,103 @@
 //! This is a base class for OCAF based TObj models
 //!  with declared virtual methods
 //!
-class TObj_Application : public TDocStd_Application
-{
+class TObj_Application : public TDocStd_Application {
 public:
-  //! Returns static instance of the application
-  Standard_EXPORT static Handle(TObj_Application) GetInstance();
- 
-  //! Returns reference to associated messenger handle
-  Handle(Message_Messenger) &Messenger() { return myMessenger; }
-    
- public:
-  /**
-  *    Load/Save support
-  */
+    //! Returns static instance of the application
+    Standard_EXPORT static Handle(TObj_Application) GetInstance();
 
-  //! Saving the OCAF document to a file
-  Standard_EXPORT virtual Standard_Boolean SaveDocument
-                        (const Handle(TDocStd_Document)&   theSourceDoc,
-                         const TCollection_ExtendedString& theTargetFile);
+    //! Returns reference to associated messenger handle
+    Handle(Message_Messenger) & Messenger() {
+        return myMessenger;
+    }
 
-  //! Saving the OCAF document to a stream
-  Standard_EXPORT virtual Standard_Boolean SaveDocument
-                        (const Handle(TDocStd_Document)&   theSourceDoc,
-                         Standard_OStream&                 theOStream);
+public:
+    /**
+     *    Load/Save support
+     */
 
-  //! Loading the OCAF document from a file
-  Standard_EXPORT virtual Standard_Boolean LoadDocument
-                         (const TCollection_ExtendedString& theSourceFile,
-                          Handle(TDocStd_Document)&         theTargetDoc);
+    //! Saving the OCAF document to a file
+    Standard_EXPORT virtual Standard_Boolean SaveDocument(const Handle(TDocStd_Document) & theSourceDoc,
+                                                          const TCollection_ExtendedString& theTargetFile);
 
-  //! Loading the OCAF document from a stream
-  Standard_EXPORT virtual Standard_Boolean LoadDocument
-                        (Standard_IStream&                 theIStream,
-                         Handle(TDocStd_Document)&         theTargetDoc);
+    //! Saving the OCAF document to a stream
+    Standard_EXPORT virtual Standard_Boolean SaveDocument(const Handle(TDocStd_Document) & theSourceDoc,
+                                                          Standard_OStream& theOStream);
 
-  //! Create the OCAF document from scratch
-  virtual Standard_EXPORT Standard_Boolean CreateNewDocument
-                         (Handle(TDocStd_Document)&         theDoc,
-                          const TCollection_ExtendedString& theFormat);
+    //! Loading the OCAF document from a file
+    Standard_EXPORT virtual Standard_Boolean LoadDocument(const TCollection_ExtendedString& theSourceFile,
+                                                          Handle(TDocStd_Document) & theTargetDoc);
 
-  //! Signal error during Load or Save
-  //! Default imiplementation is empty
-  virtual Standard_EXPORT void ErrorMessage
-                        (const TCollection_ExtendedString &theMsg,
-                         const Message_Gravity theLevel);
+    //! Loading the OCAF document from a stream
+    Standard_EXPORT virtual Standard_Boolean LoadDocument(Standard_IStream& theIStream,
+                                                          Handle(TDocStd_Document) & theTargetDoc);
 
-  //! Signal error during Load or Save
-  //! Default imiplementation invoke previous declaration with 0
-  virtual void ErrorMessage
-                        (const TCollection_ExtendedString &theMsg)
-  { ErrorMessage( theMsg, Message_Alarm ); }
+    //! Create the OCAF document from scratch
+    virtual Standard_EXPORT Standard_Boolean CreateNewDocument(Handle(TDocStd_Document) & theDoc,
+                                                               const TCollection_ExtendedString& theFormat);
 
+    //! Signal error during Load or Save
+    //! Default imiplementation is empty
+    virtual Standard_EXPORT void ErrorMessage(const TCollection_ExtendedString& theMsg, const Message_Gravity theLevel);
 
-  //! Sets the verbose flag, meaning that load/save models should show
-  //! CPU and elapsed times
-  void SetVerbose (const Standard_Boolean isVerbose)
-  { myIsVerbose = isVerbose; }
+    //! Signal error during Load or Save
+    //! Default imiplementation invoke previous declaration with 0
+    virtual void ErrorMessage(const TCollection_ExtendedString& theMsg) {
+        ErrorMessage(theMsg, Message_Alarm);
+    }
 
-  //! Returns the verbose flag
-  Standard_Boolean IsVerbose () const
-  { return myIsVerbose; }
+    //! Sets the verbose flag, meaning that load/save models should show
+    //! CPU and elapsed times
+    void SetVerbose(const Standard_Boolean isVerbose) {
+        myIsVerbose = isVerbose;
+    }
 
-  //! Dumps the content of me into the stream
-  Standard_EXPORT void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
+    //! Returns the verbose flag
+    Standard_Boolean IsVerbose() const {
+        return myIsVerbose;
+    }
 
- public:
-  /** 
-  * Redefined OCAF methods
-  */
+    //! Dumps the content of me into the stream
+    Standard_EXPORT void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
 
-  //! Return name of resource (i.e. "TObj")
-  virtual Standard_EXPORT Standard_CString ResourcesName() Standard_OVERRIDE;
+public:
+    /**
+     * Redefined OCAF methods
+     */
 
- protected:
-  /**
-  * Constructor
-  */
+    //! Return name of resource (i.e. "TObj")
+    virtual Standard_EXPORT Standard_CString ResourcesName() Standard_OVERRIDE;
 
-  //! Constructor is protected. Use method GetInstance() method to obtain 
-  //! the static instance of the object (or derive your own application)
-  Standard_EXPORT TObj_Application();
+protected:
+    /**
+     * Constructor
+     */
 
-  //! Sets an error occurred on storage of a document.
-  void SetError (const PCDM_StoreStatus theStatus, const TCollection_ExtendedString& theInfo);
+    //! Constructor is protected. Use method GetInstance() method to obtain
+    //! the static instance of the object (or derive your own application)
+    Standard_EXPORT TObj_Application();
 
-  //! Sets an error occurred on reading of a document.
-  void SetError (const PCDM_ReaderStatus theStatus, const TCollection_ExtendedString& theInfo);
+    //! Sets an error occurred on storage of a document.
+    void SetError(const PCDM_StoreStatus theStatus, const TCollection_ExtendedString& theInfo);
 
- private:
-  /**
-  * Fields
-  */
+    //! Sets an error occurred on reading of a document.
+    void SetError(const PCDM_ReaderStatus theStatus, const TCollection_ExtendedString& theInfo);
 
-  Standard_Boolean          myIsError;       //!< error flag
-  Standard_Boolean          myIsVerbose;     //!< verbose flag
-  Handle(Message_Messenger) myMessenger;     //!< messenger
+private:
+    /**
+     * Fields
+     */
 
- public:
-  //! CASCADE RTTI
-  DEFINE_STANDARD_RTTIEXT(TObj_Application,TDocStd_Application)
+    Standard_Boolean myIsError;            //!< error flag
+    Standard_Boolean myIsVerbose;          //!< verbose flag
+    Handle(Message_Messenger) myMessenger; //!< messenger
+
+public:
+    //! CASCADE RTTI
+    DEFINE_STANDARD_RTTIEXT(TObj_Application, TDocStd_Application)
 };
 
-
-//! Define handle class 
-DEFINE_STANDARD_HANDLE(TObj_Application,TDocStd_Application)
+//! Define handle class
+DEFINE_STANDARD_HANDLE(TObj_Application, TDocStd_Application)
 
 #endif

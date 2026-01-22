@@ -25,45 +25,24 @@
 //! a maximal chordial deviation.
 //! The number of isoparametric curves to be drawn and their color are
 //! controlled by the furnished Drawer.
-class StdPrs_WFDeflectionSurface  : public Prs3d_Root
-{
+class StdPrs_WFDeflectionSurface : public Prs3d_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Adds the surface aSurface to the presentation object
-  //! aPresentation, and defines its boundaries and isoparameters.
-  //! The shape's display attributes are set in the attribute
-  //! manager aDrawer. These include whether deflection
-  //! is absolute or relative to the size of the shape.
-  //! The surface aSurface is a surface object from
-  //! Adaptor, and provides data from a Geom surface.
-  //! This makes it possible to use the surface in a geometric algorithm.
-  //! Note that this surface object is manipulated by handles.
-  Standard_EXPORT static void Add (const Handle(Prs3d_Presentation)& aPresentation, const Handle(Adaptor3d_Surface)& aSurface, const Handle(Prs3d_Drawer)& aDrawer);
-
-
-
+    //! Adds the surface aSurface to the presentation object
+    //! aPresentation, and defines its boundaries and isoparameters.
+    //! The shape's display attributes are set in the attribute
+    //! manager aDrawer. These include whether deflection
+    //! is absolute or relative to the size of the shape.
+    //! The surface aSurface is a surface object from
+    //! Adaptor, and provides data from a Geom surface.
+    //! This makes it possible to use the surface in a geometric algorithm.
+    //! Note that this surface object is manipulated by handles.
+    Standard_EXPORT static void Add(const Handle(Prs3d_Presentation) & aPresentation,
+                                    const Handle(Adaptor3d_Surface) & aSurface, const Handle(Prs3d_Drawer) & aDrawer);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StdPrs_WFDeflectionSurface_HeaderFile

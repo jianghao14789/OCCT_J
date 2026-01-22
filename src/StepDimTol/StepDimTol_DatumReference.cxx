@@ -19,66 +19,59 @@
 #include <StepDimTol_Datum.hxx>
 #include <StepDimTol_DatumReference.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_DatumReference,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_DatumReference, Standard_Transient)
 
 //=======================================================================
-//function : StepDimTol_DatumReference
-//purpose  : 
+// function : StepDimTol_DatumReference
+// purpose  :
 //=======================================================================
-StepDimTol_DatumReference::StepDimTol_DatumReference ()
-{
+StepDimTol_DatumReference::StepDimTol_DatumReference() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepDimTol_DatumReference::Init(const Standard_Integer thePrecedence,
+                                     const Handle(StepDimTol_Datum) & theReferencedDatum) {
+
+    myPrecedence = thePrecedence;
+
+    myReferencedDatum = theReferencedDatum;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Precedence
+// purpose  :
 //=======================================================================
 
-void StepDimTol_DatumReference::Init (const Standard_Integer thePrecedence,
-                                      const Handle(StepDimTol_Datum) &theReferencedDatum)
-{
-
-  myPrecedence = thePrecedence;
-
-  myReferencedDatum = theReferencedDatum;
+Standard_Integer StepDimTol_DatumReference::Precedence() const {
+    return myPrecedence;
 }
 
 //=======================================================================
-//function : Precedence
-//purpose  : 
+// function : SetPrecedence
+// purpose  :
 //=======================================================================
 
-Standard_Integer StepDimTol_DatumReference::Precedence () const
-{
-  return myPrecedence;
+void StepDimTol_DatumReference::SetPrecedence(const Standard_Integer thePrecedence) {
+    myPrecedence = thePrecedence;
 }
 
 //=======================================================================
-//function : SetPrecedence
-//purpose  : 
+// function : ReferencedDatum
+// purpose  :
 //=======================================================================
 
-void StepDimTol_DatumReference::SetPrecedence (const Standard_Integer thePrecedence)
-{
-  myPrecedence = thePrecedence;
+Handle(StepDimTol_Datum) StepDimTol_DatumReference::ReferencedDatum() const {
+    return myReferencedDatum;
 }
 
 //=======================================================================
-//function : ReferencedDatum
-//purpose  : 
+// function : SetReferencedDatum
+// purpose  :
 //=======================================================================
 
-Handle(StepDimTol_Datum) StepDimTol_DatumReference::ReferencedDatum () const
-{
-  return myReferencedDatum;
-}
-
-//=======================================================================
-//function : SetReferencedDatum
-//purpose  : 
-//=======================================================================
-
-void StepDimTol_DatumReference::SetReferencedDatum (const Handle(StepDimTol_Datum) &theReferencedDatum)
-{
-  myReferencedDatum = theReferencedDatum;
+void StepDimTol_DatumReference::SetReferencedDatum(const Handle(StepDimTol_Datum) & theReferencedDatum) {
+    myReferencedDatum = theReferencedDatum;
 }

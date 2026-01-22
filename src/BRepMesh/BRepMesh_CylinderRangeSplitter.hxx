@@ -21,39 +21,29 @@
 
 //! Auxiliary class extending default range splitter in
 //! order to generate internal nodes for cylindrical surface.
-class BRepMesh_CylinderRangeSplitter : public BRepMesh_DefaultRangeSplitter
-{
+class BRepMesh_CylinderRangeSplitter : public BRepMesh_DefaultRangeSplitter {
 public:
+    //! Constructor.
+    BRepMesh_CylinderRangeSplitter() : myDu(1.) {}
 
-  //! Constructor.
-  BRepMesh_CylinderRangeSplitter()
-    : myDu(1.)
-  {
-  }
+    //! Destructor.
+    virtual ~BRepMesh_CylinderRangeSplitter() {}
 
-  //! Destructor.
-  virtual ~BRepMesh_CylinderRangeSplitter()
-  {
-  }
+    //! Resets this splitter. Must be called before first use.
+    Standard_EXPORT virtual void Reset(const IMeshData::IFaceHandle& theDFace,
+                                       const IMeshTools_Parameters& theParameters) Standard_OVERRIDE;
 
-  //! Resets this splitter. Must be called before first use.
-  Standard_EXPORT virtual void Reset(const IMeshData::IFaceHandle& theDFace,
-                                     const IMeshTools_Parameters&  theParameters) Standard_OVERRIDE;
-
-  //! Returns list of nodes generated using surface data and specified parameters.
-  Standard_EXPORT virtual Handle(IMeshData::ListOfPnt2d) GenerateSurfaceNodes(
-    const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
+    //! Returns list of nodes generated using surface data and specified parameters.
+    Standard_EXPORT virtual Handle(IMeshData::ListOfPnt2d)
+        GenerateSurfaceNodes(const IMeshTools_Parameters& theParameters) const Standard_OVERRIDE;
 
 protected:
-
-  //! Computes parametric delta taking length along U and V into account.
-  Standard_EXPORT virtual void computeDelta(
-    const Standard_Real theLengthU,
-    const Standard_Real theLengthV) Standard_OVERRIDE;
+    //! Computes parametric delta taking length along U and V into account.
+    Standard_EXPORT virtual void computeDelta(const Standard_Real theLengthU,
+                                              const Standard_Real theLengthV) Standard_OVERRIDE;
 
 private:
-
-  Standard_Real myDu;
+    Standard_Real myDu;
 };
 
 #endif

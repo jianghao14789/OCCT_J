@@ -24,33 +24,22 @@
 #include <Standard_Boolean.hxx>
 class SelectMgr_EntityOwner;
 
-
 class SelectMgr_OrFilter;
 DEFINE_STANDARD_HANDLE(SelectMgr_OrFilter, SelectMgr_CompositionFilter)
 
 //! A framework to define an or selection filter.
 //! This selects one or another type of sensitive entity.
-class SelectMgr_OrFilter : public SelectMgr_CompositionFilter
-{
+class SelectMgr_OrFilter : public SelectMgr_CompositionFilter {
 
 public:
+    //! Constructs an empty or selection filter.
+    Standard_EXPORT SelectMgr_OrFilter();
 
-  
-  //! Constructs an empty or selection filter.
-  Standard_EXPORT SelectMgr_OrFilter();
-  
-  Standard_EXPORT Standard_Boolean IsOk (const Handle(SelectMgr_EntityOwner)& anobj) const Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean IsOk(const Handle(SelectMgr_EntityOwner) & anobj) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(SelectMgr_OrFilter,SelectMgr_CompositionFilter)
+    DEFINE_STANDARD_RTTIEXT(SelectMgr_OrFilter, SelectMgr_CompositionFilter)
 
 protected:
-
 };
-
-
-
-
-
-
 
 #endif // _SelectMgr_OrFilter_HeaderFile

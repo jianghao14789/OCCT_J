@@ -27,48 +27,26 @@ class StepFEA_DummyNode;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DummyNode
-class RWStepFEA_RWDummyNode 
-{
+class RWStepFEA_RWDummyNode {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWDummyNode();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWDummyNode();
-  
-  //! Reads DummyNode
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_DummyNode)& ent) const;
-  
-  //! Writes DummyNode
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_DummyNode)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_DummyNode)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DummyNode
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_DummyNode) & ent) const;
 
+    //! Writes DummyNode
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_DummyNode) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_DummyNode) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWDummyNode_HeaderFile

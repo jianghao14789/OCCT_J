@@ -27,48 +27,27 @@ class StepShape_ConnectedFaceSubSet;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ConnectedFaceSubSet
-class RWStepShape_RWConnectedFaceSubSet 
-{
+class RWStepShape_RWConnectedFaceSubSet {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWConnectedFaceSubSet();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWConnectedFaceSubSet();
-  
-  //! Reads ConnectedFaceSubSet
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ConnectedFaceSubSet)& ent) const;
-  
-  //! Writes ConnectedFaceSubSet
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ConnectedFaceSubSet)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_ConnectedFaceSubSet)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ConnectedFaceSubSet
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_ConnectedFaceSubSet) & ent) const;
 
+    //! Writes ConnectedFaceSubSet
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_ConnectedFaceSubSet) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_ConnectedFaceSubSet) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWConnectedFaceSubSet_HeaderFile

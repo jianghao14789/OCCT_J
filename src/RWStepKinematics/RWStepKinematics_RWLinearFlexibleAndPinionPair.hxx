@@ -1,4 +1,4 @@
-// Created on : Fri May 08 19:02:07 2020 
+// Created on : Fri May 08 19:02:07 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepKinematics_LinearFlexibleAndPinionPair;
 
 //! Read & Write tool for LinearFlexibleAndPinionPair
-class RWStepKinematics_RWLinearFlexibleAndPinionPair
-{
+class RWStepKinematics_RWLinearFlexibleAndPinionPair {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWLinearFlexibleAndPinionPair();
 
-  Standard_EXPORT RWStepKinematics_RWLinearFlexibleAndPinionPair();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_LinearFlexibleAndPinionPair) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_LinearFlexibleAndPinionPair)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_LinearFlexibleAndPinionPair) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepKinematics_LinearFlexibleAndPinionPair)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepKinematics_LinearFlexibleAndPinionPair)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepKinematics_LinearFlexibleAndPinionPair) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepKinematics_RWLinearFlexibleAndPinionPair_HeaderFile_

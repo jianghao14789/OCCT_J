@@ -20,43 +20,34 @@
 
 //! Performs centroid-based sorting of abstract set along
 //! the given axis (X - 0, Y - 1, Z - 2) using quick sort.
-template<class T, int N>
-class BVH_QuickSorter : public BVH_Sorter<T, N>
-{
+template <class T, int N> class BVH_QuickSorter : public BVH_Sorter<T, N> {
 public:
-
     //! Creates new BVH quick sorter for the given axis.
     BVH_QuickSorter(const Standard_Integer theAxis = 0) : myAxis(theAxis) {}
 
     //! Sorts the set.
-    virtual void Perform(BVH_Set<T, N>* theSet) Standard_OVERRIDE
-    {
+    virtual void Perform(BVH_Set<T, N>* theSet) Standard_OVERRIDE {
         Perform(theSet, 0, theSet->Size() - 1);
     }
 
     //! Sorts the given (inclusive) range in the set.
-    virtual void Perform(BVH_Set<T, N>* theSet, const Standard_Integer theStart, const Standard_Integer theFinal) Standard_OVERRIDE
-    {
+    virtual void Perform(BVH_Set<T, N>* theSet, const Standard_Integer theStart,
+                         const Standard_Integer theFinal) Standard_OVERRIDE {
         Standard_Integer aLft = theStart;
         Standard_Integer aRgh = theFinal;
 
         T aPivot = theSet->Center((aRgh + aLft) / 2, myAxis);
-        while (aLft < aRgh)
-        {
-            while (theSet->Center(aLft, myAxis) < aPivot && aLft < theFinal)
-            {
+        while (aLft < aRgh) {
+            while (theSet->Center(aLft, myAxis) < aPivot && aLft < theFinal) {
                 ++aLft;
             }
 
-            while (theSet->Center(aRgh, myAxis) > aPivot && aRgh > theStart)
-            {
+            while (theSet->Center(aRgh, myAxis) > aPivot && aRgh > theStart) {
                 --aRgh;
             }
 
-            if (aLft <= aRgh)
-            {
-                if (aLft != aRgh)
-                {
+            if (aLft <= aRgh) {
+                if (aLft != aRgh) {
                     theSet->Swap(aLft, aRgh);
                 }
                 ++aLft;
@@ -64,22 +55,18 @@ public:
             }
         }
 
-        if (aRgh > theStart)
-        {
+        if (aRgh > theStart) {
             Perform(theSet, theStart, aRgh);
         }
 
-        if (aLft < theFinal)
-        {
+        if (aLft < theFinal) {
             Perform(theSet, aLft, theFinal);
         }
     }
 
 protected:
-
     //! Axis used to arrange the primitives (X - 0, Y - 1, Z - 2).
     Standard_Integer myAxis;
-
 };
 
 #endif // _BVH_QuickSorter_Header

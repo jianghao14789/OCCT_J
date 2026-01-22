@@ -32,8 +32,7 @@ class Poly_CoherentTriangulation;
  * Any Link can store an arbitrary pointer that is called Attribute.
  */
 
-class Poly_CoherentLink
-{
+class Poly_CoherentLink {
 public:
     // ---------- PUBLIC METHODS ----------
 
@@ -47,12 +46,11 @@ public:
      * This constructor is useful to create temporary object that is not
      * inserted into any existing triangulation.
      */
-    inline Poly_CoherentLink(const Standard_Integer iNode0,
-        const Standard_Integer iNode1)
-        : myAttribute(0L)
-    {
-        myNode[0] = iNode0; myNode[1] = iNode1;
-        myOppositeNode[0] = -1; myOppositeNode[1] = -1;
+    inline Poly_CoherentLink(const Standard_Integer iNode0, const Standard_Integer iNode1) : myAttribute(0L) {
+        myNode[0] = iNode0;
+        myNode[1] = iNode1;
+        myOppositeNode[0] = -1;
+        myOppositeNode[1] = -1;
     }
 
     /**
@@ -65,8 +63,7 @@ public:
      * @param iSide
      *   Can be 0, 1 or 2. Index of the node
      */
-    Standard_EXPORT Poly_CoherentLink(const Poly_CoherentTriangle& theTri,
-        Standard_Integer             iSide);
+    Standard_EXPORT Poly_CoherentLink(const Poly_CoherentTriangle& theTri, Standard_Integer iSide);
 
     /**
      * Return the node index in the current triangulation.
@@ -74,8 +71,7 @@ public:
      *   0 or 1 making distinction of the two nodes that constitute the Link.
      *   Node(0) always returns a smaller number than Node(1).
      */
-    inline Standard_Integer       Node(const Standard_Integer ind) const
-    {
+    inline Standard_Integer Node(const Standard_Integer ind) const {
         return myNode[ind & 0x1];
     }
 
@@ -86,24 +82,21 @@ public:
      *   0 or 1 making distinction of the two involved triangles: 0 on the left,
      *   1 on the right side of the Link.
      */
-    inline Standard_Integer       OppositeNode(const Standard_Integer ind) const
-    {
+    inline Standard_Integer OppositeNode(const Standard_Integer ind) const {
         return myOppositeNode[ind & 0x1];
     }
 
     /**
      * Query the attribute of the Link.
      */
-    inline Standard_Address       GetAttribute() const
-    {
+    inline Standard_Address GetAttribute() const {
         return myAttribute;
     }
 
     /**
      * Set the attribute of the Link.
      */
-    inline void                   SetAttribute(const Standard_Address theAtt)
-    {
+    inline void SetAttribute(const Standard_Address theAtt) {
         myAttribute = theAtt;
     }
 
@@ -111,31 +104,28 @@ public:
      * Query the status of the link - if it is an invalid one.
      * An invalid link has Node members equal to -1.
      */
-    inline Standard_Boolean       IsEmpty() const
-    {
+    inline Standard_Boolean IsEmpty() const {
         return myNode[0] < 0 || myNode[1] < 0;
     }
 
     /**
      * Invalidate this Link.
      */
-    inline void                   Nullify()
-    {
-        myNode[0] = -1; myNode[1] = -1;
-        myOppositeNode[0] = -1; myOppositeNode[1] = -1;
+    inline void Nullify() {
+        myNode[0] = -1;
+        myNode[1] = -1;
+        myOppositeNode[0] = -1;
+        myOppositeNode[1] = -1;
     }
-
 
 protected:
     // ---------- PROTECTED METHODS ----------
 
-
-
 private:
     // ---------- PRIVATE FIELDS ----------
-    Standard_Integer              myNode[2];
-    Standard_Integer              myOppositeNode[2];
-    Standard_Address              myAttribute;
+    Standard_Integer myNode[2];
+    Standard_Integer myOppositeNode[2];
+    Standard_Address myAttribute;
 
     friend class Poly_CoherentTriangulation;
 };

@@ -19,12 +19,11 @@
 #include <TCollection_AsciiString.hxx>
 
 //! Sub-mesh definition for OBJ reader.
-struct RWObj_SubMesh
-{
-  TCollection_AsciiString Object;      //!< name of active object
-  TCollection_AsciiString Group;       //!< name of active group
-  TCollection_AsciiString SmoothGroup; //!< name of active smoothing group
-  TCollection_AsciiString Material;    //!< name of active material
+struct RWObj_SubMesh {
+    TCollection_AsciiString Object;      //!< name of active object
+    TCollection_AsciiString Group;       //!< name of active group
+    TCollection_AsciiString SmoothGroup; //!< name of active smoothing group
+    TCollection_AsciiString Material;    //!< name of active material
 };
 
 #endif // _RWObj_SubMesh_HeaderFile

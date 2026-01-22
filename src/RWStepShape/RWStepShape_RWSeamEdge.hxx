@@ -27,48 +27,26 @@ class StepShape_SeamEdge;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for SeamEdge
-class RWStepShape_RWSeamEdge 
-{
+class RWStepShape_RWSeamEdge {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWSeamEdge();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWSeamEdge();
-  
-  //! Reads SeamEdge
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_SeamEdge)& ent) const;
-  
-  //! Writes SeamEdge
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_SeamEdge)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_SeamEdge)& ent, Interface_EntityIterator& iter) const;
+    //! Reads SeamEdge
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_SeamEdge) & ent) const;
 
+    //! Writes SeamEdge
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_SeamEdge) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_SeamEdge) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWSeamEdge_HeaderFile

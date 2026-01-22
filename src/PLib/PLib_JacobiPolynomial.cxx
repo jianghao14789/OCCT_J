@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <math.hxx>
 #include <math_Vector.hxx>
 #include <PLib.hxx>
@@ -26,46 +25,45 @@ IMPLEMENT_STANDARD_RTTIEXT(PLib_JacobiPolynomial, PLib_Base)
 #include "PLib_JacobiPolynomial_Data.pxx"
 
 // The possible values for NbGaussPoints
-const Standard_Integer NDEG8 = 8, NDEG10 = 10, NDEG15 = 15, NDEG20 = 20, NDEG25 = 25,
-NDEG30 = 30, NDEG40 = 40, NDEG50 = 50, NDEG61 = 61;
+const Standard_Integer NDEG8 = 8, NDEG10 = 10, NDEG15 = 15, NDEG20 = 20, NDEG25 = 25, NDEG30 = 30, NDEG40 = 40,
+                       NDEG50 = 50, NDEG61 = 61;
 
 const Standard_Integer UNDEFINED = -999;
 
 //=======================================================================
-//function : PLib_JacobiPolynomial
-//purpose  : 
+// function : PLib_JacobiPolynomial
+// purpose  :
 //=======================================================================
 
-PLib_JacobiPolynomial::PLib_JacobiPolynomial(const Standard_Integer WorkDegree,
-    const GeomAbs_Shape ConstraintOrder)
-{
+PLib_JacobiPolynomial::PLib_JacobiPolynomial(const Standard_Integer WorkDegree, const GeomAbs_Shape ConstraintOrder) {
     myWorkDegree = WorkDegree;
 
     switch (ConstraintOrder) {
-    case GeomAbs_C0: myNivConstr = 0; break;
-    case GeomAbs_C1: myNivConstr = 1; break;
-    case GeomAbs_C2: myNivConstr = 2; break;
-    default:
-        throw Standard_ConstructionError("Invalid ConstraintOrder");
+        case GeomAbs_C0:
+            myNivConstr = 0;
+            break;
+        case GeomAbs_C1:
+            myNivConstr = 1;
+            break;
+        case GeomAbs_C2:
+            myNivConstr = 2;
+            break;
+        default:
+            throw Standard_ConstructionError("Invalid ConstraintOrder");
     }
     myDegree = myWorkDegree - 2 * (myNivConstr + 1);
-    if (myDegree > 30)
-        throw Standard_ConstructionError("Invalid Degree");
+    if (myDegree > 30) throw Standard_ConstructionError("Invalid Degree");
 }
 
 //=======================================================================
-//function : Points
-//purpose  : 
+// function : Points
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::Points(const Standard_Integer NbGaussPoints,
-    TColStd_Array1OfReal& TabPoints) const
-{
-    if ((NbGaussPoints != NDEG8 && NbGaussPoints != NDEG10 &&
-        NbGaussPoints != NDEG15 && NbGaussPoints != NDEG20 &&
-        NbGaussPoints != NDEG25 && NbGaussPoints != NDEG30 &&
-        NbGaussPoints != NDEG40 && NbGaussPoints != NDEG50 &&
-        NbGaussPoints != NDEG61) ||
+void PLib_JacobiPolynomial::Points(const Standard_Integer NbGaussPoints, TColStd_Array1OfReal& TabPoints) const {
+    if ((NbGaussPoints != NDEG8 && NbGaussPoints != NDEG10 && NbGaussPoints != NDEG15 && NbGaussPoints != NDEG20 &&
+         NbGaussPoints != NDEG25 && NbGaussPoints != NDEG30 && NbGaussPoints != NDEG40 && NbGaussPoints != NDEG50 &&
+         NbGaussPoints != NDEG61) ||
         NbGaussPoints <= myDegree)
         throw Standard_ConstructionError("Invalid NbGaussPoints");
 
@@ -83,23 +81,27 @@ void PLib_JacobiPolynomial::Points(const Standard_Integer NbGaussPoints,
 }
 
 //=======================================================================
-//function : Weights
-//purpose  : 
+// function : Weights
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::Weights(const Standard_Integer NbGaussPoints,
-    TColStd_Array2OfReal& TabWeights) const
-{
+void PLib_JacobiPolynomial::Weights(const Standard_Integer NbGaussPoints, TColStd_Array2OfReal& TabWeights) const {
 
     Standard_Integer i, j;
-    Standard_Real const* pdb = NULL;     // the current pointer to WeightsDB
+    Standard_Real const* pdb = NULL; // the current pointer to WeightsDB
     switch (myNivConstr) {
-    case 0: pdb = WeightsDB_C0; break;
-    case 1: pdb = WeightsDB_C1; break;
-    case 2: pdb = WeightsDB_C2; break;
+        case 0:
+            pdb = WeightsDB_C0;
+            break;
+        case 1:
+            pdb = WeightsDB_C1;
+            break;
+        case 2:
+            pdb = WeightsDB_C2;
+            break;
     }
     Standard_Integer infdg = 2 * (myNivConstr + 1);
-    if (NbGaussPoints > NDEG8)  pdb += (NDEG8 * (NDEG8 - infdg) / 2);
+    if (NbGaussPoints > NDEG8) pdb += (NDEG8 * (NDEG8 - infdg) / 2);
     if (NbGaussPoints > NDEG10) pdb += (NDEG10 * (NDEG10 - infdg) / 2);
     if (NbGaussPoints > NDEG15) pdb += (((NDEG15 - 1) / 2) * (NDEG15 - infdg));
     if (NbGaussPoints > NDEG20) pdb += (NDEG20 * (NDEG20 - infdg) / 2);
@@ -117,11 +119,17 @@ void PLib_JacobiPolynomial::Weights(const Standard_Integer NbGaussPoints,
 
     if (NbGaussPoints % 2 == 1) {
         // NbGaussPoints is odd - the values addition for 0.
-        Standard_Real const* pdb0 = NULL;  // the current pointer to WeightsDB0
+        Standard_Real const* pdb0 = NULL; // the current pointer to WeightsDB0
         switch (myNivConstr) {
-        case 0: pdb0 = WeightsDB0_C0; break;
-        case 1: pdb0 = WeightsDB0_C1; break;
-        case 2: pdb0 = WeightsDB0_C2; break;
+            case 0:
+                pdb0 = WeightsDB0_C0;
+                break;
+            case 1:
+                pdb0 = WeightsDB0_C1;
+                break;
+            case 2:
+                pdb0 = WeightsDB0_C2;
+                break;
         }
 
         if (NbGaussPoints > NDEG15) pdb0 += ((NDEG15 - 1 - infdg) / 2 + 1);
@@ -132,8 +140,7 @@ void PLib_JacobiPolynomial::Weights(const Standard_Integer NbGaussPoints,
             TabWeights.SetValue(0, j, *pdb0++);
         for (j = 1; j <= myDegree; j += 2)
             TabWeights.SetValue(0, j, 0.);
-    }
-    else {
+    } else {
         for (j = 0; j <= myDegree; j++) {
             TabWeights.SetValue(0, j, UNDEFINED);
         }
@@ -141,17 +148,22 @@ void PLib_JacobiPolynomial::Weights(const Standard_Integer NbGaussPoints,
 }
 
 //=======================================================================
-//function : MaxValue
-//purpose  : 
+// function : MaxValue
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::MaxValue(TColStd_Array1OfReal& TabMax) const
-{
-    Standard_Real const* pdb = NULL;  // the pointer to MaxValues
+void PLib_JacobiPolynomial::MaxValue(TColStd_Array1OfReal& TabMax) const {
+    Standard_Real const* pdb = NULL; // the pointer to MaxValues
     switch (myNivConstr) {
-    case 0: pdb = MaxValuesDB_C0; break;
-    case 1: pdb = MaxValuesDB_C1; break;
-    case 2: pdb = MaxValuesDB_C2; break;
+        case 0:
+            pdb = MaxValuesDB_C0;
+            break;
+        case 1:
+            pdb = MaxValuesDB_C1;
+            break;
+        case 2:
+            pdb = MaxValuesDB_C2;
+            break;
     }
     for (Standard_Integer i = TabMax.Lower(); i <= TabMax.Upper(); i++) {
         TabMax.SetValue(i, *pdb++);
@@ -159,14 +171,12 @@ void PLib_JacobiPolynomial::MaxValue(TColStd_Array1OfReal& TabMax) const
 }
 
 //=======================================================================
-//function : MaxError
-//purpose  : 
+// function : MaxError
+// purpose  :
 //=======================================================================
 
-Standard_Real PLib_JacobiPolynomial::MaxError(const Standard_Integer Dimension,
-    Standard_Real& JacCoeff,
-    const Standard_Integer NewDegree) const
-{
+Standard_Real PLib_JacobiPolynomial::MaxError(const Standard_Integer Dimension, Standard_Real& JacCoeff,
+                                              const Standard_Integer NewDegree) const {
     Standard_Integer i, idim, ibeg, icut;
 
     math_Vector MaxErrDim(1, Dimension, 0.);
@@ -187,17 +197,13 @@ Standard_Real PLib_JacobiPolynomial::MaxError(const Standard_Integer Dimension,
 }
 
 //=======================================================================
-//function : ReduceDegree
-//purpose  : 
+// function : ReduceDegree
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::ReduceDegree(const Standard_Integer Dimension,
-    const Standard_Integer MaxDegree,
-    const Standard_Real Tol,
-    Standard_Real& JacCoeff,
-    Standard_Integer& NewDegree,
-    Standard_Real& MaxError) const
-{
+void PLib_JacobiPolynomial::ReduceDegree(const Standard_Integer Dimension, const Standard_Integer MaxDegree,
+                                         const Standard_Real Tol, Standard_Real& JacCoeff, Standard_Integer& NewDegree,
+                                         Standard_Real& MaxError) const {
     Standard_Integer i, idim, icut, ia = 2 * (myNivConstr + 1) - 1;
     Standard_Real Bid, Eps1, Error;
 
@@ -219,8 +225,7 @@ void PLib_JacobiPolynomial::ReduceDegree(const Standard_Integer Dimension,
         if (Error > Tol && i <= MaxDegree) {
             NewDegree = i;
             break;
-        }
-        else
+        } else
             MaxError = Error;
     }
     if (NewDegree == ia) {
@@ -240,15 +245,12 @@ void PLib_JacobiPolynomial::ReduceDegree(const Standard_Integer Dimension,
 }
 
 //=======================================================================
-//function : AverageError
-//purpose  : 
+// function : AverageError
+// purpose  :
 //=======================================================================
 
-Standard_Real PLib_JacobiPolynomial::AverageError(const Standard_Integer Dimension,
-    Standard_Real& JacCoeff,
-    const Standard_Integer NewDegree)
-    const
-{
+Standard_Real PLib_JacobiPolynomial::AverageError(const Standard_Integer Dimension, Standard_Real& JacCoeff,
+                                                  const Standard_Integer NewDegree) const {
     Standard_Integer i, idim, icut = Max(2 * (myNivConstr + 1) + 1, NewDegree + 1);
     Standard_Real BidJ, AverageErr = 0.;
     Standard_Real* JacArray = &JacCoeff;
@@ -263,25 +265,29 @@ Standard_Real PLib_JacobiPolynomial::AverageError(const Standard_Integer Dimensi
 }
 
 //=======================================================================
-//function :ToCoefficients
-//purpose  : 
+// function :ToCoefficients
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::ToCoefficients(const Standard_Integer Dimension,
-    const Standard_Integer Degree,
-    const TColStd_Array1OfReal& JacCoeff,
-    TColStd_Array1OfReal& Coefficients) const
-{
+void PLib_JacobiPolynomial::ToCoefficients(const Standard_Integer Dimension, const Standard_Integer Degree,
+                                           const TColStd_Array1OfReal& JacCoeff,
+                                           TColStd_Array1OfReal& Coefficients) const {
     const Standard_Integer MAXM = 31;
     Standard_Integer i, iptt, j, idim, ii, jj;
-    Standard_Real const* pTr = NULL;  // the pointer to TransMatrix
+    Standard_Real const* pTr = NULL; // the pointer to TransMatrix
     Standard_Real Bid;
     Standard_Integer ibegJC = JacCoeff.Lower(), ibegC = Coefficients.Lower();
 
     switch (myNivConstr) {
-    case 0: pTr = &TransMatrix_C0[0][0]; break;
-    case 1: pTr = &TransMatrix_C1[0][0]; break;
-    case 2: pTr = &TransMatrix_C2[0][0]; break;
+        case 0:
+            pTr = &TransMatrix_C0[0][0];
+            break;
+        case 1:
+            pTr = &TransMatrix_C1[0][0];
+            break;
+        case 2:
+            pTr = &TransMatrix_C2[0][0];
+            break;
     }
     // the conversation for even elements of JacCoeff
     for (i = 0; i <= Degree / 2; i++) {
@@ -314,17 +320,13 @@ void PLib_JacobiPolynomial::ToCoefficients(const Standard_Integer Dimension,
 }
 
 //=======================================================================
-//function : D0123
-//purpose  : common part of D0,D1,D2,D3 (FORTRAN subroutine MPOJAC)
+// function : D0123
+// purpose  : common part of D0,D1,D2,D3 (FORTRAN subroutine MPOJAC)
 //=======================================================================
 
-void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
-    const Standard_Real U,
-    TColStd_Array1OfReal& BasisValue,
-    TColStd_Array1OfReal& BasisD1,
-    TColStd_Array1OfReal& BasisD2,
-    TColStd_Array1OfReal& BasisD3)
-{
+void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv, const Standard_Real U,
+                                  TColStd_Array1OfReal& BasisValue, TColStd_Array1OfReal& BasisD1,
+                                  TColStd_Array1OfReal& BasisD2, TColStd_Array1OfReal& BasisD3) {
     Standard_Integer i, j, HermitNivConstr = 2 * (myNivConstr + 1);
     Standard_Real Aux1, Aux2;
 
@@ -338,8 +340,7 @@ void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
             for (j = 1; j <= HermitNivConstr; j++) {
                 Aux2 *= ((Standard_Real)(i + HermitNivConstr + j) / (Standard_Real)(i + j));
             }
-            myTNorm->SetValue(i, Sqrt(Aux2 * (2 * i + 2 * HermitNivConstr + 1) /
-                (Pow(2, 2 * HermitNivConstr + 1))));
+            myTNorm->SetValue(i, Sqrt(Aux2 * (2 * i + 2 * HermitNivConstr + 1) / (Pow(2, 2 * HermitNivConstr + 1))));
         }
 
         if (myDegree >= 2) {
@@ -363,19 +364,16 @@ void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
     Standard_Integer ibeg3 = BasisD3.Lower();
     Standard_Integer i0, i1, i2, i3;
 
-
     if (myDegree == 0) {
         BasisValue(ibeg0 + 0) = 1.;
         if (NDeriv >= 1) {
             BasisD1(ibeg1 + 0) = 0.;
             if (NDeriv >= 2) {
                 BasisD2(ibeg2 + 0) = 0.;
-                if (NDeriv == 3)
-                    BasisD3(ibeg3 + 0) = 0.;
+                if (NDeriv == 3) BasisD3(ibeg3 + 0) = 0.;
             }
         }
-    }
-    else {
+    } else {
         BasisValue(ibeg0 + 0) = 1.;
         Aux1 = HermitNivConstr + 1;
         BasisValue(ibeg0 + 1) = Aux1 * U;
@@ -392,7 +390,6 @@ void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
             }
         }
     }
-
 
     //  --- Positionement par reccurence
     if (myDegree > 1) {
@@ -415,18 +412,15 @@ void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
                 CofB = myCofB->Value(i);
                 Denom = myDenom->Value(i);
 
-                BasisValue(i0) = (CofA * U * BasisValue(i0 - 1) +
-                    CofB * BasisValue(i0 - 2)) * Denom;
-                BasisD1(i1) = (CofA * (U * BasisD1(i1 - 1) + BasisValue(i0 - 1)) +
-                    CofB * BasisD1(i1 - 2)) * Denom;
+                BasisValue(i0) = (CofA * U * BasisValue(i0 - 1) + CofB * BasisValue(i0 - 2)) * Denom;
+                BasisD1(i1) = (CofA * (U * BasisD1(i1 - 1) + BasisValue(i0 - 1)) + CofB * BasisD1(i1 - 2)) * Denom;
                 if (NDeriv >= 2) {
                     i2 = i + ibeg2;
-                    BasisD2(i2) = (CofA * (U * BasisD2(i2 - 1) + 2 * BasisD1(i1 - 1)) +
-                        CofB * BasisD2(i2 - 2)) * Denom;
+                    BasisD2(i2) = (CofA * (U * BasisD2(i2 - 1) + 2 * BasisD1(i1 - 1)) + CofB * BasisD2(i2 - 2)) * Denom;
                     if (NDeriv == 3) {
                         i3 = i + ibeg3;
-                        BasisD3(i3) = (CofA * (U * BasisD3(i3 - 1) + 3 * BasisD2(i2 - 1)) +
-                            CofB * BasisD3(i3 - 2)) * Denom;
+                        BasisD3(i3) =
+                            (CofA * (U * BasisD3(i3 - 1) + 3 * BasisD2(i2 - 1)) + CofB * BasisD3(i3 - 2)) * Denom;
                     }
                 }
             }
@@ -439,8 +433,7 @@ void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
         Standard_Real* TNorm = &myTNorm->ChangeValue(0);
         for (i = 0; i <= myDegree; i++)
             BV[i] *= TNorm[i];
-    }
-    else {
+    } else {
         Standard_Real TNorm;
         for (i = 0; i <= myDegree; i++) {
             TNorm = myTNorm->Value(i);
@@ -455,52 +448,39 @@ void PLib_JacobiPolynomial::D0123(const Standard_Integer NDeriv,
 }
 
 //=======================================================================
-//function : D0
-//purpose  : 
+// function : D0
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::D0(const Standard_Real U,
-    TColStd_Array1OfReal& BasisValue)
-{
+void PLib_JacobiPolynomial::D0(const Standard_Real U, TColStd_Array1OfReal& BasisValue) {
     D0123(0, U, BasisValue, BasisValue, BasisValue, BasisValue);
 }
 
 //=======================================================================
-//function : D1
-//purpose  : 
+// function : D1
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::D1(const Standard_Real U,
-    TColStd_Array1OfReal& BasisValue,
-    TColStd_Array1OfReal& BasisD1)
-{
+void PLib_JacobiPolynomial::D1(const Standard_Real U, TColStd_Array1OfReal& BasisValue, TColStd_Array1OfReal& BasisD1) {
     D0123(1, U, BasisValue, BasisD1, BasisD1, BasisD1);
 }
 
 //=======================================================================
-//function : D2
-//purpose  : 
+// function : D2
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::D2(const Standard_Real U,
-    TColStd_Array1OfReal& BasisValue,
-    TColStd_Array1OfReal& BasisD1,
-    TColStd_Array1OfReal& BasisD2)
-{
+void PLib_JacobiPolynomial::D2(const Standard_Real U, TColStd_Array1OfReal& BasisValue, TColStd_Array1OfReal& BasisD1,
+                               TColStd_Array1OfReal& BasisD2) {
     D0123(2, U, BasisValue, BasisD1, BasisD2, BasisD2);
 }
 
 //=======================================================================
-//function : D3
-//purpose  : 
+// function : D3
+// purpose  :
 //=======================================================================
 
-void PLib_JacobiPolynomial::D3(const Standard_Real U,
-    TColStd_Array1OfReal& BasisValue,
-    TColStd_Array1OfReal& BasisD1,
-    TColStd_Array1OfReal& BasisD2,
-    TColStd_Array1OfReal& BasisD3)
-{
+void PLib_JacobiPolynomial::D3(const Standard_Real U, TColStd_Array1OfReal& BasisValue, TColStd_Array1OfReal& BasisD1,
+                               TColStd_Array1OfReal& BasisD2, TColStd_Array1OfReal& BasisD3) {
     D0123(3, U, BasisValue, BasisD1, BasisD2, BasisD3);
 }
-

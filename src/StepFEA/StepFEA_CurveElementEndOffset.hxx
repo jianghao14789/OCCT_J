@@ -24,58 +24,38 @@
 #include <Standard_Transient.hxx>
 class StepFEA_CurveElementEndCoordinateSystem;
 
-
 class StepFEA_CurveElementEndOffset;
 DEFINE_STANDARD_HANDLE(StepFEA_CurveElementEndOffset, Standard_Transient)
 
 //! Representation of STEP entity CurveElementEndOffset
-class StepFEA_CurveElementEndOffset : public Standard_Transient
-{
+class StepFEA_CurveElementEndOffset : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepFEA_CurveElementEndOffset();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepFEA_CurveElementEndOffset();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const StepFEA_CurveElementEndCoordinateSystem& aCoordinateSystem, const Handle(TColStd_HArray1OfReal)& aOffsetVector);
-  
-  //! Returns field CoordinateSystem
-  Standard_EXPORT StepFEA_CurveElementEndCoordinateSystem CoordinateSystem() const;
-  
-  //! Set field CoordinateSystem
-  Standard_EXPORT void SetCoordinateSystem (const StepFEA_CurveElementEndCoordinateSystem& CoordinateSystem);
-  
-  //! Returns field OffsetVector
-  Standard_EXPORT Handle(TColStd_HArray1OfReal) OffsetVector() const;
-  
-  //! Set field OffsetVector
-  Standard_EXPORT void SetOffsetVector (const Handle(TColStd_HArray1OfReal)& OffsetVector);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const StepFEA_CurveElementEndCoordinateSystem& aCoordinateSystem,
+                              const Handle(TColStd_HArray1OfReal) & aOffsetVector);
 
+    //! Returns field CoordinateSystem
+    Standard_EXPORT StepFEA_CurveElementEndCoordinateSystem CoordinateSystem() const;
 
+    //! Set field CoordinateSystem
+    Standard_EXPORT void SetCoordinateSystem(const StepFEA_CurveElementEndCoordinateSystem& CoordinateSystem);
 
+    //! Returns field OffsetVector
+    Standard_EXPORT Handle(TColStd_HArray1OfReal) OffsetVector() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepFEA_CurveElementEndOffset,Standard_Transient)
+    //! Set field OffsetVector
+    Standard_EXPORT void SetOffsetVector(const Handle(TColStd_HArray1OfReal) & OffsetVector);
+
+    DEFINE_STANDARD_RTTIEXT(StepFEA_CurveElementEndOffset, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  StepFEA_CurveElementEndCoordinateSystem theCoordinateSystem;
-  Handle(TColStd_HArray1OfReal) theOffsetVector;
-
-
+    StepFEA_CurveElementEndCoordinateSystem theCoordinateSystem;
+    Handle(TColStd_HArray1OfReal) theOffsetVector;
 };
-
-
-
-
-
-
 
 #endif // _StepFEA_CurveElementEndOffset_HeaderFile

@@ -21,89 +21,94 @@
 
 ///  Implementation of the TextureTransform node
 
-class VrmlData_TextureTransform : public VrmlData_Node
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class VrmlData_TextureTransform : public VrmlData_Node {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  /**
-   * Empty constructor
-   */
-  inline VrmlData_TextureTransform ()
-  : myRotation(0.0)
-  {
-  }
+    /**
+     * Empty constructor
+     */
+    inline VrmlData_TextureTransform() : myRotation(0.0) {}
 
-  /**
-   * Constructor
-   */
-  inline VrmlData_TextureTransform (const VrmlData_Scene& theScene,
-                                    const char            * theName)
-    : VrmlData_Node (theScene, theName),
-	  myRotation(0.)
-  {}
+    /**
+     * Constructor
+     */
+    inline VrmlData_TextureTransform(const VrmlData_Scene& theScene, const char* theName)
+        : VrmlData_Node(theScene, theName), myRotation(0.) {}
 
-  /**
-   * Query the Center
-   */
-  inline const gp_XY&   Center          () const { return myCenter; }
-  
-  /**
-   * Query the Rotation
-   */
-  inline Standard_Real  Rotation        () const { return myRotation; }
-  
-  /**
-   * Query the Scale
-   */
-  inline const gp_XY&   Scale           () const { return myScale; }
+    /**
+     * Query the Center
+     */
+    inline const gp_XY& Center() const {
+        return myCenter;
+    }
 
-  /**
-   * Query the Translation
-   */
-  inline const gp_XY&   Translation     () const { return myTranslation; }
+    /**
+     * Query the Rotation
+     */
+    inline Standard_Real Rotation() const {
+        return myRotation;
+    }
 
-  /**
-   * Set the Center
-   */
-  inline void           SetCenter       (const gp_XY& V) { myCenter = V; }
+    /**
+     * Query the Scale
+     */
+    inline const gp_XY& Scale() const {
+        return myScale;
+    }
 
-  /**
-   * Set the Rotation
-   */
-  inline void           SetRotation     (const Standard_Real V)
-  { myRotation = V; }
+    /**
+     * Query the Translation
+     */
+    inline const gp_XY& Translation() const {
+        return myTranslation;
+    }
 
-  /**
-   * Set the Scale
-   */
-  inline void           SetScale        (const gp_XY& V) { myScale = V; }
+    /**
+     * Set the Center
+     */
+    inline void SetCenter(const gp_XY& V) {
+        myCenter = V;
+    }
 
-  /**
-   * Set the Translation
-   */
-  inline void           SetTranslation  (const gp_XY& V) { myTranslation = V; }
+    /**
+     * Set the Rotation
+     */
+    inline void SetRotation(const Standard_Real V) {
+        myRotation = V;
+    }
 
- protected:
-  // ---------- PROTECTED METHODS ----------
+    /**
+     * Set the Scale
+     */
+    inline void SetScale(const gp_XY& V) {
+        myScale = V;
+    }
 
+    /**
+     * Set the Translation
+     */
+    inline void SetTranslation(const gp_XY& V) {
+        myTranslation = V;
+    }
 
+protected:
+    // ---------- PROTECTED METHODS ----------
 
- private:
-  // ---------- PRIVATE FIELDS ----------
+private:
+    // ---------- PRIVATE FIELDS ----------
 
-  gp_XY         myCenter;
-  Standard_Real myRotation;
-  gp_XY         myScale;
-  gp_XY         myTranslation;
+    gp_XY myCenter;
+    Standard_Real myRotation;
+    gp_XY myScale;
+    gp_XY myTranslation;
 
- public:
-// Declaration of CASCADE RTTI
-DEFINE_STANDARD_RTTI_INLINE(VrmlData_TextureTransform,VrmlData_Node)
+public:
+    // Declaration of CASCADE RTTI
+    DEFINE_STANDARD_RTTI_INLINE(VrmlData_TextureTransform, VrmlData_Node)
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx
-DEFINE_STANDARD_HANDLE (VrmlData_TextureTransform, VrmlData_Node)
-
+DEFINE_STANDARD_HANDLE(VrmlData_TextureTransform, VrmlData_Node)
 
 #endif

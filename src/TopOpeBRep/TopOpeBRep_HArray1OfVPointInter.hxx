@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(TopOpeBRep_HArray1OfVPointInter, TopOpeBRep_Array1OfVPointInter)
 
-
 #endif

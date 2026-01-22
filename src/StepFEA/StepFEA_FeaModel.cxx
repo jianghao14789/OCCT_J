@@ -20,118 +20,105 @@
 #include <StepRepr_RepresentationContext.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaModel,StepRepr_Representation)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaModel, StepRepr_Representation)
 
 //=======================================================================
-//function : StepFEA_FeaModel
-//purpose  : 
+// function : StepFEA_FeaModel
+// purpose  :
 //=======================================================================
-StepFEA_FeaModel::StepFEA_FeaModel ()
-{
+StepFEA_FeaModel::StepFEA_FeaModel() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_FeaModel::Init(const Handle(TCollection_HAsciiString) & aRepresentation_Name,
+                            const Handle(StepRepr_HArray1OfRepresentationItem) & aRepresentation_Items,
+                            const Handle(StepRepr_RepresentationContext) & aRepresentation_ContextOfItems,
+                            const Handle(TCollection_HAsciiString) & aCreatingSoftware,
+                            const Handle(TColStd_HArray1OfAsciiString) & aIntendedAnalysisCode,
+                            const Handle(TCollection_HAsciiString) & aDescription,
+                            const Handle(TCollection_HAsciiString) & aAnalysisType) {
+    StepRepr_Representation::Init(aRepresentation_Name, aRepresentation_Items, aRepresentation_ContextOfItems);
+
+    theCreatingSoftware = aCreatingSoftware;
+
+    theIntendedAnalysisCode = aIntendedAnalysisCode;
+
+    theDescription = aDescription;
+
+    theAnalysisType = aAnalysisType;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : CreatingSoftware
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaModel::Init (const Handle(TCollection_HAsciiString) &aRepresentation_Name,
-                             const Handle(StepRepr_HArray1OfRepresentationItem) &aRepresentation_Items,
-                             const Handle(StepRepr_RepresentationContext) &aRepresentation_ContextOfItems,
-                             const Handle(TCollection_HAsciiString) &aCreatingSoftware,
-                             const Handle(TColStd_HArray1OfAsciiString) &aIntendedAnalysisCode,
-                             const Handle(TCollection_HAsciiString) &aDescription,
-                             const Handle(TCollection_HAsciiString) &aAnalysisType)
-{
-  StepRepr_Representation::Init(aRepresentation_Name,
-                                aRepresentation_Items,
-                                aRepresentation_ContextOfItems);
-
-  theCreatingSoftware = aCreatingSoftware;
-
-  theIntendedAnalysisCode = aIntendedAnalysisCode;
-
-  theDescription = aDescription;
-
-  theAnalysisType = aAnalysisType;
+Handle(TCollection_HAsciiString) StepFEA_FeaModel::CreatingSoftware() const {
+    return theCreatingSoftware;
 }
 
 //=======================================================================
-//function : CreatingSoftware
-//purpose  : 
+// function : SetCreatingSoftware
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepFEA_FeaModel::CreatingSoftware () const
-{
-  return theCreatingSoftware;
+void StepFEA_FeaModel::SetCreatingSoftware(const Handle(TCollection_HAsciiString) & aCreatingSoftware) {
+    theCreatingSoftware = aCreatingSoftware;
 }
 
 //=======================================================================
-//function : SetCreatingSoftware
-//purpose  : 
+// function : IntendedAnalysisCode
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaModel::SetCreatingSoftware (const Handle(TCollection_HAsciiString) &aCreatingSoftware)
-{
-  theCreatingSoftware = aCreatingSoftware;
+Handle(TColStd_HArray1OfAsciiString) StepFEA_FeaModel::IntendedAnalysisCode() const {
+    return theIntendedAnalysisCode;
 }
 
 //=======================================================================
-//function : IntendedAnalysisCode
-//purpose  : 
+// function : SetIntendedAnalysisCode
+// purpose  :
 //=======================================================================
 
-Handle(TColStd_HArray1OfAsciiString) StepFEA_FeaModel::IntendedAnalysisCode () const
-{
-  return theIntendedAnalysisCode;
+void StepFEA_FeaModel::SetIntendedAnalysisCode(const Handle(TColStd_HArray1OfAsciiString) & aIntendedAnalysisCode) {
+    theIntendedAnalysisCode = aIntendedAnalysisCode;
 }
 
 //=======================================================================
-//function : SetIntendedAnalysisCode
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaModel::SetIntendedAnalysisCode (const Handle(TColStd_HArray1OfAsciiString) &aIntendedAnalysisCode)
-{
-  theIntendedAnalysisCode = aIntendedAnalysisCode;
+Handle(TCollection_HAsciiString) StepFEA_FeaModel::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepFEA_FeaModel::Description () const
-{
-  return theDescription;
+void StepFEA_FeaModel::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : AnalysisType
+// purpose  :
 //=======================================================================
 
-void StepFEA_FeaModel::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(TCollection_HAsciiString) StepFEA_FeaModel::AnalysisType() const {
+    return theAnalysisType;
 }
 
 //=======================================================================
-//function : AnalysisType
-//purpose  : 
+// function : SetAnalysisType
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepFEA_FeaModel::AnalysisType () const
-{
-  return theAnalysisType;
-}
-
-//=======================================================================
-//function : SetAnalysisType
-//purpose  : 
-//=======================================================================
-
-void StepFEA_FeaModel::SetAnalysisType (const Handle(TCollection_HAsciiString) &aAnalysisType)
-{
-  theAnalysisType = aAnalysisType;
+void StepFEA_FeaModel::SetAnalysisType(const Handle(TCollection_HAsciiString) & aAnalysisType) {
+    theAnalysisType = aAnalysisType;
 }

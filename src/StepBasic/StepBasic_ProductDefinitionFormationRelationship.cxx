@@ -20,135 +20,127 @@
 #include <StepBasic_ProductDefinitionFormationRelationship.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ProductDefinitionFormationRelationship,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_ProductDefinitionFormationRelationship, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_ProductDefinitionFormationRelationship
-//purpose  : 
+// function : StepBasic_ProductDefinitionFormationRelationship
+// purpose  :
 //=======================================================================
-StepBasic_ProductDefinitionFormationRelationship::StepBasic_ProductDefinitionFormationRelationship ()
-{
+StepBasic_ProductDefinitionFormationRelationship::StepBasic_ProductDefinitionFormationRelationship() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepBasic_ProductDefinitionFormationRelationship::Init(
+    const Handle(TCollection_HAsciiString) & aId, const Handle(TCollection_HAsciiString) & aName,
+    const Handle(TCollection_HAsciiString) & aDescription,
+    const Handle(StepBasic_ProductDefinitionFormation) & aRelatingProductDefinitionFormation,
+    const Handle(StepBasic_ProductDefinitionFormation) & aRelatedProductDefinitionFormation) {
+
+    theId = aId;
+
+    theName = aName;
+
+    theDescription = aDescription;
+
+    theRelatingProductDefinitionFormation = aRelatingProductDefinitionFormation;
+
+    theRelatedProductDefinitionFormation = aRelatedProductDefinitionFormation;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Id
+// purpose  :
 //=======================================================================
 
-void StepBasic_ProductDefinitionFormationRelationship::Init (const Handle(TCollection_HAsciiString) &aId,
-                                                             const Handle(TCollection_HAsciiString) &aName,
-                                                             const Handle(TCollection_HAsciiString) &aDescription,
-                                                             const Handle(StepBasic_ProductDefinitionFormation) &aRelatingProductDefinitionFormation,
-                                                             const Handle(StepBasic_ProductDefinitionFormation) &aRelatedProductDefinitionFormation)
-{
-
-  theId = aId;
-
-  theName = aName;
-
-  theDescription = aDescription;
-
-  theRelatingProductDefinitionFormation = aRelatingProductDefinitionFormation;
-
-  theRelatedProductDefinitionFormation = aRelatedProductDefinitionFormation;
+Handle(TCollection_HAsciiString) StepBasic_ProductDefinitionFormationRelationship::Id() const {
+    return theId;
 }
 
 //=======================================================================
-//function : Id
-//purpose  : 
+// function : SetId
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_ProductDefinitionFormationRelationship::Id () const
-{
-  return theId;
+void StepBasic_ProductDefinitionFormationRelationship::SetId(const Handle(TCollection_HAsciiString) & aId) {
+    theId = aId;
 }
 
 //=======================================================================
-//function : SetId
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepBasic_ProductDefinitionFormationRelationship::SetId (const Handle(TCollection_HAsciiString) &aId)
-{
-  theId = aId;
+Handle(TCollection_HAsciiString) StepBasic_ProductDefinitionFormationRelationship::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_ProductDefinitionFormationRelationship::Name () const
-{
-  return theName;
+void StepBasic_ProductDefinitionFormationRelationship::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepBasic_ProductDefinitionFormationRelationship::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+Handle(TCollection_HAsciiString) StepBasic_ProductDefinitionFormationRelationship::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_ProductDefinitionFormationRelationship::Description () const
-{
-  return theDescription;
+void StepBasic_ProductDefinitionFormationRelationship::SetDescription(const Handle(TCollection_HAsciiString) &
+                                                                      aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : RelatingProductDefinitionFormation
+// purpose  :
 //=======================================================================
 
-void StepBasic_ProductDefinitionFormationRelationship::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(StepBasic_ProductDefinitionFormation)
+    StepBasic_ProductDefinitionFormationRelationship::RelatingProductDefinitionFormation() const {
+    return theRelatingProductDefinitionFormation;
 }
 
 //=======================================================================
-//function : RelatingProductDefinitionFormation
-//purpose  : 
+// function : SetRelatingProductDefinitionFormation
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_ProductDefinitionFormation) StepBasic_ProductDefinitionFormationRelationship::RelatingProductDefinitionFormation () const
-{
-  return theRelatingProductDefinitionFormation;
+void StepBasic_ProductDefinitionFormationRelationship::SetRelatingProductDefinitionFormation(
+    const Handle(StepBasic_ProductDefinitionFormation) & aRelatingProductDefinitionFormation) {
+    theRelatingProductDefinitionFormation = aRelatingProductDefinitionFormation;
 }
 
 //=======================================================================
-//function : SetRelatingProductDefinitionFormation
-//purpose  : 
+// function : RelatedProductDefinitionFormation
+// purpose  :
 //=======================================================================
 
-void StepBasic_ProductDefinitionFormationRelationship::SetRelatingProductDefinitionFormation (const Handle(StepBasic_ProductDefinitionFormation) &aRelatingProductDefinitionFormation)
-{
-  theRelatingProductDefinitionFormation = aRelatingProductDefinitionFormation;
+Handle(StepBasic_ProductDefinitionFormation)
+    StepBasic_ProductDefinitionFormationRelationship::RelatedProductDefinitionFormation() const {
+    return theRelatedProductDefinitionFormation;
 }
 
 //=======================================================================
-//function : RelatedProductDefinitionFormation
-//purpose  : 
+// function : SetRelatedProductDefinitionFormation
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_ProductDefinitionFormation) StepBasic_ProductDefinitionFormationRelationship::RelatedProductDefinitionFormation () const
-{
-  return theRelatedProductDefinitionFormation;
-}
-
-//=======================================================================
-//function : SetRelatedProductDefinitionFormation
-//purpose  : 
-//=======================================================================
-
-void StepBasic_ProductDefinitionFormationRelationship::SetRelatedProductDefinitionFormation (const Handle(StepBasic_ProductDefinitionFormation) &aRelatedProductDefinitionFormation)
-{
-  theRelatedProductDefinitionFormation = aRelatedProductDefinitionFormation;
+void StepBasic_ProductDefinitionFormationRelationship::SetRelatedProductDefinitionFormation(
+    const Handle(StepBasic_ProductDefinitionFormation) & aRelatedProductDefinitionFormation) {
+    theRelatedProductDefinitionFormation = aRelatedProductDefinitionFormation;
 }

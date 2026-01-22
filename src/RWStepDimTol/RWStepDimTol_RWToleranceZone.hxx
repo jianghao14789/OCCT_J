@@ -28,25 +28,22 @@ class StepDimTol_ToleranceZone;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ToleranceZone
-class RWStepDimTol_RWToleranceZone
-{
+class RWStepDimTol_RWToleranceZone {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWToleranceZone();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWToleranceZone();
-  
-  //! Reads ToleranceZone
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_ToleranceZone)& ent)  const;
-  
-  //! Writes ToleranceZone
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_ToleranceZone)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_ToleranceZone)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads ToleranceZone
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepDimTol_ToleranceZone) & ent) const;
+
+    //! Writes ToleranceZone
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_ToleranceZone) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_ToleranceZone) & ent, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWToleranceZone_HeaderFile

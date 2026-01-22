@@ -28,7 +28,6 @@ class Interface_Graph;
 class Interface_EntityIterator;
 class TCollection_AsciiString;
 
-
 class IGESSelect_SelectFaces;
 DEFINE_STANDARD_HANDLE(IGESSelect_SelectFaces, IFSelect_SelectExplore)
 
@@ -42,42 +41,24 @@ DEFINE_STANDARD_HANDLE(IGESSelect_SelectFaces, IFSelect_SelectExplore)
 //! - Also, any Surface which is not in a TrimmedSurface, a
 //! BoundedSurface, or a Face (FREE Surface)
 //! -> i.e. a Face for which Natural Bounds will be considered
-class IGESSelect_SelectFaces : public IFSelect_SelectExplore
-{
+class IGESSelect_SelectFaces : public IFSelect_SelectExplore {
 
 public:
+    Standard_EXPORT IGESSelect_SelectFaces();
 
-  
-  Standard_EXPORT IGESSelect_SelectFaces();
-  
-  //! Explores an entity, to take its faces
-  //! Works recursively
-  Standard_EXPORT Standard_Boolean Explore (const Standard_Integer level, const Handle(Standard_Transient)& ent, const Interface_Graph& G, Interface_EntityIterator& explored) const Standard_OVERRIDE;
-  
-  //! Returns a text defining the criterium : "Faces"
-  Standard_EXPORT TCollection_AsciiString ExploreLabel() const Standard_OVERRIDE;
+    //! Explores an entity, to take its faces
+    //! Works recursively
+    Standard_EXPORT Standard_Boolean Explore(const Standard_Integer level, const Handle(Standard_Transient) & ent,
+                                             const Interface_Graph& G,
+                                             Interface_EntityIterator& explored) const Standard_OVERRIDE;
 
+    //! Returns a text defining the criterium : "Faces"
+    Standard_EXPORT TCollection_AsciiString ExploreLabel() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_SelectFaces,IFSelect_SelectExplore)
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_SelectFaces, IFSelect_SelectExplore)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_SelectFaces_HeaderFile

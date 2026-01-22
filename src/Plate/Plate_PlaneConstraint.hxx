@@ -27,42 +27,21 @@ class gp_XY;
 class gp_Pln;
 class Plate_LinearScalarConstraint;
 
-
 //! constraint a point to belong to a Plane
-class Plate_PlaneConstraint 
-{
+class Plate_PlaneConstraint {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT Plate_PlaneConstraint(const gp_XY& point2d, const gp_Pln& pln, const Standard_Integer iu = 0,
+                                          const Standard_Integer iv = 0);
 
-  
-  Standard_EXPORT Plate_PlaneConstraint(const gp_XY& point2d, const gp_Pln& pln, const Standard_Integer iu = 0, const Standard_Integer iv = 0);
-  
     const Plate_LinearScalarConstraint& LSC() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-  Plate_LinearScalarConstraint myLSC;
-
-
+    Plate_LinearScalarConstraint myLSC;
 };
 
-
 #include <Plate_PlaneConstraint.lxx>
-
-
-
-
 
 #endif // _Plate_PlaneConstraint_HeaderFile

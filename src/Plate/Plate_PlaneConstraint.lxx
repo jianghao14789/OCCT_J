@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-inline const Plate_LinearScalarConstraint& Plate_PlaneConstraint::LSC() const
-{
-  return myLSC;
+inline const Plate_LinearScalarConstraint& Plate_PlaneConstraint::LSC() const {
+    return myLSC;
 }

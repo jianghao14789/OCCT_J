@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes an edge which
 //! - references an underlying edge with the potential to
 //! be given a location and an orientation
@@ -32,35 +31,17 @@
 //! - has an orientation for the underlying edge, in terms
 //! of its geometry (as opposed to orientation in
 //! relation to other shapes).
-class TopoDS_Edge : public TopoDS_Shape
-{
+class TopoDS_Edge : public TopoDS_Shape {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Undefined Edge.
     TopoDS_Edge();
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <TopoDS_Edge.lxx>
-
-
-
-
 
 #endif // _TopoDS_Edge_HeaderFile

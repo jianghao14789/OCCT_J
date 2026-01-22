@@ -22,40 +22,43 @@
 DEFINE_STANDARD_HANDLE(Draw_Number, Draw_Drawable3D)
 
 //! To store numbers in variables.
-class Draw_Number : public Draw_Drawable3D
-{
-  DEFINE_STANDARD_RTTIEXT(Draw_Number, Draw_Drawable3D)
-  Draw_Drawable3D_FACTORY
-public:
+class Draw_Number : public Draw_Drawable3D {
+    DEFINE_STANDARD_RTTIEXT(Draw_Number, Draw_Drawable3D)
+Draw_Drawable3D_FACTORY public :
 
-  Standard_EXPORT Draw_Number (const Standard_Real theV);
+    Standard_EXPORT
+    Draw_Number(const Standard_Real theV);
 
-  Standard_Real Value() const { return myValue; }
+    Standard_Real Value() const {
+        return myValue;
+    }
 
-  void Value (const Standard_Real theV) { myValue = theV; }
-  
-  //! Does nothing,
-  Standard_EXPORT virtual void DrawOn (Draw_Display& dis) const Standard_OVERRIDE;
+    void Value(const Standard_Real theV) {
+        myValue = theV;
+    }
 
-  //! Returns TRUE if object can be displayed.
-  virtual bool IsDisplayable() const Standard_OVERRIDE { return false; }
+    //! Does nothing,
+    Standard_EXPORT virtual void DrawOn(Draw_Display& dis) const Standard_OVERRIDE;
 
-  //! For variable copy.
-  Standard_EXPORT virtual Handle(Draw_Drawable3D) Copy() const Standard_OVERRIDE;
-  
-  //! For variable dump.
-  Standard_EXPORT virtual void Dump (Standard_OStream& S) const Standard_OVERRIDE;
+    //! Returns TRUE if object can be displayed.
+    virtual bool IsDisplayable() const Standard_OVERRIDE {
+        return false;
+    }
 
-  //! Save drawable into stream.
-  Standard_EXPORT virtual void Save (Standard_OStream& theStream) const Standard_OVERRIDE;
+    //! For variable copy.
+    Standard_EXPORT virtual Handle(Draw_Drawable3D) Copy() const Standard_OVERRIDE;
 
-  //! For variable whatis command. Set as a result the type of the variable.
-  Standard_EXPORT virtual void Whatis (Draw_Interpretor& I) const Standard_OVERRIDE;
+    //! For variable dump.
+    Standard_EXPORT virtual void Dump(Standard_OStream& S) const Standard_OVERRIDE;
+
+    //! Save drawable into stream.
+    Standard_EXPORT virtual void Save(Standard_OStream& theStream) const Standard_OVERRIDE;
+
+    //! For variable whatis command. Set as a result the type of the variable.
+    Standard_EXPORT virtual void Whatis(Draw_Interpretor& I) const Standard_OVERRIDE;
 
 private:
-
-  Standard_Real myValue;
-
+    Standard_Real myValue;
 };
 
 #endif // _Draw_Number_HeaderFile

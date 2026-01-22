@@ -27,12 +27,10 @@
 #include <math_FunctionWithDerivative.hxx>
 #include <Standard_Boolean.hxx>
 
-
 //! This abstract class describes a Function of 1 Variable
 //! used to find a line tangent to a curve and a circle.
 class Geom2dGcc_FunctionTanCirCu : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Geom2dGcc_FunctionTanCirCu(const gp_Circ2d& Circ, const Geom2dAdaptor_Curve& Curv);
@@ -54,13 +52,10 @@ public:
     Standard_EXPORT Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& Deriv);
 
 protected:
-
 private:
-
     gp_Circ2d TheCirc;
     Geom2dAdaptor_Curve Curve;
     Standard_Real myWeight;
-
 };
 
 #endif // _Geom2dGcc_FunctionTanCirCu_HeaderFile

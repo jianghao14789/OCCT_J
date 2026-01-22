@@ -20,66 +20,59 @@
 #include <StepFEA_CurveElementInterval.hxx>
 #include <StepFEA_CurveElementLocation.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_CurveElementInterval,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_CurveElementInterval, Standard_Transient)
 
 //=======================================================================
-//function : StepFEA_CurveElementInterval
-//purpose  : 
+// function : StepFEA_CurveElementInterval
+// purpose  :
 //=======================================================================
-StepFEA_CurveElementInterval::StepFEA_CurveElementInterval ()
-{
+StepFEA_CurveElementInterval::StepFEA_CurveElementInterval() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepFEA_CurveElementInterval::Init(const Handle(StepFEA_CurveElementLocation) & aFinishPosition,
+                                        const Handle(StepBasic_EulerAngles) & aEuAngles) {
+
+    theFinishPosition = aFinishPosition;
+
+    theEuAngles = aEuAngles;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : FinishPosition
+// purpose  :
 //=======================================================================
 
-void StepFEA_CurveElementInterval::Init (const Handle(StepFEA_CurveElementLocation) &aFinishPosition,
-                                         const Handle(StepBasic_EulerAngles) &aEuAngles)
-{
-
-  theFinishPosition = aFinishPosition;
-
-  theEuAngles = aEuAngles;
+Handle(StepFEA_CurveElementLocation) StepFEA_CurveElementInterval::FinishPosition() const {
+    return theFinishPosition;
 }
 
 //=======================================================================
-//function : FinishPosition
-//purpose  : 
+// function : SetFinishPosition
+// purpose  :
 //=======================================================================
 
-Handle(StepFEA_CurveElementLocation) StepFEA_CurveElementInterval::FinishPosition () const
-{
-  return theFinishPosition;
+void StepFEA_CurveElementInterval::SetFinishPosition(const Handle(StepFEA_CurveElementLocation) & aFinishPosition) {
+    theFinishPosition = aFinishPosition;
 }
 
 //=======================================================================
-//function : SetFinishPosition
-//purpose  : 
+// function : EuAngles
+// purpose  :
 //=======================================================================
 
-void StepFEA_CurveElementInterval::SetFinishPosition (const Handle(StepFEA_CurveElementLocation) &aFinishPosition)
-{
-  theFinishPosition = aFinishPosition;
+Handle(StepBasic_EulerAngles) StepFEA_CurveElementInterval::EuAngles() const {
+    return theEuAngles;
 }
 
 //=======================================================================
-//function : EuAngles
-//purpose  : 
+// function : SetEuAngles
+// purpose  :
 //=======================================================================
 
-Handle(StepBasic_EulerAngles) StepFEA_CurveElementInterval::EuAngles () const
-{
-  return theEuAngles;
-}
-
-//=======================================================================
-//function : SetEuAngles
-//purpose  : 
-//=======================================================================
-
-void StepFEA_CurveElementInterval::SetEuAngles (const Handle(StepBasic_EulerAngles) &aEuAngles)
-{
-  theEuAngles = aEuAngles;
+void StepFEA_CurveElementInterval::SetEuAngles(const Handle(StepBasic_EulerAngles) & aEuAngles) {
+    theEuAngles = aEuAngles;
 }

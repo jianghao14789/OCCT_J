@@ -27,7 +27,6 @@ class TopoDS_Edge;
 class TopoDS_Vertex;
 class TopoDS_Shape;
 
-
 //! A Tool to glue faces at common edges and reconstruct shells.
 //!
 //! The user designate pairs of common edges using the method Bind.
@@ -41,12 +40,9 @@ class TopoDS_Shape;
 //! The user can call the Shells methods to compute a compound of shells from the current set of faces.
 //!
 //! If no binding is made this class can be used to make shell from faces already sharing their edges.
-class BRepTools_Quilt
-{
+class BRepTools_Quilt {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT BRepTools_Quilt();
 
@@ -90,29 +86,10 @@ public:
     //! or not closed.
     Standard_EXPORT TopoDS_Shape Shells() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     TopTools_IndexedDataMapOfShapeShape myBounds;
     Standard_Boolean hasCopy;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepTools_Quilt_HeaderFile

@@ -27,48 +27,29 @@ class StepShape_DimensionalCharacteristicRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DimensionalCharacteristicRepresentation
-class RWStepShape_RWDimensionalCharacteristicRepresentation 
-{
+class RWStepShape_RWDimensionalCharacteristicRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWDimensionalCharacteristicRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWDimensionalCharacteristicRepresentation();
-  
-  //! Reads DimensionalCharacteristicRepresentation
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_DimensionalCharacteristicRepresentation)& ent) const;
-  
-  //! Writes DimensionalCharacteristicRepresentation
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_DimensionalCharacteristicRepresentation)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_DimensionalCharacteristicRepresentation)& ent, Interface_EntityIterator& iter) const;
+    //! Reads DimensionalCharacteristicRepresentation
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_DimensionalCharacteristicRepresentation) & ent) const;
 
+    //! Writes DimensionalCharacteristicRepresentation
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepShape_DimensionalCharacteristicRepresentation) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_DimensionalCharacteristicRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWDimensionalCharacteristicRepresentation_HeaderFile

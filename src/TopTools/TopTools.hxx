@@ -29,7 +29,6 @@ class TopTools_OrientedShapeMapHasher;
 class TopTools_LocationSet;
 class TopTools_ShapeSet;
 
-
 //! The  TopTools package provides   utilities for the
 //! topological data structure.
 //!
@@ -70,49 +69,27 @@ class TopTools_ShapeSet;
 //! Package Methods :
 //!
 //! Dump : To dump the topology of a Shape.
-class TopTools 
-{
+class TopTools {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! A set of Shapes. Can be dump, wrote or read.
+    //! Dumps the topological structure  of <Sh>  on the
+    //! stream <S>.
+    Standard_EXPORT static void Dump(const TopoDS_Shape& Sh, Standard_OStream& S);
 
-  
-  //! A set of Shapes. Can be dump, wrote or read.
-  //! Dumps the topological structure  of <Sh>  on the
-  //! stream <S>.
-  Standard_EXPORT static void Dump (const TopoDS_Shape& Sh, Standard_OStream& S);
-  
-  //! This is to bypass an extraction bug. It will force
-  //! the  inclusion    of  Standard_Integer.hxx  itself
-  //! including Standard_OStream.hxx  at   the   correct
-  //! position.
-  Standard_EXPORT static void Dummy (const Standard_Integer I);
-
-
-
+    //! This is to bypass an extraction bug. It will force
+    //! the  inclusion    of  Standard_Integer.hxx  itself
+    //! including Standard_OStream.hxx  at   the   correct
+    //! position.
+    Standard_EXPORT static void Dummy(const Standard_Integer I);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class TopTools_ShapeMapHasher;
-friend class TopTools_OrientedShapeMapHasher;
-friend class TopTools_LocationSet;
-friend class TopTools_ShapeSet;
-
+    friend class TopTools_ShapeMapHasher;
+    friend class TopTools_OrientedShapeMapHasher;
+    friend class TopTools_LocationSet;
+    friend class TopTools_ShapeSet;
 };
-
-
-
-
-
-
 
 #endif // _TopTools_HeaderFile

@@ -24,8 +24,8 @@ class OSD_Exception_FLT_DENORMAL_OPERAND;
 DEFINE_STANDARD_HANDLE(OSD_Exception_FLT_DENORMAL_OPERAND, OSD_Exception)
 
 #if !defined No_Exception && !defined No_OSD_Exception_FLT_DENORMAL_OPERAND
-#define OSD_Exception_FLT_DENORMAL_OPERAND_Raise_if(CONDITION, MESSAGE) \
-  if (CONDITION) throw OSD_Exception_FLT_DENORMAL_OPERAND(MESSAGE);
+#define OSD_Exception_FLT_DENORMAL_OPERAND_Raise_if(CONDITION, MESSAGE)                                                \
+    if (CONDITION) throw OSD_Exception_FLT_DENORMAL_OPERAND(MESSAGE);
 #else
 #define OSD_Exception_FLT_DENORMAL_OPERAND_Raise_if(CONDITION, MESSAGE)
 #endif

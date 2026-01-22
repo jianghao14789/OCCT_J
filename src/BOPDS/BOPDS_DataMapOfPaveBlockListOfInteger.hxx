@@ -19,7 +19,8 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <TColStd_ListOfInteger.hxx>
 
-typedef NCollection_DataMap<Handle(BOPDS_PaveBlock), TColStd_ListOfInteger, TColStd_MapTransientHasher> BOPDS_DataMapOfPaveBlockListOfInteger;
+typedef NCollection_DataMap<Handle(BOPDS_PaveBlock), TColStd_ListOfInteger, TColStd_MapTransientHasher>
+    BOPDS_DataMapOfPaveBlockListOfInteger;
 typedef BOPDS_DataMapOfPaveBlockListOfInteger::Iterator BOPDS_DataMapIteratorOfDataMapOfPaveBlockListOfInteger;
 
 #endif

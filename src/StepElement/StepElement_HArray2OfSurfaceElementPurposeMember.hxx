@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY2(StepElement_HArray2OfSurfaceElementPurposeMember, StepElement_Array2OfSurfaceElementPurposeMember)
 
-
 #endif

@@ -32,7 +32,6 @@
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array1OfInteger.hxx>
 
-
 //! An algorithm to convert a sequence of adjacent
 //! non-rational Bezier curves into a BSpline curve.
 //! A CompBezierCurvesToBSplineCurve object provides a framework for:
@@ -42,12 +41,9 @@
 //! -   consulting the results.
 //! Warning
 //! Do not attempt to convert rational Bezier curves using this type of algorithm.
-class Convert_CompBezierCurvesToBSplineCurve
-{
+class Convert_CompBezierCurvesToBSplineCurve {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs a framework for converting a sequence of
     //! adjacent non-rational Bezier curves into a BSpline curve.
@@ -163,7 +159,6 @@ public:
     //! condition is not checked and an error may therefore occur.
     Standard_EXPORT Standard_Integer NbKnots() const;
 
-
     //! -   loads the Knots table with the knots,
     //! -   and loads the Mults table with the corresponding multiplicities
     //! of the BSpline curve whose data is computed in this framework.
@@ -177,19 +172,8 @@ public:
     //! these conditions are not checked, and an error may occur.
     Standard_EXPORT void KnotsAndMults(TColStd_Array1OfReal& Knots, TColStd_Array1OfInteger& Mults) const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Convert_SequenceOfArray1OfPoles mySequence;
     TColgp_SequenceOfPnt CurvePoles;
     TColStd_SequenceOfReal CurveKnots;
@@ -197,14 +181,6 @@ private:
     Standard_Integer myDegree;
     Standard_Real myAngular;
     Standard_Boolean myDone;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Convert_CompBezierCurvesToBSplineCurve_HeaderFile

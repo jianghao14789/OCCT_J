@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepVisual_SurfaceStyleElementSelect> StepVisual_Array1OfSurfaceStyleElementSelect;
 
-
 #endif

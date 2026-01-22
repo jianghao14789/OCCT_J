@@ -40,168 +40,140 @@
 //=======================================================================
 // StdStorage::Version
 //=======================================================================
-TCollection_AsciiString StdStorage::Version()
-{
-  TCollection_AsciiString v("1.3");
-  return v;
+TCollection_AsciiString StdStorage::Version() {
+    TCollection_AsciiString v("1.3");
+    return v;
 }
 
 //=======================================================================
 // StdStorage::Read
 // Reads data from a file
 //=======================================================================
-Storage_Error StdStorage::Read(const TCollection_AsciiString& theFileName, 
-                               Handle(StdStorage_Data)&       theData)
-{
-  // Create a driver appropriate for the given file
-  Handle(Storage_BaseDriver) aDriver;
-  if (PCDM::FileDriverType(theFileName, aDriver) == PCDM_TOFD_Unknown)
-    return Storage_VSWrongFileDriver;
+Storage_Error StdStorage::Read(const TCollection_AsciiString& theFileName, Handle(StdStorage_Data) & theData) {
+    // Create a driver appropriate for the given file
+    Handle(Storage_BaseDriver) aDriver;
+    if (PCDM::FileDriverType(theFileName, aDriver) == PCDM_TOFD_Unknown) return Storage_VSWrongFileDriver;
 
-  // Try to open the file
-  try
-  {
-    OCC_CATCH_SIGNALS
-    PCDM_ReadWriter::Open(aDriver, theFileName, Storage_VSRead);
-  }
-  catch (Standard_Failure const&)
-  {
-    return Storage_VSOpenError;
-  }
+    // Try to open the file
+    try {
+        OCC_CATCH_SIGNALS
+        PCDM_ReadWriter::Open(aDriver, theFileName, Storage_VSRead);
+    } catch (Standard_Failure const&) {
+        return Storage_VSOpenError;
+    }
 
-  return Read(aDriver, theData);
+    return Read(aDriver, theData);
 }
 
 //=======================================================================
 // StdStorage::Read
 // Reads data from a pre-opened for reading driver
 //=======================================================================
-Storage_Error StdStorage::Read(const Handle(Storage_BaseDriver)& theDriver, 
-                               Handle(StdStorage_Data)& theData)
-{
-  if (theData.IsNull())
-    theData = new StdStorage_Data;
-  else
-    theData->Clear();
-
-  Handle(StdStorage_HeaderData) aHeaderData = theData->HeaderData();
-  Handle(StdStorage_TypeData)   aTypeData   = theData->TypeData();
-  Handle(StdStorage_RootData)   aRootData   = theData->RootData();
-
-  // Read header section
-  if (!aHeaderData->Read(theDriver))
-    return aHeaderData->ErrorStatus();
-
-  // Read types section
-  if (!aTypeData->Read(theDriver))
-    return aTypeData->ErrorStatus();
-
-  // Select instantiators for the used types
-  NCollection_Array1<StdObjMgt_Persistent::Instantiator>
-    anInstantiators(1, aTypeData->NumberOfTypes());
-  for (Standard_Integer i = 1; i <= aTypeData->NumberOfTypes(); i++)
-  {
-    StdObjMgt_Persistent::Instantiator anInstantiator = 
-      aTypeData->Instantiator(i);
-    if (anInstantiator)
-      anInstantiators(i) = anInstantiator;
+Storage_Error StdStorage::Read(const Handle(Storage_BaseDriver) & theDriver, Handle(StdStorage_Data) & theData) {
+    if (theData.IsNull())
+        theData = new StdStorage_Data;
     else
-      return Storage_VSUnknownType;
-  }
+        theData->Clear();
 
-  // Read root section
-  if (!aRootData->Read(theDriver))
-    return aRootData->ErrorStatus();
+    Handle(StdStorage_HeaderData) aHeaderData = theData->HeaderData();
+    Handle(StdStorage_TypeData) aTypeData = theData->TypeData();
+    Handle(StdStorage_RootData) aRootData = theData->RootData();
 
-  Storage_Error anError;
+    // Read header section
+    if (!aHeaderData->Read(theDriver)) return aHeaderData->ErrorStatus();
 
-  // Read and parse reference section
-  StdObjMgt_ReadData aReadData(theDriver, aHeaderData->NumberOfObjects());
+    // Read types section
+    if (!aTypeData->Read(theDriver)) return aTypeData->ErrorStatus();
 
-  anError = theDriver->BeginReadRefSection();
-  if (anError != Storage_VSOk)
-    return anError;
-
-  Standard_Integer aNbRefs = theDriver->RefSectionSize();
-  for (Standard_Integer i = 1; i <= aNbRefs; i++)
-  {
-    Standard_Integer aRef = 0, aType = 0;
-    try
-    {
-      OCC_CATCH_SIGNALS
-      theDriver->ReadReferenceType(aRef, aType);
-      anError = Storage_VSOk;
-    }
-    catch (Storage_StreamTypeMismatchError const&)
-    {
-      anError = Storage_VSTypeMismatch;
+    // Select instantiators for the used types
+    NCollection_Array1<StdObjMgt_Persistent::Instantiator> anInstantiators(1, aTypeData->NumberOfTypes());
+    for (Standard_Integer i = 1; i <= aTypeData->NumberOfTypes(); i++) {
+        StdObjMgt_Persistent::Instantiator anInstantiator = aTypeData->Instantiator(i);
+        if (anInstantiator)
+            anInstantiators(i) = anInstantiator;
+        else
+            return Storage_VSUnknownType;
     }
 
-    if (anError != Storage_VSOk)
-      return anError;
+    // Read root section
+    if (!aRootData->Read(theDriver)) return aRootData->ErrorStatus();
 
-    aReadData.CreatePersistentObject(aRef, anInstantiators(aType));
-  }
+    Storage_Error anError;
 
-  anError = theDriver->EndReadRefSection();
-  if (anError != Storage_VSOk)
-    return anError;
+    // Read and parse reference section
+    StdObjMgt_ReadData aReadData(theDriver, aHeaderData->NumberOfObjects());
 
-  // Read and parse data section
-  anError = theDriver->BeginReadDataSection();
-  if (anError != Storage_VSOk)
-    return anError;
+    anError = theDriver->BeginReadRefSection();
+    if (anError != Storage_VSOk) return anError;
 
-  for (Standard_Integer i = 1; i <= aHeaderData->NumberOfObjects(); i++)
-  {
-    try
-    {
-      OCC_CATCH_SIGNALS
-      aReadData.ReadPersistentObject(i);
-      anError = Storage_VSOk;
+    Standard_Integer aNbRefs = theDriver->RefSectionSize();
+    for (Standard_Integer i = 1; i <= aNbRefs; i++) {
+        Standard_Integer aRef = 0, aType = 0;
+        try {
+            OCC_CATCH_SIGNALS
+            theDriver->ReadReferenceType(aRef, aType);
+            anError = Storage_VSOk;
+        } catch (Storage_StreamTypeMismatchError const&) {
+            anError = Storage_VSTypeMismatch;
+        }
+
+        if (anError != Storage_VSOk) return anError;
+
+        aReadData.CreatePersistentObject(aRef, anInstantiators(aType));
     }
-    catch (Storage_StreamTypeMismatchError const&) { anError = Storage_VSTypeMismatch; }
-    catch (Storage_StreamFormatError const&) { anError = Storage_VSFormatError; }
-    catch (Storage_StreamReadError const&) { anError = Storage_VSFormatError; }
 
-    if (anError != Storage_VSOk)
-      return anError;
-  }
+    anError = theDriver->EndReadRefSection();
+    if (anError != Storage_VSOk) return anError;
 
-  anError = theDriver->EndReadDataSection();
-  if (anError != Storage_VSOk)
-    return anError;
+    // Read and parse data section
+    anError = theDriver->BeginReadDataSection();
+    if (anError != Storage_VSOk) return anError;
 
-  Handle(StdStorage_HSequenceOfRoots) aRoots = aRootData->Roots();
-  if (!aRoots.IsNull())
-  {
-    for (StdStorage_HSequenceOfRoots::Iterator anIt(*aRoots); anIt.More(); anIt.Next())
-    {
-      Handle(StdStorage_Root)& aRoot = anIt.ChangeValue();
-      aRoot->SetObject(aReadData.PersistentObject(aRoot->Reference()));
+    for (Standard_Integer i = 1; i <= aHeaderData->NumberOfObjects(); i++) {
+        try {
+            OCC_CATCH_SIGNALS
+            aReadData.ReadPersistentObject(i);
+            anError = Storage_VSOk;
+        } catch (Storage_StreamTypeMismatchError const&) {
+            anError = Storage_VSTypeMismatch;
+        } catch (Storage_StreamFormatError const&) {
+            anError = Storage_VSFormatError;
+        } catch (Storage_StreamReadError const&) {
+            anError = Storage_VSFormatError;
+        }
+
+        if (anError != Storage_VSOk) return anError;
     }
-  }
 
-  return Storage_VSOk;
+    anError = theDriver->EndReadDataSection();
+    if (anError != Storage_VSOk) return anError;
+
+    Handle(StdStorage_HSequenceOfRoots) aRoots = aRootData->Roots();
+    if (!aRoots.IsNull()) {
+        for (StdStorage_HSequenceOfRoots::Iterator anIt(*aRoots); anIt.More(); anIt.Next()) {
+            Handle(StdStorage_Root) & aRoot = anIt.ChangeValue();
+            aRoot->SetObject(aReadData.PersistentObject(aRoot->Reference()));
+        }
+    }
+
+    return Storage_VSOk;
 }
 
 //=======================================================================
 // StdStorage::currentDate
 //=======================================================================
-static TCollection_AsciiString currentDate()
-{
+static TCollection_AsciiString currentDate() {
 #define SLENGTH 80
 
-  char nowstr[SLENGTH];
-  time_t nowbin;
-  struct tm *nowstruct;
-  if (time(&nowbin) != (time_t)-1)
-  {
-    nowstruct = localtime(&nowbin);
-    strftime(nowstr, SLENGTH, "%m/%d/%Y", nowstruct);
-  }
-  TCollection_AsciiString t(nowstr);
-  return t;
+    char nowstr[SLENGTH];
+    time_t nowbin;
+    struct tm* nowstruct;
+    if (time(&nowbin) != (time_t)-1) {
+        nowstruct = localtime(&nowbin);
+        strftime(nowstr, SLENGTH, "%m/%d/%Y", nowstruct);
+    }
+    TCollection_AsciiString t(nowstr);
+    return t;
 
 #undef SLENGTH
 }
@@ -209,109 +181,89 @@ static TCollection_AsciiString currentDate()
 //=======================================================================
 // StdStorage::Write
 //=======================================================================
-Storage_Error StdStorage::Write(const Handle(Storage_BaseDriver)& theDriver, 
-                                const Handle(StdStorage_Data)& theData)
-{
-  Standard_NullObject_Raise_if(theData.IsNull(), "Null storage data");
+Storage_Error StdStorage::Write(const Handle(Storage_BaseDriver) & theDriver, const Handle(StdStorage_Data) & theData) {
+    Standard_NullObject_Raise_if(theData.IsNull(), "Null storage data");
 
-  Handle(StdStorage_HeaderData) aHeaderData = theData->HeaderData();
-  Handle(StdStorage_TypeData)   aTypeData = theData->TypeData();
-  Handle(StdStorage_RootData)   aRootData = theData->RootData();
+    Handle(StdStorage_HeaderData) aHeaderData = theData->HeaderData();
+    Handle(StdStorage_TypeData) aTypeData = theData->TypeData();
+    Handle(StdStorage_RootData) aRootData = theData->RootData();
 
-  aHeaderData->SetCreationDate(currentDate());
+    aHeaderData->SetCreationDate(currentDate());
 
-  Handle(StdStorage_HSequenceOfRoots) aRoots = aRootData->Roots();
+    Handle(StdStorage_HSequenceOfRoots) aRoots = aRootData->Roots();
 
-  StdStorage_BucketOfPersistent aPObjs;
+    StdStorage_BucketOfPersistent aPObjs;
 
-  if (!aRoots.IsNull())
-  {
-    StdObjMgt_Persistent::SequenceOfPersistent aPQueue;
-    for (StdStorage_HSequenceOfRoots::Iterator anIt(*aRoots); anIt.More(); anIt.Next())
-    {
-      Handle(StdStorage_Root) aRoot = anIt.ChangeValue();
-      Handle(StdObjMgt_Persistent) aPObj = aRoot->Object();
-      if (!aPObj.IsNull()) {
-        aPQueue.Append(aPObj);
-      }
-    }
-    while (!aPQueue.IsEmpty())
-    {
-      StdObjMgt_Persistent::SequenceOfPersistent aPQueue1;
-      for (StdObjMgt_Persistent::SequenceOfPersistent::Iterator anIt(aPQueue); anIt.More(); anIt.Next())
-      {
-        Handle(StdObjMgt_Persistent)& aPObj = anIt.ChangeValue();
-        if (!aPObj.IsNull())
-        {
-          if (aPObj->TypeNum() == 0 && aPObj->RefNum() == 0)
-          {
-            aPObj->TypeNum(aTypeData->AddType(aPObj));
-            Standard_Integer anPObjId = aPObjs.Length() + 1;
-            aPObj->RefNum(anPObjId);
-            aPObjs.Append(aPObj);
-            aPObj->PChildren(aPQueue1);
-          }
+    if (!aRoots.IsNull()) {
+        StdObjMgt_Persistent::SequenceOfPersistent aPQueue;
+        for (StdStorage_HSequenceOfRoots::Iterator anIt(*aRoots); anIt.More(); anIt.Next()) {
+            Handle(StdStorage_Root) aRoot = anIt.ChangeValue();
+            Handle(StdObjMgt_Persistent) aPObj = aRoot->Object();
+            if (!aPObj.IsNull()) {
+                aPQueue.Append(aPObj);
+            }
         }
-      }
-      aPQueue.Assign(aPQueue1);
-    }
-  }
-
-  aHeaderData->SetStorageVersion(StdStorage::Version());
-  aHeaderData->SetNumberOfObjects(aPObjs.Length());
-
-  try {
-    // Write header section
-    if (!aHeaderData->Write(theDriver))
-      return aHeaderData->ErrorStatus();
-
-    // Write types section
-    if (!aTypeData->Write(theDriver))
-      return aTypeData->ErrorStatus();
-
-    // Write root section
-    if (!aRootData->Write(theDriver))
-      return aRootData->ErrorStatus();
-
-    Storage_Error anError;
-
-    // Write reference section
-    anError = theDriver->BeginWriteRefSection();
-    if (anError != Storage_VSOk)
-      return anError;
-
-    theDriver->SetRefSectionSize(aPObjs.Length());
-    for (StdStorage_BucketIterator anIt(&aPObjs); anIt.More(); anIt.Next())
-    {
-      Handle(StdObjMgt_Persistent) aPObj = anIt.Value();
-      if (!aPObj.IsNull())
-        theDriver->WriteReferenceType(aPObj->RefNum(), aPObj->TypeNum());
+        while (!aPQueue.IsEmpty()) {
+            StdObjMgt_Persistent::SequenceOfPersistent aPQueue1;
+            for (StdObjMgt_Persistent::SequenceOfPersistent::Iterator anIt(aPQueue); anIt.More(); anIt.Next()) {
+                Handle(StdObjMgt_Persistent) & aPObj = anIt.ChangeValue();
+                if (!aPObj.IsNull()) {
+                    if (aPObj->TypeNum() == 0 && aPObj->RefNum() == 0) {
+                        aPObj->TypeNum(aTypeData->AddType(aPObj));
+                        Standard_Integer anPObjId = aPObjs.Length() + 1;
+                        aPObj->RefNum(anPObjId);
+                        aPObjs.Append(aPObj);
+                        aPObj->PChildren(aPQueue1);
+                    }
+                }
+            }
+            aPQueue.Assign(aPQueue1);
+        }
     }
 
-    anError = theDriver->EndWriteRefSection();
-    if (anError != Storage_VSOk)
-      return anError;
+    aHeaderData->SetStorageVersion(StdStorage::Version());
+    aHeaderData->SetNumberOfObjects(aPObjs.Length());
 
-    // Write data section
-    anError = theDriver->BeginWriteDataSection();
-    if (anError != Storage_VSOk)
-      return anError;
+    try {
+        // Write header section
+        if (!aHeaderData->Write(theDriver)) return aHeaderData->ErrorStatus();
 
-    StdObjMgt_WriteData aWriteData(theDriver);
-    for (StdStorage_BucketIterator anIt(&aPObjs); anIt.More(); anIt.Next())
-    {
-      Handle(StdObjMgt_Persistent) aPObj = anIt.Value();
-      if (!aPObj.IsNull())
-        aWriteData.WritePersistentObject(aPObj);
+        // Write types section
+        if (!aTypeData->Write(theDriver)) return aTypeData->ErrorStatus();
+
+        // Write root section
+        if (!aRootData->Write(theDriver)) return aRootData->ErrorStatus();
+
+        Storage_Error anError;
+
+        // Write reference section
+        anError = theDriver->BeginWriteRefSection();
+        if (anError != Storage_VSOk) return anError;
+
+        theDriver->SetRefSectionSize(aPObjs.Length());
+        for (StdStorage_BucketIterator anIt(&aPObjs); anIt.More(); anIt.Next()) {
+            Handle(StdObjMgt_Persistent) aPObj = anIt.Value();
+            if (!aPObj.IsNull()) theDriver->WriteReferenceType(aPObj->RefNum(), aPObj->TypeNum());
+        }
+
+        anError = theDriver->EndWriteRefSection();
+        if (anError != Storage_VSOk) return anError;
+
+        // Write data section
+        anError = theDriver->BeginWriteDataSection();
+        if (anError != Storage_VSOk) return anError;
+
+        StdObjMgt_WriteData aWriteData(theDriver);
+        for (StdStorage_BucketIterator anIt(&aPObjs); anIt.More(); anIt.Next()) {
+            Handle(StdObjMgt_Persistent) aPObj = anIt.Value();
+            if (!aPObj.IsNull()) aWriteData.WritePersistentObject(aPObj);
+        }
+
+        anError = theDriver->EndWriteDataSection();
+        if (anError != Storage_VSOk) return anError;
+    } catch (Storage_StreamWriteError const&) {
+        return Storage_VSWriteError;
     }
 
-    anError = theDriver->EndWriteDataSection();
-    if (anError != Storage_VSOk)
-      return anError;
-  }
-  catch (Storage_StreamWriteError const&) {
-    return Storage_VSWriteError;
-  }
-
-  return Storage_VSOk;
+    return Storage_VSOk;
 }

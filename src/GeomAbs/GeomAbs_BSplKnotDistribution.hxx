@@ -17,12 +17,10 @@
 #ifndef _GeomAbs_BSplKnotDistribution_HeaderFile
 #define _GeomAbs_BSplKnotDistribution_HeaderFile
 
-
 //! This enumeration is used in the classes BSplineCurve and
 //! BSplineSurface to describe the repartition of set of knots.
 //! (comments in classes BSplineCurve and BSplineSurface)
-enum GeomAbs_BSplKnotDistribution
-{
+enum GeomAbs_BSplKnotDistribution {
     GeomAbs_NonUniform,
     GeomAbs_Uniform,
     GeomAbs_QuasiUniform,

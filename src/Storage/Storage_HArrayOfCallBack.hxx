@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(Storage_HArrayOfCallBack, Storage_ArrayOfCallBack)
 
-
 #endif

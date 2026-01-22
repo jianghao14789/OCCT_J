@@ -23,5 +23,4 @@
 typedef NCollection_List<HLRAlgo_BiPoint> HLRAlgo_ListOfBPoint;
 typedef NCollection_List<HLRAlgo_BiPoint>::Iterator HLRAlgo_ListIteratorOfListOfBPoint;
 
-
 #endif

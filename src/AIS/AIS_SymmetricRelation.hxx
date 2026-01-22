@@ -16,7 +16,6 @@
 
 #include <PrsDim_SymmetricRelation.hxx>
 
-Standard_DEPRECATED("Deprecated alias to moved class")
-typedef PrsDim_SymmetricRelation AIS_SymmetricRelation;
+Standard_DEPRECATED("Deprecated alias to moved class") typedef PrsDim_SymmetricRelation AIS_SymmetricRelation;
 
 #endif // _AIS_SymmetricRelation_HeaderFile

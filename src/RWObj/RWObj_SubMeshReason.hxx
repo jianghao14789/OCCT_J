@@ -16,12 +16,11 @@
 #define _RWObj_SubMeshReason_HeaderFile
 
 //! Reason for creating a new group within OBJ reader.
-enum RWObj_SubMeshReason
-{
-  RWObj_SubMeshReason_NewObject,     //!< new object, should occur only ones in valid OBJ file (at the very beginning)
-  RWObj_SubMeshReason_NewGroup,      //!< new group (g item)
-  RWObj_SubMeshReason_NewMaterial,   //!< new material (usemtl item)
-  RWObj_SubMeshReason_NewSmoothGroup //!< new smoothing group (s item)
+enum RWObj_SubMeshReason {
+    RWObj_SubMeshReason_NewObject,     //!< new object, should occur only ones in valid OBJ file (at the very beginning)
+    RWObj_SubMeshReason_NewGroup,      //!< new group (g item)
+    RWObj_SubMeshReason_NewMaterial,   //!< new material (usemtl item)
+    RWObj_SubMeshReason_NewSmoothGroup //!< new smoothing group (s item)
 };
 
 #endif // _RWObj_SubMeshReason_HeaderFile

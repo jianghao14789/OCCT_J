@@ -14,7 +14,6 @@
 
 #ifndef _WIN32
 
-
 #include <OSD_Directory.hxx>
 #include <OSD_DirectoryIterator.hxx>
 #include <OSD_OSDError.hxx>
@@ -26,21 +25,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-OSD_DirectoryIterator::OSD_DirectoryIterator()
-    : myFlag(false),
-    myDescr(0),
-    myEntry(0),
-    myInit(0)
-{
-}
+OSD_DirectoryIterator::OSD_DirectoryIterator() : myFlag(false), myDescr(0), myEntry(0), myInit(0) {}
 
-OSD_DirectoryIterator::OSD_DirectoryIterator(const OSD_Path& where,
-    const TCollection_AsciiString& Mask)
-    : myFlag(false),
-    myDescr(0),
-    myEntry(0),
-    myInit(0)
-{
+OSD_DirectoryIterator::OSD_DirectoryIterator(const OSD_Path& where, const TCollection_AsciiString& Mask)
+    : myFlag(false), myDescr(0), myEntry(0), myInit(0) {
     Initialize(where, Mask);
 }
 
@@ -48,8 +36,7 @@ OSD_DirectoryIterator::OSD_DirectoryIterator(const OSD_Path& where,
 void OSD_DirectoryIterator::Destroy() {}
 //-----------------------------------------
 
-void OSD_DirectoryIterator::Initialize(const OSD_Path& where,
-    const TCollection_AsciiString& Mask) {
+void OSD_DirectoryIterator::Initialize(const OSD_Path& where, const TCollection_AsciiString& Mask) {
 
     myFlag = Standard_False;
     where.SystemName(myPlace);
@@ -68,10 +55,10 @@ Standard_Boolean OSD_DirectoryIterator::More() {
     if (myInit) {
         myInit = 0;
         myDescr = (Standard_Address)opendir(myPlace.ToCString());
-        if (myDescr) {            // LD : Si repertoire inaccessible retourner False
+        if (myDescr) { // LD : Si repertoire inaccessible retourner False
             myFlag = Standard_True;
             myInit = 0;
-            Next();          // Now find first entry
+            Next(); // Now find first entry
         }
     }
     return myFlag;
@@ -80,15 +67,14 @@ Standard_Boolean OSD_DirectoryIterator::More() {
 // Private :  See if directory name matches with a mask (like "*.c")
 // LD : reecrit (original dans OSD_FileIterator.cxx)
 
-
-static int strcmp_joker(const char* Mask, const char* Name)
-{
-    const char* p, * s;
+static int strcmp_joker(const char* Mask, const char* Name) {
+    const char *p, *s;
 
     for (p = Mask, s = Name; *p && *p != '*'; p++, s++)
         if (*p != *s) return 0;
     if (!*p) return !(*s);
-    while (*p == '*') p++;
+    while (*p == '*')
+        p++;
     if (!*p) return 1;
     for (; *s; s++)
         if (strcmp_joker(p, s)) return 1;
@@ -100,26 +86,25 @@ static int strcmp_joker(const char* Mask, const char* Name)
 void OSD_DirectoryIterator::Next() {
     int again = 1;
     struct stat stat_buf;
-    myFlag = false;   // Initialize to nothing found
+    myFlag = false; // Initialize to nothing found
 
     do {
         myEntry = readdir((DIR*)myDescr);
 
-        if (!myEntry) {   // No file found
-            myEntry = NULL;              // Keep pointer clean
-            myFlag = Standard_False;   // No more files/directory
-            closedir((DIR*)myDescr);       // so close directory
+        if (!myEntry) {              // No file found
+            myEntry = NULL;          // Keep pointer clean
+            myFlag = Standard_False; // No more files/directory
+            closedir((DIR*)myDescr); // so close directory
             myDescr = NULL;
             again = 0;
-        }
-        else {
-            //     if (!strcmp(entry->d_name,".")) continue;     LD : on prend ces 
+        } else {
+            //     if (!strcmp(entry->d_name,".")) continue;     LD : on prend ces
             //     if (!strcmp(entry->d_name,"..")) continue;         2 directories.
 
-                 // Is it a directory ?
+            // Is it a directory ?
             const TCollection_AsciiString aFullName = myPlace + "/" + ((struct dirent*)myEntry)->d_name;
             stat(aFullName.ToCString(), &stat_buf);
-            if (S_ISDIR(stat_buf.st_mode))   // Ensure me it's not a file
+            if (S_ISDIR(stat_buf.st_mode)) // Ensure me it's not a file
                 if (strcmp_joker(myMask.ToCString(), ((struct dirent*)myEntry)->d_name)) {
                     // Does it follow mask ?
                     myFlag = Standard_True;
@@ -128,9 +113,7 @@ void OSD_DirectoryIterator::Next() {
         }
 
     } while (again);
-
 }
-
 
 // Get Name of selected directory
 
@@ -145,7 +128,7 @@ OSD_Directory OSD_DirectoryIterator::Values() {
     position = Name.Search(".");
 
     if (position != -1) {
-        Ext = Name.Split(position - 1);   // Debug LD
+        Ext = Name.Split(position - 1); // Debug LD
         //  Ext.Remove(1,position);
         //  Name.Remove( position,Ext.Length()+1);
     }
@@ -156,22 +139,20 @@ OSD_Directory OSD_DirectoryIterator::Values() {
     return (TheIterator);
 }
 
-
 void OSD_DirectoryIterator::Reset() {
     myError.Reset();
 }
 
-Standard_Boolean OSD_DirectoryIterator::Failed()const {
-    return(myError.Failed());
+Standard_Boolean OSD_DirectoryIterator::Failed() const {
+    return (myError.Failed());
 }
 
 void OSD_DirectoryIterator::Perror() {
     myError.Perror();
 }
 
-
-Standard_Integer OSD_DirectoryIterator::Error()const {
-    return(myError.Error());
+Standard_Integer OSD_DirectoryIterator::Error() const {
+    return (myError.Error());
 }
 
 #else
@@ -180,9 +161,7 @@ Standard_Integer OSD_DirectoryIterator::Error()const {
 //-------------------  Windows NT sources for OSD_DirectoryIterator ------
 //------------------------------------------------------------------------
 
-
 #include <windows.h>
-
 
 #include <OSD_Directory.hxx>
 #include <OSD_DirectoryIterator.hxx>
@@ -191,14 +170,11 @@ Standard_Integer OSD_DirectoryIterator::Error()const {
 #include <TCollection_AsciiString.hxx>
 #include <TCollection_ExtendedString.hxx>
 
-#define _FD (  ( PWIN32_FIND_DATAW )myData  )
+#define _FD ((PWIN32_FIND_DATAW)myData)
 
 void _osd_wnt_set_error(OSD_Error&, Standard_Integer, ...);
 
-OSD_DirectoryIterator::OSD_DirectoryIterator(
-    const OSD_Path& where,
-    const TCollection_AsciiString& Mask
-) {
+OSD_DirectoryIterator::OSD_DirectoryIterator(const OSD_Path& where, const TCollection_AsciiString& Mask) {
 
     myFlag = Standard_False;
     myHandle = INVALID_HANDLE_VALUE;
@@ -210,17 +186,15 @@ OSD_DirectoryIterator::OSD_DirectoryIterator(
     myMask = Mask;
     myData = NULL;
 
-}  // end constructor
+} // end constructor
 
 void OSD_DirectoryIterator::Destroy() {
 
     if (myData != NULL) HeapFree(GetProcessHeap(), 0, myData);
 
-    if (myHandle != INVALID_HANDLE_VALUE)
+    if (myHandle != INVALID_HANDLE_VALUE) FindClose((HANDLE)myHandle);
 
-        FindClose((HANDLE)myHandle);
-
-}  // end  OSD_DirectoryIterator :: Destroy
+} // end  OSD_DirectoryIterator :: Destroy
 
 Standard_Boolean OSD_DirectoryIterator::More() {
 
@@ -228,13 +202,12 @@ Standard_Boolean OSD_DirectoryIterator::More() {
 
         TCollection_AsciiString wc = myPlace + "/" + myMask;
 
-        myData = HeapAlloc(
-            GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(WIN32_FIND_DATAW)
-        );
+        myData = HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, sizeof(WIN32_FIND_DATAW));
 
         // make wchar_t string from UTF-8
         TCollection_ExtendedString wcW(wc);
-        myHandle = FindFirstFileExW(wcW.ToWideString(), FindExInfoStandard, (PWIN32_FIND_DATAW)myData, FindExSearchNameMatch, NULL, 0);
+        myHandle = FindFirstFileExW(wcW.ToWideString(), FindExInfoStandard, (PWIN32_FIND_DATAW)myData,
+                                    FindExSearchNameMatch, NULL, 0);
 
         if (myHandle == INVALID_HANDLE_VALUE)
 
@@ -247,19 +220,18 @@ Standard_Boolean OSD_DirectoryIterator::More() {
 
             Next();
 
-        }  // end else
+        } // end else
 
-    }
-    else if (!myFlag) {
+    } else if (!myFlag) {
 
         FindClose((HANDLE)myHandle);
         myHandle = INVALID_HANDLE_VALUE;
 
-    }  // end if
+    } // end if
 
     return myFlag;
 
-}  // end OSD_DirectoryIterator :: More
+} // end OSD_DirectoryIterator :: More
 
 void OSD_DirectoryIterator::Next() {
 
@@ -273,63 +245,53 @@ void OSD_DirectoryIterator::Next() {
 
                 break;
 
-            }  // end if
+            } // end if
 
         } while (!(_FD->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY));
 
-    }  // end if
+    } // end if
 
     myFirstCall = Standard_False;
 
-}  // end  OSD_DirectoryIterator :: Next
+} // end  OSD_DirectoryIterator :: Next
 
 OSD_Directory OSD_DirectoryIterator::Values() {
 
     // make UTF-8 string
-    TCollection_AsciiString aFileName
-    (TCollection_ExtendedString((Standard_ExtString)_FD->cFileName));
+    TCollection_AsciiString aFileName(TCollection_ExtendedString((Standard_ExtString)_FD->cFileName));
     TheIterator.SetPath(OSD_Path(aFileName));
 
     return TheIterator;
 
-}  // end  OSD_DirectoryIterator :: Values
+} // end  OSD_DirectoryIterator :: Values
 
 Standard_Boolean OSD_DirectoryIterator::Failed() const {
 
     return myError.Failed();
 
-}  // end OSD_DirectoryIterator :: Failed
+} // end OSD_DirectoryIterator :: Failed
 
 void OSD_DirectoryIterator::Reset() {
 
     myError.Reset();
 
-}  // end OSD_DirectoryIterator :: Reset
+} // end OSD_DirectoryIterator :: Reset
 
 void OSD_DirectoryIterator::Perror() {
 
     myError.Perror();
 
-}  // end OSD_DirectoryIterator :: Perror
+} // end OSD_DirectoryIterator :: Perror
 
 Standard_Integer OSD_DirectoryIterator::Error() const {
 
     return myError.Error();
 
-}  // end OSD_DirectoryIterator :: Error
+} // end OSD_DirectoryIterator :: Error
 
 // For compatibility with UNIX version
-OSD_DirectoryIterator::OSD_DirectoryIterator()
-    : myFlag(false),
-    myHandle(0),
-    myData(0),
-    myFirstCall(Standard_False)
-{
-}
+OSD_DirectoryIterator::OSD_DirectoryIterator() : myFlag(false), myHandle(0), myData(0), myFirstCall(Standard_False) {}
 
-void OSD_DirectoryIterator::Initialize(
-    const OSD_Path&,
-    const TCollection_AsciiString&) {
-}
+void OSD_DirectoryIterator::Initialize(const OSD_Path&, const TCollection_AsciiString&) {}
 
 #endif

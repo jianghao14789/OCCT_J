@@ -30,13 +30,12 @@
 //! Not used so far.
 //! -      BRepBuilderAPI_ParametersOutOfRange
 //! The parameters given to limit the surface are out of its    bounds.
-enum BRepBuilderAPI_FaceError
-{
-BRepBuilderAPI_FaceDone,
-BRepBuilderAPI_NoFace,
-BRepBuilderAPI_NotPlanar,
-BRepBuilderAPI_CurveProjectionFailed,
-BRepBuilderAPI_ParametersOutOfRange
+enum BRepBuilderAPI_FaceError {
+    BRepBuilderAPI_FaceDone,
+    BRepBuilderAPI_NoFace,
+    BRepBuilderAPI_NotPlanar,
+    BRepBuilderAPI_CurveProjectionFailed,
+    BRepBuilderAPI_ParametersOutOfRange
 };
 
 #endif // _BRepBuilderAPI_FaceError_HeaderFile

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_ArcTangent.hxx>
 #include <Expr_Cosine.hxx>
@@ -32,13 +31,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Tangent, Expr_UnaryExpression)
 
-Expr_Tangent::Expr_Tangent(const Handle(Expr_GeneralExpression)& exp)
-{
+Expr_Tangent::Expr_Tangent(const Handle(Expr_GeneralExpression) & exp) {
     CreateOperand(exp);
 }
 
-Handle(Expr_GeneralExpression) Expr_Tangent::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Tangent::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) myexp = Operand();
     if (myexp->IsKind(STANDARD_TYPE(Expr_NumericValue))) {
         Handle(Expr_NumericValue) myNVexp = Handle(Expr_NumericValue)::DownCast(myexp);
@@ -51,13 +48,11 @@ Handle(Expr_GeneralExpression) Expr_Tangent::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_Tangent::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Tangent::Copy() const {
     return new Expr_Tangent(Expr::CopyShare(Operand()));
 }
 
-Standard_Boolean Expr_Tangent::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Tangent::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     if (Other->IsKind(STANDARD_TYPE(Expr_Tangent))) {
         Handle(Expr_GeneralExpression) myexp = Operand();
         return myexp->IsIdentical(Other->SubExpression(1));
@@ -65,15 +60,13 @@ Standard_Boolean Expr_Tangent::IsIdentical(const Handle(Expr_GeneralExpression)&
     return Standard_False;
 }
 
-Standard_Boolean Expr_Tangent::IsLinear() const
-{
+Standard_Boolean Expr_Tangent::IsLinear() const {
     return !ContainsUnknowns();
 }
 
-Handle(Expr_GeneralExpression) Expr_Tangent::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Tangent::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
-        return  new Expr_NumericValue(0.0);
+        return new Expr_NumericValue(0.0);
     }
     Handle(Expr_GeneralExpression) myexp = Operand();
     Handle(Expr_GeneralExpression) myder = myexp->Derivative(X);
@@ -83,13 +76,11 @@ Handle(Expr_GeneralExpression) Expr_Tangent::Derivative(const Handle(Expr_NamedU
     return resu->ShallowSimplified();
 }
 
-Standard_Real Expr_Tangent::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Tangent::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     return ::Tan(Operand()->Evaluate(vars, vals));
 }
 
-TCollection_AsciiString Expr_Tangent::String() const
-{
+TCollection_AsciiString Expr_Tangent::String() const {
     TCollection_AsciiString str("Tan(");
     str += Operand()->String();
     str += ")";

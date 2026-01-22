@@ -20,46 +20,38 @@
 #include <Standard_Transient.hxx>
 
 // forward declarations to avoid including of FreeType headers
-typedef struct FT_LibraryRec_ *FT_Library;
+typedef struct FT_LibraryRec_* FT_Library;
 
 //! Wrapper over FT_Library. Provides access to FreeType library.
-class Font_FTLibrary : public Standard_Transient
-{
+class Font_FTLibrary : public Standard_Transient {
 
 public:
+    //! Initialize new FT_Library instance.
+    Standard_EXPORT Font_FTLibrary();
 
-  //! Initialize new FT_Library instance.
-  Standard_EXPORT Font_FTLibrary();
+    //! Release FT_Library instance.
+    Standard_EXPORT ~Font_FTLibrary();
 
-  //! Release FT_Library instance.
-  Standard_EXPORT ~Font_FTLibrary();
+    //! This method should always return true.
+    //! @return true if FT_Library instance is valid.
+    bool IsValid() const {
+        return myFTLib != NULL;
+    }
 
-  //! This method should always return true.
-  //! @return true if FT_Library instance is valid.
-  bool IsValid() const
-  {
-    return myFTLib != NULL;
-  }
-
-  //! Access FT_Library instance.
-  FT_Library Instance() const
-  {
-    return myFTLib;
-  }
+    //! Access FT_Library instance.
+    FT_Library Instance() const {
+        return myFTLib;
+    }
 
 private:
-
-  FT_Library myFTLib;
+    FT_Library myFTLib;
 
 private:
-
-  Font_FTLibrary            (const Font_FTLibrary& );
-  Font_FTLibrary& operator= (const Font_FTLibrary& );
+    Font_FTLibrary(const Font_FTLibrary&);
+    Font_FTLibrary& operator=(const Font_FTLibrary&);
 
 public:
-
-  DEFINE_STANDARD_RTTIEXT(Font_FTLibrary,Standard_Transient) // Type definition
-
+    DEFINE_STANDARD_RTTIEXT(Font_FTLibrary, Standard_Transient) // Type definition
 };
 
 DEFINE_STANDARD_HANDLE(Font_FTLibrary, Standard_Transient)

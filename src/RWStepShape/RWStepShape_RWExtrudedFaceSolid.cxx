@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Interface_Check.hxx>
 #include <Interface_EntityIterator.hxx>
 #include <RWStepShape_RWExtrudedFaceSolid.hxx>
@@ -21,77 +20,68 @@
 #include <StepShape_ExtrudedFaceSolid.hxx>
 #include <StepShape_FaceSurface.hxx>
 
-RWStepShape_RWExtrudedFaceSolid::RWStepShape_RWExtrudedFaceSolid () {}
+RWStepShape_RWExtrudedFaceSolid::RWStepShape_RWExtrudedFaceSolid() {}
 
-void RWStepShape_RWExtrudedFaceSolid::ReadStep
-	(const Handle(StepData_StepReaderData)& data,
-	 const Standard_Integer num,
-	 Handle(Interface_Check)& ach,
-	 const Handle(StepShape_ExtrudedFaceSolid)& ent) const
-{
+void RWStepShape_RWExtrudedFaceSolid::ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                               Handle(Interface_Check) & ach,
+                                               const Handle(StepShape_ExtrudedFaceSolid) & ent) const {
 
+    // --- Number of Parameter Control ---
 
-  // --- Number of Parameter Control ---
-  
-  if (!data->CheckNbParams(num,4,ach,"extruded_face_solid")) return;
+    if (!data->CheckNbParams(num, 4, ach, "extruded_face_solid")) return;
 
-  // --- inherited field : name ---
+    // --- inherited field : name ---
 
-  Handle(TCollection_HAsciiString) aName;
-  //szv#4:S4163:12Mar99 `Standard_Boolean stat1 =` not needed
-  data->ReadString (num,1,"name",ach,aName);
-  
-  // --- inherited field : sweptFace ---
+    Handle(TCollection_HAsciiString) aName;
+    // szv#4:S4163:12Mar99 `Standard_Boolean stat1 =` not needed
+    data->ReadString(num, 1, "name", ach, aName);
 
-  Handle(StepShape_FaceSurface) aSweptFace;
-  //szv#4:S4163:12Mar99 `Standard_Boolean stat2 =` not needed
-  data->ReadEntity(num, 2,"swept_face", ach, STANDARD_TYPE(StepShape_FaceSurface), aSweptFace);
+    // --- inherited field : sweptFace ---
 
-  // --- own field : extrudedDirection ---
+    Handle(StepShape_FaceSurface) aSweptFace;
+    // szv#4:S4163:12Mar99 `Standard_Boolean stat2 =` not needed
+    data->ReadEntity(num, 2, "swept_face", ach, STANDARD_TYPE(StepShape_FaceSurface), aSweptFace);
 
-  Handle(StepGeom_Direction) aExtrudedDirection;
-  //szv#4:S4163:12Mar99 `Standard_Boolean stat3 =` not needed
-  data->ReadEntity(num, 3,"extruded_direction", ach, STANDARD_TYPE(StepGeom_Direction), aExtrudedDirection);
+    // --- own field : extrudedDirection ---
 
-  // --- own field : depth ---
+    Handle(StepGeom_Direction) aExtrudedDirection;
+    // szv#4:S4163:12Mar99 `Standard_Boolean stat3 =` not needed
+    data->ReadEntity(num, 3, "extruded_direction", ach, STANDARD_TYPE(StepGeom_Direction), aExtrudedDirection);
 
-  Standard_Real aDepth;
-  //szv#4:S4163:12Mar99 `Standard_Boolean stat4 =` not needed
-  data->ReadReal (num,4,"depth",ach,aDepth);
+    // --- own field : depth ---
 
-  //--- Initialisation of the read entity ---
+    Standard_Real aDepth;
+    // szv#4:S4163:12Mar99 `Standard_Boolean stat4 =` not needed
+    data->ReadReal(num, 4, "depth", ach, aDepth);
 
-  ent->Init(aName, aSweptFace, aExtrudedDirection, aDepth);
+    //--- Initialisation of the read entity ---
+
+    ent->Init(aName, aSweptFace, aExtrudedDirection, aDepth);
 }
 
+void RWStepShape_RWExtrudedFaceSolid::WriteStep(StepData_StepWriter& SW,
+                                                const Handle(StepShape_ExtrudedFaceSolid) & ent) const {
 
-void RWStepShape_RWExtrudedFaceSolid::WriteStep
-	(StepData_StepWriter& SW,
-	 const Handle(StepShape_ExtrudedFaceSolid)& ent) const
-{
+    // --- inherited field name ---
 
-  // --- inherited field name ---
+    SW.Send(ent->Name());
 
-  SW.Send(ent->Name());
-  
-  // --- inherited field sweptFace ---
-  
-  SW.Send(ent->SweptFace());
-  
-  // --- own field : extrudedDirection ---
+    // --- inherited field sweptFace ---
 
-  SW.Send(ent->ExtrudedDirection());
+    SW.Send(ent->SweptFace());
 
-  // --- own field : depth ---
+    // --- own field : extrudedDirection ---
 
-  SW.Send(ent->Depth());
+    SW.Send(ent->ExtrudedDirection());
+
+    // --- own field : depth ---
+
+    SW.Send(ent->Depth());
 }
 
+void RWStepShape_RWExtrudedFaceSolid::Share(const Handle(StepShape_ExtrudedFaceSolid) & ent,
+                                            Interface_EntityIterator& iter) const {
 
-void RWStepShape_RWExtrudedFaceSolid::Share(const Handle(StepShape_ExtrudedFaceSolid)& ent, Interface_EntityIterator& iter) const
-{
-
-  iter.GetOneItem(ent->SweptFace());
-  iter.GetOneItem(ent->ExtrudedDirection());
+    iter.GetOneItem(ent->SweptFace());
+    iter.GetOneItem(ent->ExtrudedDirection());
 }
-

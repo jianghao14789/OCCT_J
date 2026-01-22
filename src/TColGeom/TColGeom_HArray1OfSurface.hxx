@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(TColGeom_HArray1OfSurface, TColGeom_Array1OfSurface)
 
-
 #endif

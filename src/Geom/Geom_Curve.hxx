@@ -29,7 +29,6 @@ class gp_Trsf;
 class gp_Pnt;
 class gp_Vec;
 
-
 class Geom_Curve;
 DEFINE_STANDARD_HANDLE(Geom_Curve, Geom_Geometry)
 
@@ -213,20 +212,13 @@ public:
     Standard_EXPORT gp_Pnt Value(const Standard_Real U) const;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Curve, Geom_Geometry)
 
 protected:
-
 private:
-
 };
-
-
-
-
-
-
 
 #endif // _Geom_Curve_HeaderFile

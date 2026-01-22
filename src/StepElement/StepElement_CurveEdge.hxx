@@ -14,10 +14,6 @@
 #ifndef _StepElement_CurveEdge_HeaderFile
 #define _StepElement_CurveEdge_HeaderFile
 
-
-enum StepElement_CurveEdge
-{
-StepElement_ElementEdge
-};
+enum StepElement_CurveEdge { StepElement_ElementEdge };
 
 #endif // _StepElement_CurveEdge_HeaderFile

@@ -15,19 +15,19 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Map
-//purpose  : 
+// function : Map
+// purpose  :
 //=======================================================================
 
-inline TNaming_DataMapOfShapePtrRefShape& TNaming_UsedShapes::Map()
-{
-  return myMap;
+inline TNaming_DataMapOfShapePtrRefShape& TNaming_UsedShapes::Map() {
+    return myMap;
 }
 
 //=======================================================================
-//function : ID
-//purpose  : 
+// function : ID
+// purpose  :
 //=======================================================================
 
-inline const Standard_GUID& TNaming_UsedShapes::ID() const
-{ return GetID(); }
+inline const Standard_GUID& TNaming_UsedShapes::ID() const {
+    return GetID();
+}

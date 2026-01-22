@@ -42,7 +42,8 @@ public:
     //! the expected solution does not stay in the range A..B.
     //! The solution is found when abs(Xi - Xi-1) <= Tolerance;
     //! The maximum number of iterations allowed is given by NbIterations.
-    Standard_EXPORT math_FunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess, const Standard_Real Tolerance, const Standard_Integer NbIterations = 100);
+    Standard_EXPORT math_FunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess,
+                                      const Standard_Real Tolerance, const Standard_Integer NbIterations = 100);
 
     //! The Newton-Raphson method is done to find the root of the function F
     //! from the initial guess Guess.
@@ -51,7 +52,9 @@ public:
     //! range A..B
     //! The solution is found when abs(Xi - Xi-1) <= Tolerance;
     //! The maximum number of iterations allowed is given by NbIterations.
-    Standard_EXPORT math_FunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess, const Standard_Real Tolerance, const Standard_Real A, const Standard_Real B, const Standard_Integer NbIterations = 100);
+    Standard_EXPORT math_FunctionRoot(math_FunctionWithDerivative& F, const Standard_Real Guess,
+                                      const Standard_Real Tolerance, const Standard_Real A, const Standard_Real B,
+                                      const Standard_Integer NbIterations = 100);
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
@@ -79,15 +82,12 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 protected:
-
 private:
-
     Standard_Boolean Done;
     Standard_Real TheRoot;
     Standard_Real TheError;
     Standard_Real TheDerivative;
     Standard_Integer NbIter;
-
 };
 
 #include <math_FunctionRoot.lxx>

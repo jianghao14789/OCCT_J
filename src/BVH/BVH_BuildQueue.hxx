@@ -22,27 +22,21 @@
 #include <NCollection_Sequence.hxx>
 
 //! Command-queue for parallel building of BVH nodes.
-class BVH_BuildQueue
-{
+class BVH_BuildQueue {
     template <class T, int N> friend class BVH_QueueBuilder;
 
 public:
-
     //! Creates new BVH build queue.
-    BVH_BuildQueue()
-        : myNbThreads(0)
-    {
+    BVH_BuildQueue() : myNbThreads(0) {
         //
     }
 
     //! Releases resources of BVH build queue.
-    ~BVH_BuildQueue()
-    {
+    ~BVH_BuildQueue() {
         //
     }
 
 public:
-
     //! Returns current size of BVH build queue.
     Standard_EXPORT Standard_Integer Size();
 
@@ -53,18 +47,15 @@ public:
     Standard_EXPORT Standard_Integer Fetch(Standard_Boolean& wasBusy);
 
     //! Checks if there are active build threads.
-    Standard_Boolean HasBusyThreads()
-    {
+    Standard_Boolean HasBusyThreads() {
         return myNbThreads != 0;
     }
 
 protected:
-
     //! Queue of BVH nodes to build.
     NCollection_Sequence<Standard_Integer> myQueue;
 
 protected:
-
     //! Manages access serialization of working threads.
     Standard_Mutex myMutex;
 

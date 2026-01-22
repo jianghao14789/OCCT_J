@@ -25,51 +25,33 @@ class StepFEA_FeaModel;
 class TCollection_HAsciiString;
 class StepRepr_RepresentationContext;
 
-
 class StepFEA_NodeRepresentation;
 DEFINE_STANDARD_HANDLE(StepFEA_NodeRepresentation, StepRepr_Representation)
 
 //! Representation of STEP entity NodeRepresentation
-class StepFEA_NodeRepresentation : public StepRepr_Representation
-{
+class StepFEA_NodeRepresentation : public StepRepr_Representation {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepFEA_NodeRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepFEA_NodeRepresentation();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aRepresentation_Name, const Handle(StepRepr_HArray1OfRepresentationItem)& aRepresentation_Items, const Handle(StepRepr_RepresentationContext)& aRepresentation_ContextOfItems, const Handle(StepFEA_FeaModel)& aModelRef);
-  
-  //! Returns field ModelRef
-  Standard_EXPORT Handle(StepFEA_FeaModel) ModelRef() const;
-  
-  //! Set field ModelRef
-  Standard_EXPORT void SetModelRef (const Handle(StepFEA_FeaModel)& ModelRef);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aRepresentation_Name,
+                              const Handle(StepRepr_HArray1OfRepresentationItem) & aRepresentation_Items,
+                              const Handle(StepRepr_RepresentationContext) & aRepresentation_ContextOfItems,
+                              const Handle(StepFEA_FeaModel) & aModelRef);
 
+    //! Returns field ModelRef
+    Standard_EXPORT Handle(StepFEA_FeaModel) ModelRef() const;
 
+    //! Set field ModelRef
+    Standard_EXPORT void SetModelRef(const Handle(StepFEA_FeaModel) & ModelRef);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepFEA_NodeRepresentation,StepRepr_Representation)
+    DEFINE_STANDARD_RTTIEXT(StepFEA_NodeRepresentation, StepRepr_Representation)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(StepFEA_FeaModel) theModelRef;
-
-
+    Handle(StepFEA_FeaModel) theModelRef;
 };
-
-
-
-
-
-
 
 #endif // _StepFEA_NodeRepresentation_HeaderFile

@@ -18,12 +18,11 @@
 #include <rapidjson/ostreamwrapper.h>
 
 //! rapidjson::Writer wrapper for forward declaration.
-class RWGltf_GltfOStreamWriter : public rapidjson::Writer<rapidjson::OStreamWrapper>
-{
+class RWGltf_GltfOStreamWriter : public rapidjson::Writer<rapidjson::OStreamWrapper> {
 public:
-  //! Main constructor.
-  RWGltf_GltfOStreamWriter (rapidjson::OStreamWrapper& theOStream)
-  : rapidjson::Writer<rapidjson::OStreamWrapper> (theOStream) {}
+    //! Main constructor.
+    RWGltf_GltfOStreamWriter(rapidjson::OStreamWrapper& theOStream)
+        : rapidjson::Writer<rapidjson::OStreamWrapper>(theOStream) {}
 };
 
 #endif // _RWGltf_GltfOStreamWriter_HeaderFile

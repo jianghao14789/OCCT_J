@@ -22,47 +22,37 @@
 #include <Standard_Type.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESDefs_MacroDef,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESDefs_MacroDef, IGESData_IGESEntity)
 
-IGESDefs_MacroDef::IGESDefs_MacroDef ()    {  }
+IGESDefs_MacroDef::IGESDefs_MacroDef() {}
 
-    void  IGESDefs_MacroDef::Init
-  (const Handle(TCollection_HAsciiString)& macro,
-   const Standard_Integer entityTypeID,
-   const Handle(Interface_HArray1OfHAsciiString)& langStatements,
-   const Handle(TCollection_HAsciiString)& endMacro)
-{
-  if (langStatements->Lower() != 1)
-    throw Standard_DimensionMismatch("IGESDefs_MacroDef : Init");
-  theMACRO          = macro;
-  theEntityTypeID   = entityTypeID;
-  theLangStatements = langStatements;
-  theENDMACRO       = endMacro;
-  InitTypeAndForm(306,0);
+void IGESDefs_MacroDef::Init(const Handle(TCollection_HAsciiString) & macro, const Standard_Integer entityTypeID,
+                             const Handle(Interface_HArray1OfHAsciiString) & langStatements,
+                             const Handle(TCollection_HAsciiString) & endMacro) {
+    if (langStatements->Lower() != 1) throw Standard_DimensionMismatch("IGESDefs_MacroDef : Init");
+    theMACRO = macro;
+    theEntityTypeID = entityTypeID;
+    theLangStatements = langStatements;
+    theENDMACRO = endMacro;
+    InitTypeAndForm(306, 0);
 }
 
-    Standard_Integer  IGESDefs_MacroDef::NbStatements () const
-{
-  return theLangStatements->Length();
+Standard_Integer IGESDefs_MacroDef::NbStatements() const {
+    return theLangStatements->Length();
 }
 
-    Handle(TCollection_HAsciiString)  IGESDefs_MacroDef::MACRO () const 
-{
-  return theMACRO;
+Handle(TCollection_HAsciiString) IGESDefs_MacroDef::MACRO() const {
+    return theMACRO;
 }
 
-    Standard_Integer  IGESDefs_MacroDef::EntityTypeID () const 
-{
-  return theEntityTypeID;
+Standard_Integer IGESDefs_MacroDef::EntityTypeID() const {
+    return theEntityTypeID;
 }
 
-    Handle(TCollection_HAsciiString)  IGESDefs_MacroDef::LanguageStatement
-  (const Standard_Integer StatNum) const 
-{
-  return theLangStatements->Value(StatNum);
+Handle(TCollection_HAsciiString) IGESDefs_MacroDef::LanguageStatement(const Standard_Integer StatNum) const {
+    return theLangStatements->Value(StatNum);
 }
 
-    Handle(TCollection_HAsciiString)  IGESDefs_MacroDef::ENDMACRO () const 
-{
-  return theENDMACRO;
+Handle(TCollection_HAsciiString) IGESDefs_MacroDef::ENDMACRO() const {
+    return theENDMACRO;
 }

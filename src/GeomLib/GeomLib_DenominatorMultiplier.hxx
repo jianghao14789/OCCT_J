@@ -25,64 +25,42 @@
 #include <Standard_Real.hxx>
 class Geom_BSplineSurface;
 
-
 //! this defines an evaluator for a function of 2 variables
 //! that will be used by CancelDenominatorDerivative in one
 //! direction.
-class GeomLib_DenominatorMultiplier 
-{
+class GeomLib_DenominatorMultiplier {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! if the surface is rational this will define the evaluator
+    //! of a real function of 2 variables a(u,v) such that
+    //! if we define a new surface by :
+    //! a(u,v) * N(u,v)
+    //! NewF(u,v) = ----------------
+    //! a(u,v) * D(u,v)
+    Standard_EXPORT GeomLib_DenominatorMultiplier(const Handle(Geom_BSplineSurface) & Surface,
+                                                  const TColStd_Array1OfReal& KnotVector);
 
-  
-  //! if the surface is rational this will define the evaluator
-  //! of a real function of 2 variables a(u,v) such that
-  //! if we define a new surface by :
-  //! a(u,v) * N(u,v)
-  //! NewF(u,v) = ----------------
-  //! a(u,v) * D(u,v)
-  Standard_EXPORT GeomLib_DenominatorMultiplier(const Handle(Geom_BSplineSurface)& Surface, const TColStd_Array1OfReal& KnotVector);
-  
-  //! Returns the value of
-  //! a(UParameter,VParameter)=
-  //!
-  //! H0(UParameter)/Denominator(Umin,Vparameter)
-  //!
-  //! D Denominator(Umin,Vparameter)
-  //! - ------------------------------[H1(u)]/(Denominator(Umin,Vparameter)^2)
-  //! D U
-  //!
-  //! + H3(UParameter)/Denominator(Umax,Vparameter)
-  //!
-  //! D Denominator(Umax,Vparameter)
-  //! - ------------------------------[H2(u)]/(Denominator(Umax,Vparameter)^2)
-  //! D U
-  Standard_EXPORT Standard_Real Value (const Standard_Real UParameter, const Standard_Real VParameter) const;
-
-
-
+    //! Returns the value of
+    //! a(UParameter,VParameter)=
+    //!
+    //! H0(UParameter)/Denominator(Umin,Vparameter)
+    //!
+    //! D Denominator(Umin,Vparameter)
+    //! - ------------------------------[H1(u)]/(Denominator(Umin,Vparameter)^2)
+    //! D U
+    //!
+    //! + H3(UParameter)/Denominator(Umax,Vparameter)
+    //!
+    //! D Denominator(Umax,Vparameter)
+    //! - ------------------------------[H2(u)]/(Denominator(Umax,Vparameter)^2)
+    //! D U
+    Standard_EXPORT Standard_Real Value(const Standard_Real UParameter, const Standard_Real VParameter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(Geom_BSplineSurface) mySurface;
-  TColStd_Array1OfReal myKnotFlatVector;
-
-
+    Handle(Geom_BSplineSurface) mySurface;
+    TColStd_Array1OfReal myKnotFlatVector;
 };
-
-
-
-
-
-
 
 #endif // _GeomLib_DenominatorMultiplier_HeaderFile

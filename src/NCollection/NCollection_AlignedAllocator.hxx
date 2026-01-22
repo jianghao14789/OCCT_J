@@ -20,10 +20,8 @@
 #include <Standard.hxx>
 
 //! NCollection allocator with managed memory alignment capabilities.
-class NCollection_AlignedAllocator : public NCollection_BaseAllocator
-{
+class NCollection_AlignedAllocator : public NCollection_BaseAllocator {
 public:
-
     //! Constructor. The alignment should be specified explicitly:
     //! 16 bytes for SSE instructions
     //! 32 bytes for AVX instructions
@@ -33,21 +31,17 @@ public:
     Standard_EXPORT virtual void* Allocate(const size_t theSize) Standard_OVERRIDE;
 
     //! Free a previously allocated memory.
-    Standard_EXPORT virtual void  Free(void* thePtr) Standard_OVERRIDE;
+    Standard_EXPORT virtual void Free(void* thePtr) Standard_OVERRIDE;
 
 private:
-
     NCollection_AlignedAllocator(const NCollection_AlignedAllocator&);
-    NCollection_AlignedAllocator& operator= (const NCollection_AlignedAllocator&);
+    NCollection_AlignedAllocator& operator=(const NCollection_AlignedAllocator&);
 
 protected:
-
     size_t myAlignment; //!< alignment in bytes
 
 public:
-
     DEFINE_STANDARD_RTTIEXT(NCollection_AlignedAllocator, NCollection_BaseAllocator)
-
 };
 
 // Definition of HANDLE object using Standard_DefineHandle.hxx

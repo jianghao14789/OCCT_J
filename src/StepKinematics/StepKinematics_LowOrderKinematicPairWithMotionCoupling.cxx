@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,9 +19,7 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_LowOrderKinematicPairWithMotionCoupling, StepKinematics_KinematicPair)
 
 //=======================================================================
-//function : StepKinematics_LowOrderKinematicPairWithMotionCoupling
-//purpose  :
+// function : StepKinematics_LowOrderKinematicPairWithMotionCoupling
+// purpose  :
 //=======================================================================
-StepKinematics_LowOrderKinematicPairWithMotionCoupling::StepKinematics_LowOrderKinematicPairWithMotionCoupling ()
-{
-}
+StepKinematics_LowOrderKinematicPairWithMotionCoupling::StepKinematics_LowOrderKinematicPairWithMotionCoupling() {}

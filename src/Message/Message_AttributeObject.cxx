@@ -19,8 +19,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeObject, Message_Attribute)
 
 //=======================================================================
-//function : Constructor
-//purpose  : 使用对象和名称初始化对象属性
+// function : Constructor
+// purpose  : 使用对象和名称初始化对象属性
 //
 // 说明：
 //   - Message_AttributeObject 是用于在警报中附加任意对象的属性
@@ -44,7 +44,7 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeObject, Message_Attribute)
 // 使用示例：
 //   // 处理一个形状时发生错误
 //   Handle(TopoDS_Shape) aShape = ...;
-//   Handle(Message_AttributeObject) attr = 
+//   Handle(Message_AttributeObject) attr =
 //       new Message_AttributeObject(aShape, "FailedShape");
 //   // 现在警报可以包含指向出错的具体形状的引用
 //
@@ -55,17 +55,17 @@ IMPLEMENT_STANDARD_RTTIEXT(Message_AttributeObject, Message_Attribute)
 //     * Handle<> 会自动计数和释放资源
 //     * 防止内存泄漏
 //=======================================================================
-Message_AttributeObject::Message_AttributeObject(const Handle(Standard_Transient)& theObject,
-    const TCollection_AsciiString& theName)
-    : Message_Attribute(theName)  // 调用基类构造函数，初始化名称
+Message_AttributeObject::Message_AttributeObject(const Handle(Standard_Transient) & theObject,
+                                                 const TCollection_AsciiString& theName)
+    : Message_Attribute(theName) // 调用基类构造函数，初始化名称
 {
     // 存储传入的对象
     myObject = theObject;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 将对象内容导出为 JSON 格式（用于调试）
+// function : DumpJson
+// purpose  : 将对象内容导出为 JSON 格式（用于调试）
 //
 // 参数说明：
 //   - theOStream：输出流，JSON 将被写入此流
@@ -102,12 +102,10 @@ Message_AttributeObject::Message_AttributeObject(const Handle(Standard_Transient
 //   - 代表内存中对象的地址
 //   - 在同一次运行中，相同对象总是有相同的地址
 //=======================================================================
-void Message_AttributeObject::DumpJson(Standard_OStream& theOStream,
-    Standard_Integer theDepth) const
-{
+void Message_AttributeObject::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
     // 开始输出此对象的 JSON 表示
     OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
-    
+
     // 输出基类（Message_Attribute）的内容
     // theDepth 参数用于递归调用时控制深度
     OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Message_Attribute)

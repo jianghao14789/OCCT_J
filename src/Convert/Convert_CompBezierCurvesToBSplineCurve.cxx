@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BSplCLib.hxx>
 #include <Convert_CompBezierCurvesToBSplineCurve.hxx>
 #include <gp.hxx>
@@ -26,26 +25,18 @@
 #include <TColgp_HArray1OfPnt.hxx>
 
 //=======================================================================
-//function : Convert_CompBezierCurvesToBSplineCurve
-//purpose  : 
+// function : Convert_CompBezierCurvesToBSplineCurve
+// purpose  :
 //=======================================================================
-Convert_CompBezierCurvesToBSplineCurve::
-Convert_CompBezierCurvesToBSplineCurve(
-    const Standard_Real AngularTolerance) :
-    myAngular(AngularTolerance),
-    myDone(Standard_False)
-{
-}
-
+Convert_CompBezierCurvesToBSplineCurve::Convert_CompBezierCurvesToBSplineCurve(const Standard_Real AngularTolerance)
+    : myAngular(AngularTolerance), myDone(Standard_False) {}
 
 //=======================================================================
-//function : AddCurve
-//purpose  : 
+// function : AddCurve
+// purpose  :
 //=======================================================================
 
-void  Convert_CompBezierCurvesToBSplineCurve::AddCurve
-(const TColgp_Array1OfPnt& Poles)
-{
+void Convert_CompBezierCurvesToBSplineCurve::AddCurve(const TColgp_Array1OfPnt& Poles) {
     if (!mySequence.IsEmpty()) {
         gp_Pnt P1, P2;
         P1 = mySequence.Last()->Value(mySequence.Last()->Upper());
@@ -57,43 +48,35 @@ void  Convert_CompBezierCurvesToBSplineCurve::AddCurve
 #endif
     }
     myDone = Standard_False;
-    Handle(TColgp_HArray1OfPnt) HPoles =
-        new TColgp_HArray1OfPnt(Poles.Lower(), Poles.Upper());
+    Handle(TColgp_HArray1OfPnt) HPoles = new TColgp_HArray1OfPnt(Poles.Lower(), Poles.Upper());
     HPoles->ChangeArray1() = Poles;
     mySequence.Append(HPoles);
 }
 
-
 //=======================================================================
-//function : Degree
-//purpose  : 
+// function : Degree
+// purpose  :
 //=======================================================================
 
-Standard_Integer  Convert_CompBezierCurvesToBSplineCurve::Degree() const
-{
+Standard_Integer Convert_CompBezierCurvesToBSplineCurve::Degree() const {
     return myDegree;
 }
 
-
 //=======================================================================
-//function : NbPoles
-//purpose  : 
+// function : NbPoles
+// purpose  :
 //=======================================================================
 
-Standard_Integer  Convert_CompBezierCurvesToBSplineCurve::NbPoles() const
-{
+Standard_Integer Convert_CompBezierCurvesToBSplineCurve::NbPoles() const {
     return CurvePoles.Length();
 }
 
-
 //=======================================================================
-//function : Poles
-//purpose  : 
+// function : Poles
+// purpose  :
 //=======================================================================
 
-void  Convert_CompBezierCurvesToBSplineCurve::Poles
-(TColgp_Array1OfPnt& Poles) const
-{
+void Convert_CompBezierCurvesToBSplineCurve::Poles(TColgp_Array1OfPnt& Poles) const {
     Standard_Integer i, Lower = Poles.Lower(), Upper = Poles.Upper();
     Standard_Integer k = 1;
     for (i = Lower; i <= Upper; i++) {
@@ -101,27 +84,22 @@ void  Convert_CompBezierCurvesToBSplineCurve::Poles
     }
 }
 
-
 //=======================================================================
-//function : NbKnots
-//purpose  : 
+// function : NbKnots
+// purpose  :
 //=======================================================================
 
-Standard_Integer  Convert_CompBezierCurvesToBSplineCurve::NbKnots() const
-{
+Standard_Integer Convert_CompBezierCurvesToBSplineCurve::NbKnots() const {
     return CurveKnots.Length();
 }
 
-
 //=======================================================================
-//function : KnotsAndMults
-//purpose  : 
+// function : KnotsAndMults
+// purpose  :
 //=======================================================================
 
-void  Convert_CompBezierCurvesToBSplineCurve::KnotsAndMults
-(TColStd_Array1OfReal& Knots,
-    TColStd_Array1OfInteger& Mults) const
-{
+void Convert_CompBezierCurvesToBSplineCurve::KnotsAndMults(TColStd_Array1OfReal& Knots,
+                                                           TColStd_Array1OfInteger& Mults) const {
     Standard_Integer i, LowerK = Knots.Lower(), UpperK = Knots.Upper();
     Standard_Integer LowerM = Mults.Lower(), UpperM = Mults.Upper();
     Standard_Integer k = 1;
@@ -134,15 +112,12 @@ void  Convert_CompBezierCurvesToBSplineCurve::KnotsAndMults
     }
 }
 
-
-
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
 
-void Convert_CompBezierCurvesToBSplineCurve::Perform()
-{
+void Convert_CompBezierCurvesToBSplineCurve::Perform() {
     myDone = Standard_True;
     CurvePoles.Clear();
     CurveKnots.Clear();
@@ -151,7 +126,7 @@ void Convert_CompBezierCurvesToBSplineCurve::Perform()
     Standard_Integer UpperI = mySequence.Length();
     Standard_Integer NbrCurv = UpperI - LowerI + 1;
     //  Standard_Integer NbKnotsSpl = NbrCurv + 1 ;
-    TColStd_Array1OfReal     CurveKnVals(1, NbrCurv);
+    TColStd_Array1OfReal CurveKnVals(1, NbrCurv);
 
     Standard_Integer i;
     myDegree = 0;
@@ -169,11 +144,9 @@ void Convert_CompBezierCurvesToBSplineCurve::Perform()
         Deg = mySequence(i)->Length() - 1;
         Inc = myDegree - Deg;
         if (Inc > 0) {
-            BSplCLib::IncreaseDegree(myDegree,
-                mySequence(i)->Array1(), BSplCLib::NoWeights(),
-                Points, BSplCLib::NoWeights());
-        }
-        else {
+            BSplCLib::IncreaseDegree(myDegree, mySequence(i)->Array1(), BSplCLib::NoWeights(), Points,
+                                     BSplCLib::NoWeights());
+        } else {
             Points = mySequence(i)->Array1();
         }
 
@@ -188,33 +161,29 @@ void Convert_CompBezierCurvesToBSplineCurve::Perform()
             Det = 1.;
         }
 
-
         if (i != LowerI) {
             P2 = Points(1);
             P3 = Points(2);
             gp_Vec V1(P1, P2), V2(P2, P3);
 
             // Processing of the tangency between Bezier and the previous.
-            // This allows to guarantee at least a C1 continuity if the tangents are  
+            // This allows to guarantee at least a C1 continuity if the tangents are
             // coherent.
 
             Standard_Real D1 = V1.SquareMagnitude();
             Standard_Real D2 = V2.SquareMagnitude();
-            if (MaxDegree > 1 && //rln 20.06.99 work-around
-                D1 > gp::Resolution() && D2 > gp::Resolution() && V1.IsParallel(V2, myAngular))
-            {
+            if (MaxDegree > 1 && // rln 20.06.99 work-around
+                D1 > gp::Resolution() && D2 > gp::Resolution() && V1.IsParallel(V2, myAngular)) {
                 Standard_Real Lambda = Sqrt(D2 / D1);
                 if (CurveKnVals(i - 1) * Lambda > 10. * Epsilon(Det)) {
                     KnotsMultiplicities.Append(MaxDegree - 1);
                     CurveKnVals(i) = CurveKnVals(i - 1) * Lambda;
-                }
-                else {
+                } else {
                     CurvePoles.Append(Points(1));
                     KnotsMultiplicities.Append(MaxDegree);
                     CurveKnVals(i) = 1.0;
                 }
-            }
-            else {
+            } else {
                 CurvePoles.Append(Points(1));
                 KnotsMultiplicities.Append(MaxDegree);
                 CurveKnVals(i) = 1.0;
@@ -225,9 +194,7 @@ void Convert_CompBezierCurvesToBSplineCurve::Perform()
             for (Standard_Integer j = 2; j <= MaxDegree; j++) {
                 CurvePoles.Append(Points(j));
             }
-
         }
-
 
         if (i == UpperI) {
             // Processing of the end node of the BSpline.
@@ -245,5 +212,3 @@ void Convert_CompBezierCurvesToBSplineCurve::Perform()
     }
     CurveKnots.Append(1.0);
 }
-
-

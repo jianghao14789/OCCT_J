@@ -27,7 +27,6 @@
 class Units_Dimensions;
 class Units_Token;
 
-
 class Units_ShiftedToken;
 DEFINE_STANDARD_HANDLE(Units_ShiftedToken, Units_Token)
 
@@ -45,19 +44,18 @@ DEFINE_STANDARD_HANDLE(Units_ShiftedToken, Units_Token)
 //!
 //! An example is the  translation between the  Celsius
 //! and Fahrenheit degree of temperature.
-class Units_ShiftedToken : public Units_Token
-{
+class Units_ShiftedToken : public Units_Token {
 
 public:
-
-
     //! Creates and returns a  shifted   token.  <aword> is  a
     //! string containing the   available word, <amean>  gives
     //! the signification   of the   token,  <avalue> is   the
     //! numeric value  of the  dimension, <amove> is  the gap,
     //! and <adimensions> is  the dimension of the given  word
     //! <aword>.
-    Standard_EXPORT Units_ShiftedToken(const Standard_CString aword, const Standard_CString amean, const Standard_Real avalue, const Standard_Real amove, const Handle(Units_Dimensions)& adimensions);
+    Standard_EXPORT Units_ShiftedToken(const Standard_CString aword, const Standard_CString amean,
+                                       const Standard_Real avalue, const Standard_Real amove,
+                                       const Handle(Units_Dimensions) & adimensions);
 
     //! Creates and returns a  token, which is a ShiftedToken.
     Standard_EXPORT virtual Handle(Units_Token) Creates() const Standard_OVERRIDE;
@@ -75,29 +73,14 @@ public:
     //! conversion.
     Standard_EXPORT virtual Standard_Real Divided(const Standard_Real avalue) const Standard_OVERRIDE;
 
-    Standard_EXPORT virtual void Dump(const Standard_Integer ashift, const Standard_Integer alevel) const Standard_OVERRIDE;
-
-
+    Standard_EXPORT virtual void Dump(const Standard_Integer ashift,
+                                      const Standard_Integer alevel) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Units_ShiftedToken, Units_Token)
 
 protected:
-
-
-
-
 private:
-
-
     Standard_Real themove;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Units_ShiftedToken_HeaderFile

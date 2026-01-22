@@ -32,7 +32,6 @@ class Standard_DimensionError;
 class math_FunctionSetWithDerivatives;
 class math_Matrix;
 
-
 //! The math_FunctionSetRoot class calculates the root
 //! of a set of N functions of M variables (N<M, N=M or N>M). Knowing
 //! an initial guess of the solution and using a minimization algorithm, a search
@@ -48,7 +47,8 @@ public:
     //! of this class.
     //! The range (1, F.NbVariables()) must be especially
     //! respected for all vectors and matrix declarations.
-    Standard_EXPORT math_FunctionSetRoot(math_FunctionSetWithDerivatives& F, const math_Vector& Tolerance, const Standard_Integer NbIterations = 100);
+    Standard_EXPORT math_FunctionSetRoot(math_FunctionSetWithDerivatives& F, const math_Vector& Tolerance,
+                                         const Standard_Integer NbIterations = 100);
 
     //! is used in a sub-class to initialize correctly all the fields
     //! of this class.
@@ -71,20 +71,20 @@ public:
     //! for all unknowns.
     virtual Standard_Boolean IsSolutionReached(math_FunctionSetWithDerivatives& F);
 
-
     //! Improves the root of function from the initial guess point.
     //! The infinum and supremum may be given to constrain the solution.
     //! In this case, the solution is found when: abs(Xi - Xi-1)(j) <= Tolerance(j)
     //! for all unknowns.
-    Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint, const Standard_Boolean theStopOnDivergent = Standard_False);
-
+    Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint,
+                                 const Standard_Boolean theStopOnDivergent = Standard_False);
 
     //! Improves the root of function from the initial guess point.
     //! The infinum and supremum may be given to constrain the solution.
     //! In this case, the solution is found when: abs(Xi - Xi-1) <= Tolerance
     //! for all unknowns.
-    Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint, const math_Vector& theInfBound, const math_Vector& theSupBound, const Standard_Boolean theStopOnDivergent = Standard_False);
-
+    Standard_EXPORT void Perform(math_FunctionSetWithDerivatives& theFunction, const math_Vector& theStartingPoint,
+                                 const math_Vector& theInfBound, const math_Vector& theSupBound,
+                                 const Standard_Boolean theStopOnDivergent = Standard_False);
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
@@ -138,23 +138,13 @@ public:
 
     Standard_Boolean IsDivergent() const;
 
-
-
-
 protected:
-
-
-
     math_Vector Delta;
     math_Vector Sol;
     math_Matrix DF;
     math_Vector Tol;
 
-
 private:
-
-
-
     Standard_Boolean Done;
     Standard_Integer Kount;
     Standard_Integer State;
@@ -174,15 +164,8 @@ private:
     math_Vector Temp3;
     math_Vector Temp4;
     Standard_Boolean myIsDivergent;
-
-
 };
 
-
 #include <math_FunctionSetRoot.lxx>
-
-
-
-
 
 #endif // _math_FunctionSetRoot_HeaderFile

@@ -56,10 +56,8 @@ class gp_Vec;
 //! transformation and T defines the translation part of the
 //! transformation.
 //! This transformation never change the nature of the objects.
-class gp_Trsf
-{
+class gp_Trsf {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Returns the identity transformation.
@@ -189,7 +187,9 @@ public:
     //! Raises ConstructionError  If theS is null.
     Standard_EXPORT void SetScaleFactor(const Standard_Real theS);
 
-    void SetForm(const gp_TrsfForm theP) { shape = theP; }
+    void SetForm(const gp_TrsfForm theP) {
+        shape = theP;
+    }
 
     //! Sets the coefficients  of the transformation.  The
     //! transformation  of the  point  x,y,z is  the point
@@ -202,23 +202,34 @@ public:
     //! The method Value(i,j) will return aij.
     //! Raises ConstructionError if the determinant of  the aij is null.
     //! The matrix is orthogonalized before future using.
-    Standard_EXPORT void SetValues(const Standard_Real a11, const Standard_Real a12, const Standard_Real a13, const Standard_Real a14, const Standard_Real a21, const Standard_Real a22, const Standard_Real a23, const Standard_Real a24, const Standard_Real a31, const Standard_Real a32, const Standard_Real a33, const Standard_Real a34);
+    Standard_EXPORT void SetValues(const Standard_Real a11, const Standard_Real a12, const Standard_Real a13,
+                                   const Standard_Real a14, const Standard_Real a21, const Standard_Real a22,
+                                   const Standard_Real a23, const Standard_Real a24, const Standard_Real a31,
+                                   const Standard_Real a32, const Standard_Real a33, const Standard_Real a34);
 
     //! Returns true if the determinant of the vectorial part of
     //! this transformation is negative.
-    Standard_Boolean IsNegative() const { return (scale < 0.0); }
+    Standard_Boolean IsNegative() const {
+        return (scale < 0.0);
+    }
 
     //! Returns the nature of the transformation. It can be: an
     //! identity transformation, a rotation, a translation, a mirror
     //! transformation (relative to a point, an axis or a plane), a
     //! scaling transformation, or a compound transformation.
-    gp_TrsfForm Form() const { return shape; }
+    gp_TrsfForm Form() const {
+        return shape;
+    }
 
     //! Returns the scale factor.
-    Standard_Real ScaleFactor() const { return scale; }
+    Standard_Real ScaleFactor() const {
+        return scale;
+    }
 
     //! Returns the translation part of the transformation's matrix
-    const gp_XYZ& TranslationPart() const { return loc; }
+    const gp_XYZ& TranslationPart() const {
+        return loc;
+    }
 
     //! Returns the boolean True if there is non-zero rotation.
     //! In the presence of rotation, the output parameters store the axis
@@ -242,7 +253,9 @@ public:
     //! to its homogeneous vectorial part, multiplied by the scale factor.
     //! The coefficients of this matrix must be multiplied by the
     //! scale factor to obtain the coefficients of the transformation.
-    const gp_Mat& HVectorialPart() const { return matrix; }
+    const gp_Mat& HVectorialPart() const {
+        return matrix;
+    }
 
     //! Returns the coefficients of the transformation's matrix.
     //! It is a 3 rows * 4 columns matrix.
@@ -267,27 +280,29 @@ public:
     //! gp_Pnt P3 = P1.Transformed(T1);    // using T1 then T2
     //! P3.Transform(T2);                  // P3 = P2 !!!
     //! @endcode
-    Standard_NODISCARD gp_Trsf Inverted() const
-    {
+    Standard_NODISCARD gp_Trsf Inverted() const {
         gp_Trsf aT = *this;
         aT.Invert();
         return aT;
     }
 
-    Standard_NODISCARD gp_Trsf Multiplied(const gp_Trsf& theT) const
-    {
+    Standard_NODISCARD gp_Trsf Multiplied(const gp_Trsf& theT) const {
         gp_Trsf aTresult(*this);
         aTresult.Multiply(theT);
         return aTresult;
     }
 
-    Standard_NODISCARD gp_Trsf operator * (const gp_Trsf& theT) const { return Multiplied(theT); }
+    Standard_NODISCARD gp_Trsf operator*(const gp_Trsf& theT) const {
+        return Multiplied(theT);
+    }
 
     //! Computes the transformation composed with <me> and theT.
     //! <me> = <me> * theT
     Standard_EXPORT void Multiply(const gp_Trsf& theT);
 
-    void operator *= (const gp_Trsf& theT) { Multiply(theT); }
+    void operator*=(const gp_Trsf& theT) {
+        Multiply(theT);
+    }
 
     //! Computes the transformation composed with <me> and T.
     //! <me> = theT * <me>
@@ -302,8 +317,7 @@ public:
     //!
     //! Raises if theN < 0 and if the matrix of the transformation not
     //! inversible.
-    Standard_NODISCARD gp_Trsf Powered(const Standard_Integer theN) const
-    {
+    Standard_NODISCARD gp_Trsf Powered(const Standard_Integer theN) const {
         gp_Trsf aT = *this;
         aT.Power(theN);
         return aT;
@@ -315,31 +329,28 @@ public:
     void Transforms(gp_XYZ& theCoord) const;
 
     //! Convert transformation to 4x4 matrix.
-    template<class T>
-    void GetMat4(NCollection_Mat4<T>& theMat) const
-    {
-        if (shape == gp_Identity)
-        {
+    template <class T> void GetMat4(NCollection_Mat4<T>& theMat) const {
+        if (shape == gp_Identity) {
             theMat.InitIdentity();
             return;
         }
 
-        theMat.SetValue(0, 0, static_cast<T> (Value(1, 1)));
-        theMat.SetValue(0, 1, static_cast<T> (Value(1, 2)));
-        theMat.SetValue(0, 2, static_cast<T> (Value(1, 3)));
-        theMat.SetValue(0, 3, static_cast<T> (Value(1, 4)));
-        theMat.SetValue(1, 0, static_cast<T> (Value(2, 1)));
-        theMat.SetValue(1, 1, static_cast<T> (Value(2, 2)));
-        theMat.SetValue(1, 2, static_cast<T> (Value(2, 3)));
-        theMat.SetValue(1, 3, static_cast<T> (Value(2, 4)));
-        theMat.SetValue(2, 0, static_cast<T> (Value(3, 1)));
-        theMat.SetValue(2, 1, static_cast<T> (Value(3, 2)));
-        theMat.SetValue(2, 2, static_cast<T> (Value(3, 3)));
-        theMat.SetValue(2, 3, static_cast<T> (Value(3, 4)));
-        theMat.SetValue(3, 0, static_cast<T> (0));
-        theMat.SetValue(3, 1, static_cast<T> (0));
-        theMat.SetValue(3, 2, static_cast<T> (0));
-        theMat.SetValue(3, 3, static_cast<T> (1));
+        theMat.SetValue(0, 0, static_cast<T>(Value(1, 1)));
+        theMat.SetValue(0, 1, static_cast<T>(Value(1, 2)));
+        theMat.SetValue(0, 2, static_cast<T>(Value(1, 3)));
+        theMat.SetValue(0, 3, static_cast<T>(Value(1, 4)));
+        theMat.SetValue(1, 0, static_cast<T>(Value(2, 1)));
+        theMat.SetValue(1, 1, static_cast<T>(Value(2, 2)));
+        theMat.SetValue(1, 2, static_cast<T>(Value(2, 3)));
+        theMat.SetValue(1, 3, static_cast<T>(Value(2, 4)));
+        theMat.SetValue(2, 0, static_cast<T>(Value(3, 1)));
+        theMat.SetValue(2, 1, static_cast<T>(Value(3, 2)));
+        theMat.SetValue(2, 2, static_cast<T>(Value(3, 3)));
+        theMat.SetValue(2, 3, static_cast<T>(Value(3, 4)));
+        theMat.SetValue(3, 0, static_cast<T>(0));
+        theMat.SetValue(3, 1, static_cast<T>(0));
+        theMat.SetValue(3, 2, static_cast<T>(0));
+        theMat.SetValue(3, 3, static_cast<T>(1));
     }
 
     //! Dumps the content of me into the stream
@@ -351,17 +362,14 @@ public:
     friend class gp_GTrsf;
 
 protected:
-
     //! Makes orthogonalization of "matrix"
     Standard_EXPORT void Orthogonalize();
 
 private:
-
     Standard_Real scale;
     gp_TrsfForm shape;
     gp_Mat matrix;
     gp_XYZ loc;
-
 };
 
 #include <gp_Trsf2d.hxx>
@@ -369,23 +377,16 @@ private:
 #include <gp_Pnt.hxx>
 
 //=======================================================================
-//function : gp_Trsf
+// function : gp_Trsf
 // purpose :
 //=======================================================================
-inline gp_Trsf::gp_Trsf()
-    : scale(1.0),
-    shape(gp_Identity),
-    matrix(1, 0, 0, 0, 1, 0, 0, 0, 1),
-    loc(0.0, 0.0, 0.0)
-{
-}
+inline gp_Trsf::gp_Trsf() : scale(1.0), shape(gp_Identity), matrix(1, 0, 0, 0, 1, 0, 0, 0, 1), loc(0.0, 0.0, 0.0) {}
 
 //=======================================================================
-//function : SetMirror
+// function : SetMirror
 // purpose :
 //=======================================================================
-inline void gp_Trsf::SetMirror(const gp_Pnt& theP)
-{
+inline void gp_Trsf::SetMirror(const gp_Pnt& theP) {
     shape = gp_PntMirror;
     scale = -1.0;
     loc = theP.XYZ();
@@ -394,11 +395,10 @@ inline void gp_Trsf::SetMirror(const gp_Pnt& theP)
 }
 
 //=======================================================================
-//function : SetTranslation
+// function : SetTranslation
 // purpose :
 //=======================================================================
-inline void gp_Trsf::SetTranslation(const gp_Vec& theV)
-{
+inline void gp_Trsf::SetTranslation(const gp_Vec& theV) {
     shape = gp_Translation;
     scale = 1.;
     matrix.SetIdentity();
@@ -406,12 +406,10 @@ inline void gp_Trsf::SetTranslation(const gp_Vec& theV)
 }
 
 //=======================================================================
-//function : SetTranslation
+// function : SetTranslation
 // purpose :
 //=======================================================================
-inline void gp_Trsf::SetTranslation(const gp_Pnt& theP1,
-    const gp_Pnt& theP2)
-{
+inline void gp_Trsf::SetTranslation(const gp_Pnt& theP1, const gp_Pnt& theP2) {
     shape = gp_Translation;
     scale = 1.0;
     matrix.SetIdentity();
@@ -419,34 +417,26 @@ inline void gp_Trsf::SetTranslation(const gp_Pnt& theP1,
 }
 
 //=======================================================================
-//function : Value
+// function : Value
 // purpose :
 //=======================================================================
-inline Standard_Real gp_Trsf::Value(const Standard_Integer theRow, const Standard_Integer theCol) const
-{
+inline Standard_Real gp_Trsf::Value(const Standard_Integer theRow, const Standard_Integer theCol) const {
     Standard_OutOfRange_Raise_if(theRow < 1 || theRow > 3 || theCol < 1 || theCol > 4, " ");
-    if (theCol < 4)
-    {
+    if (theCol < 4) {
         return scale * matrix.Value(theRow, theCol);
-    }
-    else
-    {
+    } else {
         return loc.Coord(theRow);
     }
 }
 
 //=======================================================================
-//function : Transforms
+// function : Transforms
 // purpose :
 //=======================================================================
-inline void gp_Trsf::Transforms(Standard_Real& theX,
-    Standard_Real& theY,
-    Standard_Real& theZ) const
-{
+inline void gp_Trsf::Transforms(Standard_Real& theX, Standard_Real& theY, Standard_Real& theZ) const {
     gp_XYZ aTriplet(theX, theY, theZ);
     aTriplet.Multiply(matrix);
-    if (scale != 1.0)
-    {
+    if (scale != 1.0) {
         aTriplet.Multiply(scale);
     }
     aTriplet.Add(loc);
@@ -456,14 +446,12 @@ inline void gp_Trsf::Transforms(Standard_Real& theX,
 }
 
 //=======================================================================
-//function : Transforms
+// function : Transforms
 // purpose :
 //=======================================================================
-inline void gp_Trsf::Transforms(gp_XYZ& theCoord) const
-{
+inline void gp_Trsf::Transforms(gp_XYZ& theCoord) const {
     theCoord.Multiply(matrix);
-    if (scale != 1.0)
-    {
+    if (scale != 1.0) {
         theCoord.Multiply(scale);
     }
     theCoord.Add(loc);

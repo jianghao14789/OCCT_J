@@ -14,11 +14,6 @@
 #ifndef _StepElement_Element2dShape_HeaderFile
 #define _StepElement_Element2dShape_HeaderFile
 
-
-enum StepElement_Element2dShape
-{
-StepElement_Quadrilateral,
-StepElement_Triangle
-};
+enum StepElement_Element2dShape { StepElement_Quadrilateral, StepElement_Triangle };
 
 #endif // _StepElement_Element2dShape_HeaderFile

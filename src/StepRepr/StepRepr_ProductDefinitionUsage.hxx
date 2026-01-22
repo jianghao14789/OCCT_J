@@ -21,41 +21,20 @@
 
 #include <StepBasic_ProductDefinitionRelationship.hxx>
 
-
 class StepRepr_ProductDefinitionUsage;
 DEFINE_STANDARD_HANDLE(StepRepr_ProductDefinitionUsage, StepBasic_ProductDefinitionRelationship)
 
 //! Representation of STEP entity ProductDefinitionUsage
-class StepRepr_ProductDefinitionUsage : public StepBasic_ProductDefinitionRelationship
-{
+class StepRepr_ProductDefinitionUsage : public StepBasic_ProductDefinitionRelationship {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepRepr_ProductDefinitionUsage();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepRepr_ProductDefinitionUsage();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepRepr_ProductDefinitionUsage,StepBasic_ProductDefinitionRelationship)
+    DEFINE_STANDARD_RTTIEXT(StepRepr_ProductDefinitionUsage, StepBasic_ProductDefinitionRelationship)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepRepr_ProductDefinitionUsage_HeaderFile

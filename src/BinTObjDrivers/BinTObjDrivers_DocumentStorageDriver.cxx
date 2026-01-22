@@ -19,32 +19,27 @@
 #include <BinLDrivers.hxx>
 #include <BinTObjDrivers.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(BinTObjDrivers_DocumentStorageDriver,BinLDrivers_DocumentStorageDriver)
+IMPLEMENT_STANDARD_RTTIEXT(BinTObjDrivers_DocumentStorageDriver, BinLDrivers_DocumentStorageDriver)
 
 //=======================================================================
-//function : BinTObjDrivers_DocumentStorageDriver
-//purpose  : 
+// function : BinTObjDrivers_DocumentStorageDriver
+// purpose  :
 //=======================================================================
 
-BinTObjDrivers_DocumentStorageDriver::BinTObjDrivers_DocumentStorageDriver ()
-     : BinLDrivers_DocumentStorageDriver ()
-{
-}
+BinTObjDrivers_DocumentStorageDriver::BinTObjDrivers_DocumentStorageDriver() : BinLDrivers_DocumentStorageDriver() {}
 
 //=======================================================================
-//function : AttributeDrivers
-//purpose  : 
+// function : AttributeDrivers
+// purpose  :
 //=======================================================================
 
-Handle(BinMDF_ADriverTable)
-        BinTObjDrivers_DocumentStorageDriver::AttributeDrivers
-                        (const Handle(Message_Messenger)& theMsgDrv)
-{
-  // Standard drivers
-  Handle(BinMDF_ADriverTable) aTable = BinLDrivers::AttributeDrivers (theMsgDrv);
+Handle(BinMDF_ADriverTable) BinTObjDrivers_DocumentStorageDriver::AttributeDrivers(const Handle(Message_Messenger) &
+                                                                                   theMsgDrv) {
+    // Standard drivers
+    Handle(BinMDF_ADriverTable) aTable = BinLDrivers::AttributeDrivers(theMsgDrv);
 
-  // Native drivers
-  BinTObjDrivers::AddDrivers(aTable, theMsgDrv);
+    // Native drivers
+    BinTObjDrivers::AddDrivers(aTable, theMsgDrv);
 
-  return aTable;
+    return aTable;
 }

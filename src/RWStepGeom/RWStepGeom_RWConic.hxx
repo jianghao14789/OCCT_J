@@ -28,44 +28,22 @@ class StepGeom_Conic;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for Conic
-class RWStepGeom_RWConic 
-{
+class RWStepGeom_RWConic {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWConic();
 
-  
-  Standard_EXPORT RWStepGeom_RWConic();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_Conic)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_Conic)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_Conic)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_Conic) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_Conic) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepGeom_Conic) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWConic_HeaderFile

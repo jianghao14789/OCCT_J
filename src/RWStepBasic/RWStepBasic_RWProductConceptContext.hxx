@@ -28,48 +28,28 @@ class StepBasic_ProductConceptContext;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ProductConceptContext
-class RWStepBasic_RWProductConceptContext 
-{
+class RWStepBasic_RWProductConceptContext {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWProductConceptContext();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWProductConceptContext();
-  
-  //! Reads ProductConceptContext
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ProductConceptContext)& ent) const;
-  
-  //! Writes ProductConceptContext
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ProductConceptContext)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_ProductConceptContext)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ProductConceptContext
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_ProductConceptContext) & ent) const;
 
+    //! Writes ProductConceptContext
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_ProductConceptContext) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_ProductConceptContext) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWProductConceptContext_HeaderFile

@@ -28,44 +28,22 @@ class StepBasic_LengthUnit;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for LengthUnit
-class RWStepBasic_RWLengthUnit 
-{
+class RWStepBasic_RWLengthUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWLengthUnit();
 
-  
-  Standard_EXPORT RWStepBasic_RWLengthUnit();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_LengthUnit)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_LengthUnit)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepBasic_LengthUnit)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_LengthUnit) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_LengthUnit) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepBasic_LengthUnit) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWLengthUnit_HeaderFile

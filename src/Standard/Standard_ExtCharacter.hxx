@@ -15,7 +15,7 @@
 //============================================================================
 //==== Title: Standard_ExtCharacter.hxx
 //==== Role : The headr file of primitive type "ExtCharacter" from package "Standard"
-//==== 
+//====
 //==== Implementation:  This is a primitive type implemented with typedef
 //====                  Excepting "Unicod encoding"
 //============================================================================
@@ -28,14 +28,13 @@
 #include <string.h>
 
 // ===============
-// inline methods 
+// inline methods
 // ===============
 
 // ------------------------------------------------------------------
 // ToExtCharacter : Returns an ExtCharacter from a Character
 // ------------------------------------------------------------------
-inline Standard_ExtCharacter ToExtCharacter(const Standard_Character achar)
-{
+inline Standard_ExtCharacter ToExtCharacter(const Standard_Character achar) {
     //  extension a zero (partie haute-->octet de gauche) de achar
     return (Standard_ExtCharacter)((unsigned char)achar & 0x00ff);
 }
@@ -43,8 +42,7 @@ inline Standard_ExtCharacter ToExtCharacter(const Standard_Character achar)
 // ------------------------------------------------------------------
 // ToCharacter : Returns an Character from an ExtCharacter
 // ------------------------------------------------------------------
-inline Standard_Character ToCharacter(const Standard_ExtCharacter achar)
-{
+inline Standard_Character ToCharacter(const Standard_ExtCharacter achar) {
     //  recuperer partie basse(octet de droite) de achar
     return (Standard_Character)(unsigned char)(achar & 0x00ff);
 }
@@ -52,17 +50,14 @@ inline Standard_Character ToCharacter(const Standard_ExtCharacter achar)
 // ------------------------------------------------------------------
 // IsAnAscii : Returns True if an ExtCharacter is in the "Ascii Range"
 // ------------------------------------------------------------------
-inline Standard_Boolean IsAnAscii(const Standard_ExtCharacter achar)
-{
+inline Standard_Boolean IsAnAscii(const Standard_ExtCharacter achar) {
     return !(achar & 0xff00);
 }
 
 // ------------------------------------------------------------------
 // IsEqual : Returns Standard_True if two characters have the same value
 // ------------------------------------------------------------------
-inline Standard_Boolean IsEqual(const Standard_ExtCharacter One,
-    const Standard_ExtCharacter Two)
-{
+inline Standard_Boolean IsEqual(const Standard_ExtCharacter One, const Standard_ExtCharacter Two) {
     return One == Two;
 }
 

@@ -16,20 +16,17 @@
 #include <stdlib.h>
 
 //=======================================================================
-//function : ~Standard_MMgrRoot
-//purpose  : 
+// function : ~Standard_MMgrRoot
+// purpose  :
 //=======================================================================
 
-Standard_MMgrRoot::~Standard_MMgrRoot()
-{
-}
+Standard_MMgrRoot::~Standard_MMgrRoot() {}
 
 //=======================================================================
-//function : Purge
-//purpose  : 
+// function : Purge
+// purpose  :
 //=======================================================================
 
-Standard_Integer Standard_MMgrRoot::Purge(Standard_Boolean)
-{
+Standard_Integer Standard_MMgrRoot::Purge(Standard_Boolean) {
     return 0;
 }

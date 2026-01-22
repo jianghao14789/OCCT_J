@@ -30,7 +30,6 @@ class gp_Ax1;
 class gp_Pnt;
 class gp_Parab;
 
-
 //! This class implements the following algorithms used to
 //! create Parab from gp.
 //! Defines the parabola in the parameterization range  :
@@ -58,63 +57,40 @@ class gp_Parab;
 //! * Creates a parabola with its local coordinate system "A2"
 //! and it's focal length "Focal".
 //! * Create a parabola with its directrix and its focus point.
-class gce_MakeParab  : public gce_Root
-{
+class gce_MakeParab : public gce_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! --- Purpose ;
+    //! Creates a parabola with its local coordinate system "A2"
+    //! and it's focal length "Focal".
+    //! The XDirection of A2 defines the axis of symmetry of the
+    //! parabola. The YDirection of A2 is parallel to the directrix
+    //! of the parabola. The Location point of A2 is the vertex of
+    //! the parabola
+    //! The status is "NullFocusLength" if Focal < 0.0
+    Standard_EXPORT gce_MakeParab(const gp_Ax2& A2, const Standard_Real Focal);
 
-  
-  //! --- Purpose ;
-  //! Creates a parabola with its local coordinate system "A2"
-  //! and it's focal length "Focal".
-  //! The XDirection of A2 defines the axis of symmetry of the
-  //! parabola. The YDirection of A2 is parallel to the directrix
-  //! of the parabola. The Location point of A2 is the vertex of
-  //! the parabola
-  //! The status is "NullFocusLength" if Focal < 0.0
-  Standard_EXPORT gce_MakeParab(const gp_Ax2& A2, const Standard_Real Focal);
-  
+    //! D is the directrix of the parabola and F the focus point.
+    //! The symmetry axis (XAxis) of the parabola is normal to the
+    //! directrix and pass through the focus point F, but its
+    //! location point is the vertex of the parabola.
+    //! The YAxis of the parabola is parallel to D and its location
+    //! point is the vertex of the parabola. The normal to the plane
+    //! of the parabola is the cross product between the XAxis and the
+    //! YAxis.
+    Standard_EXPORT gce_MakeParab(const gp_Ax1& D, const gp_Pnt& F);
 
-  //! D is the directrix of the parabola and F the focus point.
-  //! The symmetry axis (XAxis) of the parabola is normal to the
-  //! directrix and pass through the focus point F, but its
-  //! location point is the vertex of the parabola.
-  //! The YAxis of the parabola is parallel to D and its location
-  //! point is the vertex of the parabola. The normal to the plane
-  //! of the parabola is the cross product between the XAxis and the
-  //! YAxis.
-  Standard_EXPORT gce_MakeParab(const gp_Ax1& D, const gp_Pnt& F);
-  
-  //! Returns the constructed parabola.
-  //! Exceptions StdFail_NotDone if no parabola is constructed.
-  Standard_EXPORT const gp_Parab& Value() const;
-  
-  Standard_EXPORT const gp_Parab& Operator() const;
-Standard_EXPORT operator gp_Parab() const;
+    //! Returns the constructed parabola.
+    //! Exceptions StdFail_NotDone if no parabola is constructed.
+    Standard_EXPORT const gp_Parab& Value() const;
 
-
-
+    Standard_EXPORT const gp_Parab& Operator() const;
+    Standard_EXPORT operator gp_Parab() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  gp_Parab TheParab;
-
-
+    gp_Parab TheParab;
 };
-
-
-
-
-
-
 
 #endif // _gce_MakeParab_HeaderFile

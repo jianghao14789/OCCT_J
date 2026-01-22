@@ -11,40 +11,32 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepAP214_AppliedPresentedItem.hxx>
 #include <StepAP214_PresentedItemSelect.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepAP214_AppliedPresentedItem,StepVisual_PresentedItem)
+IMPLEMENT_STANDARD_RTTIEXT(StepAP214_AppliedPresentedItem, StepVisual_PresentedItem)
 
-StepAP214_AppliedPresentedItem::StepAP214_AppliedPresentedItem ()  {}
+StepAP214_AppliedPresentedItem::StepAP214_AppliedPresentedItem() {}
 
-void StepAP214_AppliedPresentedItem::Init(
-	const Handle(StepAP214_HArray1OfPresentedItemSelect)& aItems)
-{
-  // --- classe own fields ---
-  items = aItems;
+void StepAP214_AppliedPresentedItem::Init(const Handle(StepAP214_HArray1OfPresentedItemSelect) & aItems) {
+    // --- classe own fields ---
+    items = aItems;
 }
 
-
-void StepAP214_AppliedPresentedItem::SetItems(const Handle(StepAP214_HArray1OfPresentedItemSelect)& aItems)
-{
-  items = aItems;
+void StepAP214_AppliedPresentedItem::SetItems(const Handle(StepAP214_HArray1OfPresentedItemSelect) & aItems) {
+    items = aItems;
 }
 
-Handle(StepAP214_HArray1OfPresentedItemSelect) StepAP214_AppliedPresentedItem::Items() const
-{
-  return items;
+Handle(StepAP214_HArray1OfPresentedItemSelect) StepAP214_AppliedPresentedItem::Items() const {
+    return items;
 }
 
-StepAP214_PresentedItemSelect  StepAP214_AppliedPresentedItem::ItemsValue(const Standard_Integer num) const
-{
-  return items->Value(num);
+StepAP214_PresentedItemSelect StepAP214_AppliedPresentedItem::ItemsValue(const Standard_Integer num) const {
+    return items->Value(num);
 }
 
-Standard_Integer StepAP214_AppliedPresentedItem::NbItems () const
-{
-  if (items.IsNull()) return 0;
-  return items->Length();
+Standard_Integer StepAP214_AppliedPresentedItem::NbItems() const {
+    if (items.IsNull()) return 0;
+    return items->Length();
 }

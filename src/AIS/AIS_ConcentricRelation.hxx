@@ -16,7 +16,6 @@
 
 #include <PrsDim_ConcentricRelation.hxx>
 
-Standard_DEPRECATED("Alias to moved class")
-typedef PrsDim_ConcentricRelation AIS_ConcentricRelation;
+Standard_DEPRECATED("Alias to moved class") typedef PrsDim_ConcentricRelation AIS_ConcentricRelation;
 
 #endif // _AIS_ConcentricRelation_HeaderFile

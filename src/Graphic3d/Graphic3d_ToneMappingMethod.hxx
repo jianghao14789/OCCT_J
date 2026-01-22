@@ -17,10 +17,9 @@
 #define _Graphic3d_ToneMappingMethod_HeaderFile
 
 //! Enumerates tone mapping methods.
-enum Graphic3d_ToneMappingMethod
-{
-  Graphic3d_ToneMappingMethod_Disabled,      //!< Don't use tone mapping
-  Graphic3d_ToneMappingMethod_Filmic         //!< Use filmic tone mapping
+enum Graphic3d_ToneMappingMethod {
+    Graphic3d_ToneMappingMethod_Disabled, //!< Don't use tone mapping
+    Graphic3d_ToneMappingMethod_Filmic    //!< Use filmic tone mapping
 };
 
 #endif // _Graphic3d_ToneMappingMethod_HeaderFile

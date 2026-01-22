@@ -27,21 +27,21 @@ class StepRepr_CompShAspAndDatumFeatAndShAsp;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for CompShAspAndDatumFeatAndShAsp
-class RWStepRepr_RWCompShAspAndDatumFeatAndShAsp
-{
+class RWStepRepr_RWCompShAspAndDatumFeatAndShAsp {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepRepr_RWCompShAspAndDatumFeatAndShAsp();
 
-  
-  Standard_EXPORT RWStepRepr_RWCompShAspAndDatumFeatAndShAsp();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_CompShAspAndDatumFeatAndShAsp)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_CompShAspAndDatumFeatAndShAsp)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepRepr_CompShAspAndDatumFeatAndShAsp)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_CompShAspAndDatumFeatAndShAsp) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_CompShAspAndDatumFeatAndShAsp) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepRepr_CompShAspAndDatumFeatAndShAsp) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepRepr_RWCompShAspAndDatumFeatAndShAsp_HeaderFile

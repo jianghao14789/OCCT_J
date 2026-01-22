@@ -42,10 +42,9 @@ class math_Matrix;
 //! point on the partner curve 2.
 class BRepBlend_CurvPointRadInv : public Blend_CurvPointFuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BRepBlend_CurvPointRadInv(const Handle(Adaptor3d_Curve)& C1, const Handle(Adaptor3d_Curve)& C2);
+    Standard_EXPORT BRepBlend_CurvPointRadInv(const Handle(Adaptor3d_Curve) & C1, const Handle(Adaptor3d_Curve) & C2);
 
     Standard_EXPORT void Set(const Standard_Integer Choix);
 
@@ -89,7 +88,6 @@ public:
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol);
 
 protected:
-
 private:
     Handle(Adaptor3d_Curve) curv1;
     Handle(Adaptor3d_Curve) curv2;

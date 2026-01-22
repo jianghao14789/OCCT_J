@@ -14,72 +14,52 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <MAT_Bisector.hxx>
 #include <MAT_Edge.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(MAT_Edge,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(MAT_Edge, Standard_Transient)
 
-MAT_Edge::MAT_Edge()
-: theedgenumber(0),
-  thedistance(0.0),
-  theintersectionpoint(0)
-{
-}
-    
-void MAT_Edge::EdgeNumber(const Standard_Integer anumber)
-{
-  theedgenumber = anumber;
+MAT_Edge::MAT_Edge() : theedgenumber(0), thedistance(0.0), theintersectionpoint(0) {}
+
+void MAT_Edge::EdgeNumber(const Standard_Integer anumber) {
+    theedgenumber = anumber;
 }
 
-void MAT_Edge::FirstBisector(const Handle(MAT_Bisector)& abisector)
-{
-  thefirstbisector = abisector;
+void MAT_Edge::FirstBisector(const Handle(MAT_Bisector) & abisector) {
+    thefirstbisector = abisector;
 }
 
-void MAT_Edge::SecondBisector(const Handle(MAT_Bisector)& abisector)
-{
-  thesecondbisector = abisector;
+void MAT_Edge::SecondBisector(const Handle(MAT_Bisector) & abisector) {
+    thesecondbisector = abisector;
 }
 
-void MAT_Edge::Distance(const Standard_Real adistance)
-{
-  thedistance = adistance;
+void MAT_Edge::Distance(const Standard_Real adistance) {
+    thedistance = adistance;
 }
 
-void MAT_Edge::IntersectionPoint(const Standard_Integer apoint)
-{
-  theintersectionpoint = apoint;
+void MAT_Edge::IntersectionPoint(const Standard_Integer apoint) {
+    theintersectionpoint = apoint;
 }
 
-Standard_Integer MAT_Edge::EdgeNumber() const
-{
-  return theedgenumber;
+Standard_Integer MAT_Edge::EdgeNumber() const {
+    return theedgenumber;
 }
 
-Handle(MAT_Bisector) MAT_Edge::FirstBisector() const
-{
-  return thefirstbisector;
+Handle(MAT_Bisector) MAT_Edge::FirstBisector() const {
+    return thefirstbisector;
 }
 
-Handle(MAT_Bisector) MAT_Edge::SecondBisector() const
-{
-  return thesecondbisector;
+Handle(MAT_Bisector) MAT_Edge::SecondBisector() const {
+    return thesecondbisector;
 }
 
-Standard_Real MAT_Edge::Distance() const
-{
-  return thedistance;
+Standard_Real MAT_Edge::Distance() const {
+    return thedistance;
 }
 
-Standard_Integer MAT_Edge::IntersectionPoint() const
-{
-  return theintersectionpoint;
+Standard_Integer MAT_Edge::IntersectionPoint() const {
+    return theintersectionpoint;
 }
 
-void MAT_Edge::Dump(const Standard_Integer,
-		     const Standard_Integer) const
-{
-}
-
+void MAT_Edge::Dump(const Standard_Integer, const Standard_Integer) const {}

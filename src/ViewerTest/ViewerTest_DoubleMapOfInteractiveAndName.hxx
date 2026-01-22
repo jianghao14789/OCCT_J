@@ -24,7 +24,11 @@
 #include <NCollection_DoubleMap.hxx>
 
 class AIS_InteractiveObject;
-typedef NCollection_DoubleMap<Handle(AIS_InteractiveObject),TCollection_AsciiString,TColStd_MapTransientHasher,TCollection_AsciiString> ViewerTest_DoubleMapOfInteractiveAndName;
-typedef NCollection_DoubleMap<Handle(AIS_InteractiveObject),TCollection_AsciiString,TColStd_MapTransientHasher,TCollection_AsciiString>::Iterator ViewerTest_DoubleMapIteratorOfDoubleMapOfInteractiveAndName;
+typedef NCollection_DoubleMap<Handle(AIS_InteractiveObject), TCollection_AsciiString, TColStd_MapTransientHasher,
+                              TCollection_AsciiString>
+    ViewerTest_DoubleMapOfInteractiveAndName;
+typedef NCollection_DoubleMap<Handle(AIS_InteractiveObject), TCollection_AsciiString, TColStd_MapTransientHasher,
+                              TCollection_AsciiString>::Iterator
+    ViewerTest_DoubleMapIteratorOfDoubleMapOfInteractiveAndName;
 
 #endif

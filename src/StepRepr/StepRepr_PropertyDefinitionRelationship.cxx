@@ -20,112 +20,103 @@
 #include <StepRepr_PropertyDefinitionRelationship.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepRepr_PropertyDefinitionRelationship,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepRepr_PropertyDefinitionRelationship, Standard_Transient)
 
 //=======================================================================
-//function : StepRepr_PropertyDefinitionRelationship
-//purpose  : 
+// function : StepRepr_PropertyDefinitionRelationship
+// purpose  :
 //=======================================================================
-StepRepr_PropertyDefinitionRelationship::StepRepr_PropertyDefinitionRelationship ()
-{
+StepRepr_PropertyDefinitionRelationship::StepRepr_PropertyDefinitionRelationship() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepRepr_PropertyDefinitionRelationship::Init(
+    const Handle(TCollection_HAsciiString) & aName, const Handle(TCollection_HAsciiString) & aDescription,
+    const Handle(StepRepr_PropertyDefinition) & aRelatingPropertyDefinition,
+    const Handle(StepRepr_PropertyDefinition) & aRelatedPropertyDefinition) {
+
+    theName = aName;
+
+    theDescription = aDescription;
+
+    theRelatingPropertyDefinition = aRelatingPropertyDefinition;
+
+    theRelatedPropertyDefinition = aRelatedPropertyDefinition;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Name
+// purpose  :
 //=======================================================================
 
-void StepRepr_PropertyDefinitionRelationship::Init (const Handle(TCollection_HAsciiString) &aName,
-                                                    const Handle(TCollection_HAsciiString) &aDescription,
-                                                    const Handle(StepRepr_PropertyDefinition) &aRelatingPropertyDefinition,
-                                                    const Handle(StepRepr_PropertyDefinition) &aRelatedPropertyDefinition)
-{
-
-  theName = aName;
-
-  theDescription = aDescription;
-
-  theRelatingPropertyDefinition = aRelatingPropertyDefinition;
-
-  theRelatedPropertyDefinition = aRelatedPropertyDefinition;
+Handle(TCollection_HAsciiString) StepRepr_PropertyDefinitionRelationship::Name() const {
+    return theName;
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : SetName
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepRepr_PropertyDefinitionRelationship::Name () const
-{
-  return theName;
+void StepRepr_PropertyDefinitionRelationship::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
 }
 
 //=======================================================================
-//function : SetName
-//purpose  : 
+// function : Description
+// purpose  :
 //=======================================================================
 
-void StepRepr_PropertyDefinitionRelationship::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
+Handle(TCollection_HAsciiString) StepRepr_PropertyDefinitionRelationship::Description() const {
+    return theDescription;
 }
 
 //=======================================================================
-//function : Description
-//purpose  : 
+// function : SetDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepRepr_PropertyDefinitionRelationship::Description () const
-{
-  return theDescription;
+void StepRepr_PropertyDefinitionRelationship::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
+    theDescription = aDescription;
 }
 
 //=======================================================================
-//function : SetDescription
-//purpose  : 
+// function : RelatingPropertyDefinition
+// purpose  :
 //=======================================================================
 
-void StepRepr_PropertyDefinitionRelationship::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
+Handle(StepRepr_PropertyDefinition) StepRepr_PropertyDefinitionRelationship::RelatingPropertyDefinition() const {
+    return theRelatingPropertyDefinition;
 }
 
 //=======================================================================
-//function : RelatingPropertyDefinition
-//purpose  : 
+// function : SetRelatingPropertyDefinition
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_PropertyDefinition) StepRepr_PropertyDefinitionRelationship::RelatingPropertyDefinition () const
-{
-  return theRelatingPropertyDefinition;
+void StepRepr_PropertyDefinitionRelationship::SetRelatingPropertyDefinition(const Handle(StepRepr_PropertyDefinition) &
+                                                                            aRelatingPropertyDefinition) {
+    theRelatingPropertyDefinition = aRelatingPropertyDefinition;
 }
 
 //=======================================================================
-//function : SetRelatingPropertyDefinition
-//purpose  : 
+// function : RelatedPropertyDefinition
+// purpose  :
 //=======================================================================
 
-void StepRepr_PropertyDefinitionRelationship::SetRelatingPropertyDefinition (const Handle(StepRepr_PropertyDefinition) &aRelatingPropertyDefinition)
-{
-  theRelatingPropertyDefinition = aRelatingPropertyDefinition;
+Handle(StepRepr_PropertyDefinition) StepRepr_PropertyDefinitionRelationship::RelatedPropertyDefinition() const {
+    return theRelatedPropertyDefinition;
 }
 
 //=======================================================================
-//function : RelatedPropertyDefinition
-//purpose  : 
+// function : SetRelatedPropertyDefinition
+// purpose  :
 //=======================================================================
 
-Handle(StepRepr_PropertyDefinition) StepRepr_PropertyDefinitionRelationship::RelatedPropertyDefinition () const
-{
-  return theRelatedPropertyDefinition;
-}
-
-//=======================================================================
-//function : SetRelatedPropertyDefinition
-//purpose  : 
-//=======================================================================
-
-void StepRepr_PropertyDefinitionRelationship::SetRelatedPropertyDefinition (const Handle(StepRepr_PropertyDefinition) &aRelatedPropertyDefinition)
-{
-  theRelatedPropertyDefinition = aRelatedPropertyDefinition;
+void StepRepr_PropertyDefinitionRelationship::SetRelatedPropertyDefinition(const Handle(StepRepr_PropertyDefinition) &
+                                                                           aRelatedPropertyDefinition) {
+    theRelatedPropertyDefinition = aRelatedPropertyDefinition;
 }

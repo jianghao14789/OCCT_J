@@ -14,17 +14,15 @@
 #ifndef _StepElement_EnumeratedCurveElementFreedom_HeaderFile
 #define _StepElement_EnumeratedCurveElementFreedom_HeaderFile
 
-
-enum StepElement_EnumeratedCurveElementFreedom
-{
-StepElement_XTranslation,
-StepElement_YTranslation,
-StepElement_ZTranslation,
-StepElement_XRotation,
-StepElement_YRotation,
-StepElement_ZRotation,
-StepElement_Warp,
-StepElement_None
+enum StepElement_EnumeratedCurveElementFreedom {
+    StepElement_XTranslation,
+    StepElement_YTranslation,
+    StepElement_ZTranslation,
+    StepElement_XRotation,
+    StepElement_YRotation,
+    StepElement_ZRotation,
+    StepElement_Warp,
+    StepElement_None
 };
 
 #endif // _StepElement_EnumeratedCurveElementFreedom_HeaderFile

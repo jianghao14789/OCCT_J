@@ -27,48 +27,26 @@ class StepShape_AngularSize;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for AngularSize
-class RWStepShape_RWAngularSize 
-{
+class RWStepShape_RWAngularSize {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepShape_RWAngularSize();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepShape_RWAngularSize();
-  
-  //! Reads AngularSize
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_AngularSize)& ent) const;
-  
-  //! Writes AngularSize
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_AngularSize)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepShape_AngularSize)& ent, Interface_EntityIterator& iter) const;
+    //! Reads AngularSize
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_AngularSize) & ent) const;
 
+    //! Writes AngularSize
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_AngularSize) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepShape_AngularSize) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWAngularSize_HeaderFile

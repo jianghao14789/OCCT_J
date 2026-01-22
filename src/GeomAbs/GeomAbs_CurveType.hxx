@@ -17,10 +17,8 @@
 #ifndef _GeomAbs_CurveType_HeaderFile
 #define _GeomAbs_CurveType_HeaderFile
 
-
 //! Identifies the type of a curve.
-enum GeomAbs_CurveType
-{
+enum GeomAbs_CurveType {
     GeomAbs_Line,
     GeomAbs_Circle,
     GeomAbs_Ellipse,

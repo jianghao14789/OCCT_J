@@ -23,48 +23,28 @@
 #include <Standard_Integer.hxx>
 #include <Standard_Transient.hxx>
 
-
 class GeomFill_Line;
 DEFINE_STANDARD_HANDLE(GeomFill_Line, Standard_Transient)
 
 //! class for instantiation of AppBlend
-class GeomFill_Line : public Standard_Transient
-{
+class GeomFill_Line : public Standard_Transient {
 
 public:
+    Standard_EXPORT GeomFill_Line();
 
-  
-  Standard_EXPORT GeomFill_Line();
-  
-  Standard_EXPORT GeomFill_Line(const Standard_Integer NbPoints);
-  
+    Standard_EXPORT GeomFill_Line(const Standard_Integer NbPoints);
+
     Standard_Integer NbPoints() const;
-  
-    Standard_Integer Point (const Standard_Integer Index) const;
 
+    Standard_Integer Point(const Standard_Integer Index) const;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(GeomFill_Line,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(GeomFill_Line, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer myNbPoints;
-
-
+    Standard_Integer myNbPoints;
 };
 
-
 #include <GeomFill_Line.lxx>
-
-
-
-
 
 #endif // _GeomFill_Line_HeaderFile

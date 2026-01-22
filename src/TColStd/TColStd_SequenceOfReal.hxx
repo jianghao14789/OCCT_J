@@ -20,5 +20,4 @@
 
 typedef NCollection_Sequence<Standard_Real> TColStd_SequenceOfReal;
 
-
 #endif

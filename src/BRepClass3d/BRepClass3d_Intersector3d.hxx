@@ -29,97 +29,75 @@
 #include <TopoDS_Face.hxx>
 class gp_Lin;
 
-
-
-class BRepClass3d_Intersector3d 
-{
+class BRepClass3d_Intersector3d {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor.
+    Standard_EXPORT BRepClass3d_Intersector3d();
 
-  
-  //! Empty constructor.
-  Standard_EXPORT BRepClass3d_Intersector3d();
-  
-  //! Perform the intersection between the
-  //! segment L(0) ... L(Prm) and the Shape <Sh>.
-  //!
-  //! Only the point with the smallest parameter on the
-  //! line is returned.
-  //!
-  //! The Tolerance <Tol> is used to determine if the
-  //! first point of the segment is near the face. In
-  //! that case, the parameter of the intersection point
-  //! on the line can be a negative value (greater than -Tol).
-  Standard_EXPORT void Perform (const gp_Lin& L, const Standard_Real Prm, const Standard_Real Tol, const TopoDS_Face& F);
-  
-  //! True is returned when the intersection have been computed.
+    //! Perform the intersection between the
+    //! segment L(0) ... L(Prm) and the Shape <Sh>.
+    //!
+    //! Only the point with the smallest parameter on the
+    //! line is returned.
+    //!
+    //! The Tolerance <Tol> is used to determine if the
+    //! first point of the segment is near the face. In
+    //! that case, the parameter of the intersection point
+    //! on the line can be a negative value (greater than -Tol).
+    Standard_EXPORT void Perform(const gp_Lin& L, const Standard_Real Prm, const Standard_Real Tol,
+                                 const TopoDS_Face& F);
+
+    //! True is returned when the intersection have been computed.
     Standard_Boolean IsDone() const;
-  
-  //! True is returned if a point has been found.
+
+    //! True is returned if a point has been found.
     Standard_Boolean HasAPoint() const;
-  
-  //! Returns the U parameter of the intersection point
-  //! on the surface.
+
+    //! Returns the U parameter of the intersection point
+    //! on the surface.
     Standard_Real UParameter() const;
-  
-  //! Returns the V parameter of the intersection point
-  //! on the surface.
+
+    //! Returns the V parameter of the intersection point
+    //! on the surface.
     Standard_Real VParameter() const;
-  
-  //! Returns the parameter of the intersection point
-  //! on the line.
+
+    //! Returns the parameter of the intersection point
+    //! on the line.
     Standard_Real WParameter() const;
-  
-  //! Returns the geometric point of the intersection
-  //! between the line and the surface.
+
+    //! Returns the geometric point of the intersection
+    //! between the line and the surface.
     const gp_Pnt& Pnt() const;
-  
-  //! Returns the transition of the line on the surface.
+
+    //! Returns the transition of the line on the surface.
     IntCurveSurface_TransitionOnCurve Transition() const;
-  
-  //! Returns the state of the point on the face.
-  //! The values can be either TopAbs_IN
-  //! ( the point is in the face)
-  //! or TopAbs_ON
-  //! ( the point is on a boundary of the face).
+
+    //! Returns the state of the point on the face.
+    //! The values can be either TopAbs_IN
+    //! ( the point is in the face)
+    //! or TopAbs_ON
+    //! ( the point is on a boundary of the face).
     TopAbs_State State() const;
-  
-  //! Returns the significant face used to determine
-  //! the intersection.
+
+    //! Returns the significant face used to determine
+    //! the intersection.
     const TopoDS_Face& Face() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-  gp_Pnt pnt;
-  Standard_Real U;
-  Standard_Real V;
-  Standard_Real W;
-  IntCurveSurface_TransitionOnCurve transition;
-  Standard_Boolean done;
-  Standard_Boolean hasapoint;
-  TopAbs_State state;
-  TopoDS_Face face;
-
-
+    gp_Pnt pnt;
+    Standard_Real U;
+    Standard_Real V;
+    Standard_Real W;
+    IntCurveSurface_TransitionOnCurve transition;
+    Standard_Boolean done;
+    Standard_Boolean hasapoint;
+    TopAbs_State state;
+    TopoDS_Face face;
 };
 
-
 #include <BRepClass3d_Intersector3d.lxx>
-
-
-
-
 
 #endif // _BRepClass3d_Intersector3d_HeaderFile

@@ -27,23 +27,20 @@ class StepVisual_AnnotationFillArea;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for AnnotationFillArea
-class RWStepVisual_RWAnnotationFillArea 
-{
+class RWStepVisual_RWAnnotationFillArea {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWAnnotationFillArea();
 
-  
-  Standard_EXPORT RWStepVisual_RWAnnotationFillArea();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_AnnotationFillArea)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_AnnotationFillArea)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_AnnotationFillArea)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_AnnotationFillArea) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_AnnotationFillArea) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepVisual_AnnotationFillArea) & ent, Interface_EntityIterator& iter) const;
 };
 
 #endif // _RWStepVisual_RWAnnotationFillArea_HeaderFile

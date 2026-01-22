@@ -19,48 +19,40 @@
 #include <TDocStd_Document.hxx>
 #include <TDocStd_Owner.hxx>
 
-
 //=======================================================================
-//function : Read
-//purpose  : Read persistent data from a file
+// function : Read
+// purpose  : Read persistent data from a file
 //=======================================================================
-void StdLPersistent_Document::Read (StdObjMgt_ReadData& theReadData)
-{
-  theReadData >> myData;
+void StdLPersistent_Document::Read(StdObjMgt_ReadData& theReadData) {
+    theReadData >> myData;
 }
 
 //=======================================================================
-//function : Write
-//purpose  : Write persistent data to a file
+// function : Write
+// purpose  : Write persistent data to a file
 //=======================================================================
-void StdLPersistent_Document::Write (StdObjMgt_WriteData& theWriteData) const
-{
-  theWriteData << myData;
+void StdLPersistent_Document::Write(StdObjMgt_WriteData& theWriteData) const {
+    theWriteData << myData;
 }
 
 //=======================================================================
-//function : PChildren
-//purpose  : Gets persistent child objects
+// function : PChildren
+// purpose  : Gets persistent child objects
 //=======================================================================
-void StdLPersistent_Document::PChildren(StdObjMgt_Persistent::SequenceOfPersistent& theChildren) const
-{
-  theChildren.Append(myData);
+void StdLPersistent_Document::PChildren(StdObjMgt_Persistent::SequenceOfPersistent& theChildren) const {
+    theChildren.Append(myData);
 }
 
 //=======================================================================
-//function : Import
-//purpose  : Import transient document from the persistent data
+// function : Import
+// purpose  : Import transient document from the persistent data
 //=======================================================================
-void StdLPersistent_Document::ImportDocument
-  (const Handle(TDocStd_Document)& theDocument) const
-{
-  if (theDocument.IsNull() || myData.IsNull())
-    return;
+void StdLPersistent_Document::ImportDocument(const Handle(TDocStd_Document) & theDocument) const {
+    if (theDocument.IsNull() || myData.IsNull()) return;
 
-  Handle(TDF_Data) aData = myData->Import();
-  if (aData.IsNull())
-    return;
+    Handle(TDF_Data) aData = myData->Import();
+    if (aData.IsNull()) return;
 
-  theDocument->SetData (aData);
-  TDocStd_Owner::SetDocument (aData, theDocument);
+    theDocument->SetData(aData);
+    TDocStd_Owner::SetDocument(aData, theDocument);
 }

@@ -18,7 +18,8 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel, StepVisual_DraughtingModel)
 
 //=======================================================================
-//function : StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel
-//purpose  : 
+// function : StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel
+// purpose  :
 //=======================================================================
-StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel::StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel()    {  }
+StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel::
+    StepVisual_CharacterizedObjAndRepresentationAndDraughtingModel() {}

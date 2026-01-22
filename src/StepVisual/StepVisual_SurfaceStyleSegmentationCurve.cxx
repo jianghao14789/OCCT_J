@@ -11,29 +11,24 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_CurveStyle.hxx>
 #include <StepVisual_SurfaceStyleSegmentationCurve.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleSegmentationCurve,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleSegmentationCurve, Standard_Transient)
 
-StepVisual_SurfaceStyleSegmentationCurve::StepVisual_SurfaceStyleSegmentationCurve ()  {}
+StepVisual_SurfaceStyleSegmentationCurve::StepVisual_SurfaceStyleSegmentationCurve() {}
 
-void StepVisual_SurfaceStyleSegmentationCurve::Init(
-	const Handle(StepVisual_CurveStyle)& aStyleOfSegmentationCurve)
-{
-	// --- classe own fields ---
-	styleOfSegmentationCurve = aStyleOfSegmentationCurve;
+void StepVisual_SurfaceStyleSegmentationCurve::Init(const Handle(StepVisual_CurveStyle) & aStyleOfSegmentationCurve) {
+    // --- classe own fields ---
+    styleOfSegmentationCurve = aStyleOfSegmentationCurve;
 }
 
-
-void StepVisual_SurfaceStyleSegmentationCurve::SetStyleOfSegmentationCurve(const Handle(StepVisual_CurveStyle)& aStyleOfSegmentationCurve)
-{
-	styleOfSegmentationCurve = aStyleOfSegmentationCurve;
+void StepVisual_SurfaceStyleSegmentationCurve::SetStyleOfSegmentationCurve(const Handle(StepVisual_CurveStyle) &
+                                                                           aStyleOfSegmentationCurve) {
+    styleOfSegmentationCurve = aStyleOfSegmentationCurve;
 }
 
-Handle(StepVisual_CurveStyle) StepVisual_SurfaceStyleSegmentationCurve::StyleOfSegmentationCurve() const
-{
-	return styleOfSegmentationCurve;
+Handle(StepVisual_CurveStyle) StepVisual_SurfaceStyleSegmentationCurve::StyleOfSegmentationCurve() const {
+    return styleOfSegmentationCurve;
 }

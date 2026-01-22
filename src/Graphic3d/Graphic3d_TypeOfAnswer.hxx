@@ -23,11 +23,6 @@
 //! TOA_YES yes
 //! TOA_NO  no
 //! TOA_COMPUTE yes but we have to compute the representation
-enum Graphic3d_TypeOfAnswer
-{
-  Graphic3d_TOA_YES,
-  Graphic3d_TOA_NO,
-  Graphic3d_TOA_COMPUTE
-};
+enum Graphic3d_TypeOfAnswer { Graphic3d_TOA_YES, Graphic3d_TOA_NO, Graphic3d_TOA_COMPUTE };
 
 #endif // _Graphic3d_TypeOfAnswer_HeaderFile

@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepVisual_HArray1OfBoxCharacteristicSelect, StepVisual_Array1OfBoxCharacteristicSelect)
 
-
 #endif

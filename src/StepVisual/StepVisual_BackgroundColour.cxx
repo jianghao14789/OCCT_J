@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_AreaOrView.hxx>
 #include <StepVisual_BackgroundColour.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_BackgroundColour,StepVisual_Colour)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_BackgroundColour, StepVisual_Colour)
 
-StepVisual_BackgroundColour::StepVisual_BackgroundColour ()  {}
+StepVisual_BackgroundColour::StepVisual_BackgroundColour() {}
 
-void StepVisual_BackgroundColour::Init(
-	const StepVisual_AreaOrView& aPresentation)
-{
-	// --- classe own fields ---
-	presentation = aPresentation;
+void StepVisual_BackgroundColour::Init(const StepVisual_AreaOrView& aPresentation) {
+    // --- classe own fields ---
+    presentation = aPresentation;
 }
 
-
-void StepVisual_BackgroundColour::SetPresentation(const StepVisual_AreaOrView& aPresentation)
-{
-	presentation = aPresentation;
+void StepVisual_BackgroundColour::SetPresentation(const StepVisual_AreaOrView& aPresentation) {
+    presentation = aPresentation;
 }
 
-StepVisual_AreaOrView StepVisual_BackgroundColour::Presentation() const
-{
-	return presentation;
+StepVisual_AreaOrView StepVisual_BackgroundColour::Presentation() const {
+    return presentation;
 }

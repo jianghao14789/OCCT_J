@@ -27,48 +27,29 @@ class StepBasic_ThermodynamicTemperatureUnit;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ThermodynamicTemperatureUnit
-class RWStepBasic_RWThermodynamicTemperatureUnit 
-{
+class RWStepBasic_RWThermodynamicTemperatureUnit {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWThermodynamicTemperatureUnit();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWThermodynamicTemperatureUnit();
-  
-  //! Reads ThermodynamicTemperatureUnit
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ThermodynamicTemperatureUnit)& ent) const;
-  
-  //! Writes ThermodynamicTemperatureUnit
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ThermodynamicTemperatureUnit)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_ThermodynamicTemperatureUnit)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ThermodynamicTemperatureUnit
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_ThermodynamicTemperatureUnit) & ent) const;
 
+    //! Writes ThermodynamicTemperatureUnit
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_ThermodynamicTemperatureUnit) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_ThermodynamicTemperatureUnit) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWThermodynamicTemperatureUnit_HeaderFile

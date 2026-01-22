@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepBasic_HArray1OfPerson, StepBasic_Array1OfPerson)
 
-
 #endif

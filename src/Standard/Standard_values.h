@@ -15,26 +15,25 @@
 */
 
 #ifndef _Standard_values_HeaderFile
-# define _Standard_values_HeaderFile
+#define _Standard_values_HeaderFile
 
 #if defined(_MSC_VER)
-# include <limits>
+#include <limits>
 #else
-# include <limits.h>
+#include <limits.h>
 #endif
 
-#if defined (__hpux) || defined (HPUX)
-# ifdef MAXINT
-#  undef MAXINT
-# endif
+#if defined(__hpux) || defined(HPUX)
+#ifdef MAXINT
+#undef MAXINT
+#endif
 #endif
 
 #ifndef BITSPERBYTE
-# define BITSPERBYTE	CHAR_BIT
+#define BITSPERBYTE CHAR_BIT
 #endif
 #ifndef BITS
-# define BITS(type)	(BITSPERBYTE * sizeof(type))
+#define BITS(type) (BITSPERBYTE * sizeof(type))
 #endif
 
 #endif
-

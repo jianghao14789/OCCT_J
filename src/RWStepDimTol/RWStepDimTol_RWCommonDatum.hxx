@@ -27,48 +27,26 @@ class StepDimTol_CommonDatum;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CommonDatum
-class RWStepDimTol_RWCommonDatum 
-{
+class RWStepDimTol_RWCommonDatum {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWCommonDatum();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWCommonDatum();
-  
-  //! Reads CommonDatum
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_CommonDatum)& ent) const;
-  
-  //! Writes CommonDatum
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_CommonDatum)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_CommonDatum)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CommonDatum
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepDimTol_CommonDatum) & ent) const;
 
+    //! Writes CommonDatum
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_CommonDatum) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_CommonDatum) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWCommonDatum_HeaderFile

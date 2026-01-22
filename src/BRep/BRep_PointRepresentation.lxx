@@ -15,46 +15,37 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Location
-//purpose  : 
+// function : Location
+// purpose  :
 //=======================================================================
 
-inline const TopLoc_Location&  BRep_PointRepresentation::Location()const 
-{
-  return myLocation;
+inline const TopLoc_Location& BRep_PointRepresentation::Location() const {
+    return myLocation;
 }
 
-
 //=======================================================================
-//function : Location
-//purpose  : 
+// function : Location
+// purpose  :
 //=======================================================================
 
-inline void  BRep_PointRepresentation::Location(const TopLoc_Location& L)
-{
-  myLocation = L;
+inline void BRep_PointRepresentation::Location(const TopLoc_Location& L) {
+    myLocation = L;
 }
 
-
 //=======================================================================
-//function : Parameter
-//purpose  : 
+// function : Parameter
+// purpose  :
 //=======================================================================
 
-inline Standard_Real  BRep_PointRepresentation::Parameter()const 
-{
-  return myParameter;
+inline Standard_Real BRep_PointRepresentation::Parameter() const {
+    return myParameter;
 }
 
-
 //=======================================================================
-//function : Parameter
-//purpose  : 
+// function : Parameter
+// purpose  :
 //=======================================================================
 
-inline void  BRep_PointRepresentation::Parameter(const Standard_Real P)
-{
-  myParameter = P;
+inline void BRep_PointRepresentation::Parameter(const Standard_Real P) {
+    myParameter = P;
 }
-
-

@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<Handle(StepShape_OrientedClosedShell)> StepShape_Array1OfOrientedClosedShell;
 
-
 #endif

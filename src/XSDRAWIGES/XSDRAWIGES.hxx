@@ -23,45 +23,22 @@
 
 #include <Draw_Interpretor.hxx>
 
-
 //! XSDRAW for IGES : commands IGESSelect, Controller, transfer
-class XSDRAWIGES 
-{
+class XSDRAWIGES {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Inits IGESSelect commands, for DRAW
+    Standard_EXPORT static void InitSelect();
 
-  
-  //! Inits IGESSelect commands, for DRAW
-  Standard_EXPORT static void InitSelect();
-  
-  //! Inits IGESToBRep for DRAW
-  Standard_EXPORT static void InitToBRep (Draw_Interpretor& theCommands);
-  
-  //! Inits BRepToIGES for DRAW
-  Standard_EXPORT static void InitFromBRep (Draw_Interpretor& theCommands);
+    //! Inits IGESToBRep for DRAW
+    Standard_EXPORT static void InitToBRep(Draw_Interpretor& theCommands);
 
-
-
+    //! Inits BRepToIGES for DRAW
+    Standard_EXPORT static void InitFromBRep(Draw_Interpretor& theCommands);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _XSDRAWIGES_HeaderFile

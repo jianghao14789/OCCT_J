@@ -21,18 +21,15 @@
 // function : HashCode
 // purpose  :
 //=======================================================================
-inline Standard_Integer MAT2d_MapBiIntHasher::HashCode (const MAT2d_BiInt& theKey, const Standard_Integer theUpperBound)
-{
-  return TColStd_MapIntegerHasher::HashCode (theKey.FirstIndex(), theUpperBound);
+inline Standard_Integer MAT2d_MapBiIntHasher::HashCode(const MAT2d_BiInt& theKey,
+                                                       const Standard_Integer theUpperBound) {
+    return TColStd_MapIntegerHasher::HashCode(theKey.FirstIndex(), theUpperBound);
 }
 
 //=======================================================================
-//function : IsEqual
-//purpose  : 
+// function : IsEqual
+// purpose  :
 //=======================================================================
-inline Standard_Boolean  MAT2d_MapBiIntHasher::IsEqual
-(const MAT2d_BiInt& Key1,
- const MAT2d_BiInt& Key2)
-{
-  return (Key1 == Key2);
+inline Standard_Boolean MAT2d_MapBiIntHasher::IsEqual(const MAT2d_BiInt& Key1, const MAT2d_BiInt& Key2) {
+    return (Key1 == Key2);
 }

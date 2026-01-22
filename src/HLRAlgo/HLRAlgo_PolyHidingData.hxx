@@ -24,58 +24,43 @@
 #include <Standard_Integer.hxx>
 #include <Standard_Real.hxx>
 
-
 //! Data structure of a set of Hiding Triangles.
-class HLRAlgo_PolyHidingData
-{
+class HLRAlgo_PolyHidingData {
 public:
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  struct TriangleIndices
-  {
-    Standard_Integer Index, Min, Max;
-  };
+    struct TriangleIndices {
+        Standard_Integer Index, Min, Max;
+    };
 
-  struct PlaneT
-  {
-    PlaneT() : D(0.0) {}
-    gp_XYZ Normal;
-    Standard_Real D;
-  };
+    struct PlaneT {
+        PlaneT() : D(0.0) {}
+        gp_XYZ Normal;
+        Standard_Real D;
+    };
 
-  HLRAlgo_PolyHidingData()
-  {
-  }
+    HLRAlgo_PolyHidingData() {}
 
-  void Set (
-    const Standard_Integer Index,
-    const Standard_Integer Minim,
-    const Standard_Integer Maxim,
-    const Standard_Real A,
-    const Standard_Real B,
-    const Standard_Real C,
-    const Standard_Real D)
-  {
-    myIndices.Index = Index;
-    myIndices.Min = Minim;
-    myIndices.Max = Maxim;
-    myPlane.Normal = gp_XYZ(A, B, C);
-    myPlane.D = D;
-  }
+    void Set(const Standard_Integer Index, const Standard_Integer Minim, const Standard_Integer Maxim,
+             const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D) {
+        myIndices.Index = Index;
+        myIndices.Min = Minim;
+        myIndices.Max = Maxim;
+        myPlane.Normal = gp_XYZ(A, B, C);
+        myPlane.D = D;
+    }
 
-  TriangleIndices& Indices()
-  {
-    return myIndices;
-  }
+    TriangleIndices& Indices() {
+        return myIndices;
+    }
 
-  PlaneT& Plane()
-  {
-    return myPlane;
-  }
+    PlaneT& Plane() {
+        return myPlane;
+    }
 
 private:
-  TriangleIndices myIndices;
-  PlaneT myPlane;
+    TriangleIndices myIndices;
+    PlaneT myPlane;
 };
 
 #endif // _HLRAlgo_PolyHidingData_HeaderFile

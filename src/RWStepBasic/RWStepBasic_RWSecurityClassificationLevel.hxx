@@ -27,42 +27,22 @@ class Interface_Check;
 class StepBasic_SecurityClassificationLevel;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for SecurityClassificationLevel
-class RWStepBasic_RWSecurityClassificationLevel 
-{
+class RWStepBasic_RWSecurityClassificationLevel {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWSecurityClassificationLevel();
 
-  
-  Standard_EXPORT RWStepBasic_RWSecurityClassificationLevel();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_SecurityClassificationLevel)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_SecurityClassificationLevel)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_SecurityClassificationLevel) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_SecurityClassificationLevel) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWSecurityClassificationLevel_HeaderFile

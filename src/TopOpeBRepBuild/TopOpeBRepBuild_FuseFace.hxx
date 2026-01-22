@@ -25,81 +25,61 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Integer.hxx>
 
-
-
-class TopOpeBRepBuild_FuseFace 
-{
+class TopOpeBRepBuild_FuseFace {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
     TopOpeBRepBuild_FuseFace();
-  
-    TopOpeBRepBuild_FuseFace(const TopTools_ListOfShape& LIF, const TopTools_ListOfShape& LRF, const Standard_Integer CXM);
-  
-  Standard_EXPORT void Init (const TopTools_ListOfShape& LIF, const TopTools_ListOfShape& LRF, const Standard_Integer CXM);
-  
-  Standard_EXPORT void PerformFace();
-  
-  Standard_EXPORT void PerformEdge();
-  
-  Standard_EXPORT void ClearEdge();
-  
-  Standard_EXPORT void ClearVertex();
-  
+
+    TopOpeBRepBuild_FuseFace(const TopTools_ListOfShape& LIF, const TopTools_ListOfShape& LRF,
+                             const Standard_Integer CXM);
+
+    Standard_EXPORT void Init(const TopTools_ListOfShape& LIF, const TopTools_ListOfShape& LRF,
+                              const Standard_Integer CXM);
+
+    Standard_EXPORT void PerformFace();
+
+    Standard_EXPORT void PerformEdge();
+
+    Standard_EXPORT void ClearEdge();
+
+    Standard_EXPORT void ClearVertex();
+
     Standard_Boolean IsDone() const;
-  
+
     Standard_Boolean IsModified() const;
-  
-  const TopTools_ListOfShape& LFuseFace() const;
-  
-  const TopTools_ListOfShape& LInternEdge() const;
-  
-  const TopTools_ListOfShape& LExternEdge() const;
-  
-  const TopTools_ListOfShape& LModifEdge() const;
-  
-  const TopTools_ListOfShape& LInternVertex() const;
-  
-  const TopTools_ListOfShape& LExternVertex() const;
-  
-  const TopTools_ListOfShape& LModifVertex() const;
 
+    const TopTools_ListOfShape& LFuseFace() const;
 
+    const TopTools_ListOfShape& LInternEdge() const;
 
+    const TopTools_ListOfShape& LExternEdge() const;
+
+    const TopTools_ListOfShape& LModifEdge() const;
+
+    const TopTools_ListOfShape& LInternVertex() const;
+
+    const TopTools_ListOfShape& LExternVertex() const;
+
+    const TopTools_ListOfShape& LModifVertex() const;
 
 protected:
-
-
-
-  TopTools_ListOfShape myLIE;
-  TopTools_ListOfShape myLEE;
-  TopTools_ListOfShape myLME;
-  TopTools_ListOfShape myLIV;
-  TopTools_ListOfShape myLEV;
-  TopTools_ListOfShape myLMV;
-
+    TopTools_ListOfShape myLIE;
+    TopTools_ListOfShape myLEE;
+    TopTools_ListOfShape myLME;
+    TopTools_ListOfShape myLIV;
+    TopTools_ListOfShape myLEV;
+    TopTools_ListOfShape myLMV;
 
 private:
-
-
-
-  TopTools_ListOfShape myLIF;
-  TopTools_ListOfShape myLRF;
-  TopTools_ListOfShape myLFF;
-  Standard_Boolean myInternal;
-  Standard_Boolean myModified;
-  Standard_Boolean myDone;
-
-
+    TopTools_ListOfShape myLIF;
+    TopTools_ListOfShape myLRF;
+    TopTools_ListOfShape myLFF;
+    Standard_Boolean myInternal;
+    Standard_Boolean myModified;
+    Standard_Boolean myDone;
 };
 
-
 #include <TopOpeBRepBuild_FuseFace.lxx>
-
-
-
-
 
 #endif // _TopOpeBRepBuild_FuseFace_HeaderFile

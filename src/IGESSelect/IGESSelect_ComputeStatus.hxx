@@ -26,7 +26,6 @@ class IGESData_IGESModel;
 class Interface_CopyTool;
 class TCollection_AsciiString;
 
-
 class IGESSelect_ComputeStatus;
 DEFINE_STANDARD_HANDLE(IGESSelect_ComputeStatus, IGESSelect_ModelModifier)
 
@@ -37,46 +36,27 @@ DEFINE_STANDARD_HANDLE(IGESSelect_ComputeStatus, IGESSelect_ModelModifier)
 //!
 //! Works by calling a BasicEditor from IGESData. Works on the
 //! whole produced (target) model, because computation is global.
-class IGESSelect_ComputeStatus : public IGESSelect_ModelModifier
-{
+class IGESSelect_ComputeStatus : public IGESSelect_ModelModifier {
 
 public:
+    //! Creates an ComputeStatus, which uses the system Date
+    Standard_EXPORT IGESSelect_ComputeStatus();
 
-  
-  //! Creates an ComputeStatus, which uses the system Date
-  Standard_EXPORT IGESSelect_ComputeStatus();
-  
-  //! Specific action : it first evaluates the required values for
-  //! Subordinate Status and Use Flag (in Directory Part of each
-  //! IGES Entity). Then it corrects them, for the whole target.
-  //! Works with a Protocol. Implementation uses BasicEditor
-  Standard_EXPORT void Performing (IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel)& target, Interface_CopyTool& TC) const Standard_OVERRIDE;
-  
-  //! Returns a text which is
-  //! "Compute Subordinate Status and Use Flag"
-  Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
+    //! Specific action : it first evaluates the required values for
+    //! Subordinate Status and Use Flag (in Directory Part of each
+    //! IGES Entity). Then it corrects them, for the whole target.
+    //! Works with a Protocol. Implementation uses BasicEditor
+    Standard_EXPORT void Performing(IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel) & target,
+                                    Interface_CopyTool& TC) const Standard_OVERRIDE;
 
+    //! Returns a text which is
+    //! "Compute Subordinate Status and Use Flag"
+    Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_ComputeStatus,IGESSelect_ModelModifier)
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_ComputeStatus, IGESSelect_ModelModifier)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_ComputeStatus_HeaderFile

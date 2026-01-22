@@ -21,8 +21,8 @@
 #include <TopTools_OrientedShapeMapHasher.hxx>
 #include <NCollection_Map.hxx>
 
-typedef NCollection_Map<TopoDS_Shape,TopTools_OrientedShapeMapHasher> TopTools_MapOfOrientedShape;
-typedef NCollection_Map<TopoDS_Shape,TopTools_OrientedShapeMapHasher>::Iterator TopTools_MapIteratorOfMapOfOrientedShape;
-
+typedef NCollection_Map<TopoDS_Shape, TopTools_OrientedShapeMapHasher> TopTools_MapOfOrientedShape;
+typedef NCollection_Map<TopoDS_Shape, TopTools_OrientedShapeMapHasher>::Iterator
+    TopTools_MapIteratorOfMapOfOrientedShape;
 
 #endif

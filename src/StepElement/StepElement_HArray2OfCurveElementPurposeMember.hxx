@@ -20,5 +20,4 @@
 
 DEFINE_HARRAY2(StepElement_HArray2OfCurveElementPurposeMember, StepElement_Array2OfCurveElementPurposeMember)
 
-
 #endif

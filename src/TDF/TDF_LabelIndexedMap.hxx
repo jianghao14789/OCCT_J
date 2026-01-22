@@ -20,7 +20,6 @@
 #include <TDF_LabelMapHasher.hxx>
 #include <NCollection_IndexedMap.hxx>
 
-typedef NCollection_IndexedMap<TDF_Label,TDF_LabelMapHasher> TDF_LabelIndexedMap;
-
+typedef NCollection_IndexedMap<TDF_Label, TDF_LabelMapHasher> TDF_LabelIndexedMap;
 
 #endif

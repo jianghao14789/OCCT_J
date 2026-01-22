@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _BOPAlgo_CellsBuilder_HeaderFile
 #define _BOPAlgo_CellsBuilder_HeaderFile
 
@@ -51,8 +50,8 @@
 //! The result of the algorithm is compound containing selected parts of the basic types (VERTEX, EDGE, FACE or SOLID).
 //! The default result is empty compound.
 //! It is possible to add any split part to the result by using the methods AddToRessult() and AddAllToResult().
-//! It is also possible to remove any part from the result by using methods RemoveFromResult() and RemoveAllFromResult().
-//! The method RemoveAllFromResult() is also suitable for clearing the result.
+//! It is also possible to remove any part from the result by using methods RemoveFromResult() and
+//! RemoveAllFromResult(). The method RemoveAllFromResult() is also suitable for clearing the result.
 //!
 //! To remove Internal boundaries it is necessary to set the same material to the
 //! parts between which the boundaries should be removed and call the method RemoveInternalBoundaries().
@@ -171,15 +170,13 @@
 //! # remove internal boundaries
 //! bcremoveint res
 //! @endcode
-class BOPAlgo_CellsBuilder : public BOPAlgo_Builder
-{
+class BOPAlgo_CellsBuilder : public BOPAlgo_Builder {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT BOPAlgo_CellsBuilder();
 
-    Standard_EXPORT BOPAlgo_CellsBuilder(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_CellsBuilder(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     Standard_EXPORT virtual ~BOPAlgo_CellsBuilder();
 
@@ -192,22 +189,21 @@ public:
     //! <theLSToAvoid> defines the arguments which parts should not be taken into result;<br>
     //! To be taken into result the part must be IN for all shapes from the list
     //! <theLSToTake> and must be OUT of all shapes from the list <theLSToAvoid>.<br>
-    //! 
+    //!
     //! To remove internal boundaries between any cells in the result
     //! <theMaterial> variable should be used. The boundaries between
     //! cells with the same material will be removed. Default value is 0.<br>
     //! Thus, to remove any boundary the value of this variable should not be equal to 0.<br>
     //! <theUpdate> parameter defines whether to remove boundaries now or not.
-    Standard_EXPORT void AddToResult(const TopTools_ListOfShape& theLSToTake,
-        const TopTools_ListOfShape& theLSToAvoid,
-        const Standard_Integer theMaterial = 0,
-        const Standard_Boolean theUpdate = Standard_False);
+    Standard_EXPORT void AddToResult(const TopTools_ListOfShape& theLSToTake, const TopTools_ListOfShape& theLSToAvoid,
+                                     const Standard_Integer theMaterial = 0,
+                                     const Standard_Boolean theUpdate = Standard_False);
 
     //! Add all split parts to result.<br>
     //! <theMaterial> defines the removal of internal boundaries;<br>
     //! <theUpdate> parameter defines whether to remove boundaries now or not.
     Standard_EXPORT void AddAllToResult(const Standard_Integer theMaterial = 0,
-        const Standard_Boolean theUpdate = Standard_False);
+                                        const Standard_Boolean theUpdate = Standard_False);
 
     //! Removing the parts from result.<br>
     //! The parts are defined by two lists of shapes:<br>
@@ -216,7 +212,7 @@ public:
     //! To be removed from the result the part must be IN for all shapes from the list
     //! <theLSToTake> and must be OUT of all shapes from the list <theLSToAvoid>.
     Standard_EXPORT void RemoveFromResult(const TopTools_ListOfShape& theLSToTake,
-        const TopTools_ListOfShape& theLSToAvoid);
+                                          const TopTools_ListOfShape& theLSToAvoid);
 
     //! Remove all parts from result.
     Standard_EXPORT void RemoveAllFromResult();
@@ -224,7 +220,7 @@ public:
     //! Removes internal boundaries between cells with the same material.<br>
     //! If the result contains the cells with same material but of different dimension
     //! the removal of internal boundaries between these cells will not be performed.<br>
-    //! In case of some errors during the removal the method will set the appropriate warning 
+    //! In case of some errors during the removal the method will set the appropriate warning
     //! status - use GetReport() to access them.
     Standard_EXPORT void RemoveInternalBoundaries();
 
@@ -235,35 +231,34 @@ public:
     Standard_EXPORT void MakeContainers();
 
 protected:
-
     //! Prepare information for history support taking into account
     //! local modification map of unified elements - myMapModified.
     Standard_EXPORT virtual const TopTools_ListOfShape* LocModified(const TopoDS_Shape& theS) Standard_OVERRIDE;
 
     //! Redefined method PerformInternal1 - makes all split parts,
     //! nullifies the result <myShape>, and index all parts.
-    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF, const Message_ProgressRange& theRange) Standard_OVERRIDE;
+    Standard_EXPORT virtual void PerformInternal1(const BOPAlgo_PaveFiller& thePF,
+                                                  const Message_ProgressRange& theRange) Standard_OVERRIDE;
 
     //! Indexes the parts for quick access to the arguments.
     Standard_EXPORT void IndexParts();
 
     //! Looking for the parts defined by two lists.
-    Standard_EXPORT void FindParts(const TopTools_ListOfShape& theLSToTake,
-        const TopTools_ListOfShape& theLSToAvoid,
-        TopTools_ListOfShape& theParts);
+    Standard_EXPORT void FindParts(const TopTools_ListOfShape& theLSToTake, const TopTools_ListOfShape& theLSToAvoid,
+                                   TopTools_ListOfShape& theParts);
 
     //! Removes internal boundaries between cells with the same material.<br>
     //! Returns TRUE if any internal boundaries have been removed.
-    Standard_EXPORT Standard_Boolean RemoveInternals(const TopTools_ListOfShape& theLS,
-        TopTools_ListOfShape& theLSNew,
-        const TopTools_MapOfShape& theMapKeepBnd = TopTools_MapOfShape());
+    Standard_EXPORT Standard_Boolean RemoveInternals(const TopTools_ListOfShape& theLS, TopTools_ListOfShape& theLSNew,
+                                                     const TopTools_MapOfShape& theMapKeepBnd = TopTools_MapOfShape());
 
     // fields
-    TopoDS_Shape myAllParts;                           //!< All split parts of the arguments
-    TopTools_IndexedDataMapOfShapeListOfShape myIndex; //!< Connection map from all splits parts to the argument shapes from which they were created
-    TopTools_DataMapOfIntegerListOfShape myMaterials;  //!< Map of assigned materials (material -> list of shape)
-    TopTools_DataMapOfShapeInteger myShapeMaterial;    //!< Map of assigned materials (shape -> material)
-    TopTools_DataMapOfShapeShape myMapModified;        //!< Local modification map to track unification of the splits
+    TopoDS_Shape myAllParts; //!< All split parts of the arguments
+    TopTools_IndexedDataMapOfShapeListOfShape
+        myIndex; //!< Connection map from all splits parts to the argument shapes from which they were created
+    TopTools_DataMapOfIntegerListOfShape myMaterials; //!< Map of assigned materials (material -> list of shape)
+    TopTools_DataMapOfShapeInteger myShapeMaterial;   //!< Map of assigned materials (shape -> material)
+    TopTools_DataMapOfShapeShape myMapModified;       //!< Local modification map to track unification of the splits
 };
 
 #endif //_BOPAlgo_CellsBuilder_HeaderFile

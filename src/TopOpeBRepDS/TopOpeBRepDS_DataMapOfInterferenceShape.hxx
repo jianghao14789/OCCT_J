@@ -22,8 +22,9 @@
 #include <TColStd_MapTransientHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Handle(TopOpeBRepDS_Interference),TopoDS_Shape,TColStd_MapTransientHasher> TopOpeBRepDS_DataMapOfInterferenceShape;
-typedef NCollection_DataMap<Handle(TopOpeBRepDS_Interference),TopoDS_Shape,TColStd_MapTransientHasher>::Iterator TopOpeBRepDS_DataMapIteratorOfDataMapOfInterferenceShape;
-
+typedef NCollection_DataMap<Handle(TopOpeBRepDS_Interference), TopoDS_Shape, TColStd_MapTransientHasher>
+    TopOpeBRepDS_DataMapOfInterferenceShape;
+typedef NCollection_DataMap<Handle(TopOpeBRepDS_Interference), TopoDS_Shape, TColStd_MapTransientHasher>::Iterator
+    TopOpeBRepDS_DataMapIteratorOfDataMapOfInterferenceShape;
 
 #endif

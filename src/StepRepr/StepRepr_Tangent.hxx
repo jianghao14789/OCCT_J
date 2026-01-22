@@ -24,14 +24,11 @@
 class StepRepr_Tangent;
 DEFINE_STANDARD_HANDLE(StepRepr_Tangent, StepRepr_DerivedShapeAspect)
 //! Added for Dimensional Tolerances
-class StepRepr_Tangent : public StepRepr_DerivedShapeAspect
-{
+class StepRepr_Tangent : public StepRepr_DerivedShapeAspect {
 
 public:
-  
-  Standard_EXPORT StepRepr_Tangent();
+    Standard_EXPORT StepRepr_Tangent();
 
-  DEFINE_STANDARD_RTTIEXT(StepRepr_Tangent,StepRepr_DerivedShapeAspect)
-
+    DEFINE_STANDARD_RTTIEXT(StepRepr_Tangent, StepRepr_DerivedShapeAspect)
 };
 #endif // _StepRepr_Tangent_HeaderFile

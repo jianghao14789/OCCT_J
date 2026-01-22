@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Adaptor2d_Curve2d.hxx>
 #include <Bnd_Box2d.hxx>
 #include <BndLib_Add2dCurve.hxx>
@@ -38,8 +37,8 @@
 #include <math_PSO.hxx>
 
 //=======================================================================
-//function : BndLib_Box2dCurve
-//purpose  : 
+// function : BndLib_Box2dCurve
+// purpose  :
 //=======================================================================
 class BndLib_Box2dCurve {
 public:
@@ -47,15 +46,13 @@ public:
 
     virtual ~BndLib_Box2dCurve();
 
-    void SetCurve(const Handle(Geom2d_Curve)& aC);
+    void SetCurve(const Handle(Geom2d_Curve) & aC);
 
-    const Handle(Geom2d_Curve)& Curve() const;
+    const Handle(Geom2d_Curve) & Curve() const;
 
-    void SetRange(const Standard_Real aT1,
-        const Standard_Real aT2);
+    void SetRange(const Standard_Real aT1, const Standard_Real aT2);
 
-    void Range(Standard_Real& aT1,
-        Standard_Real& aT2) const;
+    void Range(Standard_Real& aT1, Standard_Real& aT2) const;
 
     const Bnd_Box2d& Box() const;
 
@@ -77,22 +74,12 @@ protected:
     void PerformOther();
     void D0(const Standard_Real, gp_Pnt2d&);
     //
-    void Compute(const Handle(Geom2d_Conic)&,
-        const GeomAbs_CurveType,
-        const Standard_Real,
-        const Standard_Real,
-        Bnd_Box2d& aBox2D);
+    void Compute(const Handle(Geom2d_Conic) &, const GeomAbs_CurveType, const Standard_Real, const Standard_Real,
+                 Bnd_Box2d& aBox2D);
     //
-    static
-        Standard_Integer Compute(const Handle(Geom2d_Conic)&,
-            const GeomAbs_CurveType,
-            Standard_Real*);
-    static
-        Standard_Boolean IsTypeBase(const Handle(Geom2d_Curve)&,
-            GeomAbs_CurveType&);
-    static
-        Standard_Real AdjustToPeriod(const Standard_Real,
-            const Standard_Real);
+    static Standard_Integer Compute(const Handle(Geom2d_Conic) &, const GeomAbs_CurveType, Standard_Real*);
+    static Standard_Boolean IsTypeBase(const Handle(Geom2d_Curve) &, GeomAbs_CurveType&);
+    static Standard_Real AdjustToPeriod(const Standard_Real, const Standard_Real);
     //
     void PerformOnePoint();
     //
@@ -100,12 +87,8 @@ protected:
     //
     Standard_Integer NbSamples();
     //
-    Standard_Real AdjustExtr(const Standard_Real UMin,
-        const Standard_Real UMax,
-        const Standard_Real Extr0,
-        const Standard_Integer CoordIndx,
-        const Standard_Real Tol,
-        const Standard_Boolean IsMin);
+    Standard_Real AdjustExtr(const Standard_Real UMin, const Standard_Real UMax, const Standard_Real Extr0,
+                             const Standard_Integer CoordIndx, const Standard_Real Tol, const Standard_Boolean IsMin);
     //-----------------------------
 protected:
     Handle(Geom2d_Curve) myCurve;
@@ -119,27 +102,14 @@ protected:
     GeomAbs_CurveType myTypeBase;
 };
 //
-class Curv2dMaxMinCoordMVar : public math_MultipleVarFunction
-{
+class Curv2dMaxMinCoordMVar : public math_MultipleVarFunction {
 public:
-    Curv2dMaxMinCoordMVar(const Handle(Geom2d_Curve)& theCurve,
-        const Standard_Real UMin,
-        const Standard_Real UMax,
-        const Standard_Integer CoordIndx,
-        const Standard_Real Sign)
-        : myCurve(theCurve),
-        myUMin(UMin),
-        myUMax(UMax),
-        myCoordIndx(CoordIndx),
-        mySign(Sign)
-    {
-    }
+    Curv2dMaxMinCoordMVar(const Handle(Geom2d_Curve) & theCurve, const Standard_Real UMin, const Standard_Real UMax,
+                          const Standard_Integer CoordIndx, const Standard_Real Sign)
+        : myCurve(theCurve), myUMin(UMin), myUMax(UMax), myCoordIndx(CoordIndx), mySign(Sign) {}
 
-    Standard_Boolean Value(const math_Vector& X,
-        Standard_Real& F)
-    {
-        if (!CheckInputData(X(1)))
-        {
+    Standard_Boolean Value(const math_Vector& X, Standard_Real& F) {
+        if (!CheckInputData(X(1))) {
             return Standard_False;
         }
         gp_Pnt2d aP = myCurve->Value(X(1));
@@ -149,52 +119,33 @@ public:
         return Standard_True;
     }
 
-
-
-    Standard_Integer NbVariables() const
-    {
+    Standard_Integer NbVariables() const {
         return 1;
     }
 
 private:
-    Curv2dMaxMinCoordMVar& operator = (const Curv2dMaxMinCoordMVar& theOther);
+    Curv2dMaxMinCoordMVar& operator=(const Curv2dMaxMinCoordMVar& theOther);
 
-    Standard_Boolean CheckInputData(Standard_Real theParam)
-    {
-        if (theParam < myUMin ||
-            theParam > myUMax)
-            return Standard_False;
+    Standard_Boolean CheckInputData(Standard_Real theParam) {
+        if (theParam < myUMin || theParam > myUMax) return Standard_False;
         return Standard_True;
     }
 
-    const Handle(Geom2d_Curve)& myCurve;
+    const Handle(Geom2d_Curve) & myCurve;
     Standard_Real myUMin;
     Standard_Real myUMax;
     Standard_Integer myCoordIndx;
     Standard_Real mySign;
 };
 //
-class Curv2dMaxMinCoord : public math_Function
-{
+class Curv2dMaxMinCoord : public math_Function {
 public:
-    Curv2dMaxMinCoord(const Handle(Geom2d_Curve)& theCurve,
-        const Standard_Real UMin,
-        const Standard_Real UMax,
-        const Standard_Integer CoordIndx,
-        const Standard_Real Sign)
-        : myCurve(theCurve),
-        myUMin(UMin),
-        myUMax(UMax),
-        myCoordIndx(CoordIndx),
-        mySign(Sign)
-    {
-    }
+    Curv2dMaxMinCoord(const Handle(Geom2d_Curve) & theCurve, const Standard_Real UMin, const Standard_Real UMax,
+                      const Standard_Integer CoordIndx, const Standard_Real Sign)
+        : myCurve(theCurve), myUMin(UMin), myUMax(UMax), myCoordIndx(CoordIndx), mySign(Sign) {}
 
-    Standard_Boolean Value(const Standard_Real X,
-        Standard_Real& F)
-    {
-        if (!CheckInputData(X))
-        {
+    Standard_Boolean Value(const Standard_Real X, Standard_Real& F) {
+        if (!CheckInputData(X)) {
             return Standard_False;
         }
         gp_Pnt2d aP = myCurve->Value(X);
@@ -205,17 +156,14 @@ public:
     }
 
 private:
-    Curv2dMaxMinCoord& operator = (const Curv2dMaxMinCoord& theOther);
+    Curv2dMaxMinCoord& operator=(const Curv2dMaxMinCoord& theOther);
 
-    Standard_Boolean CheckInputData(Standard_Real theParam)
-    {
-        if (theParam < myUMin ||
-            theParam > myUMax)
-            return Standard_False;
+    Standard_Boolean CheckInputData(Standard_Real theParam) {
+        if (theParam < myUMin || theParam > myUMax) return Standard_False;
         return Standard_True;
     }
 
-    const Handle(Geom2d_Curve)& myCurve;
+    const Handle(Geom2d_Curve) & myCurve;
     Standard_Real myUMin;
     Standard_Real myUMax;
     Standard_Integer myCoordIndx;
@@ -223,26 +171,22 @@ private:
 };
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-BndLib_Box2dCurve::BndLib_Box2dCurve()
-{
+BndLib_Box2dCurve::BndLib_Box2dCurve() {
     Clear();
 }
 //=======================================================================
-//function : ~
-//purpose  : 
+// function : ~
+// purpose  :
 //=======================================================================
-BndLib_Box2dCurve::~BndLib_Box2dCurve()
-{
-}
+BndLib_Box2dCurve::~BndLib_Box2dCurve() {}
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::Clear()
-{
+void BndLib_Box2dCurve::Clear() {
     myBox.SetVoid();
     //
     myErrorStatus = -1;
@@ -251,63 +195,54 @@ void BndLib_Box2dCurve::Clear()
     myOffsetFlag = Standard_False;
 }
 //=======================================================================
-//function : SetCurve
-//purpose  : 
+// function : SetCurve
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::SetCurve(const Handle(Geom2d_Curve)& aC2D)
-{
+void BndLib_Box2dCurve::SetCurve(const Handle(Geom2d_Curve) & aC2D) {
     myCurve = aC2D;
 }
 //=======================================================================
-//function : Curve
-//purpose  : 
+// function : Curve
+// purpose  :
 //=======================================================================
-const Handle(Geom2d_Curve)& BndLib_Box2dCurve::Curve()const
-{
+const Handle(Geom2d_Curve) & BndLib_Box2dCurve::Curve() const {
     return myCurve;
 }
 //=======================================================================
-//function : SetRange
-//purpose  : 
+// function : SetRange
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::SetRange(const Standard_Real aT1,
-    const Standard_Real aT2)
-{
+void BndLib_Box2dCurve::SetRange(const Standard_Real aT1, const Standard_Real aT2) {
     myT1 = aT1;
     myT2 = aT2;
 }
 //=======================================================================
-//function : tRange
-//purpose  : 
+// function : tRange
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::Range(Standard_Real& aT1,
-    Standard_Real& aT2) const
-{
+void BndLib_Box2dCurve::Range(Standard_Real& aT1, Standard_Real& aT2) const {
     aT1 = myT1;
     aT2 = myT2;
 }
 //=======================================================================
-//function : ErrorStatus
-//purpose  : 
+// function : ErrorStatus
+// purpose  :
 //=======================================================================
-Standard_Integer BndLib_Box2dCurve::ErrorStatus()const
-{
+Standard_Integer BndLib_Box2dCurve::ErrorStatus() const {
     return myErrorStatus;
 }
 //=======================================================================
-//function : Box
-//purpose  : 
+// function : Box
+// purpose  :
 //=======================================================================
-const Bnd_Box2d& BndLib_Box2dCurve::Box()const
-{
+const Bnd_Box2d& BndLib_Box2dCurve::Box() const {
     return myBox;
 }
 //=======================================================================
-//function : CheckData
-//purpose  : 
+// function : CheckData
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::CheckData()
-{
+void BndLib_Box2dCurve::CheckData() {
     myErrorStatus = 0;
     //
     if (myCurve.IsNull()) {
@@ -321,13 +256,12 @@ void BndLib_Box2dCurve::CheckData()
     }
 }
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::Perform()
-{
+void BndLib_Box2dCurve::Perform() {
     Clear();
-    // 
+    //
     myErrorStatus = 0;
     //
     CheckData();
@@ -344,30 +278,23 @@ void BndLib_Box2dCurve::Perform()
     if (myErrorStatus) {
         return;
     }
-    // 
-    if (myTypeBase == GeomAbs_Line ||
-        myTypeBase == GeomAbs_Circle ||
-        myTypeBase == GeomAbs_Ellipse ||
-        myTypeBase == GeomAbs_Parabola ||
-        myTypeBase == GeomAbs_Hyperbola) { // LineConic
+    //
+    if (myTypeBase == GeomAbs_Line || myTypeBase == GeomAbs_Circle || myTypeBase == GeomAbs_Ellipse ||
+        myTypeBase == GeomAbs_Parabola || myTypeBase == GeomAbs_Hyperbola) { // LineConic
         PerformLineConic();
-    }
-    else if (myTypeBase == GeomAbs_BezierCurve) { // Bezier
+    } else if (myTypeBase == GeomAbs_BezierCurve) { // Bezier
         PerformBezier();
-    }
-    else if (myTypeBase == GeomAbs_BSplineCurve) { //B-Spline
+    } else if (myTypeBase == GeomAbs_BSplineCurve) { // B-Spline
         PerformBSpline();
-    }
-    else {
+    } else {
         myErrorStatus = 11; // unknown type base
     }
 }
 //=======================================================================
-//function : PerformOptimal
-//purpose  : 
+// function : PerformOptimal
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformOptimal(const Standard_Real Tol)
-{
+void BndLib_Box2dCurve::PerformOptimal(const Standard_Real Tol) {
     Clear();
     myErrorStatus = 0;
     CheckData();
@@ -386,34 +313,28 @@ void BndLib_Box2dCurve::PerformOptimal(const Standard_Real Tol)
         return;
     }
 
-    if (myTypeBase == GeomAbs_Line ||
-        myTypeBase == GeomAbs_Circle ||
-        myTypeBase == GeomAbs_Ellipse ||
-        myTypeBase == GeomAbs_Parabola ||
-        myTypeBase == GeomAbs_Hyperbola) { // LineConic
+    if (myTypeBase == GeomAbs_Line || myTypeBase == GeomAbs_Circle || myTypeBase == GeomAbs_Ellipse ||
+        myTypeBase == GeomAbs_Parabola || myTypeBase == GeomAbs_Hyperbola) { // LineConic
         PerformLineConic();
-    }
-    else {
+    } else {
         PerformGenCurv(Tol);
     }
 }
 //=======================================================================
-//function : PerformOnePoint
-//purpose  : 
+// function : PerformOnePoint
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformOnePoint()
-{
+void BndLib_Box2dCurve::PerformOnePoint() {
     gp_Pnt2d aP2D;
     //
     myCurve->D0(myT1, aP2D);
     myBox.Add(aP2D);
 }
 //=======================================================================
-//function : PerformBezier
-//purpose  : 
+// function : PerformBezier
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformBezier()
-{
+void BndLib_Box2dCurve::PerformBezier() {
     if (myOffsetFlag) {
         PerformOther();
         return;
@@ -457,18 +378,17 @@ void BndLib_Box2dCurve::PerformBezier()
     }
 }
 //=======================================================================
-//function : PerformBSpline
-//purpose  : 
+// function : PerformBSpline
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformBSpline()
-{
+void BndLib_Box2dCurve::PerformBSpline() {
     if (myOffsetFlag) {
         PerformOther();
         return;
     }
     //
     Standard_Integer i, aNbPoles;
-    Standard_Real  aT1, aT2, aTb[2];
+    Standard_Real aT1, aT2, aTb[2];
     gp_Pnt2d aP2D;
     Handle(Geom2d_Geometry) aG;
     Handle(Geom2d_BSplineCurve) aCBS, aCBSs;
@@ -489,8 +409,7 @@ void BndLib_Box2dCurve::PerformBSpline()
         aTb[1] = aT2;
     }
 
-    if (aTb[1] < aTb[0])
-    {
+    if (aTb[1] < aTb[0]) {
         aTb[0] = aT1;
         aTb[1] = aT2;
     }
@@ -512,11 +431,10 @@ void BndLib_Box2dCurve::PerformBSpline()
     }
 }
 //=======================================================================
-//function : PerformOther
-//purpose  : 
+// function : PerformOther
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformOther()
-{
+void BndLib_Box2dCurve::PerformOther() {
     Standard_Integer j, aNb;
     Standard_Real aT, dT;
     gp_Pnt2d aP2D;
@@ -533,56 +451,46 @@ void BndLib_Box2dCurve::PerformOther()
     myBox.Add(aP2D);
 }
 //=======================================================================
-//function : NbSamples
-//purpose  : 
+// function : NbSamples
+// purpose  :
 //=======================================================================
-Standard_Integer BndLib_Box2dCurve::NbSamples()
-{
+Standard_Integer BndLib_Box2dCurve::NbSamples() {
     Standard_Integer N;
     switch (myTypeBase) {
-    case GeomAbs_BezierCurve:
-    {
-        Handle(Geom2d_BezierCurve) aCBz = Handle(Geom2d_BezierCurve)::DownCast(myCurveBase);
-        N = aCBz->NbPoles();
-        //By default parametric range of Bezier curv is [0, 1]
-        Standard_Real du = myT2 - myT1;
-        if (du < .9)
-        {
-            N = RealToInt(du * N) + 1;
-            N = Max(N, 5);
+        case GeomAbs_BezierCurve: {
+            Handle(Geom2d_BezierCurve) aCBz = Handle(Geom2d_BezierCurve)::DownCast(myCurveBase);
+            N = aCBz->NbPoles();
+            // By default parametric range of Bezier curv is [0, 1]
+            Standard_Real du = myT2 - myT1;
+            if (du < .9) {
+                N = RealToInt(du * N) + 1;
+                N = Max(N, 5);
+            }
+            break;
         }
-        break;
-    }
-    case GeomAbs_BSplineCurve:
-    {
-        Handle(Geom2d_BSplineCurve) aCBS = Handle(Geom2d_BSplineCurve)::DownCast(myCurveBase);
-        N = (aCBS->Degree() + 1) * (aCBS->NbKnots() - 1);
-        Standard_Real umin = aCBS->FirstParameter(),
-            umax = aCBS->LastParameter();
-        Standard_Real du = (myT2 - myT1) / (umax - umin);
-        if (du < .9)
-        {
-            N = RealToInt(du * N) + 1;
-            N = Max(N, 5);
+        case GeomAbs_BSplineCurve: {
+            Handle(Geom2d_BSplineCurve) aCBS = Handle(Geom2d_BSplineCurve)::DownCast(myCurveBase);
+            N = (aCBS->Degree() + 1) * (aCBS->NbKnots() - 1);
+            Standard_Real umin = aCBS->FirstParameter(), umax = aCBS->LastParameter();
+            Standard_Real du = (myT2 - myT1) / (umax - umin);
+            if (du < .9) {
+                N = RealToInt(du * N) + 1;
+                N = Max(N, 5);
+            }
+            break;
         }
-        break;
-    }
-    default:
-        N = 17;
+        default:
+            N = 17;
     }
     return Min(23, N);
 }
 //=======================================================================
-//function : AdjustExtr
-//purpose  : 
+// function : AdjustExtr
+// purpose  :
 //=======================================================================
-Standard_Real BndLib_Box2dCurve::AdjustExtr(const Standard_Real UMin,
-    const Standard_Real UMax,
-    const Standard_Real Extr0,
-    const Standard_Integer CoordIndx,
-    const Standard_Real Tol,
-    const Standard_Boolean IsMin)
-{
+Standard_Real BndLib_Box2dCurve::AdjustExtr(const Standard_Real UMin, const Standard_Real UMax,
+                                            const Standard_Real Extr0, const Standard_Integer CoordIndx,
+                                            const Standard_Real Tol, const Standard_Boolean IsMin) {
     Standard_Real aSign = IsMin ? 1. : -1.;
     Standard_Real extr = aSign * Extr0;
     //
@@ -591,14 +499,12 @@ Standard_Real BndLib_Box2dCurve::AdjustExtr(const Standard_Real UMin,
     Geom2dAdaptor_Curve aGAC(myCurve);
     Standard_Real UTol = Max(aGAC.Resolution(Tol), Precision::PConfusion());
     Standard_Real reltol = UTol / Max(Abs(UMin), Abs(UMax));
-    if (UMax - UMin < 0.01 * Du)
-    {
-        //It is suggested that function has one extremum on small interval
+    if (UMax - UMin < 0.01 * Du) {
+        // It is suggested that function has one extremum on small interval
         math_BrentMinimum anOptLoc(reltol, 100, UTol);
         Curv2dMaxMinCoord aFunc(myCurve, UMin, UMax, CoordIndx, aSign);
         anOptLoc.Perform(aFunc, UMin, (UMin + UMax) / 2., UMax);
-        if (anOptLoc.IsDone())
-        {
+        if (anOptLoc.IsDone()) {
             extr = anOptLoc.Minimum();
             return aSign * extr;
         }
@@ -622,8 +528,7 @@ Standard_Real BndLib_Box2dCurve::AdjustExtr(const Standard_Real UMin,
     Curv2dMaxMinCoord aFunc1(myCurve, UMin, UMax, CoordIndx, aSign);
     anOptLoc.Perform(aFunc1, Max(aT(1) - aSteps(1), UMin), aT(1), Min(aT(1) + aSteps(1), UMax));
 
-    if (anOptLoc.IsDone())
-    {
+    if (anOptLoc.IsDone()) {
         extr = anOptLoc.Minimum();
         return aSign * extr;
     }
@@ -632,97 +537,77 @@ Standard_Real BndLib_Box2dCurve::AdjustExtr(const Standard_Real UMin,
 }
 
 //=======================================================================
-//function : PerformGenCurv
-//purpose  : 
+// function : PerformGenCurv
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformGenCurv(const Standard_Real Tol)
-{
+void BndLib_Box2dCurve::PerformGenCurv(const Standard_Real Tol) {
     //
     Standard_Integer Nu = NbSamples();
     //
-    Standard_Real CoordMin[2] = { RealLast(), RealLast() };
-    Standard_Real CoordMax[2] = { -RealLast(), -RealLast() };
-    Standard_Real DeflMax[2] = { -RealLast(), -RealLast() };
+    Standard_Real CoordMin[2] = {RealLast(), RealLast()};
+    Standard_Real CoordMax[2] = {-RealLast(), -RealLast()};
+    Standard_Real DeflMax[2] = {-RealLast(), -RealLast()};
     //
     gp_Pnt2d P;
     Standard_Integer i, k;
     Standard_Real du = (myT2 - myT1) / (Nu - 1), du2 = du / 2.;
     NCollection_Array1<gp_XY> aPnts(1, Nu);
     Standard_Real u;
-    for (i = 1, u = myT1; i <= Nu; i++, u += du)
-    {
+    for (i = 1, u = myT1; i <= Nu; i++, u += du) {
         D0(u, P);
         aPnts(i) = P.XY();
         //
-        for (k = 0; k < 2; ++k)
-        {
-            if (CoordMin[k] > P.Coord(k + 1))
-            {
+        for (k = 0; k < 2; ++k) {
+            if (CoordMin[k] > P.Coord(k + 1)) {
                 CoordMin[k] = P.Coord(k + 1);
             }
-            if (CoordMax[k] < P.Coord(k + 1))
-            {
+            if (CoordMax[k] < P.Coord(k + 1)) {
                 CoordMax[k] = P.Coord(k + 1);
             }
         }
         //
-        if (i > 1)
-        {
+        if (i > 1) {
             gp_XY aPm = 0.5 * (aPnts(i - 1) + aPnts(i));
             D0(u - du2, P);
             gp_XY aD = (P.XY() - aPm);
-            for (k = 0; k < 2; ++k)
-            {
-                if (CoordMin[k] > P.Coord(k + 1))
-                {
+            for (k = 0; k < 2; ++k) {
+                if (CoordMin[k] > P.Coord(k + 1)) {
                     CoordMin[k] = P.Coord(k + 1);
                 }
-                if (CoordMax[k] < P.Coord(k + 1))
-                {
+                if (CoordMax[k] < P.Coord(k + 1)) {
                     CoordMax[k] = P.Coord(k + 1);
                 }
                 Standard_Real d = Abs(aD.Coord(k + 1));
-                if (DeflMax[k] < d)
-                {
+                if (DeflMax[k] < d) {
                     DeflMax[k] = d;
                 }
             }
         }
     }
     //
-    //Adjusting minmax 
-    for (k = 0; k < 2; ++k)
-    {
+    // Adjusting minmax
+    for (k = 0; k < 2; ++k) {
         Standard_Real d = DeflMax[k];
-        if (d <= Tol)
-        {
+        if (d <= Tol) {
             continue;
         }
         Standard_Real CMin = CoordMin[k];
         Standard_Real CMax = CoordMax[k];
-        for (i = 1; i <= Nu; ++i)
-        {
-            if (aPnts(i).Coord(k + 1) - CMin < d)
-            {
+        for (i = 1; i <= Nu; ++i) {
+            if (aPnts(i).Coord(k + 1) - CMin < d) {
                 Standard_Real tmin, tmax;
                 tmin = myT1 + Max(0, i - 2) * du;
                 tmax = myT1 + Min(Nu - 1, i) * du;
-                Standard_Real cmin = AdjustExtr(tmin, tmax,
-                    CMin, k + 1, Tol, Standard_True);
-                if (cmin < CMin)
-                {
+                Standard_Real cmin = AdjustExtr(tmin, tmax, CMin, k + 1, Tol, Standard_True);
+                if (cmin < CMin) {
                     CMin = cmin;
                 }
-            }
-            else if (CMax - aPnts(i).Coord(k + 1) < d)
-            {
+            } else if (CMax - aPnts(i).Coord(k + 1) < d) {
                 Standard_Real tmin, tmax;
                 tmin = myT1 + Max(0, i - 2) * du;
                 tmax = myT1 + Min(Nu - 1, i) * du;
-                Standard_Real cmax = AdjustExtr(tmin, tmax,
-                    CMax, k + 1, Tol, Standard_False);
-                if (cmax > CMax)
-                {
+                Standard_Real cmax = AdjustExtr(tmin, tmax, CMax, k + 1, Tol, Standard_False);
+                if (cmax > CMax) {
                     CMax = cmax;
                 }
             }
@@ -736,12 +621,10 @@ void BndLib_Box2dCurve::PerformGenCurv(const Standard_Real Tol)
     myBox.Enlarge(Tol);
 }
 //=======================================================================
-//function : D0
-//purpose  : 
+// function : D0
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::D0(const Standard_Real aU,
-    gp_Pnt2d& aP2D)
-{
+void BndLib_Box2dCurve::D0(const Standard_Real aU, gp_Pnt2d& aP2D) {
     gp_Vec2d aV1;
     //
     myCurveBase->D1(aU, aP2D, aV1);
@@ -775,13 +658,12 @@ void BndLib_Box2dCurve::D0(const Standard_Real aU,
     //
 }
 //=======================================================================
-//function : GetInfoBase
-//purpose  : 
+// function : GetInfoBase
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::GetInfoBase()
-{
+void BndLib_Box2dCurve::GetInfoBase() {
     Standard_Boolean bIsTypeBase;
-    Standard_Integer  iTrimmed, iOffset;
+    Standard_Integer iTrimmed, iOffset;
     GeomAbs_CurveType aTypeB;
     Handle(Geom2d_Curve) aC2DB;
     Handle(Geom2d_TrimmedCurve) aCT2D;
@@ -835,13 +717,10 @@ void BndLib_Box2dCurve::GetInfoBase()
     myErrorStatus = 11; // unknown type base
 }
 //=======================================================================
-//function : IsTypeBase
-//purpose  : 
+// function : IsTypeBase
+// purpose  :
 //=======================================================================
-Standard_Boolean BndLib_Box2dCurve::IsTypeBase
-(const Handle(Geom2d_Curve)& aC2D,
-    GeomAbs_CurveType& aTypeB)
-{
+Standard_Boolean BndLib_Box2dCurve::IsTypeBase(const Handle(Geom2d_Curve) & aC2D, GeomAbs_CurveType& aTypeB) {
     Standard_Boolean bRet;
     Handle(Standard_Type) aType;
     //
@@ -850,39 +729,31 @@ Standard_Boolean BndLib_Box2dCurve::IsTypeBase
     aType = aC2D->DynamicType();
     if (aType == STANDARD_TYPE(Geom2d_Line)) {
         aTypeB = GeomAbs_Line;
-    }
-    else if (aType == STANDARD_TYPE(Geom2d_Circle)) {
+    } else if (aType == STANDARD_TYPE(Geom2d_Circle)) {
         aTypeB = GeomAbs_Circle;
-    }
-    else if (aType == STANDARD_TYPE(Geom2d_Ellipse)) {
+    } else if (aType == STANDARD_TYPE(Geom2d_Ellipse)) {
         aTypeB = GeomAbs_Ellipse;
-    }
-    else if (aType == STANDARD_TYPE(Geom2d_Parabola)) {
+    } else if (aType == STANDARD_TYPE(Geom2d_Parabola)) {
         aTypeB = GeomAbs_Parabola;
-    }
-    else if (aType == STANDARD_TYPE(Geom2d_Hyperbola)) {
+    } else if (aType == STANDARD_TYPE(Geom2d_Hyperbola)) {
         aTypeB = GeomAbs_Hyperbola;
-    }
-    else if (aType == STANDARD_TYPE(Geom2d_BezierCurve)) {
+    } else if (aType == STANDARD_TYPE(Geom2d_BezierCurve)) {
         aTypeB = GeomAbs_BezierCurve;
-    }
-    else if (aType == STANDARD_TYPE(Geom2d_BSplineCurve)) {
+    } else if (aType == STANDARD_TYPE(Geom2d_BSplineCurve)) {
         aTypeB = GeomAbs_BSplineCurve;
-    }
-    else {
+    } else {
         aTypeB = GeomAbs_OtherCurve;
         bRet = !bRet;
     }
     return bRet;
 }
 //=======================================================================
-//function : PerformLineConic
-//purpose  : 
+// function : PerformLineConic
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::PerformLineConic()
-{
+void BndLib_Box2dCurve::PerformLineConic() {
     Standard_Integer i, iInf[2];
-    Standard_Real  aTb[2];
+    Standard_Real aTb[2];
     gp_Pnt2d aP2D;
     //
     myErrorStatus = 0;
@@ -899,13 +770,11 @@ void BndLib_Box2dCurve::PerformLineConic()
             D0(aTb[i], aP2D);
             aBox2D.Add(aP2D);
             ++iInf[0];
-        }
-        else if (Precision::IsPositiveInfinite(aTb[i])) {
+        } else if (Precision::IsPositiveInfinite(aTb[i])) {
             D0(aTb[i], aP2D);
             aBox2D.Add(aP2D);
             ++iInf[1];
-        }
-        else {
+        } else {
             D0(aTb[i], aP2D);
             aBox2D.Add(aP2D);
         }
@@ -923,18 +792,13 @@ void BndLib_Box2dCurve::PerformLineConic()
     //
     aConic2D = Handle(Geom2d_Conic)::DownCast(myCurveBase);
     Compute(aConic2D, myTypeBase, aTb[0], aTb[1], aBox2D);
-
 }
 //=======================================================================
-//function : Compute
-//purpose  : 
+// function : Compute
+// purpose  :
 //=======================================================================
-void BndLib_Box2dCurve::Compute(const Handle(Geom2d_Conic)& aConic2D,
-    const GeomAbs_CurveType aType,
-    const Standard_Real aT1,
-    const Standard_Real aT2,
-    Bnd_Box2d& aBox2D)
-{
+void BndLib_Box2dCurve::Compute(const Handle(Geom2d_Conic) & aConic2D, const GeomAbs_CurveType aType,
+                                const Standard_Real aT1, const Standard_Real aT2, Bnd_Box2d& aBox2D) {
     Standard_Integer i, aNbT;
     Standard_Real pT[10], aT, aTwoPI, dT, aEps;
     gp_Pnt2d aP2D;
@@ -952,7 +816,7 @@ void BndLib_Box2dCurve::Compute(const Handle(Geom2d_Conic)& aConic2D,
         return;
     }
     //
-    //aType==GeomAbs_Circle ||  aType==GeomAbs_Ellipse
+    // aType==GeomAbs_Circle ||  aType==GeomAbs_Ellipse
     aEps = 1.e-14;
     aTwoPI = 2. * M_PI;
     dT = aT2 - aT1;
@@ -980,14 +844,11 @@ void BndLib_Box2dCurve::Compute(const Handle(Geom2d_Conic)& aConic2D,
 }
 
 //=======================================================================
-//function : Compute
-//purpose  : 
+// function : Compute
+// purpose  :
 //=======================================================================
-Standard_Integer BndLib_Box2dCurve::Compute
-(const Handle(Geom2d_Conic)& aConic2D,
-    const GeomAbs_CurveType aType,
-    Standard_Real* pT)
-{
+Standard_Integer BndLib_Box2dCurve::Compute(const Handle(Geom2d_Conic) & aConic2D, const GeomAbs_CurveType aType,
+                                            Standard_Real* pT) {
     Standard_Integer iRet, i, j;
     Standard_Real aCosBt, aSinBt, aCosGm, aSinGm;
     Standard_Real aLx, aLy;
@@ -1014,8 +875,7 @@ Standard_Integer BndLib_Box2dCurve::Compute
             aEL2D = Handle(Geom2d_Ellipse)::DownCast(aConic2D);
             aR1 = aEL2D->MajorRadius();
             aR2 = aEL2D->MinorRadius();
-        }
-        else if (aType == GeomAbs_Circle) {
+        } else if (aType == GeomAbs_Circle) {
             Handle(Geom2d_Circle) aCR2D;
             //
             aCR2D = Handle(Geom2d_Circle)::DownCast(aConic2D);
@@ -1051,7 +911,7 @@ Standard_Integer BndLib_Box2dCurve::Compute
             pT[j + 1] = AdjustToPeriod(pT[j + 1], aTwoPI);
         }
         iRet = 4;
-    }//if (aType==GeomAbs_Ellipse) {
+    } // if (aType==GeomAbs_Ellipse) {
     //
     else if (aType == GeomAbs_Parabola) {
         Standard_Real aFc, aEps;
@@ -1079,7 +939,7 @@ Standard_Integer BndLib_Box2dCurve::Compute
             ++j;
         }
         iRet = j;
-    }// else if (aType==GeomAbs_Parabola) {
+    } // else if (aType==GeomAbs_Parabola) {
     //
     else if (aType == GeomAbs_Hyperbola) {
         Standard_Integer k;
@@ -1100,7 +960,7 @@ Standard_Integer BndLib_Box2dCurve::Compute
             //
             aB1 = aR1 * (aLx * aSinBt - aLy * aCosBt);
             aB2 = aR2 * (aLx * aSinGm - aLy * aCosGm);
-            // 
+            //
             if (fabs(aB1) < aEps) {
                 continue;
             }
@@ -1108,8 +968,7 @@ Standard_Integer BndLib_Box2dCurve::Compute
             if (fabs(aB2) < aEps) {
                 pT[j] = 0.;
                 ++j;
-            }
-            else {
+            } else {
                 aB12 = aB1 * aB1;
                 aB22 = aB2 * aB2;
                 if (!(aB12 > aB22)) {
@@ -1128,17 +987,15 @@ Standard_Integer BndLib_Box2dCurve::Compute
             }
         }
         iRet = j;
-    }// else if (aType==GeomAbs_Hyperbola) {
+    } // else if (aType==GeomAbs_Hyperbola) {
     //
     return iRet;
 }
 //=======================================================================
-//function : AdjustToPeriod
-//purpose  : 
+// function : AdjustToPeriod
+// purpose  :
 //=======================================================================
-Standard_Real BndLib_Box2dCurve::AdjustToPeriod(const Standard_Real aT,
-    const Standard_Real aPeriod)
-{
+Standard_Real BndLib_Box2dCurve::AdjustToPeriod(const Standard_Real aT, const Standard_Real aPeriod) {
     Standard_Integer k;
     Standard_Real aTRet;
     //
@@ -1146,8 +1003,7 @@ Standard_Real BndLib_Box2dCurve::AdjustToPeriod(const Standard_Real aT,
     if (aT < 0.) {
         k = 1 + (Standard_Integer)(-aT / aPeriod);
         aTRet = aT + k * aPeriod;
-    }
-    else if (aT > aPeriod) {
+    } else if (aT > aPeriod) {
         k = (Standard_Integer)(aT / aPeriod);
         aTRet = aT - k * aPeriod;
     }
@@ -1164,32 +1020,21 @@ Standard_Real BndLib_Box2dCurve::AdjustToPeriod(const Standard_Real aT,
 // 12 - invalid range myT1 >  myT2l
 // 11 - unknown type of base curve
 // 13 - offset curve can not be computed
-//NMTTest
+// NMTTest
 
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
-void BndLib_Add2dCurve::Add(const Adaptor2d_Curve2d& aC,
-    const Standard_Real aTol,
-    Bnd_Box2d& aBox2D)
-{
-    BndLib_Add2dCurve::Add(aC,
-        aC.FirstParameter(),
-        aC.LastParameter(),
-        aTol,
-        aBox2D);
+void BndLib_Add2dCurve::Add(const Adaptor2d_Curve2d& aC, const Standard_Real aTol, Bnd_Box2d& aBox2D) {
+    BndLib_Add2dCurve::Add(aC, aC.FirstParameter(), aC.LastParameter(), aTol, aBox2D);
 }
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
-void BndLib_Add2dCurve::Add(const Adaptor2d_Curve2d& aC,
-    const Standard_Real aU1,
-    const Standard_Real aU2,
-    const Standard_Real aTol,
-    Bnd_Box2d& aBox2D)
-{
+void BndLib_Add2dCurve::Add(const Adaptor2d_Curve2d& aC, const Standard_Real aU1, const Standard_Real aU2,
+                            const Standard_Real aTol, Bnd_Box2d& aBox2D) {
     Adaptor2d_Curve2d* pC = (Adaptor2d_Curve2d*)&aC;
     Geom2dAdaptor_Curve* pA = dynamic_cast<Geom2dAdaptor_Curve*>(pC);
     if (!pA) {
@@ -1210,18 +1055,15 @@ void BndLib_Add2dCurve::Add(const Adaptor2d_Curve2d& aC,
         return;
     }
     //
-    const Handle(Geom2d_Curve)& aC2D = pA->Curve();
+    const Handle(Geom2d_Curve) & aC2D = pA->Curve();
     //
     BndLib_Add2dCurve::Add(aC2D, aU1, aU2, aTol, aBox2D);
 }
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
-void BndLib_Add2dCurve::Add(const Handle(Geom2d_Curve)& aC2D,
-    const Standard_Real aTol,
-    Bnd_Box2d& aBox2D)
-{
+void BndLib_Add2dCurve::Add(const Handle(Geom2d_Curve) & aC2D, const Standard_Real aTol, Bnd_Box2d& aBox2D) {
     Standard_Real aT1, aT2;
     //
     aT1 = aC2D->FirstParameter();
@@ -1231,15 +1073,11 @@ void BndLib_Add2dCurve::Add(const Handle(Geom2d_Curve)& aC2D,
 }
 
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
-void BndLib_Add2dCurve::Add(const Handle(Geom2d_Curve)& aC2D,
-    const Standard_Real aT1,
-    const Standard_Real aT2,
-    const Standard_Real aTol,
-    Bnd_Box2d& aBox2D)
-{
+void BndLib_Add2dCurve::Add(const Handle(Geom2d_Curve) & aC2D, const Standard_Real aT1, const Standard_Real aT2,
+                            const Standard_Real aTol, Bnd_Box2d& aBox2D) {
     BndLib_Box2dCurve aBC;
     //
     aBC.SetCurve(aC2D);
@@ -1252,15 +1090,11 @@ void BndLib_Add2dCurve::Add(const Handle(Geom2d_Curve)& aC2D,
     aBox2D.Enlarge(aTol);
 }
 //=======================================================================
-//function : AddOptimal
-//purpose  : 
+// function : AddOptimal
+// purpose  :
 //=======================================================================
-void BndLib_Add2dCurve::AddOptimal(const Handle(Geom2d_Curve)& aC2D,
-    const Standard_Real aT1,
-    const Standard_Real aT2,
-    const Standard_Real aTol,
-    Bnd_Box2d& aBox2D)
-{
+void BndLib_Add2dCurve::AddOptimal(const Handle(Geom2d_Curve) & aC2D, const Standard_Real aT1, const Standard_Real aT2,
+                                   const Standard_Real aTol, Bnd_Box2d& aBox2D) {
     BndLib_Box2dCurve aBC;
     //
     aBC.SetCurve(aC2D);

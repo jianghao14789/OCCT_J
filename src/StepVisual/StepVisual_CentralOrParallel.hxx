@@ -17,11 +17,6 @@
 #ifndef _StepVisual_CentralOrParallel_HeaderFile
 #define _StepVisual_CentralOrParallel_HeaderFile
 
-
-enum StepVisual_CentralOrParallel
-{
-StepVisual_copCentral,
-StepVisual_copParallel
-};
+enum StepVisual_CentralOrParallel { StepVisual_copCentral, StepVisual_copParallel };
 
 #endif // _StepVisual_CentralOrParallel_HeaderFile

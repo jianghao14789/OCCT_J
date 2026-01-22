@@ -22,5 +22,4 @@
 
 typedef NCollection_Array1<StepVisual_BoxCharacteristicSelect> StepVisual_Array1OfBoxCharacteristicSelect;
 
-
 #endif

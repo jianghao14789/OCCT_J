@@ -26,58 +26,38 @@
 class TCollection_HAsciiString;
 class StepShape_BooleanOperand;
 
-
 class StepShape_BooleanResult;
 DEFINE_STANDARD_HANDLE(StepShape_BooleanResult, StepGeom_GeometricRepresentationItem)
 
-
-class StepShape_BooleanResult : public StepGeom_GeometricRepresentationItem
-{
+class StepShape_BooleanResult : public StepGeom_GeometricRepresentationItem {
 
 public:
+    //! Returns a BooleanResult
+    Standard_EXPORT StepShape_BooleanResult();
 
-  
-  //! Returns a BooleanResult
-  Standard_EXPORT StepShape_BooleanResult();
-  
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const StepShape_BooleanOperator aOperator, const StepShape_BooleanOperand& aFirstOperand, const StepShape_BooleanOperand& aSecondOperand);
-  
-  Standard_EXPORT void SetOperator (const StepShape_BooleanOperator aOperator);
-  
-  Standard_EXPORT StepShape_BooleanOperator Operator() const;
-  
-  Standard_EXPORT void SetFirstOperand (const StepShape_BooleanOperand& aFirstOperand);
-  
-  Standard_EXPORT StepShape_BooleanOperand FirstOperand() const;
-  
-  Standard_EXPORT void SetSecondOperand (const StepShape_BooleanOperand& aSecondOperand);
-  
-  Standard_EXPORT StepShape_BooleanOperand SecondOperand() const;
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName, const StepShape_BooleanOperator aOperator,
+                              const StepShape_BooleanOperand& aFirstOperand,
+                              const StepShape_BooleanOperand& aSecondOperand);
 
+    Standard_EXPORT void SetOperator(const StepShape_BooleanOperator aOperator);
 
+    Standard_EXPORT StepShape_BooleanOperator Operator() const;
 
+    Standard_EXPORT void SetFirstOperand(const StepShape_BooleanOperand& aFirstOperand);
 
-  DEFINE_STANDARD_RTTIEXT(StepShape_BooleanResult,StepGeom_GeometricRepresentationItem)
+    Standard_EXPORT StepShape_BooleanOperand FirstOperand() const;
+
+    Standard_EXPORT void SetSecondOperand(const StepShape_BooleanOperand& aSecondOperand);
+
+    Standard_EXPORT StepShape_BooleanOperand SecondOperand() const;
+
+    DEFINE_STANDARD_RTTIEXT(StepShape_BooleanResult, StepGeom_GeometricRepresentationItem)
 
 protected:
-
-
-
-
 private:
-
-
-  StepShape_BooleanOperator anOperator;
-  StepShape_BooleanOperand firstOperand;
-  StepShape_BooleanOperand secondOperand;
-
-
+    StepShape_BooleanOperator anOperator;
+    StepShape_BooleanOperand firstOperand;
+    StepShape_BooleanOperand secondOperand;
 };
-
-
-
-
-
-
 
 #endif // _StepShape_BooleanResult_HeaderFile

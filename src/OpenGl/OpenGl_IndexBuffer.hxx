@@ -18,23 +18,20 @@
 #include <OpenGl_Buffer.hxx>
 
 //! Index buffer is just a VBO with special target (GL_ELEMENT_ARRAY_BUFFER).
-class OpenGl_IndexBuffer : public OpenGl_Buffer
-{
+class OpenGl_IndexBuffer : public OpenGl_Buffer {
 public:
+    //! Empty constructor.
+    Standard_EXPORT OpenGl_IndexBuffer();
 
-  //! Empty constructor.
-  Standard_EXPORT OpenGl_IndexBuffer();
+    //! Return buffer object target (GL_ELEMENT_ARRAY_BUFFER).
+    Standard_EXPORT virtual unsigned int GetTarget() const Standard_OVERRIDE;
 
-  //! Return buffer object target (GL_ELEMENT_ARRAY_BUFFER).
-  Standard_EXPORT virtual unsigned int GetTarget() const Standard_OVERRIDE;
-
-  //! Dumps the content of me into the stream
-  Standard_EXPORT virtual void DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    //! Dumps the content of me into the stream
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
 public:
-
-  DEFINE_STANDARD_RTTIEXT(OpenGl_IndexBuffer, OpenGl_Buffer)
-
+    DEFINE_STANDARD_RTTIEXT(OpenGl_IndexBuffer, OpenGl_Buffer)
 };
 
 DEFINE_STANDARD_HANDLE(OpenGl_IndexBuffer, OpenGl_Buffer)

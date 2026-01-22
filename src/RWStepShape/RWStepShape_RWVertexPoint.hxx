@@ -28,44 +28,22 @@ class StepShape_VertexPoint;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for VertexPoint
-class RWStepShape_RWVertexPoint 
-{
+class RWStepShape_RWVertexPoint {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWVertexPoint();
 
-  
-  Standard_EXPORT RWStepShape_RWVertexPoint();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_VertexPoint)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_VertexPoint)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_VertexPoint)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_VertexPoint) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_VertexPoint) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_VertexPoint) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWVertexPoint_HeaderFile

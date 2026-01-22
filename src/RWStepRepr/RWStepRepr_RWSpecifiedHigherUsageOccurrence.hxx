@@ -27,48 +27,29 @@ class StepRepr_SpecifiedHigherUsageOccurrence;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for SpecifiedHigherUsageOccurrence
-class RWStepRepr_RWSpecifiedHigherUsageOccurrence 
-{
+class RWStepRepr_RWSpecifiedHigherUsageOccurrence {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWSpecifiedHigherUsageOccurrence();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWSpecifiedHigherUsageOccurrence();
-  
-  //! Reads SpecifiedHigherUsageOccurrence
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_SpecifiedHigherUsageOccurrence)& ent) const;
-  
-  //! Writes SpecifiedHigherUsageOccurrence
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_SpecifiedHigherUsageOccurrence)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_SpecifiedHigherUsageOccurrence)& ent, Interface_EntityIterator& iter) const;
+    //! Reads SpecifiedHigherUsageOccurrence
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_SpecifiedHigherUsageOccurrence) & ent) const;
 
+    //! Writes SpecifiedHigherUsageOccurrence
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_SpecifiedHigherUsageOccurrence) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_SpecifiedHigherUsageOccurrence) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWSpecifiedHigherUsageOccurrence_HeaderFile

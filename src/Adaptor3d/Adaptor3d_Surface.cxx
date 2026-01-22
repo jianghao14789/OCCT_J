@@ -36,548 +36,462 @@
 IMPLEMENT_STANDARD_RTTIEXT(Adaptor3d_Surface, Standard_Transient)
 
 //=======================================================================
-//function : ~Adaptor3d_Surface
-//purpose  : Destructor
+// function : ~Adaptor3d_Surface
+// purpose  : Destructor
 //=======================================================================
-Adaptor3d_Surface::~Adaptor3d_Surface()
-{
+Adaptor3d_Surface::~Adaptor3d_Surface() {}
+
+//=======================================================================
+// function : ShallowCopy()
+// purpose  :
+//=======================================================================
+
+Handle(Adaptor3d_Surface) Adaptor3d_Surface::ShallowCopy() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::ShallowCopy");
+}
+//=======================================================================
+// function : FirstUParameter
+// purpose  :
+//=======================================================================
+
+Standard_Real Adaptor3d_Surface::FirstUParameter() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::FirstUParameter");
 }
 
 //=======================================================================
-//function : ShallowCopy()
-//purpose  : 
+// function : LastUParameter
+// purpose  :
 //=======================================================================
 
-Handle(Adaptor3d_Surface) Adaptor3d_Surface::ShallowCopy() const
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::ShallowCopy");
-}
-//=======================================================================
-//function : FirstUParameter
-//purpose  : 
-//=======================================================================
-
-Standard_Real Adaptor3d_Surface::FirstUParameter() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::FirstUParameter");
+Standard_Real Adaptor3d_Surface::LastUParameter() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::LastUParameter");
 }
 
-
 //=======================================================================
-//function : LastUParameter
-//purpose  : 
+// function : FirstVParameter
+// purpose  :
 //=======================================================================
 
-Standard_Real Adaptor3d_Surface::LastUParameter() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::LastUParameter");
+Standard_Real Adaptor3d_Surface::FirstVParameter() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::FirstVParameter");
 }
 
-
 //=======================================================================
-//function : FirstVParameter
-//purpose  : 
+// function : LastVParameter
+// purpose  :
 //=======================================================================
 
-Standard_Real Adaptor3d_Surface::FirstVParameter() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::FirstVParameter");
+Standard_Real Adaptor3d_Surface::LastVParameter() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::LastVParameter");
 }
 
-
 //=======================================================================
-//function : LastVParameter
-//purpose  : 
+// function : UContinuity
+// purpose  :
 //=======================================================================
 
-Standard_Real Adaptor3d_Surface::LastVParameter() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::LastVParameter");
+GeomAbs_Shape Adaptor3d_Surface::UContinuity() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::UContinuity");
 }
 
-
 //=======================================================================
-//function : UContinuity
-//purpose  : 
+// function : VContinuity
+// purpose  :
 //=======================================================================
 
-GeomAbs_Shape Adaptor3d_Surface::UContinuity() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::UContinuity");
+GeomAbs_Shape Adaptor3d_Surface::VContinuity() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::VContinuity");
 }
 
-
 //=======================================================================
-//function : VContinuity
-//purpose  : 
+// function : NbUIntervals
+// purpose  :
 //=======================================================================
 
-GeomAbs_Shape Adaptor3d_Surface::VContinuity() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::VContinuity");
+// Standard_Integer Adaptor3d_Surface::NbUIntervals(const GeomAbs_Shape S) const
+Standard_Integer Adaptor3d_Surface::NbUIntervals(const GeomAbs_Shape) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::NbUIntervals");
 }
 
-
 //=======================================================================
-//function : NbUIntervals
-//purpose  : 
+// function : NbVIntervals
+// purpose  :
 //=======================================================================
 
-//Standard_Integer Adaptor3d_Surface::NbUIntervals(const GeomAbs_Shape S) const 
-Standard_Integer Adaptor3d_Surface::NbUIntervals(const GeomAbs_Shape ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::NbUIntervals");
+// Standard_Integer Adaptor3d_Surface::NbVIntervals(const GeomAbs_Shape S) const
+Standard_Integer Adaptor3d_Surface::NbVIntervals(const GeomAbs_Shape) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::NbVIntervals");
 }
 
-
 //=======================================================================
-//function : NbVIntervals
-//purpose  : 
+// function : UIntervals
+// purpose  :
 //=======================================================================
 
-//Standard_Integer Adaptor3d_Surface::NbVIntervals(const GeomAbs_Shape S) const 
-Standard_Integer Adaptor3d_Surface::NbVIntervals(const GeomAbs_Shape ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::NbVIntervals");
+// void Adaptor3d_Surface::UIntervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const
+void Adaptor3d_Surface::UIntervals(TColStd_Array1OfReal&, const GeomAbs_Shape) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::UIntervals");
 }
 
-
 //=======================================================================
-//function : UIntervals
-//purpose  : 
+// function : VIntervals
+// purpose  :
 //=======================================================================
 
-//void Adaptor3d_Surface::UIntervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const 
-void Adaptor3d_Surface::UIntervals(TColStd_Array1OfReal& , const GeomAbs_Shape ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::UIntervals");
+// void Adaptor3d_Surface::VIntervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const
+void Adaptor3d_Surface::VIntervals(TColStd_Array1OfReal&, const GeomAbs_Shape) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::VIntervals");
 }
 
-
 //=======================================================================
-//function : VIntervals
-//purpose  : 
+// function : UTrim
+// purpose  :
 //=======================================================================
 
-//void Adaptor3d_Surface::VIntervals(TColStd_Array1OfReal& T, const GeomAbs_Shape S) const 
-void Adaptor3d_Surface::VIntervals(TColStd_Array1OfReal& , const GeomAbs_Shape ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::VIntervals");
+// Handle(Adaptor3d_Surface) Adaptor3d_Surface::UTrim(const Standard_Real First, const Standard_Real Last, const
+// Standard_Real Tol) const
+Handle(Adaptor3d_Surface) Adaptor3d_Surface::UTrim(const Standard_Real, const Standard_Real,
+                                                   const Standard_Real) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::UTrim");
 }
 
-
 //=======================================================================
-//function : UTrim
-//purpose  : 
+// function : VTrim
+// purpose  :
 //=======================================================================
 
-//Handle(Adaptor3d_Surface) Adaptor3d_Surface::UTrim(const Standard_Real First, const Standard_Real Last, const Standard_Real Tol) const 
-Handle(Adaptor3d_Surface) Adaptor3d_Surface::UTrim(const Standard_Real , const Standard_Real , const Standard_Real ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::UTrim");
+// Handle(Adaptor3d_Surface) Adaptor3d_Surface::VTrim(const Standard_Real First, const Standard_Real Last, const
+// Standard_Real Tol) const
+Handle(Adaptor3d_Surface) Adaptor3d_Surface::VTrim(const Standard_Real, const Standard_Real,
+                                                   const Standard_Real) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::VTrim");
 }
 
-
 //=======================================================================
-//function : VTrim
-//purpose  : 
+// function : IsUClosed
+// purpose  :
 //=======================================================================
 
-//Handle(Adaptor3d_Surface) Adaptor3d_Surface::VTrim(const Standard_Real First, const Standard_Real Last, const Standard_Real Tol) const 
-Handle(Adaptor3d_Surface) Adaptor3d_Surface::VTrim(const Standard_Real , const Standard_Real , const Standard_Real ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::VTrim");
+Standard_Boolean Adaptor3d_Surface::IsUClosed() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::IsUClosed");
 }
 
-
 //=======================================================================
-//function : IsUClosed
-//purpose  : 
+// function : IsVClosed
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Adaptor3d_Surface::IsUClosed() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::IsUClosed");
+Standard_Boolean Adaptor3d_Surface::IsVClosed() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::IsVClosed");
 }
 
-
 //=======================================================================
-//function : IsVClosed
-//purpose  : 
+// function : IsUPeriodic
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Adaptor3d_Surface::IsVClosed() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::IsVClosed");
+Standard_Boolean Adaptor3d_Surface::IsUPeriodic() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::IsUPeriodic");
 }
 
-
 //=======================================================================
-//function : IsUPeriodic
-//purpose  : 
+// function : UPeriod
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Adaptor3d_Surface::IsUPeriodic() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::IsUPeriodic");
+Standard_Real Adaptor3d_Surface::UPeriod() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::UPeriod");
 }
 
-
 //=======================================================================
-//function : UPeriod
-//purpose  : 
+// function : IsVPeriodic
+// purpose  :
 //=======================================================================
 
-Standard_Real Adaptor3d_Surface::UPeriod() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::UPeriod");
+Standard_Boolean Adaptor3d_Surface::IsVPeriodic() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::IsVPeriodic");
 }
 
-
 //=======================================================================
-//function : IsVPeriodic
-//purpose  : 
+// function : VPeriod
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Adaptor3d_Surface::IsVPeriodic() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::IsVPeriodic");
+Standard_Real Adaptor3d_Surface::VPeriod() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::VPeriod");
 }
 
-
 //=======================================================================
-//function : VPeriod
-//purpose  : 
+// function : Value
+// purpose  :
 //=======================================================================
 
-Standard_Real Adaptor3d_Surface::VPeriod() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::VPeriod");
+// gp_Pnt Adaptor3d_Surface::Value(const Standard_Real U, const Standard_Real V) const
+gp_Pnt Adaptor3d_Surface::Value(const Standard_Real, const Standard_Real) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Value");
 }
 
-
 //=======================================================================
-//function : Value
-//purpose  : 
+// function : D0
+// purpose  :
 //=======================================================================
 
-//gp_Pnt Adaptor3d_Surface::Value(const Standard_Real U, const Standard_Real V) const 
-gp_Pnt Adaptor3d_Surface::Value(const Standard_Real , const Standard_Real ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Value");
+// void Adaptor3d_Surface::D0(const Standard_Real U, const Standard_Real V, gp_Pnt& P) const
+void Adaptor3d_Surface::D0(const Standard_Real, const Standard_Real, gp_Pnt&) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::D0");
 }
 
-
 //=======================================================================
-//function : D0
-//purpose  : 
+// function : D1
+// purpose  :
 //=======================================================================
 
-//void Adaptor3d_Surface::D0(const Standard_Real U, const Standard_Real V, gp_Pnt& P) const 
-void Adaptor3d_Surface::D0(const Standard_Real , const Standard_Real , gp_Pnt& ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::D0");
+// void Adaptor3d_Surface::D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const
+void Adaptor3d_Surface::D1(const Standard_Real, const Standard_Real, gp_Pnt&, gp_Vec&, gp_Vec&) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::D1");
 }
 
-
 //=======================================================================
-//function : D1
-//purpose  : 
+// function : D2
+// purpose  :
 //=======================================================================
 
-//void Adaptor3d_Surface::D1(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V) const 
-void Adaptor3d_Surface::D1(const Standard_Real , const Standard_Real , gp_Pnt& , gp_Vec& , gp_Vec& ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::D1");
+// void Adaptor3d_Surface::D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec&
+// D2U, gp_Vec& D2V, gp_Vec& D2UV) const
+void Adaptor3d_Surface::D2(const Standard_Real, const Standard_Real, gp_Pnt&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&,
+                           gp_Vec&) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::D2");
 }
 
-
 //=======================================================================
-//function : D2
-//purpose  : 
+// function : D3
+// purpose  :
 //=======================================================================
 
-//void Adaptor3d_Surface::D2(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV) const 
-void Adaptor3d_Surface::D2(const Standard_Real , const Standard_Real , gp_Pnt& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::D2");
+// void Adaptor3d_Surface::D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec&
+// D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const
+void Adaptor3d_Surface::D3(const Standard_Real, const Standard_Real, gp_Pnt&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&,
+                           gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&, gp_Vec&) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::D3");
 }
 
-
 //=======================================================================
-//function : D3
-//purpose  : 
+// function : DN
+// purpose  :
 //=======================================================================
 
-//void Adaptor3d_Surface::D3(const Standard_Real U, const Standard_Real V, gp_Pnt& P, gp_Vec& D1U, gp_Vec& D1V, gp_Vec& D2U, gp_Vec& D2V, gp_Vec& D2UV, gp_Vec& D3U, gp_Vec& D3V, gp_Vec& D3UUV, gp_Vec& D3UVV) const 
-void Adaptor3d_Surface::D3(const Standard_Real , const Standard_Real , gp_Pnt& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& , gp_Vec& ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::D3");
+// gp_Vec Adaptor3d_Surface::DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const
+// Standard_Integer Nv) const
+gp_Vec Adaptor3d_Surface::DN(const Standard_Real, const Standard_Real, const Standard_Integer,
+                             const Standard_Integer) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::DN");
 }
 
-
 //=======================================================================
-//function : DN
-//purpose  : 
+// function : UResolution
+// purpose  :
 //=======================================================================
 
-//gp_Vec Adaptor3d_Surface::DN(const Standard_Real U, const Standard_Real V, const Standard_Integer Nu, const Standard_Integer Nv) const 
-gp_Vec Adaptor3d_Surface::DN(const Standard_Real , const Standard_Real , const Standard_Integer , const Standard_Integer ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::DN");
+// Standard_Real Adaptor3d_Surface::UResolution(const Standard_Real R3d) const
+Standard_Real Adaptor3d_Surface::UResolution(const Standard_Real) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::UResolution");
 }
 
-
 //=======================================================================
-//function : UResolution
-//purpose  : 
+// function : VResolution
+// purpose  :
 //=======================================================================
 
-//Standard_Real Adaptor3d_Surface::UResolution(const Standard_Real R3d) const 
-Standard_Real Adaptor3d_Surface::UResolution(const Standard_Real ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::UResolution");
+// Standard_Real Adaptor3d_Surface::VResolution(const Standard_Real R3d) const
+Standard_Real Adaptor3d_Surface::VResolution(const Standard_Real) const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::VResolution");
 }
 
-
 //=======================================================================
-//function : VResolution
-//purpose  : 
+// function : GetType
+// purpose  :
 //=======================================================================
 
-//Standard_Real Adaptor3d_Surface::VResolution(const Standard_Real R3d) const 
-Standard_Real Adaptor3d_Surface::VResolution(const Standard_Real ) const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::VResolution");
+GeomAbs_SurfaceType Adaptor3d_Surface::GetType() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::GetType");
 }
 
-
 //=======================================================================
-//function : GetType
-//purpose  : 
+// function : Plane
+// purpose  :
 //=======================================================================
 
-GeomAbs_SurfaceType Adaptor3d_Surface::GetType() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::GetType");
+gp_Pln Adaptor3d_Surface::Plane() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Plane");
 }
 
-
 //=======================================================================
-//function : Plane
-//purpose  : 
+// function : Cylinder
+// purpose  :
 //=======================================================================
 
-gp_Pln Adaptor3d_Surface::Plane() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Plane");
+gp_Cylinder Adaptor3d_Surface::Cylinder() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Cylinder");
 }
 
-
 //=======================================================================
-//function : Cylinder
-//purpose  : 
+// function : Cone
+// purpose  :
 //=======================================================================
 
-gp_Cylinder Adaptor3d_Surface::Cylinder() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Cylinder");
+gp_Cone Adaptor3d_Surface::Cone() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Cone");
 }
 
-
 //=======================================================================
-//function : Cone
-//purpose  : 
+// function : Sphere
+// purpose  :
 //=======================================================================
 
-gp_Cone Adaptor3d_Surface::Cone() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Cone");
+gp_Sphere Adaptor3d_Surface::Sphere() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Sphere");
 }
 
-
 //=======================================================================
-//function : Sphere
-//purpose  : 
+// function : Torus
+// purpose  :
 //=======================================================================
 
-gp_Sphere Adaptor3d_Surface::Sphere() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Sphere");
+gp_Torus Adaptor3d_Surface::Torus() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Torus");
 }
 
-
 //=======================================================================
-//function : Torus
-//purpose  : 
+// function : UDegree
+// purpose  :
 //=======================================================================
 
-gp_Torus Adaptor3d_Surface::Torus() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Torus");
+Standard_Integer Adaptor3d_Surface::UDegree() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::UDegree");
 }
 
-
 //=======================================================================
-//function : UDegree
-//purpose  : 
+// function : NbUPoles
+// purpose  :
 //=======================================================================
 
-Standard_Integer Adaptor3d_Surface::UDegree() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::UDegree");
+Standard_Integer Adaptor3d_Surface::NbUPoles() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::NbUPoles");
 }
 
-
 //=======================================================================
-//function : NbUPoles
-//purpose  : 
+// function : VDegree
+// purpose  :
 //=======================================================================
 
-Standard_Integer Adaptor3d_Surface::NbUPoles() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::NbUPoles");
+Standard_Integer Adaptor3d_Surface::VDegree() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::VDegree");
 }
 
-
 //=======================================================================
-//function : VDegree
-//purpose  : 
+// function : NbVPoles
+// purpose  :
 //=======================================================================
 
-Standard_Integer Adaptor3d_Surface::VDegree() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::VDegree");
+Standard_Integer Adaptor3d_Surface::NbVPoles() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::NbVPoles");
 }
 
-
 //=======================================================================
-//function : NbVPoles
-//purpose  : 
+// function : NbUKnots
+// purpose  :
 //=======================================================================
 
-Standard_Integer Adaptor3d_Surface::NbVPoles() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::NbVPoles");
+Standard_Integer Adaptor3d_Surface::NbUKnots() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::NbUKnots");
 }
 
-
 //=======================================================================
-//function : NbUKnots
-//purpose  : 
+// function : NbVKnots
+// purpose  :
 //=======================================================================
 
-Standard_Integer Adaptor3d_Surface::NbUKnots() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::NbUKnots");
+Standard_Integer Adaptor3d_Surface::NbVKnots() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::NbVKnots");
 }
 
-
 //=======================================================================
-//function : NbVKnots
-//purpose  : 
+// function : IsURational
+// purpose  :
 //=======================================================================
 
-Standard_Integer Adaptor3d_Surface::NbVKnots() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::NbVKnots");
+Standard_Boolean Adaptor3d_Surface::IsURational() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::IsURational");
 }
 
-
 //=======================================================================
-//function : IsURational
-//purpose  : 
+// function : IsVRational
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Adaptor3d_Surface::IsURational() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::IsURational");
+Standard_Boolean Adaptor3d_Surface::IsVRational() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::IsVRational");
 }
 
-
 //=======================================================================
-//function : IsVRational
-//purpose  : 
+// function : Bezier
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Adaptor3d_Surface::IsVRational() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::IsVRational");
+Handle(Geom_BezierSurface) Adaptor3d_Surface::Bezier() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Bezier");
 }
 
-
 //=======================================================================
-//function : Bezier
-//purpose  : 
+// function : BSpline
+// purpose  :
 //=======================================================================
 
-Handle(Geom_BezierSurface) Adaptor3d_Surface::Bezier() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Bezier");
+Handle(Geom_BSplineSurface) Adaptor3d_Surface::BSpline() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::BSpline");
 }
 
-
 //=======================================================================
-//function : BSpline
-//purpose  : 
+// function : AxeOfRevolution
+// purpose  :
 //=======================================================================
 
-Handle(Geom_BSplineSurface) Adaptor3d_Surface::BSpline() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::BSpline");
+gp_Ax1 Adaptor3d_Surface::AxeOfRevolution() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::AxeOfRevolution");
 }
 
-
 //=======================================================================
-//function : AxeOfRevolution
-//purpose  : 
+// function : Direction
+// purpose  :
 //=======================================================================
 
-gp_Ax1 Adaptor3d_Surface::AxeOfRevolution() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::AxeOfRevolution");
+gp_Dir Adaptor3d_Surface::Direction() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::Direction");
 }
 
-
 //=======================================================================
-//function : Direction
-//purpose  : 
+// function : BasisCurve
+// purpose  :
 //=======================================================================
 
-gp_Dir Adaptor3d_Surface::Direction() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::Direction");
+Handle(Adaptor3d_Curve) Adaptor3d_Surface::BasisCurve() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::BasisCurve");
 }
 
-
 //=======================================================================
-//function : BasisCurve
-//purpose  : 
+// function : BasisSurface
+// purpose  :
 //=======================================================================
 
-Handle(Adaptor3d_Curve) Adaptor3d_Surface::BasisCurve() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::BasisCurve");
+Handle(Adaptor3d_Surface) Adaptor3d_Surface::BasisSurface() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::BasisSurface");
 }
 
-
 //=======================================================================
-//function : BasisSurface
-//purpose  : 
-//=======================================================================
-
-Handle(Adaptor3d_Surface) Adaptor3d_Surface::BasisSurface() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::BasisSurface");
-}
-
-
-//=======================================================================
-//function : OffsetValue
-//purpose  : 
+// function : OffsetValue
+// purpose  :
 //=======================================================================
 
-Standard_Real Adaptor3d_Surface::OffsetValue() const 
-{
-  throw Standard_NotImplemented("Adaptor3d_Surface::OffsetValue");
+Standard_Real Adaptor3d_Surface::OffsetValue() const {
+    throw Standard_NotImplemented("Adaptor3d_Surface::OffsetValue");
 }

@@ -23,29 +23,24 @@
 #include <Standard_Integer.hxx>
 
 //! class for range index management of curve
-class IntTools_CurveRangeSampleMapHasher 
-{
+class IntTools_CurveRangeSampleMapHasher {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Computes a hash code for the given key, in the range [1, theUpperBound]
+    //! @param theKey the key which hash code is to be computed
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    static Standard_Integer HashCode(const IntTools_CurveRangeSample& theKey, const Standard_Integer theUpperBound) {
+        return ::HashCode(theKey.GetDepth(), theUpperBound);
+    }
 
-  //! Computes a hash code for the given key, in the range [1, theUpperBound]
-  //! @param theKey the key which hash code is to be computed
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  static Standard_Integer HashCode (const IntTools_CurveRangeSample& theKey, const Standard_Integer theUpperBound)
-  {
-    return ::HashCode(theKey.GetDepth(), theUpperBound);
-  }
-
-  //! Returns True  when the two  keys are the same. Two
-  //! same  keys  must   have  the  same  hashcode,  the
-  //! contrary is not necessary.
-  static Standard_Boolean IsEqual (const IntTools_CurveRangeSample& S1, const IntTools_CurveRangeSample& S2)
-  {
-    return S1.IsEqual(S2);
-  }
-
+    //! Returns True  when the two  keys are the same. Two
+    //! same  keys  must   have  the  same  hashcode,  the
+    //! contrary is not necessary.
+    static Standard_Boolean IsEqual(const IntTools_CurveRangeSample& S1, const IntTools_CurveRangeSample& S2) {
+        return S1.IsEqual(S2);
+    }
 };
 
 #endif // _IntTools_CurveRangeSampleMapHasher_HeaderFile

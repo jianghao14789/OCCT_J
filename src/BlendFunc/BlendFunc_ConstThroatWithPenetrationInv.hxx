@@ -25,12 +25,11 @@ class math_Matrix;
 //! on a surface's boundary
 class BlendFunc_ConstThroatWithPenetrationInv : public BlendFunc_ConstThroatInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT BlendFunc_ConstThroatWithPenetrationInv(const Handle(Adaptor3d_Surface)& S1,
-        const Handle(Adaptor3d_Surface)& S2,
-        const Handle(Adaptor3d_Curve)& C);
+    Standard_EXPORT BlendFunc_ConstThroatWithPenetrationInv(const Handle(Adaptor3d_Surface) & S1,
+                                                            const Handle(Adaptor3d_Surface) & S2,
+                                                            const Handle(Adaptor3d_Curve) & C);
 
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) Standard_OVERRIDE;
 
@@ -47,9 +46,7 @@ public:
     Standard_EXPORT Standard_Boolean Derivatives(const math_Vector& X, math_Matrix& D) Standard_OVERRIDE;
 
 protected:
-
 private:
-
 };
 
 #endif // _BlendFunc_ConstThroatWithPenetrationInv_HeaderFile

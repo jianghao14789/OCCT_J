@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(TransferBRep_HSequenceOfTransferResultInfo, TransferBRep_SequenceOfTransferResultInfo)
 
-
 #endif

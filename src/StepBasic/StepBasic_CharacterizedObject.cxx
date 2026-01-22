@@ -19,81 +19,74 @@
 #include <StepBasic_CharacterizedObject.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_CharacterizedObject,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_CharacterizedObject, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_CharacterizedObject
-//purpose  : 
+// function : StepBasic_CharacterizedObject
+// purpose  :
 //=======================================================================
-StepBasic_CharacterizedObject::StepBasic_CharacterizedObject ()
-{
-  defDescription = Standard_False;
+StepBasic_CharacterizedObject::StepBasic_CharacterizedObject() {
+    defDescription = Standard_False;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void StepBasic_CharacterizedObject::Init (const Handle(TCollection_HAsciiString) &aName,
-                                          const Standard_Boolean hasDescription,
-                                          const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theName = aName;
+void StepBasic_CharacterizedObject::Init(const Handle(TCollection_HAsciiString) & aName,
+                                         const Standard_Boolean hasDescription,
+                                         const Handle(TCollection_HAsciiString) & aDescription) {
+    theName = aName;
 
-  defDescription = hasDescription;
-  if (defDescription) {
+    defDescription = hasDescription;
+    if (defDescription) {
+        theDescription = aDescription;
+    } else
+        theDescription.Nullify();
+}
+
+//=======================================================================
+// function : Name
+// purpose  :
+//=======================================================================
+
+Handle(TCollection_HAsciiString) StepBasic_CharacterizedObject::Name() const {
+    return theName;
+}
+
+//=======================================================================
+// function : SetName
+// purpose  :
+//=======================================================================
+
+void StepBasic_CharacterizedObject::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
+}
+
+//=======================================================================
+// function : Description
+// purpose  :
+//=======================================================================
+
+Handle(TCollection_HAsciiString) StepBasic_CharacterizedObject::Description() const {
+    return theDescription;
+}
+
+//=======================================================================
+// function : SetDescription
+// purpose  :
+//=======================================================================
+
+void StepBasic_CharacterizedObject::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
     theDescription = aDescription;
-  }
-  else theDescription.Nullify();
 }
 
 //=======================================================================
-//function : Name
-//purpose  : 
+// function : HasDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_CharacterizedObject::Name () const
-{
-  return theName;
-}
-
-//=======================================================================
-//function : SetName
-//purpose  : 
-//=======================================================================
-
-void StepBasic_CharacterizedObject::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
-}
-
-//=======================================================================
-//function : Description
-//purpose  : 
-//=======================================================================
-
-Handle(TCollection_HAsciiString) StepBasic_CharacterizedObject::Description () const
-{
-  return theDescription;
-}
-
-//=======================================================================
-//function : SetDescription
-//purpose  : 
-//=======================================================================
-
-void StepBasic_CharacterizedObject::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
-}
-
-//=======================================================================
-//function : HasDescription
-//purpose  : 
-//=======================================================================
-
-Standard_Boolean StepBasic_CharacterizedObject::HasDescription () const
-{
-  return defDescription;
+Standard_Boolean StepBasic_CharacterizedObject::HasDescription() const {
+    return defDescription;
 }

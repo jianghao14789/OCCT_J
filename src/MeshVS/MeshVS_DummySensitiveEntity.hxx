@@ -27,32 +27,34 @@
 //! both hidden and shown, but these owners user cannot select "by hands"
 //! in viewer. They means for internal application tasks, for example, receiving
 //! all owners, both for hidden and shown entities.
-class MeshVS_DummySensitiveEntity : public Select3D_SensitiveEntity
-{
+class MeshVS_DummySensitiveEntity : public Select3D_SensitiveEntity {
 public:
+    Standard_EXPORT MeshVS_DummySensitiveEntity(const Handle(SelectMgr_EntityOwner) & theOwnerId);
 
-  Standard_EXPORT MeshVS_DummySensitiveEntity (const Handle(SelectMgr_EntityOwner)& theOwnerId);
+    Standard_EXPORT virtual Standard_Boolean Matches(SelectBasics_SelectingVolumeManager& theMgr,
+                                                     SelectBasics_PickResult& thePickResult) Standard_OVERRIDE;
 
-  Standard_EXPORT virtual Standard_Boolean Matches (SelectBasics_SelectingVolumeManager& theMgr,
-                                                    SelectBasics_PickResult& thePickResult) Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Integer NbSubElements() const Standard_OVERRIDE;
 
-  Standard_EXPORT virtual Standard_Integer NbSubElements() const Standard_OVERRIDE;
+    Standard_EXPORT virtual Select3D_BndBox3d BoundingBox() Standard_OVERRIDE;
 
-  Standard_EXPORT virtual Select3D_BndBox3d BoundingBox() Standard_OVERRIDE;
+    Standard_EXPORT virtual void BVH() Standard_OVERRIDE;
 
-  Standard_EXPORT virtual void BVH() Standard_OVERRIDE;
+    virtual Standard_Boolean ToBuildBVH() const Standard_OVERRIDE {
+        return Standard_False;
+    }
 
-  virtual Standard_Boolean ToBuildBVH() const Standard_OVERRIDE { return Standard_False; }
+    Standard_EXPORT virtual void Clear() Standard_OVERRIDE;
 
-  Standard_EXPORT virtual void Clear() Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Boolean HasInitLocation() const Standard_OVERRIDE;
 
-  Standard_EXPORT virtual Standard_Boolean HasInitLocation() const Standard_OVERRIDE;
+    Standard_EXPORT virtual gp_GTrsf InvInitLocation() const Standard_OVERRIDE;
 
-  Standard_EXPORT virtual gp_GTrsf InvInitLocation() const Standard_OVERRIDE;
+    virtual gp_Pnt CenterOfGeometry() const Standard_OVERRIDE {
+        return gp_Pnt();
+    }
 
-  virtual gp_Pnt CenterOfGeometry() const Standard_OVERRIDE { return gp_Pnt(); }
-
-  DEFINE_STANDARD_RTTIEXT(MeshVS_DummySensitiveEntity, Select3D_SensitiveEntity)
+    DEFINE_STANDARD_RTTIEXT(MeshVS_DummySensitiveEntity, Select3D_SensitiveEntity)
 };
 
 DEFINE_STANDARD_HANDLE(MeshVS_DummySensitiveEntity, Select3D_SensitiveEntity)

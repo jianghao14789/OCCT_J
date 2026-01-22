@@ -27,11 +27,9 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Real.hxx>
 
-
 //! for implementation, compute values for Gauss
 class CPnts_MyGaussFunction : public math_Function {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     CPnts_MyGaussFunction();
@@ -44,12 +42,9 @@ public:
     Standard_EXPORT Standard_Boolean Value(const Standard_Real X, Standard_Real& F);
 
 protected:
-
 private:
-
     CPnts_RealFunction myFunction;
     Standard_Address myData;
-
 };
 
 #include <CPnts_MyGaussFunction.lxx>

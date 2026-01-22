@@ -25,7 +25,6 @@
 #include <IGESData_IGESEntity.hxx>
 class IGESGeom_Boundary;
 
-
 class IGESGeom_BoundedSurface;
 DEFINE_STANDARD_HANDLE(IGESGeom_BoundedSurface, IGESData_IGESEntity)
 
@@ -34,61 +33,42 @@ DEFINE_STANDARD_HANDLE(IGESGeom_BoundedSurface, IGESData_IGESEntity)
 //! A bounded surface is used to communicate trimmed
 //! surfaces. The surface and trimming curves are assumed
 //! to be represented parametrically.
-class IGESGeom_BoundedSurface : public IGESData_IGESEntity
-{
+class IGESGeom_BoundedSurface : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESGeom_BoundedSurface();
 
-  
-  Standard_EXPORT IGESGeom_BoundedSurface();
-  
-  //! This method is used to set the fields of the class
-  //! BoundedSurface
-  //! - aType     : Type of bounded surface representation
-  //! - aSurface  : Surface entity to be bounded
-  //! - allBounds : Array of boundary entities
-  Standard_EXPORT void Init (const Standard_Integer aType, const Handle(IGESData_IGESEntity)& aSurface, const Handle(IGESGeom_HArray1OfBoundary)& allBounds);
-  
-  //! returns the type of Bounded surface representation
-  //! 0 = The boundary entities may only reference model space curves
-  //! 1 = The boundary entities may reference both model space curves
-  //! and associated parameter space curve representations
-  Standard_EXPORT Standard_Integer RepresentationType() const;
-  
-  //! returns the bounded surface
-  Standard_EXPORT Handle(IGESData_IGESEntity) Surface() const;
-  
-  //! returns the number of boundaries
-  Standard_EXPORT Standard_Integer NbBoundaries() const;
-  
-  //! returns boundary entity
-  //! raises exception if Index <= 0 or Index > NbBoundaries()
-  Standard_EXPORT Handle(IGESGeom_Boundary) Boundary (const Standard_Integer Index) const;
+    //! This method is used to set the fields of the class
+    //! BoundedSurface
+    //! - aType     : Type of bounded surface representation
+    //! - aSurface  : Surface entity to be bounded
+    //! - allBounds : Array of boundary entities
+    Standard_EXPORT void Init(const Standard_Integer aType, const Handle(IGESData_IGESEntity) & aSurface,
+                              const Handle(IGESGeom_HArray1OfBoundary) & allBounds);
 
+    //! returns the type of Bounded surface representation
+    //! 0 = The boundary entities may only reference model space curves
+    //! 1 = The boundary entities may reference both model space curves
+    //! and associated parameter space curve representations
+    Standard_EXPORT Standard_Integer RepresentationType() const;
 
+    //! returns the bounded surface
+    Standard_EXPORT Handle(IGESData_IGESEntity) Surface() const;
 
+    //! returns the number of boundaries
+    Standard_EXPORT Standard_Integer NbBoundaries() const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESGeom_BoundedSurface,IGESData_IGESEntity)
+    //! returns boundary entity
+    //! raises exception if Index <= 0 or Index > NbBoundaries()
+    Standard_EXPORT Handle(IGESGeom_Boundary) Boundary(const Standard_Integer Index) const;
+
+    DEFINE_STANDARD_RTTIEXT(IGESGeom_BoundedSurface, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer theType;
-  Handle(IGESData_IGESEntity) theSurface;
-  Handle(IGESGeom_HArray1OfBoundary) theBoundaries;
-
-
+    Standard_Integer theType;
+    Handle(IGESData_IGESEntity) theSurface;
+    Handle(IGESGeom_HArray1OfBoundary) theBoundaries;
 };
-
-
-
-
-
-
 
 #endif // _IGESGeom_BoundedSurface_HeaderFile

@@ -26,7 +26,6 @@
 #include <Standard_Integer.hxx>
 class TCollection_HAsciiString;
 
-
 class IGESBasic_ExternalRefFileIndex;
 DEFINE_STANDARD_HANDLE(IGESBasic_ExternalRefFileIndex, IGESData_IGESEntity)
 
@@ -35,56 +34,37 @@ DEFINE_STANDARD_HANDLE(IGESBasic_ExternalRefFileIndex, IGESData_IGESEntity)
 //! Contains a list of the symbolic names used by the
 //! referencing files and the DE pointers to the
 //! corresponding definitions within the referenced file
-class IGESBasic_ExternalRefFileIndex : public IGESData_IGESEntity
-{
+class IGESBasic_ExternalRefFileIndex : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESBasic_ExternalRefFileIndex();
 
-  
-  Standard_EXPORT IGESBasic_ExternalRefFileIndex();
-  
-  //! This method is used to set the fields of the class
-  //! ExternalRefFileIndex
-  //! - aNameArray  : External Reference Entity symbolic names
-  //! - allEntities : External Reference Entities
-  //! raises exception if array lengths are not equal
-  //! if size of aNameArray is not equal to size of allEntities
-  Standard_EXPORT void Init (const Handle(Interface_HArray1OfHAsciiString)& aNameArray, const Handle(IGESData_HArray1OfIGESEntity)& allEntities);
-  
-  //! returns number of index entries
-  Standard_EXPORT Standard_Integer NbEntries() const;
-  
-  //! returns the External Reference Entity symbolic name
-  //! raises exception if Index <= 0 or Index > NbEntries()
-  Standard_EXPORT Handle(TCollection_HAsciiString) Name (const Standard_Integer Index) const;
-  
-  //! returns the internal entity
-  //! raises exception if Index <= 0 or Index > NbEntries()
-  Standard_EXPORT Handle(IGESData_IGESEntity) Entity (const Standard_Integer Index) const;
+    //! This method is used to set the fields of the class
+    //! ExternalRefFileIndex
+    //! - aNameArray  : External Reference Entity symbolic names
+    //! - allEntities : External Reference Entities
+    //! raises exception if array lengths are not equal
+    //! if size of aNameArray is not equal to size of allEntities
+    Standard_EXPORT void Init(const Handle(Interface_HArray1OfHAsciiString) & aNameArray,
+                              const Handle(IGESData_HArray1OfIGESEntity) & allEntities);
 
+    //! returns number of index entries
+    Standard_EXPORT Standard_Integer NbEntries() const;
 
+    //! returns the External Reference Entity symbolic name
+    //! raises exception if Index <= 0 or Index > NbEntries()
+    Standard_EXPORT Handle(TCollection_HAsciiString) Name(const Standard_Integer Index) const;
 
+    //! returns the internal entity
+    //! raises exception if Index <= 0 or Index > NbEntries()
+    Standard_EXPORT Handle(IGESData_IGESEntity) Entity(const Standard_Integer Index) const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESBasic_ExternalRefFileIndex,IGESData_IGESEntity)
+    DEFINE_STANDARD_RTTIEXT(IGESBasic_ExternalRefFileIndex, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(Interface_HArray1OfHAsciiString) theNames;
-  Handle(IGESData_HArray1OfIGESEntity) theEntities;
-
-
+    Handle(Interface_HArray1OfHAsciiString) theNames;
+    Handle(IGESData_HArray1OfIGESEntity) theEntities;
 };
-
-
-
-
-
-
 
 #endif // _IGESBasic_ExternalRefFileIndex_HeaderFile

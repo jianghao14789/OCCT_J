@@ -20,10 +20,6 @@
 //! Describes rendering modes.
 //! - RM_RASTERIZATION: enables OpenGL rasterization mode;
 //! - RM_RAYTRACING: enables GPU ray-tracing mode.
-enum Graphic3d_RenderingMode
-{
-Graphic3d_RM_RASTERIZATION,
-Graphic3d_RM_RAYTRACING
-};
+enum Graphic3d_RenderingMode { Graphic3d_RM_RASTERIZATION, Graphic3d_RM_RAYTRACING };
 
 #endif // _Graphic3d_RenderingMode_HeaderFile

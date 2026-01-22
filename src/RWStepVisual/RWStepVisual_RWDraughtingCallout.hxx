@@ -28,18 +28,18 @@ class StepVisual_DraughtingCallout;
 class StepData_StepWriter;
 
 //! Read & Write Module for DraughtingCallout
-class RWStepVisual_RWDraughtingCallout 
-{
+class RWStepVisual_RWDraughtingCallout {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepVisual_RWDraughtingCallout();
 
-  Standard_EXPORT RWStepVisual_RWDraughtingCallout();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_DraughtingCallout)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_DraughtingCallout)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_DraughtingCallout)& ent, Interface_EntityIterator& iter)  const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepVisual_DraughtingCallout) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_DraughtingCallout) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepVisual_DraughtingCallout) & ent, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWDraughtingCallout_HeaderFile

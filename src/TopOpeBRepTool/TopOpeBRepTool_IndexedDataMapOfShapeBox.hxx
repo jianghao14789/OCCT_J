@@ -22,7 +22,7 @@
 #include <TopTools_OrientedShapeMapHasher.hxx>
 #include <NCollection_IndexedDataMap.hxx>
 
-typedef NCollection_IndexedDataMap<TopoDS_Shape,Bnd_Box,TopTools_OrientedShapeMapHasher> TopOpeBRepTool_IndexedDataMapOfShapeBox;
-
+typedef NCollection_IndexedDataMap<TopoDS_Shape, Bnd_Box, TopTools_OrientedShapeMapHasher>
+    TopOpeBRepTool_IndexedDataMapOfShapeBox;
 
 #endif

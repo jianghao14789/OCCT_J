@@ -52,18 +52,14 @@ class TopoDS_Compound;
 class TopoDS_Builder;
 class TopoDS_Iterator;
 
-
 //! Provides methods to cast objects of class
 //! TopoDS_Shape to be objects of more specialized
 //! sub-classes. Types are verified, thus in the example
 //! below, the first two blocks are correct but the third is
 //! rejected by the compiler.
-class TopoDS
-{
+class TopoDS {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Basic tool to access the data structure.
     //! Casts shape S to the more specialized return type, Vertex.
@@ -114,20 +110,8 @@ public:
     static const TopoDS_Compound& Compound(const TopoDS_Shape& S);
     inline static TopoDS_Compound& Compound(TopoDS_Shape&);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
     friend class TopoDS_Shape;
     friend class TopoDS_HShape;
     friend class TopoDS_TShape;
@@ -149,14 +133,8 @@ private:
     friend class TopoDS_Compound;
     friend class TopoDS_Builder;
     friend class TopoDS_Iterator;
-
 };
 
-
 #include <TopoDS.lxx>
-
-
-
-
 
 #endif // _TopoDS_HeaderFile

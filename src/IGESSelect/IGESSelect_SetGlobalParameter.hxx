@@ -28,7 +28,6 @@ class IGESData_IGESModel;
 class Interface_CopyTool;
 class TCollection_AsciiString;
 
-
 class IGESSelect_SetGlobalParameter;
 DEFINE_STANDARD_HANDLE(IGESSelect_SetGlobalParameter, IGESSelect_ModelModifier)
 
@@ -42,58 +41,39 @@ DEFINE_STANDARD_HANDLE(IGESSelect_SetGlobalParameter, IGESSelect_ModelModifier)
 //! are accepted but not mandatory
 //! Warning : a Null (not set) value is not accepted. For an empty string,
 //! give a Text Parameter which is empty
-class IGESSelect_SetGlobalParameter : public IGESSelect_ModelModifier
-{
+class IGESSelect_SetGlobalParameter : public IGESSelect_ModelModifier {
 
 public:
+    //! Creates an SetGlobalParameter, to be applied on Global
+    //! Parameter <numpar>
+    Standard_EXPORT IGESSelect_SetGlobalParameter(const Standard_Integer numpar);
 
-  
-  //! Creates an SetGlobalParameter, to be applied on Global
-  //! Parameter <numpar>
-  Standard_EXPORT IGESSelect_SetGlobalParameter(const Standard_Integer numpar);
-  
-  //! Returns the global parameter number to which this modifiers
-  //! applies
-  Standard_EXPORT Standard_Integer GlobalNumber() const;
-  
-  //! Sets a Text Parameter for the new value
-  Standard_EXPORT void SetValue (const Handle(TCollection_HAsciiString)& text);
-  
-  //! Returns the value to set to the global parameter (Text Param)
-  Standard_EXPORT Handle(TCollection_HAsciiString) Value() const;
-  
-  //! Specific action : only <target> is used : the form of the new
-  //! value is checked regarding the parameter number (given at
-  //! creation time).
-  Standard_EXPORT void Performing (IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel)& target, Interface_CopyTool& TC) const Standard_OVERRIDE;
-  
-  //! Returns a text which is
-  //! "Sets Global Parameter <numpar> to <new value>"
-  Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
+    //! Returns the global parameter number to which this modifiers
+    //! applies
+    Standard_EXPORT Standard_Integer GlobalNumber() const;
 
+    //! Sets a Text Parameter for the new value
+    Standard_EXPORT void SetValue(const Handle(TCollection_HAsciiString) & text);
 
+    //! Returns the value to set to the global parameter (Text Param)
+    Standard_EXPORT Handle(TCollection_HAsciiString) Value() const;
 
+    //! Specific action : only <target> is used : the form of the new
+    //! value is checked regarding the parameter number (given at
+    //! creation time).
+    Standard_EXPORT void Performing(IFSelect_ContextModif& ctx, const Handle(IGESData_IGESModel) & target,
+                                    Interface_CopyTool& TC) const Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(IGESSelect_SetGlobalParameter,IGESSelect_ModelModifier)
+    //! Returns a text which is
+    //! "Sets Global Parameter <numpar> to <new value>"
+    Standard_EXPORT TCollection_AsciiString Label() const Standard_OVERRIDE;
+
+    DEFINE_STANDARD_RTTIEXT(IGESSelect_SetGlobalParameter, IGESSelect_ModelModifier)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer thenum;
-  Handle(TCollection_HAsciiString) theval;
-
-
+    Standard_Integer thenum;
+    Handle(TCollection_HAsciiString) theval;
 };
-
-
-
-
-
-
 
 #endif // _IGESSelect_SetGlobalParameter_HeaderFile

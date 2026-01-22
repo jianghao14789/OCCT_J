@@ -25,26 +25,20 @@
 #include <Standard_NoSuchObject.hxx>
 #include <Standard_OutOfRange.hxx>
 
-Standard_Integer  BRepApprox_SurfaceTool::NbSamplesU (const BRepAdaptor_Surface&) 
-{
-  return(10);
+Standard_Integer BRepApprox_SurfaceTool::NbSamplesU(const BRepAdaptor_Surface&) {
+    return (10);
 }
 
-Standard_Integer  BRepApprox_SurfaceTool::NbSamplesV (const BRepAdaptor_Surface&) 
-{
-  return(10);
+Standard_Integer BRepApprox_SurfaceTool::NbSamplesV(const BRepAdaptor_Surface&) {
+    return (10);
 }
 
-Standard_Integer  BRepApprox_SurfaceTool::NbSamplesU (const BRepAdaptor_Surface&,
-                                                         const Standard_Real,
-                                                         const Standard_Real) 
-{
-  return(10);
+Standard_Integer BRepApprox_SurfaceTool::NbSamplesU(const BRepAdaptor_Surface&, const Standard_Real,
+                                                    const Standard_Real) {
+    return (10);
 }
 
-Standard_Integer  BRepApprox_SurfaceTool::NbSamplesV (const BRepAdaptor_Surface&,
-                                                         const Standard_Real,
-                                                         const Standard_Real) 
-{
-  return(10);
+Standard_Integer BRepApprox_SurfaceTool::NbSamplesV(const BRepAdaptor_Surface&, const Standard_Real,
+                                                    const Standard_Real) {
+    return (10);
 }

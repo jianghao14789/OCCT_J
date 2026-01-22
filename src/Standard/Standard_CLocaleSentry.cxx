@@ -21,50 +21,43 @@
 
 #if !defined(__ANDROID__)
 
-namespace
-{
+namespace {
 
-    //! CLocalePtr - static object representing C locale
-    class CLocalePtr
-    {
-    public:
-
-        CLocalePtr()
+//! CLocalePtr - static object representing C locale
+class CLocalePtr {
+public:
+    CLocalePtr()
 #ifdef OCCT_CLOCALE_POSIX2008
-            : myLocale(newlocale(LC_ALL_MASK, "C", NULL))
+        : myLocale(newlocale(LC_ALL_MASK, "C", NULL))
 #elif defined(_MSC_VER)
-            : myLocale(_create_locale(LC_ALL, "C"))
+        : myLocale(_create_locale(LC_ALL, "C"))
 #else
-            : myLocale(NULL)
+        : myLocale(NULL)
 #endif
-        {
-        }
+    {
+    }
 
-        ~CLocalePtr()
-        {
+    ~CLocalePtr() {
 #ifdef OCCT_CLOCALE_POSIX2008
-            freelocale(myLocale);
+        freelocale(myLocale);
 #elif defined(_MSC_VER)
-            _free_locale(myLocale);
+        _free_locale(myLocale);
 #endif
-        }
+    }
 
-    public:
+public:
+    Standard_CLocaleSentry::clocale_t myLocale;
+};
 
-        Standard_CLocaleSentry::clocale_t myLocale;
+static CLocalePtr theCLocale;
 
-    };
-
-    static CLocalePtr theCLocale;
-
-}
+} // namespace
 
 // =======================================================================
 // function : GetCLocale
 // purpose  :
 // =======================================================================
-Standard_CLocaleSentry::clocale_t Standard_CLocaleSentry::GetCLocale()
-{
+Standard_CLocaleSentry::clocale_t Standard_CLocaleSentry::GetCLocale() {
     return theCLocale.myLocale;
 }
 
@@ -78,15 +71,14 @@ Standard_CLocaleSentry::Standard_CLocaleSentry()
 #else
     : myPrevLocale(setlocale(LC_ALL, 0))
 #if defined(_MSC_VER) && (_MSC_VER > 1400)
-    , myPrevTLocaleState(_configthreadlocale(_ENABLE_PER_THREAD_LOCALE))
+      ,
+      myPrevTLocaleState(_configthreadlocale(_ENABLE_PER_THREAD_LOCALE))
 #endif
 #endif
 {
 #if !defined(OCCT_CLOCALE_POSIX2008)
     const char* aPrevLocale = (const char*)myPrevLocale;
-    if (myPrevLocale == NULL
-        || (aPrevLocale[0] == 'C' && aPrevLocale[1] == '\0'))
-    {
+    if (myPrevLocale == NULL || (aPrevLocale[0] == 'C' && aPrevLocale[1] == '\0')) {
         myPrevLocale = NULL; // already C locale
         return;
     }
@@ -103,20 +95,17 @@ Standard_CLocaleSentry::Standard_CLocaleSentry()
 // function : ~Standard_CLocaleSentry
 // purpose  :
 // =======================================================================
-Standard_CLocaleSentry::~Standard_CLocaleSentry()
-{
+Standard_CLocaleSentry::~Standard_CLocaleSentry() {
 #if defined(OCCT_CLOCALE_POSIX2008)
     uselocale((locale_t)myPrevLocale);
 #else
-    if (myPrevLocale != NULL)
-    {
+    if (myPrevLocale != NULL) {
         const char* aPrevLocale = (const char*)myPrevLocale;
         setlocale(LC_ALL, aPrevLocale);
         delete[] aPrevLocale;
     }
 #if defined(_MSC_VER) && (_MSC_VER > 1400)
-    if (myPrevTLocaleState != _ENABLE_PER_THREAD_LOCALE)
-    {
+    if (myPrevTLocaleState != _ENABLE_PER_THREAD_LOCALE) {
         _configthreadlocale(myPrevTLocaleState);
     }
 #endif

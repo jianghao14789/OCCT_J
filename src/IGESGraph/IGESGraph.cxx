@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <IGESBasic.hxx>
 #include <IGESData_SpecificLib.hxx>
 #include <IGESData_WriterLib.hxx>
@@ -27,20 +26,17 @@
 //  (Modules are created and loaded in appropriate libraries, once by Init)
 static Handle(IGESGraph_Protocol) protocol;
 
-
-    void  IGESGraph::Init ()
-{
-  IGESBasic::Init();
-  if (protocol.IsNull()) {
-    protocol = new IGESGraph_Protocol;
-    Interface_GeneralLib::SetGlobal (new IGESGraph_GeneralModule,  protocol);
-    Interface_ReaderLib::SetGlobal  (new IGESGraph_ReadWriteModule,protocol);
-    IGESData_WriterLib::SetGlobal   (new IGESGraph_ReadWriteModule,protocol);
-    IGESData_SpecificLib::SetGlobal (new IGESGraph_SpecificModule, protocol);
-  }
+void IGESGraph::Init() {
+    IGESBasic::Init();
+    if (protocol.IsNull()) {
+        protocol = new IGESGraph_Protocol;
+        Interface_GeneralLib::SetGlobal(new IGESGraph_GeneralModule, protocol);
+        Interface_ReaderLib::SetGlobal(new IGESGraph_ReadWriteModule, protocol);
+        IGESData_WriterLib::SetGlobal(new IGESGraph_ReadWriteModule, protocol);
+        IGESData_SpecificLib::SetGlobal(new IGESGraph_SpecificModule, protocol);
+    }
 }
 
-    Handle(IGESGraph_Protocol)  IGESGraph::Protocol ()
-{
-  return protocol;
+Handle(IGESGraph_Protocol) IGESGraph::Protocol() {
+    return protocol;
 }

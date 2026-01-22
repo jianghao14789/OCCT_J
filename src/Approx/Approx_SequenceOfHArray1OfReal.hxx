@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<Handle(TColStd_HArray1OfReal)> Approx_SequenceOfHArray1OfReal;
 
-
 #endif

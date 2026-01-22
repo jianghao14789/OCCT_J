@@ -28,18 +28,17 @@ class StepData_StepWriter;
 class Interface_EntityIterator;
 
 //! Read & Write Module for AnnotationPlane
-class RWStepVisual_RWAnnotationPlane 
-{
+class RWStepVisual_RWAnnotationPlane {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-  
-  Standard_EXPORT RWStepVisual_RWAnnotationPlane();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepVisual_AnnotationPlane)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepVisual_AnnotationPlane)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepVisual_AnnotationPlane)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT RWStepVisual_RWAnnotationPlane();
+
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepVisual_AnnotationPlane) & ent) const;
+
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepVisual_AnnotationPlane) & ent) const;
+
+    Standard_EXPORT void Share(const Handle(StepVisual_AnnotationPlane) & ent, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepVisual_RWAnnotationPlane_HeaderFile

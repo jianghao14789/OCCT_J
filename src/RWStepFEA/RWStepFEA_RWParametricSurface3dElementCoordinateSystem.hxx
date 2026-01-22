@@ -27,48 +27,29 @@ class StepFEA_ParametricSurface3dElementCoordinateSystem;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ParametricSurface3dElementCoordinateSystem
-class RWStepFEA_RWParametricSurface3dElementCoordinateSystem 
-{
+class RWStepFEA_RWParametricSurface3dElementCoordinateSystem {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWParametricSurface3dElementCoordinateSystem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWParametricSurface3dElementCoordinateSystem();
-  
-  //! Reads ParametricSurface3dElementCoordinateSystem
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_ParametricSurface3dElementCoordinateSystem)& ent) const;
-  
-  //! Writes ParametricSurface3dElementCoordinateSystem
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_ParametricSurface3dElementCoordinateSystem)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_ParametricSurface3dElementCoordinateSystem)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ParametricSurface3dElementCoordinateSystem
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_ParametricSurface3dElementCoordinateSystem) & ent) const;
 
+    //! Writes ParametricSurface3dElementCoordinateSystem
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_ParametricSurface3dElementCoordinateSystem) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_ParametricSurface3dElementCoordinateSystem) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWParametricSurface3dElementCoordinateSystem_HeaderFile

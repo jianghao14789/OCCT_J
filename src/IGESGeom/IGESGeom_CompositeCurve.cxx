@@ -22,27 +22,21 @@
 #include <Standard_OutOfRange.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESGeom_CompositeCurve,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESGeom_CompositeCurve, IGESData_IGESEntity)
 
-IGESGeom_CompositeCurve::IGESGeom_CompositeCurve ()    {  }
+IGESGeom_CompositeCurve::IGESGeom_CompositeCurve() {}
 
-
-    void  IGESGeom_CompositeCurve::Init
-  (const Handle(IGESData_HArray1OfIGESEntity)& allEntities)
-{
-  if (!allEntities.IsNull() && allEntities->Lower() != 1)
-    throw Standard_DimensionMismatch("IGESGeom_CompositeCurve : Init");
-  theEntities = allEntities;
-  InitTypeAndForm(102,0);
+void IGESGeom_CompositeCurve::Init(const Handle(IGESData_HArray1OfIGESEntity) & allEntities) {
+    if (!allEntities.IsNull() && allEntities->Lower() != 1)
+        throw Standard_DimensionMismatch("IGESGeom_CompositeCurve : Init");
+    theEntities = allEntities;
+    InitTypeAndForm(102, 0);
 }
 
-    Standard_Integer  IGESGeom_CompositeCurve::NbCurves () const
-{
-  return (theEntities.IsNull() ? 0 : theEntities->Length());
+Standard_Integer IGESGeom_CompositeCurve::NbCurves() const {
+    return (theEntities.IsNull() ? 0 : theEntities->Length());
 }
 
-    Handle(IGESData_IGESEntity)  IGESGeom_CompositeCurve::Curve
-  (const Standard_Integer Index) const
-{
-  return theEntities->Value(Index);
+Handle(IGESData_IGESEntity) IGESGeom_CompositeCurve::Curve(const Standard_Integer Index) const {
+    return theEntities->Value(Index);
 }

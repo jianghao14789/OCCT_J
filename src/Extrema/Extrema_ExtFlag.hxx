@@ -17,12 +17,6 @@
 #ifndef _Extrema_ExtFlag_HeaderFile
 #define _Extrema_ExtFlag_HeaderFile
 
-
-enum Extrema_ExtFlag
-{
-Extrema_ExtFlag_MIN,
-Extrema_ExtFlag_MAX,
-Extrema_ExtFlag_MINMAX
-};
+enum Extrema_ExtFlag { Extrema_ExtFlag_MIN, Extrema_ExtFlag_MAX, Extrema_ExtFlag_MINMAX };
 
 #endif // _Extrema_ExtFlag_HeaderFile

@@ -28,44 +28,25 @@ class StepAP214_AppliedPersonAndOrganizationAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for AppliedPersonAndOrganizationAssignment
-class RWStepAP214_RWAppliedPersonAndOrganizationAssignment 
-{
+class RWStepAP214_RWAppliedPersonAndOrganizationAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepAP214_RWAppliedPersonAndOrganizationAssignment();
 
-  
-  Standard_EXPORT RWStepAP214_RWAppliedPersonAndOrganizationAssignment();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepAP214_AppliedPersonAndOrganizationAssignment)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepAP214_AppliedPersonAndOrganizationAssignment)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepAP214_AppliedPersonAndOrganizationAssignment)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepAP214_AppliedPersonAndOrganizationAssignment) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepAP214_AppliedPersonAndOrganizationAssignment) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepAP214_AppliedPersonAndOrganizationAssignment) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepAP214_RWAppliedPersonAndOrganizationAssignment_HeaderFile

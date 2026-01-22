@@ -21,7 +21,7 @@
 // Suppress VC9 warning on xsputn() function
 #ifdef _MSC_VER
 #pragma warning(push)
-#pragma warning(disable: 4996)
+#pragma warning(disable : 4996)
 #endif
 
 //! Custom buffer object implementing STL interface std::streambuf for streamed reading from allocated memory block.
@@ -44,16 +44,13 @@
 //!   BRep_Builder aBuilder;
 //!   BRepTools::Read (aShape, aStream, aBuilder);
 //! @endcode
-class Standard_ArrayStreamBuffer : public std::streambuf
-{
+class Standard_ArrayStreamBuffer : public std::streambuf {
 public:
-
     //! Main constructor.
     //! Passed pointer is stored as is (memory is NOT copied nor released with destructor).
     //! @param theBegin pointer to the beginning of pre-allocated buffer
     //! @param theSize  length of pre-allocated buffer
-    Standard_EXPORT Standard_ArrayStreamBuffer(const char* theBegin,
-        const size_t theSize);
+    Standard_EXPORT Standard_ArrayStreamBuffer(const char* theBegin, const size_t theSize);
 
     //! Destructor.
     Standard_EXPORT virtual ~Standard_ArrayStreamBuffer();
@@ -62,11 +59,9 @@ public:
     //! Passed pointer is stored as is (memory is NOT copied nor released with destructor).
     //! @param theBegin pointer to the beginning of pre-allocated buffer
     //! @param theSize  length of pre-allocated buffer
-    Standard_EXPORT virtual void Init(const char* theBegin,
-        const size_t theSize);
+    Standard_EXPORT virtual void Init(const char* theBegin, const size_t theSize);
 
 protected:
-
     //! Get character on underflow.
     //! Virtual function called by other member functions to get the current character
     //! in the controlled input sequence without changing the current position.
@@ -88,32 +83,25 @@ protected:
     Standard_EXPORT virtual std::streamsize showmanyc() Standard_OVERRIDE;
 
     //! Seek to specified position.
-    Standard_EXPORT virtual pos_type seekoff(off_type theOff,
-        std::ios_base::seekdir theWay,
-        std::ios_base::openmode theWhich) Standard_OVERRIDE;
+    Standard_EXPORT virtual pos_type seekoff(off_type theOff, std::ios_base::seekdir theWay,
+                                             std::ios_base::openmode theWhich) Standard_OVERRIDE;
 
     //! Change to specified position, according to mode.
-    Standard_EXPORT virtual pos_type seekpos(pos_type thePosition,
-        std::ios_base::openmode theWhich) Standard_OVERRIDE;
+    Standard_EXPORT virtual pos_type seekpos(pos_type thePosition, std::ios_base::openmode theWhich) Standard_OVERRIDE;
 
 public:
-
     //! Read a bunch of bytes at once.
-    Standard_EXPORT virtual std::streamsize xsgetn(char* thePtr,
-        std::streamsize theCount) Standard_OVERRIDE;
+    Standard_EXPORT virtual std::streamsize xsgetn(char* thePtr, std::streamsize theCount) Standard_OVERRIDE;
 
 private:
-
     // copying is not allowed
     Standard_ArrayStreamBuffer(const Standard_ArrayStreamBuffer&);
-    Standard_ArrayStreamBuffer& operator= (const Standard_ArrayStreamBuffer&);
+    Standard_ArrayStreamBuffer& operator=(const Standard_ArrayStreamBuffer&);
 
 protected:
-
     const char* myBegin;
     const char* myEnd;
     const char* myCurrent;
-
 };
 
 #ifdef _MSC_VER

@@ -19,10 +19,10 @@
 #include <Standard_PrimitiveTypes.hxx>
 
 enum StepDimTol_DatumReferenceModifierType {
-  StepDimTol_CircularOrCylindrical,
-  StepDimTol_Distance,
-  StepDimTol_Projected,
-  StepDimTol_Spherical
+    StepDimTol_CircularOrCylindrical,
+    StepDimTol_Distance,
+    StepDimTol_Projected,
+    StepDimTol_Spherical
 };
 
 #endif

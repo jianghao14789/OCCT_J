@@ -20,5 +20,4 @@
 
 DEFINE_HSEQUENCE(StepFEA_HSequenceOfCurve3dElementProperty, StepFEA_SequenceOfCurve3dElementProperty)
 
-
 #endif

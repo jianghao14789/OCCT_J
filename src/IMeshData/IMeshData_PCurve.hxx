@@ -24,76 +24,57 @@ class gp_Pnt2d;
 
 //! Interface class representing pcurve of edge associated with discrete face.
 //! Indexation of points starts from zero.
-class IMeshData_PCurve : public IMeshData_ParametersList
-{
+class IMeshData_PCurve : public IMeshData_ParametersList {
 public:
+    //! Destructor.
+    virtual ~IMeshData_PCurve() {}
 
-  //! Destructor.
-  virtual ~IMeshData_PCurve()
-  {
-  }
+    //! Inserts new discretization point at the given position.
+    Standard_EXPORT virtual void InsertPoint(const Standard_Integer thePosition, const gp_Pnt2d& thePoint,
+                                             const Standard_Real theParamOnPCurve) = 0;
 
-  //! Inserts new discretization point at the given position.
-  Standard_EXPORT virtual void InsertPoint(
-    const Standard_Integer thePosition,
-    const gp_Pnt2d&        thePoint,
-    const Standard_Real    theParamOnPCurve) = 0;
+    //! Adds new discretization point to pcurve.
+    Standard_EXPORT virtual void AddPoint(const gp_Pnt2d& thePoint, const Standard_Real theParamOnPCurve) = 0;
 
-  //! Adds new discretization point to pcurve.
-  Standard_EXPORT virtual void AddPoint (
-    const gp_Pnt2d&     thePoint,
-    const Standard_Real theParamOnPCurve) = 0;
+    //! Returns discretization point with the given index.
+    Standard_EXPORT virtual gp_Pnt2d& GetPoint(const Standard_Integer theIndex) = 0;
 
-  //! Returns discretization point with the given index.
-  Standard_EXPORT virtual gp_Pnt2d& GetPoint (const Standard_Integer theIndex) = 0;
+    //! Returns index in mesh corresponded to discretization point with the given index.
+    Standard_EXPORT virtual Standard_Integer& GetIndex(const Standard_Integer theIndex) = 0;
 
-  //! Returns index in mesh corresponded to discretization point with the given index.
-  Standard_EXPORT virtual Standard_Integer& GetIndex(const Standard_Integer theIndex) = 0;
+    //! Removes point with the given index.
+    Standard_EXPORT virtual void RemovePoint(const Standard_Integer theIndex) = 0;
 
-  //! Removes point with the given index.
-  Standard_EXPORT virtual void RemovePoint (const Standard_Integer theIndex) = 0;
+    //! Returns forward flag of this pcurve.
+    Standard_Boolean IsForward() const {
+        return (myOrientation != TopAbs_REVERSED);
+    }
 
-  //! Returns forward flag of this pcurve.
-  Standard_Boolean IsForward () const
-  {
-    return (myOrientation != TopAbs_REVERSED);
-  }
+    //! Returns internal flag of this pcurve.
+    Standard_Boolean IsInternal() const {
+        return (myOrientation == TopAbs_INTERNAL);
+    }
 
-  //! Returns internal flag of this pcurve.
-  Standard_Boolean IsInternal() const
-  {
-    return (myOrientation == TopAbs_INTERNAL);
-  }
+    //! Returns orientation of the edge associated with current pcurve.
+    TopAbs_Orientation GetOrientation() const {
+        return myOrientation;
+    }
 
-  //! Returns orientation of the edge associated with current pcurve.
-  TopAbs_Orientation GetOrientation() const
-  {
-    return myOrientation;
-  }
+    //! Returns discrete face pcurve is associated to.
+    const IMeshData::IFacePtr& GetFace() const {
+        return myDFace;
+    }
 
-  //! Returns discrete face pcurve is associated to.
-  const IMeshData::IFacePtr& GetFace () const
-  {
-    return myDFace;
-  }
-
-  DEFINE_STANDARD_RTTIEXT(IMeshData_PCurve, IMeshData_ParametersList)
+    DEFINE_STANDARD_RTTIEXT(IMeshData_PCurve, IMeshData_ParametersList)
 
 protected:
-
-  //! Constructor.
-  IMeshData_PCurve (
-    const IMeshData::IFacePtr& theDFace,
-    const TopAbs_Orientation   theOrientation)
-    : myDFace(theDFace),
-      myOrientation(theOrientation)
-  {
-  }
+    //! Constructor.
+    IMeshData_PCurve(const IMeshData::IFacePtr& theDFace, const TopAbs_Orientation theOrientation)
+        : myDFace(theDFace), myOrientation(theOrientation) {}
 
 private:
-
-  IMeshData::IFacePtr myDFace;
-  TopAbs_Orientation  myOrientation;
+    IMeshData::IFacePtr myDFace;
+    TopAbs_Orientation myOrientation;
 };
 
 #endif

@@ -23,133 +23,107 @@
 
 #include <BRepMesh_DegreeOfFreedom.hxx>
 
-
-//! Light weighted structure representing triangle 
+//! Light weighted structure representing triangle
 //! of mesh consisting of oriented links.
-class BRepMesh_Triangle
-{
+class BRepMesh_Triangle {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  //! Default constructor.
-  BRepMesh_Triangle()
-    : myMovability  (BRepMesh_Free)
-  {
-    myEdges[0] = 0;
-    myEdges[1] = 0;
-    myEdges[2] = 0;
-    myOrientations[0] = Standard_False;
-    myOrientations[1] = Standard_False;
-    myOrientations[2] = Standard_False;
-  }
-
-  //! Constructor.
-  //! @param theEdges array of edges of triangle.
-  //! @param theOrientations array of edge's orientations.
-  //! @param theMovability movability of triangle.
-  BRepMesh_Triangle(
-    const Standard_Integer          (&theEdges)[3],
-    const Standard_Boolean          (&theOrientations)[3],
-    const BRepMesh_DegreeOfFreedom  theMovability)
-  {
-    Initialize(theEdges, theOrientations, theMovability);
-  }
-  
-  //! Initializes the triangle by the given parameters.
-  //! @param theEdges array of edges of triangle.
-  //! @param theOrientations array of edge's orientations.
-  //! @param theMovability movability of triangle.
-  void Initialize(
-    const Standard_Integer          (&theEdges)[3],
-    const Standard_Boolean          (&theOrientations)[3],
-    const BRepMesh_DegreeOfFreedom  theMovability)
-  {
-    memcpy(myEdges, theEdges, sizeof(theEdges));
-    memcpy(myOrientations, theOrientations, sizeof(theOrientations));
-    myMovability   = theMovability;
-  }
-  
-  //! Gets edges with orientations composing the triangle.
-  //! @param[out] theEdges array edges are stored to.
-  //! @param[out] theOrientations array orientations are stored to.
-  void Edges(Standard_Integer (&theEdges)[3],
-             Standard_Boolean (&theOrientations)[3]) const
-  {
-    memcpy(theEdges, myEdges, sizeof(myEdges));
-    memcpy(theOrientations, myOrientations, sizeof(myOrientations));
-  }
-  
-  //! Returns movability of the triangle.
-  BRepMesh_DegreeOfFreedom Movability() const 
-  {
-    return myMovability;
-  }
-  
-  //! Sets movability of the triangle.
-  void SetMovability(const BRepMesh_DegreeOfFreedom theMovability)
-  {
-    myMovability = theMovability;
-  }
-
-  //! Computes a hash code for this triangle, in the range [1, theUpperBound]
-  //! @param theUpperBound the upper bound of the range a computing hash code must be within
-  //! @return a computed hash code, in the range [1, theUpperBound]
-  Standard_Integer HashCode (const Standard_Integer theUpperBound) const
-  {
-    return ::HashCode (myEdges[0] + myEdges[1] + myEdges[2], theUpperBound);
-  }
-
-  //! Checks for equality with another triangle.
-  //! @param theOther triangle to be checked against this one.
-  //! @return TRUE if equal, FALSE if not.
-  Standard_Boolean IsEqual(const BRepMesh_Triangle& theOther) const
-  {
-    if (myMovability == BRepMesh_Deleted || theOther.myMovability == BRepMesh_Deleted)
-      return Standard_False;
-
-    if (myEdges[0] == theOther.myEdges[0] &&
-        myEdges[1] == theOther.myEdges[1] &&
-        myEdges[2] == theOther.myEdges[2])
-    {
-      return Standard_True;
+    //! Default constructor.
+    BRepMesh_Triangle() : myMovability(BRepMesh_Free) {
+        myEdges[0] = 0;
+        myEdges[1] = 0;
+        myEdges[2] = 0;
+        myOrientations[0] = Standard_False;
+        myOrientations[1] = Standard_False;
+        myOrientations[2] = Standard_False;
     }
 
-    if (myEdges[0] == theOther.myEdges[1] &&
-        myEdges[1] == theOther.myEdges[2] &&
-        myEdges[2] == theOther.myEdges[0])
-    {
-      return Standard_True;
+    //! Constructor.
+    //! @param theEdges array of edges of triangle.
+    //! @param theOrientations array of edge's orientations.
+    //! @param theMovability movability of triangle.
+    BRepMesh_Triangle(const Standard_Integer (&theEdges)[3], const Standard_Boolean (&theOrientations)[3],
+                      const BRepMesh_DegreeOfFreedom theMovability) {
+        Initialize(theEdges, theOrientations, theMovability);
     }
 
-    if (myEdges[0] == theOther.myEdges[2] &&
-        myEdges[1] == theOther.myEdges[0] &&
-        myEdges[2] == theOther.myEdges[1])
-    {
-      return Standard_True;
+    //! Initializes the triangle by the given parameters.
+    //! @param theEdges array of edges of triangle.
+    //! @param theOrientations array of edge's orientations.
+    //! @param theMovability movability of triangle.
+    void Initialize(const Standard_Integer (&theEdges)[3], const Standard_Boolean (&theOrientations)[3],
+                    const BRepMesh_DegreeOfFreedom theMovability) {
+        memcpy(myEdges, theEdges, sizeof(theEdges));
+        memcpy(myOrientations, theOrientations, sizeof(theOrientations));
+        myMovability = theMovability;
     }
 
-    return Standard_False;
-  }
-  
-  //! Alias for IsEqual.
-  Standard_Boolean operator ==(const BRepMesh_Triangle& theOther) const
-  {
-    return IsEqual(theOther);
-  }
+    //! Gets edges with orientations composing the triangle.
+    //! @param[out] theEdges array edges are stored to.
+    //! @param[out] theOrientations array orientations are stored to.
+    void Edges(Standard_Integer (&theEdges)[3], Standard_Boolean (&theOrientations)[3]) const {
+        memcpy(theEdges, myEdges, sizeof(myEdges));
+        memcpy(theOrientations, myOrientations, sizeof(myOrientations));
+    }
 
-  Standard_Integer          myEdges[3];
-  Standard_Boolean          myOrientations[3];
-  BRepMesh_DegreeOfFreedom  myMovability;
+    //! Returns movability of the triangle.
+    BRepMesh_DegreeOfFreedom Movability() const {
+        return myMovability;
+    }
+
+    //! Sets movability of the triangle.
+    void SetMovability(const BRepMesh_DegreeOfFreedom theMovability) {
+        myMovability = theMovability;
+    }
+
+    //! Computes a hash code for this triangle, in the range [1, theUpperBound]
+    //! @param theUpperBound the upper bound of the range a computing hash code must be within
+    //! @return a computed hash code, in the range [1, theUpperBound]
+    Standard_Integer HashCode(const Standard_Integer theUpperBound) const {
+        return ::HashCode(myEdges[0] + myEdges[1] + myEdges[2], theUpperBound);
+    }
+
+    //! Checks for equality with another triangle.
+    //! @param theOther triangle to be checked against this one.
+    //! @return TRUE if equal, FALSE if not.
+    Standard_Boolean IsEqual(const BRepMesh_Triangle& theOther) const {
+        if (myMovability == BRepMesh_Deleted || theOther.myMovability == BRepMesh_Deleted) return Standard_False;
+
+        if (myEdges[0] == theOther.myEdges[0] && myEdges[1] == theOther.myEdges[1] &&
+            myEdges[2] == theOther.myEdges[2]) {
+            return Standard_True;
+        }
+
+        if (myEdges[0] == theOther.myEdges[1] && myEdges[1] == theOther.myEdges[2] &&
+            myEdges[2] == theOther.myEdges[0]) {
+            return Standard_True;
+        }
+
+        if (myEdges[0] == theOther.myEdges[2] && myEdges[1] == theOther.myEdges[0] &&
+            myEdges[2] == theOther.myEdges[1]) {
+            return Standard_True;
+        }
+
+        return Standard_False;
+    }
+
+    //! Alias for IsEqual.
+    Standard_Boolean operator==(const BRepMesh_Triangle& theOther) const {
+        return IsEqual(theOther);
+    }
+
+    Standard_Integer myEdges[3];
+    Standard_Boolean myOrientations[3];
+    BRepMesh_DegreeOfFreedom myMovability;
 };
 
 //! Computes a hash code for the given triangle, in the range [1, theUpperBound]
 //! @param theTriangle the triangle which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-inline Standard_Integer HashCode (const BRepMesh_Triangle& theTriangle, const Standard_Integer theUpperBound)
-{
-  return theTriangle.HashCode (theUpperBound);
+inline Standard_Integer HashCode(const BRepMesh_Triangle& theTriangle, const Standard_Integer theUpperBound) {
+    return theTriangle.HashCode(theUpperBound);
 }
 
 #endif

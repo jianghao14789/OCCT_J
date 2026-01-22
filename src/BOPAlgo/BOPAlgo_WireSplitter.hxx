@@ -29,44 +29,39 @@
 class TopoDS_Wire;
 class TopoDS_Face;
 
-
 //! The class is to build loops from the given set of edges.
 //!
 //! It returns the following Error statuses
 //! - *BOPAlgo_AlertNullInputShapes* - in case there no input edges to build the loops.
 //!
-class BOPAlgo_WireSplitter : public BOPAlgo_Algo
-{
+class BOPAlgo_WireSplitter : public BOPAlgo_Algo {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT BOPAlgo_WireSplitter();
     Standard_EXPORT virtual ~BOPAlgo_WireSplitter();
 
-    Standard_EXPORT BOPAlgo_WireSplitter(const Handle(NCollection_BaseAllocator)& theAllocator);
+    Standard_EXPORT BOPAlgo_WireSplitter(const Handle(NCollection_BaseAllocator) & theAllocator);
 
     Standard_EXPORT void SetWES(const BOPAlgo_WireEdgeSet& theWES);
 
     Standard_EXPORT BOPAlgo_WireEdgeSet& WES();
 
     //! Sets the context for the algorithm
-    Standard_EXPORT void SetContext(const Handle(IntTools_Context)& theContext);
+    Standard_EXPORT void SetContext(const Handle(IntTools_Context) & theContext);
 
     //! Returns the context
-    Standard_EXPORT const Handle(IntTools_Context)& Context();
+    Standard_EXPORT const Handle(IntTools_Context) & Context();
 
-    Standard_EXPORT virtual void Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    Perform(const Message_ProgressRange& theRange = Message_ProgressRange()) Standard_OVERRIDE;
 
     static void MakeWire(TopTools_ListOfShape& theLE, TopoDS_Wire& theW);
 
-    Standard_EXPORT static void SplitBlock(const TopoDS_Face& theF,
-        BOPTools_ConnexityBlock& theCB,
-        const Handle(IntTools_Context)& theContext);
+    Standard_EXPORT static void SplitBlock(const TopoDS_Face& theF, BOPTools_ConnexityBlock& theCB,
+                                           const Handle(IntTools_Context) & theContext);
 
 protected:
-
     Standard_EXPORT virtual void CheckData() Standard_OVERRIDE;
 
     Standard_EXPORT void MakeWires(const Message_ProgressRange& theRange);
@@ -74,7 +69,6 @@ protected:
     BOPAlgo_PWireEdgeSet myWES;
     BOPTools_ListOfConnexityBlock myLCB;
     Handle(IntTools_Context) myContext;
-
 };
 
 #include <BOPAlgo_WireSplitter.lxx>

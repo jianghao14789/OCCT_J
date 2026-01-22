@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:15 2020 
+// Created on : Sat May 02 12:41:15 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,58 +19,57 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepKinematics_ContextDependentKinematicLinkRepresentation, Standard_Transient)
 
 //=======================================================================
-//function : StepKinematics_ContextDependentKinematicLinkRepresentation
-//purpose  :
+// function : StepKinematics_ContextDependentKinematicLinkRepresentation
+// purpose  :
 //=======================================================================
-StepKinematics_ContextDependentKinematicLinkRepresentation::StepKinematics_ContextDependentKinematicLinkRepresentation ()
-{
+StepKinematics_ContextDependentKinematicLinkRepresentation::
+    StepKinematics_ContextDependentKinematicLinkRepresentation() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+void StepKinematics_ContextDependentKinematicLinkRepresentation::Init(
+    const Handle(StepKinematics_KinematicLinkRepresentationAssociation) & theRepresentationRelation,
+    const Handle(StepKinematics_ProductDefinitionRelationshipKinematics) & theRepresentedProductRelation) {
+
+    myRepresentationRelation = theRepresentationRelation;
+
+    myRepresentedProductRelation = theRepresentedProductRelation;
 }
 
 //=======================================================================
-//function : Init
-//purpose  :
+// function : RepresentationRelation
+// purpose  :
 //=======================================================================
-void StepKinematics_ContextDependentKinematicLinkRepresentation::Init (const Handle(StepKinematics_KinematicLinkRepresentationAssociation)& theRepresentationRelation,
-                                                                       const Handle(StepKinematics_ProductDefinitionRelationshipKinematics)& theRepresentedProductRelation)
-{
-
-  myRepresentationRelation = theRepresentationRelation;
-
-  myRepresentedProductRelation = theRepresentedProductRelation;
+Handle(StepKinematics_KinematicLinkRepresentationAssociation)
+    StepKinematics_ContextDependentKinematicLinkRepresentation::RepresentationRelation() const {
+    return myRepresentationRelation;
 }
 
 //=======================================================================
-//function : RepresentationRelation
-//purpose  :
+// function : SetRepresentationRelation
+// purpose  :
 //=======================================================================
-Handle(StepKinematics_KinematicLinkRepresentationAssociation) StepKinematics_ContextDependentKinematicLinkRepresentation::RepresentationRelation () const
-{
-  return myRepresentationRelation;
+void StepKinematics_ContextDependentKinematicLinkRepresentation::SetRepresentationRelation(
+    const Handle(StepKinematics_KinematicLinkRepresentationAssociation) & theRepresentationRelation) {
+    myRepresentationRelation = theRepresentationRelation;
 }
 
 //=======================================================================
-//function : SetRepresentationRelation
-//purpose  :
+// function : RepresentedProductRelation
+// purpose  :
 //=======================================================================
-void StepKinematics_ContextDependentKinematicLinkRepresentation::SetRepresentationRelation (const Handle(StepKinematics_KinematicLinkRepresentationAssociation)& theRepresentationRelation)
-{
-  myRepresentationRelation = theRepresentationRelation;
+Handle(StepKinematics_ProductDefinitionRelationshipKinematics)
+    StepKinematics_ContextDependentKinematicLinkRepresentation::RepresentedProductRelation() const {
+    return myRepresentedProductRelation;
 }
 
 //=======================================================================
-//function : RepresentedProductRelation
-//purpose  :
+// function : SetRepresentedProductRelation
+// purpose  :
 //=======================================================================
-Handle(StepKinematics_ProductDefinitionRelationshipKinematics) StepKinematics_ContextDependentKinematicLinkRepresentation::RepresentedProductRelation () const
-{
-  return myRepresentedProductRelation;
-}
-
-//=======================================================================
-//function : SetRepresentedProductRelation
-//purpose  :
-//=======================================================================
-void StepKinematics_ContextDependentKinematicLinkRepresentation::SetRepresentedProductRelation (const Handle(StepKinematics_ProductDefinitionRelationshipKinematics)& theRepresentedProductRelation)
-{
-  myRepresentedProductRelation = theRepresentedProductRelation;
+void StepKinematics_ContextDependentKinematicLinkRepresentation::SetRepresentedProductRelation(
+    const Handle(StepKinematics_ProductDefinitionRelationshipKinematics) & theRepresentedProductRelation) {
+    myRepresentedProductRelation = theRepresentedProductRelation;
 }

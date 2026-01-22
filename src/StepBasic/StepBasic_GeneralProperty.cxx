@@ -19,105 +19,96 @@
 #include <StepBasic_GeneralProperty.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepBasic_GeneralProperty,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepBasic_GeneralProperty, Standard_Transient)
 
 //=======================================================================
-//function : StepBasic_GeneralProperty
-//purpose  : 
+// function : StepBasic_GeneralProperty
+// purpose  :
 //=======================================================================
-StepBasic_GeneralProperty::StepBasic_GeneralProperty ()
-{
-  defDescription = Standard_False;
+StepBasic_GeneralProperty::StepBasic_GeneralProperty() {
+    defDescription = Standard_False;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 
-void StepBasic_GeneralProperty::Init (const Handle(TCollection_HAsciiString) &aId,
-                                      const Handle(TCollection_HAsciiString) &aName,
-                                      const Standard_Boolean hasDescription,
-                                      const Handle(TCollection_HAsciiString) &aDescription)
-{
+void StepBasic_GeneralProperty::Init(const Handle(TCollection_HAsciiString) & aId,
+                                     const Handle(TCollection_HAsciiString) & aName,
+                                     const Standard_Boolean hasDescription,
+                                     const Handle(TCollection_HAsciiString) & aDescription) {
 
-  theId = aId;
+    theId = aId;
 
-  theName = aName;
+    theName = aName;
 
-  defDescription = hasDescription;
-  if (defDescription) {
+    defDescription = hasDescription;
+    if (defDescription) {
+        theDescription = aDescription;
+    } else
+        theDescription.Nullify();
+}
+
+//=======================================================================
+// function : Id
+// purpose  :
+//=======================================================================
+
+Handle(TCollection_HAsciiString) StepBasic_GeneralProperty::Id() const {
+    return theId;
+}
+
+//=======================================================================
+// function : SetId
+// purpose  :
+//=======================================================================
+
+void StepBasic_GeneralProperty::SetId(const Handle(TCollection_HAsciiString) & aId) {
+    theId = aId;
+}
+
+//=======================================================================
+// function : Name
+// purpose  :
+//=======================================================================
+
+Handle(TCollection_HAsciiString) StepBasic_GeneralProperty::Name() const {
+    return theName;
+}
+
+//=======================================================================
+// function : SetName
+// purpose  :
+//=======================================================================
+
+void StepBasic_GeneralProperty::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    theName = aName;
+}
+
+//=======================================================================
+// function : Description
+// purpose  :
+//=======================================================================
+
+Handle(TCollection_HAsciiString) StepBasic_GeneralProperty::Description() const {
+    return theDescription;
+}
+
+//=======================================================================
+// function : SetDescription
+// purpose  :
+//=======================================================================
+
+void StepBasic_GeneralProperty::SetDescription(const Handle(TCollection_HAsciiString) & aDescription) {
     theDescription = aDescription;
-  }
-  else theDescription.Nullify();
 }
 
 //=======================================================================
-//function : Id
-//purpose  : 
+// function : HasDescription
+// purpose  :
 //=======================================================================
 
-Handle(TCollection_HAsciiString) StepBasic_GeneralProperty::Id () const
-{
-  return theId;
-}
-
-//=======================================================================
-//function : SetId
-//purpose  : 
-//=======================================================================
-
-void StepBasic_GeneralProperty::SetId (const Handle(TCollection_HAsciiString) &aId)
-{
-  theId = aId;
-}
-
-//=======================================================================
-//function : Name
-//purpose  : 
-//=======================================================================
-
-Handle(TCollection_HAsciiString) StepBasic_GeneralProperty::Name () const
-{
-  return theName;
-}
-
-//=======================================================================
-//function : SetName
-//purpose  : 
-//=======================================================================
-
-void StepBasic_GeneralProperty::SetName (const Handle(TCollection_HAsciiString) &aName)
-{
-  theName = aName;
-}
-
-//=======================================================================
-//function : Description
-//purpose  : 
-//=======================================================================
-
-Handle(TCollection_HAsciiString) StepBasic_GeneralProperty::Description () const
-{
-  return theDescription;
-}
-
-//=======================================================================
-//function : SetDescription
-//purpose  : 
-//=======================================================================
-
-void StepBasic_GeneralProperty::SetDescription (const Handle(TCollection_HAsciiString) &aDescription)
-{
-  theDescription = aDescription;
-}
-
-//=======================================================================
-//function : HasDescription
-//purpose  : 
-//=======================================================================
-
-Standard_Boolean StepBasic_GeneralProperty::HasDescription () const
-{
-  return defDescription;
+Standard_Boolean StepBasic_GeneralProperty::HasDescription() const {
+    return defDescription;
 }

@@ -21,5 +21,4 @@
 
 typedef NCollection_DefaultHasher<MeshVS_TwoNodes> MeshVS_TwoNodesHasher;
 
-
 #endif

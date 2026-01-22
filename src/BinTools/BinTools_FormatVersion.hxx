@@ -15,8 +15,7 @@
 #define _BinToolsFormatVersion_HeaderFile
 
 //! Defined BinTools format version
-enum BinTools_FormatVersion
-{
+enum BinTools_FormatVersion {
     BinTools_FormatVersion_VERSION_1 = 1, //!< Does not write CurveOnSurface UV Points into the file.
     //!  On reading calls Check() method.
     BinTools_FormatVersion_VERSION_2 = 2, //!< Stores CurveOnSurface UV Points.
@@ -29,8 +28,7 @@ enum BinTools_FormatVersion
     BinTools_FormatVersion_CURRENT = BinTools_FormatVersion_VERSION_4 //!< Current version
 };
 
-enum
-{
+enum {
     BinTools_FormatVersion_LOWER = BinTools_FormatVersion_VERSION_1,
     BinTools_FormatVersion_UPPER = BinTools_FormatVersion_VERSION_4
 };

@@ -15,7 +15,7 @@
 // ============================================================================
 // FSD_BinaryFile.cxx - 二进制文件存储驱动程序的实现
 // ============================================================================
-// 
+//
 // 主要功能：
 // 1. 以二进制格式读写对象数据到文件
 // 2. 管理文件的逻辑段（Info、Comment、Type、Root、Ref、Data）
@@ -57,13 +57,11 @@ const Standard_CString MAGICNUMBER = "BINFILE";
 IMPLEMENT_STANDARD_RTTIEXT(FSD_BinaryFile, Storage_BaseDriver)
 
 //=======================================================================
-//function : FSD_BinaryFile (构造函数)
-//purpose  : 初始化二进制文件驱动，将文件头各字段设置为 -1
+// function : FSD_BinaryFile (构造函数)
+// purpose  : 初始化二进制文件驱动，将文件头各字段设置为 -1
 //=======================================================================
 
-FSD_BinaryFile::FSD_BinaryFile() :
-    myStream(0L)
-{
+FSD_BinaryFile::FSD_BinaryFile() : myStream(0L) {
     myHeader.testindian = -1;
     myHeader.binfo = -1;
     myHeader.einfo = -1;
@@ -80,21 +78,20 @@ FSD_BinaryFile::FSD_BinaryFile() :
 }
 
 //=======================================================================
-//function : IsGoodFileType (静态)
-//purpose  : 检查指定文件是否为有效的 FSD 二进制格式文件
+// function : IsGoodFileType (静态)
+// purpose  : 检查指定文件是否为有效的 FSD 二进制格式文件
 //           通过读取文件头的魔数来判断
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::IsGoodFileType(const TCollection_AsciiString& aName)
-{
-    FSD_BinaryFile      f;
+Storage_Error FSD_BinaryFile::IsGoodFileType(const TCollection_AsciiString& aName) {
+    FSD_BinaryFile f;
     Storage_Error s;
 
     s = f.Open(aName, Storage_VSRead);
 
     if (s == Storage_VSOk) {
         TCollection_AsciiString l;
-        Standard_Size        len = strlen(FSD_BinaryFile::MagicNumber());
+        Standard_Size len = strlen(FSD_BinaryFile::MagicNumber());
 
         f.ReadChar(l, len);
 
@@ -109,13 +106,12 @@ Storage_Error FSD_BinaryFile::IsGoodFileType(const TCollection_AsciiString& aNam
 }
 
 //=======================================================================
-//function : Open
-//purpose  : 打开或创建二进制存储文件
+// function : Open
+// purpose  : 打开或创建二进制存储文件
 //           支持读、写、读写三种模式
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::Open(const TCollection_AsciiString& aName, const Storage_OpenMode aMode)
-{
+Storage_Error FSD_BinaryFile::Open(const TCollection_AsciiString& aName, const Storage_OpenMode aMode) {
     Storage_Error result = Storage_VSOk;
 
     SetName(aName);
@@ -123,22 +119,18 @@ Storage_Error FSD_BinaryFile::Open(const TCollection_AsciiString& aName, const S
     if (OpenMode() == Storage_VSNone) {
         if (aMode == Storage_VSRead) {
             myStream = OSD_OpenFile(aName.ToCString(), "rb");
-        }
-        else if (aMode == Storage_VSWrite) {
+        } else if (aMode == Storage_VSWrite) {
             myStream = OSD_OpenFile(aName.ToCString(), "wb");
-        }
-        else if (aMode == Storage_VSReadWrite) {
+        } else if (aMode == Storage_VSReadWrite) {
             myStream = OSD_OpenFile(aName.ToCString(), "w+b");
         }
 
         if (myStream == 0L) {
             result = Storage_VSOpenError;
-        }
-        else {
+        } else {
             SetOpenMode(aMode);
         }
-    }
-    else {
+    } else {
         result = Storage_VSAlreadyOpen;
     }
 
@@ -146,29 +138,26 @@ Storage_Error FSD_BinaryFile::Open(const TCollection_AsciiString& aName, const S
 }
 
 //=======================================================================
-//function : IsEnd
-//purpose  : 判断是否已到达文件末尾
+// function : IsEnd
+// purpose  : 判断是否已到达文件末尾
 //=======================================================================
 
-Standard_Boolean FSD_BinaryFile::IsEnd()
-{
+Standard_Boolean FSD_BinaryFile::IsEnd() {
     return (feof(myStream) != 0);
 }
 
 //=======================================================================
-//function : Close
-//purpose  : 关闭当前打开的文件
+// function : Close
+// purpose  : 关闭当前打开的文件
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::Close()
-{
+Storage_Error FSD_BinaryFile::Close() {
     Storage_Error result = Storage_VSOk;
 
     if (OpenMode() != Storage_VSNone) {
         fclose(myStream);
         SetOpenMode(Storage_VSNone);
-    }
-    else {
+    } else {
         result = Storage_VSNotOpen;
     }
 
@@ -176,23 +165,21 @@ Storage_Error FSD_BinaryFile::Close()
 }
 
 //=======================================================================
-//function : MagicNumber (静态)
-//purpose  : 返回文件魔数，用于识别 FSD 二进制格式
+// function : MagicNumber (静态)
+// purpose  : 返回文件魔数，用于识别 FSD 二进制格式
 //=======================================================================
 
-Standard_CString FSD_BinaryFile::MagicNumber()
-{
+Standard_CString FSD_BinaryFile::MagicNumber() {
     return MAGICNUMBER;
 }
 
 //=======================================================================
-//function : ReadChar
-//purpose  : 从当前位置读取指定字节数的字符到缓冲区
+// function : ReadChar
+// purpose  : 从当前位置读取指定字节数的字符到缓冲区
 //=======================================================================
 
-void FSD_BinaryFile::ReadChar(TCollection_AsciiString& buffer, const Standard_Size rsize)
-{
-    char             c;
+void FSD_BinaryFile::ReadChar(TCollection_AsciiString& buffer, const Standard_Size rsize) {
+    char c;
     Standard_Size ccount = 0;
 
     buffer.Clear();
@@ -204,23 +191,19 @@ void FSD_BinaryFile::ReadChar(TCollection_AsciiString& buffer, const Standard_Si
 }
 
 //=======================================================================
-//function : SkipObject
-//purpose  : 跳过当前对象（占位符，未实现）
+// function : SkipObject
+// purpose  : 跳过当前对象（占位符，未实现）
 //=======================================================================
 
-void FSD_BinaryFile::SkipObject()
-{
-
-}
+void FSD_BinaryFile::SkipObject() {}
 
 //=======================================================================
-//function : PutReference
-//purpose  : 写入对象引用（整数值）
+// function : PutReference
+// purpose  : 写入对象引用（整数值）
 //           自动处理字节序反转（如果需要）
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutReference(const Standard_Integer aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutReference(const Standard_Integer aValue) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_Integer t = InverseInt(aValue);
 
@@ -232,23 +215,21 @@ Storage_BaseDriver& FSD_BinaryFile::PutReference(const Standard_Integer aValue)
 }
 
 //=======================================================================
-//function : PutCharacter
-//purpose  : 
+// function : PutCharacter
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutCharacter(const Standard_Character aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutCharacter(const Standard_Character aValue) {
     if (!fwrite(&aValue, sizeof(Standard_Character), 1, myStream)) throw Storage_StreamWriteError();
     return *this;
 }
 
 //=======================================================================
-//function : PutExtCharacter
-//purpose  : 
+// function : PutExtCharacter
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutExtCharacter(const Standard_ExtCharacter aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutExtCharacter(const Standard_ExtCharacter aValue) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_ExtCharacter t = InverseExtChar(aValue);
 
@@ -260,12 +241,11 @@ Storage_BaseDriver& FSD_BinaryFile::PutExtCharacter(const Standard_ExtCharacter 
 }
 
 //=======================================================================
-//function : PutInteger
-//purpose  : 
+// function : PutInteger
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutInteger(const Standard_Integer aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutInteger(const Standard_Integer aValue) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_Integer t = InverseInt(aValue);
 
@@ -278,24 +258,20 @@ Storage_BaseDriver& FSD_BinaryFile::PutInteger(const Standard_Integer aValue)
 }
 
 //=======================================================================
-//function : PutInteger
-//purpose  : 
+// function : PutInteger
+// purpose  :
 //=======================================================================
-Standard_Integer FSD_BinaryFile::PutInteger(Standard_OStream& theOStream,
-    const Standard_Integer theValue,
-    const Standard_Boolean theOnlyCount)
-{
+Standard_Integer FSD_BinaryFile::PutInteger(Standard_OStream& theOStream, const Standard_Integer theValue,
+                                            const Standard_Boolean theOnlyCount) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_Integer t = InverseInt(theValue);
 #else
     Standard_Integer t = theValue;
 #endif
 
-    if (!theOnlyCount)
-    {
+    if (!theOnlyCount) {
         theOStream.write((char*)&t, sizeof(Standard_Integer));
-        if (theOStream.fail())
-        {
+        if (theOStream.fail()) {
             throw Storage_StreamWriteError();
         }
     }
@@ -304,12 +280,11 @@ Standard_Integer FSD_BinaryFile::PutInteger(Standard_OStream& theOStream,
 }
 
 //=======================================================================
-//function : PutBoolean
-//purpose  : 
+// function : PutBoolean
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutBoolean(const Standard_Boolean aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutBoolean(const Standard_Boolean aValue) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_Integer t = InverseInt((Standard_Integer)aValue);
 #else
@@ -320,12 +295,11 @@ Storage_BaseDriver& FSD_BinaryFile::PutBoolean(const Standard_Boolean aValue)
 }
 
 //=======================================================================
-//function : PutReal
-//purpose  : 
+// function : PutReal
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutReal(const Standard_Real aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutReal(const Standard_Real aValue) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_Real t = InverseReal(aValue);
 
@@ -337,12 +311,11 @@ Storage_BaseDriver& FSD_BinaryFile::PutReal(const Standard_Real aValue)
 }
 
 //=======================================================================
-//function : PutShortReal
-//purpose  : 
+// function : PutShortReal
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::PutShortReal(const Standard_ShortReal aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::PutShortReal(const Standard_ShortReal aValue) {
 #if OCCT_BINARY_FILE_DO_INVERSE
     Standard_ShortReal t = InverseShortReal(aValue);
 
@@ -354,14 +327,12 @@ Storage_BaseDriver& FSD_BinaryFile::PutShortReal(const Standard_ShortReal aValue
 }
 
 //=======================================================================
-//function : GetReference
-//purpose  : ----------------- PUBLIC : GET
+// function : GetReference
+// purpose  : ----------------- PUBLIC : GET
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetReference(Standard_Integer& aValue)
-{
-    if (!fread(&aValue, sizeof(Standard_Integer), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+Storage_BaseDriver& FSD_BinaryFile::GetReference(Standard_Integer& aValue) {
+    if (!fread(&aValue, sizeof(Standard_Integer), 1, myStream)) throw Storage_StreamTypeMismatchError();
 #if OCCT_BINARY_FILE_DO_INVERSE
     aValue = InverseInt(aValue);
 #endif
@@ -369,15 +340,13 @@ Storage_BaseDriver& FSD_BinaryFile::GetReference(Standard_Integer& aValue)
 }
 
 //=======================================================================
-//function : GetReference
-//purpose  : ----------------- PUBLIC : GET
+// function : GetReference
+// purpose  : ----------------- PUBLIC : GET
 //=======================================================================
-void FSD_BinaryFile::GetReference(Standard_IStream& theIStream, Standard_Integer& aValue)
-{
+void FSD_BinaryFile::GetReference(Standard_IStream& theIStream, Standard_Integer& aValue) {
     theIStream.read((char*)&aValue, sizeof(Standard_Integer));
 
-    if (theIStream.gcount() != sizeof(Standard_Integer))
-    {
+    if (theIStream.gcount() != sizeof(Standard_Integer)) {
         throw Storage_StreamTypeMismatchError();
     }
 
@@ -387,26 +356,22 @@ void FSD_BinaryFile::GetReference(Standard_IStream& theIStream, Standard_Integer
 }
 
 //=======================================================================
-//function : GetCharacter
-//purpose  : 
+// function : GetCharacter
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetCharacter(Standard_Character& aValue)
-{
-    if (!fread(&aValue, sizeof(Standard_Character), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+Storage_BaseDriver& FSD_BinaryFile::GetCharacter(Standard_Character& aValue) {
+    if (!fread(&aValue, sizeof(Standard_Character), 1, myStream)) throw Storage_StreamTypeMismatchError();
     return *this;
 }
 
 //=======================================================================
-//function : GetExtCharacter
-//purpose  : 
+// function : GetExtCharacter
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetExtCharacter(Standard_ExtCharacter& aValue)
-{
-    if (!fread(&aValue, sizeof(Standard_ExtCharacter), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+Storage_BaseDriver& FSD_BinaryFile::GetExtCharacter(Standard_ExtCharacter& aValue) {
+    if (!fread(&aValue, sizeof(Standard_ExtCharacter), 1, myStream)) throw Storage_StreamTypeMismatchError();
 #if OCCT_BINARY_FILE_DO_INVERSE
     aValue = InverseExtChar(aValue);
 #endif
@@ -414,14 +379,12 @@ Storage_BaseDriver& FSD_BinaryFile::GetExtCharacter(Standard_ExtCharacter& aValu
 }
 
 //=======================================================================
-//function : GetInteger
-//purpose  : 
+// function : GetInteger
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetInteger(Standard_Integer& aValue)
-{
-    if (!fread(&aValue, sizeof(Standard_Integer), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+Storage_BaseDriver& FSD_BinaryFile::GetInteger(Standard_Integer& aValue) {
+    if (!fread(&aValue, sizeof(Standard_Integer), 1, myStream)) throw Storage_StreamTypeMismatchError();
 #if OCCT_BINARY_FILE_DO_INVERSE
     aValue = InverseInt(aValue);
 #endif
@@ -429,16 +392,14 @@ Storage_BaseDriver& FSD_BinaryFile::GetInteger(Standard_Integer& aValue)
 }
 
 //=======================================================================
-//function : GetInteger
-//purpose  : 
+// function : GetInteger
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::GetInteger(Standard_IStream& theIStream, Standard_Integer& theValue)
-{
+void FSD_BinaryFile::GetInteger(Standard_IStream& theIStream, Standard_Integer& theValue) {
 
     theIStream.read((char*)&theValue, sizeof(Standard_Integer));
 
-    if (theIStream.gcount() != sizeof(Standard_Integer))
-    {
+    if (theIStream.gcount() != sizeof(Standard_Integer)) {
         throw Storage_StreamTypeMismatchError();
     }
 
@@ -448,15 +409,13 @@ void FSD_BinaryFile::GetInteger(Standard_IStream& theIStream, Standard_Integer& 
 }
 
 //=======================================================================
-//function : GetBoolean
-//purpose  : 
+// function : GetBoolean
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetBoolean(Standard_Boolean& aValue)
-{
+Storage_BaseDriver& FSD_BinaryFile::GetBoolean(Standard_Boolean& aValue) {
     Standard_Integer anInt = 0;
-    if (!fread(&anInt, sizeof(Standard_Integer), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+    if (!fread(&anInt, sizeof(Standard_Integer), 1, myStream)) throw Storage_StreamTypeMismatchError();
 #if OCCT_BINARY_FILE_DO_INVERSE
     anInt = InverseInt(anInt);
 #endif
@@ -465,14 +424,12 @@ Storage_BaseDriver& FSD_BinaryFile::GetBoolean(Standard_Boolean& aValue)
 }
 
 //=======================================================================
-//function : GetReal
-//purpose  : 
+// function : GetReal
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetReal(Standard_Real& aValue)
-{
-    if (!fread(&aValue, sizeof(Standard_Real), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+Storage_BaseDriver& FSD_BinaryFile::GetReal(Standard_Real& aValue) {
+    if (!fread(&aValue, sizeof(Standard_Real), 1, myStream)) throw Storage_StreamTypeMismatchError();
 #if OCCT_BINARY_FILE_DO_INVERSE
     aValue = InverseReal(aValue);
 #endif
@@ -480,14 +437,12 @@ Storage_BaseDriver& FSD_BinaryFile::GetReal(Standard_Real& aValue)
 }
 
 //=======================================================================
-//function : GetShortReal
-//purpose  : 
+// function : GetShortReal
+// purpose  :
 //=======================================================================
 
-Storage_BaseDriver& FSD_BinaryFile::GetShortReal(Standard_ShortReal& aValue)
-{
-    if (!fread(&aValue, sizeof(Standard_ShortReal), 1, myStream))
-        throw Storage_StreamTypeMismatchError();
+Storage_BaseDriver& FSD_BinaryFile::GetShortReal(Standard_ShortReal& aValue) {
+    if (!fread(&aValue, sizeof(Standard_ShortReal), 1, myStream)) throw Storage_StreamTypeMismatchError();
 #if OCCT_BINARY_FILE_DO_INVERSE
     aValue = InverseShortReal(aValue);
 #endif
@@ -495,24 +450,22 @@ Storage_BaseDriver& FSD_BinaryFile::GetShortReal(Standard_ShortReal& aValue)
 }
 
 //=======================================================================
-//function : Destroy
-//purpose  : 
+// function : Destroy
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::Destroy()
-{
+void FSD_BinaryFile::Destroy() {
     if (OpenMode() != Storage_VSNone) {
         Close();
     }
 }
 
 //=======================================================================
-//function : BeginWriteInfoSection
-//purpose  : -------------------------- INFO : WRITE
+// function : BeginWriteInfoSection
+// purpose  : -------------------------- INFO : WRITE
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginWriteInfoSection()
-{
+Storage_Error FSD_BinaryFile::BeginWriteInfoSection() {
     union {
         char ti2[4];
         Standard_Integer aResult;
@@ -525,10 +478,7 @@ Storage_Error FSD_BinaryFile::BeginWriteInfoSection()
 
     myHeader.testindian = aWrapUnion.aResult;
 
-    if (!fwrite(FSD_BinaryFile::MagicNumber(),
-        strlen(FSD_BinaryFile::MagicNumber()),
-        1,
-        myStream))
+    if (!fwrite(FSD_BinaryFile::MagicNumber(), strlen(FSD_BinaryFile::MagicNumber()), 1, myStream))
         throw Storage_StreamWriteError();
 
     myHeader.binfo = ftell(myStream);
@@ -538,20 +488,15 @@ Storage_Error FSD_BinaryFile::BeginWriteInfoSection()
 }
 
 //=======================================================================
-//function : WriteInfo
-//purpose  : 
+// function : WriteInfo
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WriteInfo(const Standard_Integer nbObj,
-    const TCollection_AsciiString& dbVersion,
-    const TCollection_AsciiString& date,
-    const TCollection_AsciiString& schemaName,
-    const TCollection_AsciiString& schemaVersion,
-    const TCollection_ExtendedString& appName,
-    const TCollection_AsciiString& appVersion,
-    const TCollection_ExtendedString& dataType,
-    const TColStd_SequenceOfAsciiString& userInfo)
-{
+void FSD_BinaryFile::WriteInfo(const Standard_Integer nbObj, const TCollection_AsciiString& dbVersion,
+                               const TCollection_AsciiString& date, const TCollection_AsciiString& schemaName,
+                               const TCollection_AsciiString& schemaVersion, const TCollection_ExtendedString& appName,
+                               const TCollection_AsciiString& appVersion, const TCollection_ExtendedString& dataType,
+                               const TColStd_SequenceOfAsciiString& userInfo) {
     Standard_Integer i;
 
     PutInteger(nbObj);
@@ -571,21 +516,16 @@ void FSD_BinaryFile::WriteInfo(const Standard_Integer nbObj,
 }
 
 //=======================================================================
-//function : WriteInfo
-//purpose  : 
+// function : WriteInfo
+// purpose  :
 //=======================================================================
-Standard_Integer FSD_BinaryFile::WriteInfo(Standard_OStream& theOStream,
-    const Standard_Integer               theObjNb,
-    const TCollection_AsciiString& theStoreVer,
-    const TCollection_AsciiString& theCreationDate,
-    const TCollection_AsciiString& theSchemaName,
-    const TCollection_AsciiString& theSchemaVersion,
-    const TCollection_ExtendedString& theAppName,
-    const TCollection_AsciiString& theAppVer,
-    const TCollection_ExtendedString& theDataType,
-    const TColStd_SequenceOfAsciiString& theUserInfo,
-    const Standard_Boolean               theOnlyCount)
-{
+Standard_Integer
+FSD_BinaryFile::WriteInfo(Standard_OStream& theOStream, const Standard_Integer theObjNb,
+                          const TCollection_AsciiString& theStoreVer, const TCollection_AsciiString& theCreationDate,
+                          const TCollection_AsciiString& theSchemaName, const TCollection_AsciiString& theSchemaVersion,
+                          const TCollection_ExtendedString& theAppName, const TCollection_AsciiString& theAppVer,
+                          const TCollection_ExtendedString& theDataType,
+                          const TColStd_SequenceOfAsciiString& theUserInfo, const Standard_Boolean theOnlyCount) {
     Standard_Integer anInfoSize = 0;
 
     anInfoSize += PutInteger(theOStream, theObjNb, theOnlyCount);
@@ -608,45 +548,41 @@ Standard_Integer FSD_BinaryFile::WriteInfo(Standard_OStream& theOStream,
 }
 
 //=======================================================================
-//function : EndWriteInfoSection
-//purpose  : read
+// function : EndWriteInfoSection
+// purpose  : read
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndWriteInfoSection()
-{
+Storage_Error FSD_BinaryFile::EndWriteInfoSection() {
     myHeader.einfo = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : EndWriteInfoSection
-//purpose  : read
+// function : EndWriteInfoSection
+// purpose  : read
 //=======================================================================
-Storage_Error FSD_BinaryFile::EndWriteInfoSection(Standard_OStream& theOStream)
-{
+Storage_Error FSD_BinaryFile::EndWriteInfoSection(Standard_OStream& theOStream) {
     myHeader.einfo = (Standard_Integer)theOStream.tellp();
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : BeginReadInfoSection
-//purpose  : 
+// function : BeginReadInfoSection
+// purpose  :
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginReadInfoSection()
-{
+Storage_Error FSD_BinaryFile::BeginReadInfoSection() {
     Storage_Error s = Storage_VSOk;
     TCollection_AsciiString l;
-    Standard_Size        len = strlen(FSD_BinaryFile::MagicNumber());
+    Standard_Size len = strlen(FSD_BinaryFile::MagicNumber());
 
     ReadChar(l, len);
 
     if (strncmp(FSD_BinaryFile::MagicNumber(), l.ToCString(), len) != 0) {
         s = Storage_VSFormatError;
-    }
-    else {
+    } else {
         ReadHeader();
     }
 
@@ -654,20 +590,15 @@ Storage_Error FSD_BinaryFile::BeginReadInfoSection()
 }
 
 //=======================================================================
-//function : ReadInfo
-//purpose  : ------------------- INFO : READ
+// function : ReadInfo
+// purpose  : ------------------- INFO : READ
 //=======================================================================
 
-void FSD_BinaryFile::ReadInfo(Standard_Integer& nbObj,
-    TCollection_AsciiString& dbVersion,
-    TCollection_AsciiString& date,
-    TCollection_AsciiString& schemaName,
-    TCollection_AsciiString& schemaVersion,
-    TCollection_ExtendedString& appName,
-    TCollection_AsciiString& appVersion,
-    TCollection_ExtendedString& dataType,
-    TColStd_SequenceOfAsciiString& userInfo)
-{
+void FSD_BinaryFile::ReadInfo(Standard_Integer& nbObj, TCollection_AsciiString& dbVersion,
+                              TCollection_AsciiString& date, TCollection_AsciiString& schemaName,
+                              TCollection_AsciiString& schemaVersion, TCollection_ExtendedString& appName,
+                              TCollection_AsciiString& appVersion, TCollection_ExtendedString& dataType,
+                              TColStd_SequenceOfAsciiString& userInfo) {
     GetInteger(nbObj);
     ReadString(dbVersion);
     ReadString(date);
@@ -689,66 +620,54 @@ void FSD_BinaryFile::ReadInfo(Standard_Integer& nbObj,
 }
 
 //=======================================================================
-//function : ReadInfo
-//purpose  : 
+// function : ReadInfo
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::ReadCompleteInfo(Standard_IStream& theIStream, Handle(Storage_Data)& theData)
-{
+void FSD_BinaryFile::ReadCompleteInfo(Standard_IStream& theIStream, Handle(Storage_Data) & theData) {
     FSD_FileHeader aHeaderPos;
     ReadHeader(theIStream, aHeaderPos);
 
-    if (theData.IsNull())
-    {
+    if (theData.IsNull()) {
         theData = new Storage_Data();
     }
 
     Handle(Storage_InternalData) iData = theData->InternalData();
-    Handle(Storage_TypeData)     tData = theData->TypeData();
-    Handle(Storage_RootData)     rData = theData->RootData();
-    Handle(Storage_HeaderData)   hData = theData->HeaderData();
+    Handle(Storage_TypeData) tData = theData->TypeData();
+    Handle(Storage_RootData) rData = theData->RootData();
+    Handle(Storage_HeaderData) hData = theData->HeaderData();
 
     ReadHeaderData(theIStream, hData);
 
     Handle(Storage_HArrayOfCallBack) theCallBack;
 
-    while (theIStream.good() && !theIStream.eof())
-    {
+    while (theIStream.good() && !theIStream.eof()) {
         Standard_Integer aPos = (Standard_Integer)theIStream.tellg();
 
-        if (aPos >= aHeaderPos.edata)
-        {
+        if (aPos >= aHeaderPos.edata) {
             break;
-        }
-        else if (aPos == aHeaderPos.bcomment)
-        {
+        } else if (aPos == aHeaderPos.bcomment) {
             TColStd_SequenceOfExtendedString mComment;
             ReadComment(theIStream, mComment);
 
-            for (Standard_Integer i = 1; i <= mComment.Length(); i++)
-            {
+            for (Standard_Integer i = 1; i <= mComment.Length(); i++) {
                 hData->AddToComments(mComment.Value(i));
             }
 
             iData->ReadArray() = new Storage_HPArray(1, theData->NumberOfObjects());
-        }
-        else if (aPos == aHeaderPos.btype)
-        {
+        } else if (aPos == aHeaderPos.btype) {
             Standard_Integer aTypeSectionSize = TypeSectionSize(theIStream);
             theCallBack = new Storage_HArrayOfCallBack(1, aTypeSectionSize);
 
-            TCollection_AsciiString  aTypeName;
-            Standard_Integer         aTypeNum;
+            TCollection_AsciiString aTypeName;
+            Standard_Integer aTypeNum;
 
-            for (Standard_Integer i = 1; i <= aTypeSectionSize; i++)
-            {
+            for (Standard_Integer i = 1; i <= aTypeSectionSize; i++) {
                 ReadTypeInformations(theIStream, aTypeNum, aTypeName);
                 tData->AddType(aTypeName, aTypeNum);
 
                 theCallBack->SetValue(aTypeNum, NULL);
             }
-        }
-        else if (aPos == aHeaderPos.broot)
-        {
+        } else if (aPos == aHeaderPos.broot) {
             Standard_Integer aRootSectionSize = RootSectionSize(theIStream);
 
             Standard_Integer aRef;
@@ -756,8 +675,7 @@ void FSD_BinaryFile::ReadCompleteInfo(Standard_IStream& theIStream, Handle(Stora
             Handle(Storage_Root) aRoot;
             Handle(Standard_Persistent) aPer;
 
-            for (Standard_Integer i = 1; i <= aRootSectionSize; i++)
-            {
+            for (Standard_Integer i = 1; i <= aRootSectionSize; i++) {
                 ReadRoot(theIStream, aRootName, aRef, aTypeName);
 
                 aRoot = new Storage_Root(aRootName, aPer);
@@ -765,35 +683,28 @@ void FSD_BinaryFile::ReadCompleteInfo(Standard_IStream& theIStream, Handle(Stora
                 aRoot->SetType(aTypeName);
                 rData->AddRoot(aRoot);
             }
-        }
-        else if (aPos == aHeaderPos.bref)
-        {
+        } else if (aPos == aHeaderPos.bref) {
             Standard_Integer aRefSectionSize = RefSectionSize(theIStream);
 
             Standard_Integer aTypeNum, aRef = 0;
 
-            for (Standard_Integer i = 1; i <= aRefSectionSize; i++)
-            {
+            for (Standard_Integer i = 1; i <= aRefSectionSize; i++) {
                 ReadReferenceType(theIStream, aRef, aTypeNum);
 
                 iData->ReadArray()->ChangeValue(aRef) = theCallBack->Value(aTypeNum)->New();
 
-                if (!iData->ReadArray()->ChangeValue(aRef).IsNull())
-                {
+                if (!iData->ReadArray()->ChangeValue(aRef).IsNull()) {
                     iData->ReadArray()->ChangeValue(aRef)->TypeNum() = aTypeNum;
                 }
             }
-        }
-        else if (aPos == aHeaderPos.bdata)
-        {
+        } else if (aPos == aHeaderPos.bdata) {
             //
         }
     }
 
     Handle(Storage_HSeqOfRoot) aRoots = rData->Roots();
-    for (Standard_Integer i = 1; i <= theData->NumberOfRoots(); i++)
-    {
-        const Handle(Storage_Root)& aCurRoot = aRoots->Value(i);
+    for (Standard_Integer i = 1; i <= theData->NumberOfRoots(); i++) {
+        const Handle(Storage_Root) & aCurRoot = aRoots->Value(i);
         rData->UpdateRoot(aCurRoot->Name(), iData->ReadArray()->Value(aCurRoot->Reference()));
     }
 
@@ -801,45 +712,43 @@ void FSD_BinaryFile::ReadCompleteInfo(Standard_IStream& theIStream, Handle(Stora
 }
 
 //=======================================================================
-//function : EndReadInfoSection
-//purpose  : COMMENTS SECTION
+// function : EndReadInfoSection
+// purpose  : COMMENTS SECTION
 //           write
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndReadInfoSection()
-{
-    if (!fseek(myStream, myHeader.einfo, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::EndReadInfoSection() {
+    if (!fseek(myStream, myHeader.einfo, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : BeginWriteCommentSection
-//purpose  : ---------------- COMMENTS : WRITE
+// function : BeginWriteCommentSection
+// purpose  : ---------------- COMMENTS : WRITE
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginWriteCommentSection()
-{
+Storage_Error FSD_BinaryFile::BeginWriteCommentSection() {
     myHeader.bcomment = ftell(myStream);
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : BeginWriteCommentSection
-//purpose  :
+// function : BeginWriteCommentSection
+// purpose  :
 //=======================================================================
-Storage_Error FSD_BinaryFile::BeginWriteCommentSection(Standard_OStream& theOStream)
-{
+Storage_Error FSD_BinaryFile::BeginWriteCommentSection(Standard_OStream& theOStream) {
     myHeader.bcomment = (Standard_Integer)theOStream.tellp();
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : WriteComment
-//purpose  : 
+// function : WriteComment
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WriteComment(const TColStd_SequenceOfExtendedString& aCom)
-{
+void FSD_BinaryFile::WriteComment(const TColStd_SequenceOfExtendedString& aCom) {
     Standard_Integer i, aSize;
 
     aSize = aCom.Length();
@@ -850,13 +759,12 @@ void FSD_BinaryFile::WriteComment(const TColStd_SequenceOfExtendedString& aCom)
 }
 
 //=======================================================================
-//function : WriteComment
-//purpose  : 
+// function : WriteComment
+// purpose  :
 //=======================================================================
 Standard_Integer FSD_BinaryFile::WriteComment(Standard_OStream& theOStream,
-    const TColStd_SequenceOfExtendedString& theComments,
-    const Standard_Boolean                  theOnlyCount)
-{
+                                              const TColStd_SequenceOfExtendedString& theComments,
+                                              const Standard_Boolean theOnlyCount) {
     Standard_Integer aCommentSize = 0;
 
     Standard_Integer aSize = theComments.Length();
@@ -870,48 +778,46 @@ Standard_Integer FSD_BinaryFile::WriteComment(Standard_OStream& theOStream,
 }
 
 //=======================================================================
-//function : EndWriteCommentSection
-//purpose  : read
+// function : EndWriteCommentSection
+// purpose  : read
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndWriteCommentSection()
-{
+Storage_Error FSD_BinaryFile::EndWriteCommentSection() {
     myHeader.ecomment = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : EndWriteCommentSection
-//purpose  : read
+// function : EndWriteCommentSection
+// purpose  : read
 //=======================================================================
-Storage_Error FSD_BinaryFile::EndWriteCommentSection(Standard_OStream& theOStream)
-{
+Storage_Error FSD_BinaryFile::EndWriteCommentSection(Standard_OStream& theOStream) {
     myHeader.ecomment = (Standard_Integer)theOStream.tellp();
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : BeginReadCommentSection
-//purpose  : ---------------- COMMENTS : READ
+// function : BeginReadCommentSection
+// purpose  : ---------------- COMMENTS : READ
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginReadCommentSection()
-{
-    if (!fseek(myStream, myHeader.bcomment, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::BeginReadCommentSection() {
+    if (!fseek(myStream, myHeader.bcomment, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : ReadComment
-//purpose  : 
+// function : ReadComment
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadComment(TColStd_SequenceOfExtendedString& aCom)
-{
+void FSD_BinaryFile::ReadComment(TColStd_SequenceOfExtendedString& aCom) {
     TCollection_ExtendedString line;
-    Standard_Integer           len, i;
+    Standard_Integer len, i;
 
     GetInteger(len);
     for (i = 1; i <= len && !IsEnd(); i++) {
@@ -921,97 +827,91 @@ void FSD_BinaryFile::ReadComment(TColStd_SequenceOfExtendedString& aCom)
 }
 
 //=======================================================================
-//function : ReadComment
-//purpose  : 
+// function : ReadComment
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::ReadComment(Standard_IStream& theIStream, TColStd_SequenceOfExtendedString& aCom)
-{
+void FSD_BinaryFile::ReadComment(Standard_IStream& theIStream, TColStd_SequenceOfExtendedString& aCom) {
     TCollection_ExtendedString line;
-    Standard_Integer           len, i;
+    Standard_Integer len, i;
 
     GetInteger(theIStream, len);
-    for (i = 1; i <= len && theIStream.good(); i++)
-    {
+    for (i = 1; i <= len && theIStream.good(); i++) {
         ReadExtendedString(theIStream, line);
         aCom.Append(line);
     }
 }
 
 //=======================================================================
-//function : EndReadCommentSection
-//purpose  : 
+// function : EndReadCommentSection
+// purpose  :
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndReadCommentSection()
-{
-    if (!fseek(myStream, myHeader.ecomment, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::EndReadCommentSection() {
+    if (!fseek(myStream, myHeader.ecomment, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : BeginWriteTypeSection
-//purpose  : --------------- TYPE : WRITE
+// function : BeginWriteTypeSection
+// purpose  : --------------- TYPE : WRITE
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginWriteTypeSection()
-{
+Storage_Error FSD_BinaryFile::BeginWriteTypeSection() {
     myHeader.btype = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : SetTypeSectionSize
-//purpose  : 
+// function : SetTypeSectionSize
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::SetTypeSectionSize(const Standard_Integer aSize)
-{
+void FSD_BinaryFile::SetTypeSectionSize(const Standard_Integer aSize) {
     PutInteger(aSize);
 }
 
 //=======================================================================
-//function : WriteTypeInformations
-//purpose  : 
+// function : WriteTypeInformations
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WriteTypeInformations(const Standard_Integer typeNum,
-    const TCollection_AsciiString& typeName)
-{
+void FSD_BinaryFile::WriteTypeInformations(const Standard_Integer typeNum, const TCollection_AsciiString& typeName) {
     PutInteger(typeNum);
     WriteString(typeName);
 }
 
 //=======================================================================
-//function : EndWriteTypeSection
-//purpose  : read
+// function : EndWriteTypeSection
+// purpose  : read
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndWriteTypeSection()
-{
+Storage_Error FSD_BinaryFile::EndWriteTypeSection() {
     myHeader.etype = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : BeginReadTypeSection
-//purpose  : ------------------- TYPE : READ
+// function : BeginReadTypeSection
+// purpose  : ------------------- TYPE : READ
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginReadTypeSection()
-{
-    if (!fseek(myStream, myHeader.btype, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::BeginReadTypeSection() {
+    if (!fseek(myStream, myHeader.btype, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : TypeSectionSize
-//purpose  : 
+// function : TypeSectionSize
+// purpose  :
 //=======================================================================
 
-Standard_Integer FSD_BinaryFile::TypeSectionSize()
-{
+Standard_Integer FSD_BinaryFile::TypeSectionSize() {
     Standard_Integer i;
 
     GetInteger(i);
@@ -1019,11 +919,10 @@ Standard_Integer FSD_BinaryFile::TypeSectionSize()
 }
 
 //=======================================================================
-//function : TypeSectionSize
-//purpose  : 
+// function : TypeSectionSize
+// purpose  :
 //=======================================================================
-Standard_Integer FSD_BinaryFile::TypeSectionSize(Standard_IStream& theIStream)
-{
+Standard_Integer FSD_BinaryFile::TypeSectionSize(Standard_IStream& theIStream) {
     Standard_Integer i;
 
     GetInteger(theIStream, i);
@@ -1031,102 +930,99 @@ Standard_Integer FSD_BinaryFile::TypeSectionSize(Standard_IStream& theIStream)
 }
 
 //=======================================================================
-//function : ReadTypeInformations
-//purpose  : 
+// function : ReadTypeInformations
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadTypeInformations(Standard_Integer& typeNum, TCollection_AsciiString& typeName)
-{
+void FSD_BinaryFile::ReadTypeInformations(Standard_Integer& typeNum, TCollection_AsciiString& typeName) {
     GetInteger(typeNum);
     ReadString(typeName);
 }
 
 //=======================================================================
-//function : ReadTypeInformations
-//purpose  : 
+// function : ReadTypeInformations
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::ReadTypeInformations(Standard_IStream& theIStream, Standard_Integer& typeNum, TCollection_AsciiString& typeName)
-{
+void FSD_BinaryFile::ReadTypeInformations(Standard_IStream& theIStream, Standard_Integer& typeNum,
+                                          TCollection_AsciiString& typeName) {
     GetInteger(theIStream, typeNum);
     ReadString(theIStream, typeName);
 }
 
 //=======================================================================
-//function : EndReadTypeSection
-//purpose  : ROOT SECTION
+// function : EndReadTypeSection
+// purpose  : ROOT SECTION
 //           write
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndReadTypeSection()
-{
-    if (!fseek(myStream, myHeader.etype, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::EndReadTypeSection() {
+    if (!fseek(myStream, myHeader.etype, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : BeginWriteRootSection
-//purpose  : -------------------- ROOT : WRITE
+// function : BeginWriteRootSection
+// purpose  : -------------------- ROOT : WRITE
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginWriteRootSection()
-{
+Storage_Error FSD_BinaryFile::BeginWriteRootSection() {
     myHeader.broot = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : SetRootSectionSize
-//purpose  : 
+// function : SetRootSectionSize
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::SetRootSectionSize(const Standard_Integer aSize)
-{
+void FSD_BinaryFile::SetRootSectionSize(const Standard_Integer aSize) {
     PutInteger(aSize);
 }
 
 //=======================================================================
-//function : WriteRoot
-//purpose  : 
+// function : WriteRoot
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WriteRoot(const TCollection_AsciiString& rootName, const Standard_Integer aRef, const TCollection_AsciiString& rootType)
-{
+void FSD_BinaryFile::WriteRoot(const TCollection_AsciiString& rootName, const Standard_Integer aRef,
+                               const TCollection_AsciiString& rootType) {
     PutReference(aRef);
     WriteString(rootName);
     WriteString(rootType);
 }
 
 //=======================================================================
-//function : EndWriteRootSection
-//purpose  : read
+// function : EndWriteRootSection
+// purpose  : read
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndWriteRootSection()
-{
+Storage_Error FSD_BinaryFile::EndWriteRootSection() {
     myHeader.eroot = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : BeginReadRootSection
-//purpose  : ----------------------- ROOT : READ
+// function : BeginReadRootSection
+// purpose  : ----------------------- ROOT : READ
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginReadRootSection()
-{
-    if (!fseek(myStream, myHeader.broot, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::BeginReadRootSection() {
+    if (!fseek(myStream, myHeader.broot, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : RootSectionSize
-//purpose  : 
+// function : RootSectionSize
+// purpose  :
 //=======================================================================
 
-Standard_Integer FSD_BinaryFile::RootSectionSize()
-{
+Standard_Integer FSD_BinaryFile::RootSectionSize() {
     Standard_Integer i;
 
     GetInteger(i);
@@ -1134,11 +1030,10 @@ Standard_Integer FSD_BinaryFile::RootSectionSize()
 }
 
 //=======================================================================
-//function : RootSectionSize
-//purpose  : 
+// function : RootSectionSize
+// purpose  :
 //=======================================================================
-Standard_Integer FSD_BinaryFile::RootSectionSize(Standard_IStream& theIStream)
-{
+Standard_Integer FSD_BinaryFile::RootSectionSize(Standard_IStream& theIStream) {
     Standard_Integer i;
 
     GetInteger(theIStream, i);
@@ -1146,103 +1041,100 @@ Standard_Integer FSD_BinaryFile::RootSectionSize(Standard_IStream& theIStream)
 }
 
 //=======================================================================
-//function : ReadRoot
-//purpose  : 
+// function : ReadRoot
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadRoot(TCollection_AsciiString& rootName, Standard_Integer& aRef, TCollection_AsciiString& rootType)
-{
+void FSD_BinaryFile::ReadRoot(TCollection_AsciiString& rootName, Standard_Integer& aRef,
+                              TCollection_AsciiString& rootType) {
     GetReference(aRef);
     ReadString(rootName);
     ReadString(rootType);
 }
 
 //=======================================================================
-//function : ReadRoot
-//purpose  : 
+// function : ReadRoot
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::ReadRoot(Standard_IStream& theIStream, TCollection_AsciiString& rootName, Standard_Integer& aRef, TCollection_AsciiString& rootType)
-{
+void FSD_BinaryFile::ReadRoot(Standard_IStream& theIStream, TCollection_AsciiString& rootName, Standard_Integer& aRef,
+                              TCollection_AsciiString& rootType) {
     GetReference(theIStream, aRef);
     ReadString(theIStream, rootName);
     ReadString(theIStream, rootType);
 }
 
 //=======================================================================
-//function : EndReadRootSection
-//purpose  : REF SECTION
+// function : EndReadRootSection
+// purpose  : REF SECTION
 //           write
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndReadRootSection()
-{
-    if (!fseek(myStream, myHeader.eroot, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::EndReadRootSection() {
+    if (!fseek(myStream, myHeader.eroot, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : BeginWriteRefSection
-//purpose  : -------------------------- REF : WRITE
+// function : BeginWriteRefSection
+// purpose  : -------------------------- REF : WRITE
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginWriteRefSection()
-{
+Storage_Error FSD_BinaryFile::BeginWriteRefSection() {
     myHeader.bref = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : SetRefSectionSize
-//purpose  : 
+// function : SetRefSectionSize
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::SetRefSectionSize(const Standard_Integer aSize)
-{
+void FSD_BinaryFile::SetRefSectionSize(const Standard_Integer aSize) {
     PutInteger(aSize);
 }
 
 //=======================================================================
-//function : WriteReferenceType
-//purpose  : 
+// function : WriteReferenceType
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WriteReferenceType(const Standard_Integer reference, const Standard_Integer typeNum)
-{
+void FSD_BinaryFile::WriteReferenceType(const Standard_Integer reference, const Standard_Integer typeNum) {
     PutReference(reference);
     PutInteger(typeNum);
 }
 
 //=======================================================================
-//function : EndWriteRefSection
-//purpose  : read
+// function : EndWriteRefSection
+// purpose  : read
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndWriteRefSection()
-{
+Storage_Error FSD_BinaryFile::EndWriteRefSection() {
     myHeader.eref = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : BeginReadRefSection
-//purpose  : ----------------------- REF : READ
+// function : BeginReadRefSection
+// purpose  : ----------------------- REF : READ
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginReadRefSection()
-{
-    if (!fseek(myStream, myHeader.bref, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::BeginReadRefSection() {
+    if (!fseek(myStream, myHeader.bref, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : RefSectionSize
-//purpose  : 
+// function : RefSectionSize
+// purpose  :
 //=======================================================================
 
-Standard_Integer FSD_BinaryFile::RefSectionSize()
-{
+Standard_Integer FSD_BinaryFile::RefSectionSize() {
     Standard_Integer i;
 
     GetInteger(i);
@@ -1250,11 +1142,10 @@ Standard_Integer FSD_BinaryFile::RefSectionSize()
 }
 
 //=======================================================================
-//function : RefSectionSize
-//purpose  : 
+// function : RefSectionSize
+// purpose  :
 //=======================================================================
-Standard_Integer FSD_BinaryFile::RefSectionSize(Standard_IStream& theIStream)
-{
+Standard_Integer FSD_BinaryFile::RefSectionSize(Standard_IStream& theIStream) {
     Standard_Integer i;
 
     GetInteger(theIStream, i);
@@ -1262,106 +1153,93 @@ Standard_Integer FSD_BinaryFile::RefSectionSize(Standard_IStream& theIStream)
 }
 
 //=======================================================================
-//function : ReadReferenceType
-//purpose  : 
+// function : ReadReferenceType
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadReferenceType(Standard_Integer& reference,
-    Standard_Integer& typeNum)
-{
+void FSD_BinaryFile::ReadReferenceType(Standard_Integer& reference, Standard_Integer& typeNum) {
     GetReference(reference);
     GetInteger(typeNum);
 }
 
 //=======================================================================
-//function : ReadReferenceType
-//purpose  : 
+// function : ReadReferenceType
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::ReadReferenceType(Standard_IStream& theIStream, Standard_Integer& reference, Standard_Integer& typeNum)
-{
+void FSD_BinaryFile::ReadReferenceType(Standard_IStream& theIStream, Standard_Integer& reference,
+                                       Standard_Integer& typeNum) {
     GetReference(theIStream, reference);
     GetInteger(theIStream, typeNum);
 }
 
 //=======================================================================
-//function : EndReadRefSection
-//purpose  : DATA SECTION
+// function : EndReadRefSection
+// purpose  : DATA SECTION
 //           write
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndReadRefSection()
-{
-    if (!fseek(myStream, myHeader.eref, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::EndReadRefSection() {
+    if (!fseek(myStream, myHeader.eref, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : BeginWriteDataSection
-//purpose  : -------------------- DATA : WRITE
+// function : BeginWriteDataSection
+// purpose  : -------------------- DATA : WRITE
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginWriteDataSection()
-{
+Storage_Error FSD_BinaryFile::BeginWriteDataSection() {
     myHeader.bdata = ftell(myStream);
 
     return Storage_VSOk;
 }
 
 //=======================================================================
-//function : WritePersistentObjectHeader
-//purpose  : 
+// function : WritePersistentObjectHeader
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WritePersistentObjectHeader(const Standard_Integer aRef,
-    const Standard_Integer aType)
-{
+void FSD_BinaryFile::WritePersistentObjectHeader(const Standard_Integer aRef, const Standard_Integer aType) {
     PutReference(aRef);
     PutInteger(aType);
 }
 
 //=======================================================================
-//function : BeginWritePersistentObjectData
-//purpose  : 
+// function : BeginWritePersistentObjectData
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::BeginWritePersistentObjectData()
-{
-}
+void FSD_BinaryFile::BeginWritePersistentObjectData() {}
 
 //=======================================================================
-//function : BeginWriteObjectData
-//purpose  : 
+// function : BeginWriteObjectData
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::BeginWriteObjectData()
-{
-}
+void FSD_BinaryFile::BeginWriteObjectData() {}
 
 //=======================================================================
-//function : EndWriteObjectData
-//purpose  : 
+// function : EndWriteObjectData
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::EndWriteObjectData()
-{
-}
+void FSD_BinaryFile::EndWriteObjectData() {}
 
 //=======================================================================
-//function : EndWritePersistentObjectData
-//purpose  : 
+// function : EndWritePersistentObjectData
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::EndWritePersistentObjectData()
-{
-}
+void FSD_BinaryFile::EndWritePersistentObjectData() {}
 
 //=======================================================================
-//function : EndWriteDataSection
-//purpose  : read
+// function : EndWriteDataSection
+// purpose  : read
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::EndWriteDataSection()
-{
+Storage_Error FSD_BinaryFile::EndWriteDataSection() {
     myHeader.edata = ftell(myStream);
 
     fseek(myStream, myHeader.binfo, SEEK_SET);
@@ -1370,82 +1248,73 @@ Storage_Error FSD_BinaryFile::EndWriteDataSection()
 }
 
 //=======================================================================
-//function : BeginReadDataSection
-//purpose  : ---------------------- DATA : READ
+// function : BeginReadDataSection
+// purpose  : ---------------------- DATA : READ
 //=======================================================================
 
-Storage_Error FSD_BinaryFile::BeginReadDataSection()
-{
-    if (!fseek(myStream, myHeader.bdata, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
+Storage_Error FSD_BinaryFile::BeginReadDataSection() {
+    if (!fseek(myStream, myHeader.bdata, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : ReadPersistentObjectHeader
-//purpose  : 
+// function : ReadPersistentObjectHeader
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadPersistentObjectHeader(Standard_Integer& aRef,
-    Standard_Integer& aType)
-{
+void FSD_BinaryFile::ReadPersistentObjectHeader(Standard_Integer& aRef, Standard_Integer& aType) {
     GetReference(aRef);
     GetInteger(aType);
 }
 
 //=======================================================================
-//function : BeginReadPersistentObjectData
-//purpose  : 
+// function : BeginReadPersistentObjectData
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::BeginReadPersistentObjectData()
-{
+void FSD_BinaryFile::BeginReadPersistentObjectData() {}
+
+//=======================================================================
+// function : BeginReadObjectData
+// purpose  :
+//=======================================================================
+
+void FSD_BinaryFile::BeginReadObjectData() {}
+
+//=======================================================================
+// function : EndReadObjectData
+// purpose  :
+//=======================================================================
+
+void FSD_BinaryFile::EndReadObjectData() {}
+
+//=======================================================================
+// function : EndReadPersistentObjectData
+// purpose  :
+//=======================================================================
+
+void FSD_BinaryFile::EndReadPersistentObjectData() {}
+
+//=======================================================================
+// function : EndReadDataSection
+// purpose  :
+//=======================================================================
+
+Storage_Error FSD_BinaryFile::EndReadDataSection() {
+    if (!fseek(myStream, myHeader.edata, SEEK_SET))
+        return Storage_VSOk;
+    else
+        return Storage_VSSectionNotFound;
 }
 
 //=======================================================================
-//function : BeginReadObjectData
-//purpose  : 
+// function : WriteString
+// purpose  : write string at the current position.
 //=======================================================================
 
-void FSD_BinaryFile::BeginReadObjectData()
-{
-}
-
-//=======================================================================
-//function : EndReadObjectData
-//purpose  : 
-//=======================================================================
-
-void FSD_BinaryFile::EndReadObjectData()
-{
-}
-
-//=======================================================================
-//function : EndReadPersistentObjectData
-//purpose  : 
-//=======================================================================
-
-void FSD_BinaryFile::EndReadPersistentObjectData()
-{
-}
-
-//=======================================================================
-//function : EndReadDataSection
-//purpose  : 
-//=======================================================================
-
-Storage_Error FSD_BinaryFile::EndReadDataSection()
-{
-    if (!fseek(myStream, myHeader.edata, SEEK_SET)) return Storage_VSOk;
-    else return Storage_VSSectionNotFound;
-}
-
-//=======================================================================
-//function : WriteString
-//purpose  : write string at the current position.
-//=======================================================================
-
-void FSD_BinaryFile::WriteString(const TCollection_AsciiString& aString)
-{
+void FSD_BinaryFile::WriteString(const TCollection_AsciiString& aString) {
     Standard_Integer size;
 
     size = aString.Length();
@@ -1458,24 +1327,20 @@ void FSD_BinaryFile::WriteString(const TCollection_AsciiString& aString)
 }
 
 //=======================================================================
-//function : WriteString
-//purpose  : write string at the current position.
+// function : WriteString
+// purpose  : write string at the current position.
 //=======================================================================
-Standard_Integer FSD_BinaryFile::WriteString(Standard_OStream& theOStream,
-    const TCollection_AsciiString& theString,
-    const Standard_Boolean         theOnlyCount)
-{
+Standard_Integer FSD_BinaryFile::WriteString(Standard_OStream& theOStream, const TCollection_AsciiString& theString,
+                                             const Standard_Boolean theOnlyCount) {
     Standard_Integer aNumAndStrLen, anAsciiStrLen;
 
     anAsciiStrLen = aNumAndStrLen = theString.Length();
 
     aNumAndStrLen += PutInteger(theOStream, anAsciiStrLen, theOnlyCount);
 
-    if (anAsciiStrLen > 0 && !theOnlyCount)
-    {
+    if (anAsciiStrLen > 0 && !theOnlyCount) {
         theOStream.write(theString.ToCString(), theString.Length());
-        if (theOStream.fail())
-        {
+        if (theOStream.fail()) {
             throw Storage_StreamWriteError();
         }
     }
@@ -1484,12 +1349,11 @@ Standard_Integer FSD_BinaryFile::WriteString(Standard_OStream& theOStream,
 }
 
 //=======================================================================
-//function : ReadString
-//purpose  : read string from the current position.
+// function : ReadString
+// purpose  : read string from the current position.
 //=======================================================================
 
-void FSD_BinaryFile::ReadString(TCollection_AsciiString& aString)
-{
+void FSD_BinaryFile::ReadString(TCollection_AsciiString& aString) {
     Standard_Integer size = 0;
 
     GetInteger(size);
@@ -1499,35 +1363,30 @@ void FSD_BinaryFile::ReadString(TCollection_AsciiString& aString)
         c[size] = '\0';
         aString = c;
         Standard::Free(c);
-    }
-    else {
+    } else {
         aString.Clear();
     }
 }
 
 //=======================================================================
-//function : ReadString
-//purpose  : read string from the current position.
+// function : ReadString
+// purpose  : read string from the current position.
 //=======================================================================
-void FSD_BinaryFile::ReadString(Standard_IStream& theIStream, TCollection_AsciiString& aString)
-{
+void FSD_BinaryFile::ReadString(Standard_IStream& theIStream, TCollection_AsciiString& aString) {
     Standard_Integer size = 0;
 
     GetInteger(theIStream, size);
 
-    if (size > 0)
-    {
+    if (size > 0) {
         Standard_Character* c = (Standard_Character*)Standard::Allocate((size + 1) * sizeof(Standard_Character));
 
-        if (!theIStream.good())
-        {
+        if (!theIStream.good()) {
             throw Storage_StreamReadError();
         }
 
         theIStream.read(c, size);
 
-        if (theIStream.gcount() != size)
-        {
+        if (theIStream.gcount() != size) {
             throw Storage_StreamReadError();
         }
 
@@ -1536,20 +1395,17 @@ void FSD_BinaryFile::ReadString(Standard_IStream& theIStream, TCollection_AsciiS
         aString = c;
 
         Standard::Free(c);
-    }
-    else
-    {
+    } else {
         aString.Clear();
     }
 }
 
 //=======================================================================
-//function : WriteExtendedString
-//purpose  : write string at the current position.
+// function : WriteExtendedString
+// purpose  : write string at the current position.
 //=======================================================================
 
-void FSD_BinaryFile::WriteExtendedString(const TCollection_ExtendedString& aString)
-{
+void FSD_BinaryFile::WriteExtendedString(const TCollection_ExtendedString& aString) {
     Standard_Integer size;
 
     size = aString.Length();
@@ -1577,21 +1433,19 @@ void FSD_BinaryFile::WriteExtendedString(const TCollection_ExtendedString& aStri
 }
 
 //=======================================================================
-//function : WriteExtendedString
-//purpose  : write string at the current position.
+// function : WriteExtendedString
+// purpose  : write string at the current position.
 //=======================================================================
 Standard_Integer FSD_BinaryFile::WriteExtendedString(Standard_OStream& theOStream,
-    const TCollection_ExtendedString& theString,
-    const Standard_Boolean            theOnlyCount)
-{
+                                                     const TCollection_ExtendedString& theString,
+                                                     const Standard_Boolean theOnlyCount) {
     Standard_Integer aNumAndStrLen, anExtStrLen;
     anExtStrLen = theString.Length();
 
     aNumAndStrLen = anExtStrLen * sizeof(Standard_ExtCharacter);
     aNumAndStrLen += PutInteger(theOStream, anExtStrLen, theOnlyCount);
 
-    if (anExtStrLen > 0 && !theOnlyCount)
-    {
+    if (anExtStrLen > 0 && !theOnlyCount) {
         Standard_ExtString anExtStr;
 #if OCCT_BINARY_FILE_DO_INVERSE
         TCollection_ExtendedString aCopy = theString;
@@ -1601,8 +1455,7 @@ Standard_Integer FSD_BinaryFile::WriteExtendedString(Standard_OStream& theOStrea
         //
         pChar = (Standard_PExtCharacter)anExtStr;
 
-        for (Standard_Integer i = 0; i < anExtStrLen; i++)
-        {
+        for (Standard_Integer i = 0; i < anExtStrLen; i++) {
             pChar[i] = InverseExtChar(pChar[i]);
         }
 #else
@@ -1610,8 +1463,7 @@ Standard_Integer FSD_BinaryFile::WriteExtendedString(Standard_OStream& theOStrea
 #endif
 
         theOStream.write((char*)anExtStr, sizeof(Standard_ExtCharacter) * theString.Length());
-        if (theOStream.fail())
-        {
+        if (theOStream.fail()) {
             throw Storage_StreamWriteError();
         }
     }
@@ -1620,20 +1472,18 @@ Standard_Integer FSD_BinaryFile::WriteExtendedString(Standard_OStream& theOStrea
 }
 
 //=======================================================================
-//function : ReadExtendedString
-//purpose  : read string from the current position.
+// function : ReadExtendedString
+// purpose  : read string from the current position.
 //=======================================================================
 
-void FSD_BinaryFile::ReadExtendedString(TCollection_ExtendedString& aString)
-{
+void FSD_BinaryFile::ReadExtendedString(TCollection_ExtendedString& aString) {
     Standard_Integer size = 0;
 
     GetInteger(size);
     if (size > 0) {
-        Standard_ExtCharacter* c = (Standard_ExtCharacter*)
-            Standard::Allocate((size + 1) * sizeof(Standard_ExtCharacter));
-        if (!fread(c, size * sizeof(Standard_ExtCharacter), 1, myStream))
-            throw Storage_StreamWriteError();
+        Standard_ExtCharacter* c =
+            (Standard_ExtCharacter*)Standard::Allocate((size + 1) * sizeof(Standard_ExtCharacter));
+        if (!fread(c, size * sizeof(Standard_ExtCharacter), 1, myStream)) throw Storage_StreamWriteError();
         c[size] = '\0';
 #if OCCT_BINARY_FILE_DO_INVERSE
         for (Standard_Integer i = 0; i < size; i++)
@@ -1641,62 +1491,54 @@ void FSD_BinaryFile::ReadExtendedString(TCollection_ExtendedString& aString)
 #endif
         aString = c;
         Standard::Free(c);
-    }
-    else {
+    } else {
         aString.Clear();
     }
 }
 
 //=======================================================================
-//function : ReadExtendedString
-//purpose  : read string from the current position.
+// function : ReadExtendedString
+// purpose  : read string from the current position.
 //=======================================================================
-void FSD_BinaryFile::ReadExtendedString(Standard_IStream& theIStream, TCollection_ExtendedString& aString)
-{
+void FSD_BinaryFile::ReadExtendedString(Standard_IStream& theIStream, TCollection_ExtendedString& aString) {
     Standard_Integer size = 0;
 
     GetInteger(theIStream, size);
 
-    if (size > 0)
-    {
-        Standard_ExtCharacter* c = (Standard_ExtCharacter*)Standard::Allocate((size + 1) * sizeof(Standard_ExtCharacter));
+    if (size > 0) {
+        Standard_ExtCharacter* c =
+            (Standard_ExtCharacter*)Standard::Allocate((size + 1) * sizeof(Standard_ExtCharacter));
 
-        if (!theIStream.good())
-        {
+        if (!theIStream.good()) {
             throw Storage_StreamReadError();
         }
 
         const std::streamsize aNbBytes = std::streamsize(sizeof(Standard_ExtCharacter) * size);
         theIStream.read((char*)c, aNbBytes);
-        if (theIStream.gcount() != aNbBytes)
-        {
+        if (theIStream.gcount() != aNbBytes) {
             throw Storage_StreamReadError();
         }
 
         c[size] = '\0';
 
 #if OCCT_BINARY_FILE_DO_INVERSE
-        for (Standard_Integer i = 0; i < size; i++)
-        {
+        for (Standard_Integer i = 0; i < size; i++) {
             c[i] = InverseExtChar(c[i]);
         }
 #endif
         aString = c;
         Standard::Free(c);
-    }
-    else
-    {
+    } else {
         aString.Clear();
     }
 }
 
 //=======================================================================
-//function : WriteHeader
-//purpose  : 
+// function : WriteHeader
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::WriteHeader()
-{
+void FSD_BinaryFile::WriteHeader() {
     PutInteger(myHeader.testindian);
     PutInteger(myHeader.binfo);
     PutInteger(myHeader.einfo);
@@ -1713,13 +1555,11 @@ void FSD_BinaryFile::WriteHeader()
 }
 
 //=======================================================================
-//function : WriteHeader
-//purpose  : 
+// function : WriteHeader
+// purpose  :
 //=======================================================================
-Standard_Integer FSD_BinaryFile::WriteHeader(Standard_OStream& theOStream,
-    const FSD_FileHeader& theHeader,
-    const Standard_Boolean theOnlyCount)
-{
+Standard_Integer FSD_BinaryFile::WriteHeader(Standard_OStream& theOStream, const FSD_FileHeader& theHeader,
+                                             const Standard_Boolean theOnlyCount) {
     Standard_Integer aHeaderSize = 0;
 
     aHeaderSize += PutInteger(theOStream, theHeader.testindian, theOnlyCount);
@@ -1740,12 +1580,11 @@ Standard_Integer FSD_BinaryFile::WriteHeader(Standard_OStream& theOStream,
 }
 
 //=======================================================================
-//function : ReadHeader
-//purpose  : 
+// function : ReadHeader
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadHeader()
-{
+void FSD_BinaryFile::ReadHeader() {
     GetInteger(myHeader.testindian);
     GetInteger(myHeader.binfo);
     GetInteger(myHeader.einfo);
@@ -1762,12 +1601,11 @@ void FSD_BinaryFile::ReadHeader()
 }
 
 //=======================================================================
-//function : ReadHeader
-//purpose  : 
+// function : ReadHeader
+// purpose  :
 //=======================================================================
 
-void FSD_BinaryFile::ReadHeader(Standard_IStream& theIStream, FSD_FileHeader& theFileHeader)
-{
+void FSD_BinaryFile::ReadHeader(Standard_IStream& theIStream, FSD_FileHeader& theFileHeader) {
     GetInteger(theIStream, theFileHeader.testindian);
     GetInteger(theIStream, theFileHeader.binfo);
     GetInteger(theIStream, theFileHeader.einfo);
@@ -1784,16 +1622,15 @@ void FSD_BinaryFile::ReadHeader(Standard_IStream& theIStream, FSD_FileHeader& th
 }
 
 //=======================================================================
-//function : ReadHeaderData
-//purpose  : 
+// function : ReadHeaderData
+// purpose  :
 //=======================================================================
-void FSD_BinaryFile::ReadHeaderData(Standard_IStream& theIStream, const Handle(Storage_HeaderData)& theHeaderData)
-{
-    // read info 
-    TCollection_AsciiString          uinfo, mStorageVersion, mDate, mSchemaName, mSchemaVersion, mApplicationVersion;
-    TCollection_ExtendedString       mApplicationName, mDataType;
-    TColStd_SequenceOfAsciiString    mUserInfo;
-    Standard_Integer                 mNBObj;
+void FSD_BinaryFile::ReadHeaderData(Standard_IStream& theIStream, const Handle(Storage_HeaderData) & theHeaderData) {
+    // read info
+    TCollection_AsciiString uinfo, mStorageVersion, mDate, mSchemaName, mSchemaVersion, mApplicationVersion;
+    TCollection_ExtendedString mApplicationName, mDataType;
+    TColStd_SequenceOfAsciiString mUserInfo;
+    Standard_Integer mNBObj;
 
     FSD_BinaryFile::GetInteger(theIStream, mNBObj);
     FSD_BinaryFile::ReadString(theIStream, mStorageVersion);
@@ -1809,8 +1646,7 @@ void FSD_BinaryFile::ReadHeaderData(Standard_IStream& theIStream, const Handle(S
 
     FSD_BinaryFile::GetInteger(theIStream, len);
 
-    for (Standard_Integer i = 1; i <= len && theIStream.good(); i++)
-    {
+    for (Standard_Integer i = 1; i <= len && theIStream.good(); i++) {
         FSD_BinaryFile::ReadString(theIStream, line);
         mUserInfo.Append(line);
     }
@@ -1830,27 +1666,25 @@ void FSD_BinaryFile::ReadHeaderData(Standard_IStream& theIStream, const Handle(S
 }
 
 //=======================================================================
-//function : Tell
-//purpose  : 获取文件当前位置（字节偏移）
+// function : Tell
+// purpose  : 获取文件当前位置（字节偏移）
 //           失败返回 -1
 //=======================================================================
 
-Storage_Position FSD_BinaryFile::Tell()
-{
+Storage_Position FSD_BinaryFile::Tell() {
     return (Storage_Position)ftell(myStream);
 }
 
 //=======================================================================
-//function : InverseReal
-//purpose  : Inverses bytes in the real value
+// function : InverseReal
+// purpose  : Inverses bytes in the real value
 //=======================================================================
 
-Standard_Real FSD_BinaryFile::InverseReal(const Standard_Real theValue)
-{
+Standard_Real FSD_BinaryFile::InverseReal(const Standard_Real theValue) {
     Standard_STATIC_ASSERT(sizeof(Standard_Real) == 2 * sizeof(Standard_Integer));
     union {
         Standard_Integer i[2];
-        Standard_Real    aValue;
+        Standard_Real aValue;
     } aWrapUnion;
 
     aWrapUnion.aValue = theValue;
@@ -1863,16 +1697,15 @@ Standard_Real FSD_BinaryFile::InverseReal(const Standard_Real theValue)
 }
 
 //=======================================================================
-//function : InverseShortReal
-//purpose  : Inverses bytes in the short real value
+// function : InverseShortReal
+// purpose  : Inverses bytes in the short real value
 //=======================================================================
 
-Standard_ShortReal FSD_BinaryFile::InverseShortReal(const Standard_ShortReal theValue)
-{
+Standard_ShortReal FSD_BinaryFile::InverseShortReal(const Standard_ShortReal theValue) {
     Standard_STATIC_ASSERT(sizeof(Standard_ShortReal) == sizeof(Standard_Integer));
     union {
         Standard_ShortReal aValue;
-        Standard_Integer   aResult;
+        Standard_Integer aResult;
     } aWrapUnion;
 
     aWrapUnion.aValue = theValue;
@@ -1882,25 +1715,20 @@ Standard_ShortReal FSD_BinaryFile::InverseShortReal(const Standard_ShortReal the
 }
 
 //=======================================================================
-//function : InverseSize
-//purpose  : Inverses bytes in size_t type instance
+// function : InverseSize
+// purpose  : Inverses bytes in size_t type instance
 //=======================================================================
 
-template<int size>
-inline uint64_t OCCT_InverseSizeSpecialized(const uint64_t theValue, int);
+template <int size> inline uint64_t OCCT_InverseSizeSpecialized(const uint64_t theValue, int);
 
-template<>
-inline uint64_t OCCT_InverseSizeSpecialized <4>(const uint64_t theValue, int)
-{
+template <> inline uint64_t OCCT_InverseSizeSpecialized<4>(const uint64_t theValue, int) {
     return FSD_BinaryFile::InverseInt(static_cast<Standard_Integer>(theValue));
 }
 
-template<>
-inline uint64_t OCCT_InverseSizeSpecialized <8>(const uint64_t theValue, int)
-{
+template <> inline uint64_t OCCT_InverseSizeSpecialized<8>(const uint64_t theValue, int) {
     union {
         Standard_Integer i[2];
-        uint64_t    aValue;
+        uint64_t aValue;
     } aWrapUnion;
 
     aWrapUnion.aValue = theValue;
@@ -1912,12 +1740,10 @@ inline uint64_t OCCT_InverseSizeSpecialized <8>(const uint64_t theValue, int)
     return aWrapUnion.aValue;
 }
 
-Standard_Size FSD_BinaryFile::InverseSize(const Standard_Size theValue)
-{
-    return (Standard_Size)OCCT_InverseSizeSpecialized <sizeof(Standard_Size)>(theValue, 0);
+Standard_Size FSD_BinaryFile::InverseSize(const Standard_Size theValue) {
+    return (Standard_Size)OCCT_InverseSizeSpecialized<sizeof(Standard_Size)>(theValue, 0);
 }
 
-uint64_t FSD_BinaryFile::InverseUint64(const uint64_t theValue)
-{
-    return OCCT_InverseSizeSpecialized <sizeof(uint64_t)>(theValue, 0);
+uint64_t FSD_BinaryFile::InverseUint64(const uint64_t theValue) {
+    return OCCT_InverseSizeSpecialized<sizeof(uint64_t)>(theValue, 0);
 }

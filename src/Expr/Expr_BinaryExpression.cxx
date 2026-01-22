@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr_BinaryExpression.hxx>
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_InvalidOperand.hxx>
@@ -25,8 +24,7 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_BinaryExpression, Expr_GeneralExpression)
 
-void Expr_BinaryExpression::SetFirstOperand(const Handle(Expr_GeneralExpression)& exp)
-{
+void Expr_BinaryExpression::SetFirstOperand(const Handle(Expr_GeneralExpression) & exp) {
     Handle(Expr_BinaryExpression) me;
     me = this;
     if (exp == me) {
@@ -38,8 +36,7 @@ void Expr_BinaryExpression::SetFirstOperand(const Handle(Expr_GeneralExpression)
     myFirstOperand = exp;
 }
 
-void Expr_BinaryExpression::SetSecondOperand(const Handle(Expr_GeneralExpression)& exp)
-{
+void Expr_BinaryExpression::SetSecondOperand(const Handle(Expr_GeneralExpression) & exp) {
     Handle(Expr_BinaryExpression) me;
     me = this;
     if (exp == me) {
@@ -51,38 +48,31 @@ void Expr_BinaryExpression::SetSecondOperand(const Handle(Expr_GeneralExpression
     mySecondOperand = exp;
 }
 
-void Expr_BinaryExpression::CreateFirstOperand(const Handle(Expr_GeneralExpression)& exp)
-{
+void Expr_BinaryExpression::CreateFirstOperand(const Handle(Expr_GeneralExpression) & exp) {
     myFirstOperand = exp;
 }
 
-void Expr_BinaryExpression::CreateSecondOperand(const Handle(Expr_GeneralExpression)& exp)
-{
+void Expr_BinaryExpression::CreateSecondOperand(const Handle(Expr_GeneralExpression) & exp) {
     mySecondOperand = exp;
 }
 
-Standard_Integer Expr_BinaryExpression::NbSubExpressions() const
-{
+Standard_Integer Expr_BinaryExpression::NbSubExpressions() const {
     return 2;
 }
 
-const Handle(Expr_GeneralExpression)& Expr_BinaryExpression::SubExpression(const Standard_Integer I) const
-{
+const Handle(Expr_GeneralExpression) & Expr_BinaryExpression::SubExpression(const Standard_Integer I) const {
     if (I == 1) {
         return myFirstOperand;
-    }
-    else {
+    } else {
         if (I == 2) {
             return mySecondOperand;
-        }
-        else {
+        } else {
             throw Standard_OutOfRange();
         }
     }
 }
 
-Standard_Boolean Expr_BinaryExpression::ContainsUnknowns() const
-{
+Standard_Boolean Expr_BinaryExpression::ContainsUnknowns() const {
     if (myFirstOperand->IsKind(STANDARD_TYPE(Expr_NamedUnknown))) {
         return Standard_True;
     }
@@ -98,8 +88,7 @@ Standard_Boolean Expr_BinaryExpression::ContainsUnknowns() const
     return Standard_False;
 }
 
-Standard_Boolean Expr_BinaryExpression::Contains(const Handle(Expr_GeneralExpression)& exp) const
-{
+Standard_Boolean Expr_BinaryExpression::Contains(const Handle(Expr_GeneralExpression) & exp) const {
     if (myFirstOperand == exp) {
         return Standard_True;
     }
@@ -115,29 +104,25 @@ Standard_Boolean Expr_BinaryExpression::Contains(const Handle(Expr_GeneralExpres
     return Standard_False;
 }
 
-void Expr_BinaryExpression::Replace(const Handle(Expr_NamedUnknown)& var, const Handle(Expr_GeneralExpression)& with)
-{
+void Expr_BinaryExpression::Replace(const Handle(Expr_NamedUnknown) & var,
+                                    const Handle(Expr_GeneralExpression) & with) {
     if (myFirstOperand == var) {
         SetFirstOperand(with);
-    }
-    else {
+    } else {
         if (myFirstOperand->Contains(var)) {
             myFirstOperand->Replace(var, with);
         }
     }
     if (mySecondOperand == var) {
         SetSecondOperand(with);
-    }
-    else {
+    } else {
         if (mySecondOperand->Contains(var)) {
             mySecondOperand->Replace(var, with);
         }
     }
 }
 
-
-Handle(Expr_GeneralExpression) Expr_BinaryExpression::Simplified() const
-{
+Handle(Expr_GeneralExpression) Expr_BinaryExpression::Simplified() const {
     Handle(Expr_BinaryExpression) cop = Handle(Expr_BinaryExpression)::DownCast(Copy());
     Handle(Expr_GeneralExpression) op1 = cop->FirstOperand();
     Handle(Expr_GeneralExpression) op2 = cop->SecondOperand();

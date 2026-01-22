@@ -15,23 +15,19 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : IsPeriodic
-//purpose  : 
+// function : IsPeriodic
+// purpose  :
 //=======================================================================
 
-inline Standard_Boolean GeomFill_Profiler::IsPeriodic() const
-{
-  return myIsPeriodic;
+inline Standard_Boolean GeomFill_Profiler::IsPeriodic() const {
+    return myIsPeriodic;
 }
 
-
 //=======================================================================
-//function : Curve
-//purpose  : 
+// function : Curve
+// purpose  :
 //=======================================================================
 
-inline const Handle(Geom_Curve)& GeomFill_Profiler::Curve
-       (const Standard_Integer Index) const
-{
-  return mySequence( Index);
+inline const Handle(Geom_Curve) & GeomFill_Profiler::Curve(const Standard_Integer Index) const {
+    return mySequence(Index);
 }

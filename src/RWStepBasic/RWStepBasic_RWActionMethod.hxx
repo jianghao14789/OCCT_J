@@ -28,48 +28,26 @@ class StepBasic_ActionMethod;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ActionMethod
-class RWStepBasic_RWActionMethod 
-{
+class RWStepBasic_RWActionMethod {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWActionMethod();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWActionMethod();
-  
-  //! Reads ActionMethod
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ActionMethod)& ent) const;
-  
-  //! Writes ActionMethod
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ActionMethod)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_ActionMethod)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ActionMethod
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepBasic_ActionMethod) & ent) const;
 
+    //! Writes ActionMethod
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_ActionMethod) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_ActionMethod) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWActionMethod_HeaderFile

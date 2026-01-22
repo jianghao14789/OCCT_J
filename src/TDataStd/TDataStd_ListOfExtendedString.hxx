@@ -23,5 +23,4 @@
 typedef NCollection_List<TCollection_ExtendedString> TDataStd_ListOfExtendedString;
 typedef NCollection_List<TCollection_ExtendedString>::Iterator TDataStd_ListIteratorOfListOfExtendedString;
 
-
 #endif

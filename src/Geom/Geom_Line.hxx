@@ -33,7 +33,6 @@ class gp_Vec;
 class gp_Trsf;
 class Geom_Geometry;
 
-
 class Geom_Line;
 DEFINE_STANDARD_HANDLE(Geom_Line, Geom_Curve)
 
@@ -124,7 +123,8 @@ public:
     Standard_EXPORT void D2(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2) const Standard_OVERRIDE;
 
     //! V2 and V3 are vectors with null magnitude for a line.
-    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2, gp_Vec& V3) const Standard_OVERRIDE;
+    Standard_EXPORT void D3(const Standard_Real U, gp_Pnt& P, gp_Vec& V1, gp_Vec& V2,
+                            gp_Vec& V3) const Standard_OVERRIDE;
 
     //! The returned vector gives the value of the derivative for the
     //! order of derivation N.
@@ -144,7 +144,8 @@ public:
     //! me->Value(U).Transformed(T)
     //!
     //! This methods returns <U> * T.ScaleFactor()
-    Standard_EXPORT virtual Standard_Real TransformedParameter(const Standard_Real U, const gp_Trsf& T) const Standard_OVERRIDE;
+    Standard_EXPORT virtual Standard_Real TransformedParameter(const Standard_Real U,
+                                                               const gp_Trsf& T) const Standard_OVERRIDE;
 
     //! Returns a  coefficient to compute the parameter on
     //! the transformed  curve  for  the transform  of the
@@ -163,16 +164,14 @@ public:
     Standard_EXPORT Handle(Geom_Geometry) Copy() const Standard_OVERRIDE;
 
     //! Dumps the content of me into the stream
-    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const Standard_OVERRIDE;
+    Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream,
+                                          Standard_Integer theDepth = -1) const Standard_OVERRIDE;
 
     DEFINE_STANDARD_RTTIEXT(Geom_Line, Geom_Curve)
 
 protected:
-
 private:
-
     gp_Ax1 pos;
-
 };
 
 #endif // _Geom_Line_HeaderFile

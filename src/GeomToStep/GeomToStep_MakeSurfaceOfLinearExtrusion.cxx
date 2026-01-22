@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom_SurfaceOfLinearExtrusion.hxx>
 #include <GeomToStep_MakeCurve.hxx>
 #include <GeomToStep_MakeSurfaceOfLinearExtrusion.hxx>
@@ -30,34 +29,32 @@
 // Creation d' une surface_of_linear_extrusion de prostep a partir d' une
 // SurfaceOfLinearExtrusion de Geom
 //=============================================================================
-GeomToStep_MakeSurfaceOfLinearExtrusion::GeomToStep_MakeSurfaceOfLinearExtrusion
-  ( const Handle(Geom_SurfaceOfLinearExtrusion)& S )
-	
+GeomToStep_MakeSurfaceOfLinearExtrusion::GeomToStep_MakeSurfaceOfLinearExtrusion(
+    const Handle(Geom_SurfaceOfLinearExtrusion) & S)
+
 {
-  Handle(StepGeom_SurfaceOfLinearExtrusion) Surf;
-  Handle(StepGeom_Curve) aSweptCurve;
-  Handle(StepGeom_Vector) aExtrusionAxis;
-  
-  GeomToStep_MakeCurve MkCurve(S->BasisCurve());
-  GeomToStep_MakeVector MkVector(gp_Vec(S->Direction()));
+    Handle(StepGeom_SurfaceOfLinearExtrusion) Surf;
+    Handle(StepGeom_Curve) aSweptCurve;
+    Handle(StepGeom_Vector) aExtrusionAxis;
 
-  aSweptCurve = MkCurve.Value();
-  aExtrusionAxis = MkVector.Value();
+    GeomToStep_MakeCurve MkCurve(S->BasisCurve());
+    GeomToStep_MakeVector MkVector(gp_Vec(S->Direction()));
 
-  Surf = new StepGeom_SurfaceOfLinearExtrusion;
-  Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
-  Surf->Init(name, aSweptCurve, aExtrusionAxis);
-  theSurfaceOfLinearExtrusion = Surf;
-  done = Standard_True;
+    aSweptCurve = MkCurve.Value();
+    aExtrusionAxis = MkVector.Value();
+
+    Surf = new StepGeom_SurfaceOfLinearExtrusion;
+    Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
+    Surf->Init(name, aSweptCurve, aExtrusionAxis);
+    theSurfaceOfLinearExtrusion = Surf;
+    done = Standard_True;
 }
 
 //=============================================================================
 // renvoi des valeurs
 //=============================================================================
 
-const Handle(StepGeom_SurfaceOfLinearExtrusion) &
-      GeomToStep_MakeSurfaceOfLinearExtrusion::Value() const
-{
-  StdFail_NotDone_Raise_if (!done, "GeomToStep_MakeSurfaceOfLinearExtrusion::Value() - no result");
-  return theSurfaceOfLinearExtrusion;
+const Handle(StepGeom_SurfaceOfLinearExtrusion) & GeomToStep_MakeSurfaceOfLinearExtrusion::Value() const {
+    StdFail_NotDone_Raise_if(!done, "GeomToStep_MakeSurfaceOfLinearExtrusion::Value() - no result");
+    return theSurfaceOfLinearExtrusion;
 }

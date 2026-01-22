@@ -11,32 +11,26 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Vrml_Switch.hxx>
 
-Vrml_Switch::Vrml_Switch(const Standard_Integer aWhichChild)
-{
-  myWhichChild = aWhichChild;
+Vrml_Switch::Vrml_Switch(const Standard_Integer aWhichChild) {
+    myWhichChild = aWhichChild;
 }
 
- void Vrml_Switch::SetWhichChild(const Standard_Integer aWhichChild) 
-{
-  myWhichChild = aWhichChild;
+void Vrml_Switch::SetWhichChild(const Standard_Integer aWhichChild) {
+    myWhichChild = aWhichChild;
 }
 
- Standard_Integer Vrml_Switch::WhichChild() const
-{
-  return myWhichChild;
+Standard_Integer Vrml_Switch::WhichChild() const {
+    return myWhichChild;
 }
 
- Standard_OStream& Vrml_Switch::Print(Standard_OStream& anOStream) const
-{
-  anOStream  << "Switch {\n";
-  if ( myWhichChild != -1 )
-    {
-      anOStream  << "    whichChild\t";
-      anOStream << myWhichChild << "\n";
+Standard_OStream& Vrml_Switch::Print(Standard_OStream& anOStream) const {
+    anOStream << "Switch {\n";
+    if (myWhichChild != -1) {
+        anOStream << "    whichChild\t";
+        anOStream << myWhichChild << "\n";
     }
- anOStream  << "}\n";
- return anOStream;
+    anOStream << "}\n";
+    return anOStream;
 }

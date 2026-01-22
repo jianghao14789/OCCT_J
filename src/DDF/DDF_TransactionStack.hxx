@@ -22,5 +22,4 @@
 typedef NCollection_List<Handle(DDF_Transaction)> DDF_TransactionStack;
 typedef NCollection_List<Handle(DDF_Transaction)>::Iterator DDF_ListIteratorOfTransactionStack;
 
-
 #endif

@@ -28,44 +28,22 @@ class StepShape_Path;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for Path
-class RWStepShape_RWPath 
-{
+class RWStepShape_RWPath {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWPath();
 
-  
-  Standard_EXPORT RWStepShape_RWPath();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_Path)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_Path)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_Path)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_Path) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_Path) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_Path) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWPath_HeaderFile

@@ -12,7 +12,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//JCV 16/10/91
+// JCV 16/10/91
 
 #include <Convert_TorusToBSplineSurface.hxx>
 #include <gp.hxx>
@@ -27,25 +27,16 @@ static const Standard_Integer MaxNbVKnots = 4;
 static const Standard_Integer MaxNbUPoles = 7;
 static const Standard_Integer MaxNbVPoles = 7;
 
-
-static void ComputePoles(const Standard_Real R,
-    const Standard_Real r,
-    const Standard_Real U1,
-    const Standard_Real U2,
-    const Standard_Real V1,
-    const Standard_Real V2,
-    TColgp_Array2OfPnt& Poles)
-{
+static void ComputePoles(const Standard_Real R, const Standard_Real r, const Standard_Real U1, const Standard_Real U2,
+                         const Standard_Real V1, const Standard_Real V2, TColgp_Array2OfPnt& Poles) {
     Standard_Real deltaU = U2 - U1;
     Standard_Real deltaV = V2 - V1;
 
     Standard_Integer i, j;
 
     // Number of spans : maximum opening = 150 degrees ( = PI / 1.2 rds)
-    Standard_Integer
-        nbUSpans = (Standard_Integer)IntegerPart(1.2 * deltaU / M_PI) + 1;
-    Standard_Integer
-        nbVSpans = (Standard_Integer)IntegerPart(1.2 * deltaV / M_PI) + 1;
+    Standard_Integer nbUSpans = (Standard_Integer)IntegerPart(1.2 * deltaU / M_PI) + 1;
+    Standard_Integer nbVSpans = (Standard_Integer)IntegerPart(1.2 * deltaV / M_PI) + 1;
     Standard_Real AlfaU = deltaU / (nbUSpans * 2);
     Standard_Real AlfaV = deltaV / (nbVSpans * 2);
 
@@ -73,38 +64,28 @@ static void ComputePoles(const Standard_Real R,
 
     for (i = 1; i <= nbUSpans; i++) {
         for (j = 0; j <= nbVP - 1; j++) {
-            Poles(2 * i, j + 1) = gp_Pnt(x[j] * Cos(UStart + AlfaU) / Cos(AlfaU),
-                x[j] * Sin(UStart + AlfaU) / Cos(AlfaU),
-                z[j]);
-            Poles(2 * i + 1, j + 1) = gp_Pnt(x[j] * Cos(UStart + 2 * AlfaU),
-                x[j] * Sin(UStart + 2 * AlfaU),
-                z[j]);
+            Poles(2 * i, j + 1) =
+                gp_Pnt(x[j] * Cos(UStart + AlfaU) / Cos(AlfaU), x[j] * Sin(UStart + AlfaU) / Cos(AlfaU), z[j]);
+            Poles(2 * i + 1, j + 1) = gp_Pnt(x[j] * Cos(UStart + 2 * AlfaU), x[j] * Sin(UStart + 2 * AlfaU), z[j]);
         }
         UStart += 2 * AlfaU;
     }
 }
 
-
 //=======================================================================
-//function : Convert_TorusToBSplineSurface
-//purpose  : 
+// function : Convert_TorusToBSplineSurface
+// purpose  :
 //=======================================================================
 
-Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
-(const gp_Torus& T,
-    const Standard_Real U1,
-    const Standard_Real U2,
-    const Standard_Real V1,
-    const Standard_Real V2)
-    : Convert_ElementarySurfaceToBSplineSurface(MaxNbUPoles, MaxNbVPoles,
-        MaxNbUKnots, MaxNbVKnots,
-        TheUDegree, TheVDegree)
-{
+Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface(const gp_Torus& T, const Standard_Real U1,
+                                                             const Standard_Real U2, const Standard_Real V1,
+                                                             const Standard_Real V2)
+    : Convert_ElementarySurfaceToBSplineSurface(MaxNbUPoles, MaxNbVPoles, MaxNbUKnots, MaxNbVKnots, TheUDegree,
+                                                TheVDegree) {
     Standard_Real deltaU = U2 - U1;
     Standard_Real deltaV = V2 - V1;
-    Standard_DomainError_Raise_if((deltaU > 2 * M_PI) || (deltaU < 0.) ||
-        (deltaV > 2 * M_PI) || (deltaV < 0.),
-        "Convert_TorusToBSplineSurface");
+    Standard_DomainError_Raise_if((deltaU > 2 * M_PI) || (deltaU < 0.) || (deltaV > 2 * M_PI) || (deltaV < 0.),
+                                  "Convert_TorusToBSplineSurface");
 
     isuperiodic = Standard_False;
     isvperiodic = Standard_False;
@@ -113,10 +94,8 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
     // construction of the torus in the reference mark xOy.
 
     // Number of spans : maximum opening = 150 degrees ( = PI / 1.2 rds)
-    Standard_Integer
-        nbUSpans = (Standard_Integer)IntegerPart(1.2 * deltaU / M_PI) + 1;
-    Standard_Integer
-        nbVSpans = (Standard_Integer)IntegerPart(1.2 * deltaV / M_PI) + 1;
+    Standard_Integer nbUSpans = (Standard_Integer)IntegerPart(1.2 * deltaU / M_PI) + 1;
+    Standard_Integer nbVSpans = (Standard_Integer)IntegerPart(1.2 * deltaV / M_PI) + 1;
     Standard_Real AlfaU = deltaU / (nbUSpans * 2);
     Standard_Real AlfaV = deltaV / (nbVSpans * 2);
 
@@ -134,13 +113,14 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
         uknots(i) = U1 + (i - 1) * 2 * AlfaU;
         umults(i) = 2;
     }
-    umults(1)++; umults(nbUKnots)++;
+    umults(1)++;
+    umults(nbUKnots)++;
     for (i = 1; i <= nbVKnots; i++) {
         vknots(i) = V1 + (i - 1) * 2 * AlfaV;
         vmults(i) = 2;
     }
-    vmults(1)++; vmults(nbVKnots)++;
-
+    vmults(1)++;
+    vmults(nbVKnots)++;
 
     // Replace the bspline in the reference of the torus.
     // and calculate the weight of the bspline.
@@ -149,12 +129,16 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
     Trsf.SetTransformation(T.Position(), gp::XOY());
 
     for (i = 1; i <= nbUPoles; i++) {
-        if (i % 2 == 0)  W1 = Cos(AlfaU);
-        else              W1 = 1.;
+        if (i % 2 == 0)
+            W1 = Cos(AlfaU);
+        else
+            W1 = 1.;
 
         for (j = 1; j <= nbVPoles; j++) {
-            if (j % 2 == 0)  W2 = Cos(AlfaV);
-            else              W2 = 1.;
+            if (j % 2 == 0)
+                W2 = Cos(AlfaV);
+            else
+                W2 = 1.;
 
             weights(i, j) = W1 * W2;
             poles(i, j).Transform(Trsf);
@@ -162,26 +146,19 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
     }
 }
 
-
 //=======================================================================
-//function : Convert_TorusToBSplineSurface
-//purpose  : 
+// function : Convert_TorusToBSplineSurface
+// purpose  :
 //=======================================================================
 
-Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
-(const gp_Torus& T,
-    const Standard_Real    Param1,
-    const Standard_Real    Param2,
-    const Standard_Boolean UTrim)
-    : Convert_ElementarySurfaceToBSplineSurface(MaxNbUPoles, MaxNbVPoles,
-        MaxNbUKnots, MaxNbVKnots,
-        TheUDegree, TheVDegree)
-{
+Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface(const gp_Torus& T, const Standard_Real Param1,
+                                                             const Standard_Real Param2, const Standard_Boolean UTrim)
+    : Convert_ElementarySurfaceToBSplineSurface(MaxNbUPoles, MaxNbVPoles, MaxNbUKnots, MaxNbVKnots, TheUDegree,
+                                                TheVDegree) {
 #ifndef No_Exception
     Standard_Real delta = Param2 - Param1;
 #endif
-    Standard_DomainError_Raise_if((delta > 2 * M_PI) || (delta < 0.),
-        "Convert_TorusToBSplineSurface");
+    Standard_DomainError_Raise_if((delta > 2 * M_PI) || (delta < 0.), "Convert_TorusToBSplineSurface");
 
     Standard_Integer i, j;
     Standard_Real deltaU, deltaV;
@@ -201,8 +178,7 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
         nbUKnots = 4;
 
         deltaV = Param2 - Param1;
-        Standard_Integer
-            nbVSpans = (Standard_Integer)IntegerPart(1.2 * deltaV / M_PI) + 1;
+        Standard_Integer nbVSpans = (Standard_Integer)IntegerPart(1.2 * deltaV / M_PI) + 1;
         Standard_Real AlfaV = deltaV / (nbVSpans * 2);
         nbVPoles = 2 * nbVSpans + 1;
         nbVKnots = nbVSpans + 1;
@@ -215,20 +191,19 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
             vknots(i) = Param1 + (i - 1) * 2 * AlfaV;
             vmults(i) = 2;
         }
-        vmults(1)++; vmults(nbVKnots)++;
+        vmults(1)++;
+        vmults(nbVKnots)++;
 
-        CosU = 0.5;       // = Cos(pi /3)
+        CosU = 0.5; // = Cos(pi /3)
         CosV = Cos(AlfaV);
-    }
-    else {
+    } else {
         ComputePoles(R, r, Param1, Param2, 0., 2. * M_PI, poles);
 
         nbVPoles = 6;
         nbVKnots = 4;
 
         deltaU = Param2 - Param1;
-        Standard_Integer
-            nbUSpans = (Standard_Integer)IntegerPart(1.2 * deltaU / M_PI) + 1;
+        Standard_Integer nbUSpans = (Standard_Integer)IntegerPart(1.2 * deltaU / M_PI) + 1;
         Standard_Real AlfaU = deltaU / (nbUSpans * 2);
         nbUPoles = 2 * nbUSpans + 1;
         nbUKnots = nbUSpans + 1;
@@ -241,9 +216,10 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
             uknots(i) = Param1 + (i - 1) * 2 * AlfaU;
             umults(i) = 2;
         }
-        umults(1)++; umults(nbUKnots)++;
+        umults(1)++;
+        umults(nbUKnots)++;
 
-        CosV = 0.5;       // = Cos(pi /3)
+        CosV = 0.5; // = Cos(pi /3)
         CosU = Cos(AlfaU);
     }
 
@@ -253,12 +229,16 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
     Trsf.SetTransformation(T.Position(), gp::XOY());
 
     for (i = 1; i <= nbUPoles; i++) {
-        if (i % 2 == 0)  W1 = CosU;
-        else              W1 = 1.;
+        if (i % 2 == 0)
+            W1 = CosU;
+        else
+            W1 = 1.;
 
         for (j = 1; j <= nbVPoles; j++) {
-            if (j % 2 == 0)  W2 = CosV;
-            else              W2 = 1.;
+            if (j % 2 == 0)
+                W2 = CosV;
+            else
+                W2 = 1.;
 
             weights(i, j) = W1 * W2;
             poles(i, j).Transform(Trsf);
@@ -266,19 +246,14 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
     }
 }
 
-
-
 //=======================================================================
-//function : Convert_TorusToBSplineSurface
-//purpose  : 
+// function : Convert_TorusToBSplineSurface
+// purpose  :
 //=======================================================================
 
-Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
-(const gp_Torus& T)
-    : Convert_ElementarySurfaceToBSplineSurface(MaxNbUPoles, MaxNbVPoles,
-        MaxNbUKnots, MaxNbVKnots,
-        TheUDegree, TheVDegree)
-{
+Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface(const gp_Torus& T)
+    : Convert_ElementarySurfaceToBSplineSurface(MaxNbUPoles, MaxNbVPoles, MaxNbUKnots, MaxNbVKnots, TheUDegree,
+                                                TheVDegree) {
     isuperiodic = Standard_True;
     isvperiodic = Standard_True;
 
@@ -311,12 +286,16 @@ Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface
     Trsf.SetTransformation(T.Position(), gp::XOY());
 
     for (i = 1; i <= nbUPoles; i++) {
-        if (i % 2 == 0)  W1 = 0.5;
-        else              W1 = 1.;
+        if (i % 2 == 0)
+            W1 = 0.5;
+        else
+            W1 = 1.;
 
         for (j = 1; j <= nbVPoles; j++) {
-            if (j % 2 == 0)  W2 = 0.5;
-            else              W2 = 1.;
+            if (j % 2 == 0)
+                W2 = 0.5;
+            else
+                W2 = 1.;
 
             weights(i, j) = W1 * W2;
             poles(i, j).Transform(Trsf);

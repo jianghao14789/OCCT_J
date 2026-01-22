@@ -15,11 +15,10 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_TCompound
-//purpose  : 
+// function : TopoDS_TCompound
+// purpose  :
 //=======================================================================
 
-inline TopoDS_TCompound::TopoDS_TCompound() : TopoDS_TShape()
-{
-  Orientable(Standard_False);
+inline TopoDS_TCompound::TopoDS_TCompound() : TopoDS_TShape() {
+    Orientable(Standard_False);
 }

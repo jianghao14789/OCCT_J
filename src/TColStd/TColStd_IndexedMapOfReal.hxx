@@ -21,5 +21,4 @@
 
 typedef NCollection_IndexedMap<Standard_Real, TColStd_MapRealHasher> TColStd_IndexedMapOfReal;
 
-
 #endif

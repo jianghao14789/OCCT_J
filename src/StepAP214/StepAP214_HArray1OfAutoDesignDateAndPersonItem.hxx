@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(StepAP214_HArray1OfAutoDesignDateAndPersonItem, StepAP214_Array1OfAutoDesignDateAndPersonItem)
 
-
 #endif

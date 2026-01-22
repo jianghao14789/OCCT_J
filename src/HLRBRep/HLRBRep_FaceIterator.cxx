@@ -18,49 +18,45 @@
 #define No_Exception
 #endif
 
-
 #include <HLRAlgo_EdgesBlock.hxx>
 #include <HLRAlgo_WiresBlock.hxx>
 #include <HLRBRep_FaceData.hxx>
 #include <HLRBRep_FaceIterator.hxx>
 
 //=======================================================================
-//function : FaceIterator
-//purpose  : 
+// function : FaceIterator
+// purpose  :
 //=======================================================================
-HLRBRep_FaceIterator::HLRBRep_FaceIterator()
-{}
+HLRBRep_FaceIterator::HLRBRep_FaceIterator() {}
 
 //=======================================================================
-//function : InitEdge
-//purpose  : 
+// function : InitEdge
+// purpose  :
 //=======================================================================
 
-void HLRBRep_FaceIterator::InitEdge(HLRBRep_FaceData& fd)
-{
-  iWire = 0;
-  myWires = fd.Wires();
-  nbWires = myWires->NbWires();
+void HLRBRep_FaceIterator::InitEdge(HLRBRep_FaceData& fd) {
+    iWire = 0;
+    myWires = fd.Wires();
+    nbWires = myWires->NbWires();
 
-  iEdge = 0;
-  nbEdges = 0;
-  NextEdge();
+    iEdge = 0;
+    nbEdges = 0;
+    NextEdge();
 }
 
 //=======================================================================
-//function : NextEdge
-//purpose  : 
+// function : NextEdge
+// purpose  :
 //=======================================================================
 
-void HLRBRep_FaceIterator::NextEdge()
-{
-  iEdge++;
-  if (iEdge > nbEdges) {
-    iWire++;
-    if (iWire <= nbWires) {
-      iEdge = 1;
-      myEdges = myWires->Wire(iWire);
-      nbEdges = myEdges->NbEdges();
+void HLRBRep_FaceIterator::NextEdge() {
+    iEdge++;
+    if (iEdge > nbEdges) {
+        iWire++;
+        if (iWire <= nbWires) {
+            iEdge = 1;
+            myEdges = myWires->Wire(iWire);
+            nbEdges = myEdges->NbEdges();
+        }
     }
-  }
 }

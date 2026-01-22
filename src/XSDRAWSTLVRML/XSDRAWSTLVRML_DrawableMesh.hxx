@@ -23,45 +23,23 @@
 class MeshVS_Mesh;
 class Draw_Display;
 
-
 class XSDRAWSTLVRML_DrawableMesh;
 DEFINE_STANDARD_HANDLE(XSDRAWSTLVRML_DrawableMesh, Draw_Drawable3D)
 
-
-class XSDRAWSTLVRML_DrawableMesh : public Draw_Drawable3D
-{
+class XSDRAWSTLVRML_DrawableMesh : public Draw_Drawable3D {
 
 public:
+    Standard_EXPORT XSDRAWSTLVRML_DrawableMesh(const Handle(MeshVS_Mesh) & aMesh);
 
-  
-  Standard_EXPORT XSDRAWSTLVRML_DrawableMesh(const Handle(MeshVS_Mesh)& aMesh);
-  
-  Standard_EXPORT virtual void DrawOn (Draw_Display& dis) const Standard_OVERRIDE;
-  
-  Standard_EXPORT Handle(MeshVS_Mesh) GetMesh() const;
+    Standard_EXPORT virtual void DrawOn(Draw_Display& dis) const Standard_OVERRIDE;
 
+    Standard_EXPORT Handle(MeshVS_Mesh) GetMesh() const;
 
-
-
-  DEFINE_STANDARD_RTTIEXT(XSDRAWSTLVRML_DrawableMesh,Draw_Drawable3D)
+    DEFINE_STANDARD_RTTIEXT(XSDRAWSTLVRML_DrawableMesh, Draw_Drawable3D)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(MeshVS_Mesh) myMesh;
-
-
+    Handle(MeshVS_Mesh) myMesh;
 };
-
-
-
-
-
-
 
 #endif // _XSDRAWSTLVRML_DrawableMesh_HeaderFile

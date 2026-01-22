@@ -25,79 +25,70 @@
 #include <StepDimTol_GeometricToleranceTarget.hxx>
 
 //=======================================================================
-//function : RWStepDimTol_RWGeometricTolerance
-//purpose  : 
+// function : RWStepDimTol_RWGeometricTolerance
+// purpose  :
 //=======================================================================
-RWStepDimTol_RWGeometricTolerance::RWStepDimTol_RWGeometricTolerance ()
-{
+RWStepDimTol_RWGeometricTolerance::RWStepDimTol_RWGeometricTolerance() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepDimTol_RWGeometricTolerance::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                 const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                 const Handle(StepDimTol_GeometricTolerance) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 4, ach, "geometric_tolerance")) return;
+
+    // Own fields of GeometricTolerance
+
+    Handle(TCollection_HAsciiString) aName;
+    data->ReadString(num, 1, "name", ach, aName);
+
+    Handle(TCollection_HAsciiString) aDescription;
+    data->ReadString(num, 2, "description", ach, aDescription);
+
+    Handle(StepBasic_MeasureWithUnit) aMagnitude;
+    data->ReadEntity(num, 3, "magnitude", ach, STANDARD_TYPE(StepBasic_MeasureWithUnit), aMagnitude);
+
+    StepDimTol_GeometricToleranceTarget aTolerancedShapeAspect;
+    data->ReadEntity(num, 4, "toleranced_shape_aspect", ach, aTolerancedShapeAspect);
+
+    // Initialize entity
+    ent->Init(aName, aDescription, aMagnitude, aTolerancedShapeAspect);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepDimTol_RWGeometricTolerance::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                  const Standard_Integer num,
-                                                  Handle(Interface_Check)& ach,
-                                                  const Handle(StepDimTol_GeometricTolerance) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,4,ach,"geometric_tolerance") ) return;
+void RWStepDimTol_RWGeometricTolerance::WriteStep(StepData_StepWriter& SW,
+                                                  const Handle(StepDimTol_GeometricTolerance) & ent) const {
 
-  // Own fields of GeometricTolerance
+    // Own fields of GeometricTolerance
 
-  Handle(TCollection_HAsciiString) aName;
-  data->ReadString (num, 1, "name", ach, aName);
+    SW.Send(ent->Name());
 
-  Handle(TCollection_HAsciiString) aDescription;
-  data->ReadString (num, 2, "description", ach, aDescription);
+    SW.Send(ent->Description());
 
-  Handle(StepBasic_MeasureWithUnit) aMagnitude;
-  data->ReadEntity (num, 3, "magnitude", ach, STANDARD_TYPE(StepBasic_MeasureWithUnit), aMagnitude);
+    SW.Send(ent->Magnitude());
 
-  StepDimTol_GeometricToleranceTarget aTolerancedShapeAspect;
-  data->ReadEntity (num, 4, "toleranced_shape_aspect", ach, aTolerancedShapeAspect);
-
-  // Initialize entity
-  ent->Init(aName,
-            aDescription,
-            aMagnitude,
-            aTolerancedShapeAspect);
+    SW.Send(ent->TolerancedShapeAspect().Value());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepDimTol_RWGeometricTolerance::WriteStep (StepData_StepWriter& SW,
-                                                   const Handle(StepDimTol_GeometricTolerance) &ent) const
-{
+void RWStepDimTol_RWGeometricTolerance::Share(const Handle(StepDimTol_GeometricTolerance) & ent,
+                                              Interface_EntityIterator& iter) const {
 
-  // Own fields of GeometricTolerance
+    // Own fields of GeometricTolerance
 
-  SW.Send (ent->Name());
+    iter.AddItem(ent->Magnitude());
 
-  SW.Send (ent->Description());
-
-  SW.Send (ent->Magnitude());
-
-  SW.Send (ent->TolerancedShapeAspect().Value());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepDimTol_RWGeometricTolerance::Share (const Handle(StepDimTol_GeometricTolerance) &ent,
-                                               Interface_EntityIterator& iter) const
-{
-
-  // Own fields of GeometricTolerance
-
-  iter.AddItem (ent->Magnitude());
-
-  iter.AddItem (ent->TolerancedShapeAspect().Value());
+    iter.AddItem(ent->TolerancedShapeAspect().Value());
 }

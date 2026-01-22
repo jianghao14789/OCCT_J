@@ -27,46 +27,28 @@ class Message_Messenger;
 class TDF_Attribute;
 class BinObjMgt_Persistent;
 
-
 class BinMFunction_FunctionDriver;
 DEFINE_STANDARD_HANDLE(BinMFunction_FunctionDriver, BinMDF_ADriver)
 
 //! Function attribute Driver.
-class BinMFunction_FunctionDriver : public BinMDF_ADriver
-{
+class BinMFunction_FunctionDriver : public BinMDF_ADriver {
 
 public:
+    Standard_EXPORT BinMFunction_FunctionDriver(const Handle(Message_Messenger) & theMessageDriver);
 
-  
-  Standard_EXPORT BinMFunction_FunctionDriver(const Handle(Message_Messenger)& theMessageDriver);
-  
-  Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Boolean Paste (const BinObjMgt_Persistent& Source, const Handle(TDF_Attribute)& Target, BinObjMgt_RRelocationTable& RelocTable) const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Paste (const Handle(TDF_Attribute)& Source, BinObjMgt_Persistent& Target, BinObjMgt_SRelocationTable& RelocTable) const Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(TDF_Attribute) NewEmpty() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Standard_Boolean Paste(const BinObjMgt_Persistent& Source,
+                                                   const Handle(TDF_Attribute) & Target,
+                                                   BinObjMgt_RRelocationTable& RelocTable) const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void Paste(const Handle(TDF_Attribute) & Source, BinObjMgt_Persistent& Target,
+                                       BinObjMgt_SRelocationTable& RelocTable) const Standard_OVERRIDE;
 
-
-  DEFINE_STANDARD_RTTIEXT(BinMFunction_FunctionDriver,BinMDF_ADriver)
+    DEFINE_STANDARD_RTTIEXT(BinMFunction_FunctionDriver, BinMDF_ADriver)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _BinMFunction_FunctionDriver_HeaderFile

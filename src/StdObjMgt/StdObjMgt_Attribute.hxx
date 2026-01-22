@@ -18,85 +18,82 @@
 #include <StdObjMgt_ReadData.hxx>
 #include <StdObjMgt_WriteData.hxx>
 
-
 //! Root class for a temporary persistent object corresponding to an attribute.
-template <class Transient>
-class StdObjMgt_Attribute : public Standard_Transient
-{
-  class base : public StdObjMgt_Persistent
-  {
-  public:
-    //! Create an empty transient attribute
-    virtual Handle(TDF_Attribute) CreateAttribute()
-      { return myTransient = new Transient; }
+template <class Transient> class StdObjMgt_Attribute : public Standard_Transient {
+    class base : public StdObjMgt_Persistent {
+    public:
+        //! Create an empty transient attribute
+        virtual Handle(TDF_Attribute) CreateAttribute() {
+            return myTransient = new Transient;
+        }
 
-    //! Get transient attribute for the persistent data
-    virtual Handle(TDF_Attribute) GetAttribute() const
-      { return Handle(TDF_Attribute)(myTransient); }
+        //! Get transient attribute for the persistent data
+        virtual Handle(TDF_Attribute) GetAttribute() const {
+            return Handle(TDF_Attribute)(myTransient);
+        }
 
-  protected:
-    Handle(Transient) myTransient;
-  };
+    protected:
+        Handle(Transient) myTransient;
+    };
 
 public:
-  class Static : public base {};
+    class Static : public base {};
 
-  template <class DataType>
-  class Simple : public Static
-  {
-  public:
-    //! Read persistent data from a file.
-    virtual void Read (StdObjMgt_ReadData& theReadData)
-      { theReadData >> myData; }
-    //! Write persistent data to a file.
-    virtual void Write (StdObjMgt_WriteData& theWriteData) const
-      { theWriteData << myData; }
-    virtual void PChildren(StdObjMgt_Persistent::SequenceOfPersistent&) const { }
-    virtual Standard_CString PName() const { return "StdObjMgt_Attribute::undefined"; }
+    template <class DataType> class Simple : public Static {
+    public:
+        //! Read persistent data from a file.
+        virtual void Read(StdObjMgt_ReadData& theReadData) {
+            theReadData >> myData;
+        }
+        //! Write persistent data to a file.
+        virtual void Write(StdObjMgt_WriteData& theWriteData) const {
+            theWriteData << myData;
+        }
+        virtual void PChildren(StdObjMgt_Persistent::SequenceOfPersistent&) const {}
+        virtual Standard_CString PName() const {
+            return "StdObjMgt_Attribute::undefined";
+        }
 
-  protected:
-    DataType myData;
-  };
+    protected:
+        DataType myData;
+    };
 
-  struct SingleInt : Simple<Standard_Integer> {};
-  struct SingleRef : Simple<Handle(StdObjMgt_Persistent)> {};
+    struct SingleInt : Simple<Standard_Integer> {};
+    struct SingleRef : Simple<Handle(StdObjMgt_Persistent)> {};
 
 private:
-  template <class Persistent>
-  class container : public base
-  {
-  public:
-    //! Read persistent data from a file.
-    virtual void Read (StdObjMgt_ReadData& theReadData)
-    {
-      myPersistent = new Persistent;
-      myPersistent->Read (theReadData);
-    }
-    //! Write persistent data to a file.
-    virtual void Write(StdObjMgt_WriteData& theWriteData) const
-      { myPersistent->Write(theWriteData); }
-    virtual void PChildren(StdObjMgt_Persistent::SequenceOfPersistent&) const { }
-    virtual Standard_CString PName() const 
-      { return myPersistent->PName(); }
+    template <class Persistent> class container : public base {
+    public:
+        //! Read persistent data from a file.
+        virtual void Read(StdObjMgt_ReadData& theReadData) {
+            myPersistent = new Persistent;
+            myPersistent->Read(theReadData);
+        }
+        //! Write persistent data to a file.
+        virtual void Write(StdObjMgt_WriteData& theWriteData) const {
+            myPersistent->Write(theWriteData);
+        }
+        virtual void PChildren(StdObjMgt_Persistent::SequenceOfPersistent&) const {}
+        virtual Standard_CString PName() const {
+            return myPersistent->PName();
+        }
 
-    //! Import transient attribute from the persistent data
-    virtual void ImportAttribute()
-    {
-      if (myPersistent && this->myTransient)
-      {
-        myPersistent->Import (this->myTransient);
-        myPersistent.Nullify();
-      }
-    }
+        //! Import transient attribute from the persistent data
+        virtual void ImportAttribute() {
+            if (myPersistent && this->myTransient) {
+                myPersistent->Import(this->myTransient);
+                myPersistent.Nullify();
+            }
+        }
 
-  private:
-    Handle(Persistent) myPersistent;
-  };
+    private:
+        Handle(Persistent) myPersistent;
+    };
 
 public:
-  template <class Persistent>
-  static Handle(StdObjMgt_Persistent) Instantiate()
-    { return new container<Persistent>; }
+    template <class Persistent> static Handle(StdObjMgt_Persistent) Instantiate() {
+        return new container<Persistent>;
+    }
 };
 
 #endif // _StdObjMgt_Attribute_HeaderFile

@@ -28,48 +28,27 @@ class StepBasic_ContractAssignment;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ContractAssignment
-class RWStepBasic_RWContractAssignment 
-{
+class RWStepBasic_RWContractAssignment {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepBasic_RWContractAssignment();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepBasic_RWContractAssignment();
-  
-  //! Reads ContractAssignment
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_ContractAssignment)& ent) const;
-  
-  //! Writes ContractAssignment
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_ContractAssignment)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepBasic_ContractAssignment)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ContractAssignment
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_ContractAssignment) & ent) const;
 
+    //! Writes ContractAssignment
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_ContractAssignment) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepBasic_ContractAssignment) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWContractAssignment_HeaderFile

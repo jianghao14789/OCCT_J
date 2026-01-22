@@ -27,43 +27,21 @@ class StdFail_NotDone;
 class TopoDS_Shape;
 class Transfer_FinderProcess;
 
-
 //! This class implements the mapping between a Shape
 //! from TopoDS and a GeometricCurveSet from StepShape in order
 //! to create a GeometricallyBoundedWireframeRepresentation.
-class TopoDSToStep_MakeGeometricCurveSet  : public TopoDSToStep_Root
-{
+class TopoDSToStep_MakeGeometricCurveSet : public TopoDSToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopoDSToStep_MakeGeometricCurveSet(const TopoDS_Shape& SH,
+                                                       const Handle(Transfer_FinderProcess) & FP);
 
-  
-  Standard_EXPORT TopoDSToStep_MakeGeometricCurveSet(const TopoDS_Shape& SH, const Handle(Transfer_FinderProcess)& FP);
-  
-  Standard_EXPORT const Handle(StepShape_GeometricCurveSet)& Value() const;
-
-
-
+    Standard_EXPORT const Handle(StepShape_GeometricCurveSet) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepShape_GeometricCurveSet) theGeometricCurveSet;
-
-
+    Handle(StepShape_GeometricCurveSet) theGeometricCurveSet;
 };
-
-
-
-
-
-
 
 #endif // _TopoDSToStep_MakeGeometricCurveSet_HeaderFile

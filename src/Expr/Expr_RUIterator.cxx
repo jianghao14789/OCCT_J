@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_GeneralRelation.hxx>
 #include <Expr_NamedUnknown.hxx>
@@ -25,8 +24,7 @@
 #include <Standard_NoMoreObject.hxx>
 #include <Standard_NoSuchObject.hxx>
 
-Expr_RUIterator::Expr_RUIterator(const Handle(Expr_GeneralRelation)& rel)
-{
+Expr_RUIterator::Expr_RUIterator(const Handle(Expr_GeneralRelation) & rel) {
     Expr_RelationIterator ri(rel);
     Handle(Expr_SingleRelation) srel;
     Handle(Expr_NamedUnknown) var;
@@ -53,21 +51,17 @@ Expr_RUIterator::Expr_RUIterator(const Handle(Expr_GeneralRelation)& rel)
     }
 }
 
-Standard_Boolean Expr_RUIterator::More() const
-{
+Standard_Boolean Expr_RUIterator::More() const {
     return (myCurrent <= myMap.Extent());
 }
 
-void Expr_RUIterator::Next()
-{
+void Expr_RUIterator::Next() {
     if (!More()) {
         throw Standard_NoMoreObject();
     }
     myCurrent++;
 }
 
-Handle(Expr_NamedUnknown) Expr_RUIterator::Value() const
-{
+Handle(Expr_NamedUnknown) Expr_RUIterator::Value() const {
     return myMap(myCurrent);
 }
-

@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -30,14 +30,11 @@
 DEFINE_STANDARD_HANDLE(StepKinematics_RollingSurfacePair, StepKinematics_SurfacePair)
 
 //! Representation of STEP entity RollingSurfacePair
-class StepKinematics_RollingSurfacePair : public StepKinematics_SurfacePair
-{
-public :
+class StepKinematics_RollingSurfacePair : public StepKinematics_SurfacePair {
+public:
+    //! default constructor
+    Standard_EXPORT StepKinematics_RollingSurfacePair();
 
-  //! default constructor
-  Standard_EXPORT StepKinematics_RollingSurfacePair();
-
-DEFINE_STANDARD_RTTIEXT(StepKinematics_RollingSurfacePair, StepKinematics_SurfacePair)
-
+    DEFINE_STANDARD_RTTIEXT(StepKinematics_RollingSurfacePair, StepKinematics_SurfacePair)
 };
 #endif // _StepKinematics_RollingSurfacePair_HeaderFile_

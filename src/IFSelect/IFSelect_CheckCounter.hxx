@@ -26,7 +26,6 @@ class MoniTool_SignText;
 class Interface_CheckIterator;
 class Interface_InterfaceModel;
 
-
 class IFSelect_CheckCounter;
 DEFINE_STANDARD_HANDLE(IFSelect_CheckCounter, IFSelect_SignatureList)
 
@@ -34,54 +33,36 @@ DEFINE_STANDARD_HANDLE(IFSelect_CheckCounter, IFSelect_SignatureList)
 //! not per entity, its messages, but per message, the entities
 //! attached (count and list). Because many messages can be
 //! repeated if they are due to systematic errors
-class IFSelect_CheckCounter : public IFSelect_SignatureList
-{
+class IFSelect_CheckCounter : public IFSelect_SignatureList {
 
 public:
+    //! Creates a CheckCounter, empty ready to work
+    Standard_EXPORT IFSelect_CheckCounter(const Standard_Boolean withlist = Standard_False);
 
-  
-  //! Creates a CheckCounter, empty ready to work
-  Standard_EXPORT IFSelect_CheckCounter(const Standard_Boolean withlist = Standard_False);
-  
-  //! Sets a specific signature
-  //! Else, the current SignType (in the model) is used
-  Standard_EXPORT void SetSignature (const Handle(MoniTool_SignText)& sign);
-  
-  //! Returns the Signature;
-  Standard_EXPORT Handle(MoniTool_SignText) Signature() const;
-  
-  //! Analyses a CheckIterator according a Model (which detains the
-  //! entities for which the CheckIterator has messages), i.e.
-  //! counts messages for entities
-  //! If <original> is True, does not consider final messages but
-  //! those before interpretation (such as inserting variables :
-  //! integers, reals, strings)
-  //! If <failsonly> is True, only Fails are considered
-  //! Remark : global messages are recorded with a Null entity
-  Standard_EXPORT void Analyse (const Interface_CheckIterator& list, const Handle(Interface_InterfaceModel)& model, const Standard_Boolean original = Standard_False, const Standard_Boolean failsonly = Standard_False);
+    //! Sets a specific signature
+    //! Else, the current SignType (in the model) is used
+    Standard_EXPORT void SetSignature(const Handle(MoniTool_SignText) & sign);
 
+    //! Returns the Signature;
+    Standard_EXPORT Handle(MoniTool_SignText) Signature() const;
 
+    //! Analyses a CheckIterator according a Model (which detains the
+    //! entities for which the CheckIterator has messages), i.e.
+    //! counts messages for entities
+    //! If <original> is True, does not consider final messages but
+    //! those before interpretation (such as inserting variables :
+    //! integers, reals, strings)
+    //! If <failsonly> is True, only Fails are considered
+    //! Remark : global messages are recorded with a Null entity
+    Standard_EXPORT void Analyse(const Interface_CheckIterator& list, const Handle(Interface_InterfaceModel) & model,
+                                 const Standard_Boolean original = Standard_False,
+                                 const Standard_Boolean failsonly = Standard_False);
 
-
-  DEFINE_STANDARD_RTTIEXT(IFSelect_CheckCounter,IFSelect_SignatureList)
+    DEFINE_STANDARD_RTTIEXT(IFSelect_CheckCounter, IFSelect_SignatureList)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(MoniTool_SignText) thesign;
-
-
+    Handle(MoniTool_SignText) thesign;
 };
-
-
-
-
-
-
 
 #endif // _IFSelect_CheckCounter_HeaderFile

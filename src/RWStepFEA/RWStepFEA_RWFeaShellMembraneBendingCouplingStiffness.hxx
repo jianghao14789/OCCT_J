@@ -27,48 +27,29 @@ class StepFEA_FeaShellMembraneBendingCouplingStiffness;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for FeaShellMembraneBendingCouplingStiffness
-class RWStepFEA_RWFeaShellMembraneBendingCouplingStiffness 
-{
+class RWStepFEA_RWFeaShellMembraneBendingCouplingStiffness {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWFeaShellMembraneBendingCouplingStiffness();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWFeaShellMembraneBendingCouplingStiffness();
-  
-  //! Reads FeaShellMembraneBendingCouplingStiffness
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_FeaShellMembraneBendingCouplingStiffness)& ent) const;
-  
-  //! Writes FeaShellMembraneBendingCouplingStiffness
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_FeaShellMembraneBendingCouplingStiffness)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_FeaShellMembraneBendingCouplingStiffness)& ent, Interface_EntityIterator& iter) const;
+    //! Reads FeaShellMembraneBendingCouplingStiffness
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_FeaShellMembraneBendingCouplingStiffness) & ent) const;
 
+    //! Writes FeaShellMembraneBendingCouplingStiffness
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_FeaShellMembraneBendingCouplingStiffness) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_FeaShellMembraneBendingCouplingStiffness) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWFeaShellMembraneBendingCouplingStiffness_HeaderFile

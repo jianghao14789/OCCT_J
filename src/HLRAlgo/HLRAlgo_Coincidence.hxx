@@ -37,48 +37,37 @@
 //! intersection   with  the face (before  and after).
 //! This is necessary  when the  intersection is  "ON"
 //! the face.
-class HLRAlgo_Coincidence
-{
+class HLRAlgo_Coincidence {
 public:
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  HLRAlgo_Coincidence() :
-    myFE(0),
-    myParam(0.),
-    myStBef(TopAbs_IN),
-    myStAft(TopAbs_IN)
-  {
-  }
+    HLRAlgo_Coincidence() : myFE(0), myParam(0.), myStBef(TopAbs_IN), myStAft(TopAbs_IN) {}
 
-  void Set2D (const Standard_Integer FE, const Standard_Real Param)
-  {
-    myFE    = FE;
-    myParam = Param;
-  }
+    void Set2D(const Standard_Integer FE, const Standard_Real Param) {
+        myFE = FE;
+        myParam = Param;
+    }
 
-  void SetState3D (const TopAbs_State stbef, const TopAbs_State staft)
-  {
-    myStBef = stbef;
-    myStAft = staft;
-  }
+    void SetState3D(const TopAbs_State stbef, const TopAbs_State staft) {
+        myStBef = stbef;
+        myStAft = staft;
+    }
 
-  void Value2D (Standard_Integer& FE, Standard_Real& Param) const
-  {
-    FE    = myFE;
-    Param = myParam;
-  }
+    void Value2D(Standard_Integer& FE, Standard_Real& Param) const {
+        FE = myFE;
+        Param = myParam;
+    }
 
-  void State3D (TopAbs_State& stbef, TopAbs_State& staft) const
-  {
-    stbef = myStBef;
-    staft = myStAft;
-  }
+    void State3D(TopAbs_State& stbef, TopAbs_State& staft) const {
+        stbef = myStBef;
+        staft = myStAft;
+    }
 
 private:
-  Standard_Integer myFE;
-  Standard_Real myParam;
-  TopAbs_State myStBef;
-  TopAbs_State myStAft;
+    Standard_Integer myFE;
+    Standard_Real myParam;
+    TopAbs_State myStBef;
+    TopAbs_State myStAft;
 };
 
 #endif // _HLRAlgo_Coincidence_HeaderFile

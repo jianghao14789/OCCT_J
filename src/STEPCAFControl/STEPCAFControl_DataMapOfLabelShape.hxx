@@ -21,8 +21,8 @@
 #include <TDF_LabelMapHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TDF_Label,TopoDS_Shape,TDF_LabelMapHasher> STEPCAFControl_DataMapOfLabelShape;
-typedef NCollection_DataMap<TDF_Label,TopoDS_Shape,TDF_LabelMapHasher>::Iterator STEPCAFControl_DataMapIteratorOfDataMapOfLabelShape;
-
+typedef NCollection_DataMap<TDF_Label, TopoDS_Shape, TDF_LabelMapHasher> STEPCAFControl_DataMapOfLabelShape;
+typedef NCollection_DataMap<TDF_Label, TopoDS_Shape, TDF_LabelMapHasher>::Iterator
+    STEPCAFControl_DataMapIteratorOfDataMapOfLabelShape;
 
 #endif

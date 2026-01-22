@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_CameraModelD3MultiClippingUnion.hxx>
 #include <TCollection_HAsciiString.hxx>
@@ -21,21 +20,20 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepVisual_CameraModelD3MultiClippingUnion, StepGeom_GeometricRepresentationItem)
 
 //=======================================================================
-//function : StepVisual_CameraModelD3MultiClippingUnion
-//purpose  : 
+// function : StepVisual_CameraModelD3MultiClippingUnion
+// purpose  :
 //=======================================================================
-StepVisual_CameraModelD3MultiClippingUnion::StepVisual_CameraModelD3MultiClippingUnion()  {}
+StepVisual_CameraModelD3MultiClippingUnion::StepVisual_CameraModelD3MultiClippingUnion() {}
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : Init
+// purpose  :
 //=======================================================================
 void StepVisual_CameraModelD3MultiClippingUnion::Init(
-  const Handle(TCollection_HAsciiString)& theName,
-  const Handle(StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect)& theShapeClipping)
-{
-  // Own field
-  myShapeClipping = theShapeClipping;
-  // Inherited fields
-  StepGeom_GeometricRepresentationItem::Init(theName);
+    const Handle(TCollection_HAsciiString) & theName,
+    const Handle(StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect) & theShapeClipping) {
+    // Own field
+    myShapeClipping = theShapeClipping;
+    // Inherited fields
+    StepGeom_GeometricRepresentationItem::Init(theName);
 }

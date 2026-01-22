@@ -25,49 +25,26 @@
 #include <Standard_Real.hxx>
 class Geom2d_Curve;
 
-
 //! This package provides the bisecting line between two
 //! geometric elements.
-class Bisector 
-{
+class Bisector {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  Standard_EXPORT static Standard_Boolean IsConvex (const Handle(Geom2d_Curve)& Cu, const Standard_Real Sign);
-
-
-
+    Standard_EXPORT static Standard_Boolean IsConvex(const Handle(Geom2d_Curve) & Cu, const Standard_Real Sign);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-friend class Bisector_Curve;
-friend class Bisector_BisecAna;
-friend class Bisector_BisecPC;
-friend class Bisector_BisecCC;
-friend class Bisector_Bisec;
-friend class Bisector_Inter;
-friend class Bisector_PointOnBis;
-friend class Bisector_PolyBis;
-friend class Bisector_FunctionH;
-friend class Bisector_FunctionInter;
-
+    friend class Bisector_Curve;
+    friend class Bisector_BisecAna;
+    friend class Bisector_BisecPC;
+    friend class Bisector_BisecCC;
+    friend class Bisector_Bisec;
+    friend class Bisector_Inter;
+    friend class Bisector_PointOnBis;
+    friend class Bisector_PolyBis;
+    friend class Bisector_FunctionH;
+    friend class Bisector_FunctionInter;
 };
-
-
-
-
-
-
 
 #endif // _Bisector_HeaderFile

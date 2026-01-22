@@ -27,17 +27,13 @@ class Standard_ProgramError;
 class OSD_Protection;
 class Quantity_Date;
 
-
 //! A class for 'File' and 'Directory' grouping common
 //! methods (file/directory manipulation tools).
 //! The "file oriented" name means files or directories which are
 //! in fact hard coded as files.
-class OSD_FileNode
-{
+class OSD_FileNode {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Gets file name and path.
     Standard_EXPORT void Path(OSD_Path& Name) const;
@@ -88,7 +84,6 @@ public:
     Standard_EXPORT Standard_Integer Error() const;
 
 protected:
-
     //! Creates FileNode object
     //! This is to be used with SetPath .
     //! Allocate space for the file name and initializes this
@@ -103,10 +98,8 @@ protected:
     ~OSD_FileNode() {}
 
 protected:
-
     OSD_Path myPath;
     OSD_Error myError;
 };
-
 
 #endif // _OSD_FileNode_HeaderFile

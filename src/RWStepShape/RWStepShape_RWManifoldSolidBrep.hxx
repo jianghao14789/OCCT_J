@@ -28,44 +28,22 @@ class StepShape_ManifoldSolidBrep;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for ManifoldSolidBrep
-class RWStepShape_RWManifoldSolidBrep 
-{
+class RWStepShape_RWManifoldSolidBrep {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWManifoldSolidBrep();
 
-  
-  Standard_EXPORT RWStepShape_RWManifoldSolidBrep();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_ManifoldSolidBrep)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_ManifoldSolidBrep)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepShape_ManifoldSolidBrep)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepShape_ManifoldSolidBrep) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_ManifoldSolidBrep) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepShape_ManifoldSolidBrep) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWManifoldSolidBrep_HeaderFile

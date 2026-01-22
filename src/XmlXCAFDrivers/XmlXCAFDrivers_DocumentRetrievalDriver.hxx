@@ -23,42 +23,22 @@
 class XmlMDF_ADriverTable;
 class Message_Messenger;
 
-
 class XmlXCAFDrivers_DocumentRetrievalDriver;
 DEFINE_STANDARD_HANDLE(XmlXCAFDrivers_DocumentRetrievalDriver, XmlDrivers_DocumentRetrievalDriver)
 
 //! retrieval driver of a XS document
-class XmlXCAFDrivers_DocumentRetrievalDriver : public XmlDrivers_DocumentRetrievalDriver
-{
+class XmlXCAFDrivers_DocumentRetrievalDriver : public XmlDrivers_DocumentRetrievalDriver {
 
 public:
+    Standard_EXPORT XmlXCAFDrivers_DocumentRetrievalDriver();
 
-  
-  Standard_EXPORT XmlXCAFDrivers_DocumentRetrievalDriver();
-  
-  Standard_EXPORT virtual Handle(XmlMDF_ADriverTable) AttributeDrivers (const Handle(Message_Messenger)& theMsgDriver) Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(XmlMDF_ADriverTable)
+        AttributeDrivers(const Handle(Message_Messenger) & theMsgDriver) Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(XmlXCAFDrivers_DocumentRetrievalDriver,XmlDrivers_DocumentRetrievalDriver)
+    DEFINE_STANDARD_RTTIEXT(XmlXCAFDrivers_DocumentRetrievalDriver, XmlDrivers_DocumentRetrievalDriver)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _XmlXCAFDrivers_DocumentRetrievalDriver_HeaderFile

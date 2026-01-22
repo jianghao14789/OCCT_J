@@ -24,50 +24,29 @@
 #include <Standard_Boolean.hxx>
 class ShapeProcess_Context;
 
-
 class ShapeProcess_UOperator;
 DEFINE_STANDARD_HANDLE(ShapeProcess_UOperator, ShapeProcess_Operator)
 
 //! Defines operator as container for static function
 //! OperFunc. This allows user to create new operators
 //! without creation of new classes
-class ShapeProcess_UOperator : public ShapeProcess_Operator
-{
+class ShapeProcess_UOperator : public ShapeProcess_Operator {
 
 public:
+    //! Creates operator with implementation defined as
+    //! OperFunc (static function)
+    Standard_EXPORT ShapeProcess_UOperator(const ShapeProcess_OperFunc func);
 
-  
-  //! Creates operator with implementation defined as
-  //! OperFunc (static function)
-  Standard_EXPORT ShapeProcess_UOperator(const ShapeProcess_OperFunc func);
-  
-  //! Performs operation and records changes in the context
-  Standard_EXPORT virtual Standard_Boolean Perform
-                   (const Handle(ShapeProcess_Context)& context,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
+    //! Performs operation and records changes in the context
+    Standard_EXPORT virtual Standard_Boolean
+    Perform(const Handle(ShapeProcess_Context) & context,
+            const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
 
-
-
-
-  DEFINE_STANDARD_RTTIEXT(ShapeProcess_UOperator,ShapeProcess_Operator)
+    DEFINE_STANDARD_RTTIEXT(ShapeProcess_UOperator, ShapeProcess_Operator)
 
 protected:
-
-
-
-
 private:
-
-
-  ShapeProcess_OperFunc myFunc;
-
-
+    ShapeProcess_OperFunc myFunc;
 };
-
-
-
-
-
-
 
 #endif // _ShapeProcess_UOperator_HeaderFile

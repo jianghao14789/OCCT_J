@@ -26,16 +26,15 @@ class XmlDrivers_DocumentStorageDriver;
 class XmlDrivers_DocumentRetrievalDriver;
 class TDocStd_Application;
 
-class XmlDrivers 
-{
+class XmlDrivers {
 public:
-  Standard_EXPORT static const Handle(Standard_Transient)& Factory (const Standard_GUID& theGUID);
-  
-  //! Defines format "XmlOcaf" and registers its read and write drivers
-  //! in the specified application
-  Standard_EXPORT static void DefineFormat (const Handle(TDocStd_Application)& theApp);
+    Standard_EXPORT static const Handle(Standard_Transient) & Factory(const Standard_GUID& theGUID);
 
-  Standard_EXPORT static Handle(XmlMDF_ADriverTable) AttributeDrivers (const Handle(Message_Messenger)& theMsgDriver);
+    //! Defines format "XmlOcaf" and registers its read and write drivers
+    //! in the specified application
+    Standard_EXPORT static void DefineFormat(const Handle(TDocStd_Application) & theApp);
+
+    Standard_EXPORT static Handle(XmlMDF_ADriverTable) AttributeDrivers(const Handle(Message_Messenger) & theMsgDriver);
 };
 
 #endif // _XmlDrivers_HeaderFile

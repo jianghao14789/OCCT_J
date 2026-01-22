@@ -50,8 +50,7 @@ DEFINE_STANDARD_HANDLE(BRepTools_ReShape, Standard_Transient)
 //! contain one or more of these individual shapes
 //!
 //! Supports the 'BRepTools_History' history by method 'History'.
-class BRepTools_ReShape : public Standard_Transient
-{
+class BRepTools_ReShape : public Standard_Transient {
 public:
     //! Returns an empty Reshape
     Standard_EXPORT BRepTools_ReShape();
@@ -63,8 +62,7 @@ public:
     Standard_EXPORT virtual void Remove(const TopoDS_Shape& shape);
 
     //! Sets a request to Replace a Shape by a new one.
-    virtual void Replace(const TopoDS_Shape& shape, const TopoDS_Shape& newshape)
-    {
+    virtual void Replace(const TopoDS_Shape& shape, const TopoDS_Shape& newshape) {
         replace(shape, newshape, TReplacementKind_Modify);
     }
 
@@ -72,21 +70,17 @@ public:
     //! The first part is replaced by the product.
     //! The other parts are removed.
     //! The history of the merged shapes is presented by equal ways.
-    template<typename TCollection> void Merge(
-        const TCollection& theParts, const TopoDS_Shape& theProduct)
-    {
+    template <typename TCollection> void Merge(const TCollection& theParts, const TopoDS_Shape& theProduct) {
         typename TCollection::Iterator aPIt(theParts);
 
-        if (aPIt.More())
-        {
+        if (aPIt.More()) {
             replace(aPIt.Value(), theProduct, TReplacementKind_Merge_Main);
 
             aPIt.Next();
         }
 
         const TReplacementKind aKind = TReplacementKind_Merge_Ordinary;
-        for (; aPIt.More(); aPIt.Next())
-        {
+        for (; aPIt.More(); aPIt.Next()) {
             replace(aPIt.Value(), theProduct, aKind);
         }
     }
@@ -107,7 +101,8 @@ public:
     //! If <last> is False, returns status and new shape recorded in
     //! the map directly for the shape, if True and status > 0 then
     //! recursively searches for the last status and new shape.
-    Standard_EXPORT virtual Standard_Integer Status(const TopoDS_Shape& shape, TopoDS_Shape& newsh, const Standard_Boolean last = Standard_False);
+    Standard_EXPORT virtual Standard_Integer Status(const TopoDS_Shape& shape, TopoDS_Shape& newsh,
+                                                    const Standard_Boolean last = Standard_False);
 
     //! Applies the substitutions requests to a shape.
     //!
@@ -120,28 +115,25 @@ public:
     //! TopoDS_Wire or TopoDS_Compound containing TopoDS_Edges).
     //! If incompatible shape type is encountered, it is ignored and flag FAIL1 is set in Status.
     Standard_EXPORT virtual TopoDS_Shape Apply(const TopoDS_Shape& theShape,
-        const TopAbs_ShapeEnum theUntil = TopAbs_SHAPE);
+                                               const TopAbs_ShapeEnum theUntil = TopAbs_SHAPE);
 
     //! Returns (modifiable) the flag which defines whether Location of shape take into account
     //! during replacing shapes.
-    virtual Standard_Boolean& ModeConsiderLocation()
-    {
+    virtual Standard_Boolean& ModeConsiderLocation() {
         return myConsiderLocation;
     }
 
     //! Returns modified copy of vertex if original one is not recorded or returns modified original vertex otherwise.
     //@param theV - original vertex.
     //@param theTol - new tolerance of vertex, optional.
-    Standard_EXPORT TopoDS_Vertex CopyVertex(const TopoDS_Vertex& theV,
-        const Standard_Real theTol = -1.0);
+    Standard_EXPORT TopoDS_Vertex CopyVertex(const TopoDS_Vertex& theV, const Standard_Real theTol = -1.0);
 
     //! Returns modified copy of vertex if original one is not recorded or returns modified original vertex otherwise.
     //@param theV - original vertex.
     //@param theNewPos - new position for vertex copy.
     //@param theTol - new tolerance of vertex.
-    Standard_EXPORT TopoDS_Vertex CopyVertex(const TopoDS_Vertex& theV,
-        const gp_Pnt& theNewPos,
-        const Standard_Real aTol);
+    Standard_EXPORT TopoDS_Vertex CopyVertex(const TopoDS_Vertex& theV, const gp_Pnt& theNewPos,
+                                             const Standard_Real aTol);
 
     //! Checks if shape has been recorded by reshaper as a value
     //@param theShape is the given shape
@@ -154,8 +146,7 @@ public:
 
 protected:
     //! The kinds of the replacements.
-    enum TReplacementKind
-    {
+    enum TReplacementKind {
         TReplacementKind_Remove = 1,
         TReplacementKind_Modify = 2,
         TReplacementKind_Merge_Main = 4,
@@ -171,63 +162,48 @@ protected:
     //! - the second shape is oriented forward (reversed) if it's orientation
     //!   is equal (not equal) to the orientation of the first shape; <br>
     //! - the first shape is oriented forward.
-    Standard_EXPORT virtual void replace(
-        const TopoDS_Shape& shape,
-        const TopoDS_Shape& newshape,
-        const TReplacementKind theKind);
+    Standard_EXPORT virtual void replace(const TopoDS_Shape& shape, const TopoDS_Shape& newshape,
+                                         const TReplacementKind theKind);
 
 private:
     //! Returns 'true' if the kind of a replacement is an ordinary merging.
-    static Standard_Boolean isOrdinaryMerged(const TReplacementKind theKind)
-    {
+    static Standard_Boolean isOrdinaryMerged(const TReplacementKind theKind) {
         return (theKind == TReplacementKind_Merge_Ordinary);
     }
 
     //! A replacement of an initial shape.
-    struct TReplacement
-    {
+    struct TReplacement {
     public:
         //! The default constructor.
-        TReplacement() : myKind(TReplacementKind_Remove)
-        {
-        }
+        TReplacement() : myKind(TReplacementKind_Remove) {}
 
         //! The initializing constructor.
-        TReplacement(
-            const TopoDS_Shape& theResult, const TReplacementKind theKind) :
-            myResult(theResult), myKind(theKind)
-        {
-        }
+        TReplacement(const TopoDS_Shape& theResult, const TReplacementKind theKind)
+            : myResult(theResult), myKind(theKind) {}
 
         //! Returns the result of the replacement.
-        TopoDS_Shape Result() const
-        {
-            return (myKind != TReplacementKind_Merge_Ordinary) ?
-                myResult : TopoDS_Shape();
+        TopoDS_Shape Result() const {
+            return (myKind != TReplacementKind_Merge_Ordinary) ? myResult : TopoDS_Shape();
         }
 
         //! Returns the result of the relation.
-        const TopoDS_Shape& RelationResult() const
-        {
+        const TopoDS_Shape& RelationResult() const {
             return myResult;
         }
 
         //! Returns the kind of the relation
         //! between an initial shape and the result of the replacement.
-        BRepTools_History::TRelationType RelationKind() const
-        {
-            return (myKind == TReplacementKind_Remove) ?
-                BRepTools_History::TRelationType_Removed :
-                BRepTools_History::TRelationType_Modified;
+        BRepTools_History::TRelationType RelationKind() const {
+            return (myKind == TReplacementKind_Remove) ? BRepTools_History::TRelationType_Removed
+                                                       : BRepTools_History::TRelationType_Modified;
         }
 
     private:
-        TopoDS_Shape myResult; //!< The result of the replacement.
+        TopoDS_Shape myResult;   //!< The result of the replacement.
         TReplacementKind myKind; //!< The kind of the replacement.
     };
 
-    typedef NCollection_DataMap<TopoDS_Shape, TReplacement,
-        TopTools_ShapeMapHasher> TShapeToReplacement;
+    typedef NCollection_DataMap<TopoDS_Shape, TReplacement, TopTools_ShapeMapHasher> TShapeToReplacement;
 
 private:
     //! Maps each shape to its replacement.
@@ -238,19 +214,8 @@ protected:
     TopTools_MapOfShape myNewShapes;
     Standard_Integer myStatus;
 
-
 private:
-
-
     Standard_Boolean myConsiderLocation;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepTools_ReShape_HeaderFile

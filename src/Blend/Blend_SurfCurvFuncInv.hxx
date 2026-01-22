@@ -41,9 +41,7 @@ class math_Matrix;
 //! the surface.
 class Blend_SurfCurvFuncInv : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns 3.
     Standard_EXPORT Standard_Integer NbVariables() const;
@@ -70,7 +68,7 @@ public:
     Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D) = 0;
 
     //! Set the Point on which a solution has to be found.
-    Standard_EXPORT virtual void Set(const Handle(Adaptor2d_Curve2d)& Rst) = 0;
+    Standard_EXPORT virtual void Set(const Handle(Adaptor2d_Curve2d) & Rst) = 0;
 
     //! Returns in the vector Tolerance the parametric tolerance
     //! for each of the 3 variables;
@@ -87,27 +85,8 @@ public:
     //! Tol is the tolerance used in 3d space.
     Standard_EXPORT virtual Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol) = 0;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Blend_SurfCurvFuncInv_HeaderFile

@@ -23,7 +23,6 @@
 #include <HLRBRep_MyImpParToolOfTheIntersectorOfTheIntConicCurveOfCInter.hxx>
 #include <IntRes2d_Domain.hxx>
 #include <gp_Pnt2d.hxx>
- 
 
 #define ImpTool IntCurve_IConicTool
 #define ImpTool_hxx <IntCurve_IConicTool.hxx>
@@ -38,4 +37,3 @@
 #define IntImpParGen_Intersector HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter
 #define IntImpParGen_Intersector_hxx <HLRBRep_TheIntersectorOfTheIntConicCurveOfCInter.hxx>
 #include <IntImpParGen_Intersector.gxx>
-

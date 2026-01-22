@@ -40,20 +40,15 @@
 //! creation or initialisation of the iterator.   Therefore the iteration begins
 //! at index 0  and stops at the index equal to (remembered_length-1).  It is OK
 //! to enlarge the vector during the iteration.
-template <class TheItemType>
-class NCollection_Vector : public NCollection_BaseVector
-{
+template <class TheItemType> class NCollection_Vector : public NCollection_BaseVector {
 public:
     //! STL-compliant typedef for value type
     typedef TheItemType value_type;
 
 public:
-
     //! Nested class Iterator
-    class Iterator : public NCollection_BaseVector::Iterator
-    {
+    class Iterator : public NCollection_BaseVector::Iterator {
     public:
-
         //! Empty constructor - for later Init
         Iterator() {}
 
@@ -62,32 +57,27 @@ public:
             : NCollection_BaseVector::Iterator(theVector, theToEnd) {}
 
         //! Initialisation
-        void Init(const NCollection_Vector& theVector)
-        {
+        void Init(const NCollection_Vector& theVector) {
             initV(theVector);
         }
 
         //! Check end
-        Standard_Boolean More() const
-        {
+        Standard_Boolean More() const {
             return moreV();
         }
 
         //! Increment operator.
-        void Next()
-        {
+        void Next() {
             nextV();
         }
 
         //! Decrement operator.
-        void Previous()
-        {
+        void Previous() {
             prevV();
         }
 
         //! Offset operator.
-        void Offset(ptrdiff_t theOffset)
-        {
+        void Offset(ptrdiff_t theOffset) {
             offsetV(static_cast<int>(theOffset));
         }
 
@@ -97,35 +87,29 @@ public:
         // of BRepExtrema_DistShapeShape.cxx source file.
         // To enable Whole Program Optimization use command line keys: /GL for compiler and /LTCG for linker.
         // Remove this workaround after the bug in VS2019 will be fixed (see OCCT bug #0031628).
-#if defined (_MSC_VER) && (_MSC_VER >= 1920) && !defined (_WIN64) && !defined (_DEBUG)
+#if defined(_MSC_VER) && (_MSC_VER >= 1920) && !defined(_WIN64) && !defined(_DEBUG)
         __declspec(noinline) __declspec(deprecated("TODO remove this workaround for VS2019 compiler hanging bug"))
 #endif
-            //! Difference operator.
-            ptrdiff_t Differ(const Iterator& theOther) const
-        {
+        //! Difference operator.
+        ptrdiff_t Differ(const Iterator& theOther) const {
             return differV(theOther);
         }
 
         //! Constant value access
-        const TheItemType& Value() const
-        {
+        const TheItemType& Value() const {
             return ((const TheItemType*)curBlockV()->DataPtr)[myCurIndex];
         }
 
         //! Variable value access
-        TheItemType& ChangeValue() const
-        {
+        TheItemType& ChangeValue() const {
             return ((TheItemType*)curBlockV()->DataPtr)[myCurIndex];
         }
 
         //! Performs comparison of two iterators.
-        Standard_Boolean IsEqual(const Iterator& theOther) const
-        {
-            return myVector == theOther.myVector
-                && myCurIndex == theOther.myCurIndex
-                && myEndIndex == theOther.myEndIndex
-                && myICurBlock == theOther.myICurBlock
-                && myIEndBlock == theOther.myIEndBlock;
+        Standard_Boolean IsEqual(const Iterator& theOther) const {
+            return myVector == theOther.myVector && myCurIndex == theOther.myCurIndex &&
+                   myEndIndex == theOther.myEndIndex && myICurBlock == theOther.myICurBlock &&
+                   myIEndBlock == theOther.myIEndBlock;
         }
     };
 
@@ -136,157 +120,144 @@ public:
     typedef NCollection_StlIterator<std::random_access_iterator_tag, Iterator, TheItemType, true> const_iterator;
 
     //! Returns an iterator pointing to the first element in the vector.
-    iterator begin() const { return Iterator(*this, false); }
-
-    //! Returns an iterator referring to the past-the-end element in the vector.
-    iterator end() const { return Iterator(*this, true); }
-
-    //! Returns a const iterator pointing to the first element in the vector.
-    const_iterator cbegin() const { return Iterator(*this, false); }
-
-    //! Returns a const iterator referring to the past-the-end element in the vector.
-    const_iterator cend() const { return Iterator(*this, true); }
-
-public: //! @name public methods
-
-    //! Constructor
-    explicit NCollection_Vector(const Standard_Integer theIncrement = 256,
-        const Handle(NCollection_BaseAllocator)& theAlloc = NULL) :
-        NCollection_BaseVector(theAlloc, initMemBlocks, sizeof(TheItemType), theIncrement)
-    {
+    iterator begin() const {
+        return Iterator(*this, false);
     }
 
+    //! Returns an iterator referring to the past-the-end element in the vector.
+    iterator end() const {
+        return Iterator(*this, true);
+    }
+
+    //! Returns a const iterator pointing to the first element in the vector.
+    const_iterator cbegin() const {
+        return Iterator(*this, false);
+    }
+
+    //! Returns a const iterator referring to the past-the-end element in the vector.
+    const_iterator cend() const {
+        return Iterator(*this, true);
+    }
+
+public: //! @name public methods
+    //! Constructor
+    explicit NCollection_Vector(const Standard_Integer theIncrement = 256,
+                                const Handle(NCollection_BaseAllocator) & theAlloc = NULL)
+        : NCollection_BaseVector(theAlloc, initMemBlocks, sizeof(TheItemType), theIncrement) {}
+
     //! Copy constructor
-    NCollection_Vector(const NCollection_Vector& theOther) :
-        NCollection_BaseVector(theOther.myAllocator, initMemBlocks, theOther)
-    {
+    NCollection_Vector(const NCollection_Vector& theOther)
+        : NCollection_BaseVector(theOther.myAllocator, initMemBlocks, theOther) {
         copyData(theOther);
     }
 
     //! Destructor
-    virtual ~NCollection_Vector()
-    {
-        for (Standard_Integer anItemIter = 0; anItemIter < myCapacity; ++anItemIter)
-        {
+    virtual ~NCollection_Vector() {
+        for (Standard_Integer anItemIter = 0; anItemIter < myCapacity; ++anItemIter) {
             initMemBlocks(*this, myData[anItemIter], 0, 0);
         }
         this->myAllocator->Free(myData);
     }
 
     //! Total number of items
-    Standard_Integer Length() const
-    {
+    Standard_Integer Length() const {
         return myLength;
     }
 
     //! Total number of items in the vector
-    Standard_Integer Size() const
-    {
+    Standard_Integer Size() const {
         return myLength;
     }
 
     //! Method for consistency with other collections.
     //! @return Lower bound (inclusive) for iteration.
-    Standard_Integer Lower() const
-    {
+    Standard_Integer Lower() const {
         return 0;
     }
 
     //! Method for consistency with other collections.
     //! @return Upper bound (inclusive) for iteration.
-    Standard_Integer Upper() const
-    {
+    Standard_Integer Upper() const {
         return myLength - 1;
     }
 
     //! Empty query
-    Standard_Boolean IsEmpty() const
-    {
+    Standard_Boolean IsEmpty() const {
         return (myLength == 0);
     }
 
     //! Assignment to the collection of the same type
-    inline void Assign(const NCollection_Vector& theOther,
-        const Standard_Boolean theOwnAllocator = Standard_True);
+    inline void Assign(const NCollection_Vector& theOther, const Standard_Boolean theOwnAllocator = Standard_True);
 
     //! Assignment operator
-    NCollection_Vector& operator= (const NCollection_Vector& theOther)
-    {
+    NCollection_Vector& operator=(const NCollection_Vector& theOther) {
         Assign(theOther, Standard_False);
         return *this;
     }
 
     //! Append
-    TheItemType& Append(const TheItemType& theValue)
-    {
+    TheItemType& Append(const TheItemType& theValue) {
         TheItemType& anAppended = *(TheItemType*)expandV(myLength);
         anAppended = theValue;
         return anAppended;
     }
 
     //! Appends an empty value and returns the reference to it
-    TheItemType& Appended()
-    {
+    TheItemType& Appended() {
         TheItemType& anAppended = *(TheItemType*)expandV(myLength);
         return anAppended;
     }
 
     //! Operator() - query the const value
-    const TheItemType& operator() (const Standard_Integer theIndex) const
-    {
+    const TheItemType& operator()(const Standard_Integer theIndex) const {
         return Value(theIndex);
     }
 
     //! Operator[] - query the const value
-    const TheItemType& operator[] (Standard_Integer theIndex) const { return Value(theIndex); }
+    const TheItemType& operator[](Standard_Integer theIndex) const {
+        return Value(theIndex);
+    }
 
-    const TheItemType& Value(const Standard_Integer theIndex) const
-    {
+    const TheItemType& Value(const Standard_Integer theIndex) const {
         return *(const TheItemType*)findV(theIndex);
     }
 
     //! @return first element
-    const TheItemType& First() const
-    {
+    const TheItemType& First() const {
         return *(const TheItemType*)findV(Lower());
     }
 
     //! @return first element
-    TheItemType& ChangeFirst()
-    {
+    TheItemType& ChangeFirst() {
         return *(TheItemType*)findV(Lower());
     }
 
     //! @return last element
-    const TheItemType& Last() const
-    {
+    const TheItemType& Last() const {
         return *(const TheItemType*)findV(Upper());
     }
 
     //! @return last element
-    TheItemType& ChangeLast()
-    {
+    TheItemType& ChangeLast() {
         return *(TheItemType*)findV(Upper());
     }
 
     //! Operator() - query the value
-    TheItemType& operator() (const Standard_Integer theIndex)
-    {
+    TheItemType& operator()(const Standard_Integer theIndex) {
         return ChangeValue(theIndex);
     }
 
     //! Operator[] - query the value
-    TheItemType& operator[] (Standard_Integer theIndex) { return ChangeValue(theIndex); }
+    TheItemType& operator[](Standard_Integer theIndex) {
+        return ChangeValue(theIndex);
+    }
 
-    TheItemType& ChangeValue(const Standard_Integer theIndex)
-    {
+    TheItemType& ChangeValue(const Standard_Integer theIndex) {
         return *(TheItemType*)findV(theIndex);
     }
 
     //! SetValue () - set or append a value
-    TheItemType& SetValue(const Standard_Integer theIndex,
-        const TheItemType& theValue)
-    {
+    TheItemType& SetValue(const Standard_Integer theIndex, const TheItemType& theValue) {
         Standard_OutOfRange_Raise_if(theIndex < 0, "NCollection_Vector::SetValue");
         TheItemType* const aVecValue = (TheItemType*)(theIndex < myLength ? findV(theIndex) : expandV(theIndex));
         *aVecValue = theValue;
@@ -294,20 +265,15 @@ public: //! @name public methods
     }
 
 private: //! @name private methods
-
-    void copyData(const NCollection_Vector& theOther)
-    {
+    void copyData(const NCollection_Vector& theOther) {
         Standard_Integer iBlock = 0;
-        /*NCollection_Vector::*/Iterator anIter(theOther);
-        for (Standard_Integer aLength = 0; aLength < myLength; aLength += myIncrement)
-        {
+        /*NCollection_Vector::*/ Iterator anIter(theOther);
+        for (Standard_Integer aLength = 0; aLength < myLength; aLength += myIncrement) {
             MemBlock& aBlock = myData[iBlock];
             initMemBlocks(*this, aBlock, aLength, myIncrement);
             Standard_Integer anItemIter = 0;
-            for (; anItemIter < myIncrement; ++anItemIter)
-            {
-                if (!anIter.More())
-                {
+            for (; anItemIter < myIncrement; ++anItemIter) {
+                if (!anIter.More()) {
                     break;
                 }
 
@@ -320,19 +286,14 @@ private: //! @name private methods
     }
 
     //! Method to initialize memory block content
-    static void initMemBlocks(NCollection_BaseVector& theVector,
-        NCollection_BaseVector::MemBlock& theBlock,
-        const Standard_Integer            theFirst,
-        const Standard_Integer            theSize)
-    {
-        NCollection_Vector& aSelf = static_cast<NCollection_Vector&> (theVector);
-        Handle(NCollection_BaseAllocator)& anAllocator = aSelf.myAllocator;
+    static void initMemBlocks(NCollection_BaseVector& theVector, NCollection_BaseVector::MemBlock& theBlock,
+                              const Standard_Integer theFirst, const Standard_Integer theSize) {
+        NCollection_Vector& aSelf = static_cast<NCollection_Vector&>(theVector);
+        Handle(NCollection_BaseAllocator) & anAllocator = aSelf.myAllocator;
 
         // release current content
-        if (theBlock.DataPtr != NULL)
-        {
-            for (Standard_Integer anItemIter = 0; anItemIter < theBlock.Size; ++anItemIter)
-            {
+        if (theBlock.DataPtr != NULL) {
+            for (Standard_Integer anItemIter = 0; anItemIter < theBlock.Size; ++anItemIter) {
                 ((TheItemType*)theBlock.DataPtr)[anItemIter].~TheItemType();
             }
             anAllocator->Free(theBlock.DataPtr);
@@ -340,11 +301,9 @@ private: //! @name private methods
         }
 
         // allocate new content if requested
-        if (theSize > 0)
-        {
+        if (theSize > 0) {
             theBlock.DataPtr = anAllocator->Allocate(theSize * sizeof(TheItemType));
-            for (Standard_Integer anItemIter = 0; anItemIter < theSize; ++anItemIter)
-            {
+            for (Standard_Integer anItemIter = 0; anItemIter < theSize; ++anItemIter) {
                 new (&((TheItemType*)theBlock.DataPtr)[anItemIter]) TheItemType;
             }
         }
@@ -354,29 +313,24 @@ private: //! @name private methods
     }
 
     friend class Iterator;
-
 };
 
 //! Assignment to the collection of the same type
-template <class TheItemType> inline
-void NCollection_Vector<TheItemType>::Assign(const NCollection_Vector& theOther,
-    const Standard_Boolean    theOwnAllocator)
-{
-    if (this == &theOther)
-    {
+template <class TheItemType>
+inline void NCollection_Vector<TheItemType>::Assign(const NCollection_Vector& theOther,
+                                                    const Standard_Boolean theOwnAllocator) {
+    if (this == &theOther) {
         return;
     }
 
     // destroy current data using current allocator
-    for (Standard_Integer anItemIter = 0; anItemIter < myCapacity; ++anItemIter)
-    {
+    for (Standard_Integer anItemIter = 0; anItemIter < myCapacity; ++anItemIter) {
         initMemBlocks(*this, myData[anItemIter], 0, 0);
     }
     this->myAllocator->Free(myData);
 
     // allocate memory blocks with new allocator
-    if (!theOwnAllocator)
-    {
+    if (!theOwnAllocator) {
         this->myAllocator = theOther.myAllocator;
     }
     myIncrement = theOther.myIncrement;

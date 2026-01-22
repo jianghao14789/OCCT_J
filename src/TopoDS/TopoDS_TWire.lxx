@@ -15,10 +15,8 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : TopoDS_TWire
-//purpose  : 
+// function : TopoDS_TWire
+// purpose  :
 //=======================================================================
 
-inline TopoDS_TWire::TopoDS_TWire() : TopoDS_TShape()
-{
-}
+inline TopoDS_TWire::TopoDS_TWire() : TopoDS_TShape() {}

@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,Geom2dHatch_Hatching,TColStd_MapIntegerHasher> Geom2dHatch_Hatchings;
-typedef NCollection_DataMap<Standard_Integer,Geom2dHatch_Hatching,TColStd_MapIntegerHasher>::Iterator Geom2dHatch_DataMapIteratorOfHatchings;
-
+typedef NCollection_DataMap<Standard_Integer, Geom2dHatch_Hatching, TColStd_MapIntegerHasher> Geom2dHatch_Hatchings;
+typedef NCollection_DataMap<Standard_Integer, Geom2dHatch_Hatching, TColStd_MapIntegerHasher>::Iterator
+    Geom2dHatch_DataMapIteratorOfHatchings;
 
 #endif

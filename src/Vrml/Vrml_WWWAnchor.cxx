@@ -11,72 +11,61 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <TCollection_AsciiString.hxx>
 #include <Vrml_WWWAnchor.hxx>
 
-Vrml_WWWAnchor::Vrml_WWWAnchor(const TCollection_AsciiString& aName,
-			       const TCollection_AsciiString& aDescription,
-			       const Vrml_WWWAnchorMap aMap)
-{
- myName = aName;
- myDescription = aDescription;
- myMap = aMap;
+Vrml_WWWAnchor::Vrml_WWWAnchor(const TCollection_AsciiString& aName, const TCollection_AsciiString& aDescription,
+                               const Vrml_WWWAnchorMap aMap) {
+    myName = aName;
+    myDescription = aDescription;
+    myMap = aMap;
 }
 
- void Vrml_WWWAnchor::SetName(const TCollection_AsciiString& aName) 
-{
- myName = aName;
+void Vrml_WWWAnchor::SetName(const TCollection_AsciiString& aName) {
+    myName = aName;
 }
 
- TCollection_AsciiString Vrml_WWWAnchor::Name() const
-{
-  return myName;
+TCollection_AsciiString Vrml_WWWAnchor::Name() const {
+    return myName;
 }
 
- void Vrml_WWWAnchor::SetDescription(const TCollection_AsciiString& aDescription) 
-{
- myDescription = aDescription;
+void Vrml_WWWAnchor::SetDescription(const TCollection_AsciiString& aDescription) {
+    myDescription = aDescription;
 }
 
- TCollection_AsciiString Vrml_WWWAnchor::Description() const
-{
-  return myDescription;
+TCollection_AsciiString Vrml_WWWAnchor::Description() const {
+    return myDescription;
 }
 
- void Vrml_WWWAnchor::SetMap(const Vrml_WWWAnchorMap aMap) 
-{
- myMap = aMap;
+void Vrml_WWWAnchor::SetMap(const Vrml_WWWAnchorMap aMap) {
+    myMap = aMap;
 }
 
- Vrml_WWWAnchorMap Vrml_WWWAnchor::Map() const
-{
-  return myMap;
+Vrml_WWWAnchorMap Vrml_WWWAnchor::Map() const {
+    return myMap;
 }
 
- Standard_OStream& Vrml_WWWAnchor::Print(Standard_OStream& anOStream) const
-{
- anOStream  << "WWWAnchor {\n";
+Standard_OStream& Vrml_WWWAnchor::Print(Standard_OStream& anOStream) const {
+    anOStream << "WWWAnchor {\n";
 
- if ( !(myName.IsEqual( "" ) ) )
-   {
-    anOStream  << "    name\t";
-    anOStream << '"' << myName << '"' << "\n";
-   }
-
- if ( !(myDescription.IsEqual("") ) )
-   {
-    anOStream  << "    description\t";
-    anOStream << '"' << myDescription << '"' << "\n";
-   }
-
- switch ( myMap )
-    {
-     case Vrml_MAP_NONE: break; // anOStream  << "    map\tNONE ";
-     case Vrml_POINT: anOStream  << "    map\t\tPOINT\n"; break;
+    if (!(myName.IsEqual(""))) {
+        anOStream << "    name\t";
+        anOStream << '"' << myName << '"' << "\n";
     }
 
- anOStream  << "}\n";
- return anOStream;
+    if (!(myDescription.IsEqual(""))) {
+        anOStream << "    description\t";
+        anOStream << '"' << myDescription << '"' << "\n";
+    }
 
+    switch (myMap) {
+        case Vrml_MAP_NONE:
+            break; // anOStream  << "    map\tNONE ";
+        case Vrml_POINT:
+            anOStream << "    map\t\tPOINT\n";
+            break;
+    }
+
+    anOStream << "}\n";
+    return anOStream;
 }

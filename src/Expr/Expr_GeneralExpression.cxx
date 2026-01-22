@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_InvalidOperand.hxx>
 #include <Expr_NamedUnknown.hxx>
@@ -26,13 +25,12 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_GeneralExpression, Standard_Transient)
 
-Standard_Boolean Expr_GeneralExpression::IsShareable() const
-{
+Standard_Boolean Expr_GeneralExpression::IsShareable() const {
     return Standard_False;
 }
 
-Handle(Expr_GeneralExpression) Expr_GeneralExpression::NDerivative(const Handle(Expr_NamedUnknown)& X, const Standard_Integer N) const
-{
+Handle(Expr_GeneralExpression) Expr_GeneralExpression::NDerivative(const Handle(Expr_NamedUnknown) & X,
+                                                                   const Standard_Integer N) const {
     if (N <= 0) {
         throw Standard_OutOfRange();
     }
@@ -43,9 +41,7 @@ Handle(Expr_GeneralExpression) Expr_GeneralExpression::NDerivative(const Handle(
     return first;
 }
 
-
-Standard_Real Expr_GeneralExpression::EvaluateNumeric() const
-{
+Standard_Real Expr_GeneralExpression::EvaluateNumeric() const {
     if (ContainsUnknowns()) {
         throw Expr_NotEvaluable();
     }

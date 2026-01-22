@@ -24,52 +24,38 @@
 #include <NCollection_Array1.hxx>
 #include <AppParCurves_Constraint.hxx>
 
-
-struct PeriodicityInfo
-{
-  Standard_Boolean isPeriodic;
-  Standard_Real    myPeriod;
+struct PeriodicityInfo {
+    Standard_Boolean isPeriodic;
+    Standard_Real myPeriod;
 };
 
-class AppCont_LeastSquare
-{
+class AppCont_LeastSquare {
 public:
+    Standard_EXPORT AppCont_LeastSquare(const AppCont_Function& SSP, const Standard_Real U0, const Standard_Real U1,
+                                        const AppParCurves_Constraint FirstCons, const AppParCurves_Constraint LastCons,
+                                        const Standard_Integer Deg, const Standard_Integer NbPoints);
 
-  Standard_EXPORT AppCont_LeastSquare(const AppCont_Function&       SSP,
-                                      const Standard_Real           U0,
-                                      const Standard_Real           U1,
-                                      const AppParCurves_Constraint FirstCons,
-                                      const AppParCurves_Constraint LastCons,
-                                      const Standard_Integer        Deg,
-                                      const Standard_Integer        NbPoints);
+    Standard_EXPORT const AppParCurves_MultiCurve& Value();
 
-  Standard_EXPORT const AppParCurves_MultiCurve& Value();
+    Standard_EXPORT void Error(Standard_Real& F, Standard_Real& MaxE3d, Standard_Real& MaxE2d) const;
 
-  Standard_EXPORT void Error(Standard_Real& F, 
-                             Standard_Real& MaxE3d,
-                             Standard_Real& MaxE2d) const;
-
-  Standard_EXPORT Standard_Boolean IsDone() const;
+    Standard_EXPORT Standard_Boolean IsDone() const;
 
 private:
+    //! Fix border point evaluation.
+    void FixSingleBorderPoint(const AppCont_Function& theSSP, const Standard_Real theU, const Standard_Real theU0,
+                              const Standard_Real theU1, NCollection_Array1<gp_Pnt2d>& theFix2d,
+                              NCollection_Array1<gp_Pnt>& theFix);
 
-  //! Fix border point evaluation.
-  void FixSingleBorderPoint(const AppCont_Function&   theSSP,
-                            const Standard_Real       theU,
-                            const Standard_Real       theU0,
-                            const Standard_Real       theU1,
-                            NCollection_Array1<gp_Pnt2d>& theFix2d,
-                            NCollection_Array1<gp_Pnt>&   theFix);
-
-  AppParCurves_MultiCurve mySCU;
-  math_Matrix myPoints;
-  math_Matrix myPoles;
-  math_Vector myParam;
-  math_Matrix myVB;
-  NCollection_Array1<PeriodicityInfo> myPerInfo;
-  Standard_Boolean myDone;
-  Standard_Integer myDegre;
-  Standard_Integer myNbdiscret, myNbP, myNbP2d;
+    AppParCurves_MultiCurve mySCU;
+    math_Matrix myPoints;
+    math_Matrix myPoles;
+    math_Vector myParam;
+    math_Matrix myVB;
+    NCollection_Array1<PeriodicityInfo> myPerInfo;
+    Standard_Boolean myDone;
+    Standard_Integer myDegre;
+    Standard_Integer myNbdiscret, myNbP, myNbP2d;
 };
 
 #endif

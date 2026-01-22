@@ -23,10 +23,6 @@
 //! point of view.
 //! TOST_ANNOTATION     The text is always visible. The texte is displayed
 //! over the other object according to the priority.
-enum Aspect_TypeOfStyleText
-{
-Aspect_TOST_NORMAL,
-Aspect_TOST_ANNOTATION
-};
+enum Aspect_TypeOfStyleText { Aspect_TOST_NORMAL, Aspect_TOST_ANNOTATION };
 
 #endif // _Aspect_TypeOfStyleText_HeaderFile

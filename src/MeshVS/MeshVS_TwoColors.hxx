@@ -19,29 +19,26 @@
 #include <Quantity_Color.hxx>
 
 typedef struct {
-  unsigned int r1 : 8;
-  unsigned int g1 : 8;
-  unsigned int b1 : 8;
-  unsigned int r2 : 8;
-  unsigned int g2 : 8;
-  unsigned int b2 : 8;
+    unsigned int r1 : 8;
+    unsigned int g1 : 8;
+    unsigned int b1 : 8;
+    unsigned int r2 : 8;
+    unsigned int g2 : 8;
+    unsigned int b2 : 8;
 } MeshVS_TwoColors;
-
 
 //! Computes a hash code for the key, in the range [1, theUpperBound]
 //! @param theKey the key which hash code is to be computed
 //! @param theUpperBound the upper bound of the range a computing hash code must be within
 //! @return a computed hash code, in the range [1, theUpperBound]
-Standard_EXPORT Standard_Integer HashCode (const MeshVS_TwoColors& theKey, Standard_Integer theUpperBound);
+Standard_EXPORT Standard_Integer HashCode(const MeshVS_TwoColors& theKey, Standard_Integer theUpperBound);
 
-Standard_EXPORT Standard_Boolean IsEqual (const MeshVS_TwoColors& K1,
-                                          const MeshVS_TwoColors& K2  );
+Standard_EXPORT Standard_Boolean IsEqual(const MeshVS_TwoColors& K1, const MeshVS_TwoColors& K2);
 
-Standard_EXPORT Standard_Boolean operator== ( const MeshVS_TwoColors& K1,
-                                              const MeshVS_TwoColors& K2  );
+Standard_EXPORT Standard_Boolean operator==(const MeshVS_TwoColors& K1, const MeshVS_TwoColors& K2);
 
-Standard_EXPORT MeshVS_TwoColors  BindTwoColors ( const Quantity_Color&, const Quantity_Color& );
-Standard_EXPORT Quantity_Color    ExtractColor  ( MeshVS_TwoColors&, const Standard_Integer );
-Standard_EXPORT void              ExtractColors ( MeshVS_TwoColors&, Quantity_Color&, Quantity_Color& );
+Standard_EXPORT MeshVS_TwoColors BindTwoColors(const Quantity_Color&, const Quantity_Color&);
+Standard_EXPORT Quantity_Color ExtractColor(MeshVS_TwoColors&, const Standard_Integer);
+Standard_EXPORT void ExtractColors(MeshVS_TwoColors&, Quantity_Color&, Quantity_Color&);
 
 #endif

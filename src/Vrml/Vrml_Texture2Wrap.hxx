@@ -17,11 +17,6 @@
 #ifndef _Vrml_Texture2Wrap_HeaderFile
 #define _Vrml_Texture2Wrap_HeaderFile
 
-
-enum Vrml_Texture2Wrap
-{
-Vrml_REPEAT,
-Vrml_CLAMP
-};
+enum Vrml_Texture2Wrap { Vrml_REPEAT, Vrml_CLAMP };
 
 #endif // _Vrml_Texture2Wrap_HeaderFile

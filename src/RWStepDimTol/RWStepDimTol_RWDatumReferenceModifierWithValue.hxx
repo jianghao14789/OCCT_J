@@ -28,22 +28,21 @@ class StepDimTol_DatumReferenceModifierWithValue;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for DatumReferenceModifierWithValue
-class RWStepDimTol_RWDatumReferenceModifierWithValue 
-{
+class RWStepDimTol_RWDatumReferenceModifierWithValue {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWDatumReferenceModifierWithValue();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWDatumReferenceModifierWithValue();
-  
-  //! Reads DatumReferenceModifierWithValue
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_DatumReferenceModifierWithValue)& ent)  const;
-  
-  //! Writes DatumReferenceModifierWithValue
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_DatumReferenceModifierWithValue)& ent)  const;
+    //! Reads DatumReferenceModifierWithValue
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_DatumReferenceModifierWithValue) & ent) const;
+
+    //! Writes DatumReferenceModifierWithValue
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_DatumReferenceModifierWithValue) & ent) const;
 };
 #endif // _RWStepDimTol_RWDatumReferenceModifierWithValue_HeaderFile

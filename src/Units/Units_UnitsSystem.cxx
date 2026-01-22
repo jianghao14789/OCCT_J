@@ -39,60 +39,50 @@
 IMPLEMENT_STANDARD_RTTIEXT(Units_UnitsSystem, Standard_Transient)
 
 //=======================================================================
-//function : Units_UnitsSystem
-//purpose  : 
+// function : Units_UnitsSystem
+// purpose  :
 //=======================================================================
-Units_UnitsSystem::Units_UnitsSystem()
-{
+Units_UnitsSystem::Units_UnitsSystem() {
     thequantitiessequence = new Units_QuantitiesSequence();
     theactiveunitssequence = new TColStd_HSequenceOfInteger;
 }
 
-
 //=======================================================================
-//function : Units_UnitsSystem
-//purpose  : 
+// function : Units_UnitsSystem
+// purpose  :
 //=======================================================================
 
-Units_UnitsSystem::Units_UnitsSystem(const Standard_CString aName,
-    const Standard_Boolean Verbose)
-{
+Units_UnitsSystem::Units_UnitsSystem(const Standard_CString aName, const Standard_Boolean Verbose) {
     Handle(Resource_Manager) themanager = new Resource_Manager(aName, Verbose);
 
     thequantitiessequence = new Units_QuantitiesSequence();
     theactiveunitssequence = new TColStd_HSequenceOfInteger;
 }
 
-
 //=======================================================================
-//function : QuantitiesSequence
-//purpose  : 
+// function : QuantitiesSequence
+// purpose  :
 //=======================================================================
 
-Handle(Units_QuantitiesSequence) Units_UnitsSystem::QuantitiesSequence() const
-{
+Handle(Units_QuantitiesSequence) Units_UnitsSystem::QuantitiesSequence() const {
     return thequantitiessequence;
 }
 
-
 //=======================================================================
-//function : ActiveUnitsSequence
-//purpose  : 
+// function : ActiveUnitsSequence
+// purpose  :
 //=======================================================================
 
-Handle(TColStd_HSequenceOfInteger) Units_UnitsSystem::ActiveUnitsSequence() const
-{
+Handle(TColStd_HSequenceOfInteger) Units_UnitsSystem::ActiveUnitsSequence() const {
     return theactiveunitssequence;
 }
 
-
 //=======================================================================
-//function : Specify
-//purpose  : 
+// function : Specify
+// purpose  :
 //=======================================================================
 
-void Units_UnitsSystem::Specify(const Standard_CString aquantity, const Standard_CString aunit)
-{
+void Units_UnitsSystem::Specify(const Standard_CString aquantity, const Standard_CString aunit) {
     Standard_Integer index;
     Handle(Units_Unit) unit;
     Handle(Units_UnitsSequence) unitssequence;
@@ -109,14 +99,12 @@ void Units_UnitsSystem::Specify(const Standard_CString aquantity, const Standard
     Handle(Units_Token) token = unitsentence.Evaluate();
 
     if (token->IsKind(STANDARD_TYPE(Units_ShiftedToken))) {
-        Handle(Units_ShiftedToken) stoken =
-            Handle(Units_ShiftedToken)::DownCast(token);
+        Handle(Units_ShiftedToken) stoken = Handle(Units_ShiftedToken)::DownCast(token);
         Handle(Units_ShiftedUnit) sunit;
         unit = sunit = new Units_ShiftedUnit(aunit, aunit);
         sunit->Value(stoken->Value());
         sunit->Move(stoken->Move());
-    }
-    else {
+    } else {
         unit = new Units_Unit(aunit, aunit);
         unit->Value(token->Value());
     }
@@ -147,15 +135,12 @@ void Units_UnitsSystem::Specify(const Standard_CString aquantity, const Standard
     thequantity->Sequence()->Append(unit);
 }
 
-
 //=======================================================================
-//function : Remove
-//purpose  : 
+// function : Remove
+// purpose  :
 //=======================================================================
 
-void Units_UnitsSystem::Remove(const Standard_CString aquantity,
-    const Standard_CString aunit)
-{
+void Units_UnitsSystem::Remove(const Standard_CString aquantity, const Standard_CString aunit) {
     Standard_Integer index1, index2;
     Handle(Units_Unit) unit;
     Handle(Units_UnitsSequence) unitssequence;
@@ -176,8 +161,7 @@ void Units_UnitsSystem::Remove(const Standard_CString aquantity,
                     if (unitssequence->Length() == 0) {
                         thequantitiessequence->Remove(index1);
                         theactiveunitssequence->Remove(index1);
-                    }
-                    else {
+                    } else {
                         if (theactiveunitssequence->Value(index1) == index2)
                             theactiveunitssequence->SetValue(index1, 0);
                         else if (theactiveunitssequence->Value(index1) > index2)
@@ -188,22 +172,18 @@ void Units_UnitsSystem::Remove(const Standard_CString aquantity,
             }
 
             throw Units_NoSuchUnit(aunit);
-
         }
     }
 
     throw Units_NoSuchType(aquantity);
 }
 
-
 //=======================================================================
-//function : Activate
-//purpose  : 
+// function : Activate
+// purpose  :
 //=======================================================================
 
-void Units_UnitsSystem::Activate(const Standard_CString aquantity,
-    const Standard_CString aunit)
-{
+void Units_UnitsSystem::Activate(const Standard_CString aquantity, const Standard_CString aunit) {
     Standard_Integer index1, index2;
     Handle(Units_Unit) unit;
     Handle(Units_UnitsSequence) unitssequence;
@@ -227,14 +207,12 @@ void Units_UnitsSystem::Activate(const Standard_CString aquantity,
     throw Units_NoSuchType(aquantity);
 }
 
-
 //=======================================================================
-//function : Activates
-//purpose  : 
+// function : Activates
+// purpose  :
 //=======================================================================
 
-void Units_UnitsSystem::Activates()
-{
+void Units_UnitsSystem::Activates() {
     Standard_Integer index;
     Handle(Units_UnitsSequence) unitssequence;
     Handle(Units_Quantity) quantity;
@@ -248,14 +226,12 @@ void Units_UnitsSystem::Activates()
     }
 }
 
-
 //=======================================================================
-//function : ActiveUnit
-//purpose  : 
+// function : ActiveUnit
+// purpose  :
 //=======================================================================
 
-TCollection_AsciiString Units_UnitsSystem::ActiveUnit(const Standard_CString aquantity) const
-{
+TCollection_AsciiString Units_UnitsSystem::ActiveUnit(const Standard_CString aquantity) const {
     Standard_Integer index1, index2;
     Handle(Units_Unit) unit;
     Handle(Units_UnitsSequence) unitssequence;
@@ -280,17 +256,13 @@ TCollection_AsciiString Units_UnitsSystem::ActiveUnit(const Standard_CString aqu
     throw Units_NoSuchType(aquantity);
 }
 
-
 //=======================================================================
-//function : ConvertValueToUserSystem
-//purpose  : 
+// function : ConvertValueToUserSystem
+// purpose  :
 //=======================================================================
 
-Standard_Real Units_UnitsSystem::ConvertValueToUserSystem
-(const Standard_CString aquantity,
-    const Standard_Real avalue,
-    const Standard_CString aunit) const
-{
+Standard_Real Units_UnitsSystem::ConvertValueToUserSystem(const Standard_CString aquantity, const Standard_Real avalue,
+                                                          const Standard_CString aunit) const {
     Units_UnitSentence unitsentence(aunit);
     if (!unitsentence.IsDone()) {
         std::cout << "Units_UnitsSystem::ConvertValueToUserSystem : incorrect unit => return 0" << std::endl;
@@ -299,15 +271,13 @@ Standard_Real Units_UnitsSystem::ConvertValueToUserSystem
     return ConvertSIValueToUserSystem(aquantity, avalue * (unitsentence.Evaluate())->Value());
 }
 
-
 //=======================================================================
-//function : ConvertSIValueToUserSystem
-//purpose  : 
+// function : ConvertSIValueToUserSystem
+// purpose  :
 //=======================================================================
 
-Standard_Real Units_UnitsSystem::ConvertSIValueToUserSystem
-(const Standard_CString aquantity, const Standard_Real avalue) const
-{
+Standard_Real Units_UnitsSystem::ConvertSIValueToUserSystem(const Standard_CString aquantity,
+                                                            const Standard_Real avalue) const {
     Standard_Integer index, activeunit;
     Handle(Units_UnitsSequence) unitssequence;
     Handle(Units_Quantity) quantity;
@@ -328,14 +298,11 @@ Standard_Real Units_UnitsSystem::ConvertSIValueToUserSystem
                     uvalue = sunit->Value();
                     umove = sunit->Move();
                     return avalue / uvalue - umove;
-                }
-                else
-                {
+                } else {
                     uvalue = unit->Value();
                     return avalue / uvalue;
                 }
-            }
-            else {
+            } else {
                 return avalue;
             }
         }
@@ -348,15 +315,13 @@ Standard_Real Units_UnitsSystem::ConvertSIValueToUserSystem
     return avalue;
 }
 
-
 //=======================================================================
-//function : ConvertUserSystemValueToSI
-//purpose  : 
+// function : ConvertUserSystemValueToSI
+// purpose  :
 //=======================================================================
 
-Standard_Real Units_UnitsSystem::ConvertUserSystemValueToSI
-(const Standard_CString aquantity, const Standard_Real avalue) const
-{
+Standard_Real Units_UnitsSystem::ConvertUserSystemValueToSI(const Standard_CString aquantity,
+                                                            const Standard_Real avalue) const {
     Standard_Integer index, activeunit;
     Handle(Units_UnitsSequence) unitssequence;
     Handle(Units_Quantity) quantity;
@@ -377,14 +342,11 @@ Standard_Real Units_UnitsSystem::ConvertUserSystemValueToSI
                     uvalue = sunit->Value();
                     umove = sunit->Move();
                     return avalue * (uvalue + umove);
-                }
-                else
-                {
+                } else {
                     uvalue = unit->Value();
                     return avalue * uvalue;
                 }
-            }
-            else {
+            } else {
                 return avalue;
             }
         }
@@ -397,14 +359,12 @@ Standard_Real Units_UnitsSystem::ConvertUserSystemValueToSI
     return avalue;
 }
 
-
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void Units_UnitsSystem::Dump() const
-{
+void Units_UnitsSystem::Dump() const {
     Handle(Standard_Transient) transient = This();
     Handle(Units_UnitsSystem) unitssystem = Handle(Units_UnitsSystem)::DownCast(transient);
     Units_Explorer explorer(unitssystem);
@@ -416,13 +376,11 @@ void Units_UnitsSystem::Dump() const
     }
 }
 
-
 //=======================================================================
-//function : IsEmpty
-//purpose  : 
+// function : IsEmpty
+// purpose  :
 //=======================================================================
 
-Standard_Boolean Units_UnitsSystem::IsEmpty() const
-{
+Standard_Boolean Units_UnitsSystem::IsEmpty() const {
     return (thequantitiessequence->Length() > 0) ? Standard_False : Standard_True;
 }

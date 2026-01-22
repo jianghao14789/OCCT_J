@@ -22,25 +22,21 @@
 
 //! Class implements functionality of model post-processing tool.
 //! Stores polygons on triangulations to TopoDS_Edge.
-class BRepMesh_ModelPostProcessor : public IMeshTools_ModelAlgo
-{
+class BRepMesh_ModelPostProcessor : public IMeshTools_ModelAlgo {
 public:
+    //! Constructor.
+    Standard_EXPORT BRepMesh_ModelPostProcessor();
 
-  //! Constructor.
-  Standard_EXPORT BRepMesh_ModelPostProcessor();
+    //! Destructor.
+    Standard_EXPORT virtual ~BRepMesh_ModelPostProcessor();
 
-  //! Destructor.
-  Standard_EXPORT virtual ~BRepMesh_ModelPostProcessor();
-
-  DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelPostProcessor, IMeshTools_ModelAlgo)
+    DEFINE_STANDARD_RTTIEXT(BRepMesh_ModelPostProcessor, IMeshTools_ModelAlgo)
 
 protected:
-
-  //! Performs processing of edges of the given model.
-  Standard_EXPORT virtual Standard_Boolean performInternal (
-    const Handle(IMeshData_Model)& theModel,
-    const IMeshTools_Parameters&   theParameters,
-    const Message_ProgressRange&   theRange) Standard_OVERRIDE;
+    //! Performs processing of edges of the given model.
+    Standard_EXPORT virtual Standard_Boolean performInternal(const Handle(IMeshData_Model) & theModel,
+                                                             const IMeshTools_Parameters& theParameters,
+                                                             const Message_ProgressRange& theRange) Standard_OVERRIDE;
 };
 
 #endif

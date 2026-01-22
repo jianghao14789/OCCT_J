@@ -29,16 +29,15 @@
 //! into a STEP shell_based_surface_model entity.
 //! - STEPControl_GeometricCurveSet
 //! translates an Open CASCADE shape into a STEP geometric_curve_set entity.
-enum STEPControl_StepModelType
-{
-STEPControl_AsIs,
-STEPControl_ManifoldSolidBrep,
-STEPControl_BrepWithVoids,
-STEPControl_FacetedBrep,
-STEPControl_FacetedBrepAndBrepWithVoids,
-STEPControl_ShellBasedSurfaceModel,
-STEPControl_GeometricCurveSet,
-STEPControl_Hybrid
+enum STEPControl_StepModelType {
+    STEPControl_AsIs,
+    STEPControl_ManifoldSolidBrep,
+    STEPControl_BrepWithVoids,
+    STEPControl_FacetedBrep,
+    STEPControl_FacetedBrepAndBrepWithVoids,
+    STEPControl_ShellBasedSurfaceModel,
+    STEPControl_GeometricCurveSet,
+    STEPControl_Hybrid
 };
 
 #endif // _STEPControl_StepModelType_HeaderFile

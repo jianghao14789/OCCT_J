@@ -27,42 +27,22 @@ class Interface_Check;
 class StepBasic_CoordinatedUniversalTimeOffset;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for CoordinatedUniversalTimeOffset
-class RWStepBasic_RWCoordinatedUniversalTimeOffset 
-{
+class RWStepBasic_RWCoordinatedUniversalTimeOffset {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWCoordinatedUniversalTimeOffset();
 
-  
-  Standard_EXPORT RWStepBasic_RWCoordinatedUniversalTimeOffset();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_CoordinatedUniversalTimeOffset)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_CoordinatedUniversalTimeOffset)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_CoordinatedUniversalTimeOffset) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepBasic_CoordinatedUniversalTimeOffset) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWCoordinatedUniversalTimeOffset_HeaderFile

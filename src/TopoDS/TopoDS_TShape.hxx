@@ -58,61 +58,88 @@ class TopoDS_Builder;
 class TopoDS_TShape : public Standard_Transient {
 
 public:
-
     //! Returns the free flag.
-    Standard_Boolean Free() const { return ((myFlags & TopoDS_TShape_Flags_Free) != 0); }
+    Standard_Boolean Free() const {
+        return ((myFlags & TopoDS_TShape_Flags_Free) != 0);
+    }
 
     //! Sets the free flag.
-    void Free(Standard_Boolean theIsFree) { setFlag(TopoDS_TShape_Flags_Free, theIsFree); }
+    void Free(Standard_Boolean theIsFree) {
+        setFlag(TopoDS_TShape_Flags_Free, theIsFree);
+    }
 
     //! Returns the locked flag.
-    Standard_Boolean Locked() const { return ((myFlags & TopoDS_TShape_Flags_Locked) != 0); }
+    Standard_Boolean Locked() const {
+        return ((myFlags & TopoDS_TShape_Flags_Locked) != 0);
+    }
 
     //! Sets the locked flag.
-    void Locked(Standard_Boolean theIsLocked) { setFlag(TopoDS_TShape_Flags_Locked, theIsLocked); }
+    void Locked(Standard_Boolean theIsLocked) {
+        setFlag(TopoDS_TShape_Flags_Locked, theIsLocked);
+    }
 
     //! Returns the modification flag.
-    Standard_Boolean Modified() const { return ((myFlags & TopoDS_TShape_Flags_Modified) != 0); }
+    Standard_Boolean Modified() const {
+        return ((myFlags & TopoDS_TShape_Flags_Modified) != 0);
+    }
 
     //! Sets the modification flag.
-    void Modified(Standard_Boolean theIsModified)
-    {
+    void Modified(Standard_Boolean theIsModified) {
         setFlag(TopoDS_TShape_Flags_Modified, theIsModified);
-        if (theIsModified)
-        {
+        if (theIsModified) {
             setFlag(TopoDS_TShape_Flags_Checked, false); // when a TShape is modified it is also unchecked
         }
     }
 
     //! Returns the checked flag.
-    Standard_Boolean Checked() const { return ((myFlags & TopoDS_TShape_Flags_Checked) != 0); }
+    Standard_Boolean Checked() const {
+        return ((myFlags & TopoDS_TShape_Flags_Checked) != 0);
+    }
 
     //! Sets the checked flag.
-    void Checked(Standard_Boolean theIsChecked) { setFlag(TopoDS_TShape_Flags_Checked, theIsChecked); }
+    void Checked(Standard_Boolean theIsChecked) {
+        setFlag(TopoDS_TShape_Flags_Checked, theIsChecked);
+    }
 
     //! Returns the orientability flag.
-    Standard_Boolean Orientable() const { return ((myFlags & TopoDS_TShape_Flags_Orientable) != 0); }
+    Standard_Boolean Orientable() const {
+        return ((myFlags & TopoDS_TShape_Flags_Orientable) != 0);
+    }
 
     //! Sets the orientability flag.
-    void Orientable(Standard_Boolean theIsOrientable) { setFlag(TopoDS_TShape_Flags_Orientable, theIsOrientable); }
+    void Orientable(Standard_Boolean theIsOrientable) {
+        setFlag(TopoDS_TShape_Flags_Orientable, theIsOrientable);
+    }
 
     //! Returns the closedness flag.
-    Standard_Boolean Closed() const { return ((myFlags & TopoDS_TShape_Flags_Closed) != 0); }
+    Standard_Boolean Closed() const {
+        return ((myFlags & TopoDS_TShape_Flags_Closed) != 0);
+    }
 
     //! Sets the closedness flag.
-    void Closed(Standard_Boolean theIsClosed) { setFlag(TopoDS_TShape_Flags_Closed, theIsClosed); }
+    void Closed(Standard_Boolean theIsClosed) {
+        setFlag(TopoDS_TShape_Flags_Closed, theIsClosed);
+    }
 
     //! Returns the infinity flag.
-    Standard_Boolean Infinite() const { return ((myFlags & TopoDS_TShape_Flags_Infinite) != 0); }
+    Standard_Boolean Infinite() const {
+        return ((myFlags & TopoDS_TShape_Flags_Infinite) != 0);
+    }
 
     //! Sets the infinity flag.
-    void Infinite(Standard_Boolean theIsInfinite) { setFlag(TopoDS_TShape_Flags_Infinite, theIsInfinite); }
+    void Infinite(Standard_Boolean theIsInfinite) {
+        setFlag(TopoDS_TShape_Flags_Infinite, theIsInfinite);
+    }
 
     //! Returns the convexness flag.
-    Standard_Boolean Convex() const { return ((myFlags & TopoDS_TShape_Flags_Convex) != 0); }
+    Standard_Boolean Convex() const {
+        return ((myFlags & TopoDS_TShape_Flags_Convex) != 0);
+    }
 
     //! Sets the convexness flag.
-    void Convex(Standard_Boolean theIsConvex) { setFlag(TopoDS_TShape_Flags_Convex, theIsConvex); }
+    void Convex(Standard_Boolean theIsConvex) {
+        setFlag(TopoDS_TShape_Flags_Convex, theIsConvex);
+    }
 
     //! Returns the type as a term of the ShapeEnum enum :
     //! VERTEX, EDGE, WIRE, FACE, ....
@@ -123,7 +150,9 @@ public:
 
     //! Returns the number of direct sub-shapes (children).
     //! @sa TopoDS_Iterator for accessing sub-shapes
-    Standard_Integer NbChildren() const { return myShapes.Size(); }
+    Standard_Integer NbChildren() const {
+        return myShapes.Size();
+    }
 
     //! Dumps the content of me into the stream
     Standard_EXPORT virtual void DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth = -1) const;
@@ -131,11 +160,9 @@ public:
     friend class TopoDS_Iterator;
     friend class TopoDS_Builder;
 
-
     DEFINE_STANDARD_RTTIEXT(TopoDS_TShape, Standard_Transient)
 
 protected:
-
     //! Constructs an empty TShape.
     //! Free       : True
     //! Modified   : True
@@ -145,16 +172,11 @@ protected:
     //! Infinite   : False
     //! Convex     : False
     TopoDS_TShape()
-        : myFlags(TopoDS_TShape_Flags_Free
-            | TopoDS_TShape_Flags_Modified
-            | TopoDS_TShape_Flags_Orientable) {
-    }
+        : myFlags(TopoDS_TShape_Flags_Free | TopoDS_TShape_Flags_Modified | TopoDS_TShape_Flags_Orientable) {}
 
 private:
-
     // Defined mask values
-    enum TopoDS_TShape_Flags
-    {
+    enum TopoDS_TShape_Flags {
         TopoDS_TShape_Flags_Free = 0x001,
         TopoDS_TShape_Flags_Modified = 0x002,
         TopoDS_TShape_Flags_Checked = 0x004,
@@ -166,17 +188,16 @@ private:
     };
 
     //! Set bit flag.
-    void setFlag(TopoDS_TShape_Flags theFlag,
-        Standard_Boolean    theIsOn)
-    {
-        if (theIsOn) myFlags |= (Standard_Integer)theFlag;
-        else         myFlags &= ~(Standard_Integer)theFlag;
+    void setFlag(TopoDS_TShape_Flags theFlag, Standard_Boolean theIsOn) {
+        if (theIsOn)
+            myFlags |= (Standard_Integer)theFlag;
+        else
+            myFlags &= ~(Standard_Integer)theFlag;
     }
 
 private:
-
     TopoDS_ListOfShape myShapes;
-    Standard_Integer   myFlags;
+    Standard_Integer myFlags;
 };
 
 DEFINE_STANDARD_HANDLE(TopoDS_TShape, Standard_Transient)

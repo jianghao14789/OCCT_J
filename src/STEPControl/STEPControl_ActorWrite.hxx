@@ -35,101 +35,81 @@ class StepGeom_Axis2Placement3d;
 class TopoDS_Shape;
 class StepShape_NonManifoldSurfaceShapeRepresentation;
 
-
 class STEPControl_ActorWrite;
 DEFINE_STANDARD_HANDLE(STEPControl_ActorWrite, Transfer_ActorOfFinderProcess)
 
 //! This class performs the transfer of a Shape from TopoDS
 //! to AP203 or AP214 (CD2 or DIS)
-class STEPControl_ActorWrite : public Transfer_ActorOfFinderProcess
-{
+class STEPControl_ActorWrite : public Transfer_ActorOfFinderProcess {
 
 public:
+    Standard_EXPORT STEPControl_ActorWrite();
 
-  
-  Standard_EXPORT STEPControl_ActorWrite();
-  
-  Standard_EXPORT virtual Standard_Boolean Recognize (const Handle(Transfer_Finder)& start) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Handle(Transfer_Binder) Transfer
-                   (const Handle(Transfer_Finder)& start,
-                    const Handle(Transfer_FinderProcess)& FP,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
-  
-  Standard_EXPORT Handle(Transfer_Binder) TransferSubShape
-                   (const Handle(Transfer_Finder)& start,
-                    const Handle(StepShape_ShapeDefinitionRepresentation)& SDR,
-                    Handle(StepGeom_Axis2Placement3d)& AX1, 
-                    const Handle(Transfer_FinderProcess)& FP,
-                    const Handle(TopTools_HSequenceOfShape)& shapeGroup = NULL, 
-                    const Standard_Boolean isManifold = Standard_True,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT Handle(Transfer_Binder) TransferShape
-                   (const Handle(Transfer_Finder)& start,
-                    const Handle(StepShape_ShapeDefinitionRepresentation)& SDR,
-                    const Handle(Transfer_FinderProcess)& FP,
-                    const Handle(TopTools_HSequenceOfShape)& shapeGroup = NULL,
-                    const Standard_Boolean isManifold = Standard_True,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT Handle(Transfer_Binder) TransferCompound
-                   (const Handle(Transfer_Finder)& start,
-                    const Handle(StepShape_ShapeDefinitionRepresentation)& SDR,
-                    const Handle(Transfer_FinderProcess)& FP,
-                    const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT void SetMode (const STEPControl_StepModelType M);
-  
-  Standard_EXPORT STEPControl_StepModelType Mode() const;
-  
-  Standard_EXPORT void SetGroupMode (const Standard_Integer mode);
-  
-  Standard_EXPORT Standard_Integer GroupMode() const;
-  
-  Standard_EXPORT void SetTolerance (const Standard_Real Tol);
-  
-  //! Customizable method to check whether shape S should
-  //! be written as assembly or not
-  //! Default implementation uses flag GroupMode and analyses
-  //! the shape itself
-  //! NOTE: this method can modify shape
-  Standard_EXPORT virtual Standard_Boolean IsAssembly (TopoDS_Shape& S) const;
+    Standard_EXPORT virtual Standard_Boolean Recognize(const Handle(Transfer_Finder) & start) Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Handle(Transfer_Binder)
+        Transfer(const Handle(Transfer_Finder) & start, const Handle(Transfer_FinderProcess) & FP,
+                 const Message_ProgressRange& theProgress = Message_ProgressRange()) Standard_OVERRIDE;
 
+    Standard_EXPORT Handle(Transfer_Binder)
+        TransferSubShape(const Handle(Transfer_Finder) & start,
+                         const Handle(StepShape_ShapeDefinitionRepresentation) & SDR,
+                         Handle(StepGeom_Axis2Placement3d) & AX1, const Handle(Transfer_FinderProcess) & FP,
+                         const Handle(TopTools_HSequenceOfShape) & shapeGroup = NULL,
+                         const Standard_Boolean isManifold = Standard_True,
+                         const Message_ProgressRange& theProgress = Message_ProgressRange());
 
+    Standard_EXPORT Handle(Transfer_Binder)
+        TransferShape(const Handle(Transfer_Finder) & start,
+                      const Handle(StepShape_ShapeDefinitionRepresentation) & SDR,
+                      const Handle(Transfer_FinderProcess) & FP,
+                      const Handle(TopTools_HSequenceOfShape) & shapeGroup = NULL,
+                      const Standard_Boolean isManifold = Standard_True,
+                      const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-  DEFINE_STANDARD_RTTIEXT(STEPControl_ActorWrite,Transfer_ActorOfFinderProcess)
+    Standard_EXPORT Handle(Transfer_Binder)
+        TransferCompound(const Handle(Transfer_Finder) & start,
+                         const Handle(StepShape_ShapeDefinitionRepresentation) & SDR,
+                         const Handle(Transfer_FinderProcess) & FP,
+                         const Message_ProgressRange& theProgress = Message_ProgressRange());
+
+    Standard_EXPORT void SetMode(const STEPControl_StepModelType M);
+
+    Standard_EXPORT STEPControl_StepModelType Mode() const;
+
+    Standard_EXPORT void SetGroupMode(const Standard_Integer mode);
+
+    Standard_EXPORT Standard_Integer GroupMode() const;
+
+    Standard_EXPORT void SetTolerance(const Standard_Real Tol);
+
+    //! Customizable method to check whether shape S should
+    //! be written as assembly or not
+    //! Default implementation uses flag GroupMode and analyses
+    //! the shape itself
+    //! NOTE: this method can modify shape
+    Standard_EXPORT virtual Standard_Boolean IsAssembly(TopoDS_Shape& S) const;
+
+    DEFINE_STANDARD_RTTIEXT(STEPControl_ActorWrite, Transfer_ActorOfFinderProcess)
 
 protected:
-
-
-
-
 private:
+    //! Non-manifold shapes are stored in NMSSR group
+    //! (NON_MANIFOLD_SURFACE_SHAPE_REPRESENTATION).
+    //! Use this method to get the corresponding NMSSR (or
+    //! to create a new one if doesn't exist yet)
+    //! (ssv; 13.11.2010)
+    Standard_EXPORT Handle(StepShape_NonManifoldSurfaceShapeRepresentation)
+        getNMSSRForGroup(const Handle(TopTools_HSequenceOfShape) & shapeGroup,
+                         const Handle(Transfer_FinderProcess) & FP, Standard_Boolean& isNMSSRCreated) const;
 
-  
-  //! Non-manifold shapes are stored in NMSSR group
-  //! (NON_MANIFOLD_SURFACE_SHAPE_REPRESENTATION).
-  //! Use this method to get the corresponding NMSSR (or
-  //! to create a new one if doesn't exist yet)
-  //! (ssv; 13.11.2010)
-  Standard_EXPORT Handle(StepShape_NonManifoldSurfaceShapeRepresentation) getNMSSRForGroup (const Handle(TopTools_HSequenceOfShape)& shapeGroup, const Handle(Transfer_FinderProcess)& FP, Standard_Boolean& isNMSSRCreated) const;
-  
-  //! bind already written shared faces to STEP entity for non-manifold
-  Standard_EXPORT void mergeInfoForNM(const Handle(Transfer_FinderProcess)& theFP, const Handle(Standard_Transient) &theInfo) const;
+    //! bind already written shared faces to STEP entity for non-manifold
+    Standard_EXPORT void mergeInfoForNM(const Handle(Transfer_FinderProcess) & theFP,
+                                        const Handle(Standard_Transient) & theInfo) const;
 
-  Standard_Integer mygroup;
-  Standard_Real mytoler;
-  STEPConstruct_ContextTool myContext;
-
-
+    Standard_Integer mygroup;
+    Standard_Real mytoler;
+    STEPConstruct_ContextTool myContext;
 };
-
-
-
-
-
-
 
 #endif // _STEPControl_ActorWrite_HeaderFile

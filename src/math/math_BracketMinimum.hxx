@@ -45,7 +45,6 @@ class math_Function;
 //! 负责提供在限制范围内的 A 和 B。
 class math_BracketMinimum {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Constructor preparing A and B parameters only. It does not perform the job.
@@ -63,7 +62,6 @@ public:
     //! 并对函数 F 执行 Brent 最小化。
     Standard_EXPORT math_BracketMinimum(math_Function& F, const Standard_Real A, const Standard_Real B);
 
-
     //! Given two initial values this class computes a
     //! bracketing triplet of abscissae Ax, Bx, Cx
     //! (such that Bx is between Ax and Cx, F(Bx) is
@@ -75,8 +73,8 @@ public:
     //! 该三元组将最小值括住（使得 Bx 在 Ax 和 Cx 之间，F(Bx) 小于 F(Ax) 和 F(Cx)），
     //! 并对函数 F 执行 Brent 最小化。
     //! 如果 F(A) 已知，则必须使用此构造函数。
-    Standard_EXPORT math_BracketMinimum(math_Function& F, const Standard_Real A, const Standard_Real B, const Standard_Real FA);
-
+    Standard_EXPORT math_BracketMinimum(math_Function& F, const Standard_Real A, const Standard_Real B,
+                                        const Standard_Real FA);
 
     //! Given two initial values this class computes a
     //! bracketing triplet of abscissae Ax, Bx, Cx
@@ -89,7 +87,8 @@ public:
     //! 该三元组将最小值括住（使得 Bx 在 Ax 和 Cx 之间，F(Bx) 小于 F(Ax) 和 F(Cx)），
     //! 并对函数 F 执行 Brent 最小化。
     //! 如果 F(A) 和 F(B) 已知，则必须使用此构造函数。
-    Standard_EXPORT math_BracketMinimum(math_Function& F, const Standard_Real A, const Standard_Real B, const Standard_Real FA, const Standard_Real FB);
+    Standard_EXPORT math_BracketMinimum(math_Function& F, const Standard_Real A, const Standard_Real B,
+                                        const Standard_Real FA, const Standard_Real FB);
 
     //! Set limits of the parameter. By default no limits are applied to the parameter change.
     //! If no minimum is found in limits then IsDone() will return false. The user
@@ -143,7 +142,6 @@ public:
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
 private:
-
     //! Limit the given value to become within the range [myLeft, myRight].
     //! 将给定值限制在 [myLeft, myRight] 范围内。
     Standard_Real Limited(const Standard_Real theValue) const;
@@ -157,12 +155,10 @@ private:
     //! 限制 C 的值 (参见 Limited) 并在该点计算函数值。
     //! 如果 C 恰好在 A 和 B 之间，则交换 B 和 C 的参数及函数值。
     //! 如果 C 变得等于 B 或函数计算失败，则返回 false。
-    Standard_Boolean LimitAndMayBeSwap(math_Function& F, const Standard_Real theA,
-        Standard_Real& theB, Standard_Real& theFB,
-        Standard_Real& theC, Standard_Real& theFC) const;
+    Standard_Boolean LimitAndMayBeSwap(math_Function& F, const Standard_Real theA, Standard_Real& theB,
+                                       Standard_Real& theFB, Standard_Real& theC, Standard_Real& theFC) const;
 
 private:
-
     Standard_Boolean Done;
     Standard_Real Ax;
     Standard_Real Bx;
@@ -175,8 +171,6 @@ private:
     Standard_Boolean myIsLimited;
     Standard_Boolean myFA;
     Standard_Boolean myFB;
-
-
 };
 
 #include <math_BracketMinimum.lxx>

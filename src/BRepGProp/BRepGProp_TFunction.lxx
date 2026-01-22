@@ -14,53 +14,47 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : SetNbKronrodPoints
-//purpose  : 
+// function : SetNbKronrodPoints
+// purpose  :
 //=======================================================================
 
-inline void BRepGProp_TFunction::SetNbKronrodPoints
-                   (const Standard_Integer theNbPoints)
-{
-  myNbPntOuter = (theNbPoints%2 == 0) ? theNbPoints + 1 : theNbPoints;
-}
- 
-//=======================================================================
-//function : SetValueType
-//purpose  : 
-//=======================================================================
-
-inline void BRepGProp_TFunction::SetValueType(const GProp_ValueType theType)
-{
-  myValueType = theType;
-  myUFunction.SetValueType(myValueType);
+inline void BRepGProp_TFunction::SetNbKronrodPoints(const Standard_Integer theNbPoints) {
+    myNbPntOuter = (theNbPoints % 2 == 0) ? theNbPoints + 1 : theNbPoints;
 }
 
 //=======================================================================
-//function : SetTolerance
-//purpose  : 
+// function : SetValueType
+// purpose  :
 //=======================================================================
 
-inline void BRepGProp_TFunction::SetTolerance(const Standard_Real theTolerance)
-{
-  myTolerance = theTolerance;
+inline void BRepGProp_TFunction::SetValueType(const GProp_ValueType theType) {
+    myValueType = theType;
+    myUFunction.SetValueType(myValueType);
 }
 
 //=======================================================================
-//function : TolReached
-//purpose  : 
+// function : SetTolerance
+// purpose  :
 //=======================================================================
 
-inline Standard_Real BRepGProp_TFunction::ErrorReached() const
-{
-  return myErrReached;
+inline void BRepGProp_TFunction::SetTolerance(const Standard_Real theTolerance) {
+    myTolerance = theTolerance;
 }
 
 //=======================================================================
-//function : ErrorReached
-//purpose  : 
+// function : TolReached
+// purpose  :
 //=======================================================================
 
-inline Standard_Real BRepGProp_TFunction::AbsolutError() const
-{
-  return myAbsError;
+inline Standard_Real BRepGProp_TFunction::ErrorReached() const {
+    return myErrReached;
+}
+
+//=======================================================================
+// function : ErrorReached
+// purpose  :
+//=======================================================================
+
+inline Standard_Real BRepGProp_TFunction::AbsolutError() const {
+    return myAbsError;
 }

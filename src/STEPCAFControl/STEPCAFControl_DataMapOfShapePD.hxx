@@ -21,8 +21,9 @@
 #include <TopTools_ShapeMapHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<TopoDS_Shape,Handle(StepBasic_ProductDefinition),TopTools_ShapeMapHasher> STEPCAFControl_DataMapOfShapePD;
-typedef NCollection_DataMap<TopoDS_Shape,Handle(StepBasic_ProductDefinition),TopTools_ShapeMapHasher>::Iterator STEPCAFControl_DataMapIteratorOfDataMapOfShapePD;
-
+typedef NCollection_DataMap<TopoDS_Shape, Handle(StepBasic_ProductDefinition), TopTools_ShapeMapHasher>
+    STEPCAFControl_DataMapOfShapePD;
+typedef NCollection_DataMap<TopoDS_Shape, Handle(StepBasic_ProductDefinition), TopTools_ShapeMapHasher>::Iterator
+    STEPCAFControl_DataMapIteratorOfDataMapOfShapePD;
 
 #endif

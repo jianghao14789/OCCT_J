@@ -29,8 +29,8 @@
 
 class CSLib_NormalPolyDef : public math_FunctionWithDerivative {
 public:
-
-    DEFINE_STANDARD_ALLOC;;
+    DEFINE_STANDARD_ALLOC;
+    ;
 
     Standard_EXPORT CSLib_NormalPolyDef(const Standard_Integer k0, const TColStd_Array1OfReal& li);
 
@@ -52,12 +52,9 @@ public:
     Standard_EXPORT Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& D);
 
 protected:
-
 private:
-
     Standard_Integer myK0;
     TColStd_Array1OfReal myTABli;
-
 };
 
 #endif // _CSLib_NormalPolyDef_HeaderFile

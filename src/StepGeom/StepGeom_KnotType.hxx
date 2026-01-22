@@ -17,13 +17,11 @@
 #ifndef _StepGeom_KnotType_HeaderFile
 #define _StepGeom_KnotType_HeaderFile
 
-
-enum StepGeom_KnotType
-{
-StepGeom_ktUniformKnots,
-StepGeom_ktUnspecified,
-StepGeom_ktQuasiUniformKnots,
-StepGeom_ktPiecewiseBezierKnots
+enum StepGeom_KnotType {
+    StepGeom_ktUniformKnots,
+    StepGeom_ktUnspecified,
+    StepGeom_ktQuasiUniformKnots,
+    StepGeom_ktPiecewiseBezierKnots
 };
 
 #endif // _StepGeom_KnotType_HeaderFile

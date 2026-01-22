@@ -23,51 +23,30 @@
 #include <Standard_Transient.hxx>
 class TCollection_HAsciiString;
 
-
 class StepBasic_ContractType;
 DEFINE_STANDARD_HANDLE(StepBasic_ContractType, Standard_Transient)
 
 //! Representation of STEP entity ContractType
-class StepBasic_ContractType : public Standard_Transient
-{
+class StepBasic_ContractType : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_ContractType();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_ContractType();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aDescription);
-  
-  //! Returns field Description
-  Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
-  
-  //! Set field Description
-  Standard_EXPORT void SetDescription (const Handle(TCollection_HAsciiString)& Description);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aDescription);
 
+    //! Returns field Description
+    Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
 
+    //! Set field Description
+    Standard_EXPORT void SetDescription(const Handle(TCollection_HAsciiString) & Description);
 
-
-  DEFINE_STANDARD_RTTIEXT(StepBasic_ContractType,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(StepBasic_ContractType, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) theDescription;
-
-
+    Handle(TCollection_HAsciiString) theDescription;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_ContractType_HeaderFile

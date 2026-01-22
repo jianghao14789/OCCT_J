@@ -23,5 +23,4 @@
 
 typedef NCollection_IndexedMap<TopLoc_Location, TopLoc_MapLocationHasher> TopLoc_IndexedMapOfLocation;
 
-
 #endif

@@ -18,8 +18,7 @@
 #define _gp_TrsfForm_HeaderFile
 
 //! Identifies the type of a geometric transformation.
-enum gp_TrsfForm
-{
+enum gp_TrsfForm {
     gp_Identity,     //!< No transformation (matrix is identity)
     gp_Rotation,     //!< Rotation
     gp_Translation,  //!< Translation

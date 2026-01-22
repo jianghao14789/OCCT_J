@@ -20,22 +20,20 @@
 #include <TCollection_ExtendedString.hxx>
 
 #if defined(OCCT_UWP)
-  //
+//
 #elif defined(_WIN32)
-  //! 将消息严重级别转换为 EventLog 枚举
-  //! Convert message gravity into EventLog enumeration.
-static WORD getEventLogPriority(const Message_Gravity theGravity)
-{
-    switch (theGravity)
-    {
-    case Message_Alarm:
-    case Message_Fail:
-        return EVENTLOG_ERROR_TYPE;
-    case Message_Warning:
-        return EVENTLOG_WARNING_TYPE;
-    case Message_Info:
-    case Message_Trace:
-        return EVENTLOG_INFORMATION_TYPE;
+//! 将消息严重级别转换为 EventLog 枚举
+//! Convert message gravity into EventLog enumeration.
+static WORD getEventLogPriority(const Message_Gravity theGravity) {
+    switch (theGravity) {
+        case Message_Alarm:
+        case Message_Fail:
+            return EVENTLOG_ERROR_TYPE;
+        case Message_Warning:
+            return EVENTLOG_WARNING_TYPE;
+        case Message_Info:
+        case Message_Trace:
+            return EVENTLOG_INFORMATION_TYPE;
     }
     return EVENTLOG_INFORMATION_TYPE;
 }
@@ -44,15 +42,18 @@ static WORD getEventLogPriority(const Message_Gravity theGravity)
 
 //! 将消息严重级别转换为 Android 日志枚举
 //! Convert message gravity into Android log enumeration.
-static android_LogPriority getAndroidLogPriority(const Message_Gravity theGravity)
-{
-    switch (theGravity)
-    {
-    case Message_Trace:   return ANDROID_LOG_DEBUG;
-    case Message_Info:    return ANDROID_LOG_INFO;
-    case Message_Warning: return ANDROID_LOG_WARN;
-    case Message_Alarm:   return ANDROID_LOG_ERROR;
-    case Message_Fail:    return ANDROID_LOG_ERROR;
+static android_LogPriority getAndroidLogPriority(const Message_Gravity theGravity) {
+    switch (theGravity) {
+        case Message_Trace:
+            return ANDROID_LOG_DEBUG;
+        case Message_Info:
+            return ANDROID_LOG_INFO;
+        case Message_Warning:
+            return ANDROID_LOG_WARN;
+        case Message_Alarm:
+            return ANDROID_LOG_ERROR;
+        case Message_Fail:
+            return ANDROID_LOG_ERROR;
     }
     return ANDROID_LOG_DEBUG;
 }
@@ -61,41 +62,36 @@ static android_LogPriority getAndroidLogPriority(const Message_Gravity theGravit
 
 //! 将消息打印到 console.debug()
 //! Print message to console.debug().
-EM_JS(void, occJSConsoleDebug, (const char* theStr), {
-  console.debug(UTF8ToString(theStr));
-    });
+EM_JS(void, occJSConsoleDebug, (const char* theStr), { console.debug(UTF8ToString(theStr)); });
 
 //! 将消息打印到 console.info()
 //! Print message to console.info().
-EM_JS(void, occJSConsoleInfo, (const char* theStr), {
-  console.info(UTF8ToString(theStr));
-    });
+EM_JS(void, occJSConsoleInfo, (const char* theStr), { console.info(UTF8ToString(theStr)); });
 
 //! 将消息打印到 console.warn()
 //! Print message to console.warn().
-EM_JS(void, occJSConsoleWarn, (const char* theStr), {
-  console.warn(UTF8ToString(theStr));
-    });
+EM_JS(void, occJSConsoleWarn, (const char* theStr), { console.warn(UTF8ToString(theStr)); });
 
 //! 将消息打印到 console.error()
 //! Print message to console.error().
-EM_JS(void, occJSConsoleError, (const char* theStr), {
-  console.error(UTF8ToString(theStr));
-    });
+EM_JS(void, occJSConsoleError, (const char* theStr), { console.error(UTF8ToString(theStr)); });
 #else
 #include <syslog.h>
 
 //! 将消息严重级别转换为 syslog() 枚举
 //! Convert message gravity into syslog() enumeration.
-static int getSysLogPriority(const Message_Gravity theGravity)
-{
-    switch (theGravity)
-    {
-    case Message_Trace:   return LOG_DEBUG;
-    case Message_Info:    return LOG_INFO;
-    case Message_Warning: return LOG_WARNING;
-    case Message_Alarm:   return LOG_ERR;
-    case Message_Fail:    return LOG_ERR;
+static int getSysLogPriority(const Message_Gravity theGravity) {
+    switch (theGravity) {
+        case Message_Trace:
+            return LOG_DEBUG;
+        case Message_Info:
+            return LOG_INFO;
+        case Message_Warning:
+            return LOG_WARNING;
+        case Message_Alarm:
+            return LOG_ERR;
+        case Message_Fail:
+            return LOG_ERR;
     }
     return LOG_DEBUG;
 }
@@ -104,13 +100,12 @@ static int getSysLogPriority(const Message_Gravity theGravity)
 IMPLEMENT_STANDARD_RTTIEXT(Message_PrinterSystemLog, Message_Printer)
 
 //=======================================================================
-//function : Constructor
-//purpose  : 构造函数，初始化系统日志打印机
+// function : Constructor
+// purpose  : 构造函数，初始化系统日志打印机
 //=======================================================================
 Message_PrinterSystemLog::Message_PrinterSystemLog(const TCollection_AsciiString& theEventSourceName,
-    const Message_Gravity theTraceLevel)
-    : myEventSourceName(theEventSourceName)
-{
+                                                   const Message_Gravity theTraceLevel)
+    : myEventSourceName(theEventSourceName) {
     myTraceLevel = theTraceLevel;
 #if defined(OCCT_UWP)
     myEventSource = NULL;
@@ -127,14 +122,12 @@ Message_PrinterSystemLog::Message_PrinterSystemLog(const TCollection_AsciiString
 }
 
 //=======================================================================
-//function : ~Message_PrinterSystemLog
-//purpose  : 析构函数，清理资源
+// function : ~Message_PrinterSystemLog
+// purpose  : 析构函数，清理资源
 //=======================================================================
-Message_PrinterSystemLog::~Message_PrinterSystemLog()
-{
+Message_PrinterSystemLog::~Message_PrinterSystemLog() {
 #if defined(_WIN32)
-    if (myEventSource != NULL)
-    {
+    if (myEventSource != NULL) {
 #if !defined(OCCT_UWP)
         DeregisterEventSource((HANDLE)myEventSource);
 #endif
@@ -149,26 +142,21 @@ Message_PrinterSystemLog::~Message_PrinterSystemLog()
 }
 
 //=======================================================================
-//function : send
-//purpose  : 将消息发送到系统日志
+// function : send
+// purpose  : 将消息发送到系统日志
 //=======================================================================
-void Message_PrinterSystemLog::send(const TCollection_AsciiString& theString,
-    const Message_Gravity theGravity) const
-{
-    if (theGravity < myTraceLevel)
-    {
+void Message_PrinterSystemLog::send(const TCollection_AsciiString& theString, const Message_Gravity theGravity) const {
+    if (theGravity < myTraceLevel) {
         return;
     }
 
 #if defined(_WIN32)
-    if (myEventSource != NULL)
-    {
+    if (myEventSource != NULL) {
 #if !defined(OCCT_UWP)
         const TCollection_ExtendedString aWideString(theString);
         const WORD aLogType = getEventLogPriority(theGravity);
-        const wchar_t* aMessage[1] = { aWideString.ToWideString() };
-        ReportEventW((HANDLE)myEventSource, aLogType, 0, 0, NULL,
-            1, 0, aMessage, NULL);
+        const wchar_t* aMessage[1] = {aWideString.ToWideString()};
+        ReportEventW((HANDLE)myEventSource, aLogType, 0, 0, NULL, 1, 0, aMessage, NULL);
 #else
         (void)theString;
 #endif
@@ -178,13 +166,22 @@ void Message_PrinterSystemLog::send(const TCollection_AsciiString& theString,
 #elif defined(__EMSCRIPTEN__)
     // 不要使用虚假的 emscripten_log() 破坏 UNICODE 字符串
     // don't use bogus emscripten_log() corrupting UNICODE strings
-    switch (theGravity)
-    {
-    case Message_Trace:   occJSConsoleDebug(theString.ToCString()); return;
-    case Message_Info:    occJSConsoleInfo(theString.ToCString()); return;
-    case Message_Warning: occJSConsoleWarn(theString.ToCString()); return;
-    case Message_Alarm:   occJSConsoleError(theString.ToCString()); return;
-    case Message_Fail:    occJSConsoleError(theString.ToCString()); return;
+    switch (theGravity) {
+        case Message_Trace:
+            occJSConsoleDebug(theString.ToCString());
+            return;
+        case Message_Info:
+            occJSConsoleInfo(theString.ToCString());
+            return;
+        case Message_Warning:
+            occJSConsoleWarn(theString.ToCString());
+            return;
+        case Message_Alarm:
+            occJSConsoleError(theString.ToCString());
+            return;
+        case Message_Fail:
+            occJSConsoleError(theString.ToCString());
+            return;
     }
     occJSConsoleWarn(theString.ToCString());
 #else

@@ -28,44 +28,25 @@ class StepGeom_BezierCurveAndRationalBSplineCurve;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for BezierCurveAndRationalBSplineCurve
-class RWStepGeom_RWBezierCurveAndRationalBSplineCurve 
-{
+class RWStepGeom_RWBezierCurveAndRationalBSplineCurve {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWBezierCurveAndRationalBSplineCurve();
 
-  
-  Standard_EXPORT RWStepGeom_RWBezierCurveAndRationalBSplineCurve();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_BezierCurveAndRationalBSplineCurve)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_BezierCurveAndRationalBSplineCurve)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_BezierCurveAndRationalBSplineCurve)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepGeom_BezierCurveAndRationalBSplineCurve) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepGeom_BezierCurveAndRationalBSplineCurve) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepGeom_BezierCurveAndRationalBSplineCurve) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWBezierCurveAndRationalBSplineCurve_HeaderFile

@@ -17,27 +17,24 @@
 // function : SelectBasics_SelectingVolumeManager
 // purpose  :
 // =======================================================================
-SelectBasics_SelectingVolumeManager::SelectBasics_SelectingVolumeManager()
-{
-  //
+SelectBasics_SelectingVolumeManager::SelectBasics_SelectingVolumeManager() {
+    //
 }
 
 // =======================================================================
 // function : ~SelectBasics_SelectingVolumeManager
 // purpose  :
 // =======================================================================
-SelectBasics_SelectingVolumeManager::~SelectBasics_SelectingVolumeManager()
-{
-  //
+SelectBasics_SelectingVolumeManager::~SelectBasics_SelectingVolumeManager() {
+    //
 }
 
 // =======================================================================
 // function : Overlaps
 // purpose  :
 // =======================================================================
-Standard_Boolean SelectBasics_SelectingVolumeManager::Overlaps (const Handle(TColgp_HArray1OfPnt)& theArrayOfPts,
-                                                                Standard_Integer theSensType,
-                                                                SelectBasics_PickResult& thePickResult) const
-{
-  return OverlapsPolygon (theArrayOfPts->Array1(), theSensType, thePickResult);
+Standard_Boolean SelectBasics_SelectingVolumeManager::Overlaps(const Handle(TColgp_HArray1OfPnt) & theArrayOfPts,
+                                                               Standard_Integer theSensType,
+                                                               SelectBasics_PickResult& thePickResult) const {
+    return OverlapsPolygon(theArrayOfPts->Array1(), theSensType, thePickResult);
 }

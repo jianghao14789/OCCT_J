@@ -22,8 +22,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,TopOpeBRepDS_CheckStatus,TColStd_MapIntegerHasher> TopOpeBRepDS_DataMapOfCheckStatus;
-typedef NCollection_DataMap<Standard_Integer,TopOpeBRepDS_CheckStatus,TColStd_MapIntegerHasher>::Iterator TopOpeBRepDS_DataMapIteratorOfDataMapOfCheckStatus;
-
+typedef NCollection_DataMap<Standard_Integer, TopOpeBRepDS_CheckStatus, TColStd_MapIntegerHasher>
+    TopOpeBRepDS_DataMapOfCheckStatus;
+typedef NCollection_DataMap<Standard_Integer, TopOpeBRepDS_CheckStatus, TColStd_MapIntegerHasher>::Iterator
+    TopOpeBRepDS_DataMapIteratorOfDataMapOfCheckStatus;
 
 #endif

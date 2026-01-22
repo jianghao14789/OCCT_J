@@ -24,11 +24,10 @@
 #include <Standard_Integer.hxx>
 
 //! Data structure of a triangle.
-struct HLRAlgo_TriangleData
-{
-  DEFINE_STANDARD_ALLOC;
+struct HLRAlgo_TriangleData {
+    DEFINE_STANDARD_ALLOC;
 
-  Standard_Integer Node1, Node2, Node3, Flags;
+    Standard_Integer Node1, Node2, Node3, Flags;
 };
 
 #endif // _HLRAlgo_TriangleData_HeaderFile

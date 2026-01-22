@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes a shell which
 //! - references an underlying shell with the potential to
 //! be given a location and an orientation
@@ -31,38 +30,17 @@
 //! placement in the local coordinate system
 //! - has an orientation for the underlying shell, in terms
 //! of its geometry (as opposed to orientation in relation to other shapes).
-class TopoDS_Shell  : public TopoDS_Shape
-{
+class TopoDS_Shell : public TopoDS_Shape {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
-
-  
-  //! Constructs an Undefined Shell.
+    //! Constructs an Undefined Shell.
     TopoDS_Shell();
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
-
 #include <TopoDS_Shell.lxx>
-
-
-
-
 
 #endif // _TopoDS_Shell_HeaderFile

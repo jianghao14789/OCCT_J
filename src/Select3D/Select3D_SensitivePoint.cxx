@@ -16,44 +16,39 @@
 
 #include <Select3D_SensitivePoint.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Select3D_SensitivePoint,Select3D_SensitiveEntity)
+IMPLEMENT_STANDARD_RTTIEXT(Select3D_SensitivePoint, Select3D_SensitiveEntity)
 
 //==================================================
 // Function: Creation
 // Purpose :
 //==================================================
-Select3D_SensitivePoint::Select3D_SensitivePoint (const Handle(SelectMgr_EntityOwner)& theOwner,
-                                                  const gp_Pnt& thePoint)
-: Select3D_SensitiveEntity (theOwner)
-{
-  SetSensitivityFactor (12);
-  myPoint = thePoint;
+Select3D_SensitivePoint::Select3D_SensitivePoint(const Handle(SelectMgr_EntityOwner) & theOwner, const gp_Pnt& thePoint)
+    : Select3D_SensitiveEntity(theOwner) {
+    SetSensitivityFactor(12);
+    myPoint = thePoint;
 }
 
 //==================================================
 // Function: Matches
 // Purpose :
 //==================================================
-Standard_Boolean Select3D_SensitivePoint::Matches (SelectBasics_SelectingVolumeManager& theMgr,
-                                                   SelectBasics_PickResult& thePickResult)
-{
-  if (!theMgr.OverlapsPoint (myPoint, thePickResult))
-  {
-    return Standard_False;
-  }
+Standard_Boolean Select3D_SensitivePoint::Matches(SelectBasics_SelectingVolumeManager& theMgr,
+                                                  SelectBasics_PickResult& thePickResult) {
+    if (!theMgr.OverlapsPoint(myPoint, thePickResult)) {
+        return Standard_False;
+    }
 
-  thePickResult.SetDistToGeomCenter (thePickResult.Depth());
-  return Standard_True;
+    thePickResult.SetDistToGeomCenter(thePickResult.Depth());
+    return Standard_True;
 }
 
 //=======================================================================
-//function : GetConnected
-//purpose  :
+// function : GetConnected
+// purpose  :
 //=======================================================================
-Handle(Select3D_SensitiveEntity) Select3D_SensitivePoint::GetConnected()
-{
-  Handle(Select3D_SensitivePoint) aNewEntity = new Select3D_SensitivePoint (myOwnerId, myPoint);
-  return aNewEntity;
+Handle(Select3D_SensitiveEntity) Select3D_SensitivePoint::GetConnected() {
+    Handle(Select3D_SensitivePoint) aNewEntity = new Select3D_SensitivePoint(myOwnerId, myPoint);
+    return aNewEntity;
 }
 
 //=======================================================================
@@ -61,9 +56,8 @@ Handle(Select3D_SensitiveEntity) Select3D_SensitivePoint::GetConnected()
 // purpose  : Returns center of point. If location transformation
 //            is set, it will be applied
 //=======================================================================
-gp_Pnt Select3D_SensitivePoint::CenterOfGeometry() const
-{
-  return myPoint;
+gp_Pnt Select3D_SensitivePoint::CenterOfGeometry() const {
+    return myPoint;
 }
 
 //=======================================================================
@@ -71,27 +65,24 @@ gp_Pnt Select3D_SensitivePoint::CenterOfGeometry() const
 // purpose  : Returns bounding box of the point. If location
 //            transformation is set, it will be applied
 //=======================================================================
-Select3D_BndBox3d Select3D_SensitivePoint::BoundingBox()
-{
-  return Select3D_BndBox3d (SelectMgr_Vec3 (myPoint.X(), myPoint.Y(), myPoint.Z()),
-                            SelectMgr_Vec3 (myPoint.X(), myPoint.Y(), myPoint.Z()));
+Select3D_BndBox3d Select3D_SensitivePoint::BoundingBox() {
+    return Select3D_BndBox3d(SelectMgr_Vec3(myPoint.X(), myPoint.Y(), myPoint.Z()),
+                             SelectMgr_Vec3(myPoint.X(), myPoint.Y(), myPoint.Z()));
 }
 
 //=======================================================================
 // function : NbSubElements
 // purpose  : Returns the amount of sub-entities in sensitive
 //=======================================================================
-Standard_Integer Select3D_SensitivePoint::NbSubElements() const
-{
-  return 1;
+Standard_Integer Select3D_SensitivePoint::NbSubElements() const {
+    return 1;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  :
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void Select3D_SensitivePoint::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, Select3D_SensitiveEntity)
+void Select3D_SensitivePoint::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, Select3D_SensitiveEntity)
 }

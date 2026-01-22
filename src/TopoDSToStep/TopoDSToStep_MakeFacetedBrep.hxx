@@ -30,51 +30,26 @@ class TopoDS_Shell;
 class Transfer_FinderProcess;
 class TopoDS_Solid;
 
-
 //! This class implements the mapping between classes
 //! Shell or Solid from TopoDS and FacetedBrep from
 //! StepShape. All the topology and geometry comprised
 //! into the shell or the solid are taken into account and
 //! translated.
-class TopoDSToStep_MakeFacetedBrep  : public TopoDSToStep_Root
-{
+class TopoDSToStep_MakeFacetedBrep : public TopoDSToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT TopoDSToStep_MakeFacetedBrep(const TopoDS_Shell& S, const Handle(Transfer_FinderProcess) & FP,
+                                                 const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-  
-  Standard_EXPORT TopoDSToStep_MakeFacetedBrep(const TopoDS_Shell& S,
-                                               const Handle(Transfer_FinderProcess)& FP,
-                                               const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT TopoDSToStep_MakeFacetedBrep(const TopoDS_Solid& S,
-                                               const Handle(Transfer_FinderProcess)& FP,
-                                               const Message_ProgressRange& theProgress = Message_ProgressRange());
-  
-  Standard_EXPORT const Handle(StepShape_FacetedBrep)& Value() const;
+    Standard_EXPORT TopoDSToStep_MakeFacetedBrep(const TopoDS_Solid& S, const Handle(Transfer_FinderProcess) & FP,
+                                                 const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-
-
+    Standard_EXPORT const Handle(StepShape_FacetedBrep) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepShape_FacetedBrep) theFacetedBrep;
-
-
+    Handle(StepShape_FacetedBrep) theFacetedBrep;
 };
-
-
-
-
-
-
 
 #endif // _TopoDSToStep_MakeFacetedBrep_HeaderFile

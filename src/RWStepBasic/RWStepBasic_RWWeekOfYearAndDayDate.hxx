@@ -27,42 +27,21 @@ class Interface_Check;
 class StepBasic_WeekOfYearAndDayDate;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for WeekOfYearAndDayDate
-class RWStepBasic_RWWeekOfYearAndDayDate 
-{
+class RWStepBasic_RWWeekOfYearAndDayDate {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepBasic_RWWeekOfYearAndDayDate();
 
-  
-  Standard_EXPORT RWStepBasic_RWWeekOfYearAndDayDate();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepBasic_WeekOfYearAndDayDate)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepBasic_WeekOfYearAndDayDate)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepBasic_WeekOfYearAndDayDate) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepBasic_WeekOfYearAndDayDate) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepBasic_RWWeekOfYearAndDayDate_HeaderFile

@@ -29,10 +29,10 @@
 //! To avoid any problems with this, for better application portability it is recommended
 //! that the thread function returns just integer (casted to void*).
 //! This shall work on all platforms.
-typedef Standard_Address(*OSD_ThreadFunction) (Standard_Address data);
+typedef Standard_Address (*OSD_ThreadFunction)(Standard_Address data);
 
-//#ifdef _WIN32
-//typedef LPTHREAD_START_ROUTINE OSD_ThreadFunction;
-//#endif
+// #ifdef _WIN32
+// typedef LPTHREAD_START_ROUTINE OSD_ThreadFunction;
+// #endif
 
 #endif

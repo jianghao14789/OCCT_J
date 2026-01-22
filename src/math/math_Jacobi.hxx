@@ -30,8 +30,6 @@
 class StdFail_NotDone;
 class math_Matrix;
 
-
-
 //! This class implements the Jacobi method to find the eigenvalues and
 //! the eigenvectors of a real symmetric square matrix.
 //! A sort of eigenvalues is done.
@@ -70,30 +68,15 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Standard_Boolean Done;
     math_Matrix AA;
     Standard_Integer NbRotations;
     math_Vector EigenValues;
     math_Matrix EigenVectors;
-
-
 };
 
-
 #include <math_Jacobi.lxx>
-
 
 #endif // _math_Jacobi_HeaderFile

@@ -27,42 +27,21 @@ class Interface_Check;
 class StepShape_PrecisionQualifier;
 class StepData_StepWriter;
 
-
 //! Read & Write Module for PrecisionQualifier
-class RWStepShape_RWPrecisionQualifier 
-{
+class RWStepShape_RWPrecisionQualifier {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepShape_RWPrecisionQualifier();
 
-  
-  Standard_EXPORT RWStepShape_RWPrecisionQualifier();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepShape_PrecisionQualifier)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepShape_PrecisionQualifier)& ent) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepShape_PrecisionQualifier) & ent) const;
 
-
-
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepShape_PrecisionQualifier) & ent) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepShape_RWPrecisionQualifier_HeaderFile

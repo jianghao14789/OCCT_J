@@ -25,5 +25,4 @@
 typedef NCollection_List<Handle(TColStd_HArray1OfReal)> FEmTool_ListOfVectors;
 typedef NCollection_List<Handle(TColStd_HArray1OfReal)>::Iterator FEmTool_ListIteratorOfListOfVectors;
 
-
 #endif

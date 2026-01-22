@@ -22,8 +22,8 @@
 class Poly_CoherentTriangle;
 
 #ifdef _MSC_VER
-#pragma warning (push)
-#pragma warning(disable:4355) //'this' : used in base member initializer list
+#pragma warning(push)
+#pragma warning(disable : 4355) //'this' : used in base member initializer list
 #endif
 
 /**
@@ -31,8 +31,7 @@ class Poly_CoherentTriangle;
  * round double-linked list of these nodes.
  */
 
-class Poly_CoherentTriPtr
-{
+class Poly_CoherentTriPtr {
 public:
     /**
      * Iterator class for this list of triangles. Because the list is round,
@@ -42,44 +41,32 @@ public:
     class Iterator {
     public:
         //! Empty constructor
-        inline Iterator()
-            : myFirst(0L),
-            myCurrent(0L)
-        {
-        }
+        inline Iterator() : myFirst(0L), myCurrent(0L) {}
         //! Constructor
-        inline Iterator(const Poly_CoherentTriPtr& thePtr)
-            : myFirst(&thePtr),
-            myCurrent(&thePtr)
-        {
-        }
+        inline Iterator(const Poly_CoherentTriPtr& thePtr) : myFirst(&thePtr), myCurrent(&thePtr) {}
         //! Query the triangle that started the current iteration.
-        inline const Poly_CoherentTriangle* First() const
-        {
+        inline const Poly_CoherentTriangle* First() const {
             return myFirst ? &myFirst->GetTriangle() : 0L;
         }
         //! Query if there is available triangle pointer on this iteration
-        inline Standard_Boolean             More() const
-        {
+        inline Standard_Boolean More() const {
             return myCurrent != 0L;
         }
         //! Go to the next iteration.
-        Standard_EXPORT void                Next();
+        Standard_EXPORT void Next();
         //! Get the current iterated triangle
-        inline const Poly_CoherentTriangle& Value() const
-        {
+        inline const Poly_CoherentTriangle& Value() const {
             return myCurrent->GetTriangle();
         }
         //! Get the current iterated triangle (mutable)
-        inline Poly_CoherentTriangle& ChangeValue() const
-        {
+        inline Poly_CoherentTriangle& ChangeValue() const {
             return const_cast<Poly_CoherentTriangle&>(myCurrent->GetTriangle());
         }
         //! Get the current iterated pointer to triangle
-        inline const Poly_CoherentTriPtr& PtrValue() const
-        {
+        inline const Poly_CoherentTriPtr& PtrValue() const {
             return *myCurrent;
         }
+
     private:
         const Poly_CoherentTriPtr* myFirst;
         const Poly_CoherentTriPtr* myCurrent;
@@ -87,54 +74,42 @@ public:
 
     // ---------- PUBLIC METHODS ----------
 
-
     /**
      * Constructor.
      */
     inline Poly_CoherentTriPtr(const Poly_CoherentTriangle& theTri)
-        : mypTriangle(&theTri),
-        myNext(this),
-        myPrevious(this)
-    {
-    }
+        : mypTriangle(&theTri), myNext(this), myPrevious(this) {}
 
     /**
      * Operator new for dynamic allocations
      */
     DEFINE_NCOLLECTION_ALLOC
 
-        /**
-         * Query the stored pointer to Triangle.
-         */
-        inline const Poly_CoherentTriangle&
-        GetTriangle() const
-    {
+    /**
+     * Query the stored pointer to Triangle.
+     */
+    inline const Poly_CoherentTriangle& GetTriangle() const {
         return *mypTriangle;
     }
 
     /**
      * Initialize this instance with a pointer to triangle.
      */
-    inline void          SetTriangle(const Poly_CoherentTriangle* pTri)
-    {
+    inline void SetTriangle(const Poly_CoherentTriangle* pTri) {
         mypTriangle = pTri;
     }
 
     /**
      * Query the next pointer in the list.
      */
-    inline Poly_CoherentTriPtr&
-        Next() const
-    {
+    inline Poly_CoherentTriPtr& Next() const {
         return *myNext;
     }
 
     /**
      * Query the previous pointer in the list.
      */
-    inline Poly_CoherentTriPtr&
-        Previous() const
-    {
+    inline Poly_CoherentTriPtr& Previous() const {
         return *myPrevious;
     }
 
@@ -145,8 +120,7 @@ public:
      * @param theA
      *   Allocator where the new pointer instance is created.
      */
-    Standard_EXPORT void Append(const Poly_CoherentTriangle* pTri,
-        const Handle(NCollection_BaseAllocator)& theA);
+    Standard_EXPORT void Append(const Poly_CoherentTriangle* pTri, const Handle(NCollection_BaseAllocator) & theA);
 
     /**
      * Prepend a pointer to triangle into the list before the current instance.
@@ -155,8 +129,7 @@ public:
      * @param theA
      *   Allocator where the new pointer instance is created.
      */
-    Standard_EXPORT void Prepend(const Poly_CoherentTriangle* pTri,
-        const Handle(NCollection_BaseAllocator)& theA);
+    Standard_EXPORT void Prepend(const Poly_CoherentTriangle* pTri, const Handle(NCollection_BaseAllocator) & theA);
 
     /**
      * Remove a pointer to triangle from its list.
@@ -165,16 +138,12 @@ public:
      * @param theA
      *   Allocator where the current pointer instance was created.
      */
-    Standard_EXPORT static void
-        Remove(Poly_CoherentTriPtr* thePtr,
-            const Handle(NCollection_BaseAllocator)& theA);
+    Standard_EXPORT static void Remove(Poly_CoherentTriPtr* thePtr, const Handle(NCollection_BaseAllocator) & theA);
 
     /**
      * Remove the list containing the given pointer to triangle.
      */
-    Standard_EXPORT static void
-        RemoveList(Poly_CoherentTriPtr* thePtr,
-            const Handle(NCollection_BaseAllocator)&);
+    Standard_EXPORT static void RemoveList(Poly_CoherentTriPtr* thePtr, const Handle(NCollection_BaseAllocator) &);
 
 protected:
     // ---------- PROTECTED METHODS ----------
@@ -182,12 +151,7 @@ protected:
     /**
      * Constructor.
      */
-    inline Poly_CoherentTriPtr(const Poly_CoherentTriangle* pTri)
-        : mypTriangle(pTri),
-        myNext(this),
-        myPrevious(this)
-    {
-    }
+    inline Poly_CoherentTriPtr(const Poly_CoherentTriangle* pTri) : mypTriangle(pTri), myNext(this), myPrevious(this) {}
 
 private:
     // ---------- PRIVATE FIELDS ----------
@@ -200,7 +164,7 @@ private:
 };
 
 #ifdef _MSC_VER
-#pragma warning (pop)
+#pragma warning(pop)
 #endif
 
 #endif

@@ -12,24 +12,21 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//#include <BOPTools_SetMapHasher.ixx>
+// #include <BOPTools_SetMapHasher.ixx>
 
 //=======================================================================
 // function : HashCode
 // purpose  :
 //=======================================================================
-inline Standard_Integer BOPTools_SetMapHasher::HashCode (const BOPTools_Set&    theSet,
-                                                         const Standard_Integer theUpperBound)
-{
-  return theSet.HashCode (theUpperBound);
+inline Standard_Integer BOPTools_SetMapHasher::HashCode(const BOPTools_Set& theSet,
+                                                        const Standard_Integer theUpperBound) {
+    return theSet.HashCode(theUpperBound);
 }
 
 //=======================================================================
-//function :IsEqual
-//purpose  : 
+// function :IsEqual
+// purpose  :
 //=======================================================================
-inline Standard_Boolean BOPTools_SetMapHasher::IsEqual(const BOPTools_Set& theSS1,
-						       const BOPTools_Set& theSS2)
-{
-  return theSS1.IsEqual(theSS2);
+inline Standard_Boolean BOPTools_SetMapHasher::IsEqual(const BOPTools_Set& theSS1, const BOPTools_Set& theSS2) {
+    return theSS1.IsEqual(theSS2);
 }

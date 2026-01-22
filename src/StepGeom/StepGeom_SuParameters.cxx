@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:14 2020 
+// Created on : Sat May 02 12:41:14 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -19,158 +19,139 @@
 IMPLEMENT_STANDARD_RTTIEXT(StepGeom_SuParameters, StepGeom_GeometricRepresentationItem)
 
 //=======================================================================
-//function : StepGeom_SuParameters
-//purpose  : 
+// function : StepGeom_SuParameters
+// purpose  :
 //=======================================================================
 
-StepGeom_SuParameters::StepGeom_SuParameters ()
-{
+StepGeom_SuParameters::StepGeom_SuParameters() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepGeom_SuParameters::Init(const Handle(TCollection_HAsciiString) & theRepresentationItem_Name,
+                                 const Standard_Real theA, const Standard_Real theAlpha, const Standard_Real theB,
+                                 const Standard_Real theBeta, const Standard_Real theC, const Standard_Real theGamma) {
+    StepGeom_GeometricRepresentationItem::Init(theRepresentationItem_Name);
+
+    myA = theA;
+
+    myAlpha = theAlpha;
+
+    myB = theB;
+
+    myBeta = theBeta;
+
+    myC = theC;
+
+    myGamma = theGamma;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : A
+// purpose  :
 //=======================================================================
 
-void StepGeom_SuParameters::Init (const Handle(TCollection_HAsciiString)& theRepresentationItem_Name,
-                                        const Standard_Real theA,
-                                        const Standard_Real theAlpha,
-                                        const Standard_Real theB,
-                                        const Standard_Real theBeta,
-                                        const Standard_Real theC,
-                                        const Standard_Real theGamma)
-{
-  StepGeom_GeometricRepresentationItem::Init(theRepresentationItem_Name);
-
-  myA = theA;
-
-  myAlpha = theAlpha;
-
-  myB = theB;
-
-  myBeta = theBeta;
-
-  myC = theC;
-
-  myGamma = theGamma;
+Standard_Real StepGeom_SuParameters::A() const {
+    return myA;
 }
 
 //=======================================================================
-//function : A
-//purpose  : 
+// function : SetA
+// purpose  :
 //=======================================================================
 
-Standard_Real StepGeom_SuParameters::A () const
-{
-  return myA;
+void StepGeom_SuParameters::SetA(const Standard_Real theA) {
+    myA = theA;
 }
 
 //=======================================================================
-//function : SetA
-//purpose  : 
+// function : Alpha
+// purpose  :
 //=======================================================================
 
-void StepGeom_SuParameters::SetA (const Standard_Real theA)
-{
-  myA = theA;
+Standard_Real StepGeom_SuParameters::Alpha() const {
+    return myAlpha;
 }
 
 //=======================================================================
-//function : Alpha
-//purpose  : 
+// function : SetAlpha
+// purpose  :
 //=======================================================================
 
-Standard_Real StepGeom_SuParameters::Alpha () const
-{
-  return myAlpha;
+void StepGeom_SuParameters::SetAlpha(const Standard_Real theAlpha) {
+    myAlpha = theAlpha;
 }
 
 //=======================================================================
-//function : SetAlpha
-//purpose  : 
+// function : B
+// purpose  :
 //=======================================================================
 
-void StepGeom_SuParameters::SetAlpha (const Standard_Real theAlpha)
-{
-  myAlpha = theAlpha;
+Standard_Real StepGeom_SuParameters::B() const {
+    return myB;
 }
 
 //=======================================================================
-//function : B
-//purpose  : 
+// function : SetB
+// purpose  :
 //=======================================================================
 
-Standard_Real StepGeom_SuParameters::B () const
-{
-  return myB;
+void StepGeom_SuParameters::SetB(const Standard_Real theB) {
+    myB = theB;
 }
 
 //=======================================================================
-//function : SetB
-//purpose  : 
+// function : Beta
+// purpose  :
 //=======================================================================
 
-void StepGeom_SuParameters::SetB (const Standard_Real theB)
-{
-  myB = theB;
+Standard_Real StepGeom_SuParameters::Beta() const {
+    return myBeta;
 }
 
 //=======================================================================
-//function : Beta
-//purpose  : 
+// function : SetBeta
+// purpose  :
 //=======================================================================
 
-Standard_Real StepGeom_SuParameters::Beta () const
-{
-  return myBeta;
+void StepGeom_SuParameters::SetBeta(const Standard_Real theBeta) {
+    myBeta = theBeta;
 }
 
 //=======================================================================
-//function : SetBeta
-//purpose  : 
+// function : C
+// purpose  :
 //=======================================================================
 
-void StepGeom_SuParameters::SetBeta (const Standard_Real theBeta)
-{
-  myBeta = theBeta;
+Standard_Real StepGeom_SuParameters::C() const {
+    return myC;
 }
 
 //=======================================================================
-//function : C
-//purpose  : 
+// function : SetC
+// purpose  :
 //=======================================================================
 
-Standard_Real StepGeom_SuParameters::C () const
-{
-  return myC;
+void StepGeom_SuParameters::SetC(const Standard_Real theC) {
+    myC = theC;
 }
 
 //=======================================================================
-//function : SetC
-//purpose  : 
+// function : Gamma
+// purpose  :
 //=======================================================================
 
-void StepGeom_SuParameters::SetC (const Standard_Real theC)
-{
-  myC = theC;
+Standard_Real StepGeom_SuParameters::Gamma() const {
+    return myGamma;
 }
 
 //=======================================================================
-//function : Gamma
-//purpose  : 
+// function : SetGamma
+// purpose  :
 //=======================================================================
 
-Standard_Real StepGeom_SuParameters::Gamma () const
-{
-  return myGamma;
-}
-
-//=======================================================================
-//function : SetGamma
-//purpose  : 
-//=======================================================================
-
-void StepGeom_SuParameters::SetGamma (const Standard_Real theGamma)
-{
-  myGamma = theGamma;
+void StepGeom_SuParameters::SetGamma(const Standard_Real theGamma) {
+    myGamma = theGamma;
 }

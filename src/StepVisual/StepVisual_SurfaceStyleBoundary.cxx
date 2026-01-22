@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_CurveStyle.hxx>
 #include <StepVisual_SurfaceStyleBoundary.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleBoundary,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleBoundary, Standard_Transient)
 
-StepVisual_SurfaceStyleBoundary::StepVisual_SurfaceStyleBoundary ()  {}
+StepVisual_SurfaceStyleBoundary::StepVisual_SurfaceStyleBoundary() {}
 
-void StepVisual_SurfaceStyleBoundary::Init(
-	const Handle(StepVisual_CurveStyle)& aStyleOfBoundary)
-{
-	// --- classe own fields ---
-	styleOfBoundary = aStyleOfBoundary;
+void StepVisual_SurfaceStyleBoundary::Init(const Handle(StepVisual_CurveStyle) & aStyleOfBoundary) {
+    // --- classe own fields ---
+    styleOfBoundary = aStyleOfBoundary;
 }
 
-
-void StepVisual_SurfaceStyleBoundary::SetStyleOfBoundary(const Handle(StepVisual_CurveStyle)& aStyleOfBoundary)
-{
-	styleOfBoundary = aStyleOfBoundary;
+void StepVisual_SurfaceStyleBoundary::SetStyleOfBoundary(const Handle(StepVisual_CurveStyle) & aStyleOfBoundary) {
+    styleOfBoundary = aStyleOfBoundary;
 }
 
-Handle(StepVisual_CurveStyle) StepVisual_SurfaceStyleBoundary::StyleOfBoundary() const
-{
-	return styleOfBoundary;
+Handle(StepVisual_CurveStyle) StepVisual_SurfaceStyleBoundary::StyleOfBoundary() const {
+    return styleOfBoundary;
 }

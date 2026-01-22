@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom2d_Ellipse.hxx>
 #include <Geom_Ellipse.hxx>
 #include <GeomToStep_MakeAxis2Placement2d.hxx>
@@ -32,59 +31,51 @@
 //=============================================================================
 // Creation d'une ellipse de prostep a partir d'une ellipse 3d de gp
 //=============================================================================
-GeomToStep_MakeEllipse::GeomToStep_MakeEllipse( const gp_Elips& E)
-{
+GeomToStep_MakeEllipse::GeomToStep_MakeEllipse(const gp_Elips& E) {
 #include "GeomToStep_MakeEllipse_gen.pxx"
 }
-
 
 //=============================================================================
 // Creation d'une ellipse de prostep a partir d'une ellipse de
 // Geom
 //=============================================================================
 
-GeomToStep_MakeEllipse::GeomToStep_MakeEllipse( const Handle(Geom_Ellipse)& Cer)
-{
-  gp_Elips E;
-  E = Cer->Elips();
+GeomToStep_MakeEllipse::GeomToStep_MakeEllipse(const Handle(Geom_Ellipse) & Cer) {
+    gp_Elips E;
+    E = Cer->Elips();
 #include "GeomToStep_MakeEllipse_gen.pxx"
 }
-
 
 //=============================================================================
 // Creation d'une ellipse 2d de prostep a partir d'une ellipse de
 // Geom2d
 //=============================================================================
 
-GeomToStep_MakeEllipse::GeomToStep_MakeEllipse( const Handle(Geom2d_Ellipse)& Cer)
-{
-  gp_Elips2d E2d;
-  E2d = Cer->Elips2d();
+GeomToStep_MakeEllipse::GeomToStep_MakeEllipse(const Handle(Geom2d_Ellipse) & Cer) {
+    gp_Elips2d E2d;
+    E2d = Cer->Elips2d();
 
-  Handle(StepGeom_Ellipse) EStep = new StepGeom_Ellipse;
-  StepGeom_Axis2Placement Ax2;
-  Handle(StepGeom_Axis2Placement2d) Ax2Step;
-  Standard_Real majorR, minorR;
-  
-  GeomToStep_MakeAxis2Placement2d MkAxis2(E2d.Axis());
-  Ax2Step = MkAxis2.Value();
-  majorR = E2d.MajorRadius();
-  minorR = E2d.MinorRadius();
-  Ax2.SetValue(Ax2Step);
-  Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
-  EStep->Init(name, Ax2, majorR, minorR);
-  theEllipse = EStep;
-  done = Standard_True;
+    Handle(StepGeom_Ellipse) EStep = new StepGeom_Ellipse;
+    StepGeom_Axis2Placement Ax2;
+    Handle(StepGeom_Axis2Placement2d) Ax2Step;
+    Standard_Real majorR, minorR;
 
+    GeomToStep_MakeAxis2Placement2d MkAxis2(E2d.Axis());
+    Ax2Step = MkAxis2.Value();
+    majorR = E2d.MajorRadius();
+    minorR = E2d.MinorRadius();
+    Ax2.SetValue(Ax2Step);
+    Handle(TCollection_HAsciiString) name = new TCollection_HAsciiString("");
+    EStep->Init(name, Ax2, majorR, minorR);
+    theEllipse = EStep;
+    done = Standard_True;
 }
 
 //=============================================================================
 // renvoi des valeurs
 //=============================================================================
 
-const Handle(StepGeom_Ellipse) &
-      GeomToStep_MakeEllipse::Value() const
-{
-  StdFail_NotDone_Raise_if (!done, "GeomToStep_MakeEllipse::Value() - no result");
-  return theEllipse;
+const Handle(StepGeom_Ellipse) & GeomToStep_MakeEllipse::Value() const {
+    StdFail_NotDone_Raise_if(!done, "GeomToStep_MakeEllipse::Value() - no result");
+    return theEllipse;
 }

@@ -15,11 +15,10 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : Extrema
-//purpose  : 
+// function : Extrema
+// purpose  :
 //=======================================================================
 
-inline const Extrema_ExtPC2d& Geom2dAPI_ProjectPointOnCurve::Extrema() const
-{
-  return myExtPC;
+inline const Extrema_ExtPC2d& Geom2dAPI_ProjectPointOnCurve::Extrema() const {
+    return myExtPC;
 }

@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr_FunctionDerivative.hxx>
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_GeneralFunction.hxx>
@@ -31,8 +30,8 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_FunctionDerivative, Expr_GeneralFunction)
 
-Expr_FunctionDerivative::Expr_FunctionDerivative(const Handle(Expr_GeneralFunction)& func, const Handle(Expr_NamedUnknown)& withX, const Standard_Integer deg)
-{
+Expr_FunctionDerivative::Expr_FunctionDerivative(const Handle(Expr_GeneralFunction) & func,
+                                                 const Handle(Expr_NamedUnknown) & withX, const Standard_Integer deg) {
     myFunction = func;
     myDerivate = withX;
     if (deg <= 0) {
@@ -42,36 +41,32 @@ Expr_FunctionDerivative::Expr_FunctionDerivative(const Handle(Expr_GeneralFuncti
     UpdateExpression();
 }
 
-Standard_Integer Expr_FunctionDerivative::NbOfVariables() const
-{
+Standard_Integer Expr_FunctionDerivative::NbOfVariables() const {
     return myFunction->NbOfVariables();
 }
 
-Handle(Expr_NamedUnknown) Expr_FunctionDerivative::Variable(const Standard_Integer index) const
-{
+Handle(Expr_NamedUnknown) Expr_FunctionDerivative::Variable(const Standard_Integer index) const {
     return myFunction->Variable(index);
 }
 
-Standard_Real Expr_FunctionDerivative::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& values) const
-{
+Standard_Real Expr_FunctionDerivative::Evaluate(const Expr_Array1OfNamedUnknown& vars,
+                                                const TColStd_Array1OfReal& values) const {
     if (vars.Length() != values.Length()) {
         throw Standard_OutOfRange();
     }
     return myExp->Evaluate(vars, values);
 }
 
-Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Copy() const
-{
+Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Copy() const {
     return new Expr_FunctionDerivative(myFunction->Copy(), myDerivate, myDegree);
 }
 
-Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Derivative(const Handle(Expr_NamedUnknown)& var) const
-{
+Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Derivative(const Handle(Expr_NamedUnknown) & var) const {
     return Derivative(var, 1);
 }
 
-Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Derivative(const Handle(Expr_NamedUnknown)& var, const Standard_Integer deg) const
-{
+Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Derivative(const Handle(Expr_NamedUnknown) & var,
+                                                                 const Standard_Integer deg) const {
     if (var == myDerivate) {
         return new Expr_FunctionDerivative(myFunction, var, myDegree + deg);
     }
@@ -79,8 +74,7 @@ Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Derivative(const Handle(Ex
     return new Expr_FunctionDerivative(me, var, deg);
 }
 
-Standard_Boolean Expr_FunctionDerivative::IsIdentical(const Handle(Expr_GeneralFunction)& func) const
-{
+Standard_Boolean Expr_FunctionDerivative::IsIdentical(const Handle(Expr_GeneralFunction) & func) const {
     if (!func->IsKind(STANDARD_TYPE(Expr_FunctionDerivative))) {
         return Standard_False;
     }
@@ -97,30 +91,24 @@ Standard_Boolean Expr_FunctionDerivative::IsIdentical(const Handle(Expr_GeneralF
     return Standard_True;
 }
 
-Standard_Boolean Expr_FunctionDerivative::IsLinearOnVariable(const Standard_Integer) const
-{
+Standard_Boolean Expr_FunctionDerivative::IsLinearOnVariable(const Standard_Integer) const {
     // should be improved
     return myExp->IsLinear();
 }
 
-Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Function() const
-{
+Handle(Expr_GeneralFunction) Expr_FunctionDerivative::Function() const {
     return myFunction;
 }
 
-Standard_Integer Expr_FunctionDerivative::Degree() const
-{
+Standard_Integer Expr_FunctionDerivative::Degree() const {
     return myDegree;
 }
 
-Handle(Expr_NamedUnknown) Expr_FunctionDerivative::DerivVariable() const
-{
+Handle(Expr_NamedUnknown) Expr_FunctionDerivative::DerivVariable() const {
     return myDerivate;
 }
 
-
-TCollection_AsciiString Expr_FunctionDerivative::GetStringName() const
-{
+TCollection_AsciiString Expr_FunctionDerivative::GetStringName() const {
     TCollection_AsciiString res;
     if (NbOfVariables() == 1) {
         res = myFunction->GetStringName();
@@ -150,20 +138,16 @@ TCollection_AsciiString Expr_FunctionDerivative::GetStringName() const
     return res;
 }
 
-
-Handle(Expr_GeneralExpression) Expr_FunctionDerivative::Expression() const
-{
+Handle(Expr_GeneralExpression) Expr_FunctionDerivative::Expression() const {
     return myExp;
 }
 
-void Expr_FunctionDerivative::UpdateExpression()
-{
+void Expr_FunctionDerivative::UpdateExpression() {
     if (myFunction->IsKind(STANDARD_TYPE(Expr_FunctionDerivative))) {
         Handle(Expr_FunctionDerivative) defunc = Handle(Expr_FunctionDerivative)::DownCast(myFunction);
         defunc->UpdateExpression();
         myExp = defunc->Expression()->NDerivative(myDerivate, myDegree);
-    }
-    else {
+    } else {
         Handle(Expr_NamedFunction) nafunc = Handle(Expr_NamedFunction)::DownCast(myFunction);
         myExp = nafunc->Expression()->NDerivative(myDerivate, myDegree);
     }

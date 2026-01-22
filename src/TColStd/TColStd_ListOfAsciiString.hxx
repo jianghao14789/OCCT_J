@@ -21,5 +21,4 @@
 typedef NCollection_List<TCollection_AsciiString> TColStd_ListOfAsciiString;
 typedef NCollection_List<TCollection_AsciiString>::Iterator TColStd_ListIteratorOfListOfAsciiString;
 
-
 #endif

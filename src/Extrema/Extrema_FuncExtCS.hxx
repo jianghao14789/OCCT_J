@@ -36,12 +36,10 @@ class math_Matrix;
 class Extrema_POnCurv;
 class Extrema_POnSurf;
 
-
 //! Function to find extrema of the
 //! distance between a curve and a surface.
 class Extrema_FuncExtCS : public math_FunctionSetWithDerivatives {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     Standard_EXPORT Extrema_FuncExtCS();
@@ -80,23 +78,19 @@ public:
     Standard_EXPORT const Extrema_POnSurf& PointOnSurface(const Standard_Integer N) const;
 
     //! Change Sequence of SquareDistance
-    TColStd_SequenceOfReal& SquareDistances()
-    {
+    TColStd_SequenceOfReal& SquareDistances() {
         return mySqDist;
     }
     //! Change Sequence of PointOnCurv
-    Extrema_SequenceOfPOnCurv& PointsOnCurve()
-    {
+    Extrema_SequenceOfPOnCurv& PointsOnCurve() {
         return myPoint1;
     }
     //! Change Sequence of PointOnSurf
-    Extrema_SequenceOfPOnSurf& PointsOnSurf()
-    {
+    Extrema_SequenceOfPOnSurf& PointsOnSurf() {
         return myPoint2;
     }
 
 private:
-
     const Adaptor3d_Curve* myC;
     const Adaptor3d_Surface* myS;
     gp_Pnt myP1;
@@ -109,7 +103,6 @@ private:
     Extrema_SequenceOfPOnSurf myPoint2;
     Standard_Boolean myCinit;
     Standard_Boolean mySinit;
-
 };
 
 #endif // _Extrema_FuncExtCS_HeaderFile

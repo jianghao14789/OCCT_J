@@ -27,48 +27,29 @@ class StepRepr_QuantifiedAssemblyComponentUsage;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for QuantifiedAssemblyComponentUsage
-class RWStepRepr_RWQuantifiedAssemblyComponentUsage 
-{
+class RWStepRepr_RWQuantifiedAssemblyComponentUsage {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWQuantifiedAssemblyComponentUsage();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWQuantifiedAssemblyComponentUsage();
-  
-  //! Reads QuantifiedAssemblyComponentUsage
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_QuantifiedAssemblyComponentUsage)& ent) const;
-  
-  //! Writes QuantifiedAssemblyComponentUsage
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_QuantifiedAssemblyComponentUsage)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepRepr_QuantifiedAssemblyComponentUsage)& ent, Interface_EntityIterator& iter) const;
+    //! Reads QuantifiedAssemblyComponentUsage
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_QuantifiedAssemblyComponentUsage) & ent) const;
 
+    //! Writes QuantifiedAssemblyComponentUsage
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_QuantifiedAssemblyComponentUsage) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_QuantifiedAssemblyComponentUsage) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWQuantifiedAssemblyComponentUsage_HeaderFile

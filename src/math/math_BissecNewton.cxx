@@ -12,43 +12,29 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <math_BissecNewton.hxx>
 #include <math_FunctionWithDerivative.hxx>
 #include <StdFail_NotDone.hxx>
 
 //=======================================================================
-//function : math_BissecNewton
-//purpose  : Constructor
+// function : math_BissecNewton
+// purpose  : Constructor
 //=======================================================================
 math_BissecNewton::math_BissecNewton(const Standard_Real theXTolerance)
-    : TheStatus(math_NotBracketed),
-    XTol(theXTolerance),
-    x(0.0),
-    dx(0.0),
-    f(0.0),
-    df(0.0),
-    Done(Standard_False)
-{
-}
+    : TheStatus(math_NotBracketed), XTol(theXTolerance), x(0.0), dx(0.0), f(0.0), df(0.0), Done(Standard_False) {}
 
 //=======================================================================
-//function : ~math_BissecNewton
-//purpose  : Destructor
+// function : ~math_BissecNewton
+// purpose  : Destructor
 //=======================================================================
-math_BissecNewton::~math_BissecNewton()
-{
-}
+math_BissecNewton::~math_BissecNewton() {}
 
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
-void math_BissecNewton::Perform(math_FunctionWithDerivative& F,
-    const Standard_Real    Bound1,
-    const Standard_Real    Bound2,
-    const Standard_Integer NbIterations)
-{
+void math_BissecNewton::Perform(math_FunctionWithDerivative& F, const Standard_Real Bound1, const Standard_Real Bound2,
+                                const Standard_Integer NbIterations) {
     Standard_Boolean GOOD;
     Standard_Integer j;
     Standard_Real dxold, fh, fl;
@@ -79,8 +65,7 @@ void math_BissecNewton::Perform(math_FunctionWithDerivative& F,
     if (fl < -aFTol || (fl < aFTol && fh < -aFTol)) {
         xl = Bound1;
         xh = Bound2;
-    }
-    else {
+    } else {
         xl = Bound2;
         xh = Bound1;
         swap = fl;
@@ -98,8 +83,7 @@ void math_BissecNewton::Perform(math_FunctionWithDerivative& F,
         return;
     }
     for (j = 1; j <= NbIterations; j++) {
-        if ((((x - xh) * df - f) * ((x - xl) * df - f) >= 0.0)
-            || (fabs(2.0 * f) > fabs(dxold * df))) {
+        if ((((x - xh) * df - f) * ((x - xl) * df - f) >= 0.0) || (fabs(2.0 * f) > fabs(dxold * df))) {
             dxold = dx;
             dx = 0.5 * (xh - xl);
             x = xl + dx;
@@ -108,8 +92,7 @@ void math_BissecNewton::Perform(math_FunctionWithDerivative& F,
                 Done = Standard_True;
                 return;
             }
-        }
-        else {
+        } else {
             dxold = dx;
             dx = f / df;
             temp = x;
@@ -134,12 +117,10 @@ void math_BissecNewton::Perform(math_FunctionWithDerivative& F,
         if (f < 0.0) {
             xl = x;
             fl = f;
-        }
-        else if (f > 0.0) {
+        } else if (f > 0.0) {
             xh = x;
             fh = f;
-        }
-        else {
+        } else {
             TheStatus = math_OK;
             Done = Standard_True;
             return;
@@ -151,8 +132,8 @@ void math_BissecNewton::Perform(math_FunctionWithDerivative& F,
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 void math_BissecNewton::Dump(Standard_OStream& o) const {
 
@@ -161,9 +142,7 @@ void math_BissecNewton::Dump(Standard_OStream& o) const {
         o << " Status = Done \n";
         o << " The Root  is: " << x << std::endl;
         o << " The value at this Root is: " << f << std::endl;
-    }
-    else {
+    } else {
         o << " Status = not Done \n";
     }
 }
-

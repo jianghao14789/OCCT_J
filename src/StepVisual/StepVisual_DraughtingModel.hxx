@@ -21,41 +21,20 @@
 
 #include <StepRepr_Representation.hxx>
 
-
 class StepVisual_DraughtingModel;
 DEFINE_STANDARD_HANDLE(StepVisual_DraughtingModel, StepRepr_Representation)
 
 //! Representation of STEP entity DraughtingModel
-class StepVisual_DraughtingModel : public StepRepr_Representation
-{
+class StepVisual_DraughtingModel : public StepRepr_Representation {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepVisual_DraughtingModel();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepVisual_DraughtingModel();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepVisual_DraughtingModel,StepRepr_Representation)
+    DEFINE_STANDARD_RTTIEXT(StepVisual_DraughtingModel, StepRepr_Representation)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepVisual_DraughtingModel_HeaderFile

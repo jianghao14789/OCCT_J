@@ -22,8 +22,8 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,TopoDS_Shape,TColStd_MapIntegerHasher> TopTools_DataMapOfIntegerShape;
-typedef NCollection_DataMap<Standard_Integer,TopoDS_Shape,TColStd_MapIntegerHasher>::Iterator TopTools_DataMapIteratorOfDataMapOfIntegerShape;
-
+typedef NCollection_DataMap<Standard_Integer, TopoDS_Shape, TColStd_MapIntegerHasher> TopTools_DataMapOfIntegerShape;
+typedef NCollection_DataMap<Standard_Integer, TopoDS_Shape, TColStd_MapIntegerHasher>::Iterator
+    TopTools_DataMapIteratorOfDataMapOfIntegerShape;
 
 #endif

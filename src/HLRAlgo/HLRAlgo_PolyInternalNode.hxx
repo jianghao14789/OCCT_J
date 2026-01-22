@@ -26,55 +26,43 @@
 #include <gp_XYZ.hxx>
 #include <gp_XY.hxx>
 
-
 class HLRAlgo_PolyInternalNode;
 DEFINE_STANDARD_HANDLE(HLRAlgo_PolyInternalNode, Standard_Transient)
 
 //! to Update OutLines.
-class HLRAlgo_PolyInternalNode : public Standard_Transient
-{
+class HLRAlgo_PolyInternalNode : public Standard_Transient {
 public:
-  struct NodeIndices
-  {
-    Standard_Integer NdSg, Flag, Edg1, Edg2;
-  };
+    struct NodeIndices {
+        Standard_Integer NdSg, Flag, Edg1, Edg2;
+    };
 
-  struct NodeData
-  {
-    NodeData()
-    : PCu1(0.0),
-      PCu2(0.0),
-      Scal(0.0)
-    {
+    struct NodeData {
+        NodeData() : PCu1(0.0), PCu2(0.0), Scal(0.0) {}
+        gp_XYZ Point, Normal;
+        gp_XY UV;
+        Standard_Real PCu1, PCu2, Scal;
+    };
+
+    HLRAlgo_PolyInternalNode() {
+        myIndices.NdSg = 0;
+        myIndices.Flag = 0;
+        myIndices.Edg1 = 0;
+        myIndices.Edg2 = 0;
     }
-    gp_XYZ Point, Normal;
-    gp_XY UV;
-    Standard_Real PCu1, PCu2, Scal;
-  };
 
-  HLRAlgo_PolyInternalNode()
-  {
-    myIndices.NdSg = 0;
-    myIndices.Flag = 0;
-    myIndices.Edg1 = 0;
-    myIndices.Edg2 = 0;
-  }
+    NodeIndices& Indices() {
+        return myIndices;
+    }
 
-  NodeIndices& Indices()
-  {
-    return myIndices;
-  }
+    NodeData& Data() {
+        return myData;
+    }
 
-  NodeData& Data()
-  {
-    return myData;
-  }
-
-  DEFINE_STANDARD_RTTIEXT(HLRAlgo_PolyInternalNode,Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(HLRAlgo_PolyInternalNode, Standard_Transient)
 
 private:
-  NodeIndices myIndices;
-  NodeData myData;
+    NodeIndices myIndices;
+    NodeData myData;
 };
 
 #endif // _HLRAlgo_PolyInternalNode_HeaderFile

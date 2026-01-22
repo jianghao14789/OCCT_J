@@ -21,41 +21,20 @@
 
 #include <StepFEA_Node.hxx>
 
-
 class StepFEA_NodeWithSolutionCoordinateSystem;
 DEFINE_STANDARD_HANDLE(StepFEA_NodeWithSolutionCoordinateSystem, StepFEA_Node)
 
 //! Representation of STEP entity NodeWithSolutionCoordinateSystem
-class StepFEA_NodeWithSolutionCoordinateSystem : public StepFEA_Node
-{
+class StepFEA_NodeWithSolutionCoordinateSystem : public StepFEA_Node {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepFEA_NodeWithSolutionCoordinateSystem();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepFEA_NodeWithSolutionCoordinateSystem();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepFEA_NodeWithSolutionCoordinateSystem,StepFEA_Node)
+    DEFINE_STANDARD_RTTIEXT(StepFEA_NodeWithSolutionCoordinateSystem, StepFEA_Node)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepFEA_NodeWithSolutionCoordinateSystem_HeaderFile

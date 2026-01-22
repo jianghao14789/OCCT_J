@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <CDM_Application.hxx>
 #include <CDM_Document.hxx>
 #include <CDM_MetaData.hxx>
@@ -26,127 +25,112 @@
 #include <Message.hxx>
 #include <Message_Messenger.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(CDM_Application,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(CDM_Application, Standard_Transient)
 
 //=======================================================================
-//function : Constructor
-//purpose  : 
+// function : Constructor
+// purpose  :
 //=======================================================================
-CDM_Application::CDM_Application()
-{
-  myMessenger = new Message_Messenger;
+CDM_Application::CDM_Application() {
+    myMessenger = new Message_Messenger;
 }
 //=======================================================================
-//function : SetDocumentVersion
-//purpose  : 
+// function : SetDocumentVersion
+// purpose  :
 //=======================================================================
-void CDM_Application::SetDocumentVersion
-                        (const Handle(CDM_Document)& aDocument,
-                         const Handle(CDM_MetaData)& aMetaData) const
-{
-  aDocument->SetModifications(aMetaData->DocumentVersion(this));
+void CDM_Application::SetDocumentVersion(const Handle(CDM_Document) & aDocument,
+                                         const Handle(CDM_MetaData) & aMetaData) const {
+    aDocument->SetModifications(aMetaData->DocumentVersion(this));
 }
 
 //=======================================================================
-//function : SetReferenceCounter
-//purpose  : 
+// function : SetReferenceCounter
+// purpose  :
 //=======================================================================
 
-void CDM_Application::SetReferenceCounter
-                        (const Handle(CDM_Document)& aDocument,
-                         const Standard_Integer aReferenceCounter)
-{
-  aDocument->SetReferenceCounter(aReferenceCounter);
+void CDM_Application::SetReferenceCounter(const Handle(CDM_Document) & aDocument,
+                                          const Standard_Integer aReferenceCounter) {
+    aDocument->SetReferenceCounter(aReferenceCounter);
 }
 
 //=======================================================================
-//function : MessageDriver
-//purpose  : 
+// function : MessageDriver
+// purpose  :
 //=======================================================================
 
-Handle(Message_Messenger) CDM_Application::MessageDriver()
-{
-  return myMessenger;
+Handle(Message_Messenger) CDM_Application::MessageDriver() {
+    return myMessenger;
 }
 
 //=======================================================================
-//function : Write
-//purpose  : 
+// function : Write
+// purpose  :
 //=======================================================================
 
-void CDM_Application::Write(const Standard_ExtString aString)
-{
-  MessageDriver()->Send(aString);
+void CDM_Application::Write(const Standard_ExtString aString) {
+    MessageDriver()->Send(aString);
 }
 
 //=======================================================================
-//function : BeginOfUpdate
-//purpose  : 
+// function : BeginOfUpdate
+// purpose  :
 //=======================================================================
 
-void CDM_Application::BeginOfUpdate (const Handle(CDM_Document)& /*aDocument*/)
-{
-  TCollection_ExtendedString updating("Updating: ");
-  updating += "Document";
-  Write(updating.ToExtString());
+void CDM_Application::BeginOfUpdate(const Handle(CDM_Document) & /*aDocument*/) {
+    TCollection_ExtendedString updating("Updating: ");
+    updating += "Document";
+    Write(updating.ToExtString());
 }
 
 //=======================================================================
-//function : EndOfUpdate
-//purpose  : 
+// function : EndOfUpdate
+// purpose  :
 //=======================================================================
 
-void CDM_Application::EndOfUpdate
-                        (const Handle(CDM_Document)&       /*aDocument*/,
-                         const Standard_Boolean            theStatus,
-                         const TCollection_ExtendedString& /*ErrorString*/)
-{
-  TCollection_ExtendedString message;
-  if (theStatus)
-    message="Updated: ";
-  else
-    message="Error during updating: ";
-      
-  message+="Document";
-  Write(message.ToExtString());
+void CDM_Application::EndOfUpdate(const Handle(CDM_Document) & /*aDocument*/, const Standard_Boolean theStatus,
+                                  const TCollection_ExtendedString& /*ErrorString*/) {
+    TCollection_ExtendedString message;
+    if (theStatus)
+        message = "Updated: ";
+    else
+        message = "Error during updating: ";
+
+    message += "Document";
+    Write(message.ToExtString());
 }
 
 //=======================================================================
-//function : Name
-//purpose  : returns the application name
+// function : Name
+// purpose  : returns the application name
 //=======================================================================
 
-TCollection_ExtendedString CDM_Application::Name() const
-{
-  // Default: empty
-  return TCollection_ExtendedString();
+TCollection_ExtendedString CDM_Application::Name() const {
+    // Default: empty
+    return TCollection_ExtendedString();
 }
 
 //=======================================================================
-//function : Version
-//purpose  : returns the application version
+// function : Version
+// purpose  : returns the application version
 //=======================================================================
 
-TCollection_AsciiString CDM_Application::Version() const
-{
-  // Default: empty
-  return TCollection_AsciiString();
+TCollection_AsciiString CDM_Application::Version() const {
+    // Default: empty
+    return TCollection_AsciiString();
 }
 
 //=======================================================================
-//function : MetaDataLookUpTable
-//purpose  : returns the MetaData LookUpTable
+// function : MetaDataLookUpTable
+// purpose  : returns the MetaData LookUpTable
 //=======================================================================
-CDM_MetaDataLookUpTable& CDM_Application::MetaDataLookUpTable()
-{
-  return myMetaDataLookUpTable;
+CDM_MetaDataLookUpTable& CDM_Application::MetaDataLookUpTable() {
+    return myMetaDataLookUpTable;
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : DumpJson
+// purpose  :
 //=======================================================================
-void CDM_Application::DumpJson (Standard_OStream& theOStream, Standard_Integer /*theDepth*/) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
+void CDM_Application::DumpJson(Standard_OStream& theOStream, Standard_Integer /*theDepth*/) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
 }

@@ -28,13 +28,10 @@
 #include <Standard_ConstructionError.hxx>
 
 //=======================================================================
-//function : gp_Lin2d
-//purpose  : 
+// function : gp_Lin2d
+// purpose  :
 //=======================================================================
-gp_Lin2d::gp_Lin2d(const Standard_Real A,
-    const Standard_Real B,
-    const Standard_Real C)
-{
+gp_Lin2d::gp_Lin2d(const Standard_Real A, const Standard_Real B, const Standard_Real C) {
     const Standard_Real Norm2 = A * A + B * B;
     Standard_ConstructionError_Raise_if(Norm2 <= gp::Resolution(), " ");
     const gp_Pnt2d P(-A * C / Norm2, -B * C / Norm2);
@@ -56,46 +53,41 @@ gp_Lin2d::gp_Lin2d(const Standard_Real A,
 }
 
 //=======================================================================
-//function : Mirror
-//purpose  : 
+// function : Mirror
+// purpose  :
 //=======================================================================
 
-void gp_Lin2d::Mirror(const gp_Pnt2d& P)
-{
+void gp_Lin2d::Mirror(const gp_Pnt2d& P) {
     pos.Mirror(P);
 }
 
 //=======================================================================
-//function : Mirrored
-//purpose  : 
+// function : Mirrored
+// purpose  :
 //=======================================================================
 
-gp_Lin2d gp_Lin2d::Mirrored(const gp_Pnt2d& P)  const
-{
+gp_Lin2d gp_Lin2d::Mirrored(const gp_Pnt2d& P) const {
     gp_Lin2d L = *this;
     L.pos.Mirror(P);
     return L;
 }
 
 //=======================================================================
-//function : Mirror
-//purpose  : 
+// function : Mirror
+// purpose  :
 //=======================================================================
 
-void gp_Lin2d::Mirror(const gp_Ax2d& A)
-{
+void gp_Lin2d::Mirror(const gp_Ax2d& A) {
     pos.Mirror(A);
 }
 
 //=======================================================================
-//function : Mirrored
-//purpose  : 
+// function : Mirrored
+// purpose  :
 //=======================================================================
 
-gp_Lin2d gp_Lin2d::Mirrored(const gp_Ax2d& A) const
-{
+gp_Lin2d gp_Lin2d::Mirrored(const gp_Ax2d& A) const {
     gp_Lin2d L = *this;
     L.pos.Mirror(A);
     return L;
 }
-

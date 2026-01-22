@@ -27,12 +27,10 @@
 #include <math_Vector.hxx>
 class math_Matrix;
 
-
 //! This abstract class describes the virtual functions associated
 //! with a set of N Functions each of M independent variables.
 class math_FunctionSetWithDerivatives : public math_FunctionSet {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Returns the number of variables of the function.
@@ -60,9 +58,7 @@ public:
     Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D) = 0;
 
 protected:
-
 private:
-
 };
 
 #endif // _math_FunctionSetWithDerivatives_HeaderFile

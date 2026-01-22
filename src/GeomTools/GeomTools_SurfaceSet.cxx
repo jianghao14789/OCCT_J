@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom_BezierSurface.hxx>
 #include <Geom_BSplineSurface.hxx>
 #include <Geom_ConicalSurface.hxx>
@@ -47,84 +46,68 @@
 #include <TColStd_Array1OfReal.hxx>
 #include <TColStd_Array2OfReal.hxx>
 
-#define PLANE           1
-#define CYLINDER        2
-#define CONE            3
-#define SPHERE          4
-#define TORUS           5
+#define PLANE 1
+#define CYLINDER 2
+#define CONE 3
+#define SPHERE 4
+#define TORUS 5
 #define LINEAREXTRUSION 6
-#define REVOLUTION      7
-#define BEZIER          8
-#define BSPLINE         9
-#define RECTANGULAR     10
-#define OFFSET          11
+#define REVOLUTION 7
+#define BEZIER 8
+#define BSPLINE 9
+#define RECTANGULAR 10
+#define OFFSET 11
 
 //=======================================================================
-//function : GeomTools_SurfaceSet
-//purpose  : 
+// function : GeomTools_SurfaceSet
+// purpose  :
 //=======================================================================
 
-GeomTools_SurfaceSet::GeomTools_SurfaceSet()
-{
-}
-
+GeomTools_SurfaceSet::GeomTools_SurfaceSet() {}
 
 //=======================================================================
-//function : Clear
-//purpose  : 
+// function : Clear
+// purpose  :
 //=======================================================================
 
-void  GeomTools_SurfaceSet::Clear()
-{
+void GeomTools_SurfaceSet::Clear() {
     myMap.Clear();
 }
 
-
 //=======================================================================
-//function : Add
-//purpose  : 
+// function : Add
+// purpose  :
 //=======================================================================
 
-Standard_Integer  GeomTools_SurfaceSet::Add(const Handle(Geom_Surface)& S)
-{
+Standard_Integer GeomTools_SurfaceSet::Add(const Handle(Geom_Surface) & S) {
     return myMap.Add(S);
 }
 
-
 //=======================================================================
-//function : Surface
-//purpose  : 
+// function : Surface
+// purpose  :
 //=======================================================================
 
-Handle(Geom_Surface)  GeomTools_SurfaceSet::Surface
-(const Standard_Integer I)const
-{
-    if (I <= 0 || I > myMap.Extent())
-        return Handle(Geom_Surface)();
+Handle(Geom_Surface) GeomTools_SurfaceSet::Surface(const Standard_Integer I) const {
+    if (I <= 0 || I > myMap.Extent()) return Handle(Geom_Surface)();
     return Handle(Geom_Surface)::DownCast(myMap(I));
 }
 
-
 //=======================================================================
-//function : Index
-//purpose  : 
+// function : Index
+// purpose  :
 //=======================================================================
 
-Standard_Integer  GeomTools_SurfaceSet::Index
-(const Handle(Geom_Surface)& S)const
-{
+Standard_Integer GeomTools_SurfaceSet::Index(const Handle(Geom_Surface) & S) const {
     return myMap.FindIndex(S);
 }
 
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const gp_Pnt P,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const gp_Pnt P, Standard_OStream& OS, const Standard_Boolean compact) {
     OS << P.X();
     if (!compact) OS << ",";
     OS << " ";
@@ -136,14 +119,11 @@ static void Print(const gp_Pnt P,
 }
 
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const gp_Dir D,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const gp_Dir D, Standard_OStream& OS, const Standard_Boolean compact) {
     OS << D.X();
     if (!compact) OS << ",";
     OS << " ";
@@ -155,14 +135,11 @@ static void Print(const gp_Dir D,
 }
 
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_Plane)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_Plane) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << PLANE << " ";
     else
@@ -181,16 +158,12 @@ static void Print(const Handle(Geom_Plane)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_CylindricalSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_CylindricalSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << CYLINDER << " ";
     else
@@ -211,16 +184,12 @@ static void Print(const Handle(Geom_CylindricalSurface)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_ConicalSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_ConicalSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << CONE << " ";
     else
@@ -244,16 +213,12 @@ static void Print(const Handle(Geom_ConicalSurface)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_SphericalSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_SphericalSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << SPHERE << " ";
     else
@@ -274,16 +239,12 @@ static void Print(const Handle(Geom_SphericalSurface)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_ToroidalSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_ToroidalSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << TORUS << " ";
     else
@@ -304,16 +265,13 @@ static void Print(const Handle(Geom_ToroidalSurface)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_SurfaceOfLinearExtrusion)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_SurfaceOfLinearExtrusion) & S, Standard_OStream& OS,
+                  const Standard_Boolean compact) {
     if (compact)
         OS << LINEAREXTRUSION << " ";
     else
@@ -326,16 +284,12 @@ static void Print(const Handle(Geom_SurfaceOfLinearExtrusion)& S,
     GeomTools_CurveSet::PrintCurve(S->BasisCurve(), OS, compact);
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_SurfaceOfRevolution)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_SurfaceOfRevolution) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << REVOLUTION << " ";
     else
@@ -350,44 +304,35 @@ static void Print(const Handle(Geom_SurfaceOfRevolution)& S,
     GeomTools_CurveSet::PrintCurve(S->BasisCurve(), OS, compact);
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_BezierSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_BezierSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << BEZIER << " ";
     else
         OS << "BezierSurface";
-
 
     Standard_Boolean urational = S->IsURational();
     Standard_Boolean vrational = S->IsVRational();
     if (compact)
         OS << (urational ? 1 : 0) << " ";
     else {
-        if (urational)
-            OS << " urational";
+        if (urational) OS << " urational";
     }
     if (compact)
         OS << (vrational ? 1 : 0) << " ";
     else {
-        if (vrational)
-            OS << " vrational";
+        if (vrational) OS << " vrational";
     }
 
     if (!compact) {
         Standard_Boolean uclosed = S->IsUClosed();
         Standard_Boolean vclosed = S->IsVClosed();
-        if (uclosed)
-            OS << " uclosed";
-        if (vclosed)
-            OS << " vclosed";
+        if (uclosed) OS << " uclosed";
+        if (vclosed) OS << " vclosed";
     }
 
     // poles and weights
@@ -401,10 +346,8 @@ static void Print(const Handle(Geom_BezierSurface)& S,
         for (j = 1; j <= vdegree + 1; j++) {
             if (!compact) OS << "\n  " << std::setw(2) << i << ", " << std::setw(2) << j << " : ";
             Print(S->Pole(i, j), OS, compact);
-            if (urational || vrational)
-                OS << " " << S->Weight(i, j);
-            if (compact)
-                OS << " ";
+            if (urational || vrational) OS << " " << S->Weight(i, j);
+            if (compact) OS << " ";
         }
         OS << "\n";
     }
@@ -412,16 +355,12 @@ static void Print(const Handle(Geom_BezierSurface)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_BSplineSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_BSplineSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << BSPLINE << " ";
     else
@@ -432,14 +371,12 @@ static void Print(const Handle(Geom_BSplineSurface)& S,
     if (compact)
         OS << (urational ? 1 : 0) << " ";
     else {
-        if (urational)
-            OS << " urational";
+        if (urational) OS << " urational";
     }
     if (compact)
         OS << (vrational ? 1 : 0) << " ";
     else {
-        if (vrational)
-            OS << " vrational";
+        if (vrational) OS << " vrational";
     }
 
     Standard_Boolean uperiodic = S->IsUPeriodic();
@@ -447,25 +384,20 @@ static void Print(const Handle(Geom_BSplineSurface)& S,
     if (compact)
         OS << (uperiodic ? 1 : 0) << " ";
     else {
-        if (uperiodic)
-            OS << " uperiodic";
+        if (uperiodic) OS << " uperiodic";
     }
     if (compact)
         OS << (vperiodic ? 1 : 0) << " ";
     else {
-        if (vperiodic)
-            OS << " vperiodic";
+        if (vperiodic) OS << " vperiodic";
     }
 
     if (!compact) {
         Standard_Boolean uclosed = S->IsUClosed();
         Standard_Boolean vclosed = S->IsVClosed();
-        if (uclosed)
-            OS << " uclosed";
-        if (vclosed)
-            OS << " vclosed";
+        if (uclosed) OS << " uclosed";
+        if (vclosed) OS << " vclosed";
     }
-
 
     // poles and weights
     Standard_Integer i, j, udegree, vdegree, nbupoles, nbvpoles, nbuknots, nbvknots;
@@ -487,10 +419,8 @@ static void Print(const Handle(Geom_BSplineSurface)& S,
         for (j = 1; j <= nbvpoles; j++) {
             if (!compact) OS << "\n  " << std::setw(2) << i << ", " << std::setw(2) << j << " : ";
             Print(S->Pole(i, j), OS, compact);
-            if (urational || vrational)
-                OS << " " << S->Weight(i, j);
-            if (compact)
-                OS << " ";
+            if (urational || vrational) OS << " " << S->Weight(i, j);
+            if (compact) OS << " ";
         }
         OS << "\n";
     }
@@ -510,16 +440,13 @@ static void Print(const Handle(Geom_BSplineSurface)& S,
     if (!compact) OS << "\n";
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_RectangularTrimmedSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_RectangularTrimmedSurface) & S, Standard_OStream& OS,
+                  const Standard_Boolean compact) {
     if (compact)
         OS << RECTANGULAR << " ";
     else
@@ -533,16 +460,12 @@ static void Print(const Handle(Geom_RectangularTrimmedSurface)& S,
     GeomTools_SurfaceSet::PrintSurface(S->BasisSurface(), OS, compact);
 }
 
-
 //=======================================================================
-//function : Print
-//purpose  : 
+// function : Print
+// purpose  :
 //=======================================================================
 
-static void Print(const Handle(Geom_OffsetSurface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+static void Print(const Handle(Geom_OffsetSurface) & S, Standard_OStream& OS, const Standard_Boolean compact) {
     if (compact)
         OS << OFFSET << " ";
     else
@@ -554,67 +477,52 @@ static void Print(const Handle(Geom_OffsetSurface)& S,
     GeomTools_SurfaceSet::PrintSurface(S->BasisSurface(), OS, compact);
 }
 
-
 //=======================================================================
-//function : PrintSurface
-//purpose  : 
+// function : PrintSurface
+// purpose  :
 //=======================================================================
 
-void GeomTools_SurfaceSet::PrintSurface(const Handle(Geom_Surface)& S,
-    Standard_OStream& OS,
-    const Standard_Boolean compact)
-{
+void GeomTools_SurfaceSet::PrintSurface(const Handle(Geom_Surface) & S, Standard_OStream& OS,
+                                        const Standard_Boolean compact) {
     Handle(Standard_Type) TheType = S->DynamicType();
 
     if (TheType == STANDARD_TYPE(Geom_Plane)) {
         Print(Handle(Geom_Plane)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_CylindricalSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_CylindricalSurface)) {
         Print(Handle(Geom_CylindricalSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_ConicalSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_ConicalSurface)) {
         Print(Handle(Geom_ConicalSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_SphericalSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_SphericalSurface)) {
         Print(Handle(Geom_SphericalSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_ToroidalSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_ToroidalSurface)) {
         Print(Handle(Geom_ToroidalSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
+    } else if (TheType == STANDARD_TYPE(Geom_SurfaceOfLinearExtrusion)) {
         Print(Handle(Geom_SurfaceOfLinearExtrusion)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_SurfaceOfRevolution)) {
+    } else if (TheType == STANDARD_TYPE(Geom_SurfaceOfRevolution)) {
         Print(Handle(Geom_SurfaceOfRevolution)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_BezierSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_BezierSurface)) {
         Print(Handle(Geom_BezierSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_BSplineSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_BSplineSurface)) {
         Print(Handle(Geom_BSplineSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_RectangularTrimmedSurface)) {
         Print(Handle(Geom_RectangularTrimmedSurface)::DownCast(S), OS, compact);
-    }
-    else if (TheType == STANDARD_TYPE(Geom_OffsetSurface)) {
+    } else if (TheType == STANDARD_TYPE(Geom_OffsetSurface)) {
         Print(Handle(Geom_OffsetSurface)::DownCast(S), OS, compact);
-    }
-    else {
+    } else {
         GeomTools::GetUndefinedTypeHandler()->PrintSurface(S, OS, compact);
-        //if (!compact)
-        //  OS << "***** Unknown Surface ********\n";
-        //else
-        //  std::cout << "***** Unknown Surface ********"<<std::endl;
+        // if (!compact)
+        //   OS << "***** Unknown Surface ********\n";
+        // else
+        //   std::cout << "***** Unknown Surface ********"<<std::endl;
     }
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Dump
+// purpose  :
 //=======================================================================
 
-void  GeomTools_SurfaceSet::Dump(Standard_OStream& OS)const
-{
+void GeomTools_SurfaceSet::Dump(Standard_OStream& OS) const {
     Standard_Integer i, nbsurf = myMap.Extent();
     OS << "\n -------\n";
     OS << "Dump of " << nbsurf << " surfaces ";
@@ -626,15 +534,13 @@ void  GeomTools_SurfaceSet::Dump(Standard_OStream& OS)const
     }
 }
 
-
 //=======================================================================
-//function : Write
-//purpose  : 
+// function : Write
+// purpose  :
 //=======================================================================
 
-void  GeomTools_SurfaceSet::Write(Standard_OStream& OS, const Message_ProgressRange& theProgress)const
-{
-    std::streamsize  prec = OS.precision(17);
+void GeomTools_SurfaceSet::Write(Standard_OStream& OS, const Message_ProgressRange& theProgress) const {
+    std::streamsize prec = OS.precision(17);
 
     Standard_Integer i, nbsurf = myMap.Extent();
     OS << "Surfaces " << nbsurf << "\n";
@@ -645,14 +551,12 @@ void  GeomTools_SurfaceSet::Write(Standard_OStream& OS, const Message_ProgressRa
     OS.precision(prec);
 }
 
-
 //=======================================================================
-//function : ReadPnt
-//purpose  : 
+// function : ReadPnt
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS, gp_Pnt& P)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, gp_Pnt& P) {
     Standard_Real X = 0., Y = 0., Z = 0.;
     GeomTools::GetReal(IS, X);
     GeomTools::GetReal(IS, Y);
@@ -662,12 +566,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS, gp_Pnt& P)
 }
 
 //=======================================================================
-//function : ReadDir
-//purpose  : 
+// function : ReadDir
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS, gp_Dir& D)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, gp_Dir& D) {
     Standard_Real X = 0., Y = 0., Z = 0.;
     GeomTools::GetReal(IS, X);
     GeomTools::GetReal(IS, Y);
@@ -677,31 +580,26 @@ static Standard_IStream& operator>>(Standard_IStream& IS, gp_Dir& D)
 }
 
 //=======================================================================
-//function : ReadAx3
-//purpose  : 
+// function : ReadAx3
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS, gp_Ax3& A3)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, gp_Ax3& A3) {
     gp_Pnt P(0., 0., 0.);
     gp_Dir A(1., 0., 0.), AX(1., 0., 0.), AY(1., 0., 0.);
     IS >> P >> A >> AX >> AY;
     gp_Ax3 ax3(P, A, AX);
-    if (AY.DotCross(A, AX) < 0)
-        ax3.YReverse();
+    if (AY.DotCross(A, AX) < 0) ax3.YReverse();
     A3 = ax3;
     return IS;
 }
 
-
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_Plane)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_Plane) & S) {
     gp_Ax3 A;
     IS >> A;
     S = new Geom_Plane(A);
@@ -709,13 +607,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_CylindricalSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_CylindricalSurface) & S) {
     gp_Ax3 A;
     Standard_Real R = 0.;
     IS >> A;
@@ -725,13 +621,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_ConicalSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_ConicalSurface) & S) {
     gp_Ax3 A;
     Standard_Real R = 0., Ang = 0.;
     IS >> A;
@@ -742,13 +636,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_SphericalSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_SphericalSurface) & S) {
     gp_Ax3 A;
     Standard_Real R = 0.;
     IS >> A;
@@ -758,13 +650,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_ToroidalSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_ToroidalSurface) & S) {
     gp_Ax3 A;
     Standard_Real R1 = 0., R2 = 0.;
     IS >> A;
@@ -775,13 +665,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_SurfaceOfLinearExtrusion)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_SurfaceOfLinearExtrusion) & S) {
     gp_Dir D(1., 0., 0.);
     IS >> D;
     Handle(Geom_Curve) C = GeomTools_CurveSet::ReadCurve(IS);
@@ -790,13 +678,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_SurfaceOfRevolution)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_SurfaceOfRevolution) & S) {
     gp_Pnt P(0., 0., 0.);
     gp_Dir D(1., 0., 0.);
     IS >> P >> D;
@@ -806,13 +692,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_BezierSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_BezierSurface) & S) {
     Standard_Boolean urational = Standard_False, vrational = Standard_False;
     IS >> urational >> vrational;
     Standard_Integer udegree = 0, vdegree = 0;
@@ -824,8 +708,7 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
     for (i = 1; i <= udegree + 1; i++) {
         for (j = 1; j <= vdegree + 1; j++) {
             IS >> poles(i, j);
-            if (urational || vrational)
-                GeomTools::GetReal(IS, weights(i, j));
+            if (urational || vrational) GeomTools::GetReal(IS, weights(i, j));
         }
     }
 
@@ -837,15 +720,13 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_BSplineSurface)& S)
-{
-    Standard_Boolean urational = Standard_False, vrational = Standard_False,
-        uperiodic = Standard_False, vperiodic = Standard_False;
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_BSplineSurface) & S) {
+    Standard_Boolean urational = Standard_False, vrational = Standard_False, uperiodic = Standard_False,
+                     vperiodic = Standard_False;
     IS >> urational >> vrational;
     IS >> uperiodic >> vperiodic;
     Standard_Integer udegree = 0, vdegree = 0, nbupoles = 0, nbvpoles = 0, nbuknots = 0, nbvknots = 0;
@@ -860,8 +741,7 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
     for (i = 1; i <= nbupoles; i++) {
         for (j = 1; j <= nbvpoles; j++) {
             IS >> poles(i, j);
-            if (urational || vrational)
-                GeomTools::GetReal(IS, weights(i, j));
+            if (urational || vrational) GeomTools::GetReal(IS, weights(i, j));
         }
     }
 
@@ -880,22 +760,19 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
     }
 
     if (urational || vrational)
-        S = new Geom_BSplineSurface(poles, weights, uknots, vknots, umults, vmults,
-            udegree, vdegree, uperiodic, vperiodic);
+        S = new Geom_BSplineSurface(poles, weights, uknots, vknots, umults, vmults, udegree, vdegree, uperiodic,
+                                    vperiodic);
     else
-        S = new Geom_BSplineSurface(poles, uknots, vknots, umults, vmults,
-            udegree, vdegree, uperiodic, vperiodic);
+        S = new Geom_BSplineSurface(poles, uknots, vknots, umults, vmults, udegree, vdegree, uperiodic, vperiodic);
     return IS;
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_RectangularTrimmedSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_RectangularTrimmedSurface) & S) {
     Standard_Real U1 = 0., U2 = 0., V1 = 0., V2 = 0.;
     GeomTools::GetReal(IS, U1);
     GeomTools::GetReal(IS, U2);
@@ -907,13 +784,11 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
 }
 
 //=======================================================================
-//function : operator>>
-//purpose  : 
+// function : operator>>
+// purpose  :
 //=======================================================================
 
-static Standard_IStream& operator>>(Standard_IStream& IS,
-    Handle(Geom_OffsetSurface)& S)
-{
+static Standard_IStream& operator>>(Standard_IStream& IS, Handle(Geom_OffsetSurface) & S) {
     Standard_Real O = 0.;
     GeomTools::GetReal(IS, O);
     Handle(Geom_Surface) BS = GeomTools_SurfaceSet::ReadSurface(IS);
@@ -921,120 +796,93 @@ static Standard_IStream& operator>>(Standard_IStream& IS,
     return IS;
 }
 
-
 //=======================================================================
-//function : ReadSurface
-//purpose  : 
+// function : ReadSurface
+// purpose  :
 //=======================================================================
 
-Handle(Geom_Surface) GeomTools_SurfaceSet::ReadSurface(Standard_IStream& IS)
-{
+Handle(Geom_Surface) GeomTools_SurfaceSet::ReadSurface(Standard_IStream& IS) {
     Standard_Integer stype;
 
     Handle(Geom_Surface) S;
     try {
         OCC_CATCH_SIGNALS
-            IS >> stype;
+        IS >> stype;
         switch (stype) {
 
-        case PLANE:
-        {
-            Handle(Geom_Plane) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case PLANE: {
+                Handle(Geom_Plane) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case CYLINDER:
-        {
-            Handle(Geom_CylindricalSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case CYLINDER: {
+                Handle(Geom_CylindricalSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case CONE:
-        {
-            Handle(Geom_ConicalSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case CONE: {
+                Handle(Geom_ConicalSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case SPHERE:
-        {
-            Handle(Geom_SphericalSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case SPHERE: {
+                Handle(Geom_SphericalSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case TORUS:
-        {
-            Handle(Geom_ToroidalSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case TORUS: {
+                Handle(Geom_ToroidalSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case LINEAREXTRUSION:
-        {
-            Handle(Geom_SurfaceOfLinearExtrusion) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case LINEAREXTRUSION: {
+                Handle(Geom_SurfaceOfLinearExtrusion) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case REVOLUTION:
-        {
-            Handle(Geom_SurfaceOfRevolution) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case REVOLUTION: {
+                Handle(Geom_SurfaceOfRevolution) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case BEZIER:
-        {
-            Handle(Geom_BezierSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case BEZIER: {
+                Handle(Geom_BezierSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case BSPLINE:
-        {
-            Handle(Geom_BSplineSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case BSPLINE: {
+                Handle(Geom_BSplineSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case RECTANGULAR:
-        {
-            Handle(Geom_RectangularTrimmedSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case RECTANGULAR: {
+                Handle(Geom_RectangularTrimmedSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        case OFFSET:
-        {
-            Handle(Geom_OffsetSurface) SS;
-            IS >> SS;
-            S = SS;
-        }
-        break;
+            case OFFSET: {
+                Handle(Geom_OffsetSurface) SS;
+                IS >> SS;
+                S = SS;
+            } break;
 
-        default:
-        {
-            Handle(Geom_Surface) SS;
-            GeomTools::GetUndefinedTypeHandler()->ReadSurface(stype, IS, SS);
-            S = SS;
+            default: {
+                Handle(Geom_Surface) SS;
+                GeomTools::GetUndefinedTypeHandler()->ReadSurface(stype, IS, SS);
+                S = SS;
+            } break;
         }
-        break;
-        }
-    }
-    catch (Standard_Failure const& anException) {
+    } catch (Standard_Failure const& anException) {
 #ifdef OCCT_DEBUG
         std::cout << "EXCEPTION in GeomTools_SurfaceSet::ReadSurface(..)!!!" << std::endl;
         std::cout << anException << std::endl;
@@ -1045,12 +893,11 @@ Handle(Geom_Surface) GeomTools_SurfaceSet::ReadSurface(Standard_IStream& IS)
 }
 
 //=======================================================================
-//function : Read
-//purpose  : 
+// function : Read
+// purpose  :
 //=======================================================================
 
-void  GeomTools_SurfaceSet::Read(Standard_IStream& IS, const Message_ProgressRange& theProgress)
-{
+void GeomTools_SurfaceSet::Read(Standard_IStream& IS, const Message_ProgressRange& theProgress) {
     char buffer[255];
     IS >> buffer;
     if (strcmp(buffer, "Surfaces")) {

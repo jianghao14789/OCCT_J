@@ -28,26 +28,23 @@ class StepVisual_SurfaceStyleReflectanceAmbient;
 class StepVisual_SurfaceStyleTransparent;
 
 //! Representation of STEP SELECT type RenderingPropertiesSelect
-class StepVisual_RenderingPropertiesSelect : public StepData_SelectType
-{
+class StepVisual_RenderingPropertiesSelect : public StepData_SelectType {
 
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT StepVisual_RenderingPropertiesSelect();
 
-  //! Empty constructor
-  Standard_EXPORT StepVisual_RenderingPropertiesSelect();
+    //! Recognizes a kind of RenderingPropertiesSelect select type
+    //! -- 1 -> SurfaceStyleReflectanceAmbient
+    //! -- 2 -> SurfaceStyleTransparent
+    Standard_EXPORT Standard_Integer CaseNum(const Handle(Standard_Transient) & ent) const Standard_OVERRIDE;
 
-  //! Recognizes a kind of RenderingPropertiesSelect select type
-  //! -- 1 -> SurfaceStyleReflectanceAmbient
-  //! -- 2 -> SurfaceStyleTransparent
-  Standard_EXPORT Standard_Integer CaseNum (const Handle(Standard_Transient)& ent) const Standard_OVERRIDE;
+    //! Returns Value as SurfaceStyleReflectanceAmbient (or Null if another type)
+    Standard_EXPORT Handle(StepVisual_SurfaceStyleReflectanceAmbient) SurfaceStyleReflectanceAmbient() const;
 
-  //! Returns Value as SurfaceStyleReflectanceAmbient (or Null if another type)
-  Standard_EXPORT Handle(StepVisual_SurfaceStyleReflectanceAmbient) SurfaceStyleReflectanceAmbient() const;
-
-  //! Returns Value as SurfaceStyleTransparent (or Null if another type)
-  Standard_EXPORT Handle(StepVisual_SurfaceStyleTransparent) SurfaceStyleTransparent() const;
-
+    //! Returns Value as SurfaceStyleTransparent (or Null if another type)
+    Standard_EXPORT Handle(StepVisual_SurfaceStyleTransparent) SurfaceStyleTransparent() const;
 };
 #endif // _StepVisual_RenderingPropertiesSelect_HeaderFile

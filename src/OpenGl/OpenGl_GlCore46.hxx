@@ -17,20 +17,17 @@
 #include <OpenGl_GlCore45.hxx>
 
 //! OpenGL 4.6 definition.
-struct OpenGl_GlCore46 : public OpenGl_GlCore45
-{
+struct OpenGl_GlCore46 : public OpenGl_GlCore45 {
 private:
-  typedef OpenGl_GlCore45 theBaseClass_t;
+    typedef OpenGl_GlCore45 theBaseClass_t;
 
 public: //! @name OpenGL 4.6 additives to 4.5
-
 #if !defined(GL_ES_VERSION_2_0)
-  using theBaseClass_t::glSpecializeShader;
-  using theBaseClass_t::glMultiDrawArraysIndirectCount;
-  using theBaseClass_t::glMultiDrawElementsIndirectCount;
-  using theBaseClass_t::glPolygonOffsetClamp;
+    using theBaseClass_t::glMultiDrawArraysIndirectCount;
+    using theBaseClass_t::glMultiDrawElementsIndirectCount;
+    using theBaseClass_t::glPolygonOffsetClamp;
+    using theBaseClass_t::glSpecializeShader;
 #endif
-
 };
 
 #endif // _OpenGl_GlCore46_Header

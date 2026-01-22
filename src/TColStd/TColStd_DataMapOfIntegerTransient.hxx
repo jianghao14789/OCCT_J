@@ -20,8 +20,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer, Handle(Standard_Transient), TColStd_MapIntegerHasher> TColStd_DataMapOfIntegerTransient;
-typedef NCollection_DataMap<Standard_Integer, Handle(Standard_Transient), TColStd_MapIntegerHasher>::Iterator TColStd_DataMapIteratorOfDataMapOfIntegerTransient;
-
+typedef NCollection_DataMap<Standard_Integer, Handle(Standard_Transient), TColStd_MapIntegerHasher>
+    TColStd_DataMapOfIntegerTransient;
+typedef NCollection_DataMap<Standard_Integer, Handle(Standard_Transient), TColStd_MapIntegerHasher>::Iterator
+    TColStd_DataMapIteratorOfDataMapOfIntegerTransient;
 
 #endif

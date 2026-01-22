@@ -22,8 +22,9 @@
 #include <STEPConstruct_PointHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<gp_Pnt,Handle(Standard_Transient),STEPConstruct_PointHasher> STEPConstruct_DataMapOfPointTransient;
-typedef NCollection_DataMap<gp_Pnt,Handle(Standard_Transient),STEPConstruct_PointHasher>::Iterator STEPConstruct_DataMapIteratorOfDataMapOfPointTransient;
-
+typedef NCollection_DataMap<gp_Pnt, Handle(Standard_Transient), STEPConstruct_PointHasher>
+    STEPConstruct_DataMapOfPointTransient;
+typedef NCollection_DataMap<gp_Pnt, Handle(Standard_Transient), STEPConstruct_PointHasher>::Iterator
+    STEPConstruct_DataMapIteratorOfDataMapOfPointTransient;
 
 #endif

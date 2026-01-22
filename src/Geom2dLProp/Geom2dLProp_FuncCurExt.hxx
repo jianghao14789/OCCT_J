@@ -26,14 +26,12 @@
 #include <Standard_Boolean.hxx>
 class Geom2d_Curve;
 
-
 //! Function used to find the extremas of curvature in 2d.
 class Geom2dLProp_FuncCurExt : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-    Standard_EXPORT Geom2dLProp_FuncCurExt(const Handle(Geom2d_Curve)& C, const Standard_Real Tol);
+    Standard_EXPORT Geom2dLProp_FuncCurExt(const Handle(Geom2d_Curve) & C, const Standard_Real Tol);
 
     //! Returns the value for the variable <X>.
     Standard_EXPORT Standard_Boolean Value(const Standard_Real X, Standard_Real& F);
@@ -50,9 +48,7 @@ public:
     Standard_EXPORT Standard_Boolean IsMinKC(const Standard_Real Param) const;
 
 protected:
-
 private:
-
     Handle(Geom2d_Curve) theCurve;
     Standard_Real epsX;
 };

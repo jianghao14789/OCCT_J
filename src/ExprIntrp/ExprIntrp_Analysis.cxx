@@ -16,7 +16,6 @@
 
 #define _ExprIntrp_Analysis_SourceFile
 
-
 #include <Expr_GeneralExpression.hxx>
 #include <Expr_GeneralFunction.hxx>
 #include <Expr_GeneralRelation.hxx>
@@ -29,34 +28,27 @@
 
 ExprIntrp_Analysis::ExprIntrp_Analysis() {}
 
-
-void ExprIntrp_Analysis::Push(const Handle(Expr_GeneralExpression)& exp)
-{
+void ExprIntrp_Analysis::Push(const Handle(Expr_GeneralExpression) & exp) {
     myGEStack.Prepend(exp);
 }
 
-void ExprIntrp_Analysis::PushRelation(const Handle(Expr_GeneralRelation)& rel)
-{
+void ExprIntrp_Analysis::PushRelation(const Handle(Expr_GeneralRelation) & rel) {
     myGRStack.Prepend(rel);
 }
 
-void ExprIntrp_Analysis::PushFunction(const Handle(Expr_GeneralFunction)& func)
-{
+void ExprIntrp_Analysis::PushFunction(const Handle(Expr_GeneralFunction) & func) {
     myGFStack.Prepend(func);
 }
 
-void ExprIntrp_Analysis::PushName(const TCollection_AsciiString& name)
-{
+void ExprIntrp_Analysis::PushName(const TCollection_AsciiString& name) {
     myNameStack.Prepend(name);
 }
 
-void ExprIntrp_Analysis::PushValue(const Standard_Integer val)
-{
+void ExprIntrp_Analysis::PushValue(const Standard_Integer val) {
     myValueStack.Prepend(val);
 }
 
-Handle(Expr_GeneralExpression) ExprIntrp_Analysis::Pop()
-{
+Handle(Expr_GeneralExpression) ExprIntrp_Analysis::Pop() {
     Handle(Expr_GeneralExpression) res;
     if (!myGEStack.IsEmpty()) {
         res = myGEStack.First();
@@ -65,8 +57,7 @@ Handle(Expr_GeneralExpression) ExprIntrp_Analysis::Pop()
     return res;
 }
 
-Handle(Expr_GeneralRelation) ExprIntrp_Analysis::PopRelation()
-{
+Handle(Expr_GeneralRelation) ExprIntrp_Analysis::PopRelation() {
     Handle(Expr_GeneralRelation) res;
     if (!myGRStack.IsEmpty()) {
         res = myGRStack.First();
@@ -75,8 +66,7 @@ Handle(Expr_GeneralRelation) ExprIntrp_Analysis::PopRelation()
     return res;
 }
 
-Handle(Expr_GeneralFunction) ExprIntrp_Analysis::PopFunction()
-{
+Handle(Expr_GeneralFunction) ExprIntrp_Analysis::PopFunction() {
     Handle(Expr_GeneralFunction) res;
     if (!myGFStack.IsEmpty()) {
         res = myGFStack.First();
@@ -85,8 +75,7 @@ Handle(Expr_GeneralFunction) ExprIntrp_Analysis::PopFunction()
     return res;
 }
 
-TCollection_AsciiString ExprIntrp_Analysis::PopName()
-{
+TCollection_AsciiString ExprIntrp_Analysis::PopName() {
     TCollection_AsciiString res;
     if (!myNameStack.IsEmpty()) {
         res = myNameStack.First();
@@ -95,8 +84,7 @@ TCollection_AsciiString ExprIntrp_Analysis::PopName()
     return res;
 }
 
-Standard_Integer ExprIntrp_Analysis::PopValue()
-{
+Standard_Integer ExprIntrp_Analysis::PopValue() {
     Standard_Integer res = 0;
     if (!myValueStack.IsEmpty()) {
         res = myValueStack.First();
@@ -105,18 +93,15 @@ Standard_Integer ExprIntrp_Analysis::PopValue()
     return res;
 }
 
-Standard_Boolean ExprIntrp_Analysis::IsExpStackEmpty() const
-{
+Standard_Boolean ExprIntrp_Analysis::IsExpStackEmpty() const {
     return myGEStack.IsEmpty();
 }
 
-Standard_Boolean ExprIntrp_Analysis::IsRelStackEmpty() const
-{
+Standard_Boolean ExprIntrp_Analysis::IsRelStackEmpty() const {
     return myGRStack.IsEmpty();
 }
 
-void ExprIntrp_Analysis::ResetAll()
-{
+void ExprIntrp_Analysis::ResetAll() {
     myGEStack.Clear();
     myGRStack.Clear();
     myGFStack.Clear();
@@ -126,28 +111,24 @@ void ExprIntrp_Analysis::ResetAll()
     myNamed.Clear();
 }
 
-void ExprIntrp_Analysis::SetMaster(const Handle(ExprIntrp_Generator)& agen)
-{
+void ExprIntrp_Analysis::SetMaster(const Handle(ExprIntrp_Generator) & agen) {
     ResetAll();
     myMaster = agen;
     myFunctions = myMaster->GetFunctions();
     myNamed = myMaster->GetNamed();
 }
 
-void ExprIntrp_Analysis::Use(const Handle(Expr_NamedFunction)& func)
-{
+void ExprIntrp_Analysis::Use(const Handle(Expr_NamedFunction) & func) {
     myFunctions.Append(func);
     myMaster->Use(func);
 }
 
-void ExprIntrp_Analysis::Use(const Handle(Expr_NamedExpression)& named)
-{
+void ExprIntrp_Analysis::Use(const Handle(Expr_NamedExpression) & named) {
     myNamed.Append(named);
     myMaster->Use(named);
 }
 
-Handle(Expr_NamedExpression) ExprIntrp_Analysis::GetNamed(const TCollection_AsciiString& name)
-{
+Handle(Expr_NamedExpression) ExprIntrp_Analysis::GetNamed(const TCollection_AsciiString& name) {
     for (Standard_Integer i = 1; i <= myNamed.Length(); i++) {
         if (name == myNamed(i)->GetName()) {
             return myNamed(i);
@@ -157,8 +138,7 @@ Handle(Expr_NamedExpression) ExprIntrp_Analysis::GetNamed(const TCollection_Asci
     return curnamed;
 }
 
-Handle(Expr_NamedFunction) ExprIntrp_Analysis::GetFunction(const TCollection_AsciiString& name)
-{
+Handle(Expr_NamedFunction) ExprIntrp_Analysis::GetFunction(const TCollection_AsciiString& name) {
     for (Standard_Integer i = 1; i <= myFunctions.Length(); i++) {
         if (name == myFunctions(i)->GetName()) {
             return myFunctions(i);

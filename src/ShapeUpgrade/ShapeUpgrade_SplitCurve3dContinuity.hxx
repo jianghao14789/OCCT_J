@@ -26,7 +26,6 @@
 #include <ShapeUpgrade_SplitCurve3d.hxx>
 class Geom_Curve;
 
-
 class ShapeUpgrade_SplitCurve3dContinuity;
 DEFINE_STANDARD_HANDLE(ShapeUpgrade_SplitCurve3dContinuity, ShapeUpgrade_SplitCurve3d)
 
@@ -34,50 +33,30 @@ DEFINE_STANDARD_HANDLE(ShapeUpgrade_SplitCurve3dContinuity, ShapeUpgrade_SplitCu
 //! Tolerance is used to correct the curve at a knot that respects
 //! geometrically the criterion, in order to reduce the
 //! multiplicity of the knot.
-class ShapeUpgrade_SplitCurve3dContinuity : public ShapeUpgrade_SplitCurve3d
-{
+class ShapeUpgrade_SplitCurve3dContinuity : public ShapeUpgrade_SplitCurve3d {
 
 public:
+    //! Empty constructor.
+    Standard_EXPORT ShapeUpgrade_SplitCurve3dContinuity();
 
-  
-  //! Empty constructor.
-  Standard_EXPORT ShapeUpgrade_SplitCurve3dContinuity();
-  
-  //! Sets criterion for splitting.
-  Standard_EXPORT void SetCriterion (const GeomAbs_Shape Criterion);
-  
-  //! Sets tolerance.
-  Standard_EXPORT void SetTolerance (const Standard_Real Tol);
-  
-  //! Calculates points for correction/splitting of the curve
-  Standard_EXPORT virtual void Compute() Standard_OVERRIDE;
-  
-  Standard_EXPORT const Handle(Geom_Curve)& GetCurve() const;
+    //! Sets criterion for splitting.
+    Standard_EXPORT void SetCriterion(const GeomAbs_Shape Criterion);
 
+    //! Sets tolerance.
+    Standard_EXPORT void SetTolerance(const Standard_Real Tol);
 
+    //! Calculates points for correction/splitting of the curve
+    Standard_EXPORT virtual void Compute() Standard_OVERRIDE;
 
+    Standard_EXPORT const Handle(Geom_Curve) & GetCurve() const;
 
-  DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitCurve3dContinuity,ShapeUpgrade_SplitCurve3d)
+    DEFINE_STANDARD_RTTIEXT(ShapeUpgrade_SplitCurve3dContinuity, ShapeUpgrade_SplitCurve3d)
 
 protected:
-
-
-
-
 private:
-
-
-  GeomAbs_Shape myCriterion;
-  Standard_Real myTolerance;
-  Standard_Integer myCont;
-
-
+    GeomAbs_Shape myCriterion;
+    Standard_Real myTolerance;
+    Standard_Integer myCont;
 };
-
-
-
-
-
-
 
 #endif // _ShapeUpgrade_SplitCurve3dContinuity_HeaderFile

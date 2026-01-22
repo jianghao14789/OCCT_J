@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESGraph_HArray1OfTextDisplayTemplate, IGESGraph_Array1OfTextDisplayTemplate)
 
-
 #endif

@@ -14,10 +14,9 @@
 // commercial license or contractual agreement.
 
 //            Automatically created from NCollection_List.hxx by GAWK
-// Purpose:      Simple list to link  items together keeping the first 
+// Purpose:      Simple list to link  items together keeping the first
 //               and the last one.
 //               Inherits BaseList, adding the data item to each node.
-
 
 #ifndef NCollection_DefineList_HeaderFile
 #define NCollection_DefineList_HeaderFile
@@ -26,7 +25,6 @@
 
 // **************************************** Template for  List   class ********
 
-#define DEFINE_LIST(_ClassName_, _BaseCollection_, TheItemType)                \
-typedef NCollection_List <TheItemType > _ClassName_;
+#define DEFINE_LIST(_ClassName_, _BaseCollection_, TheItemType) typedef NCollection_List<TheItemType> _ClassName_;
 
 #endif

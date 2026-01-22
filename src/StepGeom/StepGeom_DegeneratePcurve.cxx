@@ -11,46 +11,39 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepGeom_DegeneratePcurve.hxx>
 #include <StepGeom_Surface.hxx>
 #include <StepRepr_DefinitionalRepresentation.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepGeom_DegeneratePcurve,StepGeom_Point)
+IMPLEMENT_STANDARD_RTTIEXT(StepGeom_DegeneratePcurve, StepGeom_Point)
 
-StepGeom_DegeneratePcurve::StepGeom_DegeneratePcurve ()  {}
+StepGeom_DegeneratePcurve::StepGeom_DegeneratePcurve() {}
 
-void StepGeom_DegeneratePcurve::Init(
-	const Handle(TCollection_HAsciiString)& aName,
-	const Handle(StepGeom_Surface)& aBasisSurface,
-	const Handle(StepRepr_DefinitionalRepresentation)& aReferenceToCurve)
-{
-	// --- classe own fields ---
-	basisSurface = aBasisSurface;
-	referenceToCurve = aReferenceToCurve;
-	// --- classe inherited fields ---
-	StepRepr_RepresentationItem::Init(aName);
+void StepGeom_DegeneratePcurve::Init(const Handle(TCollection_HAsciiString) & aName,
+                                     const Handle(StepGeom_Surface) & aBasisSurface,
+                                     const Handle(StepRepr_DefinitionalRepresentation) & aReferenceToCurve) {
+    // --- classe own fields ---
+    basisSurface = aBasisSurface;
+    referenceToCurve = aReferenceToCurve;
+    // --- classe inherited fields ---
+    StepRepr_RepresentationItem::Init(aName);
 }
 
-
-void StepGeom_DegeneratePcurve::SetBasisSurface(const Handle(StepGeom_Surface)& aBasisSurface)
-{
-	basisSurface = aBasisSurface;
+void StepGeom_DegeneratePcurve::SetBasisSurface(const Handle(StepGeom_Surface) & aBasisSurface) {
+    basisSurface = aBasisSurface;
 }
 
-Handle(StepGeom_Surface) StepGeom_DegeneratePcurve::BasisSurface() const
-{
-	return basisSurface;
+Handle(StepGeom_Surface) StepGeom_DegeneratePcurve::BasisSurface() const {
+    return basisSurface;
 }
 
-void StepGeom_DegeneratePcurve::SetReferenceToCurve(const Handle(StepRepr_DefinitionalRepresentation)& aReferenceToCurve)
-{
-	referenceToCurve = aReferenceToCurve;
+void StepGeom_DegeneratePcurve::SetReferenceToCurve(const Handle(StepRepr_DefinitionalRepresentation) &
+                                                    aReferenceToCurve) {
+    referenceToCurve = aReferenceToCurve;
 }
 
-Handle(StepRepr_DefinitionalRepresentation) StepGeom_DegeneratePcurve::ReferenceToCurve() const
-{
-	return referenceToCurve;
+Handle(StepRepr_DefinitionalRepresentation) StepGeom_DegeneratePcurve::ReferenceToCurve() const {
+    return referenceToCurve;
 }

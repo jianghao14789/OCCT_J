@@ -19,31 +19,25 @@
 #include <OpenGl_Structure.hxx>
 
 //! Dummy structure which just redirects to groups of another structure.
-class OpenGl_StructureShadow : public OpenGl_Structure
-{
+class OpenGl_StructureShadow : public OpenGl_Structure {
 
 public:
-
-  //! Create empty structure
-  Standard_EXPORT OpenGl_StructureShadow (const Handle(Graphic3d_StructureManager)& theManager,
-                                          const Handle(OpenGl_Structure)&           theStructure);
+    //! Create empty structure
+    Standard_EXPORT OpenGl_StructureShadow(const Handle(Graphic3d_StructureManager) & theManager,
+                                           const Handle(OpenGl_Structure) & theStructure);
 
 public:
+    //! Raise exception on API misuse.
+    Standard_EXPORT virtual void Connect(Graphic3d_CStructure&) Standard_OVERRIDE;
 
-  //! Raise exception on API misuse.
-  Standard_EXPORT virtual void Connect (Graphic3d_CStructure& ) Standard_OVERRIDE;
-
-  //! Raise exception on API misuse.
-  Standard_EXPORT virtual void Disconnect (Graphic3d_CStructure& ) Standard_OVERRIDE;
+    //! Raise exception on API misuse.
+    Standard_EXPORT virtual void Disconnect(Graphic3d_CStructure&) Standard_OVERRIDE;
 
 private:
-
-  Handle(OpenGl_Structure) myParent;
+    Handle(OpenGl_Structure) myParent;
 
 public:
-
-  DEFINE_STANDARD_RTTIEXT(OpenGl_StructureShadow,OpenGl_Structure) // Type definition
-
+    DEFINE_STANDARD_RTTIEXT(OpenGl_StructureShadow, OpenGl_Structure) // Type definition
 };
 
 DEFINE_STANDARD_HANDLE(OpenGl_StructureShadow, OpenGl_Structure)

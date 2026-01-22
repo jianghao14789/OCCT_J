@@ -17,36 +17,33 @@
 
 #include <Message_Msg.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(TopoDS_AlertWithShape,Message_Alert)
+IMPLEMENT_STANDARD_RTTIEXT(TopoDS_AlertWithShape, Message_Alert)
 
 //=======================================================================
-//function : TopoDS_AlertWithShape
-//purpose  : 
+// function : TopoDS_AlertWithShape
+// purpose  :
 //=======================================================================
 
-TopoDS_AlertWithShape::TopoDS_AlertWithShape (const TopoDS_Shape& theShape)
-{
-  myShape = theShape;
+TopoDS_AlertWithShape::TopoDS_AlertWithShape(const TopoDS_Shape& theShape) {
+    myShape = theShape;
 }
 
 //=======================================================================
-//function : SupportsMerge
-//purpose  : 
+// function : SupportsMerge
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopoDS_AlertWithShape::SupportsMerge () const
-{
-  return Standard_False;
+Standard_Boolean TopoDS_AlertWithShape::SupportsMerge() const {
+    return Standard_False;
 }
-  
+
 //=======================================================================
-//function : Merge
-//purpose  : 
+// function : Merge
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TopoDS_AlertWithShape::Merge (const Handle(Message_Alert)& /*theTarget*/)
-{
-  return Standard_False;
-//  Handle(TopoDS_AlertWithShape) aTarget = Handle(TopoDS_AlertWithShape)::DownCast (theTarget);
-//  return aTarget->GetShape() == myShape;
+Standard_Boolean TopoDS_AlertWithShape::Merge(const Handle(Message_Alert) & /*theTarget*/) {
+    return Standard_False;
+    //  Handle(TopoDS_AlertWithShape) aTarget = Handle(TopoDS_AlertWithShape)::DownCast (theTarget);
+    //  return aTarget->GetShape() == myShape;
 }

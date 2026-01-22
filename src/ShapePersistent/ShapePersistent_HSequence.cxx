@@ -15,45 +15,34 @@
 #include <StdObjMgt_WriteData.hxx>
 #include <ShapePersistent_HSequence.hxx>
 
-
 template <class SequenceClass>
-void ShapePersistent_HSequence::node<SequenceClass>::Read
-  (StdObjMgt_ReadData& theReadData)
-{
-  theReadData >> myPreviuos >> myItem >> myNext;
+void ShapePersistent_HSequence::node<SequenceClass>::Read(StdObjMgt_ReadData& theReadData) {
+    theReadData >> myPreviuos >> myItem >> myNext;
 }
 
 template <class SequenceClass>
-void ShapePersistent_HSequence::node<SequenceClass>::Write
-  (StdObjMgt_WriteData& theWriteData) const
-{
-  theWriteData << myPreviuos << myItem << myNext;
+void ShapePersistent_HSequence::node<SequenceClass>::Write(StdObjMgt_WriteData& theWriteData) const {
+    theWriteData << myPreviuos << myItem << myNext;
 }
 
 template <class SequenceClass>
-void ShapePersistent_HSequence::instance<SequenceClass>::Read
-  (StdObjMgt_ReadData& theReadData)
-{
-  theReadData >> myFirst >> myLast >> mySize;
+void ShapePersistent_HSequence::instance<SequenceClass>::Read(StdObjMgt_ReadData& theReadData) {
+    theReadData >> myFirst >> myLast >> mySize;
 }
 
 template <class SequenceClass>
-void ShapePersistent_HSequence::instance<SequenceClass>::Write
-  (StdObjMgt_WriteData& theWriteData) const
-{
-  theWriteData << myFirst << myLast << mySize;
+void ShapePersistent_HSequence::instance<SequenceClass>::Write(StdObjMgt_WriteData& theWriteData) const {
+    theWriteData << myFirst << myLast << mySize;
 }
 
 template <class SequenceClass>
-Handle(SequenceClass)
-  ShapePersistent_HSequence::instance<SequenceClass>::Import() const
-{
-  Handle(SequenceClass) aSequence = new SequenceClass;
-  
-  for (Handle(Node) aNode = myFirst; aNode; aNode = aNode->Next())
-    aSequence->Append (aNode->Item());
+Handle(SequenceClass) ShapePersistent_HSequence::instance<SequenceClass>::Import() const {
+    Handle(SequenceClass) aSequence = new SequenceClass;
 
-  return aSequence;
+    for (Handle(Node) aNode = myFirst; aNode; aNode = aNode->Next())
+        aSequence->Append(aNode->Item());
+
+    return aSequence;
 }
 
 template class ShapePersistent_HSequence::node<TColgp_HSequenceOfXYZ>;
@@ -66,47 +55,46 @@ template class ShapePersistent_HSequence::instance<TColgp_HSequenceOfPnt>;
 template class ShapePersistent_HSequence::instance<TColgp_HSequenceOfDir>;
 template class ShapePersistent_HSequence::instance<TColgp_HSequenceOfVec>;
 
+//=======================================================================
+// XYZ
+//=======================================================================
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfXYZ>::PName() const {
+    return "PColgp_HSequenceOfXYZ";
+}
+
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfXYZ>::PName() const {
+    return "PColgp_SeqNodeOfHSequenceOfXYZ";
+}
 
 //=======================================================================
-// XYZ 
+// Pnt
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfXYZ>
-  ::PName() const { return "PColgp_HSequenceOfXYZ"; }
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfPnt>::PName() const {
+    return "PColgp_HSequenceOfPnt";
+}
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfXYZ>
-  ::PName() const { return "PColgp_SeqNodeOfHSequenceOfXYZ"; }
-
-//=======================================================================
-// Pnt 
-//=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfPnt>
-  ::PName() const { return "PColgp_HSequenceOfPnt"; }
-
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfPnt>
-  ::PName() const { return "PColgp_SeqNodeOfHSequenceOfPnt"; }
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfPnt>::PName() const {
+    return "PColgp_SeqNodeOfHSequenceOfPnt";
+}
 
 //=======================================================================
-// Dir 
+// Dir
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfDir>
-  ::PName() const { return "PColgp_HSequenceOfDir"; }
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfDir>::PName() const {
+    return "PColgp_HSequenceOfDir";
+}
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfDir>
-  ::PName() const { return "PColgp_SeqNodeOfHSequenceOffDir"; }
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfDir>::PName() const {
+    return "PColgp_SeqNodeOfHSequenceOffDir";
+}
 
 //=======================================================================
-// Vec 
+// Vec
 //=======================================================================
-template<>
-Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfVec>
-  ::PName() const { return "PColgp_HSequenceOfVec"; }
+template <> Standard_CString ShapePersistent_HSequence::instance<TColgp_HSequenceOfVec>::PName() const {
+    return "PColgp_HSequenceOfVec";
+}
 
-template<>
-Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfVec>
-  ::PName() const { return "PColgp_SeqNodeOfHSequenceOfVec"; }
+template <> Standard_CString ShapePersistent_HSequence::node<TColgp_HSequenceOfVec>::PName() const {
+    return "PColgp_SeqNodeOfHSequenceOfVec";
+}

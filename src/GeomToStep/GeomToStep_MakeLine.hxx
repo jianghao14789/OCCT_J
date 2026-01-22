@@ -28,50 +28,27 @@ class gp_Lin2d;
 class Geom_Line;
 class Geom2d_Line;
 
-
 //! This class implements the mapping between classes
 //! Line from Geom and Lin from gp, and the class
 //! Line from StepGeom which describes a line from
 //! Prostep.
-class GeomToStep_MakeLine  : public GeomToStep_Root
-{
+class GeomToStep_MakeLine : public GeomToStep_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT GeomToStep_MakeLine(const gp_Lin& L);
 
-  
-  Standard_EXPORT GeomToStep_MakeLine(const gp_Lin& L);
-  
-  Standard_EXPORT GeomToStep_MakeLine(const gp_Lin2d& L);
-  
-  Standard_EXPORT GeomToStep_MakeLine(const Handle(Geom_Line)& C);
-  
-  Standard_EXPORT GeomToStep_MakeLine(const Handle(Geom2d_Line)& C);
-  
-  Standard_EXPORT const Handle(StepGeom_Line)& Value() const;
+    Standard_EXPORT GeomToStep_MakeLine(const gp_Lin2d& L);
 
+    Standard_EXPORT GeomToStep_MakeLine(const Handle(Geom_Line) & C);
 
+    Standard_EXPORT GeomToStep_MakeLine(const Handle(Geom2d_Line) & C);
 
+    Standard_EXPORT const Handle(StepGeom_Line) & Value() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(StepGeom_Line) theLine;
-
-
+    Handle(StepGeom_Line) theLine;
 };
-
-
-
-
-
-
 
 #endif // _GeomToStep_MakeLine_HeaderFile

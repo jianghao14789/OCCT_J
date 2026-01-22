@@ -40,10 +40,8 @@ class Geom_Curve;
 class Geom_Surface;
 
 //! Performs geometric modifications on a shape.
-class BRepTools_Modifier
-{
+class BRepTools_Modifier {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Creates an empty Modifier.
@@ -54,14 +52,14 @@ public:
 
     //! Creates a modifier on  the shape <S>, and performs
     //! the modifications described by <M>.
-    Standard_EXPORT BRepTools_Modifier(const TopoDS_Shape& S, const Handle(BRepTools_Modification)& M);
+    Standard_EXPORT BRepTools_Modifier(const TopoDS_Shape& S, const Handle(BRepTools_Modification) & M);
 
     //! Initializes the modifier with the shape <S>.
     Standard_EXPORT void Init(const TopoDS_Shape& S);
 
     //! Performs the modifications described by <M>.
-    Standard_EXPORT void Perform(const Handle(BRepTools_Modification)& M,
-        const Message_ProgressRange& theProgress = Message_ProgressRange());
+    Standard_EXPORT void Perform(const Handle(BRepTools_Modification) & M,
+                                 const Message_ProgressRange& theProgress = Message_ProgressRange());
 
     //! Returns Standard_True if the modification has
     //! been computed successfully.
@@ -71,29 +69,22 @@ public:
     Standard_EXPORT Standard_Boolean IsMutableInput() const;
 
     //! Sets the mutable input state
-    //! If true then the input (original) shape can be modified 
+    //! If true then the input (original) shape can be modified
     //! during modification process
     Standard_EXPORT void SetMutableInput(Standard_Boolean theMutableInput);
 
     //! Returns the modified shape corresponding to <S>.
     const TopoDS_Shape& ModifiedShape(const TopoDS_Shape& S) const;
 
-
 protected:
-
-
-
 private:
-
-    struct NewCurveInfo
-    {
+    struct NewCurveInfo {
         Handle(Geom_Curve) myCurve;
         TopLoc_Location myLoc;
         Standard_Real myToler;
     };
 
-    struct NewSurfaceInfo
-    {
+    struct NewSurfaceInfo {
         Handle(Geom_Surface) mySurface;
         TopLoc_Location myLoc;
         Standard_Real myToler;
@@ -103,25 +94,21 @@ private:
 
     Standard_EXPORT void Put(const TopoDS_Shape& S);
 
-    Standard_EXPORT Standard_Boolean Rebuild(const TopoDS_Shape& S,
-        const Handle(BRepTools_Modification)& M,
-        Standard_Boolean& theNewGeom,
-        const Message_ProgressRange& theProgress = Message_ProgressRange());
+    Standard_EXPORT Standard_Boolean Rebuild(const TopoDS_Shape& S, const Handle(BRepTools_Modification) & M,
+                                             Standard_Boolean& theNewGeom,
+                                             const Message_ProgressRange& theProgress = Message_ProgressRange());
 
-    Standard_EXPORT void CreateNewVertices(
-        const TopTools_IndexedDataMapOfShapeListOfShape& theMVE,
-        const Handle(BRepTools_Modification)& M);
+    Standard_EXPORT void CreateNewVertices(const TopTools_IndexedDataMapOfShapeListOfShape& theMVE,
+                                           const Handle(BRepTools_Modification) & M);
 
-    Standard_EXPORT void FillNewCurveInfo(
-        const TopTools_IndexedDataMapOfShapeListOfShape& theMEF,
-        const Handle(BRepTools_Modification)& M);
+    Standard_EXPORT void FillNewCurveInfo(const TopTools_IndexedDataMapOfShapeListOfShape& theMEF,
+                                          const Handle(BRepTools_Modification) & M);
 
-    Standard_EXPORT void FillNewSurfaceInfo(const Handle(BRepTools_Modification)& M);
+    Standard_EXPORT void FillNewSurfaceInfo(const Handle(BRepTools_Modification) & M);
 
-    Standard_EXPORT void CreateOtherVertices(
-        const TopTools_IndexedDataMapOfShapeListOfShape& theMVE,
-        const TopTools_IndexedDataMapOfShapeListOfShape& theMEF,
-        const Handle(BRepTools_Modification)& M);
+    Standard_EXPORT void CreateOtherVertices(const TopTools_IndexedDataMapOfShapeListOfShape& theMVE,
+                                             const TopTools_IndexedDataMapOfShapeListOfShape& theMEF,
+                                             const Handle(BRepTools_Modification) & M);
 
     TopTools_DataMapOfShapeShape myMap;
     TopoDS_Shape myShape;
@@ -131,14 +118,8 @@ private:
     TopTools_MapOfShape myNonUpdFace;
     TopTools_MapOfShape myHasNewGeom;
     Standard_Boolean myMutableInput;
-
 };
 
-
 #include <BRepTools_Modifier.lxx>
-
-
-
-
 
 #endif // _BRepTools_Modifier_HeaderFile

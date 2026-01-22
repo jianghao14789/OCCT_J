@@ -16,67 +16,61 @@
 #include <StdFail_NotDone.hxx>
 
 //==========================================================================
-//function : IsDone
+// function : IsDone
 //           Returns Standard_True if computation is performed successfully.
 //==========================================================================
 
-inline Standard_Boolean math_KronrodSingleIntegration::IsDone() const
-{
+inline Standard_Boolean math_KronrodSingleIntegration::IsDone() const {
     return myIsDone;
 }
 
 //==========================================================================
-//function : Value
+// function : Value
 //           Returns the value of the integral.
 //==========================================================================
 
-inline Standard_Real math_KronrodSingleIntegration::Value() const
-{
+inline Standard_Real math_KronrodSingleIntegration::Value() const {
     StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
     return myValue;
 }
 
 //==========================================================================
-//function : ErrorReached
+// function : ErrorReached
 //           Returns the value of the relative error reached.
 //==========================================================================
 
-inline Standard_Real math_KronrodSingleIntegration::ErrorReached() const
-{
+inline Standard_Real math_KronrodSingleIntegration::ErrorReached() const {
     StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
     return myErrorReached;
 }
 
 //=======================================================================
-//function : AbsolutError
-//purpose  : 
+// function : AbsolutError
+// purpose  :
 //=======================================================================
 
-inline Standard_Real math_KronrodSingleIntegration::AbsolutError() const
-{
+inline Standard_Real math_KronrodSingleIntegration::AbsolutError() const {
     StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
     return myAbsolutError;
 }
 
 //==========================================================================
-//function : OrderReached
+// function : OrderReached
 //           Returns the number of Kronrod points for which the result
 //           is computed.
 //==========================================================================
 
-inline Standard_Integer math_KronrodSingleIntegration::OrderReached() const
-{
+inline Standard_Integer math_KronrodSingleIntegration::OrderReached() const {
     StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
     return myNbPntsReached;
 }
 
 //==========================================================================
-//function : NbIterReached
+// function : NbIterReached
 //           Returns the number of iterations that were made to compute result.
 //==========================================================================
 
-inline Standard_Integer math_KronrodSingleIntegration::NbIterReached() const
-{
+inline Standard_Integer math_KronrodSingleIntegration::NbIterReached() const {
     StdFail_NotDone_Raise_if(!myIsDone, "math_KronrodSingleIntegration");
     return myNbIterReached;
 }

@@ -31,5 +31,3 @@ typedef struct {
 typedef GUID Standard_UUID;
 
 #endif
-
-

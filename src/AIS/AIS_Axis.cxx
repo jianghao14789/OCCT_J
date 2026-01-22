@@ -40,320 +40,282 @@
 #include <TopoDS.hxx>
 #include <UnitsAPI.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(AIS_Axis,AIS_InteractiveObject)
+IMPLEMENT_STANDARD_RTTIEXT(AIS_Axis, AIS_InteractiveObject)
 
 //=======================================================================
-//function : AIS_Axis
-//purpose  :
+// function : AIS_Axis
+// purpose  :
 //=======================================================================
-AIS_Axis::AIS_Axis(const Handle(Geom_Line)& aComponent):
-myComponent(aComponent),
-myTypeOfAxis(AIS_TOAX_Unknown),
-myIsXYZAxis(Standard_False)
-{
-  myDrawer->SetLineAspect(new Prs3d_LineAspect
-     (Quantity_NOC_RED,Aspect_TOL_DOTDASH,1.));
-  SetInfiniteState();
-
-  gp_Dir thedir = myComponent->Position().Direction();
-  gp_Pnt loc = myComponent->Position().Location();
-  Standard_Real aLength = UnitsAPI::AnyToLS(250000., "mm");
-  myPfirst = loc.XYZ() + aLength*thedir.XYZ();
-  myPlast = loc.XYZ() - aLength*thedir.XYZ();
-}
-
-//=======================================================================
-//function : AIS_Axis
-//purpose  :  Xaxis, YAxis, ZAxis
-//=======================================================================
-AIS_Axis::AIS_Axis(const Handle(Geom_Axis2Placement)& aComponent,
-		   const AIS_TypeOfAxis anAxisType):
-myAx2(aComponent),
-myTypeOfAxis(anAxisType),
-myIsXYZAxis(Standard_True)
-{
-  Handle (Prs3d_DatumAspect) DA = new Prs3d_DatumAspect();
-  Standard_Real aLength;
-  try {
-    aLength = UnitsAPI::AnyToLS(100. ,"mm");
-  } catch (Standard_Failure const&) {
-    aLength = 0.1;
-  }
-  DA->SetAxisLength(aLength,aLength,aLength);
-  Quantity_Color col (Quantity_NOC_TURQUOISE);
-  DA->LineAspect(Prs3d_DatumParts_XAxis)->SetColor(col);
-  DA->LineAspect(Prs3d_DatumParts_YAxis)->SetColor(col);
-  DA->LineAspect(Prs3d_DatumParts_ZAxis)->SetColor(col);
-  myDrawer->SetDatumAspect(DA); 
-  
-  ComputeFields();
-}
-
-//=======================================================================
-//function : AIS_Axis
-//purpose  : 
-//=======================================================================
-AIS_Axis::AIS_Axis(const Handle(Geom_Axis1Placement)& anAxis)
-:myComponent(new Geom_Line(anAxis->Ax1())),
- myTypeOfAxis(AIS_TOAX_Unknown),
- myIsXYZAxis(Standard_False)
-{
-  myDrawer->SetLineAspect(new Prs3d_LineAspect(Quantity_NOC_RED,Aspect_TOL_DOTDASH,1.));
-  SetInfiniteState();
-
-  gp_Dir thedir = myComponent->Position().Direction();
-  gp_Pnt loc = myComponent->Position().Location();
-  Standard_Real aLength = UnitsAPI::AnyToLS(250000. ,"mm"); 
-  myPfirst = loc.XYZ() + aLength*thedir.XYZ();
-  myPlast = loc.XYZ() - aLength*thedir.XYZ();
-}
-
-//=======================================================================
-//function : AIS_Axis
-//purpose :
-//=======================================================================
-AIS_Axis::AIS_Axis (const gp_Ax1& theAxis, const Standard_Real theLength)
-: myComponent (new Geom_Line (theAxis)),
-  myTypeOfAxis (AIS_TOAX_ZAxis),
-  myIsXYZAxis (Standard_True)
-{
-  myDir = theAxis.Direction();
-  myPfirst = theAxis.Location();
-  if (theLength <= 0 && theLength != -1)
-  {
-    throw Standard_NumericError ("AIS_Axis::AIS_Axis : invalid value for theLength parameter");
-  }
-  myVal = (theLength == -1) ? UnitsAPI::AnyToLS (250000., "mm") : theLength;
-  myPlast = myPfirst.XYZ() + myVal * myDir.XYZ();
-  SetInfiniteState();
-  Handle(Prs3d_DatumAspect) aDatumAspect = new Prs3d_DatumAspect();
-  aDatumAspect->SetDrawLabels (Standard_False);
-  myDrawer->SetDatumAspect (aDatumAspect);
-  Handle(Prs3d_LineAspect) aDefaultLineAspect = new Prs3d_LineAspect (Quantity_NOC_RED, Aspect_TOL_SOLID, 1.0);
-  myDrawer->SetLineAspect (aDefaultLineAspect);
-  myLineAspect = myDrawer->LineAspect();
-}
-
-//=======================================================================
-//function : SetComponent
-//purpose  : 
-//=======================================================================
-
-void AIS_Axis::SetComponent(const Handle(Geom_Line)& aComponent)
-{
-  myComponent = aComponent;
-  myTypeOfAxis = AIS_TOAX_Unknown;
-  myIsXYZAxis = Standard_False;
-  SetInfiniteState();
-
-  gp_Dir thedir = myComponent->Position().Direction();
-  gp_Pnt loc = myComponent->Position().Location();
-  Standard_Real aLength = UnitsAPI::AnyToLS(250000. ,"mm");
-  myPfirst = loc.XYZ() + aLength*thedir.XYZ();
-  myPlast = loc.XYZ() - aLength*thedir.XYZ();
-}
-
-
-
-//=======================================================================
-//function : SetAxis2Placement
-//purpose  : 
-//=======================================================================
-
-void AIS_Axis::SetAxis2Placement(const Handle(Geom_Axis2Placement)& aComponent,
-				 const AIS_TypeOfAxis anAxisType)
-{
-  myAx2 = aComponent;
-  myTypeOfAxis = anAxisType;
-  myIsXYZAxis = Standard_True;
-  ComputeFields();
-}
-
-//=======================================================================
-//function : SetAxis1Placement
-//purpose  : 
-//=======================================================================
-
-void AIS_Axis::SetAxis1Placement(const Handle(Geom_Axis1Placement)& anAxis)
-{
-  SetComponent(new Geom_Line(anAxis->Ax1()));
-}
-
-//=======================================================================
-//function : Compute
-//purpose  : 
-//=======================================================================
-void AIS_Axis::Compute (const Handle(PrsMgr_PresentationManager)& ,
-		        const Handle(Prs3d_Presentation)& thePrs,
-		        const Standard_Integer )
-{
-  thePrs->SetInfiniteState (myInfiniteState);
-  thePrs->SetDisplayPriority (5);
-  if (!myIsXYZAxis)
-  {
-    GeomAdaptor_Curve curv (myComponent);
-    StdPrs_Curve::Add (thePrs, curv, myDrawer);
-  }
-  else
-  {
-    DsgPrs_XYZAxisPresentation::Add (thePrs, myLineAspect, myDir, myVal,
-                                     myDrawer->DatumAspect()->ToDrawLabels() ? myText : "",
-                                     myPfirst, myPlast);
-  }
-}
-
-//=======================================================================
-//function : ComputeSelection
-//purpose  : 
-//=======================================================================
-
-void AIS_Axis::ComputeSelection(const Handle(SelectMgr_Selection)& aSelection,
-				const Standard_Integer)
-{
-  Handle(SelectMgr_EntityOwner) eown = new SelectMgr_EntityOwner (this, 3);
-  Handle(Select3D_SensitiveSegment) seg = new Select3D_SensitiveSegment(eown,
-									myPfirst,
-									myPlast);
-  aSelection->Add(seg);
-}
-
-//=======================================================================
-//function : SetColor
-//purpose  :
-//=======================================================================
-void AIS_Axis::SetColor(const Quantity_Color &aCol)
-{
-  hasOwnColor=Standard_True;
-  myDrawer->SetColor (aCol);
-  myDrawer->LineAspect()->SetColor(aCol);
-  
-  const Handle(Prs3d_DatumAspect)& DA = myDrawer->DatumAspect();
-  DA->LineAspect(Prs3d_DatumParts_XAxis)->SetColor(aCol);
-  DA->LineAspect(Prs3d_DatumParts_YAxis)->SetColor(aCol);
-  DA->LineAspect(Prs3d_DatumParts_ZAxis)->SetColor(aCol);
-  SynchronizeAspects();
-}
-
-//=======================================================================
-//function : SetWidth 
-//purpose  : 
-//=======================================================================
-void AIS_Axis::SetWidth(const Standard_Real aValue)
-{
-  if(aValue<0.0) return;
-  if(aValue==0) UnsetWidth();
-  
-  myDrawer->LineAspect()->SetWidth(aValue);
-  
-  const Handle(Prs3d_DatumAspect)& DA = myDrawer->DatumAspect();
-  DA->LineAspect(Prs3d_DatumParts_XAxis)->SetWidth(aValue);
-  DA->LineAspect(Prs3d_DatumParts_YAxis)->SetWidth(aValue);
-  DA->LineAspect(Prs3d_DatumParts_ZAxis)->SetWidth(aValue);
-  SynchronizeAspects();
-}
-
-//=======================================================================
-//function : SetDisplayAspect
-//purpose  : 
-//=======================================================================
-void AIS_Axis::SetDisplayAspect (const Handle(Prs3d_LineAspect)& theNewLineAspect)
-{
-  myDrawer->SetLineAspect (theNewLineAspect);
-  myLineAspect = myDrawer->LineAspect();
-  SetColor (theNewLineAspect->Aspect()->Color());
-}
-
-//=======================================================================
-//function : ComputeFields
-//purpose  : 
-//=======================================================================
-void AIS_Axis::ComputeFields()
-{
-  if (myIsXYZAxis){
-    // calcul de myPFirst,myPlast
-    Handle(Prs3d_DatumAspect) DA = myDrawer->DatumAspect();
-    gp_Ax2 anAxis = myAx2->Ax2();
-    const gp_Pnt& Orig = anAxis.Location();
-    const gp_Dir& oX   = anAxis.XDirection();
-    const gp_Dir& oY   = anAxis.YDirection();
-    const gp_Dir& oZ   = anAxis.Direction();
-    Standard_Real xo,yo,zo,x = 0.,y = 0.,z = 0.;
-    Orig.Coord(xo,yo,zo);
-    myPfirst.SetCoord(xo,yo,zo);
-    
-    switch (myTypeOfAxis) {
-    case AIS_TOAX_XAxis:
-      {
-	oX.Coord(x,y,z);
-    myVal = DA->AxisLength(Prs3d_DatumParts_XAxis);
-	myDir = oX;
-	myLineAspect = DA->LineAspect(Prs3d_DatumParts_XAxis);
-	myText = Standard_CString ("X");
-	break;
-      }
-    case AIS_TOAX_YAxis:
-      {
-	oY.Coord(x,y,z);
-	myVal = DA->AxisLength(Prs3d_DatumParts_YAxis);
-	myDir = oY;
-	myLineAspect = DA->LineAspect(Prs3d_DatumParts_YAxis);
-	myText = Standard_CString ("Y");
-	break;
-      }
-    case AIS_TOAX_ZAxis:
-      {
-	oZ.Coord(x,y,z); 
-	myVal = DA->AxisLength(Prs3d_DatumParts_ZAxis);
-	myDir = oZ;
-	myLineAspect = DA->LineAspect(Prs3d_DatumParts_ZAxis);
-	myText = Standard_CString ("Z");
-	break;
-      }
-     default:
-      break;
-    }
-    
-    myComponent = new Geom_Line(Orig,myDir);
-    x = xo + x*myVal;   y = yo + y*myVal;  z = zo + z*myVal;
-    myPlast.SetCoord(x,y,z);
+AIS_Axis::AIS_Axis(const Handle(Geom_Line) & aComponent)
+    : myComponent(aComponent), myTypeOfAxis(AIS_TOAX_Unknown), myIsXYZAxis(Standard_False) {
+    myDrawer->SetLineAspect(new Prs3d_LineAspect(Quantity_NOC_RED, Aspect_TOL_DOTDASH, 1.));
     SetInfiniteState();
-  }
+
+    gp_Dir thedir = myComponent->Position().Direction();
+    gp_Pnt loc = myComponent->Position().Location();
+    Standard_Real aLength = UnitsAPI::AnyToLS(250000., "mm");
+    myPfirst = loc.XYZ() + aLength * thedir.XYZ();
+    myPlast = loc.XYZ() - aLength * thedir.XYZ();
 }
 
 //=======================================================================
-//function : AcceptDisplayMode
-//purpose  : 
+// function : AIS_Axis
+// purpose  :  Xaxis, YAxis, ZAxis
+//=======================================================================
+AIS_Axis::AIS_Axis(const Handle(Geom_Axis2Placement) & aComponent, const AIS_TypeOfAxis anAxisType)
+    : myAx2(aComponent), myTypeOfAxis(anAxisType), myIsXYZAxis(Standard_True) {
+    Handle(Prs3d_DatumAspect) DA = new Prs3d_DatumAspect();
+    Standard_Real aLength;
+    try {
+        aLength = UnitsAPI::AnyToLS(100., "mm");
+    } catch (Standard_Failure const&) {
+        aLength = 0.1;
+    }
+    DA->SetAxisLength(aLength, aLength, aLength);
+    Quantity_Color col(Quantity_NOC_TURQUOISE);
+    DA->LineAspect(Prs3d_DatumParts_XAxis)->SetColor(col);
+    DA->LineAspect(Prs3d_DatumParts_YAxis)->SetColor(col);
+    DA->LineAspect(Prs3d_DatumParts_ZAxis)->SetColor(col);
+    myDrawer->SetDatumAspect(DA);
+
+    ComputeFields();
+}
+
+//=======================================================================
+// function : AIS_Axis
+// purpose  :
+//=======================================================================
+AIS_Axis::AIS_Axis(const Handle(Geom_Axis1Placement) & anAxis)
+    : myComponent(new Geom_Line(anAxis->Ax1())), myTypeOfAxis(AIS_TOAX_Unknown), myIsXYZAxis(Standard_False) {
+    myDrawer->SetLineAspect(new Prs3d_LineAspect(Quantity_NOC_RED, Aspect_TOL_DOTDASH, 1.));
+    SetInfiniteState();
+
+    gp_Dir thedir = myComponent->Position().Direction();
+    gp_Pnt loc = myComponent->Position().Location();
+    Standard_Real aLength = UnitsAPI::AnyToLS(250000., "mm");
+    myPfirst = loc.XYZ() + aLength * thedir.XYZ();
+    myPlast = loc.XYZ() - aLength * thedir.XYZ();
+}
+
+//=======================================================================
+// function : AIS_Axis
+// purpose :
+//=======================================================================
+AIS_Axis::AIS_Axis(const gp_Ax1& theAxis, const Standard_Real theLength)
+    : myComponent(new Geom_Line(theAxis)), myTypeOfAxis(AIS_TOAX_ZAxis), myIsXYZAxis(Standard_True) {
+    myDir = theAxis.Direction();
+    myPfirst = theAxis.Location();
+    if (theLength <= 0 && theLength != -1) {
+        throw Standard_NumericError("AIS_Axis::AIS_Axis : invalid value for theLength parameter");
+    }
+    myVal = (theLength == -1) ? UnitsAPI::AnyToLS(250000., "mm") : theLength;
+    myPlast = myPfirst.XYZ() + myVal * myDir.XYZ();
+    SetInfiniteState();
+    Handle(Prs3d_DatumAspect) aDatumAspect = new Prs3d_DatumAspect();
+    aDatumAspect->SetDrawLabels(Standard_False);
+    myDrawer->SetDatumAspect(aDatumAspect);
+    Handle(Prs3d_LineAspect) aDefaultLineAspect = new Prs3d_LineAspect(Quantity_NOC_RED, Aspect_TOL_SOLID, 1.0);
+    myDrawer->SetLineAspect(aDefaultLineAspect);
+    myLineAspect = myDrawer->LineAspect();
+}
+
+//=======================================================================
+// function : SetComponent
+// purpose  :
 //=======================================================================
 
- Standard_Boolean  AIS_Axis::
-AcceptDisplayMode(const Standard_Integer aMode) const
-{return aMode == 0;}
+void AIS_Axis::SetComponent(const Handle(Geom_Line) & aComponent) {
+    myComponent = aComponent;
+    myTypeOfAxis = AIS_TOAX_Unknown;
+    myIsXYZAxis = Standard_False;
+    SetInfiniteState();
+
+    gp_Dir thedir = myComponent->Position().Direction();
+    gp_Pnt loc = myComponent->Position().Location();
+    Standard_Real aLength = UnitsAPI::AnyToLS(250000., "mm");
+    myPfirst = loc.XYZ() + aLength * thedir.XYZ();
+    myPlast = loc.XYZ() - aLength * thedir.XYZ();
+}
 
 //=======================================================================
-//function : UnsetColor
-//purpose  : 
+// function : SetAxis2Placement
+// purpose  :
 //=======================================================================
-void AIS_Axis::UnsetColor()
-{
-  myDrawer->LineAspect()->SetColor(Quantity_NOC_RED);
-  hasOwnColor = Standard_False;
 
-  myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_XAxis)->SetColor(Quantity_NOC_TURQUOISE);
-  myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_YAxis)->SetColor(Quantity_NOC_TURQUOISE);
-  myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_ZAxis)->SetColor(Quantity_NOC_TURQUOISE);
-  SynchronizeAspects();
+void AIS_Axis::SetAxis2Placement(const Handle(Geom_Axis2Placement) & aComponent, const AIS_TypeOfAxis anAxisType) {
+    myAx2 = aComponent;
+    myTypeOfAxis = anAxisType;
+    myIsXYZAxis = Standard_True;
+    ComputeFields();
+}
+
+//=======================================================================
+// function : SetAxis1Placement
+// purpose  :
+//=======================================================================
+
+void AIS_Axis::SetAxis1Placement(const Handle(Geom_Axis1Placement) & anAxis) {
+    SetComponent(new Geom_Line(anAxis->Ax1()));
+}
+
+//=======================================================================
+// function : Compute
+// purpose  :
+//=======================================================================
+void AIS_Axis::Compute(const Handle(PrsMgr_PresentationManager) &, const Handle(Prs3d_Presentation) & thePrs,
+                       const Standard_Integer) {
+    thePrs->SetInfiniteState(myInfiniteState);
+    thePrs->SetDisplayPriority(5);
+    if (!myIsXYZAxis) {
+        GeomAdaptor_Curve curv(myComponent);
+        StdPrs_Curve::Add(thePrs, curv, myDrawer);
+    } else {
+        DsgPrs_XYZAxisPresentation::Add(thePrs, myLineAspect, myDir, myVal,
+                                        myDrawer->DatumAspect()->ToDrawLabels() ? myText : "", myPfirst, myPlast);
+    }
+}
+
+//=======================================================================
+// function : ComputeSelection
+// purpose  :
+//=======================================================================
+
+void AIS_Axis::ComputeSelection(const Handle(SelectMgr_Selection) & aSelection, const Standard_Integer) {
+    Handle(SelectMgr_EntityOwner) eown = new SelectMgr_EntityOwner(this, 3);
+    Handle(Select3D_SensitiveSegment) seg = new Select3D_SensitiveSegment(eown, myPfirst, myPlast);
+    aSelection->Add(seg);
+}
+
+//=======================================================================
+// function : SetColor
+// purpose  :
+//=======================================================================
+void AIS_Axis::SetColor(const Quantity_Color& aCol) {
+    hasOwnColor = Standard_True;
+    myDrawer->SetColor(aCol);
+    myDrawer->LineAspect()->SetColor(aCol);
+
+    const Handle(Prs3d_DatumAspect) & DA = myDrawer->DatumAspect();
+    DA->LineAspect(Prs3d_DatumParts_XAxis)->SetColor(aCol);
+    DA->LineAspect(Prs3d_DatumParts_YAxis)->SetColor(aCol);
+    DA->LineAspect(Prs3d_DatumParts_ZAxis)->SetColor(aCol);
+    SynchronizeAspects();
+}
+
+//=======================================================================
+// function : SetWidth
+// purpose  :
+//=======================================================================
+void AIS_Axis::SetWidth(const Standard_Real aValue) {
+    if (aValue < 0.0) return;
+    if (aValue == 0) UnsetWidth();
+
+    myDrawer->LineAspect()->SetWidth(aValue);
+
+    const Handle(Prs3d_DatumAspect) & DA = myDrawer->DatumAspect();
+    DA->LineAspect(Prs3d_DatumParts_XAxis)->SetWidth(aValue);
+    DA->LineAspect(Prs3d_DatumParts_YAxis)->SetWidth(aValue);
+    DA->LineAspect(Prs3d_DatumParts_ZAxis)->SetWidth(aValue);
+    SynchronizeAspects();
+}
+
+//=======================================================================
+// function : SetDisplayAspect
+// purpose  :
+//=======================================================================
+void AIS_Axis::SetDisplayAspect(const Handle(Prs3d_LineAspect) & theNewLineAspect) {
+    myDrawer->SetLineAspect(theNewLineAspect);
+    myLineAspect = myDrawer->LineAspect();
+    SetColor(theNewLineAspect->Aspect()->Color());
+}
+
+//=======================================================================
+// function : ComputeFields
+// purpose  :
+//=======================================================================
+void AIS_Axis::ComputeFields() {
+    if (myIsXYZAxis) {
+        // calcul de myPFirst,myPlast
+        Handle(Prs3d_DatumAspect) DA = myDrawer->DatumAspect();
+        gp_Ax2 anAxis = myAx2->Ax2();
+        const gp_Pnt& Orig = anAxis.Location();
+        const gp_Dir& oX = anAxis.XDirection();
+        const gp_Dir& oY = anAxis.YDirection();
+        const gp_Dir& oZ = anAxis.Direction();
+        Standard_Real xo, yo, zo, x = 0., y = 0., z = 0.;
+        Orig.Coord(xo, yo, zo);
+        myPfirst.SetCoord(xo, yo, zo);
+
+        switch (myTypeOfAxis) {
+            case AIS_TOAX_XAxis: {
+                oX.Coord(x, y, z);
+                myVal = DA->AxisLength(Prs3d_DatumParts_XAxis);
+                myDir = oX;
+                myLineAspect = DA->LineAspect(Prs3d_DatumParts_XAxis);
+                myText = Standard_CString("X");
+                break;
+            }
+            case AIS_TOAX_YAxis: {
+                oY.Coord(x, y, z);
+                myVal = DA->AxisLength(Prs3d_DatumParts_YAxis);
+                myDir = oY;
+                myLineAspect = DA->LineAspect(Prs3d_DatumParts_YAxis);
+                myText = Standard_CString("Y");
+                break;
+            }
+            case AIS_TOAX_ZAxis: {
+                oZ.Coord(x, y, z);
+                myVal = DA->AxisLength(Prs3d_DatumParts_ZAxis);
+                myDir = oZ;
+                myLineAspect = DA->LineAspect(Prs3d_DatumParts_ZAxis);
+                myText = Standard_CString("Z");
+                break;
+            }
+            default:
+                break;
+        }
+
+        myComponent = new Geom_Line(Orig, myDir);
+        x = xo + x * myVal;
+        y = yo + y * myVal;
+        z = zo + z * myVal;
+        myPlast.SetCoord(x, y, z);
+        SetInfiniteState();
+    }
+}
+
+//=======================================================================
+// function : AcceptDisplayMode
+// purpose  :
+//=======================================================================
+
+Standard_Boolean AIS_Axis::AcceptDisplayMode(const Standard_Integer aMode) const {
+    return aMode == 0;
+}
+
+//=======================================================================
+// function : UnsetColor
+// purpose  :
+//=======================================================================
+void AIS_Axis::UnsetColor() {
+    myDrawer->LineAspect()->SetColor(Quantity_NOC_RED);
+    hasOwnColor = Standard_False;
+
+    myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_XAxis)->SetColor(Quantity_NOC_TURQUOISE);
+    myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_YAxis)->SetColor(Quantity_NOC_TURQUOISE);
+    myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_ZAxis)->SetColor(Quantity_NOC_TURQUOISE);
+    SynchronizeAspects();
 }
 //=======================================================================
-//function : UnsetWidth
-//purpose  : 
+// function : UnsetWidth
+// purpose  :
 //=======================================================================
 
-void AIS_Axis::UnsetWidth()
-{
-  myOwnWidth = 0.0f;
-  myDrawer->LineAspect()->SetWidth(1.);
-  myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_XAxis)->SetWidth(1.);
-  myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_YAxis)->SetWidth(1.);
-  myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_ZAxis)->SetWidth(1.);
-  SynchronizeAspects();
+void AIS_Axis::UnsetWidth() {
+    myOwnWidth = 0.0f;
+    myDrawer->LineAspect()->SetWidth(1.);
+    myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_XAxis)->SetWidth(1.);
+    myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_YAxis)->SetWidth(1.);
+    myDrawer->DatumAspect()->LineAspect(Prs3d_DatumParts_ZAxis)->SetWidth(1.);
+    SynchronizeAspects();
 }

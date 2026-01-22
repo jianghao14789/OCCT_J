@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(HLRAlgo_HArray1OfPINod, HLRAlgo_Array1OfPINod)
 
-
 #endif

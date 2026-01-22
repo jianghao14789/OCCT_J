@@ -40,7 +40,8 @@ public:
     DEFINE_STANDARD_ALLOC;
 
     //! Constructor. Initialize new entity.
-    Standard_EXPORT math_Powell(const math_MultipleVarFunction& theFunction, const Standard_Real theTolerance, const Standard_Integer theNbIterations = 200, const Standard_Real theZEPS = 1.0e-12);
+    Standard_EXPORT math_Powell(const math_MultipleVarFunction& theFunction, const Standard_Real theTolerance,
+                                const Standard_Integer theNbIterations = 200, const Standard_Real theZEPS = 1.0e-12);
 
     //! Destructor
     Standard_EXPORT virtual ~math_Powell();
@@ -50,7 +51,8 @@ public:
     //! whose columns contain the initial set of directions.
     //! The solution F = Fi is found when:
     //! 2.0 * abs(Fi - Fi-1) =< Tolerance * (abs(Fi) + abs(Fi-1) + ZEPS).
-    Standard_EXPORT void Perform(math_MultipleVarFunction& theFunction, const math_Vector& theStartingPoint, const math_Matrix& theStartingDirections);
+    Standard_EXPORT void Perform(math_MultipleVarFunction& theFunction, const math_Vector& theStartingPoint,
+                                 const math_Matrix& theStartingDirections);
 
     //! Solution F = Fi is found when:
     //! 2.0 * abs(Fi - Fi-1) <= Tolerance * (abs(Fi) + abs(Fi-1)) + ZEPS.
@@ -99,7 +101,6 @@ private:
     Standard_Integer State;
     Standard_Integer Itermax;
 };
-
 
 #include <math_Powell.lxx>
 

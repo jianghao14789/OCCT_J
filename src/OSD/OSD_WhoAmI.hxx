@@ -17,8 +17,7 @@
 
 //! Allows great accuracy for error management.
 //! This is private.
-enum OSD_WhoAmI
-{
+enum OSD_WhoAmI {
     OSD_WDirectory,
     OSD_WDirectoryIterator,
     OSD_WEnvironment,

@@ -24,76 +24,58 @@
 class TCollection_HAsciiString;
 class StepBasic_Group;
 
-
 class StepBasic_GroupRelationship;
 DEFINE_STANDARD_HANDLE(StepBasic_GroupRelationship, Standard_Transient)
 
 //! Representation of STEP entity GroupRelationship
-class StepBasic_GroupRelationship : public Standard_Transient
-{
+class StepBasic_GroupRelationship : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepBasic_GroupRelationship();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepBasic_GroupRelationship();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Handle(TCollection_HAsciiString)& aName, const Standard_Boolean hasDescription, const Handle(TCollection_HAsciiString)& aDescription, const Handle(StepBasic_Group)& aRelatingGroup, const Handle(StepBasic_Group)& aRelatedGroup);
-  
-  //! Returns field Name
-  Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
-  
-  //! Set field Name
-  Standard_EXPORT void SetName (const Handle(TCollection_HAsciiString)& Name);
-  
-  //! Returns field Description
-  Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
-  
-  //! Set field Description
-  Standard_EXPORT void SetDescription (const Handle(TCollection_HAsciiString)& Description);
-  
-  //! Returns True if optional field Description is defined
-  Standard_EXPORT Standard_Boolean HasDescription() const;
-  
-  //! Returns field RelatingGroup
-  Standard_EXPORT Handle(StepBasic_Group) RelatingGroup() const;
-  
-  //! Set field RelatingGroup
-  Standard_EXPORT void SetRelatingGroup (const Handle(StepBasic_Group)& RelatingGroup);
-  
-  //! Returns field RelatedGroup
-  Standard_EXPORT Handle(StepBasic_Group) RelatedGroup() const;
-  
-  //! Set field RelatedGroup
-  Standard_EXPORT void SetRelatedGroup (const Handle(StepBasic_Group)& RelatedGroup);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Handle(TCollection_HAsciiString) & aName, const Standard_Boolean hasDescription,
+                              const Handle(TCollection_HAsciiString) & aDescription,
+                              const Handle(StepBasic_Group) & aRelatingGroup,
+                              const Handle(StepBasic_Group) & aRelatedGroup);
 
+    //! Returns field Name
+    Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
 
+    //! Set field Name
+    Standard_EXPORT void SetName(const Handle(TCollection_HAsciiString) & Name);
 
+    //! Returns field Description
+    Standard_EXPORT Handle(TCollection_HAsciiString) Description() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepBasic_GroupRelationship,Standard_Transient)
+    //! Set field Description
+    Standard_EXPORT void SetDescription(const Handle(TCollection_HAsciiString) & Description);
+
+    //! Returns True if optional field Description is defined
+    Standard_EXPORT Standard_Boolean HasDescription() const;
+
+    //! Returns field RelatingGroup
+    Standard_EXPORT Handle(StepBasic_Group) RelatingGroup() const;
+
+    //! Set field RelatingGroup
+    Standard_EXPORT void SetRelatingGroup(const Handle(StepBasic_Group) & RelatingGroup);
+
+    //! Returns field RelatedGroup
+    Standard_EXPORT Handle(StepBasic_Group) RelatedGroup() const;
+
+    //! Set field RelatedGroup
+    Standard_EXPORT void SetRelatedGroup(const Handle(StepBasic_Group) & RelatedGroup);
+
+    DEFINE_STANDARD_RTTIEXT(StepBasic_GroupRelationship, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Handle(TCollection_HAsciiString) theName;
-  Handle(TCollection_HAsciiString) theDescription;
-  Handle(StepBasic_Group) theRelatingGroup;
-  Handle(StepBasic_Group) theRelatedGroup;
-  Standard_Boolean defDescription;
-
-
+    Handle(TCollection_HAsciiString) theName;
+    Handle(TCollection_HAsciiString) theDescription;
+    Handle(StepBasic_Group) theRelatingGroup;
+    Handle(StepBasic_Group) theRelatedGroup;
+    Standard_Boolean defDescription;
 };
-
-
-
-
-
-
 
 #endif // _StepBasic_GroupRelationship_HeaderFile

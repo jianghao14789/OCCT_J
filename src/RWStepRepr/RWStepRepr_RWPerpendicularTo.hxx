@@ -28,25 +28,22 @@ class StepRepr_PerpendicularTo;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for PerpendicularTo
-class RWStepRepr_RWPerpendicularTo 
-{
+class RWStepRepr_RWPerpendicularTo {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepRepr_RWPerpendicularTo();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepRepr_RWPerpendicularTo();
-  
-  //! Reads PerpendicularTo
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_PerpendicularTo)& ent)  const;
-  
-  //! Writes PerpendicularTo
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_PerpendicularTo)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepRepr_PerpendicularTo)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads PerpendicularTo
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepRepr_PerpendicularTo) & ent) const;
+
+    //! Writes PerpendicularTo
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepRepr_PerpendicularTo) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepRepr_PerpendicularTo) & ent, Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepRepr_RWPerpendicularTo_HeaderFile

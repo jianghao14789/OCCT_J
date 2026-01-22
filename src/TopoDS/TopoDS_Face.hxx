@@ -23,7 +23,6 @@
 
 #include <TopoDS_Shape.hxx>
 
-
 //! Describes a face which
 //! - references an underlying face with the potential to
 //! be given a location and an orientation
@@ -31,19 +30,15 @@
 //! placement in the local coordinate system
 //! - has an orientation for the underlying face, in terms
 //! of its geometry (as opposed to orientation in relation to other shapes).
-class TopoDS_Face : public TopoDS_Shape
-{
+class TopoDS_Face : public TopoDS_Shape {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Undefined Face.
     TopoDS_Face();
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_Face.lxx>

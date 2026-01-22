@@ -43,32 +43,34 @@ DEFINE_STANDARD_HANDLE(PrsDim_DimensionOwner, SelectMgr_EntityOwner)
 //! higher priority to the one compared to the other. An
 //! edge, could have priority 5, for example, and a face,
 //! priority 4. The default priority is 5.
-class PrsDim_DimensionOwner : public SelectMgr_EntityOwner
-{
-  DEFINE_STANDARD_RTTIEXT(PrsDim_DimensionOwner, SelectMgr_EntityOwner)
+class PrsDim_DimensionOwner : public SelectMgr_EntityOwner {
+    DEFINE_STANDARD_RTTIEXT(PrsDim_DimensionOwner, SelectMgr_EntityOwner)
 public:
+    //! Initializes the dimension owner, theSO, and attributes it
+    //! the priority, thePriority.
+    Standard_EXPORT PrsDim_DimensionOwner(const Handle(SelectMgr_SelectableObject) & theSelObject,
+                                          const PrsDim_DimensionSelectionMode theSelMode,
+                                          const Standard_Integer thePriority = 0);
 
-  //! Initializes the dimension owner, theSO, and attributes it
-  //! the priority, thePriority.
-  Standard_EXPORT PrsDim_DimensionOwner(const Handle(SelectMgr_SelectableObject)& theSelObject, const PrsDim_DimensionSelectionMode theSelMode, const Standard_Integer thePriority = 0);
-  
-  PrsDim_DimensionSelectionMode SelectionMode() const { return mySelectionMode; }
-  
-  Standard_EXPORT virtual void HilightWithColor (const Handle(PrsMgr_PresentationManager)& thePM,
-                                                 const Handle(Prs3d_Drawer)& theStyle,
-                                                 const Standard_Integer theMode) Standard_OVERRIDE;
-  
-  //! Returns true if an object with the selection mode
-  //! aMode is highlighted in the presentation manager aPM.
-  Standard_EXPORT virtual Standard_Boolean IsHilighted (const Handle(PrsMgr_PresentationManager)& thePM, const Standard_Integer theMode = 0) const Standard_OVERRIDE;
-  
-  //! Removes highlighting from the selected part of dimension.
-  Standard_EXPORT virtual void Unhilight (const Handle(PrsMgr_PresentationManager)& thePM, const Standard_Integer theMode = 0) Standard_OVERRIDE;
+    PrsDim_DimensionSelectionMode SelectionMode() const {
+        return mySelectionMode;
+    }
+
+    Standard_EXPORT virtual void HilightWithColor(const Handle(PrsMgr_PresentationManager) & thePM,
+                                                  const Handle(Prs3d_Drawer) & theStyle,
+                                                  const Standard_Integer theMode) Standard_OVERRIDE;
+
+    //! Returns true if an object with the selection mode
+    //! aMode is highlighted in the presentation manager aPM.
+    Standard_EXPORT virtual Standard_Boolean IsHilighted(const Handle(PrsMgr_PresentationManager) & thePM,
+                                                         const Standard_Integer theMode = 0) const Standard_OVERRIDE;
+
+    //! Removes highlighting from the selected part of dimension.
+    Standard_EXPORT virtual void Unhilight(const Handle(PrsMgr_PresentationManager) & thePM,
+                                           const Standard_Integer theMode = 0) Standard_OVERRIDE;
 
 private:
-
-  PrsDim_DimensionSelectionMode mySelectionMode;
-
+    PrsDim_DimensionSelectionMode mySelectionMode;
 };
 
 #endif // _AIS_DimensionOwner_HeaderFile

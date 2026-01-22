@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_FillAreaStyle.hxx>
 #include <StepVisual_SurfaceStyleFillArea.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleFillArea,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_SurfaceStyleFillArea, Standard_Transient)
 
-StepVisual_SurfaceStyleFillArea::StepVisual_SurfaceStyleFillArea ()  {}
+StepVisual_SurfaceStyleFillArea::StepVisual_SurfaceStyleFillArea() {}
 
-void StepVisual_SurfaceStyleFillArea::Init(
-	const Handle(StepVisual_FillAreaStyle)& aFillArea)
-{
-	// --- classe own fields ---
-	fillArea = aFillArea;
+void StepVisual_SurfaceStyleFillArea::Init(const Handle(StepVisual_FillAreaStyle) & aFillArea) {
+    // --- classe own fields ---
+    fillArea = aFillArea;
 }
 
-
-void StepVisual_SurfaceStyleFillArea::SetFillArea(const Handle(StepVisual_FillAreaStyle)& aFillArea)
-{
-	fillArea = aFillArea;
+void StepVisual_SurfaceStyleFillArea::SetFillArea(const Handle(StepVisual_FillAreaStyle) & aFillArea) {
+    fillArea = aFillArea;
 }
 
-Handle(StepVisual_FillAreaStyle) StepVisual_SurfaceStyleFillArea::FillArea() const
-{
-	return fillArea;
+Handle(StepVisual_FillAreaStyle) StepVisual_SurfaceStyleFillArea::FillArea() const {
+    return fillArea;
 }

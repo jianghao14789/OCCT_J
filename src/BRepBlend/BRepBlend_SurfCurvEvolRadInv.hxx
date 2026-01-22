@@ -24,7 +24,6 @@
 class Law_Function;
 class math_Matrix;
 
-
 //! Function of reframing between a surface restriction
 //! of the surface and a curve.
 //! Class     used   to   compute  a    solution   of  the
@@ -38,11 +37,10 @@ class math_Matrix;
 //! the surface.
 class BRepBlend_SurfCurvEvolRadInv : public Blend_SurfCurvFuncInv {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-
-    Standard_EXPORT BRepBlend_SurfCurvEvolRadInv(const Handle(Adaptor3d_Surface)& S, const Handle(Adaptor3d_Curve)& C, const Handle(Adaptor3d_Curve)& Cg, const Handle(Law_Function)& Evol);
+    Standard_EXPORT BRepBlend_SurfCurvEvolRadInv(const Handle(Adaptor3d_Surface) & S, const Handle(Adaptor3d_Curve) & C,
+                                                 const Handle(Adaptor3d_Curve) & Cg, const Handle(Law_Function) & Evol);
 
     Standard_EXPORT void Set(const Standard_Integer Choix);
 
@@ -68,7 +66,7 @@ public:
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
 
     //! Set the restriction on which a solution has to be found.
-    Standard_EXPORT void Set(const Handle(Adaptor2d_Curve2d)& Rst);
+    Standard_EXPORT void Set(const Handle(Adaptor2d_Curve2d) & Rst);
 
     //! Returns in the vector Tolerance the parametric tolerance
     //! for each of the 3 variables;
@@ -85,19 +83,8 @@ public:
     //! Tol is the tolerance used in 3d space.
     Standard_EXPORT Standard_Boolean IsSolution(const math_Vector& Sol, const Standard_Real Tol);
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Handle(Adaptor3d_Surface) surf;
     Handle(Adaptor3d_Curve) curv;
     Handle(Adaptor3d_Curve) guide;
@@ -106,14 +93,6 @@ private:
     Standard_Integer choix;
     Handle(Law_Function) tevol;
     Standard_Real sg1;
-
-
 };
-
-
-
-
-
-
 
 #endif // _BRepBlend_SurfCurvEvolRadInv_HeaderFile

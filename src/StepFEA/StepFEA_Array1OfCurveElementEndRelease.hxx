@@ -19,5 +19,4 @@
 
 typedef NCollection_Array1<Handle(StepFEA_CurveElementEndRelease)> StepFEA_Array1OfCurveElementEndRelease;
 
-
 #endif

@@ -36,10 +36,8 @@ class Quantity_Period;
 //! January 1, 1979 (zero hour). The valid date can
 //! only be later than this one.
 //! Note: a Period object gives the interval between two dates.
-class Quantity_Date
-{
+class Quantity_Date {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Constructs a default date
@@ -62,7 +60,9 @@ public:
     //! Exceptions
     //! Quantity_DateDefinitionError if mm, dd, hh,
     //! mn, ss, mis and mics are not the components of the valid date.
-    Standard_EXPORT Quantity_Date(const Standard_Integer mm, const Standard_Integer dd, const Standard_Integer yyyy, const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss, const Standard_Integer mis = 0, const Standard_Integer mics = 0);
+    Standard_EXPORT Quantity_Date(const Standard_Integer mm, const Standard_Integer dd, const Standard_Integer yyyy,
+                                  const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss,
+                                  const Standard_Integer mis = 0, const Standard_Integer mics = 0);
 
     //! Gets a complete Date.
     //! -   in mm - the month,
@@ -73,7 +73,9 @@ public:
     //! -   in ss - the second,
     //! -   in mis - the millisecond, and
     //! -   in mics - the microsecond
-    Standard_EXPORT void Values(Standard_Integer& mm, Standard_Integer& dd, Standard_Integer& yy, Standard_Integer& hh, Standard_Integer& mn, Standard_Integer& ss, Standard_Integer& mis, Standard_Integer& mics) const;
+    Standard_EXPORT void Values(Standard_Integer& mm, Standard_Integer& dd, Standard_Integer& yy, Standard_Integer& hh,
+                                Standard_Integer& mn, Standard_Integer& ss, Standard_Integer& mis,
+                                Standard_Integer& mics) const;
 
     //! Assigns to this date the year yyyy, the month
     //! mm, the day dd, the hour hh, the minute mn, the
@@ -82,7 +84,9 @@ public:
     //! Exceptions
     //! Quantity_DateDefinitionError if mm, dd, hh,
     //! mn, ss, mis and mics are not components of a valid date.
-    Standard_EXPORT void SetValues(const Standard_Integer mm, const Standard_Integer dd, const Standard_Integer yy, const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss, const Standard_Integer mis = 0, const Standard_Integer mics = 0);
+    Standard_EXPORT void SetValues(const Standard_Integer mm, const Standard_Integer dd, const Standard_Integer yy,
+                                   const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss,
+                                   const Standard_Integer mis = 0, const Standard_Integer mics = 0);
 
     //! Subtracts one Date from another one to find the period
     //! between and returns the value.
@@ -94,15 +98,13 @@ public:
     //! Raises an exception if the result date is anterior to
     //! Jan 1, 1979.
     Standard_EXPORT Quantity_Date Subtract(const Quantity_Period& aPeriod);
-    Quantity_Date operator - (const Quantity_Period& aPeriod)
-    {
+    Quantity_Date operator-(const Quantity_Period& aPeriod) {
         return Subtract(aPeriod);
     }
 
     //! Adds a Period to a Date and returns the new Date.
     Standard_EXPORT Quantity_Date Add(const Quantity_Period& aPeriod);
-    Quantity_Date operator + (const Quantity_Period& aPeriod)
-    {
+    Quantity_Date operator+(const Quantity_Period& aPeriod) {
         return Add(aPeriod);
     }
 
@@ -133,22 +135,19 @@ public:
     //! Returns TRUE if both <me> and <other> are equal.
     //! This method is an alias of operator ==.
     Standard_EXPORT Standard_Boolean IsEqual(const Quantity_Date& anOther) const;
-    Standard_Boolean operator == (const Quantity_Date& anOther) const
-    {
+    Standard_Boolean operator==(const Quantity_Date& anOther) const {
         return IsEqual(anOther);
     }
 
     //! Returns TRUE if <me> is earlier than <other>.
     Standard_EXPORT Standard_Boolean IsEarlier(const Quantity_Date& anOther) const;
-    Standard_Boolean operator < (const Quantity_Date& anOther) const
-    {
+    Standard_Boolean operator<(const Quantity_Date& anOther) const {
         return IsEarlier(anOther);
     }
 
     //! Returns TRUE if <me> is later then <other>.
     Standard_EXPORT Standard_Boolean IsLater(const Quantity_Date& anOther) const;
-    Standard_Boolean operator > (const Quantity_Date& anOther) const
-    {
+    Standard_Boolean operator>(const Quantity_Date& anOther) const {
         return IsLater(anOther);
     }
 
@@ -169,22 +168,21 @@ public:
     //! -   ss lies within the range [0, 59],
     //! -   mis lies within the range [0, 999],
     //! -   mics lies within the range [0, 999].C
-    Standard_EXPORT static Standard_Boolean IsValid(const Standard_Integer mm, const Standard_Integer dd, const Standard_Integer yy, const Standard_Integer hh, const Standard_Integer mn, const Standard_Integer ss, const Standard_Integer mis = 0, const Standard_Integer mics = 0);
+    Standard_EXPORT static Standard_Boolean IsValid(const Standard_Integer mm, const Standard_Integer dd,
+                                                    const Standard_Integer yy, const Standard_Integer hh,
+                                                    const Standard_Integer mn, const Standard_Integer ss,
+                                                    const Standard_Integer mis = 0, const Standard_Integer mics = 0);
 
     //! Returns true if a year is a leap year.
     //! The leap years are divisible by 4 and not by 100 except
     //! the years divisible by 400.
-    static Standard_Boolean IsLeap(const Standard_Integer yy)
-    {
-        return ((yy % 4 == 0) && (yy % 100 != 0))
-            || (yy % 400) == 0;
+    static Standard_Boolean IsLeap(const Standard_Integer yy) {
+        return ((yy % 4 == 0) && (yy % 100 != 0)) || (yy % 400) == 0;
     }
 
 private:
-
     Standard_Integer mySec;
     Standard_Integer myUSec;
-
 };
 
 #endif // _Quantity_Date_HeaderFile

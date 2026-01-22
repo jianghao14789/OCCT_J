@@ -26,7 +26,6 @@
 class TCollection_HAsciiString;
 class IGESAppli_Node;
 
-
 class IGESAppli_FiniteElement;
 DEFINE_STANDARD_HANDLE(IGESAppli_FiniteElement, IGESData_IGESEntity)
 
@@ -34,58 +33,39 @@ DEFINE_STANDARD_HANDLE(IGESAppli_FiniteElement, IGESData_IGESEntity)
 //! in package IGESAppli
 //! Used to define a finite element with the help of an
 //! element topology.
-class IGESAppli_FiniteElement : public IGESData_IGESEntity
-{
+class IGESAppli_FiniteElement : public IGESData_IGESEntity {
 
 public:
+    Standard_EXPORT IGESAppli_FiniteElement();
 
-  
-  Standard_EXPORT IGESAppli_FiniteElement();
-  
-  //! This method is used to set the fields of the class
-  //! FiniteElement
-  //! - aType    : Indicates the topology type
-  //! - allNodes : List of Nodes defining the element
-  //! - aName    : Element type name
-  Standard_EXPORT void Init (const Standard_Integer aType, const Handle(IGESAppli_HArray1OfNode)& allNodes, const Handle(TCollection_HAsciiString)& aName);
-  
-  //! returns Topology type
-  Standard_EXPORT Standard_Integer Topology() const;
-  
-  //! returns the number of nodes defining the element
-  Standard_EXPORT Standard_Integer NbNodes() const;
-  
-  //! returns Node defining element entity
-  //! raises exception if Index <= 0 or Index > NbNodes()
-  Standard_EXPORT Handle(IGESAppli_Node) Node (const Standard_Integer Index) const;
-  
-  //! returns Element Type Name
-  Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
+    //! This method is used to set the fields of the class
+    //! FiniteElement
+    //! - aType    : Indicates the topology type
+    //! - allNodes : List of Nodes defining the element
+    //! - aName    : Element type name
+    Standard_EXPORT void Init(const Standard_Integer aType, const Handle(IGESAppli_HArray1OfNode) & allNodes,
+                              const Handle(TCollection_HAsciiString) & aName);
 
+    //! returns Topology type
+    Standard_EXPORT Standard_Integer Topology() const;
 
+    //! returns the number of nodes defining the element
+    Standard_EXPORT Standard_Integer NbNodes() const;
 
+    //! returns Node defining element entity
+    //! raises exception if Index <= 0 or Index > NbNodes()
+    Standard_EXPORT Handle(IGESAppli_Node) Node(const Standard_Integer Index) const;
 
-  DEFINE_STANDARD_RTTIEXT(IGESAppli_FiniteElement,IGESData_IGESEntity)
+    //! returns Element Type Name
+    Standard_EXPORT Handle(TCollection_HAsciiString) Name() const;
+
+    DEFINE_STANDARD_RTTIEXT(IGESAppli_FiniteElement, IGESData_IGESEntity)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer theTopology;
-  Handle(IGESAppli_HArray1OfNode) theNodes;
-  Handle(TCollection_HAsciiString) theName;
-
-
+    Standard_Integer theTopology;
+    Handle(IGESAppli_HArray1OfNode) theNodes;
+    Handle(TCollection_HAsciiString) theName;
 };
-
-
-
-
-
-
 
 #endif // _IGESAppli_FiniteElement_HeaderFile

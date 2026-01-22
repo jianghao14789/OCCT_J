@@ -22,9 +22,7 @@
 #include <Standard_ConstructionError.hxx>
 #include <Standard_OutOfRange.hxx>
 
-void gp_GTrsf2d::SetAffinity(const gp_Ax2d& A,
-    const Standard_Real Ratio)
-{
+void gp_GTrsf2d::SetAffinity(const gp_Ax2d& A, const Standard_Real Ratio) {
     shape = gp_Other;
     scale = 0.0;
     Standard_Real a = A.Direction().X();
@@ -39,38 +37,34 @@ void gp_GTrsf2d::SetAffinity(const gp_Ax2d& A,
     loc.Add(A.Location().XY());
 }
 
-void gp_GTrsf2d::SetTranslationPart(const gp_XY& Coord)
-{
+void gp_GTrsf2d::SetTranslationPart(const gp_XY& Coord) {
     loc = Coord;
-    if (Form() == gp_CompoundTrsf || Form() == gp_Other ||
-        Form() == gp_Translation) {
+    if (Form() == gp_CompoundTrsf || Form() == gp_Other || Form() == gp_Translation) {
+    } else if (Form() == gp_Identity) {
+        shape = gp_Translation;
+    } else {
+        shape = gp_CompoundTrsf;
     }
-    else if (Form() == gp_Identity) { shape = gp_Translation; }
-    else { shape = gp_CompoundTrsf; }
 }
 
-void gp_GTrsf2d::Invert()
-{
+void gp_GTrsf2d::Invert() {
     if (shape == gp_Other) {
         matrix.Invert();
         loc.Multiply(matrix);
         loc.Reverse();
-    }
-    else {
+    } else {
         gp_Trsf2d T = Trsf2d();
         T.Invert();
         SetTrsf2d(T);
     }
 }
 
-void gp_GTrsf2d::Multiply(const gp_GTrsf2d& T)
-{
+void gp_GTrsf2d::Multiply(const gp_GTrsf2d& T) {
     if (Form() == gp_Other || T.Form() == gp_Other) {
         shape = gp_Other;
         loc.Add(T.loc.Multiplied(matrix));
         matrix.Multiply(T.matrix);
-    }
-    else {
+    } else {
         gp_Trsf2d T1 = Trsf2d();
         gp_Trsf2d T2 = T.Trsf2d();
         T1.Multiply(T2);
@@ -81,18 +75,19 @@ void gp_GTrsf2d::Multiply(const gp_GTrsf2d& T)
     }
 }
 
-void gp_GTrsf2d::Power(const Standard_Integer N)
-{
+void gp_GTrsf2d::Power(const Standard_Integer N) {
     if (N == 0) {
         scale = 1.0;
         shape = gp_Identity;
         matrix.SetIdentity();
         loc = gp_XY(0., 0.);
-    }
-    else if (N == 1) {}
-    else if (N == -1) { Invert(); }
-    else {
-        if (N < 0) { Invert(); }
+    } else if (N == 1) {
+    } else if (N == -1) {
+        Invert();
+    } else {
+        if (N < 0) {
+            Invert();
+        }
         if (shape == gp_Other) {
             Standard_Integer Npower = N;
             if (Npower < 0) Npower = -Npower;
@@ -105,13 +100,14 @@ void gp_GTrsf2d::Power(const Standard_Integer N)
                     loc.Add(Temploc.Multiplied(matrix));
                     matrix.Multiply(Tempmatrix);
                 }
-                if (Npower == 1) { break; }
+                if (Npower == 1) {
+                    break;
+                }
                 Temploc.Add(Temploc.Multiplied(Tempmatrix));
                 Tempmatrix.Multiply(Tempmatrix);
                 Npower = Npower / 2;
             }
-        }
-        else {
+        } else {
             gp_Trsf2d T = Trsf2d();
             T.Power(N);
             SetTrsf2d(T);
@@ -119,15 +115,13 @@ void gp_GTrsf2d::Power(const Standard_Integer N)
     }
 }
 
-void gp_GTrsf2d::PreMultiply(const gp_GTrsf2d& T)
-{
+void gp_GTrsf2d::PreMultiply(const gp_GTrsf2d& T) {
     if (Form() == gp_Other || T.Form() == gp_Other) {
         shape = gp_Other;
         loc.Multiply(T.matrix);
         loc.Add(T.loc);
         matrix.PreMultiply(T.matrix);
-    }
-    else {
+    } else {
         gp_Trsf2d T1 = Trsf2d();
         gp_Trsf2d T2 = T.Trsf2d();
         T1.PreMultiply(T2);
@@ -138,30 +132,23 @@ void gp_GTrsf2d::PreMultiply(const gp_GTrsf2d& T)
     }
 }
 
-gp_Trsf2d gp_GTrsf2d::Trsf2d() const
-{
+gp_Trsf2d gp_GTrsf2d::Trsf2d() const {
     // Test of orthogonality
     const Standard_Real aTolerance = Precision::Angular();
     const Standard_Real aTolerance2 = 2.0 * aTolerance;
 
-    if (Form() == gp_Other)
-        throw Standard_ConstructionError("gp_GTrsf2d::Trsf2d() - non-orthogonal GTrsf2d(0)");
+    if (Form() == gp_Other) throw Standard_ConstructionError("gp_GTrsf2d::Trsf2d() - non-orthogonal GTrsf2d(0)");
 
-    Standard_Real value = (matrix.Value(1, 1) * matrix.Value(1, 1)
-        + matrix.Value(2, 1) * matrix.Value(2, 1));
+    Standard_Real value = (matrix.Value(1, 1) * matrix.Value(1, 1) + matrix.Value(2, 1) * matrix.Value(2, 1));
     if (Abs(value - 1.) > aTolerance2)
         throw Standard_ConstructionError("gp_GTrsf2d::Trsf2d() - non-orthogonal GTrsf2d(1)");
 
-    value = (matrix.Value(1, 2) * matrix.Value(1, 2)
-        + matrix.Value(2, 2) * matrix.Value(2, 2));
+    value = (matrix.Value(1, 2) * matrix.Value(1, 2) + matrix.Value(2, 2) * matrix.Value(2, 2));
     if (Abs(value - 1.) > aTolerance2)
         throw Standard_ConstructionError("gp_GTrsf2d::Trsf2d() - non-orthogonal GTrsf2d(2)");
 
-    value = (matrix.Value(1, 1) * matrix.Value(1, 2)
-        + matrix.Value(2, 1) * matrix.Value(2, 2));
-    if (Abs(value) > aTolerance)
-        throw Standard_ConstructionError("gp_GTrsf2d::Trsf2d() - non-orthogonal GTrsf2d(3)");
-
+    value = (matrix.Value(1, 1) * matrix.Value(1, 2) + matrix.Value(2, 1) * matrix.Value(2, 2));
+    if (Abs(value) > aTolerance) throw Standard_ConstructionError("gp_GTrsf2d::Trsf2d() - non-orthogonal GTrsf2d(3)");
 
     gp_Trsf2d aTransformation;
     aTransformation.matrix = matrix;
@@ -171,4 +158,3 @@ gp_Trsf2d gp_GTrsf2d::Trsf2d() const
 
     return aTransformation;
 }
-

@@ -11,29 +11,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_Type.hxx>
 #include <StepVisual_PreDefinedItem.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepVisual_PreDefinedItem,Standard_Transient)
+IMPLEMENT_STANDARD_RTTIEXT(StepVisual_PreDefinedItem, Standard_Transient)
 
-StepVisual_PreDefinedItem::StepVisual_PreDefinedItem ()  {}
+StepVisual_PreDefinedItem::StepVisual_PreDefinedItem() {}
 
-void StepVisual_PreDefinedItem::Init(
-	const Handle(TCollection_HAsciiString)& aName)
-{
-	// --- classe own fields ---
-	name = aName;
+void StepVisual_PreDefinedItem::Init(const Handle(TCollection_HAsciiString) & aName) {
+    // --- classe own fields ---
+    name = aName;
 }
 
-
-void StepVisual_PreDefinedItem::SetName(const Handle(TCollection_HAsciiString)& aName)
-{
-	name = aName;
+void StepVisual_PreDefinedItem::SetName(const Handle(TCollection_HAsciiString) & aName) {
+    name = aName;
 }
 
-Handle(TCollection_HAsciiString) StepVisual_PreDefinedItem::Name() const
-{
-	return name;
+Handle(TCollection_HAsciiString) StepVisual_PreDefinedItem::Name() const {
+    return name;
 }

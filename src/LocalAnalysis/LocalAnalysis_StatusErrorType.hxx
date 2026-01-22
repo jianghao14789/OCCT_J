@@ -17,14 +17,12 @@
 #ifndef _LocalAnalysis_StatusErrorType_HeaderFile
 #define _LocalAnalysis_StatusErrorType_HeaderFile
 
-
-enum LocalAnalysis_StatusErrorType
-{
-LocalAnalysis_NullFirstDerivative,
-LocalAnalysis_NullSecondDerivative,
-LocalAnalysis_TangentNotDefined,
-LocalAnalysis_NormalNotDefined,
-LocalAnalysis_CurvatureNotDefined
+enum LocalAnalysis_StatusErrorType {
+    LocalAnalysis_NullFirstDerivative,
+    LocalAnalysis_NullSecondDerivative,
+    LocalAnalysis_TangentNotDefined,
+    LocalAnalysis_NormalNotDefined,
+    LocalAnalysis_CurvatureNotDefined
 };
 
 #endif // _LocalAnalysis_StatusErrorType_HeaderFile

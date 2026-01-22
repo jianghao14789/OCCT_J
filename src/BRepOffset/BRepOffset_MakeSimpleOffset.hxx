@@ -27,15 +27,13 @@
 #include <TopoDS_Vertex.hxx>
 #include <TopoDS_Shape.hxx>
 
-
-enum BRepOffsetSimple_Status
-{
-  BRepOffsetSimple_OK,
-  BRepOffsetSimple_NullInputShape,
-  BRepOffsetSimple_ErrorOffsetComputation,
-  BRepOffsetSimple_ErrorWallFaceComputation,
-  BRepOffsetSimple_ErrorInvalidNbShells,
-  BRepOffsetSimple_ErrorNonClosedShell
+enum BRepOffsetSimple_Status {
+    BRepOffsetSimple_OK,
+    BRepOffsetSimple_NullInputShape,
+    BRepOffsetSimple_ErrorOffsetComputation,
+    BRepOffsetSimple_ErrorWallFaceComputation,
+    BRepOffsetSimple_ErrorInvalidNbShells,
+    BRepOffsetSimple_ErrorNonClosedShell
 };
 
 //! This class represents simple offset algorithm itself. It builds simple offset without intersection.
@@ -54,124 +52,134 @@ enum BRepOffsetSimple_Status
 //!
 //! The possible drawback of the simple algorithm is that it leads, in general case, to tolerance increasing.
 //! The tolerances have to grow in order to cover the gaps between the neighbor faces in the output.
-//! It should be noted that the actual tolerance growth depends on the offset distance and the quality of 
+//! It should be noted that the actual tolerance growth depends on the offset distance and the quality of
 //! joints between the input faces. Anyway the good input shell (smooth connections between adjacent faces)
 //! will lead to good result.
-class BRepOffset_MakeSimpleOffset
-{
+class BRepOffset_MakeSimpleOffset {
 public:
+    //! Constructor. Does nothing.
+    Standard_EXPORT BRepOffset_MakeSimpleOffset();
 
+    //! Constructor.
+    Standard_EXPORT BRepOffset_MakeSimpleOffset(const TopoDS_Shape& theInputShape, const Standard_Real theOffsetValue);
 
-  //! Constructor. Does nothing.
-  Standard_EXPORT BRepOffset_MakeSimpleOffset();
+    //! Initialies shape for modifications.
+    Standard_EXPORT void Initialize(const TopoDS_Shape& theInputShape, const Standard_Real theOffsetValue);
 
-  //! Constructor.
-  Standard_EXPORT BRepOffset_MakeSimpleOffset(const TopoDS_Shape& theInputShape,
-                                              const Standard_Real theOffsetValue);
+    //! Computes offset shape.
+    Standard_EXPORT void Perform();
 
-  //! Initialies shape for modifications.
-  Standard_EXPORT void Initialize(const TopoDS_Shape& theInputShape,
-                                  const Standard_Real theOffsetValue);
+    //! Gets error message.
+    Standard_EXPORT TCollection_AsciiString GetErrorMessage() const;
 
-  //! Computes offset shape.
-  Standard_EXPORT void Perform();
+    //! Gets error code.
+    BRepOffsetSimple_Status GetError() const {
+        return myError;
+    }
 
-  //! Gets error message.
-  Standard_EXPORT TCollection_AsciiString GetErrorMessage() const;
+    // Inline methods.
+    //! Gets solid building flag.
+    Standard_Boolean GetBuildSolidFlag() const {
+        return myIsBuildSolid;
+    }
 
-  //! Gets error code.
-  BRepOffsetSimple_Status GetError() const { return myError; }
+    //! Sets solid building flag.
+    void SetBuildSolidFlag(const Standard_Boolean theBuildFlag) {
+        myIsBuildSolid = theBuildFlag;
+    }
 
-  // Inline methods.
-  //! Gets solid building flag.
-  Standard_Boolean GetBuildSolidFlag() const { return myIsBuildSolid; }
+    //! Gets offset value.
+    Standard_Real GetOffsetValue() const {
+        return myOffsetValue;
+    }
 
-  //! Sets solid building flag.
-  void SetBuildSolidFlag(const Standard_Boolean theBuildFlag) { myIsBuildSolid = theBuildFlag; }
+    //! Sets offset value.
+    void SetOffsetValue(const Standard_Real theOffsetValue) {
+        myOffsetValue = theOffsetValue;
+    }
 
-  //! Gets offset value.
-  Standard_Real GetOffsetValue() const { return myOffsetValue; }
+    //! Gets tolerance (used for handling singularities).
+    Standard_Real GetTolerance() const {
+        return myTolerance;
+    }
 
-  //! Sets offset value.
-  void SetOffsetValue(const Standard_Real theOffsetValue) { myOffsetValue = theOffsetValue; }
+    //! Sets tolerance (used for handling singularities).
+    void SetTolerance(const Standard_Real theValue) {
+        myTolerance = theValue;
+    }
 
-  //! Gets tolerance (used for handling singularities).
-  Standard_Real GetTolerance() const { return myTolerance; }
+    //! Gets done state.
+    Standard_Boolean IsDone() const {
+        return myIsDone;
+    }
 
-  //! Sets tolerance (used for handling singularities).
-  void SetTolerance (const Standard_Real theValue) { myTolerance = theValue; }
+    //! Returns result shape.
+    const TopoDS_Shape& GetResultShape() const {
+        return myResShape;
+    }
 
-  //! Gets done state.
-  Standard_Boolean IsDone() const { return myIsDone; } 
+    //! Computes max safe offset value for the given tolerance.
+    Standard_Real GetSafeOffset(const Standard_Real theExpectedToler);
 
-  //! Returns result shape.
-  const TopoDS_Shape& GetResultShape() const { return myResShape; }
+    //! Returns result shape for the given one (if exists).
+    Standard_EXPORT const TopoDS_Shape Generated(const TopoDS_Shape& theShape) const;
 
-  //! Computes max safe offset value for the given tolerance.
-  Standard_Real GetSafeOffset(const Standard_Real theExpectedToler);
-
-  //! Returns result shape for the given one (if exists).
-  Standard_EXPORT const TopoDS_Shape Generated(const TopoDS_Shape& theShape) const;
-
-  //! Returns modified shape for the given one (if exists).
-  Standard_EXPORT const TopoDS_Shape Modified(const TopoDS_Shape& theShape) const;
+    //! Returns modified shape for the given one (if exists).
+    Standard_EXPORT const TopoDS_Shape Modified(const TopoDS_Shape& theShape) const;
 
 protected:
+    //! Computes max angle in faces junction.
+    void ComputeMaxAngle();
 
-  //! Computes max angle in faces junction.
-  void ComputeMaxAngle();
-
-  //! Clears previous result.
-  void Clear();
+    //! Clears previous result.
+    void Clear();
 
 private:
+    //! Builds face on specified wall.
+    TopoDS_Face BuildWallFace(const TopoDS_Edge& theOrigEdge);
 
-  //! Builds face on specified wall.
-  TopoDS_Face BuildWallFace(const TopoDS_Edge& theOrigEdge);
+    //! Builds missing walls.
+    Standard_Boolean BuildMissingWalls();
 
-  //! Builds missing walls.
-  Standard_Boolean BuildMissingWalls();
+    // Input data.
 
-  // Input data.
+    //! Input shape.
+    TopoDS_Shape myInputShape;
 
-  //! Input shape.
-  TopoDS_Shape myInputShape;
+    //! Offset value.
+    Standard_Real myOffsetValue;
 
-  //! Offset value.
-  Standard_Real myOffsetValue;
+    //! Tolerance (for singularities)
+    Standard_Real myTolerance;
 
-  //! Tolerance (for singularities)
-  Standard_Real myTolerance;
+    //! Solid building flag. True means solid construction.
+    Standard_Boolean myIsBuildSolid;
 
-  //! Solid building flag. True means solid construction.
-  Standard_Boolean myIsBuildSolid;
+    // Internal data.
 
-  // Internal data.
+    //! Maximal angle in faces junction. This value helps to estimate result tolerance.
+    Standard_Real myMaxAngle;
 
-  //! Maximal angle in faces junction. This value helps to estimate result tolerance.
-  Standard_Real myMaxAngle;
+    //! Error message.
+    BRepOffsetSimple_Status myError;
 
-  //! Error message.
-  BRepOffsetSimple_Status myError;
+    //! Done state.
+    Standard_Boolean myIsDone;
 
-  //! Done state.
-  Standard_Boolean myIsDone;
+    //! Map of vertex - wall edge.
+    //! Used to build shared edge between adjacent wall faces.
+    NCollection_DataMap<TopoDS_Vertex, TopoDS_Edge> myMapVE;
 
-  //! Map of vertex - wall edge.
-  //! Used to build shared edge between adjacent wall faces.
-  NCollection_DataMap<TopoDS_Vertex, TopoDS_Edge> myMapVE;
+    //! Used for histrory support.
+    BRepTools_Modifier myBuilder;
 
-  //! Used for histrory support.
-  BRepTools_Modifier myBuilder;
+    //! Used for history support.
+    Handle(ShapeBuild_ReShape) myReShape;
 
-  //! Used for history support.
-  Handle(ShapeBuild_ReShape) myReShape;
+    // Output data.
 
-  // Output data.
-
-  //! Result shape.
-  TopoDS_Shape myResShape;
-
+    //! Result shape.
+    TopoDS_Shape myResShape;
 };
 
 #endif // _BRepOffset_MakeSimpleOffset_HeaderFile

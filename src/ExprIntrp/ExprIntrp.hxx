@@ -25,45 +25,23 @@
 class ExprIntrp_Generator;
 class TCollection_AsciiString;
 
-
 //! Describes an interpreter for GeneralExpressions,
 //! GeneralFunctions, and GeneralRelations defined in
 //! package Expr.
-class ExprIntrp
-{
+class ExprIntrp {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-    Standard_EXPORT static Standard_Boolean Parse(const Handle(ExprIntrp_Generator)& gen, const TCollection_AsciiString& str);
-
-
+    Standard_EXPORT static Standard_Boolean Parse(const Handle(ExprIntrp_Generator) & gen,
+                                                  const TCollection_AsciiString& str);
 
     friend class ExprIntrp_Generator;
     friend class ExprIntrp_GenExp;
     friend class ExprIntrp_GenFct;
     friend class ExprIntrp_GenRel;
     friend class ExprIntrp_Analysis;
-
 };
-
-
-
-
-
-
 
 #endif // _ExprIntrp_HeaderFile

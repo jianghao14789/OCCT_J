@@ -27,7 +27,7 @@ DEFINE_STANDARD_HANDLE(FSD_File, Storage_BaseDriver)
 
 //! FSD_File 是文本格式的文件存储驱动程序
 //! 继承自 Storage_BaseDriver，用于以文本/ASCII格式读写对象数据
-//! 
+//!
 //! 与 FSD_BinaryFile 的区别：
 //! - FSD_File：文本格式，可读性强，便于调试，但文件较大
 //! - FSD_BinaryFile：二进制格式，效率高，文件小，但不可直接阅读
@@ -38,24 +38,22 @@ DEFINE_STANDARD_HANDLE(FSD_File, Storage_BaseDriver)
 //! - 自动处理行尾和空白字符
 //! - 便于版本管理和人工审查
 //! - 数据结构与 FSD_BinaryFile 相同，但编码方式不同
-class FSD_File : public Storage_BaseDriver
-{
+class FSD_File : public Storage_BaseDriver {
 public:
     DEFINE_STANDARD_RTTIEXT(FSD_File, Storage_BaseDriver)
 
 public:
-
     //! 构造函数
     //! 创建一个文件存储驱动程序实例，用于文本格式的文件操作。
     //! 使用 Open 函数来指定要驱动的文件名。
     Standard_EXPORT FSD_File();
 
-
     //! 打开或创建文件
     //! 将 aName 指定为此驱动程序驱动的文件名。
     //! aMode 指定文件是以读或写模式打开。
     //! 如果文件成功打开，返回 Storage_VSOk，否则返回 Storage_Error 枚举中的相应错误代码。
-    Standard_EXPORT virtual Storage_Error Open(const TCollection_AsciiString& aName, const Storage_OpenMode aMode) Standard_OVERRIDE;
+    Standard_EXPORT virtual Storage_Error Open(const TCollection_AsciiString& aName,
+                                               const Storage_OpenMode aMode) Standard_OVERRIDE;
 
     //! 判断是否已到达文件末尾
     Standard_EXPORT virtual Standard_Boolean IsEnd() Standard_OVERRIDE;
@@ -72,15 +70,12 @@ public:
     Standard_EXPORT virtual Storage_Error BeginWriteInfoSection() Standard_OVERRIDE;
 
     //! 写入文件元信息（版本、日期、应用名等）
-    Standard_EXPORT virtual void WriteInfo(const Standard_Integer nbObj,
-        const TCollection_AsciiString& dbVersion,
-        const TCollection_AsciiString& date,
-        const TCollection_AsciiString& schemaName,
-        const TCollection_AsciiString& schemaVersion,
-        const TCollection_ExtendedString& appName,
-        const TCollection_AsciiString& appVersion,
-        const TCollection_ExtendedString& objectType,
-        const TColStd_SequenceOfAsciiString& userInfo) Standard_OVERRIDE;
+    Standard_EXPORT virtual void
+    WriteInfo(const Standard_Integer nbObj, const TCollection_AsciiString& dbVersion,
+              const TCollection_AsciiString& date, const TCollection_AsciiString& schemaName,
+              const TCollection_AsciiString& schemaVersion, const TCollection_ExtendedString& appName,
+              const TCollection_AsciiString& appVersion, const TCollection_ExtendedString& objectType,
+              const TColStd_SequenceOfAsciiString& userInfo) Standard_OVERRIDE;
 
     //! 结束写入信息段
     Standard_EXPORT virtual Storage_Error EndWriteInfoSection() Standard_OVERRIDE;
@@ -89,18 +84,15 @@ public:
     Standard_EXPORT virtual Storage_Error BeginReadInfoSection() Standard_OVERRIDE;
 
     //! 读取文件元信息
-    Standard_EXPORT virtual void ReadInfo(Standard_Integer& nbObj,
-        TCollection_AsciiString& dbVersion,
-        TCollection_AsciiString& date,
-        TCollection_AsciiString& schemaName,
-        TCollection_AsciiString& schemaVersion,
-        TCollection_ExtendedString& appName,
-        TCollection_AsciiString& appVersion,
-        TCollection_ExtendedString& objectType,
-        TColStd_SequenceOfAsciiString& userInfo) Standard_OVERRIDE;
+    Standard_EXPORT virtual void ReadInfo(Standard_Integer& nbObj, TCollection_AsciiString& dbVersion,
+                                          TCollection_AsciiString& date, TCollection_AsciiString& schemaName,
+                                          TCollection_AsciiString& schemaVersion, TCollection_ExtendedString& appName,
+                                          TCollection_AsciiString& appVersion, TCollection_ExtendedString& objectType,
+                                          TColStd_SequenceOfAsciiString& userInfo) Standard_OVERRIDE;
 
     //! 读取完整的信息段，包括版本兼容性检查
-    Standard_EXPORT virtual void ReadCompleteInfo(Standard_IStream& theIStream, Handle(Storage_Data)& theData) Standard_OVERRIDE;
+    Standard_EXPORT virtual void ReadCompleteInfo(Standard_IStream& theIStream,
+                                                  Handle(Storage_Data) & theData) Standard_OVERRIDE;
 
     //! 结束读取信息段
     Standard_EXPORT virtual Storage_Error EndReadInfoSection() Standard_OVERRIDE;
@@ -135,7 +127,7 @@ public:
 
     //! 写入单个类型的信息（类型编号和类型名称）
     Standard_EXPORT virtual void WriteTypeInformations(const Standard_Integer typeNum,
-        const TCollection_AsciiString& typeName) Standard_OVERRIDE;
+                                                       const TCollection_AsciiString& typeName) Standard_OVERRIDE;
 
     //! 结束写入类型段
     Standard_EXPORT virtual Storage_Error EndWriteTypeSection() Standard_OVERRIDE;
@@ -147,7 +139,8 @@ public:
     Standard_EXPORT virtual Standard_Integer TypeSectionSize() Standard_OVERRIDE;
 
     //! 读取单个类型信息
-    Standard_EXPORT virtual void ReadTypeInformations(Standard_Integer& typeNum, TCollection_AsciiString& typeName) Standard_OVERRIDE;
+    Standard_EXPORT virtual void ReadTypeInformations(Standard_Integer& typeNum,
+                                                      TCollection_AsciiString& typeName) Standard_OVERRIDE;
 
     //! 结束读取类型段
     Standard_EXPORT virtual Storage_Error EndReadTypeSection() Standard_OVERRIDE;
@@ -161,9 +154,8 @@ public:
     Standard_EXPORT virtual void SetRootSectionSize(const Standard_Integer aSize) Standard_OVERRIDE;
 
     //! 写入单个根对象的信息（名称、引用号、类型）
-    Standard_EXPORT virtual void WriteRoot(const TCollection_AsciiString& rootName,
-        const Standard_Integer aRef,
-        const TCollection_AsciiString& aType) Standard_OVERRIDE;
+    Standard_EXPORT virtual void WriteRoot(const TCollection_AsciiString& rootName, const Standard_Integer aRef,
+                                           const TCollection_AsciiString& aType) Standard_OVERRIDE;
 
     //! 结束写入根对象段
     Standard_EXPORT virtual Storage_Error EndWriteRootSection() Standard_OVERRIDE;
@@ -175,9 +167,8 @@ public:
     Standard_EXPORT virtual Standard_Integer RootSectionSize() Standard_OVERRIDE;
 
     //! 读取单个根对象信息
-    Standard_EXPORT virtual void ReadRoot(TCollection_AsciiString& rootName,
-        Standard_Integer& aRef,
-        TCollection_AsciiString& aType) Standard_OVERRIDE;
+    Standard_EXPORT virtual void ReadRoot(TCollection_AsciiString& rootName, Standard_Integer& aRef,
+                                          TCollection_AsciiString& aType) Standard_OVERRIDE;
 
     //! 结束读取根对象段
     Standard_EXPORT virtual Storage_Error EndReadRootSection() Standard_OVERRIDE;
@@ -191,7 +182,8 @@ public:
     Standard_EXPORT virtual void SetRefSectionSize(const Standard_Integer aSize) Standard_OVERRIDE;
 
     //! 写入单个引用信息（对象引用号和其类型号）
-    Standard_EXPORT virtual void WriteReferenceType(const Standard_Integer reference, const Standard_Integer typeNum) Standard_OVERRIDE;
+    Standard_EXPORT virtual void WriteReferenceType(const Standard_Integer reference,
+                                                    const Standard_Integer typeNum) Standard_OVERRIDE;
 
     //! 结束写入引用段
     Standard_EXPORT virtual Storage_Error EndWriteRefSection() Standard_OVERRIDE;
@@ -203,7 +195,8 @@ public:
     Standard_EXPORT virtual Standard_Integer RefSectionSize() Standard_OVERRIDE;
 
     //! 读取单个引用信息
-    Standard_EXPORT virtual void ReadReferenceType(Standard_Integer& reference, Standard_Integer& typeNum) Standard_OVERRIDE;
+    Standard_EXPORT virtual void ReadReferenceType(Standard_Integer& reference,
+                                                   Standard_Integer& typeNum) Standard_OVERRIDE;
 
     //! 结束读取引用段
     Standard_EXPORT virtual Storage_Error EndReadRefSection() Standard_OVERRIDE;
@@ -214,7 +207,8 @@ public:
     Standard_EXPORT virtual Storage_Error BeginWriteDataSection() Standard_OVERRIDE;
 
     //! 写入持久化对象的头部（引用号和类型号）
-    Standard_EXPORT virtual void WritePersistentObjectHeader(const Standard_Integer aRef, const Standard_Integer aType) Standard_OVERRIDE;
+    Standard_EXPORT virtual void WritePersistentObjectHeader(const Standard_Integer aRef,
+                                                             const Standard_Integer aType) Standard_OVERRIDE;
 
     //! 开始写入持久化对象的数据
     Standard_EXPORT virtual void BeginWritePersistentObjectData() Standard_OVERRIDE;
@@ -235,7 +229,8 @@ public:
     Standard_EXPORT virtual Storage_Error BeginReadDataSection() Standard_OVERRIDE;
 
     //! 读取持久化对象的头部
-    Standard_EXPORT virtual void ReadPersistentObjectHeader(Standard_Integer& aRef, Standard_Integer& aType) Standard_OVERRIDE;
+    Standard_EXPORT virtual void ReadPersistentObjectHeader(Standard_Integer& aRef,
+                                                            Standard_Integer& aType) Standard_OVERRIDE;
 
     //! 开始读取持久化对象的数据
     Standard_EXPORT virtual void BeginReadPersistentObjectData() Standard_OVERRIDE;
@@ -307,8 +302,7 @@ public:
     //! 销毁对象并释放资源
     Standard_EXPORT void Destroy();
 
-    ~FSD_File()
-    {
+    ~FSD_File() {
         Destroy();
     }
 
@@ -316,7 +310,6 @@ public:
     Standard_EXPORT static Standard_CString MagicNumber();
 
 protected:
-
     //! 从当前位置读取至行尾的文本内容到缓冲区
     Standard_EXPORT virtual void ReadLine(TCollection_AsciiString& buffer);
 
@@ -342,7 +335,7 @@ protected:
     Standard_EXPORT virtual Storage_Error FindTag(const Standard_CString aTag);
 
 protected:
-    FSD_FStream myStream;  // 文本格式的文件流对象
+    FSD_FStream myStream; // 文本格式的文件流对象
 };
 
 #endif // _FSD_File_HeaderFile

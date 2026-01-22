@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <CDM_Document.hxx>
 #include <FSD_CmpFile.hxx>
 #include <PCDM.hxx>
@@ -36,149 +35,133 @@
 #include <TColStd_SequenceOfExtendedString.hxx>
 
 #include <locale.h>
-IMPLEMENT_STANDARD_RTTIEXT(PCDM_StorageDriver,PCDM_Writer)
+IMPLEMENT_STANDARD_RTTIEXT(PCDM_StorageDriver, PCDM_Writer)
 
 #define STORAGE_VERSION "STORAGE_VERSION:"
 
+void PCDM_StorageDriver::Write(const Handle(CDM_Document) & aDocument, const TCollection_ExtendedString& aFileName,
+                               const Message_ProgressRange& /*theRange*/) {
+    Handle(Storage_Schema) theSchema = new Storage_Schema;
 
+    Handle(Storage_Data) theData = new Storage_Data;
 
-void PCDM_StorageDriver::Write (const Handle(CDM_Document)& aDocument,
-                                const TCollection_ExtendedString&  aFileName, 
-                                const Message_ProgressRange &/*theRange*/) 
-{
-  Handle(Storage_Schema) theSchema = new Storage_Schema;
-
-  Handle(Storage_Data) theData = new Storage_Data;
-
-  Standard_Boolean Failure(Standard_False);
-  Standard_SStream aMsg; aMsg << "error during Make:";
-  PCDM_SequenceOfDocument thePersistentDocuments;
-  {
-    try { OCC_CATCH_SIGNALS Make(aDocument,thePersistentDocuments);}
-    catch (Standard_Failure const& anException) {
-      aMsg << anException<<(char)0;
-      Failure=Standard_True;
+    Standard_Boolean Failure(Standard_False);
+    Standard_SStream aMsg;
+    aMsg << "error during Make:";
+    PCDM_SequenceOfDocument thePersistentDocuments;
+    {
+        try {
+            OCC_CATCH_SIGNALS Make(aDocument, thePersistentDocuments);
+        } catch (Standard_Failure const& anException) {
+            aMsg << anException << (char)0;
+            Failure = Standard_True;
+        }
     }
-  }
 
-  if(Failure) throw PCDM_DriverError(aMsg.str().c_str());
+    if (Failure) throw PCDM_DriverError(aMsg.str().c_str());
 
-  if(thePersistentDocuments.IsEmpty()) {
-    aMsg << "the storage driver: " << DynamicType()->Name() << "returned no documents to store" << (char) 0;
-    throw PCDM_DriverError(aMsg.str().c_str());
-  }
+    if (thePersistentDocuments.IsEmpty()) {
+        aMsg << "the storage driver: " << DynamicType()->Name() << "returned no documents to store" << (char)0;
+        throw PCDM_DriverError(aMsg.str().c_str());
+    }
 
-  Standard_Integer i=1;
-  for(; i<=thePersistentDocuments.Length(); i++) {
-    theData->AddRoot(thePersistentDocuments(i));
-  }
+    Standard_Integer i = 1;
+    for (; i <= thePersistentDocuments.Length(); i++) {
+        theData->AddRoot(thePersistentDocuments(i));
+    }
 
-  TCollection_AsciiString ligne(STORAGE_VERSION);
-  ligne+=PCDM_ReadWriter::Writer()->Version();
-  theData->AddToUserInfo(ligne);
+    TCollection_AsciiString ligne(STORAGE_VERSION);
+    ligne += PCDM_ReadWriter::Writer()->Version();
+    theData->AddToUserInfo(ligne);
 
-  PCDM_ReadWriter::WriteFileFormat(theData,aDocument);
-  PCDM_ReadWriter::Writer()->WriteReferenceCounter(theData,aDocument);
-  PCDM_ReadWriter::Writer()->WriteReferences(theData,aDocument,aFileName);
-  PCDM_ReadWriter::Writer()->WriteExtensions(theData,aDocument);
-  PCDM_ReadWriter::Writer()->WriteVersion(theData,aDocument);
+    PCDM_ReadWriter::WriteFileFormat(theData, aDocument);
+    PCDM_ReadWriter::Writer()->WriteReferenceCounter(theData, aDocument);
+    PCDM_ReadWriter::Writer()->WriteReferences(theData, aDocument, aFileName);
+    PCDM_ReadWriter::Writer()->WriteExtensions(theData, aDocument);
+    PCDM_ReadWriter::Writer()->WriteVersion(theData, aDocument);
 
-  // add document comments
-  TColStd_SequenceOfExtendedString aComments;
-  aDocument->Comments(aComments);
-  Standard_Integer aLen = aComments.Length();
-  for (i = 1; i <= aLen; i++)
-  {
-    theData->AddToComments(aComments(i));
-  }
+    // add document comments
+    TColStd_SequenceOfExtendedString aComments;
+    aDocument->Comments(aComments);
+    Standard_Integer aLen = aComments.Length();
+    for (i = 1; i <= aLen; i++) {
+        theData->AddToComments(aComments(i));
+    }
 
-  Handle(FSD_CmpFile) theFile = new FSD_CmpFile;
-  PCDM_ReadWriter::Open(theFile,aFileName,Storage_VSWrite);
-  theSchema->Write(theFile,theData);
-  theFile->Close();
+    Handle(FSD_CmpFile) theFile = new FSD_CmpFile;
+    PCDM_ReadWriter::Open(theFile, aFileName, Storage_VSWrite);
+    theSchema->Write(theFile, theData);
+    theFile->Close();
 
-  if ( theData->ErrorStatus() != Storage_VSOk )
-    throw PCDM_DriverError(theData->ErrorStatusExtension().ToCString());
-}
-
-
-//=======================================================================
-//function : Write
-//purpose  : 
-//=======================================================================
-void PCDM_StorageDriver::Write (const Handle(CDM_Document)&              /*aDocument*/, 
-                                Standard_OStream&                        /*theOStream*/, 
-                                const Message_ProgressRange&             /*theRange*/)
-{
-  
-}
-
-//Handle(PCDM_Document) PCDM_StorageDriver::Make(const Handle(CDM_Document)& aDocument) {
-Handle(PCDM_Document) PCDM_StorageDriver::Make(const Handle(CDM_Document)& ) {
-  Handle(PCDM_Document) voidDocument;
-  Standard_SStream aMsg;
-  aMsg << "No Make method were implemented in this Driver" << DynamicType()->Name() << (char) 0;
-  throw Standard_NotImplemented(aMsg.str().c_str());
-}
-
-void PCDM_StorageDriver::Make(const Handle(CDM_Document)& aDocument, PCDM_SequenceOfDocument& Documents) {
-  Documents.Append(Make(aDocument));
+    if (theData->ErrorStatus() != Storage_VSOk) throw PCDM_DriverError(theData->ErrorStatusExtension().ToCString());
 }
 
 //=======================================================================
-//function : SetFormat
-//purpose  : 
+// function : Write
+// purpose  :
 //=======================================================================
+void PCDM_StorageDriver::Write(const Handle(CDM_Document) & /*aDocument*/, Standard_OStream& /*theOStream*/,
+                               const Message_ProgressRange& /*theRange*/) {}
 
-void PCDM_StorageDriver::SetFormat (const TCollection_ExtendedString& aformat)
-{
-  myFormat = aformat;
+// Handle(PCDM_Document) PCDM_StorageDriver::Make(const Handle(CDM_Document)& aDocument) {
+Handle(PCDM_Document) PCDM_StorageDriver::Make(const Handle(CDM_Document) &) {
+    Handle(PCDM_Document) voidDocument;
+    Standard_SStream aMsg;
+    aMsg << "No Make method were implemented in this Driver" << DynamicType()->Name() << (char)0;
+    throw Standard_NotImplemented(aMsg.str().c_str());
 }
 
-
-//=======================================================================
-//function : GetFormat
-//purpose  : 
-//=======================================================================
-
-TCollection_ExtendedString PCDM_StorageDriver::GetFormat () const
-{
-  return myFormat;
-}
-
-//=======================================================================
-//function : IsError
-//purpose  :
-//=======================================================================
-
-Standard_Boolean PCDM_StorageDriver::IsError () const 
-{
-  return myIsError;
+void PCDM_StorageDriver::Make(const Handle(CDM_Document) & aDocument, PCDM_SequenceOfDocument& Documents) {
+    Documents.Append(Make(aDocument));
 }
 
 //=======================================================================
-//function : SetIsError
-//purpose  :
+// function : SetFormat
+// purpose  :
 //=======================================================================
-void PCDM_StorageDriver::SetIsError(const Standard_Boolean theIsError)
-{
+
+void PCDM_StorageDriver::SetFormat(const TCollection_ExtendedString& aformat) {
+    myFormat = aformat;
+}
+
+//=======================================================================
+// function : GetFormat
+// purpose  :
+//=======================================================================
+
+TCollection_ExtendedString PCDM_StorageDriver::GetFormat() const {
+    return myFormat;
+}
+
+//=======================================================================
+// function : IsError
+// purpose  :
+//=======================================================================
+
+Standard_Boolean PCDM_StorageDriver::IsError() const {
+    return myIsError;
+}
+
+//=======================================================================
+// function : SetIsError
+// purpose  :
+//=======================================================================
+void PCDM_StorageDriver::SetIsError(const Standard_Boolean theIsError) {
     myIsError = theIsError;
 }
 
 //=======================================================================
-//function : GetStoreStatus
-//purpose  :
+// function : GetStoreStatus
+// purpose  :
 //=======================================================================
 
-PCDM_StoreStatus PCDM_StorageDriver::GetStoreStatus () const 
-{
-  return myStoreStatus;
+PCDM_StoreStatus PCDM_StorageDriver::GetStoreStatus() const {
+    return myStoreStatus;
 }
 //=======================================================================
-//function : SetStoreStatus
-//purpose  :
+// function : SetStoreStatus
+// purpose  :
 //=======================================================================
-void PCDM_StorageDriver::SetStoreStatus(const PCDM_StoreStatus theStoreStatus)
-{
+void PCDM_StorageDriver::SetStoreStatus(const PCDM_StoreStatus theStoreStatus) {
     myStoreStatus = theStoreStatus;
 }

@@ -18,11 +18,6 @@
 #define _BRepFill_TypeOfContact_HeaderFile
 
 //! A pair of bound shapes with the result.
-enum BRepFill_TypeOfContact
-{
-BRepFill_NoContact,
-BRepFill_Contact,
-BRepFill_ContactOnBorder
-};
+enum BRepFill_TypeOfContact { BRepFill_NoContact, BRepFill_Contact, BRepFill_ContactOnBorder };
 
 #endif // _BRepFill_TypeOfContact_HeaderFile

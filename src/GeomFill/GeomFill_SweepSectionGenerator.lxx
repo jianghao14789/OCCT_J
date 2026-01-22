@@ -15,11 +15,10 @@
 // commercial license or contractual agreement.
 
 //=======================================================================
-//function : NbSections
-//purpose  : 
+// function : NbSections
+// purpose  :
 //=======================================================================
 
-inline Standard_Integer GeomFill_SweepSectionGenerator::NbSections() const 
-{
-  return myNbSections;
+inline Standard_Integer GeomFill_SweepSectionGenerator::NbSections() const {
+    return myNbSections;
 }

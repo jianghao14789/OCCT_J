@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Blend_Point.hxx>
 #include <Blend_SurfRstFunction.hxx>
 #include <gp_Pnt.hxx>
@@ -25,17 +24,14 @@
 #include <Standard_DomainError.hxx>
 #include <Standard_NotImplemented.hxx>
 
-const gp_Pnt& Blend_SurfRstFunction::Pnt1() const
-{
+const gp_Pnt& Blend_SurfRstFunction::Pnt1() const {
     return PointOnS();
 }
 
-const gp_Pnt& Blend_SurfRstFunction::Pnt2() const
-{
+const gp_Pnt& Blend_SurfRstFunction::Pnt2() const {
     return PointOnRst();
 }
 
-Standard_Real Blend_SurfRstFunction::GetMinimalDistance() const
-{
+Standard_Real Blend_SurfRstFunction::GetMinimalDistance() const {
     throw Standard_NotImplemented("Blend_SurfRstFunction::GetMinimalDistance");
 }

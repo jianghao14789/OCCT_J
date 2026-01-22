@@ -21,8 +21,9 @@
 #include <TColStd_MapIntegerHasher.hxx>
 #include <NCollection_DataMap.hxx>
 
-typedef NCollection_DataMap<Standard_Integer,MeshVS_TwoColors,TColStd_MapIntegerHasher> MeshVS_DataMapOfIntegerTwoColors;
-typedef NCollection_DataMap<Standard_Integer,MeshVS_TwoColors,TColStd_MapIntegerHasher>::Iterator MeshVS_DataMapIteratorOfDataMapOfIntegerTwoColors;
-
+typedef NCollection_DataMap<Standard_Integer, MeshVS_TwoColors, TColStd_MapIntegerHasher>
+    MeshVS_DataMapOfIntegerTwoColors;
+typedef NCollection_DataMap<Standard_Integer, MeshVS_TwoColors, TColStd_MapIntegerHasher>::Iterator
+    MeshVS_DataMapIteratorOfDataMapOfIntegerTwoColors;
 
 #endif

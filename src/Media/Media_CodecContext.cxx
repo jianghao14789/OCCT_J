@@ -14,7 +14,7 @@
 
 // activate some C99 macros like UINT64_C in "stdint.h" which used by FFmpeg
 #ifndef __STDC_CONSTANT_MACROS
-  #define __STDC_CONSTANT_MACROS
+#define __STDC_CONSTANT_MACROS
 #endif
 
 #include <Media_CodecContext.hxx>
@@ -28,9 +28,8 @@
 
 #ifdef HAVE_FFMPEG
 #include <Standard_WarningsDisable.hxx>
-extern "C"
-{
-  #include <libavformat/avformat.h>
+extern "C" {
+#include <libavformat/avformat.h>
 };
 #include <Standard_WarningsRestore.hxx>
 #endif
@@ -42,16 +41,10 @@ IMPLEMENT_STANDARD_RTTIEXT(Media_CodecContext, Standard_Transient)
 // purpose  :
 // =======================================================================
 Media_CodecContext::Media_CodecContext()
-: myCodecCtx (NULL),
-  myCodec    (NULL),
-  myPtsStartBase  (0.0),
-  myPtsStartStream(0.0),
-  myTimeBase      (1.0),
-  myStreamIndex   (0),
-  myPixelAspectRatio (1.0f)
-{
+    : myCodecCtx(NULL), myCodec(NULL), myPtsStartBase(0.0), myPtsStartStream(0.0), myTimeBase(1.0), myStreamIndex(0),
+      myPixelAspectRatio(1.0f) {
 #ifdef HAVE_FFMPEG
-  myCodecCtx = avcodec_alloc_context3 (NULL);
+    myCodecCtx = avcodec_alloc_context3(NULL);
 #endif
 }
 
@@ -59,23 +52,19 @@ Media_CodecContext::Media_CodecContext()
 // function : ~Media_CodecContext
 // purpose  :
 // =======================================================================
-Media_CodecContext::~Media_CodecContext()
-{
-  Close();
+Media_CodecContext::~Media_CodecContext() {
+    Close();
 }
 
 // =======================================================================
 // function : Init
 // purpose  :
 // =======================================================================
-bool Media_CodecContext::Init (const AVStream& theStream,
-                               double thePtsStartBase,
-                               int    theNbThreads)
-{
+bool Media_CodecContext::Init(const AVStream& theStream, double thePtsStartBase, int theNbThreads) {
 #ifdef HAVE_FFMPEG
-  return Init (theStream, thePtsStartBase, theNbThreads, AV_CODEC_ID_NONE);
+    return Init(theStream, thePtsStartBase, theNbThreads, AV_CODEC_ID_NONE);
 #else
-  return Init (theStream, thePtsStartBase, theNbThreads, 0);
+    return Init(theStream, thePtsStartBase, theNbThreads, 0);
 #endif
 }
 
@@ -83,82 +72,65 @@ bool Media_CodecContext::Init (const AVStream& theStream,
 // function : Init
 // purpose  :
 // =======================================================================
-bool Media_CodecContext::Init (const AVStream& theStream,
-                               double thePtsStartBase,
-                               int theNbThreads,
-                               int theCodecId)
-{
+bool Media_CodecContext::Init(const AVStream& theStream, double thePtsStartBase, int theNbThreads, int theCodecId) {
 #ifdef HAVE_FFMPEG
-  myStreamIndex = theStream.index;
-  if (avcodec_parameters_to_context (myCodecCtx, theStream.codecpar) < 0)
-  {
-    Message::SendFail ("Internal error: unable to copy codec parameters");
-    Close();
-    return false;
-  }
-
-  myTimeBase       = av_q2d (theStream.time_base);
-  myPtsStartBase   = thePtsStartBase;
-  myPtsStartStream = Media_FormatContext::StreamUnitsToSeconds (theStream, theStream.start_time);
-
-  const AVCodecID aCodecId = theCodecId != AV_CODEC_ID_NONE ? (AVCodecID )theCodecId : theStream.codecpar->codec_id;
-  myCodec = avcodec_find_decoder (aCodecId);
-  if (myCodec == NULL)
-  {
-    Message::Send ("FFmpeg: unable to find decoder", Message_Fail);
-    Close();
-    return false;
-  }
-
-  myCodecCtx->codec_id = aCodecId;
-  AVDictionary* anOpts = NULL;
-  av_dict_set (&anOpts, "refcounted_frames", "1", 0);
-  if (theStream.codecpar->codec_type == AVMEDIA_TYPE_VIDEO)
-  {
-    myCodecCtx->thread_count = theNbThreads <= -1 ? OSD_Parallel::NbLogicalProcessors() : theNbThreads;
-  }
-
-  if (avcodec_open2 (myCodecCtx, myCodec, &anOpts) < 0)
-  {
-    Message::SendFail ("FFmpeg: unable to open decoder");
-    Close();
-    return false;
-  }
-
-  myPixelAspectRatio = 1.0f;
-  if (theStream.sample_aspect_ratio.num && av_cmp_q(theStream.sample_aspect_ratio, myCodecCtx->sample_aspect_ratio))
-  {
-    myPixelAspectRatio = float(theStream.sample_aspect_ratio.num) / float(theStream.sample_aspect_ratio.den);
-  }
-  else
-  {
-    if (myCodecCtx->sample_aspect_ratio.num == 0
-     || myCodecCtx->sample_aspect_ratio.den == 0)
-    {
-      myPixelAspectRatio = 1.0f;
+    myStreamIndex = theStream.index;
+    if (avcodec_parameters_to_context(myCodecCtx, theStream.codecpar) < 0) {
+        Message::SendFail("Internal error: unable to copy codec parameters");
+        Close();
+        return false;
     }
-    else
-    {
-      myPixelAspectRatio = float(myCodecCtx->sample_aspect_ratio.num) / float(myCodecCtx->sample_aspect_ratio.den);
+
+    myTimeBase = av_q2d(theStream.time_base);
+    myPtsStartBase = thePtsStartBase;
+    myPtsStartStream = Media_FormatContext::StreamUnitsToSeconds(theStream, theStream.start_time);
+
+    const AVCodecID aCodecId = theCodecId != AV_CODEC_ID_NONE ? (AVCodecID)theCodecId : theStream.codecpar->codec_id;
+    myCodec = avcodec_find_decoder(aCodecId);
+    if (myCodec == NULL) {
+        Message::Send("FFmpeg: unable to find decoder", Message_Fail);
+        Close();
+        return false;
     }
-  }
 
-  if (theStream.codecpar->codec_type == AVMEDIA_TYPE_VIDEO
-   && (myCodecCtx->width  <= 0
-    || myCodecCtx->height <= 0))
-  {
-    Message::SendFail ("FFmpeg: video stream has invalid dimensions");
-    Close();
-    return false;
-  }
+    myCodecCtx->codec_id = aCodecId;
+    AVDictionary* anOpts = NULL;
+    av_dict_set(&anOpts, "refcounted_frames", "1", 0);
+    if (theStream.codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+        myCodecCtx->thread_count = theNbThreads <= -1 ? OSD_Parallel::NbLogicalProcessors() : theNbThreads;
+    }
 
-  return true;
+    if (avcodec_open2(myCodecCtx, myCodec, &anOpts) < 0) {
+        Message::SendFail("FFmpeg: unable to open decoder");
+        Close();
+        return false;
+    }
+
+    myPixelAspectRatio = 1.0f;
+    if (theStream.sample_aspect_ratio.num && av_cmp_q(theStream.sample_aspect_ratio, myCodecCtx->sample_aspect_ratio)) {
+        myPixelAspectRatio = float(theStream.sample_aspect_ratio.num) / float(theStream.sample_aspect_ratio.den);
+    } else {
+        if (myCodecCtx->sample_aspect_ratio.num == 0 || myCodecCtx->sample_aspect_ratio.den == 0) {
+            myPixelAspectRatio = 1.0f;
+        } else {
+            myPixelAspectRatio =
+                float(myCodecCtx->sample_aspect_ratio.num) / float(myCodecCtx->sample_aspect_ratio.den);
+        }
+    }
+
+    if (theStream.codecpar->codec_type == AVMEDIA_TYPE_VIDEO && (myCodecCtx->width <= 0 || myCodecCtx->height <= 0)) {
+        Message::SendFail("FFmpeg: video stream has invalid dimensions");
+        Close();
+        return false;
+    }
+
+    return true;
 #else
-  (void )&theStream;
-  (void )thePtsStartBase;
-  (void )theNbThreads;
-  (void )theCodecId;
-  return false;
+    (void)&theStream;
+    (void)thePtsStartBase;
+    (void)theNbThreads;
+    (void)theCodecId;
+    return false;
 #endif
 }
 
@@ -166,40 +138,35 @@ bool Media_CodecContext::Init (const AVStream& theStream,
 // function : Close
 // purpose  :
 // =======================================================================
-void Media_CodecContext::Close()
-{
-  if (myCodecCtx != NULL)
-  {
-  #ifdef HAVE_FFMPEG
-    avcodec_free_context (&myCodecCtx);
-  #endif
-  }
+void Media_CodecContext::Close() {
+    if (myCodecCtx != NULL) {
+#ifdef HAVE_FFMPEG
+        avcodec_free_context(&myCodecCtx);
+#endif
+    }
 }
 
 // =======================================================================
 // function : Flush
 // purpose  :
 // =======================================================================
-void Media_CodecContext::Flush()
-{
-  if (myCodecCtx != NULL)
-  {
-  #ifdef HAVE_FFMPEG
-    avcodec_flush_buffers (myCodecCtx);
-  #endif
-  }
+void Media_CodecContext::Flush() {
+    if (myCodecCtx != NULL) {
+#ifdef HAVE_FFMPEG
+        avcodec_flush_buffers(myCodecCtx);
+#endif
+    }
 }
 
 // =======================================================================
 // function : SizeX
 // purpose  :
 // =======================================================================
-int Media_CodecContext::SizeX() const
-{
+int Media_CodecContext::SizeX() const {
 #ifdef HAVE_FFMPEG
-  return (myCodecCtx != NULL) ? myCodecCtx->width : 0;
+    return (myCodecCtx != NULL) ? myCodecCtx->width : 0;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -207,12 +174,11 @@ int Media_CodecContext::SizeX() const
 // function : SizeY
 // purpose  :
 // =======================================================================
-int Media_CodecContext::SizeY() const
-{
+int Media_CodecContext::SizeY() const {
 #ifdef HAVE_FFMPEG
-  return (myCodecCtx != NULL) ? myCodecCtx->height : 0;
+    return (myCodecCtx != NULL) ? myCodecCtx->height : 0;
 #else
-  return 0;
+    return 0;
 #endif
 }
 
@@ -220,32 +186,27 @@ int Media_CodecContext::SizeY() const
 // function : CanProcessPacket
 // purpose  :
 // =======================================================================
-bool Media_CodecContext::CanProcessPacket (const Handle(Media_Packet)& thePacket) const
-{
-  return !thePacket.IsNull()
-       && myStreamIndex == thePacket->StreamIndex();
+bool Media_CodecContext::CanProcessPacket(const Handle(Media_Packet) & thePacket) const {
+    return !thePacket.IsNull() && myStreamIndex == thePacket->StreamIndex();
 }
 
 // =======================================================================
 // function : SendPacket
 // purpose  :
 // =======================================================================
-bool Media_CodecContext::SendPacket (const Handle(Media_Packet)& thePacket)
-{
-  if (!CanProcessPacket (thePacket))
-  {
-    return false;
-  }
+bool Media_CodecContext::SendPacket(const Handle(Media_Packet) & thePacket) {
+    if (!CanProcessPacket(thePacket)) {
+        return false;
+    }
 
 #ifdef HAVE_FFMPEG
-  const int aRes = avcodec_send_packet (myCodecCtx, thePacket->Packet());
-  if (aRes < 0 && aRes != AVERROR_EOF)
-  {
-    return false;
-  }
-  return true;
+    const int aRes = avcodec_send_packet(myCodecCtx, thePacket->Packet());
+    if (aRes < 0 && aRes != AVERROR_EOF) {
+        return false;
+    }
+    return true;
 #else
-  return false;
+    return false;
 #endif
 }
 
@@ -253,25 +214,22 @@ bool Media_CodecContext::SendPacket (const Handle(Media_Packet)& thePacket)
 // function : ReceiveFrame
 // purpose  :
 // =======================================================================
-bool Media_CodecContext::ReceiveFrame (const Handle(Media_Frame)& theFrame)
-{
-  if (theFrame.IsNull())
-  {
-    return false;
-  }
+bool Media_CodecContext::ReceiveFrame(const Handle(Media_Frame) & theFrame) {
+    if (theFrame.IsNull()) {
+        return false;
+    }
 
 #ifdef HAVE_FFMPEG
-  const int aRes2 = avcodec_receive_frame (myCodecCtx, theFrame->ChangeFrame());
-  if (aRes2 < 0)
-  {
-    return false;
-  }
+    const int aRes2 = avcodec_receive_frame(myCodecCtx, theFrame->ChangeFrame());
+    if (aRes2 < 0) {
+        return false;
+    }
 
-  const int64_t aPacketPts = theFrame->BestEffortTimestamp() != AV_NOPTS_VALUE ? theFrame->BestEffortTimestamp() : 0;
-  const double aFramePts  = double(aPacketPts) * myTimeBase - myPtsStartBase;
-  theFrame->SetPts (aFramePts);
-  return true;
+    const int64_t aPacketPts = theFrame->BestEffortTimestamp() != AV_NOPTS_VALUE ? theFrame->BestEffortTimestamp() : 0;
+    const double aFramePts = double(aPacketPts) * myTimeBase - myPtsStartBase;
+    theFrame->SetPts(aFramePts);
+    return true;
 #else
-  return false;
+    return false;
 #endif
 }

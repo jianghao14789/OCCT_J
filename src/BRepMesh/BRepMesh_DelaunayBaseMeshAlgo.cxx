@@ -21,43 +21,36 @@ IMPLEMENT_STANDARD_RTTIEXT(BRepMesh_DelaunayBaseMeshAlgo, BRepMesh_ConstrainedBa
 
 //=======================================================================
 // Function: Constructor
-// Purpose : 
+// Purpose :
 //=======================================================================
-BRepMesh_DelaunayBaseMeshAlgo::BRepMesh_DelaunayBaseMeshAlgo()
-{
-}
+BRepMesh_DelaunayBaseMeshAlgo::BRepMesh_DelaunayBaseMeshAlgo() {}
 
 //=======================================================================
 // Function: Destructor
-// Purpose : 
+// Purpose :
 //=======================================================================
-BRepMesh_DelaunayBaseMeshAlgo::~BRepMesh_DelaunayBaseMeshAlgo()
-{
-}
+BRepMesh_DelaunayBaseMeshAlgo::~BRepMesh_DelaunayBaseMeshAlgo() {}
 
 //=======================================================================
-//function : generateMesh
-//purpose  :
+// function : generateMesh
+// purpose  :
 //=======================================================================
-void BRepMesh_DelaunayBaseMeshAlgo::generateMesh(const Message_ProgressRange& theRange)
-{
-  const Handle(BRepMesh_DataStructureOfDelaun)& aStructure = getStructure();
-  const Handle(VectorOfPnt)&                    aNodesMap  = getNodesMap();
+void BRepMesh_DelaunayBaseMeshAlgo::generateMesh(const Message_ProgressRange& theRange) {
+    const Handle(BRepMesh_DataStructureOfDelaun) & aStructure = getStructure();
+    const Handle(VectorOfPnt) & aNodesMap = getNodesMap();
 
-  IMeshData::VectorOfInteger aVerticesOrder(aNodesMap->Size(), getAllocator());
-  for (Standard_Integer i = 1; i <= aNodesMap->Size(); ++i)
-  {
-    aVerticesOrder.Append(i);
-  }
+    IMeshData::VectorOfInteger aVerticesOrder(aNodesMap->Size(), getAllocator());
+    for (Standard_Integer i = 1; i <= aNodesMap->Size(); ++i) {
+        aVerticesOrder.Append(i);
+    }
 
-  std::pair<Standard_Integer, Standard_Integer> aCellsCount = getCellsCount (aVerticesOrder.Size ());
-  BRepMesh_Delaun aMesher(aStructure, aVerticesOrder, aCellsCount.first, aCellsCount.second);
-  BRepMesh_MeshTool aCleaner(aStructure);
-  aCleaner.EraseFreeLinks();
+    std::pair<Standard_Integer, Standard_Integer> aCellsCount = getCellsCount(aVerticesOrder.Size());
+    BRepMesh_Delaun aMesher(aStructure, aVerticesOrder, aCellsCount.first, aCellsCount.second);
+    BRepMesh_MeshTool aCleaner(aStructure);
+    aCleaner.EraseFreeLinks();
 
-  if (!theRange.More())
-  {
-    return;
-  }
-  postProcessMesh(aMesher, theRange);
+    if (!theRange.More()) {
+        return;
+    }
+    postProcessMesh(aMesher, theRange);
 }

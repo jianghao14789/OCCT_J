@@ -14,50 +14,52 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Geom2d_Vector.hxx>
 #include <gp_Vec2d.hxx>
 #include <gp_VectorWithNullMagnitude.hxx>
 #include <Standard_DomainError.hxx>
 #include <Standard_Type.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Geom2d_Vector,Geom2d_Geometry)
+IMPLEMENT_STANDARD_RTTIEXT(Geom2d_Vector, Geom2d_Geometry)
 
-typedef Geom2d_Vector         Vector;
-typedef gp_Ax2d  Ax2d;
+typedef Geom2d_Vector Vector;
+typedef gp_Ax2d Ax2d;
 typedef gp_Pnt2d Pnt2d;
 
-Standard_Real Geom2d_Vector::Angle (
-const Handle(Geom2d_Vector)& Other) const { 
+Standard_Real Geom2d_Vector::Angle(const Handle(Geom2d_Vector) & Other) const {
 
-  return gpVec2d.Angle (Other->Vec2d());
+    return gpVec2d.Angle(Other->Vec2d());
 }
 
-
-void Geom2d_Vector::Reverse () { gpVec2d.Reverse(); }
-
-gp_Vec2d Geom2d_Vector::Vec2d () const      { return gpVec2d; }
-
-Standard_Real Geom2d_Vector::X () const              { return gpVec2d.X(); }
-
-Standard_Real Geom2d_Vector::Y () const              { return gpVec2d.Y(); }
-
-
-Handle(Geom2d_Vector) Geom2d_Vector::Reversed () const {
-
-  Handle(Geom2d_Vector) V = Handle(Geom2d_Vector)::DownCast(Copy());
-  V->Reverse();
-  return V;
+void Geom2d_Vector::Reverse() {
+    gpVec2d.Reverse();
 }
 
-
-void Geom2d_Vector::Coord (Standard_Real& X, Standard_Real& Y) const {
-
-  gpVec2d.Coord (X, Y);
+gp_Vec2d Geom2d_Vector::Vec2d() const {
+    return gpVec2d;
 }
- 
 
-Standard_Real Geom2d_Vector::Dot (const Handle(Geom2d_Vector)& Other) const  { 
+Standard_Real Geom2d_Vector::X() const {
+    return gpVec2d.X();
+}
 
-  return gpVec2d.Dot (Other->Vec2d());
+Standard_Real Geom2d_Vector::Y() const {
+    return gpVec2d.Y();
+}
+
+Handle(Geom2d_Vector) Geom2d_Vector::Reversed() const {
+
+    Handle(Geom2d_Vector) V = Handle(Geom2d_Vector)::DownCast(Copy());
+    V->Reverse();
+    return V;
+}
+
+void Geom2d_Vector::Coord(Standard_Real& X, Standard_Real& Y) const {
+
+    gpVec2d.Coord(X, Y);
+}
+
+Standard_Real Geom2d_Vector::Dot(const Handle(Geom2d_Vector) & Other) const {
+
+    return gpVec2d.Dot(Other->Vec2d());
 }

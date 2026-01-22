@@ -19,102 +19,115 @@
 
 class Draw_Viewer;
 
-class Draw_View : public Draw_Window
-{
+class Draw_View : public Draw_Window {
 public:
+    //! Constructor
+    Draw_View(Standard_Integer theId, Draw_Viewer* theViewer, Standard_Integer theX, Standard_Integer theY,
+              Standard_Integer theWidth, Standard_Integer theHeight, Aspect_Drawable theWindow = 0);
 
-  //! Constructor
-  Draw_View(Standard_Integer theId,
-            Draw_Viewer*     theViewer,
-            Standard_Integer theX,
-            Standard_Integer theY,
-            Standard_Integer theWidth,
-            Standard_Integer theHeight,
-            Aspect_Drawable  theWindow = 0);
+    //! Constructor.
+    Draw_View(Standard_Integer theId, Draw_Viewer* theViewer, const char* theTitle);
 
-  //! Constructor.
-  Draw_View(Standard_Integer theId,
-            Draw_Viewer*     theViewer,
-            const char*      theTitle);
-
-  //! Destructor.
-  ~Draw_View();
+    //! Destructor.
+    ~Draw_View();
 
 public: // @name getters and setters
+    //! Gets horizontal offset.
+    Standard_Integer GetDx() const {
+        return myDx;
+    }
 
-  //! Gets horizontal offset.
-  Standard_Integer GetDx() const { return myDx; }
+    //! Sets horizontal offset.
+    void SetDx(const Standard_Integer theDx) {
+        myDx = theDx;
+    }
 
-  //! Sets horizontal offset.
-  void SetDx (const Standard_Integer theDx) { myDx = theDx; }
+    //! Gets vertical offset.
+    Standard_Integer GetDy() const {
+        return myDy;
+    }
 
-  //! Gets vertical offset.
-  Standard_Integer GetDy() const { return myDy; }
+    //! Sets vertical offset.
+    void SetDy(const Standard_Integer theDy) {
+        myDy = theDy;
+    }
 
-  //! Sets vertical offset.
-  void SetDy (const Standard_Integer theDy) { myDy = theDy; }
+    //! Gets parameter of zoom.
+    Standard_Real GetZoom() const {
+        return myZoom;
+    }
 
-  //! Gets parameter of zoom.
-  Standard_Real GetZoom() const { return myZoom; }
+    //! Sets parameter of zoom.
+    void SetZoom(const Standard_Real theZoom) {
+        myZoom = theZoom;
+    }
 
-  //! Sets parameter of zoom.
-  void SetZoom (const Standard_Real theZoom) { myZoom = theZoom; }
+    //! Gets matrix of view.
+    const gp_Trsf& GetMatrix() const {
+        return myMatrix;
+    }
 
-  //! Gets matrix of view.
-  const gp_Trsf& GetMatrix() const { return myMatrix; }
+    //! Sets view matrix.
+    void SetMatrix(const gp_Trsf& theMatrix) {
+        myMatrix = theMatrix;
+    }
 
-  //! Sets view matrix.
-  void SetMatrix (const gp_Trsf& theMatrix) { myMatrix = theMatrix; }
+    //! Gets focal distance.
+    Standard_Real GetFocalDistance() const {
+        return myFocalDistance;
+    }
 
-  //! Gets focal distance.
-  Standard_Real GetFocalDistance() const { return myFocalDistance; }
+    //! Sets focal distance.
+    void SetFocalDistance(const Standard_Real theDistance) {
+        myFocalDistance = theDistance;
+    }
 
-  //! Sets focal distance.
-  void SetFocalDistance (const Standard_Real theDistance) { myFocalDistance = theDistance; }
+    //! Returns type of view.
+    const char* Type() {
+        return myType;
+    }
 
-  //! Returns type of view.
-  const char* Type() { return myType; }
+    //! Returns true value if current view in 2D mode.
+    Standard_Boolean Is2D() const {
+        return myIs2D;
+    }
 
-  //! Returns true value if current view in 2D mode.
-  Standard_Boolean Is2D() const { return myIs2D; }
-
-  //! Returns true value if current view in perspective mode.
-  Standard_Real IsPerspective() const { return myIsPers; }
+    //! Returns true value if current view in perspective mode.
+    Standard_Real IsPerspective() const {
+        return myIsPers;
+    }
 
 public: //! @name view API
+    //! Initialize view by the type.
+    Standard_Boolean Init(const char* theType);
 
-  //! Initialize view by the type.
-  Standard_Boolean Init(const char* theType);
+    //! Transform view matrix.
+    void Transform(const gp_Trsf& theTransformation);
 
-  //! Transform view matrix.
-  void Transform(const gp_Trsf& theTransformation);
+    //! Resets frame of current view.
+    void ResetFrame();
 
-  //! Resets frame of current view.
-  void ResetFrame();
+    //! Returns parameters of frame corners.
+    void GetFrame(Standard_Integer& theX0, Standard_Integer& theY0, Standard_Integer& theX1, Standard_Integer& theY1);
 
-  //! Returns parameters of frame corners.
-  void GetFrame(Standard_Integer& theX0,Standard_Integer& theY0,
-                Standard_Integer& theX1,Standard_Integer& theY1);
-
-  //! Perform window exposing.
-  virtual void WExpose() Standard_OVERRIDE;
+    //! Perform window exposing.
+    virtual void WExpose() Standard_OVERRIDE;
 
 protected:
-
-  Standard_Integer       myId;
-  Draw_Viewer*           myViewer;
-  char                   myType[5];
-  Standard_Boolean       myIsPers;
-  Standard_Boolean       myIs2D;
-  Standard_Real          myFocalDistance;
-  Standard_Real          myZoom;
-  gp_Trsf                myMatrix;
-  Standard_Integer       myDx;
-  Standard_Integer       myDy;
-  Standard_Integer       myFrameX0;
-  Standard_Integer       myFrameY0;
-  Standard_Integer       myFrameX1;
-  Standard_Integer       myFrameY1;
+    Standard_Integer myId;
+    Draw_Viewer* myViewer;
+    char myType[5];
+    Standard_Boolean myIsPers;
+    Standard_Boolean myIs2D;
+    Standard_Real myFocalDistance;
+    Standard_Real myZoom;
+    gp_Trsf myMatrix;
+    Standard_Integer myDx;
+    Standard_Integer myDy;
+    Standard_Integer myFrameX0;
+    Standard_Integer myFrameY0;
+    Standard_Integer myFrameX1;
+    Standard_Integer myFrameY1;
 };
 
 #endif

@@ -21,9 +21,8 @@
 
 typedef NCollection_List<Handle(Font_SystemFont)> Font_NListOfSystemFont;
 
-inline Standard_Boolean IsEqual (const Handle(Font_SystemFont)& theFirstFont,
-                                 const Handle(Font_SystemFont)& theSecondFont)
-{
-  return theFirstFont->IsEqual (theSecondFont);
+inline Standard_Boolean IsEqual(const Handle(Font_SystemFont) & theFirstFont,
+                                const Handle(Font_SystemFont) & theSecondFont) {
+    return theFirstFont->IsEqual(theSecondFont);
 }
 #endif

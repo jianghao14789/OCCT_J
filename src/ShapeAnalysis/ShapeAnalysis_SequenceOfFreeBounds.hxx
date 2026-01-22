@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<Handle(ShapeAnalysis_FreeBoundData)> ShapeAnalysis_SequenceOfFreeBounds;
 
-
 #endif

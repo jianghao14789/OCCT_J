@@ -20,45 +20,36 @@
 #include <Standard_Type.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(IGESGraph_NominalSize,IGESData_IGESEntity)
+IMPLEMENT_STANDARD_RTTIEXT(IGESGraph_NominalSize, IGESData_IGESEntity)
 
-IGESGraph_NominalSize::IGESGraph_NominalSize ()    {  }
+IGESGraph_NominalSize::IGESGraph_NominalSize() {}
 
-
-    void IGESGraph_NominalSize::Init
-  (const Standard_Integer          nbProps,
-   const Standard_Real             aNominalSizeValue,
-   const Handle(TCollection_HAsciiString)& aNominalSizeName,
-   const Handle(TCollection_HAsciiString)& aStandardName)
-{
-  theNbPropertyValues = nbProps;
-  theNominalSizeValue = aNominalSizeValue;
-  theNominalSizeName  = aNominalSizeName;
-  theStandardName     = aStandardName;
-  InitTypeAndForm(406,13);
+void IGESGraph_NominalSize::Init(const Standard_Integer nbProps, const Standard_Real aNominalSizeValue,
+                                 const Handle(TCollection_HAsciiString) & aNominalSizeName,
+                                 const Handle(TCollection_HAsciiString) & aStandardName) {
+    theNbPropertyValues = nbProps;
+    theNominalSizeValue = aNominalSizeValue;
+    theNominalSizeName = aNominalSizeName;
+    theStandardName = aStandardName;
+    InitTypeAndForm(406, 13);
 }
 
-    Standard_Integer IGESGraph_NominalSize::NbPropertyValues () const
-{
-  return theNbPropertyValues;
+Standard_Integer IGESGraph_NominalSize::NbPropertyValues() const {
+    return theNbPropertyValues;
 }
 
-    Standard_Real IGESGraph_NominalSize::NominalSizeValue () const
-{
-  return theNominalSizeValue;
+Standard_Real IGESGraph_NominalSize::NominalSizeValue() const {
+    return theNominalSizeValue;
 }
 
-    Handle(TCollection_HAsciiString) IGESGraph_NominalSize::NominalSizeName () const
-{
-  return theNominalSizeName;
+Handle(TCollection_HAsciiString) IGESGraph_NominalSize::NominalSizeName() const {
+    return theNominalSizeName;
 }
 
-    Standard_Boolean IGESGraph_NominalSize::HasStandardName () const
-{
-  return (! theStandardName.IsNull() );
+Standard_Boolean IGESGraph_NominalSize::HasStandardName() const {
+    return (!theStandardName.IsNull());
 }
 
-    Handle(TCollection_HAsciiString) IGESGraph_NominalSize::StandardName () const
-{
-  return theStandardName;
+Handle(TCollection_HAsciiString) IGESGraph_NominalSize::StandardName() const {
+    return theStandardName;
 }

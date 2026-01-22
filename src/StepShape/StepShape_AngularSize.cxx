@@ -20,47 +20,41 @@
 #include <StepShape_AngularSize.hxx>
 #include <TCollection_HAsciiString.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepShape_AngularSize,StepShape_DimensionalSize)
+IMPLEMENT_STANDARD_RTTIEXT(StepShape_AngularSize, StepShape_DimensionalSize)
 
 //=======================================================================
-//function : StepShape_AngularSize
-//purpose  : 
+// function : StepShape_AngularSize
+// purpose  :
 //=======================================================================
-StepShape_AngularSize::StepShape_AngularSize ()
-{
+StepShape_AngularSize::StepShape_AngularSize() {}
+
+//=======================================================================
+// function : Init
+// purpose  :
+//=======================================================================
+
+void StepShape_AngularSize::Init(const Handle(StepRepr_ShapeAspect) & aDimensionalSize_AppliesTo,
+                                 const Handle(TCollection_HAsciiString) & aDimensionalSize_Name,
+                                 const StepShape_AngleRelator aAngleSelection) {
+    StepShape_DimensionalSize::Init(aDimensionalSize_AppliesTo, aDimensionalSize_Name);
+
+    theAngleSelection = aAngleSelection;
 }
 
 //=======================================================================
-//function : Init
-//purpose  : 
+// function : AngleSelection
+// purpose  :
 //=======================================================================
 
-void StepShape_AngularSize::Init (const Handle(StepRepr_ShapeAspect) &aDimensionalSize_AppliesTo,
-                                  const Handle(TCollection_HAsciiString) &aDimensionalSize_Name,
-                                  const StepShape_AngleRelator aAngleSelection)
-{
-  StepShape_DimensionalSize::Init(aDimensionalSize_AppliesTo,
-                                  aDimensionalSize_Name);
-
-  theAngleSelection = aAngleSelection;
+StepShape_AngleRelator StepShape_AngularSize::AngleSelection() const {
+    return theAngleSelection;
 }
 
 //=======================================================================
-//function : AngleSelection
-//purpose  : 
+// function : SetAngleSelection
+// purpose  :
 //=======================================================================
 
-StepShape_AngleRelator StepShape_AngularSize::AngleSelection () const
-{
-  return theAngleSelection;
-}
-
-//=======================================================================
-//function : SetAngleSelection
-//purpose  : 
-//=======================================================================
-
-void StepShape_AngularSize::SetAngleSelection (const StepShape_AngleRelator aAngleSelection)
-{
-  theAngleSelection = aAngleSelection;
+void StepShape_AngularSize::SetAngleSelection(const StepShape_AngleRelator aAngleSelection) {
+    theAngleSelection = aAngleSelection;
 }

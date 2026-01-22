@@ -22,5 +22,4 @@
 
 typedef NCollection_Sequence<Handle(AIS_InteractiveObject)> AIS_SequenceOfInteractive;
 
-
 #endif

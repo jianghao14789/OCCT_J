@@ -26,47 +26,33 @@ class IMeshData_Model;
 struct IMeshTools_Parameters;
 
 //! Interface class providing API for algorithms intended to update or modify discrete model.
-class IMeshTools_ModelAlgo : public Standard_Transient
-{
+class IMeshTools_ModelAlgo : public Standard_Transient {
 public:
+    //! Destructor.
+    virtual ~IMeshTools_ModelAlgo() {}
 
-  //! Destructor.
-  virtual ~IMeshTools_ModelAlgo()
-  {
-  }
+    //! Exceptions protected processing of the given model.
+    Standard_Boolean Perform(const Handle(IMeshData_Model) & theModel, const IMeshTools_Parameters& theParameters,
+                             const Message_ProgressRange& theRange) {
+        try {
+            OCC_CATCH_SIGNALS
 
-  //! Exceptions protected processing of the given model.
-  Standard_Boolean Perform (
-    const Handle (IMeshData_Model)& theModel,
-    const IMeshTools_Parameters&    theParameters,
-    const Message_ProgressRange&    theRange)
-  {
-    try
-    {
-      OCC_CATCH_SIGNALS
-
-      return performInternal (theModel, theParameters, theRange);
+            return performInternal(theModel, theParameters, theRange);
+        } catch (Standard_Failure const&) {
+            return Standard_False;
+        }
     }
-    catch (Standard_Failure const&)
-    {
-      return Standard_False;
-    }
-  }
 
-  DEFINE_STANDARD_RTTIEXT(IMeshTools_ModelAlgo, Standard_Transient)
+    DEFINE_STANDARD_RTTIEXT(IMeshTools_ModelAlgo, Standard_Transient)
 
 protected:
+    //! Constructor.
+    IMeshTools_ModelAlgo() {}
 
-  //! Constructor.
-  IMeshTools_ModelAlgo()
-  {
-  }
-
-  //! Performs processing of the given model.
-  Standard_EXPORT virtual Standard_Boolean performInternal (
-    const Handle (IMeshData_Model)& theModel,
-    const IMeshTools_Parameters&    theParameters,
-    const Message_ProgressRange&    theRange) = 0;
+    //! Performs processing of the given model.
+    Standard_EXPORT virtual Standard_Boolean performInternal(const Handle(IMeshData_Model) & theModel,
+                                                             const IMeshTools_Parameters& theParameters,
+                                                             const Message_ProgressRange& theRange) = 0;
 };
 
 #endif

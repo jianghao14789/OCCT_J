@@ -23,7 +23,7 @@
 class math_PSOParticlesPool;
 
 //! In this class implemented variation of Particle Swarm Optimization (PSO) method.
-//! A. Ismael F. Vaz, L. N. Vicente 
+//! A. Ismael F. Vaz, L. N. Vicente
 //! "A particle swarm pattern search method for bound constrained global optimization"
 //!
 //! Algorithm description:
@@ -66,39 +66,29 @@ public:
     * @param theNbParticles defines number of particles.
     * @param theNbIter defines maximum number of iterations.
     */
-    Standard_EXPORT math_PSO(math_MultipleVarFunction* theFunc,
-        const math_Vector& theLowBorder,
-        const math_Vector& theUppBorder,
-        const math_Vector& theSteps,
-        const Standard_Integer theNbParticles = 32,
-        const Standard_Integer theNbIter = 100);
+    Standard_EXPORT math_PSO(math_MultipleVarFunction* theFunc, const math_Vector& theLowBorder,
+                             const math_Vector& theUppBorder, const math_Vector& theSteps,
+                             const Standard_Integer theNbParticles = 32, const Standard_Integer theNbIter = 100);
 
     //! Perform computations, particles array is constructed inside of this function.
-    Standard_EXPORT void Perform(const math_Vector& theSteps,
-        Standard_Real& theValue,
-        math_Vector& theOutPnt,
-        const Standard_Integer theNbIter = 100);
+    Standard_EXPORT void Perform(const math_Vector& theSteps, Standard_Real& theValue, math_Vector& theOutPnt,
+                                 const Standard_Integer theNbIter = 100);
 
     //! Perform computations with given particles array.
-    Standard_EXPORT void Perform(math_PSOParticlesPool& theParticles,
-        Standard_Integer theNbParticles,
-        Standard_Real& theValue,
-        math_Vector& theOutPnt,
-        const Standard_Integer theNbIter = 100);
+    Standard_EXPORT void Perform(math_PSOParticlesPool& theParticles, Standard_Integer theNbParticles,
+                                 Standard_Real& theValue, math_Vector& theOutPnt,
+                                 const Standard_Integer theNbIter = 100);
 
 private:
-
-    void performPSOWithGivenParticles(math_PSOParticlesPool& theParticles,
-        Standard_Integer theNbParticles,
-        Standard_Real& theValue,
-        math_Vector& theOutPnt,
-        const Standard_Integer theNbIter = 100);
+    void performPSOWithGivenParticles(math_PSOParticlesPool& theParticles, Standard_Integer theNbParticles,
+                                      Standard_Real& theValue, math_Vector& theOutPnt,
+                                      const Standard_Integer theNbIter = 100);
 
     math_MultipleVarFunction* myFunc;
-    math_Vector myLowBorder; // Lower border.
-    math_Vector myUppBorder; // Upper border.
-    math_Vector mySteps; // steps used in PSO algorithm.
-    Standard_Integer myN; // Dimension count.
+    math_Vector myLowBorder;        // Lower border.
+    math_Vector myUppBorder;        // Upper border.
+    math_Vector mySteps;            // steps used in PSO algorithm.
+    Standard_Integer myN;           // Dimension count.
     Standard_Integer myNbParticles; // Particles number.
     Standard_Integer myNbIter;
 };

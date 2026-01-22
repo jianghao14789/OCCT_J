@@ -23,223 +23,181 @@
 #include <TDataXtd_Presentation.hxx>
 #include <Quantity_Color.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(XmlMDataXtd_PresentationDriver,XmlMDF_ADriver)
+IMPLEMENT_STANDARD_RTTIEXT(XmlMDataXtd_PresentationDriver, XmlMDF_ADriver)
 
-IMPLEMENT_DOMSTRING (GuidString,        "guid")
-IMPLEMENT_DOMSTRING (IsDisplayedString, "isdisplayed")
-IMPLEMENT_DOMSTRING (ColorString,       "color")
-IMPLEMENT_DOMSTRING (MaterialString,    "material")
-IMPLEMENT_DOMSTRING (TransparencyString,"transparency")
-IMPLEMENT_DOMSTRING (WidthString,       "width")
-IMPLEMENT_DOMSTRING (ModeString,        "mode")
+IMPLEMENT_DOMSTRING(GuidString, "guid")
+IMPLEMENT_DOMSTRING(IsDisplayedString, "isdisplayed")
+IMPLEMENT_DOMSTRING(ColorString, "color")
+IMPLEMENT_DOMSTRING(MaterialString, "material")
+IMPLEMENT_DOMSTRING(TransparencyString, "transparency")
+IMPLEMENT_DOMSTRING(WidthString, "width")
+IMPLEMENT_DOMSTRING(ModeString, "mode")
 
-IMPLEMENT_DOMSTRING (DisplayedString,   "true")
-
-//=======================================================================
-//function : XmlMDataXtd_PresentationDriver
-//purpose  : Constructor
-//=======================================================================
-XmlMDataXtd_PresentationDriver::XmlMDataXtd_PresentationDriver
-  (const Handle(Message_Messenger)& theMsgDriver)
-  : XmlMDF_ADriver (theMsgDriver, NULL)
-{}
+IMPLEMENT_DOMSTRING(DisplayedString, "true")
 
 //=======================================================================
-//function : NewEmpty
-//purpose  : 
+// function : XmlMDataXtd_PresentationDriver
+// purpose  : Constructor
 //=======================================================================
-Handle(TDF_Attribute) XmlMDataXtd_PresentationDriver::NewEmpty() const
-{
-  return (new TDataXtd_Presentation());
+XmlMDataXtd_PresentationDriver::XmlMDataXtd_PresentationDriver(const Handle(Message_Messenger) & theMsgDriver)
+    : XmlMDF_ADriver(theMsgDriver, NULL) {}
+
+//=======================================================================
+// function : NewEmpty
+// purpose  :
+//=======================================================================
+Handle(TDF_Attribute) XmlMDataXtd_PresentationDriver::NewEmpty() const {
+    return (new TDataXtd_Presentation());
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : persistent -> transient (retrieve)
+// function : Paste
+// purpose  : persistent -> transient (retrieve)
 //=======================================================================
-Standard_Boolean XmlMDataXtd_PresentationDriver::Paste
-  (const XmlObjMgt_Persistent&  theSource,
-  const Handle(TDF_Attribute)& theTarget,
-  XmlObjMgt_RRelocationTable&  ) const
-{
-  TCollection_ExtendedString aMessageString;
-  XmlObjMgt_DOMString aDOMStr;
+Standard_Boolean XmlMDataXtd_PresentationDriver::Paste(const XmlObjMgt_Persistent& theSource,
+                                                       const Handle(TDF_Attribute) & theTarget,
+                                                       XmlObjMgt_RRelocationTable&) const {
+    TCollection_ExtendedString aMessageString;
+    XmlObjMgt_DOMString aDOMStr;
 
-  Handle(TDataXtd_Presentation) aTPrs =
-    Handle(TDataXtd_Presentation)::DownCast(theTarget);
-  const XmlObjMgt_Element& anElem = theSource;
+    Handle(TDataXtd_Presentation) aTPrs = Handle(TDataXtd_Presentation)::DownCast(theTarget);
+    const XmlObjMgt_Element& anElem = theSource;
 
-  //convert attribute value into GUID
-  aDOMStr = anElem.getAttribute(::GuidString());
-  if (aDOMStr == NULL)
-  {
-    myMessageDriver->Send("Cannot retrieve guid string from attribute", Message_Fail);
-    return Standard_False;
-  }
-  Standard_CString aGuidStr = (Standard_CString) aDOMStr.GetString();
-  aTPrs->SetDriverGUID(aGuidStr);
+    // convert attribute value into GUID
+    aDOMStr = anElem.getAttribute(::GuidString());
+    if (aDOMStr == NULL) {
+        myMessageDriver->Send("Cannot retrieve guid string from attribute", Message_Fail);
+        return Standard_False;
+    }
+    Standard_CString aGuidStr = (Standard_CString)aDOMStr.GetString();
+    aTPrs->SetDriverGUID(aGuidStr);
 
-  // is displayed
-  aDOMStr = anElem.getAttribute(::IsDisplayedString());
-  aTPrs->SetDisplayed(aDOMStr != NULL);
+    // is displayed
+    aDOMStr = anElem.getAttribute(::IsDisplayedString());
+    aTPrs->SetDisplayed(aDOMStr != NULL);
 
-  Standard_Integer anIValue;
+    Standard_Integer anIValue;
 
-  // color
-  aDOMStr = anElem.getAttribute(::ColorString());
-  if (aDOMStr != NULL)
-  {
-    if (!aDOMStr.GetInteger(anIValue))
-    {
-      aMessageString = TCollection_ExtendedString
-        ("Cannot retrieve Integer value from \"") + aDOMStr + "\"";
-      myMessageDriver->Send (aMessageString, Message_Fail);
-      return Standard_False;
+    // color
+    aDOMStr = anElem.getAttribute(::ColorString());
+    if (aDOMStr != NULL) {
+        if (!aDOMStr.GetInteger(anIValue)) {
+            aMessageString = TCollection_ExtendedString("Cannot retrieve Integer value from \"") + aDOMStr + "\"";
+            myMessageDriver->Send(aMessageString, Message_Fail);
+            return Standard_False;
+        }
+
+        const Quantity_NameOfColor aNameOfColor = TDataXtd_Presentation::getColorNameFromOldEnum(anIValue);
+        aTPrs->SetColor(aNameOfColor);
+    } else {
+        aTPrs->UnsetColor();
     }
 
-    const Quantity_NameOfColor aNameOfColor = TDataXtd_Presentation::getColorNameFromOldEnum (anIValue);
-    aTPrs->SetColor(aNameOfColor);
-  }
-  else
-  {
-    aTPrs->UnsetColor();
-  }
-
-  // material
-  aDOMStr = anElem.getAttribute(::MaterialString());
-  if (aDOMStr != NULL)
-  {
-    if (!aDOMStr.GetInteger(anIValue))
-    {
-      aMessageString = TCollection_ExtendedString
-        ("Cannot retrieve Integer value from \"") + aDOMStr + "\"";
-      myMessageDriver->Send (aMessageString, Message_Fail);
-      return Standard_False;
+    // material
+    aDOMStr = anElem.getAttribute(::MaterialString());
+    if (aDOMStr != NULL) {
+        if (!aDOMStr.GetInteger(anIValue)) {
+            aMessageString = TCollection_ExtendedString("Cannot retrieve Integer value from \"") + aDOMStr + "\"";
+            myMessageDriver->Send(aMessageString, Message_Fail);
+            return Standard_False;
+        }
+        aTPrs->SetMaterialIndex(anIValue);
+    } else {
+        aTPrs->UnsetMaterial();
     }
-    aTPrs->SetMaterialIndex(anIValue);
-  }
-  else
-  {
-    aTPrs->UnsetMaterial();
-  }
 
-  Standard_Real aValue;
+    Standard_Real aValue;
 
-  // transparency
-  aDOMStr = anElem.getAttribute(::TransparencyString());
-  if (aDOMStr != NULL)
-  {
-    if (!XmlObjMgt::GetReal(aDOMStr, aValue))
-    {
-      aMessageString = TCollection_ExtendedString
-        ("Cannot retrieve Real value from \"") + aDOMStr + "\"";
-      myMessageDriver->Send (aMessageString, Message_Fail);
-      return Standard_False;
+    // transparency
+    aDOMStr = anElem.getAttribute(::TransparencyString());
+    if (aDOMStr != NULL) {
+        if (!XmlObjMgt::GetReal(aDOMStr, aValue)) {
+            aMessageString = TCollection_ExtendedString("Cannot retrieve Real value from \"") + aDOMStr + "\"";
+            myMessageDriver->Send(aMessageString, Message_Fail);
+            return Standard_False;
+        }
+        aTPrs->SetTransparency(aValue);
+    } else {
+        aTPrs->UnsetTransparency();
     }
-    aTPrs->SetTransparency(aValue);
-  }
-  else
-  {
-    aTPrs->UnsetTransparency();
-  }
 
-  // width
-  aDOMStr = anElem.getAttribute(::WidthString());
-  if (aDOMStr != NULL)
-  {
-    if (!XmlObjMgt::GetReal(aDOMStr, aValue))
-    {
-      aMessageString = TCollection_ExtendedString
-        ("Cannot retrieve Real value from \"") + aDOMStr + "\"";
-      myMessageDriver->Send (aMessageString, Message_Fail);
-      return Standard_False;
+    // width
+    aDOMStr = anElem.getAttribute(::WidthString());
+    if (aDOMStr != NULL) {
+        if (!XmlObjMgt::GetReal(aDOMStr, aValue)) {
+            aMessageString = TCollection_ExtendedString("Cannot retrieve Real value from \"") + aDOMStr + "\"";
+            myMessageDriver->Send(aMessageString, Message_Fail);
+            return Standard_False;
+        }
+        aTPrs->SetWidth(aValue);
+    } else {
+        aTPrs->UnsetWidth();
     }
-    aTPrs->SetWidth(aValue);
-  }
-  else
-  {
-    aTPrs->UnsetWidth();
-  }
 
-  // mode
-  aDOMStr = anElem.getAttribute(::ModeString());
-  if (aDOMStr != NULL)
-  {
-    if (!aDOMStr.GetInteger(anIValue))
-    {
-      aMessageString = TCollection_ExtendedString
-        ("Cannot retrieve Integer value from \"") + aDOMStr + "\"";
-      myMessageDriver->Send (aMessageString, Message_Fail);
-      return Standard_False;
+    // mode
+    aDOMStr = anElem.getAttribute(::ModeString());
+    if (aDOMStr != NULL) {
+        if (!aDOMStr.GetInteger(anIValue)) {
+            aMessageString = TCollection_ExtendedString("Cannot retrieve Integer value from \"") + aDOMStr + "\"";
+            myMessageDriver->Send(aMessageString, Message_Fail);
+            return Standard_False;
+        }
+        aTPrs->SetMode(anIValue);
+    } else {
+        aTPrs->UnsetMode();
     }
-    aTPrs->SetMode(anIValue);
-  }
-  else
-  {
-    aTPrs->UnsetMode();
-  }
 
-  return Standard_True;
+    return Standard_True;
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : transient -> persistent (store)
+// function : Paste
+// purpose  : transient -> persistent (store)
 //=======================================================================
-void XmlMDataXtd_PresentationDriver::Paste
-                                  (const Handle(TDF_Attribute)& theSource,
-                                   XmlObjMgt_Persistent&        theTarget,
-                                   XmlObjMgt_SRelocationTable&) const
-{
-  Handle(TDataXtd_Presentation) aTPrs =
-    Handle(TDataXtd_Presentation)::DownCast(theSource);
-  if (aTPrs.IsNull()) return;
+void XmlMDataXtd_PresentationDriver::Paste(const Handle(TDF_Attribute) & theSource, XmlObjMgt_Persistent& theTarget,
+                                           XmlObjMgt_SRelocationTable&) const {
+    Handle(TDataXtd_Presentation) aTPrs = Handle(TDataXtd_Presentation)::DownCast(theSource);
+    if (aTPrs.IsNull()) return;
 
-  //convert GUID into attribute value
-  Standard_Character aGuidStr [40];
-  Standard_PCharacter pGuidStr;
-  pGuidStr=aGuidStr;
-  aTPrs->GetDriverGUID().ToCString (pGuidStr);
-  theTarget.Element().setAttribute(::GuidString(), aGuidStr);
+    // convert GUID into attribute value
+    Standard_Character aGuidStr[40];
+    Standard_PCharacter pGuidStr;
+    pGuidStr = aGuidStr;
+    aTPrs->GetDriverGUID().ToCString(pGuidStr);
+    theTarget.Element().setAttribute(::GuidString(), aGuidStr);
 
-  // is displayed
-  if (aTPrs->IsDisplayed())
-    theTarget.Element().setAttribute(::IsDisplayedString(), ::DisplayedString());
+    // is displayed
+    if (aTPrs->IsDisplayed()) theTarget.Element().setAttribute(::IsDisplayedString(), ::DisplayedString());
 
-  Standard_Integer aNb;
+    Standard_Integer aNb;
 
-  // color
-  if (aTPrs->HasOwnColor())
-  {
-    aNb = TDataXtd_Presentation::getOldColorNameFromNewEnum (aTPrs->Color());
-    theTarget.Element().setAttribute(::ColorString(), aNb);
-  }
+    // color
+    if (aTPrs->HasOwnColor()) {
+        aNb = TDataXtd_Presentation::getOldColorNameFromNewEnum(aTPrs->Color());
+        theTarget.Element().setAttribute(::ColorString(), aNb);
+    }
 
-  // material
-  if (aTPrs->HasOwnMaterial())
-  {
-    aNb = aTPrs->MaterialIndex();
-    theTarget.Element().setAttribute(::MaterialString(), aNb);
-  }
+    // material
+    if (aTPrs->HasOwnMaterial()) {
+        aNb = aTPrs->MaterialIndex();
+        theTarget.Element().setAttribute(::MaterialString(), aNb);
+    }
 
-  // transparency
-  if (aTPrs->HasOwnTransparency())
-  {
-    TCollection_AsciiString aRNbStr (aTPrs->Transparency());
-    theTarget.Element().setAttribute(::TransparencyString(), aRNbStr.ToCString());
-  }
+    // transparency
+    if (aTPrs->HasOwnTransparency()) {
+        TCollection_AsciiString aRNbStr(aTPrs->Transparency());
+        theTarget.Element().setAttribute(::TransparencyString(), aRNbStr.ToCString());
+    }
 
-  // width
-  if (aTPrs->HasOwnWidth())
-  {
-    TCollection_AsciiString aRNbStr (aTPrs->Width());
-    theTarget.Element().setAttribute(::WidthString(), aRNbStr.ToCString());
-  }
+    // width
+    if (aTPrs->HasOwnWidth()) {
+        TCollection_AsciiString aRNbStr(aTPrs->Width());
+        theTarget.Element().setAttribute(::WidthString(), aRNbStr.ToCString());
+    }
 
-  // mode
-  if (aTPrs->HasOwnMode())
-  {
-    aNb = aTPrs->Mode();
-    theTarget.Element().setAttribute(::ModeString(), aNb);
-  }
+    // mode
+    if (aTPrs->HasOwnMode()) {
+        aNb = aTPrs->Mode();
+        theTarget.Element().setAttribute(::ModeString(), aNb);
+    }
 }

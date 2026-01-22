@@ -23,5 +23,4 @@
 
 DEFINE_HSEQUENCE(StepRepr_HSequenceOfMaterialPropertyRepresentation, StepRepr_SequenceOfMaterialPropertyRepresentation)
 
-
 #endif

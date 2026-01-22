@@ -11,7 +11,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #ifndef _ShapePersistent_HArray2_HeaderFile
 #define _ShapePersistent_HArray2_HeaderFile
 
@@ -30,20 +29,18 @@
 #include <TColgp_HArray2OfLin2d.hxx>
 #include <TColgp_HArray2OfCirc2d.hxx>
 
-
-class ShapePersistent_HArray2 : private StdLPersistent_HArray2
-{
+class ShapePersistent_HArray2 : private StdLPersistent_HArray2 {
 public:
-  typedef instance<TColgp_HArray2OfXYZ>    XYZ;
-  typedef instance<TColgp_HArray2OfPnt>    Pnt;
-  typedef instance<TColgp_HArray2OfDir>    Dir;
-  typedef instance<TColgp_HArray2OfVec>    Vec;
-  typedef instance<TColgp_HArray2OfXY>     XY;
-  typedef instance<TColgp_HArray2OfPnt2d>  Pnt2d;
-  typedef instance<TColgp_HArray2OfDir2d>  Dir2d;
-  typedef instance<TColgp_HArray2OfVec2d>  Vec2d;
-  typedef instance<TColgp_HArray2OfLin2d>  Lin2d;
-  typedef instance<TColgp_HArray2OfCirc2d> Circ2d;
+    typedef instance<TColgp_HArray2OfXYZ> XYZ;
+    typedef instance<TColgp_HArray2OfPnt> Pnt;
+    typedef instance<TColgp_HArray2OfDir> Dir;
+    typedef instance<TColgp_HArray2OfVec> Vec;
+    typedef instance<TColgp_HArray2OfXY> XY;
+    typedef instance<TColgp_HArray2OfPnt2d> Pnt2d;
+    typedef instance<TColgp_HArray2OfDir2d> Dir2d;
+    typedef instance<TColgp_HArray2OfVec2d> Vec2d;
+    typedef instance<TColgp_HArray2OfLin2d> Lin2d;
+    typedef instance<TColgp_HArray2OfCirc2d> Circ2d;
 };
 
 #endif

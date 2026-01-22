@@ -23,58 +23,38 @@
 #include <Standard_Transient.hxx>
 class StepDimTol_Datum;
 
-
 class StepDimTol_DatumReference;
 DEFINE_STANDARD_HANDLE(StepDimTol_DatumReference, Standard_Transient)
 
 //! Representation of STEP entity DatumReference
-class StepDimTol_DatumReference : public Standard_Transient
-{
+class StepDimTol_DatumReference : public Standard_Transient {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepDimTol_DatumReference();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepDimTol_DatumReference();
-  
-  //! Initialize all fields (own and inherited)
-  Standard_EXPORT void Init (const Standard_Integer thePrecedence, const Handle(StepDimTol_Datum)& theReferencedDatum);
-  
-  //! Returns field Precedence
-  Standard_EXPORT Standard_Integer Precedence() const;
-  
-  //! Set field Precedence
-  Standard_EXPORT void SetPrecedence (const Standard_Integer thePrecedence);
-  
-  //! Returns field ReferencedDatum
-  Standard_EXPORT Handle(StepDimTol_Datum) ReferencedDatum() const;
-  
-  //! Set field ReferencedDatum
-  Standard_EXPORT void SetReferencedDatum (const Handle(StepDimTol_Datum)& theReferencedDatum);
+    //! Initialize all fields (own and inherited)
+    Standard_EXPORT void Init(const Standard_Integer thePrecedence,
+                              const Handle(StepDimTol_Datum) & theReferencedDatum);
 
+    //! Returns field Precedence
+    Standard_EXPORT Standard_Integer Precedence() const;
 
+    //! Set field Precedence
+    Standard_EXPORT void SetPrecedence(const Standard_Integer thePrecedence);
 
+    //! Returns field ReferencedDatum
+    Standard_EXPORT Handle(StepDimTol_Datum) ReferencedDatum() const;
 
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_DatumReference,Standard_Transient)
+    //! Set field ReferencedDatum
+    Standard_EXPORT void SetReferencedDatum(const Handle(StepDimTol_Datum) & theReferencedDatum);
+
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_DatumReference, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
-  Standard_Integer myPrecedence;
-  Handle(StepDimTol_Datum) myReferencedDatum;
-
-
+    Standard_Integer myPrecedence;
+    Handle(StepDimTol_Datum) myReferencedDatum;
 };
-
-
-
-
-
-
 
 #endif // _StepDimTol_DatumReference_HeaderFile

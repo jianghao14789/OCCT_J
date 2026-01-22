@@ -20,60 +20,49 @@
 #include <TopoDS.hxx>
 
 //=======================================================================
-//function : StdPrs_ToolRFace
-//purpose  :
+// function : StdPrs_ToolRFace
+// purpose  :
 //=======================================================================
-StdPrs_ToolRFace::StdPrs_ToolRFace()
-: myHasNullCurves (Standard_False)
-{
+StdPrs_ToolRFace::StdPrs_ToolRFace() : myHasNullCurves(Standard_False) {}
+
+//=======================================================================
+// function : StdPrs_ToolRFace
+// purpose  :
+//=======================================================================
+StdPrs_ToolRFace::StdPrs_ToolRFace(const Handle(BRepAdaptor_Surface) & theSurface)
+    : myFace(theSurface->Face()), myHasNullCurves(Standard_False) {
+    myFace.Orientation(TopAbs_FORWARD);
 }
 
 //=======================================================================
-//function : StdPrs_ToolRFace
-//purpose  :
+// function : Edge
+// purpose  :
 //=======================================================================
-StdPrs_ToolRFace::StdPrs_ToolRFace (const Handle(BRepAdaptor_Surface)& theSurface)
-: myFace (theSurface->Face()),
-  myHasNullCurves (Standard_False)
-{
-  myFace.Orientation(TopAbs_FORWARD);
+const TopoDS_Edge& StdPrs_ToolRFace::Edge() const {
+    return TopoDS::Edge(myExplorer.Current());
 }
 
 //=======================================================================
-//function : Edge
-//purpose  :
+// function : next
+// purpose  :
 //=======================================================================
-const TopoDS_Edge& StdPrs_ToolRFace::Edge() const
-{
-  return TopoDS::Edge (myExplorer.Current());
-}
+void StdPrs_ToolRFace::next() {
+    Standard_Real aParamU1, aParamU2;
+    for (; myExplorer.More(); myExplorer.Next()) {
+        // skip INTERNAL and EXTERNAL edges
+        if (myExplorer.Current().Orientation() != TopAbs_FORWARD &&
+            myExplorer.Current().Orientation() != TopAbs_REVERSED) {
+            continue;
+        }
 
-//=======================================================================
-//function : next
-//purpose  :
-//=======================================================================
-void StdPrs_ToolRFace::next()
-{
-  Standard_Real aParamU1, aParamU2;
-  for (; myExplorer.More(); myExplorer.Next())
-  {
-    // skip INTERNAL and EXTERNAL edges
-    if (myExplorer.Current().Orientation() != TopAbs_FORWARD
-     && myExplorer.Current().Orientation() != TopAbs_REVERSED)
-    {
-      continue;
+        if (Handle(Geom2d_Curve) aCurve =
+                BRep_Tool::CurveOnSurface(TopoDS::Edge(myExplorer.Current()), myFace, aParamU1, aParamU2)) {
+            myCurve.Load(aCurve, aParamU1, aParamU2);
+            return;
+        } else {
+            myHasNullCurves = Standard_True;
+        }
     }
 
-    if (Handle(Geom2d_Curve) aCurve = BRep_Tool::CurveOnSurface (TopoDS::Edge (myExplorer.Current()), myFace, aParamU1, aParamU2))
-    {
-      myCurve.Load (aCurve, aParamU1, aParamU2);
-      return;
-    }
-    else
-    {
-      myHasNullCurves = Standard_True;
-    }
-  }
-
-  myCurve.Reset();
+    myCurve.Reset();
 }

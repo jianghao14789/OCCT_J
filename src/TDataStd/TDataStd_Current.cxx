@@ -26,159 +26,144 @@
 #include <TDF_RelocationTable.hxx>
 #include <TDF_Tool.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(TDataStd_Current,TDF_Attribute)
+IMPLEMENT_STANDARD_RTTIEXT(TDataStd_Current, TDF_Attribute)
 
 //=======================================================================
-//function : GetID
-//purpose  : 
+// function : GetID
+// purpose  :
 //=======================================================================
-const Standard_GUID& TDataStd_Current::GetID () 
-{
-  static Standard_GUID TDataStd_CurrentID("2a96b623-ec8b-11d0-bee7-080009dc3333");
-  return TDataStd_CurrentID;
+const Standard_GUID& TDataStd_Current::GetID() {
+    static Standard_GUID TDataStd_CurrentID("2a96b623-ec8b-11d0-bee7-080009dc3333");
+    return TDataStd_CurrentID;
 }
 
 //=======================================================================
-//function : Set
-//purpose  : 
+// function : Set
+// purpose  :
 //=======================================================================
 
-void TDataStd_Current::Set (const TDF_Label& current)
-{ 
-  Handle(TDataStd_Current) A;
-  Handle(TDF_Data) D = current.Data();
-  if (!D->Root().FindAttribute (TDataStd_Current::GetID(), A)) {
-    A = new TDataStd_Current (); 
-    D->Root().AddAttribute(A);
-  }
-  A->SetLabel (current);
+void TDataStd_Current::Set(const TDF_Label& current) {
+    Handle(TDataStd_Current) A;
+    Handle(TDF_Data) D = current.Data();
+    if (!D->Root().FindAttribute(TDataStd_Current::GetID(), A)) {
+        A = new TDataStd_Current();
+        D->Root().AddAttribute(A);
+    }
+    A->SetLabel(current);
 }
 
 //=======================================================================
-//function : Get
-//purpose  : 
+// function : Get
+// purpose  :
 //=======================================================================
 
-TDF_Label TDataStd_Current::Get (const TDF_Label& access)
-{ 
-//  TDF_Label current;
-  Handle(TDataStd_Current) A;
-  if (!access.Data()->Root().FindAttribute (TDataStd_Current::GetID(), A)) {
-    throw Standard_DomainError("TDataStd_Current::Get : not set");
-  }  
-  return A->GetLabel();
+TDF_Label TDataStd_Current::Get(const TDF_Label& access) {
+    //  TDF_Label current;
+    Handle(TDataStd_Current) A;
+    if (!access.Data()->Root().FindAttribute(TDataStd_Current::GetID(), A)) {
+        throw Standard_DomainError("TDataStd_Current::Get : not set");
+    }
+    return A->GetLabel();
 }
 
 //=======================================================================
-//function : Has
-//purpose  : 
+// function : Has
+// purpose  :
 //=======================================================================
 
-Standard_Boolean TDataStd_Current::Has (const TDF_Label& access)
-{ 
-  return (access.Data()->Root().IsAttribute (TDataStd_Current::GetID()));
+Standard_Boolean TDataStd_Current::Has(const TDF_Label& access) {
+    return (access.Data()->Root().IsAttribute(TDataStd_Current::GetID()));
 }
 
 //=======================================================================
-//function : TDataStd_Current
-//purpose  : 
+// function : TDataStd_Current
+// purpose  :
 //=======================================================================
 
-TDataStd_Current::TDataStd_Current () { }
-
-
+TDataStd_Current::TDataStd_Current() {}
 
 //=======================================================================
-//function : SetLabel
-//purpose  : 
+// function : SetLabel
+// purpose  :
 //=======================================================================
 
-void TDataStd_Current::SetLabel (const TDF_Label& current) 
-{
-  // OCC2932 correction
-  if(myLabel == current) return;
+void TDataStd_Current::SetLabel(const TDF_Label& current) {
+    // OCC2932 correction
+    if (myLabel == current) return;
 
-  Backup();
-  myLabel = current;
+    Backup();
+    myLabel = current;
 }
 
 //=======================================================================
-//function : GetLabel
-//purpose  : 
+// function : GetLabel
+// purpose  :
 //=======================================================================
 
-TDF_Label TDataStd_Current::GetLabel () const
-{
-  return myLabel;
-}
-
-
-//=======================================================================
-//function : ID
-//purpose  : 
-//=======================================================================
-
-const Standard_GUID& TDataStd_Current::ID() const { return GetID(); }
-
-
-//=======================================================================
-//function : NewEmpty
-//purpose  : 
-//=======================================================================
-
-Handle(TDF_Attribute) TDataStd_Current::NewEmpty () const
-{  
-  return new TDataStd_Current(); 
+TDF_Label TDataStd_Current::GetLabel() const {
+    return myLabel;
 }
 
 //=======================================================================
-//function : Restore
-//purpose  : 
+// function : ID
+// purpose  :
 //=======================================================================
 
-void TDataStd_Current::Restore(const Handle(TDF_Attribute)& With) 
-{
-  myLabel = Handle(TDataStd_Current)::DownCast (With)->GetLabel ();
+const Standard_GUID& TDataStd_Current::ID() const {
+    return GetID();
 }
 
 //=======================================================================
-//function : Paste
-//purpose  : 
+// function : NewEmpty
+// purpose  :
 //=======================================================================
 
-void TDataStd_Current::Paste (const Handle(TDF_Attribute)& Into,
-				const Handle(TDF_RelocationTable)& RT) const
-{
-  TDF_Label tLab;
-  if (!myLabel.IsNull()) {
-    if (!RT->HasRelocation(myLabel,tLab)) tLab = myLabel;
-  }
-  Handle(TDataStd_Current)::DownCast(Into)->SetLabel(tLab);
+Handle(TDF_Attribute) TDataStd_Current::NewEmpty() const {
+    return new TDataStd_Current();
 }
 
 //=======================================================================
-//function : Dump
-//purpose  : 
+// function : Restore
+// purpose  :
 //=======================================================================
 
-Standard_OStream& TDataStd_Current::Dump (Standard_OStream& anOS) const
-{  
-  anOS << "Current";
-  return anOS;
+void TDataStd_Current::Restore(const Handle(TDF_Attribute) & With) {
+    myLabel = Handle(TDataStd_Current)::DownCast(With)->GetLabel();
 }
 
 //=======================================================================
-//function : DumpJson
-//purpose  : 
+// function : Paste
+// purpose  :
 //=======================================================================
-void TDataStd_Current::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_TRANSIENT_CLASS_BEGIN (theOStream)
 
-  OCCT_DUMP_BASE_CLASS (theOStream, theDepth, TDF_Attribute)
-
-  TCollection_AsciiString aLabel;
-  TDF_Tool::Entry (myLabel, aLabel);
-  OCCT_DUMP_FIELD_VALUE_STRING (theOStream, aLabel)
+void TDataStd_Current::Paste(const Handle(TDF_Attribute) & Into, const Handle(TDF_RelocationTable) & RT) const {
+    TDF_Label tLab;
+    if (!myLabel.IsNull()) {
+        if (!RT->HasRelocation(myLabel, tLab)) tLab = myLabel;
+    }
+    Handle(TDataStd_Current)::DownCast(Into)->SetLabel(tLab);
 }
 
+//=======================================================================
+// function : Dump
+// purpose  :
+//=======================================================================
+
+Standard_OStream& TDataStd_Current::Dump(Standard_OStream& anOS) const {
+    anOS << "Current";
+    return anOS;
+}
+
+//=======================================================================
+// function : DumpJson
+// purpose  :
+//=======================================================================
+void TDataStd_Current::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_TRANSIENT_CLASS_BEGIN(theOStream)
+
+    OCCT_DUMP_BASE_CLASS(theOStream, theDepth, TDF_Attribute)
+
+    TCollection_AsciiString aLabel;
+    TDF_Tool::Entry(myLabel, aLabel);
+    OCCT_DUMP_FIELD_VALUE_STRING(theOStream, aLabel)
+}

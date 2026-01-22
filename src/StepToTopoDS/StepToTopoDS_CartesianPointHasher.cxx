@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <StepGeom_CartesianPoint.hxx>
 #include <StepToTopoDS_CartesianPointHasher.hxx>
 
@@ -22,21 +21,17 @@
 // function : HashCode
 // purpose  :
 //=======================================================================
-Standard_Integer StepToTopoDS_CartesianPointHasher::HashCode (const Handle (StepGeom_CartesianPoint)
-                                                                & theCartesianPoint,
-                                                              const Standard_Integer theUpperBound)
-{
-  return ::HashCode (theCartesianPoint, theUpperBound);
+Standard_Integer StepToTopoDS_CartesianPointHasher::HashCode(const Handle(StepGeom_CartesianPoint) & theCartesianPoint,
+                                                             const Standard_Integer theUpperBound) {
+    return ::HashCode(theCartesianPoint, theUpperBound);
 }
 
 //=======================================================================
-//function : IsEqual
-//purpose  : 
+// function : IsEqual
+// purpose  :
 //=======================================================================
 
-Standard_Boolean StepToTopoDS_CartesianPointHasher::IsEqual
-  (const Handle(StepGeom_CartesianPoint)& K1,
-   const Handle(StepGeom_CartesianPoint)& K2)
-{
-  return (K1 == K2);
+Standard_Boolean StepToTopoDS_CartesianPointHasher::IsEqual(const Handle(StepGeom_CartesianPoint) & K1,
+                                                            const Handle(StepGeom_CartesianPoint) & K2) {
+    return (K1 == K2);
 }

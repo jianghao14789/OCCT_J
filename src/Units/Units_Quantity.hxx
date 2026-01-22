@@ -29,7 +29,6 @@
 class TCollection_HAsciiString;
 class Units_Dimensions;
 
-
 class Units_Quantity;
 DEFINE_STANDARD_HANDLE(Units_Quantity, Standard_Transient)
 
@@ -37,17 +36,15 @@ DEFINE_STANDARD_HANDLE(Units_Quantity, Standard_Transient)
 //! units of all the unit systems for a given physical
 //! quantity. Each unit's  value  is  expressed in the
 //! S.I. unit system.
-class Units_Quantity : public Standard_Transient
-{
+class Units_Quantity : public Standard_Transient {
 
 public:
-
-
     //! Creates  a new Quantity  object with <aname> which  is
     //! the name of the physical quantity, <adimensions> which
     //! is the physical dimensions, and <aunitssequence> which
     //! describes all the units known for this quantity.
-    Units_Quantity(const Standard_CString aname, const Handle(Units_Dimensions)& adimensions, const Handle(Units_UnitsSequence)& aunitssequence);
+    Units_Quantity(const Standard_CString aname, const Handle(Units_Dimensions) & adimensions,
+                   const Handle(Units_UnitsSequence) & aunitssequence);
 
     //! Returns in a AsciiString from TCollection the name of the quantity.
     TCollection_AsciiString Name() const;
@@ -66,31 +63,15 @@ public:
     //! Useful for debugging.
     Standard_EXPORT void Dump(const Standard_Integer ashift, const Standard_Integer alevel) const;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Units_Quantity, Standard_Transient)
 
 protected:
-
-
-
-
 private:
-
-
     Handle(TCollection_HAsciiString) thename;
     Handle(Units_Dimensions) thedimensions;
     Handle(Units_UnitsSequence) theunitssequence;
-
-
 };
 
-
 #include <Units_Quantity.lxx>
-
-
-
-
 
 #endif // _Units_Quantity_HeaderFile

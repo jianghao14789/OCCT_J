@@ -13,7 +13,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <BOPAlgo_WireEdgeSet.hxx>
 #include <BOPAlgo_WireSplitter.hxx>
 #include <BOPAlgo_Alerts.hxx>
@@ -33,212 +32,185 @@
 #include <TopTools_MapOfShape.hxx>
 
 //=======================================================================
-//function : 
-//purpose  : 
+// function :
+// purpose  :
 //=======================================================================
-BOPAlgo_WireSplitter::BOPAlgo_WireSplitter()
-:
-  BOPAlgo_Algo(),
-  myWES(NULL),
-  myLCB(myAllocator)
-{
+BOPAlgo_WireSplitter::BOPAlgo_WireSplitter() : BOPAlgo_Algo(), myWES(NULL), myLCB(myAllocator) {}
+//=======================================================================
+// function :
+// purpose  :
+//=======================================================================
+BOPAlgo_WireSplitter::BOPAlgo_WireSplitter(const Handle(NCollection_BaseAllocator) & theAllocator)
+    : BOPAlgo_Algo(theAllocator), myWES(NULL), myLCB(myAllocator) {}
+//=======================================================================
+// function : ~
+// purpose  :
+//=======================================================================
+BOPAlgo_WireSplitter::~BOPAlgo_WireSplitter() {}
+//=======================================================================
+// function : SetWES
+// purpose  :
+//=======================================================================
+void BOPAlgo_WireSplitter::SetWES(const BOPAlgo_WireEdgeSet& theWES) {
+    myWES = (BOPAlgo_WireEdgeSet*)&theWES;
 }
 //=======================================================================
-//function : 
-//purpose  : 
+// function : WES
+// purpose  :
 //=======================================================================
-BOPAlgo_WireSplitter::BOPAlgo_WireSplitter
-  (const Handle(NCollection_BaseAllocator)& theAllocator)
-:
-  BOPAlgo_Algo(theAllocator),
-  myWES(NULL),
-  myLCB(myAllocator)
-{
+BOPAlgo_WireEdgeSet& BOPAlgo_WireSplitter::WES() {
+    return *myWES;
 }
 //=======================================================================
-//function : ~
-//purpose  : 
+// function : SetContext
+// purpose  :
 //=======================================================================
-BOPAlgo_WireSplitter::~BOPAlgo_WireSplitter()
-{
+void BOPAlgo_WireSplitter::SetContext(const Handle(IntTools_Context) & theContext) {
+    myContext = theContext;
 }
 //=======================================================================
-//function : SetWES
-//purpose  : 
+// function : Context
+// purpose  :
 //=======================================================================
-void BOPAlgo_WireSplitter::SetWES(const BOPAlgo_WireEdgeSet& theWES)
-{
-  myWES=(BOPAlgo_WireEdgeSet*)&theWES;
-}
-//=======================================================================
-//function : WES
-//purpose  : 
-//=======================================================================
-BOPAlgo_WireEdgeSet& BOPAlgo_WireSplitter::WES()
-{
-  return *myWES;
-}
-//=======================================================================
-//function : SetContext
-//purpose  : 
-//=======================================================================
-void BOPAlgo_WireSplitter::SetContext(const Handle(IntTools_Context)& theContext)
-{
-  myContext = theContext;
-}
-//=======================================================================
-//function : Context
-//purpose  : 
-//=======================================================================
-const Handle(IntTools_Context)& BOPAlgo_WireSplitter::Context()
-{
-  return myContext;
+const Handle(IntTools_Context) & BOPAlgo_WireSplitter::Context() {
+    return myContext;
 }
 //=======================================================================
 // function: CheckData
-// purpose: 
+// purpose:
 //=======================================================================
-void BOPAlgo_WireSplitter::CheckData()
-{
-  if (!myWES) {
-    AddError (new BOPAlgo_AlertNullInputShapes);
-    return;
-  }
+void BOPAlgo_WireSplitter::CheckData() {
+    if (!myWES) {
+        AddError(new BOPAlgo_AlertNullInputShapes);
+        return;
+    }
 }
 //=======================================================================
-//function : Perform
-//purpose  : 
+// function : Perform
+// purpose  :
 //=======================================================================
-void BOPAlgo_WireSplitter::Perform(const Message_ProgressRange& theRange)
-{
-  GetReport()->Clear();
-  Message_ProgressScope aPS(theRange, "Building wires", 1);
-  //
-  CheckData();
-  if (HasErrors()) {
-    return;
-  }
-  //
-  // create a context
-  if (myContext.IsNull()) {
-    myContext = new IntTools_Context;
-  }
-  //
-  BOPTools_AlgoTools::MakeConnexityBlocks
-    (myWES->StartElements(), TopAbs_VERTEX, TopAbs_EDGE, myLCB);
-  if (UserBreak (aPS))
-  {
-    return;
-  }
+void BOPAlgo_WireSplitter::Perform(const Message_ProgressRange& theRange) {
+    GetReport()->Clear();
+    Message_ProgressScope aPS(theRange, "Building wires", 1);
+    //
+    CheckData();
+    if (HasErrors()) {
+        return;
+    }
+    //
+    // create a context
+    if (myContext.IsNull()) {
+        myContext = new IntTools_Context;
+    }
+    //
+    BOPTools_AlgoTools::MakeConnexityBlocks(myWES->StartElements(), TopAbs_VERTEX, TopAbs_EDGE, myLCB);
+    if (UserBreak(aPS)) {
+        return;
+    }
 
-  MakeWires(aPS.Next());
+    MakeWires(aPS.Next());
 }
 
 /////////////////////////////////////////////////////////////////////////
 class BOPAlgo_WS_ConnexityBlock {
 public:
-  BOPAlgo_WS_ConnexityBlock() {};
-  ~BOPAlgo_WS_ConnexityBlock() {};
+    BOPAlgo_WS_ConnexityBlock() {};
+    ~BOPAlgo_WS_ConnexityBlock() {};
 
-  void SetFace(const TopoDS_Face& theF) {
-    myFace = theF;
-  }
-
-  const TopoDS_Face& Face() const {
-    return myFace;
-  }
-
-  void SetConnexityBlock(const BOPTools_ConnexityBlock& theCB) {
-    myCB = theCB;
-  }
-
-  const BOPTools_ConnexityBlock& ConnexityBlock() const {
-    return myCB;
-  }
-
-  void SetContext(const Handle(IntTools_Context)& aContext) {
-    myContext = aContext;
-  }
-  //
-  const Handle(IntTools_Context)& Context()const {
-    return myContext;
-  }
-  //
-  void SetProgressRange(const Message_ProgressRange& theRange) {
-    myRange = theRange;
-  }
-
-  void Perform() {
-    Message_ProgressScope aPS (myRange, NULL, 1);
-    if (!aPS.More())
-    {
-      return;
+    void SetFace(const TopoDS_Face& theF) {
+        myFace = theF;
     }
-    BOPAlgo_WireSplitter::SplitBlock(myFace, myCB, myContext);
-  }
+
+    const TopoDS_Face& Face() const {
+        return myFace;
+    }
+
+    void SetConnexityBlock(const BOPTools_ConnexityBlock& theCB) {
+        myCB = theCB;
+    }
+
+    const BOPTools_ConnexityBlock& ConnexityBlock() const {
+        return myCB;
+    }
+
+    void SetContext(const Handle(IntTools_Context) & aContext) {
+        myContext = aContext;
+    }
+    //
+    const Handle(IntTools_Context) & Context() const {
+        return myContext;
+    }
+    //
+    void SetProgressRange(const Message_ProgressRange& theRange) {
+        myRange = theRange;
+    }
+
+    void Perform() {
+        Message_ProgressScope aPS(myRange, NULL, 1);
+        if (!aPS.More()) {
+            return;
+        }
+        BOPAlgo_WireSplitter::SplitBlock(myFace, myCB, myContext);
+    }
 
 protected:
-  TopoDS_Face myFace;
-  BOPTools_ConnexityBlock myCB;
-  Handle(IntTools_Context) myContext;
-  Message_ProgressRange myRange;
+    TopoDS_Face myFace;
+    BOPTools_ConnexityBlock myCB;
+    Handle(IntTools_Context) myContext;
+    Message_ProgressRange myRange;
 };
 
 typedef NCollection_Vector<BOPAlgo_WS_ConnexityBlock> BOPAlgo_VectorOfConnexityBlock;
 
 //=======================================================================
-//function : MakeWires
-//purpose  : 
+// function : MakeWires
+// purpose  :
 //=======================================================================
-void BOPAlgo_WireSplitter::MakeWires(const Message_ProgressRange& theRange)
-{
-  Standard_Boolean bIsRegular;
-  Standard_Integer aNbVCB, k;
-  TopoDS_Wire aW;
-  BOPTools_ListIteratorOfListOfConnexityBlock aItCB;
-  TopTools_ListIteratorOfListOfShape aIt;
-  BOPAlgo_VectorOfConnexityBlock aVCB;
-  //
-  Message_ProgressScope aPSOuter(theRange, NULL, 1);
-  //
-  const TopoDS_Face& aF=myWES->Face();
-  //
-  aItCB.Initialize(myLCB);
-  for (; aItCB.More(); aItCB.Next()) {
-    if (UserBreak (aPSOuter))
-    {
-      return;
-    }
+void BOPAlgo_WireSplitter::MakeWires(const Message_ProgressRange& theRange) {
+    Standard_Boolean bIsRegular;
+    Standard_Integer aNbVCB, k;
+    TopoDS_Wire aW;
+    BOPTools_ListIteratorOfListOfConnexityBlock aItCB;
+    TopTools_ListIteratorOfListOfShape aIt;
+    BOPAlgo_VectorOfConnexityBlock aVCB;
+    //
+    Message_ProgressScope aPSOuter(theRange, NULL, 1);
+    //
+    const TopoDS_Face& aF = myWES->Face();
+    //
+    aItCB.Initialize(myLCB);
+    for (; aItCB.More(); aItCB.Next()) {
+        if (UserBreak(aPSOuter)) {
+            return;
+        }
 
-    BOPTools_ConnexityBlock& aCB=aItCB.ChangeValue();
-    bIsRegular=aCB.IsRegular();
-    if (bIsRegular) {
-      TopTools_ListOfShape& aLE=aCB.ChangeShapes();
-      BOPAlgo_WireSplitter::MakeWire(aLE, aW);
-      myWES->AddShape(aW);
+        BOPTools_ConnexityBlock& aCB = aItCB.ChangeValue();
+        bIsRegular = aCB.IsRegular();
+        if (bIsRegular) {
+            TopTools_ListOfShape& aLE = aCB.ChangeShapes();
+            BOPAlgo_WireSplitter::MakeWire(aLE, aW);
+            myWES->AddShape(aW);
+        } else {
+            BOPAlgo_WS_ConnexityBlock& aWSCB = aVCB.Appended();
+            aWSCB.SetFace(aF);
+            aWSCB.SetConnexityBlock(aCB);
+        }
     }
-    else {
-      BOPAlgo_WS_ConnexityBlock& aWSCB = aVCB.Appended();
-      aWSCB.SetFace(aF);
-      aWSCB.SetConnexityBlock(aCB);
+    aNbVCB = aVCB.Length();
+    Message_ProgressScope aPSParallel(aPSOuter.Next(), NULL, aNbVCB);
+    for (Standard_Integer iW = 0; iW < aNbVCB; ++iW) {
+        aVCB.ChangeValue(iW).SetProgressRange(aPSParallel.Next());
     }
-  }
-  aNbVCB=aVCB.Length();
-  Message_ProgressScope aPSParallel(aPSOuter.Next(), NULL, aNbVCB);
-  for (Standard_Integer iW = 0; iW < aNbVCB; ++iW)
-  {
-    aVCB.ChangeValue(iW).SetProgressRange(aPSParallel.Next());
-  }
-  //===================================================
-  BOPTools_Parallel::Perform (myRunParallel, aVCB, myContext);
-  //===================================================
-  for (k=0; k<aNbVCB; ++k) {
-    const BOPAlgo_WS_ConnexityBlock& aCB=aVCB(k);
-    const TopTools_ListOfShape& aLW=aCB.ConnexityBlock().Loops();
-    aIt.Initialize(aLW);
-    for (; aIt.More(); aIt.Next()) {
-      const TopoDS_Shape& aWx=aIt.Value();
-      myWES->AddShape(aWx);
+    //===================================================
+    BOPTools_Parallel::Perform(myRunParallel, aVCB, myContext);
+    //===================================================
+    for (k = 0; k < aNbVCB; ++k) {
+        const BOPAlgo_WS_ConnexityBlock& aCB = aVCB(k);
+        const TopTools_ListOfShape& aLW = aCB.ConnexityBlock().Loops();
+        aIt.Initialize(aLW);
+        for (; aIt.More(); aIt.Next()) {
+            const TopoDS_Shape& aWx = aIt.Value();
+            myWES->AddShape(aWx);
+        }
     }
-  }
 }

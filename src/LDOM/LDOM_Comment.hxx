@@ -20,32 +20,32 @@
 
 //  Class LDOM_Comment
 
-class LDOM_Comment : public LDOM_CharacterData
-{
- public:
-  // ---------- PUBLIC METHODS ----------
+class LDOM_Comment : public LDOM_CharacterData {
+public:
+    // ---------- PUBLIC METHODS ----------
 
-  LDOM_Comment () {}
-  // Empty constructor
+    LDOM_Comment() {}
+    // Empty constructor
 
-  LDOM_Comment (const LDOM_Comment& theOther) : LDOM_CharacterData (theOther) {}
-  // Copy constructor
+    LDOM_Comment(const LDOM_Comment& theOther) : LDOM_CharacterData(theOther) {}
+    // Copy constructor
 
-  LDOM_Comment&         operator =      (const LDOM_NullPtr * theNull)
-           { return (LDOM_Comment&) LDOM_CharacterData::operator = (theNull); }
-  // Nullify
+    LDOM_Comment& operator=(const LDOM_NullPtr* theNull) {
+        return (LDOM_Comment&)LDOM_CharacterData::operator=(theNull);
+    }
+    // Nullify
 
-  LDOM_Comment&         operator =      (const LDOM_Comment& theOther)
-           { return (LDOM_Comment&) LDOM_CharacterData::operator = (theOther); }
-  // Assignment
+    LDOM_Comment& operator=(const LDOM_Comment& theOther) {
+        return (LDOM_Comment&)LDOM_CharacterData::operator=(theOther);
+    }
+    // Assignment
 
- protected:
-  friend class LDOM_Document;
-  // ---------- PROTECTED METHODS ----------
+protected:
+    friend class LDOM_Document;
+    // ---------- PROTECTED METHODS ----------
 
-  LDOM_Comment                          (const LDOM_BasicText&          theText,
-                                         const Handle(LDOM_MemManager)& theDoc)
-    : LDOM_CharacterData (theText, theDoc) {}
+    LDOM_Comment(const LDOM_BasicText& theText, const Handle(LDOM_MemManager) & theDoc)
+        : LDOM_CharacterData(theText, theDoc) {}
 };
 
 #endif

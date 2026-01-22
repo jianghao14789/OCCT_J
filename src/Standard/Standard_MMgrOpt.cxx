@@ -25,12 +25,12 @@
 #include <errno.h>
 
 #ifndef _WIN32
-# include <sys/mman.h>    /* mmap() */
+#include <sys/mman.h> /* mmap() */
 #endif
 
 #include <fcntl.h>
 //
-#if defined (__sun) || defined(SOLARIS)
+#if defined(__sun) || defined(SOLARIS)
 extern "C" int getpagesize();
 #endif
 
@@ -41,7 +41,7 @@ extern "C" int getpagesize();
 // Assumptions
 //======================================================================
 
-// This implementation makes a number of assumptions regarding size of 
+// This implementation makes a number of assumptions regarding size of
 // types:
 //
 // sizeof(Standard_Size) == sizeof(Standard_Address==void*)
@@ -54,7 +54,7 @@ extern "C" int getpagesize();
 
 // For clarity of implementation, the following conventions are used
 // for naming variables:
-// 
+//
 // ...Size: size in bytes
 //
 // RoundSize, RSize etc.: size in bytes, rounded according to allocation granularity
@@ -69,40 +69,39 @@ extern "C" int getpagesize();
 // Macro definitions
 //======================================================================
 
-//     
+//
 // MMAP_BASE_ADDRESS,  MMAP_FLAGS
-#if defined (__hpux) || defined(HPUX)
+#if defined(__hpux) || defined(HPUX)
 #define MMAP_BASE_ADDRESS 0x80000000
 #define MMAP_FLAGS (MAP_ANONYMOUS | MAP_PRIVATE | MAP_VARIABLE)
-#elif defined (__osf__) || defined(DECOSF1)
+#elif defined(__osf__) || defined(DECOSF1)
 #define MMAP_BASE_ADDRESS 0x1000000000
 #define MMAP_FLAGS (MAP_ANONYMOUS | MAP_PRIVATE | MAP_VARIABLE)
 #elif defined(_AIX)
-#define MMAP_BASE_ADDRESS  0x80000000
+#define MMAP_BASE_ADDRESS 0x80000000
 #define MMAP_FLAGS (MAP_ANONYMOUS | MAP_PRIVATE | MAP_VARIABLE)
 #elif defined(__APPLE__)
-#define MMAP_BASE_ADDRESS  0x80000000
+#define MMAP_BASE_ADDRESS 0x80000000
 #define MMAP_FLAGS (MAP_ANON | MAP_PRIVATE)
 #elif defined(__linux__)
 #define MMAP_BASE_ADDRESS 0x20000000
 #define MMAP_FLAGS (MAP_PRIVATE)
 #elif defined(_WIN32)
-//static HANDLE myhMap;
+// static HANDLE myhMap;
 #else
 #define MMAP_BASE_ADDRESS 0x60000000
 #define MMAP_FLAGS (MAP_PRIVATE)
 #endif
 
 // Round size up to the specified page size
-#define PAGE_ALIGN(size,thePageSize)                            \
-  (((size) + (thePageSize) - 1) &  ~((thePageSize) - 1))
+#define PAGE_ALIGN(size, thePageSize) (((size) + (thePageSize) - 1) & ~((thePageSize) - 1))
 
 // Round size up to 4, 8, or 16 bytes
 // Note that 0 yields 0
-#define ROUNDUP16(size)                (((size) + 0xf) & ~(Standard_Size)0xf)
-#define ROUNDUP8(size)                 (((size) + 0x7) & ~(Standard_Size)0x7)
-#define ROUNDUP4(size)                 (((size) + 0x3) & ~(Standard_Size)0x3)
-#define ROUNDDOWN8(size)               ((size) & ~(Standard_Size)0x7)
+#define ROUNDUP16(size) (((size) + 0xf) & ~(Standard_Size)0xf)
+#define ROUNDUP8(size) (((size) + 0x7) & ~(Standard_Size)0x7)
+#define ROUNDUP4(size) (((size) + 0x3) & ~(Standard_Size)0x3)
+#define ROUNDDOWN8(size) ((size) & ~(Standard_Size)0x7)
 
 // The following two macros define granularity of memory allocation,
 // by rounding size to the size of the allocation cell,
@@ -110,13 +109,13 @@ extern "C" int getpagesize();
 // Note that granularity shall be not less than sizeof(Standard_Size)
 
 // Traditional implementation: granularity 16 bytes
-//#define ROUNDUP_CELL(size)             ROUNDUP16(size)
-//#define INDEX_CELL(rsize)              ((rsize) >> 4)
+// #define ROUNDUP_CELL(size)             ROUNDUP16(size)
+// #define INDEX_CELL(rsize)              ((rsize) >> 4)
 
 // Reduced granularity: 8 bytes
-#define ROUNDUP_CELL(size)             ROUNDUP8(size)
-#define ROUNDDOWN_CELL(size)           ROUNDDOWN8(size)
-#define INDEX_CELL(rsize)              ((rsize) >> 3)
+#define ROUNDUP_CELL(size) ROUNDUP8(size)
+#define ROUNDDOWN_CELL(size) ROUNDDOWN8(size)
+#define INDEX_CELL(rsize) ((rsize) >> 3)
 
 /* In the allocated block, first bytes are used for storing of memory manager's data.
    (size of block). The minimal size of these data is sizeof(int).
@@ -134,20 +133,17 @@ extern "C" int getpagesize();
 #endif
 
 // Get address of user area from block address, and vice-versa
-#define GET_USER(block)    (((Standard_Size*)(block)) + BLOCK_SHIFT)
-#define GET_BLOCK(storage) (((Standard_Size*)(storage))-BLOCK_SHIFT)
+#define GET_USER(block) (((Standard_Size*)(block)) + BLOCK_SHIFT)
+#define GET_BLOCK(storage) (((Standard_Size*)(storage)) - BLOCK_SHIFT)
 
 //=======================================================================
-//function : Standard_MMgr
-//purpose  : 
+// function : Standard_MMgr
+// purpose  :
 //=======================================================================
 
-Standard_MMgrOpt::Standard_MMgrOpt(const Standard_Boolean aClear,
-    const Standard_Boolean aMMap,
-    const Standard_Size aCellSize,
-    const Standard_Integer aNbPages,
-    const Standard_Size aThreshold)
-{
+Standard_MMgrOpt::Standard_MMgrOpt(const Standard_Boolean aClear, const Standard_Boolean aMMap,
+                                   const Standard_Size aCellSize, const Standard_Integer aNbPages,
+                                   const Standard_Size aThreshold) {
     // check basic assumption
     Standard_STATIC_ASSERT(sizeof(Standard_Size) == sizeof(Standard_Address));
 
@@ -166,43 +162,39 @@ Standard_MMgrOpt::Standard_MMgrOpt(const Standard_Boolean aClear,
     myNbPages = aNbPages;
     myThreshold = aThreshold;
 
-    // initialize 
+    // initialize
     Initialize();
 }
 
 //=======================================================================
-//function : ~Standard_MMgrOpt
-//purpose  : 
+// function : ~Standard_MMgrOpt
+// purpose  :
 //=======================================================================
 
-Standard_MMgrOpt::~Standard_MMgrOpt()
-{
+Standard_MMgrOpt::~Standard_MMgrOpt() {
     Purge(Standard_True);
     free(myFreeList);
 
-    // NOTE: freeing pools may be dangerous if not all memory taken by 
-    //       this instance of the memory manager has been freed 
+    // NOTE: freeing pools may be dangerous if not all memory taken by
+    //       this instance of the memory manager has been freed
     FreePools();
 }
 
 // interface level
 
 //=======================================================================
-//function : Initialize
-//purpose  : 
+// function : Initialize
+// purpose  :
 //=======================================================================
 
-void Standard_MMgrOpt::Initialize()
-{
-    // check number of pages in small blocks pools 
-    if (myNbPages < 100)
-        myNbPages = 1000;
+void Standard_MMgrOpt::Initialize() {
+    // check number of pages in small blocks pools
+    if (myNbPages < 100) myNbPages = 1000;
 
     // get system-dependent page size
 #ifndef _WIN32
     myPageSize = getpagesize();
-    if (!myPageSize)
-        myMMap = 0;
+    if (!myPageSize) myMMap = 0;
 #else
     SYSTEM_INFO SystemInfo;
     GetSystemInfo(&SystemInfo);
@@ -211,7 +203,7 @@ void Standard_MMgrOpt::Initialize()
 
     // initialize memory mapped files
     if (myMMap) {
-#if defined (__sgi) || defined(IRIX)
+#if defined(__sgi) || defined(IRIX)
         /* Probleme de conflit en la zone des malloc et la zone des mmap sur SGI */
         /* Ce probleme a ete identifie en IRIX 5.3 jusqu'en  IRIX 6.2. Le probleme */
         /* ne semble pas apparaitre en IRIX 6.4 */
@@ -249,53 +241,48 @@ void Standard_MMgrOpt::Initialize()
             perror("ERR_MEMRY_FAIL");
 #endif
 
-#if defined(IRIX) || defined(__sgi) || defined(SOLARIS) || defined(__sun) || defined(__linux__) || defined(__FreeBSD__) || defined(__ANDROID__)
+#if defined(IRIX) || defined(__sgi) || defined(SOLARIS) || defined(__sun) || defined(__linux__) ||                     \
+    defined(__FreeBSD__) || defined(__ANDROID__)
         if ((myMMap = open("/dev/zero", O_RDWR)) < 0) {
             if ((myMMap = open("/dev/null", O_RDWR)) < 0) {
                 myMMap = 0;
             }
         }
-        if (!myMMap)
-            perror("ERR_MMAP_FAIL");
+        if (!myMMap) perror("ERR_MMAP_FAIL");
 #else
         myMMap = -1;
 #endif
     }
 
     // initialize free lists
-    myFreeListMax = INDEX_CELL(ROUNDUP_CELL(myThreshold - BLOCK_SHIFT)); // all blocks less than myThreshold are to be recycled
+    myFreeListMax =
+        INDEX_CELL(ROUNDUP_CELL(myThreshold - BLOCK_SHIFT)); // all blocks less than myThreshold are to be recycled
     myFreeList = (Standard_Size**)calloc(myFreeListMax + 1, sizeof(Standard_Size*));
     myCellSize = ROUNDUP16(myCellSize);
 }
 
 //=======================================================================
-//function : SetMMgrOptCallBack
-//purpose  : Sets a callback function to be called on each alloc/free
+// function : SetMMgrOptCallBack
+// purpose  : Sets a callback function to be called on each alloc/free
 //=======================================================================
 
 static Standard_MMgrOpt::TPCallBackFunc MyPCallBackFunc = NULL;
 
-Standard_EXPORT void Standard_MMgrOpt::SetCallBackFunction(TPCallBackFunc pFunc)
-{
+Standard_EXPORT void Standard_MMgrOpt::SetCallBackFunction(TPCallBackFunc pFunc) {
     MyPCallBackFunc = pFunc;
 }
 
-inline void callBack(const Standard_Boolean isAlloc,
-    const Standard_Address aStorage,
-    const Standard_Size aRoundSize,
-    const Standard_Size aSize)
-{
-    if (MyPCallBackFunc)
-        (*MyPCallBackFunc)(isAlloc, aStorage, aRoundSize, aSize);
+inline void callBack(const Standard_Boolean isAlloc, const Standard_Address aStorage, const Standard_Size aRoundSize,
+                     const Standard_Size aSize) {
+    if (MyPCallBackFunc) (*MyPCallBackFunc)(isAlloc, aStorage, aRoundSize, aSize);
 }
 
 //=======================================================================
-//function : Allocate
-//purpose  : 
+// function : Allocate
+// purpose  :
 //=======================================================================
 
-Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
-{
+Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize) {
     Standard_Size* aStorage = NULL;
 
     // round up size according to allocation granularity
@@ -309,8 +296,8 @@ Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
         const Standard_Size RoundSizeN = RoundSize / sizeof(Standard_Size);
 
         // Lock access to critical data (myFreeList and other fields) by mutex.
-        // Note that we do not lock fields that do not change during the 
-        // object life (such as myThreshold), and assume that calls to functions 
+        // Note that we do not lock fields that do not change during the
+        // object life (such as myThreshold), and assume that calls to functions
         // of standard library are already protected by their implementation.
         // The unlock is called as soon as possible, for every treatment case.
         // We also do not use Sentry, since in case if OCC signal or exception is
@@ -334,16 +321,15 @@ Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
             aStorage = GET_USER(aBlock);
 
             // clear block if requested
-            if (myClear)
-                memset(aStorage, 0, RoundSize);
+            if (myClear) memset(aStorage, 0, RoundSize);
         }
         // else if block size is small allocate it in pools
         else if (RoundSize <= myCellSize) {
-            // unlock the mutex for free lists 
+            // unlock the mutex for free lists
             myMutex.Unlock();
 
             // and lock the specific mutex used to protect access to small blocks pools;
-            // note that this is done by sentry class so as to ensure unlocking in case of 
+            // note that this is done by sentry class so as to ensure unlocking in case of
             // possible exception that may be thrown from AllocMemory()
             Standard_Mutex::Sentry aSentry(myMutexPools);
 
@@ -356,8 +342,7 @@ Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
 
                 if (myEndBlock > myNextAddr) {
                     // put the remaining piece to the free lists
-                    const Standard_Size aPSize = (myEndBlock - GET_USER(myNextAddr))
-                        * sizeof(Standard_Size);
+                    const Standard_Size aPSize = (myEndBlock - GET_USER(myNextAddr)) * sizeof(Standard_Size);
                     const Standard_Size aRPSize = ROUNDDOWN_CELL(aPSize);
                     const Standard_Size aPIndex = INDEX_CELL(aRPSize);
                     if (aPIndex > 0 && aPIndex <= myFreeListMax) {
@@ -392,16 +377,16 @@ Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
             myMutex.Unlock();
 
             // we use operator ?: instead of if() since it is faster
-            Standard_Size* aBlock = (Standard_Size*)(myClear ? calloc(RoundSizeN + BLOCK_SHIFT, sizeof(Standard_Size)) :
-                malloc((RoundSizeN + BLOCK_SHIFT) * sizeof(Standard_Size)));
+            Standard_Size* aBlock =
+                (Standard_Size*)(myClear ? calloc(RoundSizeN + BLOCK_SHIFT, sizeof(Standard_Size))
+                                         : malloc((RoundSizeN + BLOCK_SHIFT) * sizeof(Standard_Size)));
 
             // if allocation failed, try to free some memory by purging free lists, and retry
             if (!aBlock) {
                 if (Purge(Standard_False))
                     aBlock = (Standard_Size*)calloc(RoundSizeN + BLOCK_SHIFT, sizeof(Standard_Size));
                 // if still not succeeded, raise exception
-                if (!aBlock)
-                    throw Standard_OutOfMemory("Standard_MMgrOpt::Allocate(): malloc failed");
+                if (!aBlock) throw Standard_OutOfMemory("Standard_MMgrOpt::Allocate(): malloc failed");
             }
 
             // initialize new block header by its size
@@ -413,7 +398,7 @@ Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
     // blocks of big size may be allocated as memory mapped files
     else {
         // Compute size of the block to be allocated, including header,
-        // Note that we use rounded size, even if this block will not be stored in 
+        // Note that we use rounded size, even if this block will not be stored in
         // the free list, for consistency of calls to AllocMemory() / FreeMemory()
         // and calculation of index in the free list
         Standard_Size AllocSize = RoundSize + sizeof(Standard_Size);
@@ -433,15 +418,13 @@ Standard_Address Standard_MMgrOpt::Allocate(const Standard_Size aSize)
 }
 
 //=======================================================================
-//function : Free
-//purpose  : 
+// function : Free
+// purpose  :
 //=======================================================================
 
-void Standard_MMgrOpt::Free(Standard_Address theStorage)
-{
+void Standard_MMgrOpt::Free(Standard_Address theStorage) {
     // safely return if attempt to free null pointer
-    if (!theStorage)
-        return;
+    if (!theStorage) return;
 
     // get the pointer to the memory block header
     Standard_Size* aBlock = GET_BLOCK(theStorage);
@@ -455,8 +438,8 @@ void Standard_MMgrOpt::Free(Standard_Address theStorage)
     const Standard_Size Index = INDEX_CELL(RoundSize);
     if (Index <= myFreeListMax) {
         // Lock access to critical data (myFreeList and other) by mutex
-        // Note that we do not lock fields that do not change during the 
-        // object life (such as myThreshold), and assume that calls to functions 
+        // Note that we do not lock fields that do not change during the
+        // object life (such as myThreshold), and assume that calls to functions
         // of standard library are already protected by their implementation.
         // We also do not use Sentry, since in case if OCC signal or exception is
         // caused by this block we will have deadlock anyway...
@@ -475,12 +458,11 @@ void Standard_MMgrOpt::Free(Standard_Address theStorage)
 }
 
 //=======================================================================
-//function : Purge
-//purpose  : Frees all free lists except small blocks (less than CellSize)
+// function : Purge
+// purpose  : Frees all free lists except small blocks (less than CellSize)
 //=======================================================================
 
-Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
-{
+Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean) {
     // Lock access to critical data by mutex
     Standard_Mutex::Sentry aSentry(myMutex);
 
@@ -510,9 +492,7 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
 #ifndef _WIN32
     const Standard_Size PoolSize = myPageSize * myNbPages;
 #else
-    const Standard_Size PoolSize =
-        PAGE_ALIGN(myPageSize * myNbPages + sizeof(HANDLE), myPageSize) -
-        sizeof(HANDLE);
+    const Standard_Size PoolSize = PAGE_ALIGN(myPageSize * myNbPages + sizeof(HANDLE), myPageSize) - sizeof(HANDLE);
 #endif
     const Standard_Size RPoolSize = ROUNDDOWN_CELL(PoolSize);
     const Standard_Size PoolSizeN = RPoolSize / sizeof(Standard_Size);
@@ -546,8 +526,7 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
         // counters
         for (i = 0; i <= nCells; i++) {
             Standard_Size* aFree = myFreeList[i];
-            Standard_Size aSize = BLOCK_SHIFT * sizeof(Standard_Size) +
-                ROUNDUP_CELL(1) * i;
+            Standard_Size aSize = BLOCK_SHIFT * sizeof(Standard_Size) + ROUNDUP_CELL(1) * i;
             while (aFree) {
                 for (iPool = 0; iPool <= iLast; iPool++) {
                     if (aFree >= aPools[iPool] && aFree < aPools[iPool] + PoolSizeN) {
@@ -563,8 +542,7 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
         Standard_Integer iLastFree = -1;
         for (iPool = 0; iPool <= iLast; iPool++) {
             aFreeSize[iPool] = ROUNDUP_CELL(aFreeSize[iPool]);
-            if (aFreeSize[iPool] == RPoolSize)
-                aFreePools[++iLastFree] = iPool;
+            if (aFreeSize[iPool] == RPoolSize) aFreePools[++iLastFree] = iPool;
         }
         if (iLastFree == -1) {
             // no free pools found in this table
@@ -581,11 +559,9 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
             while (aFree) {
                 for (j = 0; j <= iLastFree; j++) {
                     iPool = aFreePools[j];
-                    if (aFree >= aPools[iPool] && aFree < aPools[iPool] + PoolSizeN)
-                        break;
+                    if (aFree >= aPools[iPool] && aFree < aPools[iPool] + PoolSizeN) break;
                 }
-                if (j <= iLastFree)
-                {
+                if (j <= iLastFree) {
                     // remove
                     aFree = *(Standard_Size**)aFree;
                     if (aPrevFree)
@@ -593,8 +569,7 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
                     else
                         myFreeList[i] = aFree;
                     nbFreed++;
-                }
-                else {
+                } else {
                     // skip
                     aPrevFree = aFree;
                     aFree = *(Standard_Size**)aFree;
@@ -604,22 +579,16 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
 
         // release free pools, and reconnect remaining pools
         // in the linked list
-        Standard_Size* aPrev = (aFreePools[0] == 0
-            ? aPrevPool
-            : aPools[aFreePools[0] - 1]);
+        Standard_Size* aPrev = (aFreePools[0] == 0 ? aPrevPool : aPools[aFreePools[0] - 1]);
         for (j = 0; j <= iLastFree; j++) {
             iPool = aFreePools[j];
             if (j > 0) {
                 // update the pointer to the previous non-free pool
-                if (iPool - aFreePools[j - 1] > 1)
-                    aPrev = aPools[iPool - 1];
+                if (iPool - aFreePools[j - 1] > 1) aPrev = aPools[iPool - 1];
             }
             if (j == iLastFree || aFreePools[j + 1] - iPool > 1) {
                 // get next non-free pool
-                Standard_Size* aNext =
-                    (j == iLastFree && aFreePools[j] == iLast)
-                    ? aNextPool
-                    : aPools[iPool + 1];
+                Standard_Size* aNext = (j == iLastFree && aFreePools[j] == iLast) ? aNextPool : aPools[iPool + 1];
                 // and connect it to the list of pools that have been processed
                 // and remain non-free
                 if (aPrev)
@@ -630,9 +599,7 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
             FreeMemory(aPools[iPool], PoolSize);
         }
         // update the pointer to the previous non-free pool
-        aPrevPool = (aFreePools[iLastFree] == iLast
-            ? aPrev
-            : aPools[iLast]);
+        aPrevPool = (aFreePools[iLastFree] == iLast ? aPrev : aPools[iLast]);
         (void)nPoolFreed; // unused but set for debug
         nPoolFreed += iLastFree + 1;
     }
@@ -641,12 +608,11 @@ Standard_Integer Standard_MMgrOpt::Purge(Standard_Boolean)
 }
 
 //=======================================================================
-//function : FreePools
-//purpose  : Frees all memory pools allocated for small blocks
+// function : FreePools
+// purpose  : Frees all memory pools allocated for small blocks
 //=======================================================================
 
-void Standard_MMgrOpt::FreePools()
-{
+void Standard_MMgrOpt::FreePools() {
     // Lock access to critical data by mutex
     Standard_Mutex::Sentry aSentry(myMutexPools);
 
@@ -663,16 +629,13 @@ void Standard_MMgrOpt::FreePools()
 }
 
 //=======================================================================
-//function : Reallocate
-//purpose  : 
+// function : Reallocate
+// purpose  :
 //=======================================================================
 
-Standard_Address Standard_MMgrOpt::Reallocate(Standard_Address theStorage,
-    const Standard_Size theNewSize)
-{
+Standard_Address Standard_MMgrOpt::Reallocate(Standard_Address theStorage, const Standard_Size theNewSize) {
     // if theStorage == NULL, just allocate new memory block
-    if (!theStorage)
-    {
+    if (!theStorage) {
         return Allocate(theNewSize);
     }
 
@@ -692,20 +655,18 @@ Standard_Address Standard_MMgrOpt::Reallocate(Standard_Address theStorage,
         memcpy(newStorage, theStorage, OldSize);
         Free(theStorage);
         // clear newly added part of the block
-        if (myClear)
-            memset(((char*)newStorage) + OldSize, 0, theNewSize - OldSize);
+        if (myClear) memset(((char*)newStorage) + OldSize, 0, theNewSize - OldSize);
     }
     return newStorage;
 }
 
 //=======================================================================
-//function : AllocMemory
-//purpose  : Allocate a big block of memory using either malloc/calloc
+// function : AllocMemory
+// purpose  : Allocate a big block of memory using either malloc/calloc
 //           or memory mapped file
 //=======================================================================
 
-Standard_Size* Standard_MMgrOpt::AllocMemory(Standard_Size& Size)
-{
+Standard_Size* Standard_MMgrOpt::AllocMemory(Standard_Size& Size) {
     // goto is used as efficient method for a possibility to retry allocation
 retry:
 
@@ -720,14 +681,12 @@ retry:
 
         // allocate memory
         // note that on UNIX myMMap is file descriptor for /dev/null
-        aBlock = (Standard_Size*)mmap((char*)MMAP_BASE_ADDRESS, AlignedSize,
-            PROT_READ | PROT_WRITE, MMAP_FLAGS,
-            myMMap, 0);
+        aBlock =
+            (Standard_Size*)mmap((char*)MMAP_BASE_ADDRESS, AlignedSize, PROT_READ | PROT_WRITE, MMAP_FLAGS, myMMap, 0);
         if (aBlock == MAP_FAILED /* -1 */) {
             int errcode = errno;
             // as a last resort, try freeing some memory by calling Purge()
-            if (Purge(Standard_False))
-                goto retry;
+            if (Purge(Standard_False)) goto retry;
             // if nothing helps, raise exception
             throw Standard_OutOfMemory(strerror(errcode));
         }
@@ -742,29 +701,24 @@ retry:
         const Standard_Size AlignedSize = PAGE_ALIGN(Size + sizeof(HANDLE), myPageSize);
 
         // allocate mapped file
-        HANDLE hMap = CreateFileMapping(INVALID_HANDLE_VALUE, NULL,
-            PAGE_READWRITE,
-            DWORD(AlignedSize / 0x80000000),
-            DWORD(AlignedSize % 0x80000000), NULL);
-        HANDLE* aMBlock = (hMap && GetLastError() != ERROR_ALREADY_EXISTS ?
-            (HANDLE*)MapViewOfFile(hMap, FILE_MAP_WRITE, 0, 0, 0) : NULL);
+        HANDLE hMap = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, DWORD(AlignedSize / 0x80000000),
+                                        DWORD(AlignedSize % 0x80000000), NULL);
+        HANDLE* aMBlock =
+            (hMap && GetLastError() != ERROR_ALREADY_EXISTS ? (HANDLE*)MapViewOfFile(hMap, FILE_MAP_WRITE, 0, 0, 0)
+                                                            : NULL);
         // check for error and try allocating address space
-        if (!aMBlock)
-        {
+        if (!aMBlock) {
             // close handle if allocated
-            if (hMap)
-                CloseHandle(hMap);
+            if (hMap) CloseHandle(hMap);
             hMap = 0;
             // as a last resort, try freeing some memory by calling Purge() and retry
-            if (Purge(Standard_False))
-                goto retry;
+            if (Purge(Standard_False)) goto retry;
             // if nothing helps, make error message and raise exception
             const int BUFSIZE = 1024;
 
             wchar_t message[BUFSIZE];
 
-            if (FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM, 0, GetLastError(), 0,
-                message, BUFSIZE - 1, 0) <= 0)
+            if (FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM, 0, GetLastError(), 0, message, BUFSIZE - 1, 0) <= 0)
                 StringCchCopyW(message, _countof(message), L"Standard_MMgrOpt::AllocMemory() failed to mmap");
 
             char messageA[BUFSIZE];
@@ -780,39 +734,34 @@ retry:
 
         // save actually allocated size into argument
         Size = AlignedSize - sizeof(HANDLE);
-#endif    
+#endif
     }
     // else just allocate by malloc or calloc
     else {
         aBlock = (Standard_Size*)(myClear ? calloc(Size, sizeof(char)) : malloc(Size));
         // check the result
-        if (!aBlock)
-        {
+        if (!aBlock) {
             // as a last resort, try freeing some memory by calling Purge()
-            if (Purge(Standard_False))
-                goto retry;
+            if (Purge(Standard_False)) goto retry;
             // if nothing helps, raise exception
             throw Standard_OutOfMemory("Standard_MMgrOpt::Allocate(): malloc failed");
         }
     }
     // clear whole block if clearing option is set
-    if (myClear)
-        memset(aBlock, 0, Size);
+    if (myClear) memset(aBlock, 0, Size);
     return aBlock;
 }
 
 //=======================================================================
-//function : FreeMemory
-//purpose  : 
+// function : FreeMemory
+// purpose  :
 //=======================================================================
 
-void Standard_MMgrOpt::FreeMemory(Standard_Address aBlock,
-    const Standard_Size
-#ifndef _WIN32                                   
-    aSize
+void Standard_MMgrOpt::FreeMemory(Standard_Address aBlock, const Standard_Size
+#ifndef _WIN32
+                                                               aSize
 #endif
-)
-{
+) {
     // release memory (either free or unmap)
     if (myMMap) {
 #ifndef _WIN32
@@ -826,7 +775,6 @@ void Standard_MMgrOpt::FreeMemory(Standard_Address aBlock,
         UnmapViewOfFile((LPCVOID)aMBlock);
         CloseHandle(hMap);
 #endif
-    }
-    else
+    } else
         free(aBlock);
 }

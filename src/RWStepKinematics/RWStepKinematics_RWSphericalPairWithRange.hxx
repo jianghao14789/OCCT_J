@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -28,19 +28,20 @@ class Interface_EntityIterator;
 class StepKinematics_SphericalPairWithRange;
 
 //! Read & Write tool for SphericalPairWithRange
-class RWStepKinematics_RWSphericalPairWithRange
-{
+class RWStepKinematics_RWSphericalPairWithRange {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepKinematics_RWSphericalPairWithRange();
 
-  Standard_EXPORT RWStepKinematics_RWSphericalPairWithRange();
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & theData, const Standard_Integer theNum,
+                                  Handle(Interface_Check) & theArch,
+                                  const Handle(StepKinematics_SphericalPairWithRange) & theEnt) const;
 
-  Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData)& theData, const Standard_Integer theNum, Handle(Interface_Check)& theArch, const Handle(StepKinematics_SphericalPairWithRange)& theEnt) const;
+    Standard_EXPORT void WriteStep(StepData_StepWriter& theSW,
+                                   const Handle(StepKinematics_SphericalPairWithRange) & theEnt) const;
 
-  Standard_EXPORT void WriteStep(StepData_StepWriter& theSW, const Handle(StepKinematics_SphericalPairWithRange)& theEnt) const;
-
-  Standard_EXPORT void Share(const Handle(StepKinematics_SphericalPairWithRange)& theEnt, Interface_EntityIterator& iter) const;
-
+    Standard_EXPORT void Share(const Handle(StepKinematics_SphericalPairWithRange) & theEnt,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepKinematics_RWSphericalPairWithRange_HeaderFile_

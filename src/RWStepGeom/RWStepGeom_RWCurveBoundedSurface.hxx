@@ -28,48 +28,27 @@ class StepGeom_CurveBoundedSurface;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for CurveBoundedSurface
-class RWStepGeom_RWCurveBoundedSurface 
-{
+class RWStepGeom_RWCurveBoundedSurface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepGeom_RWCurveBoundedSurface();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepGeom_RWCurveBoundedSurface();
-  
-  //! Reads CurveBoundedSurface
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_CurveBoundedSurface)& ent) const;
-  
-  //! Writes CurveBoundedSurface
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_CurveBoundedSurface)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepGeom_CurveBoundedSurface)& ent, Interface_EntityIterator& iter) const;
+    //! Reads CurveBoundedSurface
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepGeom_CurveBoundedSurface) & ent) const;
 
+    //! Writes CurveBoundedSurface
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_CurveBoundedSurface) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepGeom_CurveBoundedSurface) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWCurveBoundedSurface_HeaderFile

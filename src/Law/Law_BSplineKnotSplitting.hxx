@@ -28,8 +28,6 @@ class Standard_DimensionError;
 class Standard_RangeError;
 class Law_BSpline;
 
-
-
 //! For a B-spline curve the discontinuities are localised at the
 //! knot values and between two knots values the B-spline is
 //! infinitely continuously differentiable.
@@ -49,60 +47,35 @@ class Law_BSpline;
 //! don't need to create the B-spline curve arcs, you can use the
 //! functions LocalD1, LocalD2, LocalD3, LocalDN of the class
 //! BSplineCurve.
-class Law_BSplineKnotSplitting 
-{
+class Law_BSplineKnotSplitting {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Locates the knot values which correspond to the segmentation of
+    //! the curve into arcs with a continuity equal to ContinuityRange.
+    //!
+    //! Raised if ContinuityRange is not greater or equal zero.
+    Standard_EXPORT Law_BSplineKnotSplitting(const Handle(Law_BSpline) & BasisLaw,
+                                             const Standard_Integer ContinuityRange);
 
-  
+    //! Returns the number of knots corresponding to the splitting.
+    Standard_EXPORT Standard_Integer NbSplits() const;
 
-  //! Locates the knot values which correspond to the segmentation of
-  //! the curve into arcs with a continuity equal to ContinuityRange.
-  //!
-  //! Raised if ContinuityRange is not greater or equal zero.
-  Standard_EXPORT Law_BSplineKnotSplitting(const Handle(Law_BSpline)& BasisLaw, const Standard_Integer ContinuityRange);
-  
+    //! Returns the indexes of the BSpline curve knots corresponding to
+    //! the splitting.
+    //!
+    //! Raised if the length of SplitValues is not equal to NbSPlit.
+    Standard_EXPORT void Splitting(TColStd_Array1OfInteger& SplitValues) const;
 
-  //! Returns the number of knots corresponding to the splitting.
-  Standard_EXPORT Standard_Integer NbSplits() const;
-  
-
-  //! Returns the indexes of the BSpline curve knots corresponding to
-  //! the splitting.
-  //!
-  //! Raised if the length of SplitValues is not equal to NbSPlit.
-  Standard_EXPORT void Splitting (TColStd_Array1OfInteger& SplitValues) const;
-  
-
-  //! Returns the index of the knot corresponding to the splitting
-  //! of range Index.
-  //!
-  //! Raised if Index < 1 or Index > NbSplits
-  Standard_EXPORT Standard_Integer SplitValue (const Standard_Integer Index) const;
-
-
-
+    //! Returns the index of the knot corresponding to the splitting
+    //! of range Index.
+    //!
+    //! Raised if Index < 1 or Index > NbSplits
+    Standard_EXPORT Standard_Integer SplitValue(const Standard_Integer Index) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  Handle(TColStd_HArray1OfInteger) splitIndexes;
-
-
+    Handle(TColStd_HArray1OfInteger) splitIndexes;
 };
-
-
-
-
-
-
 
 #endif // _Law_BSplineKnotSplitting_HeaderFile

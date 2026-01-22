@@ -27,48 +27,29 @@ class StepFEA_Surface3dElementRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for Surface3dElementRepresentation
-class RWStepFEA_RWSurface3dElementRepresentation 
-{
+class RWStepFEA_RWSurface3dElementRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWSurface3dElementRepresentation();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWSurface3dElementRepresentation();
-  
-  //! Reads Surface3dElementRepresentation
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_Surface3dElementRepresentation)& ent) const;
-  
-  //! Writes Surface3dElementRepresentation
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_Surface3dElementRepresentation)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_Surface3dElementRepresentation)& ent, Interface_EntityIterator& iter) const;
+    //! Reads Surface3dElementRepresentation
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepFEA_Surface3dElementRepresentation) & ent) const;
 
+    //! Writes Surface3dElementRepresentation
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepFEA_Surface3dElementRepresentation) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_Surface3dElementRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWSurface3dElementRepresentation_HeaderFile

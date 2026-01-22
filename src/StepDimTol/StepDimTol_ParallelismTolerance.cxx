@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepDimTol_ParallelismTolerance.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_ParallelismTolerance,StepDimTol_GeometricToleranceWithDatumReference)
+IMPLEMENT_STANDARD_RTTIEXT(StepDimTol_ParallelismTolerance, StepDimTol_GeometricToleranceWithDatumReference)
 
 //=======================================================================
-//function : StepDimTol_ParallelismTolerance
-//purpose  : 
+// function : StepDimTol_ParallelismTolerance
+// purpose  :
 //=======================================================================
-StepDimTol_ParallelismTolerance::StepDimTol_ParallelismTolerance ()
-{
-}
+StepDimTol_ParallelismTolerance::StepDimTol_ParallelismTolerance() {}

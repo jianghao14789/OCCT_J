@@ -28,44 +28,22 @@ class StepGeom_SphericalSurface;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for SphericalSurface
-class RWStepGeom_RWSphericalSurface 
-{
+class RWStepGeom_RWSphericalSurface {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepGeom_RWSphericalSurface();
 
-  
-  Standard_EXPORT RWStepGeom_RWSphericalSurface();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepGeom_SphericalSurface)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepGeom_SphericalSurface)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepGeom_SphericalSurface)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepGeom_SphericalSurface) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepGeom_SphericalSurface) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepGeom_SphericalSurface) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepGeom_RWSphericalSurface_HeaderFile

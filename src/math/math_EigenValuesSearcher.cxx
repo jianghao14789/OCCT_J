@@ -13,28 +13,23 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <math_EigenValuesSearcher.hxx>
 #include <StdFail_NotDone.hxx>
 
 //==========================================================================
-//function : pythag
+// function : pythag
 //           Computation of sqrt(x*x + y*y).
 //==========================================================================
-static inline Standard_Real pythag(const Standard_Real x,
-    const Standard_Real y)
-{
+static inline Standard_Real pythag(const Standard_Real x, const Standard_Real y) {
     return Sqrt(x * x + y * y);
 }
 
 math_EigenValuesSearcher::math_EigenValuesSearcher(const TColStd_Array1OfReal& Diagonal,
-    const TColStd_Array1OfReal& Subdiagonal)
-{
+                                                   const TColStd_Array1OfReal& Subdiagonal) {
     myIsDone = Standard_False;
 
     Standard_Integer n = Diagonal.Length();
-    if (Subdiagonal.Length() != n)
-        throw Standard_Failure("math_EigenValuesSearcher : dimension mismatch");
+    if (Subdiagonal.Length() != n) throw Standard_Failure("math_EigenValuesSearcher : dimension mismatch");
 
     myDiagonal = new TColStd_HArray1OfReal(1, n);
     myDiagonal->ChangeArray1() = Diagonal;
@@ -46,7 +41,7 @@ math_EigenValuesSearcher::math_EigenValuesSearcher(const TColStd_Array1OfReal& D
 
     Standard_Real* d = new Standard_Real[n + 1];
     Standard_Real* e = new Standard_Real[n + 1];
-    Standard_Real** z = new Standard_Real * [n + 1];
+    Standard_Real** z = new Standard_Real*[n + 1];
     Standard_Integer i, j;
     for (i = 1; i <= n; i++)
         z[i] = new Standard_Real[n + 1];
@@ -63,21 +58,20 @@ math_EigenValuesSearcher::math_EigenValuesSearcher(const TColStd_Array1OfReal& D
     Standard_Integer m;
     Standard_Integer l;
     Standard_Integer iter;
-    //Standard_Integer i;
+    // Standard_Integer i;
     Standard_Integer k;
-    Standard_Real    s;
-    Standard_Real    r;
-    Standard_Real    p;
-    Standard_Real    g;
-    Standard_Real    f;
-    Standard_Real    dd;
-    Standard_Real    c;
-    Standard_Real    b;
+    Standard_Real s;
+    Standard_Real r;
+    Standard_Real p;
+    Standard_Real g;
+    Standard_Real f;
+    Standard_Real dd;
+    Standard_Real c;
+    Standard_Real b;
 
     result = Standard_True;
 
-    if (n != 1)
-    {
+    if (n != 1) {
         // Shift e.
         for (i = 2; i <= n; i++)
             e[i - 1] = e[i];
@@ -91,14 +85,13 @@ math_EigenValuesSearcher::math_EigenValuesSearcher(const TColStd_Array1OfReal& D
                 for (m = l; m <= n - 1; m++) {
                     dd = Abs(d[m]) + Abs(d[m + 1]);
 
-                    if (Abs(e[m]) + dd == dd)
-                        break;
+                    if (Abs(e[m]) + dd == dd) break;
                 }
 
                 if (m != l) {
                     if (iter++ == 30) {
                         result = Standard_False;
-                        break; //return result;
+                        break; // return result;
                     }
 
                     g = (d[l + 1] - d[l]) / (2. * e[l]);
@@ -140,21 +133,18 @@ math_EigenValuesSearcher::math_EigenValuesSearcher(const TColStd_Array1OfReal& D
                         }
                     }
 
-                    if (r == 0 && i >= 1)
-                        continue;
+                    if (r == 0 && i >= 1) continue;
 
                     d[l] -= p;
                     e[l] = g;
                     e[m] = 0.;
                 }
             } while (m != l);
-            if (result == Standard_False)
-                break;
-        } //end of for (l = 1; l <= n; l++)
-    } //end of if (n != 1)
+            if (result == Standard_False) break;
+        } // end of for (l = 1; l <= n; l++)
+    } // end of if (n != 1)
 
-    if (result)
-    {
+    if (result) {
         for (i = 1; i <= n; i++)
             myEigenValues->ChangeValue(i) = d[i];
         for (i = 1; i <= n; i++)
@@ -171,23 +161,19 @@ math_EigenValuesSearcher::math_EigenValuesSearcher(const TColStd_Array1OfReal& D
     delete[] z;
 }
 
-Standard_Boolean math_EigenValuesSearcher::IsDone() const
-{
+Standard_Boolean math_EigenValuesSearcher::IsDone() const {
     return myIsDone;
 }
 
-Standard_Integer math_EigenValuesSearcher::Dimension() const
-{
+Standard_Integer math_EigenValuesSearcher::Dimension() const {
     return myN;
 }
 
-Standard_Real math_EigenValuesSearcher::EigenValue(const Standard_Integer Index) const
-{
+Standard_Real math_EigenValuesSearcher::EigenValue(const Standard_Integer Index) const {
     return myEigenValues->Value(Index);
 }
 
-math_Vector math_EigenValuesSearcher::EigenVector(const Standard_Integer Index) const
-{
+math_Vector math_EigenValuesSearcher::EigenVector(const Standard_Integer Index) const {
     math_Vector theVector(1, myN);
 
     Standard_Integer i;

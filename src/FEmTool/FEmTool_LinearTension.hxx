@@ -28,50 +28,30 @@
 #include <Standard_Real.hxx>
 #include <math_Vector.hxx>
 
-
 class FEmTool_LinearTension;
 DEFINE_STANDARD_HANDLE(FEmTool_LinearTension, FEmTool_ElementaryCriterion)
 
 //! Criterium of LinearTension To Hermit-Jacobi  elements
-class FEmTool_LinearTension : public FEmTool_ElementaryCriterion
-{
+class FEmTool_LinearTension : public FEmTool_ElementaryCriterion {
 
 public:
+    Standard_EXPORT FEmTool_LinearTension(const Standard_Integer WorkDegree, const GeomAbs_Shape ConstraintOrder);
 
-  
-  Standard_EXPORT FEmTool_LinearTension(const Standard_Integer WorkDegree, const GeomAbs_Shape ConstraintOrder);
-  
-  Standard_EXPORT virtual Handle(TColStd_HArray2OfInteger) DependenceTable() const Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual Standard_Real Value() Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Hessian (const Standard_Integer Dimension1, const Standard_Integer Dimension2, math_Matrix& H) Standard_OVERRIDE;
-  
-  Standard_EXPORT virtual void Gradient (const Standard_Integer Dimension, math_Vector& G) Standard_OVERRIDE;
+    Standard_EXPORT virtual Handle(TColStd_HArray2OfInteger) DependenceTable() const Standard_OVERRIDE;
 
+    Standard_EXPORT virtual Standard_Real Value() Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void Hessian(const Standard_Integer Dimension1, const Standard_Integer Dimension2,
+                                         math_Matrix& H) Standard_OVERRIDE;
 
+    Standard_EXPORT virtual void Gradient(const Standard_Integer Dimension, math_Vector& G) Standard_OVERRIDE;
 
-  DEFINE_STANDARD_RTTIEXT(FEmTool_LinearTension,FEmTool_ElementaryCriterion)
+    DEFINE_STANDARD_RTTIEXT(FEmTool_LinearTension, FEmTool_ElementaryCriterion)
 
 protected:
-
-
-
-
 private:
-
-
-  math_Matrix RefMatrix;
-  Standard_Integer myOrder;
-
-
+    math_Matrix RefMatrix;
+    Standard_Integer myOrder;
 };
-
-
-
-
-
-
 
 #endif // _FEmTool_LinearTension_HeaderFile

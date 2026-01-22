@@ -30,11 +30,8 @@ class IntSurf_Quadric;
 class gp_Lin;
 class HLRBRep_LineTool;
 
-
-
 class HLRBRep_TheQuadCurvFuncOfTheQuadCurvExactInterCSurf : public math_FunctionWithDerivative {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Create the function.
@@ -53,10 +50,10 @@ public:
 
     //! Computes the value and the derivative of the function.
     //! returns True.
-    Standard_EXPORT Standard_Boolean Values(const Standard_Real Param, Standard_Real& F, Standard_Real& D) Standard_OVERRIDE;
+    Standard_EXPORT Standard_Boolean Values(const Standard_Real Param, Standard_Real& F,
+                                            Standard_Real& D) Standard_OVERRIDE;
 
 protected:
-
 private:
     IntSurf_Quadric myQuadric;
     gp_Lin myCurve;

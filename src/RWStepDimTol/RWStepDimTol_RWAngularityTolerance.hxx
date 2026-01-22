@@ -27,48 +27,28 @@ class StepDimTol_AngularityTolerance;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for AngularityTolerance
-class RWStepDimTol_RWAngularityTolerance 
-{
+class RWStepDimTol_RWAngularityTolerance {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWAngularityTolerance();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWAngularityTolerance();
-  
-  //! Reads AngularityTolerance
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_AngularityTolerance)& ent) const;
-  
-  //! Writes AngularityTolerance
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_AngularityTolerance)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepDimTol_AngularityTolerance)& ent, Interface_EntityIterator& iter) const;
+    //! Reads AngularityTolerance
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_AngularityTolerance) & ent) const;
 
+    //! Writes AngularityTolerance
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepDimTol_AngularityTolerance) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_AngularityTolerance) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepDimTol_RWAngularityTolerance_HeaderFile

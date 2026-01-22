@@ -24,24 +24,19 @@ DEFINE_STANDARD_HANDLE(Draw_Printer, Message_Printer)
 
 //! Implementation of Printer class with output
 //! (Message_Messenge) directed to Draw_Interpretor
-class Draw_Printer : public Message_Printer
-{
-  DEFINE_STANDARD_RTTIEXT(Draw_Printer, Message_Printer)
+class Draw_Printer : public Message_Printer {
+    DEFINE_STANDARD_RTTIEXT(Draw_Printer, Message_Printer)
 public:
-
-  //! Creates a printer connected to the interpretor.
-  Standard_EXPORT Draw_Printer (Draw_Interpretor& theTcl);
+    //! Creates a printer connected to the interpretor.
+    Standard_EXPORT Draw_Printer(Draw_Interpretor& theTcl);
 
 protected:
-
-  //! Send a string message with specified trace level.
-  Standard_EXPORT virtual void send (const TCollection_AsciiString& theString,
-                                     const Message_Gravity theGravity) const Standard_OVERRIDE;
+    //! Send a string message with specified trace level.
+    Standard_EXPORT virtual void send(const TCollection_AsciiString& theString,
+                                      const Message_Gravity theGravity) const Standard_OVERRIDE;
 
 private:
-
-  Draw_Interpretor* myTcl;
-
+    Draw_Interpretor* myTcl;
 };
 
 #endif // _Draw_Printer_HeaderFile

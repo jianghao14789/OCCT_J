@@ -26,15 +26,11 @@
 #include <Standard_CString.hxx>
 class Units_Token;
 
-
 //! This class  defines  a measurement which is the
 //! association of a real value and a unit.
-class Units_Measurement
-{
+class Units_Measurement {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! It is the empty constructor of the class.
     Standard_EXPORT Units_Measurement();
@@ -42,7 +38,7 @@ public:
     //! Returns an instance  of this class.   <avalue> defines
     //! the measurement, and <atoken>  the token which defines
     //! the unit used.
-    Standard_EXPORT Units_Measurement(const Standard_Real avalue, const Handle(Units_Token)& atoken);
+    Standard_EXPORT Units_Measurement(const Standard_Real avalue, const Handle(Units_Token) & atoken);
 
     //! Returns an  instance of this  class.  <avalue> defines
     //! the  measurement, and <aunit> the   unit used,
@@ -73,8 +69,7 @@ public:
     //! addition  of  <me>  and  <ameasurement>.  The   chosen
     //! returned unit is the unit of <me>.
     Standard_EXPORT Units_Measurement Add(const Units_Measurement& ameasurement) const;
-    Units_Measurement operator + (const Units_Measurement& ameasurement) const
-    {
+    Units_Measurement operator+(const Units_Measurement& ameasurement) const {
         return Add(ameasurement);
     }
 
@@ -82,40 +77,35 @@ public:
     //! subtraction of  <me>  and <ameasurement>.   The chosen
     //! returned unit is the unit of <me>.
     Standard_EXPORT Units_Measurement Subtract(const Units_Measurement& ameasurement) const;
-    Units_Measurement operator - (const Units_Measurement& ameasurement) const
-    {
+    Units_Measurement operator-(const Units_Measurement& ameasurement) const {
         return Subtract(ameasurement);
     }
 
     //! Returns  a measurement which  is the multiplication of
     //! <me> and <ameasurement>.
     Standard_EXPORT Units_Measurement Multiply(const Units_Measurement& ameasurement) const;
-    Units_Measurement operator * (const Units_Measurement& ameasurement) const
-    {
+    Units_Measurement operator*(const Units_Measurement& ameasurement) const {
         return Multiply(ameasurement);
     }
 
     //! Returns  a measurement which  is the multiplication of
     //! <me> with the value  <avalue>.
     Standard_EXPORT Units_Measurement Multiply(const Standard_Real avalue) const;
-    Units_Measurement operator * (const Standard_Real avalue) const
-    {
+    Units_Measurement operator*(const Standard_Real avalue) const {
         return Multiply(avalue);
     }
 
     //! Returns a measurement which  is the division of  <me> by
     //! <ameasurement>.
     Standard_EXPORT Units_Measurement Divide(const Units_Measurement& ameasurement) const;
-    Units_Measurement operator / (const Units_Measurement& ameasurement) const
-    {
+    Units_Measurement operator/(const Units_Measurement& ameasurement) const {
         return Divide(ameasurement);
     }
 
     //! Returns  a measurement which  is the division of <me> by
     //! the constant <avalue>.
     Standard_EXPORT Units_Measurement Divide(const Standard_Real avalue) const;
-    Units_Measurement operator / (const Standard_Real avalue) const
-    {
+    Units_Measurement operator/(const Standard_Real avalue) const {
         return Divide(avalue);
     }
 
@@ -128,30 +118,11 @@ public:
     //! Useful for debugging.
     Standard_EXPORT void Dump() const;
 
-
-
-
 protected:
-
-
-
-
-
 private:
-
-
-
     Standard_Real themeasurement;
     Handle(Units_Token) thetoken;
     Standard_Boolean myHasToken;
-
-
 };
-
-
-
-
-
-
 
 #endif // _Units_Measurement_HeaderFile

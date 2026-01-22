@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <CDM_Application.hxx>
 #include <CDM_Document.hxx>
 #include <FSD_BinaryFile.hxx>
@@ -33,73 +32,59 @@
 #include <UTL.hxx>
 
 //=======================================================================
-//function : FileDriverType
-//purpose  : 
+// function : FileDriverType
+// purpose  :
 //=======================================================================
 
-PCDM_TypeOfFileDriver PCDM::FileDriverType(const TCollection_AsciiString& aFileName, Handle(Storage_BaseDriver)& aBaseDriver)
-{
-  if(FSD_CmpFile::IsGoodFileType(aFileName) == Storage_VSOk) {
-    aBaseDriver=new FSD_CmpFile;
-    return PCDM_TOFD_CmpFile;
-  }
-  else if(FSD_File::IsGoodFileType(aFileName) == Storage_VSOk) {
-    aBaseDriver=new FSD_File;
-    return PCDM_TOFD_File;
-  }
-  else if(FSD_BinaryFile::IsGoodFileType(aFileName) == Storage_VSOk) {
-    aBaseDriver=new FSD_BinaryFile;
-    return PCDM_TOFD_File;
-  }
-  else {
-    aBaseDriver=NULL;
-    return PCDM_TOFD_Unknown;
-  }
+PCDM_TypeOfFileDriver PCDM::FileDriverType(const TCollection_AsciiString& aFileName,
+                                           Handle(Storage_BaseDriver) & aBaseDriver) {
+    if (FSD_CmpFile::IsGoodFileType(aFileName) == Storage_VSOk) {
+        aBaseDriver = new FSD_CmpFile;
+        return PCDM_TOFD_CmpFile;
+    } else if (FSD_File::IsGoodFileType(aFileName) == Storage_VSOk) {
+        aBaseDriver = new FSD_File;
+        return PCDM_TOFD_File;
+    } else if (FSD_BinaryFile::IsGoodFileType(aFileName) == Storage_VSOk) {
+        aBaseDriver = new FSD_BinaryFile;
+        return PCDM_TOFD_File;
+    } else {
+        aBaseDriver = NULL;
+        return PCDM_TOFD_Unknown;
+    }
 }
 
 //=======================================================================
-//function : FileDriverType
-//purpose  : 
+// function : FileDriverType
+// purpose  :
 //=======================================================================
 
-PCDM_TypeOfFileDriver PCDM::FileDriverType (Standard_IStream& theIStream, Handle(Storage_BaseDriver)& theBaseDriver)
-{
-  TCollection_AsciiString aReadMagicNumber;
+PCDM_TypeOfFileDriver PCDM::FileDriverType(Standard_IStream& theIStream, Handle(Storage_BaseDriver) & theBaseDriver) {
+    TCollection_AsciiString aReadMagicNumber;
 
-  // read magic number from the file
-  if (theIStream.good())
-  {
-    aReadMagicNumber = Storage_BaseDriver::ReadMagicNumber (theIStream);
-  }
-
-  if(aReadMagicNumber == FSD_CmpFile::MagicNumber())
-  {
-    theBaseDriver = new FSD_CmpFile;
-    return PCDM_TOFD_CmpFile;
-  }
-  else if (aReadMagicNumber == FSD_File::MagicNumber())
-  {
-    theBaseDriver = new FSD_File;
-    return PCDM_TOFD_File;
-  }
-  else if (aReadMagicNumber == FSD_BinaryFile::MagicNumber())
-  {
-    theBaseDriver = new FSD_BinaryFile;
-    return PCDM_TOFD_File;
-  }
-  else if (aReadMagicNumber.Search ("<?xml") != -1)
-  {
-    // skip xml declaration
-    char aChar = ' ';
-    while (theIStream.good() && !theIStream.eof() && aChar != '>')
-    {
-      theIStream.get(aChar);
+    // read magic number from the file
+    if (theIStream.good()) {
+        aReadMagicNumber = Storage_BaseDriver::ReadMagicNumber(theIStream);
     }
 
-    return PCDM_TOFD_XmlFile;
-  }
+    if (aReadMagicNumber == FSD_CmpFile::MagicNumber()) {
+        theBaseDriver = new FSD_CmpFile;
+        return PCDM_TOFD_CmpFile;
+    } else if (aReadMagicNumber == FSD_File::MagicNumber()) {
+        theBaseDriver = new FSD_File;
+        return PCDM_TOFD_File;
+    } else if (aReadMagicNumber == FSD_BinaryFile::MagicNumber()) {
+        theBaseDriver = new FSD_BinaryFile;
+        return PCDM_TOFD_File;
+    } else if (aReadMagicNumber.Search("<?xml") != -1) {
+        // skip xml declaration
+        char aChar = ' ';
+        while (theIStream.good() && !theIStream.eof() && aChar != '>') {
+            theIStream.get(aChar);
+        }
 
-  theBaseDriver = NULL;
-  return PCDM_TOFD_Unknown;
+        return PCDM_TOFD_XmlFile;
+    }
+
+    theBaseDriver = NULL;
+    return PCDM_TOFD_Unknown;
 }
-

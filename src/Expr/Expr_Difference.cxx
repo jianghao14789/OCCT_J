@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Expr.hxx>
 #include <Expr_Difference.hxx>
 #include <Expr_GeneralExpression.hxx>
@@ -31,15 +30,13 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Expr_Difference, Expr_BinaryExpression)
 
-Expr_Difference::Expr_Difference(const Handle(Expr_GeneralExpression)& exp1, const Handle(Expr_GeneralExpression)& exp2)
-{
+Expr_Difference::Expr_Difference(const Handle(Expr_GeneralExpression) & exp1,
+                                 const Handle(Expr_GeneralExpression) & exp2) {
     CreateFirstOperand(exp1);
     CreateSecondOperand(exp2);
 }
 
-
-Handle(Expr_GeneralExpression) Expr_Difference::ShallowSimplified() const
-{
+Handle(Expr_GeneralExpression) Expr_Difference::ShallowSimplified() const {
     Handle(Expr_GeneralExpression) myfirst = FirstOperand();
     Handle(Expr_GeneralExpression) mysecond = SecondOperand();
 
@@ -90,13 +87,11 @@ Handle(Expr_GeneralExpression) Expr_Difference::ShallowSimplified() const
     return me;
 }
 
-Handle(Expr_GeneralExpression) Expr_Difference::Copy() const
-{
+Handle(Expr_GeneralExpression) Expr_Difference::Copy() const {
     return Expr::CopyShare(FirstOperand()) - Expr::CopyShare(SecondOperand());
 }
 
-Standard_Boolean Expr_Difference::IsIdentical(const Handle(Expr_GeneralExpression)& Other) const
-{
+Standard_Boolean Expr_Difference::IsIdentical(const Handle(Expr_GeneralExpression) & Other) const {
     Standard_Boolean ident = Standard_False;
     if (Other->IsKind(STANDARD_TYPE(Expr_Difference))) {
         Handle(Expr_GeneralExpression) myfirst = FirstOperand();
@@ -104,23 +99,20 @@ Standard_Boolean Expr_Difference::IsIdentical(const Handle(Expr_GeneralExpressio
         Handle(Expr_Difference) DOther = Handle(Expr_Difference)::DownCast(Other);
         Handle(Expr_GeneralExpression) fother = DOther->FirstOperand();
         Handle(Expr_GeneralExpression) sother = DOther->SecondOperand();
-        if ((myfirst->IsIdentical(fother)) &&
-            (mysecond->IsIdentical(sother))) {
+        if ((myfirst->IsIdentical(fother)) && (mysecond->IsIdentical(sother))) {
             ident = Standard_True;
         }
     }
     return ident;
 }
 
-Standard_Boolean Expr_Difference::IsLinear() const
-{
+Standard_Boolean Expr_Difference::IsLinear() const {
     Handle(Expr_GeneralExpression) myfirst = FirstOperand();
     Handle(Expr_GeneralExpression) mysecond = SecondOperand();
     return (myfirst->IsLinear() && mysecond->IsLinear());
 }
 
-Handle(Expr_GeneralExpression) Expr_Difference::Derivative(const Handle(Expr_NamedUnknown)& X) const
-{
+Handle(Expr_GeneralExpression) Expr_Difference::Derivative(const Handle(Expr_NamedUnknown) & X) const {
     if (!Contains(X)) {
         return new Expr_NumericValue(0.0);
     }
@@ -133,8 +125,8 @@ Handle(Expr_GeneralExpression) Expr_Difference::Derivative(const Handle(Expr_Nam
     return der->ShallowSimplified();
 }
 
-Handle(Expr_GeneralExpression) Expr_Difference::NDerivative(const Handle(Expr_NamedUnknown)& X, const Standard_Integer N) const
-{
+Handle(Expr_GeneralExpression) Expr_Difference::NDerivative(const Handle(Expr_NamedUnknown) & X,
+                                                            const Standard_Integer N) const {
     if (N <= 0) {
         throw Standard_OutOfRange();
     }
@@ -148,18 +140,14 @@ Handle(Expr_GeneralExpression) Expr_Difference::NDerivative(const Handle(Expr_Na
     mysecond = mysecond->NDerivative(X, N);
     Handle(Expr_Difference) der = myfirst - mysecond;
     return der->ShallowSimplified();
-
 }
 
-
-Standard_Real Expr_Difference::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const
-{
+Standard_Real Expr_Difference::Evaluate(const Expr_Array1OfNamedUnknown& vars, const TColStd_Array1OfReal& vals) const {
     Standard_Real res = FirstOperand()->Evaluate(vars, vals);
     return res - SecondOperand()->Evaluate(vars, vals);
 }
 
-TCollection_AsciiString Expr_Difference::String() const
-{
+TCollection_AsciiString Expr_Difference::String() const {
     Handle(Expr_GeneralExpression) op1 = FirstOperand();
     Handle(Expr_GeneralExpression) op2 = SecondOperand();
     TCollection_AsciiString str;
@@ -167,8 +155,7 @@ TCollection_AsciiString Expr_Difference::String() const
         str += "(";
         str += op1->String();
         str += ")";
-    }
-    else {
+    } else {
         str = op1->String();
     }
     str += "-";
@@ -176,8 +163,7 @@ TCollection_AsciiString Expr_Difference::String() const
         str += "(";
         str += op2->String();
         str += ")";
-    }
-    else {
+    } else {
         str += op2->String();
     }
     return str;

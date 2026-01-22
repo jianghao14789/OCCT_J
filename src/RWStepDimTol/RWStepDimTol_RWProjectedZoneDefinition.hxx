@@ -28,25 +28,25 @@ class StepDimTol_ProjectedZoneDefinition;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ProjectedZoneDefinition
-class RWStepDimTol_RWProjectedZoneDefinition 
-{
+class RWStepDimTol_RWProjectedZoneDefinition {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepDimTol_RWProjectedZoneDefinition();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepDimTol_RWProjectedZoneDefinition();
-  
-  //! Reads ProjectedZoneDefinition
-  Standard_EXPORT   void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepDimTol_ProjectedZoneDefinition)& ent)  const;
-  
-  //! Writes ProjectedZoneDefinition
-  Standard_EXPORT   void WriteStep (StepData_StepWriter& SW, const Handle(StepDimTol_ProjectedZoneDefinition)& ent)  const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT   void Share (const Handle(StepDimTol_ProjectedZoneDefinition)& ent, Interface_EntityIterator& iter)  const;
+    //! Reads ProjectedZoneDefinition
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepDimTol_ProjectedZoneDefinition) & ent) const;
+
+    //! Writes ProjectedZoneDefinition
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepDimTol_ProjectedZoneDefinition) & ent) const;
+
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepDimTol_ProjectedZoneDefinition) & ent,
+                               Interface_EntityIterator& iter) const;
 };
 #endif // _RWStepDimTol_RWProjectedZoneDefinition_HeaderFile

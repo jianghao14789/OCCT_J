@@ -18,48 +18,32 @@
 #include <Draw_MarkerShape.hxx>
 
 //! DrawTrSurf parameters.
-struct DrawTrSurf_Params
-{
+struct DrawTrSurf_Params {
 public:
-  Draw_Color       PntColor;
-  Draw_Color       CurvColor;
-  Draw_Color       BoundsColor;
-  Draw_Color       IsosColor;
-  Draw_Color       PolesColor;
-  Draw_Color       KnotsColor;
+    Draw_Color PntColor;
+    Draw_Color CurvColor;
+    Draw_Color BoundsColor;
+    Draw_Color IsosColor;
+    Draw_Color PolesColor;
+    Draw_Color KnotsColor;
 
-  Draw_MarkerShape PntMarker;
-  Draw_MarkerShape KnotsMarker;
-  Standard_Boolean IsShowPoles;
-  Standard_Boolean IsShowKnots;
-  Standard_Boolean NeedKnotsIsos;
-  Standard_Real    Deflection;
-  Standard_Integer KnotsSize;
-  Standard_Integer Discret;
-  Standard_Integer DrawMode;
-  Standard_Integer NbUIsos;
-  Standard_Integer NbVIsos;
+    Draw_MarkerShape PntMarker;
+    Draw_MarkerShape KnotsMarker;
+    Standard_Boolean IsShowPoles;
+    Standard_Boolean IsShowKnots;
+    Standard_Boolean NeedKnotsIsos;
+    Standard_Real Deflection;
+    Standard_Integer KnotsSize;
+    Standard_Integer Discret;
+    Standard_Integer DrawMode;
+    Standard_Integer NbUIsos;
+    Standard_Integer NbVIsos;
 
-  DrawTrSurf_Params()
-  : PntColor   (Draw_rouge),
-    CurvColor  (Draw_jaune),
-    BoundsColor(Draw_vert),
-    IsosColor  (Draw_bleu),
-    PolesColor (Draw_rouge),
-    KnotsColor (Draw_violet),
-    PntMarker  (Draw_Plus),
-    KnotsMarker(Draw_Losange),
-    IsShowPoles (true),
-    IsShowKnots (true),
-    NeedKnotsIsos (true),
-    Deflection (0.01),
-    KnotsSize (5),
-    Discret (30),
-    DrawMode(0),
-    NbUIsos (10),
-    NbVIsos (10)
-  {}
-
+    DrawTrSurf_Params()
+        : PntColor(Draw_rouge), CurvColor(Draw_jaune), BoundsColor(Draw_vert), IsosColor(Draw_bleu),
+          PolesColor(Draw_rouge), KnotsColor(Draw_violet), PntMarker(Draw_Plus), KnotsMarker(Draw_Losange),
+          IsShowPoles(true), IsShowKnots(true), NeedKnotsIsos(true), Deflection(0.01), KnotsSize(5), Discret(30),
+          DrawMode(0), NbUIsos(10), NbVIsos(10) {}
 };
 
 #endif

@@ -27,48 +27,26 @@ class StepFEA_ElementGroup;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write tool for ElementGroup
-class RWStepFEA_RWElementGroup 
-{
+class RWStepFEA_RWElementGroup {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Empty constructor
+    Standard_EXPORT RWStepFEA_RWElementGroup();
 
-  
-  //! Empty constructor
-  Standard_EXPORT RWStepFEA_RWElementGroup();
-  
-  //! Reads ElementGroup
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepFEA_ElementGroup)& ent) const;
-  
-  //! Writes ElementGroup
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepFEA_ElementGroup)& ent) const;
-  
-  //! Fills data for graph (shared items)
-  Standard_EXPORT void Share (const Handle(StepFEA_ElementGroup)& ent, Interface_EntityIterator& iter) const;
+    //! Reads ElementGroup
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach, const Handle(StepFEA_ElementGroup) & ent) const;
 
+    //! Writes ElementGroup
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW, const Handle(StepFEA_ElementGroup) & ent) const;
 
-
+    //! Fills data for graph (shared items)
+    Standard_EXPORT void Share(const Handle(StepFEA_ElementGroup) & ent, Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepFEA_RWElementGroup_HeaderFile

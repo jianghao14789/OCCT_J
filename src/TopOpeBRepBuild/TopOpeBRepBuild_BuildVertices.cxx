@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <gp_Pnt.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <TCollection_AsciiString.hxx>
@@ -41,17 +40,16 @@
 #include <TopOpeBRepTool_ShapeExplorer.hxx>
 
 //=======================================================================
-//function : BuildVertices
-//purpose  : 
+// function : BuildVertices
+// purpose  :
 //=======================================================================
-void TopOpeBRepBuild_Builder::BuildVertices(const Handle(TopOpeBRepDS_HDataStructure)& HDS)
-{
-  Standard_Integer iP, n = HDS->NbPoints();
-  
-  myNewVertices = new TopTools_HArray1OfShape(0, n);
+void TopOpeBRepBuild_Builder::BuildVertices(const Handle(TopOpeBRepDS_HDataStructure) & HDS) {
+    Standard_Integer iP, n = HDS->NbPoints();
 
-  for (iP = 1; iP <= n; iP++) {
-    const TopOpeBRepDS_Point& aTBSPoint=HDS->Point(iP);
-    myBuildTool.MakeVertex(ChangeNewVertex(iP), aTBSPoint);
-  }
+    myNewVertices = new TopTools_HArray1OfShape(0, n);
+
+    for (iP = 1; iP <= n; iP++) {
+        const TopOpeBRepDS_Point& aTBSPoint = HDS->Point(iP);
+        myBuildTool.MakeVertex(ChangeNewVertex(iP), aTBSPoint);
+    }
 }

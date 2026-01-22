@@ -24,14 +24,12 @@
 #include <TopAbs_ShapeEnum.hxx>
 class TopoDS_TShape;
 
-
 class TopoDS_TCompound;
 DEFINE_STANDARD_HANDLE(TopoDS_TCompound, TopoDS_TShape)
 
 //! A TCompound is an all-purpose set of Shapes.
 class TopoDS_TCompound : public TopoDS_TShape {
 public:
-
     //! Creates an empty TCompound.
     TopoDS_TCompound();
 
@@ -44,9 +42,7 @@ public:
     DEFINE_STANDARD_RTTIEXT(TopoDS_TCompound, TopoDS_TShape)
 
 protected:
-
 private:
-
 };
 
 #include <TopoDS_TCompound.lxx>

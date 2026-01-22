@@ -28,44 +28,25 @@ class StepRepr_DefinitionalRepresentation;
 class StepData_StepWriter;
 class Interface_EntityIterator;
 
-
 //! Read & Write Module for DefinitionalRepresentation
-class RWStepRepr_RWDefinitionalRepresentation 
-{
+class RWStepRepr_RWDefinitionalRepresentation {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT RWStepRepr_RWDefinitionalRepresentation();
 
-  
-  Standard_EXPORT RWStepRepr_RWDefinitionalRepresentation();
-  
-  Standard_EXPORT void ReadStep (const Handle(StepData_StepReaderData)& data, const Standard_Integer num, Handle(Interface_Check)& ach, const Handle(StepRepr_DefinitionalRepresentation)& ent) const;
-  
-  Standard_EXPORT void WriteStep (StepData_StepWriter& SW, const Handle(StepRepr_DefinitionalRepresentation)& ent) const;
-  
-  Standard_EXPORT void Share (const Handle(StepRepr_DefinitionalRepresentation)& ent, Interface_EntityIterator& iter) const;
+    Standard_EXPORT void ReadStep(const Handle(StepData_StepReaderData) & data, const Standard_Integer num,
+                                  Handle(Interface_Check) & ach,
+                                  const Handle(StepRepr_DefinitionalRepresentation) & ent) const;
 
+    Standard_EXPORT void WriteStep(StepData_StepWriter& SW,
+                                   const Handle(StepRepr_DefinitionalRepresentation) & ent) const;
 
-
+    Standard_EXPORT void Share(const Handle(StepRepr_DefinitionalRepresentation) & ent,
+                               Interface_EntityIterator& iter) const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _RWStepRepr_RWDefinitionalRepresentation_HeaderFile

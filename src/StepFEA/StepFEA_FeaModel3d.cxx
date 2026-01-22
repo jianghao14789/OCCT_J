@@ -18,12 +18,10 @@
 #include <Standard_Type.hxx>
 #include <StepFEA_FeaModel3d.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaModel3d,StepFEA_FeaModel)
+IMPLEMENT_STANDARD_RTTIEXT(StepFEA_FeaModel3d, StepFEA_FeaModel)
 
 //=======================================================================
-//function : StepFEA_FeaModel3d
-//purpose  : 
+// function : StepFEA_FeaModel3d
+// purpose  :
 //=======================================================================
-StepFEA_FeaModel3d::StepFEA_FeaModel3d ()
-{
-}
+StepFEA_FeaModel3d::StepFEA_FeaModel3d() {}

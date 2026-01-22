@@ -19,57 +19,50 @@ IMPLEMENT_STANDARD_RTTIEXT(Graphic3d_SequenceOfHClipPlane, Standard_Transient)
 // function : Graphic3d_SequenceOfHClipPlane
 // purpose  :
 // =======================================================================
-Graphic3d_SequenceOfHClipPlane::Graphic3d_SequenceOfHClipPlane()
-: myToOverrideGlobal (Standard_False)
-{
-  //
+Graphic3d_SequenceOfHClipPlane::Graphic3d_SequenceOfHClipPlane() : myToOverrideGlobal(Standard_False) {
+    //
 }
 
 // =======================================================================
 // function : Append
 // purpose  :
 // =======================================================================
-bool Graphic3d_SequenceOfHClipPlane::Append (const Handle(Graphic3d_ClipPlane)& theItem)
-{
-  for (NCollection_Sequence<Handle(Graphic3d_ClipPlane)>::Iterator anItemIter (myItems); anItemIter.More(); anItemIter.Next())
-  {
-    if (anItemIter.Value() == theItem)
-    {
-      return false;
+bool Graphic3d_SequenceOfHClipPlane::Append(const Handle(Graphic3d_ClipPlane) & theItem) {
+    for (NCollection_Sequence<Handle(Graphic3d_ClipPlane)>::Iterator anItemIter(myItems); anItemIter.More();
+         anItemIter.Next()) {
+        if (anItemIter.Value() == theItem) {
+            return false;
+        }
     }
-  }
-  myItems.Append (theItem);
-  return true;
+    myItems.Append(theItem);
+    return true;
 }
 
 // =======================================================================
 // function : Remove
 // purpose  :
 // =======================================================================
-bool Graphic3d_SequenceOfHClipPlane::Remove (const Handle(Graphic3d_ClipPlane)& theItem)
-{
-  for (NCollection_Sequence<Handle(Graphic3d_ClipPlane)>::Iterator anItemIter (myItems); anItemIter.More(); anItemIter.Next())
-  {
-    if (anItemIter.Value() == theItem)
-    {
-      myItems.Remove (anItemIter);
-      return true;
+bool Graphic3d_SequenceOfHClipPlane::Remove(const Handle(Graphic3d_ClipPlane) & theItem) {
+    for (NCollection_Sequence<Handle(Graphic3d_ClipPlane)>::Iterator anItemIter(myItems); anItemIter.More();
+         anItemIter.Next()) {
+        if (anItemIter.Value() == theItem) {
+            myItems.Remove(anItemIter);
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
 
 // =======================================================================
 // function : DumpJson
 // purpose  :
 // =======================================================================
-void Graphic3d_SequenceOfHClipPlane::DumpJson (Standard_OStream& theOStream, Standard_Integer theDepth) const
-{
-  OCCT_DUMP_FIELD_VALUE_NUMERICAL (theOStream, myToOverrideGlobal)
+void Graphic3d_SequenceOfHClipPlane::DumpJson(Standard_OStream& theOStream, Standard_Integer theDepth) const {
+    OCCT_DUMP_FIELD_VALUE_NUMERICAL(theOStream, myToOverrideGlobal)
 
-  for (NCollection_Sequence<Handle(Graphic3d_ClipPlane)>::Iterator anIterator (myItems); anIterator.More(); anIterator.Next())
-  {
-    const Handle(Graphic3d_ClipPlane)& aClipPlane = anIterator.Value();
-    OCCT_DUMP_FIELD_VALUES_DUMPED (theOStream, theDepth, aClipPlane.get())
-  }
+    for (NCollection_Sequence<Handle(Graphic3d_ClipPlane)>::Iterator anIterator(myItems); anIterator.More();
+         anIterator.Next()) {
+        const Handle(Graphic3d_ClipPlane) & aClipPlane = anIterator.Value();
+        OCCT_DUMP_FIELD_VALUES_DUMPED(theOStream, theDepth, aClipPlane.get())
+    }
 }

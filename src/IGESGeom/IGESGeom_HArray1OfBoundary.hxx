@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(IGESGeom_HArray1OfBoundary, IGESGeom_Array1OfBoundary)
 
-
 #endif

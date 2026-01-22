@@ -25,67 +25,60 @@
 #include <StepRepr_ConfigurationItem.hxx>
 
 //=======================================================================
-//function : RWStepRepr_RWConfigurationDesign
-//purpose  : 
+// function : RWStepRepr_RWConfigurationDesign
+// purpose  :
 //=======================================================================
-RWStepRepr_RWConfigurationDesign::RWStepRepr_RWConfigurationDesign ()
-{
+RWStepRepr_RWConfigurationDesign::RWStepRepr_RWConfigurationDesign() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepRepr_RWConfigurationDesign::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                const Handle(StepRepr_ConfigurationDesign) & ent) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 2, ach, "configuration_design")) return;
+
+    // Own fields of ConfigurationDesign
+
+    Handle(StepRepr_ConfigurationItem) aConfiguration;
+    data->ReadEntity(num, 1, "configuration", ach, STANDARD_TYPE(StepRepr_ConfigurationItem), aConfiguration);
+
+    StepRepr_ConfigurationDesignItem aDesign;
+    data->ReadEntity(num, 2, "design", ach, aDesign);
+
+    // Initialize entity
+    ent->Init(aConfiguration, aDesign);
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepRepr_RWConfigurationDesign::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                 const Standard_Integer num,
-                                                 Handle(Interface_Check)& ach,
-                                                 const Handle(StepRepr_ConfigurationDesign) &ent) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,2,ach,"configuration_design") ) return;
+void RWStepRepr_RWConfigurationDesign::WriteStep(StepData_StepWriter& SW,
+                                                 const Handle(StepRepr_ConfigurationDesign) & ent) const {
 
-  // Own fields of ConfigurationDesign
+    // Own fields of ConfigurationDesign
 
-  Handle(StepRepr_ConfigurationItem) aConfiguration;
-  data->ReadEntity (num, 1, "configuration", ach, STANDARD_TYPE(StepRepr_ConfigurationItem), aConfiguration);
+    SW.Send(ent->Configuration());
 
-  StepRepr_ConfigurationDesignItem aDesign;
-  data->ReadEntity (num, 2, "design", ach, aDesign);
-
-  // Initialize entity
-  ent->Init(aConfiguration,
-            aDesign);
+    SW.Send(ent->Design().Value());
 }
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepRepr_RWConfigurationDesign::WriteStep (StepData_StepWriter& SW,
-                                                  const Handle(StepRepr_ConfigurationDesign) &ent) const
-{
+void RWStepRepr_RWConfigurationDesign::Share(const Handle(StepRepr_ConfigurationDesign) & ent,
+                                             Interface_EntityIterator& iter) const {
 
-  // Own fields of ConfigurationDesign
+    // Own fields of ConfigurationDesign
 
-  SW.Send (ent->Configuration());
+    iter.AddItem(ent->Configuration());
 
-  SW.Send (ent->Design().Value());
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepRepr_RWConfigurationDesign::Share (const Handle(StepRepr_ConfigurationDesign) &ent,
-                                              Interface_EntityIterator& iter) const
-{
-
-  // Own fields of ConfigurationDesign
-
-  iter.AddItem (ent->Configuration());
-
-  iter.AddItem (ent->Design().Value());
+    iter.AddItem(ent->Design().Value());
 }

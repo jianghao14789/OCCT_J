@@ -19,12 +19,6 @@
 
 //! Intersection type between the hatching and the
 //! element.
-enum HatchGen_IntersectionType
-{
-HatchGen_TRUE,
-HatchGen_TOUCH,
-HatchGen_TANGENT,
-HatchGen_UNDETERMINED
-};
+enum HatchGen_IntersectionType { HatchGen_TRUE, HatchGen_TOUCH, HatchGen_TANGENT, HatchGen_UNDETERMINED };
 
 #endif // _HatchGen_IntersectionType_HeaderFile

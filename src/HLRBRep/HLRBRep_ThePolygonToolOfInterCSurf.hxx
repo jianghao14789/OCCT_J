@@ -29,47 +29,29 @@ class gp_Pnt;
 class HLRBRep_ThePolygonOfInterCSurf;
 class Bnd_Box;
 
-
-
-class HLRBRep_ThePolygonToolOfInterCSurf 
-{
+class HLRBRep_ThePolygonToolOfInterCSurf {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    //! Give the bounding box of the polygon.
+    static const Bnd_Box& Bounding(const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
 
-  
-  //! Give the bounding box of the polygon.
-    static const Bnd_Box& Bounding (const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
-  
-    static Standard_Real DeflectionOverEstimation (const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
-  
-    static Standard_Boolean Closed (const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
-  
-    static Standard_Integer NbSegments (const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
-  
-  //! Give the point of range Index in the Polygon.
-    static const gp_Pnt& BeginOfSeg (const HLRBRep_ThePolygonOfInterCSurf& thePolygon, const Standard_Integer Index);
-  
-  //! Give the point of range Index in the Polygon.
-    static const gp_Pnt& EndOfSeg (const HLRBRep_ThePolygonOfInterCSurf& thePolygon, const Standard_Integer Index);
-  
-  Standard_EXPORT static void Dump (const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
+    static Standard_Real DeflectionOverEstimation(const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
 
+    static Standard_Boolean Closed(const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
 
+    static Standard_Integer NbSegments(const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
 
+    //! Give the point of range Index in the Polygon.
+    static const gp_Pnt& BeginOfSeg(const HLRBRep_ThePolygonOfInterCSurf& thePolygon, const Standard_Integer Index);
+
+    //! Give the point of range Index in the Polygon.
+    static const gp_Pnt& EndOfSeg(const HLRBRep_ThePolygonOfInterCSurf& thePolygon, const Standard_Integer Index);
+
+    Standard_EXPORT static void Dump(const HLRBRep_ThePolygonOfInterCSurf& thePolygon);
 
 protected:
-
-
-
-
-
 private:
-
-
-
-
-
 };
 
 #define ThePoint gp_Pnt
@@ -91,8 +73,5 @@ private:
 #undef TheBoundingBox_hxx
 #undef IntCurveSurface_PolygonTool
 #undef IntCurveSurface_PolygonTool_hxx
-
-
-
 
 #endif // _HLRBRep_ThePolygonToolOfInterCSurf_HeaderFile

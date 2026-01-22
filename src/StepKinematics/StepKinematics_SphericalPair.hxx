@@ -1,4 +1,4 @@
-// Created on : Sat May 02 12:41:16 2020 
+// Created on : Sat May 02 12:41:16 2020
 // Created by: Irina KRYLOVA
 // Generator:	Express (EXPRESS -> CASCADE/XSTEP Translator) V3.0
 // Copyright (c) Open CASCADE 2020
@@ -29,14 +29,11 @@
 DEFINE_STANDARD_HANDLE(StepKinematics_SphericalPair, StepKinematics_LowOrderKinematicPair)
 
 //! Representation of STEP entity SphericalPair
-class StepKinematics_SphericalPair : public StepKinematics_LowOrderKinematicPair
-{
-public :
+class StepKinematics_SphericalPair : public StepKinematics_LowOrderKinematicPair {
+public:
+    //! default constructor
+    Standard_EXPORT StepKinematics_SphericalPair();
 
-  //! default constructor
-  Standard_EXPORT StepKinematics_SphericalPair();
-
-DEFINE_STANDARD_RTTIEXT(StepKinematics_SphericalPair, StepKinematics_LowOrderKinematicPair)
-
+    DEFINE_STANDARD_RTTIEXT(StepKinematics_SphericalPair, StepKinematics_LowOrderKinematicPair)
 };
 #endif // _StepKinematics_SphericalPair_HeaderFile_

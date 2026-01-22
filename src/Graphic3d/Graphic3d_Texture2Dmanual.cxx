@@ -19,40 +19,37 @@
 #include <Graphic3d_TextureParams.hxx>
 #include <Graphic3d_TypeOfTextureMode.hxx>
 
-IMPLEMENT_STANDARD_RTTIEXT(Graphic3d_Texture2Dmanual,Graphic3d_Texture2D)
+IMPLEMENT_STANDARD_RTTIEXT(Graphic3d_Texture2Dmanual, Graphic3d_Texture2D)
 
 // =======================================================================
 // function : Graphic3d_Texture2Dmanual
 // purpose  :
 // =======================================================================
-Graphic3d_Texture2Dmanual::Graphic3d_Texture2Dmanual (const TCollection_AsciiString& theFileName)
-: Graphic3d_Texture2D (theFileName, Graphic3d_TOT_2D_MIPMAP)
-{
-  myParams->SetModulate (Standard_True);
-  myParams->SetRepeat   (Standard_True);
-  myParams->SetFilter   (Graphic3d_TOTF_TRILINEAR);
+Graphic3d_Texture2Dmanual::Graphic3d_Texture2Dmanual(const TCollection_AsciiString& theFileName)
+    : Graphic3d_Texture2D(theFileName, Graphic3d_TOT_2D_MIPMAP) {
+    myParams->SetModulate(Standard_True);
+    myParams->SetRepeat(Standard_True);
+    myParams->SetFilter(Graphic3d_TOTF_TRILINEAR);
 }
 
 // =======================================================================
 // function : Graphic3d_Texture2Dmanual
 // purpose  :
 // =======================================================================
-Graphic3d_Texture2Dmanual::Graphic3d_Texture2Dmanual (const Graphic3d_NameOfTexture2D theNOT)
-: Graphic3d_Texture2D (theNOT, Graphic3d_TOT_2D_MIPMAP)
-{
-  myParams->SetModulate (Standard_True);
-  myParams->SetRepeat   (Standard_True);
-  myParams->SetFilter   (Graphic3d_TOTF_TRILINEAR);
+Graphic3d_Texture2Dmanual::Graphic3d_Texture2Dmanual(const Graphic3d_NameOfTexture2D theNOT)
+    : Graphic3d_Texture2D(theNOT, Graphic3d_TOT_2D_MIPMAP) {
+    myParams->SetModulate(Standard_True);
+    myParams->SetRepeat(Standard_True);
+    myParams->SetFilter(Graphic3d_TOTF_TRILINEAR);
 }
 
 // =======================================================================
 // function : Graphic3d_Texture2Dmanual
 // purpose  :
 // =======================================================================
-Graphic3d_Texture2Dmanual::Graphic3d_Texture2Dmanual (const Handle(Image_PixMap)& thePixMap)
-: Graphic3d_Texture2D (thePixMap, Graphic3d_TOT_2D_MIPMAP)
-{
-  myParams->SetModulate (Standard_True);
-  myParams->SetRepeat   (Standard_True);
-  myParams->SetFilter   (Graphic3d_TOTF_TRILINEAR);
+Graphic3d_Texture2Dmanual::Graphic3d_Texture2Dmanual(const Handle(Image_PixMap) & thePixMap)
+    : Graphic3d_Texture2D(thePixMap, Graphic3d_TOT_2D_MIPMAP) {
+    myParams->SetModulate(Standard_True);
+    myParams->SetRepeat(Standard_True);
+    myParams->SetFilter(Graphic3d_TOTF_TRILINEAR);
 }

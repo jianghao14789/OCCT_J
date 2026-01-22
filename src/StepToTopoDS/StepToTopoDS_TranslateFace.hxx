@@ -30,48 +30,26 @@ class StepToTopoDS_Tool;
 class StepToTopoDS_NMTool;
 class TopoDS_Shape;
 
-
-
-class StepToTopoDS_TranslateFace  : public StepToTopoDS_Root
-{
+class StepToTopoDS_TranslateFace : public StepToTopoDS_Root {
 public:
+    DEFINE_STANDARD_ALLOC;
 
-  DEFINE_STANDARD_ALLOC;
+    Standard_EXPORT StepToTopoDS_TranslateFace();
 
-  
-  Standard_EXPORT StepToTopoDS_TranslateFace();
-  
-  Standard_EXPORT StepToTopoDS_TranslateFace(const Handle(StepShape_FaceSurface)& FS, StepToTopoDS_Tool& T, StepToTopoDS_NMTool& NMTool);
-  
-  Standard_EXPORT void Init (const Handle(StepShape_FaceSurface)& FS, StepToTopoDS_Tool& T, StepToTopoDS_NMTool& NMTool);
-  
-  Standard_EXPORT const TopoDS_Shape& Value() const;
-  
-  Standard_EXPORT StepToTopoDS_TranslateFaceError Error() const;
+    Standard_EXPORT StepToTopoDS_TranslateFace(const Handle(StepShape_FaceSurface) & FS, StepToTopoDS_Tool& T,
+                                               StepToTopoDS_NMTool& NMTool);
 
+    Standard_EXPORT void Init(const Handle(StepShape_FaceSurface) & FS, StepToTopoDS_Tool& T,
+                              StepToTopoDS_NMTool& NMTool);
 
+    Standard_EXPORT const TopoDS_Shape& Value() const;
 
+    Standard_EXPORT StepToTopoDS_TranslateFaceError Error() const;
 
 protected:
-
-
-
-
-
 private:
-
-
-
-  StepToTopoDS_TranslateFaceError myError;
-  TopoDS_Shape myResult;
-
-
+    StepToTopoDS_TranslateFaceError myError;
+    TopoDS_Shape myResult;
 };
-
-
-
-
-
-
 
 #endif // _StepToTopoDS_TranslateFace_HeaderFile

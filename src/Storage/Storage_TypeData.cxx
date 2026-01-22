@@ -12,7 +12,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <Standard_ErrorHandler.hxx>
 #include <Standard_NoSuchObject.hxx>
 #include <Storage_TypeData.hxx>
@@ -22,16 +21,11 @@
 
 IMPLEMENT_STANDARD_RTTIEXT(Storage_TypeData, Standard_Transient)
 
-Storage_TypeData::Storage_TypeData() : myErrorStatus(Storage_VSOk)
-{
-}
+Storage_TypeData::Storage_TypeData() : myErrorStatus(Storage_VSOk) {}
 
-Standard_Boolean Storage_TypeData::Read(const Handle(Storage_BaseDriver)& theDriver)
-{
+Standard_Boolean Storage_TypeData::Read(const Handle(Storage_BaseDriver) & theDriver) {
     // Check driver open mode
-    if (theDriver->OpenMode() != Storage_VSRead
-        && theDriver->OpenMode() != Storage_VSReadWrite)
-    {
+    if (theDriver->OpenMode() != Storage_VSRead && theDriver->OpenMode() != Storage_VSReadWrite) {
         myErrorStatus = Storage_VSModeError;
         myErrorStatusExt = "OpenMode";
         return Standard_False;
@@ -39,25 +33,20 @@ Standard_Boolean Storage_TypeData::Read(const Handle(Storage_BaseDriver)& theDri
 
     // Read type section
     myErrorStatus = theDriver->BeginReadTypeSection();
-    if (myErrorStatus != Storage_VSOk)
-    {
+    if (myErrorStatus != Storage_VSOk) {
         myErrorStatusExt = "BeginReadTypeSection";
         return Standard_False;
     }
 
-    Standard_Integer        aTypeNum;
+    Standard_Integer aTypeNum;
     TCollection_AsciiString aTypeName;
 
     Standard_Integer len = theDriver->TypeSectionSize();
-    for (Standard_Integer i = 1; i <= len; i++)
-    {
-        try
-        {
+    for (Standard_Integer i = 1; i <= len; i++) {
+        try {
             OCC_CATCH_SIGNALS
-                theDriver->ReadTypeInformations(aTypeNum, aTypeName);
-        }
-        catch (const Storage_StreamTypeMismatchError&)
-        {
+            theDriver->ReadTypeInformations(aTypeNum, aTypeName);
+        } catch (const Storage_StreamTypeMismatchError&) {
             myErrorStatus = Storage_VSTypeMismatch;
             myErrorStatusExt = "ReadTypeInformations";
             return Standard_False;
@@ -67,8 +56,7 @@ Standard_Boolean Storage_TypeData::Read(const Handle(Storage_BaseDriver)& theDri
     }
 
     myErrorStatus = theDriver->EndReadTypeSection();
-    if (myErrorStatus != Storage_VSOk)
-    {
+    if (myErrorStatus != Storage_VSOk) {
         myErrorStatusExt = "EndReadTypeSection";
         return Standard_False;
     }
@@ -76,20 +64,17 @@ Standard_Boolean Storage_TypeData::Read(const Handle(Storage_BaseDriver)& theDri
     return Standard_True;
 }
 
-Standard_Integer Storage_TypeData::NumberOfTypes() const
-{
+Standard_Integer Storage_TypeData::NumberOfTypes() const {
     return myPt.Extent();
 }
 
-Standard_Boolean Storage_TypeData::IsType(const TCollection_AsciiString& aName) const
-{
+Standard_Boolean Storage_TypeData::IsType(const TCollection_AsciiString& aName) const {
     return myPt.Contains(aName);
 }
 
-Handle(TColStd_HSequenceOfAsciiString) Storage_TypeData::Types() const
-{
+Handle(TColStd_HSequenceOfAsciiString) Storage_TypeData::Types() const {
     Handle(TColStd_HSequenceOfAsciiString) r = new TColStd_HSequenceOfAsciiString;
-    Standard_Integer                       i;
+    Standard_Integer i;
 
     for (i = 1; i <= myPt.Extent(); i++) {
         r->Append(myPt.FindKey(i));
@@ -98,66 +83,55 @@ Handle(TColStd_HSequenceOfAsciiString) Storage_TypeData::Types() const
     return r;
 }
 
-void Storage_TypeData::AddType(const TCollection_AsciiString& aName, const Standard_Integer aTypeNum)
-{
+void Storage_TypeData::AddType(const TCollection_AsciiString& aName, const Standard_Integer aTypeNum) {
     myPt.Add(aName, aTypeNum);
 }
 
-TCollection_AsciiString Storage_TypeData::Type(const Standard_Integer aTypeNum) const
-{
+TCollection_AsciiString Storage_TypeData::Type(const Standard_Integer aTypeNum) const {
     TCollection_AsciiString r;
 
     if (aTypeNum <= myPt.Extent() && aTypeNum > 0) {
         r = myPt.FindKey(aTypeNum);
-    }
-    else {
+    } else {
         throw Standard_NoSuchObject("Storage_TypeData::Type - aTypeNum not in range");
     }
 
     return r;
 }
 
-Standard_Integer Storage_TypeData::Type(const TCollection_AsciiString& aTypeName) const
-{
+Standard_Integer Storage_TypeData::Type(const TCollection_AsciiString& aTypeName) const {
     Standard_Integer r = 0;
 
     if (myPt.Contains(aTypeName)) {
         r = myPt.FindFromKey(aTypeName);
-    }
-    else {
+    } else {
         throw Standard_NoSuchObject("Storage_TypeData::Type - aTypeName not found");
     }
 
     return r;
 }
 
-void Storage_TypeData::Clear()
-{
+void Storage_TypeData::Clear() {
     myPt.Clear();
 }
 
-Storage_Error  Storage_TypeData::ErrorStatus() const
-{
+Storage_Error Storage_TypeData::ErrorStatus() const {
     return myErrorStatus;
 }
 
-void Storage_TypeData::SetErrorStatus(const Storage_Error anError)
-{
+void Storage_TypeData::SetErrorStatus(const Storage_Error anError) {
     myErrorStatus = anError;
 }
 
-void Storage_TypeData::ClearErrorStatus()
-{
+void Storage_TypeData::ClearErrorStatus() {
     myErrorStatus = Storage_VSOk;
     myErrorStatusExt.Clear();
 }
 
-TCollection_AsciiString Storage_TypeData::ErrorStatusExtension() const
-{
+TCollection_AsciiString Storage_TypeData::ErrorStatusExtension() const {
     return myErrorStatusExt;
 }
 
-void Storage_TypeData::SetErrorStatusExtension(const TCollection_AsciiString& anErrorExt)
-{
+void Storage_TypeData::SetErrorStatusExtension(const TCollection_AsciiString& anErrorExt) {
     myErrorStatusExt = anErrorExt;
 }

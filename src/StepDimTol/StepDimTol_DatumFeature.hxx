@@ -21,41 +21,20 @@
 
 #include <StepRepr_ShapeAspect.hxx>
 
-
 class StepDimTol_DatumFeature;
 DEFINE_STANDARD_HANDLE(StepDimTol_DatumFeature, StepRepr_ShapeAspect)
 
 //! Representation of STEP entity DatumFeature
-class StepDimTol_DatumFeature : public StepRepr_ShapeAspect
-{
+class StepDimTol_DatumFeature : public StepRepr_ShapeAspect {
 
 public:
+    //! Empty constructor
+    Standard_EXPORT StepDimTol_DatumFeature();
 
-  
-  //! Empty constructor
-  Standard_EXPORT StepDimTol_DatumFeature();
-
-
-
-
-  DEFINE_STANDARD_RTTIEXT(StepDimTol_DatumFeature,StepRepr_ShapeAspect)
+    DEFINE_STANDARD_RTTIEXT(StepDimTol_DatumFeature, StepRepr_ShapeAspect)
 
 protected:
-
-
-
-
 private:
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _StepDimTol_DatumFeature_HeaderFile

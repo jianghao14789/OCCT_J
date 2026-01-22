@@ -25,7 +25,7 @@
 
 // *********************************************** Class DoubleMap ************
 
-#define DEFINE_DOUBLEMAP(_ClassName_, _BaseCollection_, TheKey1Type, TheKey2Type) \
-typedef NCollection_DoubleMap <TheKey1Type, TheKey2Type > _ClassName_;
+#define DEFINE_DOUBLEMAP(_ClassName_, _BaseCollection_, TheKey1Type, TheKey2Type)                                      \
+    typedef NCollection_DoubleMap<TheKey1Type, TheKey2Type> _ClassName_;
 
 #endif

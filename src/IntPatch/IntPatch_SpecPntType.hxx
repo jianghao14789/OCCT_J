@@ -21,14 +21,13 @@
 //! intersection algorithm. Such as pole of sphere,
 //! apex of cone, point on U- or V-seam etc.
 
-enum IntPatch_SpecPntType
-{
-  IntPatch_SPntNone,
-  IntPatch_SPntSeamU,
-  IntPatch_SPntSeamV,
-  IntPatch_SPntSeamUV,
-  IntPatch_SPntPoleSeamU,
-  IntPatch_SPntPole
+enum IntPatch_SpecPntType {
+    IntPatch_SPntNone,
+    IntPatch_SPntSeamU,
+    IntPatch_SPntSeamV,
+    IntPatch_SPntSeamUV,
+    IntPatch_SPntPoleSeamU,
+    IntPatch_SPntPole
 };
 
 #endif // _IntPatch_SpecPntType_HeaderFile

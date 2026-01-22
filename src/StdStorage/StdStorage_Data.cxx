@@ -17,15 +17,10 @@
 #include <StdStorage_RootData.hxx>
 
 StdStorage_Data::StdStorage_Data()
-  : myHeaderData(new StdStorage_HeaderData)
-  , myTypeData(new StdStorage_TypeData)
-  , myRootData(new StdStorage_RootData)
-{
+    : myHeaderData(new StdStorage_HeaderData), myTypeData(new StdStorage_TypeData),
+      myRootData(new StdStorage_RootData) {}
 
-}
-
-void StdStorage_Data::Clear()
-{
-  myTypeData->Clear();
-  myRootData->Clear();
+void StdStorage_Data::Clear() {
+    myTypeData->Clear();
+    myRootData->Clear();
 }

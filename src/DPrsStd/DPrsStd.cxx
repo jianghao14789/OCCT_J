@@ -14,7 +14,6 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-
 #include <AppStd_Application.hxx>
 #include <DDataStd.hxx>
 #include <DDF.hxx>
@@ -31,37 +30,35 @@
 #include <TCollection_AsciiString.hxx>
 
 //=======================================================================
-//function : AllComands
-//purpose  : 
+// function : AllComands
+// purpose  :
 //=======================================================================
 
-void DPrsStd::AllCommands (Draw_Interpretor& theCommands)
-{
-  static Standard_Boolean done = Standard_False;
-  if (done) return;
-  done = Standard_True;
+void DPrsStd::AllCommands(Draw_Interpretor& theCommands) {
+    static Standard_Boolean done = Standard_False;
+    if (done) return;
+    done = Standard_True;
 
-  DPrsStd::AISPresentationCommands(theCommands); 
-  DPrsStd::AISViewerCommands(theCommands);  
-  //DPrsStd::BasicCommands(theCommands);  
+    DPrsStd::AISPresentationCommands(theCommands);
+    DPrsStd::AISViewerCommands(theCommands);
+    // DPrsStd::BasicCommands(theCommands);
 }
 
 //==============================================================================
 // DPrsStd::Factory
 //==============================================================================
-void DPrsStd::Factory(Draw_Interpretor& theDI)
-{
-  static Standard_Boolean DPrsStdFactoryDone = Standard_False;
-  if (DPrsStdFactoryDone) return;
-  DPrsStdFactoryDone = Standard_True;
+void DPrsStd::Factory(Draw_Interpretor& theDI) {
+    static Standard_Boolean DPrsStdFactoryDone = Standard_False;
+    if (DPrsStdFactoryDone) return;
+    DPrsStdFactoryDone = Standard_True;
 
-  DDF::AllCommands(theDI);
-  DNaming::AllCommands(theDI);
-  DDataStd::AllCommands(theDI);  
-  DPrsStd::AllCommands(theDI);
-  DDocStd::AllCommands(theDI);
+    DDF::AllCommands(theDI);
+    DNaming::AllCommands(theDI);
+    DDataStd::AllCommands(theDI);
+    DPrsStd::AllCommands(theDI);
+    DDocStd::AllCommands(theDI);
 #ifdef OCCT_DEBUG
-  std::cout << "Draw Plugin : All DF commands are loaded" << std::endl;
+    std::cout << "Draw Plugin : All DF commands are loaded" << std::endl;
 #endif
 }
 

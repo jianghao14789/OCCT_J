@@ -33,7 +33,6 @@ class Standard_DimensionError;
 class Standard_ConstructionError;
 class math_Matrix;
 
-
 //! This class implements the least square solution of a set of
 //! linear equations of m unknowns (n >= m) using the Householder
 //! method. It solves A.X = B.
@@ -43,12 +42,9 @@ class math_Matrix;
 //! It is about 16% longer than GaussLeastSquare if there is only
 //! one member B to solve.
 //! It is about 30% longer if there are twenty B members to solve.
-class math_Householder
-{
+class math_Householder {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Given an input matrix A with n>= m, given an input matrix B
     //! this constructor performs the least square resolution of
@@ -66,7 +62,9 @@ public:
     //! be done.
     //! Exception DimensionError is raised if the row number of B
     //! is different from the A row number.
-    Standard_EXPORT math_Householder(const math_Matrix& A, const math_Matrix& B, const Standard_Integer lowerArow, const Standard_Integer upperArow, const Standard_Integer lowerAcol, const Standard_Integer upperAcol, const Standard_Real EPS = 1.0e-20);
+    Standard_EXPORT math_Householder(const math_Matrix& A, const math_Matrix& B, const Standard_Integer lowerArow,
+                                     const Standard_Integer upperArow, const Standard_Integer lowerAcol,
+                                     const Standard_Integer upperAcol, const Standard_Real EPS = 1.0e-20);
 
     //! Given an input matrix A with n>= m, given an input vector B
     //! this constructor performs the least square resolution of
@@ -97,23 +95,12 @@ public:
     //! Prints information on the current state of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
     //! This method is used internally for each constructor
     //! above and can't be used directly.
     Standard_EXPORT void Perform(const math_Matrix& A, const math_Matrix& B, const Standard_Real EPS);
 
-
-
-
 private:
-
-
-
     math_Matrix Sol;
     math_Matrix Q;
     Standard_Boolean Done;
@@ -121,15 +108,8 @@ private:
     Standard_Integer myupperArow;
     Standard_Integer mylowerAcol;
     Standard_Integer myupperAcol;
-
-
 };
 
-
 #include <math_Householder.lxx>
-
-
-
-
 
 #endif // _math_Householder_HeaderFile

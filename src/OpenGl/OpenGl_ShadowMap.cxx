@@ -28,155 +28,135 @@ IMPLEMENT_STANDARD_RTTIEXT(OpenGl_ShadowMap, OpenGl_NamedResource)
 // purpose  :
 // =======================================================================
 OpenGl_ShadowMap::OpenGl_ShadowMap()
-: OpenGl_NamedResource ("shadow_map"),
-  myShadowMapFbo (new OpenGl_FrameBuffer()),
-  myShadowCamera (new Graphic3d_Camera()),
-  myShadowMapBias (0.0f)
-{
-  //
+    : OpenGl_NamedResource("shadow_map"), myShadowMapFbo(new OpenGl_FrameBuffer()),
+      myShadowCamera(new Graphic3d_Camera()), myShadowMapBias(0.0f) {
+    //
 }
 
 // =======================================================================
 // function : Release
 // purpose  :
 // =======================================================================
-void OpenGl_ShadowMap::Release (OpenGl_Context* theCtx)
-{
-  myShadowMapFbo->Release (theCtx);
+void OpenGl_ShadowMap::Release(OpenGl_Context* theCtx) {
+    myShadowMapFbo->Release(theCtx);
 }
 
 // =======================================================================
 // function : ~OpenGl_ShadowMap
 // purpose  :
 // =======================================================================
-OpenGl_ShadowMap::~OpenGl_ShadowMap()
-{
-  Release (NULL);
+OpenGl_ShadowMap::~OpenGl_ShadowMap() {
+    Release(NULL);
 }
 
 // =======================================================================
 // function : EstimatedDataSize
 // purpose  :
 // =======================================================================
-Standard_Size OpenGl_ShadowMap::EstimatedDataSize() const
-{
-  return myShadowMapFbo->EstimatedDataSize();
+Standard_Size OpenGl_ShadowMap::EstimatedDataSize() const {
+    return myShadowMapFbo->EstimatedDataSize();
 }
 
 // =======================================================================
 // function : IsValid
 // purpose  :
 // =======================================================================
-bool OpenGl_ShadowMap::IsValid() const
-{
-  return myShadowMapFbo->IsValid();
+bool OpenGl_ShadowMap::IsValid() const {
+    return myShadowMapFbo->IsValid();
 }
 
 // =======================================================================
 // function : Texture
 // purpose  :
 // =======================================================================
-const Handle(OpenGl_Texture)& OpenGl_ShadowMap::Texture() const
-{
-  return myShadowMapFbo->DepthStencilTexture();
+const Handle(OpenGl_Texture) & OpenGl_ShadowMap::Texture() const {
+    return myShadowMapFbo->DepthStencilTexture();
 }
 
 // =======================================================================
 // function : UpdateCamera
 // purpose  :
 // =======================================================================
-bool OpenGl_ShadowMap::UpdateCamera (const Graphic3d_CView& theView,
-                                     const gp_XYZ* theOrigin)
-{
-  const Bnd_Box aMinMaxBox  = theOrigin == NULL ? theView.MinMaxValues (false) : Bnd_Box(); // applicative min max boundaries
-  const Bnd_Box aGraphicBox = theOrigin == NULL ? theView.MinMaxValues (true)  : Bnd_Box(); // real graphical boundaries (not accounting infinite flag)
+bool OpenGl_ShadowMap::UpdateCamera(const Graphic3d_CView& theView, const gp_XYZ* theOrigin) {
+    const Bnd_Box aMinMaxBox =
+        theOrigin == NULL ? theView.MinMaxValues(false) : Bnd_Box(); // applicative min max boundaries
+    const Bnd_Box aGraphicBox = theOrigin == NULL
+                                    ? theView.MinMaxValues(true)
+                                    : Bnd_Box(); // real graphical boundaries (not accounting infinite flag)
 
-  switch (myShadowLight->Type())
-  {
-    case Graphic3d_TypeOfLightSource_Ambient:
-    {
-      return false; // not applicable
-    }
-    case Graphic3d_TypeOfLightSource_Directional:
-    {
-      if (theOrigin != NULL)
-      {
-        Graphic3d_Mat4d aTrans;
-        aTrans.Translate (Graphic3d_Vec3d (theOrigin->X(), theOrigin->Y(), theOrigin->Z()));
-        Graphic3d_Mat4d anOrientMat = myShadowCamera->OrientationMatrix() * aTrans;
-        myLightMatrix = myShadowCamera->ProjectionMatrixF() * Graphic3d_Mat4 (anOrientMat);
-        return true;
-      }
+    switch (myShadowLight->Type()) {
+        case Graphic3d_TypeOfLightSource_Ambient: {
+            return false; // not applicable
+        }
+        case Graphic3d_TypeOfLightSource_Directional: {
+            if (theOrigin != NULL) {
+                Graphic3d_Mat4d aTrans;
+                aTrans.Translate(Graphic3d_Vec3d(theOrigin->X(), theOrigin->Y(), theOrigin->Z()));
+                Graphic3d_Mat4d anOrientMat = myShadowCamera->OrientationMatrix() * aTrans;
+                myLightMatrix = myShadowCamera->ProjectionMatrixF() * Graphic3d_Mat4(anOrientMat);
+                return true;
+            }
 
-      Graphic3d_Vec4d aDir (myShadowLight->Direction().X(), myShadowLight->Direction().Y(), myShadowLight->Direction().Z(), 0.0);
-      if (myShadowLight->IsHeadlight())
-      {
-        Graphic3d_Mat4d anOrientInv;
-        theView.Camera()->OrientationMatrix().Inverted (anOrientInv);
-        aDir = anOrientInv * aDir;
-      }
-      myShadowCamera->SetZeroToOneDepth (theView.Camera()->IsZeroToOneDepth());
-      myShadowCamera->SetProjectionType (Graphic3d_Camera::Projection_Orthographic);
-      myShadowCamera->SetDirection (gp_Dir (aDir.x(), aDir.y(), aDir.z()));
-      myShadowCamera->SetUp (!myShadowCamera->Direction().IsParallel (gp::DY(), Precision::Angular())
-                            ? gp::DY()
-                            : gp::DX());
-      myShadowCamera->OrthogonalizeUp();
+            Graphic3d_Vec4d aDir(myShadowLight->Direction().X(), myShadowLight->Direction().Y(),
+                                 myShadowLight->Direction().Z(), 0.0);
+            if (myShadowLight->IsHeadlight()) {
+                Graphic3d_Mat4d anOrientInv;
+                theView.Camera()->OrientationMatrix().Inverted(anOrientInv);
+                aDir = anOrientInv * aDir;
+            }
+            myShadowCamera->SetZeroToOneDepth(theView.Camera()->IsZeroToOneDepth());
+            myShadowCamera->SetProjectionType(Graphic3d_Camera::Projection_Orthographic);
+            myShadowCamera->SetDirection(gp_Dir(aDir.x(), aDir.y(), aDir.z()));
+            myShadowCamera->SetUp(!myShadowCamera->Direction().IsParallel(gp::DY(), Precision::Angular()) ? gp::DY()
+                                                                                                          : gp::DX());
+            myShadowCamera->OrthogonalizeUp();
 
-      // Fitting entire scene to the light might produce a shadow map of too low resolution.
-      // More reliable approach would be putting a center to a current eye position and limiting maximum range,
-      // so that shadow range will be limited to some reasonable distance from current eye.
-      if (myShadowCamera->FitMinMax (aMinMaxBox, 10.0 * Precision::Confusion(), false))
-      {
-        myShadowCamera->SetScale (Max (myShadowCamera->ViewDimensions().X() * 1.1, myShadowCamera->ViewDimensions().Y() * 1.1)); // add margin
-      }
-      myShadowCamera->ZFitAll (1.0, aMinMaxBox, aGraphicBox);
-      myLightMatrix = myShadowCamera->ProjectionMatrixF() * myShadowCamera->OrientationMatrixF();
-      return true;
+            // Fitting entire scene to the light might produce a shadow map of too low resolution.
+            // More reliable approach would be putting a center to a current eye position and limiting maximum range,
+            // so that shadow range will be limited to some reasonable distance from current eye.
+            if (myShadowCamera->FitMinMax(aMinMaxBox, 10.0 * Precision::Confusion(), false)) {
+                myShadowCamera->SetScale(Max(myShadowCamera->ViewDimensions().X() * 1.1,
+                                             myShadowCamera->ViewDimensions().Y() * 1.1)); // add margin
+            }
+            myShadowCamera->ZFitAll(1.0, aMinMaxBox, aGraphicBox);
+            myLightMatrix = myShadowCamera->ProjectionMatrixF() * myShadowCamera->OrientationMatrixF();
+            return true;
+        }
+        case Graphic3d_TypeOfLightSource_Positional: {
+            // render into cubemap shadowmap texture
+            return false; // not implemented
+        }
+        case Graphic3d_TypeOfLightSource_Spot: {
+            // myShadowCamera->SetProjectionType (Graphic3d_Camera::Projection_Perspective);
+            // myShadowCamera->SetEye (theCastShadowLight->Position());
+            return false; // not implemented
+        }
     }
-    case Graphic3d_TypeOfLightSource_Positional:
-    {
-      // render into cubemap shadowmap texture
-      return false; // not implemented
-    }
-    case Graphic3d_TypeOfLightSource_Spot:
-    {
-      //myShadowCamera->SetProjectionType (Graphic3d_Camera::Projection_Perspective);
-      //myShadowCamera->SetEye (theCastShadowLight->Position());
-      return false; // not implemented
-    }
-  }
-  return false;
+    return false;
 }
 
 // =======================================================================
 // function : Release
 // purpose  :
 // =======================================================================
-void OpenGl_ShadowMapArray::Release (OpenGl_Context* theCtx)
-{
-  for (Standard_Integer anIter = Lower(); anIter <= Upper(); ++anIter)
-  {
-    if (const Handle(OpenGl_ShadowMap)& aShadow = ChangeValue (anIter))
-    {
-      aShadow->Release (theCtx);
+void OpenGl_ShadowMapArray::Release(OpenGl_Context* theCtx) {
+    for (Standard_Integer anIter = Lower(); anIter <= Upper(); ++anIter) {
+        if (const Handle(OpenGl_ShadowMap) & aShadow = ChangeValue(anIter)) {
+            aShadow->Release(theCtx);
+        }
     }
-  }
 }
 
 // =======================================================================
 // function : EstimatedDataSize
 // purpose  :
 // =======================================================================
-Standard_Size OpenGl_ShadowMapArray::EstimatedDataSize() const
-{
-  Standard_Size aSize = 0;
-  for (Standard_Integer anIter = Lower(); anIter <= Upper(); ++anIter)
-  {
-    if (const Handle(OpenGl_ShadowMap)& aShadow = Value (anIter))
-    {
-      aSize += aShadow->EstimatedDataSize();
+Standard_Size OpenGl_ShadowMapArray::EstimatedDataSize() const {
+    Standard_Size aSize = 0;
+    for (Standard_Integer anIter = Lower(); anIter <= Upper(); ++anIter) {
+        if (const Handle(OpenGl_ShadowMap) & aShadow = Value(anIter)) {
+            aSize += aShadow->EstimatedDataSize();
+        }
     }
-  }
-  return aSize;
+    return aSize;
 }

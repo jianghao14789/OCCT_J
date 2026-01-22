@@ -23,5 +23,4 @@
 
 DEFINE_HARRAY1(TColGeom_HArray1OfBSplineCurve, TColGeom_Array1OfBSplineCurve)
 
-
 #endif

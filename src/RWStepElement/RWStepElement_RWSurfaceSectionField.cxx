@@ -23,46 +23,38 @@
 #include <StepElement_SurfaceSectionField.hxx>
 
 //=======================================================================
-//function : RWStepElement_RWSurfaceSectionField
-//purpose  : 
+// function : RWStepElement_RWSurfaceSectionField
+// purpose  :
 //=======================================================================
-RWStepElement_RWSurfaceSectionField::RWStepElement_RWSurfaceSectionField ()
-{
+RWStepElement_RWSurfaceSectionField::RWStepElement_RWSurfaceSectionField() {}
+
+//=======================================================================
+// function : ReadStep
+// purpose  :
+//=======================================================================
+
+void RWStepElement_RWSurfaceSectionField::ReadStep(const Handle(StepData_StepReaderData) & data,
+                                                   const Standard_Integer num, Handle(Interface_Check) & ach,
+                                                   const Handle(StepElement_SurfaceSectionField) & /*ent*/) const {
+    // Check number of parameters
+    if (!data->CheckNbParams(num, 0, ach, "surface_section_field")) return;
+
+    // Initialize entity
+    //  ent->Init();
 }
 
 //=======================================================================
-//function : ReadStep
-//purpose  : 
+// function : WriteStep
+// purpose  :
 //=======================================================================
 
-void RWStepElement_RWSurfaceSectionField::ReadStep (const Handle(StepData_StepReaderData)& data,
-                                                    const Standard_Integer num,
-                                                    Handle(Interface_Check)& ach,
-                                                    const Handle(StepElement_SurfaceSectionField) &/*ent*/) const
-{
-  // Check number of parameters
-  if ( ! data->CheckNbParams(num,0,ach,"surface_section_field") ) return;
-
-  // Initialize entity
-//  ent->Init();
-}
+void RWStepElement_RWSurfaceSectionField::WriteStep(StepData_StepWriter&,
+                                                    const Handle(StepElement_SurfaceSectionField) &) const {}
 
 //=======================================================================
-//function : WriteStep
-//purpose  : 
+// function : Share
+// purpose  :
 //=======================================================================
 
-void RWStepElement_RWSurfaceSectionField::WriteStep (StepData_StepWriter&,
-                                                     const Handle(StepElement_SurfaceSectionField)&) const
-{
-}
-
-//=======================================================================
-//function : Share
-//purpose  : 
-//=======================================================================
-
-void RWStepElement_RWSurfaceSectionField::Share (const Handle(StepElement_SurfaceSectionField)&,
-                                                 Interface_EntityIterator&) const
-{
-}
+void RWStepElement_RWSurfaceSectionField::Share(const Handle(StepElement_SurfaceSectionField) &,
+                                                Interface_EntityIterator&) const {}
