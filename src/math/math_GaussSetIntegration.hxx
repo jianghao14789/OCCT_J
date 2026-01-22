@@ -34,13 +34,10 @@ class math_FunctionSet;
 //! functions of M  variables variables between the
 //! parameter bounds Lower[a..b] and Upper[a..b].
 //! Warning: - The case M>1 is not implemented.
-class math_GaussSetIntegration
-{
+class math_GaussSetIntegration {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! The Gauss-Legendre integration with Order = points of
     //! integration for each unknown, is done on the function F
@@ -56,30 +53,13 @@ public:
     //! Prints information on the current state of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     math_Vector Val;
     Standard_Boolean Done;
-
-
 };
 
-
 #include <math_GaussSetIntegration.lxx>
-
-
-
-
 
 #endif // _math_GaussSetIntegration_HeaderFile

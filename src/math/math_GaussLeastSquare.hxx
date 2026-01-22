@@ -32,7 +32,6 @@ class Standard_DimensionError;
 class math_Matrix;
 
 
-
 //! This class implements the least square solution of a set of
 //! n linear equations of m unknowns (n >= m) using the gauss LU
 //! decomposition algorithm.

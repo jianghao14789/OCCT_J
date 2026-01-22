@@ -33,28 +33,21 @@ class StdFail_InfiniteSolutions;
 //! This class implements the calculation of all the real roots of a real
 //! polynomial of degree <= 4 using a direct method. Once found,
 //! the roots are polished using the Newton method.
-class math_DirectPolynomialRoots
-{
+class math_DirectPolynomialRoots {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! computes all the real roots of the polynomial
     //! Ax4 + Bx3 + Cx2 + Dx + E using a direct method.
     Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D, const Standard_Real E);
 
-
     //! computes all the real roots of the polynomial
     //! Ax3 + Bx2 + Cx + D using a direct method.
     Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D);
 
-
     //! computes all the real roots of the polynomial
     //! Ax2 + Bx + C using a direct method.
     Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B, const Standard_Real C);
-
 
     //! computes the real root of the polynomial Ax + B.
     Standard_EXPORT math_DirectPolynomialRoots(const Standard_Real A, const Standard_Real B);
@@ -80,12 +73,7 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
     Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D, const Standard_Real E);
 
     Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D);
@@ -94,26 +82,13 @@ protected:
 
     Standard_EXPORT void Solve(const Standard_Real A, const Standard_Real B);
 
-
-
-
 private:
-
-
-
     Standard_Boolean Done;
     Standard_Boolean InfiniteStatus;
     Standard_Integer NbSol;
     Standard_Real TheRoots[4];
-
-
 };
 
-
 #include <math_DirectPolynomialRoots.lxx>
-
-
-
-
 
 #endif // _math_DirectPolynomialRoots_HeaderFile

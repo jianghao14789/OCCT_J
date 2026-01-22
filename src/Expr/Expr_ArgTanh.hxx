@@ -33,13 +33,8 @@ class TCollection_AsciiString;
 class Expr_ArgTanh;
 DEFINE_STANDARD_HANDLE(Expr_ArgTanh, Expr_UnaryExpression)
 
-
-class Expr_ArgTanh : public Expr_UnaryExpression
-{
-
+class Expr_ArgTanh : public Expr_UnaryExpression {
 public:
-
-
     //! Creates the Argtanh of <exp>.
     Standard_EXPORT Expr_ArgTanh(const Handle(Expr_GeneralExpression)& exp);
 
@@ -69,27 +64,12 @@ public:
     //! returns a string representing <me> in a readable way.
     Standard_EXPORT TCollection_AsciiString String() const Standard_OVERRIDE;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(Expr_ArgTanh, Expr_UnaryExpression)
 
 protected:
 
-
-
-
 private:
 
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _Expr_ArgTanh_HeaderFile

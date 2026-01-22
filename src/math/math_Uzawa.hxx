@@ -31,7 +31,6 @@ class StdFail_NotDone;
 class Standard_ConstructionError;
 class math_Matrix;
 
-
 //! This class implements a system resolution C*X = B with
 //! an approach solution X0. There are no conditions on the
 //! number of equations. The algorithm used is the Uzawa
@@ -42,12 +41,9 @@ class math_Matrix;
 //! done and is similar to Gauss resolution with an optimisation
 //! because the matrix is a symmetric matrix.
 //! (The resolution is done with Crout algorithm)
-class math_Uzawa
-{
+class math_Uzawa {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Given an input matrix Cont, two input vectors Secont
     //! and StartingPoint, it solves Cont*X = Secont (only
@@ -108,22 +104,12 @@ public:
     //! Prints information on the current state of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
 
     //! Is used internally by the two constructors above.
     Standard_EXPORT void Perform(const math_Matrix& Cont, const math_Vector& Secont, const math_Vector& StartingPoint, const Standard_Integer Nci, const Standard_Integer Nce, const Standard_Real EpsLix = 1.0e-06, const Standard_Real EpsLic = 1.0e-06, const Standard_Integer NbIterations = 500);
 
-
-
-
 private:
-
-
-
     math_Vector Resul;
     math_Vector Erruza;
     math_Vector Errinit;
@@ -132,14 +118,8 @@ private:
     Standard_Integer NbIter;
     Standard_Boolean Done;
 
-
 };
 
-
 #include <math_Uzawa.lxx>
-
-
-
-
 
 #endif // _math_Uzawa_HeaderFile

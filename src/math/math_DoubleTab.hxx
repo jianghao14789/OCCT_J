@@ -26,14 +26,10 @@
 #include <Standard_Boolean.hxx>
 #include <Standard_Integer.hxx>
 
-
-
-class math_DoubleTab
-{
+// 用于表示一个 二维双精度浮点数（Standard_Real）数组
+class math_DoubleTab {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT math_DoubleTab(const Standard_Integer LowerRow, const Standard_Integer UpperRow, const Standard_Integer LowerCol, const Standard_Integer UpperCol);
 
@@ -61,20 +57,10 @@ public:
         Free();
     }
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
     Standard_EXPORT void Allocate();
-
 
     Standard_Address Addr;
     Standard_Real Buf[16];
@@ -83,15 +69,9 @@ private:
     Standard_Integer UppR;
     Standard_Integer LowC;
     Standard_Integer UppC;
-
-
 };
 
 
 #include <math_DoubleTab.lxx>
-
-
-
-
 
 #endif // _math_DoubleTab_HeaderFile

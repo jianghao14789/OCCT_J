@@ -52,10 +52,8 @@
 //!    V3 = V1;    // --> will raise DimensionError;
 //!    V1.Add(V3)  // --> will raise DimensionError;
 //! @endcode
-class math_IntegerVector
-{
+class math_IntegerVector {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! constructs an IntegerVector in the range [Lower..Upper]
@@ -79,20 +77,17 @@ public:
     Standard_EXPORT math_IntegerVector(const math_IntegerVector& theOther);
 
     //! returns the length of an IntegerVector
-    inline Standard_Integer Length() const
-    {
+    inline Standard_Integer Length() const {
         return Array.Length();
     }
 
     //! returns the value of the Lower index of an IntegerVector.
-    inline Standard_Integer Lower() const
-    {
+    inline Standard_Integer Lower() const {
         return Array.Lower();
     }
 
     //! returns the value of the Upper index of an IntegerVector.
-    inline Standard_Integer Upper() const
-    {
+    inline Standard_Integer Upper() const {
         return Array.Upper();
     }
 
@@ -127,24 +122,21 @@ public:
     //! returns the product of an IntegerVector by an integer value.
     Standard_EXPORT void Multiply(const Standard_Integer theRight);
 
-    void operator *=(const Standard_Integer theRight)
-    {
+    void operator *=(const Standard_Integer theRight) {
         Multiply(theRight);
     }
 
     //! returns the product of an IntegerVector by an integer value.
     Standard_NODISCARD Standard_EXPORT math_IntegerVector Multiplied(const Standard_Integer theRight) const;
 
-    Standard_NODISCARD math_IntegerVector operator*(const Standard_Integer theRight) const
-    {
+    Standard_NODISCARD math_IntegerVector operator*(const Standard_Integer theRight) const {
         return Multiplied(theRight);
     }
 
     //! returns the product of a vector and a real value.
     Standard_NODISCARD Standard_EXPORT math_IntegerVector TMultiplied(const Standard_Integer theRight) const;
 
-    friend inline math_IntegerVector operator* (const Standard_Integer theLeft, const math_IntegerVector& theRight)
-    {
+    friend inline math_IntegerVector operator* (const Standard_Integer theLeft, const math_IntegerVector& theRight) {
         return theRight.Multiplied(theLeft);
     }
 
@@ -153,8 +145,7 @@ public:
     //! An exception is raised if the lengths are not equal.
     Standard_EXPORT void Add(const math_IntegerVector& theRight);
 
-    void operator +=(const math_IntegerVector& theRight)
-    {
+    void operator +=(const math_IntegerVector& theRight) {
         Add(theRight);
     }
 
@@ -163,8 +154,7 @@ public:
     //! An exception is raised if the lengths are not equal.
     Standard_NODISCARD Standard_EXPORT math_IntegerVector Added(const math_IntegerVector& theRight) const;
 
-    Standard_NODISCARD math_IntegerVector operator+(const math_IntegerVector& theRight) const
-    {
+    Standard_NODISCARD math_IntegerVector operator+(const math_IntegerVector& theRight) const {
         return Added(theRight);
     }
 
@@ -178,24 +168,20 @@ public:
     Standard_EXPORT void Subtract(const math_IntegerVector& theLeft, const math_IntegerVector& theRight);
 
     //! accesses the value of index theNum of an IntegerVector.
-    const Standard_Integer& Value(const Standard_Integer theNum) const
-    {
+    const Standard_Integer& Value(const Standard_Integer theNum) const {
         return Array(theNum);
     }
 
     //! accesses (in read or write mode) the value of index theNum of an IntegerVector.
-    inline Standard_Integer& Value(const Standard_Integer theNum)
-    {
+    inline Standard_Integer& Value(const Standard_Integer theNum) {
         return Array(theNum);
     }
 
-    const Standard_Integer& operator()(const Standard_Integer theNum) const
-    {
+    const Standard_Integer& operator()(const Standard_Integer theNum) const {
         return Value(theNum);
     }
 
-    Standard_Integer& operator()(const Standard_Integer theNum)
-    {
+    Standard_Integer& operator()(const Standard_Integer theNum) {
         return Value(theNum);
     }
 
@@ -203,8 +189,7 @@ public:
     //! An exception is raised if the Lengths are different.
     Standard_EXPORT math_IntegerVector& Initialized(const math_IntegerVector& theOther);
 
-    math_IntegerVector& operator=(const math_IntegerVector& theOther)
-    {
+    math_IntegerVector& operator=(const math_IntegerVector& theOther) {
         return Initialized(theOther);
     }
 
@@ -212,16 +197,14 @@ public:
     //! An exception is raised if the lengths are not equal.
     Standard_NODISCARD Standard_EXPORT Standard_Integer Multiplied(const math_IntegerVector& theRight) const;
 
-    Standard_NODISCARD Standard_Integer operator*(const math_IntegerVector& theRight) const
-    {
+    Standard_NODISCARD Standard_Integer operator*(const math_IntegerVector& theRight) const {
         return Multiplied(theRight);
     }
 
     //! returns the opposite of an IntegerVector.
     Standard_EXPORT math_IntegerVector Opposite();
 
-    math_IntegerVector operator-()
-    {
+    math_IntegerVector operator-() {
         return Opposite();
     }
 
@@ -229,8 +212,7 @@ public:
     //! An exception is raised if the IntegerVectors have not the same length.
     Standard_EXPORT void Subtract(const math_IntegerVector& theRight);
 
-    void operator-=(const math_IntegerVector& theRight)
-    {
+    void operator-=(const math_IntegerVector& theRight) {
         Subtract(theRight);
     }
 
@@ -238,8 +220,7 @@ public:
     //! An exception is raised if the IntegerVectors have not the same length.
     Standard_NODISCARD Standard_EXPORT math_IntegerVector Subtracted(const math_IntegerVector& theRight) const;
 
-    Standard_NODISCARD math_IntegerVector operator-(const math_IntegerVector& theRight) const
-    {
+    Standard_NODISCARD math_IntegerVector operator-(const math_IntegerVector& theRight) const {
         return Subtracted(theRight);
     }
 
@@ -250,22 +231,18 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& theO) const;
 
-    friend inline Standard_OStream& operator<<(Standard_OStream& theO, const math_IntegerVector& theVec)
-    {
+    friend inline Standard_OStream& operator<<(Standard_OStream& theO, const math_IntegerVector& theVec) {
         theVec.Dump(theO);
         return theO;
     }
 
 protected:
-
     //! is used internally to set the Lower value of the IntegerVector.
     void SetFirst(const Standard_Integer theFirst);
 
 private:
-
     NCollection_LocalArray<Standard_Integer, 512> myLocArray;
     NCollection_Array1<Standard_Integer> Array;
-
 };
 
 #endif

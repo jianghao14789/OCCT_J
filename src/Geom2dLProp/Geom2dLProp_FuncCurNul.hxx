@@ -1,4 +1,4 @@
-// Created on: 1994-09-02
+﻿// Created on: 1994-09-02
 // Created by: Yves FRICAUD
 // Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -28,47 +28,28 @@ class Geom2d_Curve;
 
 
 //! Function used to find the inflections in 2d.
-class Geom2dLProp_FuncCurNul  : public math_FunctionWithDerivative
-{
+class Geom2dLProp_FuncCurNul : public math_FunctionWithDerivative {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT Geom2dLProp_FuncCurNul(const Handle(Geom2d_Curve)& C);
-  
-  //! Returns the value for the variable <X>.
-  Standard_EXPORT Standard_Boolean Value (const Standard_Real X, Standard_Real& F);
-  
-  //! Returns the derivative for the variable <X>
-  Standard_EXPORT Standard_Boolean Derivative (const Standard_Real X, Standard_Real& D);
-  
-  //! Returns the value of the function and the derivative
-  //! for the variable <X>.
-  Standard_EXPORT Standard_Boolean Values (const Standard_Real X, Standard_Real& F, Standard_Real& D);
+    Standard_EXPORT Geom2dLProp_FuncCurNul(const Handle(Geom2d_Curve)& C);
 
+    //! Returns the value for the variable <X>.
+    Standard_EXPORT Standard_Boolean Value(const Standard_Real X, Standard_Real& F);
 
+    //! Returns the derivative for the variable <X>
+    Standard_EXPORT Standard_Boolean Derivative(const Standard_Real X, Standard_Real& D);
 
+    //! Returns the value of the function and the derivative
+    //! for the variable <X>.
+    Standard_EXPORT Standard_Boolean Values(const Standard_Real X, Standard_Real& F, Standard_Real& D);
 
 protected:
 
-
-
-
-
 private:
-
-
-
-  Handle(Geom2d_Curve) theCurve;
-
+    Handle(Geom2d_Curve) theCurve;
 
 };
-
-
-
-
-
-
 
 #endif // _Geom2dLProp_FuncCurNul_HeaderFile

@@ -1,4 +1,4 @@
-// Created on: 1997-02-07
+﻿// Created on: 1997-02-07
 // Created by: Laurent BOURESCHE
 // Copyright (c) 1997-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -27,13 +27,15 @@
 
 const gp_Pnt& Blend_SurfRstFunction::Pnt1() const
 {
-  return PointOnS();
+    return PointOnS();
 }
 
 const gp_Pnt& Blend_SurfRstFunction::Pnt2() const
 {
-  return PointOnRst();
+    return PointOnRst();
 }
 
 Standard_Real Blend_SurfRstFunction::GetMinimalDistance() const
-{  throw Standard_NotImplemented("Blend_SurfRstFunction::GetMinimalDistance");}
+{
+    throw Standard_NotImplemented("Blend_SurfRstFunction::GetMinimalDistance");
+}

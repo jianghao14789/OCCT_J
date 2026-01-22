@@ -42,11 +42,9 @@ public:
     Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
 };
 
-
 math_MyFunctionSetWithDerivatives::math_MyFunctionSetWithDerivatives
 (math_FunctionWithDerivative& F) {
     Ff = &F;
-
 }
 
 Standard_Integer math_MyFunctionSetWithDerivatives::NbVariables() const {
@@ -64,8 +62,6 @@ Standard_Boolean math_MyFunctionSetWithDerivatives::Derivatives(const math_Vecto
 Standard_Boolean math_MyFunctionSetWithDerivatives::Values(const math_Vector& X, math_Vector& F, math_Matrix& D) {
     return Ff->Values(X(1), F(1), D(1, 1));
 }
-
-
 
 
 math_FunctionRoot::math_FunctionRoot(math_FunctionWithDerivative& F,

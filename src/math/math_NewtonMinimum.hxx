@@ -33,15 +33,9 @@ class StdFail_NotDone;
 class Standard_DimensionError;
 class math_MultipleVarFunctionWithHessian;
 
-
-
-class math_NewtonMinimum
-{
+class math_NewtonMinimum {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! The tolerance required on the solution is given by Tolerance.
     //! Iteration are  stopped if (!WithSingularity) and H(F(Xi)) is not definite
@@ -59,7 +53,6 @@ public:
 
     //! Destructor
     Standard_EXPORT virtual ~math_NewtonMinimum();
-
 
     //! This method is called at the end of each iteration to check the convergence:
     //! || Xi+1 - Xi || < Tolerance or || F(Xi+1) - F(Xi)|| < Tolerance * || F(Xi) ||
@@ -109,18 +102,12 @@ public:
     //! The exception NotDone is raised if an error has occurred.
     math_Status GetStatus() const;
 
-
     //! Prints on the stream o information on the current state
     //! of the object.
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
 
     math_Status TheStatus;
     math_Vector TheLocation;
@@ -139,22 +126,13 @@ protected:
     math_Vector myLeft;
     math_Vector myRight;
 
-
 private:
-
-
 
     Standard_Boolean Done;
     Standard_Integer Itermax;
 
-
 };
 
-
 #include <math_NewtonMinimum.lxx>
-
-
-
-
 
 #endif // _math_NewtonMinimum_HeaderFile

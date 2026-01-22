@@ -1,4 +1,4 @@
-// Copyright (c) 2020 OPEN CASCADE SAS
+﻿// Copyright (c) 2020 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -29,59 +29,58 @@
 
 //! This class implements function which calculate square Eucluidean distance
 //! between point on surface and nearest point on Conic.
-class Extrema_GlobOptFuncCQuadric : public math_MultipleVarFunction
-{
+class Extrema_GlobOptFuncCQuadric : public math_MultipleVarFunction {
 public:
 
-  //! Curve and surface should exist during all the lifetime of Extrema_GlobOptFuncCQuadric.
-  Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve *C);
+    //! Curve and surface should exist during all the lifetime of Extrema_GlobOptFuncCQuadric.
+    Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C);
 
-  Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve *C, 
-                                               const Standard_Real   theTf, 
-                                               const Standard_Real   theTl);
+    Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C,
+        const Standard_Real   theTf,
+        const Standard_Real   theTl);
 
-  Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve   *C,
-                                               const Adaptor3d_Surface *S);
+    Standard_EXPORT  Extrema_GlobOptFuncCQuadric(const Adaptor3d_Curve* C,
+        const Adaptor3d_Surface* S);
 
-  Standard_EXPORT void LoadQuad(const Adaptor3d_Surface *S, 
-                                const Standard_Real     theUf, 
-                                const Standard_Real     theUl,
-                                const Standard_Real     theVf, 
-                                const Standard_Real     theVl);
+    Standard_EXPORT void LoadQuad(const Adaptor3d_Surface* S,
+        const Standard_Real     theUf,
+        const Standard_Real     theUl,
+        const Standard_Real     theVf,
+        const Standard_Real     theVl);
 
-  Standard_EXPORT virtual Standard_Integer NbVariables() const;
+    Standard_EXPORT virtual Standard_Integer NbVariables() const;
 
-  Standard_EXPORT virtual Standard_Boolean Value(const math_Vector &theX,
-                                                 Standard_Real     &theF);
-  //! Parameters of quadric for point on curve defined by theCT
-  Standard_EXPORT void QuadricParameters(const math_Vector& theCT,
-                                               math_Vector& theUV) const;
+    Standard_EXPORT virtual Standard_Boolean Value(const math_Vector& theX,
+        Standard_Real& theF);
+    //! Parameters of quadric for point on curve defined by theCT
+    Standard_EXPORT void QuadricParameters(const math_Vector& theCT,
+        math_Vector& theUV) const;
 
 private:
 
-  Standard_Boolean checkInputData(const math_Vector   &X,
-                                  Standard_Real       &ct);
+    Standard_Boolean checkInputData(const math_Vector& X,
+        Standard_Real& ct);
 
-  void value(Standard_Real ct,
-             Standard_Real &F);
+    void value(Standard_Real ct,
+        Standard_Real& F);
 
 
-  const Adaptor3d_Curve   *myC;
-  const Adaptor3d_Surface *myS;
-  GeomAbs_SurfaceType mySType;
-  gp_Pln myPln;
-  gp_Cone myCone;
-  gp_Cylinder myCylinder;
-  gp_Sphere mySphere;
-  gp_Torus myTorus;
-  gp_Pnt myPTrim[4];
-  // Boundaries
-  Standard_Real myTf;
-  Standard_Real myTl;
-  Standard_Real myUf;
-  Standard_Real myUl;
-  Standard_Real myVf;
-  Standard_Real myVl;
+    const Adaptor3d_Curve* myC;
+    const Adaptor3d_Surface* myS;
+    GeomAbs_SurfaceType mySType;
+    gp_Pln myPln;
+    gp_Cone myCone;
+    gp_Cylinder myCylinder;
+    gp_Sphere mySphere;
+    gp_Torus myTorus;
+    gp_Pnt myPTrim[4];
+    // Boundaries
+    Standard_Real myTf;
+    Standard_Real myTl;
+    Standard_Real myUf;
+    Standard_Real myUl;
+    Standard_Real myVf;
+    Standard_Real myVl;
 
 };
 

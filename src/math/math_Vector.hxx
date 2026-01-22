@@ -55,10 +55,8 @@ class math_Matrix;
 //!    V3 = V1;    // --> will raise DimensionError;
 //!    V1.Add(V3)  // --> will raise DimensionError;
 //! @endcode
-class math_Vector
-{
+class math_Vector {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Constructs a non-initialized vector in the range [theLower..theUpper]
@@ -268,32 +266,28 @@ public:
     //! An exception is raised if the Lengths are different.
     Standard_EXPORT math_Vector& Initialized(const math_Vector& theOther);
 
-    math_Vector& operator=(const math_Vector& theOther)
-    {
+    math_Vector& operator=(const math_Vector& theOther) {
         return Initialized(theOther);
     }
 
     //! returns the inner product of 2 vectors.
     //! An exception is raised if the lengths are not equal.
     Standard_NODISCARD Standard_EXPORT Standard_Real Multiplied(const math_Vector& theRight) const;
-    Standard_NODISCARD Standard_Real operator*(const math_Vector& theRight) const
-    {
+    Standard_NODISCARD Standard_Real operator*(const math_Vector& theRight) const {
         return Multiplied(theRight);
     }
 
     //! returns the product of a vector by a matrix.
     Standard_NODISCARD Standard_EXPORT math_Vector Multiplied(const math_Matrix& theRight) const;
 
-    Standard_NODISCARD math_Vector operator*(const math_Matrix& theRight) const
-    {
+    Standard_NODISCARD math_Vector operator*(const math_Matrix& theRight) const {
         return Multiplied(theRight);
     }
 
     //! returns the opposite of a vector.
     Standard_EXPORT math_Vector Opposite();
 
-    math_Vector operator-()
-    {
+    math_Vector operator-() {
         return Opposite();
     }
 
@@ -301,8 +295,7 @@ public:
     //! An exception is raised if the vectors have not the same length.
     Standard_EXPORT void Subtract(const math_Vector& theRight);
 
-    void operator-=(const math_Vector& theRight)
-    {
+    void operator-=(const math_Vector& theRight) {
         Subtract(theRight);
     }
 
@@ -310,8 +303,7 @@ public:
     //! An exception is raised if the vectors have not the same length.
     Standard_NODISCARD Standard_EXPORT math_Vector Subtracted(const math_Vector& theRight) const;
 
-    Standard_NODISCARD math_Vector operator-(const math_Vector& theRight) const
-    {
+    Standard_NODISCARD math_Vector operator-(const math_Vector& theRight) const {
         return Subtracted(theRight);
     }
 
@@ -323,8 +315,7 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& theO) const;
 
-    friend inline Standard_OStream& operator<<(Standard_OStream& theO, const math_Vector& theVec)
-    {
+    friend inline Standard_OStream& operator<<(Standard_OStream& theO, const math_Vector& theVec) {
         theVec.Dump(theO);
         return theO;
     }
@@ -332,12 +323,10 @@ public:
     friend class math_Matrix;
 
 protected:
-
     //! Is used internally to set the "theLower" value of the vector.
     void SetLower(const Standard_Integer theLower);
 
 private:
-
     NCollection_LocalArray<Standard_Real, 512> myLocArray;
     NCollection_Array1<Standard_Real> Array;
 

@@ -1,4 +1,4 @@
-// Created on: 1996-06-05
+﻿// Created on: 1996-06-05
 // Created by: Stagiaire Xuan Trang PHAMPHU
 // Copyright (c) 1996-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -37,10 +37,10 @@
 //=======================================================================
 
 BlendFunc_Chamfer::BlendFunc_Chamfer(const Handle(Adaptor3d_Surface)& S1,
-                                     const Handle(Adaptor3d_Surface)& S2,
-                                     const Handle(Adaptor3d_Curve)&   CG)
-  : BlendFunc_GenChamfer(S1,S2,CG),
-    corde1(S1,CG),corde2(S2,CG)
+    const Handle(Adaptor3d_Surface)& S2,
+    const Handle(Adaptor3d_Curve)& CG)
+    : BlendFunc_GenChamfer(S1, S2, CG),
+    corde1(S1, CG), corde2(S2, CG)
 {
 }
 
@@ -50,11 +50,11 @@ BlendFunc_Chamfer::BlendFunc_Chamfer(const Handle(Adaptor3d_Surface)& S1,
 //=======================================================================
 
 void BlendFunc_Chamfer::Set(const Standard_Real Dist1, const Standard_Real Dist2,
-			    const Standard_Integer Choix)
+    const Standard_Integer Choix)
 {
-  corde1.SetDist(Dist1);
-  corde2.SetDist(Dist2);
-  choix = Choix;
+    corde1.SetDist(Dist1);
+    corde2.SetDist(Dist2);
+    choix = Choix;
 }
 
 //=======================================================================
@@ -64,8 +64,8 @@ void BlendFunc_Chamfer::Set(const Standard_Real Dist1, const Standard_Real Dist2
 
 void BlendFunc_Chamfer::Set(const Standard_Real Param)
 {
-  corde1.SetParam(Param);
-  corde2.SetParam(Param);
+    corde1.SetParam(Param);
+    corde2.SetParam(Param);
 }
 
 //=======================================================================
@@ -75,20 +75,20 @@ void BlendFunc_Chamfer::Set(const Standard_Real Param)
 
 Standard_Boolean BlendFunc_Chamfer::IsSolution(const math_Vector& Sol, const Standard_Real Tol)
 {
-  math_Vector Sol1(1,2), Sol2(1,2);
+    math_Vector Sol1(1, 2), Sol2(1, 2);
 
-  Sol1(1) = Sol(1);
-  Sol1(2) = Sol(2);
-  Sol2(1) = Sol(3); 
-  Sol2(2) = Sol(4); 
-  
-  Standard_Boolean issol = corde1.IsSolution(Sol1,Tol);
-  issol = issol && corde2.IsSolution(Sol2,Tol);
-  tol = Tol;
-  if (issol) 
-    distmin = Min (distmin, corde1.PointOnS().Distance(corde2.PointOnS()));
+    Sol1(1) = Sol(1);
+    Sol1(2) = Sol(2);
+    Sol2(1) = Sol(3);
+    Sol2(2) = Sol(4);
 
-  return issol;
+    Standard_Boolean issol = corde1.IsSolution(Sol1, Tol);
+    issol = issol && corde2.IsSolution(Sol2, Tol);
+    tol = Tol;
+    if (issol)
+        distmin = Min(distmin, corde1.PointOnS().Distance(corde2.PointOnS()));
+
+    return issol;
 }
 
 //=======================================================================
@@ -98,17 +98,17 @@ Standard_Boolean BlendFunc_Chamfer::IsSolution(const math_Vector& Sol, const Sta
 
 Standard_Boolean BlendFunc_Chamfer::Value(const math_Vector& X, math_Vector& F)
 {
-  math_Vector x(1,2), f(1,2);
+    math_Vector x(1, 2), f(1, 2);
 
-  x(1) = X(1); x(2) = X(2);
-  corde1.Value(x,f);
-  F(1) = f(1); F(2) = f(2);
+    x(1) = X(1); x(2) = X(2);
+    corde1.Value(x, f);
+    F(1) = f(1); F(2) = f(2);
 
-  x(1) = X(3); x(2) = X(4);
-  corde2.Value(x,f);
-  F(3) = f(1); F(4) = f(2);
+    x(1) = X(3); x(2) = X(4);
+    corde2.Value(x, f);
+    F(3) = f(1); F(4) = f(2);
 
-  return Standard_True;
+    return Standard_True;
 }
 
 
@@ -119,29 +119,29 @@ Standard_Boolean BlendFunc_Chamfer::Value(const math_Vector& X, math_Vector& F)
 
 Standard_Boolean BlendFunc_Chamfer::Derivatives(const math_Vector& X, math_Matrix& D)
 {
-  Standard_Integer i,j;
-  math_Vector x(1,2);
-  math_Matrix d(1,2,1,2);
+    Standard_Integer i, j;
+    math_Vector x(1, 2);
+    math_Matrix d(1, 2, 1, 2);
 
-  x(1) = X(1); x(2) = X(2);
-  corde1.Derivatives(x,d);
-  for( i=1; i<3; i++ ){
-    for( j=1; j<3; j++ ){
-      D(i,j) = d(i,j);
-      D(i,j+2) = 0.;
+    x(1) = X(1); x(2) = X(2);
+    corde1.Derivatives(x, d);
+    for (i = 1; i < 3; i++) {
+        for (j = 1; j < 3; j++) {
+            D(i, j) = d(i, j);
+            D(i, j + 2) = 0.;
+        }
     }
-  }   
 
-  x(1) = X(3); x(2) = X(4);
-  corde2.Derivatives(x,d);
-  for( i=1; i<3; i++ ){
-    for( j=1; j<3; j++ ){
-      D(i+2,j+2) = d(i,j);
-      D(i+2,j) = 0.;
+    x(1) = X(3); x(2) = X(4);
+    corde2.Derivatives(x, d);
+    for (i = 1; i < 3; i++) {
+        for (j = 1; j < 3; j++) {
+            D(i + 2, j + 2) = d(i, j);
+            D(i + 2, j) = 0.;
+        }
     }
-  }   
 
-  return Standard_True;
+    return Standard_True;
 }
 
 //=======================================================================
@@ -149,19 +149,19 @@ Standard_Boolean BlendFunc_Chamfer::Derivatives(const math_Vector& X, math_Matri
 //purpose  : 
 //=======================================================================
 
-const gp_Pnt& BlendFunc_Chamfer::PointOnS1 () const
+const gp_Pnt& BlendFunc_Chamfer::PointOnS1() const
 {
-  return corde1.PointOnS();
+    return corde1.PointOnS();
 }
-  
+
 //=======================================================================
 //function : PointOnS2
 //purpose  : 
 //=======================================================================
 
-const gp_Pnt& BlendFunc_Chamfer::PointOnS2 () const
+const gp_Pnt& BlendFunc_Chamfer::PointOnS2() const
 {
-  return corde2.PointOnS();
+    return corde2.PointOnS();
 }
 
 
@@ -170,9 +170,9 @@ const gp_Pnt& BlendFunc_Chamfer::PointOnS2 () const
 //purpose  : 
 //=======================================================================
 
-Standard_Boolean BlendFunc_Chamfer::IsTangencyPoint () const
+Standard_Boolean BlendFunc_Chamfer::IsTangencyPoint() const
 {
-  return corde1.IsTangencyPoint() && corde2.IsTangencyPoint();
+    return corde1.IsTangencyPoint() && corde2.IsTangencyPoint();
 }
 
 //=======================================================================
@@ -180,9 +180,9 @@ Standard_Boolean BlendFunc_Chamfer::IsTangencyPoint () const
 //purpose  : 
 //=======================================================================
 
-const gp_Vec& BlendFunc_Chamfer::TangentOnS1 () const
+const gp_Vec& BlendFunc_Chamfer::TangentOnS1() const
 {
-  return corde1.TangentOnS();
+    return corde1.TangentOnS();
 }
 
 //=======================================================================
@@ -190,9 +190,9 @@ const gp_Vec& BlendFunc_Chamfer::TangentOnS1 () const
 //purpose  : 
 //=======================================================================
 
-const gp_Vec& BlendFunc_Chamfer::TangentOnS2 () const
+const gp_Vec& BlendFunc_Chamfer::TangentOnS2() const
 {
-  return corde2.TangentOnS();
+    return corde2.TangentOnS();
 }
 
 //=======================================================================
@@ -200,9 +200,9 @@ const gp_Vec& BlendFunc_Chamfer::TangentOnS2 () const
 //purpose  : 
 //=======================================================================
 
-const gp_Vec2d& BlendFunc_Chamfer::Tangent2dOnS1 () const
+const gp_Vec2d& BlendFunc_Chamfer::Tangent2dOnS1() const
 {
-  return corde1.Tangent2dOnS();
+    return corde1.Tangent2dOnS();
 }
 
 //=======================================================================
@@ -210,9 +210,9 @@ const gp_Vec2d& BlendFunc_Chamfer::Tangent2dOnS1 () const
 //purpose  : 
 //=======================================================================
 
-const gp_Vec2d& BlendFunc_Chamfer::Tangent2dOnS2 () const
+const gp_Vec2d& BlendFunc_Chamfer::Tangent2dOnS2() const
 {
-  return corde2.Tangent2dOnS();
+    return corde2.Tangent2dOnS();
 }
 
 //=======================================================================
@@ -222,51 +222,51 @@ const gp_Vec2d& BlendFunc_Chamfer::Tangent2dOnS2 () const
 //=======================================================================
 
 void BlendFunc_Chamfer::Tangent(const Standard_Real U1,
-				const Standard_Real V1,
-				const Standard_Real U2,
-				const Standard_Real V2,
-				gp_Vec& TgF,
-				gp_Vec& TgL,
-				gp_Vec& NmF,
-				gp_Vec& NmL) const
+    const Standard_Real V1,
+    const Standard_Real U2,
+    const Standard_Real V2,
+    gp_Vec& TgF,
+    gp_Vec& TgL,
+    gp_Vec& NmF,
+    gp_Vec& NmL) const
 {
-  gp_Pnt pt1,pt2,ptgui;
-  gp_Vec d1u1,d1v1,d1u2,d1v2;
-  gp_Vec nplan;
-  Standard_Boolean revF = Standard_False;
-  Standard_Boolean revL = Standard_False;
+    gp_Pnt pt1, pt2, ptgui;
+    gp_Vec d1u1, d1v1, d1u2, d1v2;
+    gp_Vec nplan;
+    Standard_Boolean revF = Standard_False;
+    Standard_Boolean revL = Standard_False;
 
-  ptgui = corde1.PointOnGuide();
-  nplan = corde1.NPlan();
-  surf1->D1(U1,V1,pt1,d1u1,d1v1);
-  NmF = d1u1.Crossed(d1v1);
+    ptgui = corde1.PointOnGuide();
+    nplan = corde1.NPlan();
+    surf1->D1(U1, V1, pt1, d1u1, d1v1);
+    NmF = d1u1.Crossed(d1v1);
 
-  surf2->D1(U2,V2,pt2,d1u2,d1v2);
-  NmL = d1u2.Crossed(d1v2);
+    surf2->D1(U2, V2, pt2, d1u2, d1v2);
+    NmL = d1u2.Crossed(d1v2);
 
-  TgF = (nplan.Crossed(NmF)).Normalized();
-  TgL = (nplan.Crossed(NmL)).Normalized();
+    TgF = (nplan.Crossed(NmF)).Normalized();
+    TgL = (nplan.Crossed(NmL)).Normalized();
 
-  if( (choix == 2)||(choix == 5) ){
-    revF = Standard_True;
-    revL = Standard_True;
-  }
-  if( (choix == 4)||(choix == 7) )
-    revL = Standard_True;
-  if( (choix == 3)||(choix == 8) )
-    revF = Standard_True;
+    if ((choix == 2) || (choix == 5)) {
+        revF = Standard_True;
+        revL = Standard_True;
+    }
+    if ((choix == 4) || (choix == 7))
+        revL = Standard_True;
+    if ((choix == 3) || (choix == 8))
+        revF = Standard_True;
 
-  if( revF )
-    TgF.Reverse();
-  if( revL )
-    TgL.Reverse();
+    if (revF)
+        TgF.Reverse();
+    if (revL)
+        TgL.Reverse();
 }
 
 //=======================================================================
 //function : GetSectionSize
 //purpose  : Non implementee (non necessaire car non rationel)
 //=======================================================================
-Standard_Real BlendFunc_Chamfer::GetSectionSize() const 
+Standard_Real BlendFunc_Chamfer::GetSectionSize() const
 {
-  throw Standard_NotImplemented("BlendFunc_Chamfer::GetSectionSize()");
+    throw Standard_NotImplemented("BlendFunc_Chamfer::GetSectionSize()");
 }

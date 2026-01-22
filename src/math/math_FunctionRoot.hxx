@@ -28,8 +28,6 @@
 class StdFail_NotDone;
 class math_FunctionWithDerivative;
 
-
-
 //! This class implements the computation of a root of a function of
 //! a single variable which is near an initial guess using a minimization
 //! algorithm.Knowledge of the derivative is required. The

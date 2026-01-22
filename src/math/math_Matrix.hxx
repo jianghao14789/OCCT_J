@@ -72,12 +72,9 @@
 //! math_Matrix A (tab1[0][0], 1, 10, 1, 20);
 //! math_Matrix B (tab2[0],    1, 10, 1, 20);
 //! @endcode
-class math_Matrix
-{
+class math_Matrix {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Constructs a non-initialized  matrix of range [LowerRow..UpperRow,
     //! LowerCol..UpperCol]
@@ -170,16 +167,16 @@ public:
     //! -   the number of columns of matrix Right is not equal to
     //! the number of columns of this matrix.
     Standard_EXPORT void Multiply(const Standard_Real Right);
-    void operator*= (const Standard_Real Right)
-    {
+
+    void operator*= (const Standard_Real Right) {
         Multiply(Right);
     }
 
     //! multiplies all the elements of a matrix by the
     //! value <Right>.
     Standard_NODISCARD Standard_EXPORT math_Matrix Multiplied(const Standard_Real Right) const;
-    Standard_NODISCARD math_Matrix operator* (const Standard_Real Right) const
-    {
+
+    Standard_NODISCARD math_Matrix operator* (const Standard_Real Right) const {
         return Multiplied(Right);
     }
 
@@ -207,16 +204,15 @@ public:
     //! divides all the elements of a matrix by the value <Right>.
     //! An exception is raised if <Right> = 0.
     Standard_EXPORT void Divide(const Standard_Real Right);
-    void operator/= (const Standard_Real Right)
-    {
+    void operator/= (const Standard_Real Right) {
         Divide(Right);
     }
 
     //! divides all the elements of a matrix by the value <Right>.
     //! An exception is raised if <Right> = 0.
     Standard_NODISCARD Standard_EXPORT math_Matrix Divided(const Standard_Real Right) const;
-    Standard_NODISCARD math_Matrix operator/ (const Standard_Real Right) const
-    {
+
+    Standard_NODISCARD math_Matrix operator/ (const Standard_Real Right) const {
         return Divided(Right);
     }
 
@@ -227,16 +223,16 @@ public:
     //! preferable to use operator += or the function Add
     //! whenever possible.
     Standard_EXPORT void Add(const math_Matrix& Right);
-    void operator+= (const math_Matrix& Right)
-    {
+
+    void operator+= (const math_Matrix& Right) {
         Add(Right);
     }
 
     //! adds the matrix <Right> to a matrix.
     //! An exception is raised if the dimensions are different.
     Standard_NODISCARD Standard_EXPORT math_Matrix Added(const math_Matrix& Right) const;
-    Standard_NODISCARD math_Matrix operator+ (const math_Matrix& Right) const
-    {
+
+    Standard_NODISCARD math_Matrix operator+ (const math_Matrix& Right) const {
         return Added(Right);
     }
 
@@ -251,16 +247,16 @@ public:
     //! is preferable to use operator -= or the function
     //! Subtract whenever possible.
     Standard_EXPORT void Subtract(const math_Matrix& Right);
-    void operator-= (const math_Matrix& Right)
-    {
+
+    void operator-= (const math_Matrix& Right) {
         Subtract(Right);
     }
 
     //! Returns the result of the subtraction of <Right> from <me>.
     //! An exception is raised if the dimensions are different.
     Standard_NODISCARD Standard_EXPORT math_Matrix Subtracted(const math_Matrix& Right) const;
-    Standard_NODISCARD math_Matrix operator- (const math_Matrix& Right) const
-    {
+
+    Standard_NODISCARD math_Matrix operator- (const math_Matrix& Right) const {
         return Subtracted(Right);
     }
 
@@ -347,48 +343,48 @@ public:
     //! An exception is raised if <Row> and <Col> are not
     //! in the correct range.
     Standard_Real& Value(const Standard_Integer Row, const Standard_Integer Col) const;
-    Standard_Real& operator() (const Standard_Integer Row, const Standard_Integer Col) const
-    {
+
+    Standard_Real& operator() (const Standard_Integer Row, const Standard_Integer Col) const {
         return Value(Row, Col);
     }
 
     //! Matrixes are copied through assignment.
     //! An exception is raised if the dimensions are different.
     Standard_EXPORT math_Matrix& Initialized(const math_Matrix& Other);
-    math_Matrix& operator= (const math_Matrix& Other)
-    {
+
+    math_Matrix& operator= (const math_Matrix& Other) {
         return Initialized(Other);
     }
 
     //! Returns the product of 2 matrices.
     //! An exception is raised if the dimensions are different.
     Standard_EXPORT void Multiply(const math_Matrix& Right);
-    void operator*= (const math_Matrix& Right)
-    {
+
+    void operator*= (const math_Matrix& Right) {
         Multiply(Right);
     }
 
     //! Returns the product of 2 matrices.
     //! An exception is raised if the dimensions are different.
     Standard_NODISCARD Standard_EXPORT math_Matrix Multiplied(const math_Matrix& Right) const;
-    Standard_NODISCARD math_Matrix operator* (const math_Matrix& Right) const
-    {
+
+    Standard_NODISCARD math_Matrix operator* (const math_Matrix& Right) const {
         return Multiplied(Right);
     }
 
     //! Returns the product of a matrix by a vector.
     //! An exception is raised if the dimensions are different.
     Standard_NODISCARD Standard_EXPORT math_Vector Multiplied(const math_Vector& Right) const;
-    Standard_NODISCARD math_Vector operator* (const math_Vector& Right) const
-    {
+
+    Standard_NODISCARD math_Vector operator* (const math_Vector& Right) const {
         return Multiplied(Right);
     }
 
     //! Returns the opposite of a matrix.
     //! An exception is raised if the dimensions are different.
     Standard_EXPORT math_Matrix Opposite();
-    math_Matrix operator-()
-    {
+
+    math_Matrix operator-() {
         return Opposite();
     }
 
@@ -396,12 +392,9 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
     friend class math_Vector;
 
-
 protected:
-
 
     //! The new lower row of the matrix is set to <LowerRow>
     Standard_EXPORT void SetLowerRow(const Standard_Integer LowerRow);
@@ -415,27 +408,14 @@ protected:
     //! of range <LowerCol>.
     void SetLower(const Standard_Integer LowerRow, const Standard_Integer LowerCol);
 
-
-
-
 private:
-
-
-
     Standard_Integer LowerRowIndex;
     Standard_Integer UpperRowIndex;
     Standard_Integer LowerColIndex;
     Standard_Integer UpperColIndex;
     math_DoubleTab Array;
-
-
 };
 
-
 #include <math_Matrix.lxx>
-
-
-
-
 
 #endif // _math_Matrix_HeaderFile

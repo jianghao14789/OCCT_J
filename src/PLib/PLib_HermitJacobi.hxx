@@ -64,13 +64,8 @@ DEFINE_STANDARD_HANDLE(PLib_HermitJacobi, PLib_Base)
 //! @code
 //! Q(t) = c2*iordre+2  J0(t) + ...+ cDegree JDegree-2*iordre-2
 //! @endcode
-class PLib_HermitJacobi : public PLib_Base
-{
-
+class PLib_HermitJacobi : public PLib_Base {
 public:
-
-
-
     //! Initialize the polynomial class
     //! Degree has to be <= 30
     //! ConstraintOrder has to be GeomAbs_C0
@@ -78,12 +73,10 @@ public:
     //! GeomAbs_C2
     Standard_EXPORT PLib_HermitJacobi(const Standard_Integer WorkDegree, const GeomAbs_Shape ConstraintOrder);
 
-
     //! This  method computes the  maximum  error on the polynomial
     //! W(t) Q(t) obtained by missing the coefficients of JacCoeff from
     //! NewDegree +1 to Degree
     Standard_EXPORT Standard_Real MaxError(const Standard_Integer Dimension, Standard_Real& HermJacCoeff, const Standard_Integer NewDegree) const;
-
 
     //! Compute NewDegree <= MaxDegree so that MaxError is lower
     //! than Tol.
@@ -93,7 +86,6 @@ public:
     Standard_EXPORT void ReduceDegree(const Standard_Integer Dimension, const Standard_Integer MaxDegree, const Standard_Real Tol, Standard_Real& HermJacCoeff, Standard_Integer& NewDegree, Standard_Real& MaxError) const Standard_OVERRIDE;
 
     Standard_EXPORT Standard_Real AverageError(const Standard_Integer Dimension, Standard_Real& HermJacCoeff, const Standard_Integer NewDegree) const;
-
 
     //! Convert the polynomial P(t) = H(t) + W(t) Q(t) in the canonical base.
     Standard_EXPORT void ToCoefficients(const Standard_Integer Dimension, const Standard_Integer Degree, const TColStd_Array1OfReal& HermJacCoeff, TColStd_Array1OfReal& Coefficients) const Standard_OVERRIDE;
@@ -119,19 +111,11 @@ public:
     //! returns NivConstr
     Standard_Integer NivConstr() const;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(PLib_HermitJacobi, PLib_Base)
 
 protected:
 
-
-
-
 private:
-
-
     //! Compute the values and the derivatives values of
     //! the basis functions in u
     Standard_EXPORT void D0123(const Standard_Integer NDerive, const Standard_Real U, TColStd_Array1OfReal& BasisValue, TColStd_Array1OfReal& BasisD1, TColStd_Array1OfReal& BasisD2, TColStd_Array1OfReal& BasisD3);
@@ -139,15 +123,8 @@ private:
     math_Matrix myH;
     Handle(PLib_JacobiPolynomial) myJacobi;
     TColStd_Array1OfReal myWCoeff;
-
-
 };
 
-
 #include <PLib_HermitJacobi.lxx>
-
-
-
-
 
 #endif // _PLib_HermitJacobi_HeaderFile

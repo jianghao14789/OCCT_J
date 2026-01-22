@@ -23,10 +23,8 @@
 #include <Standard_Real.hxx>
 
 //! Simple container storing two reals: value and weight
-class math_ValueAndWeight
-{
+class math_ValueAndWeight {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     math_ValueAndWeight() : myValue(0.), myWeight(0.) {}

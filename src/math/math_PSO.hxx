@@ -53,10 +53,8 @@ class math_PSOParticlesPool;
 //! Run local optimization from pso output point.
 //! Warning: In PSO used fixed seed in RNG, so results are reproducible.
 
-class math_PSO
-{
+class math_PSO {
 public:
-
     /**
     * Constructor.
     *

@@ -29,20 +29,23 @@
 class StdFail_NotDone;
 class math_FunctionWithDerivative;
 
-
-
 //! This class implements a combination of Newton-Raphson and bissection
 //! methods to find the root of the function between two bounds.
 //! Knowledge of the derivative is required.
-class math_BissecNewton
-{
+//!
+//! 此类实现牛顿-拉夫逊法和二分法的组合，
+//! 用于在两个边界之间找到函数的根。
+//! 需要函数导数信息。
+class math_BissecNewton {
 public:
 
     DEFINE_STANDARD_ALLOC;
 
-
     //! Constructor.
     //! @param theXTolerance - algorithm tolerance.
+    //!
+    //! 构造函数。
+    //! @param theXTolerance - 算法公差。
     Standard_EXPORT math_BissecNewton(const Standard_Real theXTolerance);
 
 
@@ -53,6 +56,13 @@ public:
     //! The solution is found when:
     //! abs(Xi - Xi-1) <= TolX and F(Xi) * F(Xi-1) <= 0
     //! The maximum number of iterations allowed is given by NbIterations.
+    //!
+    //! 结合使用牛顿-拉夫逊法和二分法，在函数 F 的
+    //! 边界 Bound1 和 Bound2 之间找到其根。
+    //! 对根所要求的公差由 TolX 给出。
+    //! 当满足以下条件时，找到解：
+    //! abs(Xi - Xi-1) <= TolX 且 F(Xi) * F(Xi-1) <= 0
+    //! 允许的最大迭代次数由 NbIterations 给出。
     Standard_EXPORT void Perform(math_FunctionWithDerivative& F, const Standard_Real Bound1, const Standard_Real Bound2, const Standard_Integer NbIterations = 100);
 
 
@@ -60,38 +70,51 @@ public:
     //! solution has been found.
     //! It can be redefined in a sub-class to implement a specific test to
     //! stop the iterations.
+    //!
+    //! 该方法在每次迭代结束时被调用，以检查是否已找到解。
+    //! 可以在子类中重定义此方法，以实现特定的停止迭代的测试。
     virtual Standard_Boolean IsSolutionReached(math_FunctionWithDerivative& theFunction);
 
     //! Tests is the root has been successfully found.
+    //!
+    //! 测试根是否已成功找到。
     Standard_Boolean IsDone() const;
 
     //! returns the value of the root.
     //! Exception NotDone is raised if the minimum was not found.
+    //!
+    //! 返回根的值。
+    //! 如果未找到最小值，则引发 NotDone 异常。
     Standard_Real Root() const;
 
     //! returns the value of the derivative at the root.
     //! Exception NotDone is raised if the minimum was not found.
+    //!
+    //! 返回根处的导数值。
+    //! 如果未找到最小值，则引发 NotDone 异常。
     Standard_Real Derivative() const;
 
     //! returns the value of the function at the root.
     //! Exception NotDone is raised if the minimum was not found.
+    //!
+    //! 返回根处的函数值。
+    //! 如果未找到最小值，则引发 NotDone 异常。
     Standard_Real Value() const;
 
     //! Prints on the stream o information on the current state
     //! of the object.
     //! Is used to redifine the operator <<.
+    //!
+    //! 在流 o 上打印有关对象当前状态的信息。
+    //! 用于重定义操作符 <<。
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
     //! Destructor
+    //!
+    //! 析构函数
     Standard_EXPORT virtual ~math_BissecNewton();
 
-
-
-
 protected:
-
-
-
     math_Status TheStatus;
     Standard_Real XTol;
     Standard_Real x;
@@ -99,21 +122,11 @@ protected:
     Standard_Real f;
     Standard_Real df;
 
-
 private:
-
-
-
     Standard_Boolean Done;
-
 
 };
 
-
 #include <math_BissecNewton.lxx>
-
-
-
-
 
 #endif // _math_BissecNewton_HeaderFile

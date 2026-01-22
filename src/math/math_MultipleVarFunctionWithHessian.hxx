@@ -28,14 +28,9 @@
 #include <Standard_Real.hxx>
 class math_Matrix;
 
-
-
-class math_MultipleVarFunctionWithHessian : public math_MultipleVarFunctionWithGradient
-{
+class math_MultipleVarFunctionWithHessian : public math_MultipleVarFunctionWithGradient {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! returns the number of variables of the function.
     Standard_EXPORT virtual Standard_Integer NbVariables() const = 0;
@@ -64,27 +59,10 @@ public:
     //! successfully, False otherwise.
     Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G, math_Matrix& H) = 0;
 
-
-
-
 protected:
-
-
-
-
 
 private:
 
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _math_MultipleVarFunctionWithHessian_HeaderFile

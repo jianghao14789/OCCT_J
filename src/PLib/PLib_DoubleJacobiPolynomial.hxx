@@ -27,14 +27,9 @@
 #include <TColStd_Array1OfReal.hxx>
 class PLib_JacobiPolynomial;
 
-
-
-class PLib_DoubleJacobiPolynomial
-{
+class PLib_DoubleJacobiPolynomial {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT PLib_DoubleJacobiPolynomial();
 
@@ -64,32 +59,15 @@ public:
     //! returns myTabMaxV;
     Handle(TColStd_HArray1OfReal) TabMaxV() const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     Handle(PLib_JacobiPolynomial) myJacPolU;
     Handle(PLib_JacobiPolynomial) myJacPolV;
     Handle(TColStd_HArray1OfReal) myTabMaxU;
     Handle(TColStd_HArray1OfReal) myTabMaxV;
-
-
 };
 
-
 #include <PLib_DoubleJacobiPolynomial.lxx>
-
-
-
-
 
 #endif // _PLib_DoubleJacobiPolynomial_HeaderFile

@@ -46,7 +46,6 @@ class math_Vector;
 //! Su and Sv are first derivatives of the surface, * symbol means dot product.
 class Extrema_FuncPSDist : public math_MultipleVarFunctionWithGradient {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
     //! Constructor.
@@ -66,8 +65,6 @@ public:
     Standard_EXPORT Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G) Standard_OVERRIDE;
 
 private:
-
-
     //! Check point is inside of the surface parameter space.
     //! Returns true if inside and false otherwise.
     Standard_Boolean IsInside(const math_Vector& X);
@@ -78,4 +75,5 @@ private:
     const Adaptor3d_Surface& mySurf;
     const gp_Pnt& myP;
 };
+
 #endif // _Extrema_FuncPSDsit_HeaderFile

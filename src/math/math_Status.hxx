@@ -17,9 +17,7 @@
 #ifndef _math_Status_HeaderFile
 #define _math_Status_HeaderFile
 
-
-enum math_Status
-{
+enum math_Status {
     math_OK,
     math_TooManyIterations,
     math_FunctionError,

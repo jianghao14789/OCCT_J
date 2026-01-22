@@ -36,13 +36,9 @@ class math_MultipleVarFunctionWithGradient;
 //! this class implements the Fletcher-Reeves-Polak_Ribiere minimization
 //! algorithm of a function of multiple variables.
 //! Knowledge of the function's gradient is required.
-class math_FRPR
-{
+class math_FRPR {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! Initializes the computation of the minimum of F.
     //! Warning: constructor does not perform computations.
@@ -51,11 +47,9 @@ public:
     //! Destructor
     Standard_EXPORT virtual ~math_FRPR();
 
-
     //! The solution F = Fi is found when
     //! 2.0 * abs(Fi - Fi-1) <= Tolerance * (abs(Fi) + abs(Fi-1) + ZEPS).
     Standard_EXPORT void Perform(math_MultipleVarFunctionWithGradient& theFunction, const math_Vector& theStartingPoint);
-
 
     //! The solution F = Fi is found when:
     //! 2.0 * abs(Fi - Fi-1) <= Tolerance * (abs(Fi) + abs(Fi-1)) + ZEPS.
@@ -99,13 +93,7 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
-
     math_Vector TheLocation;
     math_Vector TheGradient;
     Standard_Real TheMinimum;
@@ -113,25 +101,14 @@ protected:
     Standard_Real XTol;
     Standard_Real EPSZ;
 
-
 private:
-
-
-
     Standard_Boolean Done;
     Standard_Integer Iter;
     Standard_Integer State;
     math_Status TheStatus;
     Standard_Integer Itermax;
-
-
 };
 
-
 #include <math_FRPR.lxx>
-
-
-
-
 
 #endif // _math_FRPR_HeaderFile

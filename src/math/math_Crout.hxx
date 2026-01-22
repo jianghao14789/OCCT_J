@@ -37,12 +37,9 @@ class math_Matrix;
 //! invert a symmetric matrix.
 //! This algorithm is similar to Gauss but is faster than Gauss.
 //! Only the inferior triangle of A and the diagonal can be given.
-class math_Crout
-{
+class math_Crout {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Given an input matrix A, this algorithm inverts A by the
     //! Crout algorithm. The user can give only the inferior
@@ -86,31 +83,14 @@ public:
     //! of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     math_Matrix InvA;
     Standard_Boolean Done;
     Standard_Real Det;
-
-
 };
 
-
 #include <math_Crout.lxx>
-
-
-
-
 
 #endif // _math_Crout_HeaderFile

@@ -34,12 +34,9 @@ class Standard_RangeError;
 //! This class implements the solutions of the equation
 //! a*Cos(x)*Cos(x) + 2*b*Cos(x)*Sin(x) + c*Cos(x) + d*Sin(x) + e
 //! The degree of this equation can be 4, 3 or 2.
-class math_TrigonometricFunctionRoots
-{
+class math_TrigonometricFunctionRoots {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! Given coefficients a, b, c, d , e, this constructor
     //! performs the resolution of the equation above.
@@ -79,35 +76,17 @@ public:
     //! Prints information on the current state of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
     //! is used by the constructors above.
     Standard_EXPORT void Perform(const Standard_Real A, const Standard_Real B, const Standard_Real C, const Standard_Real D, const Standard_Real E, const Standard_Real InfBound, const Standard_Real SupBound);
 
-
-
-
 private:
-
-
-
     Standard_Integer NbSol;
     TColStd_Array1OfReal Sol;
     Standard_Boolean InfiniteStatus;
     Standard_Boolean Done;
-
-
 };
 
-
 #include <math_TrigonometricFunctionRoots.lxx>
-
-
-
-
 
 #endif // _math_TrigonometricFunctionRoots_HeaderFile

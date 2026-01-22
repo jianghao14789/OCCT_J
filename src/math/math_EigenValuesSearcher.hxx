@@ -32,12 +32,9 @@ class StdFail_NotDone;
 
 //! This class finds eigen values and vectors of
 //! real symmetric tridiagonal matrix
-class math_EigenValuesSearcher
-{
+class math_EigenValuesSearcher {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT math_EigenValuesSearcher(const TColStd_Array1OfReal& Diagonal, const TColStd_Array1OfReal& Subdiagonal);
 
@@ -56,33 +53,15 @@ public:
     //! Index must be in [1, Dimension()]
     Standard_EXPORT math_Vector EigenVector(const Standard_Integer Index) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     Handle(TColStd_HArray1OfReal) myDiagonal;
     Handle(TColStd_HArray1OfReal) mySubdiagonal;
     Standard_Boolean myIsDone;
     Standard_Integer myN;
     Handle(TColStd_HArray1OfReal) myEigenValues;
     Handle(TColStd_HArray2OfReal) myEigenVectors;
-
-
 };
-
-
-
-
-
-
 
 #endif // _math_EigenValuesSearcher_HeaderFile

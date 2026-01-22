@@ -25,14 +25,9 @@
 #include <Standard_Integer.hxx>
 #include <math_Vector.hxx>
 
-
-
-class math_ComputeGaussPointsAndWeights
-{
+class math_ComputeGaussPointsAndWeights {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     Standard_EXPORT math_ComputeGaussPointsAndWeights(const Standard_Integer Number);
 
@@ -42,30 +37,12 @@ public:
 
     Standard_EXPORT math_Vector Weights() const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     Handle(TColStd_HArray1OfReal) myPoints;
     Handle(TColStd_HArray1OfReal) myWeights;
     Standard_Boolean myIsDone;
-
-
 };
-
-
-
-
-
-
 
 #endif // _math_ComputeGaussPointsAndWeights_HeaderFile

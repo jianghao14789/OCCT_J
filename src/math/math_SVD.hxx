@@ -37,13 +37,9 @@ class math_Matrix;
 //! Value Decomposition algorithm is used. For singular or
 //! nearly singular matrices SVD is a better choice than Gauss
 //! or GaussLeastSquare.
-class math_SVD
-{
+class math_SVD {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! Given as input an n X m matrix A with n < m, n = m or n > m
     //! this constructor performs the Singular Value Decomposition.
@@ -51,7 +47,6 @@ public:
 
     //! Returns true if the computations are successful, otherwise returns false.
     Standard_Boolean IsDone() const;
-
 
     //! Given the input Vector B this routine solves the set of linear
     //! equations A . X = B.
@@ -74,33 +69,16 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     Standard_Boolean Done;
     math_Matrix U;
     math_Matrix V;
     math_Vector Diag;
     Standard_Integer RowA;
-
-
 };
 
-
 #include <math_SVD.lxx>
-
-
-
-
 
 #endif // _math_SVD_HeaderFile

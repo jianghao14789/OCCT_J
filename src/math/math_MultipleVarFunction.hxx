@@ -26,8 +26,6 @@
 #include <math_Vector.hxx>
 #include <Standard_Real.hxx>
 
-
-
 //! Describes the virtual functions associated with a multiple variable function.
 class math_MultipleVarFunction {
 public:
@@ -65,11 +63,5 @@ protected:
 private:
 
 };
-
-
-
-
-
-
 
 #endif // _math_MultipleVarFunction_HeaderFile

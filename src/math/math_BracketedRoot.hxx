@@ -31,13 +31,10 @@ class math_Function;
 
 //! This class implements the Brent method to find the root of a function
 //! located within two bounds. No knowledge of the derivative is required.
-class math_BracketedRoot
-{
+class math_BracketedRoot {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! The Brent method is used to find the root of the function F between
     //! the bounds Bound1 and Bound2 on the function F.
@@ -68,32 +65,17 @@ public:
     //! of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
 
     Standard_Boolean Done;
     Standard_Real TheRoot;
     Standard_Real TheError;
     Standard_Integer NbIter;
 
-
 };
 
-
 #include <math_BracketedRoot.lxx>
-
-
-
-
 
 #endif // _math_BracketedRoot_HeaderFile

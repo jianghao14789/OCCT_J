@@ -28,18 +28,13 @@
 class StdFail_NotDone;
 class math_Function;
 
-
-
 //! This class implements the Brent's method to find the minimum of
 //! a function of a single variable.
 //! No knowledge of the derivative is required.
-class math_BrentMinimum
-{
+class math_BrentMinimum {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! This constructor should be used in a sub-class to initialize
     //! correctly all the fields of this class.
@@ -89,12 +84,7 @@ public:
     //! Is used to redefine the operator <<.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
-
-
 
     Standard_Real a;
     Standard_Real b;
@@ -105,24 +95,15 @@ protected:
     Standard_Real XTol;
     Standard_Real EPSZ;
 
-
 private:
-
-
 
     Standard_Boolean Done;
     Standard_Integer iter;
     Standard_Integer Itermax;
     Standard_Boolean myF;
 
-
 };
 
-
 #include <math_BrentMinimum.lxx>
-
-
-
-
 
 #endif // _math_BrentMinimum_HeaderFile

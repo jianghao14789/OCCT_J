@@ -35,13 +35,9 @@ class math_Matrix;
 //! This class implements the Jacobi method to find the eigenvalues and
 //! the eigenvectors of a real symmetric square matrix.
 //! A sort of eigenvalues is done.
-class math_Jacobi
-{
+class math_Jacobi {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! Given a Real n X n matrix A, this constructor computes all its
     //! eigenvalues and eigenvectors using the Jacobi method.

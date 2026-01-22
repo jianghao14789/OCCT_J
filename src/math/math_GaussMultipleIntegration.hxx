@@ -34,13 +34,10 @@ class math_MultipleVarFunction;
 //! This class implements the integration of a function of multiple
 //! variables between the parameter bounds Lower[a..b] and Upper[a..b].
 //! Warning: Each element of Order must be inferior or equal to 61.
-class math_GaussMultipleIntegration
-{
+class math_GaussMultipleIntegration {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
-
 
     //! The Gauss-Legendre integration with Order = points of
     //! integration for each unknown, is done on the function F
@@ -56,30 +53,13 @@ public:
     //! Prints information on the current state of the object.
     Standard_EXPORT void Dump(Standard_OStream& o) const;
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
     Standard_Real Val;
     Standard_Boolean Done;
-
-
 };
 
-
 #include <math_GaussMultipleIntegration.lxx>
-
-
-
-
 
 #endif // _math_GaussMultipleIntegration_HeaderFile

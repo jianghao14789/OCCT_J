@@ -45,8 +45,7 @@ private:
 //! The same as class GCPnts_DistFunction2d, 
 //! but it can be used in minimization algorithms that
 //! requires multi variable function
-class GCPnts_DistFunction2dMV : public math_MultipleVarFunction
-{
+class GCPnts_DistFunction2dMV : public math_MultipleVarFunction {
 public:
     Standard_EXPORT GCPnts_DistFunction2dMV(GCPnts_DistFunction2d& theCurvLinDist);
 

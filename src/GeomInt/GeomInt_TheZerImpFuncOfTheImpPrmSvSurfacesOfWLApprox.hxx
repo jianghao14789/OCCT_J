@@ -1,4 +1,4 @@
-// Created on: 1995-01-27
+﻿// Created on: 1995-01-27
 // Created by: Jacques GOUSSARD
 // Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
@@ -29,85 +29,73 @@ class IntSurf_Quadric;
 class IntSurf_QuadricTool;
 class math_Matrix;
 
-class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox  : public math_FunctionSetWithDerivatives
-{
+class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox : public math_FunctionSetWithDerivatives {
 public:
 
-  DEFINE_STANDARD_ALLOC;
+    DEFINE_STANDARD_ALLOC;
 
-  
-  Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox();
-  
-  Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const Handle(Adaptor3d_Surface)& PS, const IntSurf_Quadric& IS);
-  
-  Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const IntSurf_Quadric& IS);
-  
-    void Set (const Handle(Adaptor3d_Surface)& PS);
-  
-    void SetImplicitSurface (const IntSurf_Quadric& IS);
-  
-    void Set (const Standard_Real Tolerance);
-  
-  Standard_EXPORT Standard_Integer NbVariables() const;
-  
-  Standard_EXPORT Standard_Integer NbEquations() const;
-  
-  Standard_EXPORT Standard_Boolean Value (const math_Vector& X, math_Vector& F);
-  
-  Standard_EXPORT Standard_Boolean Derivatives (const math_Vector& X, math_Matrix& D);
-  
-  Standard_EXPORT Standard_Boolean Values (const math_Vector& X, math_Vector& F, math_Matrix& D);
-  
+
+    Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox();
+
+    Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const Handle(Adaptor3d_Surface)& PS, const IntSurf_Quadric& IS);
+
+    Standard_EXPORT GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox(const IntSurf_Quadric& IS);
+
+    void Set(const Handle(Adaptor3d_Surface)& PS);
+
+    void SetImplicitSurface(const IntSurf_Quadric& IS);
+
+    void Set(const Standard_Real Tolerance);
+
+    Standard_EXPORT Standard_Integer NbVariables() const;
+
+    Standard_EXPORT Standard_Integer NbEquations() const;
+
+    Standard_EXPORT Standard_Boolean Value(const math_Vector& X, math_Vector& F);
+
+    Standard_EXPORT Standard_Boolean Derivatives(const math_Vector& X, math_Matrix& D);
+
+    Standard_EXPORT Standard_Boolean Values(const math_Vector& X, math_Vector& F, math_Matrix& D);
+
     Standard_Real Root() const;
-  
-  //! Returns the value Tol so that if Abs(Func.Root())<Tol
-  //! the function is considered null.
+
+    //! Returns the value Tol so that if Abs(Func.Root())<Tol
+    //! the function is considered null.
     Standard_Real Tolerance() const;
-  
+
     const gp_Pnt& Point() const;
-  
-  Standard_EXPORT Standard_Boolean IsTangent();
-  
+
+    Standard_EXPORT Standard_Boolean IsTangent();
+
     const gp_Vec& Direction3d();
-  
+
     const gp_Dir2d& Direction2d();
-  
+
     const Handle(Adaptor3d_Surface)& PSurface() const;
-  
+
     const IntSurf_Quadric& ISurface() const;
-
-
-
 
 protected:
 
-
-
-
-
 private:
 
-
-
-  Standard_Address surf;
-  Standard_Address func;
-  Standard_Real u;
-  Standard_Real v;
-  Standard_Real tol;
-  gp_Pnt pntsol;
-  Standard_Real valf;
-  Standard_Boolean computed;
-  Standard_Boolean tangent;
-  Standard_Real tgdu;
-  Standard_Real tgdv;
-  gp_Vec gradient;
-  Standard_Boolean derived;
-  gp_Vec d1u;
-  gp_Vec d1v;
-  gp_Vec d3d;
-  gp_Dir2d d2d;
-
-
+    Standard_Address surf;
+    Standard_Address func;
+    Standard_Real u;
+    Standard_Real v;
+    Standard_Real tol;
+    gp_Pnt pntsol;
+    Standard_Real valf;
+    Standard_Boolean computed;
+    Standard_Boolean tangent;
+    Standard_Real tgdu;
+    Standard_Real tgdv;
+    gp_Vec gradient;
+    Standard_Boolean derived;
+    gp_Vec d1u;
+    gp_Vec d1v;
+    gp_Vec d3d;
+    gp_Dir2d d2d;
 };
 
 #define ThePSurface Handle(Adaptor3d_Surface)
@@ -133,8 +121,5 @@ private:
 #undef TheISurfaceTool_hxx
 #undef IntImp_ZerImpFunc
 #undef IntImp_ZerImpFunc_hxx
-
-
-
 
 #endif // _GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_HeaderFile

@@ -15,8 +15,10 @@
 #include <StdFail_NotDone.hxx>
 #include <math_Vector.hxx>
 
+// 如果计算成功完成，则返回 true。
 inline Standard_Boolean math_BFGS::IsDone() const { return Done; }
 
+// 重载 << 操作符，用于打印对象状态信息。
 inline Standard_OStream& operator<<(Standard_OStream& o,
     const math_BFGS& B)
 {
@@ -24,36 +26,43 @@ inline Standard_OStream& operator<<(Standard_OStream& o,
     return o;
 }
 
-
+// 返回最小值的坐标向量。
+// 如果计算未完成，则引发异常。
 inline  const math_Vector& math_BFGS::Location() const {
     StdFail_NotDone_Raise_if(!Done, " ");
     return TheLocation;
 }
 
+// 将最小值的坐标向量输出到 Loc。
+// 如果计算未完成，则引发异常。
 inline  void math_BFGS::Location(math_Vector& Loc) const {
     StdFail_NotDone_Raise_if(!Done, " ");
     Loc = TheLocation;
 }
 
-
+// 返回计算出的最小值。
+// 如果计算未完成，则引发异常。
 inline Standard_Real math_BFGS::Minimum() const {
     StdFail_NotDone_Raise_if(!Done, " ");
     return TheMinimum;
 }
 
-
+// 返回最小值点的梯度向量。
+// 如果计算未完成，则引发异常。
 inline const math_Vector& math_BFGS::Gradient() const {
     StdFail_NotDone_Raise_if(!Done, " ");
     return TheGradient;
 }
 
-
+// 将最小值点的梯度向量输出到 Grad。
+// 如果计算未完成，则引发异常。
 inline void math_BFGS::Gradient(math_Vector& Grad) const {
     StdFail_NotDone_Raise_if(!Done, " ");
     Grad = TheGradient;
 }
 
-
+// 返回实际执行的迭代次数。
+// 如果计算未完成，则引发异常。
 inline Standard_Integer math_BFGS::NbIterations() const {
     StdFail_NotDone_Raise_if(!Done, " ");
     return nbiter;

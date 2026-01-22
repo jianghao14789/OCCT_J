@@ -40,12 +40,9 @@ class math_Matrix;
 //! is no success in the Newton direction. This algorithm can also be
 //! used for functions minimization. Knowledge of all the partial
 //! derivatives (the Jacobian) is required.
-class math_FunctionSetRoot
-{
+class math_FunctionSetRoot {
 public:
-
     DEFINE_STANDARD_ALLOC;
-
 
     //! is used in a sub-class to initialize correctly all the fields
     //! of this class.

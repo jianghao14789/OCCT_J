@@ -31,12 +31,10 @@
 
 //! The abstract class MultipleVarFunctionWithGradient
 //! describes the virtual functions associated with a multiple variable function.
-class math_MultipleVarFunctionWithGradient : public math_MultipleVarFunction
-{
+class math_MultipleVarFunctionWithGradient : public math_MultipleVarFunction {
 public:
 
     DEFINE_STANDARD_ALLOC;
-
 
     //! Returns the number of variables of the function.
     Standard_EXPORT virtual Standard_Integer NbVariables() const = 0;
@@ -57,27 +55,10 @@ public:
     //! False otherwise.
     Standard_EXPORT virtual Standard_Boolean Values(const math_Vector& X, Standard_Real& F, math_Vector& G) = 0;
 
-
-
-
 protected:
-
-
-
-
 
 private:
 
-
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _math_MultipleVarFunctionWithGradient_HeaderFile

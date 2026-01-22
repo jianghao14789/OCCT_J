@@ -43,22 +43,17 @@ class PLib_DoubleJacobiPolynomial;
 //! Note: weight arrays can be passed by pointer for
 //! some functions so that NULL pointer is valid.
 //! That means no weights passed.
-class PLib
-{
+class PLib {
 public:
-
     DEFINE_STANDARD_ALLOC;
 
-
     //! Used as argument for a non rational functions
-    inline static TColStd_Array1OfReal* NoWeights()
-    {
+    inline static TColStd_Array1OfReal* NoWeights() {
         return NULL;
     }
 
     //! Used as argument for a non rational functions
-    inline static TColStd_Array2OfReal* NoWeights2()
-    {
+    inline static TColStd_Array2OfReal* NoWeights2() {
         return NULL;
     }
 
@@ -350,25 +345,13 @@ public:
 
     Standard_EXPORT static void EvalLength(const Standard_Integer Degree, const Standard_Integer Dimension, Standard_Real& PolynomialCoeff, const Standard_Real U1, const Standard_Real U2, const Standard_Real Tol, Standard_Real& Length, Standard_Real& Error);
 
-
-
-
 protected:
 
-
-
-
-
 private:
-
-
-
-
     friend class PLib_Base;
     friend class PLib_JacobiPolynomial;
     friend class PLib_HermitJacobi;
     friend class PLib_DoubleJacobiPolynomial;
-
 };
 
 #endif // _PLib_HeaderFile

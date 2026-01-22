@@ -32,11 +32,8 @@ DEFINE_STANDARD_HANDLE(TopLoc_Datum3D, Standard_Transient)
 //! A Datum3D is always described relative to the default datum.
 //! The default datum is described relative to itself: its
 //! origin is (0,0,0), and its axes are (1,0,0) (0,1,0) (0,0,1).
-class TopLoc_Datum3D : public Standard_Transient
-{
-
+class TopLoc_Datum3D : public Standard_Transient {
 public:
-
     //! Constructs a default Datum3D.
     Standard_EXPORT TopLoc_Datum3D();
 
@@ -62,7 +59,6 @@ public:
     DEFINE_STANDARD_RTTIEXT(TopLoc_Datum3D, Standard_Transient)
 
 private:
-
     gp_Trsf myTrsf;
 
 };

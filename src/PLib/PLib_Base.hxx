@@ -30,13 +30,8 @@ class PLib_Base;
 DEFINE_STANDARD_HANDLE(PLib_Base, Standard_Transient)
 
 //! To work with different polynomial's Bases
-class PLib_Base : public Standard_Transient
-{
-
+class PLib_Base : public Standard_Transient {
 public:
-
-
-
     //! Convert the polynomial P(t) in the canonical base.
     Standard_EXPORT virtual void ToCoefficients(const Standard_Integer Dimension, const Standard_Integer Degree, const TColStd_Array1OfReal& CoeffinBase, TColStd_Array1OfReal& Coefficients) const = 0;
 
@@ -58,7 +53,6 @@ public:
     //! returns WorkDegree
     Standard_EXPORT virtual Standard_Integer WorkDegree() const = 0;
 
-
     //! Compute NewDegree <= MaxDegree so that MaxError is lower
     //! than Tol.
     //! MaxError can be greater than Tol if it is not possible
@@ -66,27 +60,12 @@ public:
     //! In this case NewDegree = MaxDegree
     Standard_EXPORT virtual void ReduceDegree(const Standard_Integer Dimension, const Standard_Integer MaxDegree, const Standard_Real Tol, Standard_Real& BaseCoeff, Standard_Integer& NewDegree, Standard_Real& MaxError) const = 0;
 
-
-
-
     DEFINE_STANDARD_RTTIEXT(PLib_Base, Standard_Transient)
 
 protected:
 
-
-
-
 private:
 
-
-
-
 };
-
-
-
-
-
-
 
 #endif // _PLib_Base_HeaderFile

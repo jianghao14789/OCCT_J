@@ -36,5 +36,3 @@ inline Handle(TColStd_HArray1OfReal) PLib_DoubleJacobiPolynomial::TabMaxV() cons
 {
     return myTabMaxV;
 }
-
-

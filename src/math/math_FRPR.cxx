@@ -231,18 +231,3 @@ void math_FRPR::Dump(Standard_OStream& o) const
         o << " Status = not Done because " << (Standard_Integer)TheStatus << "\n";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
