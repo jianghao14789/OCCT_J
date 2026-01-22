@@ -27,6 +27,9 @@
 //!
 //! Expands to C++11 keyword "override" on compilers that are known to
 //! suppot it; empty in other cases.
+// Standard_OVERRIDE 宏：用于派生类中声明覆盖（重写）基类的虚函数。
+// 如果基类中的虚函数被删除或签名改变，编译器会报错，从而增强代码安全性。
+// 在支持 C++11 的编译器上，它展开为 "override" 关键字。
 #if defined(__cplusplus) && (__cplusplus >= 201100L)
 // part of C++11 standard
 #define Standard_OVERRIDE override
@@ -39,6 +42,8 @@
 
 //! @def Standard_DELETE
 //! Alias for C++11 keyword "=delete" marking methods to be deleted.
+// Standard_DELETE 宏：用于禁用特定的成员函数（如禁用拷贝构造函数）。
+// 在支持 C++11 的编译器上，展开为 "= delete"。
 #if defined(__cplusplus) && (__cplusplus >= 201100L)
 // part of C++11 standard
 #define Standard_DELETE = delete
@@ -55,10 +60,8 @@
 //! next label (i.e. does not end with "break" or "return" etc.).
 //! This macro indicates that the fall through is intentional and should not be
 //! diagnosed by a compiler that warns on fallthrough.
-//!
-//! Expands to C++17 attribute statement "[[fallthrough]];" on compilers that
-//! declare support of C++17, or to "__attribute__((fallthrough));" on
-//! GCC 7+.
+// Standard_FALLTHROUGH 宏：用于 switch 语句中，表示有意让代码从一个 case 穿透到下一个 case。
+// 这可以防止编译器发出“意外穿透”的警告。
 #if defined(__cplusplus) && (__cplusplus >= 201703L)
 // part of C++17 standard
 #define Standard_FALLTHROUGH [[fallthrough]];
@@ -73,9 +76,8 @@
 //! This attribute may appear in a function declaration,
 //! enumeration declaration or class declaration. It tells the compiler to
 //! issue a warning, if a return value marked by that attribute is discarded.
-//!
-//! Expands to C++17 attribute statement "[[nodiscard]]" on compilers that
-//! declare support of this attribute, or equivalent attribute on GCC.
+// Standard_NODISCARD 宏：用于函数声明，告诉编译器如果调用者忽略了返回值，则发出警告。
+// 对应 C++17 的 [[nodiscard]] 属性。
 #if defined(__has_cpp_attribute)
 #if __has_cpp_attribute(nodiscard)
 #define Standard_NODISCARD [[nodiscard]]
@@ -94,8 +96,7 @@
 //! @def Standard_UNUSED
 //! Macro for marking variables / functions as possibly unused
 //! so that compiler will not emit redundant "unused" warnings.
-//!
-//! Expands to "__attribute__((unused))" on GCC and CLang.
+// Standard_UNUSED 宏：用于标记可能未使用的变量或函数，防止编译器报“未使用”警告。
 #if defined(__GNUC__) || defined(__clang__)
 #define Standard_UNUSED __attribute__((unused))
 #else
@@ -104,7 +105,7 @@
 
 //! @def Standard_NOINLINE
 //! Macro for disallowing function inlining.
-//! Expands to "__attribute__((noinline))" on GCC and CLang.
+// Standard_NOINLINE 宏：禁止编译器将函数进行内联展开。
 #if defined(__clang__) || (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1)))
 #define Standard_NOINLINE __attribute__((noinline))
 #elif defined(_MSC_VER)
@@ -115,6 +116,7 @@
 
 //! @def Standard_THREADLOCAL
 //! Define Standard_THREADLOCAL modifier as C++11 thread_local keyword where it is available.
+// Standard_THREADLOCAL 宏：定义线程局部变量。展开为 C++11 的 thread_local。
 #if defined(__clang__)
 // CLang version: standard CLang > 3.3 or XCode >= 8 (but excluding 32-bit ARM)
 // Note: this has to be in separate #if to avoid failure of preprocessor on other platforms
@@ -145,6 +147,8 @@
 //! Use of such method or class will cause compiler warning (if supported by
 //! compiler and unless disabled).
 //! If macro OCCT_NO_DEPRECATED is defined, Standard_DEPRECATED is defined empty.
+// Standard_DEPRECATED 宏：用于标记过时的（不推荐使用的）函数或类。
+// 当有人调用它们时，编译器会发出警告，提示该项已过时。
 #ifdef OCCT_NO_DEPRECATED
 #define Standard_DEPRECATED(theMsg)
 #else
@@ -167,6 +171,7 @@
 //! @def Standard_ENABLE_DEPRECATION_WARNINGS
 //! Enables warnings on use of deprecated features previously disabled by
 //! Standard_DISABLE_DEPRECATION_WARNINGS.
+// 下面两个宏用于在特定代码块中临时禁用或恢复“过时建议”的警告。
 #if defined(__ICL) || defined(__INTEL_COMPILER)
 #define Standard_DISABLE_DEPRECATION_WARNINGS __pragma(warning(push)) __pragma(warning(disable : 1478))
 #define Standard_ENABLE_DEPRECATION_WARNINGS __pragma(warning(pop))
@@ -186,6 +191,7 @@
 //! @def OCCT_NO_RVALUE_REFERENCE
 //! Disables methods and constructors that use rvalue references
 //! (C++11 move semantics) not supported by obsolete compilers.
+// OCCT_NO_RVALUE_REFERENCE：在旧版编译器（如 VS2008）上禁用右值引用支持。
 #if (defined(_MSC_VER) && (_MSC_VER < 1600))
 #define OCCT_NO_RVALUE_REFERENCE
 #endif
@@ -200,6 +206,8 @@
 // or include windows.h prior to any OCCT stuff.
 // Note that we define each symbol to itself, so that it still can be used
 // e.g. as name of variable, method etc.
+// 在 Windows 上，包含 windows.h 可能会引入很多冲突的宏（如 min/max）。
+// OCCT 预先定义了一些宏来限制 windows.h 的副作用。
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN /* exclude extra Windows stuff */
 #endif
@@ -243,16 +251,21 @@
 //!
 //! If macro OCCT_STATIC_BUILD is defined, then Standard_EXPORT
 //! is set to empty.
+// Standard_EXPORT 宏：非常重要！
+// 在 Windows DLL 编译中，该宏展开为 __declspec(dllexport)，确保外部可以调用此函数。
+// 如果是静态链接编译，它则为空。
 
 #if defined(_WIN32) && !defined(OCCT_STATIC_BUILD) && !defined(HAVE_NO_DLL)
 
 //======================================================
 // Windows-specific definitions
+// Windows 平台特定定义
 //======================================================
 
 #ifndef Standard_EXPORT
 #define Standard_EXPORT __declspec(dllexport)
 // For global variables :
+// 用于全局变量：
 #define Standard_EXPORTEXTERN __declspec(dllexport) extern
 #define Standard_EXPORTEXTERNC extern "C" __declspec(dllexport)
 #endif /* Standard_EXPORT */
@@ -266,6 +279,7 @@
 
 //======================================================
 // UNIX / static library definitions
+// UNIX 平台或静态库定义
 //======================================================
 
 #ifndef Standard_EXPORT

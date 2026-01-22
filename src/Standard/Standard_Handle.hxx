@@ -22,6 +22,7 @@
 class Standard_Transient;
 
 //! Namespace opencascade is intended for low-level template classes and functions
+// opencascade 命名空间用于存放底层的模板类和函数
 namespace opencascade {
 
 //! Intrusive smart pointer for use with Standard_Transient class and its descendants.
@@ -34,71 +35,78 @@ namespace opencascade {
 //! handle from plain C pointer to the object already pointed by another handle.
 //! The same object can be referenced by handles of different types (as soon as
 //! they are compatible with the object type).
-//!
-//! Handle has type cast operator to const reference to handle to the base
-//! types, which allows it to be passed by reference in functions accepting
-//! reference to handle to base class, without copying.
-//!
-//! By default, the type cast operator is provided also for non-const reference.
-//! These casts (potentially unsafe) can be disabled by defining macro
-//! OCCT_HANDLE_NOCAST; if it is defined, generalized copy constructor
-//! and assignment operators are defined allowing to initialize handle
-//! of base type from handle to derived type.
-//!
-//! Weak pointers are not supported.
+// 侵入式智能指针，用于 Standard_Transient 类及其派生类。
+//
+// 该类类似于 boost::intrusive_ptr<>。引用计数器是基类 (Standard_Transient) 的一部分，
+// 因此创建 Handle 不需要为计数器分配额外的内存。
+// 指向同一个对象的所有 Handle 共享同一个计数器；当最后一个指向该对象的 Handle 被销毁时，对象将被删除。
+// 从已经由另一个 Handle 指向的对象的普通 C 指针创建一个新 Handle 是安全的。
+// 同一个对象可以被不同类型的 Handle 引用（只要它们与对象类型兼容）。
+
 template <class T> class handle {
 public:
     //! STL-compliant typedef of contained type
+    // 与 STL 兼容的包含类型定义
     typedef T element_type;
 
 public:
     //! Empty constructor
+    // 默认构造函数，初始化为空指针
     handle() : entity(0) {}
 
     //! Constructor from pointer to new object
+    // 通过对象指针构造 Handle。会自动增加对象的引用计数。
     handle(const T* thePtr) : entity(const_cast<T*>(thePtr)) {
         BeginScope();
     }
 
     //! Copy constructor
+    // 拷贝构造函数。新 Handle 指向相同对象，引用计数加 1。
     handle(const handle& theHandle) : entity(theHandle.entity) {
         BeginScope();
     }
 
 #ifndef OCCT_NO_RVALUE_REFERENCE
     //! Move constructor
+    // 移动构造函数。接管原 Handle 的对象，引用计数保持不变。
     handle(handle&& theHandle) : entity(theHandle.entity) {
         theHandle.entity = 0;
     }
 #endif
 
     //! Destructor
+    // 析构函数。减少引用计数，如果计数降为 0 则删除对象。
     ~handle() {
         EndScope();
     }
 
     //! Nullify the handle
+    // 将 Handle 置为空，并减少原对象的引用计数。
     void Nullify() {
         EndScope();
     }
 
     //! Check for being null
+    // 检查 Handle 是否为空。
     bool IsNull() const {
         return entity == 0;
     }
 
     //! Reset by new pointer
+    // 重置 Handle 以指向新指针。
     void reset(T* thePtr) {
         Assign(thePtr);
     }
 
     //! Assignment operator
+    // 赋值运算符。
     handle& operator=(const handle& theHandle) {
         Assign(theHandle.entity);
         return *this;
     }
 
     //! Assignment to pointer
+    // 赋值为新指针。
     handle& operator=(const T* thePtr) {
         Assign(const_cast<T*>(thePtr));
         return *this;
@@ -106,6 +114,7 @@ public:
 
 #ifndef OCCT_NO_RVALUE_REFERENCE
     //! Move operator
+    // 移动赋值运算符。
     handle& operator=(handle&& theHandle) {
         std::swap(this->entity, theHandle.entity);
         return *this;
@@ -114,21 +123,25 @@ public:
 
     //! STL-like cast to pointer to referred object (note non-const).
     //! @sa std::shared_ptr::get()
+    // 获取底层对象指针。
     T* get() const {
         return static_cast<T*>(this->entity);
     }
 
     //! Member access operator (note non-const)
+    // 成员访问运算符 ->，使得 Handle 可以像指针一样使用。
     T* operator->() const {
         return static_cast<T*>(this->entity);
     }
 
     //! Dereferencing operator (note non-const)
+    // 解引用运算符 *。
     T& operator*() const {
         return *get();
     }
 
     //! Check for equality
+    // 相等性检查。
     template <class T2> bool operator==(const handle<T2>& theHandle) const {
         return get() == theHandle.get();
     }
@@ -144,6 +157,7 @@ public:
     }
 
     //! Check for inequality
+    // 不等性检查。
     template <class T2> bool operator!=(const handle<T2>& theHandle) const {
         return get() != theHandle.get();
     }
@@ -159,11 +173,14 @@ public:
     }
 
     //! Compare operator for possible use in std::map<> etc.
+    // 比较运算符，以便在 std::map 等容器中使用。
     template <class T2> bool operator<(const handle<T2>& theHandle) const {
         return get() < theHandle.get();
     }
 
     //! Down casting operator from handle to base type
+    // 向下转换函数。用于将基类 Handle 转换为派生类 Handle。
+    // 使用 C++ 的 dynamic_cast 确保转换的安全性。
     template <class T2>
     static typename opencascade::std::enable_if<is_base_but_not_same<T2, T>::value, handle>::type
     DownCast(const handle<T2>& theObject) {
@@ -198,6 +215,7 @@ public:
     (defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)))
 
     //! Conversion to bool for use in conditional expressions
+    // 显式转换为布尔值，用于条件判断（如 if (aHandle) ...）。
     explicit operator bool() const {
         return entity != nullptr;
     }
@@ -222,6 +240,7 @@ public:
 
     //! Generalized copy constructor.
     //! Constructs handle holding entity of base type (T) from the one which holds entity of derived type (T2).
+    // 通用拷贝构造函数。允许从派生类 Handle 构造基类 Handle。
     template <class T2, typename = typename std::enable_if<is_base_but_not_same<T, T2>::value>::type>
     handle(const handle<T2>& theHandle) : entity(theHandle.entity) {
         BeginScope();
@@ -250,6 +269,7 @@ public:
 #else
 
     //! Upcast to const reference to base type.
+    // 向上转换：转换为基类 Handle 的常量引用。
     template <class T2, typename = typename std::enable_if<is_base_but_not_same<T2, T>::value>::type>
     operator const handle<T2>&() const {
         return reinterpret_cast<const handle<T2>&>(*this);
@@ -257,6 +277,7 @@ public:
 
     //! Upcast to non-const reference to base type.
     //! NB: this cast can be dangerous, but required for legacy code; see #26377
+    // 向上转换：转换为基类 Handle 的引用。
     template <class T2, typename = typename std::enable_if<is_base_but_not_same<T2, T>::value>::type>
     operator handle<T2>&() {
         return reinterpret_cast<handle<T2>&>(*this);
@@ -335,6 +356,7 @@ public:
 
 private:
     //! Assignment
+    // 内部赋值函数。
     void Assign(Standard_Transient* thePtr) {
         if (thePtr == entity) return;
         EndScope();
@@ -343,11 +365,13 @@ private:
     }
 
     //! Increment reference counter of referred object
+    // 增加所引用对象的引用计数。
     void BeginScope() {
         if (entity != 0) entity->IncrementRefCounter();
     }
 
     //! Decrement reference counter and if 0, destroy referred object
+    // 减少引用计数，如果为 0，则销毁所引用的对象。
     void EndScope() {
         if (entity != 0 && entity->DecrementRefCounter() == 0) entity->Delete();
         entity = 0;
@@ -362,6 +386,8 @@ private:
 } // namespace opencascade
 
 //! Define Handle() macro
+// 定义 Handle 宏，方便用户声明智能指针。
+// 例如 Handle(Standard_Transient) 等价于 opencascade::handle<Standard_Transient>
 #define Handle(Class) opencascade::handle<Class>
 
 //! Computes a hash code for the standard handle, in the range [1, theUpperBound]
